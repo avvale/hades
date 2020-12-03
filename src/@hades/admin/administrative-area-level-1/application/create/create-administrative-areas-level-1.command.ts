@@ -10,6 +10,9 @@ export class CreateAdministrativeAreasLevel1Command
             customCode?: string,
             name: string,
             slug: string,
+            latitude?: number,
+            longitude?: number,
+            zoom?: number,
         } [],
         public readonly cQMetadata?: CQMetadata,
     ) {}

@@ -12,11 +12,11 @@ export class Seeder
             const commandBus = appContext.get(ICommandBus);
 
             await (() => {
-                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel1));
-                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101));
-                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102));
-                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103));
-                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel1)).catch(e => console.error);
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101)).catch(e => console.error);
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102)).catch(e => console.error);
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103)).catch(e => console.error);
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104)).catch(e => console.error);
             })();
         });
     }

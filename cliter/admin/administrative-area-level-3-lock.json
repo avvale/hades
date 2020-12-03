@@ -1,0 +1,505 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-area-level-3.command-handler.ts",
+            "integrity": "sha1:df9eda6e6ec7c5651a692285f1d2be331084d19c"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-area-level-3.command.handler.spec.ts",
+            "integrity": "sha1:8d32d2dd0e5daaaded16730179fd1f0d27df9949"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-area-level-3.command.ts",
+            "integrity": "sha1:8c697085c5ff845ec5801e26b36f745daf709a8c"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-area-level-3.service.spec.ts",
+            "integrity": "sha1:103c1ac398a3b3546fb18965fef04405abe30fa5"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-area-level-3.service.ts",
+            "integrity": "sha1:e7a120d081d2e74f5040fc199ea49324971c58dc"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-areas-level-3.command-handler.ts",
+            "integrity": "sha1:a442c0ff19b625b6f040cc97ff9da165d5656e7c"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-areas-level-3.command.handler.spec.ts",
+            "integrity": "sha1:d28ec882f8d280984d22edbb46ae3a98920d0b35"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-areas-level-3.command.ts",
+            "integrity": "sha1:b7589e764472d0533f093915c1cf34fe9a80da67"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-areas-level-3.service.spec.ts",
+            "integrity": "sha1:1684544baf36aa582f5e0ea2b20b24164e8c91f4"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-areas-level-3.service.ts",
+            "integrity": "sha1:d788caae3be28f4efa32a7fbef899b919a59c4ee"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-area-level-3-by-id.command-handler.ts",
+            "integrity": "sha1:8b0a31956ab43f623721e5bbc7d2bb7e66b29cb4"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-area-level-3-by-id.command.handler.spec.ts",
+            "integrity": "sha1:0b8f3ae591154a7f425af3872797ee0904d83b36"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-area-level-3-by-id.command.ts",
+            "integrity": "sha1:2b922e58ac5ba8dab19a34a9900bfbd5318fbb5b"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-area-level-3-by-id.service.spec.ts",
+            "integrity": "sha1:8f29491190e654d52cf1f7dc88ac9d37325d51de"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-area-level-3-by-id.service.ts",
+            "integrity": "sha1:768ef50b28157e236ffacb6682eee0c9d4a8fc74"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-areas-level-3.command-handler.ts",
+            "integrity": "sha1:93405ca21a6e33bb4c892754352d15793474cd26"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-areas-level-3.command.handler.spec.ts",
+            "integrity": "sha1:332d6db7f8e65ffaa2663bde5dc521adea43081d"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-areas-level-3.command.ts",
+            "integrity": "sha1:08a42264ae97030f0c5e75bb382f2f8f764c1846"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-areas-level-3.service.spec.ts",
+            "integrity": "sha1:7005ff8509cc4841627dbf7e60a6e4b2c7736293"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/delete/delete-administrative-areas-level-3.service.ts",
+            "integrity": "sha1:475bbea6d00900ca5976e3ff14425518d01cc548"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/add-administrative-areas-level-3-context.event.ts",
+            "integrity": "sha1:79063b394f1ebcfabd48e8a016a78d7366c3d47e"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/created-administrative-area-level-3.event-handler.ts",
+            "integrity": "sha1:85a324f8a06a460cb2c5f3c7fc2a14d0e6f77365"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/created-administrative-area-level-3.event.ts",
+            "integrity": "sha1:3b1ec4152326ad80957929e5b94e62b7dcb5aafc"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/created-administrative-areas-level-3.event-handler.ts",
+            "integrity": "sha1:29348e3afd6a0b57c2ac11b279e51fe051f94469"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/created-administrative-areas-level-3.event.ts",
+            "integrity": "sha1:b719da5f070b89c660452b7b84a8bdbc25d5a14b"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/deleted-administrative-area-level-3.event-handler.ts",
+            "integrity": "sha1:143959e2f85fca884c63cff13815e3cf67aecb97"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/deleted-administrative-area-level-3.event.ts",
+            "integrity": "sha1:8ad885c787a641141883bc2a953c62c22298aec1"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/deleted-administrative-areas-level-3.event-handler.ts",
+            "integrity": "sha1:8865e385a5e7d77ba3f05f19e49d598b1927718c"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/deleted-administrative-areas-level-3.event.ts",
+            "integrity": "sha1:c3bfa05047358db75ab83d0bba1db56947e11b15"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/updated-administrative-area-level-3.event-handler.ts",
+            "integrity": "sha1:05c66b082c3ed6ef94c0043c43808126b0708a0c"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/events/updated-administrative-area-level-3.event.ts",
+            "integrity": "sha1:2842cdf24e3795bd7388e80a97f6dd18549546e6"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3-by-id.query-handler.ts",
+            "integrity": "sha1:3ce563128165382cc34695d1e10c49be9e8bc2fb"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3-by-id.query.handler.spec.ts",
+            "integrity": "sha1:5f3e25a4e05e69044597929b8beeafe5fe952493"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3-by-id.query.ts",
+            "integrity": "sha1:c3e810faa7831d7914ec65d8ab301875926c3dbf"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3-by-id.service.spec.ts",
+            "integrity": "sha1:ff738a6a82b8acae0bdc25c97a0ccb0689fad87b"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3-by-id.service.ts",
+            "integrity": "sha1:5998a0a5d341300fcd1d15d724cfab245a1c5145"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3.query-handler.ts",
+            "integrity": "sha1:bf411c70122fd8de6a0f186e328b964ea16402dc"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3.query.handler.spec.ts",
+            "integrity": "sha1:6a195218f2f25c8cee8c6b02c5e689e41dd00342"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3.query.ts",
+            "integrity": "sha1:7145f125af086e05a348703284b199d120fa8e2e"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3.service.spec.ts",
+            "integrity": "sha1:778643bfc67959fe1cac272b8e52efe4fbfd074d"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/find/find-administrative-area-level-3.service.ts",
+            "integrity": "sha1:005782112ddfa3bfc6497e034dd0c42de1c595bc"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/get/get-administrative-areas-level-3.query-handler.ts",
+            "integrity": "sha1:1b19d9ef783a0796ce8c00f925150b6e26e35e1f"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/get/get-administrative-areas-level-3.query.handler.spec.ts",
+            "integrity": "sha1:62e51bcdac7e06db07c20d77f29d454578a6784b"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/get/get-administrative-areas-level-3.query.ts",
+            "integrity": "sha1:cf990bc8ad1e170d3b10c9a8e401549aa12f208a"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/get/get-administrative-areas-level-3.service.spec.ts",
+            "integrity": "sha1:011c68fa5af92d11f8824b294646fa046fd1d840"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/get/get-administrative-areas-level-3.service.ts",
+            "integrity": "sha1:2eeeea6e65594f40f6d6621fd9909bc04e817423"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/paginate/paginate-administrative-areas-level-3.query-handler.ts",
+            "integrity": "sha1:40cc0574adab1c408c6369e315e8b7adc7cc37ba"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/paginate/paginate-administrative-areas-level-3.query.handler.spec.ts",
+            "integrity": "sha1:e4561d04a7da81634662283e88f1fe0ffeae6749"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/paginate/paginate-administrative-areas-level-3.query.ts",
+            "integrity": "sha1:4e774c3f46231bf908a7881db1500d2108e6d075"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/paginate/paginate-administrative-areas-level-3.service.spec.ts",
+            "integrity": "sha1:2e8a90088f592cd8baae3b8db6b2289f924582fa"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/paginate/paginate-administrative-areas-level-3.service.ts",
+            "integrity": "sha1:f7d809391efcc4b9012cf7a59576bd0ee2c0809e"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/sagas/administrative-area-level-3.sagas.ts",
+            "integrity": "sha1:c113c0c4174aa1a6efb1aafa417568e8ca0d564f"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/update/update-administrative-area-level-3.command-handler.ts",
+            "integrity": "sha1:7ede658d4ea1dfc52989fc9d1b75d985c073aa1f"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/update/update-administrative-area-level-3.command.handler.spec.ts",
+            "integrity": "sha1:20750d13710e186aa255c80fa7e9524b88e13154"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/update/update-administrative-area-level-3.command.ts",
+            "integrity": "sha1:c52e23586b4ebacc62103bc4bd4272b882205ac1"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/update/update-administrative-area-level-3.service.spec.ts",
+            "integrity": "sha1:cba50036689e94d3affef3b56e72b7ae2cdf97c8"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/application/update/update-administrative-area-level-3.service.ts",
+            "integrity": "sha1:1e1d9764c989efa87fdbfef1b94f98746e7ed67f"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.aggregate.ts",
+            "integrity": "sha1:21d224a980b9bb3d3482da0cf18525e08d114ba4"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.mapper.ts",
+            "integrity": "sha1:63317c840f1f10d0c031138c2d3e41755251f4f9"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.repository.ts",
+            "integrity": "sha1:b11344cf9b73b6dc6b09c8354e3ad6b78a74dd5d"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.response.ts",
+            "integrity": "sha1:fc6de4e8e377a534967516a0ccb91fc1a9f265b4"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/index.ts",
+            "integrity": "sha1:1d5b187d370dd5155fab629a5a56b6ae586e067e"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/index.ts",
+            "integrity": "sha1:90408829a680e4d5230928b6d0f329a11e2eadc8"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/infrastructure/mock/mock-administrative-area-level-3.repository.ts",
+            "integrity": "sha1:e89526a1b5a1261bfa2f8bacf91135b693a7c756"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed.ts",
+            "integrity": "sha1:e6e65c15829fbc9f1b7a72a9504885be8b7a26c2"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/infrastructure/sequelize/sequelize-administrative-area-level-3.model.ts",
+            "integrity": "sha1:530810de1c6a4a6beefe17bb36f53956f7836cc8"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/infrastructure/sequelize/sequelize-administrative-area-level-3.repository.ts",
+            "integrity": "sha1:3b9c78cf829ef4515b9318d3428aad6e543ab7a2"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-id.ts",
+            "integrity": "sha1:67b197da9d945c4e2616b4aa6f0149030b5e3684"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-country-common-id.ts",
+            "integrity": "sha1:fba291455ca8a43c04b599fcec8517b431342ba5"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-administrative-area-level-1-id.ts",
+            "integrity": "sha1:a6115d8a031f5d58ffd49127e78da13bbaa00445"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-administrative-area-level-2-id.ts",
+            "integrity": "sha1:2dcf4b389ce0ea379012fd9e86b872721b2efdc2"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-code.ts",
+            "integrity": "sha1:793bbea84000ce83797c78bd6cf6812c877f0b45"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-custom-code.ts",
+            "integrity": "sha1:4747bed7116057ac5cead2ef27a9a243588c61df"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-name.ts",
+            "integrity": "sha1:8574f36cc78064e040e4cfdcccceecfa78f44d24"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-slug.ts",
+            "integrity": "sha1:eaa84a941e0a94b6a87b4cff5c28100acea70f5d"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-latitude.ts",
+            "integrity": "sha1:4c748facc134a0c7586cec31b70ea10485a47739"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-longitude.ts",
+            "integrity": "sha1:0a1d282eb0e5dc5a9a4a02a3220836d0950d4d7b"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-zoom.ts",
+            "integrity": "sha1:ac9a2ff04635cf444ba66c23e19a63d1ff6bd108"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-created-at.ts",
+            "integrity": "sha1:ce7c21a8f2ab28279026b3e05df88ada70d48dfb"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-updated-at.ts",
+            "integrity": "sha1:655252175841941c4dc9f6520e21a50c1661bf2d"
+        },
+        {
+            "path": "src/@hades/admin/administrative-area-level-3/domain/value-objects/administrative-area-level-3-deleted-at.ts",
+            "integrity": "sha1:f8f433de932c3115081465d741bb4e3656d621fc"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-create-administrative-area-level-3.controller.spec.ts",
+            "integrity": "sha1:b53d0031c8d213bfc4e72368b501fac2cad32045"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-create-administrative-area-level-3.controller.ts",
+            "integrity": "sha1:c2db8c17b8417f2e5e57683e2a0c239c40839d12"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-create-administrative-areas-level-3.controller.spec.ts",
+            "integrity": "sha1:9a610f85afdde97e7d0fb967b60fdd025e9a3c60"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-create-administrative-areas-level-3.controller.ts",
+            "integrity": "sha1:527a32292dd9daae0cacdff1f3631f4267e19b7a"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-delete-administrative-area-level-3-by-id.controller.spec.ts",
+            "integrity": "sha1:8a1e6adecba4a5f35d0d9f637b268e9ff1e1ac83"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-delete-administrative-area-level-3-by-id.controller.ts",
+            "integrity": "sha1:e1310a4d2c44934253f640692812fe2053147c81"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-delete-administrative-areas-level-3.controller.spec.ts",
+            "integrity": "sha1:be614584efbbec679d908fd04d552ff35e326e04"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-delete-administrative-areas-level-3.controller.ts",
+            "integrity": "sha1:3e4730bb12d9d6194fad544c7f56b17cd9a374ae"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-find-administrative-area-level-3-by-id.controller.spec.ts",
+            "integrity": "sha1:3eab44d6dacb238eb0dec7f4f802586681833674"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-find-administrative-area-level-3-by-id.controller.ts",
+            "integrity": "sha1:2b997fdd23dd3f7ebf7ecc139c899f3e58f88302"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-find-administrative-area-level-3.controller.spec.ts",
+            "integrity": "sha1:a4d05f0690ff347b7dd427a38e62a6a2ae05f4c5"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-find-administrative-area-level-3.controller.ts",
+            "integrity": "sha1:c7995bcf75e4519febdd9e2a7d9f0ffd94851267"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-get-administrative-areas-level-3.controller.spec.ts",
+            "integrity": "sha1:6f5b17eea119b458d732d2606b1fc74842b98793"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-get-administrative-areas-level-3.controller.ts",
+            "integrity": "sha1:ec63feec51e6ec7e0f8137b24b8b57b2d0de4de5"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-paginate-administrative-areas-level-3.controller.spec.ts",
+            "integrity": "sha1:e29a08b565e557c13cee723c55ac0e5d5e23d2a0"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-paginate-administrative-areas-level-3.controller.ts",
+            "integrity": "sha1:84a2166f428033fbde1e6f7586e13958e2836a89"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-update-administrative-area-level-3.controller.spec.ts",
+            "integrity": "sha1:cc376ef6ff3c251dd31978ee1ee3232f9055b7cc"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/controllers/admin-update-administrative-area-level-3.controller.ts",
+            "integrity": "sha1:8ecd71c57a785e01e85e9f177d417b1096a382e7"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/dto/administrative-area-level-3.dto.ts",
+            "integrity": "sha1:0f3fa0ec3c07eebb3cb3088cecb5aea42e7a7348"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/dto/create-administrative-area-level-3.dto.ts",
+            "integrity": "sha1:b15f9313a09c183e0ca3769967b594409b782e6f"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/dto/update-administrative-area-level-3.dto.ts",
+            "integrity": "sha1:e08fd21bf3bde33c68a9e16d933d9519071ccad7"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/graphql/administrative-area-level-3.graphql",
+            "integrity": "sha1:b6717a662194c9835de3248691b62ba99e73b4bd"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/index.ts",
+            "integrity": "sha1:25adb3c4a0c07822e6da7aa2072f3e0f01a397ca"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-create-administrative-area-level-3.resolver.spec.ts",
+            "integrity": "sha1:d62c35751439359ffe54e5e3f90d5ca66e846068"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-create-administrative-area-level-3.resolver.ts",
+            "integrity": "sha1:23fc3d6011bd28a527647c35c9fdcbc45b01eaec"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-create-administrative-areas-level-3.resolver.spec.ts",
+            "integrity": "sha1:4aebe8ac2cc3b61a16ded7adc1ea247cef2e0f84"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-create-administrative-areas-level-3.resolver.ts",
+            "integrity": "sha1:ac43c20284cc148ba0135c4bcbae2215f06be948"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-delete-administrative-area-level-3-by-id.resolver.spec.ts",
+            "integrity": "sha1:8a2e4728197f0056657657023b0b42fed0b80844"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-delete-administrative-area-level-3-by-id.resolver.ts",
+            "integrity": "sha1:ca36205e67a364dd9814b5fab11e484db5f7d56c"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-delete-administrative-areas-level-3.resolver.spec.ts",
+            "integrity": "sha1:1bbe4e3470ed68ae5ded6df700b6c1b21d777d5e"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-delete-administrative-areas-level-3.resolver.ts",
+            "integrity": "sha1:372a9655a6bced8c8a83e94d7cde6bf32469469d"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-find-administrative-area-level-3-by-id.resolver.spec.ts",
+            "integrity": "sha1:2e01c4f4e5bb83b65760c3b29744bdb0c6bd2a3d"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-find-administrative-area-level-3-by-id.resolver.ts",
+            "integrity": "sha1:38b411d207ea9ef888ce422bc4a9c44314b5de92"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-find-administrative-area-level-3.resolver.spec.ts",
+            "integrity": "sha1:a286eb4d472b66397fa891b37cafc2a40b251b8c"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-find-administrative-area-level-3.resolver.ts",
+            "integrity": "sha1:54110579342659fad8123d6d1555878e584c1ee2"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-get-administrative-areas-level-3.resolver.spec.ts",
+            "integrity": "sha1:dc961fa94080c274e07cffcb0ce6d190533fbcd5"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-get-administrative-areas-level-3.resolver.ts",
+            "integrity": "sha1:79f1d97fa37328cd6e68c6a829952fc2b60fb44c"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-paginate-administrative-areas-level-3.resolver.spec.ts",
+            "integrity": "sha1:d4e0ae8b0bf5ef87368634f64bca77387491a28d"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-paginate-administrative-areas-level-3.resolver.ts",
+            "integrity": "sha1:32c9eb3bd004224baef7a332bbf837498c810855"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-update-administrative-area-level-3.resolver.spec.ts",
+            "integrity": "sha1:6661e7e1a4a811aaef768066ac87abea11c3d63a"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/resolvers/admin-update-administrative-area-level-3.resolver.ts",
+            "integrity": "sha1:1ff17ba8abe4916b14921ed3dede5a7ec543aa0e"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/seeder/seeder.module.ts",
+            "integrity": "sha1:7d64321496ef2030c17accb1dca01bb98740ca96"
+        },
+        {
+            "path": "src/apps/admin/administrative-area-level-3/seeder/seeder.ts",
+            "integrity": "sha1:7c174b77f28dbd38e86d28f2bf0b16c8a2bd2074"
+        },
+        {
+            "path": "postman/admin.administrative-area-level-3.postman.json",
+            "integrity": "sha1:754dfabebf4cee71d10b852a7dd21c627c812463"
+        }
+    ]
+}

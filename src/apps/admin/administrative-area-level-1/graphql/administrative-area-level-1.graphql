@@ -8,6 +8,9 @@ type AdminAdministrativeAreaLevel1
     customCode: GraphQLString
     name: GraphQLString!
     slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -21,6 +24,9 @@ input AdminCreateAdministrativeAreaLevel1Input
     customCode: GraphQLString
     name: GraphQLString!
     slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
 }
 
 input AdminUpdateAdministrativeAreaLevel1Input
@@ -31,6 +37,9 @@ input AdminUpdateAdministrativeAreaLevel1Input
     customCode: GraphQLString
     name: GraphQLString
     slug: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
 }
 
 type Query

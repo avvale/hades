@@ -6,6 +6,9 @@ import {
     AdministrativeAreaLevel1CustomCode,
     AdministrativeAreaLevel1Name,
     AdministrativeAreaLevel1Slug,
+    AdministrativeAreaLevel1Latitude,
+    AdministrativeAreaLevel1Longitude,
+    AdministrativeAreaLevel1Zoom,
     AdministrativeAreaLevel1CreatedAt,
     AdministrativeAreaLevel1UpdatedAt,
     AdministrativeAreaLevel1DeletedAt,
@@ -23,6 +26,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
     customCode: AdministrativeAreaLevel1CustomCode;
     name: AdministrativeAreaLevel1Name;
     slug: AdministrativeAreaLevel1Slug;
+    latitude: AdministrativeAreaLevel1Latitude;
+    longitude: AdministrativeAreaLevel1Longitude;
+    zoom: AdministrativeAreaLevel1Zoom;
     createdAt: AdministrativeAreaLevel1CreatedAt;
     updatedAt: AdministrativeAreaLevel1UpdatedAt;
     deletedAt: AdministrativeAreaLevel1DeletedAt;
@@ -37,6 +43,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
         customCode: AdministrativeAreaLevel1CustomCode,
         name: AdministrativeAreaLevel1Name,
         slug: AdministrativeAreaLevel1Slug,
+        latitude: AdministrativeAreaLevel1Latitude,
+        longitude: AdministrativeAreaLevel1Longitude,
+        zoom: AdministrativeAreaLevel1Zoom,
         createdAt: AdministrativeAreaLevel1CreatedAt,
         updatedAt: AdministrativeAreaLevel1UpdatedAt,
         deletedAt: AdministrativeAreaLevel1DeletedAt,
@@ -51,6 +60,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
         this.customCode = customCode;
         this.name = name;
         this.slug = slug;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.zoom = zoom;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -66,6 +78,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
         customCode: AdministrativeAreaLevel1CustomCode,
         name: AdministrativeAreaLevel1Name,
         slug: AdministrativeAreaLevel1Slug,
+        latitude: AdministrativeAreaLevel1Latitude,
+        longitude: AdministrativeAreaLevel1Longitude,
+        zoom: AdministrativeAreaLevel1Zoom,
         createdAt: AdministrativeAreaLevel1CreatedAt,
         updatedAt: AdministrativeAreaLevel1UpdatedAt,
         deletedAt: AdministrativeAreaLevel1DeletedAt,
@@ -79,6 +94,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
             customCode,
             name,
             slug,
+            latitude,
+            longitude,
+            zoom,
             createdAt,
             updatedAt,
             deletedAt,
@@ -96,6 +114,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
                 administrativeAreaLevel1.customCode?.value,
                 administrativeAreaLevel1.name.value,
                 administrativeAreaLevel1.slug.value,
+                administrativeAreaLevel1.latitude?.value,
+                administrativeAreaLevel1.longitude?.value,
+                administrativeAreaLevel1.zoom?.value,
                 administrativeAreaLevel1.createdAt?.value,
                 administrativeAreaLevel1.updatedAt?.value,
                 administrativeAreaLevel1.deletedAt?.value,
@@ -113,6 +134,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
                 administrativeAreaLevel1.customCode?.value,
                 administrativeAreaLevel1.name?.value,
                 administrativeAreaLevel1.slug?.value,
+                administrativeAreaLevel1.latitude?.value,
+                administrativeAreaLevel1.longitude?.value,
+                administrativeAreaLevel1.zoom?.value,
                 administrativeAreaLevel1.createdAt?.value,
                 administrativeAreaLevel1.updatedAt?.value,
                 administrativeAreaLevel1.deletedAt?.value,
@@ -130,6 +154,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
                 administrativeAreaLevel1.customCode?.value,
                 administrativeAreaLevel1.name.value,
                 administrativeAreaLevel1.slug.value,
+                administrativeAreaLevel1.latitude?.value,
+                administrativeAreaLevel1.longitude?.value,
+                administrativeAreaLevel1.zoom?.value,
                 administrativeAreaLevel1.createdAt?.value,
                 administrativeAreaLevel1.updatedAt?.value,
                 administrativeAreaLevel1.deletedAt?.value,
@@ -146,6 +173,9 @@ export class AdminAdministrativeAreaLevel1 extends AggregateRoot
             customCode: this.customCode?.value,
             name: this.name.value,
             slug: this.slug.value,
+            latitude: this.latitude?.value,
+            longitude: this.longitude?.value,
+            zoom: this.zoom?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

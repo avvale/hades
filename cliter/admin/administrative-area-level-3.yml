@@ -1,0 +1,85 @@
+version: 1.0.0
+boundedContextName: admin
+moduleName: administrative-area-level-3
+moduleNames: administrative-areas-level-3
+aggregateName: AdminAdministrativeAreaLevel3
+hasOAuth: true
+hasTenant: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: country_common_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminCountry
+    relationshipModulePath: admin/country
+    relationshipKey: common_id
+    relationshipField: country
+  - name: administrative_area_level_1_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminAdministrativeAreaLevel1
+    relationshipModulePath: admin/administrative-area-level-1
+    relationshipKey: id
+    relationshipField: administrativeAreaLevel1
+  - name: administrative_area_level_2_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminAdministrativeAreaLevel2
+    relationshipModulePath: admin/administrative-area-level-2
+    relationshipKey: id
+    relationshipField: administrativeAreaLevel2
+  - name: code
+    type: varchar
+    maxLength: 8
+    nullable: false
+    index: unique
+  - name: custom_code
+    type: varchar
+    maxLength: 10
+    nullable: true
+    index: unique
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: slug
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: latitude
+    type: decimal
+    decimals:
+      - 17
+      - 4
+    maxLength: 17
+    nullable: true
+  - name: longitude
+    type: decimal
+    decimals:
+      - 17
+      - 4
+    maxLength: 17
+    nullable: true
+  - name: zoom
+    type: int.unsigned
+    maxLength: 2
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

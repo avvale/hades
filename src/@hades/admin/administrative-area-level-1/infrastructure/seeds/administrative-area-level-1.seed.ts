@@ -17,7 +17,6 @@ export const administrativeAreasLevel1 = [
     {id: 'ae2616d1-8d92-4d4d-8eee-1a6f77662661', code: 'LA',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Lahij',                                            slug: 'lahij'},
     {id: '8c09584a-8569-4941-8cac-ec8f43b5ec43', code: 'MA',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Ma\'rib',                                          slug: 'marib'},
     {id: '48602295-cb16-43e8-8103-094c5a0a35db', code: 'MR',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Al Mahrah',                                        slug: 'al-mahrah'},
-    {id: '48602295-cb16-43e8-8103-094c5a0a35db', code: 'MR',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Al Mahrah',                                        slug: 'al-mahrah'},
     {id: '7a0da119-d0bf-43f7-8552-1a38f01d8c74', code: 'MW',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Al Mahwit',                                        slug: 'al-mahwit'},
 
     // Andorra
