@@ -20,11 +20,11 @@ aggregateProperties:
     length: 0
     nullable: true
   - name: description
-    type: TEXT
+    type: text
     length: 0
     nullable: true
   - name: excerpt
-    type: TEXT
+    type: text
     length: 0
     nullable: true
   - name: email
@@ -90,15 +90,15 @@ aggregateProperties:
   - name: latitude
     type: decimal
     decimals:
-    - 17
-    - 14
+      - 17
+      - 14
     maxLength: 17
     nullable: true
   - name: longitude
     type: decimal
     decimals:
-    - 17
-    - 14
+      - 17
+      - 14
     maxLength: 17
     nullable: true
   - name: created_at

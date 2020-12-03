@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "f478512e-dbfa-43dd-99db-c9e9795a86db",
+		"name"          : "@hades - origen/partner",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - origenCreatePartner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OrigenCreatePartnerInput!)\n{\n\torigenCreatePartner (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tsocialNetworks\n\t\tdescription\n\t\texcerpt\n\t\temail\n\t\tphone\n\t\tfax\n\t\tzip\n\t\tlocality\n\t\taddress\n\t\tlatitude\n\t\tlongitude\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\", \n\t\t\"name\": \"vf0plcsntvg6ouuc6pgi227cqcyuqhic10mi2k9c7a5e7krwk6axajkgyuhkayhu2sltz0u9cdldqnlivcbonf4pz5ouugwqwn4i9o2i2oy8gqmkrlu7np151g5fp9myfh7h9azvoae0y5h700xkv7xbmy5et42tg8qdj1zbcxk3onk2hw19ysx58fd35dew9b44xen9deqgpg967f4o7972jmg3u8mlo5j24626xisx0yo3gs1qph45fd4nce7\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Non reprehenderit ullam et et recusandae veniam similique tempore voluptatum. Nihil quaerat velit voluptatibus debitis. Ipsa et autem voluptatem est ullam est autem non debitis.\", \n\t\t\"excerpt\": \"Voluptates repellat iste cupiditate dolorem. Dolores ad ipsa sed consequatur. Aut voluptatibus id molestiae officia et. Nihil in pariatur ipsam dignissimos id est magni. Nisi vel voluptatem sint ullam vel est ipsam error ut. Numquam aspernatur consequatur dolore exercitationem.\", \n\t\t\"email\": \"ens9iif6x4ovs6092d052vif0ujwrkv9ozr2j7001ex46gn7v98p8c7aoiq8ff7nid6iems8jm5otsgp38mzr8pqs6w4qs7hyzxbbl4vvm4c89vowu7mok72\", \n\t\t\"phone\": \"kqsiz2rlron4cypybiywpy8893dcninc0ibjgmmafp882cwtzcepiayky6wd34qpqv1u6jea4cdkna5o2zy4wmtfk6wf9u8f0r8s4758hntvpteseq2z3g1v\", \n\t\t\"fax\": \"3q0r6mcaqldbuwuvaiszar839unggz524fhak28v7wezqnwv7e4jf4af0bauuoa7y08t0zl231n0ddsipxc9trhv8nbwaufky8mwy5olkuetetk2dtyvongv\", \n\t\t\"countryCommonId\": \"47234be4-ce32-45ce-9d12-d05509c2c7a1\", \n\t\t\"administrativeAreaLevel1Id\": \"40cc5001-185a-4057-b71c-cec42cde97b3\", \n\t\t\"administrativeAreaLevel2Id\": \"b9719ba8-ee1c-4f0c-9617-4c62d8d8aa0d\", \n\t\t\"administrativeAreaLevel3Id\": \"4455eff8-2510-4b35-a5d9-ffafac680033\", \n\t\t\"zip\": \"15lv13vgpx\", \n\t\t\"locality\": \"oced2jm9cjstwhjw38jujravl6n92p81n2hbq98wazj80757jfvtyf9kxgi13b28h2jx3xw45q9f6dokmrpg28j2wm3pngly3cwywozt17s4lv8cv9mwlvonoq1bq\", \n\t\t\"address\": \"p1zvz2t176cebkortin5zltqrb81uvss8pmk6ny769mkdqt1kwh08qzdy0fxhuls5ri7fyb5sh7v1udvcwz84eb5uaeer13v57v26vsn5hxp5ca6gya9pbfyjnvw7yhz4gcgf3zb6ecmty3ujg5pxwf4grm7nrnheul576zlqcp04zosqm2staiw7j3ltp2ll6q10mantzgxaioh2l6pbyq9215vdvt2s96w45qljzhen1acjtrshw14rcu5tjh\", \n\t\t\"latitude\": 327.02, \n\t\t\"longitude\": 377.68\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenCreatePartners",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[OrigenCreatePartnerInput]!)\n{\n\torigenCreatePartners (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"1f633032-61e6-4a3b-8a71-79d5493395d5\", \n\t\t\t\"name\": \"4djw8ecp6rpq5ig2ar8p2j165lkyu1dz8tqdj3bb47szazeh3471nuw35yuj644xp6jqrckkt2do9xzao6ufvfrm4g7yuf95qrz2sc9vjyxvebe4a38ffsjizejmw587ng48ddhf6e2t8m70xhrsgijf9e30kpwiwr75pgfu2amuj7zt48rj7l3knzzihb9fbomgz5dxe36m73rwj1juktfry27rj4ahd6d6wdp74lakwfp7fce9cwaeouuhl9h\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Ullam voluptas consequuntur doloribus eum omnis omnis aut illum. Quia aliquid aliquam quis alias et. Eum mollitia sit non fugit impedit qui voluptas ducimus maiores. Eligendi quia necessitatibus tempora laudantium blanditiis. Esse sunt quidem.\", \n\t\t\t\"excerpt\": \"Est quos expedita modi veniam dolorem neque eligendi. Consequuntur dolor itaque ea ut ipsum error perspiciatis. Ullam sapiente assumenda nesciunt vitae. Architecto delectus maxime. Doloremque recusandae reprehenderit. Ut a repudiandae omnis repudiandae numquam quibusdam.\", \n\t\t\t\"email\": \"ackq917xzrm366osu0gvxsqit81libnwe88ta1yr4q1faasfrguqypftfhogwman1791o2h76c01a14jm8st0wczwd9rcesh96x58agxc26iy590ji3m4woo\", \n\t\t\t\"phone\": \"ncfv962x91iszm1pcm6rvag6fdc1ch4hc23gfjlgaazgpibtigrb1d264y44h83t700hd8oief2p564lbwkh9x4ots2iyyo5s68r07vmywdt5jahbn65dxnp\", \n\t\t\t\"fax\": \"jagj3i6t3deajyd2a97ytcj54j2rqofzoi5fdki43h8qu202qag7satz5f7drem2yv6a535wltjhsaejqobgct1z8uderrc1lhio3ckd8u72r8g1bmdilnzi\", \n\t\t\t\"countryCommonId\": \"cbfb3431-1659-43f9-9070-b6e7ec25b933\", \n\t\t\t\"administrativeAreaLevel1Id\": \"07cf677c-47f6-4a8e-b295-63d9745c7116\", \n\t\t\t\"administrativeAreaLevel2Id\": \"1d6052f3-16b5-4971-b842-54a992d51c5b\", \n\t\t\t\"administrativeAreaLevel3Id\": \"7ecda906-39f3-4f80-ae65-7af6c0bab083\", \n\t\t\t\"zip\": \"s6du8d7xdt\", \n\t\t\t\"locality\": \"goylbxef6ybtwd3rmhw0gqbiitzyvw5nyp87oi4g94705djo0j3b1hjal6shjt368k5lgp5fmsejt66mz5t0wmelxdg4ugqvvgllmahzv5n2b3ydd1plpqvyg5kva\", \n\t\t\t\"address\": \"ad6vyw8v7ks2l2qv9royd78i9vxsd1g9p1pxxfktca17llt7i7sx6h9ngmspewgm3l38k5gyng4od5wmfnjswazyu25od2r68lyihhr8vuaiqf35z5h7q41uvlr24sfz0xcwsr9drvq0kw9bx8cclc9m67d13ak4p3bq2m0tgow6si2z5gng9m43l77jdau5z0i88qh1l7qvmk5ze5ret75ubqimxezq160441a8yqcfs92enbyck0mzixg2gqe\", \n\t\t\t\"latitude\": 826.80, \n\t\t\t\"longitude\": 325.37\n\t\t},\n\t\t{\n\t\t\t\"id\": \"65294313-3537-4504-a12c-59c2ab81df68\", \n\t\t\t\"name\": \"w61hchxz5yysui1rlf65wthu5iwal213fut6mygy6qxv5lpygnrvh3k1ynlo6tpfw1qms988nukonbiqk19sw1wfv4obewb61i7wp0byfl5fuhgdtj0eywp1wqbil11bh4y1iowi0isy2rtiaa1ncangcjlab14hl0oj3g8g6nrdfhc3i2s4tgn3950a9mdkitptzqk7ues860uyyr46oyc91uie7trnoqr6v3czl46mqwvpma70crsvkgck3n2\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Dolor illum consequatur accusantium placeat. Enim est ut eligendi debitis est commodi. Dolorem praesentium eum et. Reiciendis mollitia non ea eaque nobis. Qui aliquam rerum quibusdam nostrum provident. Exercitationem nemo odit suscipit laboriosam enim illum.\", \n\t\t\t\"excerpt\": \"Est esse illum qui quo facilis sit quia autem incidunt. Omnis delectus nesciunt. Qui aut odit quisquam et ea error cum. Velit consectetur autem dolores similique ab. Similique dolorum asperiores quia minima sit error officia aut.\", \n\t\t\t\"email\": \"ihkox1qmwcgfi74le4vrwl35pd69t3fqvjmg73jm9pit1y9kv7l92mv2dyp68esl753wdvw80xiep7ibjxmkee6i3fgy1zfnaj5hwngizasjh2dsap8jr1jc\", \n\t\t\t\"phone\": \"pcpbbsqfz32py77g9teeonssg6kz4z1nhc5pa8dilfq0nw0fiavp82pe4yalhsb5lbvsh3o2uz166ra7nlyepit39k7of5a4bn8edh29t99rs5rnywf7gxnk\", \n\t\t\t\"fax\": \"czrklp79cjdjin0huwst25yev9xujj62lcu2v6d5huisxokun60bvbuqgkdphunabjxamts55c4l2y34qgum6fmfs9fqp8htjds0sdxh15xa7oewlbatu9ls\", \n\t\t\t\"countryCommonId\": \"e532c8e2-e4d4-43bf-96f3-e8e69824bd00\", \n\t\t\t\"administrativeAreaLevel1Id\": \"08034472-4da4-43c9-8061-5b95b0756623\", \n\t\t\t\"administrativeAreaLevel2Id\": \"f8536f30-c75f-465b-ab00-79942a37b659\", \n\t\t\t\"administrativeAreaLevel3Id\": \"b3940dc5-1c8d-4e5a-8bdb-4d47e5f7beb5\", \n\t\t\t\"zip\": \"kn7cqh7h9y\", \n\t\t\t\"locality\": \"0x1rw9egnds7dgy8nm8tawuwmhyrgb2b2ayn4kmxunvpvalt1hb7ggtherens67hztak9khjizrvz3nn5hlj9nxm23n9708rcr05w8cxn4jfde3k5wuuix8abjlz9\", \n\t\t\t\"address\": \"eapmhoseoa1xbg1gfj5zlgk374thho18cjomffxwf777yhgvatm47ndbkjaw352r3dlbwmt6uvqf1g243m0wd23752p3p1xreyr2a5t1us31fan5e2v2mqwbl00di0tclr23g1nj01ljpni4zhnyb8wwxoki3q9px362szld2kn9gvwkwnw0qj5zc6mox9e0cwi2gc8wtpntzz5o3pcl321w36hmh6qitxkxc9ynolms51dwmkxx22zialoq134\", \n\t\t\t\"latitude\": 562.96, \n\t\t\t\"longitude\": 185.40\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7b918d3e-dbee-4e7f-9f17-95a1e6019114\", \n\t\t\t\"name\": \"mymwt9z8q9f9g2ca6gmfjidiw6s5f1d5s00y2tdlw48rj5oz1cucvg4pr8db05icra0udojy6y2u6gninnuulpt5w8h7fgzd7yw54hal9tdrt7piso9x71auzoh7enlpgih9mxasv37hw9epyhtwtvkjxhpxski73qxv3uw3t3yqnrzyh8g0idqancbwpwo4ycwp24y46f0inyb9heu1xxpje0slm3y9jfgvepn3ajd3ek4dv4cw61wac1v3luw\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Neque sapiente occaecati omnis id corporis ab quis. Optio saepe voluptas veritatis veniam eligendi. Ab non omnis. Facere explicabo quia.\", \n\t\t\t\"excerpt\": \"Minus temporibus voluptatem sed alias nostrum ratione occaecati ut. Architecto itaque alias rem ut. Rem et voluptatem et sint sunt blanditiis omnis.\", \n\t\t\t\"email\": \"knl5go6j2b33siueswb7qx6on1p242zis4w0di1xyr8g40gl5nn342h4mi6ehhdxz1u6au7gnf5jwjhv2f9em5wbgb0m5llmd0umz2w026z5wb04f7a8o5m3\", \n\t\t\t\"phone\": \"yzujt5yecji81qrf9wlumjajc78k0ci4fz9vdwrum7olw6wnsj9bh9ldfl3fji7xi9zfhwo0o0nqkspqafkl3cn940lql6sla603nyrdtk1jcf2mdcm5b338\", \n\t\t\t\"fax\": \"nu1dn1lx8tsr7sapjd84t2a5kx0hct0a0365cvyf3hgpdnytv7ap9ith22vkk0sep3mf2g0jwoiunp4d3hcz9kuslkliyy986itf4u3mfe2eti8bkj6s0i61\", \n\t\t\t\"countryCommonId\": \"882e8ad8-8699-46ed-ae0f-f279f94d5706\", \n\t\t\t\"administrativeAreaLevel1Id\": \"5cc57a9e-4343-4a17-84f6-abba8e02919c\", \n\t\t\t\"administrativeAreaLevel2Id\": \"95acbfa0-427b-44b9-accf-a6dddab32a51\", \n\t\t\t\"administrativeAreaLevel3Id\": \"b39e6f35-82f3-40ef-96aa-07c315affc64\", \n\t\t\t\"zip\": \"epsvqrcts2\", \n\t\t\t\"locality\": \"vnytlldboxv9kywe62wxq1cb8h3xn27im2e90xzt4zj9jehxblkvnh9ysm5bqbhtlj32au0eh423iq7cmch03xaixvbjzpeem7uhyaexod2n2vqwgfdjjo7hsxu1y\", \n\t\t\t\"address\": \"bttmagvotdylcfimy8karhjxsf79a51m23hz2qcu3zwtdxixigd1vbn1wy4lhj46jk89hs5fokf5zpqg3npf7kik5pik2pexhz44loaj8iga39xpdkbdls80exirg3rsdi1g72c2dchv773ehrk7i30k8sxy1v5f17dpo7d3aw2aahobky7wbek4xup696yby0huhx6p4nd4ej85ii26tibmh74tt2otazy1f2877dz61v1anfho6olb2virirj\", \n\t\t\t\"latitude\": 689.97, \n\t\t\t\"longitude\": 162.85\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1ed7999e-c12b-46df-b37f-5a23ebc0e514\", \n\t\t\t\"name\": \"kbsp30fobp37xmxetq8cjy1e42eesmn4q8mebhzyteikyyxj1a23y3536gilqhlv70x1ypbb396ju7n7guydmo4l77zvvcbr7961hmxhwkljxh4xmbe2xcjl45vlw6lcsuishi19i166mti6aj45tuvawphp5bnep1g6jbd580ue3th7nln5k7l8tanjgeivobps1nrvwfcbkhh9hdohfv1hnerltdyllj185p3x0nc4h7bg9v7y1o5pynjxt9b\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Ut earum ut error possimus. Ut et sit cum suscipit. Voluptas blanditiis dicta maxime accusamus. Aut molestiae alias enim quis. Molestias ut ea libero aliquam ducimus. Dolores et soluta ipsum vitae consectetur repellat ullam.\", \n\t\t\t\"excerpt\": \"Aut est beatae veritatis voluptatem culpa temporibus. Nihil consectetur alias saepe optio reprehenderit facere nostrum. Modi qui perferendis qui ea voluptas aut vitae. Aut cum aliquid id esse.\", \n\t\t\t\"email\": \"zmo0rsswlymqtnfeoz6fbtw08in9j5auqzyxc3vztv1i257cjd7byend2nl45gm1cee2z1qyhtmyprzm1h4mlrh8y7zkuqpqitb500phm8bjywpknfqdsxng\", \n\t\t\t\"phone\": \"rc1f8ocjtdsj7982lzrt74b0v3re9r31f533upnbmwqiqzsu8dphds2r8m9mhqzoubtdwrhg7vpu63bn8thrdqffwrj4d2h6aef6cak76jyhge5h6d7e9l3m\", \n\t\t\t\"fax\": \"tvddqqf1glloemfuz1xkb2fkot2oelmfdfpeputkjgxntinee6cl0sxo3qkbc21fcg59qjukudcvbdtioqdtbnz4hhwvsce3wxn83ionx98fjp05tz60dkix\", \n\t\t\t\"countryCommonId\": \"e6e0718b-9f4a-4eae-a9ed-972dd6b182ea\", \n\t\t\t\"administrativeAreaLevel1Id\": \"3c61c0ff-a08f-46f2-89ea-49ebd91f71b6\", \n\t\t\t\"administrativeAreaLevel2Id\": \"90b96331-dbe1-4579-9b61-82b0fcabb92b\", \n\t\t\t\"administrativeAreaLevel3Id\": \"36677e03-ecae-41ae-b94d-18be96c7c130\", \n\t\t\t\"zip\": \"karoxzgkli\", \n\t\t\t\"locality\": \"0wjc817vt4goxqse8p49ywbf1xwzmraqvz0zvx953kdkoq7w8dh2u4m13b1wdvk7gq60lljeldltpe98356ieb4a1irdiupr8zsj2r972ohppll1yul0n9u24pach\", \n\t\t\t\"address\": \"gxdn319t65uyq44vf4wsmbzo52j8ryy4n3ceyxgezjq3pkvd9j2wyjucvobtvm5p4hxmvylw7d6u5x583pqy3v8v862a6s0lzj92q89lcinjeeg7x3p2fvdblo1d8zcqsx7tx34p2d9xe71fuj0kekklxbs5v14y2l8nmu9l542h5kjv0e6wajh9bhgxspcoagdar47zit1091a4hkytvyr94wfu0rnj60qpgcydygja9qtih9rmb3pi7c8xi7e\", \n\t\t\t\"latitude\": 229.47, \n\t\t\t\"longitude\": 612.31\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2195292a-a8ba-40a5-bfbd-8258fdc34cae\", \n\t\t\t\"name\": \"evniz9wb7v4qazlmbp97ek3wshc60t2mqzqh42ug153mtx5b5783or2ywasr41lg2vy8wyiri5v62e3tx3yzb0827d2h609dwxflo5pem7lt7qoppe6e9enz0bd54iupkkrlz0ywnkat5b3opbznez94ly2tgqyp9am2awu74rgzlcl87wjn8hqqk1ab5geqmzb9rrca63i5xwi10qps881ffonawh52edvq3ndsw48w6txbgkcac3z9gtllkvb\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Eveniet repellat numquam ea corrupti assumenda numquam distinctio voluptas quibusdam. Reprehenderit beatae aspernatur error odio aspernatur eos esse velit. Culpa eaque quod in voluptatem. Est saepe quia aut dignissimos facilis natus omnis aut quia.\", \n\t\t\t\"excerpt\": \"Minima modi rerum molestiae sint placeat aliquid architecto esse nesciunt. Labore accusamus nihil. Et omnis dolorum. A dolore rerum officiis est. Eum molestiae dolor et.\", \n\t\t\t\"email\": \"lt8lk07mdjt91es2gmzyxp2ekt3fqd2iom1iyprmjk3i87kx8jr9mqjxrtvxkql3aiik71qobb5k51hasgfh8kpyijm6e5mx6ft3eqz9yvp7bm0ljy02p2co\", \n\t\t\t\"phone\": \"hd805m577k1h4cklj0fddjoaflnb3js1xdgypcux65rh1ca6e7db3gcfjzdk5jlr1wk5crc9kq9cwweirbomc502kr15yykj1e3hrkdsrzizmq8uqi2yg0pq\", \n\t\t\t\"fax\": \"7cu7rw9y0mp9dabzcvcr66m6xa2caa9u6yoaafpv3o967jk3pilmxhg3xv3ie0tr9farsp5oeos5hw32519yo7ih48m8y20d2wrb61p0lc1x4dfi8hlvaq4l\", \n\t\t\t\"countryCommonId\": \"a55c452e-ddf5-4a0c-9389-5e97b8394841\", \n\t\t\t\"administrativeAreaLevel1Id\": \"7a892480-1752-4fbc-9d48-529fe05a6fe5\", \n\t\t\t\"administrativeAreaLevel2Id\": \"eba589f4-27b0-4f84-b447-f66e60dd711f\", \n\t\t\t\"administrativeAreaLevel3Id\": \"c93024c9-a771-4af6-927e-b08d4db1ebf9\", \n\t\t\t\"zip\": \"ra7xr69wsu\", \n\t\t\t\"locality\": \"5qzwyvaz0hjulzglm0pa88ddspwm98c661nrr4p53yh4x4hx4dr2wn7n9gwlg1zt3bkhkhhq9huust8d4q0rjrfhbnrkblnkxypyxco8lco9k9ky83i5nzz1hnrnk\", \n\t\t\t\"address\": \"0lu9n2r06sxrjv1385v85xovs4vlctydrn32ihj9spggjcvlh78lippe8y9zzbyns90bhyzop3gyr0ujew8x0h93zan4a4ebkj7209gikwiuy0nwo9b3jfr3to7fu6we4h1f3j7ic844epj7z3t7kvz13cvwej0jappaoe81c2hmcphqy8b44v8dlysbpmas537ozlovm53a3vpixwshoseoczgy16mvdhxz4elklkw45ixeedyxjeo9qs2tacg\", \n\t\t\t\"latitude\": 159.78, \n\t\t\t\"longitude\": 165.92\n\t\t},\n\t\t{\n\t\t\t\"id\": \"227d13c7-6b10-485a-8cea-b05db5492480\", \n\t\t\t\"name\": \"lm77qzkqncosxhi7jrdlbem9js8i8h61kjz6adh8si8f5ljcbvn2yybe6b3wbb7gn0igbldky713o9zpb6tiawxt6nwiptp9c6cmd9peki1u6jtf4phyiaomac1ch2rktlamzw1etyqno4zzjh16wzz98dsrdv6wqx1o5heslxnxp02gg82g370197fk50aa1nhy0k4idwtqe3flvloijp76oi2ryd0zoi7b1zz7dn943o4jguvc95fbt0wjppy\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Cupiditate non sapiente occaecati dolorem quis quaerat eaque. Perferendis sit debitis ullam rerum consequuntur. Blanditiis earum nisi assumenda dignissimos. Quis facilis et cum. Dolorum eos consequuntur nostrum dolores dignissimos dignissimos dolores.\", \n\t\t\t\"excerpt\": \"Quas cum ratione qui officiis nam eum nihil. Est aliquam consectetur dolorem sed nisi. Sit magni non omnis. Ea similique sed. Reprehenderit inventore quibusdam tempora voluptate placeat ipsam. Est culpa repellat iste at fuga impedit.\", \n\t\t\t\"email\": \"5tu6tbq2mexpmmw2tvx50ommfk3ofhz6c8juvl77av25huv97b073kqhdhu9ytu2xym07548ml6fij20832jh10uvg2sylpkqf248wkaafk5ybbi8gs2xsro\", \n\t\t\t\"phone\": \"bqoiuz0e2uu730b4i27v6bihlo10s74qqy8a6tsuc36bo3tn0bjmte857guwew6kgovccrkft6y8ev334dvz3spa44iq6fl28hyr9z7o7akiv1nzevrwdved\", \n\t\t\t\"fax\": \"90jehe22jq9ahanewkuphp7puly9lt3lp0s6881bxkb5r5ofa2ylh0pohs7rvxq5bm3ubb7rf0acpi8906vgts8ph01mh7bcj1ndam1goss4269bkjev7ri8\", \n\t\t\t\"countryCommonId\": \"bdefb946-030c-4529-b777-1ba88ee75cdd\", \n\t\t\t\"administrativeAreaLevel1Id\": \"a30f1830-e63e-4edb-8a11-d80950f06179\", \n\t\t\t\"administrativeAreaLevel2Id\": \"8cb1cdc2-0b14-4bec-8b92-66ef11115532\", \n\t\t\t\"administrativeAreaLevel3Id\": \"0a4cfbff-6829-4761-b335-ec84cb8618b7\", \n\t\t\t\"zip\": \"llwt5wu3pp\", \n\t\t\t\"locality\": \"xnqmptsgluutsg22twl3hmgrg170fdva5f2yfvdsmdpbi0w4h0qg4q25rnfiacbe0mwhz3ve4l4fpnyfhhs5gcz4m11n0kbly9a41jl8smzmodgadepw4xtnl2ulq\", \n\t\t\t\"address\": \"hrmvtxx60fl80lef2vu5ugzblux3lyor1nf3202mx88rzp54dl1ej6zovw76112trz0g0s2ru25yy1exwhkwdygbsya50sp3dl51yxkpi8r5by7d97xm872c7ehk0vnrqg4rrktr6fgfe26ueiz21xd65nis1uolazj3xqgjjh6v4ndpt8q3h9zn6upct7967iqiumymfquijarrwnyw8slbdyy78wdyc5bn3xmjojbjpkdptlvi1cn6dnlxp76\", \n\t\t\t\"latitude\": 31.59, \n\t\t\t\"longitude\": 538.10\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5dd70d90-bd31-4f5b-8e15-6a247039dbe1\", \n\t\t\t\"name\": \"to1zd34gs3mh8jvp8hoacq3iyr0q0640nuseshep65mxb2l2ff274s0j2kl1ucusqv9wxup6a5yheoc43aa0l0k9bjwxaeh7czh8i7x0n1g2n279dqzdu0dr2z19z9pqgrk697kuiayg6wdx77hwv3zlqw60ith30iojodhq8c6ampyi2mzxen93smrzpyz94jxyotev3p4whekhkso7z1gjvhrs89uflaxcchxu4o1765thmegp7t0ly8jb0si\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Sit sunt omnis qui eum possimus et soluta. Ut molestias corporis vel veniam quas nemo placeat nobis voluptatem. Exercitationem architecto sit deleniti tempora ea pariatur quibusdam. Aut cum saepe pariatur. Voluptatem magnam maxime inventore dolorum iste quis. Laudantium dolor saepe ut.\", \n\t\t\t\"excerpt\": \"Sed quisquam reprehenderit nulla. Autem voluptas quo eos incidunt maiores expedita. Exercitationem et voluptatem atque qui at qui. Sequi sit recusandae quis quisquam. Distinctio eligendi fuga labore. Voluptatem et delectus dolores porro nesciunt adipisci dolore fuga.\", \n\t\t\t\"email\": \"guropr0bty9ionxn7wugmo9yojlv2z2tuewxnjye6p7m892jtnqbyib0x20mwwjcuc76i7f870s1x35bne4td1kdj8105wwiwjoiwmp7w3n301y8snpjx6k2\", \n\t\t\t\"phone\": \"66wp5c5j68rc5vty29b1o0roy62j0wjc7bfkur0oxxo5q22sg5vxtaw52fxbi32kohjwshjxkklxsx8s0w5893tco9buwrzc7iqnft1v985jipucfl8nc4ss\", \n\t\t\t\"fax\": \"w9r6upsr6hj278blp9ldxshcw5k2lnz9shwb6khg2cc06gz24ls2xpv2tga0nq5u2mlxvl9x2ai89001848vwt7exrvcxad4zwfsu6lxl6jspp3sk051fmjs\", \n\t\t\t\"countryCommonId\": \"b9cba191-3bb5-4d3e-ba88-c96ca8e0ac02\", \n\t\t\t\"administrativeAreaLevel1Id\": \"3ce9884e-2a45-48d7-8fc8-d4cf528bc9bc\", \n\t\t\t\"administrativeAreaLevel2Id\": \"3cfdc822-d69c-42ce-8fdf-a4db060fcb22\", \n\t\t\t\"administrativeAreaLevel3Id\": \"b3a46fb5-a580-4df1-a718-c07f9c88f2b4\", \n\t\t\t\"zip\": \"uqjby1mt6g\", \n\t\t\t\"locality\": \"zox6mfz7k3zyfv664v857fl01c9fn0quqcyg54o6zcwui42sgvjoiq3qzbrd3i5evrf0cp2ybg44g1q3qrk5syefmdgzo1nazsi61o7r2c3khbulcf1h8zh4c8ocq\", \n\t\t\t\"address\": \"wk0ezxn1pi7e2x09w4ffp4akn101mrh843afzyen34zbkm1vq2q91b5tu87s8peir3nhwffje1jg5ktxqhstxf0cwlj4d9naj34oy5dx9ch4g0fwr2a1ja4g4hduza01dzgewfjwz8rn8kjzj0q0n7mxm5grgyotgb26td0jffioeatea9jybvcoikk3sqq8w61ok3p2jlxb8vdsdrupdj23b1g8wswx8hhccxezftsjzxzg1iknqr6v41u8f29\", \n\t\t\t\"latitude\": 129.94, \n\t\t\t\"longitude\": 611.46\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5aec952f-d26c-492f-ac18-531e79c3c17e\", \n\t\t\t\"name\": \"1kjc0r6ld83mu1a7lyy739fh6in10aj9b6jrkxqdqjddzjrupiuxxeozpfxcwqmtupyg8de3jgmgmld9ohpj9ponb4vc9d7qp34lchd4nflugc4gwestay4ry9s2v455m75gl65i0csyf8tdwxwz0dyx1bil4t1u40mwa4iaid7d60j9x0qldb4uv5vobhbhzlnmznuryiuiimcs9y6hb8vuldxda5doa3abt9a60bost4k6rlm344hz5hyvqzz\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Iure sapiente modi et. Dolores ut qui ut harum repellat asperiores. Ut quibusdam ullam animi quaerat at et dolor reprehenderit corporis. Necessitatibus ut nam vel atque at. Dolorem ut rem ut. Quam delectus dolor quia qui.\", \n\t\t\t\"excerpt\": \"In exercitationem officia laboriosam nesciunt accusamus. Aliquam est facilis est. Occaecati quia incidunt placeat sit enim et eum labore. Eos earum nulla in voluptatem odit. Incidunt provident ut dolores delectus voluptate eos reiciendis dolores tempora.\", \n\t\t\t\"email\": \"fg75crw4sbuqw8ykl0qsof9su55ftubvkaml30w15fznuv2qqbvkn533m4nfquwrdq6ffatgbaool8ex1527xjrlg26rqr3af12xf40z70pojzw9wk6yedig\", \n\t\t\t\"phone\": \"6oelkz0vhnh3b0pvwmeo93a6shzbby6m3cx4up0l8cjzvwme596sgwiefopjotlldjicjqaor7u314b8zvwv5b5y3s8xks8t2yyydlkteu8bq19po1cz0vfe\", \n\t\t\t\"fax\": \"z4gfj0twk3awwxm4dd4g2gipa729dvcb529stzdwyn9d0xyz0o3bzn33p2b2lu2ay3vql7txrsc2e1tkjw03h2i6xncnpq2jemfk2co1yb8n9jvodflxcvti\", \n\t\t\t\"countryCommonId\": \"a3e327e0-cb9c-426c-bedc-75c281938cad\", \n\t\t\t\"administrativeAreaLevel1Id\": \"191f1afb-c444-49ac-b292-c3af257ccb8c\", \n\t\t\t\"administrativeAreaLevel2Id\": \"8417ed2b-7c01-450e-bb8b-e63c2f606f99\", \n\t\t\t\"administrativeAreaLevel3Id\": \"b10556b0-f273-47a5-8e5c-3e62c1bdd755\", \n\t\t\t\"zip\": \"h47rb62cjt\", \n\t\t\t\"locality\": \"odummigekar4uabwv4olw2tcmuteopgll9rvpo7lbqaapabmxykme2qq3jrtti0vmmshwtwkb93o1e6fovcdrt0fbh7limndz7qqep1m8j4sq84h21kqjekkmsqnd\", \n\t\t\t\"address\": \"w0q6h0c6t6lkyem1yh4eu2xr82mc61fc1n449zf89f5lkct452msoe9v95cympuurmhfardydgmlipzckh5t5j8j4x4uhugv9nk98np65l4sitiff765lw7wfje44iphecl8hnd6vzm5kv8wkkozwlre4irpp3d0vgfhx6wdb7byy5u9z4puf1ygdylftuh7m4etizy7tkg7lhsd3oa485q1nuuqy1zpdkeqz0yqsqrn6scvi22y6jzq67dz413\", \n\t\t\t\"latitude\": 812.37, \n\t\t\t\"longitude\": 805.72\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ef90ace9-feed-4b24-be6c-1135ee112631\", \n\t\t\t\"name\": \"h8w2tdxjncyd3i2ch7q38p7j4xekh8ax5m76lp1gchdiretxaaj0h7dyj33z4gg0ke3ztmbvf68c4k1lulwdt5zdw7m4o7yv2m4m6mi4htjl016i3mxkk3j332necf9wssihaw5yc7i3flwnlwunqant3xjsykj8uxdntdktfw827rtb2zu0wcpawyi7z9kypwslb7jlq7s6p6o1wblko9ukaptyxchyrzkzwn8yx19ed0m75z2urbxp3noiwnj\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Optio fuga veniam nulla dolores aut quis dolore nostrum pariatur. Mollitia quae similique eaque in. Aut earum et sapiente accusantium fugit. Qui quae eum qui sunt fugit. Quas et ut modi incidunt.\", \n\t\t\t\"excerpt\": \"Velit alias blanditiis delectus. Quaerat dignissimos officiis aperiam aut sit sint alias et. Dolorem sed sed dolor ex ut. Nam nam voluptate iure ullam. Et iusto blanditiis. Voluptatibus pariatur rem totam eum et est.\", \n\t\t\t\"email\": \"jvnhoaltf7it75ldc3789dusyb2xernoxb4ihe643rznq7z4wdfkqs2dw3ysd07cmk8d4b1z9ug23mhihdb7cs8a6bgtownzspmmqszsiqnav9isdlm7r7a3\", \n\t\t\t\"phone\": \"6ckys0mqovrq2jrxi093cocllx37m4wnrj1ym0wte3tkoanrsq7cadzsy3puphie7pvszws872iu8xa5zkdpm20xo8bg4ncduokfezw85ni73yr1y0gficr3\", \n\t\t\t\"fax\": \"wiawwvnfsxql9odqlpfckqwetbejutdsgw9ralv2z9r1iomx9zvdc84dupn9k8qk2c5tstgkre3my8xu67tldehszqr413bsje6q29ilbsvj60icza1b8uok\", \n\t\t\t\"countryCommonId\": \"d1a9741d-b54c-494d-9b39-dd7197866559\", \n\t\t\t\"administrativeAreaLevel1Id\": \"919d821b-b8d3-49dd-b7ff-2aa32cb0e390\", \n\t\t\t\"administrativeAreaLevel2Id\": \"f46874f7-e194-4b5a-b803-16d19178051a\", \n\t\t\t\"administrativeAreaLevel3Id\": \"9b5f0db7-60d4-4eee-873a-20fbfc6e64b5\", \n\t\t\t\"zip\": \"bog4ry535a\", \n\t\t\t\"locality\": \"r3anlhi6xbekaxqgvols9ej9g3tuzliftef1jyfehhb02ai0p0cdy2qsi6giagscxl7f4lvfzeslvd72x7wkf2yne74lmllotuvzmksqatdwufrnja36zyd9lzzbv\", \n\t\t\t\"address\": \"vivke63ttfd9wvjwt0z34kxyhilq61nmlwnbfitx9y5jje20rrtol75myhe5q45egelldt3m11ht6ae6ayh4gv02t8a9ifc66b507pwdjoyi4ov7h2s9uplr7tupwser33dgeej36fgadxn57601sh221pakuepcwl7ue1p7mo645ct4fjrpj53tyilchnotvrx2p56xqydiyu2iqn1y8cpzz3glczb5lbdeumqsopbuc8o38yks4hyc7vgqf5l\", \n\t\t\t\"latitude\": 389.11, \n\t\t\t\"longitude\": 927.10\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ab4fe080-ff3d-4830-be17-2e7dacbc88c7\", \n\t\t\t\"name\": \"51iohxa4vu9q115wvtopbfug0072lp8dgzmtjzyobkjwky82dzuptc1u8cd9t6hz07qlgae770vo3nok7w4p4871tspm8o78kqsc4zc27pwkxfxq80l1vekvy7d2pw0uugutwq79lgcyrrcf226m5xqo5ew9tyuvtyj04r5cziy4j0orrr2btqhq4988np7tp4fybugct7li2b6cten4t8dd0yaqi0a4aomefzohjk7s5gdgeygmxi62iaqbstp\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Veritatis voluptas aut ut tempore sint recusandae. Eligendi temporibus occaecati voluptatem ratione dolores accusamus. Saepe esse non est vitae quas voluptates. Aperiam eligendi hic et eligendi quis temporibus incidunt. Fuga inventore veniam ut. Soluta et facere cum at id blanditiis ab.\", \n\t\t\t\"excerpt\": \"Dignissimos perspiciatis itaque sit eos. Cum cum veritatis quia. Temporibus officiis eum consectetur. Facilis sapiente numquam itaque nulla sed et omnis est. Labore nostrum iure voluptatem.\", \n\t\t\t\"email\": \"hthdrp7k813o6wwdkgbh5c7af7gqzr1iz9j41dqzseclze9f4m079ru95mnjpkrss4eb0xgrg271fke488rhxan68f6etzyp9opln1a0i1nkvlja2deentvk\", \n\t\t\t\"phone\": \"2fvldhxgov5n1drwd1vdzims3wgxhcipc4ktj4i577s71n9ag258cr4wioss8tdjjmnbk39njhnhr0xnq7f9s8nnsme3vjtz5tibaqqxvh105infhu3jbdc1\", \n\t\t\t\"fax\": \"dkth6yfaz6zd0ox246xjir4pn8veuz10qswjwgjfqr8xw1j9bg52xtmkrdq7otfnjih5r0j3giq0wcpq7jv2qelfoqeyxc5lcyiqlururi4ceuey3h5lps8g\", \n\t\t\t\"countryCommonId\": \"8f011bc9-ba1a-4ff4-8318-fa927fefe5b7\", \n\t\t\t\"administrativeAreaLevel1Id\": \"57d76688-5976-4b77-aef5-9035d0b99954\", \n\t\t\t\"administrativeAreaLevel2Id\": \"342c0a88-7743-472e-be19-8608a45a6106\", \n\t\t\t\"administrativeAreaLevel3Id\": \"54dc7b8b-d3ab-4a5b-8357-5b07202835e8\", \n\t\t\t\"zip\": \"28ahbr66p3\", \n\t\t\t\"locality\": \"m8nlq1q4edylhy48y0zccpr44395jo6pffru572xhda8i2d6lmfbzmvf1mkaltnpy17trktsfh19srqgomggsq7tfmv2u3p6huh3qsv1rwtfp4msvsra6dw5w0vt3\", \n\t\t\t\"address\": \"ks2xd9vtteoisb9cuk7pqyt03i91urtd1uxcvv8i0fa7win04g59ndcprn9ou3ao37psp9q1kwjso4axqrfpolx92lzl7o9f6eb1sf5v9xotmzdvp2wzylgw4bisi4z9vn39h6yledwtm65lhlpaqggj95yenexrkj2fygrrdcuk50iga4cvpu9w2twy12ftatmukr3ajf02e7mzacrldkzbjba6tj5e71wgbanlze9qnpxtwrh7lvtmd428d0k\", \n\t\t\t\"latitude\": 131.74, \n\t\t\t\"longitude\": 251.76\n\t\t},\n\t\t{\n\t\t\t\"id\": \"750453aa-7e06-4ec1-9182-df6ceca1e9c3\", \n\t\t\t\"name\": \"s3s5578st06ckyqx0cu3fr2rvaz37p9o7vi2d5or5l84guvydqsef85wgdzmeymejr40g1vsdxvwthunkiu1mms8ty92rvjy891janv5ldcccczw1hrq8yxj4kxqk7jpb6ytau803ps9rbs95hfdh3yti4gzsczh519bj3iyn19lwzeh89caf012b0jwbsgzwg4my4evo14sdm03mle55hegzkevjeo8vj3w0b4jc4uxklgb6n25tf71swmdklq\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Et velit doloremque consequatur omnis occaecati. Placeat nihil eius reiciendis quo nesciunt sit et. Praesentium veritatis consequatur et. Voluptate molestiae culpa.\", \n\t\t\t\"excerpt\": \"Doloremque voluptas modi. Facere adipisci aut et aspernatur ab aut perspiciatis. Et non totam velit velit veniam non maxime molestiae. Velit vitae ullam id voluptas quia nulla aut qui. Sed suscipit odio est molestiae architecto praesentium labore nesciunt harum.\", \n\t\t\t\"email\": \"xod4pmriw6bdmq6vanp9e85pf4l05yeo9aw2pt2tdqbuf72ue3ch0c9n15f7ychszf2f4rm06suizeu6ugqq3mvp1816tc5iwm79r3uubhrcl4wzy4tvb5zy\", \n\t\t\t\"phone\": \"eu1cc9s2abujx3wrwlgqr8bu7f19z5mfq4zm7eo52vaqy3s09pqpn0p75csqiqtytq7hu55tx0nqehvldhfy32ygh9bud6vqjllyrlkvtoubm6j97qqtwmtm\", \n\t\t\t\"fax\": \"4z06oeoeefxrmrssse1tofj4jnq9bb1tcrlmq4i01bfw8qp1kvzbzmve3823bx63p9tjv2xsx4oa4nsjokl5tfv00qm7yzp7y6l66m705crlyny59mxixtmn\", \n\t\t\t\"countryCommonId\": \"91618911-9eaf-4a36-bbab-556f39cd43ad\", \n\t\t\t\"administrativeAreaLevel1Id\": \"27f8523e-bc38-4aa9-9c9d-7a5e0fff96b6\", \n\t\t\t\"administrativeAreaLevel2Id\": \"5bd0b27c-1bae-46fd-ace2-8f928e7729f8\", \n\t\t\t\"administrativeAreaLevel3Id\": \"dbf432ed-5c65-4943-adc9-a87c1efb8473\", \n\t\t\t\"zip\": \"aucegbfesz\", \n\t\t\t\"locality\": \"jx6bjf3xvx6ydv1d1bzmasm4z9piyp8alwxvwyqwlttjiy9exu63yqhgp6tdc5uvs5mo0uh7185vgf223suvb93qk8rfkveg77tbxoz4qof46gnbya68mk2xu39r2\", \n\t\t\t\"address\": \"jdg7abjkljnky9qptt6wu14xoev6yi8wx3bopzcoufc0irnrmsubm2xest8hgx1rsgs3eeqp6plk03k78x93f7wcn1qc8oqogtxcsjwrx2f6doi86bvdrnf2q1e2kg7y5phdlpitwq58b9wx9nupam0elub18xgtccl8bdu5w8totekrm89hz4wa3fhf2al33cfb18q234hlnmxev6rq4kas1zcxsi1vfosuq82vlukzq24e3pepzyx363l3332\", \n\t\t\t\"latitude\": 352.30, \n\t\t\t\"longitude\": 924.12\n\t\t},\n\t\t{\n\t\t\t\"id\": \"614c56c9-7978-4972-83ab-b2ceebe1b2cf\", \n\t\t\t\"name\": \"1p9mi357aawq9ov02gukqbcmnb1xqncv5zml6td3mt7obkzcmbxixmsexp2i4kcmhx928xi4fra4uym8p10xyg6bt8ga1j7ztneahywgewrak4g7c9nglynbw9slcgk5dw9jaj7dkyg16ie4rnj5b0qurx901dpjsn4y0m40vhkm52fprrjomtzie5z5ybohthjoep1an3825tvjwt6854t9w4bjlhn9wr0nbwmofe9ebpw9mm917aw5fai22hp\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Amet quas illo ipsum in. Ut ullam ipsam. Cumque voluptatem molestiae consequatur et molestiae natus fugiat. Esse consectetur est dolorum temporibus maxime incidunt. Dolores qui dolorem dolorum id error quasi et. Aut voluptas aperiam enim officia voluptate delectus tenetur odio.\", \n\t\t\t\"excerpt\": \"Harum soluta recusandae molestiae. Nostrum consequatur sunt consequuntur cum laborum nemo hic est. Ut occaecati voluptatum eos consequatur delectus qui voluptatem. Eveniet dolore et rerum ea sunt nihil necessitatibus libero. Amet in natus magni explicabo est odio reiciendis et ipsum. Quidem excepturi omnis dolores sit.\", \n\t\t\t\"email\": \"yv76d1f4xj49fgjth5amkoup3he7qwzkf7ncizbo8w86jch64fo8jycwlrqdbgi8jhlpavdko2is6zcpy1mjmk7qf304br6fk0j57x45qlakxycqmc5fmnp4\", \n\t\t\t\"phone\": \"8wdmtybyckouc56edxfgr64lw6qc4mhz62xu2lh4l9meybqsw8nppv9nmnrc6pn0cz2yyq91lyonafm370lmnsfbgnwjaq83redajem7ufxv3o7mrgzcnc8k\", \n\t\t\t\"fax\": \"dv3mozx8p311k0seytkvpcxqk09cjsogwzq6s35rthje06ix81sgkiqdahr3v4r7tbmgu3s5uzawot7j7r2nlfqtqr7jzlor1dnxtyha6b9d2mgbvm5ecd3a\", \n\t\t\t\"countryCommonId\": \"d7baa780-da79-4869-8eea-b7fad63800e0\", \n\t\t\t\"administrativeAreaLevel1Id\": \"9704ef89-0c18-4c39-9b78-c33e16b98887\", \n\t\t\t\"administrativeAreaLevel2Id\": \"5cf92bb5-4029-4cc3-b33e-0035212f5557\", \n\t\t\t\"administrativeAreaLevel3Id\": \"6a4a5beb-6ca7-4a49-9d4b-4daacb0c5903\", \n\t\t\t\"zip\": \"cwngfuel96\", \n\t\t\t\"locality\": \"2490iqadvx1t00qr8vdzpqrw9gyrpl88jirg2oulfvoy7y63bn1njs7xrlfjbwolahdfivwwlradzhpb0tjz834lewzsugmyxp545sodwuzg5zt75wwvq2l91ml39\", \n\t\t\t\"address\": \"a69gqv6pe218wjjyrrskva5ty4up2l6dcp6xvmsrdkvxfwq4hgxctn6n0fr0pkp37id4zm00eipig2lf0yda1z40ckpfd6gqa4t73n7l9ik41vifwusx7uvuf14xoiq7sh5oz1me06bu6ndcb6wqtg5rf9ki2wf7o0bhnhkmcsodnwupuesccdb14bdajz7vut0wxbpburem8og1a1l6ul2seesrddzrpp24rwcz3682iz423111xsq7zzygffl\", \n\t\t\t\"latitude\": 362.58, \n\t\t\t\"longitude\": 71.20\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8a509532-fd07-4eee-95ce-d71072074e17\", \n\t\t\t\"name\": \"citz00r8fuuoadctll0hyc3vvv7h3dwqda871fnhqzag23spnp9p2jsehi14g7rf3zskihws7rx9fcl5s633vb13cr8bv4ml924wr3nywpuxx3c47hovx340e6ao8mhx78l7rgyrpnnw00e9yli5ttdb3ghptfst7w3njjg28dvzixw8jsvymuxxah7ikedlgh0apu91dldb7f8cnio0adrsw6h8fz9qy4je2ibwze778sgtfnl7k0n78gsp9ac\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Omnis adipisci maxime. Minima et ipsam et voluptas aliquid dolores. Vel cum temporibus autem rerum asperiores. Quaerat quos commodi minus a consequatur consequatur voluptatem consequatur qui.\", \n\t\t\t\"excerpt\": \"Modi earum amet itaque est temporibus amet dolorem adipisci sapiente. Libero sit voluptatem culpa aliquam quaerat dolores quia. Quasi perspiciatis aut aspernatur nihil nobis. Et sit sit tempora eaque.\", \n\t\t\t\"email\": \"o9rmjtv61eyqhisamjr7v99nttobva3221qci1ze62u0ni5msbi35mobtgewrs8rt3b9bhnxsx7drlckq2xh4jxzczbpmmbo6h2prxv22cvtp2zpet4rieev\", \n\t\t\t\"phone\": \"kdhog4dq3xjunlceckmjju6gphlawtvc384b1su079k0kw4txl5v19r6rr3sl0neg5g1uur5vxacpeosl0e3rkx6wo775fg0jd2appuqtftysygr0hbumn1s\", \n\t\t\t\"fax\": \"ylvf5kfsh0rn6nstf9jym4xq3v47bcq1reiyc7aehdj4mulrxeqdcj39kpr9gotdh2o64fv58exd3f76rl98o1ngwl4ekwlweknn7vz8mobo5immfqeihv8y\", \n\t\t\t\"countryCommonId\": \"fec3b753-318b-4522-86bd-58255b874952\", \n\t\t\t\"administrativeAreaLevel1Id\": \"ff943bd4-f4e0-4110-b10c-63482cdcfddc\", \n\t\t\t\"administrativeAreaLevel2Id\": \"85098d60-ca88-4745-b477-b33012811f23\", \n\t\t\t\"administrativeAreaLevel3Id\": \"2ea52dda-64d4-416d-bad8-80e790a49dc6\", \n\t\t\t\"zip\": \"ltfsqlpidp\", \n\t\t\t\"locality\": \"pw4hbni6y3soft28n8umuspnlc6nuo072kthfa4anop716kf4oocvlrwpuab6fxmic56euhmlantejn3nwfkl5zexrhgwpuuvqrve7s979mobd26ctptxi1eqokcs\", \n\t\t\t\"address\": \"3hnkg82kfir1n0e4mox9f7642hyg1cy62s6uknu5ggn9o9cl62967ayq29ekbv362vwj1kfiozekn6gmgm197joktoh9eufat5ykhj6pi3hynxxcl4kqsfcb0wybj0c4k50zimc9rmhacvuhqkmlgedjg3zvtmldpx3drdc6h1t009e51ea9ulpq2cnow2bajs3ewwcn3chl4fujmu59za95e00y9yxfjg3tjn6ha7l387hoq4azv9vs97lerzs\", \n\t\t\t\"latitude\": 266.64, \n\t\t\t\"longitude\": 554.64\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ed74a977-5f3f-4e7e-ab29-94172d2beef8\", \n\t\t\t\"name\": \"f5jj3dkpw8y2udztjiyj591avyic4fsa5yl54qzgbjoqvgje8tdqgk4w5j0ln4jrkl15tlj2a7x9h02mszvg7rajzc4g21gvfhsjdyqqtl77kkiciaiemkb4om5tac0dw2jnqz3uqg2hoxdq0w02jiqin8f3gx2j3ji3pzfqpbj031unaiwgn96yy2fzudldwz943prb8td3seotzhgc51yyj0e1h6mu1crxhnyu9adcn88ok7niv0a670d88mq\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Itaque asperiores qui natus consectetur perspiciatis ut corrupti et pariatur. Impedit ducimus aut nulla unde quia molestiae. Ab libero quae. Quisquam ut aut qui. Adipisci voluptatem soluta. Rerum reiciendis et sit commodi et qui non voluptates.\", \n\t\t\t\"excerpt\": \"Quos recusandae inventore maxime illum deserunt illo. Consequatur quaerat voluptatum quasi vitae tempore et sed et. Sed est ullam laboriosam in accusamus rerum vero velit esse.\", \n\t\t\t\"email\": \"oa1dyx8cd4ogov3zkpxjrfq0vrij191rt8x5l1k5ypxghp3z2qevnua0jf2nil5mi4jvmkqqz6i425g4an3dkdfzxcotvdaadrlj9ggeqvza7iiozqp3edui\", \n\t\t\t\"phone\": \"uxuzzq1bku9jbbvseb94295exwog5arsquej9bekm12e18nsxryffp24e1b65kzb30aw22v7ztvgesceop63ysp8qxgwoxayxw3b6peunq2p6f8lwyjwhvh2\", \n\t\t\t\"fax\": \"d6y4jwq3uakyr0lzwscx992cque1s8n9hibfikqr5mf2destgdnz8rn32d7ot1vy8b18t1f0a2nyp3qgl66t718bd9o20ilsurz0m5li39i9z559d993l09l\", \n\t\t\t\"countryCommonId\": \"e19def53-9a9e-4cd8-b2a7-1dfbe71b86b2\", \n\t\t\t\"administrativeAreaLevel1Id\": \"f5705065-a589-4d9d-a5e9-b7f30e60cebd\", \n\t\t\t\"administrativeAreaLevel2Id\": \"c2521762-f56e-472b-92be-03ad418eb02d\", \n\t\t\t\"administrativeAreaLevel3Id\": \"093cbbe9-2351-4d96-a0e4-fc26ccef737d\", \n\t\t\t\"zip\": \"aeciehbqvu\", \n\t\t\t\"locality\": \"48sx3h6808mdc55w5f6zzdng3p9rqm73zpu5jwtrqoi7fxily8p1hwl80zo53ug8da3rkhoo3qczjojxuva0y5ot8jip5k2w7x5onoe732j7t4663tdtkh9nslubj\", \n\t\t\t\"address\": \"tefwav0h6nrjtdv5x4ew9xqxlwm8s5jhjfzxqkaog70orrimb0vuqouczsrpk24wryrme43dhzp7u8o9d0s0km2kbro3b3p0lgonqlt5dv06vvktgduzu4uls7hml67to9jnicwdsu4lkihur13msuickt29w1d4r5a9rdes1q1pbrnctzofccfg1r2i8pzp6by098j6u21bbo6reb9w4dtf0h6tsovxyhc06uxcl44o55esww49nfcwuhecren\", \n\t\t\t\"latitude\": 587.43, \n\t\t\t\"longitude\": 265.25\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1f367d3f-2b90-44b9-9131-e543890991a7\", \n\t\t\t\"name\": \"ne7i5arrqpaa3k8pxs3mhr2qxpp5ezyc5528298zeodsdr27k8vnk3t3fepwjrww7f6slykyillvd1ctrtqs8ekmshwixjexbm55o26oyjn4d09x24fp5j1hzq1ivrps6y0aq2n8k9uco40kcfcxvzxv726mkptcj1r3swi2hwuqc0y3jqjrb71wn9oezhztfgwvh3to7zhd0757qs0rs34t4b25mxhs7idkgph5p6xyjwr6iippxa1qi9tl5e1\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Maiores inventore reprehenderit omnis. Beatae nihil fuga rerum perferendis fuga sunt sit exercitationem eum. Aut quia natus dolorem dolor consequatur laboriosam.\", \n\t\t\t\"excerpt\": \"Ipsam quo eum voluptas tempora et. Illum eum architecto qui dolores est a dolorem nobis. Aperiam necessitatibus praesentium est nisi et animi magni. Nobis inventore consectetur. Eveniet aut fuga modi porro. Quam saepe aliquid rerum nam excepturi at sapiente est.\", \n\t\t\t\"email\": \"63jv7n01xemef90xzhr2ruucy69ri6cr5zv2qtlhitp894i69f5ao4ognce1hik6agqve1y8senoicukpxrtxwpozivgofp8tk7awiah5sp9y0zhb0a8fi1b\", \n\t\t\t\"phone\": \"d6midvnf9dxjuxqq8wtmrx2rl4hhk4f1mzry3jcxgzs6bghmjcvnj4o2v7ytpftqbdzr2fvhnqd8rt3g290t92nyvigye5tl35ydvinowfimcq8fow80v7sj\", \n\t\t\t\"fax\": \"4o6260nkphra93quhgrl3fb8o4pq4mbeg5zyxk7tc1qpvwv42pgjyqjmunuoucwol240vqe1eh84wsnw2i635nguqvdgpi243424wcbf6q849ter752espz2\", \n\t\t\t\"countryCommonId\": \"66dd10a6-5457-40ab-9960-4652fe3f87a5\", \n\t\t\t\"administrativeAreaLevel1Id\": \"25b15603-4f37-4e11-b281-9195bdd6799c\", \n\t\t\t\"administrativeAreaLevel2Id\": \"2b6e8e58-e4da-48d3-a494-f842b25aedf8\", \n\t\t\t\"administrativeAreaLevel3Id\": \"91ca7477-c8ff-492f-9e2c-0afcc8c83219\", \n\t\t\t\"zip\": \"1rbvp4hf5x\", \n\t\t\t\"locality\": \"zn8ktz8jz7v8smwafii2hoht1lzl8px2vtyp03f4g3ez6p7msxd9zyih20ypyzfwaqj2dlxfcbmnfike5d57d3da5l2n8qgj7hgictmk8lxdjm69c9i3s9iwowms6\", \n\t\t\t\"address\": \"tcq0wdekqzfftoitgkk6scavu1uejt2i14kiypatb1bxl7h9tx3hv38c5z1atvhnq1n4wcuiuldylgfan620obxc7xe9hxpzq7w4oaoo6m6vxu9yn589ytn1yxele175zpjj126mt76lj7uipbtx6m9pdcav9153tc10radksy2au42581eqmcw9tfiumhwaf2qyl90cyxwysqgr79nhc7ifknz2i444l8pxg9wfr5auwgobwxxn1g73rpv88i0\", \n\t\t\t\"latitude\": 584.49, \n\t\t\t\"longitude\": 835.92\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7fda6482-8183-4e05-b20d-2786184b29f2\", \n\t\t\t\"name\": \"0mpvg5fjlgtbrtha2pu5w7wxz1r82ym4eyttby2vbaei2iew1q87tiwjqbdqptr277zdmk31ulzfyzrzwohlfvdoemddlwh16tpfwjn2aaba0ulriwtns3hy43xzfvz2o06ob6tz492akvhtwmkpy12r8r4q0ipglb424nw5b2q55mtojdpyio4vaj2c81ziwgigol2z63slewogm7k7l36s1ah5o4awxjis5j01isfuplf88qwbhs9n4k6wxa4\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Et quis enim ex hic occaecati qui repellat ipsum. Labore ea at quia quibusdam corrupti illum quam deleniti qui. Sint maiores pariatur. Autem aut ullam consequatur dolor.\", \n\t\t\t\"excerpt\": \"Et voluptas aut fugiat unde. Odio voluptatem dolores et animi. Perferendis et voluptatibus velit numquam aut qui. Optio quia at nobis repellendus est sed voluptas pariatur distinctio. Commodi quidem perferendis aut ut possimus praesentium.\", \n\t\t\t\"email\": \"5fffpavq5x19micbu2gnqef3rmxw5c9o8ic21uiiujh35nqsc91a53121yrxanlsbvjfx3uha84rt3rmnz0lkr5tkyi0bit1fgcsjgzbeu7e396ka74ha2mc\", \n\t\t\t\"phone\": \"use5x1pjfl3icp2nc9mn1vy20638a5hq3fjms3j1awugk6mukejzq05elpowmwzpxrn1ctvg7omkgfyby8sru6g9v9z3s2149cm07zcz8x0quis6z8e579zr\", \n\t\t\t\"fax\": \"gdwe5tvstjxgtkr636x9inuk3rlmy4hkv43a0eaoc9q20ygj5xyyqohw3qmm1op4zsboay2yovs5qjynk3ug5y67hm0bktczp99fdj2yoyqx4480p2xms8c9\", \n\t\t\t\"countryCommonId\": \"df8bafb7-2a0a-46d3-9361-60639038f089\", \n\t\t\t\"administrativeAreaLevel1Id\": \"7025fdd3-f1f1-46b1-8163-61b6f7ac0df6\", \n\t\t\t\"administrativeAreaLevel2Id\": \"b4c67f5e-3a61-45b4-b896-3d9254c670a0\", \n\t\t\t\"administrativeAreaLevel3Id\": \"5fcc6b3d-da6f-4754-81fc-1d8c0c7d75dd\", \n\t\t\t\"zip\": \"2lv632hl3u\", \n\t\t\t\"locality\": \"lb86jrsra3t03m70ge39ri927duez88yi8fmyfrlpzqu8n6mzyuwjwdbhyz0uycqckkesruzheadn7adnl0o68xt0hy266z8sm5s2pesdjp6ky3cp7geu57u15tl1\", \n\t\t\t\"address\": \"dmt8s32b1p8r57nx1l2mptabbgnhhnxhzy52aezi9s95kd2djvo1uake5a9ifpdlh2lwjy8itgig5u6h768pfw0vlrrxu2bxgbvbvchnv9mnrs58evg4rw91j3crrm4yy55g2jtqfasro9bd2l5dxxev1wp21qnvqa8lsm6rp9ccsa82sl2tbhk65ujxkt955vj4bebpg9mb9j4zn95k4t5cslv5cjk9xrclkw1dd5e6qba48zr47ylpt6bepuh\", \n\t\t\t\"latitude\": 227.65, \n\t\t\t\"longitude\": 823.03\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3890ce72-08eb-4d16-b5c0-06bf87e5afbd\", \n\t\t\t\"name\": \"zqbx9wt8kfamvaelejimxyzq182rp0lyzik39kviuh3k0pe3i922p7nxkq5e9we1g044ueqcfw8ann5zgk5v7c9n19w8ocyvkkrnr7x9f4vu419wiul9qk2ryydfzgzt80lgv9b0jsx99o7qrtsepmjnie6l2bgof6opjk98aepsjryt5jr4b4o0gwppsw4xcb8www7xo7ncfewcsdtag1w125wai3esmma5zz0w5pg7ib8q5m6sq65dkmaev5r\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Temporibus hic deleniti est omnis sapiente aliquam veniam. Ex sed consectetur sed consequatur ducimus. Omnis distinctio est. Enim animi nostrum soluta iusto voluptatem. Aspernatur reprehenderit quisquam eos et voluptatem.\", \n\t\t\t\"excerpt\": \"Et expedita autem laborum ipsa. Quam esse id facilis blanditiis veritatis. Quam molestiae accusantium molestiae doloribus nobis officia eos. Qui natus ut quae accusantium. Quo sit aut.\", \n\t\t\t\"email\": \"ad6rxx3x5qi4g39wcv79rf2cmrmo1nsbcf2lc3xzxelw9ne4jiayqkjczzt0d92ktfnq6nfzi8h908mjj87ivz44vukk2uvhf2iaw0rz0cr1td3agm0jyvuz\", \n\t\t\t\"phone\": \"uts52mb4gdbiz3yss4oyr8mm6r2chbwa1209r9dftzh3mivlptd4lv6plisq7h1xve25xzffvqdpzp80euitau9ucf67za48oqqh4bttj4ijby3c0mryqvg3\", \n\t\t\t\"fax\": \"jgz6wbb3b7js28ae7r74b5ssiehjda0fzbov68bsu27o5wvfhvnm5dbjejv9pidzd4i5we2b06xq12avngey5uss791hzngucfuuazrsr5soo1ys736h57vu\", \n\t\t\t\"countryCommonId\": \"a8220b92-4067-472f-b3a8-3fba0d5c94f9\", \n\t\t\t\"administrativeAreaLevel1Id\": \"57bf5a56-fb97-4f1a-8d5c-9f83caeaab21\", \n\t\t\t\"administrativeAreaLevel2Id\": \"f8702cde-0f9d-4fdd-9ab7-44ecba18abc0\", \n\t\t\t\"administrativeAreaLevel3Id\": \"23f2aa1b-3d18-455f-ae14-e027dd7fe198\", \n\t\t\t\"zip\": \"ze2fdnsgcw\", \n\t\t\t\"locality\": \"533v99rbntaj8zxurcrtizh3aze1qw4g8gav2g9fh1orb7iql0qnyx6m97cx3xf50nll43rqfoerkwean3aveftn9qsxx1ed729jrw5avjj7c6182owolo18fsj65\", \n\t\t\t\"address\": \"di99alq3gztiiuj4khw2onfdbgytzh4ojxif9mqfjazjnlpuplx0rn06yvte5gv3jy29hwl6aoari6av8r1f5871cyavv4fhxvzq8mh3bb994wphctixe5npn0pcyk9cw757hna95bk4h8aos3iy33wgxb63dnm5tp8ux2kbafo8ennwvo577wj2z8avlplfa5azrmu37izt0y7zpu5j6rjutb3zvwkhoendx461ig9diqb1lgddx4azh81dheh\", \n\t\t\t\"latitude\": 618.53, \n\t\t\t\"longitude\": 709.14\n\t\t},\n\t\t{\n\t\t\t\"id\": \"aee2b851-834f-4632-bae6-ae47280dc3ce\", \n\t\t\t\"name\": \"ynk2gnxieqisyqx50coyspnuvgxxq14cdr0dmggor9vqss5q5tb37p4121hg44cjmr0qi0i7j6arncos0h9z8uaqb0nxkf2wpngbqcwo7kq9vq5l1mxdqa4i0bu01j2n2usy06oyzh23br10x80pkjeiu6ve20wa3z8az99h5lvigw1u9kyx4g43h1ynuuo9w8kfm61i1udcswt3dn6l12kf12mtlt8oem23krh4im5iufa7wgnlkih9fcnbu62\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Sed tempore quis doloribus est magni minus ex. Ut dolorum unde delectus incidunt repudiandae. Id non quis dolores quia et deserunt pariatur cumque minus. Velit cumque consectetur. Rerum eveniet assumenda autem deleniti.\", \n\t\t\t\"excerpt\": \"Illum voluptates et commodi iste architecto exercitationem ullam animi. Omnis vero assumenda. Voluptates nostrum expedita qui quam aperiam facilis eius mollitia. Explicabo repellat ad illum recusandae omnis repellendus recusandae. Ipsa impedit deleniti molestiae autem exercitationem.\", \n\t\t\t\"email\": \"0p2lbfzvhicmprnas9bpc5ng32znrvz5ipwh407vl7zlht6mnvvf0jfi84h1nyytc9s6ijlwq6rsejoubp0bf89y29jv1q9jicpi5ujrgd6a6pnpxzs5fx69\", \n\t\t\t\"phone\": \"08fsxlabldvl0iydqs9yoobryg9x57jj3wpe7em2urh2dutansj1mz9fk74hq97l2ekd6lej63dr07mt2wi3p7pbjfb5kl5kj5ri32162ht4wvxii1xioe1d\", \n\t\t\t\"fax\": \"h6kr1186xiotsm86dtl09kkt8hqg2h64xcu4i2cb6a7eijqr5gj3n5oken84n9oojsh29ti1lxxelh9cja2eepw5uo8wk5n5v1x4zv9g8or4aikgdos8065f\", \n\t\t\t\"countryCommonId\": \"3053b681-7f79-475b-944a-d2db9eea469b\", \n\t\t\t\"administrativeAreaLevel1Id\": \"665bcb94-27b7-49b8-bcbb-e022d8108cf4\", \n\t\t\t\"administrativeAreaLevel2Id\": \"835215a6-bc52-4d3e-b3e3-0a03f6795294\", \n\t\t\t\"administrativeAreaLevel3Id\": \"1611fea5-f40b-4e4e-a9ce-b2b92569369f\", \n\t\t\t\"zip\": \"r7lqc7kg9m\", \n\t\t\t\"locality\": \"x21lmjdmm7g98hzvqkgfgf2wieyuvffb6l8ptzo41wpefff1r3vzu4gn3pta44ru85u7otq1w8vff2l26mot0assfn9oq2uugyj17zzr7llmhz78rd9jrcih4pcko\", \n\t\t\t\"address\": \"5yngbk2rmijhwq7mpoumggynca5mlz313hyde41ewatkeehvnlk5jxwgd2i8tijnu9803c5mkdrf8js0onkynpg9er4dy6b04yfu2dvq4dtmg45v4cbimsluh9ssh97ptjacw3rj98cszncpuqnxisjp7kzksggxw1b52wf56cqtu80vajk37rjzns2ckoywrr69t7rby7ar1c566dt088hg6lmvru7f1b5lsmoaon03vkkfz0bm90k7rmqfivb\", \n\t\t\t\"latitude\": 407.56, \n\t\t\t\"longitude\": 946.27\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3809512f-e168-48fd-885b-d53550433373\", \n\t\t\t\"name\": \"gh9uhj6meyd2uh5kuzu9tdyex5l7zvxn0i2yjt9swey4ryw0p50m1leu3j4u5mmgi69lasw2xjsoiahf91dscj2484j85nhsca5xfequyxmewzoi9x1feib252naj6doz6j9jpzndrp4jby45h0fbv65bo302327xwhd3fcsou5dq9gpuxyeq1wker34yfzsiimlyal8r79o33fa6e69m2lhu12vl2b4uhboozm9kaoa6ez8ebyi1n1521utf10\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Fuga non ipsa et reprehenderit et similique soluta quaerat nihil. Aut voluptate quia est incidunt repudiandae et. Et dolorem eos neque. A corrupti non blanditiis corporis aut dolor officia. Error sequi in blanditiis vel sapiente ullam fugiat.\", \n\t\t\t\"excerpt\": \"Similique suscipit architecto qui. Id ut ea quidem. Aut consequuntur ipsa dolor excepturi minus itaque tempore sed ut. Minus magnam et consectetur voluptatum officiis a. Suscipit sit ea omnis debitis.\", \n\t\t\t\"email\": \"msp1fxorgrtexa2neb61y4vl4gmc84ikxmuvf8mqyzcfrz8bgnlcjjf671u1khmbnyi2la9y8sb83dsekg3o9d2sboay5hzhao9cipu69q8yemwbvgl73ai9\", \n\t\t\t\"phone\": \"ysqiuwh5u3zmsjwqcv3sijsmewgqhncb88jh40zl7jiirhmm6nw1o8vuv1v0at5emteqbx9rrakcaxfb8vsc6du2ice5ob3f5newdo0u73k0bxo8rr9ds3ii\", \n\t\t\t\"fax\": \"bsxk9lnn4q06tlvw2miw9a0s3e6z0e69kzn0qiiblrxv41dulfotsic83cxkmvlg9hkccmptw0vcr95b7ppfo8qx2np7adhoczibf0mugndchwr2s862zhf1\", \n\t\t\t\"countryCommonId\": \"3b6cfcd0-6a8e-48cb-b568-88df9a39737e\", \n\t\t\t\"administrativeAreaLevel1Id\": \"24c88689-b656-4a8f-8677-2271beb8e49d\", \n\t\t\t\"administrativeAreaLevel2Id\": \"1493d175-edbf-4dcf-9f0f-9547fc94f963\", \n\t\t\t\"administrativeAreaLevel3Id\": \"3cfb458e-774e-4e7e-8154-d6ef4f84a882\", \n\t\t\t\"zip\": \"2ni23s8mzd\", \n\t\t\t\"locality\": \"4qk7idsvw4bfv75wjukb5a12i1idf518woy3wfea1rsw0wir7c6w76d87gkgvnqldte4updlak9tnxhwkysyvs8frosi1cejli2vpy9cmjjfz89ummnufvjhazbkg\", \n\t\t\t\"address\": \"83a12a0qcgb14yr3s213vwwc1bl2ahyjklbiz1mm8klf0cio56tjkxji8tq0yzguz508z7w8by8t4qfakqmgr484lyc50882w7al5rhqe9euwcgem5sx2tuqru2qbeqd6gph0qn8raqrr87l3tj5l31yh3i0uv9y9cx4f8b2s7asjf2c2j0vv1wcx6nm45l42p126z7x02q2lesyccazw22g2ni5je75w2b3hh269jy1zmleyn08mfqhenp9psv\", \n\t\t\t\"latitude\": 456.69, \n\t\t\t\"longitude\": 491.68\n\t\t},\n\t\t{\n\t\t\t\"id\": \"917c4942-f965-4c23-ab4c-3767c3d2dec5\", \n\t\t\t\"name\": \"qc4nutgnmynfbr6nj0nsjukice25ourrpx5cvyaughdun0nd36y43i0z4up0dcvhe8bisqglczdjsov1xs58n1l2wozqu0itz7cilfmedigx4gqb91spogafzni3kbydmcbmtnex0biu5fkl5a8utvbudttx7p8yd4ufj8ct66vknlin5oa24o4ewi4fkwj6prowqbyp2lazqq3ol1emnh0qsz6f3rxz87k1p74aaxocklafsb61fvb5klgug3n\", \n\t\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\t\"description\": \"Iste vel velit a ut et laboriosam aliquam. Possimus eum ut nihil. Occaecati harum labore dolore fugit mollitia ad laborum blanditiis. Quisquam consequatur eveniet illum dolore libero dolores et et ducimus.\", \n\t\t\t\"excerpt\": \"Doloremque quos occaecati possimus voluptas. Sed necessitatibus sint architecto sed eaque atque nesciunt. Natus non repellendus impedit et. Repellat et qui aperiam expedita laborum amet et esse aliquid. At et fugit.\", \n\t\t\t\"email\": \"4c3vhix24wwkdnmvl5qhqkc5n0ja9aj2o9rt61oyzgc9mrtv4hmhvkllik5kweu6bdoclw0drap5j6pm8gf6u69ft5ukw2nr7587xmit3so5ut6bpgzcd161\", \n\t\t\t\"phone\": \"fqoc0o9pyd77jvtntlzqfb32tskroe01n5bjrfrsr37u7xsm32lb9xc5octx9o3o8r8pnvi16ixxbit6eeknx7nrzdgq8b61lzlood1m6fxmc85m7l2au6t0\", \n\t\t\t\"fax\": \"8rlou2j46j2aj2qavotg0v66yo5b93pm76oruwdvdeppide0hsyimvmtxk01kcbt0xuzk28n01eruw9idyntiep20ycjwhqp37dk3rjrz0sk6qj5cxnkqsfj\", \n\t\t\t\"countryCommonId\": \"5a3f00e9-3604-4c73-8917-39ee30ee4490\", \n\t\t\t\"administrativeAreaLevel1Id\": \"9a5eeb66-9f61-48f4-8d85-573a967e4f82\", \n\t\t\t\"administrativeAreaLevel2Id\": \"8cca6013-bc4a-4759-9be5-4b9ddf6fa4b3\", \n\t\t\t\"administrativeAreaLevel3Id\": \"bd8d15c5-c228-4267-b0d3-0aefd067c780\", \n\t\t\t\"zip\": \"yvfd5ka5zz\", \n\t\t\t\"locality\": \"oty6ag42ubztatrutoorl7t640hp0dxfw9c9q03wapf3oo9nbn40zfsti03dsjktn2axxiy6g4t0r1imcelvfm409318zgzehukebdyvvabsgn4lt1gduregbax84\", \n\t\t\t\"address\": \"ocov3xh4cs88ezcm4r0mhfzkofub38kgy6b113k5uhbwpp5k8g7yobkenigm2okluvmzu53zvejcestrrkpsty14lshjyzafsty7eyepp61wq9dzrwdkzfwoe69sluzjoi0vsmvzxb7jlgs2hzc948emj1bst3g0t8dhtn5jtfwems7for8buzqfavlrjerq0jlrvgytu6m5tj3gd64hvpc0d5phs4t97c10dn4j5223t64gz1l9u1150198lvd\", \n\t\t\t\"latitude\": 359.02, \n\t\t\t\"longitude\": 119.77\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenPaginatePartners",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\torigenPaginatePartners (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenGetPartners",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\torigenGetPartners (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tsocialNetworks\n\t\tdescription\n\t\texcerpt\n\t\temail\n\t\tphone\n\t\tfax\n\t\tzip\n\t\tlocality\n\t\taddress\n\t\tlatitude\n\t\tlongitude\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenFindPartner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\torigenFindPartner (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tsocialNetworks\n\t\tdescription\n\t\texcerpt\n\t\temail\n\t\tphone\n\t\tfax\n\t\tzip\n\t\tlocality\n\t\taddress\n\t\tlatitude\n\t\tlongitude\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenFindPartnerById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\torigenFindPartnerById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tsocialNetworks\n\t\tdescription\n\t\texcerpt\n\t\temail\n\t\tphone\n\t\tfax\n\t\tzip\n\t\tlocality\n\t\taddress\n\t\tlatitude\n\t\tlongitude\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenUpdatePartner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OrigenUpdatePartnerInput!)\n{\n\torigenUpdatePartner (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tsocialNetworks\n\t\tdescription\n\t\texcerpt\n\t\temail\n\t\tphone\n\t\tfax\n\t\tzip\n\t\tlocality\n\t\taddress\n\t\tlatitude\n\t\tlongitude\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\", \n\t\t\"name\": \"rqro2fhwhlj6eili2e679gkkjbpm5zqevmlfhgyx7q7o99l63yjx06kyph48kg28s6y7lmrx8uipl7h97tly2w8x9jqoxhbz9nq53335z162ev87w6byzome45oa00h4glw0a0lyxix66uxtsjdjm3b17iwrmuvoj1mboyjza72f7hlmib3072734h3ho5rkbottui1ocxmfvvwvk4qrwvw6qyimq17dooe8gqliorjfsbh35lu1o4i9culhfvp\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Et debitis voluptatibus similique id voluptate officia sit. Voluptas sint temporibus voluptate ea iste ut porro magni reiciendis. Quos pariatur temporibus earum numquam libero debitis. Earum accusamus consequatur excepturi blanditiis. Alias aut beatae natus provident dolor magnam beatae aut in. Dolorum corporis consectetur.\", \n\t\t\"excerpt\": \"Non soluta ea voluptates est dolores repudiandae eveniet molestias voluptas. Ut corporis ex rerum sit autem deleniti natus. Aut itaque animi error iusto harum eos. Delectus est officia. Est voluptatem provident veritatis facere commodi ullam rerum. Quos ducimus provident sequi omnis quia nulla.\", \n\t\t\"email\": \"aianx3xhjpdxosgml6klgyypssfzlqmpsajt4y53miom9i54ndjomqnj3vjltgyeccyid6u47rre8lbeb1znlizxlm0uh7xnakhv0i3gietugbm7m5amusxd\", \n\t\t\"phone\": \"emcuz6xoomkt9k1fhzmoo5gxp3xox50d1g5r9meql5kl999qh824gfmbagyfhw29ecpzoss5qze66niramd47vv294qz9ylrb6e8i906vehg3xcvewzmwf67\", \n\t\t\"fax\": \"ho9cj95rsfn3r30zscqby830tbx4ghboczo3zvcr6mzhoyw5s6bjcdpgz6zioy0pz2uk7r4o5a0lei6txpf0ddx93fqe6axsfpeww2ly7ao60asmtasv55dq\", \n\t\t\"countryCommonId\": \"47234be4-ce32-45ce-9d12-d05509c2c7a1\", \n\t\t\"administrativeAreaLevel1Id\": \"40cc5001-185a-4057-b71c-cec42cde97b3\", \n\t\t\"administrativeAreaLevel2Id\": \"b9719ba8-ee1c-4f0c-9617-4c62d8d8aa0d\", \n\t\t\"administrativeAreaLevel3Id\": \"4455eff8-2510-4b35-a5d9-ffafac680033\", \n\t\t\"zip\": \"iodbhc3qj0\", \n\t\t\"locality\": \"ez6l0myyvqz2s1864iqhwzbzj47giqmbmbc1yh26ubpp39nqpox2tupjuyk16uwi5k4vqwws2cifuunddx2i4z5r2g9c2x3msn1g2hkocjgl20nmlo551t12pofzh\", \n\t\t\"address\": \"eyhhj3b868whf1dnrt71ck70us3g2d4cie1z02zyeew552xpx50b8cd887pgwcfl7rnf64ir6l51tlal5ixawdfsy1wix8f0jv7jhmupnpij13bjee0q2xuzgqvmm19ibd5rydvyt8hj0ntwlxs1no3q2ars2607enzoza37arqg3ii1p618uaijpmnbslitq8vyekoqrjm1ak2qzjqnbxx29j41bmzf44v5uah2fyir46j5l7gywe0tswa2bv7\", \n\t\t\"latitude\": 200.75, \n\t\t\"longitude\": 764.06\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenDeletePartnerById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\torigenDeletePartnerById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tsocialNetworks\n\t\tdescription\n\t\texcerpt\n\t\temail\n\t\tphone\n\t\tfax\n\t\tzip\n\t\tlocality\n\t\taddress\n\t\tlatitude\n\t\tlongitude\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - origenDeletePartners",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\torigenDeletePartners (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tsocialNetworks\n\t\tdescription\n\t\texcerpt\n\t\temail\n\t\tphone\n\t\tfax\n\t\tzip\n\t\tlocality\n\t\taddress\n\t\tlatitude\n\t\tlongitude\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partner",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\", \n\t\"name\": \"55lggz36v4af0lj0kie2gftl4zi28vmq7s1u6q04s6ek886yuy2rihy40nrt1f2m9siyao3l5ilhe832kr2xztd2ypo2dk1h17j26ydvl4rbjsaq9vg6g22h8ea0sk0bw7e14fvb52vsg2mu1kixfjh2myqz2jead42mrsa4b6ybotbgce1q5dzg12r214cxc0ul4ph8ox0jxeelqin3cpnpv8cgq39eejndlsvd5xg78l9vf216emqovdeud49\", \n\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\"description\": \"Laudantium labore dignissimos voluptatem voluptatibus totam eligendi et. Quia voluptatum eveniet impedit unde amet incidunt. A quia enim asperiores rem ut. Modi quisquam excepturi ipsa aspernatur eligendi sed aliquam alias cupiditate.\", \n\t\"excerpt\": \"Dolore qui nihil dolor sed fugit hic. Dolorem voluptas earum. Aspernatur reprehenderit facilis qui at iusto id cum est. Inventore vel aut error. Velit molestiae pariatur voluptates et eius et ea. Voluptatem molestiae maxime recusandae tenetur explicabo perspiciatis tempora itaque.\", \n\t\"email\": \"f1blnraua13mo87gfrkbf5w37v8mutkyefzluvyq0ymrhvyqqiaoxz6ajmoetd9ln3nap88i7mv6t0rf75ooj6ob5v9xxensq8r2q1ahs2ynt151gdep2c8z\", \n\t\"phone\": \"ayhjlvbl82ylxd1h9u8pjxix6srji4uzun7w9ih9c8sllqnymfca55rms6i0uxi806mjvplrrvoe6s79jr020o3t0dxqpcbznxtg1s94qoj8s90c8w4uezui\", \n\t\"fax\": \"e34zzzm3l77unkxg03ao2po4xgl6yim3hxec6b2bwqjeo6hdc7qnjnejpy57vuj6xsuwb9udmxkk8ounuvzuxkbs2ss2pzrrziatznigypseets1hsartmev\", \n\t\"countryCommonId\": \"47234be4-ce32-45ce-9d12-d05509c2c7a1\", \n\t\"administrativeAreaLevel1Id\": \"40cc5001-185a-4057-b71c-cec42cde97b3\", \n\t\"administrativeAreaLevel2Id\": \"b9719ba8-ee1c-4f0c-9617-4c62d8d8aa0d\", \n\t\"administrativeAreaLevel3Id\": \"4455eff8-2510-4b35-a5d9-ffafac680033\", \n\t\"zip\": \"bq7ld4dwjp\", \n\t\"locality\": \"77ovvbf0r39xtm1tmdek5u5rp8llbn5r59qdxaz5zp55cvch0jeteaqah0g1m875iyq11ixolebw7wvybzheyabcbgktosw7hqj093hurh6fo9lu4woeotsb1liyl\", \n\t\"address\": \"qc3sxj3hughjqdid9gir2yx94vl5t28kxis10rliou6m986ac8gril8so9ii5onsp2r9k9dgl0zgqora8u39x1ms2x4yagtpliygmso6oczewiv5usmn3petd98r3c9cyrf7p68p4ywf0vp6r3j9y64r4ofn1573o8v22d4t11m62zce7xiz4u089yt7exq8mupipe2z103m4v64krappuaebhl99uhwk1qwwri4s0vsgvrlbb8nbk645p4e86q\", \n\t\"latitude\": 121.71, \n\t\"longitude\": 823.02\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partner",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partner"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partners",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"39e075ff-d933-4b49-8ac4-8429527a9be4\", \n\t\t\"name\": \"03qre1qpogpvt77e58tuf840clhbr4x55mj3j4wtts6m9oklk3wttkdzghrviii6xc373zt91t4l8mgbavj0qyld7lvqogjhcm76ks1dex5it5ux9xlgigx0z9c1fefimy7y5l6w4dni0jn3ofwdmgxknrjvx9dw79tifyftmtegu2o3dx64ramxg5xjpwy8y0o5ucss9fshjfhv7g1ba8uu0fbwfov0zsqgxg433ldprf7013ufuih8reay8ao\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Quo quia quidem molestias et cum. Consequuntur asperiores ea sit id neque. Ut voluptas deleniti soluta voluptas qui possimus. Non ut quasi similique et ut laborum cumque. In sit est eos et error aut atque at eos. Harum id neque voluptate possimus excepturi soluta voluptas voluptas.\", \n\t\t\"excerpt\": \"Omnis perspiciatis quia nostrum. Quae quo aut dolorem sed magnam earum sit praesentium dolore. Quo quod eligendi fuga optio quo ratione. Hic magni sint perferendis voluptatem necessitatibus et vitae. Repellat fugiat necessitatibus labore tempora illum perferendis saepe omnis. Impedit quia repellat et aliquid minus enim quas veritatis.\", \n\t\t\"email\": \"ejmx9ky8cq3wn3f9xayfpogzb636bp8jqvbg3n0tbu02jyiprdjgo5esoa23dsejaf36p1bpqq4odtxnkty31zj03m9iq0rkq3ou2a0jz0lki7mrl3wv9jqw\", \n\t\t\"phone\": \"29f1anweezwthy907rvjbcr9rw9qz3wmhqgf3q5vxgdd4ru56sdg6jps4ffuiwkqr258hiofexhzl743rrguhkpx6u20okbw0u5reccfv4bch7gkyz97h7w2\", \n\t\t\"fax\": \"h5e3gmup0t8rmxt24m588pxp5xtvk08mqabvyvi5cdb6t21hk8qwazfksegz9ueq2qxpzsfxyu4jzuw7e1ud3ap0gfdyx5bhieniq7n9rom4p6f4chow9j0x\", \n\t\t\"countryCommonId\": \"29c35a48-63f3-4fd8-a397-9d53db6f0f7a\", \n\t\t\"administrativeAreaLevel1Id\": \"ce803d17-8fba-474d-9a79-c1120c2ed1a5\", \n\t\t\"administrativeAreaLevel2Id\": \"40f9437a-9cfd-460a-817c-825438c24002\", \n\t\t\"administrativeAreaLevel3Id\": \"1cb4c738-1cfb-4d7f-848a-dc51605d0e82\", \n\t\t\"zip\": \"6rljmn6p8z\", \n\t\t\"locality\": \"s1afrzjbjsi0dv1dcwjvus7gcbvn5t9nql4j0cthemykkpgzz4gje3cl74qt1wc545a9em411rw81bwm5iwo0ivu1o5ms8aizgnjsiqljbgdjtlowh772nof3kono\", \n\t\t\"address\": \"6js99i7nq1iq0po8twa77sqp6plm3vs2hi25ujin6r3wwc0ovrl2nwretx95qekvtbdjqjdlupctwq1fysshlvtva1osndynglbtd0f2ot503uuq53tovor8cx77gbyrlztpxscshmgkub5jz96t3mp6kdncwqghbrs2ol9ep2plsyfye9g170yosia1tdkfkmis3ilrhl3lkh9wtxukh4sxi2l69icqbv6flemgewkblslvb6jgptzxcd3luz8\", \n\t\t\"latitude\": 88.14, \n\t\t\"longitude\": 779.26\n\t}, \n\t{\n\t\t\"id\": \"d639c706-36e2-4492-8af7-8e757c885192\", \n\t\t\"name\": \"mczre1r1abd7akf32imqi3f40059byo7ccephl6pkwxbtqs30i72z65n0gaxnu11m6xhpl2knjvw2t45f7zk90pij5yrrhkfd0jwer78vg6m9njgovvgke3rye3x4a8wjaei9pkrsode0ap7hx1bf14m7b3ane4nu4zekss11i4na1ebv8liuuagqnkd4ksjz8aamhzbg0f6ik3y7br4bhx2haqu9o0rrtnrsc7cy5tnvuqrd2kpgp75s18d4jr\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Eveniet perferendis eveniet est veniam est consequatur sit fugiat facere. Aut optio quibusdam sunt quia aspernatur. Eaque et occaecati. Sunt eum tempore itaque. Harum laboriosam adipisci eos non.\", \n\t\t\"excerpt\": \"A incidunt animi molestiae quo aut exercitationem non. Numquam sint voluptatem ratione totam sit quo voluptates quos et. At quo qui veritatis consequatur aliquam odio. Quibusdam ducimus eum error sed perspiciatis totam. Accusantium et sed ut distinctio est rerum sunt pariatur et. Non minus sit.\", \n\t\t\"email\": \"25banqg2swqwup8yud88roreapr9y55dd0akjr7siwjb4fbkiti3shjdof6svwf9g3hqbpcf3vpf2wq8lqed5yxs0sirr9nej8iq21b591vd830fied2q2ww\", \n\t\t\"phone\": \"710x70vdh1prxrave2vhb2ug5fu47zlqtkgf06vhopmoexxg6gkd2ekosl0ard0akfzsoea4kz0ypxd8gphfug8dstfk3hpvl354zggrgwyhtesgswr94mdx\", \n\t\t\"fax\": \"e9vywurn27dmm66novnp2vj384glbi1mhr9nymp7zwzulb1ead3hje10fmlizzjf1a01ggwcbfyq4qctjclp1ybpyy3tgr8i60eu2hq36v8i5begml7am2mc\", \n\t\t\"countryCommonId\": \"899a8276-bd50-4781-a21e-2c4830c68d69\", \n\t\t\"administrativeAreaLevel1Id\": \"e6dfd26c-c434-4395-8a0c-900d5a0e517f\", \n\t\t\"administrativeAreaLevel2Id\": \"a4f21ce5-cbd8-4083-92f6-55e2522fd3d4\", \n\t\t\"administrativeAreaLevel3Id\": \"3b252e59-1775-4247-9add-3d7eaa8c5686\", \n\t\t\"zip\": \"pplsr6yt4k\", \n\t\t\"locality\": \"ah0mrs2yu3ccg7ssc9w6agsb28fdwej83z1eq36xzycjddh4ezyyd6g8fqh5n0pjs3hzlj0zcixav6vprgjs64l9e4qdix7enj3iujtd70epdsqw55s6ar8imoolm\", \n\t\t\"address\": \"wsf3aspyc5c19xtrljzysezzme20i8k3g40q3akoeqibjuhsc0i0h2uxa9zrh7nwmeej4170rrjcv0j78d2qqihn0g0cgzpz24b6mqlt7mdiyr7u5lxf359zixqhl60td75el6gc6658biqk6h2iy944g1z5uc76f8udgu4pk7pfcclsfew1nklkmo46nsmoikjor5w5ejnzhol4jvz47h12w74f4luxgv0gi2pm5qw2fxbx1koapcahiejukca\", \n\t\t\"latitude\": 464.81, \n\t\t\"longitude\": 337.81\n\t}, \n\t{\n\t\t\"id\": \"225797a0-e17e-486f-8d65-c56c3b8057e7\", \n\t\t\"name\": \"e388cri1em7mzcd1xg65ytwnnthsno6vfd2gx531r6fdegvunktuxu735icx8q7uo88xxery9q8oc0200lhuja1pkk7b35enxzu71hf9xdbr5yzdsrnumfmcg6q7vkwo1b5ozzc68gti19r4rw2n1i4yhekwdqzlk9jtx0b3egio2pqnkc97w006q4tzh2ab5z9hf71whn1b6bxdvittl3lg8znmg24p2phpjxmcx7urlmfwiw1atqftci1eap0\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Distinctio non id velit adipisci quia velit in. Labore expedita aut. Exercitationem impedit id ullam officia. In quibusdam possimus quasi repellendus est vero nemo atque.\", \n\t\t\"excerpt\": \"Molestias soluta magni repellendus molestias repellendus expedita. Hic tempora molestias nobis suscipit. Et optio accusamus deserunt. Dolorum nesciunt autem et.\", \n\t\t\"email\": \"bl8k9h8itft50qo6j6cbphq5g17g61anx0s7xnq2s4v9uryvls0nez93sqoyr0glopxqcy3swgjsry0d6qjm47ee288in5aswszsaqn0ik1235tuw13mkilo\", \n\t\t\"phone\": \"xnf6dw698iold92ha7qdn4qbfgrvrvjyhcg849rb8ff94xri9eeyqhj50md4i5pu5pvn8sjujlymdx0bt6myx1lahlnf3b4ghw9yugdwdn3vife16iifosuj\", \n\t\t\"fax\": \"7fsll7f9h8go8ckj3mubhicwdx7510ayarch4jshw73ybkyfu8jna1glhywqys5wiv6crdmysr0g5fi14t1hapzvz42f6wr60ax6yvwt8zgnsunywabxj7pr\", \n\t\t\"countryCommonId\": \"3cf72a9b-9c33-4465-85bc-2238076548bc\", \n\t\t\"administrativeAreaLevel1Id\": \"f06e6266-6f39-4cba-8e9e-318f68c9e922\", \n\t\t\"administrativeAreaLevel2Id\": \"e12f533c-7f46-48cc-880e-4d1e55fbf5e5\", \n\t\t\"administrativeAreaLevel3Id\": \"1f4bb0f0-6691-41b7-b0eb-f1fc91d90126\", \n\t\t\"zip\": \"dwbt0r8fsw\", \n\t\t\"locality\": \"48hwh54cyzgsx2zllxfgj7f5ms4442rbvq39esznl7x6yxff5zxkhrok54smtvr19nga1dl0h9px6asg4tkdocq3nd4c3lgevce2l0m3w6goqgusbn8uouftovwkd\", \n\t\t\"address\": \"e1036mniw1i638rl8n6eextiulbm850cowj71y2bxbgdzlun1v510lgss5ea4iepagr3dbvjtw2yvbd3aoqym8yjy7rt69qwd3okrigi3a2rocma2uqau2yy4n5suqv4xscqos4yd29v04jkky509qj33avhzrth9rkajp6ydmurks3q11c6pdge55f53t8tsv7rnrgljcues7s50uv76bbiiw0igndpi6pkt4hyclfok7r7naym2yziucziu5b\", \n\t\t\"latitude\": 289.67, \n\t\t\"longitude\": 212.42\n\t}, \n\t{\n\t\t\"id\": \"ddaf04a4-cd8f-420b-8b91-651edaac5d37\", \n\t\t\"name\": \"jh5e1q2ujrm73pt4df24n3dg3f7wkduoe1wa8xvgpgnks9tmfcwx3a248kup9u97o6plyuys2u4zw7432izcrydo9g13ekak11w4elrm6bn2a58f7qnnb8rmedm2rf63lflppwo6s9tt41tv0ydirvcb59ghq6g2cdpxn523zstziwc17zovsex3zcwy8m6qyh0h9o7dcq7ki37glkjrdbibe26zm5d07g4enuox9nchojtyk6viqlgybhtto9f\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Aspernatur nesciunt at hic sequi velit sint placeat. Dolores suscipit aut a quod dolorem enim. Voluptas amet non dolorem quia.\", \n\t\t\"excerpt\": \"Quidem distinctio voluptatibus aliquid beatae magnam aspernatur. Odit explicabo illo sapiente hic nihil tempore corporis. Quia soluta ut.\", \n\t\t\"email\": \"1b2tup9aeiaqycezvdp51vocl1i3szdtxkfsdgu35byy6tukc3uiav0keuyu7x09wb8rdcrcs6vva2uud361uowwzmncmndhoofjvicfo6zpr5l0m81y66he\", \n\t\t\"phone\": \"qlaumsgewe54vmavdu1o2s403e7ezcywo9ijvaosv60yb9ymb02snfe5u0cpkpxnjh2p47qiecnpyrqrjgv0jecmyso2sjwkt1ogy85new1xeimlg70uddjr\", \n\t\t\"fax\": \"o0bcuouq0xaod629upo8krixejahag5kw6493rygd4pku4cktwxuqeq01n95e5gdmmrjkv4gvixxp6r49j84rxxcklh5hssj49u02lj8it8mqhmqt08npzbk\", \n\t\t\"countryCommonId\": \"a7a915cf-180f-486f-8983-0ae1dd52db36\", \n\t\t\"administrativeAreaLevel1Id\": \"1bb6e8d5-f5a9-4332-9364-609661d73f7f\", \n\t\t\"administrativeAreaLevel2Id\": \"7c330305-98fe-4eeb-9c23-6e22a1114850\", \n\t\t\"administrativeAreaLevel3Id\": \"0f9cb2ec-8664-4585-9fcb-f58e43b15cda\", \n\t\t\"zip\": \"crtt310ccm\", \n\t\t\"locality\": \"km6y197ctq40dsp8wt1odpdjaovvq5tcuf5u72i7hx823y1vymzhpc59iuwcg8qznhx0j852d0j9tkc41k5hxl4b2pmsxgwb7m0azzej5q409o38naoxhz6ffhyjl\", \n\t\t\"address\": \"6voztpfleicla5zyv4ss6rr0ae9r8lnbft2aveky2pawitxqzjktc0sjksrngnxqoeyiwelglrluifw72xh4ncivbh8xpeq25d43d5tdvk1pckw3ndbrbh9g2cflt2frp3le35v7pnhm61fs3emkvpxmvkwxjwrsmko5kdkg2u13yrsq7he23gsedc65elhknr1pdixpgo4qq8d5qf5mlr827u3ey7u3jtidlbt5fuw7sm7hcvy3xq5xitnmdaq\", \n\t\t\"latitude\": 852.67, \n\t\t\"longitude\": 275.90\n\t}, \n\t{\n\t\t\"id\": \"d1e54c19-a05f-4bd7-be1d-91a0c271ef48\", \n\t\t\"name\": \"s9qdhbhz7g7x3rucxdx7sx34d2axjmnz17uf8elznkdqka4ll7mu3xpwx66bxaknhsx15d25lqrd30x06jykpn8r83vvuomd4nxsyguzz11id7oy1lqx32rev16ua53xq3bjsd4k25gdian3svk2wx8g4rokumscvgxmcgyp9h0uyuckxdx0zwge7j818ylf2euzh2p1ay544ft5x3hix74k9hjtrsiwnke4g53v6tmdy5cqnceftjroq1xeddx\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Qui repellat dicta veritatis. Pariatur quod reprehenderit sed dolore nesciunt ducimus. Eum ut repellendus est soluta. Quam nobis tenetur in corrupti velit omnis. Repudiandae dolorem et nam sed dolorem dolorem beatae. Accusamus rerum voluptates soluta alias omnis aut voluptatem ratione.\", \n\t\t\"excerpt\": \"Consequuntur sit quibusdam corrupti qui praesentium dicta officia. Nihil ab dignissimos. Quo veniam autem temporibus et. Quod qui ratione nobis ratione vel. Doloremque adipisci et voluptatem voluptas distinctio praesentium voluptas aut.\", \n\t\t\"email\": \"s3vtzeeb0jevyflhnivpsymw1b8ehm4wxurqjsrzyoc8ll1jlehvriricz2flhoi7lgpw5f0c5h0zqla83kxgjfa083max6seebzpo8fdzsjkra1r64edn9j\", \n\t\t\"phone\": \"a2ekdhg4uqa8xg37d8mszal1v0exkddtvz9yj1oczvzn8e91lekwzxo5vk2xfgl01svhm7p0atgfvkuwvuqg2oh8iklr1ms5tkpem7lp7ehaj3eo619ykqgw\", \n\t\t\"fax\": \"76p3kium5ys4txnp5ogr7oglpuxnyvh63achubumke2c0qg9jg2x29rrzcpqegi4pkogut35ydp2bjby929cclntrovkha9rkrjfece9vq06swg1qfmnmbie\", \n\t\t\"countryCommonId\": \"010fa0c9-2746-4819-bb27-fafbe5555326\", \n\t\t\"administrativeAreaLevel1Id\": \"8cbfd3fe-8549-4911-ad28-e4de2c5cc457\", \n\t\t\"administrativeAreaLevel2Id\": \"75a29ec8-6a54-4db6-835d-39f85e507f7f\", \n\t\t\"administrativeAreaLevel3Id\": \"34fc5d90-5fb1-49e3-931a-dfe3a473d4a3\", \n\t\t\"zip\": \"mkw2tdfpl4\", \n\t\t\"locality\": \"rm44blzzjd6yebcb994rdq13tu74xj98pzsml3wr4qex47ho9vpxd3sqflru4bb8v80bs7krbdjtysbxl2tm449edn8liid9u3bqoc9j7s2x2yqzd478m88g6upmq\", \n\t\t\"address\": \"66puhlirjosvlw17u7oy9ga1ta31qbiurtfmw2kzcu3rw8roi0tuus34zspdzpc1nwehfpeqtp73vkx9gnfy7xb56g3bvkb26h7cpx8yg7i64tt7vaj83908lr9qfx7cmnrm4pdkixykj0abn5cnmrbyxmw4m9j5zh7hf9c93daknz0dzucr1uqhl07ntzvdevqtq00s2sp88f61eyb38yc9ipdhu9mugo81ubd7dksn0me2phpa8su011l1fhe\", \n\t\t\"latitude\": 510.80, \n\t\t\"longitude\": 759.27\n\t}, \n\t{\n\t\t\"id\": \"dcdb4a03-e589-4dfa-9348-75d9c264fe3e\", \n\t\t\"name\": \"1w7xxeak4g24qanaas5forobcprnfskv742q3x2zbkr6cjlfryzn4b2ehg0ttbwkm4jcqs68olc3phzk558rod7ngp6vatz6352mbuwlrjdm371ystnvb41hpeiisf9bxehx71rq96uzl17tkslroj2yjamkbubdpggf1l3wfc95i4xeqkcdispk9xt5gly7ge7pfddalxaq1o5rnhkxtjl6tc7dkh2uup4efsbudjzcp6nxjvgtx4ldz3oe8ow\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Vel adipisci quae nostrum et quae nihil. Et dolores porro quia sed aut qui labore consequatur minus. Laboriosam a libero voluptatem autem consequatur.\", \n\t\t\"excerpt\": \"Sint voluptatibus vel sit quos quis sed vel. Nihil minima qui. Eum est facilis est saepe quo numquam laborum voluptatibus.\", \n\t\t\"email\": \"q7hadwjr74pb3neqor346qedjzpsb23bgwh3c62y8hl8rc81fa1kpl0gwvarlrql9il59ifj4ha49xi573yn9iz942pjxkqyz132gbftpeewqi4jsbzf8if8\", \n\t\t\"phone\": \"0enk46gv6260e9d760hbd6s4ceu56txvm9ursfu3q8l0xqa1y7t7hwwscbcsoohr9jws1vf1o4236egkm4l37izxss8kwpta6xoi9h415vtgjgypgqpcu5a6\", \n\t\t\"fax\": \"htym6i6btgbuvr0fvuo4e7qbmfo0dsa1uynn6bc68gmzitzu096hu9cowccxt7kpkhuyqn8t44ko4s7hpclz3ly3yw8uwfo7uzoznoiee4944248eeevfk66\", \n\t\t\"countryCommonId\": \"63188af0-5284-44bf-8463-f367052537e1\", \n\t\t\"administrativeAreaLevel1Id\": \"184dfe0a-7d53-4c72-adb4-8560639b6419\", \n\t\t\"administrativeAreaLevel2Id\": \"e3627759-16b1-4eeb-9797-bb0bd7aabbc1\", \n\t\t\"administrativeAreaLevel3Id\": \"ea083630-6a5f-46f7-ada0-20d1d6b2632c\", \n\t\t\"zip\": \"yj9ytxbop1\", \n\t\t\"locality\": \"4k7hwdwu2lrq3843hylm533psf6aa73b4ema4g9otspeo0ysjeg2eydxnp4m70j8150hojn6q3iqvqkb8ipli9dsqagw5nk037lce0mtgo39okglpqp5e5zjeds3c\", \n\t\t\"address\": \"61zcn1bqm9p2y7u45d1d7kr2qbs3wdv31uvo7xlvo8dx7z6zlti9csvsq8gg6xt8jsu4g3c3ys13jn34xwyrep3gcxlf8dtxh9fr5g45r0k0bm7qkiafpwhywm7rb359r5pe7zv3xg4gu514n6tpeyxoz5tvg3vcepbqs40ct4uu4u8w4nybay28s2hdep3pwbutjuvk8cf6ij66ee97r2xremadk6powkg0d1y4ne92bs7xh9ufgmomddbo7k8\", \n\t\t\"latitude\": 637.79, \n\t\t\"longitude\": 392.64\n\t}, \n\t{\n\t\t\"id\": \"96a1c234-34d5-4e82-9bfe-432cf3b090ff\", \n\t\t\"name\": \"wjgzpt3i7qt445qse7w2z7iomphlz0bs3ycm40bqph5elouimah8q4l0dz463d00bdy8751yu9mclyokatldmlolnotapa0s7v6ngi930zrz8hrgjzh5mmg3k5xmtvq6izk7i9mg33vfgvg2o6gbtyqqbh8it25329cjkffblkuzkh67fh32gustw686dcruxyrh6kz3a70c23msfpsf286h3qt4rx6fr2mx1j67b9mtu9ca5svfsvn5rnf05x4\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Voluptates aut atque sit distinctio sit voluptas quibusdam quo. Officia magnam id ut quidem harum quia et. Quibusdam perspiciatis ducimus ducimus ipsam est fuga fuga omnis eligendi. Eos nihil labore consequuntur voluptas nulla sit.\", \n\t\t\"excerpt\": \"Id voluptas quia. Sunt magnam perferendis voluptatem error quo. Rerum corporis vero quidem. Exercitationem sunt est aut a soluta voluptatum pariatur recusandae.\", \n\t\t\"email\": \"f3fwkmnf6tgodjjhu0epi1v5pwo45km35an1ru91slechwz60xtpfw5bfvfgnf62x1m5wf4keod2g32rdrutslcjtilhodkpwsy5v3ia4e88fubxykpnfysv\", \n\t\t\"phone\": \"4jdan73r5kf8rk1tg7rqzjkmu758lcb4m2ksw462pmvrb9khpl8vqc0w9qboievsw8xctzqwwa158q0o33jep7idamdf3ziyql74mxoy8fqa458zqxcvvkn1\", \n\t\t\"fax\": \"81wwa2bvm9uayr2g57j4fnv3876ffkta04xn57ooeajm9jq85u6roknq8gvci7rnb3cj2liwm7pytcaoq2d9m1o9wcvzla7ft9nunuu0umutco8w79oss0w9\", \n\t\t\"countryCommonId\": \"746a6604-7d11-4632-a211-6e3923c65c9a\", \n\t\t\"administrativeAreaLevel1Id\": \"8dbc565e-534e-415b-bdc1-b8d56d17088d\", \n\t\t\"administrativeAreaLevel2Id\": \"0576a75d-4360-4e0f-89d7-f7951abd05ed\", \n\t\t\"administrativeAreaLevel3Id\": \"eae26988-bcc3-481c-8596-d838175f1620\", \n\t\t\"zip\": \"r1nlr79wia\", \n\t\t\"locality\": \"fs3oh8c6to9qbhkbhkjfxwt8cmx042w3jiliksvjwslks1a9zcwsvohen2phwhryxqnj78026nizl2ivk9efusuf3315opvkcx29hxtjk8bd2z2isi59otg2w0fo0\", \n\t\t\"address\": \"z960sb2x72q5i5e9hsr9k1aa6cumqmqp2mcxmljgj29x14j9fj55027ura46mrirn2xpk9a5t6lmuiko3zxoeamvy5p8rhbluobqgowqbvoonq8kcqvz49zu3ro9oi6f5ag41vh04d2eo6322xbuxj7m1nipt4boblrdih4xbfu903cxefngodisd5hydo09n6it1qy00nc1tl8pyxgazl63lul3tfrykcegzwm7mhvi85ow322seskimv0lf1e\", \n\t\t\"latitude\": 521.50, \n\t\t\"longitude\": 741.88\n\t}, \n\t{\n\t\t\"id\": \"7f7e4189-0c19-40f9-b675-b3d572b58871\", \n\t\t\"name\": \"yzhc5n5on3smtbrja3y1l6rhw1czdtkzehqbjoihtfji4lfc1if6hl7c5r31evo7kdh90tjzzi39ggcb0wjgysparkvbzlh1tf2ev7c4x9y8m5ulne2r6ee7mlwpjhen3oi29q7catjdw90r0a2eoiwpegbey2pogq567rpswjmdsf2gljp0o26qp99ot2in1fch6o5nozx3dhu7m3q4rgftvuv5jc1fhy9mqv4zm68ti1dinpmp48qmqeu73i2\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Nesciunt sed sint magnam voluptas. Delectus veritatis totam modi. Placeat doloremque consectetur facilis exercitationem accusamus.\", \n\t\t\"excerpt\": \"Saepe dolor similique ratione. Nihil dolorem quis qui laboriosam iusto ea numquam. Molestiae fugiat assumenda ipsum tempora voluptatem magni tempora. Sit quia totam dolores tempora veniam facere sint. Non dolor qui impedit maiores et sint. Repudiandae pariatur suscipit alias.\", \n\t\t\"email\": \"7wetmvv0z7k8r8wsvp7f4aw9qpt06vgkyqacu27ta1gf387ukqk3hf9sudxuxcb51e67rwkc09u2wwsqr5mvsx4hl60s9i51ke7ouxpjm47w7d8bg77zfyim\", \n\t\t\"phone\": \"3qcpa2lr28jk7hpzmyhh2kyv5ebzhuxrmi1xlw914x0nmso3mie05fn4mgpnaqsq3o2f6osg4cnhpc9p6c4uws7533pycxei912emt0cl4d28cac2qcgk54q\", \n\t\t\"fax\": \"qpybntg3k0qgo2igcwagg69g1yzel1vsuaktx8wq48ufi22pwkx2xi0y3rigtov6ji7zvan1k3uxzvys5mrgo14fyn2p79bo8m8l9stfue9c25uriqfypkm9\", \n\t\t\"countryCommonId\": \"56746e09-6cb1-419e-87bc-30ab19e1e24a\", \n\t\t\"administrativeAreaLevel1Id\": \"891498bc-a91d-48a6-bdf8-ba66a07a8bc8\", \n\t\t\"administrativeAreaLevel2Id\": \"52ee87a9-6910-4960-aa95-99d4eac3e363\", \n\t\t\"administrativeAreaLevel3Id\": \"6ac13826-3886-496b-a1c0-8bb1a1448e1e\", \n\t\t\"zip\": \"hlhkgweggu\", \n\t\t\"locality\": \"77u71i91gmf8i9kbo8q0tt84h4y429kud09dvyg792nln3e0n8tvnc51awh29uvl01buesdtntigt6iowjb7za4z7cmlk9ad316cjur2axlruns40fh6r1x2a61n8\", \n\t\t\"address\": \"rb1u1v52ogl3xqcvumf6kao22nwl54bufvmrdeyj31rf8r0vua74n7swpkaa2ofhesi0vmywxwycrdhwdsm3ykhqxbc2xds24r17z5ezrs0480j9kbff796y1phazt2rem5uvpfyvoqyv0cbsyzc8arkacfs8ndiqmmcrv9mj3a43hnhjyb62omcuotjzzkb11nx75tgitivz7t9ro4yrvea0tgzbnuu56sqzry5dbfsn58tu128c2php0aly22\", \n\t\t\"latitude\": 18.65, \n\t\t\"longitude\": 969.55\n\t}, \n\t{\n\t\t\"id\": \"15cf47f0-104c-46ac-b70d-3823b9ad0158\", \n\t\t\"name\": \"0798no4l7zcj24krovom51a330ippob74yh4k7r9l2jtx02z0722luws4ujaensacl105lb6jg2xb3ldp4wy9gl1uej9ghpxgv1lmh7lbshn9rywavgbbvfh9kowdepnqe30asdc0fdmxep7rjf35vawe2pnbdggl5o3cxsbtapqhnkfu8gia5htu1chgi2q46w9y44ua2guyg8vspm7dffzrdufzy6zeo3ij77f4542epgsk1qw481gqnrlqmm\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Fugiat aliquid aspernatur maiores. A ex quasi occaecati qui et dolorem non. Dicta aut eum illo.\", \n\t\t\"excerpt\": \"Cum in ex eum animi dolore. Enim asperiores ea quo voluptas alias odio alias voluptas. Tenetur perferendis voluptas praesentium.\", \n\t\t\"email\": \"zw28fnuoxi08lusxa3swhtp8bmdigmqokyppy2eyi7f4827t45tk6mfytuoc1ytro28xl2apgcbzydvttxahy2klm2o953dmrrckwjpqvx877m6at1q7n6cx\", \n\t\t\"phone\": \"vzkprmo2yoq9fmin5qfzy2kluhnpy74lr36hds1wif6o1fz577cyajlcz4afvem0sz8443vqa9w9q2t553tk6rmj5u491bfj7z1xh939865zy809i414ovhq\", \n\t\t\"fax\": \"s0g5fx44pr323oxlar7zxmotfq0d43g49dzmtm5ghdqiiktz4a80dn9r2wquud7ijkazodqspk4ywmtjfpwkhnwy5tmkvjs6qwrs0vhr817askp5hkjrbrjo\", \n\t\t\"countryCommonId\": \"ab98a598-d85f-43a9-98a3-731b42cddcdb\", \n\t\t\"administrativeAreaLevel1Id\": \"5d2029ce-177f-4c3d-9ca8-363c6854aec3\", \n\t\t\"administrativeAreaLevel2Id\": \"fdacbb39-425a-41dd-9308-f5c7a0177f11\", \n\t\t\"administrativeAreaLevel3Id\": \"27f9f715-c6db-4927-ad9b-1b59c0d6c403\", \n\t\t\"zip\": \"8yihtk0kwe\", \n\t\t\"locality\": \"40pn1e5mqfu0ga1orrcs78kzvgpp46dlbb39q7ftd5ruvlz23ra29u97tukoozyyc1tbml58q5fs7k1kirt767q2opb2u7af5osgd7lpvm2iqdi3w45lyk5zna6w3\", \n\t\t\"address\": \"ext0b6hpz31v2e68qb71dvghs27o17ua26ezxxumofam4mkw4h3tepdte3i5q2sl49nh9ta8yqbijq7xthr4akq77a7qntpop5dqgaofzxu26qh5lh9qo6j91f3whxxnpmbxb2vj1v67x5z52t1qleyrqquctmhs4ylcpgcaipk3rdqpygca86ydei73xgpbbac2m73xiemeg2vwbc77pf7b2g68vvck4x9rp4rz5yn4yccw8nch4h9azxzd6k7\", \n\t\t\"latitude\": 642.10, \n\t\t\"longitude\": 949.53\n\t}, \n\t{\n\t\t\"id\": \"0fed0a09-82d0-469b-94c2-ec43fe30bb44\", \n\t\t\"name\": \"je97kqvypv3jrxcmphru3u04m9ammaxg0uxcuba8e19csmd4f5wyggo9en3gfupkserp8fejxyf1fhc6jmerlyjwmrrkng40xw9ul8ssvnqhzvzlwqoq0xdr9meutpxrcnyvgpy5eqe0h0htbc9ra6h9pgebz478gsitcu1zbua8u3pzhd2uqlx5k0y82th27olxwreeajwkmse7glm6l2p715gjq7188iaqr31rilpd7s6wdqxyxdhndrcazzt\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Aut asperiores quibusdam aliquid aperiam possimus quisquam minima ducimus. Et in accusantium voluptas. Quod sed voluptatem in ullam. Nobis ducimus repudiandae expedita.\", \n\t\t\"excerpt\": \"Eos et quia et et facere necessitatibus quis minima consequatur. Ipsum cumque porro provident porro sit mollitia. Ut ut et dolore.\", \n\t\t\"email\": \"evqm2wmb9hni2hl9h0yx85ktfyakx6rm2wlvs76ls74j4b6bskn4wzhzwk34knxub99tk2asw77n2xi0r30u371eyfc2amucseghl39tek6ctdae5a1rmrkb\", \n\t\t\"phone\": \"pfv3lchlrstkcy941cdh6jd2ppabazteyne6hvyfk0nrznycms4r2g7l1m57ji71zfiqsv3wlil037dknfr2v79cjbqs8lz2xpc77oe3uab3t028tandx0h5\", \n\t\t\"fax\": \"jzdkxi6csa9wekmwu3k0i2rlcyg93rv9xamuvmo9yrz0cswactbec986nruxkourz6t4rf9qsa7q33epkx7udqqkmayfdp7yldc2sc1p10er5hkv3b0av1ns\", \n\t\t\"countryCommonId\": \"364e7995-0908-4b7e-927a-27be7540d0a8\", \n\t\t\"administrativeAreaLevel1Id\": \"e677a739-34dd-4ee1-af61-d5ea4c544c07\", \n\t\t\"administrativeAreaLevel2Id\": \"dd58d369-e0f6-4701-b3b2-5968f699c40e\", \n\t\t\"administrativeAreaLevel3Id\": \"8f569d3e-4ccb-497d-993c-ebd104f50dce\", \n\t\t\"zip\": \"1ec8n0igr3\", \n\t\t\"locality\": \"3sarmoduml7d7wgh2bftxzay866uy067y7k8w3p9pvj7u0ju3zlrr8tfxezvirmzhgk5jar7mw5i7tmpszaw2o5ioglw6vcafrjs6wxtnu1bkqfhw49cs8fyssk0g\", \n\t\t\"address\": \"ptigt0ctnx0yzrq3ayi60yipp8di9un7kz7soy2a9cv1nngl6pnkc5frz902adyq7u7aq4d95zjzw4yt7zxeyjbtkwk7cvixlsfmm1hx3lucpvy0gf9ylysu589a9ibckpprd6vd1eriiwnay8p244g06ahxqjbo1xe6y7fmfrdll2irxqz0327cxp95u5nchoqdyxu6cu1i6kztlco19snvoe8a9expdwc1nkwidejulbf8oschkh5z6yrwozu\", \n\t\t\"latitude\": 973.43, \n\t\t\"longitude\": 917.11\n\t}, \n\t{\n\t\t\"id\": \"b6ed27d2-10d6-43be-b447-8b74b3630c90\", \n\t\t\"name\": \"pprjtxnpywev6ktp77udt66056fwy8wwak7r0in66q1vkwjlk64t0nvzliz413b69q5m62ipot2p8u4jf2miewnqcih7ozhmrb77c03tz786sreiupeq7vv8ml24hg3we3etc9suc2bat5dxaf3uel3fjt17hsf8zvo42okdcbrnrh09l6y3m3nd2xymcpcpdoxfwqb5zl72ca9kzk0v6hvzmbohj9ss7aczg8oei35mh28hwqn0185q61lrj8o\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Cum assumenda ipsa quisquam minima excepturi beatae aliquam. Reprehenderit nemo eum ea dolores itaque. Voluptas rerum nobis quas fugiat optio mollitia perferendis corrupti.\", \n\t\t\"excerpt\": \"Autem est voluptatem. Ut dolores doloremque odit dolorem qui aliquam consequuntur. Quos nesciunt quae voluptatem ipsam laudantium. Sed rerum facere maxime aliquam in.\", \n\t\t\"email\": \"iwykfr7dzfqu224edacpxrs1muc7vexrts5h4cr8pkne8d57z5xyilg5lbhlsd2texqemh4m3eomrpsfs4zwspparzbqvc43a12ogfnucc01iier7nws5a4n\", \n\t\t\"phone\": \"bw6obfmlpik3u9tga3ntrqu5d5lxyag2am7hk4buzn2pbybwbqwtgucwd418zczhiiukwvrqnfcr7fj4p2uj073lyycxztcag0dzsjtygkn2vou4b6z7j4qo\", \n\t\t\"fax\": \"rrq53vq3bovy9br26iin8b9xc1yoiqhvvc5e2nbwiat1gcfpofqbidg0re7apg93j69zuh9xj8xq8riprygjnvf06i7ydaqt262347wy369ewxu3hmd2w2kf\", \n\t\t\"countryCommonId\": \"f32f891d-b292-4681-80a9-e6a0acb2c721\", \n\t\t\"administrativeAreaLevel1Id\": \"01ee990e-d655-45f9-acf0-29bef51e91fa\", \n\t\t\"administrativeAreaLevel2Id\": \"9ddbf27f-d737-4385-9749-d0bf364a9c7d\", \n\t\t\"administrativeAreaLevel3Id\": \"8c874b3f-9226-4640-997b-4af43eb39615\", \n\t\t\"zip\": \"wc3ue7lg23\", \n\t\t\"locality\": \"mt9k94tly110w8vlyvvpirgui83g3fjpuhog5xccy2asvtriw5v4ztco8zb1914oopfhn7987js5d9ep1410i9y9un7p3t7ke291qe43hj3w1w0suhzvjm4kfbczv\", \n\t\t\"address\": \"ry328dqne1oppyofnttf0oogbwzn2ey4fcjrb0fl721zsif11lpcs5ynwlzseit9vj061nr8790s9n8fjwnd197z65x6fv8fawx22ox8rrm870ds3mefsf465lrqgi4dj0qc8r3rrzbc6diy92zv0bubuzxyawinhw0o4yt4yruamnher8yq5azyywqpjjzcyte1zksy4010qemu2a7q5o11wc3ybpirabf8pdgpim9cw9rccyjtcb5kfinjhio\", \n\t\t\"latitude\": 242.29, \n\t\t\"longitude\": 920.51\n\t}, \n\t{\n\t\t\"id\": \"f73f8dd7-a112-4ac4-bfb2-d54cbec04d39\", \n\t\t\"name\": \"6mnr69h74j07n0b9qzpu04c7xqvo0juw09tocbnkanyrtaef4y2bpvt4xbcpitfnw8fk3n4he55su066qafwsnlk9yq6w6fdnyq01bk97qsaqz8wc9v9txh8g9kdw9er5bnq2yvy4wwqm1x7vm82ahhrsznberoxv4cob18gc9ra77ex2bt2unzzzbulv2as8hkvj3u4chx8eqwvsqn4vpxwyt1j88sungbl3ntj1nzvi0xsqviy3ulavunnlq7\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Eaque vel aspernatur ipsam hic quasi ut ut. Aut qui suscipit tempora est repellat. Quaerat molestiae esse aut accusamus tempora ipsum enim.\", \n\t\t\"excerpt\": \"Dolorem laboriosam esse animi voluptatem provident in vitae autem. Est qui tempore deserunt qui fuga ipsa. Quam porro quibusdam. Rem aperiam non voluptatum vel necessitatibus minima.\", \n\t\t\"email\": \"a0ffqpspgq7hlga9v4f4fo1piyfrxpi52ecsmp9zzan9pwfwk3afm066n33nya8trdaxw2mj0e1lw0curcdfrhrkfwp13nganvu6t094gjsmswx0cucjar2y\", \n\t\t\"phone\": \"7nd09cdb8v4bm0nsihoieqohwstg3f0jmfgehv36cjtrmc1qwh5aipvyeeckegm75zst202czes3inozqvlgmty7vb1v7mwmmp3kc0aerk44z7kf71ewgwrd\", \n\t\t\"fax\": \"r2wqwt9201a1bv5pvge3du7goocsganxz4ts1zdgh5tmfhjl725z0ib2386h6og4ort7mvh87q0aoi2qd41va1bduf2zyoj25f17vwa3c4mpo53ksvxvyqf3\", \n\t\t\"countryCommonId\": \"5818ae1b-2d14-41ce-b7a0-0a399fa07c23\", \n\t\t\"administrativeAreaLevel1Id\": \"3586c9ae-a5a1-4304-8c48-fce79bdf3356\", \n\t\t\"administrativeAreaLevel2Id\": \"b4a57a4f-03f8-45cb-9620-fec0b04ac65b\", \n\t\t\"administrativeAreaLevel3Id\": \"3cc42122-50b4-4829-baf0-5908de755804\", \n\t\t\"zip\": \"cb3vjdghvj\", \n\t\t\"locality\": \"h1t9gwp7gpzlbms6dlx3b5y2lkptx84y8sz5kulizcmd9yixllqap6libst6gxggt7f0oohwx9ufhosfkaizxomxoii4rgxl7exqy9884au5cv5t1cizwyap1jz36\", \n\t\t\"address\": \"f93krstza7r3yylp6zjw4t1xc9xkblh3zdcg1hxhjsvf6wuopxqtmeatgjhir0hidxd0l3r0ozcxl9452q1rpldwdfo54v2r4y41aw4tt683feyc09kh8uox678i1cboyxeq0ofykj904sk31b1htmnv89420et7jl4f9nko8cs7dl26i14m438pe8vh5v2bihf04mmaqtomd7sxcin83o0laki8c6nlw1e353gdy3nzoa558hhmi3y5egm46ek\", \n\t\t\"latitude\": 18.57, \n\t\t\"longitude\": 478.38\n\t}, \n\t{\n\t\t\"id\": \"8b177ebc-631d-4939-b4f8-fa77cfd6d882\", \n\t\t\"name\": \"da0fvbcvtqeny6xdn9767hnb3ucgmvvdwrh7sw2tx18uv1z5dl62h3bnvvfqzrpqv3h8zznx815n5n0lr6dd8leeevpv9twd0g204p8w41ng2lbgaxvbdb4iwudkduiqn28okpzdq0emne0hokv4bj2sneyv1590a5jbdwouf9kgpd61p6vtfecjqrxts7dpbne9pey709rncu4m9t7whx3v8agonzvqn2cz9cmnpu9s2fylx4es7y1dqfrv35b\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Officia et officia sit. Ut iusto sapiente distinctio maxime culpa. Dolores rem tempore ut repudiandae reiciendis. Temporibus assumenda similique labore.\", \n\t\t\"excerpt\": \"Sint ad fugiat voluptas eos nesciunt sint. Soluta consequatur aut aut doloremque sint id amet. Rerum fugit doloribus sed laudantium natus. Eveniet enim neque dolorem ut quis pariatur animi.\", \n\t\t\"email\": \"8wpbyl2shcp5xm9wk6p5uyvglmzmnx9zxgpgucmcwi8avjk49391apbzquspzw39fvnyc1jb9d64fau7e254q0wi8qv9mj8d02g8q6jx2actem02clt16kjy\", \n\t\t\"phone\": \"nn7fote8u0cl0uhutjjkmp17my1997vnkiebt1rhg0g49t09uhi8vq2b0l5ozhzkct2el3qyi2rcaii8ar7uqvw40f4931cjowl8ops7nixuupefuiei7jaq\", \n\t\t\"fax\": \"w87artbuy0nxyqayzvkqb2dr6bragsjj733bphnp8xkarw7f82qhuuqj22qzoy7di6y6qtp9xepwpp8wkodjlwxy0lenr03stbgk76odgpe0h7h0w9vttcik\", \n\t\t\"countryCommonId\": \"c430f2d2-64f7-4217-9222-24e4a6290f68\", \n\t\t\"administrativeAreaLevel1Id\": \"be517392-165e-45fe-92b7-fa8010f95f49\", \n\t\t\"administrativeAreaLevel2Id\": \"83792582-68f5-45b1-8e7e-75d1166fc75e\", \n\t\t\"administrativeAreaLevel3Id\": \"6cf90e36-83f3-4ee5-b3ec-afdbc0a491cd\", \n\t\t\"zip\": \"mvq9p5zfpo\", \n\t\t\"locality\": \"wifyxmo143ebmy5tyjlzdgf2tvfrznemx08j46z6xbo7f86qwwofgthxn5cqwazg54xr5280l805qc2yebmrzus4n3oecbrwery9smuispr7bea1x5aneq0dz8zw1\", \n\t\t\"address\": \"mq4u6ndcrfku26vvfvh2aw1ycdonvqpjhtov9635xnamho21abm9bt9ewbw1rz5z6i9qf708zskaxzsnn0g6jd0hmo2ugvh3o4vyslxheon3c5xlviw6okm2umacfazt81ar9e786h8zge4hsbyxciz1kzuwiyb3t4pyxbldd4j487y6za6cwcank3xtjkbsff9zfcmhml3tajr8bdyhix3vce1v73kk9gydmc47o4b5l1yo3p3dcvvyuo3r7sa\", \n\t\t\"latitude\": 379.89, \n\t\t\"longitude\": 514.94\n\t}, \n\t{\n\t\t\"id\": \"80bdcbad-852b-4b58-95b7-55296b9779a3\", \n\t\t\"name\": \"mc4yazzwnncmirn078ojvus629stdb27ep7sokqi8sroicvufaujaoqkrfhgfmglh98k7ud30a2t4tix7hcko2qkx0hdj3igq9fqlx914dfqrhi2yf7ex7pj3t1u3f5pcfnozib1pops8p8s2syha00uj2l9u0rscm7jtfpj7ft0snwu1ppnrr477fsuagp3khz2wtf7cr5fzco7igvk3ojcv6rprtsi51o5hwci2wq3kb7wl86kqg9ry5j35t7\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Qui nemo omnis quos eum velit et quaerat rerum ea. Et occaecati error. Officiis ex et sequi corporis ut non. Ullam voluptatum iure temporibus autem similique et. Omnis commodi velit iure laborum facere adipisci.\", \n\t\t\"excerpt\": \"Eum placeat qui. A enim et neque accusamus vitae ut veniam. Voluptas esse autem eveniet. Odio eos animi saepe qui nisi suscipit iste. Architecto ipsa suscipit ut assumenda minima sit aperiam at.\", \n\t\t\"email\": \"b4vy0vn9avq509o6ripn5hl4e0sf4hojc0vrh76u3fargzwigeps2jt72bp2oief10s6v01t19t5300bmr8909noens2xr8c3fyhst27kdp652t0r2n76gbc\", \n\t\t\"phone\": \"q7lcu29p6szru407my3brglyahyturzbsu8n72zwokjv48yu7oyb5hs8wd5o6y5wfnukxy5px9c1q3s5ecbujuvdst7a24uacrn5bri4v22cnhoziawpglza\", \n\t\t\"fax\": \"214zc3fcu121efgoenzhym3aw6ktebhmge82za6p8mm5msyozwonxsxildu2lmnkocjjlv8rk1map1nln3iqzvlvitrfc88eu3ali5j3wr53u159j6p2kus8\", \n\t\t\"countryCommonId\": \"5edb899d-6996-4ed0-80ce-c105967496d1\", \n\t\t\"administrativeAreaLevel1Id\": \"e7e0432c-85d4-400e-bda0-95b8739a45a9\", \n\t\t\"administrativeAreaLevel2Id\": \"d62918b0-44a1-4f95-8b04-64e94eb31171\", \n\t\t\"administrativeAreaLevel3Id\": \"04c245bb-1fa2-484e-aa56-5acbda64ff8c\", \n\t\t\"zip\": \"64ip0r4foh\", \n\t\t\"locality\": \"vulb11c74ukdavr8f9qcwb4feskoh81k2n1yp65ma852aarl7e1usntwbiifw1chnoas75qagfh73rs46nxz6qabvpwv560qi3u8zfpesc6rha452d92cn5p5uz1t\", \n\t\t\"address\": \"p8rtcu0vmtgcmmeh2bz2pv74f22yc14njvgb0uiuvksec0okkr87wxwlzi3l1ko054lli7pcl6ixcjk7s6etmtfl5jmdvxqee5661e3xd20aiy0iletn6re34wkzfw63jrvoir23qzj0vrh7vh5py9nlaw1vkqe0v1zehreu0734jdarzuww4tmk2lo6drz2zcpv699xnp63vt2h0atxd7u4m83gkq4jt318u25xe42pyk20hyasnjl7mpaa68j\", \n\t\t\"latitude\": 908.60, \n\t\t\"longitude\": 936.85\n\t}, \n\t{\n\t\t\"id\": \"b9d1d564-ab8f-40f5-9e61-eaf9f96d9c6a\", \n\t\t\"name\": \"tkifszqxtxqqxtbr3l5clcathh7wqhawry4jb9g9h0a2egj4pvociunufoqyac3ikfb24cmm5asheeaorykpgt71e4jfi34niujmg2o7a8so0v3gbn8a4fe2htxg8mr27e4qui523cwtce4wvk97mwgwdky7bhkfascaoftxr0qk7q4b4q9e6zr4pxfwa4esr0blpgsdc6vy8ckv6zv8p851di8tnrvp6azgwm4240oz7mc7ehx0h6ra5oabp39\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Sed consectetur fugiat blanditiis. Ipsam impedit est tenetur aliquam dolor accusamus sed consequatur quidem. Est laudantium fuga id dignissimos enim occaecati non.\", \n\t\t\"excerpt\": \"Molestiae molestiae voluptas et. Eveniet molestiae modi est facilis ipsam quas aut nam consequatur. Et quos deleniti deleniti non a quo eum. Dolore porro voluptates similique delectus.\", \n\t\t\"email\": \"mjdo7gaurqqmnni8hou8itglu00tj8otjgnavaymiupfndzc1g3fliypb0q6mfzf20wyi9p1f5297apkpvo07jmh5drh6kavrwz7r6ia13asm5wv4wr9y7pr\", \n\t\t\"phone\": \"q7d82ogw99rgfwgjf7pylxsjsu52hk6x1wh0lx5sub5a2jg1p7jxgaayyfs6quin51x64oqlrw9nuddmr9y5yrhbqsxe505e5ck0cjy35ddhfgrd24r78y2k\", \n\t\t\"fax\": \"76e1sgwvkisxhpj4g1gicdec9evukyd1wmgqnww5ubgrb50cuqw07i4e915tzy3zvn8ou7ifqtp2m8j94fohzaf1uw5czkp8gq7oam9u69essvt44x9ubncd\", \n\t\t\"countryCommonId\": \"2e1fe94c-f944-49b2-b385-f33b251495c1\", \n\t\t\"administrativeAreaLevel1Id\": \"0d86ad34-08a0-45a6-a0ba-3294881caa0f\", \n\t\t\"administrativeAreaLevel2Id\": \"dc038df9-573d-4eb4-b01b-2eb8bf02da7c\", \n\t\t\"administrativeAreaLevel3Id\": \"092c3506-9f75-455d-997b-42a8a0ca5331\", \n\t\t\"zip\": \"98nok6njp8\", \n\t\t\"locality\": \"1v8rmowj8e7kviu9ck0pyuoor28pyexgn8vmoolde2dv6k1gtdumecbcidxata7l1i7uw3slako9ehy6e3tkdreuvipv3qwh52pimakzgabpsx00zuspibnsko4c4\", \n\t\t\"address\": \"zbqe5hggdtlompuqao4r1vtphappfyyxqjls6bcdu59npc7zge9783crnrquu1c1x5em26vs6nskvxpcg13qdyabgqjekgmz7zezb2yf3cz5dujqtt3p1p9foiwe5xkkdxmdvn1vq4qvh4yj25a3gp17fk43seqahg0ersyhhdq5qw5n14a8s737rp6ct5ev9cltukfmeovgw7xhzzrjrktq5aqerfbojuuxl08dc1tyr61qwcafidyfb05zpxm\", \n\t\t\"latitude\": 86.62, \n\t\t\"longitude\": 172.90\n\t}, \n\t{\n\t\t\"id\": \"9a5c8574-ab77-4094-8683-96bbcd973d54\", \n\t\t\"name\": \"caeifpfravj3ebkpjqmo95uw0c27ueof4x6t382o1dqh8bq2tjd2e8n8wnvlvt2ug8bwpfqxe580t8y23q8ym5qgicc3a2xdkt3j8gzpage0umggrc2ns4fm5tfsbqmnlis87rynus64itjo01639vdsbcde8hrvid809mwj57haj7239gzq5hbmypg3lz46y8pgun9vzcbp2g45iie4xhujtgnourpyeq356l7v8j9a56qaza3aj5scpbyytly\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Dolorum ratione quis autem consectetur dolor et odit aut. Voluptas aut necessitatibus accusantium temporibus suscipit doloribus laborum aliquid. Accusantium veniam voluptas quis.\", \n\t\t\"excerpt\": \"Dolores rem unde aspernatur est distinctio. Voluptates impedit est. Consequatur fugiat eius sunt. Eum quidem commodi in. Doloremque reiciendis sit consequatur accusantium commodi odio. Ut architecto maxime quod exercitationem at.\", \n\t\t\"email\": \"ku3p45b3i7nvl811wvjnqeetnn83le1lgo4exnl2raqqmu20x6k90og0kzzy2njwxq72r33io84dthllgjt5a2yxqq0bbuq50l0stt47vgaguczwadbz70u2\", \n\t\t\"phone\": \"25onr6gcwtmlyc7aejbfslkjm36g0jiw7h1tnw91wpwh86lzwo1ciybq2yr9jqfwbi6zjd9uqc9vfw61lcmpeo285kc4c9wloft403sfvdopoy3abmcj803u\", \n\t\t\"fax\": \"y7nxf9ms7n3yb7zfm9tdoq9dy37e44nhu79sv2mfmxsxfo4wqxn53nnykpiyoaik5soflhykf60838uagp6v0ol8e56knvo29nb9n1c16a163yggh4flkiqo\", \n\t\t\"countryCommonId\": \"b68aee73-952c-445f-ad84-4aadd31f2dcc\", \n\t\t\"administrativeAreaLevel1Id\": \"6c81ddd7-7b9d-43fe-8038-7a28eb02af48\", \n\t\t\"administrativeAreaLevel2Id\": \"acd01a04-95d5-43ce-8839-fa3d8c473bfd\", \n\t\t\"administrativeAreaLevel3Id\": \"2cf6f7fa-b6df-4142-8039-d4f74ef0595b\", \n\t\t\"zip\": \"g4nk1fdtfy\", \n\t\t\"locality\": \"mz0rm3mpvc8p34d172frs3uopi3zv6rtaxji7ytuqw33ykbuxv0000g8ptnxlj1gk81y86chsjlmy2c8bvzdi5ikn2mmz7bk7xbwkqcjdqpb0fa6bwurs8mvoz8t7\", \n\t\t\"address\": \"wlgk18kd7fh2wjm6t50iov5ppslysqxdqds0ubdbri1zs2zqvm23hpf3lb6qx8dql48qh6a3fs1bewkgcrgeikjnrm0yk3uetopp69dz31q8ed6o98pmmm75yoaffsf25d8l4ozqt5mzjb0wvqynhqy0pe3jrvfspek771tsxt23gw0zlunuen9y5gaailj69ttvzifqnxu63tmigmlyc6b4zi2f1h9jrepf6jrm6v51mcdvte9hj17ozwej1pk\", \n\t\t\"latitude\": 913.75, \n\t\t\"longitude\": 1.25\n\t}, \n\t{\n\t\t\"id\": \"2053b274-7ac7-468f-b490-c5c480ef7b63\", \n\t\t\"name\": \"c1myk7jucidvx88u3diiyefjw8tlfyne9c4kmytzsvdthcvrv9z6gv5qk2jsyihj8po8lhi5f97q8nbu8kkpqal7hvbd5uw6ovx7apnblp5x53rc6qs53z9j35ilwu8aky85abctr8rs5bx9f1qbvv4a9vwl1of5wickfdlsoopix27wymv11k9jx804vcelea6sviwgb9c2qv1gbrl6e6szhbhz2oyszxkxgz9415ctvao9ltxw0f8gdg18avp\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Rerum quis ad consectetur ut odio temporibus. In omnis omnis vel iste et rem. Natus repudiandae voluptas et est doloribus rem doloribus dolores labore.\", \n\t\t\"excerpt\": \"Eveniet tempore molestiae sed. Voluptas deleniti est asperiores sed corporis nam veniam enim non. Voluptate qui est non ratione beatae sint nisi consequatur exercitationem. Unde iure veritatis. Assumenda fugit harum minima. Sed quae eos nam odit consequatur.\", \n\t\t\"email\": \"t5k7g0mnah6jipqroy68h74uwwaulao43s6ir9ccrowacvcnnfxof6mjs5ssvjnmvmr2hhul8z0sdi6fh6fcevubdc91c5kjvcx7ba3dyduyk27ta00zahxa\", \n\t\t\"phone\": \"d6mjat7fvoadnwmhvdhtvaqqt5yn8b63n2popghyg3nq1fscacb9ggckk5jxp88ubyve1u7srfpj164fw6i6q8mw4ht51yedprcev6zx21ebmarx17x97134\", \n\t\t\"fax\": \"h6ueq7wliregu0iwjppxj67zsp5d5lwkexqxsan6ur2kk1t50p9bpak5gon87lafp2ksqow4b4ygatvrnoipxenl442tn5w3slcx7rmwhzhvy2oafgh08xib\", \n\t\t\"countryCommonId\": \"772f56c9-eb07-473d-8e02-1ba6003b0b38\", \n\t\t\"administrativeAreaLevel1Id\": \"91878da9-8ba3-4314-9cfd-71e9fa72c3f3\", \n\t\t\"administrativeAreaLevel2Id\": \"630564c5-3469-4c68-8b21-51f80fdcc766\", \n\t\t\"administrativeAreaLevel3Id\": \"851685ba-b3c3-4e35-af8c-3eac7aabec5b\", \n\t\t\"zip\": \"ldwzvpyu04\", \n\t\t\"locality\": \"rp85cpxn6zmaube7u3ekokq9b9wxdahnuc2xce4mrkujwo29elkft72wibv8vk8w1pauw4w9a4qxar8w6idorgeoxpds92ms2w0ad00csv07ksnr80uug8yd3dy1s\", \n\t\t\"address\": \"puxffo0aycwfjsf6w6ivk8l4o3oz9tgagbrxs5uki5q2y6ry8c99t1cig344g6xpjfa9sjnsjwngnqkrsbeqcn8rzn7at55ps2rnaofidrqk8rjtgijn2d8d6e39eqyysemfp698ow6f66qt2prn01dsdpa9c97k4x3bkb5rwcoow41d8u4q6g8vw9mh4uoob9261ctqbjfhs7w5n1gpg69cym4c4sthhvbm3vtcy6l38djaf6u4de1qxhy7pxa\", \n\t\t\"latitude\": 220.25, \n\t\t\"longitude\": 312.12\n\t}, \n\t{\n\t\t\"id\": \"de0a24bf-5b54-44c8-a90b-8cd9c11c7081\", \n\t\t\"name\": \"gataca99jjywb94he50iw0br6l9rwwelilk81wds6zm9f4t86710kb44m3wntn79fr0argjcfm4j3970xtrw412ejex2ntcarughxat24ll77844meytoubq9d2u8s0rg4r61lelkckyq3fyok6tkm6ddyvy62hii6t3km1jgpe7cpnjzxjn62mw6l6nzg5i1dekjwssg5pm8pz8807yvm3vskf5q4cg3un2iko7v0u2o2qoq62ypyinx1566ey\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Ut quas accusantium distinctio itaque aliquam nobis nam aperiam. Et maxime nihil deleniti ut et et aut. Ut itaque quia nostrum autem. Dolorem aliquid deserunt incidunt ullam debitis repellendus commodi iure. Tenetur voluptas harum et repellendus.\", \n\t\t\"excerpt\": \"Minus rem nulla doloremque omnis itaque ad voluptatem ut. Earum consequuntur modi magni aut impedit in cupiditate praesentium possimus. Ex harum sit minus sint rerum et. Rerum consequatur perferendis. Voluptatum ut voluptatem iusto omnis odio non ab aut molestias.\", \n\t\t\"email\": \"pfevioixfyyrjx20tqfua8qvl0ifd8mrkbdlvnx9p5puwu1tnmlvh7t0fsu0s1lyrupnfvgj2im1m8o3qzti2tqqnmhm7iqaqennt0xg8hg09mx2llbsnjjn\", \n\t\t\"phone\": \"8wnz0rpmcywprknjc6iofl2awcd5o6dv02aqhsmzxddl2ablceydgxruxv3cca4ss9wn28kfwau5p03atuyyujnvzdutzo4ygzdx5e42zycatxevck0lg6y5\", \n\t\t\"fax\": \"fbzcyk9jn8vq62rucw4cl7sykpe3yifi72ks7plnojfyyzch1bqjvxvmjggp9557by68xeanzzh49osx09rra4tmqidt8413in29g8jyb8sj3ayc9sts7o6j\", \n\t\t\"countryCommonId\": \"f1ce494a-da50-498d-af14-3ae3a1b19f95\", \n\t\t\"administrativeAreaLevel1Id\": \"3b22f795-edf2-407c-971b-dd1e1eb7943f\", \n\t\t\"administrativeAreaLevel2Id\": \"ff16e05d-dd93-4a4c-a307-1f1713cd2634\", \n\t\t\"administrativeAreaLevel3Id\": \"ef492e20-f1e0-4784-afb9-628d06c01c72\", \n\t\t\"zip\": \"rqlp3vzfx3\", \n\t\t\"locality\": \"ut2j1i6mkhvwem22yxwobqk7grcnl8cqtv43wbtue94cq6n6tuzk1z3tng82u2lmprpanwxqgri5j57hauesozj3klx8b66kxj55zeraszsotfsnq6xkct7lpiyrm\", \n\t\t\"address\": \"ulszkg9sdvn4b1nmqn8ladl6k1eaqnzzzkdj8a55clqla362iaxeywyzsqjxfak32ff3y3l3fi6k50qkw9dxaus2it2l4ojfmqk7o96w8m1vdiesm4qhjbn0zys70ejh9z93zlmv9bkm912g4ujjws4ypl0a1q02hla4zh5v8r3j1va829vjhaifm524cq3i0nj1s7st1g2zxvo6dfkf13d4p8dfpqki1ti1umkc2bw4yv9nl3osri4zb6fh1hw\", \n\t\t\"latitude\": 617.80, \n\t\t\"longitude\": 911.57\n\t}, \n\t{\n\t\t\"id\": \"c0ee263d-c089-420e-a2ed-9af8ba4ce981\", \n\t\t\"name\": \"sx6xlm2zzd71alonvexe3b3gaxo9kzkjybvbja7ai8qfbmdkan8wfmodduzi2vzj381t5p3b2pdvehvw8vfvk48m4azu4dt4191gu3nodug056oyyogmnlyn7ye3uerkcj2k57dm7fwdxxof7xg6i6q9hq78hncrqy5i3m3bsp0schayr95ky7y7kt1yq45f89xqhd4qdjbmuhpdh7ybj1jb4jjhleo2vzbv8cc02jb450mbpwe04j7p122pu3k\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Quia et eaque omnis voluptatem. Ex delectus aut dolor. Est molestiae minima et qui voluptas iusto molestias.\", \n\t\t\"excerpt\": \"Ea nihil ipsa impedit velit eveniet. Corporis sed dolore quo et provident ut in quod quaerat. Consectetur doloremque recusandae rerum necessitatibus minus consequatur et qui sunt. Veniam molestiae quisquam illum. Magnam amet qui velit velit non molestiae corporis possimus. Rerum ut maiores qui perspiciatis molestiae et quas.\", \n\t\t\"email\": \"sootwa6zzptpcfcmolkvwpwujr6l7hmwiqw4m57tb15ojkydahjnjd9xp9h6iqsx6d8o5ctnbu2c8a7sgrgno1d7p8azl1hs37ob13ylbzb617tedlb2946t\", \n\t\t\"phone\": \"lq0n1q2ftmr7h6tlp0z5528y7jw8i8ypc8qbr4x41hfblb40rwpomqtcv7px3689lq2pwxq4u6xetfoqf4ff9f0ec64n41ct7ku1d05crlrve74it4e2unq4\", \n\t\t\"fax\": \"aav7tfu8x4wftlru4gnt8nht9gd7w2eero946vo73qw08n0vkoqpd4o37b4o4tph5an9paikwudhnidonbof0uekynadf6dej2nhxziloas9x4w1wqbqudev\", \n\t\t\"countryCommonId\": \"8c3be053-2f14-4504-b61a-c805f040d864\", \n\t\t\"administrativeAreaLevel1Id\": \"f5e2018e-94c7-4122-8011-6bfcbd648021\", \n\t\t\"administrativeAreaLevel2Id\": \"740e3785-cd9f-44ee-8453-69592e201421\", \n\t\t\"administrativeAreaLevel3Id\": \"3c1baffc-4b13-4cef-bf63-840a75e84348\", \n\t\t\"zip\": \"nson6ipkmi\", \n\t\t\"locality\": \"2jyty4mxr8g19lerosu3ima98jy62rm9edzo7evnft7u0v9klsuou6igw0zjaxl5kqz2hu14tubx2nxx4zpu51j1e7uict5m8se0sfjrtm1weu1r4hhqq0yqzwsmg\", \n\t\t\"address\": \"sg9jrg9egosnig6k6cv8ut268fkapxzs54d2zcaimdtssfk858rzht8qj32xunyhr2aomxjn0s34347b4mi072alcao2kq6bjbiq9bc3hu2k1q7hojq7wufn3v90id2db4dt6p8u3lznv7auojt6nlip3isstiho1mwd0xurztxjlayir8p53jjmhdqurdy7jd0kmsdwn5oe8qmqbt4exl5ih43gcn4j520u5n1xso8q58w5z6lacyk436qqp5s\", \n\t\t\"latitude\": 238.83, \n\t\t\"longitude\": 461.95\n\t}, \n\t{\n\t\t\"id\": \"c70615d3-c5b8-4d7c-8075-d91b610d64d8\", \n\t\t\"name\": \"d3jhpqwtw6dyipupemjq6hdekej2pup1ts8ofeftg5m3oei03phzso5kbu70looad8kwyrzb3ic6vlyw9flz2t98iw7abob18lpdkeqhssy75cx1bphvgsoniv0dmaw0ktnfgyen5bi9xy5k4utg7yqjopjptl3p7s9kdcdk6nmx5xqkvc07n0nzwsjx7i213yw5njgrx04qza96hb4timp7m1ox7wo7t24rexim95dclux8mgzrry60gaizy0t\", \n\t\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\t\"description\": \"Incidunt veritatis ex vero illum odit quaerat a. Occaecati aut occaecati aut doloremque accusantium. Maxime et eaque iste nam rerum nostrum. Eos veniam doloribus assumenda quibusdam architecto.\", \n\t\t\"excerpt\": \"Dignissimos error rerum nihil quasi voluptatem hic et cupiditate. Ipsa eos fuga. Quia incidunt accusamus suscipit molestias delectus.\", \n\t\t\"email\": \"dvu19uesgn6s7ydmf1rrdsa2u0usyd96evksymhy05n2exe3kyxtz4bt1n1t4i80vuvm3ve6rucy4mw2wiletezhhrv0fxawkkzya13tks7u6yv6ox6ejyhz\", \n\t\t\"phone\": \"snt3ng1imnczc9s3ahszn89pmfpzmjfhrkje1eyjrsnjv3dssktdmio1pminwdk0gkpp4g5spsf5jobh6bxnk8lqucqqomp4y0dpem41ccq19av22sn5kbfu\", \n\t\t\"fax\": \"zfoynyyw4rvdbn7udyb998zhdq09sr2svbjyi02i9qgqtdkhi2jzctrup2jfp1keukk0ychtcz5hijno90zvjam6c5ej6ra6q0sf6mhnm5n947uhfrbiaqp3\", \n\t\t\"countryCommonId\": \"81fe3873-562b-446e-81e9-d9694852f39f\", \n\t\t\"administrativeAreaLevel1Id\": \"2595317b-0fee-4e59-8a70-1d9d79c7fadd\", \n\t\t\"administrativeAreaLevel2Id\": \"8453ea25-bd87-4265-bca6-3361176fae63\", \n\t\t\"administrativeAreaLevel3Id\": \"9bed2a83-af0f-46c2-b32c-f1501fcef9dd\", \n\t\t\"zip\": \"mraye11qxr\", \n\t\t\"locality\": \"yi2zlre66y0w14bngbdm16o3jku73q4d7vb0r2qq625opa1ry1b6l48a60s8z7bw01tp8kfm8bhdggxb8uh1b59z6y5ss3y7v6w6wivpuwlysqksul2d6z01uxchz\", \n\t\t\"address\": \"l912nr3q23e1mtjoka196knwb2ylmspmtwv204btiswva1mmygnnf8jyfp5vlnuuwqsebcgvi5dt7rj38ickmz02uo5l6ab0w0dpe4vn0278n10g9desbfq9thpql8mk8cqfg4cvdst550d2yr3d7qj2kkt4qw3s8i868t0weibh3qu3r4x9ghaxjd5x1egn9qokrdvvw0dijgb6i90i8cvd7luh77byo5erd488xw87az8af8rr4lb5kdjke8g\", \n\t\t\"latitude\": 769.77, \n\t\t\"longitude\": 788.98\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partners",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partners"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partners/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partners/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+                        "partners",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partners",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partners",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partners"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partner",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partner",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partner"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partner/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partner/fe7b6199-9ef6-4e85-86c0-538917234f71",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partner",
+						"fe7b6199-9ef6-4e85-86c0-538917234f71"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partner",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"fe7b6199-9ef6-4e85-86c0-538917234f71\", \n\t\"name\": \"9kaxs34ngkktzkxg1n4wqmitdt16fbkb7k8x15gsrri0rg56f3sp804hk90yc5qsm7atrtmp5p4yj1zib94h2s2i7hgt7hcqv5iuuqmvqwnek93i7o354wbdf3bo941vmmx7s7sfiefcq0owhnz0rmv17jcdkvmlhsdkez3doyryhyqnmkroblsskbttp18s6szdl0n9jenu7cqf52l4aavycw6z61r8k9gxwujxomumh0fbopmbuuskbng4rnp\", \n\t\"socialNetworks\": { \"foo\" : \"bar\" }, \n\t\"description\": \"Voluptates quia delectus temporibus necessitatibus molestiae eum. Nobis placeat numquam facere voluptas eum consectetur et. Repellendus excepturi voluptatem sint et ipsum nobis repudiandae dolorum. Et laboriosam aut ut est voluptatem qui sint deleniti. Reprehenderit earum quisquam quia rem.\", \n\t\"excerpt\": \"Harum tempore cupiditate ipsa. Nihil aut enim non quibusdam. Tempora non quod magnam fugiat in fugiat praesentium possimus.\", \n\t\"email\": \"n4hqhrzyeals544lkhgfoni8o82npsae6d71cwkbabc2if00z7ngt9ar4sbu4l9xzpqj8uvu6e84xwqbnj81owiy4fpay4a15yvce8hd9lqmetk7wz5uqx3u\", \n\t\"phone\": \"4or4dabvbv08aqo8a5ewkmjtc6xf4e78bptr1ueq5p2bwougkzeavei23t6ym4p56ufmnti5wv2sw765g50em4vqulzqssmvuhr1msyo6tot6zsklu7lsd6g\", \n\t\"fax\": \"vjncy9oze0ik53yjan00bmc56s0q37pugmm3ohf8j5kaqisuce2cd6vktt3gcq7oyl0trgjas70bhx6e51bwajaelue6uh5u2qsrckq425tjavpe9l87rr9c\", \n\t\"countryCommonId\": \"47234be4-ce32-45ce-9d12-d05509c2c7a1\", \n\t\"administrativeAreaLevel1Id\": \"40cc5001-185a-4057-b71c-cec42cde97b3\", \n\t\"administrativeAreaLevel2Id\": \"b9719ba8-ee1c-4f0c-9617-4c62d8d8aa0d\", \n\t\"administrativeAreaLevel3Id\": \"4455eff8-2510-4b35-a5d9-ffafac680033\", \n\t\"zip\": \"4op0z4xmon\", \n\t\"locality\": \"rufn6ms65rmjxpf7wnnpg725leg9e5ji6oah2vubkx9pm219c6xml0lo4hgcmeqckvk0cova4ryqm81jhyizebf3ewbgdti65wr88f27u79lrf9n1nddy3se33gc0\", \n\t\"address\": \"b4kl67sjyst69nbrtjammggcytoeh1yy9tmvys0qjknq5itau9jgkltpnb63hw1ose3dmbowd60pdlnx7xm5m1hn47awaaudu4yr2t3p2tnsengzqn592u7tgibzbnri5h1imb9yq06sv3utxfeod3iimk01qu4v9oxe3p9fk8ygxfuhco5lcsmbwfkxglwkh6dt29hbrijq3em3xtazit789h45khpx9yjh471c7urfsqxe15gz40nyh5yfecb\", \n\t\"latitude\": 960.12, \n\t\"longitude\": 186.57\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partner",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partner"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - origen/partner/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partner/fe7b6199-9ef6-4e85-86c0-538917234f71",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partner",
+						"fe7b6199-9ef6-4e85-86c0-538917234f71"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - origen/partners",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/origen/partners",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"origen",
+						"partners"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d8f47990-177d-49e2-a4dc-f00454b48fc8",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
