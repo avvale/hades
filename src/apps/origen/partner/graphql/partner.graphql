@@ -1,0 +1,87 @@
+
+type OriginPartner
+{
+    id: ID!
+    name: GraphQLString!
+    socialNetworks: JSON
+    description: GraphQLString
+    excerpt: GraphQLString
+    email: GraphQLString
+    phone: GraphQLString
+    fax: GraphQLString
+    countryCommonId: ID!
+    country: AdminCountry!
+    administrativeAreaLevel1Id: ID
+    administrativeAreaLevel1: AdminAdministrativeAreaLevel1
+    administrativeAreaLevel2Id: ID
+    administrativeAreaLevel2: AdminAdministrativeAreaLevel2
+    administrativeAreaLevel3Id: ID
+    administrativeAreaLevel3: AdminAdministrativeAreaLevel3
+    zip: GraphQLString
+    locality: GraphQLString
+    address: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input OrigenCreatePartnerInput
+{
+    id: ID!
+    name: GraphQLString!
+    socialNetworks: JSON
+    description: GraphQLString
+    excerpt: GraphQLString
+    email: GraphQLString
+    phone: GraphQLString
+    fax: GraphQLString
+    countryCommonId: ID!
+    administrativeAreaLevel1Id: ID
+    administrativeAreaLevel2Id: ID
+    administrativeAreaLevel3Id: ID
+    zip: GraphQLString
+    locality: GraphQLString
+    address: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+}
+
+input OrigenUpdatePartnerInput
+{
+    id: ID!
+    name: GraphQLString
+    socialNetworks: JSON
+    description: GraphQLString
+    excerpt: GraphQLString
+    email: GraphQLString
+    phone: GraphQLString
+    fax: GraphQLString
+    countryCommonId: ID
+    administrativeAreaLevel1Id: ID
+    administrativeAreaLevel2Id: ID
+    administrativeAreaLevel3Id: ID
+    zip: GraphQLString
+    locality: GraphQLString
+    address: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+}
+
+type Query
+{
+    origenFindPartner(query:QueryStatement constraint:QueryStatement): OriginPartner
+    origenFindPartnerById(id:ID constraint:QueryStatement): OriginPartner
+    origenGetPartners(query:QueryStatement constraint:QueryStatement): [OriginPartner]!
+    origenPaginatePartners(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    origenCreatePartner(payload: OrigenCreatePartnerInput!): OriginPartner
+    origenCreatePartners(payload: [OrigenCreatePartnerInput]!): Boolean!
+    origenUpdatePartner(payload: OrigenUpdatePartnerInput! constraint:QueryStatement): OriginPartner
+    origenDeletePartnerById(id: ID! constraint:QueryStatement): OriginPartner
+    origenDeletePartners(query:QueryStatement constraint:QueryStatement): [OriginPartner]!
+}

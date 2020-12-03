@@ -1,0 +1,529 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partner.command-handler.ts",
+            "integrity": "sha1:b3b58d13eacf933ee4a3c898224a453f18e5988d"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partner.command.handler.spec.ts",
+            "integrity": "sha1:6e7aaf1a527da78df041634d3c7d228245d96a3a"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partner.command.ts",
+            "integrity": "sha1:034f244e0df15f97adb120bd0a717445bae2115d"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partner.service.spec.ts",
+            "integrity": "sha1:632e8c8fd44736d1f3eb9ee8b3eaf49a8f8c2851"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partner.service.ts",
+            "integrity": "sha1:50814d40916c6ac3672f5bbd4204bbc20765d19b"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partners.command-handler.ts",
+            "integrity": "sha1:c1e7b2c0c4cf0b21eada7e2796f3e8244e0eafd5"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partners.command.handler.spec.ts",
+            "integrity": "sha1:fd9472c078b7d6352d9bfad8155cc08e7f8fbeaa"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partners.command.ts",
+            "integrity": "sha1:99c7f947e4bcbb3ca305ad42e236a46e18bbf6d8"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partners.service.spec.ts",
+            "integrity": "sha1:c11f216299bbed822c84b401e9f69f6bbb32e22a"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/create/create-partners.service.ts",
+            "integrity": "sha1:214e92c667cb6495f490c31dd77de8e4d70bf6e3"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partner-by-id.command-handler.ts",
+            "integrity": "sha1:3a2b6d1ce7efa51ebf9c42f4837805bbeadacda9"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partner-by-id.command.handler.spec.ts",
+            "integrity": "sha1:b2152a0a6846cc8818969de5d1ac5d82cecdd6fb"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partner-by-id.command.ts",
+            "integrity": "sha1:4165e729fdf90021c253a674a91bf58ec8eaf751"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partner-by-id.service.spec.ts",
+            "integrity": "sha1:2fa170371cb9574f67c91e426bf2574e5c0b1413"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partner-by-id.service.ts",
+            "integrity": "sha1:6932ffb5088cfb87972662cd179b5f131d770e75"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partners.command-handler.ts",
+            "integrity": "sha1:2e5986b94d431d42bf5aabdbc9496f30b91ed1c1"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partners.command.handler.spec.ts",
+            "integrity": "sha1:e838f932071c036c03d0218a161987253ad490e8"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partners.command.ts",
+            "integrity": "sha1:d3b3363420456681019cfb6b24b20f9a18126278"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partners.service.spec.ts",
+            "integrity": "sha1:4db4899d1dbd7523e04b6fb34389b0044340899f"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/delete/delete-partners.service.ts",
+            "integrity": "sha1:a48937fdd5990f9ba5bb86ba6f24e6985f689274"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/add-partners-context.event.ts",
+            "integrity": "sha1:72d2eb58920a85238b9fdac7205b2ebd92fee67b"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/created-partner.event-handler.ts",
+            "integrity": "sha1:ff63ef8f10e11258ee03c8c03fee557eb258ce5f"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/created-partner.event.ts",
+            "integrity": "sha1:f3e1fdd8e703f85e7d1ff853eecef7dbd0cc7a7e"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/created-partners.event-handler.ts",
+            "integrity": "sha1:1a7edb07cc659f3b5f04a451bbc363c748984d10"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/created-partners.event.ts",
+            "integrity": "sha1:a1c3d54a6ede72023a6b96e96e6394b6518bb237"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/deleted-partner.event-handler.ts",
+            "integrity": "sha1:a114bc22f9117253558ac517536e014357225050"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/deleted-partner.event.ts",
+            "integrity": "sha1:a1d34f062ee26d66f47691a577fd55a151117864"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/deleted-partners.event-handler.ts",
+            "integrity": "sha1:13fffd7533912a5efb12a383b8c9783b52e1badc"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/deleted-partners.event.ts",
+            "integrity": "sha1:bdfbb0bc6b049dacbd86e493a54c032c2ab5cdbd"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/updated-partner.event-handler.ts",
+            "integrity": "sha1:2a1dcda037d72200697969b9f13bd592ca0722fb"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/events/updated-partner.event.ts",
+            "integrity": "sha1:b57fe5b3405fcb4822b721a0817afb24b2f1522b"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner-by-id.query-handler.ts",
+            "integrity": "sha1:a93548221a80cc42f780262799b4a4c98185cdc5"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner-by-id.query.handler.spec.ts",
+            "integrity": "sha1:9c58dc449ab3fb2300a882a776290143cdc3cafe"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner-by-id.query.ts",
+            "integrity": "sha1:3d423952739aad75763d87cf7e627f2bad388228"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner-by-id.service.spec.ts",
+            "integrity": "sha1:1e934c2a8a90299ec3bc959c43c8182fac30042d"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner-by-id.service.ts",
+            "integrity": "sha1:9e39ce3c7ce1ccec3a41cdb8b760e02fba76d22f"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner.query-handler.ts",
+            "integrity": "sha1:23b2921a6e5b56964f118d6c92a82c476caee6a0"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner.query.handler.spec.ts",
+            "integrity": "sha1:bf5021efe73132448eb7ae81dabc1f68615aaaf8"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner.query.ts",
+            "integrity": "sha1:4fd4774ab2618cb49c685ce151f38a66ebbfeb66"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner.service.spec.ts",
+            "integrity": "sha1:647c399091721eca390f84d92ffba58ef15b082b"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/find/find-partner.service.ts",
+            "integrity": "sha1:a3bc14f54c6d6f8c432f42d601c5854292365996"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/get/get-partners.query-handler.ts",
+            "integrity": "sha1:9febef9a6eab4f9fe8f1ada0f75e76f07968ae00"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/get/get-partners.query.handler.spec.ts",
+            "integrity": "sha1:8713d19a7b8fad5a8323cec19b910854ca96336f"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/get/get-partners.query.ts",
+            "integrity": "sha1:77bb576bd2af364ea27170465c21a0d5069588b3"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/get/get-partners.service.spec.ts",
+            "integrity": "sha1:45a4c877309997cd7d2a59f7165e8615fcfae65d"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/get/get-partners.service.ts",
+            "integrity": "sha1:5a4608dfea05058605a66b55d2f4380f3f91a86d"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/paginate/paginate-partners.query-handler.ts",
+            "integrity": "sha1:58bb2423eca4624528d62a5c183da0f1cac884cc"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/paginate/paginate-partners.query.handler.spec.ts",
+            "integrity": "sha1:cb749dbddd6e64b4cd609df53243ee7fc8238b04"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/paginate/paginate-partners.query.ts",
+            "integrity": "sha1:b96e07a7ec8fd86a446262618488049870fa9aa3"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/paginate/paginate-partners.service.spec.ts",
+            "integrity": "sha1:1ba3ab2b6974bd3fdbdaa9477064f03b43358b8f"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/paginate/paginate-partners.service.ts",
+            "integrity": "sha1:609d4f52ba0ac368cb5ee90ee14e262eeccc373d"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/sagas/partner.sagas.ts",
+            "integrity": "sha1:de0c446f1e02abc748cab67b3df135846c17aac0"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/update/update-partner.command-handler.ts",
+            "integrity": "sha1:d60cb3f4192ac66d9f1bd1604933163115b3a63a"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/update/update-partner.command.handler.spec.ts",
+            "integrity": "sha1:81d409af679b72b9dd2c4d22280d66d59e754dca"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/update/update-partner.command.ts",
+            "integrity": "sha1:8fea9b8c2d7371dd2bc2996820872fda47961af5"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/update/update-partner.service.spec.ts",
+            "integrity": "sha1:5fcd7a98f1ae44fc8a200f7355323c09fb581429"
+        },
+        {
+            "path": "src/@hades/origen/partner/application/update/update-partner.service.ts",
+            "integrity": "sha1:71aedc761c904c61e6b880a892dc007235c1f768"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/partner.aggregate.ts",
+            "integrity": "sha1:96ed905170180d99670ccd56642decf89dc92047"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/partner.mapper.ts",
+            "integrity": "sha1:3c1ed64cfc3a15193a85779093837796389d0e34"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/partner.repository.ts",
+            "integrity": "sha1:4591d8480c5a1f32f2412ec14268936da713b2bb"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/partner.response.ts",
+            "integrity": "sha1:412e33ad408805646165f66e2a14c88f98804daf"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/index.ts",
+            "integrity": "sha1:1c65836b67c95d61bbcc468ec32aef356f258203"
+        },
+        {
+            "path": "src/@hades/origen/partner/index.ts",
+            "integrity": "sha1:0468770c96b1aef52bd31fa864f710eaee100b2a"
+        },
+        {
+            "path": "src/@hades/origen/partner/infrastructure/mock/mock-partner.repository.ts",
+            "integrity": "sha1:f02d1555403962ec007b7d35835d89ef4e1b0370"
+        },
+        {
+            "path": "src/@hades/origen/partner/infrastructure/seeds/partner.seed.ts",
+            "integrity": "sha1:9048093260d92923b699081effcd6f38f1abb8c5"
+        },
+        {
+            "path": "src/@hades/origen/partner/infrastructure/sequelize/sequelize-partner.model.ts",
+            "integrity": "sha1:833a47b3e227f02e484f69b3459b13e5355733df"
+        },
+        {
+            "path": "src/@hades/origen/partner/infrastructure/sequelize/sequelize-partner.repository.ts",
+            "integrity": "sha1:a0efa9b5340d35c320c295f32d4f153e86ee65b9"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-id.ts",
+            "integrity": "sha1:fc6e616f48b83f8969d3d2d810a40604142682d0"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-name.ts",
+            "integrity": "sha1:d65fff0944af3d0220ec90d9066fb22877144e1f"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-social-networks.ts",
+            "integrity": "sha1:2599983a44ef17240ac35020056f47f11bd9fbae"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-description.ts",
+            "integrity": "sha1:a9cb2f13597d075b4c7d17ab3d0b05134d8a0090"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-excerpt.ts",
+            "integrity": "sha1:dfd91f8c0a26d0d1934c29588b2a18675c04f2d0"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-email.ts",
+            "integrity": "sha1:b88c76bf16da4192af71689d660be242456918d8"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-phone.ts",
+            "integrity": "sha1:5cec40562d4f46596cf88556b3dcce2340d428a6"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-fax.ts",
+            "integrity": "sha1:52806615e2673a0bc99a903f11e476d6a522d369"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-country-common-id.ts",
+            "integrity": "sha1:dcafc85e867cacbc5b6647cfec67ad6c1b3ed8ec"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-administrative-area-level-1-id.ts",
+            "integrity": "sha1:5195eeb6b3954566e75bcb56f6ae3153652b5625"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-administrative-area-level-2-id.ts",
+            "integrity": "sha1:d03eb0bbb051ebd25e0724ee34569a1920e128ea"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-administrative-area-level-3-id.ts",
+            "integrity": "sha1:bdf75030c9e45e1ef9051dd40c9b6fcb8546e92b"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-zip.ts",
+            "integrity": "sha1:d208015ecebd957dd6d1392c5831474dda31aed6"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-locality.ts",
+            "integrity": "sha1:1012c3755e98f74a9e841d429ef0707f80d406c1"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-address.ts",
+            "integrity": "sha1:e6811d6cb0d1ad44403388dd4764de00301cd3ef"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-latitude.ts",
+            "integrity": "sha1:04c561a67bb1cb8e2a89ac6e8aa5359fc3843ca0"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-longitude.ts",
+            "integrity": "sha1:5dab462da6ca2a1061fe1d456e4db2da2b5efd37"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-created-at.ts",
+            "integrity": "sha1:4c35f29e78cc3f665797544dd29decc6427ef0cf"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-updated-at.ts",
+            "integrity": "sha1:6a25139a7fd8976d59d3f44d98d1f8f3f51f59cb"
+        },
+        {
+            "path": "src/@hades/origen/partner/domain/value-objects/partner-deleted-at.ts",
+            "integrity": "sha1:96dc88915c18fb77aa63ed8dbdeef54cbd042b7f"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-create-partner.controller.spec.ts",
+            "integrity": "sha1:737bbae0770484c55e49e8d775dd85a4bd93b0fe"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-create-partner.controller.ts",
+            "integrity": "sha1:4fa37990da952e8f76df72b1bb5ed408c18f8089"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-create-partners.controller.spec.ts",
+            "integrity": "sha1:37d545141e18074e83f3c52941d3f3cfbe9eec53"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-create-partners.controller.ts",
+            "integrity": "sha1:38fd582f33f688a002441960627642985a22b1b6"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-delete-partner-by-id.controller.spec.ts",
+            "integrity": "sha1:f55d966688659103331afd7beb85107ae731e332"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-delete-partner-by-id.controller.ts",
+            "integrity": "sha1:01456f8543f22a01407d6427bf7988bb76f3de80"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-delete-partners.controller.spec.ts",
+            "integrity": "sha1:689fa696d4547104838206cd13ff9815406f8003"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-delete-partners.controller.ts",
+            "integrity": "sha1:edb7d5f842fa1e988b796c786bc08442896ed9e0"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-find-partner-by-id.controller.spec.ts",
+            "integrity": "sha1:2d2d302c95362b18817731b424f672cb0e47f8a8"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-find-partner-by-id.controller.ts",
+            "integrity": "sha1:d5c43da5436b9f873e068547e4d1d7d1dd9eeb97"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-find-partner.controller.spec.ts",
+            "integrity": "sha1:6332488bad7b4a17e70ebb48b920b75b1cad18e0"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-find-partner.controller.ts",
+            "integrity": "sha1:eb2c82705aa9741a462054519cf13b33bf9d0677"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-get-partners.controller.spec.ts",
+            "integrity": "sha1:50cce771edbda6f6d0f9b78699ba56f6c01568b9"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-get-partners.controller.ts",
+            "integrity": "sha1:b89899d0133daaea78aa40cc4078808978b69e48"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-paginate-partners.controller.spec.ts",
+            "integrity": "sha1:542b17a7c490e4234487b872da549b4cb83659eb"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-paginate-partners.controller.ts",
+            "integrity": "sha1:5f86c3eb07c14554aa30b8cbc16ebfd85a504e06"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-update-partner.controller.spec.ts",
+            "integrity": "sha1:8f2c23f21a464e3d35f35df6c9bbcefb78fe9073"
+        },
+        {
+            "path": "src/apps/origen/partner/controllers/origen-update-partner.controller.ts",
+            "integrity": "sha1:354d6e64703f731ee0b33dba75e4f9cef4ee7416"
+        },
+        {
+            "path": "src/apps/origen/partner/dto/partner.dto.ts",
+            "integrity": "sha1:8742f90043a6fd1389f168428ad81b838b49d958"
+        },
+        {
+            "path": "src/apps/origen/partner/dto/create-partner.dto.ts",
+            "integrity": "sha1:76dbc8d0c5e327834d44d07ac35d3735eec797d8"
+        },
+        {
+            "path": "src/apps/origen/partner/dto/update-partner.dto.ts",
+            "integrity": "sha1:d37479950b96a423b5cf0ddd6176c6ee33b9e5fe"
+        },
+        {
+            "path": "src/apps/origen/partner/graphql/partner.graphql",
+            "integrity": "sha1:0f0fc80f2c402b2e3d6db04c1a007c22aa83877c"
+        },
+        {
+            "path": "src/apps/origen/partner/index.ts",
+            "integrity": "sha1:5ebe701a26bc4f7a32105b1362a679393aec80eb"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-create-partner.resolver.spec.ts",
+            "integrity": "sha1:f96beaeafa344eb452f2a7dcd481d794d4449214"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-create-partner.resolver.ts",
+            "integrity": "sha1:7b5aa622f91cf5dc1e5581938ec5a4f3de722adc"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-create-partners.resolver.spec.ts",
+            "integrity": "sha1:816ba98114f0422590f3e1edae6e43f6929f1995"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-create-partners.resolver.ts",
+            "integrity": "sha1:7d6f55be946eb7eb7234256f158cd3d83f3375e2"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-delete-partner-by-id.resolver.spec.ts",
+            "integrity": "sha1:0976146ce005fb05b7bab83bc6754618106d8eb9"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-delete-partner-by-id.resolver.ts",
+            "integrity": "sha1:05da5d4501afc87842ea97d754c0233da1a54b52"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-delete-partners.resolver.spec.ts",
+            "integrity": "sha1:69b1161823bd9672028d611b1077e47718f227b2"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-delete-partners.resolver.ts",
+            "integrity": "sha1:d81eca5ecea792dbf455a150acd7b71e7d67ea3b"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-find-partner-by-id.resolver.spec.ts",
+            "integrity": "sha1:a412dd47a69ec159fe8d0dfb1e88a0ce640a9e8e"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-find-partner-by-id.resolver.ts",
+            "integrity": "sha1:e75b6a8a4122906707dc7d0eb77896f281365d8b"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-find-partner.resolver.spec.ts",
+            "integrity": "sha1:86cfa21d87b3e59098c699136e617f443b5cb8a3"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-find-partner.resolver.ts",
+            "integrity": "sha1:c54ee3c540114046fb8adb04db1814af43741070"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-get-partners.resolver.spec.ts",
+            "integrity": "sha1:5cda3a4deb84e44bb8d5b8710101f05d0cd31d4d"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-get-partners.resolver.ts",
+            "integrity": "sha1:11bf16c9d435c7025fa4af5fb923aa8406b3479a"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-paginate-partners.resolver.spec.ts",
+            "integrity": "sha1:1bd35a81a01d85e5ffd785a5c45e231367f6bf9c"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-paginate-partners.resolver.ts",
+            "integrity": "sha1:0e2e227edf8ec403613bfa653710c4b08810eeb9"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-update-partner.resolver.spec.ts",
+            "integrity": "sha1:139e94885b321012ab723f52983f675c78cbde01"
+        },
+        {
+            "path": "src/apps/origen/partner/resolvers/origen-update-partner.resolver.ts",
+            "integrity": "sha1:66d80b08d93d91880567ee5e5d374df8171dd014"
+        },
+        {
+            "path": "src/apps/origen/partner/seeder/seeder.module.ts",
+            "integrity": "sha1:d34e965e4ef91c8c318e607edcff00d42cb21618"
+        },
+        {
+            "path": "src/apps/origen/partner/seeder/seeder.ts",
+            "integrity": "sha1:7ed7e7c53ecdd6ec50c6c98dab2c0acee8d5f1d0"
+        },
+        {
+            "path": "postman/origen.partner.postman.json",
+            "integrity": "sha1:f3daf38ef39ce06bec8315f1e7002e5e91150887"
+        }
+    ]
+}
