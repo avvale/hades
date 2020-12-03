@@ -2,7 +2,7 @@ version: 1.0.0
 boundedContextName: origen
 moduleName: partner
 moduleNames: partners
-aggregateName: OriginPartner
+aggregateName: OrigenPartner
 hasOAuth: true
 hasTenant: false
 aggregateProperties:
