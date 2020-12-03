@@ -1,5 +1,5 @@
 
-type OriginPartner
+type OrigenPartner
 {
     id: ID!
     name: GraphQLString!
@@ -71,17 +71,17 @@ input OrigenUpdatePartnerInput
 
 type Query
 {
-    origenFindPartner(query:QueryStatement constraint:QueryStatement): OriginPartner
-    origenFindPartnerById(id:ID constraint:QueryStatement): OriginPartner
-    origenGetPartners(query:QueryStatement constraint:QueryStatement): [OriginPartner]!
+    origenFindPartner(query:QueryStatement constraint:QueryStatement): OrigenPartner
+    origenFindPartnerById(id:ID constraint:QueryStatement): OrigenPartner
+    origenGetPartners(query:QueryStatement constraint:QueryStatement): [OrigenPartner]!
     origenPaginatePartners(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
 type Mutation
 {
-    origenCreatePartner(payload: OrigenCreatePartnerInput!): OriginPartner
+    origenCreatePartner(payload: OrigenCreatePartnerInput!): OrigenPartner
     origenCreatePartners(payload: [OrigenCreatePartnerInput]!): Boolean!
-    origenUpdatePartner(payload: OrigenUpdatePartnerInput! constraint:QueryStatement): OriginPartner
-    origenDeletePartnerById(id: ID! constraint:QueryStatement): OriginPartner
-    origenDeletePartners(query:QueryStatement constraint:QueryStatement): [OriginPartner]!
+    origenUpdatePartner(payload: OrigenUpdatePartnerInput! constraint:QueryStatement): OrigenPartner
+    origenDeletePartnerById(id: ID! constraint:QueryStatement): OrigenPartner
+    origenDeletePartners(query:QueryStatement constraint:QueryStatement): [OrigenPartner]!
 }

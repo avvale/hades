@@ -24,15 +24,15 @@ import {
     PartnerUpdatedAt,
     PartnerDeletedAt,
 } from '@hades/origen/partner/domain/value-objects';
-import { OriginPartner } from './../../domain/partner.aggregate';
+import { OrigenPartner } from './../../domain/partner.aggregate';
 import { partners } from './../seeds/partner.seed';
 
 @Injectable()
-export class MockPartnerRepository extends MockRepository<OriginPartner> implements IPartnerRepository
+export class MockPartnerRepository extends MockRepository<OrigenPartner> implements IPartnerRepository
 {
     public readonly repository: any;
-    public readonly aggregateName: string = 'OriginPartner';
-    public collectionSource: OriginPartner[];
+    public readonly aggregateName: string = 'OrigenPartner';
+    public collectionSource: OrigenPartner[];
     public deletedAtInstance: PartnerDeletedAt = new PartnerDeletedAt(null);
 
     constructor()
@@ -57,7 +57,7 @@ export class MockPartnerRepository extends MockRepository<OriginPartner> impleme
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
 
-            this.collectionSource.push(OriginPartner.register(
+            this.collectionSource.push(OrigenPartner.register(
                     new PartnerId(itemCollection.id),
                     new PartnerName(itemCollection.name),
                     new PartnerSocialNetworks(itemCollection.socialNetworks),

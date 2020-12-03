@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IPartnerRepository } from './../../domain/partner.repository';
-import { OriginPartner } from './../../domain/partner.aggregate';
+import { OrigenPartner } from './../../domain/partner.aggregate';
 
 @Injectable()
 export class FindPartnerService
@@ -11,7 +11,7 @@ export class FindPartnerService
         private readonly repository: IPartnerRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OriginPartner>
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OrigenPartner>
     {
         return await this.repository.find(queryStatement, constraint, cQMetadata);
     }

@@ -1,6 +1,6 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
-import { OriginPartner } from './partner.aggregate';
+import { OrigenPartner } from './partner.aggregate';
 import { PartnerResponse } from './partner.response';
 import {
     PartnerId,
@@ -39,7 +39,7 @@ export class PartnerMapper implements IMapper
      * Map object to aggregate
      * @param partner
      */
-    mapModelToAggregate(partner: ObjectLiteral, cQMetadata?: CQMetadata): OriginPartner
+    mapModelToAggregate(partner: ObjectLiteral, cQMetadata?: CQMetadata): OrigenPartner
     {
         if (!partner) return;
 
@@ -50,7 +50,7 @@ export class PartnerMapper implements IMapper
      * Map array of objects to array aggregates
      * @param partners
      */
-    mapModelsToAggregates(partners: ObjectLiteral[], cQMetadata?: CQMetadata): OriginPartner[]
+    mapModelsToAggregates(partners: ObjectLiteral[], cQMetadata?: CQMetadata): OrigenPartner[]
     {
         if (!Array.isArray(partners)) return;
 
@@ -61,7 +61,7 @@ export class PartnerMapper implements IMapper
      * Map aggregate to response
      * @param partner
      */
-    mapAggregateToResponse(partner: OriginPartner): PartnerResponse
+    mapAggregateToResponse(partner: OrigenPartner): PartnerResponse
     {
         return this.makeResponse(partner);
     }
@@ -70,16 +70,16 @@ export class PartnerMapper implements IMapper
      * Map array of aggregates to array responses
      * @param partners
      */
-    mapAggregatesToResponses(partners: OriginPartner[]): PartnerResponse[]
+    mapAggregatesToResponses(partners: OrigenPartner[]): PartnerResponse[]
     {
         if (!Array.isArray(partners)) return;
 
         return partners.map(partner => this.makeResponse(partner));
     }
 
-    private makeAggregate(partner: ObjectLiteral, cQMetadata?: CQMetadata): OriginPartner
+    private makeAggregate(partner: ObjectLiteral, cQMetadata?: CQMetadata): OrigenPartner
     {
-        return OriginPartner.register(
+        return OrigenPartner.register(
             new PartnerId(partner.id),
             new PartnerName(partner.name),
             new PartnerSocialNetworks(partner.socialNetworks),
@@ -107,7 +107,7 @@ export class PartnerMapper implements IMapper
         );
     }
 
-    private makeResponse(partner: OriginPartner): PartnerResponse
+    private makeResponse(partner: OrigenPartner): PartnerResponse
     {
         if (!partner) return;
 

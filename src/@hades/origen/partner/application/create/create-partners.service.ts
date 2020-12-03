@@ -57,7 +57,7 @@ export class CreatePartnersService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregatePartners = partners.map(partner => OriginPartner.register(
+        const aggregatePartners = partners.map(partner => OrigenPartner.register(
             partner.id,
             partner.name,
             partner.socialNetworks,
