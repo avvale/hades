@@ -1,0 +1,112 @@
+version: 1.0.0
+boundedContextName: origen
+moduleName: partner
+moduleNames: partners
+aggregateName: OriginPartner
+hasOAuth: true
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: social_networks
+    type: json
+    length: 0
+    nullable: true
+  - name: description
+    type: TEXT
+    length: 0
+    nullable: true
+  - name: excerpt
+    type: TEXT
+    length: 0
+    nullable: true
+  - name: email
+    type: varchar
+    maxLength: 120
+    nullable: true
+  - name: phone
+    type: varchar
+    maxLength: 120
+    nullable: true
+  - name: fax
+    type: varchar
+    maxLength: 120
+    nullable: true
+  - name: country_common_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminCountry
+    relationshipModulePath: admin/country
+    relationshipKey: common_id
+    relationshipField: country
+  - name: administrative_area_level_1_id
+    type: id
+    length: 36
+    nullable: true
+    relationship: many-to-one
+    relationshipAggregate: AdminAdministrativeAreaLevel1
+    relationshipModulePath: admin/administrative-area-level-1
+    relationshipKey: id
+    relationshipField: administrativeAreaLevel1
+  - name: administrative_area_level_2_id
+    type: id
+    length: 36
+    nullable: true
+    relationship: many-to-one
+    relationshipAggregate: AdminAdministrativeAreaLevel2
+    relationshipModulePath: admin/administrative-area-level-2
+    relationshipKey: id
+    relationshipField: administrativeAreaLevel2
+  - name: administrative_area_level_3_id
+    type: id
+    length: 36
+    nullable: true
+    relationship: many-to-one
+    relationshipAggregate: AdminAdministrativeAreaLevel3
+    relationshipModulePath: admin/administrative-area-level-3
+    relationshipKey: id
+    relationshipField: administrativeAreaLevel3
+  - name: zip
+    type: varchar
+    maxLength: 10
+    nullable: true
+  - name: locality
+    type: varchar
+    maxLength: 125
+    nullable: true
+  - name: address
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: latitude
+    type: decimal
+    decimals:
+    - 17
+    - 14
+    maxLength: 17
+    nullable: true
+  - name: longitude
+    type: decimal
+    decimals:
+    - 17
+    - 14
+    maxLength: 17
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
