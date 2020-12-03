@@ -25,7 +25,7 @@ import {
     PartnerDeletedAt,
 } from './../../domain/value-objects';
 import { IPartnerRepository } from './../../domain/partner.repository';
-import { OriginPartner } from './../../domain/partner.aggregate';
+import { OrigenPartner } from './../../domain/partner.aggregate';
 
 @Injectable()
 export class UpdatePartnerService
@@ -60,7 +60,7 @@ export class UpdatePartnerService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const partner = OriginPartner.register(
+        const partner = OrigenPartner.register(
             payload.id,
             payload.name,
             payload.socialNetworks,

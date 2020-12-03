@@ -29,7 +29,7 @@ import { AdminAdministrativeAreaLevel1 } from '@hades/admin/administrative-area-
 import { AdminAdministrativeAreaLevel2 } from '@hades/admin/administrative-area-level-2/domain/administrative-area-level-2.aggregate';
 import { AdminAdministrativeAreaLevel3 } from '@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.aggregate';
 
-export class OriginPartner extends AggregateRoot
+export class OrigenPartner extends AggregateRoot
 {
     id: PartnerId;
     name: PartnerName;
@@ -140,9 +140,9 @@ export class OriginPartner extends AggregateRoot
         administrativeAreaLevel1?: AdminAdministrativeAreaLevel1,
         administrativeAreaLevel2?: AdminAdministrativeAreaLevel2,
         administrativeAreaLevel3?: AdminAdministrativeAreaLevel3,
-    ): OriginPartner
+    ): OrigenPartner
     {
-        return new OriginPartner(
+        return new OrigenPartner(
             id,
             name,
             socialNetworks,
@@ -170,7 +170,7 @@ export class OriginPartner extends AggregateRoot
         );
     }
 
-    created(partner: OriginPartner): void
+    created(partner: OrigenPartner): void
     {
         this.apply(
             new CreatedPartnerEvent(
@@ -198,7 +198,7 @@ export class OriginPartner extends AggregateRoot
         );
     }
 
-    updated(partner: OriginPartner): void
+    updated(partner: OrigenPartner): void
     {
         this.apply(
             new UpdatedPartnerEvent(
@@ -226,7 +226,7 @@ export class OriginPartner extends AggregateRoot
         );
     }
 
-    deleted(partner: OriginPartner): void
+    deleted(partner: OrigenPartner): void
     {
         this.apply(
             new DeletedPartnerEvent(

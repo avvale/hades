@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { OriginPartner } from './../../domain/partner.aggregate';
+import { OrigenPartner } from './../../domain/partner.aggregate';
 import { CreatedPartnerEvent } from './created-partner.event';
 import { DeletedPartnerEvent } from './deleted-partner.event';
 import { CreatedPartnersEvent } from './created-partners.event';
@@ -8,7 +8,7 @@ import { DeletedPartnersEvent } from './deleted-partners.event';
 export class AddPartnersContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: OriginPartner[] = [],
+        public readonly aggregateRoots: OrigenPartner[] = [],
     ) {
         super();
     }

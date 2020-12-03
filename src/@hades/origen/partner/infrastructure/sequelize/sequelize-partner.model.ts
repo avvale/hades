@@ -7,7 +7,7 @@ import { AdminAdministrativeAreaLevel2Model } from '@hades/admin/administrative-
 import { AdminAdministrativeAreaLevel3Model } from '@hades/admin/administrative-area-level-3/infrastructure/sequelize/sequelize-administrative-area-level-3.model';
 
 @Table({ modelName: 'origen_partner', freezeTableName: true, timestamps: false })
-export class OriginPartnerModel extends Model<OriginPartnerModel>
+export class OrigenPartnerModel extends Model<OrigenPartnerModel>
 {
     @Column({
         field: 'id',

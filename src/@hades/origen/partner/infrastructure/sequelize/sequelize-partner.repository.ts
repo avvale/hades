@@ -3,19 +3,19 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IPartnerRepository } from './../../domain/partner.repository';
-import { OriginPartner } from './../../domain/partner.aggregate';
+import { OrigenPartner } from './../../domain/partner.aggregate';
 import { PartnerMapper } from './../../domain/partner.mapper';
-import { OriginPartnerModel } from './sequelize-partner.model';
+import { OrigenPartnerModel } from './sequelize-partner.model';
 
 @Injectable()
-export class SequelizePartnerRepository extends SequelizeRepository<OriginPartner, OriginPartnerModel> implements IPartnerRepository
+export class SequelizePartnerRepository extends SequelizeRepository<OrigenPartner, OrigenPartnerModel> implements IPartnerRepository
 {
-    public readonly aggregateName: string = 'OriginPartner';
+    public readonly aggregateName: string = 'OrigenPartner';
     public readonly mapper: PartnerMapper = new PartnerMapper();
 
     constructor(
-        @InjectModel(OriginPartnerModel)
-        public readonly repository: typeof OriginPartnerModel,
+        @InjectModel(OrigenPartnerModel)
+        public readonly repository: typeof OrigenPartnerModel,
         public readonly criteria: ICriteria,
     ) {
         super();
