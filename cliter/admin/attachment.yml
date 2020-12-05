@@ -4,7 +4,7 @@ moduleName: attachment
 moduleNames: attachments
 aggregateName: AdminAttachment
 hasOAuth: true
-hasTenant: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id

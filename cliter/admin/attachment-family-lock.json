@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed.ts",
-            "integrity": "sha1:f4cd4d0fa1e9a4d9b7bb1c43b3df0ec0c815948c"
+            "integrity": "sha1:30e52a85ec615786530b502f2aa6858facc6f5c3"
         },
         {
             "path": "src/@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-family.model.ts",
@@ -327,7 +327,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-create-attachment-family.controller.ts",
-            "integrity": "sha1:49abf887b3efeb8f74970b3455e4e7523d9a26ef"
+            "integrity": "sha1:9146d65ba342ea87a17a6cf19b39461d6168ae8b"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-create-attachment-families.controller.spec.ts",
@@ -335,7 +335,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-create-attachment-families.controller.ts",
-            "integrity": "sha1:638501689660822029afdd18d3f48fc8198f9bc1"
+            "integrity": "sha1:00c55658000a038ffe6342f4d202fd15e325d31c"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-delete-attachment-family-by-id.controller.spec.ts",
@@ -343,7 +343,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-delete-attachment-family-by-id.controller.ts",
-            "integrity": "sha1:08b27795ace31a26daccbeac41525fa5ff6022d8"
+            "integrity": "sha1:d356a0c3550a1b0a56317330979865d280d0cf98"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-delete-attachment-families.controller.spec.ts",
@@ -351,7 +351,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-delete-attachment-families.controller.ts",
-            "integrity": "sha1:4156169a8cc4febee3f6d93064a3591c4787c93f"
+            "integrity": "sha1:3563f56394e0689094adfbd159dba34d129717ae"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-find-attachment-family-by-id.controller.spec.ts",
@@ -359,7 +359,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-find-attachment-family-by-id.controller.ts",
-            "integrity": "sha1:ed9757280aa816bdbd7e359b0e2616d3177c4297"
+            "integrity": "sha1:e1388dc6ef7047898808685ffc4c2cf432232c82"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-find-attachment-family.controller.spec.ts",
@@ -367,7 +367,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-find-attachment-family.controller.ts",
-            "integrity": "sha1:fd89b525a6285f65def21b7fab6b19473c0e4b6b"
+            "integrity": "sha1:edfcc0170dba8c4181d72291e2806c5f4c8b94f3"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-get-attachment-families.controller.spec.ts",
@@ -375,7 +375,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-get-attachment-families.controller.ts",
-            "integrity": "sha1:617fc0cc0575275e5c076841b12bf4715ecaa191"
+            "integrity": "sha1:8bde73325ce05eb06dbcdaa28f37733e5d2f50b2"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-paginate-attachment-families.controller.spec.ts",
@@ -383,7 +383,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-paginate-attachment-families.controller.ts",
-            "integrity": "sha1:5197250b89a73e74773bb536c1829c89e815164d"
+            "integrity": "sha1:23a8c55be9e99f69f0e61fb9e4d2dc4f20364b0f"
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-update-attachment-family.controller.spec.ts",
@@ -391,7 +391,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/controllers/admin-update-attachment-family.controller.ts",
-            "integrity": "sha1:37e0499aec3d21c33cab519abe8e84f0e2196f97"
+            "integrity": "sha1:2486ce0c18ce654cea85b8594383ca40aa8c38e0"
         },
         {
             "path": "src/apps/admin/attachment-family/dto/attachment-family.dto.ts",
@@ -419,7 +419,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-create-attachment-family.resolver.ts",
-            "integrity": "sha1:08f695b204df0d69f06fcc8e8416e1e616303f38"
+            "integrity": "sha1:7944002193f41849ec67a3f128cd5621e105e0ee"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-create-attachment-families.resolver.spec.ts",
@@ -427,7 +427,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-create-attachment-families.resolver.ts",
-            "integrity": "sha1:56914d4e5d689851fefd12fb3f8682c34fb92e43"
+            "integrity": "sha1:58bb244801bd184b1ec4bf14ab9a268cce57cb07"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-delete-attachment-family-by-id.resolver.spec.ts",
@@ -435,7 +435,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-delete-attachment-family-by-id.resolver.ts",
-            "integrity": "sha1:318148f06f6fb0d1913892c2e8cbac9c8bc208f5"
+            "integrity": "sha1:7433bd8e3661d1c6b2870bac1e4b3d63f8cdf356"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-delete-attachment-families.resolver.spec.ts",
@@ -443,7 +443,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-delete-attachment-families.resolver.ts",
-            "integrity": "sha1:2bbba5d076d620d9ddc4c358ac879858399abf6a"
+            "integrity": "sha1:024e23230ea9490eb36876a67fad0cda2f153d57"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-find-attachment-family-by-id.resolver.spec.ts",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-find-attachment-family-by-id.resolver.ts",
-            "integrity": "sha1:72c9d8a5269ff86afae8746abf7a0c53dbc587e8"
+            "integrity": "sha1:061bc098f8510aaa769f06be25476cf7e91b09a1"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-find-attachment-family.resolver.spec.ts",
@@ -459,7 +459,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-find-attachment-family.resolver.ts",
-            "integrity": "sha1:4332b4fd5e7e3685bd689a77d59a3e246d578c17"
+            "integrity": "sha1:f5bd6ea70fa0b91db48d49338324b6746f73ab55"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-get-attachment-families.resolver.spec.ts",
@@ -467,7 +467,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-get-attachment-families.resolver.ts",
-            "integrity": "sha1:7904d50bd4ecf17a98a2b3c625f1ecc3aa1c492a"
+            "integrity": "sha1:442b5e5414067561a474d1932a7b2780a2a84bb4"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-paginate-attachment-families.resolver.spec.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-paginate-attachment-families.resolver.ts",
-            "integrity": "sha1:fe62a06a8dfcad39b13dd8d570447aa6895ed684"
+            "integrity": "sha1:e801ba3bec14a7c1ecedca7edb6d764d388a1b92"
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-update-attachment-family.resolver.spec.ts",
@@ -483,7 +483,7 @@
         },
         {
             "path": "src/apps/admin/attachment-family/resolvers/admin-update-attachment-family.resolver.ts",
-            "integrity": "sha1:706bf7eacee46581bc26fe08f545d2bd9fb506d4"
+            "integrity": "sha1:5f484f94997135382f71ff0921de8b95ee7f171c"
         },
         {
             "path": "src/apps/admin/attachment-family/seeder/seeder.module.ts",
@@ -495,7 +495,7 @@
         },
         {
             "path": "postman/admin.attachment-family.postman.json",
-            "integrity": "sha1:c083c9979350231506e74d15c3b1a821cd41f2c0"
+            "integrity": "sha1:d7105a26aa0e45208deb288ff8d455c6488325f4"
         }
     ]
 }

@@ -4,7 +4,7 @@ moduleName: administrative-area-level-1
 moduleNames: administrative-areas-level-1
 aggregateName: AdminAdministrativeAreaLevel1
 hasOAuth: true
-hasTenant: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id

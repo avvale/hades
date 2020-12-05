@@ -9,11 +9,6 @@ import { Permissions } from './../../../shared/modules/auth/decorators/permissio
 import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
-// tenant
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantPolicy } from './../../../shared/decorators/tenant-policy.decorator';
-
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { CreateAttachmentFamiliesCommand } from '@hades/admin/attachment-family/application/create/create-attachment-families.command';
@@ -32,9 +27,7 @@ export class AdminCreateAttachmentFamiliesController
     @ApiOperation({ summary: 'Create attachment-families in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [AttachmentFamilyDto] })
     @ApiBody({ type: [CreateAttachmentFamilyDto] })
-    @TenantPolicy()
     async main(
-        @CurrentAccount() account: AccountResponse,
         @Body() payload: CreateAttachmentFamilyDto[],
         @Timezone() timezone?: string,
     )
