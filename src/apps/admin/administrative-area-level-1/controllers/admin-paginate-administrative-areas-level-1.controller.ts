@@ -8,11 +8,6 @@ import { Permissions } from './../../../shared/modules/auth/decorators/permissio
 import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
-// tenant
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantConstraint } from './../../../shared/decorators/tenant-constraint.decorator';
-
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateAdministrativeAreasLevel1Query } from '@hades/admin/administrative-area-level-1/application/paginate/paginate-administrative-areas-level-1.query';
@@ -34,9 +29,7 @@ export class AdminPaginateAdministrativeAreasLevel1Controller
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
     @ApiQuery({ name: 'queryStatement', type: QueryStatement })
     @ApiQuery({ name: 'constraint', type: QueryStatement })
-    @TenantConstraint()
     async main(
-        @CurrentAccount() account: AccountResponse,
         @Body('query') queryStatement?: QueryStatement,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,

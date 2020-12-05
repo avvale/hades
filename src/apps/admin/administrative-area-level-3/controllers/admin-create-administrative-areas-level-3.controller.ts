@@ -9,11 +9,6 @@ import { Permissions } from './../../../shared/modules/auth/decorators/permissio
 import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
-// tenant
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantPolicy } from './../../../shared/decorators/tenant-policy.decorator';
-
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { CreateAdministrativeAreasLevel3Command } from '@hades/admin/administrative-area-level-3/application/create/create-administrative-areas-level-3.command';
@@ -32,9 +27,7 @@ export class AdminCreateAdministrativeAreasLevel3Controller
     @ApiOperation({ summary: 'Create administrative-areas-level-3 in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [AdministrativeAreaLevel3Dto] })
     @ApiBody({ type: [CreateAdministrativeAreaLevel3Dto] })
-    @TenantPolicy()
     async main(
-        @CurrentAccount() account: AccountResponse,
         @Body() payload: CreateAdministrativeAreaLevel3Dto[],
         @Timezone() timezone?: string,
     )
