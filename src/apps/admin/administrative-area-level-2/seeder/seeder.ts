@@ -8,9 +8,9 @@ export class Seeder
 {
     main()
     {
-        NestFactory.createApplicationContext(SeederModule).then(appContext => {
+        NestFactory.createApplicationContext(SeederModule).then(async appContext => {
             const commandBus = appContext.get(ICommandBus);
-            commandBus.dispatch(new CreateAdministrativeAreasLevel2Command(administrativeAreasLevel2));
+            await commandBus.dispatch(new CreateAdministrativeAreasLevel2Command(administrativeAreasLevel2));
         });
     }
 }

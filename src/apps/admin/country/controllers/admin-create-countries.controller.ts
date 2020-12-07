@@ -9,11 +9,6 @@ import { Permissions } from './../../../shared/modules/auth/decorators/permissio
 import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
-// tenant
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantPolicy } from './../../../shared/decorators/tenant-policy.decorator';
-
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { CreateCountriesCommand } from '@hades/admin/country/application/create/create-countries.command';
@@ -32,9 +27,7 @@ export class AdminCreateCountriesController
     @ApiOperation({ summary: 'Create countries in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [CountryDto] })
     @ApiBody({ type: [CreateCountryDto] })
-    @TenantPolicy()
     async main(
-        @CurrentAccount() account: AccountResponse,
         @Body() payload: CreateCountryDto[],
         @Timezone() timezone?: string,
     )

@@ -9,11 +9,6 @@ import { Permissions } from './../../../shared/modules/auth/decorators/permissio
 import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
-// tenant
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantConstraint } from './../../../shared/decorators/tenant-constraint.decorator';
-
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -35,9 +30,7 @@ export class AdminUpdateAdministrativeAreaLevel2Controller
     @Put()
     @ApiOperation({ summary: 'Update administrative-area-level-2' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: AdministrativeAreaLevel2Dto})
-    @TenantConstraint()
     async main(
-        @CurrentAccount() account: AccountResponse,
         @Body() payload: UpdateAdministrativeAreaLevel2Dto,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
