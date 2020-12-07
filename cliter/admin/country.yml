@@ -4,7 +4,7 @@ moduleName: country
 moduleNames: countries
 aggregateName: AdminCountry
 hasOAuth: true
-hasTenant: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id

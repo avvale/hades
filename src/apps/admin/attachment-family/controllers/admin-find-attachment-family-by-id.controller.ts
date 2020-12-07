@@ -8,11 +8,6 @@ import { Permissions } from './../../../shared/modules/auth/decorators/permissio
 import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
-// tenant
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantConstraint } from './../../../shared/decorators/tenant-constraint.decorator';
-
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
@@ -31,9 +26,7 @@ export class AdminFindAttachmentFamilyByIdController
     @Get(':id')
     @ApiOperation({ summary: 'Find attachment-family by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: AttachmentFamilyDto })
-    @TenantConstraint()
     async main(
-        @CurrentAccount() account: AccountResponse,
         @Param('id') id: string,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
