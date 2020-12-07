@@ -12,7 +12,6 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
 {
     public readonly aggregateName: string = 'IamTenant';
     public readonly mapper: TenantMapper = new TenantMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamTenantModel)
@@ -26,13 +25,13 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
     async createdAggregateHook(aggregate: IamTenant, model: IamTenantModel)
     {
         // add many to many relation
-        if (aggregate.accountIds.length > 0) await model.$add('accounts', aggregate.accountIds.value);
+        if (Array.isArray(aggregate.accountIds) && aggregate.accountIds.length > 0) await model.$add('accounts', aggregate.accountIds.value);
     }
 
     // hook called after create aggregate
     async updatedAggregateHook(aggregate: IamTenant, model: IamTenantModel)
     {
         // set many to many relation
-        if (aggregate.accountIds.isArray()) await model.$set('accounts', aggregate.accountIds.value);
+        if (Array.isArray(aggregate.accountIds) && aggregate.accountIds.isArray()) await model.$set('accounts', aggregate.accountIds.value);
     }
 }

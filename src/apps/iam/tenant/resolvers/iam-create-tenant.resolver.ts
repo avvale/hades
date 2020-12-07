@@ -34,7 +34,18 @@ export class IamCreateTenantResolver
         @Timezone() timezone?: string,
     )
     {
-        const accounts = await this.queryBus.ask(new GetAccountsQuery({
+        // denormalize tenant in accounts
+        if (Array.isArray(payload.accountIds) && payload.accountIds.length > 0) this.denormalizeTenantInAccount(payload, timezone);
+
+        await this.commandBus.dispatch(new CreateTenantCommand(payload, { timezone }));
+
+        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, {}, { timezone }));
+    }
+
+    private async denormalizeTenantInAccount(payload: IamCreateTenantInput, timezone?: string)
+    {
+        // get accounts to denormalize tenantsId on each account
+        let accounts = await this.queryBus.ask(new GetAccountsQuery({
             where: {
                 id: payload.accountIds
             }
@@ -44,7 +55,7 @@ export class IamCreateTenantResolver
         {
             const currentTenants = account.dTenants;
 
-            // add new tenan and update account
+            // add new tenant and update account
             currentTenants.push(payload.id);
             await this.commandBus.dispatch(new UpdateAccountCommand({
                 id: account.id,
@@ -59,9 +70,5 @@ export class IamCreateTenantResolver
                 tenantIds: currentTenants
             }, undefined, { timezone }));
         }
-
-        await this.commandBus.dispatch(new CreateTenantCommand(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, {}, { timezone }));
     }
 }
