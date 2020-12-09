@@ -11,6 +11,7 @@ import {
     LangIso6392,
     LangIso6393,
     LangIetf,
+    LangDir,
     LangSort,
     LangIsActive,
     LangCreatedAt,
@@ -65,6 +66,7 @@ describe('UpdateLangService', () =>
                 new LangIso6392(langs[0].iso6392),
                 new LangIso6393(langs[0].iso6393),
                 new LangIetf(langs[0].ietf),
+                new LangDir(langs[0].dir),
                 new LangSort(langs[0].sort),
                 new LangIsActive(langs[0].isActive),
             )).toBe(undefined);

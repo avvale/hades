@@ -8,6 +8,7 @@ export class LangResponse
         public readonly iso6392: string,
         public readonly iso6393: string,
         public readonly ietf: string,
+        public readonly dir: string,
         public readonly sort: number,
         public readonly isActive: boolean,
         public readonly createdAt: string,
