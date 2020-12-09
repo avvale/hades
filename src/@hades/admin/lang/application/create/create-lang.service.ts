@@ -7,6 +7,7 @@ import {
     LangIso6392,
     LangIso6393,
     LangIetf,
+    LangDir,
     LangSort,
     LangIsActive,
     LangCreatedAt,
@@ -32,6 +33,7 @@ export class CreateLangService
             iso6392: LangIso6392,
             iso6393: LangIso6393,
             ietf: LangIetf,
+            dir: LangDir,
             sort: LangSort,
             isActive: LangIsActive,
         }
@@ -45,6 +47,7 @@ export class CreateLangService
             payload.iso6392,
             payload.iso6393,
             payload.ietf,
+            payload.dir,
             payload.sort,
             payload.isActive,
             new LangCreatedAt({currentTimestamp: true}),
