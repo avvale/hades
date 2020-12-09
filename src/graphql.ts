@@ -14,6 +14,11 @@ export enum AdminAttachmentFamilyFit {
     HEIGHT_FREE = "HEIGHT_FREE"
 }
 
+export enum AdminLangDir {
+    LTR = "LTR",
+    RTL = "RTL"
+}
+
 export enum IamAccountType {
     USER = "USER",
     SERVICE = "SERVICE"
@@ -230,6 +235,7 @@ export interface AdminCreateLangInput {
     iso6392: GraphQLString;
     iso6393: GraphQLString;
     ietf: GraphQLString;
+    dir: AdminLangDir;
     sort?: GraphQLInt;
     isActive: GraphQLBoolean;
 }
@@ -241,6 +247,7 @@ export interface AdminUpdateLangInput {
     iso6392?: GraphQLString;
     iso6393?: GraphQLString;
     ietf?: GraphQLString;
+    dir?: AdminLangDir;
     sort?: GraphQLInt;
     isActive?: GraphQLBoolean;
 }
@@ -839,6 +846,7 @@ export interface AdminLang {
     iso6392: GraphQLString;
     iso6393: GraphQLString;
     ietf: GraphQLString;
+    dir: AdminLangDir;
     sort?: GraphQLInt;
     isActive: GraphQLBoolean;
     createdAt?: GraphQLTimestamp;
