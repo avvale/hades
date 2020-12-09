@@ -6,6 +6,7 @@ import {
     LangIso6392,
     LangIso6393,
     LangIetf,
+    LangDir,
     LangSort,
     LangIsActive,
     LangCreatedAt,
@@ -24,6 +25,7 @@ export class AdminLang extends AggregateRoot
     iso6392: LangIso6392;
     iso6393: LangIso6393;
     ietf: LangIetf;
+    dir: LangDir;
     sort: LangSort;
     isActive: LangIsActive;
     createdAt: LangCreatedAt;
@@ -39,6 +41,7 @@ export class AdminLang extends AggregateRoot
         iso6392: LangIso6392,
         iso6393: LangIso6393,
         ietf: LangIetf,
+        dir: LangDir,
         sort: LangSort,
         isActive: LangIsActive,
         createdAt: LangCreatedAt,
@@ -54,6 +57,7 @@ export class AdminLang extends AggregateRoot
         this.iso6392 = iso6392;
         this.iso6393 = iso6393;
         this.ietf = ietf;
+        this.dir = dir;
         this.sort = sort;
         this.isActive = isActive;
         this.createdAt = createdAt;
@@ -70,6 +74,7 @@ export class AdminLang extends AggregateRoot
         iso6392: LangIso6392,
         iso6393: LangIso6393,
         ietf: LangIetf,
+        dir: LangDir,
         sort: LangSort,
         isActive: LangIsActive,
         createdAt: LangCreatedAt,
@@ -84,6 +89,7 @@ export class AdminLang extends AggregateRoot
             iso6392,
             iso6393,
             ietf,
+            dir,
             sort,
             isActive,
             createdAt,
@@ -102,6 +108,7 @@ export class AdminLang extends AggregateRoot
                 lang.iso6392.value,
                 lang.iso6393.value,
                 lang.ietf.value,
+                lang.dir.value,
                 lang.sort?.value,
                 lang.isActive.value,
                 lang.createdAt?.value,
@@ -121,6 +128,7 @@ export class AdminLang extends AggregateRoot
                 lang.iso6392?.value,
                 lang.iso6393?.value,
                 lang.ietf?.value,
+                lang.dir?.value,
                 lang.sort?.value,
                 lang.isActive?.value,
                 lang.createdAt?.value,
@@ -140,6 +148,7 @@ export class AdminLang extends AggregateRoot
                 lang.iso6392.value,
                 lang.iso6393.value,
                 lang.ietf.value,
+                lang.dir.value,
                 lang.sort?.value,
                 lang.isActive.value,
                 lang.createdAt?.value,
@@ -158,6 +167,7 @@ export class AdminLang extends AggregateRoot
             iso6392: this.iso6392.value,
             iso6393: this.iso6393.value,
             ietf: this.ietf.value,
+            dir: this.dir.value,
             sort: this.sort?.value,
             isActive: this.isActive.value,
             createdAt: this.createdAt?.value,

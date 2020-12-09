@@ -49,6 +49,13 @@ export class AdminLangModel extends Model<AdminLangModel>
     ietf: string;
 
     @Column({
+        field: 'dir',
+        allowNull: false,
+        type: DataTypes.ENUM('LTR','RTL'),
+    })
+    dir: string;
+
+    @Column({
         field: 'sort',
         allowNull: true,
         type: DataTypes.SMALLINT.UNSIGNED,
