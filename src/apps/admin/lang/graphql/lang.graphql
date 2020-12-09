@@ -1,3 +1,7 @@
+enum AdminLangDir {
+    LTR
+    RTL
+}
 
 type AdminLang
 {
@@ -7,6 +11,7 @@ type AdminLang
     iso6392: GraphQLString!
     iso6393: GraphQLString!
     ietf: GraphQLString!
+    dir: AdminLangDir!
     sort: GraphQLInt
     isActive: GraphQLBoolean!
     createdAt: GraphQLTimestamp
@@ -22,6 +27,7 @@ input AdminCreateLangInput
     iso6392: GraphQLString!
     iso6393: GraphQLString!
     ietf: GraphQLString!
+    dir: AdminLangDir!
     sort: GraphQLInt
     isActive: GraphQLBoolean!
 }
@@ -34,6 +40,7 @@ input AdminUpdateLangInput
     iso6392: GraphQLString
     iso6393: GraphQLString
     ietf: GraphQLString
+    dir: AdminLangDir
     sort: GraphQLInt
     isActive: GraphQLBoolean
 }

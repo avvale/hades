@@ -8,6 +8,7 @@ import {
     LangIso6392,
     LangIso6393,
     LangIetf,
+    LangDir,
     LangSort,
     LangIsActive,
     LangCreatedAt,
@@ -33,6 +34,7 @@ export class CreateLangCommandHandler implements ICommandHandler<CreateLangComma
                 iso6392: new LangIso6392(command.payload.iso6392),
                 iso6393: new LangIso6393(command.payload.iso6393),
                 ietf: new LangIetf(command.payload.ietf),
+                dir: new LangDir(command.payload.dir),
                 sort: new LangSort(command.payload.sort),
                 isActive: new LangIsActive(command.payload.isActive),
             }

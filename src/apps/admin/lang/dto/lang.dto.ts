@@ -39,6 +39,13 @@ export class LangDto
     ietf: string;
 
     @ApiProperty({
+        type        : String,
+        enum        : ['LTR','RTL'],
+        description : 'dir [input here api field description]',
+    })
+    dir: string;
+
+    @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
     })

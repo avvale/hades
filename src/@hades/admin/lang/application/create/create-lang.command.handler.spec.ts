@@ -46,6 +46,7 @@ describe('CreateLangCommandHandler', () =>
                     langs[0].iso6392,
                     langs[0].iso6393,
                     langs[0].ietf,
+                    langs[0].dir,
                     langs[0].sort,
                     langs[0].isActive,
                 )
