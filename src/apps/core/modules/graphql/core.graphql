@@ -8,8 +8,9 @@ scalar GraphQLFloat
 scalar GraphQLBoolean
 scalar GraphQLISODateTime
 scalar GraphQLTimestamp
+scalar GraphQLUpload
 
-input QueryStatement 
+input QueryStatement
 {
     where: JSON
     include: [String]
@@ -18,7 +19,7 @@ input QueryStatement
     offset: Int
 }
 
-type Pagination 
+type Pagination
 {
     "Total possible objects displayed"
     total: Int!
@@ -26,4 +27,10 @@ type Pagination
     count: Int!
     "Query object data"
     rows: [JSON]!
+}
+
+type Mutation
+{
+    coreUploadFiles(files: [Upload!]!): Boolean
+    coreUploadFile(file: Upload!): Boolean
 }
