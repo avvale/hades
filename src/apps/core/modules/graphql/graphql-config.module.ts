@@ -7,13 +7,13 @@ import { join } from 'path';
 import GraphQLJSON from 'graphql-type-json';
 
 @Module({
-    imports: [        
+    imports: [
         GraphQLModule.forRoot({
             context: ({ req }) => ({ req }),
             debug: true,
             playground: true,
             typePaths: ['./**/*.graphql'],
-            resolvers: { 
+            resolvers: {
                 JSON: GraphQLJSON // define JSON Scalar type
             },
             definitions: {
