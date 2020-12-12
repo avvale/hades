@@ -662,8 +662,6 @@ export interface IMutation {
     adminUpdateCountry(payload: AdminUpdateCountryInput, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
     adminDeleteCountryById(id: string, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
     adminDeleteCountries(query?: QueryStatement, constraint?: QueryStatement): AdminCountry[] | Promise<AdminCountry[]>;
-    coreUploadFiles(files: Upload[]): boolean | Promise<boolean>;
-    coreUploadFile(file: Upload): boolean | Promise<boolean>;
     adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
     adminCreateLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
     adminUpdateLang(payload: AdminUpdateLangInput, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
@@ -674,6 +672,8 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
+    coreUploadFiles(files: Upload[]): boolean | Promise<boolean>;
+    coreUploadFile(file: Upload): boolean | Promise<boolean>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
