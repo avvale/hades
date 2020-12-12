@@ -6,7 +6,6 @@
     "private": true,
     "license": "UNLICENSED",
     "scripts": {
-        "preinstall": "npx npm-force-resolutions",
         "prebuild": "rimraf dist",
         "build": "nest build",
         "graphql:types": "ts-node generate-typings",
@@ -92,15 +91,14 @@
             "json",
             "ts"
         ],
-        "moduleDirectories": [
-            "node_modules",
-            "src"
-        ],
         "rootDir": "src",
-        "testRegex": ".spec.ts$",
+        "testRegex": ".*\\.spec\\.ts$",
         "transform": {
             "^.+\\.(t|j)s$": "ts-jest"
-        },
+          },
+        "collectCoverageFrom": [
+            "**/*.(t|j)s"
+        ],
         "coverageDirectory": "../coverage",
         "testEnvironment": "node"
     }
