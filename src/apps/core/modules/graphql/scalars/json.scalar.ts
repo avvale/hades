@@ -6,13 +6,13 @@ export class Json implements CustomScalar<any, any>
 {
     description = 'Any custom scalar type';
 
-    serialize(value: any): Object 
+    serialize(value: any): Object
     {
         if (typeof value === 'string') return JSON.parse(value);
         return value;
     }
 
-    parseValue(value: any): Object 
+    parseValue(value: any): Object
     {
         return value;
     }
