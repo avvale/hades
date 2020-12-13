@@ -31,6 +31,6 @@ type Pagination
 
 type Mutation
 {
-    coreUploadFiles(files: [Upload!]!): Boolean
-    coreUploadFile(file: Upload!): Boolean
+    coreUploadFiles(path: GraphQLString! files: [Upload!]!): JSON
+    coreUploadFile(path: GraphQLString! file: Upload!): JSON
 }
