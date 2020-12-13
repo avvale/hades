@@ -672,8 +672,8 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
-    coreUploadFiles(files: Upload[]): boolean | Promise<boolean>;
-    coreUploadFile(file: Upload): boolean | Promise<boolean>;
+    coreUploadFiles(path: GraphQLString, files: Upload[]): JSON | Promise<JSON>;
+    coreUploadFile(path: GraphQLString, file: Upload): JSON | Promise<JSON>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
