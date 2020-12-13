@@ -1,6 +1,7 @@
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
+import * as path from 'path';
 import { Moment } from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 declare const Buffer: any;
@@ -80,5 +81,22 @@ export class Utils
     public static uuid(): string
     {
         return uuidv4();
+    }
+
+    public static randomString(length: number, chars: string): string
+    {
+        var mask = '';
+        if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
+        if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if (chars.indexOf('#') > -1) mask += '0123456789';
+        if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
+        var result = '';
+        for (var i = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
+        return result;
+    }
+
+    public static basePath(...relativePath): string
+    {
+        return path.join(process.cwd(), ...relativePath);
     }
 }
