@@ -1,13 +1,15 @@
+import { Moment } from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import * as path from 'path';
-import { Moment } from 'moment';
-import { v4 as uuidv4 } from 'uuid';
 declare const Buffer: any;
 
 export class Utils
 {
+    constructor() {}
+
     public static now(): Moment
     {
         return moment();
@@ -98,5 +100,10 @@ export class Utils
     public static basePath(...relativePath): string
     {
         return path.join(process.cwd(), ...relativePath);
+    }
+
+    public static asset(...relativePath): string
+    {
+        return path.join(...relativePath);
     }
 }
