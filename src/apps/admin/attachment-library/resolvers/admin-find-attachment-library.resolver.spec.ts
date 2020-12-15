@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AdminFindAttachmentLibraryResolver } from './admin-find-attachment-library.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { attachmentLibrary } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 
 describe('AdminFindAttachmentLibraryResolver', () => 
 {
@@ -51,8 +51,8 @@ describe('AdminFindAttachmentLibraryResolver', () =>
 
         test('should return a attachmentLibrary', async () => 
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibrary[0])));
-            expect(await resolver.main()).toBe(attachmentLibrary[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibraries[0])));
+            expect(await resolver.main()).toBe(attachmentLibraries[0]);
         });
     });
 });

@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindAttachmentLibraryByIdQueryHandler } from './find-attachment-library-by-id.query-handler';
 import { MockAttachmentLibraryRepository } from '@hades/admin/attachment-library/infrastructure/mock/mock-attachment-library.repository';
-import { attachmentLibrary } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 import { IAttachmentLibraryRepository } from '@hades/admin/attachment-library/domain/attachment-library.repository';
 import { AttachmentLibraryMapper } from '@hades/admin/attachment-library/domain/attachment-library.mapper';
 import { FindAttachmentLibraryByIdQuery } from './find-attachment-library-by-id.query';
@@ -53,7 +53,7 @@ describe('FindAttachmentLibraryByIdQueryHandler', () =>
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindAttachmentLibraryByIdQuery(
-                    attachmentLibrary[0].id,
+                    attachmentLibraries[0].id,
                 
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));

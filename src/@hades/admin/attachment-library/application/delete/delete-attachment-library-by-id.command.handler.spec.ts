@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteAttachmentLibraryByIdCommandHandler } from './delete-attachment-library-by-id.command-handler';
-import { attachmentLibrary } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 import { DeleteAttachmentLibraryByIdCommand } from './delete-attachment-library-by-id.command';
 import { DeleteAttachmentLibraryByIdService } from './delete-attachment-library-by-id.service';
 
@@ -40,7 +40,7 @@ describe('DeleteAttachmentLibraryByIdCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAttachmentLibraryByIdCommand(
-                    attachmentLibrary[0].id,
+                    attachmentLibraries[0].id,
                 )
             )).toBe(undefined);
         });

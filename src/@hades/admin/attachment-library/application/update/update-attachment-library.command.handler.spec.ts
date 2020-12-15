@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { UpdateAttachmentLibraryCommandHandler } from './update-attachment-library.command-handler';
-import { attachmentLibrary } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 import { UpdateAttachmentLibraryCommand } from './update-attachment-library.command';
 import { UpdateAttachmentLibraryService } from './update-attachment-library.service';
 
@@ -40,17 +40,17 @@ describe('UpdateAttachmentLibraryCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new UpdateAttachmentLibraryCommand(
-                    attachmentLibrary[0].id,
-                    attachmentLibrary[0].name,
-                    attachmentLibrary[0].pathname,
-                    attachmentLibrary[0].filename,
-                    attachmentLibrary[0].url,
-                    attachmentLibrary[0].mime,
-                    attachmentLibrary[0].extension,
-                    attachmentLibrary[0].size,
-                    attachmentLibrary[0].width,
-                    attachmentLibrary[0].height,
-                    attachmentLibrary[0].data,
+                    attachmentLibraries[0].id,
+                    attachmentLibraries[0].name,
+                    attachmentLibraries[0].pathname,
+                    attachmentLibraries[0].filename,
+                    attachmentLibraries[0].url,
+                    attachmentLibraries[0].mime,
+                    attachmentLibraries[0].extension,
+                    attachmentLibraries[0].size,
+                    attachmentLibraries[0].width,
+                    attachmentLibraries[0].height,
+                    attachmentLibraries[0].data,
                 )
             )).toBe(undefined);
         });

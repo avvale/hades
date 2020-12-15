@@ -38,13 +38,13 @@ export class AttachmentLibraryMapper implements IMapper
 
     /**
      * Map array of objects to array aggregates
-     * @param attachmentLibrary
+     * @param attachmentLibraries
      */
-    mapModelsToAggregates(attachmentLibrary: ObjectLiteral[], cQMetadata?: CQMetadata): AdminAttachmentLibrary[]
+    mapModelsToAggregates(attachmentLibraries: ObjectLiteral[], cQMetadata?: CQMetadata): AdminAttachmentLibrary[]
     {
-        if (!Array.isArray(attachmentLibrary)) return;
+        if (!Array.isArray(attachmentLibraries)) return;
 
-        return attachmentLibrary.map(attachmentLibrary  => this.makeAggregate(attachmentLibrary, cQMetadata));
+        return attachmentLibraries.map(attachmentLibrary  => this.makeAggregate(attachmentLibrary, cQMetadata));
     }
 
     /**
@@ -58,13 +58,13 @@ export class AttachmentLibraryMapper implements IMapper
 
     /**
      * Map array of aggregates to array responses
-     * @param attachmentLibrary
+     * @param attachmentLibraries
      */
-    mapAggregatesToResponses(attachmentLibrary: AdminAttachmentLibrary[]): AttachmentLibraryResponse[]
+    mapAggregatesToResponses(attachmentLibraries: AdminAttachmentLibrary[]): AttachmentLibraryResponse[]
     {
-        if (!Array.isArray(attachmentLibrary)) return;
+        if (!Array.isArray(attachmentLibraries)) return;
 
-        return attachmentLibrary.map(attachmentLibrary => this.makeResponse(attachmentLibrary));
+        return attachmentLibraries.map(attachmentLibrary => this.makeResponse(attachmentLibrary));
     }
 
     private makeAggregate(attachmentLibrary: ObjectLiteral, cQMetadata?: CQMetadata): AdminAttachmentLibrary

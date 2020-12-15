@@ -1,7 +1,7 @@
 version: 1.0.0
 boundedContextName: admin
 moduleName: attachment-library
-moduleNames: attachment-library
+moduleNames: attachment-libraries
 aggregateName: AdminAttachmentLibrary
 hasOAuth: true
 hasTenant: false
