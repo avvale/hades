@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { attachmentLibrary } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 import { DeleteAttachmentLibraryByIdService } from './delete-attachment-library-by-id.service';
 import { AttachmentLibraryId } from './../../domain/value-objects';
 import { IAttachmentLibraryRepository } from './../../domain/attachment-library.repository';
@@ -49,7 +49,7 @@ describe('DeleteAttachmentLibraryByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new AttachmentLibraryId(attachmentLibrary[0].id)
+                new AttachmentLibraryId(attachmentLibraries[0].id)
             )).toBe(undefined);
         });
     });

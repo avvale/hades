@@ -17,7 +17,7 @@ export abstract class IAttachmentLibraryRepository implements IRepository<AdminA
     abstract async create(attachmentLibrary: AdminAttachmentLibrary): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(attachmentLibrary: AdminAttachmentLibrary[], options?: object): Promise<void>;
+    abstract async insert(attachmentLibraries: AdminAttachmentLibrary[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAttachmentLibrary | null>;

@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AdminUpdateAttachmentLibraryController } from './admin-update-attachment-library.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { attachmentLibrary } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 
 describe('AdminUpdateAttachmentLibraryController', () => 
 {
@@ -48,8 +48,8 @@ describe('AdminUpdateAttachmentLibraryController', () =>
 
         test('should return a attachmentLibrary created', async () => 
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibrary[0])));
-            expect(await controller.main(attachmentLibrary[0])).toBe(attachmentLibrary[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibraries[0])));
+            expect(await controller.main(attachmentLibraries[0])).toBe(attachmentLibraries[0]);
         });
     });
 });

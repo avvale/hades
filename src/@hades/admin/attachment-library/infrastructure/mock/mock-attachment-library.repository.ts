@@ -19,7 +19,7 @@ import {
     AttachmentLibraryDeletedAt,
 } from '@hades/admin/attachment-library/domain/value-objects';
 import { AdminAttachmentLibrary } from './../../domain/attachment-library.aggregate';
-import { attachmentLibrary } from './../seeds/attachment-library.seed';
+import { attachmentLibraries } from './../seeds/attachment-library.seed';
 
 @Injectable()
 export class MockAttachmentLibraryRepository extends MockRepository<AdminAttachmentLibrary> implements IAttachmentLibraryRepository
@@ -45,7 +45,7 @@ export class MockAttachmentLibraryRepository extends MockRepository<AdminAttachm
         this.collectionSource = [];
         const now = Utils.nowTimestamp();
 
-        for (const itemCollection of <any[]>attachmentLibrary)
+        for (const itemCollection of <any[]>attachmentLibraries)
         {
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;

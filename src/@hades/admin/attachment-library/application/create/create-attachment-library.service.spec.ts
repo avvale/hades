@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { attachmentLibrary } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 import { CreateAttachmentLibraryService } from './create-attachment-library.service';
 import {
     AttachmentLibraryId,
@@ -63,17 +63,17 @@ describe('CreateAttachmentLibraryService', () =>
         test('should create a attachmentLibrary and emit event', async () =>
         {
             expect(await service.main(
-                new AttachmentLibraryId(attachmentLibrary[0].id),
-                new AttachmentLibraryName(attachmentLibrary[0].name),
-                new AttachmentLibraryPathname(attachmentLibrary[0].pathname),
-                new AttachmentLibraryFilename(attachmentLibrary[0].filename),
-                new AttachmentLibraryUrl(attachmentLibrary[0].url),
-                new AttachmentLibraryMime(attachmentLibrary[0].mime),
-                new AttachmentLibraryExtension(attachmentLibrary[0].extension),
-                new AttachmentLibrarySize(attachmentLibrary[0].size),
-                new AttachmentLibraryWidth(attachmentLibrary[0].width),
-                new AttachmentLibraryHeight(attachmentLibrary[0].height),
-                new AttachmentLibraryData(attachmentLibrary[0].data),
+                new AttachmentLibraryId(attachmentLibraries[0].id),
+                new AttachmentLibraryName(attachmentLibraries[0].name),
+                new AttachmentLibraryPathname(attachmentLibraries[0].pathname),
+                new AttachmentLibraryFilename(attachmentLibraries[0].filename),
+                new AttachmentLibraryUrl(attachmentLibraries[0].url),
+                new AttachmentLibraryMime(attachmentLibraries[0].mime),
+                new AttachmentLibraryExtension(attachmentLibraries[0].extension),
+                new AttachmentLibrarySize(attachmentLibraries[0].size),
+                new AttachmentLibraryWidth(attachmentLibraries[0].width),
+                new AttachmentLibraryHeight(attachmentLibraries[0].height),
+                new AttachmentLibraryData(attachmentLibraries[0].data),
             )).toBe(undefined);
         });
     });
