@@ -90,6 +90,11 @@ aggregateProperties:
     type: id
     length: 36
     nullable: true
+    relationship: many-to-one
+    relationshipAggregate: AdminAttachmentLibrary
+    relationshipModulePath: admin/attachment-library
+    relationshipKey: id
+    relationshipField: attachmentLibrary
   - name: library_filename
     type: varchar
     maxLength: 255

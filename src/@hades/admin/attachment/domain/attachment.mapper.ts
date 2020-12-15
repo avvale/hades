@@ -30,6 +30,7 @@ import {
     AttachmentDeletedAt,
 } from './value-objects';
 import { AttachmentFamilyMapper } from '@hades/admin/attachment-family/domain/attachment-family.mapper';
+import { AttachmentLibraryMapper } from '@hades/admin/attachment-library/domain/attachment-library.mapper';
 
 export class AttachmentMapper implements IMapper
 {
@@ -108,6 +109,7 @@ export class AttachmentMapper implements IMapper
             new AttachmentUpdatedAt(attachment.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
             new AttachmentDeletedAt(attachment.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new AttachmentFamilyMapper({ eagerLoading: false }).mapModelToAggregate(attachment.family) : undefined,
+            this.options.eagerLoading ? new AttachmentLibraryMapper({ eagerLoading: false }).mapModelToAggregate(attachment.attachmentLibrary) : undefined,
         );
     }
 
@@ -142,6 +144,7 @@ export class AttachmentMapper implements IMapper
             attachment.updatedAt.value,
             attachment.deletedAt.value,
             this.options.eagerLoading ? new AttachmentFamilyMapper({ eagerLoading: false }).mapAggregateToResponse(attachment.family) : undefined,
+            this.options.eagerLoading ? new AttachmentLibraryMapper({ eagerLoading: false }).mapAggregateToResponse(attachment.attachmentLibrary) : undefined,
         );
     }
 }

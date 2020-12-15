@@ -37,15 +37,15 @@ aggregateProperties:
     nullable: true
   - name: size
     type: int.unsigned
-    length: 10
+    maxLength: 10
     nullable: false
   - name: width
     type: smallint.unsigned
-    length: 6
+    maxLength: 6
     nullable: true
   - name: height
     type: smallint.unsigned
-    length: 6
+    maxLength: 6
     nullable: true
   - name: data
     type: json
