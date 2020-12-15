@@ -13,24 +13,35 @@ scalar GraphQLUpload
 input QueryStatement
 {
     where: JSON
-    include: [String]
+    include: [GraphQLString]
     order: JSON
-    limit: Int
-    offset: Int
+    limit: GraphQLInt
+    offset: GraphQLInt
 }
 
 type Pagination
 {
     "Total possible objects displayed"
-    total: Int!
+    total: GraphQLInt!
     "Number of items filtered according to query"
-    count: Int!
+    count: GraphQLInt!
     "Query object data"
     rows: [JSON]!
 }
 
+type UploadFile
+{
+    name: GraphQLString!
+    filename: GraphQLString!
+    pathname: GraphQLString!
+    extension: GraphQLString
+    url: GraphQLString!
+    mime: GraphQLString!
+    size: GraphQLInt!
+}
+
 type Mutation
 {
-    coreUploadFiles(path: GraphQLString! files: [Upload!]!): JSON
-    coreUploadFile(path: GraphQLString! file: Upload!): JSON
+    coreUploadFiles(path: GraphQLString! files: [Upload!]!): [UploadFile]
+    coreUploadFile(path: GraphQLString! file: Upload!): UploadFile
 }
