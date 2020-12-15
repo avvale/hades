@@ -272,10 +272,10 @@ export interface AdminUpdateResourceInput {
 
 export interface QueryStatement {
     where?: JSON;
-    include?: string[];
+    include?: GraphQLString[];
     order?: JSON;
-    limit?: number;
-    offset?: number;
+    limit?: GraphQLInt;
+    offset?: GraphQLInt;
 }
 
 export interface IamCreateAccountInput {
@@ -672,8 +672,8 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
-    coreUploadFiles(path: GraphQLString, files: Upload[]): JSON | Promise<JSON>;
-    coreUploadFile(path: GraphQLString, file: Upload): JSON | Promise<JSON>;
+    coreUploadFiles(path: GraphQLString, files: Upload[]): UploadFile[] | Promise<UploadFile[]>;
+    coreUploadFile(path: GraphQLString, file: Upload): UploadFile | Promise<UploadFile>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -870,9 +870,19 @@ export interface AdminResource {
 }
 
 export interface Pagination {
-    total: number;
-    count: number;
+    total: GraphQLInt;
+    count: GraphQLInt;
     rows: JSON[];
+}
+
+export interface UploadFile {
+    name: GraphQLString;
+    filename: GraphQLString;
+    pathname: GraphQLString;
+    extension?: GraphQLString;
+    url: GraphQLString;
+    mime: GraphQLString;
+    size: GraphQLInt;
 }
 
 export interface IamAccount {
