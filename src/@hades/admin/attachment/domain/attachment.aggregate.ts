@@ -30,6 +30,7 @@ import { CreatedAttachmentEvent } from './../application/events/created-attachme
 import { UpdatedAttachmentEvent } from './../application/events/updated-attachment.event';
 import { DeletedAttachmentEvent } from './../application/events/deleted-attachment.event';
 import { AdminAttachmentFamily } from '@hades/admin/attachment-family/domain/attachment-family.aggregate';
+import { AdminAttachmentLibrary } from '@hades/admin/attachment-library/domain/attachment-library.aggregate';
 
 export class AdminAttachment extends AggregateRoot
 {
@@ -61,6 +62,7 @@ export class AdminAttachment extends AggregateRoot
 
     // eager relationship
     family: AdminAttachmentFamily;
+    attachmentLibrary: AdminAttachmentLibrary;
 
     constructor(
         id: AttachmentId,
@@ -89,6 +91,7 @@ export class AdminAttachment extends AggregateRoot
         updatedAt: AttachmentUpdatedAt,
         deletedAt: AttachmentDeletedAt,
         family?: AdminAttachmentFamily,
+        attachmentLibrary?: AdminAttachmentLibrary,
     )
     {
         super();
@@ -121,6 +124,7 @@ export class AdminAttachment extends AggregateRoot
 
         // eager relationship
         this.family = family;
+        this.attachmentLibrary = attachmentLibrary;
     }
 
     static register (
@@ -150,6 +154,7 @@ export class AdminAttachment extends AggregateRoot
         updatedAt: AttachmentUpdatedAt,
         deletedAt: AttachmentDeletedAt,
         family?: AdminAttachmentFamily,
+        attachmentLibrary?: AdminAttachmentLibrary,
     ): AdminAttachment
     {
         return new AdminAttachment(
@@ -179,6 +184,7 @@ export class AdminAttachment extends AggregateRoot
             updatedAt,
             deletedAt,
             family,
+            attachmentLibrary,
         );
     }
 
@@ -312,6 +318,7 @@ export class AdminAttachment extends AggregateRoot
 
             // eager relationship
             family: this.family?.toDTO(),
+            attachmentLibrary: this.attachmentLibrary?.toDTO(),
         }
     }
 }

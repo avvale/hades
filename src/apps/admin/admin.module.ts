@@ -10,6 +10,7 @@ import { AdminAttachmentControllers, AdminAttachmentResolvers } from './attachme
 import { AdminAdministrativeAreaLevel1Controllers, AdminAdministrativeAreaLevel1Resolvers } from './administrative-area-level-1';
 import { AdminAdministrativeAreaLevel2Controllers, AdminAdministrativeAreaLevel2Resolvers } from './administrative-area-level-2';
 import { AdminAdministrativeAreaLevel3Controllers, AdminAdministrativeAreaLevel3Resolvers } from './administrative-area-level-3';
+import { AdminAttachmentLibraryControllers, AdminAttachmentLibraryResolvers } from './attachment-library';
 
 @Module({
     imports: [
@@ -26,7 +27,8 @@ import { AdminAdministrativeAreaLevel3Controllers, AdminAdministrativeAreaLevel3
         ...AdminAttachmentControllers,
         ...AdminAdministrativeAreaLevel1Controllers,
         ...AdminAdministrativeAreaLevel2Controllers,
-        ...AdminAdministrativeAreaLevel3Controllers
+        ...AdminAdministrativeAreaLevel3Controllers,
+        ...AdminAttachmentLibraryControllers
     ],
     providers: [
         ...AdminHandlers,
@@ -40,7 +42,8 @@ import { AdminAdministrativeAreaLevel3Controllers, AdminAdministrativeAreaLevel3
         ...AdminAttachmentResolvers,
         ...AdminAdministrativeAreaLevel1Resolvers,
         ...AdminAdministrativeAreaLevel2Resolvers,
-        ...AdminAdministrativeAreaLevel3Resolvers
+        ...AdminAdministrativeAreaLevel3Resolvers,
+        ...AdminAttachmentLibraryResolvers
     ]
 })
 export class AdminModule {}
