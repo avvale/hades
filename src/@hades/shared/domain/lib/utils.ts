@@ -1,13 +1,16 @@
+import { Moment } from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import * as path from 'path';
-import { Moment } from 'moment';
-import { v4 as uuidv4 } from 'uuid';
 declare const Buffer: any;
 
 export class Utils
 {
+    // TODO, create interface and decouple
+    constructor() {}
+
     public static now(): Moment
     {
         return moment();
@@ -78,6 +81,22 @@ export class Utils
         return bcrypt.hashSync(password, saltRounds);
     }
 
+    public static isImageMime(mime: string)
+    {
+        switch (mime)
+        {
+            case 'image/gif':
+            case 'image/jpeg':
+            case 'image/pjpeg':
+            case 'image/png':
+            case 'image/svg+xml':
+                return true;
+                break;
+            default:
+                return false;
+        }
+    }
+
     public static uuid(): string
     {
         return uuidv4();
@@ -98,5 +117,10 @@ export class Utils
     public static basePath(...relativePath): string
     {
         return path.join(process.cwd(), ...relativePath);
+    }
+
+    public static asset(...relativePath): string
+    {
+        return path.join(...relativePath);
     }
 }
