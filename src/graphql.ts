@@ -172,6 +172,7 @@ export interface AdminCreateAttachmentInput {
     title?: GraphQLString;
     description?: GraphQLString;
     excerpt?: GraphQLString;
+    name: GraphQLString;
     pathname: GraphQLString;
     filename: GraphQLString;
     url: GraphQLString;
@@ -197,6 +198,7 @@ export interface AdminUpdateAttachmentInput {
     title?: GraphQLString;
     description?: GraphQLString;
     excerpt?: GraphQLString;
+    name?: GraphQLString;
     pathname?: GraphQLString;
     filename?: GraphQLString;
     url?: GraphQLString;
@@ -852,6 +854,7 @@ export interface AdminAttachment {
     title?: GraphQLString;
     description?: GraphQLString;
     excerpt?: GraphQLString;
+    name: GraphQLString;
     pathname: GraphQLString;
     filename: GraphQLString;
     url: GraphQLString;
