@@ -54,7 +54,11 @@ export class CoreUploadFileResolver
 
         if (ImageManager.isImageMime(fileTypeData.mime))
         {
-            const dimensions = ImageManager.dimensions(attachmentLibraryAbsolutePath);
+            const dimensions = await ImageManager.dimensions(attachmentLibraryAbsolutePath);
+            console.log(dimensions);
+            attachmentLibraryTemp.width = dimensions.width;
+            attachmentLibraryTemp.height = dimensions.height;
+            
         }
 
         
