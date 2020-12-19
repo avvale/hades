@@ -36,7 +36,7 @@ export class AdminUploadFileResolver
             });
         })();
 
-        const attachmentLibraryTemp = {
+        const tempAttachmentLibrary = {
             id: Utils.uuid,
             name: filename,
             pathname: attachmentLibraryPathName,
@@ -61,6 +61,9 @@ export class AdminUploadFileResolver
             
         }
 
+        const tempAttachment = {
+        };
+
         
 
        /*  const attachmentLibraryTemp = {
@@ -77,16 +80,9 @@ export class AdminUploadFileResolver
            // data: { }
         }; */
 
-        /* return {
-            name: filename,
-            filename: hashName,
-            pathname: Utils.basePath('public/storage', relativeStoragePath),
-            extension: fileTypeData.ext,
-            url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, hashName),
-            mime: fileTypeData.mime,
-            size: stats.size
-        }; */
-
-
+        return {
+            tempAttachmentLibrary,
+            tempAttachmentLibrary
+        };
     }
 }
