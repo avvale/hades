@@ -9,6 +9,7 @@ export { AttachmentAlt } from './attachment-alt';
 export { AttachmentTitle } from './attachment-title';
 export { AttachmentDescription } from './attachment-description';
 export { AttachmentExcerpt } from './attachment-excerpt';
+export { AttachmentName } from './attachment-name';
 export { AttachmentPathname } from './attachment-pathname';
 export { AttachmentFilename } from './attachment-filename';
 export { AttachmentUrl } from './attachment-url';

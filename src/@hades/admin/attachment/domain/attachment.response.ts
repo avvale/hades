@@ -15,6 +15,7 @@ export class AttachmentResponse
         public readonly title: string,
         public readonly description: string,
         public readonly excerpt: string,
+        public readonly name: string,
         public readonly pathname: string,
         public readonly filename: string,
         public readonly url: string,

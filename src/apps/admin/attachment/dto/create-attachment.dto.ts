@@ -70,6 +70,12 @@ export class CreateAttachmentDto
 
     @ApiProperty({
         type        : String,
+        description : 'name [input here api field description]',
+    })
+    name: string;
+
+    @ApiProperty({
+        type        : String,
         description : 'pathname [input here api field description]',
     })
     pathname: string;

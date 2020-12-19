@@ -51,6 +51,7 @@ describe('CreateAttachmentCommandHandler', () =>
                     attachments[0].title,
                     attachments[0].description,
                     attachments[0].excerpt,
+                    attachments[0].name,
                     attachments[0].pathname,
                     attachments[0].filename,
                     attachments[0].url,
