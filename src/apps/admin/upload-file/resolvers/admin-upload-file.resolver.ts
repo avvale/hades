@@ -20,94 +20,76 @@ export class AdminUploadFileResolver
 
         const { filename, createReadStream } = await file;
 
-        const readableStream                = createReadStream()
-        const fileTypeData                  = await fileType.fromStream(readableStream);
+        const readableStream                = await fileType.stream(createReadStream());
+        const extension                     = readableStream.fileType.ext;
+        const mime                          = readableStream.fileType.mime;
         const pathName                      = Utils.basePath('public/storage', relativeStoragePath);
         const attachmentLibraryId           = Utils.uuid();
-        const attachmentLibraryHashName     = Utils.randomString(40, 'a#') + '.' + fileTypeData.ext;
-        const attachmentHashName            = Utils.randomString(40, 'a#') + '.' + fileTypeData.ext;
+        const attachmentLibraryHashName     = Utils.randomString(40, 'a#') + '.' + extension;
+        const attachmentHashName            = Utils.randomString(40, 'a#') + '.' + extension;
         const attachmentLibraryAbsolutePath = path.join(pathName, attachmentLibraryHashName);
-        const attachmentLibraryStats        = fs.statSync(attachmentLibraryAbsolutePath);
         let dimensions                      = null;
         let exif                            = null;
 
         // user IIFE to invoke await function with promise for upload file
-        await ((): Promise<void> => {
-            return new Promise((resolve, reject) => {
-                const writeableString = fs.createWriteStream(attachmentLibraryAbsolutePath);
-                writeableString.on('finish', resolve)
-                readableStream.pipe(writeableString);
-            });
-        })();
+        await ((): Promise<void> => new Promise(resolve => readableStream.pipe(fs.createWriteStream(attachmentLibraryAbsolutePath)).on('finish', resolve)))();
+
+        // read stats of file after uploaded
+        const attachmentLibraryStats        = fs.statSync(attachmentLibraryAbsolutePath);
 
         // get image properties
-        if (ImageManager.isImageMime(fileTypeData.mime))
+        if (ImageManager.isImageMime(mime))
         {
             dimensions    = await ImageManager.dimensions(attachmentLibraryAbsolutePath);
             exif          = await ImageManager.exif(attachmentLibraryAbsolutePath);
-            console.log(dimensions);
-            console.log(exif);
         }
 
-        const tempAttachmentLibrary = {
+        const attachmentLibrary = {
             id: attachmentLibraryId,
             name: filename,
             pathname: pathName,
             filename: attachmentLibraryHashName,
             url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentLibraryHashName),
-            mime: fileTypeData.mime,
-            extension: fileTypeData.ext,
+            mime: mime,
+            extension: extension,
             size: attachmentLibraryStats.size,
-            width: null,
-            height: null,
-            data: null,
+            width: dimensions?.width,
+            height: dimensions?.height,
+            data: {exif},
         };
 
-        const tempAttachment = {
+        // copy attachment file from attachment library
+        fs.copyFileSync(attachmentLibraryAbsolutePath, path.join(pathName, attachmentHashName));
+
+        const attachment = {
             id: Utils.uuid,
             commonId: Utils.uuid,
             langId: '',
             attachableModel: '',
             attachableId: '',
-            familyId: '',
-            sort: '',
-            alt: '',
-            title: '',
-            description: '',
-            excerpt: '',
+            familyId: null,
+            sort: null,
+            alt: null,
+            title: null,
+            description: null,
+            excerpt: null,
             name: filename,
             pathname: pathName,
             filename: attachmentHashName,
             url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentHashName),
-            mime: fileTypeData.mime,
-            extension: fileTypeData.ext,
+            mime: mime,
+            extension: extension,
             size: attachmentLibraryStats.size,
-            width: null,
-            height: null,
+            width: dimensions?.width,
+            height: dimensions?.height,
             libraryId: attachmentLibraryId,
             libraryFilename: attachmentLibraryHashName,
-            data: {}
+            data: {exif}
         };
 
-        
-
-       /*  const attachmentLibraryTemp = {
-            id: Utils.uuid,
-            name: filename,
-            pathname: pathName,
-            filename: attachmentLibraryHashName,
-            url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentLibraryHashName),
-            mime: fileTypeData.mime,
-            extension: fileTypeData.ext,
-            size: attachmentLibraryStats.size,
-           //width: GraphQLInt
-           // height: GraphQLInt
-           // data: { }
-        }; */
-
         return {
-            tempAttachmentLibrary,
-            tempAttachment
+            attachmentLibrary,
+            attachment
         };
     }
 }
