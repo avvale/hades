@@ -1,7 +1,7 @@
 type UploadFile
 {
-    AdminCreateAttachmentLibraryInput
-    AdminCreateAttachmentInput
+    attachmentLibrary: AdminAttachmentLibrary
+    attachment: AdminAttachment
 }
 
 type Mutation
