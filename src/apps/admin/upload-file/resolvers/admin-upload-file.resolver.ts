@@ -13,7 +13,7 @@ export class AdminUploadFileResolver
         private environmentService: EnvironmentService
     ) {}
 
-    @Mutation('coreUploadFile')
+    @Mutation('adminUploadFile')
     async main(@Args('path') relativeStoragePath: string, @Args('file') file: Upload)
     {
         if (!fs.existsSync(Utils.basePath('public/storage', relativeStoragePath))) fs.mkdirSync(Utils.basePath('public/storage', relativeStoragePath), {recursive: true});
@@ -66,15 +66,15 @@ export class AdminUploadFileResolver
         const tempAttachment = {
             id: Utils.uuid,
             commonId: Utils.uuid,
-            //langId: ID!
-            // attachableModel: GraphQLString!
-            // attachableId: ID!
-            // familyId: ID
-            // sort: GraphQLInt
-            // alt: GraphQLString
-            // title: GraphQLString
-            // description: GraphQLString
-            // excerpt: GraphQLString
+            langId: '',
+            attachableModel: '',
+            attachableId: '',
+            familyId: '',
+            sort: '',
+            alt: '',
+            title: '',
+            description: '',
+            excerpt: '',
             name: filename,
             pathname: pathName,
             filename: attachmentHashName,
@@ -82,11 +82,11 @@ export class AdminUploadFileResolver
             mime: fileTypeData.mime,
             extension: fileTypeData.ext,
             size: attachmentLibraryStats.size,
-            width: GraphQLInt
-            height: GraphQLInt
+            width: null,
+            height: null,
             libraryId: attachmentLibraryId,
-            libraryFilename: GraphQLString
-            data: JSON
+            libraryFilename: attachmentLibraryHashName,
+            data: {}
         };
 
         
