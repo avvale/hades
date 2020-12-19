@@ -11,6 +11,7 @@ import { AdminAdministrativeAreaLevel1Controllers, AdminAdministrativeAreaLevel1
 import { AdminAdministrativeAreaLevel2Controllers, AdminAdministrativeAreaLevel2Resolvers } from './administrative-area-level-2';
 import { AdminAdministrativeAreaLevel3Controllers, AdminAdministrativeAreaLevel3Resolvers } from './administrative-area-level-3';
 import { AdminAttachmentLibraryControllers, AdminAttachmentLibraryResolvers } from './attachment-library';
+import { AdminUploadFileResolvers } from './upload-file';
 
 @Module({
     imports: [
@@ -43,7 +44,8 @@ import { AdminAttachmentLibraryControllers, AdminAttachmentLibraryResolvers } fr
         ...AdminAdministrativeAreaLevel1Resolvers,
         ...AdminAdministrativeAreaLevel2Resolvers,
         ...AdminAdministrativeAreaLevel3Resolvers,
-        ...AdminAttachmentLibraryResolvers
+        ...AdminAttachmentLibraryResolvers,
+        ...AdminUploadFileResolvers
     ]
 })
 export class AdminModule {}

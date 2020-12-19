@@ -16,6 +16,7 @@ export class UpdateAttachmentCommand
             title?: string,
             description?: string,
             excerpt?: string,
+            name?: string,
             pathname?: string,
             filename?: string,
             url?: string,

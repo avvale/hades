@@ -95,6 +95,13 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     excerpt: string;
 
     @Column({
+        field: 'name',
+        allowNull: false,
+        type: DataTypes.STRING(255),
+    })
+    name: string;
+
+    @Column({
         field: 'pathname',
         allowNull: false,
         type: DataTypes.STRING(1024),
