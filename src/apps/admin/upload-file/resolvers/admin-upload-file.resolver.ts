@@ -22,9 +22,11 @@ export class AdminUploadFileResolver
 
         const readableStream                = createReadStream()
         const fileTypeData                  = await fileType.fromStream(readableStream);
+        const pathName                      = Utils.basePath('public/storage', relativeStoragePath);
+        const attachmentLibraryId           = Utils.uuid();
         const attachmentLibraryHashName     = Utils.randomString(40, 'a#') + '.' + fileTypeData.ext;
-        const attachmentLibraryPathName     = Utils.basePath('public/storage', relativeStoragePath);
-        const attachmentLibraryAbsolutePath = path.join(attachmentLibraryPathName, attachmentLibraryHashName);
+        const attachmentHashName            = Utils.randomString(40, 'a#') + '.' + fileTypeData.ext;
+        const attachmentLibraryAbsolutePath = path.join(pathName, attachmentLibraryHashName);
         const attachmentLibraryStats        = fs.statSync(attachmentLibraryAbsolutePath);
 
         // user IIFE to invoke await function with promise for upload file
@@ -37,9 +39,9 @@ export class AdminUploadFileResolver
         })();
 
         const tempAttachmentLibrary = {
-            id: Utils.uuid,
+            id: attachmentLibraryId,
             name: filename,
-            pathname: attachmentLibraryPathName,
+            pathname: pathName,
             filename: attachmentLibraryHashName,
             url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentLibraryHashName),
             mime: fileTypeData.mime,
@@ -50,18 +52,38 @@ export class AdminUploadFileResolver
             data: null,
         };
 
-        //exifr.parse(file)
-
         if (ImageManager.isImageMime(fileTypeData.mime))
         {
             const dimensions = await ImageManager.dimensions(attachmentLibraryAbsolutePath);
+            const exif = await ImageManager.exif(attachmentLibraryAbsolutePath);
             console.log(dimensions);
-            attachmentLibraryTemp.width = dimensions.width;
-            attachmentLibraryTemp.height = dimensions.height;
-            
+            console.log(exif);
         }
 
         const tempAttachment = {
+            id: Utils.uuid,
+            commonId: Utils.uuid,
+            //langId: ID!
+            // attachableModel: GraphQLString!
+            // attachableId: ID!
+            // familyId: ID
+            // sort: GraphQLInt
+            // alt: GraphQLString
+            // title: GraphQLString
+            // description: GraphQLString
+            // excerpt: GraphQLString
+            name: filename,
+            pathname: pathName,
+            filename: attachmentHashName,
+            url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentHashName),
+            mime: fileTypeData.mime,
+            extension: fileTypeData.ext,
+            size: attachmentLibraryStats.size,
+            width: GraphQLInt
+            height: GraphQLInt
+            libraryId: attachmentLibraryId,
+            libraryFilename: GraphQLString
+            data: JSON
         };
 
         
@@ -69,7 +91,7 @@ export class AdminUploadFileResolver
        /*  const attachmentLibraryTemp = {
             id: Utils.uuid,
             name: filename,
-            pathname: attachmentLibraryPathName,
+            pathname: pathName,
             filename: attachmentLibraryHashName,
             url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentLibraryHashName),
             mime: fileTypeData.mime,
@@ -82,7 +104,7 @@ export class AdminUploadFileResolver
 
         return {
             tempAttachmentLibrary,
-            tempAttachmentLibrary
+            tempAttachment
         };
     }
 }
