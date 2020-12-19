@@ -12,4 +12,20 @@ export class ImageManager
    {
        return await exifr.parse(path);
    }
+
+   public static isImageMime(mime: string): boolean
+   {
+        switch (mime)
+        {
+            case 'image/gif':
+            case 'image/jpeg':
+            case 'image/pjpeg':
+            case 'image/png':
+            case 'image/svg+xml':
+                return true;
+                break;
+            default:
+                return false;
+        }
+    }
 }
