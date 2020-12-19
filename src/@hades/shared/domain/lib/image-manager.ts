@@ -3,7 +3,7 @@ var imagickal = require('imagickal');
 
 export class ImageManager
 {
-   public static async dimensions(path: string): Promise<any>
+   public static async dimensions(path: string): Promise<{width: number, height: number}>
    {
         return await imagickal.dimensions(path);
    }
