@@ -8,6 +8,7 @@ declare const Buffer: any;
 
 export class Utils
 {
+    // TODO, create interface and decouple
     constructor() {}
 
     public static now(): Moment
@@ -78,6 +79,22 @@ export class Utils
     public static hash(password: string, saltRounds: number = 10): string
     {
         return bcrypt.hashSync(password, saltRounds);
+    }
+
+    public static isImageMime(mime: string)
+    {
+        switch (mime)
+        {
+            case 'image/gif':
+            case 'image/jpeg':
+            case 'image/pjpeg':
+            case 'image/png':
+            case 'image/svg+xml':
+                return true;
+                break;
+            default:
+                return false;
+        }
     }
 
     public static uuid(): string
