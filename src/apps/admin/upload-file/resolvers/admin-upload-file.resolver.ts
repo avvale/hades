@@ -28,6 +28,8 @@ export class AdminUploadFileResolver
         const attachmentHashName            = Utils.randomString(40, 'a#') + '.' + fileTypeData.ext;
         const attachmentLibraryAbsolutePath = path.join(pathName, attachmentLibraryHashName);
         const attachmentLibraryStats        = fs.statSync(attachmentLibraryAbsolutePath);
+        let dimensions                      = null;
+        let exif                            = null;
 
         // user IIFE to invoke await function with promise for upload file
         await ((): Promise<void> => {
@@ -37,6 +39,15 @@ export class AdminUploadFileResolver
                 readableStream.pipe(writeableString);
             });
         })();
+
+        // get image properties
+        if (ImageManager.isImageMime(fileTypeData.mime))
+        {
+            dimensions    = await ImageManager.dimensions(attachmentLibraryAbsolutePath);
+            exif          = await ImageManager.exif(attachmentLibraryAbsolutePath);
+            console.log(dimensions);
+            console.log(exif);
+        }
 
         const tempAttachmentLibrary = {
             id: attachmentLibraryId,
@@ -51,14 +62,6 @@ export class AdminUploadFileResolver
             height: null,
             data: null,
         };
-
-        if (ImageManager.isImageMime(fileTypeData.mime))
-        {
-            const dimensions = await ImageManager.dimensions(attachmentLibraryAbsolutePath);
-            const exif = await ImageManager.exif(attachmentLibraryAbsolutePath);
-            console.log(dimensions);
-            console.log(exif);
-        }
 
         const tempAttachment = {
             id: Utils.uuid,
