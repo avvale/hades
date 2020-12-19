@@ -711,8 +711,8 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
-    adminUploadFiles(path: GraphQLString, files: Upload[]): AdminUploadFile[] | Promise<AdminUploadFile[]>;
-    adminUploadFile(path: GraphQLString, file: Upload): AdminUploadFile | Promise<AdminUploadFile>;
+    adminUploadFiles(path: GraphQLString, files: Upload[]): UploadFile[] | Promise<UploadFile[]>;
+    adminUploadFile(path: GraphQLString, file: Upload): UploadFile | Promise<UploadFile>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -927,14 +927,9 @@ export interface AdminResource {
     deletedAt?: GraphQLTimestamp;
 }
 
-export interface AdminUploadFile {
-    name: GraphQLString;
-    filename: GraphQLString;
-    pathname: GraphQLString;
-    extension?: GraphQLString;
-    url: GraphQLString;
-    mime: GraphQLString;
-    size: GraphQLInt;
+export interface UploadFile {
+    attachmentLibrary?: AdminAttachmentLibrary;
+    attachment?: AdminAttachment;
 }
 
 export interface Pagination {
