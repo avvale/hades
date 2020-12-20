@@ -101,6 +101,14 @@ aggregateProperties:
       - 14
     maxLength: 17
     nullable: true
+  - name: attachments
+    type: AdminAttachment
+    nullable: true
+    relationship: one-to-many
+    relationshipSingularName: attachment
+    relationshipAggregate: AdminAttachment
+    relationshipModulePath: admin/attachment
+    relationshipKey: attachable_id
   - name: created_at
     type: timestamp
     nullable: true

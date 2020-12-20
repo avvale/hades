@@ -28,6 +28,7 @@ import { CountryMapper } from '@hades/admin/country/domain/country.mapper';
 import { AdministrativeAreaLevel1Mapper } from '@hades/admin/administrative-area-level-1/domain/administrative-area-level-1.mapper';
 import { AdministrativeAreaLevel2Mapper } from '@hades/admin/administrative-area-level-2/domain/administrative-area-level-2.mapper';
 import { AdministrativeAreaLevel3Mapper } from '@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.mapper';
+import { AttachmentMapper } from '@hades/admin/attachment/domain/attachment.mapper';
 
 export class PartnerMapper implements IMapper
 {
@@ -104,6 +105,7 @@ export class PartnerMapper implements IMapper
             this.options.eagerLoading ? new AdministrativeAreaLevel1Mapper({ eagerLoading: false }).mapModelToAggregate(partner.administrativeAreaLevel1) : undefined,
             this.options.eagerLoading ? new AdministrativeAreaLevel2Mapper({ eagerLoading: false }).mapModelToAggregate(partner.administrativeAreaLevel2) : undefined,
             this.options.eagerLoading ? new AdministrativeAreaLevel3Mapper({ eagerLoading: false }).mapModelToAggregate(partner.administrativeAreaLevel3) : undefined,
+            this.options.eagerLoading ? new AttachmentMapper({ eagerLoading: false }).mapModelsToAggregates(partner.attachments) : undefined,
         );
     }
 
@@ -136,6 +138,7 @@ export class PartnerMapper implements IMapper
             this.options.eagerLoading ? new AdministrativeAreaLevel1Mapper({ eagerLoading: false }).mapAggregateToResponse(partner.administrativeAreaLevel1) : undefined,
             this.options.eagerLoading ? new AdministrativeAreaLevel2Mapper({ eagerLoading: false }).mapAggregateToResponse(partner.administrativeAreaLevel2) : undefined,
             this.options.eagerLoading ? new AdministrativeAreaLevel3Mapper({ eagerLoading: false }).mapAggregateToResponse(partner.administrativeAreaLevel3) : undefined,
+            this.options.eagerLoading ? new AttachmentMapper({ eagerLoading: false }).mapAggregatesToResponses(partner.attachments) : undefined,
         );
     }
 }

@@ -28,6 +28,7 @@ import { AdminCountry } from '@hades/admin/country/domain/country.aggregate';
 import { AdminAdministrativeAreaLevel1 } from '@hades/admin/administrative-area-level-1/domain/administrative-area-level-1.aggregate';
 import { AdminAdministrativeAreaLevel2 } from '@hades/admin/administrative-area-level-2/domain/administrative-area-level-2.aggregate';
 import { AdminAdministrativeAreaLevel3 } from '@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.aggregate';
+import { AdminAttachment } from '@hades/admin/attachment/domain/attachment.aggregate';
 
 export class OrigenPartner extends AggregateRoot
 {
@@ -57,6 +58,7 @@ export class OrigenPartner extends AggregateRoot
     administrativeAreaLevel1: AdminAdministrativeAreaLevel1;
     administrativeAreaLevel2: AdminAdministrativeAreaLevel2;
     administrativeAreaLevel3: AdminAdministrativeAreaLevel3;
+    attachments: AdminAttachment[];
 
     constructor(
         id: PartnerId,
@@ -83,6 +85,7 @@ export class OrigenPartner extends AggregateRoot
         administrativeAreaLevel1?: AdminAdministrativeAreaLevel1,
         administrativeAreaLevel2?: AdminAdministrativeAreaLevel2,
         administrativeAreaLevel3?: AdminAdministrativeAreaLevel3,
+        attachments?: AdminAttachment[],
     )
     {
         super();
@@ -113,6 +116,7 @@ export class OrigenPartner extends AggregateRoot
         this.administrativeAreaLevel1 = administrativeAreaLevel1;
         this.administrativeAreaLevel2 = administrativeAreaLevel2;
         this.administrativeAreaLevel3 = administrativeAreaLevel3;
+        this.attachments = attachments;
     }
 
     static register (
@@ -140,6 +144,7 @@ export class OrigenPartner extends AggregateRoot
         administrativeAreaLevel1?: AdminAdministrativeAreaLevel1,
         administrativeAreaLevel2?: AdminAdministrativeAreaLevel2,
         administrativeAreaLevel3?: AdminAdministrativeAreaLevel3,
+        attachments?: AdminAttachment[],
     ): OrigenPartner
     {
         return new OrigenPartner(
@@ -167,6 +172,7 @@ export class OrigenPartner extends AggregateRoot
             administrativeAreaLevel1,
             administrativeAreaLevel2,
             administrativeAreaLevel3,
+            attachments,
         );
     }
 
@@ -283,6 +289,7 @@ export class OrigenPartner extends AggregateRoot
             administrativeAreaLevel1: this.administrativeAreaLevel1?.toDTO(),
             administrativeAreaLevel2: this.administrativeAreaLevel2?.toDTO(),
             administrativeAreaLevel3: this.administrativeAreaLevel3?.toDTO(),
+            attachments: this.attachments?.map(item => item.toDTO()),
         }
     }
 }
