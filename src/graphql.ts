@@ -543,6 +543,7 @@ export interface OrigenCreatePartnerInput {
     address?: GraphQLString;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
+    attachments?: AdminCreateAttachmentInput[];
 }
 
 export interface OrigenUpdatePartnerInput {
@@ -563,6 +564,7 @@ export interface OrigenUpdatePartnerInput {
     address?: GraphQLString;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
+    attachments?: AdminUpdateAttachmentInput[];
 }
 
 export interface AdminAdministrativeAreaLevel1 {
