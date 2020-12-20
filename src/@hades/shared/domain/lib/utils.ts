@@ -121,6 +121,6 @@ export class Utils
 
     public static asset(...relativePath): string
     {
-        return path.join(...relativePath);
+        return relativePath.join('/');
     }
 }
