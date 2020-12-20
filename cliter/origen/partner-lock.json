@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/origen/partner/infrastructure/seeds/partner.seed.ts",
-            "integrity": "sha1:a28e8a689e0b3282ce43d8a3f75587944a74a755"
+            "integrity": "sha1:4c0b7c2c8b60cbc8991229fab21a85a3e4097dc2"
         },
         {
             "path": "src/@hades/origen/partner/infrastructure/sequelize/sequelize-partner.model.ts",
@@ -523,7 +523,7 @@
         },
         {
             "path": "postman/origen.partner.postman.json",
-            "integrity": "sha1:4deca79b3afc48fcd90f26c7d500ee0984671639"
+            "integrity": "sha1:550d526065a8491c3102890a1d55328480b36743"
         }
     ]
 }
