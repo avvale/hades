@@ -5,6 +5,7 @@ import { AdminCountryModel } from '@hades/admin/country/infrastructure/sequelize
 import { AdminAdministrativeAreaLevel1Model } from '@hades/admin/administrative-area-level-1/infrastructure/sequelize/sequelize-administrative-area-level-1.model';
 import { AdminAdministrativeAreaLevel2Model } from '@hades/admin/administrative-area-level-2/infrastructure/sequelize/sequelize-administrative-area-level-2.model';
 import { AdminAdministrativeAreaLevel3Model } from '@hades/admin/administrative-area-level-3/infrastructure/sequelize/sequelize-administrative-area-level-3.model';
+import { AdminAttachmentModel } from '@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.model';
 
 @Table({ modelName: 'origen_partner', freezeTableName: true, timestamps: false })
 export class OrigenPartnerModel extends Model<OrigenPartnerModel>
@@ -164,6 +165,10 @@ export class OrigenPartnerModel extends Model<OrigenPartnerModel>
         type: DataTypes.DECIMAL(17,14),
     })
     longitude: number;
+
+
+    @HasMany(() => AdminAttachmentModel, 'attachable_id')
+    attachments: AdminAttachmentModel[];
 
     @Column({
         field: 'created_at',

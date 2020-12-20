@@ -231,11 +231,11 @@
         },
         {
             "path": "src/@hades/origen/partner/domain/partner.aggregate.ts",
-            "integrity": "sha1:63f04b1e94f46bfba37fa8dae823bcb2779d684c"
+            "integrity": "sha1:2fd4842dc4dd8c80c5b60e02cfbe5f6006f682fe"
         },
         {
             "path": "src/@hades/origen/partner/domain/partner.mapper.ts",
-            "integrity": "sha1:793f4ad32fd6be3be5ebe09de2a19097fa7c3407"
+            "integrity": "sha1:048b439700faa90a276a4adfad437d5e19cc8084"
         },
         {
             "path": "src/@hades/origen/partner/domain/partner.repository.ts",
@@ -243,7 +243,7 @@
         },
         {
             "path": "src/@hades/origen/partner/domain/partner.response.ts",
-            "integrity": "sha1:412e33ad408805646165f66e2a14c88f98804daf"
+            "integrity": "sha1:a2705c19813496591f76f7092229bd65ec6e01c0"
         },
         {
             "path": "src/@hades/origen/partner/domain/value-objects/index.ts",
@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/origen/partner/infrastructure/seeds/partner.seed.ts",
-            "integrity": "sha1:d5e538a696eaab61ebeb9968fa3d65d022898e65"
+            "integrity": "sha1:a28e8a689e0b3282ce43d8a3f75587944a74a755"
         },
         {
             "path": "src/@hades/origen/partner/infrastructure/sequelize/sequelize-partner.model.ts",
-            "integrity": "sha1:54d54639b30091687299ba9fea30d8f214230991"
+            "integrity": "sha1:0b7b93e1f8e734b0267886de6a713387a1861c17"
         },
         {
             "path": "src/@hades/origen/partner/infrastructure/sequelize/sequelize-partner.repository.ts",
@@ -435,7 +435,7 @@
         },
         {
             "path": "src/apps/origen/partner/graphql/partner.graphql",
-            "integrity": "sha1:70bde0f3502cbef3551b010739edb9aaac00ebc7"
+            "integrity": "sha1:221858e816edf4e2fc10c9894f6c6149081e7f1a"
         },
         {
             "path": "src/apps/origen/partner/index.ts",
@@ -523,7 +523,7 @@
         },
         {
             "path": "postman/origen.partner.postman.json",
-            "integrity": "sha1:7e92d5260f9c0d76f63a70dfba7678dbfbbc4f29"
+            "integrity": "sha1:4deca79b3afc48fcd90f26c7d500ee0984671639"
         }
     ]
 }

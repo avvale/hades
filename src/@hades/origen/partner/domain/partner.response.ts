@@ -2,6 +2,7 @@ import { CountryResponse } from '@hades/admin/country/domain/country.response';
 import { AdministrativeAreaLevel1Response } from '@hades/admin/administrative-area-level-1/domain/administrative-area-level-1.response';
 import { AdministrativeAreaLevel2Response } from '@hades/admin/administrative-area-level-2/domain/administrative-area-level-2.response';
 import { AdministrativeAreaLevel3Response } from '@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.response';
+import { AttachmentResponse } from '@hades/admin/attachment/domain/attachment.response';
 
 export class PartnerResponse
 {
@@ -30,5 +31,6 @@ export class PartnerResponse
         public readonly administrativeAreaLevel1: AdministrativeAreaLevel1Response,
         public readonly administrativeAreaLevel2: AdministrativeAreaLevel2Response,
         public readonly administrativeAreaLevel3: AdministrativeAreaLevel3Response,
+        public readonly attachments: AttachmentResponse[],
     ) {}
 }
