@@ -11,6 +11,7 @@ import {
     AttachmentTitle,
     AttachmentDescription,
     AttachmentExcerpt,
+    AttachmentName,
     AttachmentPathname,
     AttachmentFilename,
     AttachmentUrl,
@@ -30,6 +31,7 @@ import { CreatedAttachmentEvent } from './../application/events/created-attachme
 import { UpdatedAttachmentEvent } from './../application/events/updated-attachment.event';
 import { DeletedAttachmentEvent } from './../application/events/deleted-attachment.event';
 import { AdminAttachmentFamily } from '@hades/admin/attachment-family/domain/attachment-family.aggregate';
+import { AdminAttachmentLibrary } from '@hades/admin/attachment-library/domain/attachment-library.aggregate';
 
 export class AdminAttachment extends AggregateRoot
 {
@@ -44,6 +46,7 @@ export class AdminAttachment extends AggregateRoot
     title: AttachmentTitle;
     description: AttachmentDescription;
     excerpt: AttachmentExcerpt;
+    name: AttachmentName;
     pathname: AttachmentPathname;
     filename: AttachmentFilename;
     url: AttachmentUrl;
@@ -61,6 +64,7 @@ export class AdminAttachment extends AggregateRoot
 
     // eager relationship
     family: AdminAttachmentFamily;
+    attachmentLibrary: AdminAttachmentLibrary;
 
     constructor(
         id: AttachmentId,
@@ -74,6 +78,7 @@ export class AdminAttachment extends AggregateRoot
         title: AttachmentTitle,
         description: AttachmentDescription,
         excerpt: AttachmentExcerpt,
+        name: AttachmentName,
         pathname: AttachmentPathname,
         filename: AttachmentFilename,
         url: AttachmentUrl,
@@ -89,6 +94,7 @@ export class AdminAttachment extends AggregateRoot
         updatedAt: AttachmentUpdatedAt,
         deletedAt: AttachmentDeletedAt,
         family?: AdminAttachmentFamily,
+        attachmentLibrary?: AdminAttachmentLibrary,
     )
     {
         super();
@@ -104,6 +110,7 @@ export class AdminAttachment extends AggregateRoot
         this.title = title;
         this.description = description;
         this.excerpt = excerpt;
+        this.name = name;
         this.pathname = pathname;
         this.filename = filename;
         this.url = url;
@@ -121,6 +128,7 @@ export class AdminAttachment extends AggregateRoot
 
         // eager relationship
         this.family = family;
+        this.attachmentLibrary = attachmentLibrary;
     }
 
     static register (
@@ -135,6 +143,7 @@ export class AdminAttachment extends AggregateRoot
         title: AttachmentTitle,
         description: AttachmentDescription,
         excerpt: AttachmentExcerpt,
+        name: AttachmentName,
         pathname: AttachmentPathname,
         filename: AttachmentFilename,
         url: AttachmentUrl,
@@ -150,6 +159,7 @@ export class AdminAttachment extends AggregateRoot
         updatedAt: AttachmentUpdatedAt,
         deletedAt: AttachmentDeletedAt,
         family?: AdminAttachmentFamily,
+        attachmentLibrary?: AdminAttachmentLibrary,
     ): AdminAttachment
     {
         return new AdminAttachment(
@@ -164,6 +174,7 @@ export class AdminAttachment extends AggregateRoot
             title,
             description,
             excerpt,
+            name,
             pathname,
             filename,
             url,
@@ -179,6 +190,7 @@ export class AdminAttachment extends AggregateRoot
             updatedAt,
             deletedAt,
             family,
+            attachmentLibrary,
         );
     }
 
@@ -197,6 +209,7 @@ export class AdminAttachment extends AggregateRoot
                 attachment.title?.value,
                 attachment.description?.value,
                 attachment.excerpt?.value,
+                attachment.name.value,
                 attachment.pathname.value,
                 attachment.filename.value,
                 attachment.url.value,
@@ -230,6 +243,7 @@ export class AdminAttachment extends AggregateRoot
                 attachment.title?.value,
                 attachment.description?.value,
                 attachment.excerpt?.value,
+                attachment.name?.value,
                 attachment.pathname?.value,
                 attachment.filename?.value,
                 attachment.url?.value,
@@ -263,6 +277,7 @@ export class AdminAttachment extends AggregateRoot
                 attachment.title?.value,
                 attachment.description?.value,
                 attachment.excerpt?.value,
+                attachment.name.value,
                 attachment.pathname.value,
                 attachment.filename.value,
                 attachment.url.value,
@@ -295,6 +310,7 @@ export class AdminAttachment extends AggregateRoot
             title: this.title?.value,
             description: this.description?.value,
             excerpt: this.excerpt?.value,
+            name: this.name.value,
             pathname: this.pathname.value,
             filename: this.filename.value,
             url: this.url.value,
@@ -312,6 +328,7 @@ export class AdminAttachment extends AggregateRoot
 
             // eager relationship
             family: this.family?.toDTO(),
+            attachmentLibrary: this.attachmentLibrary?.toDTO(),
         }
     }
 }

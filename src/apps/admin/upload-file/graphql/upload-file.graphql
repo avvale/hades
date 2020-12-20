@@ -1,0 +1,11 @@
+type UploadFile
+{
+    attachmentLibrary: AdminAttachmentLibrary
+    attachment: AdminAttachment
+}
+
+type Mutation
+{
+    adminUploadFiles(path: GraphQLString! files: [Upload!]!): [UploadFile]
+    adminUploadFile(path: GraphQLString! file: Upload!): UploadFile
+}

@@ -13,6 +13,7 @@ type AdminAttachment
     title: GraphQLString
     description: GraphQLString
     excerpt: GraphQLString
+    name: GraphQLString!
     pathname: GraphQLString!
     filename: GraphQLString!
     url: GraphQLString!
@@ -22,6 +23,7 @@ type AdminAttachment
     width: GraphQLInt
     height: GraphQLInt
     libraryId: ID
+    attachmentLibrary: AdminAttachmentLibrary
     libraryFilename: GraphQLString
     data: JSON
     createdAt: GraphQLTimestamp
@@ -42,6 +44,7 @@ input AdminCreateAttachmentInput
     title: GraphQLString
     description: GraphQLString
     excerpt: GraphQLString
+    name: GraphQLString!
     pathname: GraphQLString!
     filename: GraphQLString!
     url: GraphQLString!
@@ -68,6 +71,7 @@ input AdminUpdateAttachmentInput
     title: GraphQLString
     description: GraphQLString
     excerpt: GraphQLString
+    name: GraphQLString
     pathname: GraphQLString
     filename: GraphQLString
     url: GraphQLString

@@ -1,4 +1,5 @@
 import { AttachmentFamilyResponse } from '@hades/admin/attachment-family/domain/attachment-family.response';
+import { AttachmentLibraryResponse } from '@hades/admin/attachment-library/domain/attachment-library.response';
 
 export class AttachmentResponse
 {
@@ -14,6 +15,7 @@ export class AttachmentResponse
         public readonly title: string,
         public readonly description: string,
         public readonly excerpt: string,
+        public readonly name: string,
         public readonly pathname: string,
         public readonly filename: string,
         public readonly url: string,
@@ -29,5 +31,6 @@ export class AttachmentResponse
         public readonly updatedAt: string,
         public readonly deletedAt: string,
         public readonly family: AttachmentFamilyResponse,
+        public readonly attachmentLibrary: AttachmentLibraryResponse,
     ) {}
 }

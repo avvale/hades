@@ -1,0 +1,62 @@
+version: 1.0.0
+boundedContextName: admin
+moduleName: attachment-library
+moduleNames: attachment-libraries
+aggregateName: AdminAttachmentLibrary
+hasOAuth: true
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: pathname
+    type: varchar
+    maxLength: 1024
+    nullable: false
+  - name: filename
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: url
+    type: varchar
+    maxLength: 1024
+    nullable: false
+  - name: mime
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: extension
+    type: varchar
+    maxLength: 50
+    nullable: true
+  - name: size
+    type: int.unsigned
+    maxLength: 10
+    nullable: false
+  - name: width
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: true
+  - name: height
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: true
+  - name: data
+    type: json
+    length: 0
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

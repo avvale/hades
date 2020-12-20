@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachment.command-handler.ts",
-            "integrity": "sha1:5975851cf6040dd44280a2a39b4980248fa715de"
+            "integrity": "sha1:2d981ec2d2c1c2e16c24736eacdafec1d6609d68"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachment.command.handler.spec.ts",
-            "integrity": "sha1:f683eb2645ed4c350fc496e2a7a532453bdaefcf"
+            "integrity": "sha1:ae35233398acd702459b8eba70659009fc50b799"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachment.command.ts",
-            "integrity": "sha1:2b15eecaf758728f0b3884e975e5e518640dd62a"
+            "integrity": "sha1:0b00ca138d0220e88819867c71a4346b4b0f62bd"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachment.service.spec.ts",
-            "integrity": "sha1:17c02a6b4b7eb6095eac79ec307baae1b9734fac"
+            "integrity": "sha1:0eed2266d80669bc6ce5182b863ce6d20bf16c40"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachment.service.ts",
-            "integrity": "sha1:ca88bdaacd7291d9156a23e0be3494e5f5a9a38a"
+            "integrity": "sha1:c74ad7f40b2e410b7ebcb1b98913db9d56e83b88"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachments.command-handler.ts",
-            "integrity": "sha1:28f6bf899e0bfa935a99e2067ce4b2b5b46ac264"
+            "integrity": "sha1:2423d256903c933cd1bbbba0323cb416145c13e2"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachments.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachments.command.ts",
-            "integrity": "sha1:a895dcca8d620070ed02cee83d0574ad9f9191c0"
+            "integrity": "sha1:341cd2d23787b1025790c1b597651582c2946637"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachments.service.spec.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachments.service.ts",
-            "integrity": "sha1:d7cf9e0d9c332bcda5f126ec7d354c9163766620"
+            "integrity": "sha1:afe2c7ee09f987c4a4afae92a0d553b857a1b979"
         },
         {
             "path": "src/@hades/admin/attachment/application/delete/delete-attachment-by-id.command-handler.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/admin/attachment/application/events/add-attachments-context.event.ts",
-            "integrity": "sha1:f2084eabdeff311dfae8433732c40fb04ebe5f32"
+            "integrity": "sha1:1511306780eac7ec4194f89195c1feccf50e84f6"
         },
         {
             "path": "src/@hades/admin/attachment/application/events/created-attachment.event-handler.ts",
@@ -91,7 +91,7 @@
         },
         {
             "path": "src/@hades/admin/attachment/application/events/created-attachment.event.ts",
-            "integrity": "sha1:0a74ef6ba7d372ac189be9237884eb17b1f02ce3"
+            "integrity": "sha1:82db7815483713e4de6af01faae21c03dcd448cb"
         },
         {
             "path": "src/@hades/admin/attachment/application/events/created-attachments.event-handler.ts",
@@ -107,7 +107,7 @@
         },
         {
             "path": "src/@hades/admin/attachment/application/events/deleted-attachment.event.ts",
-            "integrity": "sha1:d2eacf0ee9e7d48551103fbc21fdac762e57b175"
+            "integrity": "sha1:1fc5e9f232078ba774c9e240b8c682d798cbe1c2"
         },
         {
             "path": "src/@hades/admin/attachment/application/events/deleted-attachments.event-handler.ts",
@@ -123,7 +123,7 @@
         },
         {
             "path": "src/@hades/admin/attachment/application/events/updated-attachment.event.ts",
-            "integrity": "sha1:f745e72dff8810fb1b9619f08ddc4c15ad43ea3c"
+            "integrity": "sha1:8c5034857e57152a55252d61a494eb3b5568b30f"
         },
         {
             "path": "src/@hades/admin/attachment/application/find/find-attachment-by-id.query-handler.ts",
@@ -211,31 +211,31 @@
         },
         {
             "path": "src/@hades/admin/attachment/application/update/update-attachment.command-handler.ts",
-            "integrity": "sha1:5de6fa5170e70bd8bc1bb1722149c885bcc7392c"
+            "integrity": "sha1:ae4d6f0d3205bc0de7d4faec03cee814c6e71820"
         },
         {
             "path": "src/@hades/admin/attachment/application/update/update-attachment.command.handler.spec.ts",
-            "integrity": "sha1:0ea62caf3939759f9b3d5c1f3683eaeb48d65de8"
+            "integrity": "sha1:bb6b6d52fd9fa5094086bc0c256dc861de2b1967"
         },
         {
             "path": "src/@hades/admin/attachment/application/update/update-attachment.command.ts",
-            "integrity": "sha1:83cb87a633ef3f75594ac860f4fe361ac5108e10"
+            "integrity": "sha1:675d7d9022500863e02c2e3987752030372bead0"
         },
         {
             "path": "src/@hades/admin/attachment/application/update/update-attachment.service.spec.ts",
-            "integrity": "sha1:f7c9b3f8a2fa65c13e16bd9611f8531800cd088b"
+            "integrity": "sha1:1e40082f50d2224ffb86957fa121cf3ad37f1d7d"
         },
         {
             "path": "src/@hades/admin/attachment/application/update/update-attachment.service.ts",
-            "integrity": "sha1:fd63f7d70145bbbfd18bd605176d0644d2d0fea3"
+            "integrity": "sha1:3e3ce40a36286b95fb6b1df5ba5a791bd54912b1"
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.aggregate.ts",
-            "integrity": "sha1:e554e59898d0c81d80fa7673eec68f0cc67cbe56"
+            "integrity": "sha1:6b0667c687bc82868a5682545c30d3bc554ebc37"
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.mapper.ts",
-            "integrity": "sha1:d988bce0027e396b245d4772c0e17727a6df8221"
+            "integrity": "sha1:f752aae08e4e9506d40a8ffe948858645f08f368"
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.repository.ts",
@@ -243,11 +243,11 @@
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.response.ts",
-            "integrity": "sha1:d9d2ac2267cd1c6f74b4f719c5e682519a8bb1d6"
+            "integrity": "sha1:d9860573932b702aa4718e9318966877453fcc76"
         },
         {
             "path": "src/@hades/admin/attachment/domain/value-objects/index.ts",
-            "integrity": "sha1:7407687be8f570d241d36c5df572ecf4423f69fe"
+            "integrity": "sha1:c0a88a4b0a42314f4c55b09e5432150438405cca"
         },
         {
             "path": "src/@hades/admin/attachment/index.ts",
@@ -255,15 +255,15 @@
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/mock/mock-attachment.repository.ts",
-            "integrity": "sha1:3cba5c012d4af2f52011c2ece391e9f9b1e64050"
+            "integrity": "sha1:2612368b530919eaacd766623398743c2f03ccc8"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/seeds/attachment.seed.ts",
-            "integrity": "sha1:97a80b22651ae5b75a96a3a3741b7305d81cbe13"
+            "integrity": "sha1:a609dc6855b08846b593c1c6498d224607e6bf0a"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.model.ts",
-            "integrity": "sha1:b80c16f09429c39c776e54898d34d1ef0b4fb81f"
+            "integrity": "sha1:35ee2405b4d3e32b97995f520eeccc99fc018042"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.repository.ts",
@@ -312,6 +312,10 @@
         {
             "path": "src/@hades/admin/attachment/domain/value-objects/attachment-excerpt.ts",
             "integrity": "sha1:5fb8a018902fde919f36dff826ab97b70377baf6"
+        },
+        {
+            "path": "src/@hades/admin/attachment/domain/value-objects/attachment-name.ts",
+            "integrity": "sha1:174db49e42b2d429972f82f12b2b85d9d1184374"
         },
         {
             "path": "src/@hades/admin/attachment/domain/value-objects/attachment-pathname.ts",
@@ -443,19 +447,19 @@
         },
         {
             "path": "src/apps/admin/attachment/dto/attachment.dto.ts",
-            "integrity": "sha1:2355b0054a6338fda9c48d6e52279c423dfb444e"
+            "integrity": "sha1:7376f345cc5bbee0045ea2914b085f313ba238d2"
         },
         {
             "path": "src/apps/admin/attachment/dto/create-attachment.dto.ts",
-            "integrity": "sha1:a74845ff33d59ea071bfeda80741fb9fed00fb91"
+            "integrity": "sha1:770cf0d072bfd1f025d13cb614c53a3f1d730010"
         },
         {
             "path": "src/apps/admin/attachment/dto/update-attachment.dto.ts",
-            "integrity": "sha1:3856bdd780b4d28969829fb80f8a540ede9b8c15"
+            "integrity": "sha1:75cfc0f4f1f8f7919d18c47573d2a040177968a2"
         },
         {
             "path": "src/apps/admin/attachment/graphql/attachment.graphql",
-            "integrity": "sha1:49d0caa97375f2f97fbc225b450de47a5c2eda94"
+            "integrity": "sha1:2599eb0bbb6e767090abc40d9ba2a76d90c231c8"
         },
         {
             "path": "src/apps/admin/attachment/index.ts",
@@ -543,7 +547,7 @@
         },
         {
             "path": "postman/admin.attachment.postman.json",
-            "integrity": "sha1:1b4d0e8bd50e493272edea22e6a01b675f252327"
+            "integrity": "sha1:7d9f10b2ec6f5e8fb816b1906f71e0c09a190354"
         }
     ]
 }

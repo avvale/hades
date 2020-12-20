@@ -8,6 +8,6 @@ export interface AggregateBase
     createdAt?: TimestampValueObject;
     updatedAt?: TimestampValueObject;
     deletedAt?: TimestampValueObject;
-    
+
     toDTO(): ObjectLiteral;
 }

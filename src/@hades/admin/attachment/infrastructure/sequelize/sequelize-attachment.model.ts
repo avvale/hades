@@ -2,6 +2,7 @@ import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Ha
 import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
 import { AdminAttachmentFamilyModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-family.model';
+import { AdminAttachmentLibraryModel } from '@hades/admin/attachment-library/infrastructure/sequelize/sequelize-attachment-library.model';
 
 @Table({ modelName: 'admin_attachment', freezeTableName: true, timestamps: false })
 export class AdminAttachmentModel extends Model<AdminAttachmentModel>
@@ -35,6 +36,7 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     })
     attachableModel: string;
 
+    @UnderscoredIndex
     @Column({
         field: 'attachable_id',
         allowNull: false,
@@ -94,6 +96,13 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     excerpt: string;
 
     @Column({
+        field: 'name',
+        allowNull: false,
+        type: DataTypes.STRING(255),
+    })
+    name: string;
+
+    @Column({
         field: 'pathname',
         allowNull: false,
         type: DataTypes.STRING(1024),
@@ -149,12 +158,21 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     })
     height: number;
 
+    @ForeignKey(() => AdminAttachmentLibraryModel)
     @Column({
         field: 'library_id',
         allowNull: true,
         type: DataTypes.UUID,
+        references: {
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION',
     })
     libraryId: string;
+
+    @BelongsTo(() => AdminAttachmentLibraryModel)
+    attachmentLibrary: AdminAttachmentLibraryModel;
 
     @Column({
         field: 'library_filename',
