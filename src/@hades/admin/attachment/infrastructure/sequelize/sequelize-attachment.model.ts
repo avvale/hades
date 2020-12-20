@@ -36,6 +36,7 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     })
     attachableModel: string;
 
+    @UnderscoredIndex
     @Column({
         field: 'attachable_id',
         allowNull: false,
