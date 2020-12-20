@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/seeds/attachment.seed.ts",
-            "integrity": "sha1:aaca37f00dbeb438e113126268fc4066df700959"
+            "integrity": "sha1:a609dc6855b08846b593c1c6498d224607e6bf0a"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.model.ts",
-            "integrity": "sha1:71b1853c90b7963ae226779776d3e17116c379ce"
+            "integrity": "sha1:35ee2405b4d3e32b97995f520eeccc99fc018042"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.repository.ts",
@@ -547,7 +547,7 @@
         },
         {
             "path": "postman/admin.attachment.postman.json",
-            "integrity": "sha1:9120990b8884c7a25439e30275b672ce3da86cfc"
+            "integrity": "sha1:7d9f10b2ec6f5e8fb816b1906f71e0c09a190354"
         }
     ]
 }
