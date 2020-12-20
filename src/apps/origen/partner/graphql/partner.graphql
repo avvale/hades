@@ -47,6 +47,7 @@ input OrigenCreatePartnerInput
     address: GraphQLString
     latitude: GraphQLFloat
     longitude: GraphQLFloat
+    attachments: [AdminCreateAttachmentInput]
 }
 
 input OrigenUpdatePartnerInput
@@ -68,6 +69,7 @@ input OrigenUpdatePartnerInput
     address: GraphQLString
     latitude: GraphQLFloat
     longitude: GraphQLFloat
+    attachments: [AdminUpdateAttachmentInput]
 }
 
 type Query

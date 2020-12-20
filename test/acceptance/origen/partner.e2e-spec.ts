@@ -60,22 +60,22 @@ describe('partner', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'b3do3h9din2myidz07yy7swx6yidb73t75r8vgshcrudorkh39s4idt6t3vd72wgkq2h2ub0ihhveiioabp80lu65er52d835a5xctu20uj1bisgki30alb5geujpyuvah2fzpqgrjc7v3vyxlq0cezmcdmsqyl3i8igwitq1m2lvmv7t3xizky592a5d3d40mdid8yqumaqkcnlq25zm4igdxm3kluei3k56622lxjekqi0m9qr6w7zz1r2nzi',
+                name: 'auidq1ieta3im9y6pnccec5pv6gb27x21edlkepzs8fempvlp08gc41u0d88ap3x3e7gpoo22qzd0433hlxxlvpftwqsziylm9wsu7a8cxnamfux3597ooj4iuwp6ns7jb0d945nb4lzy244a73sfme3snn9fuu218ewuqx7uej8zfeutg88v3sgnz67umi7ms494mwdvhgkgxq8zniypzbmyh7s643ljb0rv4iwriar8xhhycw7xippbr17yi9',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Magnam quos tempora neque delectus saepe. Et qui accusamus dolorem non rem voluptatem magni laborum libero. Vel dolor amet maiores assumenda tempore harum. Unde est voluptas distinctio. Sed porro est id tenetur impedit aliquid.',
-                excerpt: 'Et deleniti vitae. Aut quod nihil placeat. Voluptatem deleniti omnis explicabo et est recusandae aliquid. Necessitatibus quam adipisci delectus maxime alias sunt. Eos earum pariatur officiis. Exercitationem numquam nostrum labore vitae id.',
-                email: '6pd5sli7hxrt6t9joq20lpea8ghoqhn0ykc2z88bi9ggcs91gilvcduncgacg26kv5snkqmm35rt1vm0nc50lxctgz5y0q7xdv9g7hw84miqztarckvd7pqf',
-                phone: '6uuebwsokx03yug4g4pmjjcbdxkfxhok82y01gqlm0xooekbf4cp3fi0ux3h7b6entoe8016p566q62e0ieu9u4sl16sv80bbwy7y0vyzc4pszvloec76xaf',
-                fax: 'dsc284ymch2li6cr66qo33md28prdutr2pg27pq65gggq3xvxhx0tlh9hfbz682pfvips72prur5mg7vzy3a0z19cyaz2pz4484fy5ryq6xx6yw5dst0190n',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '44o6bx95zi',
-                locality: '2fxtllhbxbws1lrb6j0s78vfw7a3rvjprkmx4ajhrr1bjb8692mp1rw0io8ynp50dtfemo2qsdlgtizveqgpy2chgoxlotmy71796oq7cfsilwfswkekkxydopuxp',
-                address: '1qtd69oh09wqqpdd2c0bxjma6ulxfyxj4lwxy4hbefcokcv17vt5k2vzjrxon2p2x5nvvxnmyve256hb0v4azvmdhvq0abcaur79ykp8ogdlt96boplllylx4v1l9yt7v1hq8dk6360xcux6vaalrhimn8w4n1cydr3bmzbtiqao4q8dvzvnhnu1ee7qlpffs19b2maynmzz9ubikaj6cedylwge2tqx9dksgou2hlvtywpl8rczyhgqhfuciqg',
-                latitude: 819.13,
-                longitude: 78.95,
+                description: 'Ut in quis suscipit nihil autem eum natus. Officiis et officia vero et. Dolorem et et.',
+                excerpt: 'Soluta saepe consectetur nesciunt odit. Rerum iste vitae quis. Ut voluptatem et officiis. A doloremque et aut suscipit voluptatem. Ut atque at eos eum pariatur velit neque pariatur non. Ullam exercitationem labore ut ad.',
+                email: 'fgiivbk1vlczf0mne929c6nbg3b6ov1lvzgjqddos5ut4gtec8xge7ou5uq3lx6wrcu2w6bnhaz52ggtkpwqjxsfdkxnx67cgvnmpjftkxwz1n2pmonol4dq',
+                phone: 'xb9hestt1hoi69e5e5ukn578nyoms4ed80f6qurfc9ag9tj0qww4h5kabb7pungvybesmpwlrhrgtr3tly63nrwjunh4mpml4y8htxa5068w2hrlicnb8p8g',
+                fax: 'hz0d3lmuhh58ttbz3u24orcxekfw8djuttlvbso0ctmww0dlsigv6o9tb1sbzirbu0ci50k44npp96lkkszb105ejaauefpi26t61ei6j6f98rrug9la5pp2',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: '3ecq8gkrg6',
+                locality: 'zyn564ztclu8x9hj7egdz5z7yntisui42809w7nor94how4yp3l190yluvz5bfiwsovs1uf869pxn4zg2tsreec69lpmq574k2a74dbfdv758m8we250n2n61g373',
+                address: '0yjfvoqstywj320nu0apbpq9hkf8nhynkcqxsug7gl1qks9gnvmhmz89y7581apmu2n03zmw7hxll4tjnq9v734hl5ve8msi22w6dac6npks2yjrl9f9iqu9ezs6tnhozke1nw73tq39ickgwi9fvy32e720jvu9pn8xfey9n6tata58hmrhgpdt796sk6gh00qks50zonlpt26f2u1e15n6nzt4saf86cl29mr384cz4b67fp3wfr31lbvrhk0',
+                latitude: 180.00,
+                longitude: 355.38,
             })
             .expect(400)
             .then(res => {
@@ -90,22 +90,22 @@ describe('partner', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                name: 'ne1qkaajefnr941q0koxrl8yckd4nfq7ztywox71zfnztuaqgcgqlirk7ef8y3nygdpp3woe9npb3nydc2grnmnfdttt2koxgvn40oh8jpiucqstc5vt6zccrw0ai06vw0hs65hz3kdk7g3tfc2tvtpy73eem9iuxx1uilk6c5yj7fzui8bxs0z3vzayl7dakk2iqe03wy1v7z1ynjfchwxfmfe9l8tq315eutm1zhy0uics3xxeic0q1ryyega',
+                name: 'xyxni85nk0m4h2c2ve77q8loenlgl28chqqbkdrkpgxj8b4nt29csjz2n7z5jsysql0v2kvtpj74ekw3tcf9f2wgwgx3hhx0oha5rg4rhiouy8l3rhy1frcyne3rfjt4m5q5wklry33ldx4og72wcuprlhvcv5zbj83vtp2vsmyebadhsjn6eozkwziekf8sc7b826ca46fl1qhj9i2j48ps9xw4syiw4m4ut3we626zqilutwqbwfcqdxrycd2',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Facilis accusantium dolorum non quia dolores eveniet nihil. Animi expedita nulla in illo maiores sint est nostrum. Consequuntur consequatur et aliquam consequatur tempora et. Nulla fugit vitae voluptatem et blanditiis inventore quo. Dolorem quibusdam eius voluptas facere sed aut quo optio quos.',
-                excerpt: 'Tempora consequatur asperiores maxime et dolor quasi dolorum dignissimos. Ab consequatur odit. Fugit quia impedit laborum cum hic dolores cupiditate quia voluptatum. Accusamus dolor quis. Eos architecto nihil earum est natus atque. Totam sit architecto maxime sint laudantium sed omnis velit.',
-                email: 'rwuxiyx5prp4zk5nufjz3qhdo9gp7ovjycpgaypukb7ebshsueg6c3o0e7dkzhp33omui0urkjpuwqe6nlagzwiml59cqxi4w0b3xszu61njbla4m8hb3h34',
-                phone: 'vk461tc0vt2tzfxbrn40bayyucvryq6317mvvmlgycu1jpe4fleje8ux51qoe4as9yififqqbcxuce2ss991at4eeje320y6f6yt25yn3466302nd9k56tqa',
-                fax: 'zac9xyda9lb1ggsxircqkn0ew99c8iqe9iujpvf5z8trkjqa77jj6eck0jgtshn1n2zdlz0q9onoxv75x2fa6r8eupqzg8n9t35ulhlmwkqocwxo8gwahh84',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'mcl4iuedgb',
-                locality: '6sk2lge9cw9i0fk86ol11ruxq7gkfrh6x0qt4kinq8qo82ijcg8zb44qtvp5h14k2mk86olafbrmm5ynl74xvujthbqvweawckoef0ty66akcafewhjlc8q68jthv',
-                address: 'olq2avblgk8mwa1q4xree9qzyi0cea9mibsh2r126rso4vq31kcuoplzrwsgi2oevls2ck0oqs1shajnv12a9jtrzd0b9w02usn3rskimnlyoe6rqylut0eov0gf18lyjplfw53a1zq3iusx62ini0x026rjefo00pxv0cm1gxd7ma4zqrud23kv754sjsytxpoj984s71wdbvmtohe19bx8l37xmwh8b84y5e2zaxq7e1z2vb4ozz56ay0kltw',
-                latitude: 169.02,
-                longitude: 617.82,
+                description: 'Nam officiis sapiente qui eos debitis incidunt eos reprehenderit. Similique aut molestiae suscipit sunt et nam ducimus. Est quos eum similique quis natus architecto qui provident. Et voluptate expedita repellendus. Dignissimos dignissimos aut non optio dicta non repellat voluptatum sit.',
+                excerpt: 'Est et et doloremque laudantium nihil ipsam autem aut. Sed qui dolorem autem maxime quia ad molestiae sit. Commodi id beatae tempore qui blanditiis officiis.',
+                email: 't4mpzrmtmyvd4z7oec9euyxdix82ooix6ot1xl19etats4o6lnc8po25qjb3mozxqfq0er6jfiryfgboygygetxwk60pwo1afyk9tvpy5vbxqumfb48cv1hg',
+                phone: 'b8sv1w2tjwd5de2m4a0pmmfrnfda4m40tndxpkra2ahi95cniwyy20cswga2a2y9y5hqc07n2imaohv9wu7lru8jiw5x9d834wrreykw1w977rhtqkspu3km',
+                fax: 'y4zgmwlxblbuaye8w1lmfy071sotmlb6l43eeoafto7l2nxxntdjmiu76x8givif6nexr672ala5efh6ka3fm9tf5oan9jatmb824cvlvmmkfo3sxza5d8kp',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'fbzpwpp0mb',
+                locality: 'tkqz60u66uv0evqujve29gmk40cloz6xq15i13g0q69el94ajkytwzn8a2dfmj19g6gf05uepjj7t3sk8iiyhqjkc9fx4l3x5vsx6uxgdq9oimjy4besydanfoco5',
+                address: '9qx7exdq0j7ydod9gxddjce1wsskhtitwt04qo8v9je8w6t2j2q6viyzqjxrm6aycejx7mpyg27xbmw31w9e2nklk5ftfanhxj0w3dmemej6wwpssw9bhpwn1fbneyh2jpgowhuwxtcdsvmu93jsucdpow4d256mhlnlvaw2l4z0kbpqe73zfttco37kl6ogyeusxmvsg8lgzr5j1sh9fui5xu5qectlw28018m311yi8x2hu7v715p3oivw2df',
+                latitude: 846.46,
+                longitude: 667.49,
             })
             .expect(400)
             .then(res => {
@@ -119,23 +119,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
                 name: null,
                 socialNetworks: { "foo" : "bar" },
-                description: 'Accusantium pariatur in. Optio quisquam quia ut molestias sed. Voluptas ad hic vel nulla ducimus asperiores sed. Omnis fugit voluptatem omnis.',
-                excerpt: 'Porro qui quam qui provident laboriosam. Sed et et consequatur enim deleniti ullam. Consequatur modi consectetur voluptatem reiciendis ullam ratione voluptas. Autem quia veniam quibusdam numquam et nostrum. Ea ut laboriosam ipsum.',
-                email: 'tr1xjot5zrizqog5zejr5btfqh1t007gb4th6urgi617f2ir9au1shfhk4whyjilow9btdj2kkgom4vkr45uarm4lxelgyv984q2yqo5q936nb5i9opz50e4',
-                phone: 's85is0kxf9xjjjdcsewwevr8azwbywre8dbgugwtarytvuetvakg1ogjn6a303sx9hhxibqilsb0civs9pbpdwmdpaxnwtdt4nh6qa87bpk073wk1duikbcw',
-                fax: '4oqtsstyqai0nuw8kils1hodw1hiosjbfvd0nh8y7dmrpg4qbzbleixbb1tufy9bokz21hsm80ak2p5bfafsr5vcekywg982q5trzp8mdp3b76xcyy0cyo10',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '0eesh65hq9',
-                locality: 'mu02xy1zialy4ik6bfvudp4uy2i7a9qel415v9oueeypjp02wc2ibi6fmqdgjexpz7c22tc7l3srfw78hd33nz1exjmvl17cxmumpd9jz2q333aeyca13qr27t41c',
-                address: '1jbr8dhs0m777x2kufarxmxjr1rbidf8tfzschido3nvh3bet14u6jq0mu1g2wu4gmfdbo0ud9o3ta89bm3vt4nhuf0jm3zpj5yqb2cc7c48fs4l0kflj2zm1oi84a7b5tjjv7acde12xael7gnz5frl4ds259jxjrx6fjvs84kkmbs9n6jceb7z7c7mx68broyymm5gp1e4yxn1syrz1zj2icpfktf9bn7p61yhcxuuth4dymvnmcrs4q5pc29',
-                latitude: 63.45,
-                longitude: 204.99,
+                description: 'Nam in quibusdam iusto aliquid exercitationem et tempore quam. Veritatis ea ratione ipsum qui molestiae. Nulla quo aut soluta qui. Debitis enim fugiat.',
+                excerpt: 'Aspernatur non consequatur voluptatem vero voluptas fugiat magni et nihil. Sit sed eum temporibus rem aut. Blanditiis deleniti est atque nam dolorem omnis veniam a. Est et qui illum perspiciatis qui fuga.',
+                email: 'iua81rieaqj1jkiez1t84cnm3ypf8h1jotkfojbtodbpyszmjbf6uhc6e3mcbhrt2p2ezjty1lvyh3ws2znvtjs0yauc6wiy2rin1xgtghqa5queucz1y04u',
+                phone: '2b8hodq8jxmultym5k2yalw12zbgop1jcbfrys39rg2btwryr1jufcx67lakqu0l706imxq00hry0kznwcjuuiqsqqhptbls6zfwneb937dmzj69uttc2bhs',
+                fax: 'dkqns4amkobr6o06nrsxn6orehwyl14ouuauf3efus9352zxz5owgswzblzbeqf6voijghi5yn3ibqay68pncp6oc3ga1zv4e7ceu2xh5czyco3j832iabmu',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: '3ndll18ljd',
+                locality: '25golf2qdaz0wes1c5h7u434b9z6tz2dlc5frmxz2if78hcz88j41stbwqpwu5u7sh8ew20p815f3ck8dxp75h9k42o4ozukwpwcvbx7r2skqdsw7oqnvvke3m3p0',
+                address: 'c7qxmtbclixm6xcm90u0swnknaj872ita1vfvfj8875dxbjqzh7k5wfr0apzplyuglf2j36zasial1orralmxdq1pz1bglio4t3pr68oi0n0x5wge7tiflplxdb0td9jpc8c1qsaovk5ka3t2i1xaioob2xper9rhvf089rhg7d3oom1krrdbgu9ao0hz3opzoggbt568e79t0sk8ddhs99l8k5ovm6t6ssxzblb32xp51b1byrhasje38dp5u2',
+                latitude: 541.59,
+                longitude: 894.82,
             })
             .expect(400)
             .then(res => {
@@ -149,23 +149,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
                 
                 socialNetworks: { "foo" : "bar" },
-                description: 'Sit et ut eligendi omnis commodi enim nesciunt dolores. Et asperiores sit dicta laborum repellendus. Quam alias et voluptas consequatur aut sunt iure. Architecto atque eius eos vero sed est sequi in. Et autem et minima. Non quasi commodi eveniet quas eum atque dolorem placeat laboriosam.',
-                excerpt: 'Laborum facilis id aut aut rem aut. Deleniti nesciunt totam soluta provident dolor. Et est possimus repellat odit. Voluptatem sequi officiis.',
-                email: 'ly0et2czine85ejoy4n3ukpjbe2jqb6y7bw5w9th4y581u0pl5ihmnkzb4uyha92s4ixtly5aezgmgik0ame6gggivr659bgib07dlzctwv7xtmza7gmy9fe',
-                phone: '0kfr5f9av4b5jnrudk5gnzkfc1dxt26tpm6v49nprzqruv33vtacku5m6v5232bg7ufv4oi414020hzg383b2nxs4536beph3jy0csf3mgd6b780eppbe72c',
-                fax: 'd491z9vkg8z3ergbrw4xnmq2gw1m1kgq274efdmguoolxgopsg3qcsma4aaandtvvt3uvb7mr77m9quted0ao75svcyzor6po8wojl9ypemc3e088umy2ea4',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'gn9ojunzkh',
-                locality: 'qt6okduh81ls1nogfc6dnrjijb0b4dmini30sdn1mnp0836i24cj7al2xqqz4qdni1ek1kzm1qk1kcqj2fxgrhvieimifqd27lzwtmok1f86ksv21sprzvodde7q6',
-                address: 'i2jlmjzdoqzy2o6blyowf4wr8fg7gzg2rm894us9b04xz85ls59e1rog60z0avzb5gnvowl2idvjcssls0ufvlfgh5uy9osz22u32okvlz7krjlz7c8glvbvmx6dsdpv5lbjtilxnusazfkudakmne4w2jwba77ds0fbzie6pipekxv74v3f2aa55r5c2kawro0h4dajqlqwfe52ijf7figdjm2nk7hnvofji4v1wuxgktzqocms8sfg3ln5g60',
-                latitude: 210.44,
-                longitude: 470.87,
+                description: 'Sint fugit tempore quidem. Assumenda occaecati quia. Dolorem eaque esse. Aut molestiae veniam.',
+                excerpt: 'Et et iste consequatur itaque assumenda repellat. Dignissimos sunt quisquam omnis accusantium occaecati asperiores cupiditate ipsam. Itaque et quos possimus quam soluta quis.',
+                email: 'ckjxvrd4uy5ad9hmov63hnlu3gdu35ocp938vmij94sxgaep5e9dtubeji3wdwixsc5hlid1odfvjumw1aslo5gkolrrzr5wq27tu97xn2rtpma5tjq80z1f',
+                phone: '5i8r7vx3ykc4i9rc1uautua2nt81r8o2ymdp0wyb8hsot3xj8989u7bypi7fliavhewnp4ip85gavrhx0syasmxm6kzhnj8tb46vxho2l6ogpslk56ai5pdh',
+                fax: 'tl2bycako61gkctepo2dc1n9esyah35ktmflnklmf1nocuaxbbs1yopq5qgtxncd03blfcqecp79q2jbbeuau7elvb7v6uilly88muyb54arv7d733oadjci',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'a8ettozupq',
+                locality: '0fe0v16erlprz6fbk4scz9riab5mv8q5037emlula7774r0tla5ufwf4zllgyp6p1c9682m67kd41doy95kw664a6js8wpl6zjshua3tuz4og5kifo7cs2dxvsgwd',
+                address: 'iq5f5f98jxle7jny2bj8kj5z7cn40h5u90gkzhnxszxtll3szh7vsj6vmwo4uu56wvevpo0ll09mbnccjzz48kdlts0e237jfl5vj1exwlnjducw0ab7ea39o1k27waspdh1td596v67gogp5aiugxa5ek5n5woajepubxyveu9wciitz087pz9dsupuq8jmqd21faq1i7jdpcnp9p1bs65etxemh07fhkl794iv3or8kl3kc9x2alhjfpg4vt7',
+                latitude: 665.68,
+                longitude: 468.33,
             })
             .expect(400)
             .then(res => {
@@ -179,23 +179,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 's2oc44z7x1ndnpukdzajvusnoqqvsera4zwo4eal092rhy2bhoiwui5zte84ewmfv5lt9ucqn9lywr0twtjfbbbv1fzj62bmg9aitg5ynsvfawt99v4c307t4ltdldq2wcf2bdudo3dxgo9zv48iyrnxetwlbthye0ba7eh1b0prxcn19q09512g76tjyhu47kxk7cwmz3b3cwx66s56fpbojcmyqprlk0ek9jpud4l6qctsxbsql5kyv3694vk',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'rtzrmqe53ngtlenwrdkdpue5ymrk0bhm37z0a63tcqbbokpww3hmpmurjdqmayal2zr4ob5jt0m0ax6id4gdmhnsvyvmg3hefh94kisj44pah3hrkaz8uvn8dxks6n71514so8cnwxyrrsojy49ybemc3ey1iw0csa1q75athuvvutvmxxo36r36i2wzhjg3co02duc8foc3gzk6ksn9ffcemfm44743kapdc9vsr4ntvgi2pf9grc1y4tqh1gf',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Labore officia voluptas porro. Iste officiis dolorum. Perspiciatis repellendus voluptatem ab quia necessitatibus alias est similique. Est quod dolores aut fugit. Tenetur quo mollitia quasi.',
-                excerpt: 'Sit iste voluptatem non totam. Et tempore dolor corporis vitae iusto neque fuga. Quas et assumenda vero placeat voluptas libero voluptas voluptas. Ipsam et molestiae qui reiciendis animi voluptas ut. Dolorum voluptatibus eum enim enim sint sit id doloremque.',
-                email: 'bcvlfqksg17j1tr5ley9xwcwf1vauuh38252avagesljfj22bcpea1ihbfz90ed120vrt3b9865ra5w0a5rbakjpi1oh8grlmcvydnvnyuzxg8u1w1xusdrk',
-                phone: '9yqtifdxtjv9opy00mr9foo7ecfo6quvfcvrsgl4hse3ejkscr8zm4cp66akrxc4li2gxzsr2lmlu0aw9388xw3le7mej1pn0ktccnrn13ebin0hgqorwt1l',
-                fax: 'web4j9stbfwl3124k5rdm1ywvdzzmlrfac5r4e81ja761tx88knb3w96xkoin9u4cwwwdnb6tv4tqw213zoh8gyb5xx590v8mc5k4z2mpot8nynirkijqyjr',
+                description: 'Natus dolores non iusto inventore quod laborum. Qui sit ut quia non. Consequuntur quasi cum ipsa. Accusantium sit hic molestias ut veniam. Libero vel voluptates doloremque ex occaecati et dolor est aut. Cum accusamus perspiciatis nihil voluptatem rerum porro quia.',
+                excerpt: 'Commodi repellendus ut maiores voluptatum adipisci. Non doloribus labore. Eaque culpa voluptas nihil culpa quis voluptate. Ut non neque illum sunt est consectetur praesentium ratione excepturi. Magnam natus quia hic ullam.',
+                email: 'x9ayuqp8o2drcaqsq5lsn9agyh5s2q0lebsprya5jnrh2hfjj9d4jfhsjugzj19h67bp4af3wcc8z19rezk43crzb6ariat7eh00irlmkj8xvhc7uq4qvyp2',
+                phone: 'ses59ug4q02cqfq99d7z8ivvb51xwljuju38077qv2f634db0kfs6ezrz1irjuol3jba5r2xoz831xx7ty2fvtpqdpa9pj5cifkzmfnr1pk17am631lmgx42',
+                fax: 'ftw6xapv9ffxy5y2wwqkn68yvq1b1hi24xmroaahi1844n53fieb62o45oiyy8twy4pppbavgzrtrizc9dvqs5m1lx7q6xz1kc8ie29j8bq0vlejxp3tqw79',
                 countryCommonId: null,
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'rvrwjf3eem',
-                locality: 'gebrcsjw6fsmc9sserpqtjkn30qsjg3rdu7x45mmj4ne8plm5kpkhyeq78or5vaisu0jn3o1ea3izi9mybwvq3z1ftatcx4gwsp3vnxcr5a9ov69puyoaycff42ev',
-                address: 'ab83huq8hh5ncj6guji7fzr8qpq8o96u5tmto9bw50guy70oyzkmil04f41ffqpo0l0ix9ce3jqkqvnk9v5q712jn1kl3btnxfh02tyyrw3usij9dv1kalfo511nw230ddj561qhh9qjk8vreq2twd7ccqro52x2mon96gpp1rm9ftc54dc9kgr12sejzbs7k5zlkjtmn4uk299j0nub4byxxcv8f18wbzleqp63kwa8w9dem71luconspfnwne',
-                latitude: 936.18,
-                longitude: 834.50,
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: '9cks9qqcqb',
+                locality: 'ntpzmcf2p4lb96gg6a3atr9shv8520cq4mvxk16kgd75xbko279wjiwy6tlj1hvddg2jh3634z1i6nacz5ohkwzurgozi4zzeabxm5zbrsq4e6j9nnw3y3zjjpwex',
+                address: '9y5eb5stbpegfd0kvaxwt15s7hfgyqwh2u03ztkmewgzlakl57u5kznq15j14d5br819p32drqfzdresus9iou4vmtsur307xjxb9xhq54w0s6qnpajlc5v5hwkwjmc7z0w30em55bdrsmveqshj044w1fv6g5t910gc4q9qua0b5nesegznht78tzulex03rjkoz09ldyui68i2miarcrmg9ek15r11pnz27xyl838vwn36684dcgt4oz0b39g',
+                latitude: 390.62,
+                longitude: 222.58,
             })
             .expect(400)
             .then(res => {
@@ -209,23 +209,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'bu1f18wjsr2jaco452lhirqa0b7nsqdul2aj1lm97f6g1e4kjvqawwcy0mwuqlws87rrs1w2vv1pss68pgbc8nnz856bvmza25ht06hn0z2e37qb5omupgoun95uklz6jsqwkccitd5xp4bjzf07zfyyogagkgbgiwqzf0xnyjyzyz5w2gpyctdi1wcsvkdntjf6ri9damwm0seg3977c7hy5p6px5xr7j6da9okjcay2dsirl2um5mcom74tjh',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'zs3x0k6jnowyng3xczcqnmdydw74lqv6l2muhuuuhfq79f83e5k03h2lyt9oski278j3e1g82tusrblltkpsba3vjk2w9pyxlani8e66q8x986xocv8ntsz1di62124co70w2vpozpsjulgpebum2reurrv0s6vj2jkmgj21wgujfj69zsm8u1wzm089gs3pvyv3dh3eeg7bkhky5wudqgzxxw1c0rq2hu84jnf1itz4nl89nk8hj79rfeg4f3w',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Odit vero cum quia voluptatem et illum error exercitationem. Qui eligendi est nesciunt fugiat accusamus in ea sit. Suscipit molestiae id eos voluptates. Ea in facere aut vel recusandae autem et explicabo fuga.',
-                excerpt: 'Voluptatum amet nemo non. Sunt consectetur harum reiciendis est. Voluptatem ea aliquid nobis dolore velit tempore maxime aut. Officia veniam voluptatem deserunt.',
-                email: '65r9isqr1j78j4c28678en9fk5f99dbpm7ad8d1oujbfjvvclrzfi1ohbokmfp3o0564crj37kqie3ssw1ziuqkyrl18qsoiixb3g0u37a422sajdch6gr41',
-                phone: 'bsm13zal0bczvee1tterwukjx6bqnc97stx6wso1b8yjq02s1ltodzuo7rik1mk3on8d700q83qh3as8py1zk8yxv0ulcm6hw0hcbxa606c37tz6xtqsrf6e',
-                fax: 'x3jbwckivoqzkm7h28bdk694qmd5pdv1n6qa5vlthffaqk5281poss5gfjrzd0w6gn7j6suhse2hplyd78hdl7uexmzscuowjyqohsxumqeq5nhqv2400t2j',
+                description: 'Soluta quo nihil tenetur itaque temporibus non. Numquam nam fugiat nulla. Vitae ullam numquam ea sint qui dicta. Aut architecto sit et modi occaecati praesentium officia.',
+                excerpt: 'Voluptate ipsam earum animi ut dolores est maxime eaque. Molestiae praesentium occaecati aut. Asperiores cum quia. Voluptas veniam beatae doloribus occaecati asperiores sit. Sint molestiae et aut in voluptatem quia odio.',
+                email: 'x25sbyg0nqs2hd0sjvjaf4375lbid4ftgijm3o1o6plrxntmft6oiy4oyapatdvtgvxkrbmbfekgfoomzpfmqjmog7evx7kinkn9tqo9g5hpxswysnaw45p2',
+                phone: '698mt6bww2bhj8stgxfj65llti0mzqjl02er9xw1rqchaj3rh6022f4eg6cu9835p4j21by1pxs5e3o9tf4p0bwvh6o3gtu75goshewlxet8f0lwxoabufbi',
+                fax: '3paa2zx4wdx12eriyqs0yo91y7gkecp1q66kivh1xkq220ww3xo3jwl9dnzl0hqwwr4ymdq9yql0u3a0peoxcsp2m7wiohqe0fkuyc7iqwova3bs3ixnvqkk',
                 
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '7rgejys1qo',
-                locality: 'qgwf54j8k5iiw4e3qwgfgptg3x3pm5z8u39tbgofgargudqejtvwmmbnzwe9lpy6rkjuq8fuwe5aef0d8z2fs2fq9yakdheza7mlrad3cdyonyaglas2cccltct8u',
-                address: 'in1thro3hz6mi6pspqc73vn41tp93wqiva8z1y8zpf841ngcwq7m3qsv16pjarofm1vh2q6tq0rsaakfsp74ru78dv7zox906l6mj54et1p82rr6ve2b8erl6lq78vwov9hh5mwymxzzp775y8uygjfp5ozkdghy2bmnav39e4wp87emlmfa5fitvv3mdw1z72bmyzkzqg8m0knh98egkj3w9b8iyimn9ni12mgggpggkrksge97pjr34ttm0y6',
-                latitude: 673.77,
-                longitude: 217.19,
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'r14s0uua91',
+                locality: '8ylfe2jszewfvonqgejaar6f5vvueu6rqm65zc33ucm5jvns7w7pllnhg85o7nbidqkp9f9mmrcx8x5v9h5vajv6zbck7nvixu418k7kthahthdm5e4psrjf2qgu6',
+                address: 'rd9v0x8o8lpaewcrs4zlz0xbgldhlidqk29vatdqrippbey6ce2tywgim35cuachn7js9eu2lxzuh1bv0qcmgra27kjjesw99toopnqjd9hp384n7foq07yckqi2t8zn1pgzxcb8t1yx6m3k4of5wx3n6mxag31o3i7oc49f1u3jos2j1ltdi5rlxvoo9au76tfdy8fh0v0xcdyo75ssp83fg1g6dvgk1wphrx1tstdidv1uhpdr3hmcbfx1knq',
+                latitude: 896.02,
+                longitude: 964.80,
             })
             .expect(400)
             .then(res => {
@@ -241,23 +241,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: 'dl1yttyuzf3zcf68kinumzrbsjnuruog7ki9q',
-                name: '05b62zzjaxj2h9as7hq9jc74zfntcjazt4508fhiflfz0c2007xipu96wdjzdt4vxn5tpdka8hyu8zwk40kxix45de1qo0nf9sdslqlccgtwq8c44ecq40pgim4admj88984ce4yrqmigjkspqdz1via7w4swiefex31lnrobe6fkddi243rupczsuag4xr3t1wxvykzwjzm5efsmp9mr976qi57wvmd71ys2z79r4w3x8yjgqls37d8nio45s9',
+                id: 'm36m4tmbo74dhr80ydscuoeij0ru5m7cjjfk2',
+                name: 'fx0agllllx5cz2xm9t28v36cmsy9tgmotb8748gquiozcjuwqz3nu2c9uanvro3pq4iaz8lq5xl6blsckq9ks7tisuarp0cprshfyuzqcwpu7qccb6pxlr8t6jhrsq5jqky386j6ebif3a7soyw0ojv3ntkkupecmh5ktdnql2w6qp2jad6b763hgblu9q4f06d3e4pkamso0oby10v0vdztgkyehil59anw9f4g9b47l97t46ppm3rbbqpv6sq',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Alias dolorem quia qui distinctio unde. Ratione ipsa et. Ratione et atque magnam iure ullam id enim rerum. Sed aut quidem dolorem voluptatum quas reprehenderit illum in explicabo. Aut consequatur fugit labore.',
-                excerpt: 'Dolore ut vel eos rerum nam numquam amet autem aperiam. Magnam at dolor quasi in. Dolorem pariatur excepturi at nulla enim nihil. Ad perferendis quo ratione adipisci tempora molestiae error quas. Accusamus at quo. Non ut laborum vero et nostrum et quibusdam.',
-                email: 'htwgwq9cz4va53hnb2p351zfbt99k1rrkit08h6jgzpfjwowu95iz3kbr4po0u000zgwo5m4uw59hrctsrx06206bu2tvx1j3y1pdn6guie1lg5qyt889dat',
-                phone: '188fk6k2mba1lnj1shz6b3y9opedxs6q0xdkxldqftmf56kw78j4pnucpus6ma3unwr94tfel9wx4o3wrn8rpy5od3vp7pn1le5dcecnee8fvnavdh83phiu',
-                fax: '9evykq6nr9f7kpf0nxdb99mdqt6jupkh1hucog9mhdiv2kx5qwu2phfx8yuv98kmxp9acl33ju8wr9xl5rtl9av1p52obf3hms0wa4l0unrbtm0rzifcndbl',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '3hwzqy8kct',
-                locality: 'gdvfh2wf59h7scmxbtnfov7uya1q5lf6s0v5e1pxyloz85gt156o6k6vd86srle0rxxuycxjws5pwtksqbf3coe4z5h679xek1ho8tyrsf7ufgn1f7hohcbzeyp8d',
-                address: 'be4wdcczso7htexa7vylmwrrh8g96o67g2s4zn1nykhhv0tikyr57ci9vcxe22i9nli15ltlsgerzh6dzluxvoj74ltier63ruz6dgdvohuyrww1308pwvxi8u4wg05vx0izuo42nthyacj6gfzsmaynmyn8dipaz4jkoi7ggna6vlnj9aaki008gmkjvrsjwju2uriygpusc48mbpyh2bckjrw9nrhgedtz8q9laqg7pgv4bdyu4m22xcjxz28',
-                latitude: 160.60,
-                longitude: 579.88,
+                description: 'Nostrum laborum velit aut ut velit possimus voluptatum aut. Non molestiae dolore ut iure corporis error. Nemo quae ut illo rerum et aut quo. Quis eum blanditiis omnis pariatur perferendis eveniet. Est hic placeat dolorum laudantium ab sit.',
+                excerpt: 'Non fugiat iusto cum a. Non beatae voluptates ut autem. Voluptas sed voluptatem omnis libero et hic vel est quae.',
+                email: 'v3z3yoijrumwu2x2edo3csptl5bydj1nigvba9amjdwju6y02nibie8hmstxqzwrzddmswssf6314x9rf1igia3tcg37v17bavmccursgybbssxc5hrii1f9',
+                phone: '5lq79m1y3q1xk85cn3xjvqm7e0bnrjo24trb1fkuvmz9jdkcn7l45op0yq5qsxo8m9httwsrva9c4evom67pknbxwfrut61q2gt2flns822lcll357swz88r',
+                fax: '8b19lxn51q5ohiq5whsva7bfzo8gf3hrgadjmaom3rfono81z8e4md2715i133be1l5efswgjtqz8e4ap3th8nmdgdwl6we7njx3uzcgr6h74qc9fs7eop6f',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'upojzu1xzt',
+                locality: 'pmvokg7hpbggzwqtvc2b7z1zoxehn63n2rwbt3gbu3xvg52mt2mat9akbmgsmv2dnxvwq25et5stfvt0oh0c5724wvgzb28bifxcojra7ii6zd9rgw5n9spddqa0i',
+                address: 'e70wskvdvxnnqb1bztixgyw9axdum34gake7pdq07kdaadjym9ozu5z0ij5c39eggagtg39efk4dtwd8rn45zhplw4s418fjtv70dlbcgsrs6p3xd0ioorklzwefb6trkiyrf5v6h11t6diy3zt2w04ftcmwq3hkd5fkb90nlzozppcntugrowyme8nb0kx9nw96rbdmubf22r48r3qbaqcdhjqj14836ndfaydsjopztr8g6vo6r319kx2a6hw',
+                latitude: 424.31,
+                longitude: 731.65,
             })
             .expect(400)
             .then(res => {
@@ -271,23 +271,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'q3d54ouchx1f09dwqfsc3lnve5n502iws29kwl6gck1ih1ve7299n90qyy32orrv8et5jt8202rrzcdpn8txzk5ozmkg70kns6nxt8aicazm8b00wz6hfcur8rzy3w8diiwk052g8pbm9zrwj01m74hl7i1kclglr6itiwk8rw2i2xx3b0ej4k3acnzcbnj80ajgisoxvg4kaunnv8jl7tj011688py7auu04z9102xhm6k2mvh49eev4c4jjb9',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'fpvtpmoripdp7zba2lmc7r048jzo1838cbv9cmnzr0fqr0ihgafy8q7odjkdf6qjmmp5pe5jrxv46fw94lke42qu8wgif7tez5h85uftdp953p9kh86o9ilz8fq281o33xxbltsrrktwvfbzg37tdgw9lwhy5v8ewhh07d645bak27id7b94cfm3sthf2gioydvouvvq4x35npgi1et66lgp0352mnzmgrdv4607n22bvmwa7g4ozcw80evrjy6',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Ipsa explicabo magnam doloribus quo labore. Culpa in possimus tempora consectetur deserunt minima et pariatur. Tempore odio hic quo enim qui. Dolore qui id eveniet iusto temporibus sapiente. Impedit magnam et. Sed molestias voluptatem deserunt.',
-                excerpt: 'Veritatis fuga minus facilis rerum illo quas non. Dolores tempora eum magni eum. Nobis repellat repellat. Nihil voluptatibus eius aut dolores et. Ipsam sed est quis optio nam ea. Quo omnis autem porro autem natus culpa dolor explicabo.',
-                email: '3977ixz2c8dnj2uqsbxr9ixngze5llkhszb9am4imp9345l68qnla0631w7b3d1w6k0x6dp47hf6d641mxk3giuo2oz0k8pj8ihonwcsui3j4r2duj5stl9p',
-                phone: '7t3gzpckbtu93zyb8qdd4ritfuc4occofjx8shutjj0rn9ikdxtgzfuntibkobur95bsf1fwp8tw0zd2tbhv46pybdm805a9xepx8ijawriqf9qs3cfjepyt',
-                fax: 'c5edmgrn2lxtwevfp8lbs2btnufff10m7bgv1v9dqoiquigwa5qw2ssrs8l8l9sgpbp8lvxop20dt7zvckn32bjuk02dtkbro6zhdkvx71rlw6jmpnn703db',
-                countryCommonId: 'rel8ow6txgbzenhezvnik9czx8sxidutl0sqt',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '0xukenjvxi',
-                locality: '0jnrpe3554tayvnxtq79s46uy0mptdaibsbzuiotec6cjm2mn40u57q5fv6ctopf35dgu2p9pnyi1jj0fgvq093gigoz3bl9m3xlafw2d9s6kcpherrw9zusvtqyc',
-                address: 'acshcvr9vui2blwmdke40ot67tntk5om5bp6bbat7p6o3nywcni4piel268r9up43893ks3c4yb0omsfock540k7urskbizw3x58bh9gcat52x1vtcy8gf5wyj4mr0h8u5op3880bo2ncu983xm4wfftwuii0n3jp5o4ufglmtpyu04ivjgksak07cymruw0r7hfvc9y4i7mj61slb80md473i89cgiesy2vxdfrq54bvi6vxty18md8x33fgd5',
-                latitude: 8.44,
-                longitude: 736.87,
+                description: 'Provident vel cupiditate porro aliquam magnam. Ut voluptatibus consequuntur voluptatum ut tempora numquam expedita. Fugit officia rerum ipsa laborum voluptas et quasi. Culpa hic officia a ipsa ut hic.',
+                excerpt: 'Ut debitis rerum sit ducimus tenetur velit iusto quidem. Ratione et ut amet. Repellendus quo est est ducimus facilis in itaque distinctio. Non dolores odio natus vero quia accusantium.',
+                email: '8cw0d0tup4ih6nox9sfwt50qmydjbni0hcro3acdke9yv1qw0zcazh1oitpthb78u5d48m7w9nf8c2tjhhygfzwcy86fvmra1npr3h2568j4lc5yq8531tue',
+                phone: '1tq7otrqtwkbo9hgd19t3aeqfw8jwgiafh88dtzviuki37b5kl9af8923k8gl4xyn246d6bp33lxgvrnmz1pd9vx8zquofepunrvx5ec27kkrrc8bx689mvu',
+                fax: 'x2fbcwwawsae1183qr324xpoyueg4h92vgm9jghq12qew4l6hver1qpid8p3dpc1s1l1nno4yob0r606vr4ryfbx4bjp33att1m7tka0kgj0s70ixdw45m1l',
+                countryCommonId: 'anpoypgz3z4v8wwknw6so4zbvuuvnvflxpsx7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'aznz5e9xgd',
+                locality: 'eoazlp6ewzjxf0pg1lyuvdl0eui0ev9w1f6shpxumht6cqxgvmqttakvt1z1sf10s8l96eii2cw654oyuxkua8mc7fr7twiar08y6nuhkpw1kbszswodh4yoso404',
+                address: '9yldxj8qo3eczmmanbs96jgb1jivpocnnvye3znq58ys3ghlwpd0agq9fhs2z8dxmoibn6w59e7iwqujw8hu1ft4js6fgfapp5fes2zprcb9zz7kvpboyyokbjywgdgy0004d4zhdzcoesmqtqx1fkiccdavt1i6qxx93upj060tpfeghugacseb0wrzmiyrkes49c2c17hryrxwz1zb55tf9g8tm7nn7knf02rlo7n225cf31a4x4ans2kik3i',
+                latitude: 198.95,
+                longitude: 755.27,
             })
             .expect(400)
             .then(res => {
@@ -301,23 +301,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'uftl5o79swbztcu9lksfe26hwl5o3m8j32ars9xlo5svvhihn1m0s6z44ir0nts4k6q2ikkayce9hjkf6sige12hd3kvv6tlt8oics3mszkhi6bwsp3hjqz9jpa1ppgkdy9zpglz0z3pm32ixp1n41q1pwkcjk0uejib8s3c07xtilx1bsbt7gviyqefnsq7ro2m220d248bl4htv380tee2nuyac4n2zzpk891cqvjwyoyffysqqfley3zlxud',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'ddx7u743e09iievf64bund9v88kwmk8gn0xn8cpsl1473jj4au0wwg2bqhtgs703hcteltbwd5akzn9tldt3gppyp3vz9rk6pf8jingry32nkfgraike4cvphx8ffyzd1gt0687t6otqbi7yrdsvsqoqhu3j4z5ntjbpbff75r7za8ab5t4edlrfrusxq78cjtt33ib4y1wx0b9lfpwnhxvgjwpct2qpd6acvd8wdx6si8c3pd6b8goy6tkjlus',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Nesciunt ullam illum enim veritatis. Ullam dolores rerum quae ea. Necessitatibus dolorem aspernatur optio atque et adipisci fugiat numquam sunt. Temporibus aut consequuntur qui aperiam maiores. Dolorem enim saepe libero doloribus. Necessitatibus qui sint voluptatem praesentium itaque sit quo asperiores quibusdam.',
-                excerpt: 'Voluptatibus quibusdam sint et nemo. Dolor praesentium et molestiae. Velit voluptatem ut aut.',
-                email: '359av060yajcrmx9irxzqhky8mg5bdkmxqtwcenm9hywx3yjf17wwh0d6ajev7q8jibip22f8nz1ydks4zu8578c4b9u309b5561p6uub9vxgvd0frnk7ldq',
-                phone: 'b1t4ge7z5fprs7iwzvvn1zylmefu18qhba9xiinnx8idlpwpcl8p00rl3pri4se23ve8mvatx2nhqtf3ay7sya2mv0vc6kv3fykf0vq0hvh31fxkopwep5wu',
-                fax: 'k4jt54zrccbjlh73ynb0whoad7ercxqsd99nc5ritb2sk8k2k0f85jsa3fdvb2t2ysr23f2kg7mna2o0t341e3f8a8d8p8c9vrxbj59wz78gjsbrl12aanpu',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: 'p1qafwvuznuxasbqrcxbk8691gbwicdop3n5k',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '8em3ejdovb',
-                locality: 'on1enwvmukmiqat0gybv0llbh4ps318oslxov3f23kkjf5dm0zfdrrmzn5qukaejcm5ijshq4840b9pbdzwf4f7xfffdo31w31o3ghwl3ghou69xrpw8u5iny3qxv',
-                address: '7cchd74fdcy401p4pb4exczzn63di2kbdmdcsd6kqjpe4ij7xj3u1tjqk4l643pc94bc7jy6hlfn3f5cb77uhepg6fv3ayc31e1rn83eiyb2mwntecum5obqunbmx928j7v8te5kwmtfus4bfvi7ew9zafv8wlq9rper6os5w3i9uq2ho46lno48l2upnquyluxf68eq4uk87zao9igy2n7jfjy6h3bugbicbedk3vyqpgclkun0hj2jo533mq8',
-                latitude: 42.23,
-                longitude: 154.56,
+                description: 'Rerum quaerat repellat quas molestiae exercitationem laboriosam et excepturi aut. Molestias et at est vitae. At voluptatem debitis porro minus esse et officia ut.',
+                excerpt: 'Aut assumenda voluptates quas vitae repellendus sequi aspernatur doloremque. Omnis omnis et architecto ducimus non labore ex doloribus. Ut vel sit dolorem a sapiente facilis provident quibusdam. Qui sapiente natus adipisci aut est voluptates ad illum.',
+                email: 't4ef30y4j787qowx856hqfjbxv1m6iz0q7avq08uzgwazs6p0yp93u1udy1zfl74av3xhaolu32b7ghmknholx6jvpe9omxrk7p6gvtnjcrv6sxuo1s9bjo8',
+                phone: '4kvpirx2t3xg82ythtk4ngp3j7t13e51sooh1vtfhnnl1wb9j5x2x1g9rluaj8pjve3wpvn7gpx1fsplrnb5n07li7l88h5vc7mem4i8e4xzw5e0jd2i2or2',
+                fax: 'tq1t9m14hxmxg5ivu73vvbkslg0urhkpaqmpanus4p2fmr8k1tzb6sph38ghfs25ph8vvmqamuun2bs7v1j510whi4diwvy3znqh53qjpb2b0zwffeq1vxmp',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '80h77ud5axw8dju5zuwg5hg2k71yvo1koyq4q',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: '4fb3ipqqli',
+                locality: 'qd5h08smka1vewk7gwnbb77eg7b1eriudt2ls3r2efpsn2e17xq8rno7p2ari1nwqjnwj1vexes64cfo2adogtx4fk3ld9sy1qdj0cfjbb1pzgjy3r2xwz0uvhbq7',
+                address: '6q36q02j5gx3obgtw6tqc8oamfr7neyxigwec6igrfpy1s81xsoy6q9wx007iqis56s4hptbmjccvgl85md2yj7iar1kumwsjmpz8obkc425elm2yxwlq9qwwt4dkcj8koi647nxn00xw1qrqoyewboxv84uslhjqlcvfzvk9fwe55tojxcqhcx2mpnucmmyc7mae24832me3nf63acekf5leljxgir9lrh7ske9eyw1lc2dh0sx3mxyxpwlir4',
+                latitude: 243.15,
+                longitude: 608.63,
             })
             .expect(400)
             .then(res => {
@@ -331,23 +331,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'fu5eztrsvdasp0jyq4p2peju9eantctry64v3vqtmvpdq375ho5pqqzqlp9dp6csljte33m05x68zqin874spji5ymxep27nowvrivu610pbbsdft6sp56h0wgchppeholi3emofi58eood8of7of5zs84slavbb5gs6gltpmbrtc4q6yvvzwu2h3b9v2prmq9l2htc62fd9wfndeusmmtajv1qnte2ffa4o38hwd0te464o6kdo165mykvtnko',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'ae4i9pqz2jwl0f7bdtld93zn7zwptsdwrqzhesv2a8xp8am1fq4kdrurhvdy15qu6s5ehxix2c0742jk13exxhfe6slsp77hf0snp578jugg3xhv9so5xgrxlnmmiynnjiyg63jqomkhyz5g8pn5degjykbz8jzcpiuf5y2erinq1m1q58s7jiwumkh8bgnnjv37nkeirsps4i8cg4o38w5jso0k51cn5qhltpsn7n8xlgvf8mkvqt8p1r2hyb2',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Odio sit est. Sint sint voluptatem corrupti consequuntur provident et non aut. Error facere maiores rerum delectus sit error corrupti ullam. Sunt eum vitae eius molestiae delectus.',
-                excerpt: 'Sit consequatur magnam velit delectus repellendus qui aut eligendi. Excepturi ut in deserunt consequatur facere alias. Enim occaecati velit expedita at quam. Laboriosam pariatur possimus eaque qui magnam. Vitae ut incidunt saepe perferendis iure possimus laudantium.',
-                email: 'eq6jnw56hw259v18gq004137mnl50e7foq40yvhc17u1i47frydtn4znoevz6o6w70gsin11qoiapbhneskdp8cejphtai0j36e21ungzdafvt6qwb4gyrq0',
-                phone: 'njatkjd6vwrfwmve2u2tz4halq70ycw3dl9yjr8r8c6zctle8fwcvfkkbivpihea5n4l4b3ab0vc8z1ty2rpgd8ashpaesr7q3ubdcba01kumd61ayxjrr2f',
-                fax: 'xnshc8s5nxuxh3kc16etwot399o3c8a1q5cu8uqr6lkrb76vgsb1giziwd8yfc18lt8kk5v2vz0oiougeq0yfajw2s16ybx7j12c18xucrtzhkttv0st050b',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '386g0aajdfv8hhg814kd30xragghl1s2jgt4q',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'octbgv1iqf',
-                locality: 'kkagq6eppqeothlkuyg6h6zulz4xyw6fxl2fykwr00nv37dm30fklgqv38kgwb1kau3asguvy0fxweaajqf88swvkspumjfefhp8hbgt5znga6iy461lgce6ldayl',
-                address: 'ealonc1m2gqymhouz2xc4jnydzq5q16eke5w42mfga02eou729ppxot8bhm2r9mxvesrrno5ovnn7vv1v1cc7l1qt9ohk4tol7uox1yxupd060rzr6ptu5btdqsx00kens8fr3jrnd7sq9wou79xpd5oc0ibfylgboaqj66cuyrt9onzqy9dinfpoy69ousxnldhvskjqi593i3e17972yjhekoasr8tmzl3lnsguxxqfsw8cahzz029c5h4hvk',
-                latitude: 474.38,
-                longitude: 119.07,
+                description: 'Iste sed vero qui. Et repellendus doloribus eum animi est. Blanditiis unde nam fugit voluptas voluptas ut molestias sit nesciunt. Aut quis sequi praesentium aut. Autem et tenetur ipsum.',
+                excerpt: 'Dicta deserunt et facere consequuntur dolorem repudiandae ab. Nisi odit aut omnis. Maiores rerum perferendis tempore illum eaque vitae quo. Ea adipisci sed id dolore debitis. Quo architecto repellendus molestiae ab voluptatibus.',
+                email: 'qnk531w46et1ucpbs4vn4b45023rs02qc9e05u7qbwo2y3fkyaf1802rtwirir70gc3enfb2kgs29vr0defwddgcoputro8kz5eoqptfti4k1hr1lxkmecnq',
+                phone: 'eoyk0i2defh81e8lmy1iiyjme42x8wa57rx46pjki5vvcj7e8x2diyccokkfdh1qqnqj8wcv38tu5cs96y5tqiiq77lw8zm78q9nc8n3ptilnl2yw36qdjw7',
+                fax: 'lw25ozgacqsqpfmus8dupghnrdasi3eimesaqxzy0h1kian6r28c2i7rqvu0t4luz9bh7ufms8qkw3r51sbd34ro4mpgyab8b3hsbcrwgsbvioxq4v5hmcrr',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: 'qliysfqspflqvyc0puent1tck58nc4gpgug27',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'yjzk67pchd',
+                locality: 'vvpq3u5b30ph4lvlbllz9mldroy0mmdxalrplvzl4saafd5fql8lobuqi9rwz8ihc2sub4nu7aepgg5yrybpvf9vawhhlzhd72bedrxd22xasrx35xp7xxa1mw4e5',
+                address: 'w5wtpxzxsmu08muxykrhsvz1qic7n7jblf8rmehfh734y1wnqdmkcp990sr5yfaza3vnwg9bwnzy2sl40tik7hfiebihnmtdtw0n5f7imqg7yczd87inyc1xddu8obpbhw5uclyvgpkabi5wx9aegmc249qrmzp8pmfx66bok3s59i0z5kuniitnea1catezdmf4hrqbulajty7rdjezxtvjap92j1rc1as9wxdhmpnmdv4u9any45zfe3jp6c0',
+                latitude: 670.07,
+                longitude: 637.24,
             })
             .expect(400)
             .then(res => {
@@ -361,23 +361,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'wyvqenh713cuzkaimlx8kwopyagj2pv2l5xe026fv4dim13qm7z1ogz3e9q93n4xrz7yjul9kxul808by7yel8tgp2097dfos7aqz237xykhzde3xtq1bhjtpmc0mgoadelmxoa2spotcymwdwdylu1xky4mhzg17z7rpdfo9797g0t00smcgyoxx5hsyi0gld39ro05sdsdz9hitlcusr7108b9vm98fr2skojml8j37n4eodcgiol8rb2tivq',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'ktsfee6zo5qnvn7uglyjs45b06rlk57mvhkle6rz2zrilipfj7lbv55csiyjjmg9lgofesg99acm4fqgfw1tptax5t365kwy8ayns2qdfd3ts0n16vy2jfara7p8w806muzw8pd2i9fiobytf72u9zqznvaf17kug9w3gxpanah9wwfczpm22pot3b2oufc6ff2t7femnz07lveza6zly4eyvute3nol5fbd0v8x1sj0h5i449ym4m5f3hypd1b',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Quas impedit et sit est libero rerum. Minus ad iusto et necessitatibus. Non quo dolores consectetur. Cum magnam est.',
-                excerpt: 'Minus adipisci molestiae dolorum nisi omnis tempore quis. Ut ipsum et consectetur. Exercitationem voluptatem ex tempore molestiae voluptas. Porro esse occaecati blanditiis id sunt. Voluptatem aut enim et.',
-                email: 'iwutns01uhm3hk1w9p7kx7ds27j1441wgdwg6a6g9k08ia8xlitp4yunifivyx1srn94x8we0zg9hj55p93mleilmssj6ur5teh9dsuuj7ouhuzsfs61wu75',
-                phone: '4g74ul7u2yz28v4pmuwj5roebdgt9g4l7zdl88bfe6466dpukjlsb01t3v2zlemrloy79n5rxn84f2l5a537do243j6z4yutwz0mw5ks55xfh383qokqhd3b',
-                fax: '3pp1jpy78t0x8c6vnypd5wm6fmljalgz2w7jnpmvqwb6vreaqno42cwtmwqk8hp0kvk79fec65l7c2xl9xchgi6pj7md640kthtwkorfkv4g39081pwi9ot4',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: 'l8gum6b7ug3xr9p8qd5k1tvig4fn5i5t2kvl4',
-                zip: 'ump1gudp5q',
-                locality: 'cocee3nc69sl9xdg6sejnvf4v6i5g0q357gecnk7vuztuti4n5b43diu785nj98ia998o8m7i0kcq8di2u0i4rvriyma5ya1ghg4007ju7hu5h3e3z35y042pp462',
-                address: '1p8yojtvr51dkw0lzdvsb1defras5yres79b0ii8tj7wxnvll6zvxh9r0j4jc7ildkap5bhsaee80j7gw9hwzrgouxvvg66ms4qgn5ryeo0s78261rd5ol34h5shov3kyyieuw8nrmzmhp58e8ekbsu2ue3o3wd3fo0gx8yfh3yy9cqqmhsvdwjagua1t84ej6tnf4r7v5xmdurjsv7jr1q18mjg3c46s96rg4cbe69xxhvr8u682ocmosmx160',
-                latitude: 848.01,
-                longitude: 370.65,
+                description: 'Et recusandae similique quam fugit error cupiditate reiciendis aut. Cupiditate vitae eligendi eum aliquam quae et quo architecto. Possimus sunt quis quis fugit hic et est temporibus sint. Ipsa asperiores sed. In iusto non saepe voluptatem deleniti et alias eos asperiores.',
+                excerpt: 'Porro doloribus rerum consequatur facilis impedit animi ex. Fugiat exercitationem repellat qui excepturi repellendus ad eligendi. Debitis aliquid omnis quibusdam et in eum iusto accusamus. Dolores nisi voluptatem non tempore et at quia doloremque minus. Magni deleniti quae aut consequuntur odit eos.',
+                email: 'nngb2f9d6o1xrr6gelc71h9h0xyryeuyd0yb2vktrwuiodkf3xqzbbegnayb9rhzyv8qc8azrt93pd9j39tj971zmz94bpjp3deaf3zlbvxta7f82ss474jh',
+                phone: '44mfaxj563oos83luxy0oeln6zd25otp0h8839tremmapns6ozq1zld4qhjicgv8co15tndo619vdsdgqarzunlms2ufwarahuhjnlgfhigxur7x6bv9h7p7',
+                fax: 'mvt65w2a1xf0hvb6ffartw2kav5lr3o795mrtd07h4ggzh9g5red7fqqpc5tyzg0ti92vfuy9qyjozi109994tlmubryvinm4u8hr4wevrr2z9olhvs3f2lr',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: 'yakh045e5o2ly12dtcpmayr2kou5rq2lpcgp1',
+                zip: '768sjajdca',
+                locality: 'y01bl9khjotns65gh9ydte0qzva0zu7nkktfk51cfyv7hibyf75aefda1pfbaz5coe65houqzm4y3c7h99xit5cc0530nv935ctvu1r7sbg7e01765qxqpkhnmwxu',
+                address: 'yej4by28naymas12prb1ih7j0tm3qkp825qi62nm0nc5dbjj5jk5gtxqo2ilkb4jf9hvjcakax7bkxivhkh7mgzarym30y73d80zimjimkangvf8vbhwy595savyh69yv8g12qdb90rrbe8t59aup1yqv6hniqk04oqts0oiz38skjzzf7ozfxt8ft0f9mtnlznz523bvfcxdm0ase2po96k3gzgszst45uhe988qyizscmegdq0z63qptq0lye',
+                latitude: 847.40,
+                longitude: 303.63,
             })
             .expect(400)
             .then(res => {
@@ -393,23 +393,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: '8yeuwnxzhrpodlkg1hi8t4bvovvic0i8vcqmkgpyln3volymqw6pnwws9g3nlw5dyi1a69w3samqt3i7anrsxlywzjhkyedtiyn5gihe2k44jzsik8zzj4w2sdw0acfbqnqsdbl6emed3nz0j33lei5kugmxjnqv1tvgwcz3bbfbphte590124gme9b4abqxex2offexn69w07a4yxfvcz9mc491of1ew39hrblu9x3gx8tg3oq5t2eflkjzqkcq',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: '3g2qaqlqfslmfa2q78vvaaukw4rn16equ2m5fz1mc3g1893893rnls511nmjj73e96v39dm4ohopvqbv1dlfwihaut3g929oxzrtbbolab5ri5mopnc9v6iu1wfth5hcczzznxe4ndh09nz9extgwxi3884iwqb1llv7pz1gtxqj3ok2m1713qmezjtw5j82hnjcwtwqy5e3z9vz2dp0k2bq81jfe7hc99vbv6e4i9755g34td6kks0k4iia3lvh',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Velit sit sapiente totam facere aperiam repellendus. Officia ut similique cupiditate. Soluta est consequatur. Voluptates aut odit. Velit deserunt numquam inventore.',
-                excerpt: 'Iusto omnis ipsa maxime eaque. Alias sit quo consequatur debitis voluptatem. Quod cumque aspernatur optio hic voluptas nam.',
-                email: 'mv7sk6n8ffp2rf61pr5b33y3b1p1n5nw5ynwpxyex6qc30a5zb67c5dp063evgnf7dv7t9l9vmr9qgb8ttujmzm5c7te39ubz2u7p3omlxvvyvfcy50osbv3',
-                phone: 'oecsdy0yjsscaxxfmdgecmcs7igt37d26zm6lictd3g0ex9uhcezwxi3m9iug264z6j0yzd9hxznc3eepjeo236un4sxcm9me0w4fuskj3d5x9mc3sokhwqz',
-                fax: '084dd8xjum5g064olmr1xaps3ls72rwbw1s75nbl8hgw0jzylu7q7nb38nz3lk838fqtsxebxz14urrkc1bv84a6zgengkldncff1gvrezez0iylsw60e3zo',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'zfdstido9c',
-                locality: '26o6i0unp1oy69apo7j0qdp9p0hmmjqzy81moil2z47fdxa7a9arb9xgz1wekphr6ju0hsk8guwa9e0gwjdrq6wk7x9irkuam72do9ro40jzaqghzsydsdc6rsti6',
-                address: 'z7t8xa1afkb0ga0zgtr0iio50r768ycp1wlgw9f2v872jnvnxx5j6x59saga4wb6bmbmd1r65nmjpddkft4ktyuaqe5h7o1g6fewcoe7460ee6op3yeuz8zty0fbydzyq6ul22zzxsx01hh5bcrqo0eukpylj16cohuwvj2cdf3mp58n2l5hmnit7ou13kbrm45l5k9vqgxzyf0irusuy3f0p4n1dqwkytmdm93e2jwhioi7xr9shqwdb1f71t2',
-                latitude: 105.51,
-                longitude: 895.69,
+                description: 'Vel placeat nesciunt necessitatibus. Aut sed dolores deleniti. Quod aut recusandae. Natus optio sit ut molestias necessitatibus cumque optio saepe. Nam rerum architecto adipisci quia nihil. Odit ut sint quo autem laudantium praesentium.',
+                excerpt: 'Voluptates veniam fugiat qui. Blanditiis quod est. Ut nobis repellendus quos harum qui natus. Eos neque placeat qui optio. Sit odio suscipit necessitatibus nobis eos qui et qui accusantium. Corrupti reprehenderit odit eos voluptas.',
+                email: 'vbg9bpw8prsa87hldt29n6tfeq3165rl7ako46ahqn3f6bg75mb9zfjr0h8jmgti61df3azzhzcjm8a01k7lfsqkivxgf4ezd6hqoduflxcmepqspwgijrbo',
+                phone: 'pql05mahh0k4qujgy55nrcywn475g1v3rb220sxzfmt379zo7qvpc7338ifh5s68pb20lu38x1hgsw9jj94l64w5639yrfjpllby8cl1ffmy44nj69iaslrl',
+                fax: 'n8pp6r7wh1dskt1qlc6qmtczt9z8cphi2qpmvh2ys8krp9wcal8m9q96y7ksk52miwdflofu6q3egdijib85264j2l5cnf1tp1mzycjnpv9a0e6b5j0hs7no',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 't5ko8a3yw7',
+                locality: 'o8lojgy3130nv6a0vqzcy75ea8acsr60zcb145leai5qnnn6qxwsjgmwwp81fm6lxni5tmmkpmtwl3z232ve6preljy2r8jgsssq4xh73pa9ujlqqm467lglpr4wk',
+                address: 'sdzhld8nywifzhwv6gnmaeenmcgqi5snvcs7n31wfpitjs5d9h49a30lx14efvbp8avlctusnmfmielf0cedwd3g6t7q57q59bh0d8t1y3lmlbdw1e4coabqn0q2x9fjhwq0m80cy9hfl7drculv4iwmhhpwrje2v5yxof6tmxqubcxzjmrzdvh2ysws5ovyuznpn4g3p9hvpiibt2nige2c1axpqljy3ha31ku5w3a92trb8p1vr0ndqqlwo56',
+                latitude: 235.18,
+                longitude: 670.12,
             })
             .expect(400)
             .then(res => {
@@ -423,23 +423,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'efmv6yrohiz53ajc1gndgzx1y8402ata7arsob15edwzw1crx719w3yvutgrdnxkqxx7vhlredam4j2hruui4n3rflx8stg0muwa52pro8q20h48xmkpq4ke7h8kojd7dj3f1nfxixxieptgqxuca1wivstnc5hxioqsgipmyjp4bt8yhq12yxidpkggcj25dhyegx5ewgw19rmcejyjvvpysu5n1zvwo99wm05bi8636z6a9ywoiiqf3dtihzi',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 't9osppmm1h3w3q0mgks0c03d81e5mtmizgqbpr8kkdlelgnuznrrbk62j8eaz7we00s6zvsf3sjte3gkbin5lnho1ou18tqdkdork3s020fvoqspf6qmwggy1qa98jr8cbo363blfulqk744fb4pwmbo9bks45e2vnt7zqcbags2g8f4kfdemv448viyt9b52g8nysrb3q17pehtpy01qh6i01pxdjrctf7fw4j57a888wjftjpg9twgrjibare',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Consequatur eos quae excepturi in qui est non. Est quia cumque et perspiciatis quo. Facilis deserunt eaque quia laborum. Quaerat dignissimos molestiae sit sequi dolor rerum.',
-                excerpt: 'Sed voluptas quasi expedita. Quia dolorum ad aut occaecati. Consectetur aliquid quia voluptatem velit non et repudiandae.',
-                email: 'ft8r7qje20hgqkfqqhuqs2gvj9saorzyslm1p9ex8buwigakczqx5j2189mq3v1it8hw7i65gios44akx9kp0iuotywf66mqihfhp2ltliai51q62bx56wut7',
-                phone: '5hd04uzf7luv7jzlxrwmqu642jhmk5sfg9fomm8t3j65gj32vo6njkizpf7zy2gg2cjywn7b9dum3h9yaselii96hqr4a8h37vhprfs3x3bmvmxn8umawh2n',
-                fax: 'e2lzq6v7ptbpykc5axu111wwqrhc7x12hsepwboct9y4amfyxxg0qei9998y2wodq7s00h3uxrbb97suc5cygpoid753hu7sl8zn73jyak6mushpfs63wj3p',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'v8gv0azso0',
-                locality: 'xpprx3e69x1lbd8p8zvz9i9bu84yoazqfetz002nmbluz07i5qzvp7jy4a670dqi3tt369mp4w9s7xqoy6k9dlx6hwik31h2uo0212nz99erlfghxete450dlcste',
-                address: '7zbq6tl1anf21c058ytvwbmpy5oohobzzhwq1u2x31m6gc0l0truj2mq55pa8drakrnhd4zc1p6lic9wfrmmhmyp1im2g5j37yqd2ndjcu21vqu9eibwoq36l8o3g6cfrss9ezzvajdwjln11kvgaguda96rutag68afnc4ynx2zp7rgkj3lfstybe2x1arh0jn2tbu111futc41srv8xvqk2vxdanj4p6bicuznuc33e6lon1jp5zo5ywquhyn',
-                latitude: 341.37,
-                longitude: 742.40,
+                description: 'Ut quia consequatur nulla sint necessitatibus. Iusto quia impedit nesciunt. Vel qui eveniet suscipit deserunt consequuntur. Est illo quidem iusto veniam quia eos. Ratione enim qui deleniti inventore tempore non.',
+                excerpt: 'Soluta perferendis aut numquam voluptatibus id ab aspernatur in. Magnam voluptas accusantium non qui vitae. Tempora incidunt exercitationem quia amet culpa. Dolorum voluptatem non repellat perferendis laudantium sapiente saepe. Excepturi qui tempore dolore ratione rerum eum eligendi qui.',
+                email: 'wfsvre0ph40eda3eu0mv336un87o2cortn3u3bivhb6x5ondogjo8vrvfvnjuflj4td822vevxve5llrekn9u5a9699wa52462udo3hqsp0d08vb6nzwa7h5y',
+                phone: 'oeqlkmu6s9tfq40p2rncrocutp91kz1dnztpo420jh04kvlt20zokrfjemb8om2jv93qufc9do5bjgu065s6lto1mdo5v6ty49y39wvak2f91wusptxx8gs3',
+                fax: 'hpdo38iwtnknsyxrjpmyhag1c9mtiqjey67frcs0vq9r4eteld0jc07u3dsov7n082mwki0onklv7c1vd4kgwooz8m3iyzhd0pgl5vyu48phebv8luxgo88q',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'epl3lv4316',
+                locality: 'tsh5t8ae2e9tb63afw8a1yef62a53obpfalbl31wmp89i6cyz2iqxxyv3qeko7z26zzrlurf7rfijd1orzi189jv7jvj3yw4yklxz0a6ja3m9ybjbia1zweqt8kbh',
+                address: 'unua2o9inmf2qw44ej9lt0vy06g5aeevxae42litw0yyfdbl4puehswborgyqtpudw8il2v20j68qbfj7hny1te3l060mzbytsrdne5uuij18j8wvjz4qfppl7e8lq3rcamawrhulpddexj9bhqo4g56ufq8sv8v2uig7z8i2y5nlhs3d0kuhyahayn6walljxd0mar6hr0w95iou5uq79gtnaa4mgt7o8qj5yz1e2wpehxvrb3uuw70xyjhela',
+                latitude: 194.84,
+                longitude: 236.41,
             })
             .expect(400)
             .then(res => {
@@ -453,23 +453,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'h164kkcolez88k60fyda773exgyxt3jurm7jaii31ngdjjwda5y2ytrac54gcmy5umew2lbgn2kx4dj6nzvzx307qucggev7trxx85p59t351yjrgq2srcl3vjl4ryh11lxbtz99oei85rsmgproj8m1zgij43smai03xz307nbklnmjbt373ruj11onwrrgp2r6m7gdtkysgzv3c2i92szh5re5k2rd8uynuwusa6wmv2b4aziijy8mwlkvjq7',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'uqjk607cum5skr98gbvkrmgx6eprkpfxcyxhyflzal366djzzdjb9o8b0yx14v2z21pmf7iyci44bakdaoc4go79a9pokfhbwhgf2q7szd2qb2lbjwteihjyxym4yo7na99yhc3qku6ws60ii09c4mfcnmrko6autyp6tgdhjchafzwb2amslw486ovvvm2jraxrp9dsl62x41rkhbmec718m3b0bptx1nuemlsj689g4g2ypyhq4f2q0ul1wne',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Quod nam sit nam quia ut. Quia quia facilis accusamus qui ut ea. Nam a voluptatum. Cumque delectus laboriosam omnis explicabo neque nostrum dignissimos incidunt. Quidem nesciunt modi consequatur ut unde. Ut ut adipisci dolorem sit et facilis consectetur occaecati.',
-                excerpt: 'Maiores hic voluptas exercitationem sit quibusdam. Velit qui est minus eius. Officia facilis qui quam dolores architecto. Consequuntur quo quis assumenda unde.',
-                email: 'gfnx6hf4in580udctcn4cmo64zhb63nh5r09u9hjelbf964iblmmpppx93h5cnhe71a3ga6wdac4m44b21t4cbg8ywxjlntgbmad2dqyht07qzdu8h3tq1va',
-                phone: 'i22jzo7x7hin4jee92qeyscm44zgulgu0fgkwzivqv3wfd0onk9w7upbh77z87asrj2jy989pcwgi43z22ek9xfxa2y01jkox6h56g6jfdy99h3evsghhzuem',
-                fax: 'nxmsjpe183kvimw6c33tyugeyapjwrfi8abb3dfqzr005a98imvc6iejtp3vi2zelqzeo4ojwsgmuxvsgjvrek2j2o0poefdml60kvkeuazafr0um33bx53a',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '15v90la7rp',
-                locality: '5ivrqi9z08kqsynflquoh6ec1fcqjkgbgcok559s3b54j6m8s06j94rhvm0336k8lz9og8tqddxnnnlofu0cndb63wfnv8m4lvcvb7shgzh9rk6zh8g10eq7gmhta',
-                address: 'f5coa9bhf4etiwphy7iyi7d3esxp0z7u7o34iahmaj21q0xdjxyehyrnniukt49feaawuchfcgk0hdns79aoyfmgvhvua2kshuwpv6ak0acrz3xgtcgiq0cve1igaexor5b3j3se20ai3kipqsjmwdkp6z381ojueebbcujmygaxddvzqhdc7ltlbcovuo4288wq58w4ufdqq0whxwer4c4bn9sdnnto80ckhmisvytrkdis1bc6qrofl94bj2b',
-                latitude: 6.22,
-                longitude: 833.76,
+                description: 'Saepe ipsam odit quidem excepturi. Voluptatem et qui repudiandae voluptatem commodi. Ut placeat quia vel et labore cum maxime. Voluptatem pariatur quibusdam.',
+                excerpt: 'Ea laboriosam molestias. Reiciendis sapiente perspiciatis et voluptas perspiciatis et. Assumenda voluptatibus impedit quia iusto temporibus id eius optio modi.',
+                email: 'sw3xp9lkcsqnungfxbaoi39v1op8ypyqrsjewx47lembtg4ho2a1zynf7b1fpbht633t28n5atgfss7uupenevyt0oaxrvop3xverdxokx5kq1vmupjxgv73',
+                phone: '0750vqbz88kjld3ow7toxwy1f3czkftrrbxf1mgeqn8nfiuptwu3vm81uioucs0fvou5nb4uexlut6ohj5lksbao7wfkq54r1lty45fnjq3urve82h8hm10zt',
+                fax: 'vga60h4zypz56s2sh5ztw428kt8iep3al1te6y1o2tgbbaixcyd2sljf6x2595hzbf3ja74reto8ttmi30hdyrsxwlhovm8e4s41ir8uo9otczbice8n1pz9',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'u605ahfrnh',
+                locality: '90xpgasagbcwmy0n9siqzuo89xki0tidcze43gt77tqhj38mlk6l5rg59hhz61a4v9kvw0cwofajo39ww39drz062q5tmcrkne4g0998x1i1nwj34kp8awpal5yib',
+                address: '0jlgfgetzqphfbt6847olf1bvm4nl06tlqc2elvutbu64awt5dfgb30bdn5qjdzw559kb95ul98obwz3ia55bp8mfqs5ps1smvbtl81z25rl8ac6ogi2t6uvcqtsqqcktnqpk897samlljn3rivrk267dyickbj6m0y5mruha2i1xd6ybq69u5qf0jf0h6qi1cv2pb9z5jv5uecb1cjpsq4e08zw09c74sl5r5jqic9mmzg54dy0iieftysuk87',
+                latitude: 185.68,
+                longitude: 546.88,
             })
             .expect(400)
             .then(res => {
@@ -483,23 +483,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'pcqcee0eji0pij27o0hhcflqijn5h4mcgeu35f1vj0gpfu6c61wd6hzm916kfemutpjvwckdg3dwrgo1tjjwkop1vscw6l9jrwhesmtatuvko46b3ge8vdi2jk8ka41fp445ufvhgbi4c3nwz2dn0bl9n8yq8agad0e5z42ty4c6887zr65f7nz0mmi0hr046g6x2ox8iu8vhprmy9wkwh2ncxvfpz3bgay9fbfu78f7pao3e8z5bw20zwv1o8m',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'ym77iypsfctoylsfwsv4f48vfq0s7two543hsv7wtdthdl6prx1qaltrb8rkg3al7ja7lwxpj82egtmeslxxrul5gsvwfyrnp6n3swexyu0qnc030xzrahci3n2um69b7b8yd9ico944yxgcn79eu0pk1rnszmwj8tpwz5sqp80qj3upqqdtf76ph6utrq19f3bw0l206asir2k0yr2gptfa25ijd5m1scx1nw7qnvbcy5u602rer94kqs91382',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Error quam aut ipsum. Culpa voluptatibus in excepturi. Sunt aliquam et et vel est. Ut ut voluptatum quisquam vero. Reprehenderit qui et quia iste corrupti quidem earum sit. Omnis dignissimos ratione pariatur.',
-                excerpt: 'Nihil quis fugiat quia inventore fugit dolor omnis voluptatem. Nam odit nam occaecati accusamus quae in consequuntur. Quia fuga ipsam id possimus.',
-                email: 'v770ksm081fqojekw6blgq8eqhjhh8capzvc1xgqix9fgxre6hnrm0xqa2gubj6onoy9pnhnwiyds4ub729y9dr69ng5bt5pmoh7wpou027mafrte6x57asn',
-                phone: '0us8qreg4xa5xdjy5mxs8lkil0nxg4p87oj612k9y94raad6rkdtn0mrw5vnqidd5oz9rdprblsba1cacaof7we7jvgpavj6y9o2d5gf7pnkl7yikyoctwgq',
-                fax: '8f290il1yurjp4ro8h0uwgllojvmvltockcfhptwhvvl9okpbi2141jnsiahbdm6k6j2qzp89utcxkf9lygv7eknml64n5kzqqt8t7tn32jzfut1ppu0xchmq',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'it2yykfnl7',
-                locality: 'qbrl40gp7zcvj2innusr4q53cxwiq2npnz3ugwm10n91ipk9mc8uyaxtr66yu2xa9bcor0rsfbmhk0sgvwrime5pm8iu3l3as432p2j060sbkua8yzq6wfy10f0l7',
-                address: 'vz3njdpro0cxosmjeziaolzw8i6lzap9atc0m5yn2vhafwcvbg51y4aeoh0vrg3oczd34mfoekfz4o4phs1xuzj2md9ghk9kkhk7w3yz0f72x76xi9434e5j2b5h9v6wqsq1p80lqurg5oum2utl3aqnypd4qxnjbovpfwaacoauvvhsyx0m9izrknrnl3mss5rhnz1nzqscpjvm16bhzx2tla70fa36cx5tj3p2dlkrla6zlum5r6d9okojeq3',
-                latitude: 618.74,
-                longitude: 888.65,
+                description: 'Aut asperiores natus. Sed repellendus ducimus magni tempora enim aut doloribus atque. Aliquid quia recusandae officiis dolorem.',
+                excerpt: 'Quis tempore perspiciatis voluptatem rerum vel non. Tempora et odio similique quasi. Ad accusamus ut qui ipsum. Quae esse consectetur quidem suscipit et dolore aut officia. Laborum aut similique distinctio aut.',
+                email: '3ngs7pz3juaxwewl69ggsjs9o04v0yj61lc6w8bcou77hi68d227o9b918n3pmpyx7mbene7hmx6zsxahu72gsyrd89jbgegb74roud1nhrjyrjnsrmebwyk',
+                phone: 'ew9uw13f4zwqh6pm7an5j40t7dn6unn60b08vlj2iv4e45pz81fbjec9vw7r5jazf2q8vd1knzndmdisa698rgq1e7id2urxpodx1r609yv2glkvxzwdtyc9',
+                fax: 'eqbjxgbdyaftrnpytk98xngldplo7zv1aoqh1gpuqlh7308y9kw1ng1jn0sgjf97qperjo3a4rq8gfs77tcwg6a2qmi6lzojdf8ijcklg3uth1rscmvmdjs98',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'b56tefox4u',
+                locality: 'kvw1swge8xqxjqd4765jqi4aaobsi2estqwx9o7oz4iekg4326obauz7jiigovmfdk7i0xsowohmtcqltlk6a44afx7hwvmfpevvn73j8owl7v9gcnhdo2rygg0ai',
+                address: 'y845qs0nsdgyc9c995gdhl2vp07rg71egb6xdbdxquade1fidv3ugbpheuiorzooj9legohmlbgqmu5owfk3w0ekpa087qnai0wrco2w2ocuhnevf4ajjxufsxwzpi7wlqcqgsrtefjze39f2jh5g9do1wigmfc2igmx8zq56y5w85h8y3okkaq7kdlovfo8obx366do5k772av7da6acd6nw642ac3yikakyovqyncx1yzx0k31okmz1vgztxw',
+                latitude: 317.76,
+                longitude: 149.39,
             })
             .expect(400)
             .then(res => {
@@ -513,23 +513,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: '83am0j1dbxbxqrd786qxof990qqq4ev4naoxfnyv6s6ajg8sxyj23z88whib7awn8s92zfridrct388lhsdxa3e7sid5d9zu2q5jo2q094eglx3vlpbc5iechkkn0w16d9uy3068slzid3wmtl4ah9mzqs6wukp71uh7mypksnu72mukjzcyz98k0p07u90kyoyrbtwp6mvdab5b27km7m6rdsct9a2uxgm3odzb0tlkjhny6kwalyqhcosmamh',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'y8wzt36ojwifatyz7wl747btvpwp5hgczwbclr02amghcp5l10pdou2ao5829cygv4cgddlw50xrfhicz8rbofph7k7u8b8zxmc2x4ehxjv8ilvk5kuqya8rqpvw4bagu2f3v1mukgid4s9lge57obvfqg2se34ysacfoxyraxem4cf6r0ihjvqrb0gfvf8jk592dndp8lnbcuo66n9dor7b7ugp59646lsgwuxh1cohz38hotzskyv6jw7fqi6',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Non quo laborum. Quia deserunt placeat esse sunt. Iure quo minus esse. Voluptatem quia dolore corporis vel quia ducimus laboriosam. Maxime eum eos qui nemo doloribus sint est veniam. Tenetur distinctio nemo enim dicta voluptatem.',
-                excerpt: 'Repellat similique rem ea et recusandae sapiente. Nihil sit deserunt et consectetur. Et repudiandae cumque dicta ullam eius eveniet nemo. Aut et officiis officia dolorem illum ab cumque ex est. Suscipit fuga quidem error necessitatibus omnis est.',
-                email: 'd8tfyft0d38pvp0hw5wxhya0cchcaho6gjgxrnr5fgf5tto28rajz6zyisb5bfusdoygrpjnust6yqv4ztw7475v4e5y36w533lmbp3ytx8wtxfg4ge1hxrk',
-                phone: '7wcyyl5jdp1snosxvk5qy7ipgm3ivga1k4kiro3w6xun8tua6at573jc6mnnn1k2i80f0ebhympezeqrq8qs4sxtu8l2b91yk74xqagud8rc8c2s0a1rlb4v',
-                fax: 'fd8v0znpsxv9l3stcuk1p1wdjebk9pgbdouxxlehl1a51rp5gcuvl1uhqu55ysk5fq68tlbslq72muzmme7a0arl8nyfnrh5xsn6ea7kkq2awxzzv4vzchrh',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '68ztd95ozrx',
-                locality: '1grektcnbnuyyxcxmwntjebx17m9tgkdyxu58t63bpwmfe2brupgdfyyadgl3slzyehtqargd4p4ze0xvd6aqmc9ere8jnun139emdno3cecjo94jemklj3s47pxb',
-                address: '2a80ro20cputqn1k9j3lae3ptlcb924slk3mys5g2cmnnzfvohlipscepjlqzzy4skgj9n0konteeop4tf4mpafkgiykc0h4tmi59vo5b22fdnipe610zb50395su56rk03cq8xxak5s1ejlcae4ktei69qumzr6ay861svo1uhiwtn6wmp1j4psvz6f6enxp2eb745qtkpwxixap6rzn64mxzjkuhv0h7mhqa4o3i3byptxsxh1abin2f0kd3m',
-                latitude: 961.62,
-                longitude: 673.09,
+                description: 'Harum voluptate non eveniet. Est numquam officia cumque earum facere sint qui non quam. Odio possimus aperiam at non suscipit quisquam blanditiis possimus nihil. Consectetur eos reprehenderit in saepe. Consequatur a excepturi dolores hic deleniti voluptas rem et. Doloribus sit est rerum dolorum delectus blanditiis modi.',
+                excerpt: 'Reprehenderit tenetur et nihil et nulla accusantium aut. Error perferendis nam aliquam architecto in unde sed quaerat natus. Aut alias illum molestias qui tempore unde dolore qui. Aut mollitia earum est expedita dignissimos. Voluptatem sunt aut nihil vero amet ipsa tempore. Rerum quia voluptatum.',
+                email: 'tu228f880m2fqqlb7c96xx3s549ue0rxmsydtvi82h0rz3xfkytptjs63wosjblnk5uwwfzjt0svyg1uy6g13yecaulcfcffyw8g7fa5k0liggnzw8hsm4mv',
+                phone: 'ryjpe7lq7qqv3u42pvpuyt6257scf40n2hwyc4urwyder8lwhiwwc7v4g1rgy0v1g2ywzo8h2fpft07z427owfkocd9tgji5ycwgsr0kwsm2l9zmagjoggdb',
+                fax: '8gnoqnvgb8cnpo2k1ofa2y2u69pxxfudqsfyg15gl3ujrw8kjkupc0tgwv59ybgyxk91f17lyi80zue6mzu7spp4ocdo1e5wgcp2ycj6d4dqk0d3l4c34j7z',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'eyjyzbddte5',
+                locality: 'st6fudroojn287gzr8ga0gvxawbzujyy8iqm0kiv0gg6obb6ulkwibd0h9mxdxlbmrhi6rswudu95rt0bd2lo6v8wkerkw9ogmp1g4cs2d2mi01epuxq5nw4uu5ee',
+                address: 'qtn8bgpfoz4jk7guxdxax0as1lryc1b8p7le8slw5isd365opwg3vnky6aq0qd3qogla0owt50w1x1f3ivvai28sgc4gmv94mxtq46i833ia3m2qz8ego3h27g579ev28b92im6s0lola45cnv6z6rcicvhpdxm4xpcpf6ta08p84uq6mnqf7w1d0yfv5heh899qjj0k4kcl0h8meem22q0eddohhzl7uv3mh7ldm68kge8zmyjehwfd6tnu5fp',
+                latitude: 350.74,
+                longitude: 393.79,
             })
             .expect(400)
             .then(res => {
@@ -543,23 +543,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'dtb5nigrzbofbiznmfd64k3nkypfoytkqp4r84a0n94oh176tjzksndakizxwssx433vi13s4vk8d1cy8bki95nz2o2kq22eqi21c0dz39aerv7lmtxgzb3oybdyc0elra4ds7n7qlfvf3okp2c4pjec340frpomf59v9rutd98a1jfe6y3qf4kmwit7rtmkj2re8u1y3vbpaddtohf8km5t25ueffuw4j0idbai9mf3by004mna7h2dxmtgs7a',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'n20egkt71e6igu5xrnoxwwbjvzyrmsfodvqc0zenavh97jf8t53c9ykgaz2uqp7b28o40uvb1fy6wwfrxkl1wsi44qte2pv8w8vwarlh8t099ykdgsgx8g0e2xad14g3urpph55ia6iyeq8cy99xm5kyjbdz8jptnh4yyde764lbzwm0orzifjpkuu3exabqac3fsscq2x8san5i3vse8j2a5qrsn0b6fy4yjpxvo5e9v7xf31loct3hv39hgov',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Ratione ratione voluptatem quam eaque iste commodi et perferendis. Odio delectus aperiam minima. Magni dignissimos modi et in possimus maiores sit. Corrupti consequatur rerum sed distinctio quod mollitia nobis temporibus. Repudiandae sit ex autem praesentium alias.',
-                excerpt: 'Voluptas in voluptatem veniam explicabo nemo. Eos deserunt optio eveniet quis dolor est. Nulla voluptates ducimus. Omnis sed ut dolorem.',
-                email: '26id0ivt9h2d4sywadlsl0vespdxz6kaly129io8wwp5h9d0q998l36ajjdipyurw5ayzuujs8pazwwl1pgv09pymp3bvncw2feaeul2js8rk64ehzsf58lv',
-                phone: 'gj9x1furse3u3r5um4ro5zpvwrzziafhr0lxjhb903d70ir0owutd6s721j9lfydgu3laufkgbbm7jz0qm8vvcgmwcd5cses8dczcuhvdayvgrm9x8gpqrc1',
-                fax: '765ajj5qxh00xj57dbynvnoug38silrjojs70ib2ogpiqu5bkzlnavnfxqvzrduaika3lcbdx7o5qlefdrdgu3sclix76q0s33v9997gh1nj1ahk47udbdgd',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '31yr8b5chz',
-                locality: 'qm3dw9i3fd5k0v1il0vcsuv73pvq0itgz77ffbqxruhwqn73exs2bnzb1i4mymfn9r0dsp9jet1t51nj9m1t0q264nm6qed9bhqtypeqh7w4aqti67tzmd18phjo7z',
-                address: 'vyjvlff4p1ioklselnm0hj4mz5p33c8be1ht7tp6hip4o8zq6r8ylbatkkdrfua7oacc4dsd3z6t09pabb49mfoda1xibc59z32p6zqjowkjl4x609p8j02kkj28qga2bme5bw5relvdj33fn0v9ibd195blqi30kguxzv2p8i4cratkkf7xxzyyoyt09e9jhom2r2aexpxqeiesg5qwkvtf4dfaw1f1m40u0jxtorius6b3rxj3rtmz9j5z263',
-                latitude: 828.55,
-                longitude: 189.20,
+                description: 'Id porro cumque vero et non architecto atque velit. In non aut molestiae ut sequi tempora et laborum explicabo. Repudiandae natus rem eos vel sunt earum.',
+                excerpt: 'Voluptatum possimus quidem recusandae laudantium vero nobis. Omnis repudiandae voluptates fugiat eligendi accusamus nihil similique. Deserunt odit qui excepturi in a aut odio omnis praesentium. Aliquid illum iure neque est odio fugiat. Qui ab et libero rerum pariatur quo amet aut aut.',
+                email: 'eamua36v9kbmj12hctfjuu5si2ib0tyexwn7zt337j0ovb5izgfdaq7mywkiks8ipdoztbvx2bczh1o2dk8uj8ehvhmm5r0mxrln2yn6bc1tk1g5u0fnkqjd',
+                phone: 'v259bz8w8rv2pn6jxlh5mk07x33ftsswt2xgqgjqzuo8cokwnfbs8kl9u20a1re2ln8l8dfg9b9f6bg26omrgygayhiekvz1borqon2tkzxifsdi26zpd7sa',
+                fax: 'ixj3utg0gsj9jgb5vw4f4g4sq2adb8mkuwogbze8xwypf1j1nhnewewabck2hxi89swihgbmkc0qy1es8dsr5englcly1qbnyrz7e8ka6qm016ul2t07se94',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'j07xw874pf',
+                locality: 'kkdbk841pa9i99sqr2ci6h6ufjmuh727kqvg01b5645a84y2rwg9nav4cac32nik9dpt8vldjgjad8s41hq0t7lr0ksmxz5yydl3dqxkou53dx8zu0wa0eineadupa',
+                address: 'zi4sc3cx3ar9m4fktc1vpi5wbj64znppb7xsn9n08iy3gydpdf2pudnkfwts4sem3ln7y8jwzdse2ljb109qsr9r488orh4tkob4ua14x4glpf85gr3u4n16n6grmq67akqexmh8uhqmrs0qagsm5co1s5cau9istlgu8yam7099jqghscxdfw9pdyfsg0jd96bw6s6smhzmg7en1e3pmimdzmtmy1gnwka0vj5pqrmwpbp1jq8hb8roeen45xt',
+                latitude: 447.50,
+                longitude: 619.11,
             })
             .expect(400)
             .then(res => {
@@ -573,23 +573,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'pjl7h2bisi8xn6ivi6axsb1d1zhbh8j3v0k74q5tzfej92kxsyb3lwpony6tcjofmu8x1ijrtbfoos4zorid2f86gvzxplii80uj6j9zn6auiugqgk99asfjn7m6ino1azr2z2ucqvj6hofcuc7ed39do1dprtkitv4nhib3pjvi5ww0zn175idv261a67ugfazd5sgznie8o7yslvxoj5f164qddjob9g95mwf6rm4ytzhclhufw2vcyk693pa',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'hk89wtx8orn6bv8dh69mm20bmw89qjxkxe7a1wndu9rphtu19qael8ts1oswae5y1m8jgyq5qw60i9tao12ayahnybggye4xqom5s053nvksswio9kuhvkeg9gt75mqkwzrfvbt8znztlstef5l653v49pl996vv4gg8xyf3z3i89m4rkmcinytjwm1fahdngt82tysdxfi0xpxnonhg8brn6xgds8lmp2kc38gw512txeu7lcecpn635gefkef',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Expedita eligendi amet odio fuga nihil. Eaque voluptates occaecati unde eaque asperiores nihil nisi ullam. Libero sint eum facere non quis expedita sit minima quasi.',
-                excerpt: 'Minus vitae voluptates sint sunt et odio numquam. Quia adipisci velit et est. Occaecati occaecati pariatur.',
-                email: '775hnacl8ceruysqysqpzpmo15xmykdxyirne2p8g79ql2gvo2n1c4pi1izt4by2wukqfckjfys5me55vssu31hll2x40dabwixmibso1n5ide9ktraggzod',
-                phone: 'iyqe3n6dv73y3xqazhskpwbb5n923xsnaxkmzftu3d7bzogbi7jawu8rb9z001b617wt7i5kruylszwcph960j47xfrowfledzx8ahyxnsz8by4hyyvu6ov7',
-                fax: '39a5w2ka5ch226ypovj13c5ciak31k5pil4hvsvl0k07ofbmu13br9s59xgleeh10t4da1eckg5gnrbgzvko437790t3riqkzpba4h77ps5lprswj0dbsiok',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'mpa0w54z12',
-                locality: '3hq9f059tyq5d29db1qhz2rv1cae4sj7m6m5y5g2j1ehl5qbo5by215dk4fh6s7gpavrj89temi8gyr1qi6ph1stwd9hrqfziaff0aknd7v0fjxdm8enryi9a339e',
-                address: 'f55plz8gkt0700aagbbdvi02m5szmz19jbcqqn60kh6bc3rhzh8asaii4k0v49z0qbj79liuhz6dm33mhbrrr5xvv1nhjapvlctk37nxkrp1q18af1gs0i74ho1tnnxsig8wbvbtghcz9zq4twcbstlvcvyh39n2ry476bwzrjwutk91fm3mwm6yna3elifc02kw4xviu2kex1oi4fnazdaao1ve8ae2es3lxqguvv9f3luz8t2pfc29jbmi8frn',
-                latitude: 861.84,
-                longitude: 356.27,
+                description: 'Aut sed quia eveniet quia corrupti sit voluptatum. Laboriosam qui quasi. Corporis magnam similique. Dolorem quo quibusdam nulla nihil nisi dolore. Et inventore deleniti quis temporibus. Rerum quia suscipit molestiae ipsum debitis.',
+                excerpt: 'Distinctio perferendis aut. Asperiores sunt vel. Ut nihil facilis autem nulla enim sed sapiente qui animi.',
+                email: 'jy4rbjr0gjlqsy3vwd4tmcfd6lrusocpqvlebn4ywwbntfx0hg2r7e3laleg24l8duhg1nr9ope0z2974nk2paqll8tb7clq4r3qqfsl0t57zs7n76j6qcfm',
+                phone: 'i6bajlr7jfbp5levgktl7pcv7xdhhyisi5z7rwcbh6rp31qdtruvk8ymzgr8h12tokqrxxqp9k5mhy5xxnqu2wvh1sb412swizme457buh0i6czpvlroct1p',
+                fax: '2f1fep7q7dktqr87ubav1bzfb7r4t5npwffc2bzk2zxfmhec6x3k407zmoshab0hkbbwq5kapfdqqvijj19rtl88qx03dswq96mumconl0g5aswh1t030o7x',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'h62y8cgao4',
+                locality: 'f8z9eodl07mydfo974os0d6isdadqwl4l0lwidmqwjn29ivg70n7g7fkg04pldsgqrrk681rt9im4eoubrahokhh1it4etk172qv7vgnseqwir5u21ntag50tef1c',
+                address: 'sfgdrnkj5w0qhxx9hyp8spz8s2vokm1yma0r861ckbwk17ofu3cqdhkm5kwb7yc0uy8vm0jn8h0o71khmeycx5ricmplh8u6ae58w88zqydwsv9ci7yq5n01echc9z0qpctxd6lecglj9f2ygjel8g0y70c10dhqjpqlrtz3goz0ws0shqblb3ra8zj2wlrl9wpbfwwfmfovl82jow0qgnk3izee8yk8ndisycywij8j3nspim17p2rl2mz7c8uu',
+                latitude: 707.73,
+                longitude: 264.86,
             })
             .expect(400)
             .then(res => {
@@ -603,23 +603,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'k6cda8xpoi495rjtfbubek3ya3qk9zewad0hzefksnw0cswac79ih6t35l1vu9jy5yr8tbb9dn6zr9y9vstunor6ya347d21pfqin53lt0216t9tl60ac838aljdr9zlrrfuqt246lqzk0e05xqstu2e5qkw1ljir6n8eq5f1mdjogy7wheqbc3p4yxri71iyjgpzhxsd73zr3i8ebzpyv8zp1jhgrn97f5d0a16d742pc6ympzeb7pzu6x73ef',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'fc3w6omel8kzwp0knzercld1aedm9r7aq00ilh1ll0bf7n8hbslj2veruygeqz7z3k9k0bo1e01zxtxzntyxkk39k7w46w5qh8xg4v56278rxmrdb3mcjvqno5gvkgbby2pe8mywgzyley4ooaeaq2k27rhq964waskwje9pgjhzcrcwgn91c8znlalpodcy6mk7xkpdq229fpbo6i8e2oeuczwdwd3ys96c7mny8svo6h7g893stghwsu9dw19',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Aliquid sit aut ut ratione architecto. Doloremque omnis rem ullam quam velit totam. Quis modi expedita ex dolorem enim.',
-                excerpt: 'Reiciendis corrupti nihil ipsam non. Delectus tempore id vitae quos aut. Est provident earum molestiae. Eum veritatis molestiae deserunt. Soluta non et ipsam. Voluptatem architecto ullam qui laborum.',
-                email: '6rwbm9xwmt7g7k7qavoblt6vz3qpd6njwfi8aop1v0ktfoxkw2wd26qgl0gh0gupv6qsxha2ytvilpvyth3fctdi93xnf98x0tk2u03qcm323csiu33imlls',
-                phone: '77xgenu7ilv67j8xk4khxfg1qerpguhagp5bpf6immbfes49n31ozjg3gxlbzfb5gvag982z2m6f4pxooubj5edg8i38m44zo64j5dt3u7i8p6d860t8ds1r',
-                fax: '4dgp7so4x5bly4w535w2hkan7jwt0ygto6c6c21agkgyqowc6bt07ffnfax192nb68sa8qvqcvlzp9f78kke7peqoy4i7wx4g86wsd0e67ygy318qjg1al1w',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'r2g3x76wtz',
-                locality: 'nhjkbx4bclye036pirzoosee3ie8j7m0rfoayowoinbd4emz6u797fh2xbt8sqnrmimj6yl4jvti07to28j1wrj5dbayddm0c7i85zrchbrgum98gu4qsz0xliq72',
-                address: 'pfzfgjkwipndoag17uxpz5x1ufpj46jr0exfadt2w3psg3xzafv6k5mzn0w0h24fumyx74brvx1lyonion7rcxowjxhok121kbpk9v5bphhldnxgo9fo228fxo22gr6qhxvltteky9wo48y5rotq5hf3n34xl3o68lohax1oth2db5kf3hsozztov1hxbqfwzxrobxqwtmvvsh5y824o2eh38pxy10mbvpl5u0db0qh5axfmttbdsai2w04j9yl',
-                latitude: 892.16,
-                longitude: 142.83,
+                description: 'Aut tenetur iste fuga et quia dolorum. Nam non praesentium omnis et assumenda. Architecto ex qui voluptate id quis odit repellendus nihil. Eaque reiciendis omnis sit ad ut. Quo molestias consequuntur alias.',
+                excerpt: 'Vero cumque magni nesciunt rerum repudiandae. Dicta facere esse iusto delectus pariatur. Illum necessitatibus assumenda quia necessitatibus accusamus facilis.',
+                email: 'db3gtepqwcqt6td4zncvi5m5r16q8p13cwya9464tz0p811oksic911348hgvkfwe3trqkdrh7uyarfo7ynurzgvyt6jz48bt604t9ci7cj4doaljieu3zd3',
+                phone: '3woczdgxtisvykwwiaibfssol3jxnmcynf0sxhena21vradzhdz7jpqsrk2a07prk7r2crr889j3v08iqtucfv2fno0lv7impb97vo3i7gpk0c35ufrpm8ee',
+                fax: 'vazhw8iydfduoaz56aoody44n47vklwjwb2apcsbml08lq2hoe2edk9ieopqpsa5oj9jgc90r8qhx8iu8gz9cs0l3pgh50f1s223zgdgg0hyqakz3sxthv2b',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'n6jc5v2ozk',
+                locality: 'b179ubdltq095gef8mf70z8divm4poqux4oik9957paxhz0ji7exxemchaavlna7m0tis53uvg3winv5fk6t3xwck7sddye875dhn9ea0lsveonz14ogkfoaaq8ve',
+                address: 'u43m9mel9c7bt8fz4kdfrwbq8e9n4h1noiqpwpcsi2wh107ukwwpmbc6zmee0uc9veps3n5xctkny46f5hbfdba5hxskhxg7huqipk1canteb8t96c6x2gsnu3bwt81w7hjo51nh093kcbo1cmv68821yrb4k20b0qgka0j8b4rgsyxizom5udqobukpwud8552o7jf8ywtjjshjnf8docp0sitcvnsccyp5ime3azo2h3tg3b93gj6z7v25f9a',
+                latitude: 220.47,
+                longitude: 446.66,
             })
             .expect(400)
             .then(res => {
@@ -633,23 +633,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: '43br2205f9lw29wq0pyjlvr48v6px0qcarulel6rj4u4p1uiprt4tnaeua2ptui9k2njl4zv3cmk54cz7hqrfkouz8xxobu6m0c830dkccb20tgzs8lm46u8jjcn1cjjp06wr3yu10w47u7jerdnr2hu2yggxrap3fmqormrgl4oyugexc1ezlx7nb89685if4to7b2u2gpf5v3n7vol3ssu61wr4lpvqzgxcdhubke4ywc6eafvrwurwd75ubg',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'ae3wol7byllnxljihozr2ovlts27s10s3c5w7zej8zolfrekvq54vntujsm0yl9ml6i6la6n2i021e1pisc1r0na2r5mlu8ke6ztzvnfr1q0qph4wiuci171kd8knemxl22jvx80h23bo8p0tswl32e77uh3adxwkdvu8qjymahtxunl5evu5pjjih9xhridohueynky0e948jpjx7o8dghro3y8dwvl0whiulo07gv4aejicwlzj6qd2ona6pa',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Vel similique esse tempora aliquid odit natus. Maxime vero perferendis debitis sed quisquam tempore odit minima. Repellat in asperiores veritatis qui quae dolor rem quia expedita.',
-                excerpt: 'Quas eos aut repellendus molestias quae. Et neque dolorem tempore qui architecto. Minima quaerat sapiente veniam accusantium. Odio et culpa non omnis. Quasi vero omnis debitis saepe eaque et nostrum atque. Earum quis esse illo.',
-                email: 'qufyo6afs6u6lsey9h24xkq9ukf28oz8jhhgrr5rufxkf3fn66dqnianxwiv5irt6xl9rq73to83gmg1dmy9udzhlzdg9dikjdb1ye5nfzi7w62p1g85jhiw',
-                phone: 'k96s8g5xze1popq6pt6so5vecdly6go6gpcrj7z0csukprtw9mulqczj53p96018te440ru19k60h6dmrjz113mf71nsev7g6e5tdey7if2nt8m0bs0zzaeh',
-                fax: 'bbnc8d21mnmcbynve1l97y3qwgvfx9qmoa4iv18qutsayqmta4p2r57oz1lsvjpcogqqrvcntre9nafzzmx6vayyoyiwv2jy9kt1t3lpm78odhu3t4yo8v0m',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'cpzq1hkvt0',
-                locality: 'yg3noc0xzz58b3itexc7u87o4ywyqhbjgqlsf4hhljdeitdete7qoci5v6aricr8g1lb24z67w516kia179eotcuvmctt8a26lzrbweue64dvnud1t5696u6elmch',
-                address: 'e1sfyjljiff53jomyrv3xkuh2hfbwvpvz2insni6owun2hkdzmb233805vvsfy02hgrzg6e32koj0hsam4r05ut34z5im9zu90xm3ln3wd5du03dqfcaw0agi4758u1yn1ctidcfjn0cb8652y7zfw5dlwkoez0wzc5t2j2pm29nejgpn9457h0whoc1e80mji6lxi94m1puycjedjoo3n5ezlqhpj3bfff06zfv2x4n6r1bx6kyjujmab90xhi',
-                latitude: 261.44,
-                longitude: 286.11,
+                description: 'Perferendis quia libero sint eligendi quo aut. Necessitatibus similique placeat quibusdam. Eos tempora totam maxime. Doloribus aspernatur voluptate voluptatem molestiae qui sunt possimus voluptas.',
+                excerpt: 'Sed voluptas voluptas ut et tempora quibusdam ipsum quia. Ducimus facilis doloremque ut pariatur sed velit enim repellendus. Dolor est non impedit optio voluptatem.',
+                email: 'job8qcld7te7zp0j52ooaaknzz8v6lf5pdbnnqdbn67lr0us6mp9le1l2m95nloeile12a0qb7ykz9mmxx32p4db6t4mb1cbbuqpcdsp1jsl2dbg9yvo30fm',
+                phone: 'tmoejpfkugh5sslo6jy4bwmu7sgvubyabz4njd7y3dfpskxz824vy8eg9dkcptevc3319l8mjekm1li5e4oaognwlk9i82200tayht8d5hfdmymo4g5cp33y',
+                fax: 'xckbs6v6cd8xfd7yqwv7xfxqoflz1ag0od8s2kyvh1ophzsm5fer5jpu0gy8l8r4feo1tj1lc1ua1xmd4391wnc369cpukzpcqwdgwoc2s9jmcbm6tu43msp',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'squwfgw3i5',
+                locality: 'ljn0xw9zvskbuo2k3fhypa7hptlcq9rd7sp3tgbw78ke5imsbibfcjj4fe7ce9829hxseam4o2g7dj1j31h6gi28urk8yh50li5hb4ubx7314wp7quufkutf993w0',
+                address: 'mao004duurfftc50abslwfwstp0iye656l1b8vzz5btqg6krk8bv3xvp2cehvjrwtx9ygly5ee20pe7dfaxq7poqiswz37jo0sbq678g7ydms8g77vbv6obbxzb8otl97b0a5i4egdrbkrvdxrem3dwkhpeh9evkdibkwl3295tfngtv906djhbgr7givkbqmnhm09pdi2yeekgw3t7hsg3mw6f6ue2xewhdk8bn236m4njv663o8aytvn1sncg',
+                latitude: 683.03,
+                longitude: 610.46,
             })
             .expect(400)
             .then(res => {
@@ -676,23 +676,23 @@ describe('partner', () =>
             .post('/origen/partner')
             .set('Accept', 'application/json')
             .send({
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: 'stbfi3elh4b761uiu4j1h6b3kra9n1e2alhdxh056kyas5fb81vu2xz57uw5lptjznurkkn8m3zhfy4d53949d0o9c63e8yh4ywo9ndq8ku2qrawsy7omswtgrdsefnapzr1vgps3a42s1wdzyt72dyfzs4zpct56opnrv2amj2mn42ki2ogyhib28svcdrsln2zjvjxio7lp7uovh589ocmnvu3r55sd3yw4ldym5o33l9rulbfy8dxqrtbeu5',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: 'e9nkzpjjib529olgpxlj00v1rlir7m4sbqkwx3mjzfni1rojt2z2abk3z1bmzavoc62717kl2gkww6hsbzc74g36xyun146391o9v4nqjtgq6p24hh85dvyrn6w7jjzrfaftjnvq4v3o5e8n8nh95t4dnqate38i4v5t8q31ajz203le8hk5py6twslrq3iysfm4ztrmx7xkvszdu0tg1fzai11f6fqy95ii3yydsw7g3r2brgh4yl5pf86pcm1',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Possimus omnis quia maxime. Doloremque quis maiores sunt impedit ut mollitia. Voluptas tenetur molestias provident numquam aut officia magnam explicabo distinctio. Quia velit vitae hic inventore cumque labore occaecati deserunt quas.',
-                excerpt: 'Et et quia qui ad ducimus commodi velit et sed. Ea illo alias cumque quidem vitae fugiat error perspiciatis. Necessitatibus ex ex quisquam suscipit vel qui magnam laborum. Nihil aut rerum nemo quia.',
-                email: 'dsy54ui4ycblzej5cx1hfcyx23clkelrd520andnjlq1d8fhljh08x5sjlysu9jckcg876c8abgsl1dxc2dx5xkwxu4atpkoxift3l4slg7sto9z5axu6wl1',
-                phone: 'g1lp1p9bfx3dy6qvfyn7gqy9zpiiqsb9wt9qpx3ajx5dyjtxf1j5ad8hcld838f1or6dixhil0khe10lugah1imusf9y6iqiykwzbmhyorj6a0ny4ly3abaw',
-                fax: 'n9l5kdd6fjrm1sdwdrwcztxj84aw5ocrt4z8x1qc6e29xlxp6uin18jzwn1aq7vpwdrzenls3jpqggp2d1rdy44hsmd4an6ssxjnhh80kvdgzkb4yznmqctv',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: '0p6h9isnum',
-                locality: 'i0zwuejy5jnpdamjhy3ynnmgqeu4j5tanm9y5emkoof38ee2rk3pwque7e94f3qs9btdkas3y6ctu1txp43nr8brvbasbaxrw4ugnc26nvy4qlc0crw9ume7mpbi4',
-                address: 'jqbg4jzyvrjy0xjdfmyzgk6hgu2m8el23x1q0jmqzytaj78ew573rpkdzqhbyagtan2r33gahcbuov57drhrutvmt9igrc5rp7f7w32vopm20llw6qb78srzhskfuxssmy7cd0281e5yjd81tof4d9d3s2zp77jwspzxjz1dcju0efp8kqsjwo1of4iydo8r000afasf32yhs3fnqpttmdym08klfsg8v2kqxk21w3soczcflwso70spqrye2vk',
-                latitude: 216.47,
-                longitude: 706.14,
+                description: 'Eligendi ut laudantium accusamus dolorem. Nulla fuga ducimus tempora excepturi. Adipisci sint fugiat quos eum aut quas. Officia non magni. Quisquam cum ex iure sint laborum non. Sed laudantium veniam.',
+                excerpt: 'Sint ut ut dignissimos quaerat ea. Consequatur ex odit saepe. Officia dicta officia assumenda qui qui quae et voluptatum est. Perspiciatis vitae sed.',
+                email: '05x5caygtqgacx53ytut4ul2zohfi5j8gf2ljz4gm4uuhe0p6hcfkcseyxbeyztk83qusnoh5r40k7nw2r460xw90lz3s0gbvawi5s7yxbetwvrtrkhl1xw8',
+                phone: 'umhtxw0dg4nr3wl4a4zdcpc11qh2692sghq1alp5vtucgupkf3ptbdoc6hirzkzo3ap5875kfvxdus4fp9kp2p7n9ac8fp9xj0uwjz9m6n9emgwi2yq9ct0b',
+                fax: '3264b1ev70mk64wistr0oo6yqunngb1gpv1abyqaezxmhxsusv16x6zpzvf9agzhvm2ighufa30f322ty33kkoud6l2x9ydkd1oj77svo28tp25xn4yae219',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: 'eus7qzdg9r',
+                locality: 'ndrb6eombz91ycv00cgxfxz83dkj7gvu03feiutynuzxy9k2dzpbddw4gh6tfqk6ebxvw5qd2uzdv6vyh73h5u52gsge90xevdgyykm6420vg2rf64zo89fec45oc',
+                address: 'y97k4sz438s1aaidwblkh9coekf2bsfpepb3zhxgjf61rndeqnfm08sf3n8afk3bf7iko4a3wlbksvqy0gwewwctui066xtdjzhik9fysbgjrw44gt2h643ubxtr2ko70162e4bac6aosnjjazchay6r3jdqqpe72nfa8ppvadtmiad9g2ki4mtpq2zqclwgqfl8z2wdgoo8ye167vi6v0tnihakj150gohw522t6a91v9q66mrtqqbb4kkzgh5',
+                latitude: 585.57,
+                longitude: 645.47,
             })
             .expect(201);
     });
@@ -727,7 +727,7 @@ describe('partner', () =>
                 {
                     where: 
                     {
-                        id: 'fd73b2bf-6f54-451c-9a3e-69fe7eda7e36'
+                        id: '915fa864-2144-4632-be90-fdf947ba92bd'
                     }
                 }
             })
@@ -744,18 +744,18 @@ describe('partner', () =>
                 {
                     where: 
                     {
-                        id: '8307be3b-9e21-4a24-ba38-ab70db28330d'
+                        id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '8307be3b-9e21-4a24-ba38-ab70db28330d'));
+            .expect(repository.collectionResponse.find(item => item.id === 'c3358001-fd7f-4dce-b2bf-4255acc38d31'));
     });
 
     test(`/REST:GET origen/partner/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/origen/partner/bab8a521-e433-4a1d-8b5d-ba2fa6879e0f')
+            .get('/origen/partner/f20c72f2-85cf-4e38-8b81-15c605d8f20f')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -763,10 +763,10 @@ describe('partner', () =>
     test(`/REST:GET origen/partner/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/origen/partner/8307be3b-9e21-4a24-ba38-ab70db28330d')
+            .get('/origen/partner/c3358001-fd7f-4dce-b2bf-4255acc38d31')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '8307be3b-9e21-4a24-ba38-ab70db28330d'));
+            .expect(repository.collectionResponse.find(e => e.id === 'c3358001-fd7f-4dce-b2bf-4255acc38d31'));
     });
 
     test(`/REST:GET origen/partners`, () => 
@@ -785,23 +785,23 @@ describe('partner', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'cfc55a8a-f78c-485e-b7ed-3e31e87491a6',
-                name: '0xyxrsxkg17kvxcj309dtwwcbq6n55dq5p1tt5a7oyz7f3e21vbjvdy4oah5z9yai1tkt0t72h6hjcwtk9tg8cefhuwr2aur2j83gtt1sy4bmus0hiyqabnyknualykgu41uq3hwciqe4c4lmpem5471dbn4rk6kef4u352zwkvmhamjq8mdjs0la0p52rghg6jx36xqex73l8xs4vlhefrm8dc8swm20gw5htfrlbxrvp1ee07jbajfjxyquui',
+                id: 'c54b0fa0-9b46-4edb-b440-43b04de27c57',
+                name: 'egt79f3y5io3cgihcqalqaukuah4inq163noxyzuz10tl00qnlac7hiot9arlnrylq9rc1v866azouu220j77pap451kjchh47lsi61ysw2fzjv46jtrk8wvqkhkvf8uh83snkvdawfcb2yb7jb0ueb4mnoxah8le197n0cgzaf8jvd08cnq3zjrffdb2oca5wcrozr0p274yz04at31a5ymq0jn2jgin7q1qplrogpys56qwxddpozxfskqc7p',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Quod facere amet. Quo minus sint ipsam laudantium. Ea sapiente fugiat hic possimus asperiores delectus id. Dolor quidem odio fugiat consequatur blanditiis omnis in veniam.',
-                excerpt: 'Numquam labore provident quis temporibus qui. Laboriosam debitis veritatis voluptatibus tenetur minus aut. Velit aperiam aperiam sed mollitia. Dolores repellat qui. Voluptate reprehenderit minus minus est sapiente et molestiae adipisci. Dolores voluptatem assumenda dolorem cumque quia dolor modi saepe.',
-                email: 'u3x0thnn61v5wk4v8u9qlzsfn7fd6rk4vwz9o90gah4p832txcwafwnl0ek1pg2stmk0eg787kuzzju2or6whb9nnmp670vgrh3xomkic3yfxrw0k4qmi12j',
-                phone: 'f5vftui0pg9eqijr4e8itfx9gf3f4ftgruqwymbphax9latbld3ier2jbvj0j2xsuupl5muzx4ll1zmasn0i7789kns57sy49k0ur49p2x6ia53sxwm0wbta',
-                fax: '21y7q3q2q6xro4awoaa9wtk3dyrxjbenn3womjf4tj5x5w0cs34dsuddzdi3h26ryzi8dl9cdpr10o6dp4irznmwp2fzr2foox0c8g4s6l51mnwbqg7fg85v',
-                countryCommonId: '70937232-8e14-4f13-ae09-e43742b3ef91',
-                administrativeAreaLevel1Id: '6405e7aa-8218-4343-a19b-a1212c3cfc9f',
-                administrativeAreaLevel2Id: '794e141a-d9d8-42e7-b889-d917e24fcd8e',
-                administrativeAreaLevel3Id: '6943c8cc-2e74-4da9-8b78-22df73107e44',
-                zip: '60kujr0b9a',
-                locality: '8zsumf0z6oa1fio8ljx7yzby28297s7zkszzcal44ux9pz5u2d850n8dqpuw8r1u17hdxrgupt61moumsv8vjr48lo0lgfi9fysylmivs5p261v6hm0h0ljxik3jk',
-                address: 'z8jqrhgwuey6nf43r0tb6eoxqzhrvj0fmx1jbc9oxr6tdmvk8c97kdxodjl3m9al1tf2g7x7oaappifl9e4yewodbrlwemcxh42qk3ve6yziwovlqw5l9ias50t9yphg62bha7ff3myw4tau2b0m9vcum6mqc2dp92j6czffgql8mx3qmd0bw8g05s91x3vistm0qrcwxuij7zim6kt9j8snc2610n6n4dcacaibo2b8k6pohwgy75mowpwubiz',
-                latitude: 848.51,
-                longitude: 801.24,
+                description: 'Id est esse consequatur laudantium explicabo quam excepturi corrupti. Et quas consequatur dolor asperiores iste aut assumenda. Ea voluptatum nobis debitis labore nam quasi.',
+                excerpt: 'Et quidem rerum aut ut hic. Sed molestias aliquid voluptatum ut impedit molestiae quos dolorem vel. Et quo deleniti animi est explicabo. Totam molestiae aut repellat eos odit quam.',
+                email: 'khczbwj7mi8bpatprtjze1efnjio1lv7uetf06pvhc7y3vqmcvlhwbaexipfzien0alx88vkdnnn17ghc4iybd54ozb0c5z9x3xd7pjwnub4y6xtvzx10p8i',
+                phone: 'xh7fsdbw1zjontc3keqyoxheep5yy82beeg8peskauj5yax6mkzk82pe1ivrvs4kpgch4kuf4g6cmhslqay6kit9v2jg3hqt59p97c4irife396xdz64b5r2',
+                fax: '98hvouivkfb3buoawurf6tvatxoyppo07864wryk8lm7jkyh8fs2n1tnnmxhogwvxq86jilx8awvmxbrl4tkylnweqedgjpqvffefy52cdtphsy9j2q72en8',
+                countryCommonId: '3d6ba96c-9869-4620-af45-2582c4f176aa',
+                administrativeAreaLevel1Id: 'c9bb9196-a3e9-4baa-a80e-17b5143ebf73',
+                administrativeAreaLevel2Id: 'f92478c1-3504-4b80-a518-52d8719a62c0',
+                administrativeAreaLevel3Id: '08a2c1d1-f435-4123-b183-30f2676c9218',
+                zip: 'gt9g0ezf2s',
+                locality: '5gbjo06uzzveg9iqem0si4owfw4un22ufx9mya448lsg8bh0ugs84vf3ed5ag6ecipm5i4b33o5d9nhvhw8l8znehlhfz2qxwz6id7a99ewswkridl3uja0w0thbo',
+                address: 'zpa0vnafagyv6fs3ljpnupe6aoyn8v8t2bvs47ka4ww2skvqygosdxkqzfqumz7b3r54ljzrcdc21nvnlc6j8swi2ck3mbwh7441hts29wut6l6ier59c5izw5plbyx70fabj2thges2zazvq0pvsv1rvgzm2lxamrexff6oqeso8mds3y1lzf5180x31oqms5duki8e1yrkkh8vjgtqeuu1m24kuz2hasntknlko6ffnjlknfrx20o4yoqu783',
+                latitude: 22.67,
+                longitude: 181.16,
             })
             .expect(404);
     });
@@ -813,32 +813,32 @@ describe('partner', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                name: '3cysei3zcz1icasuc5n29409dfrlschund4kv25fbs9yh7tma6zgndbzsvl5z8kt3h5exg801n6oi0m4cjwpizal4x2ly6hvpj0cdm5rhi2rooemv2et869xb6vsu7qi9f33yytybp326tmyhax870b8yee8u5goi78v94ahwx3zfjp45s7k3j3sb654kh6u8egmuuu1osu6k89eb4fnrrhy3qp1knqd5wj4obwj9p026gu4cyztl23bsauc6cr',
+                id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                name: '5fx9xpw2v0974a67xx7nz27pp95qstp20n60fxng7kqpnqean6hyxsesvv94x7ew5ch6m3j83jb2pq34z7d8laofq88b45x3lxbi2e61cwgpwqjd2zi8nnml9xpf8ax88hbmhwb05acp7x2t49h78fh80eqd5n90p8cdpu7qtiljtmruhxtqq93inlx32p9kf3q28thhs0fabydvq0xk98prfvqx46b9qfq1cwvngu5f0n2f8wri60bfk9z3oej',
                 socialNetworks: { "foo" : "bar" },
-                description: 'Harum nemo ut architecto et fugiat quam unde unde suscipit. Aut enim ipsa enim et. Dicta in voluptates qui. Nihil voluptate porro eligendi aliquam. Consequatur quo qui ut assumenda et sint deserunt.',
-                excerpt: 'Dolor dolore molestiae eveniet. Illo nesciunt officia corrupti. Impedit nesciunt maiores quis at voluptatum placeat illo quo architecto. Ipsa architecto occaecati. Voluptatem aut enim perspiciatis. Sapiente ut quis ut eaque error aut.',
-                email: 'ohuu9eiid7v62xbg0qsukn67vzmqxtzn4zuu6xw08kti22tf7j2eeo6x8ya52tsuiufmjuk7kuheo9kewwnkdkm6ap85fpptbrij9jkax8iwv2pzbzfa909q',
-                phone: 'upp4ocs1hyi6cffm83i266uy1c83oaaqy44b3ct4ok34mg8q5h47r9v5ajs3v4kxl33wu09h4xfq85f01eageawgvbjkd72hgbuo8n72330z6m9dgmslv5cd',
-                fax: 'tt6smgrojx8scdi9kbzp4ycc8ygr07ocu6csidxyimbffruir68gc0s60z2idkl9rzbnau7gtypvkzjlisolsz828a2wpoxinl32ie3qanwggt0emdrh0rbh',
-                countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                zip: 'j3rozh9aph',
-                locality: 'i6e1yjy9ytm98y8i15vmwkdkruw2hxhb3ow1arqy7g0ouojdze7dg9959npuol08c6hpl67fkiinkduxpzhgb1ffkala8yoyvfzxua6fs7gfn6r4qvfzzxqyajvpp',
-                address: '47juhhhsllmfohkwzx7a0g4mbrkx0luqtb5uexkla1yar0gi7jve23mbj7ovsej6t9sv550z8au6lcp7mx8pl58sgls7e3gnctldgj2b8tvxs5ij3ds1nn6tgzzhi3p116j85hfk1t4vz7r7mzikkbefjti7yo3stfk6w082nno31rekawpvp0gylfwbuktzajz1w6o6zxn1uw3w4texzrnz1yh4bn4glndktshuhgzy9ole82sx23jz8kjlm5a',
-                latitude: 382.12,
-                longitude: 987.33,
+                description: 'Eos provident voluptatem maiores maiores velit blanditiis. Sapiente sit nostrum et aliquid est est maxime quibusdam. Quos neque eum illum aut in. Autem modi sequi tempore ipsum consequatur molestiae alias et. Ut natus nostrum quis sint soluta quia ut voluptatem eos.',
+                excerpt: 'Voluptatibus modi incidunt ut laudantium non voluptatum. Aliquid iste suscipit qui qui distinctio. Eligendi ut sint assumenda fuga labore sit sunt. Deleniti saepe rerum qui deserunt voluptatem voluptas dolorem quod error. Qui aperiam eveniet harum qui iusto natus in nisi et.',
+                email: 'q59pnlicesq07xr3rot8cwac106t8dfwzxl3jrxritrs9fghk7z63ipuadv80e2ifg3yuf9o72btem8oio9722nu7m9zm5x1q4sisjezwt2almsnp3vdzong',
+                phone: 'jt6netqhc0jz59a20wbhgher98fey8tayevcqkcc3p08vlmj7t3bwa552hebj009rcrro2dwf4tyi7r6i9m6xfjrbp7zt200wi8o9xn6f1beeet1lto5gx19',
+                fax: 'ok96am16txh4if5v51j1nbj0plieo7rktut0hyqyltzwry8rbznqf5oyxaajy12rknarqi9e0vjg9d753rarzqxct7irlb2nnwe4hgs8h3hmvm5nbgsirhc2',
+                countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                zip: '7wrcu6kxp1',
+                locality: 'e9e67zl0uze1iyf9ku60xx35scksv2a5afv0o7xh3sbta1zx8m7zbsa37yrcsk74sftdgbrpp7fzm8xof0jxpmebf46je2ntwo23bp82k59gwbxvivo3pz9rohz5e',
+                address: 'dg973jz2p05zgx3wq8jn35gj81qnij56smyw31s6n1978rxsg775t71l8va4lfftz5xgbc93ybur8tybhhc6ovcg7nvl13f8xz57eqpxabtas4ccxdt2dp9mbla85mtovm9yeggr9i7nvku87x97qki5eztpe8s0qxqun5e7tgd7bxvehwcif9kdow9jp2i66g4lvac8puhee2cw3z5zwly8zcraai7np2e0724gcbhe2clex8d95w1u8ppi33j',
+                latitude: 717.88,
+                longitude: 885.81,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '8307be3b-9e21-4a24-ba38-ab70db28330d'));
+            .expect(repository.collectionResponse.find(e => e.id === 'c3358001-fd7f-4dce-b2bf-4255acc38d31'));
     });
 
     test(`/REST:DELETE origen/partner/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/origen/partner/431bb339-aedc-4e65-b483-1ffd7353670b')
+            .delete('/origen/partner/069d93f1-9e74-4513-ad7c-98832e596956')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -846,7 +846,7 @@ describe('partner', () =>
     test(`/REST:DELETE origen/partner/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/origen/partner/8307be3b-9e21-4a24-ba38-ab70db28330d')
+            .delete('/origen/partner/c3358001-fd7f-4dce-b2bf-4255acc38d31')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -924,29 +924,29 @@ describe('partner', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'b915d067-114d-4c84-8f95-4869c7e9384b',
-                        name: 'vaseliufw1cnpfsmm1el7m3p3u8x5xr2xmesmoly9vu4dvej8oii6pqbft83xijj8gmgm3p97miek5lvdajmuuu9q5he4z1orohq5efiy377w8yy8yp3lvg8eij4tv9nmviupqq9lldeek9h0e9czezx6y8q6rgo30nkzw0q5qpw3bpkutpjagm64ry0uycjs4435le19sk78jttgl48ncbux6miz6vp2nwxbvc6wxbc7w87uu0j3vuxfdmahpe',
+                        id: '55f4b018-7586-4d81-9c4a-61d5e08fcf36',
+                        name: 'bbinfgjnr2jktfv38q8viatn6z8xgtcqlqpd6i3zmjubfvfkjxs571wjkdpk0c7w7pko4o9cqyao2lnjnvbp7w7btjn7w3qn6fiv65dqgxr19d1jq3zp3rophf98hnikzd6oreymg1cy49fopvdogohpw994boubbpxr0lsgbypz6tj2c3cb9mmbqq57hkzfvke3lgp5g94wjin4nns2mvv64gedpurvf7fpsjib3b7mmpfehz2lqmftb8dm5tk',
                         socialNetworks: { "foo" : "bar" },
-                        description: 'Non mollitia consequatur. Et adipisci sed quis possimus id qui aut. Non nam ipsam quisquam eveniet sed et. Rerum laboriosam dolor fugit saepe vero perspiciatis fugiat dolorem. Nam et qui exercitationem hic quia repellat perferendis. Et nesciunt enim est temporibus ut.',
-                        excerpt: 'Iure et saepe distinctio dolorem perferendis. Fugit sunt laborum quo consequatur delectus. Nobis est similique vel. Placeat expedita fuga odio ratione tempore voluptas quam sapiente.',
-                        email: 'rs69w9c38jf0ca2mri2716ivcson458u2q1yxs36w2n7o4zmxii60qs3l8s73dxr16yockaer06munw3zi36xetaztthj9xru720957mgiili17gbfnhx6yh',
-                        phone: 'g0azbo3ors6s2f0qyk2ojajoe7zcr7v3no4b48hwdb34wwb5q4t1tk7kk6mxv4mf2wnjt794vq17sn38mqny5fw4c3iidzbr1vg1hisb0bwx5e3zo868bnjk',
-                        fax: 'srcwwshv9w9d5ahr0pj3110yrk30s3sk4ozvg2llmg6vhiiwlolvtmsnbgdi8sf2yz6xsg6z9m87ye7gpkqbek23fewamq1rudw7rhs9vm8cor8hn6320h2q',
-                        countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                        administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                        administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                        administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                        zip: 'eqnhajfawz',
-                        locality: '74d1g4tkiiyq2p12782viiiuttji4usa21hdkk0xmi9nqxesdcjujnbzhjpdilhlpo9uhnqtaxi3qvd3itnborvbgkdo5fut197e3hpgbay5u9cn3m4q57dv35cn1',
-                        address: 'xkmaitem8ay9c9vzpndevviy369x5sfp848q2ph5s76rsejvfr95twloeixtjsfsnvh9l3fs6wufqqzias3404g828rxct277cnhkiu8hogstuuekgpd202tdmugg0ladn3kdxmybty6m36t1j92h968us96kcv80d1em0iraconog1ewv7pt3mdbxyvbzzmfw0obk9rwn5a5yp6k4tu03ld5whvgbxwob3dzpse5k5597oqmkztlc6286g7ktm',
-                        latitude: 154.06,
-                        longitude: 134.08,
+                        description: 'Possimus voluptatem consequatur repellat numquam officiis excepturi. Sunt eos voluptatem possimus sint et impedit hic sed officia. Debitis molestias praesentium consequatur alias repudiandae quo omnis et.',
+                        excerpt: 'Molestias dolorum animi rem. Animi voluptatem eum repudiandae voluptatem omnis qui id. Voluptas amet laborum facere. Iste adipisci dolore sapiente neque.',
+                        email: 'u0mrf6tma0zra0xq2korv4mqlpb9v7fhd47yyb7x7hln7agj6ttbwqcr63pxp8dd8mvg4eagoe091v2muazpae7n3n242utzoddiepa4ajtjpke9vjy2l072',
+                        phone: 'dii7ikgqh20wtlglczskztjpzulvkl3mdy3g0p9wbv9jjeedtbk7ej2z052qnabmufe2jf4i8svzl9m6rbdwhpmde40m6l1vt05v6vp2knd4oew2gdqneief',
+                        fax: 'oi52fuva73j4nspo3l02wo9d8lhtzyhdpgdfobqfskj9g9n2kz3082mn0rra8zcii49s5w62wkc0kh6ljvlign0vq14odnt32tnv61amzhqhnknahz40clmu',
+                        countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                        administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                        administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                        administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                        zip: '98uk7bqlrp',
+                        locality: 'nvh1ny785x72s4yls5ujor4fm5kl87ix5msvw3ta13m76esy2yvwno9drhjwrrqveggvk466v8uax8exkujexpo53bqzup38elyqqsi6kl9x6tj82j6qp9c2w6vah',
+                        address: 'avamqzcqwqc3uv6cs5ir1xlhhm3ofmq95zlqxhtuaq03285qvnay35b51k4xqtvmty896nd3dh9emdx3933vh4uqavpbgn49q8uld30hrfzfi8w421j3ei0kokyukp29o6lfg7owsyuvfl5kixrotpve9yec029fgczpsl75z6gr1y70msueyufv97gl04bdf0lelpmd05p92o9uzpjvikfv8xi3bwnznaimrt0zopsajzsptoa4bup9u4pndtu',
+                        latitude: 193.35,
+                        longitude: 146.37,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.origenCreatePartner).toHaveProperty('id', 'b915d067-114d-4c84-8f95-4869c7e9384b');
+                expect(res.body.data.origenCreatePartner).toHaveProperty('id', '55f4b018-7586-4d81-9c4a-61d5e08fcf36');
             });
     });
 
@@ -1019,7 +1019,7 @@ describe('partner', () =>
                     {
                         where: 
                         {
-                            id: 'b6ab9aaa-5a8d-4f9d-afa8-d5ce40000462'
+                            id: '84a6cc55-793c-495e-91c6-895c2f0aeca8'
                         }
                     }
                 }
@@ -1067,14 +1067,14 @@ describe('partner', () =>
                     {
                         where: 
                         {
-                            id: '8307be3b-9e21-4a24-ba38-ab70db28330d'
+                            id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.origenFindPartner.id).toStrictEqual('8307be3b-9e21-4a24-ba38-ab70db28330d');
+                expect(res.body.data.origenFindPartner.id).toStrictEqual('c3358001-fd7f-4dce-b2bf-4255acc38d31');
             });
     });
 
@@ -1108,7 +1108,7 @@ describe('partner', () =>
                     }
                 `,
                 variables: {
-                    id: 'a4f0568f-0c71-4342-90a2-0fe46e3200c1'
+                    id: 'dda45fae-c681-4e1a-baa8-e77a5c015119'
                 }
             })
             .expect(200)
@@ -1149,12 +1149,12 @@ describe('partner', () =>
                     }
                 `,
                 variables: {
-                    id: '8307be3b-9e21-4a24-ba38-ab70db28330d'
+                    id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.origenFindPartnerById.id).toStrictEqual('8307be3b-9e21-4a24-ba38-ab70db28330d');
+                expect(res.body.data.origenFindPartnerById.id).toStrictEqual('c3358001-fd7f-4dce-b2bf-4255acc38d31');
             });
     });
 
@@ -1230,23 +1230,23 @@ describe('partner', () =>
                 variables: {
                     payload: {
                         
-                        id: '48f03cab-2637-4420-8cea-48a258f45a2d',
-                        name: '0c1v0ffbd72tx6co01gbmjlknus4rqnq7jujzrsr7s2a3yuzr0pufjnt1gqqebcfsuewyx7haa3abrdnwqxc0dpq9o320ro5toyiuldpyqkguqlrfuvvzykrququlmz60jqxrcraz8z4mx0hiweytiiohq822zd70dg0hwk6lvwft23qruc389u66bgokzg37gqf8dqwc50jqtf0w8c2wbvudlvbxqua480ud2fa6huhrd2b1906ypad938wynh',
+                        id: 'd00f01f6-3bdc-4221-acd5-974d431931d4',
+                        name: 's9l4vks39y2m6bb3pgpgo1m0x6gaz1tnihzf5t0ajj8wqd0kv9njvuvn85sxhdyfou6yby9967e5abkjf8rsddu1gsa5fo6qbtm80fbrt102ja6epu00cxz9p76of4kyue7fbsalnbqb3neezedfantt8pcyrxdoe25p8eetvwuhil7ppcr19vnqzqctbjp1mi1tp745iqhnu834pzu7tkq0q9ya4o0y7rofgotdzs6v5durqck5xxnuaqhfnpr',
                         socialNetworks: { "foo" : "bar" },
-                        description: 'Quisquam voluptas inventore dicta fugiat et. Distinctio occaecati tempora saepe voluptatibus. In cum quis impedit ullam omnis. Quia exercitationem inventore pariatur. Placeat ipsam nihil. Consequatur quo quia aliquam tempore libero ut ipsa.',
-                        excerpt: 'Ad sit fugiat dolorem blanditiis corrupti. Mollitia in tempora commodi. Recusandae ipsum odit ut enim et ipsum.',
-                        email: '23m96nhjw8bfpag636jpsah670lttqxks5avz1etl7fdcnnfalzkkcu8f4a9dy2qa6rv4f4fasfhikgobrcdd7kx59vgx7uvpb8vue1zo7tb1xg20ynwmfgi',
-                        phone: 'owakgchassnifqymgfta2c7fyafbwhydwtczpcr6rm3ixzdvgd18wl34bdsk5j23zbw14tf2l1txpuo87tebvpdpwb3h08ghdfp8kgxzdur9f4ap4zwrkq85',
-                        fax: 'z1ezmb46peolq8llr5vfqmy6d8palcqg7xqb1q2a90q9jqre88icngkq2azi3n0qkw4pjuc9tts73mk4pbxdboyfv3rtmuim738xpc0s5t23x9poxm6v0x0a',
-                        countryCommonId: '4dc91dba-1b32-4222-afd8-522e343741fc',
-                        administrativeAreaLevel1Id: '20bdb10e-2d81-442c-a254-13c89efcdecf',
-                        administrativeAreaLevel2Id: '75a52d0f-c344-4a77-b92a-4f86d2065def',
-                        administrativeAreaLevel3Id: 'c1cb0426-5a22-4973-a6df-c71320c700b5',
-                        zip: 'lednc5tiij',
-                        locality: 'cl9qq8z91p9r99es75a3it82jtk6gu59t5eabq53tmm7taum020aou7zamu8eywffh2tb82gl83rgtv80654bwqrgzdp5io4g2x0ejq58rz5xegdmrq760of6g9oy',
-                        address: 'wtjlrhj0q3tbw7usazdjimhr0g3d4lcthq3nth1getdsymtob4t1vqr5u94jwne7i1s2vddtn5zlyodj7ygwil1xp3ndcq3apz7syjt0utur7mrehjksvb210j2oay9wk5hsun8hyovdhubwm4n7qz46urc7dhutssngei36dxst2rclac92dc67ozsov5tv9j6v0ngfu70s0jpa5kd586oaq4lyk1llyl116ifnl58phakj8uqhy89ts0s3ml6',
-                        latitude: 239.02,
-                        longitude: 465.24,
+                        description: 'Eligendi est fugit modi sit temporibus sit ut natus quia. Commodi eligendi cum corporis. Autem sed velit. Quia repellendus fuga.',
+                        excerpt: 'Aliquid sapiente recusandae a. Dolor eos enim dolores in ut recusandae aut aut. Molestiae consequatur quas nam fugiat odit. Quaerat quia quos consequuntur.',
+                        email: '9hn2b857cf4ibryue4gedifgfu0c0tlqcaw5tz3xypfov0x43eh38qu5zim8uk730ssgtizk10q4bejd6x49v3igviepexyl2rkaw8zhzz91ofpyjk1e8592',
+                        phone: 'g3kvrqgb4s8709ydfe8wyuqkegmpdhz8zto8crukdbbba08yi8afr8odakluondx4tznxlxk03yvbmupq3vz8tisoxpqqley2vvuji4p7u6ka5051193uqj6',
+                        fax: 'jxm4u02op3w81wtqhaolz33yastjgz63qq1mf7sd4379qj9ok8ue4nvfp7mv4wpvq1p84dmb6pl1kwt81pa8q53h2iwnqz5tm2lui9wd7pyxz9dlvyna7eo9',
+                        countryCommonId: 'e12e38de-42df-4a4d-a61e-e35394c5f2c1',
+                        administrativeAreaLevel1Id: 'f108db26-eef5-4244-b8b0-c97df7ea553b',
+                        administrativeAreaLevel2Id: 'f6ae9332-1b1e-4dcc-9653-723cd614fc77',
+                        administrativeAreaLevel3Id: 'd72939ed-adb0-499d-8ca9-704e14178351',
+                        zip: 'jd76nshlx5',
+                        locality: '7ov6bkx8mg7z4c2zan4jongooxzfo1zyz1l6apymlhl2ekycv4ef7lhgiene3ki946iv4264kt4vcfbq7fq9z2nkuy8zigctqmarvl154oz1eka7xq0yk97g629bx',
+                        address: 'nvdtiwtehb29574cw2qv1acvmffk8nqwkc61ptrevw0a0yb3d9r7eux9qi3j2pznyexo28qirgp0kybn76iyuu8i2736sh7zawtychw3s76na2oyawqpd3nojbx7s8j3qeayt5kj5a74ikgxrhedwzshjxmkz7k0wil4z66uky5qd687zft4yq27leb0bo76257f0ijwunjk8wapjd36lk1k83zrve3ontikyae9nglayx9mfuf3s9kfas3q5mm',
+                        latitude: 133.55,
+                        longitude: 456.74,
                     }
                 }
             })
@@ -1290,29 +1290,29 @@ describe('partner', () =>
                 variables: {
                     payload: {
                         
-                        id: '8307be3b-9e21-4a24-ba38-ab70db28330d',
-                        name: '4nqmvwtk35d8aihobbsb93gx2kcd82llhexzyasrxlj072hvsffmfv9tjylskak4p5xtfd93a12936wjw4qouxn7vgj9nj1cmei3ewl773u9fv4hyp9na92ylaa8yeqeniv3zhmbcssc92ph8kd1ys5oxmfyp79hytu6scy9ca2fqenrywdjkprom7ys0ka88hk6y4nbz7i3eddvbtdqxk8mez0konxr2k4s8tzhdqp4pwxxirnnbndwbxmw98d',
+                        id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31',
+                        name: 'f6bf4za37iejzz8443ujxr8wb9almmcu2fuis6haxwsn6hwxhpiemq15ttoowhcv2l5izuhtn6535kem0zphk01a46mm4yruig6jrzt8sokxkg7yhinzkc5lk7gb2tuinelloorso2b9hrpfqon5f45db0xl6mrsp2w1f1d64dy6e5oimzs6r4zqn8j1wnfj5ux8hcx2xo5payplahjb0fin9swtm2n37xcddjgfnqqrlukij5baw29n367eksw',
                         socialNetworks: { "foo" : "bar" },
-                        description: 'Doloribus vel sit cumque et aut. Dolores mollitia quia quia optio. Quo assumenda modi voluptatem quis asperiores pariatur. Est repudiandae magni dicta iste itaque non.',
-                        excerpt: 'Qui consequatur accusantium asperiores provident qui. Amet consequuntur illo ut doloremque ut voluptatem tempore. Eum a delectus atque aut rerum debitis quibusdam ex eius. Voluptas in atque vel quibusdam minus. Ipsam commodi quia eius at. Praesentium voluptatem nulla voluptatibus facere labore mollitia.',
-                        email: 's8gn3iehwciup8zbvkl4j7vjjnvp713gn4old1xo3ku7q2r04s49wwym1zr6vakunn81vkxofu98zksrujhk5y0ucoximrzfm7un1qrjmfqi5jxbt4b1c22m',
-                        phone: 'xoradrln91lbz8jeitcpvgciypj669n3wa1hovawhr9x5hn5irovqvbbmn1osjbnnz1z642luz41qekjrrzfnk9qebtlhp6yo5szwv8gkw8fv9mofwv6hjqm',
-                        fax: 'ait4670twy262s979bdv2kavt1gct31op6aqi4k9gpluvx6utsneyrs9dqwemth0p5vgrcsxq6ky65kgk4i41nk7t83j8rz7d34ojv6iz2zjeycahlhihac1',
-                        countryCommonId: 'fbc0e32c-0c39-4935-87d8-4fed50676d83',
-                        administrativeAreaLevel1Id: '1e4c259b-a9eb-40d1-a630-bfc6f64f2501',
-                        administrativeAreaLevel2Id: '4040100c-ac75-4805-bdae-bc640eeebf58',
-                        administrativeAreaLevel3Id: '4892651a-46cf-4437-a1db-414eb5a2a2aa',
-                        zip: 'kaj0ll2sif',
-                        locality: 'h9cb74lpypwf8uvzasicdyvclgmiyu48v7y1zcayfc8rd7ip03b9trice8uk70t6ocbmn9q3dcwqux2i5vyhvmyc1svhbto9sxvynwnehsj7qka0cvcwd3maxthy6',
-                        address: 'p4tdfrht226osti1h61a3346n8bleqvtypjx12peme6gylr676ljy530iiral2ofbevnwd606lkfsltsor1395ru0vtjl1ji6gab6qa2pmya9bu2rbpljuv9t1wks90alw4ccghopw4bybf574e3zcpptc2lxdrm53bh0igcnt4pmucz01s25jd7hdwtfbrrqwn9doek5c2xprerk67ltdprrqq2pmbocz3nx03kmb0prpmaq5qux9ynr2a51dx',
-                        latitude: 910.82,
-                        longitude: 495.95,
+                        description: 'Fugiat voluptatem possimus praesentium eius. Omnis similique est delectus sequi. Molestiae molestiae eum qui incidunt ipsam saepe. Quia sequi doloribus et nesciunt ea.',
+                        excerpt: 'Dolorem dolorem incidunt. Doloremque iure optio aut velit vero ullam perspiciatis repellat aut. Minus dolor eum illo dolores. Non tempora quis ea esse. Dolores consequatur aspernatur non sed reprehenderit. Aut quia eligendi aut.',
+                        email: 'xz4vm852zipitjv3kttzp93mm45k6kbgj0ehk2elcwh38rmzgbud06gqxqfu9ygi2xelb6cvt87zxhimqo1lax8tnt2omxxztm9t78746bw6yyfkgz57m5ka',
+                        phone: '8x1cu46clbsqej0k5zo8fvnj99juif60twc36g4mw97nw7xclle2eq6hpmk3j90u54kwgvmht41m8k6ztks3x3t0v61fppw7h88pc6680vc04o6f3or5jo58',
+                        fax: 't4sf04g3d8xacs1j7ywhvzztmusmz9rnskoylfvytvvbzauc0f7bdbelq2nhfcm0dlsizqwcweh88gwn1nj0by6p3bkce8czjbux0zovm2iq9k4bci201stp',
+                        countryCommonId: 'c76dc079-9853-4635-9dab-ccecfb7d04c7',
+                        administrativeAreaLevel1Id: '5880d44e-1d54-45bf-899d-a83b2caa8178',
+                        administrativeAreaLevel2Id: '95f6828e-f354-4949-8fba-33b78c615176',
+                        administrativeAreaLevel3Id: '001d78c6-ce76-4749-b763-5cd9cd318c25',
+                        zip: 'mz8spaf2to',
+                        locality: 'cc2unbuj1zi1ccrl6w69b0jx47c2g0dygn47wgz9w0cd9nd8zj4kol8m45nnurfvagzxz55v3t3d025ofuf8czubbff89hb7bc6jvcrm5v2t9li6sujcfye4q76co',
+                        address: 's6s242y10lt9i0ye9s86k74hkro834xbiec35po1zaghi83uvro1z2ff8dhrm28q524o92kenglz227tpze12riinq183gw0hiwlo0z8o15gwqkbynjpyn4exqan7ti94gatog6ulowys26rkg9px0w9njzosdztzzu85q00rkcwyf23y55yn3fn2ppyjkqdcbls8hzexm9tbn8fewjwkjoi5qzl8jcgs62s5fyo227jtu7elbnklhn8kq0mjul',
+                        latitude: 247.31,
+                        longitude: 831.34,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.origenUpdatePartner.id).toStrictEqual('8307be3b-9e21-4a24-ba38-ab70db28330d');
+                expect(res.body.data.origenUpdatePartner.id).toStrictEqual('c3358001-fd7f-4dce-b2bf-4255acc38d31');
             });
     });
 
@@ -1346,7 +1346,7 @@ describe('partner', () =>
                     }
                 `,
                 variables: {
-                    id: '1438f5ae-32ac-4ba8-89ad-f2ded60160f7'
+                    id: '1d6cb0e5-8dff-4c07-94be-033be64a1f6b'
                 }
             })
             .expect(200)
@@ -1387,12 +1387,12 @@ describe('partner', () =>
                     }
                 `,
                 variables: {
-                    id: '8307be3b-9e21-4a24-ba38-ab70db28330d'
+                    id: 'c3358001-fd7f-4dce-b2bf-4255acc38d31'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.origenDeletePartnerById.id).toStrictEqual('8307be3b-9e21-4a24-ba38-ab70db28330d');
+                expect(res.body.data.origenDeletePartnerById.id).toStrictEqual('c3358001-fd7f-4dce-b2bf-4255acc38d31');
             });
     });
 
