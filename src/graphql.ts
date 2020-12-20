@@ -1105,6 +1105,7 @@ export interface OrigenPartner {
     address?: GraphQLString;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
+    attachments?: AdminAttachment[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
