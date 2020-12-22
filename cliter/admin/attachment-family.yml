@@ -47,7 +47,7 @@ aggregateProperties:
     type: json
     nullable: true
   - name: quality
-    type: int.unsigned
+    type: smallint.unsigned
     maxLength: 2
     nullable: true
   - name: format

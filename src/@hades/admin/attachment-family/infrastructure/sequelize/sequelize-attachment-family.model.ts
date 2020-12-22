@@ -57,7 +57,7 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
     @Column({
         field: 'quality',
         allowNull: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.SMALLINT.UNSIGNED,
     })
     quality: number;
 
