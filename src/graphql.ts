@@ -114,7 +114,7 @@ export interface AdminCreateAttachmentFamilyInput {
     resourceIds?: string[];
     width?: GraphQLInt;
     height?: GraphQLInt;
-    fit: AdminAttachmentFamilyFit;
+    fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
     format?: GraphQLString;
@@ -817,7 +817,7 @@ export interface AdminAttachmentFamily {
     resources?: AdminResource[];
     width?: GraphQLInt;
     height?: GraphQLInt;
-    fit: AdminAttachmentFamilyFit;
+    fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
     format?: GraphQLString;
