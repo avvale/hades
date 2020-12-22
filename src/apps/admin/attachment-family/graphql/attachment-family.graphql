@@ -13,7 +13,7 @@ type AdminAttachmentFamily
     resources: [AdminResource]
     width: GraphQLInt
     height: GraphQLInt
-    fit: AdminAttachmentFamilyFit!
+    fit: AdminAttachmentFamilyFit
     sizes: JSON
     quality: GraphQLInt
     format: GraphQLString
@@ -29,7 +29,7 @@ input AdminCreateAttachmentFamilyInput
     resourceIds: [ID]
     width: GraphQLInt
     height: GraphQLInt
-    fit: AdminAttachmentFamilyFit!
+    fit: AdminAttachmentFamilyFit
     sizes: JSON
     quality: GraphQLInt
     format: GraphQLString

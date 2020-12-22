@@ -42,7 +42,7 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
 
     @Column({
         field: 'fit',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.ENUM('CROP','WIDTH','HEIGHT','WIDTH_FREE','HEIGHT_FREE'),
     })
     fit: string;
