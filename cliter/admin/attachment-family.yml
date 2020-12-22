@@ -42,7 +42,7 @@ aggregateProperties:
       - HEIGHT
       - WIDTH_FREE
       - HEIGHT_FREE
-    nullable: false
+    nullable: true
   - name: sizes
     type: json
     nullable: true

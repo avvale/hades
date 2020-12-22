@@ -9,7 +9,7 @@ export class CreateAttachmentFamiliesCommand
             resourceIds?: string[],
             width?: number,
             height?: number,
-            fit: string,
+            fit?: string,
             sizes?: any,
             quality?: number,
             format?: string,
