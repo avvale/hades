@@ -64,7 +64,7 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
     @Column({
         field: 'format',
         allowNull: true,
-        type: DataTypes.STRING(10),
+        type: DataTypes.ENUM('JPG','PNG','GIF','TIF','BMP','DATA_URL'),
     })
     format: string;
 

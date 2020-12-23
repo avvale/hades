@@ -48,11 +48,17 @@ aggregateProperties:
     nullable: true
   - name: quality
     type: smallint.unsigned
-    maxLength: 2
+    maxLength: 3
     nullable: true
   - name: format
-    type: varchar
-    maxLength: 10
+    type: enum
+    enumOptions:
+      - JPG
+      - PNG
+      - GIF
+      - TIF
+      - BMP
+      - DATA_URL
     nullable: true
   - name: created_at
     type: timestamp

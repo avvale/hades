@@ -11,7 +11,7 @@ export class AttachmentFamilyQuality extends SmallintValueObject
             name: 'AttachmentFamilyQuality',
             nullable: true,
             undefinable: true,
-            maxLength: 2,
+            maxLength: 3,
             unsigned: true,
         }, validationRules));
     }
