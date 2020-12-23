@@ -1,7 +1,7 @@
-import { StringValueObject } from '@hades/shared/domain/value-objects/string.value-object';
+import { EnumValueObject } from '@hades/shared/domain/value-objects/enum.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class AttachmentFamilyFormat extends StringValueObject
+export class AttachmentFamilyFormat extends EnumValueObject
 {
     public readonly type: 'AttachmentFamilyFormat';
 
@@ -11,7 +11,7 @@ export class AttachmentFamilyFormat extends StringValueObject
             name: 'AttachmentFamilyFormat',
             nullable: true,
             undefinable: true,
-            maxLength: 10,
+            enumOptions:  ['JPG','PNG','GIF','TIF','BMP','DATA_URL'],
         }, validationRules));
     }
 }

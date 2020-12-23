@@ -54,6 +54,7 @@ export class AttachmentFamilyDto
 
     @ApiProperty({
         type        : String,
+        enum        : ['JPG','PNG','GIF','TIF','BMP','DATA_URL'],
         description : 'format [input here api field description]',
     })
     format: string;
