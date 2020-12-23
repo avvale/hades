@@ -14,6 +14,15 @@ export enum AdminAttachmentFamilyFit {
     HEIGHT_FREE = "HEIGHT_FREE"
 }
 
+export enum AdminAttachmentFamilyFormat {
+    JPG = "JPG",
+    PNG = "PNG",
+    GIF = "GIF",
+    TIF = "TIF",
+    BMP = "BMP",
+    DATA_URL = "DATA_URL"
+}
+
 export enum AdminLangDir {
     LTR = "LTR",
     RTL = "RTL"
@@ -117,7 +126,7 @@ export interface AdminCreateAttachmentFamilyInput {
     fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
-    format?: GraphQLString;
+    format?: AdminAttachmentFamilyFormat;
 }
 
 export interface AdminUpdateAttachmentFamilyInput {
@@ -129,7 +138,7 @@ export interface AdminUpdateAttachmentFamilyInput {
     fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
-    format?: GraphQLString;
+    format?: AdminAttachmentFamilyFormat;
 }
 
 export interface AdminCreateAttachmentLibraryInput {
@@ -820,7 +829,7 @@ export interface AdminAttachmentFamily {
     fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
-    format?: GraphQLString;
+    format?: AdminAttachmentFamilyFormat;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
