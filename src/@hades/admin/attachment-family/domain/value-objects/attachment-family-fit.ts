@@ -11,7 +11,7 @@ export class AttachmentFamilyFit extends EnumValueObject
             name: 'AttachmentFamilyFit',
             nullable: true,
             undefinable: true,
-            enumOptions:  ['CROP','WIDTH','HEIGHT','WIDTH_FREE','HEIGHT_FREE'],
+            enumOptions:  ['CROP','WIDTH','HEIGHT','FREE_WIDTH','FREE_HEIGHT'],
         }, validationRules));
     }
 }

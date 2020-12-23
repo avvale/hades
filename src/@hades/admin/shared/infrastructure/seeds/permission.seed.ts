@@ -20,13 +20,13 @@ export const permissions = [
     {id: '0f21e653-4ca1-45fa-a2a7-9b74c5aba700',  name: 'admin.administrativeAreaLevel3.update',    boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
     {id: '548c6f11-a801-4b83-b57f-a96896427a16',  name: 'admin.administrativeAreaLevel3.delete',    boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
 
-    {id: '6627bf0b-6eaf-403a-a30b-97a33e142b21',  name: 'admin.attachment.access',                  boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: '6627bf0b-6eaf-403a-a30b-97a33e142b21',  name: 'admin.attachmentSection.access',           boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
 
-    {id: '543581c4-2f1a-4a22-a699-b69d589630ac',  name: 'admin.attachment.attachmentFamily.access', boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
-    {id: 'f71edff5-2456-4cc9-8264-4a28c2bae44b',  name: 'admin.attachment.attachmentFamily.get',    boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
-    {id: 'd31c17f0-a0cd-4164-9da8-cbbed3aae402',  name: 'admin.attachment.attachmentFamily.create', boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
-    {id: '3fce3fc4-73c3-4d03-8b81-233e3ec3ab6d',  name: 'admin.attachment.attachmentFamily.update', boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
-    {id: 'ce1446fb-fe14-4b78-b6fd-7bb70594c482',  name: 'admin.attachment.attachmentFamily.delete', boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: '543581c4-2f1a-4a22-a699-b69d589630ac',  name: 'admin.attachmentFamily.access',            boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: 'f71edff5-2456-4cc9-8264-4a28c2bae44b',  name: 'admin.attachmentFamily.get',               boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: 'd31c17f0-a0cd-4164-9da8-cbbed3aae402',  name: 'admin.attachmentFamily.create',            boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: '3fce3fc4-73c3-4d03-8b81-233e3ec3ab6d',  name: 'admin.attachmentFamily.update',            boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: 'ce1446fb-fe14-4b78-b6fd-7bb70594c482',  name: 'admin.attachmentFamily.delete',            boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
 
     {id: '5dc5e4ed-e9de-4124-86fa-34ac6790c508',  name: 'admin.country.access',                     boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
     {id: '39ae478d-98a6-40c6-babe-e9412d6678e5',  name: 'admin.country.get',                        boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
