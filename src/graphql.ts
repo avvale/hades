@@ -10,8 +10,8 @@ export enum AdminAttachmentFamilyFit {
     CROP = "CROP",
     WIDTH = "WIDTH",
     HEIGHT = "HEIGHT",
-    WIDTH_FREE = "WIDTH_FREE",
-    HEIGHT_FREE = "HEIGHT_FREE"
+    FREE_WIDTH = "FREE_WIDTH",
+    FREE_HEIGHT = "FREE_HEIGHT"
 }
 
 export enum AdminAttachmentFamilyFormat {
