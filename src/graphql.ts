@@ -221,6 +221,45 @@ export interface AdminUpdateAttachmentInput {
     data?: JSON;
 }
 
+export interface AdminCropInput {
+    x?: GraphQLInt;
+    y?: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    rotate?: GraphQLInt;
+    scaleX?: GraphQLInt;
+    scaleY?: GraphQLInt;
+}
+
+export interface AdminCropAttachmentInput {
+    id: string;
+    commonId: string;
+    langId: string;
+    attachableModel: GraphQLString;
+    attachableId: string;
+    familyId?: string;
+    sort?: GraphQLInt;
+    alt?: GraphQLString;
+    title?: GraphQLString;
+    description?: GraphQLString;
+    excerpt?: GraphQLString;
+    name: GraphQLString;
+    pathname: GraphQLString;
+    filename: GraphQLString;
+    url: GraphQLString;
+    mime: GraphQLString;
+    extension?: GraphQLString;
+    size: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    libraryId?: string;
+    library?: AdminCreateAttachmentLibraryInput;
+    libraryFilename?: GraphQLString;
+    data?: JSON;
+    isUploaded: GraphQLBoolean;
+    isChanged: GraphQLBoolean;
+}
+
 export interface AdminCreateCountryInput {
     id: string;
     commonId: string;
@@ -707,6 +746,8 @@ export interface IMutation {
     adminUpdateAttachment(payload: AdminUpdateAttachmentInput, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
     adminDeleteAttachmentById(id: string, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
     adminDeleteAttachments(query?: QueryStatement, constraint?: QueryStatement): AdminAttachment[] | Promise<AdminAttachment[]>;
+    adminCropAttachment(crop: AdminCropInput, attachmentFamily: AdminCreateAttachmentFamilyInput, attachment: AdminCropAttachmentInput): JSON | Promise<JSON>;
+    adminDeleteAttachment(attachment: AdminUpdateAttachmentInput): JSON | Promise<JSON>;
     adminCreateCountry(payload: AdminCreateCountryInput): AdminCountry | Promise<AdminCountry>;
     adminCreateCountries(payload: AdminCreateCountryInput[]): boolean | Promise<boolean>;
     adminUpdateCountry(payload: AdminUpdateCountryInput, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
@@ -875,7 +916,7 @@ export interface AdminAttachment {
     width?: GraphQLInt;
     height?: GraphQLInt;
     libraryId?: string;
-    attachmentLibrary?: AdminAttachmentLibrary;
+    library?: AdminAttachmentLibrary;
     libraryFilename?: GraphQLString;
     data?: JSON;
     createdAt?: GraphQLTimestamp;
