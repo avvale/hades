@@ -172,7 +172,7 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     libraryId: string;
 
     @BelongsTo(() => AdminAttachmentLibraryModel)
-    attachmentLibrary: AdminAttachmentLibraryModel;
+    library: AdminAttachmentLibraryModel;
 
     @Column({
         field: 'library_filename',

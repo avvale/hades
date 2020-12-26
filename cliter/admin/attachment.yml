@@ -99,7 +99,7 @@ aggregateProperties:
     relationshipAggregate: AdminAttachmentLibrary
     relationshipModulePath: admin/attachment-library
     relationshipKey: id
-    relationshipField: attachmentLibrary
+    relationshipField: library
   - name: library_filename
     type: varchar
     maxLength: 255

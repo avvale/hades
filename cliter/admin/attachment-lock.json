@@ -231,11 +231,11 @@
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.aggregate.ts",
-            "integrity": "sha1:6b0667c687bc82868a5682545c30d3bc554ebc37"
+            "integrity": "sha1:3b329eba55ff87373c078f47c4c5e7fcd49cff8a"
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.mapper.ts",
-            "integrity": "sha1:f752aae08e4e9506d40a8ffe948858645f08f368"
+            "integrity": "sha1:3d4b7a7589c6f51e5a48bf711707be43119fe0f4"
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.repository.ts",
@@ -243,7 +243,7 @@
         },
         {
             "path": "src/@hades/admin/attachment/domain/attachment.response.ts",
-            "integrity": "sha1:d9860573932b702aa4718e9318966877453fcc76"
+            "integrity": "sha1:d3ca269525ca1a3b6528e92859e0561d34eae0f8"
         },
         {
             "path": "src/@hades/admin/attachment/domain/value-objects/index.ts",
@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/seeds/attachment.seed.ts",
-            "integrity": "sha1:a609dc6855b08846b593c1c6498d224607e6bf0a"
+            "integrity": "sha1:c1d6d81d83571429794d9ffcfd809265b540b7db"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.model.ts",
-            "integrity": "sha1:35ee2405b4d3e32b97995f520eeccc99fc018042"
+            "integrity": "sha1:bc22bbda0f88c8657821318fb1502bb01495d2c5"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.repository.ts",
@@ -459,7 +459,7 @@
         },
         {
             "path": "src/apps/admin/attachment/graphql/attachment.graphql",
-            "integrity": "sha1:2599eb0bbb6e767090abc40d9ba2a76d90c231c8"
+            "integrity": "sha1:7884db4b34e5d86982a82e21515051588249c3c0"
         },
         {
             "path": "src/apps/admin/attachment/index.ts",
@@ -547,7 +547,7 @@
         },
         {
             "path": "postman/admin.attachment.postman.json",
-            "integrity": "sha1:7d9f10b2ec6f5e8fb816b1906f71e0c09a190354"
+            "integrity": "sha1:02b2e26b2a45202e4a0fea8a7dd378427f16f3c6"
         }
     ]
 }
