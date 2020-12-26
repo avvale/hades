@@ -64,7 +64,7 @@ export class AdminAttachment extends AggregateRoot
 
     // eager relationship
     family: AdminAttachmentFamily;
-    attachmentLibrary: AdminAttachmentLibrary;
+    library: AdminAttachmentLibrary;
 
     constructor(
         id: AttachmentId,
@@ -94,7 +94,7 @@ export class AdminAttachment extends AggregateRoot
         updatedAt: AttachmentUpdatedAt,
         deletedAt: AttachmentDeletedAt,
         family?: AdminAttachmentFamily,
-        attachmentLibrary?: AdminAttachmentLibrary,
+        library?: AdminAttachmentLibrary,
     )
     {
         super();
@@ -128,7 +128,7 @@ export class AdminAttachment extends AggregateRoot
 
         // eager relationship
         this.family = family;
-        this.attachmentLibrary = attachmentLibrary;
+        this.library = library;
     }
 
     static register (
@@ -159,7 +159,7 @@ export class AdminAttachment extends AggregateRoot
         updatedAt: AttachmentUpdatedAt,
         deletedAt: AttachmentDeletedAt,
         family?: AdminAttachmentFamily,
-        attachmentLibrary?: AdminAttachmentLibrary,
+        library?: AdminAttachmentLibrary,
     ): AdminAttachment
     {
         return new AdminAttachment(
@@ -190,7 +190,7 @@ export class AdminAttachment extends AggregateRoot
             updatedAt,
             deletedAt,
             family,
-            attachmentLibrary,
+            library,
         );
     }
 
@@ -328,7 +328,7 @@ export class AdminAttachment extends AggregateRoot
 
             // eager relationship
             family: this.family?.toDTO(),
-            attachmentLibrary: this.attachmentLibrary?.toDTO(),
+            library: this.library?.toDTO(),
         }
     }
 }

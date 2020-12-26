@@ -31,6 +31,6 @@ export class AttachmentResponse
         public readonly updatedAt: string,
         public readonly deletedAt: string,
         public readonly family: AttachmentFamilyResponse,
-        public readonly attachmentLibrary: AttachmentLibraryResponse,
+        public readonly library: AttachmentLibraryResponse,
     ) {}
 }
