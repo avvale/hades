@@ -222,13 +222,13 @@ export interface AdminUpdateAttachmentInput {
 }
 
 export interface AdminCropInput {
-    x?: GraphQLInt;
-    y?: GraphQLInt;
-    width?: GraphQLInt;
-    height?: GraphQLInt;
-    rotate?: GraphQLInt;
-    scaleX?: GraphQLInt;
-    scaleY?: GraphQLInt;
+    x: GraphQLInt;
+    y: GraphQLInt;
+    width: GraphQLInt;
+    height: GraphQLInt;
+    rotate: GraphQLInt;
+    scaleX: GraphQLInt;
+    scaleY: GraphQLInt;
 }
 
 export interface AdminCropAttachmentInput {
@@ -763,8 +763,8 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
-    adminUploadFiles(path: GraphQLString, files: Upload[]): UploadFile[] | Promise<UploadFile[]>;
-    adminUploadFile(path: GraphQLString, file: Upload): UploadFile | Promise<UploadFile>;
+    adminUploadFiles(path: GraphQLString, langId: string, files: Upload[]): UploadFile[] | Promise<UploadFile[]>;
+    adminUploadFile(path: GraphQLString, langId: string, file: Upload): UploadFile | Promise<UploadFile>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
