@@ -10,13 +10,11 @@ import { AuthorizationGuard } from './../../../shared/modules/auth/guards/author
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { CreateAttachmentCommand } from '@hades/admin/attachment/application/create/create-attachment.command';
-import { FindAttachmentByIdQuery } from '@hades/admin/attachment/application/find/find-attachment-by-id.query';
+import { CropAttachmentCommand } from '@hades/admin/attachment/application/crop/crop-attachment.command';
 import { AdminCreateAttachmentFamilyInput, AdminCropAttachmentInput, AdminCropInput } from './../../../../graphql';
 
-
 @Resolver()
-//@Permissions('admin.attachment.create')
+@Permissions('admin.attachment.create')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class AdminCropAttachmentResolver
 {
@@ -33,14 +31,6 @@ export class AdminCropAttachmentResolver
         @Timezone() timezone?: string,
     )
     {
-        console.log(crop);
-        console.log(attachmentFamily);
-        console.log(attachment);
-
-
-
-       //await this.commandBus.dispatch(new CreateAttachmentCommand(payload, { timezone }));
-
-        //return await this.queryBus.ask(new FindAttachmentByIdQuery(payload.id, {}, { timezone }));
+        await this.commandBus.dispatch(new CropAttachmentCommand(crop, attachmentFamily, attachment, { timezone }));
     }
 }

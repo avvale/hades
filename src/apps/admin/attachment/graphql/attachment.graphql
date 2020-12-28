@@ -87,13 +87,13 @@ input AdminUpdateAttachmentInput
 
 input AdminCropInput
 {
-    x: GraphQLInt
-    y: GraphQLInt
-    width: GraphQLInt
-    height: GraphQLInt
-    rotate: GraphQLInt
-    scaleX: GraphQLInt
-    scaleY: GraphQLInt
+    x: GraphQLInt!
+    y: GraphQLInt!
+    width: GraphQLInt!
+    height: GraphQLInt!
+    rotate: GraphQLInt!
+    scaleX: GraphQLInt!
+    scaleY: GraphQLInt!
 }
 
 input AdminCropAttachmentInput
