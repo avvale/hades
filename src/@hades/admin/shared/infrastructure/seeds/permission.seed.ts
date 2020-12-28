@@ -22,6 +22,12 @@ export const permissions = [
 
     {id: '6627bf0b-6eaf-403a-a30b-97a33e142b21',  name: 'admin.attachmentSection.access',           boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
 
+    {id: '475fc395-8636-4a59-a4ff-a69a678d3d2e',  name: 'admin.attachment.access',                  boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: 'c923eb47-c18e-48fe-97c8-50c8a737413a',  name: 'admin.attachment.get',                     boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: 'faf881d1-00cc-4ee7-b823-bc70a321eac3',  name: 'admin.attachment.create',                  boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: '6a7264b2-ec6e-4232-b98e-8a98bebd6c5f',  name: 'admin.attachment.update',                  boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+    {id: '473d35b1-9e19-4e8b-81d9-0ab648b6f3a6',  name: 'admin.attachment.delete',                  boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
+
     {id: '543581c4-2f1a-4a22-a699-b69d589630ac',  name: 'admin.attachmentFamily.access',            boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
     {id: 'f71edff5-2456-4cc9-8264-4a28c2bae44b',  name: 'admin.attachmentFamily.get',               boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
     {id: 'd31c17f0-a0cd-4164-9da8-cbbed3aae402',  name: 'admin.attachmentFamily.create',            boundedContextId: 'd0a2ed9c-2a05-4f32-851b-81860d1d3b4d'},
