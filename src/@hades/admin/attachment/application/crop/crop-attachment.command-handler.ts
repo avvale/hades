@@ -39,7 +39,6 @@ import {
     AttachmentIsUploaded,
 } from './../../domain/value-objects';
 import { AttachmentFamilyName, AttachmentFamilyResourceIds, AttachmentFamilyWidth, AttachmentFamilyHeight, AttachmentFamilyFit, AttachmentFamilySizes, AttachmentFamilyQuality, AttachmentFamilyFormat } from '@hades/admin/attachment-family/domain/value-objects';
-import { format } from 'path';
 import { AttachmentLibraryName, AttachmentLibraryPathname, AttachmentLibraryUrl, AttachmentLibraryMime, AttachmentLibraryExtension, AttachmentLibrarySize, AttachmentLibraryWidth, AttachmentLibraryHeight, AttachmentLibraryData } from '@hades/admin/attachment-library/domain/value-objects';
 
 @CommandHandler(CropAttachmentCommand)
@@ -51,7 +50,6 @@ export class CropAttachmentCommandHandler implements ICommandHandler<CropAttachm
 
     async execute(command: CropAttachmentCommand): Promise<void>
     {
-        console.log(command)
         // call to use case and implements ValueObjects
         await this.cropAttachmentService.main(
             {

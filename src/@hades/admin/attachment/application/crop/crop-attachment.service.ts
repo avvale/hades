@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { ImageManager } from '@hades/shared/domain/lib/image-manager';
@@ -115,9 +116,34 @@ export class CropAttachmentService
         }
     ): Promise<void>
     {
-        attachmentFamily.format.value
+        // load image from file
+        let image = await ImageManager.loadImage(path.join(attachment.library.pathname.value, attachment.library.filename.value));
 
-        Utils.mimeFromExtension(attachmentFamily.format.value);
+        // set new extension from attachment family (jpg, png, gif, etc.)
+        if (attachmentFamily.format.value && Utils.mimeFromExtension(attachmentFamily.format.value) !== attachment.library.mime.value)
+        {
+            image                   = ImageManager.changeFormat(image, attachmentFamily.format.value);
+
+            attachment.filename     = new AttachmentFilename(`${path.parse(attachment.filename.value).name}.${attachmentFamily.format.value.toLowerCase()}`);
+            attachment.extension    = new AttachmentExtension(attachmentFamily.format.value.toLowerCase());
+            const urlParsed         = path.parse(attachment.url.value);
+            attachment.url          = new AttachmentUrl(`${urlParsed.dir}/${urlParsed.name}.${attachment.extension.value}`);
+            attachment.mime         = new AttachmentMime(Utils.mimeFromExtension(attachment.extension.value));
+        }
+
+        image = ImageManager.crop(image, {left: crop.x.value, top: crop.y.value, width: crop.width.value, height: crop.height.value})
+
+        if (attachmentFamily.width.value || attachmentFamily.height.value)
+        {
+            image = ImageManager.resize(image, attachmentFamily.width.value, attachmentFamily.height.value);
+        }
+
+        // consultar info desde una query
+        const info                  = await image.withMetadata().toFile(path.join(attachment.pathname.value, attachment.filename.value));
+        attachment.width            = new AttachmentWidth(info.width);
+        attachment.height           = new AttachmentHeight(info.height);
+        attachment.size             = new AttachmentSize(info.size);
+        attachment.data             = new AttachmentData({exif: ImageManager.exif((await image.metadata()).exif)});
 
         // set image format from attachment family (jpg, png, gif, etc.)
         //if (attachmentFamily.format.value.toLowerCase() !== attachment.extension)

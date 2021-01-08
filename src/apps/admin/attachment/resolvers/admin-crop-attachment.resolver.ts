@@ -32,5 +32,10 @@ export class AdminCropAttachmentResolver
     )
     {
         await this.commandBus.dispatch(new CropAttachmentCommand(crop, attachmentFamily, attachment, { timezone }));
+
+        console.log(crop, attachmentFamily, attachment)
+        attachment.filename;
+        attachment.pathname;
+        // cogemos el nomnbre del fichero y comprobamos si hay cambio de extensión
     }
 }

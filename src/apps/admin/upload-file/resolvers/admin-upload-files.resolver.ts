@@ -15,7 +15,7 @@ export class AdminUploadFilesResolver
     ) {}
 
     @Mutation('adminUploadFiles')
-    async main(@Args('path') relativeStoragePath: string, @Args('langId') langId: string, @Args('files') files: Upload[])
+    async main(@Args('attachableModel') attachableModel: string, @Args('attachableId') attachableId: string, @Args('path') relativeStoragePath: string, @Args('langId') langId: string, @Args('files') files: Upload[])
     {
         if (!fs.existsSync(Utils.basePath('public/storage', relativeStoragePath))) fs.mkdirSync(Utils.basePath('public/storage', relativeStoragePath), {recursive: true});
         const uploadFiles: UploadFile[] = [];
@@ -69,8 +69,8 @@ export class AdminUploadFilesResolver
                 id: Utils.uuid(),
                 commonId: Utils.uuid(),
                 langId: langId,
-                attachableModel: '',
-                attachableId: '',
+                attachableModel: attachableModel,
+                attachableId: attachableId,
                 familyId: null,
                 sort: null,
                 alt: null,

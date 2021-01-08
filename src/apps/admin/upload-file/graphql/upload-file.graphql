@@ -6,6 +6,6 @@ type UploadFile
 
 type Mutation
 {
-    adminUploadFiles(path: GraphQLString! langId: ID! files: [Upload!]!): [UploadFile]
-    adminUploadFile(path: GraphQLString! langId: ID! file: Upload!): UploadFile
+    adminUploadFiles(attachableModel: GraphQLString! attachableId: ID! path: GraphQLString! langId: ID! files: [Upload!]!): [UploadFile]
+    adminUploadFile(attachableModel: GraphQLString! attachableId: ID! path: GraphQLString! langId: ID! file: Upload!): UploadFile
 }
