@@ -1,19 +1,32 @@
-import exifr from 'exifr';
-var imagickal = require('imagickal');
 import * as path from 'path';
 import * as sharp from 'sharp';
-import { AdminCreateAttachmentInput } from 'src/graphql';
+import * as exifReader from 'exif-reader';
 
 export class ImageManager
 {
    public static async dimensions(path: string): Promise<{width: number, height: number}>
    {
-        return await imagickal.dimensions(path);
+        const metadata = await sharp(path).metadata();
+
+        return {
+            width: metadata.width,
+            height: metadata.height
+        };
    }
 
-   public static async exif(path: string): Promise<any>
+   // allow read exif from absolute file path or exif buffer
+   public static async exif(prop: string | Buffer)
    {
-       return await exifr.parse(path);
+        const buffer = prop instanceof Buffer ? prop : (await sharp(prop).metadata()).exif;
+
+        try
+        {
+            const exif = exifReader(buffer);
+        }
+        catch (error)
+        {
+            return null;
+        }
    }
 
    public static isImageMime(mime: string): boolean
@@ -30,6 +43,48 @@ export class ImageManager
             default:
                 return false;
         }
+    }
+
+    public static async loadImage(path: string): Promise<sharp.Sharp>
+    {
+        return await sharp(path);
+    }
+
+    public static changeFormat(
+        image: sharp.Sharp,
+        format: string,
+        options? : sharp.PngOptions | sharp.JpegOptions
+    ): sharp.Sharp
+    {
+        switch (format)
+        {
+            case 'jpeg':
+            case 'jpg':
+                return image.jpeg(options);
+            case 'png':
+                return image.png(options);
+            default:
+                return image;
+        }
+    }
+
+    public static crop(
+        image: sharp.Sharp,
+        region: sharp.Region
+    ): sharp.Sharp
+    {
+        return image.extract(region);
+    }
+
+    public static resize(
+        image: sharp.Sharp,
+        width?: number | null,
+        height?: number | null,
+        options?: sharp.ResizeOptions
+
+    ): sharp.Sharp
+    {
+        return image.resize(width, height, options);
     }
 
     public static cropAttachment(attachment, attachmentFamily, crop)
@@ -65,7 +120,7 @@ export class ImageManager
         }
         else
         {
-            // resize al tamaño indicado en el 
+            // resize al tamaño indicado en el
         }
 
         // salvamos la imagen
@@ -74,7 +129,7 @@ export class ImageManager
         // get new properties from image cropped
         // attachment.with = info.width
 
-        return { 
+        return {
             attachment: '',
             attachmentFamily: '',
             crop: 'crop'
