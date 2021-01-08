@@ -4,6 +4,7 @@ import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import * as path from 'path';
+import * as mime from 'mime';
 declare const Buffer: any;
 
 export class Utils
@@ -79,6 +80,14 @@ export class Utils
     public static hash(password: string, saltRounds: number = 10): string
     {
         return bcrypt.hashSync(password, saltRounds);
+    }
+
+    public static mimeFromExtension(extension: string): string
+    {
+        // set to lowercase and delete . character
+        extension = extension.toLowerCase().replace(/\./g, '');
+
+        return mime.getType(extension);
     }
 
     public static isImageMime(mime: string)
