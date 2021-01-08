@@ -27,6 +27,7 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
+    index: index
   - name: family_id
     type: id
     length: 36
@@ -54,6 +55,10 @@ aggregateProperties:
   - name: excerpt
     type: text
     nullable: true
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
   - name: pathname
     type: varchar
     maxLength: 1024
@@ -90,6 +95,11 @@ aggregateProperties:
     type: id
     length: 36
     nullable: true
+    relationship: many-to-one
+    relationshipAggregate: AdminAttachmentLibrary
+    relationshipModulePath: admin/attachment-library
+    relationshipKey: id
+    relationshipField: library
   - name: library_filename
     type: varchar
     maxLength: 255

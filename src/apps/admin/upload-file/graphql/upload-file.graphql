@@ -1,0 +1,11 @@
+type UploadFile
+{
+    attachmentLibrary: AdminAttachmentLibrary
+    attachment: AdminAttachment
+}
+
+type Mutation
+{
+    adminUploadFiles(attachableModel: GraphQLString! attachableId: ID! path: GraphQLString! langId: ID! files: [Upload!]!): [UploadFile]
+    adminUploadFile(attachableModel: GraphQLString! attachableId: ID! path: GraphQLString! langId: ID! file: Upload!): UploadFile
+}

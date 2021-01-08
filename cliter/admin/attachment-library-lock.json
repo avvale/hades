@@ -1,0 +1,505 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-library.command-handler.ts",
+            "integrity": "sha1:89af06ee9ce83e7f3c81e6054efd2bde2dd5d021"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-library.command.handler.spec.ts",
+            "integrity": "sha1:52d19cba5756d2d463cf3be000f610ece2948079"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-library.command.ts",
+            "integrity": "sha1:94ecd6db2fef024e1beb492cfe4d020b450e4379"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-library.service.spec.ts",
+            "integrity": "sha1:987659b1163bf8bbcb167f492c8ebd61132cf853"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-library.service.ts",
+            "integrity": "sha1:8b9b7225e972a88b12b7643387d034be6f416fef"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-libraries.command-handler.ts",
+            "integrity": "sha1:51396f027d542f2eb16717a834e0738d682601f2"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-libraries.command.handler.spec.ts",
+            "integrity": "sha1:91bd512d221c0d3c12e2f03b50befc802324eda9"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-libraries.command.ts",
+            "integrity": "sha1:f9132e32c806691f91fe58dc23eee19354076fa3"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-libraries.service.spec.ts",
+            "integrity": "sha1:1fc8164b1decc11c6829221bcc98223f5dcd222e"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/create/create-attachment-libraries.service.ts",
+            "integrity": "sha1:e6427cd7676ecdad51adac84b547d665e85d3806"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-library-by-id.command-handler.ts",
+            "integrity": "sha1:f5834084aa68c61226e17ebc97f32b838e875efd"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-library-by-id.command.handler.spec.ts",
+            "integrity": "sha1:d9842675835f8ed9b896ed3d3c48404690bf56dc"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-library-by-id.command.ts",
+            "integrity": "sha1:f26c6722b71b456113695ce8d4ca2550c9408223"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-library-by-id.service.spec.ts",
+            "integrity": "sha1:175aecb120ce1be1158697020813d2ebf2e99ddb"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-library-by-id.service.ts",
+            "integrity": "sha1:88b355e82ebf1dbc88406f06abd5d8f2fdfb78a8"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-libraries.command-handler.ts",
+            "integrity": "sha1:01a7ed25e823d236abd36f37335a1f87207eccc6"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-libraries.command.handler.spec.ts",
+            "integrity": "sha1:ad95fecafe434b859338fa57ca94be5a6eb22cfa"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-libraries.command.ts",
+            "integrity": "sha1:2184f4de6c05435f9fb1f579dac312d2402b16e7"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-libraries.service.spec.ts",
+            "integrity": "sha1:187fea4dfc710abc0d279cd7af1eaf427063f35b"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/delete/delete-attachment-libraries.service.ts",
+            "integrity": "sha1:bf025c225f94936baa3f2767d24eccf7c6fcb26f"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/add-attachment-libraries-context.event.ts",
+            "integrity": "sha1:b72675f20012a27665586eb7389117621dd98016"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/created-attachment-library.event-handler.ts",
+            "integrity": "sha1:18b4e9436232f92fac91c2b3cfd21f4f5ae6856c"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/created-attachment-library.event.ts",
+            "integrity": "sha1:ddf4d092941dde87b49e4a319d5c8034d6c07003"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/created-attachment-libraries.event-handler.ts",
+            "integrity": "sha1:7bad202ebce1bbb32c878939fb0575f608cb41fc"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/created-attachment-libraries.event.ts",
+            "integrity": "sha1:c6bb540980988f8c5319632a24490989409e9fe7"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/deleted-attachment-library.event-handler.ts",
+            "integrity": "sha1:ea8dcba3c0a769f697cca149417ff1e17102da36"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/deleted-attachment-library.event.ts",
+            "integrity": "sha1:2d1d499aface54c468ff0803e23070a64bfdc3de"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/deleted-attachment-libraries.event-handler.ts",
+            "integrity": "sha1:2233f9a8dafaf857589913fb48e33d1661ec170f"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/deleted-attachment-libraries.event.ts",
+            "integrity": "sha1:14ce64b0ebe029c508a8af832ad9942fff40fb84"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/updated-attachment-library.event-handler.ts",
+            "integrity": "sha1:40296ccbca14dec985eeb747e6fa0d194ac2c9d0"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/events/updated-attachment-library.event.ts",
+            "integrity": "sha1:610619b2be33d3d2512f4adbbc55e6a2edda0e97"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library-by-id.query-handler.ts",
+            "integrity": "sha1:2a54f8cfc57d077ca324124645d5745cfd515717"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library-by-id.query.handler.spec.ts",
+            "integrity": "sha1:a787bad32ecde3abb7d6140ea3aa412c0eda1627"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library-by-id.query.ts",
+            "integrity": "sha1:d34e5fe97d4c7ff6937c3492c9411036932d154d"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library-by-id.service.spec.ts",
+            "integrity": "sha1:9efd2dd41a078f0e43d580383d214244b1964721"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library-by-id.service.ts",
+            "integrity": "sha1:b261c4f47a236f2f0fb27beb09cd0a183421c2ec"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library.query-handler.ts",
+            "integrity": "sha1:ddb793309d4ebb843e74ef95b5b2b78c8e161473"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library.query.handler.spec.ts",
+            "integrity": "sha1:04466b72d2b7fc037171702556e557db2d294b4d"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library.query.ts",
+            "integrity": "sha1:120ff185f2a779e6d66a4f2e7885e9976c9c9fc9"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library.service.spec.ts",
+            "integrity": "sha1:0436532460092a5de54cd248427ab8d96f076f8a"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/find/find-attachment-library.service.ts",
+            "integrity": "sha1:9a3787f0f1c528bcf64d059cf0741488d2c001d5"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/get/get-attachment-libraries.query-handler.ts",
+            "integrity": "sha1:af115e38875d8b3edcc42e10b8228444cca9f1af"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/get/get-attachment-libraries.query.handler.spec.ts",
+            "integrity": "sha1:d5eced049ede785f0a9da376ef461bfb8d2d78b2"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/get/get-attachment-libraries.query.ts",
+            "integrity": "sha1:23d7006198be8788a6c2a5b71df29e2cb4ed0170"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/get/get-attachment-libraries.service.spec.ts",
+            "integrity": "sha1:d30e890dd3620dc35481dc09f9862af4ab89a5a9"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/get/get-attachment-libraries.service.ts",
+            "integrity": "sha1:5bb34b3c7554bf9dae2b799a31b348af6f5bbe62"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/paginate/paginate-attachment-libraries.query-handler.ts",
+            "integrity": "sha1:2c9f6817599554572d34c5a4d27c8323dcfb44ea"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/paginate/paginate-attachment-libraries.query.handler.spec.ts",
+            "integrity": "sha1:d4e3ceefe1e3e8e065ad38111a21cac65588ca11"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/paginate/paginate-attachment-libraries.query.ts",
+            "integrity": "sha1:f6551d1dea545b41d09909e34cbcee2bc3eaec25"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/paginate/paginate-attachment-libraries.service.spec.ts",
+            "integrity": "sha1:95933212b6b0195a6860e76083c35116eef8dc43"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/paginate/paginate-attachment-libraries.service.ts",
+            "integrity": "sha1:74f33cb2477d219dca36e282a4f69296405e1a59"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/sagas/attachment-library.sagas.ts",
+            "integrity": "sha1:442990e06feda0c8d2fd7f67ead44e931edf610c"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/update/update-attachment-library.command-handler.ts",
+            "integrity": "sha1:0c75a615366967c8966b3d75dfc9d82f7fe06e0f"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/update/update-attachment-library.command.handler.spec.ts",
+            "integrity": "sha1:8d992b82eae2dd3cedcbf1d72be382f915d55f62"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/update/update-attachment-library.command.ts",
+            "integrity": "sha1:1a5a567e3389d54f2f617551ea3335942e748078"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/update/update-attachment-library.service.spec.ts",
+            "integrity": "sha1:162292381be0ae7dce8f9771dff38ad359b90d08"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/application/update/update-attachment-library.service.ts",
+            "integrity": "sha1:d172b7aad4c379b14488f5ce22c46e7f7fce7dd7"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/attachment-library.aggregate.ts",
+            "integrity": "sha1:15ce2db3e6e7252219ac6c737691b57cbd017db6"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/attachment-library.mapper.ts",
+            "integrity": "sha1:d8756d60add9221a68f9f9c4a85335f1e4c4de60"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/attachment-library.repository.ts",
+            "integrity": "sha1:20b76856bb35a1375101a612031e85d52087d958"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/attachment-library.response.ts",
+            "integrity": "sha1:67fb7432e7696ffe39ae113d8258cc6d8a8bd9df"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/index.ts",
+            "integrity": "sha1:cb6b06afb12494d371b3db0c035674c97022cfae"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/index.ts",
+            "integrity": "sha1:e3f11d98e9612abb86ef9ba17be4a0805d7299f3"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/infrastructure/mock/mock-attachment-library.repository.ts",
+            "integrity": "sha1:dc3f3a000c2a0eb7d7474e2ee820b84515dd5de6"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed.ts",
+            "integrity": "sha1:40eb41baee981e5ddd14a30fc2d41b60e1354178"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/infrastructure/sequelize/sequelize-attachment-library.model.ts",
+            "integrity": "sha1:7c7df9ac36f55014a68f901c4661976120603e63"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/infrastructure/sequelize/sequelize-attachment-library.repository.ts",
+            "integrity": "sha1:951916050e6767712167f122648ab45912e7cfb3"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-id.ts",
+            "integrity": "sha1:5945e4f6aa9419f304da585e685b821134b4f107"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-name.ts",
+            "integrity": "sha1:bbae92a4346841e52952fc3494df58a7731986e0"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-pathname.ts",
+            "integrity": "sha1:7168fa6a2500d544e0a505741b9cfda009918383"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-filename.ts",
+            "integrity": "sha1:a5964f0fb08618260ee1f03d2741966270a3d5a2"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-url.ts",
+            "integrity": "sha1:a358b529547a09253a80dc9fec94f8572d8fc7ff"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-mime.ts",
+            "integrity": "sha1:8b132d1b0a51a8f0219f93965b975d2712f46d01"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-extension.ts",
+            "integrity": "sha1:8ae8f6e1ea0a7a74aa3bea76031c03710ba5c240"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-size.ts",
+            "integrity": "sha1:45d83ee36913ae56d03de2ca911c614e733c1f66"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-width.ts",
+            "integrity": "sha1:1c5c3a6e69ab1ba3c48072737ce642f751e28eb2"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-height.ts",
+            "integrity": "sha1:ece3bd9b002e87ecc41c3c669cf30eeabd3da404"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-data.ts",
+            "integrity": "sha1:3981714e0be8b6475dd1e205c73f4ca49d422dd4"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-created-at.ts",
+            "integrity": "sha1:e8cdbb03b6d68c6f7e5187f6675b3e94c62eb88a"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-updated-at.ts",
+            "integrity": "sha1:d6c5d2fa416f479cfe9b69f4c5a27a8241353474"
+        },
+        {
+            "path": "src/@hades/admin/attachment-library/domain/value-objects/attachment-library-deleted-at.ts",
+            "integrity": "sha1:07b88780e1a7a7fd526892802daa418190cb3e17"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-create-attachment-library.controller.spec.ts",
+            "integrity": "sha1:d2f3d6f8ff88d4a2fce6af642618df95394138bf"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-create-attachment-library.controller.ts",
+            "integrity": "sha1:dcb78552cf7c21d5d868f9a81516fbd402403fba"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-create-attachment-libraries.controller.spec.ts",
+            "integrity": "sha1:c20be99babcaa030660f7bb5eb3d73a22bd4d37c"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-create-attachment-libraries.controller.ts",
+            "integrity": "sha1:e2c216d86811b8ebca347e13c75d6553d142a1d3"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-delete-attachment-library-by-id.controller.spec.ts",
+            "integrity": "sha1:c4542a89d516dcaaca5e868c98cbf3291d0370ae"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-delete-attachment-library-by-id.controller.ts",
+            "integrity": "sha1:b5bcf1cdac844984c03ab47186cfd996c702f04a"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-delete-attachment-libraries.controller.spec.ts",
+            "integrity": "sha1:345d6dba6d1b7ced09d06617b69cb48a55a835c9"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-delete-attachment-libraries.controller.ts",
+            "integrity": "sha1:daff9f3f99020126e94b9bf73cca98e0828dfe36"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-find-attachment-library-by-id.controller.spec.ts",
+            "integrity": "sha1:52310f33487056e750bcfe165e9feae1ce2c2fea"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-find-attachment-library-by-id.controller.ts",
+            "integrity": "sha1:9a24fcce7252dff616dc07ce37bd3f7c4e978b1d"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-find-attachment-library.controller.spec.ts",
+            "integrity": "sha1:cae5df260f06bb3a42455da3a9830d84c8ac3057"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-find-attachment-library.controller.ts",
+            "integrity": "sha1:c73c1d28d9937d0f8c4959a946bd02302cdbf533"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-get-attachment-libraries.controller.spec.ts",
+            "integrity": "sha1:322b012f8d3d1c83aebf52ab6f5bd00e4bf32e20"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-get-attachment-libraries.controller.ts",
+            "integrity": "sha1:e7609d68ec995707dc37aaf0622d815050375c74"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-paginate-attachment-libraries.controller.spec.ts",
+            "integrity": "sha1:ecc7ac25fd3cf335e6883720f95b074098445c72"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-paginate-attachment-libraries.controller.ts",
+            "integrity": "sha1:f5b550ac23aaa5ad7a7102d1de64d53e1a76cd9d"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-update-attachment-library.controller.spec.ts",
+            "integrity": "sha1:b95467e33449e276adccd0ca78e6bd65e5aeeaa7"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/controllers/admin-update-attachment-library.controller.ts",
+            "integrity": "sha1:a56988b505631bb3fcee0a909f1351435b18a504"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/dto/attachment-library.dto.ts",
+            "integrity": "sha1:fb032dfeb867dfb58f2e606e2e355f6251764c9e"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/dto/create-attachment-library.dto.ts",
+            "integrity": "sha1:909bd26aaade9cfd08c04d1572082acf27354e60"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/dto/update-attachment-library.dto.ts",
+            "integrity": "sha1:0083fa522f1bd0138bcab82fd16f63a25076a0bc"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/graphql/attachment-library.graphql",
+            "integrity": "sha1:b9b8bccca0e497f5f4fe1d6695e4b22c7a9d102b"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/index.ts",
+            "integrity": "sha1:733afcd749fb0619898c5fb8e7609b7be7ca0dcf"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-create-attachment-library.resolver.spec.ts",
+            "integrity": "sha1:abfad98b41f8bf2a10daf4759266d83d90b3a0fc"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-create-attachment-library.resolver.ts",
+            "integrity": "sha1:f799ba385233e167f37f0985d80e774c1d1ab569"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-create-attachment-libraries.resolver.spec.ts",
+            "integrity": "sha1:72a64e7ed81591325ef96385323ee435aae0f405"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-create-attachment-libraries.resolver.ts",
+            "integrity": "sha1:831b4cf9ad941e1f272eaa30daf41c1365ba2e27"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-delete-attachment-library-by-id.resolver.spec.ts",
+            "integrity": "sha1:20e08c80dcb8be551e7a33d0617b22d31fd54f34"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-delete-attachment-library-by-id.resolver.ts",
+            "integrity": "sha1:439364a5ca2789afcde61fca501deffd77b86485"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-delete-attachment-libraries.resolver.spec.ts",
+            "integrity": "sha1:d904903cb937f16361e3ceb6718b82389f39704a"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-delete-attachment-libraries.resolver.ts",
+            "integrity": "sha1:1b0206262fa2d9ca121db4aa2433561a3f2404a3"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-find-attachment-library-by-id.resolver.spec.ts",
+            "integrity": "sha1:296f373986a4e09aad9a67ffa1be9c7615c355a0"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-find-attachment-library-by-id.resolver.ts",
+            "integrity": "sha1:2d77219ed29d8d354d5be664447984cc41540258"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-find-attachment-library.resolver.spec.ts",
+            "integrity": "sha1:d962e192078115677e3cd4d48efc43db342c4ce3"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-find-attachment-library.resolver.ts",
+            "integrity": "sha1:d57e68e278b8e1f819925ef40ea186ae9705d4b6"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-get-attachment-libraries.resolver.spec.ts",
+            "integrity": "sha1:d9ebbaee4dfc98c52a3ff67ae3ca3cbd65e89996"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-get-attachment-libraries.resolver.ts",
+            "integrity": "sha1:b19d17193ac804abb1c87b791ec5de2b08f75ccf"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-paginate-attachment-libraries.resolver.spec.ts",
+            "integrity": "sha1:d1f5aa655c742553b30f4cc08798dd8e50d26ba4"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-paginate-attachment-libraries.resolver.ts",
+            "integrity": "sha1:4ac25898f7a00eacc2f85cbaf348af74fb2d8b96"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-update-attachment-library.resolver.spec.ts",
+            "integrity": "sha1:b69b8c3d31ecd6e5d4932521ee8fcc3d3509cb82"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/resolvers/admin-update-attachment-library.resolver.ts",
+            "integrity": "sha1:94f6bf8bf90c26e6096e772b483716443684d7c5"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/seeder/seeder.module.ts",
+            "integrity": "sha1:7d64321496ef2030c17accb1dca01bb98740ca96"
+        },
+        {
+            "path": "src/apps/admin/attachment-library/seeder/seeder.ts",
+            "integrity": "sha1:aefa4de7bd79072cf5fa38a06a13ea70203a6bdb"
+        },
+        {
+            "path": "postman/admin.attachment-library.postman.json",
+            "integrity": "sha1:1572393f8a49f4c1dba5d43c5ac9f738027328c7"
+        }
+    ]
+}

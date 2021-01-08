@@ -4,6 +4,7 @@ import { CreateAttachmentsCommandHandler } from './application/create/create-att
 import { UpdateAttachmentCommandHandler } from './application/update/update-attachment.command-handler';
 import { DeleteAttachmentByIdCommandHandler } from './application/delete/delete-attachment-by-id.command-handler';
 import { DeleteAttachmentsCommandHandler } from './application/delete/delete-attachments.command-handler';
+import { CropAttachmentCommandHandler } from './application/crop/crop-attachment.command-handler';
 
 // queries
 import { PaginateAttachmentsQueryHandler } from './application/paginate/paginate-attachments.query-handler';
@@ -28,6 +29,7 @@ import { FindAttachmentByIdService } from './application/find/find-attachment-by
 import { UpdateAttachmentService } from './application/update/update-attachment.service';
 import { DeleteAttachmentByIdService } from './application/delete/delete-attachment-by-id.service';
 import { DeleteAttachmentsService } from './application/delete/delete-attachments.service';
+import { CropAttachmentService } from './application/crop/crop-attachment.service';
 
 // models
 export { AdminAttachmentModel } from './infrastructure/sequelize/sequelize-attachment.model';
@@ -46,6 +48,7 @@ export const AdminAttachmentHandlers = [
     UpdateAttachmentCommandHandler,
     DeleteAttachmentByIdCommandHandler,
     DeleteAttachmentsCommandHandler,
+    CropAttachmentCommandHandler,
 
     // queries
     PaginateAttachmentsQueryHandler,
@@ -71,4 +74,5 @@ export const AdminAttachmentServices = [
     UpdateAttachmentService,
     DeleteAttachmentByIdService,
     DeleteAttachmentsService,
+    CropAttachmentService,
 ];

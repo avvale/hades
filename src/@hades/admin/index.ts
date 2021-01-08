@@ -6,6 +6,7 @@ import { AdminAttachmentHandlers, AdminAttachmentServices, AdminAttachmentModel,
 import { AdminAdministrativeAreaLevel1Handlers, AdminAdministrativeAreaLevel1Services, AdminAdministrativeAreaLevel1Model, IAdministrativeAreaLevel1Repository, SequelizeAdministrativeAreaLevel1Repository, AdministrativeAreaLevel1Sagas } from './administrative-area-level-1';
 import { AdminAdministrativeAreaLevel2Handlers, AdminAdministrativeAreaLevel2Services, AdminAdministrativeAreaLevel2Model, IAdministrativeAreaLevel2Repository, SequelizeAdministrativeAreaLevel2Repository, AdministrativeAreaLevel2Sagas } from './administrative-area-level-2';
 import { AdminAdministrativeAreaLevel3Handlers, AdminAdministrativeAreaLevel3Services, AdminAdministrativeAreaLevel3Model, IAdministrativeAreaLevel3Repository, SequelizeAdministrativeAreaLevel3Repository, AdministrativeAreaLevel3Sagas } from './administrative-area-level-3';
+import { AdminAttachmentLibraryHandlers, AdminAttachmentLibraryServices, AdminAttachmentLibraryModel, IAttachmentLibraryRepository, SequelizeAttachmentLibraryRepository, AttachmentLibrarySagas } from './attachment-library';
 
 export const AdminHandlers = [
     ...AdminLangHandlers,
@@ -15,7 +16,8 @@ export const AdminHandlers = [
     ...AdminAttachmentHandlers,
     ...AdminAdministrativeAreaLevel1Handlers,
     ...AdminAdministrativeAreaLevel2Handlers,
-    ...AdminAdministrativeAreaLevel3Handlers
+    ...AdminAdministrativeAreaLevel3Handlers,
+    ...AdminAttachmentLibraryHandlers
 ];
 export const AdminServices = [
     ...AdminLangServices,
@@ -25,7 +27,8 @@ export const AdminServices = [
     ...AdminAttachmentServices,
     ...AdminAdministrativeAreaLevel1Services,
     ...AdminAdministrativeAreaLevel2Services,
-    ...AdminAdministrativeAreaLevel3Services
+    ...AdminAdministrativeAreaLevel3Services,
+    ...AdminAttachmentLibraryServices
 ];
 export const AdminModels = [
     AdminLangModel,
@@ -36,7 +39,8 @@ export const AdminModels = [
     AdminAttachmentModel,
     AdminAdministrativeAreaLevel1Model,
     AdminAdministrativeAreaLevel2Model,
-    AdminAdministrativeAreaLevel3Model
+    AdminAdministrativeAreaLevel3Model,
+    AdminAttachmentLibraryModel
 ];
 export const AdminRepositories = [
     {
@@ -70,6 +74,10 @@ export const AdminRepositories = [
     {
         provide: IAdministrativeAreaLevel3Repository,
         useClass: SequelizeAdministrativeAreaLevel3Repository
+    },
+    {
+        provide: IAttachmentLibraryRepository,
+        useClass: SequelizeAttachmentLibraryRepository
     }
 ];
 export const AdminSagas = [
@@ -80,5 +88,6 @@ export const AdminSagas = [
     AttachmentSagas,
     AdministrativeAreaLevel1Sagas,
     AdministrativeAreaLevel2Sagas,
-    AdministrativeAreaLevel3Sagas
+    AdministrativeAreaLevel3Sagas,
+    AttachmentLibrarySagas
 ];

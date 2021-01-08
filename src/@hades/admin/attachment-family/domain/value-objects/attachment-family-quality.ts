@@ -1,7 +1,7 @@
-import { IntValueObject } from '@hades/shared/domain/value-objects/int.value-object';
+import { SmallintValueObject } from '@hades/shared/domain/value-objects/smallint.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class AttachmentFamilyQuality extends IntValueObject
+export class AttachmentFamilyQuality extends SmallintValueObject
 {
     public readonly type: 'AttachmentFamilyQuality';
 
@@ -11,7 +11,7 @@ export class AttachmentFamilyQuality extends IntValueObject
             name: 'AttachmentFamilyQuality',
             nullable: true,
             undefinable: true,
-            maxLength: 2,
+            maxLength: 3,
             unsigned: true,
         }, validationRules));
     }

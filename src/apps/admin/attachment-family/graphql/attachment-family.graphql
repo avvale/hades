@@ -2,8 +2,16 @@ enum AdminAttachmentFamilyFit {
     CROP
     WIDTH
     HEIGHT
-    WIDTH_FREE
-    HEIGHT_FREE
+    FREE_WIDTH
+    FREE_HEIGHT
+}
+enum AdminAttachmentFamilyFormat {
+    JPG
+    PNG
+    GIF
+    TIF
+    BMP
+    DATA_URL
 }
 
 type AdminAttachmentFamily
@@ -13,10 +21,10 @@ type AdminAttachmentFamily
     resources: [AdminResource]
     width: GraphQLInt
     height: GraphQLInt
-    fit: AdminAttachmentFamilyFit!
+    fit: AdminAttachmentFamilyFit
     sizes: JSON
     quality: GraphQLInt
-    format: GraphQLString
+    format: AdminAttachmentFamilyFormat
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -29,10 +37,10 @@ input AdminCreateAttachmentFamilyInput
     resourceIds: [ID]
     width: GraphQLInt
     height: GraphQLInt
-    fit: AdminAttachmentFamilyFit!
+    fit: AdminAttachmentFamilyFit
     sizes: JSON
     quality: GraphQLInt
-    format: GraphQLString
+    format: AdminAttachmentFamilyFormat
 }
 
 input AdminUpdateAttachmentFamilyInput
@@ -45,7 +53,7 @@ input AdminUpdateAttachmentFamilyInput
     fit: AdminAttachmentFamilyFit
     sizes: JSON
     quality: GraphQLInt
-    format: GraphQLString
+    format: AdminAttachmentFamilyFormat
 }
 
 type Query

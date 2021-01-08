@@ -10,7 +10,10 @@ export abstract class EnumValueObject extends StringValueObject
 
     set value(value: string)
     {
-        if (value && !this.validationRules.enumOptions.includes(value)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be any of this options: ${this.validationRules.enumOptions.join(', ')}`);
+        if (
+            value &&
+            !this.validationRules.enumOptions.includes(value)
+        ) throw new BadRequestException(`Value for ${this.validationRules.name} has to be any of this options: ${this.validationRules.enumOptions.join(', ')}`);
 
         super.value = value
     }
