@@ -3022,7 +3022,7 @@ bl@^4.0.3:
     inherits "^2.0.4"
     readable-stream "^3.4.0"
 
-bluebird@^3.3.4, bluebird@^3.5.0:
+bluebird@^3.5.0:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -4270,10 +4270,10 @@ execa@^4.0.0, execa@^4.0.2:
     signal-exit "^3.0.2"
     strip-final-newline "^2.0.0"
 
-exifr@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/exifr/-/exifr-6.0.0.tgz#e82af10e158852a1c7e19aea45bceb4cdd486727"
-  integrity sha512-a8n3SVIyuI5NP5VJCb/rJHsqXnofgYL1ZXcJdKBXOmCNIrj+pSExaBFHcbdEF5xp5GQrK4kpOabLJ+wBfUGYuA==
+exif-reader@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/exif-reader/-/exif-reader-1.0.3.tgz#8eb63f878aeb49ec89bd5b7be10e393db78c3c2e"
+  integrity sha512-tWMBj1+9jUSibgR/kv/GQ/fkR0biaN9GEZ5iPdf7jFeH//d2bSzgPoaWf1OfMv4MXFD4upwvpCCyeMvSyLWSfA==
 
 exit@^0.1.2:
   version "0.1.2"
@@ -5170,14 +5170,6 @@ ignore@^5.1.4:
   version "5.1.8"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.8.tgz#f150a8b50a34289b33e22f5889abd4d8016f0e57"
   integrity sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==
-
-imagickal@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/imagickal/-/imagickal-5.0.1.tgz#919e784d871b845c82626f8a1878961af1f6dac1"
-  integrity sha512-aoo+7q14odsdMzvHkbbvV4J7yxRHncUBbgsRjIpzKfWZPgx/aENuN35nAxZ1JQ8uhea7l2DOzm6brSz6qubs2g==
-  dependencies:
-    bluebird "^3.3.4"
-    debug "^3.1.0"
 
 immutable@~3.7.6:
   version "3.7.6"
@@ -6577,6 +6569,11 @@ mime@1.6.0, mime@^1.4.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
+
+mime@^2.4.7:
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.7.tgz#962aed9be0ed19c91fd7dc2ece5d7f4e89a90d74"
+  integrity sha512-dhNd1uA2u397uQk3Nv5LM4lm93WYDUXFn3Fu291FJerns4jyTudqhIWe4W04YLy7Uk1tm1Ore04NpjRvQp/NPA==
 
 mimic-fn@^2.1.0:
   version "2.1.0"
