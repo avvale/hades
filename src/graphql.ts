@@ -10,8 +10,22 @@ export enum AdminAttachmentFamilyFit {
     CROP = "CROP",
     WIDTH = "WIDTH",
     HEIGHT = "HEIGHT",
-    WIDTH_FREE = "WIDTH_FREE",
-    HEIGHT_FREE = "HEIGHT_FREE"
+    FREE_WIDTH = "FREE_WIDTH",
+    FREE_HEIGHT = "FREE_HEIGHT"
+}
+
+export enum AdminAttachmentFamilyFormat {
+    JPG = "JPG",
+    PNG = "PNG",
+    GIF = "GIF",
+    TIF = "TIF",
+    BMP = "BMP",
+    DATA_URL = "DATA_URL"
+}
+
+export enum AdminLangDir {
+    LTR = "LTR",
+    RTL = "RTL"
 }
 
 export enum IamAccountType {
@@ -109,10 +123,10 @@ export interface AdminCreateAttachmentFamilyInput {
     resourceIds?: string[];
     width?: GraphQLInt;
     height?: GraphQLInt;
-    fit: AdminAttachmentFamilyFit;
+    fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
-    format?: GraphQLString;
+    format?: AdminAttachmentFamilyFormat;
 }
 
 export interface AdminUpdateAttachmentFamilyInput {
@@ -124,7 +138,35 @@ export interface AdminUpdateAttachmentFamilyInput {
     fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
-    format?: GraphQLString;
+    format?: AdminAttachmentFamilyFormat;
+}
+
+export interface AdminCreateAttachmentLibraryInput {
+    id: string;
+    name?: GraphQLString;
+    pathname: GraphQLString;
+    filename: GraphQLString;
+    url: GraphQLString;
+    mime: GraphQLString;
+    extension?: GraphQLString;
+    size: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    data?: JSON;
+}
+
+export interface AdminUpdateAttachmentLibraryInput {
+    id: string;
+    name?: GraphQLString;
+    pathname?: GraphQLString;
+    filename?: GraphQLString;
+    url?: GraphQLString;
+    mime?: GraphQLString;
+    extension?: GraphQLString;
+    size?: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    data?: JSON;
 }
 
 export interface AdminCreateAttachmentInput {
@@ -139,6 +181,7 @@ export interface AdminCreateAttachmentInput {
     title?: GraphQLString;
     description?: GraphQLString;
     excerpt?: GraphQLString;
+    name: GraphQLString;
     pathname: GraphQLString;
     filename: GraphQLString;
     url: GraphQLString;
@@ -164,6 +207,7 @@ export interface AdminUpdateAttachmentInput {
     title?: GraphQLString;
     description?: GraphQLString;
     excerpt?: GraphQLString;
+    name?: GraphQLString;
     pathname?: GraphQLString;
     filename?: GraphQLString;
     url?: GraphQLString;
@@ -175,6 +219,45 @@ export interface AdminUpdateAttachmentInput {
     libraryId?: string;
     libraryFilename?: GraphQLString;
     data?: JSON;
+}
+
+export interface AdminCropInput {
+    x: GraphQLInt;
+    y: GraphQLInt;
+    width: GraphQLInt;
+    height: GraphQLInt;
+    rotate: GraphQLInt;
+    scaleX: GraphQLInt;
+    scaleY: GraphQLInt;
+}
+
+export interface AdminCropAttachmentInput {
+    id: string;
+    commonId: string;
+    langId: string;
+    attachableModel: GraphQLString;
+    attachableId: string;
+    familyId?: string;
+    sort?: GraphQLInt;
+    alt?: GraphQLString;
+    title?: GraphQLString;
+    description?: GraphQLString;
+    excerpt?: GraphQLString;
+    name: GraphQLString;
+    pathname: GraphQLString;
+    filename: GraphQLString;
+    url: GraphQLString;
+    mime: GraphQLString;
+    extension?: GraphQLString;
+    size: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    libraryId?: string;
+    library?: AdminCreateAttachmentLibraryInput;
+    libraryFilename?: GraphQLString;
+    data?: JSON;
+    isUploaded: GraphQLBoolean;
+    isChanged: GraphQLBoolean;
 }
 
 export interface AdminCreateCountryInput {
@@ -230,6 +313,7 @@ export interface AdminCreateLangInput {
     iso6392: GraphQLString;
     iso6393: GraphQLString;
     ietf: GraphQLString;
+    dir: AdminLangDir;
     sort?: GraphQLInt;
     isActive: GraphQLBoolean;
 }
@@ -241,6 +325,7 @@ export interface AdminUpdateLangInput {
     iso6392?: GraphQLString;
     iso6393?: GraphQLString;
     ietf?: GraphQLString;
+    dir?: AdminLangDir;
     sort?: GraphQLInt;
     isActive?: GraphQLBoolean;
 }
@@ -265,10 +350,10 @@ export interface AdminUpdateResourceInput {
 
 export interface QueryStatement {
     where?: JSON;
-    include?: string[];
+    include?: GraphQLString[];
     order?: JSON;
-    limit?: number;
-    offset?: number;
+    limit?: GraphQLInt;
+    offset?: GraphQLInt;
 }
 
 export interface IamCreateAccountInput {
@@ -521,6 +606,10 @@ export interface IQuery {
     adminFindAttachmentFamilyById(id?: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminGetAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
     adminPaginateAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    adminFindAttachmentLibrary(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentLibrary | Promise<AdminAttachmentLibrary>;
+    adminFindAttachmentLibraryById(id?: string, constraint?: QueryStatement): AdminAttachmentLibrary | Promise<AdminAttachmentLibrary>;
+    adminGetAttachmentLibraries(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentLibrary[] | Promise<AdminAttachmentLibrary[]>;
+    adminPaginateAttachmentLibraries(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     adminFindAttachment(query?: QueryStatement, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
     adminFindAttachmentById(id?: string, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
     adminGetAttachments(query?: QueryStatement, constraint?: QueryStatement): AdminAttachment[] | Promise<AdminAttachment[]>;
@@ -601,11 +690,18 @@ export interface IMutation {
     adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminDeleteAttachmentFamilyById(id: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminDeleteAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
+    adminCreateAttachmentLibrary(payload: AdminCreateAttachmentLibraryInput): AdminAttachmentLibrary | Promise<AdminAttachmentLibrary>;
+    adminCreateAttachmentLibraries(payload: AdminCreateAttachmentLibraryInput[]): boolean | Promise<boolean>;
+    adminUpdateAttachmentLibrary(payload: AdminUpdateAttachmentLibraryInput, constraint?: QueryStatement): AdminAttachmentLibrary | Promise<AdminAttachmentLibrary>;
+    adminDeleteAttachmentLibraryById(id: string, constraint?: QueryStatement): AdminAttachmentLibrary | Promise<AdminAttachmentLibrary>;
+    adminDeleteAttachmentLibraries(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentLibrary[] | Promise<AdminAttachmentLibrary[]>;
     adminCreateAttachment(payload: AdminCreateAttachmentInput): AdminAttachment | Promise<AdminAttachment>;
     adminCreateAttachments(payload: AdminCreateAttachmentInput[]): boolean | Promise<boolean>;
     adminUpdateAttachment(payload: AdminUpdateAttachmentInput, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
     adminDeleteAttachmentById(id: string, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
     adminDeleteAttachments(query?: QueryStatement, constraint?: QueryStatement): AdminAttachment[] | Promise<AdminAttachment[]>;
+    adminCropAttachment(crop: AdminCropInput, attachmentFamily: AdminCreateAttachmentFamilyInput, attachment: AdminCropAttachmentInput): JSON | Promise<JSON>;
+    adminDeleteAttachment(attachment: AdminUpdateAttachmentInput): JSON | Promise<JSON>;
     adminCreateCountry(payload: AdminCreateCountryInput): AdminCountry | Promise<AdminCountry>;
     adminCreateCountries(payload: AdminCreateCountryInput[]): boolean | Promise<boolean>;
     adminUpdateCountry(payload: AdminUpdateCountryInput, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
@@ -621,6 +717,8 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
+    adminUploadFiles(attachableModel: GraphQLString, attachableId: string, path: GraphQLString, langId: string, files: Upload[]): UploadFile[] | Promise<UploadFile[]>;
+    adminUploadFile(attachableModel: GraphQLString, attachableId: string, path: GraphQLString, langId: string, file: Upload): UploadFile | Promise<UploadFile>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -718,10 +816,27 @@ export interface AdminAttachmentFamily {
     resources?: AdminResource[];
     width?: GraphQLInt;
     height?: GraphQLInt;
-    fit: AdminAttachmentFamilyFit;
+    fit?: AdminAttachmentFamilyFit;
     sizes?: JSON;
     quality?: GraphQLInt;
-    format?: GraphQLString;
+    format?: AdminAttachmentFamilyFormat;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminAttachmentLibrary {
+    id: string;
+    name?: GraphQLString;
+    pathname: GraphQLString;
+    filename: GraphQLString;
+    url: GraphQLString;
+    mime: GraphQLString;
+    extension?: GraphQLString;
+    size: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    data?: JSON;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -740,6 +855,7 @@ export interface AdminAttachment {
     title?: GraphQLString;
     description?: GraphQLString;
     excerpt?: GraphQLString;
+    name: GraphQLString;
     pathname: GraphQLString;
     filename: GraphQLString;
     url: GraphQLString;
@@ -749,6 +865,7 @@ export interface AdminAttachment {
     width?: GraphQLInt;
     height?: GraphQLInt;
     libraryId?: string;
+    library?: AdminAttachmentLibrary;
     libraryFilename?: GraphQLString;
     data?: JSON;
     createdAt?: GraphQLTimestamp;
@@ -790,6 +907,7 @@ export interface AdminLang {
     iso6392: GraphQLString;
     iso6393: GraphQLString;
     ietf: GraphQLString;
+    dir: AdminLangDir;
     sort?: GraphQLInt;
     isActive: GraphQLBoolean;
     createdAt?: GraphQLTimestamp;
@@ -810,9 +928,14 @@ export interface AdminResource {
     deletedAt?: GraphQLTimestamp;
 }
 
+export interface UploadFile {
+    attachmentLibrary?: AdminAttachmentLibrary;
+    attachment?: AdminAttachment;
+}
+
 export interface Pagination {
-    total: number;
-    count: number;
+    total: GraphQLInt;
+    count: GraphQLInt;
     rows: JSON[];
 }
 
@@ -970,3 +1093,4 @@ export type GraphQLFloat = any;
 export type GraphQLBoolean = any;
 export type GraphQLISODateTime = any;
 export type GraphQLTimestamp = any;
+export type GraphQLUpload = any;
