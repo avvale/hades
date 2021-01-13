@@ -20,6 +20,9 @@ import { AdminUpdateAttachmentResolver } from './resolvers/admin-update-attachme
 import { AdminDeleteAttachmentByIdResolver } from './resolvers/admin-delete-attachment-by-id.resolver';
 import { AdminDeleteAttachmentsResolver } from './resolvers/admin-delete-attachments.resolver';
 
+// custom
+import { AdminCropAttachmentResolver } from './resolvers/admin-crop-attachment.resolver';
+
 export const AdminAttachmentControllers = [
     AdminCreateAttachmentController,
     AdminCreateAttachmentsController,
@@ -42,4 +45,7 @@ export const AdminAttachmentResolvers = [
     AdminUpdateAttachmentResolver,
     AdminDeleteAttachmentByIdResolver,
     AdminDeleteAttachmentsResolver,
+
+    // custom
+    AdminCropAttachmentResolver
 ];

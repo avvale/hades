@@ -15,28 +15,28 @@ export class AdminUploadFileResolver
     ) {}
 
     @Mutation('adminUploadFile')
-    async main(@Args('path') relativeStoragePath: string, @Args('file') file: Upload)
+    async main(@Args('path') relativeStoragePath: string, @Args('langId') langId: string, @Args('file') file: Upload)
     {
         if (!fs.existsSync(Utils.basePath('public/storage', relativeStoragePath))) fs.mkdirSync(Utils.basePath('public/storage', relativeStoragePath), {recursive: true});
 
-        const { filename, createReadStream } = await file;
+        const { filename, createReadStream }    = await file;
 
-        const readableStream                = await fileType.stream(createReadStream());
-        const extension                     = readableStream.fileType.ext;
-        const mime                          = readableStream.fileType.mime;
-        const pathName                      = Utils.basePath('public/storage', relativeStoragePath);
-        const attachmentLibraryId           = Utils.uuid();
-        const attachmentLibraryHashName     = Utils.randomString(40, 'a#') + '.' + extension;
-        const attachmentHashName            = Utils.randomString(40, 'a#') + '.' + extension;
-        const attachmentLibraryAbsolutePath = path.join(pathName, attachmentLibraryHashName);
-        let dimensions                      = null;
-        let exif                            = null;
+        const readableStream                    = await fileType.stream(createReadStream());
+        const extension                         = readableStream.fileType.ext;
+        const mime                              = readableStream.fileType.mime;
+        const pathName                          = Utils.basePath('public/storage', relativeStoragePath);
+        const attachmentLibraryId               = Utils.uuid();
+        const attachmentLibraryHashName         = Utils.randomString(40, 'a#') + '.' + extension;
+        const attachmentHashName                = Utils.randomString(40, 'a#') + '.' + extension;
+        const attachmentLibraryAbsolutePath     = path.join(pathName, attachmentLibraryHashName);
+        let dimensions                          = null;
+        let exif                                = null;
 
         // user IIFE to invoke await function with promise for upload file
         await ((): Promise<void> => new Promise(resolve => readableStream.pipe(fs.createWriteStream(attachmentLibraryAbsolutePath)).on('finish', resolve)))();
 
         // read stats of file after uploaded
-        const attachmentLibraryStats        = fs.statSync(attachmentLibraryAbsolutePath);
+        const attachmentLibraryStats = fs.statSync(attachmentLibraryAbsolutePath);
 
         // get image properties
         if (ImageManager.isImageMime(mime))
@@ -50,7 +50,7 @@ export class AdminUploadFileResolver
             name: filename,
             pathname: pathName,
             filename: attachmentLibraryHashName,
-            url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentLibraryHashName),
+            url: Utils.asset(this.environmentService.get('APP_URL'), 'storage', relativeStoragePath, attachmentLibraryHashName),
             mime: mime,
             extension: extension,
             size: attachmentLibraryStats.size,
@@ -63,9 +63,9 @@ export class AdminUploadFileResolver
         fs.copyFileSync(attachmentLibraryAbsolutePath, path.join(pathName, attachmentHashName));
 
         const attachment = {
-            id: Utils.uuid,
-            commonId: Utils.uuid,
-            langId: '',
+            id: Utils.uuid(),
+            commonId: Utils.uuid(),
+            langId: langId,
             attachableModel: '',
             attachableId: '',
             familyId: null,
@@ -77,7 +77,7 @@ export class AdminUploadFileResolver
             name: filename,
             pathname: pathName,
             filename: attachmentHashName,
-            url: Utils.asset(this.environmentService.get('APP_URL'), 'public/storage', relativeStoragePath, attachmentHashName),
+            url: Utils.asset(this.environmentService.get('APP_URL'), 'storage', relativeStoragePath, attachmentHashName),
             mime: mime,
             extension: extension,
             size: attachmentLibraryStats.size,

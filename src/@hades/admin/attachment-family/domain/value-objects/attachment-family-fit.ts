@@ -9,9 +9,9 @@ export class AttachmentFamilyFit extends EnumValueObject
     {
         super(value, Object.assign({
             name: 'AttachmentFamilyFit',
-            nullable: false,
-            undefinable: false,
-            enumOptions:  ['CROP','WIDTH','HEIGHT','WIDTH_FREE','HEIGHT_FREE'],
+            nullable: true,
+            undefinable: true,
+            enumOptions:  ['CROP','WIDTH','HEIGHT','FREE_WIDTH','FREE_HEIGHT'],
         }, validationRules));
     }
 }

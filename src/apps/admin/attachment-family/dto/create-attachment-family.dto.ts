@@ -34,7 +34,7 @@ export class CreateAttachmentFamilyDto
 
     @ApiProperty({
         type        : String,
-        enum        : ['CROP','WIDTH','HEIGHT','WIDTH_FREE','HEIGHT_FREE'],
+        enum        : ['CROP','WIDTH','HEIGHT','FREE_WIDTH','FREE_HEIGHT'],
         description : 'fit [input here api field description]',
     })
     fit: string;
@@ -53,6 +53,7 @@ export class CreateAttachmentFamilyDto
 
     @ApiProperty({
         type        : String,
+        enum        : ['JPG','PNG','GIF','TIF','BMP','DATA_URL'],
         description : 'format [input here api field description]',
     })
     format: string;

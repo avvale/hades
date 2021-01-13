@@ -40,19 +40,25 @@ aggregateProperties:
       - CROP
       - WIDTH
       - HEIGHT
-      - WIDTH_FREE
-      - HEIGHT_FREE
-    nullable: false
+      - FREE_WIDTH
+      - FREE_HEIGHT
+    nullable: true
   - name: sizes
     type: json
     nullable: true
   - name: quality
-    type: int.unsigned
-    maxLength: 2
+    type: smallint.unsigned
+    maxLength: 3
     nullable: true
   - name: format
-    type: varchar
-    maxLength: 10
+    type: enum
+    enumOptions:
+      - JPG
+      - PNG
+      - GIF
+      - TIF
+      - BMP
+      - DATA_URL
     nullable: true
   - name: created_at
     type: timestamp

@@ -42,8 +42,8 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
 
     @Column({
         field: 'fit',
-        allowNull: false,
-        type: DataTypes.ENUM('CROP','WIDTH','HEIGHT','WIDTH_FREE','HEIGHT_FREE'),
+        allowNull: true,
+        type: DataTypes.ENUM('CROP','WIDTH','HEIGHT','FREE_WIDTH','FREE_HEIGHT'),
     })
     fit: string;
 
@@ -57,14 +57,14 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
     @Column({
         field: 'quality',
         allowNull: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.SMALLINT.UNSIGNED,
     })
     quality: number;
 
     @Column({
         field: 'format',
         allowNull: true,
-        type: DataTypes.STRING(10),
+        type: DataTypes.ENUM('JPG','PNG','GIF','TIF','BMP','DATA_URL'),
     })
     format: string;
 

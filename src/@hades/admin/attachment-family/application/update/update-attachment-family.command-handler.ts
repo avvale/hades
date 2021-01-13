@@ -33,7 +33,7 @@ export class UpdateAttachmentFamilyCommandHandler implements ICommandHandler<Upd
                 resourceIds: new AttachmentFamilyResourceIds(command.payload.resourceIds),
                 width: new AttachmentFamilyWidth(command.payload.width),
                 height: new AttachmentFamilyHeight(command.payload.height),
-                fit: new AttachmentFamilyFit(command.payload.fit, { undefinable: true }),
+                fit: new AttachmentFamilyFit(command.payload.fit),
                 sizes: new AttachmentFamilySizes(command.payload.sizes),
                 quality: new AttachmentFamilyQuality(command.payload.quality),
                 format: new AttachmentFamilyFormat(command.payload.format),
