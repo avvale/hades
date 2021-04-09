@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { EnvironmentService } from '@hades/shared/domain/services/environment.service';
+import { Dialect } from 'sequelize/types';
 import { EnvironmentModule } from './../../../shared/modules/environment.module';
 
 @Module({
@@ -13,7 +14,7 @@ import { EnvironmentModule } from './../../../shared/modules/environment.module'
                 process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
 
                 return {
-                    dialect: 'mysql',
+                    dialect: environmentService.get<Dialect>('DATABASE_DIALECT'),
                     host: environmentService.get<string>('DATABASE_HOST'),
                     port: +environmentService.get<number>('DATABASE_PORT'),
                     username: environmentService.get<string>('DATABASE_USER'),
