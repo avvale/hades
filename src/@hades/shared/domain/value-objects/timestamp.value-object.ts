@@ -1,7 +1,9 @@
 import { BadRequestException } from '@nestjs/common';
 import { StringValueObject } from './string.value-object';
 import { Utils } from './../lib/utils';
-import * as moment from 'moment-timezone';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as dayjs from 'dayjs';
+dayjs.extend(timezone);
 
 export abstract class TimestampValueObject extends StringValueObject
 {
@@ -26,17 +28,17 @@ export abstract class TimestampValueObject extends StringValueObject
         if (this.data.addTimezone)
         {
             // create data with application timezone and transform to request timezone to be returned to client
-            super.value = moment.tz(value, process.env.TZ).tz(this.data.addTimezone).format('YYYY-MM-DD HH:mm:ss');
+            super.value = dayjs.tz(value, process.env.TZ).tz(this.data.addTimezone).format('YYYY-MM-DD HH:mm:ss');
         }
         else if (this.data.removeTimezone)
         {
             // create date with request timezone and transform to application timezone to be saved in database
-            super.value = moment.tz(value, this.data.removeTimezone).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss');
+            super.value = dayjs.tz(value, this.data.removeTimezone).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss');
         }
         else
         {
             // crate value according to default timezone application
-            super.value = moment(value, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
+            super.value = dayjs(value, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
         }
     }
 }
