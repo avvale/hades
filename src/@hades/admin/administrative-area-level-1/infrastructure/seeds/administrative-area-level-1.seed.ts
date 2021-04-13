@@ -1,3 +1,4 @@
+// ignored file
 export const administrativeAreasLevel1 = [
     {id: 'd0730a9d-bd14-492b-ba77-e9b78651c8ab', code: 'AB',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Abyan',                                            slug: 'abyan'},
     {id: '453f680f-08b7-4024-8d8e-a019880be043', code: 'AD',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Adén',                                             slug: 'aden'},

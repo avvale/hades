@@ -1,3 +1,4 @@
+// ignored file
 export const countries = [
     // es
     {id: 'd6f6e040-f7b2-416d-b2b2-ffe2cd0d087a', commonId: 'f080cbfe-ea18-41e9-b399-ac07c7aed14e', langId: '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a', iso3166Alpha2: 'AD', iso3166Alpha3: 'AND', iso3166Numeric: '020', name: 'Andorra',                                                   slug: 'andorra',                                                sort: null, prefix: '376',      administrativeAreaLevel1: 'Parroquias',                                  administrativeAreaLevel2: null,                  administrativeAreaLevel3: null,  latitude: 42.55033100000000,        longitude: 1.58085500000000,        zoom: 8,        administrativeAreas: null, dataLang: ['4470b5ab-9d57-4c9d-a68f-5bf8e32f543a', '7c4754e7-3363-48ca-af99-632522226b51', '47ecef11-3d7d-426b-967d-31f2f737b65c', '94c893c1-3eb7-4f22-a878-b405c6d42e09']},

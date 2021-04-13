@@ -1,3 +1,4 @@
+// ignored file
 export const administrativeAreasLevel2 = [
     {id: 'cac1e781-c67b-460b-b73d-1870fb9cb0a2', code: 'AL-BR',   countryCommonId: 'fa06a177-bb31-495e-b1a4-4c07649d6d45',   administrativeAreaLevel1Id: '5047e5f0-44da-41bf-b589-67d05ac69e57',   name: 'Berat',                                        slug: 'berat'},
     {id: 'e011296e-1f4a-4100-8f79-dc92f7da9ea7', code: 'AL-BU',   countryCommonId: 'fa06a177-bb31-495e-b1a4-4c07649d6d45',   administrativeAreaLevel1Id: 'f567ed4c-8f3b-4874-b2e5-0053ac473f47',   name: 'Bulqizë',                                      slug: 'bulqize'},
