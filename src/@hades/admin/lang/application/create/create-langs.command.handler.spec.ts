@@ -6,12 +6,12 @@ import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { CreateLangsCommand } from './create-langs.command';
 import { CreateLangsService } from './create-langs.service';
 
-describe('CreateLangsCommandHandler', () => 
+describe('CreateLangsCommandHandler', () =>
 {
     let commandHandler: CreateLangsCommandHandler;
     let service: CreateLangsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateLangsCommandHandler', () =>
         service         = module.get<CreateLangsService>(CreateLangsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateLangsCommandHandler should be defined', () => 
+        test('CreateLangsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an lang created', async () => 
+        test('should return an lang created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateLangsCommand(
                     langs
-                
+
                 )
             )).toBe(undefined);
         });

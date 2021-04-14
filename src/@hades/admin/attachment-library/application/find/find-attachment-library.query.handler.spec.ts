@@ -8,14 +8,14 @@ import { AttachmentLibraryMapper } from '@hades/admin/attachment-library/domain/
 import { FindAttachmentLibraryQuery } from './find-attachment-library.query';
 import { FindAttachmentLibraryService } from './find-attachment-library.service';
 
-describe('FindAttachmentLibraryQueryHandler', () => 
+describe('FindAttachmentLibraryQueryHandler', () =>
 {
     let queryHandler: FindAttachmentLibraryQueryHandler;
     let service: FindAttachmentLibraryService;
     let repository: MockAttachmentLibraryRepository;
     let mapper: AttachmentLibraryMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindAttachmentLibraryQueryHandler', () =>
         mapper          = new AttachmentLibraryMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAttachmentLibraryQueryHandler should be defined', () => 
+        test('FindAttachmentLibraryQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an attachmentLibrary founded', async () => 
+        test('should return an attachmentLibrary founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

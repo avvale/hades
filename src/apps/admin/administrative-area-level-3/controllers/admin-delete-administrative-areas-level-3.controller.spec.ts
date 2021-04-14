@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
-describe('AdminDeleteAdministrativeAreasLevel3Controller', () => 
+describe('AdminDeleteAdministrativeAreasLevel3Controller', () =>
 {
     let controller: AdminDeleteAdministrativeAreasLevel3Controller;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('AdminDeleteAdministrativeAreasLevel3Controller', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminDeleteAdministrativeAreasLevel3Controller should be defined', () => 
+        test('AdminDeleteAdministrativeAreasLevel3Controller should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an administrativeAreasLevel3 deleted', async () => 
+        test('should return an administrativeAreasLevel3 deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel3)));
             expect(await controller.main()).toBe(administrativeAreasLevel3);

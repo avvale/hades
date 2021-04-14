@@ -5,12 +5,12 @@ import { DeleteAttachmentLibrariesCommandHandler } from './delete-attachment-lib
 import { DeleteAttachmentLibrariesCommand } from './delete-attachment-libraries.command';
 import { DeleteAttachmentLibrariesService } from './delete-attachment-libraries.service';
 
-describe('DeleteAttachmentLibrariesCommandHandler', () => 
+describe('DeleteAttachmentLibrariesCommandHandler', () =>
 {
     let commandHandler: DeleteAttachmentLibrariesCommandHandler;
     let service: DeleteAttachmentLibrariesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteAttachmentLibrariesCommandHandler', () =>
         service         = module.get<DeleteAttachmentLibrariesService>(DeleteAttachmentLibrariesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAttachmentLibrariesCommandHandler should be defined', () => 
+        test('DeleteAttachmentLibrariesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAttachmentLibrariesCommand()

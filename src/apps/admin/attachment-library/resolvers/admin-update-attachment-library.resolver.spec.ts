@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 import { AdminUpdateAttachmentLibraryInput } from './../../../../graphql';
 
-describe('AdminUpdateAttachmentLibraryResolver', () => 
+describe('AdminUpdateAttachmentLibraryResolver', () =>
 {
     let resolver: AdminUpdateAttachmentLibraryResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -43,14 +43,14 @@ describe('AdminUpdateAttachmentLibraryResolver', () =>
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('AdminUpdateAttachmentLibraryResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a attachmentLibrary created', async () => 
+        test('should return a attachmentLibrary created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibraries[0])));
             expect(await resolver.main(<AdminUpdateAttachmentLibraryInput>attachmentLibraries[0])).toBe(attachmentLibraries[0]);

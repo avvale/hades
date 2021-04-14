@@ -13,7 +13,7 @@ describe('AdminCreateCountryResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateCountryResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateCountryResolver should be defined', () => 
+    test('AdminCreateCountryResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateCountryResolver should be defined', () => 
+        test('AdminCreateCountryResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an country created', async () => 
+        test('should return an country created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
             expect(await resolver.main(<AdminCreateCountryInput>countries[0])).toBe(countries[0]);

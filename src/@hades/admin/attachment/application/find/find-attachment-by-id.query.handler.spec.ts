@@ -9,7 +9,7 @@ import { AttachmentMapper } from '@hades/admin/attachment/domain/attachment.mapp
 import { FindAttachmentByIdQuery } from './find-attachment-by-id.query';
 import { FindAttachmentByIdService } from './find-attachment-by-id.service';
 
-describe('FindAttachmentByIdQueryHandler', () => 
+describe('FindAttachmentByIdQueryHandler', () =>
 {
     let queryHandler: FindAttachmentByIdQueryHandler;
     let service: FindAttachmentByIdService;
@@ -48,13 +48,13 @@ describe('FindAttachmentByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an attachment founded', async () => 
+        test('should return an attachment founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindAttachmentByIdQuery(
                     attachments[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

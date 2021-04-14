@@ -41,14 +41,14 @@ describe('PaginateResourcesQueryHandler', () =>
         mapper          = new ResourceMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateResourcesQueryHandler should be defined', () => 
+        test('PaginateResourcesQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an resources paginated', async () => 
+        test('should return an resources paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateResourcesQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

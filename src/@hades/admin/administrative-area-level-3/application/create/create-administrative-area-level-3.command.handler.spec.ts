@@ -40,17 +40,19 @@ describe('CreateAdministrativeAreaLevel3CommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateAdministrativeAreaLevel3Command(
-                    administrativeAreasLevel3[0].id,
-                    administrativeAreasLevel3[0].countryCommonId,
-                    administrativeAreasLevel3[0].administrativeAreaLevel1Id,
-                    administrativeAreasLevel3[0].administrativeAreaLevel2Id,
-                    administrativeAreasLevel3[0].code,
-                    administrativeAreasLevel3[0].customCode,
-                    administrativeAreasLevel3[0].name,
-                    administrativeAreasLevel3[0].slug,
-                    administrativeAreasLevel3[0].latitude,
-                    administrativeAreasLevel3[0].longitude,
-                    administrativeAreasLevel3[0].zoom,
+                    {
+                        id : administrativeAreasLevel3[0].id,
+                        countryCommonId : administrativeAreasLevel3[0].countryCommonId,
+                        administrativeAreaLevel1Id : administrativeAreasLevel3[0].administrativeAreaLevel1Id,
+                        administrativeAreaLevel2Id : administrativeAreasLevel3[0].administrativeAreaLevel2Id,
+                        code : administrativeAreasLevel3[0].code,
+                        customCode : administrativeAreasLevel3[0].customCode,
+                        name : administrativeAreasLevel3[0].name,
+                        slug : administrativeAreasLevel3[0].slug,
+                        latitude : administrativeAreasLevel3[0].latitude,
+                        longitude : administrativeAreasLevel3[0].longitude,
+                        zoom : administrativeAreasLevel3[0].zoom,
+                    }
                 )
             )).toBe(undefined);
         });

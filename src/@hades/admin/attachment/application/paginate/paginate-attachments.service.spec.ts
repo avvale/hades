@@ -6,13 +6,13 @@ import { PaginateAttachmentsService } from './paginate-attachments.service';
 import { IAttachmentRepository } from './../../domain/attachment.repository';
 import { MockAttachmentRepository } from './../../infrastructure/mock/mock-attachment.repository';
 
-describe('PaginateAttachmentsService', () => 
+describe('PaginateAttachmentsService', () =>
 {
     let service: PaginateAttachmentsService;
     let repository: IAttachmentRepository;
     let mockRepository: MockAttachmentRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateAttachmentsService', () =>
                 EventPublisher,
                 PaginateAttachmentsService,
                 MockAttachmentRepository,
-                { 
+                {
                     provide: IAttachmentRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateAttachmentsService', () =>
         mockRepository  = module.get(MockAttachmentRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateAttachmentsService should be defined', () => 
+        test('PaginateAttachmentsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate attachments', async () => 
+        test('should paginate attachments', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

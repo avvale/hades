@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
 
-describe('AdminDeleteCountryByIdController', () => 
+describe('AdminDeleteCountryByIdController', () =>
 {
     let controller: AdminDeleteCountryByIdController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminDeleteCountryByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminDeleteCountryByIdController should be defined', () => 
+        test('AdminDeleteCountryByIdController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an country deleted', async () => 
+        test('should return an country deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
             expect(await controller.main(countries[0].id)).toBe(countries[0]);

@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
-describe('AdminPaginateAdministrativeAreasLevel3Resolver', () => 
+describe('AdminPaginateAdministrativeAreasLevel3Resolver', () =>
 {
     let resolver: AdminPaginateAdministrativeAreasLevel3Resolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminPaginateAdministrativeAreasLevel3Resolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminPaginateAdministrativeAreasLevel3Resolver should be defined', () => 
+    test('AdminPaginateAdministrativeAreasLevel3Resolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminPaginateAdministrativeAreasLevel3Resolver should be defined', () => 
+        test('AdminPaginateAdministrativeAreasLevel3Resolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a administrativeAreasLevel3', async () => 
+        test('should return a administrativeAreasLevel3', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel3)));
             expect(await resolver.main()).toBe(administrativeAreasLevel3);

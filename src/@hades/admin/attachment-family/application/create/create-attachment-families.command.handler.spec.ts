@@ -6,12 +6,12 @@ import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructur
 import { CreateAttachmentFamiliesCommand } from './create-attachment-families.command';
 import { CreateAttachmentFamiliesService } from './create-attachment-families.service';
 
-describe('CreateAttachmentFamiliesCommandHandler', () => 
+describe('CreateAttachmentFamiliesCommandHandler', () =>
 {
     let commandHandler: CreateAttachmentFamiliesCommandHandler;
     let service: CreateAttachmentFamiliesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateAttachmentFamiliesCommandHandler', () =>
         service         = module.get<CreateAttachmentFamiliesService>(CreateAttachmentFamiliesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAttachmentFamiliesCommandHandler should be defined', () => 
+        test('CreateAttachmentFamiliesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an attachmentFamily created', async () => 
+        test('should return an attachmentFamily created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateAttachmentFamiliesCommand(
                     attachmentFamilies
-                
+
                 )
             )).toBe(undefined);
         });

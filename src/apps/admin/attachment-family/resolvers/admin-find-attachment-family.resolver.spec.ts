@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
 
-describe('AdminFindAttachmentFamilyResolver', () => 
+describe('AdminFindAttachmentFamilyResolver', () =>
 {
     let resolver: AdminFindAttachmentFamilyResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminFindAttachmentFamilyResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminFindAttachmentFamilyResolver should be defined', () => 
+    test('AdminFindAttachmentFamilyResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminFindAttachmentFamilyResolver should be defined', () => 
+        test('AdminFindAttachmentFamilyResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a attachmentFamily', async () => 
+        test('should return a attachmentFamily', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentFamilies[0])));
             expect(await resolver.main()).toBe(attachmentFamilies[0]);

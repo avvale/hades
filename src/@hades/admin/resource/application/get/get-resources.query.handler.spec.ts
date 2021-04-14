@@ -8,14 +8,14 @@ import { ResourceMapper } from '@hades/admin/resource/domain/resource.mapper';
 import { GetResourcesQuery } from './get-resources.query';
 import { GetResourcesService } from './get-resources.service';
 
-describe('GetResourcesQueryHandler', () => 
+describe('GetResourcesQueryHandler', () =>
 {
     let queryHandler: GetResourcesQueryHandler;
     let service: GetResourcesService;
     let repository: MockResourceRepository;
     let mapper: ResourceMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetResourcesQueryHandler', () =>
         mapper          = new ResourceMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetResourcesQueryHandler should be defined', () => 
+        test('GetResourcesQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an resources founded', async () => 
+        test('should return an resources founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

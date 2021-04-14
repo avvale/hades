@@ -6,13 +6,13 @@ import { PaginateLangsService } from './paginate-langs.service';
 import { ILangRepository } from './../../domain/lang.repository';
 import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
 
-describe('PaginateLangsService', () => 
+describe('PaginateLangsService', () =>
 {
     let service: PaginateLangsService;
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateLangsService', () =>
                 EventPublisher,
                 PaginateLangsService,
                 MockLangRepository,
-                { 
+                {
                     provide: ILangRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateLangsService', () =>
         mockRepository  = module.get(MockLangRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateLangsService should be defined', () => 
+        test('PaginateLangsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate langs', async () => 
+        test('should paginate langs', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

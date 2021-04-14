@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachments } from '@hades/admin/attachment/infrastructure/seeds/attachment.seed';
 
-describe('AdminFindAttachmentByIdResolver', () => 
+describe('AdminFindAttachmentByIdResolver', () =>
 {
     let resolver: AdminFindAttachmentByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminFindAttachmentByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminFindAttachmentByIdResolver should be defined', () => 
+    test('AdminFindAttachmentByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminFindAttachmentByIdResolver should be defined', () => 
+        test('AdminFindAttachmentByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an attachment by id', async () => 
+        test('should return an attachment by id', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachments[0])));
             expect(await resolver.main(attachments[0].id)).toBe(attachments[0]);

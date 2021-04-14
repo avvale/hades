@@ -60,16 +60,16 @@ describe('administrative-area-level-3', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: '4xd1ahgw',
-                customCode: 'x8lwh1wrwb',
-                name: '275g5uqy3yxlvuv31bkcb5dz3zvcb13ddk0x5pvw92ucipwkpmiq6vkc920rha41r7x5z8y8iarfyfrdeui504wwgaz31qb2gvux071wcklyqc807093l6thcrhbf9i97bl3lzemdqq8q3sbq9oc6yfpmyfh7ai5zg6s3ud8ue5pp8g026h4ywvhuab84w6rj6aurb5etbowprd5pnrcy9rkp22nhd3vvxm6b0ohhtaf9cj3dcph2ori59pcfk4',
-                slug: 'szc6nmq940cz2znsilpoeybzvuel2zaw9a1b2uuc7tmm7fylqn2paknkjjwl1wa8gidz80qyi5y585i5sjh0s2cfufuti534bt9vxllgwdgv5jdkc4x1xyr9rq6rwmyrm9wbn7ro7lo8m9z7491phqtxi0c7fn2z624dqnbzg6nuipv7fo6nsqs5z7cvxsof0hbwt98e7tj2lpq9055b0mkyfqfb4al8fyssgjz0jmx7ynlqm39vdovv9qvdrv2',
-                latitude: 173.66,
-                longitude: 558.79,
-                zoom: 17,
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'a44x6qqf',
+                customCode: '5eyw5zunat',
+                name: 'rt0j9y8fuq4tt55b6fkhnizxsmduvoqqc54u27cq9dxubqqjoadoke6fnvg9qf6ctfbpragntziq3ph64orelgw85qb6or0y02cn1ppzr4z0icngs847c6zcb5sfkhf2rcluzx754joawmp7dfv3uhjm3jl6w0oith4u8duvn82noo5f43dkup2yw894kr1hzk1q9s63ll46aptomzvx88qvn2nyrmmk6y5deem6ek3v42caarn6rsb70lr5v18',
+                slug: 'sena2puqq4exfsfgbqzgkeye00jotajkvud77yd7gxwbqlszol7tgo0c5kyqlwvb11ksb1qzlwff1cnpg8odvr9bgm662csnznl8dmrci7yab38xwrfo8ww26ur7io7ph66w2b20svfr66qst6w3zf5f7w434ngm7cm3el0r4ya3ckryqx2tgpo5ox6lbh8kihzxk7gimp69yomkhalfyzw5wi370as9ytvt0pfpmbbdom0gb1thyu7oa4pq1qt',
+                latitude: 512.35,
+                longitude: 802.11,
+                zoom: 98,
             })
             .expect(400)
             .then(res => {
@@ -84,16 +84,16 @@ describe('administrative-area-level-3', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'drhbos7w',
-                customCode: 'nze03920m3',
-                name: 'qevrhj57avcwr0hh6ptryuo1jikgia57nb220emiqh313zpxwqiv5xeiji0firdb3v31gtjc6gu7zdeybi2wfxkfhx7pj4bdtix7xqyoyyqhii6c26ute9boook3uckahpbuhljjkos8jp0txk15ua8wrrjo4kx5ijiou44k89sixlo79w6r93qbwhlz530yq7fmi691fojedxnn6d6igkghrxdkz19xxy1mcpiraoi47mo2rvalggv0wwpc6rd',
-                slug: 'fsjeiqi4ukxpkgobegdt4uz3mz4c76tl3qnvsczis5zvzt5dkgiwjjrf7vs2kmm4m54tqtz4xjbgblz1dxuguywluec449lwircwh8ihfb20edltkq4u1xfpydf5raozxheoylfoseyrye8ng0yo2qtzrjcezby14uyaevnx50zxt9kzvgv7mprvcn9ab81uvvfn405jcl0b5frz9vbd67s5q2wik0ubagr7l3llp8zjakasp7rarxfq6oqbbbc',
-                latitude: 309.38,
-                longitude: 498.59,
-                zoom: 41,
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'tbwu5a6h',
+                customCode: 'la9u8fb653',
+                name: 'ws6mwjyvyxgsq71f0x9qfe5j3o6cjvu5w22r4s56q3e6zylxfq9x5rrb5qkus1w7znju8bibthvpkx19dgbg97vv1pu2rwqs3daxsew5bqeq56jax1yst4083yxu2z7gv6bcc7b7nv9mvpatu9s52xrfdbtdz10h6qr8x14zmcqzhzo5ngu47mafn3ks258g6ub2ntwei73fpoqdemlhzp1xhu1pqzelsh1l3zpdbl05jexvkvnngnbhvxj8yzw',
+                slug: 'u88m994ai6un8wl0gp5v8wsim2y8o1dqvq93psdnrjzsv5x8y4tacqesi9mjccls7yjhlklgy96yskp5x6z3h4nq4a4q4jndirbtgk92980thx2nltofbw4xo1ps73h3zbiaib02lrlfv2opu0sjv3h1znn2awthgka8sfkjv7n0av259ami851jy0wa7mha7gde2sev1h7nkaoavro22sxr1dnpcg2wbra9myyqo4r4a6uce9imaimzhq81pnw',
+                latitude: 892.71,
+                longitude: 282.75,
+                zoom: 47,
             })
             .expect(400)
             .then(res => {
@@ -107,17 +107,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
                 countryCommonId: null,
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'wpmzzsrg',
-                customCode: '9atx8cezvz',
-                name: 'iqwstiumvfmqo7k41oj3tks2npr0a9547cpmd1p677gslq7fwzqtf79icp8cac7a3va1a7722l50p9cydkoft8xcnyjgg5o97bdyjvnmzsthmi4towano2f0a8na3t8wn8vbty2zudlt30lff6pnnbi03csgrv5okm69y8x5feauom6t5rhga0ewmcakpnq7xwcc0xgvoymgu882jlaywwk9cqhoe6ohyt2v0v731d67y500xe860vzvza8pmtn',
-                slug: 'i7cd2hyeabpitc7q5a7byb9s9y3vsgdmsj2xx5m0za547z4mhlb4tu0x4emv5uf0pm43t897cclwtqkz4kq6iioilzut78kgs69086n6osmc1q6hiwq66gbeykw38xaq5p89knfx6gpdziaf0tbky7n6zjucwy1z9pwm8v1oqzprj7tsla04cet4w2ksf0qzlgs9vlnzhrv3wf0xkglex74u8wgnh30icfcizk5m04s4y0drn1fq9dg0q7lsjka',
-                latitude: 730.53,
-                longitude: 817.51,
-                zoom: 32,
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: '3y2x85rb',
+                customCode: '73c1kjqbpx',
+                name: 'k82yuy1kfjt0u7lm9es4jvqgqz7zq6jv35ktmjoue37jmao1tpts8x81lhyu2x50mav1qry4qn5yql20xd1ijkqq3qdj0e203sn2ajo8lgw0av86a4as93daln7u0a5d3nxlnkm2vycr3a0926bceet94yuec239lxlq7ovfptf9rke33pg136wg7n8qz75ad3g7lxa2d5kahm2xjfs76dlpkma4b1uc3lc1oytkuu9kc8epnzbf143nmy2j8n0',
+                slug: 'wypmfoqpq74i3r3zkbyk3bg5yimpmsx40bjugj7ysq5axe41hjq5rek5wenhwtm41y3gyzfottrvu2fyyhuwwyya3p00mq8p3gv3u5ibpsyoi3m6fb835ogujljdpiwfgg9ogt2ntkb4bmtm3ywq8fymsy2jclxc54s9kx5agp3gegfnuno59dckyrzrr25b7vs7tu7fdjwf1nbrzb345c17i3z4ymzyvdef464p4z2293kcek6ket5zpu8p4b3',
+                latitude: 533.04,
+                longitude: 238.36,
+                zoom: 22,
             })
             .expect(400)
             .then(res => {
@@ -131,17 +131,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
                 
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'v6jasveu',
-                customCode: '89rn90gayr',
-                name: 'yj3um4umv9lyct0yek398z9al6mkh0a0p3iq9l0uc3i4lp29m5i206zthtujlg2ygtvz8x0u3gf59xhpou3428s2oh3l0fyuw99skryryf4jzz40d8flawteppkmhmmjxw471kwa6p5gg6weyij1g199b8x3hpd2vabgnr7kwd2ya9wzdlmt43xnkd0x6fi0kg20fhxm8uoe8j6thcqtjvkau3fx82v0zuwilnbnltowo79y0ldzz8377snkk5e',
-                slug: 'ph8q03qug4a96tekfj9clqrhrw0t57yut2avx1xyjwb5lw94tgw64dj9zx47j8vfkx89wsmwtul3bcjkb4yyqfntr297d30u1vn6j6fuffbxd0n2dncfrq0w2ol2jsveq2zpatixlppdrewp6tbfzqfizyspqtynrennz68bdqmph0rixg24km5ryrptovmcqr9smz9md543xkshkuzb0ne9akls57sgbty79lg1s664lwpx4ppb42ym9g86z9e',
-                latitude: 778.54,
-                longitude: 999.03,
-                zoom: 59,
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'igk5uli8',
+                customCode: 'c29jtdfk3f',
+                name: '62jjln29kr263u9ubl46plync2dqwztzgqz5lnkro0n1l7w50b372l49mw6c1gxwbhpmk1q2kbqihetq5cw8f3r5eacay9372tdn2lus7mfvl6r4s548atswq56akui2ngqoln3jino4k37yn2bo5dk5wgtrygeoyfpdy6tqrjzebofjh6pfz8p9h74w2grgton213nnd59xe26qvl5rf1iq5u7l11hynzlade5ebmn6166mazj0ys42wvn5opr',
+                slug: 'd3yvqowf8jy4y3nnup6pagasdjngmnh0ktws65qe2ei650enzfj622k2unfig3v0wmxwoeoicz04b8gcae5b35zqwj4vp20sx1p5xyx1897xucz9hwufwousa5gdd2rnxdxnqno87ba76qx3vasi743l7kuwajbksbalhveibrzto2lfp22rrfuzd7jr9oko7xmu2sv7ut9auwozlo2845mpxqve4r2093y27m906nl34k4kt4ra16m6qvurca4',
+                latitude: 991.42,
+                longitude: 642.18,
+                zoom: 83,
             })
             .expect(400)
             .then(res => {
@@ -155,17 +155,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
                 administrativeAreaLevel1Id: null,
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'm11y4sbg',
-                customCode: 'nop10fikba',
-                name: 'iygn0vfbt7kakxmk0fbrdjog6xags2b3gmcuzcbqxonapzr7257gwxcnxr8ukho6ut7amebhdv4jhwwbqha6hqispe13qwvzq0zzwvmfgkwfaqt7idth23d5i7ahqokmssp82veic4abbripw6te6zd3l67t1jfri69ry4x3h1oadgqzvmgxi0qorvf4fcm7aj6pmor1pa9jhodxcdgnbqjarosiw7ompd01crca9ywmeauhkjv19m2eie3s2om',
-                slug: '78zv79mkrrhikgrkzc7j75fqr384ovzluiwjkm3l5n4aqdh6zumccno1s8nqk678czn85dxs5r0u4rds7xlrkzfwh6hkkfxm2f57flp4srzwhp582nw6wql2ssz05qpjh40lcqtgkawf07w92o797wqrihfhoq9bk293ghf29x83mtj99jdfw8z3bjrbk16sou6bblutuz6o6qwnjvgs0iqye9qwvm6oxu2meqnkp6g8mtthdcz6sqmwtfoqotv',
-                latitude: 269.80,
-                longitude: 472.97,
-                zoom: 23,
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'e4g0nnw2',
+                customCode: 'v2nclgq57k',
+                name: 'h1ouovjmbamv1w6y8zyrxckesqxvz94v815id7qxovguo7e064d62g65jj7ly9gxs8htacmwq42vm5432leqlr7xmyuyf1h5gkao1dvyz5kqvj92pi606aya3ldu31uesg5gzgtj5l8l0qh9m4xz5vz6t8rge676z65ms5abxlxy75xg5goe66ogx33fahatfh7ola614dve7u09eqchhw3ui7p84dfss4g68zo7572blkt5mdei04o46m9vu0c',
+                slug: 'afczej6udsnf2wsj1h8dogdlf4gjykfzq3vzih065r6j276ac4w2wn5ai3s3yi5hcjmf4v6sc6v76kgkj54fc1xt94xu4ddw42u85cxs41pi0xlrnv1gy8juww0ci4ytc0sgef5azmqitrsim20hcwp78097xyuyjkr0fbi8p11pu2z41mq0z18ymfs5lg1snfkjfjrzxg86jdubzoiz1s5hmkvkp8pxnbut1bd08z0ua227oa89rrko9x1t9ja',
+                latitude: 800.16,
+                longitude: 112.46,
+                zoom: 40,
             })
             .expect(400)
             .then(res => {
@@ -179,17 +179,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
                 
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'z2hb9psa',
-                customCode: 't0vxkf1zpp',
-                name: 'r9b6gw3kwmo8v896cfarqs2bjb1ucxqijebj5bmvqgizeu7y58qx0wdpo4m8pgc8p8kxtjcg4frpedxqiqe8um2lcblhlvffpweqprovuq9rgfy2u63g7poao7fj73kcsjlrtv1c3yy7gpqzzlyt5qtz8evjg2ynj16vdvt7rwsm4f77lckg64lxp3avs3xouo21j24o1iyt5cmr24js8x89jhvywpl13m7yuugfhk2uh2ibkie91c51s81wcu4',
-                slug: '7se77han8l3rphqccx5ahasnob5gz2yw7qklt26hwvdjwwnaizd6hout7wttr9vwp70929pv494wpad2cjjq8lob2zdhctehcj5zvph3fg19wzp3tolu1q2kvb0832l1ezrinels241q6kquhcp99cvfqw4olmwepx7exhyfpj47b92c9wuwu9ew3ttwlkdom01c1qozxedmd2689cy84xeerjivth7f12wu2btfj4bz4qos2mm6il56t825pvi',
-                latitude: 461.79,
-                longitude: 83.10,
-                zoom: 34,
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'lgvno39d',
+                customCode: 'plvnxb18r8',
+                name: '85cr7a8xuedu8b5zhqdmlt0ze2wqqfhjt4niel1taj4lvj4bu63wudsaxegnb5vo0pvqo608p5dycklw5djwslwbsrpu58uzdrjy036a6vky1zc089jompws3t2xk96bkybqd1jpz08bf2urxsd7i5u9tmpjqh5pzg245rccpop3z1q4zryp9656bvwvjgwoyj6u4ih69aaa54obbhbegoxeykt5y1kiscf8515wvc9xcp8f1r6nb2mv3gt0c77',
+                slug: '9a94va3afnh44as4ea55qc7h3qiiji0orx8t5ub4gxb0eeim6dk7vfb25283ybcnsk595tw871y32hmgujjab8lzgttqldhbarko3jd1x07c4w8irkkgpzf7tg3vy8k4o8bs2omwh3xi4jxqvws8q8p2zrs9sdbue75jbsgziu74tkwujwhga20xr9cfsnc1hl3d7eiqlkth11trx1310xz5hi4fpyer4o8gmbsgddquewk9xpujrur8swmi58h',
+                latitude: 639.03,
+                longitude: 961.70,
+                zoom: 45,
             })
             .expect(400)
             .then(res => {
@@ -203,17 +203,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
                 administrativeAreaLevel2Id: null,
-                code: '9rywtbxx',
-                customCode: 'y432bo7wx1',
-                name: 'lnk65103byya6d1t9toygsyhsrru3xe494dm09ck853j40g89ryzx9nhl9cmnoyutuc70g3x12stj6kvgmhuwey32j4zbw1a1ydghjswt4pn96ef17fupidk15mj5uncsakdw4grlgtrprcxw2g5w0ubq753zp4lr7sjv322vnuhfmgsao5xdgancmd97qrxgisld3ibgc4f09sav15zu9vts943iur4wwfdpubr78n7y12s8kpzuy8zen77ybq',
-                slug: 'yrf0720bbdiapeufkwhwkgpzlgtdsc10nuha63dsxg0tbtn0lbxd3p9pmqf6xzcic8w4ihz04wzsecss1s8z2jm69fdbx6e8m7u15zzu3r8i4ib7hqc96d64208fg786pmsu12m5o1gx0xu50xuupugzetm9vdbc71gn0gf9fodtewfuzj5ez9z01ow87ezy71oplhobui34mk46hdb9sotrvna1twk211w3yxr5l99ck8fh1xj1w3kvj73alqb',
-                latitude: 321.56,
-                longitude: 427.20,
-                zoom: 82,
+                code: 'ncuipka2',
+                customCode: '7zk8lbpzre',
+                name: 'stb0fjn9utl579rgvvxf6mfn3njukrxvduydcobw0korlxp1ca7toe3smsho3139jel3m6dl8131zdy8j5j68z9b6d2mpzjfvzgfywhgpkpxgfw8xml1wtygtj6ami6m0fvwbs2emvnv60l7eeffjdbhxmwy0ikc9d4d8ujzghnxyit2hlnwzy51hxwwrq8zbnezgbsiu4mh68c8fq8yvfc0hf2v0cmr720dgltbljd5sk6m8i4zplgk9tqi01j',
+                slug: 'douhfllienm4aq2cfxatz70puhsugyje68dqxrw0y9e08o623kbppdt8m4vn0fxebnx7p89b4j0ugxc2lig86mpvf2y44sgbv01jje7fiugabo8dzj3ence5s7b9pe7hfp21s311efpoa6wcb9kufvqudf7z7k4lqb7thbaks0t9n7sud12v6lz5pkxo9y3ofkxblg8ul3z64w1umrpql999pcod6p6yjd3vokq0cj7eh42lzga237iobgfk1b5',
+                latitude: 167.43,
+                longitude: 144.26,
+                zoom: 60,
             })
             .expect(400)
             .then(res => {
@@ -227,17 +227,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
                 
-                code: '40iontce',
-                customCode: 'nc5bae16e3',
-                name: '1h46mro2u58xx3ha2q02rm3plcjdxg1efp8qb0yuh4fuqiorktfhhllsgyc1n46z8upup4rhsbxzdmcgh2vv710so4tr683pwpmopqmy1afrwqmbas8lie7mscmx9wzb1ntgxgbclvd55bp5wwjesr1jjn93n0ks25stmqngxjbebmqucxkvyxvalrbfudswmxvazacl0nxng2kk8nll7urzrce2p1jjahsp0te1y9cybp3e4z4jhs8liyy8f67',
-                slug: 'hlctxohjjv6pogp1opzoix46catb3m5sd244iqlf6nrqvql416k3g1kxcljhzalob2osqviu07ywtxvuvvndf3koedibkogvkp0q4h55bvaw5no7d304bovlacddlfm5jddn73rhhj0l19m9pg8jngg5ycxtuy19cfypjvl9jg9cap1nhkl1jx0u28zi7cqnnqhbkx076n97nobp65r0n3c4vomtr2dcea0om0a4tvv4bmqulnhvope255sgdz8',
-                latitude: 76.06,
-                longitude: 103.93,
-                zoom: 11,
+                code: 'b0mythqe',
+                customCode: 'v0ymes719d',
+                name: '9uhw9gzn0as6zh65znxioga5exh63nsnqw9bklhas4y2hv3yr72t3m9f7btoqs8jk2jvgqbnhk15lz06lx881w1ty05s1tn3wdggxama4c0el9pk3ln05ijymf33unbxc4a06ejzhhwrzfvh9iflytbpafh948rvwiqopr4ryzqr9so7omj7cc9awyiycyxkf1we6gyfgg92j9e9do8dt9ssj1z0h5naa7nxlaj35f9s27bknoi5nakngl3auo7',
+                slug: 'ociepeo45pysw6xbnd8p8cggjrqyjtezo632roxwmeo3lwxrwiy8dwveo0aeabs228sq81yg4ix2jpqaj00faea3wo9jynr20u501h087gcori7eouqz5n4crbsxpymkk9omliowyyn4rlanc99lbh75hurrxpt5lf0kjg8zxxl72za71s79ltdpl0g43ircod1ii2yv8o5ao61gm7s0yrmvrst4asibx27yqgpc688upu2vwgx6xjpv8a1zceh',
+                latitude: 703.95,
+                longitude: 449.58,
+                zoom: 84,
             })
             .expect(400)
             .then(res => {
@@ -251,17 +251,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
                 code: null,
-                customCode: 'xdwj3rfw1o',
-                name: 'qhovxki406jk8ljf0ucn2gyz2hia8z7xuoe1f8hcrnw1dc8bqpy665x7lwirgse9c8awxm1biebqigqcn5yijlnrkwsaotxx6y7s4pc1y9sgfukpd4mmozj4gqmi6tpt7fnyhgk88d7d9c29baie5pma3hdazsqhr67m85ilib6aa5c974fr3zgy7flpis1oxjicwz26a89i7jyec0nq27aiwek6pjuggwl2m22wx06sqlppdo9ch8m9u63r5jo',
-                slug: '740v2ls3e7kjngroj1j38v71n5gqtfod7ywh4rs8p5m9l7e11qiv4e1yhyfaqo5jj8xwtax72tzqcfcw0r2h3459p6ntbr64ddb7qhd2lh39nthtnw4rc4601ysfg5hrftgtwk61ewt6znaob5oc6m36tcect8citpfuokb9tk72i60jh157qj1uv7ijj0s8d76sje45gmb57c02jj9b5q996vbg5elyy3b3ql72fs6dr8utd0mqwckz2h908vp',
-                latitude: 984.08,
-                longitude: 561.74,
-                zoom: 18,
+                customCode: 'f9tky2q9wi',
+                name: '5y2vxp5ysppr1p7wvfid3nx67gmi2frqyrxcgmiuw4oqmlhtnjx5s9x0lwlzzu7uckm5p97gds572y38lrpiwfdg7uuhllp6iul5ha9oyatdun444i7bpcpa8m4tn4100dzi8vlfph0h38d66iiitpkv3n9gioyh6pvmx9qj1zx3pc3yc71al8luk1v9ujk0ihmlbw73w687ejq3iurvtuzgjbx5v7s310qz6xk9pkhwagzt3phrhh2lot4cx1t',
+                slug: '33q211lit38eevjdjvmqtb5f1oywqi9rf0aq977xx4fyo8kmkbnb8d1tma5hlygluthk4h19wjs0wtv8428zzycbbnyqydgvmt934a89shuz8rar42rap4i3b4fpvywhg5i9bqfyml4q14i76d8ih7d7oq3pf8tv34172tgwrxr8q94vsiigboq44ynvxyf2owdvvnkinqs0qp2dcmilgdellr25vobkvwmuoshkwv7krewubzxqng6udkw2925',
+                latitude: 79.41,
+                longitude: 23.14,
+                zoom: 51,
             })
             .expect(400)
             .then(res => {
@@ -275,17 +275,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
                 
-                customCode: '0ffgvlonu0',
-                name: 'hzo72e939h1pt0f4nyuub3knpp0t04xede4i3q6pxfa8y6tk7eob9bdmj5fsqir4pa2ds0shimuwkprgut6dfz0p741nm2te7hhz37em0r8d9b07c574caozdl2uwm0v6zi5yy2mf7rl03osrn0tpm5admaxb91bajphvq6mpq7t8y8g0cer5mlmmihdoiyn6cepu8ncuakn61xrkz9vlpklx26u0fhd2sgj1tceupy5h5x1imai4bmw888j8fv',
-                slug: 'shywbke1o2lgnw7w5bbe7id85iym6nj20urzlgtn2iq2pbbjmycwqglvy5dw2a31i7j6kdc4x5ak6oxlcbpnhavhvasqeg5yf9xavg3uvn7j5yzvly5moun9gfkoy8ng6t8akzgh59atqc3mmroxlh2u5qy0pdy21l05rmyl61ygshq0zbt5945wq6m3xzyzv6qu6uhttbpvdftsclvox948d77iyufrgr3zcvzl0wc9pdooh7n5o76x3yi3tc2',
-                latitude: 562.68,
-                longitude: 834.14,
-                zoom: 62,
+                customCode: 'fvp340zkye',
+                name: 'ajiub6oe84454peajcditmtyp57cpdedjb5du4iqslo2koxm64swu7w2ieqtsexss66wowzeu0lf1k7fzi788itmv2pyh325cgje4k3o09f8t1yp9ukhl1lnbc1vxcmjgyr2fgx6cuf0eqx0alrb5309n5ol26v2pdejmv2shov5m1w2c6y7vctwsuqphtv528nhzei7gt0lgxrsapzvr5s8fm9ytvpa0ibhw70edeg7ju5dl9yue0gohww1203',
+                slug: 'i40fpq1kvod36aq7jhjuuni55432grwq34zunqe0s6qk5fvpqx5bo8zoabngaqwwqtkjct76prnvrla0vb66kn5nd25onl4eaap4uxbdpzff3dp87su487eydx85d7inixs1uuaagi7lv9u8qbweztqq4t9irkq9f5n5qhx52jf3kn55a9b1fpx2nbgv404fney10j152i2ofn22z4il81dpdqfccpi7w04sd6g2r0fw1zwcme3bmb2kgyb76h6',
+                latitude: 566.34,
+                longitude: 989.82,
+                zoom: 53,
             })
             .expect(400)
             .then(res => {
@@ -299,17 +299,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'ei17pmt2',
-                customCode: 'r8se6ph2m6',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'ms3xsyg9',
+                customCode: '6xii1899e3',
                 name: null,
-                slug: 'oqqkmm935gucrajebfjkmlk57m7jnb8ogijk2b6tbbl8qg8zx0m74v94mp2tjlrc9dftb4d2c3wq0tzqir5vfgqg9kphseb07kmdfe2jkxtmt22s51krgo40mlk7r028eci0a3pb5erc7eqnogwltnwjlk0t2w0k4soxxm5tpfd9eq4arfusc82uhv4kbp1m47uk666vaqk0ss88098dcefisd7ev56rbsmvryrkzt58hfcj3kozvxc1vbgaufh',
-                latitude: 336.64,
-                longitude: 275.91,
-                zoom: 99,
+                slug: 'kgcmmgqpa5063nlmvmscc46i5ath15eh79b80gyyyw0sdo2hwo2ffcknptb2zsnvam3ehu63zsdcac2cydee1y5jtqkklfooyvdrot71cac22c93cbsk382ur6sy0bjezacglb6heanya5rurrdlk9cf0n0f11ryz5gxqi6ki2sueo71k7xd9yseawwvkiv5bcttot9x6e80hftcvuwf7onfyvjj894eh5jv9u54dhh5l7j6su8wjskp0j6pfkj',
+                latitude: 461.37,
+                longitude: 827.25,
+                zoom: 78,
             })
             .expect(400)
             .then(res => {
@@ -323,17 +323,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: '6fd39onu',
-                customCode: 'vv9krkda5s',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'pcoyfke3',
+                customCode: 'l86i2guh1k',
                 
-                slug: '0skj5bqltkzo1uh9vyj8n3pbttne2u0rfq9zear2udeadl29iobu5aw65vhodgg8kjkgcpsw7vwwd38m2w0bvcbo0th6qysh97qnff44ws3kns7zn2yk95wxz0u2z10g3nxb62s8b1ckg42bonjxakxclhb92h6e2n27uohqbjl87sjvktjmjs08pat1n7xn104k315jd339v03uxvnmtnslrzwy534m8xzvdm87zufhdanv6erw0rdlh8b63bi',
-                latitude: 242.00,
-                longitude: 759.49,
-                zoom: 76,
+                slug: 'x2uzgq5qjpgg690icg84i7x4x0wdn7ezqvwblohnl56reih0ps5iuh44bhv5tco105xkxdb0een3uc6ujh7rn67mzv0yt9zstko8vyu63t7iuupjoajhr6y6kkdjtfdgza97dgcxw4mutki0ucgd7z9b7eto523i6dfhqx0mxqqyodjt9u31v7mvd8lef978iar8onlp13vh78jlbtypbey33oqfykljvynzoejutilq9fjvqx4cxq9da2kpquh',
+                latitude: 310.98,
+                longitude: 426.46,
+                zoom: 65,
             })
             .expect(400)
             .then(res => {
@@ -347,17 +347,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'y5ojvjvn',
-                customCode: 'o0v13l9dxn',
-                name: 'bz1yr0fwv6sloo2v0n0o8h7eljpzw3sczvvylqn0q68rscx0g8m9cfrtkdgu3o9cigaea1ych19kkkhridnlrf8szzvzmwkm7sjvpbgkgqynewiwjhkky48m5bvh2y7merec9bh9illjdb8guu7nss9d6gijjniqrr1sgkkgeeze8djdpc4nq6u728q0szw48owq9kmr2757v0j2hzs16kxs2v8tkbs9l0fzrtff5fphpxmd44e1tmsdix3pa1k',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'lg09ben1',
+                customCode: 'tdmgy73gwz',
+                name: 'fap6jkg5amc1bf18ze7mntebdet08zll8sjn190scj6wyg24qn5a9agx6t8i8sun9ohwampiytdgfn2j1znmz7t3ztzvmjvyyi7noda5zp77ufj1qlnfqlf3ml2d0dnuag4rfdqrq9vjtzafh6szsi1edboxutnoc2ujp2t33229tkohh7e99rfw5mjlwc8mxb3jmlaaa3dmx07lg7ggg9vh9y1ht3r4wdraqq2ufn5qipfxw2w1ozuwsocn1a0',
                 slug: null,
-                latitude: 462.83,
-                longitude: 148.50,
-                zoom: 61,
+                latitude: 933.89,
+                longitude: 389.56,
+                zoom: 60,
             })
             .expect(400)
             .then(res => {
@@ -371,17 +371,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'li4ypgf6',
-                customCode: 'n6c5m1m0vd',
-                name: 'w81fomm2npvll7s3cofxp24a4odedszc4ptqjoayoyyi857dbvro369kfzp2o6iipdgkwqk9wgus6lzptx040tw6zctpccvb4zljod0yjrc7fzz5dfhthi3x5vhic2rd70qkx7okpd6azisvim1jnlui77fpx4brtv4n6ov3uqhhfdcm0pqyjujw4nuir3ounc8yisj08g5vvkxv5b98q9k7jkuglc02o8prw0ywbnd1lo6up7fhcls33eomnc0',
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'l7p6e2pw',
+                customCode: '529agestii',
+                name: 'k4zf5tjrvl6blzqqcgtgnfcrscwdqjxool686h1jm7cmls0p5awvtgpg4amrb2nlkp72x7rejx1xgzuju9c3j8q69jjkjsom8ck6t666a7gbpvdlkdrx3lvhy3y9gvk0lfngbj5lo2sfk46kxgqriopcfn07vgwpqpwseuu3dupaut2wa2o489mo8s27nxifzjygq4djnoj50fvod6ey4bx3cqd9rku7g7f24bwqgf1b5dn0mp44d881xzic0sl',
                 
-                latitude: 251.80,
-                longitude: 919.13,
-                zoom: 99,
+                latitude: 784.57,
+                longitude: 634.76,
+                zoom: 70,
             })
             .expect(400)
             .then(res => {
@@ -397,17 +397,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: '4xy5bv5qxg7mt7z04na0021rup7jo68ti78qz',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'tp18x7of',
-                customCode: 'b2m2uict6v',
-                name: 'gmntuhnstebq61nwo4py5t0rky4w6n3lhjrwnvkwk9jye5peujcmp0ziddz3vnvou6owvl5za4v2b7fh31nbhy3q8o516yz5u02riv9p71jlv5n9u1y2d13c48s2aso5ut8e1vld5f9yibkswv29am97qcake4ld36hizamji15xal07do9243jsl8catm5ga2roauwmnggrwd0ikufqaieuuk9utm3u3w3z1d4f0iu6z8xut2jc10xayx44dol',
-                slug: 'mmgafyu7d3143a0vbolyon8vs74268adon8merzhkwmsx3896nbvxcm5enxhi54nvsfikdykl8r1phjte1uq8s9ooh21l6h5fpqwbg55oypnm3kh02xouhjekug9gv416erhj38e649nx6k23j80av788ug19vqcexehfiwiugmlv8ocfm1wfgu9squ6tv8482drjuilyl01jffg6574flsw3nxw9cleby3npaau8u726gu7pf5bxgxe3cvb8x3',
-                latitude: 827.25,
-                longitude: 877.47,
-                zoom: 17,
+                id: 'pg3jrydsnnezyepn5rxr3ld775x63czryxxeb',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'p1q8xblt',
+                customCode: '48kbexw79f',
+                name: 'k5exg78e2cd1rlaascahjv11yvqxmweitsfcrv9lnlzyw9z17fnfn7msgzzravv1eq9ab6jjcb5klgh0398xuismy6v1yg2j1g45c4kira7kj4byealnc8dxdna8rcv4f4mt5wgc0avtbcp0aec5xoe76xot8udddruo9i4mkivujo42adhptaq5bfuzlo5fbpc1g3w9v13wfkkg73r1783zu4as60y02kz3ebjs9tihvnpi4mru761fbzzapfb',
+                slug: 'ateykoneumu6ir1ugf3k4s2y8h6kgwf1fcyfqguzpk87aoj3h6ztqan8kptwuksw1ojvh8n4hh2qhq0qmlwur366nigsyhpfb3kc9q1hxtbo58az9jpszeai430kt9870mkd59rr4536p2n7fxvzw3mhvj7rc7hpvajiabnj73llqaszuq1qwmen09zqrhz6sk84p7gs2ql97oqwp0skr8s650ph1d453rb8lqmri2za60weyybu0ukj3iksrpu',
+                latitude: 587.46,
+                longitude: 820.14,
+                zoom: 47,
             })
             .expect(400)
             .then(res => {
@@ -421,17 +421,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'pd2ja603mcxwdx24rbm5qxrnoebs69zzo7pjz',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'bqyem2a0',
-                customCode: '0o4jmg7n1s',
-                name: 'pcp5ox522o5yba5t1kqsq4xpvrz6s9hkylze8vc3patq1p06o6fw20bt78a04yptz3nxpxypbgypw77mh5yyspbqh7tsancet70wgdre4f52dwdooqll6w99gobdtoctxpgv4a4triqa95kfbgizw6sba2zc9tjcaub5ug1p58vf3agn7y401xbabq9ankh33v1s1zt2vxkn6f722wnexuutyjpudkl99x5o52bhm0peuzrcqf8haebucakr3nm',
-                slug: '8t34m43kyusy7t8ptw4rr75j7j56ryejq80tjldn7f1mu4k235mlsw85kqq453slsd49vyeaocvy91pv3jo7q6n1gptbg24xf417c25hqnkt1nk8fj9ogqyse8kcfqqf1myx9lgqcr1yq4v1hrvpm0ufy3z5gqeu3v20da0o3pfnwvr6wz9wavaal7mehwiubr6dywv8li7b87imcwuyeyk9sh8qu90l3f3pxweews6lslk7f6iltjxc7itqpp0',
-                latitude: 826.93,
-                longitude: 795.18,
-                zoom: 75,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '91znn841muy0qecuufvbbgfv8e8cxo3iml5ku',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'ylaul5xu',
+                customCode: '5osqp2asfq',
+                name: 'lxujalbfutzebvlcepqdka4ry1m4pqqnew9o3dhhn3glc9uanq7cev5i97smv07lco3wd7dsk68g4jdx54d0tgaeigq5jkz5exkl15hrfs2i2eybodkillhrhl1qgbn21b99k8swfl5l0wvkule3usakka6ptfge4a7q7nsf2l9ed8uaw4vatrr55rm7rzoim0q1mkdci7ocynf3qf8huesgvrylz0ho7rh8l3r1p0udqyuz3tefc3xyre2idkv',
+                slug: '50n1ucunb5q5yy4t98wkfi2km9ofi2slb73cdewf7q9l8y5er6yzlm46q8b6tzfng4rwwcliqa92bwz1zmytsnbs9paa3pxa6ruge9scpj3qbrb9isqms0q96wohcnzkv6jdj7kruo25h6kw1tywmd8l81d67syn5qpptgpf1r8ktub9g9igsebkegrjx8lltw8wbiu1c6txfpmbc66r7zg2mp8hqejtlaurs4zkdg6xo1np0w38v95lqa5m3u1',
+                latitude: 955.57,
+                longitude: 678.30,
+                zoom: 49,
             })
             .expect(400)
             .then(res => {
@@ -445,17 +445,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'yv19xfl0er7gtyeocqfx4sa5pgkz6j27mt76x',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'x0vzay6b',
-                customCode: '95n43ijvms',
-                name: 'vro52pjzx9je8xb1tnz9erx5i89n9948a83xtiqykvibv6qh5gjngzqh7yocby3vta642go9m2elr7i6sym30waj9v3wk1uad40o153y9yh3i5htnzm7fhqlimwbzxajvpbhtyqqg7oiqj3o86d6hht14b08uwd71z5zkwrshyq5uc23bwpg3mra58cg54adh15ahdwq0nly0kitj802lkr5tt0gyzpu2fpzuf1sflk4hvmat6rcdcypusewzvx',
-                slug: 'z8xxozksz09pb6kh4hlgumrunlnvoz2puelsdari7mven8t6c3rihq2w8kgb119yjgocnqrc0ajujqd08c5o9c1puypxax9ervq6cv5ptjscfrl98xpmly11tryq9roq2rnbnj61sgm6i3riu365j19h9hienvq0ccfb2f7dr9ewe49he0t6g4jlwq3mpmnbuc7apy1s6x9bkotuijkh90joudrygo6vqc8e1113onp5ok5k48hqsis67hiel72',
-                latitude: 431.95,
-                longitude: 935.06,
-                zoom: 20,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: 'c9v8ofp1edeg1ug69zeq6xdbsbcgq343fgnz5',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: '50ssleoz',
+                customCode: 'ho02jd65e6',
+                name: 'm459gd3hvn4y5sihvzym8usjaaczxeyd40dbvud7jhs476rn20oa5gsttdo2sgru1fvqbmvk3uj9j372ejs04rduf3bhzupo3dvaqxhn2x125z3ohti2c4u5g4jqvs4wqvy9k6816iahv4ofykuce6i9rspdon7qhlotemld934bfydmszl3zm759wdk7npck7m4652o8pa6khycpayppdwuzroxys8ilk8j35z6rzfwc2b3kk0pdhwmbcrygqc',
+                slug: '17yp5tusirsg1loxw3bu0hjka3aitq9rcdnswr9chp4yu51pu0uyz1ov9i6etudndrvnvhi9jxptib3p7u4zeygfaipmml1bntspr0n17khhx9q8a8s7b3ocmeqfj7phynujwnqr2cgmdrevbnzkh0v73ixyq597xhkmktvaj2tozt7kzv5x6yoalw32ftdwyr07f4u1i1wc203trm9n4mi5zhkfu8dm7nya5693gsttnl1s6meuxb16uhqqiur',
+                latitude: 977.48,
+                longitude: 838.36,
+                zoom: 18,
             })
             .expect(400)
             .then(res => {
@@ -469,17 +469,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: 'f28gyp4vxkqskd5cfx003bxxu9m8vayoc8d2l',
-                code: 'latgz1pr',
-                customCode: '52kys7wdos',
-                name: 'zn0d89qe2sp6t90iiqegq1qxkulv5ft0qiwrfsddhpsw21no30c3yciesyfgafm6brpcul9xwhttsjs93stxd22yehao473cm9aotiw3waty6vkoq8buzc7y6ovrznmmdrpbc8hvjp7n2pvy1fyapwyqsbc5eifg4spacir76z48huqx9kxp5qchu2mb83kgrarkq6qm0ozy76w4mhxwvdc74e7urt83l6cvat0qdqe10ojuhi0pjlukuf1d0q1',
-                slug: 'mi8l1bmaffdblscpzc1uxt8ebb69sfgl3nb388hu4gv3xjbsucleqpf5ws495mrfn5u22ul9x1h0nmvm4l894nyxyu3rrhfzbw242cu3dgiz3a16q0q7zlsinnxucr3ypmwhxinal3r5tteftnnnw3m9n7308nevfe8nha5v0ic3w36e3j3z7iw344l2jotzec1rdpu3je1heeozofv0bgxq650ect8sqa2wxzzc93rnzh97nget77jfjw4tvvy',
-                latitude: 536.51,
-                longitude: 918.02,
-                zoom: 68,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: 'tymtd9p0mnlubf04sx1hwlm7akt6g7jnvkgwy',
+                code: 'a5nt8exg',
+                customCode: 'jtsqdfvedn',
+                name: 'n16ku0h39yba12a85ej1fguczbrjr6rmtpagp0sxitpua9tiweznhoaoszcp57izauuwslh1x52ynj33qga8m2782cosbhmrjgf7nra7zikibgrnnhs7sdu1bgp1bb796c1hc505jl8tix7ontnzwy1gzcfov46qcuct8zf3atgtldk08c4f87vhf83hjbrn8xop0o5qyf3uk92uwzlw3sh4fxmtprth6yzqnuy4w27ghu4elm9exz6tnz3qft5',
+                slug: 'u0nbu9l3jrk68zxj6os0ak9aml2vu7oaqidydnf6vxmfe1n8g2yxdwla7ceud5b6uewmnaeiipit8xdaiwjazc9wqo234zmpsrzss1d1bcybcffdbhc2iq4s6f75yvchozz4mdwr5d6uytc6prtxzow9l0p19cyn9msortmbjd1sacaek5vbz4ry2ydcqnpw9uzq9yojqqkrds68f6lh69amm6kjp3uq28l2h52xgsrukqcuzomkpubzh16dux8',
+                latitude: 537.96,
+                longitude: 990.47,
+                zoom: 21,
             })
             .expect(400)
             .then(res => {
@@ -495,17 +495,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 't4oirt4dv',
-                customCode: '03xzxp59nb',
-                name: 'l5h5h5ue4qav503bn9v8hajzp8rv4nnhj08xeasfgfzdgzmolo6thwx96zay5ajk01s2jrv1doarhyl2v1akm4rike0y2ql0jm6fl8xtn45fwlub3x2jf8kuj0czyi13lo9nmpw1adt9iai1noqgl8js24u7r7hg88aqiffnk2ds4lm5rljt7qzqz3e7j9y6a6byym3kf2lae86abmf2tevq52vwadp2hat1tet2n87c3m90nccykmgv71el9ev',
-                slug: 'filbd95fintoibkg4cvw992pi63idpdj72e7ibuio0fwyt5vcntgk9he7iiimlwq319nlxjfnqtl88wdno3z15fpwp60ywgp5zxopujfindt99f6d1ov61w07win1f9gug57r4d0aqd4uzjx80owvouqckeprc4lmzss9v19uzvbepgmgukp2ozkflisdpdnvmr4da3sis3dmhw6euf1vm01jwga1uajm5fsgv3k97p13id91nvxzo0i2riw6wq',
-                latitude: 892.85,
-                longitude: 202.07,
-                zoom: 40,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'i6q0ut227',
+                customCode: 'rxyz3hskiy',
+                name: 'iqe5yczd36u1dufqgogaf8iq9f286ay4w5cpl4v9v7xzdkleo57cslpc9aho09uat9eir71es4mhdv3kkd3ntutekykt0ru82k03yyuba32p04o8zki4yfaspet8j70twbtblm0scj2ncjw54qxwgcnt63w8mnjtvbhhpo6ciznzaj9hobu0a6i0mintsurms3vhgghu8pc42u83m55j5xx5qurdexore5sqghwslmlufbyhhece7de8himryz2',
+                slug: 'fkkezsepokwjt4sld6lg0xw7xxfj8gwe4i6z6oann4bcgaha79r7j86l9sxxo664fxhhcycge8c0sq1alijc7oqdyvfketvg05snjtgvwowk1uibt3tesftluwuecretr8oql80rm67u8840l6bi3hjqziulveggw4hibgex9t31beh34ubyrx21r5vnqzsxa0d7tphyxmnequm2e254vu2selwjwlrg86prmyu8jtsd9gfhvnhz9fxxwww58g8',
+                latitude: 799.91,
+                longitude: 486.38,
+                zoom: 59,
             })
             .expect(400)
             .then(res => {
@@ -519,17 +519,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'wy5dw7t2',
-                customCode: '9lg7daxw30o',
-                name: 'lb2rtjuhh3gn3wuox10jnrfjq0r08c0tnsegvoaguqcnqbp3vtkci67hk8waygrp9x9q0piq1v54gxgx6ntmn0iju9zq9ftzn1h5djem479qrkg5u1j6w5mbxtxhujmaihx50iylsum1kk2ex7afsapf2i0ourp90tsf947f9cisw9fv7afgvheixt220yg0xvs0326h2n12km06xpfr3il6rk5xvoxsp3197pqcqnyv4du62y9zt2cq1fzc616',
-                slug: 'jgean6dje205umdphq7idr8thvudyuxe01n9jmib3m7uupkggpnhqk2tvv16gj1a7pf8qkx30meyob8hu5v2qjz4rt3lnan1ywp66xuzm7t3o77dma1udohqlx4wxfv3sqvroxrqsufyy9lgrhszr95174yqpd5g1oqr7lj1kxw6w6jmwy1w1nggr138h61euqyg2zvko7ecc75j66wkeabl5rapc180d124l1z4172nrwh1r6dmn41yftz99ys',
-                latitude: 651.63,
-                longitude: 64.57,
-                zoom: 58,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'ufwgegdg',
+                customCode: '7dzo1g8xoji',
+                name: 'vmdtr5gy3o9u88yfubx2v1byaxki66hony9hzyxgzrm0ole45b5efda87bz9miojqa8hfcy2a1k2at1x7ijl1cey1ejr9eb43nsdye4is8r7yoadbrnt8e0y2izik9p9rx8j8j1rqfdub86fhm60ehr1pm27no9pfc2aiyc92kv4wbwakz7orx5digx24vkelk8ayc6y7q2rfv48dsznysppb0zi72gb4snebm4rmg4ouf2aixkrdcozk0i1pnr',
+                slug: 'ftpytdmyg5vp3f0oa0nofw2s5pf3lr2dsft4a3xg9n46sqykheb5y7hsdd83tl5uu9spg2n8nt7usuwb50pvzvj2lvxsghkniawjm8i6pmcldrznpyqqhzsyleubhzrc7sekbftky6u2rbq3hsf7w409uevjaudytlkehy1mxxz8cbx63q2rto7d67uom9gpmn37dbno60mm81a151u2vhtho4mdgzch4w5lguvxyiapxejn4xhl8ots082qr99',
+                latitude: 753.09,
+                longitude: 425.87,
+                zoom: 19,
             })
             .expect(400)
             .then(res => {
@@ -543,17 +543,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: '99fxff5z',
-                customCode: 'jazaa0ft1o',
-                name: 'itmuo2kshscva03qn95wztzdinkfpe3tlcxf76jh7yafz2a1dyik038wf08j3fjm1cfzhy12bj5g09dbcufjtaxyvptcx2ulmzv1fp0b6mwlm1gcl53lyulmtb9j6z657zbvo2zm6dp3zb3jhzukwn1er5riawcyqz74te144u051zaywyvxpt3rjds4gpf7ek9k9zpff5jdd8ucw54b3x6q5tqtsebkv6kschr6y4lrjlkzifxlcyegppmzbmxx',
-                slug: 'ul0chau9s1t8rp01sq5omglva74lyotmc8vpqzio7ia2d5o34nwoqa5lvaa4gf892qaulr8jfhbd4eemuf66irouiybcqm6uf5puyw5q3uetb6s7ggzg4f0oouqzlaafemw2zb0nw2ih7ig6pqs202j8kt6y0h6hbtuu35mn8fuix5a65zclddwsd3i7h106spi06drw561ikaeovvdz0fv8di9p71zvt62eln6wzwmkyovevpyvymi7s6j85i8',
-                latitude: 982.06,
-                longitude: 264.25,
-                zoom: 97,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'b824giqk',
+                customCode: '0mhe4hlx9x',
+                name: 'kyhuzu7tjfshml3tmb9bl7judw66a2ay23e9rkn2mcc4anp4txhumte7a6apqv73rm90pz6wmn6gz7xpuk0mq1txvvh8mle1qjmzu464pyqa7jn143nyottb3mvfree8dwn7xg52japyaqy4b4eh6cndht5m13kd5572gr2zizoj6eo8fdga2fes5onf50xct83137qg67axge40jzmq3eoh1r2f35ye61g7ly9uecd8nm4b7jfym0smqi47hru1',
+                slug: 'm3k1cz1qa26hxdwb3jrmv06t7lanz9548j2guuvvsjw6t6q45srrydq2mxwlu678hjxs6jnt6nvkc7t9idox0ljm7hwt3hxgr2xraczqdcesmfmpuxg6ju9ur3lml0vxg1ksr0svreyqef14u5w4umizhmavmxp38vqhrohxut40e06ztwtza0fvghnupeji45ouptoatw3mq44s87ho7u7iu5gyrbpvdoi697mo16mo6bole4dy6e6636aanxm',
+                latitude: 955.39,
+                longitude: 889.57,
+                zoom: 69,
             })
             .expect(400)
             .then(res => {
@@ -567,17 +567,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: '8p3sldow',
-                customCode: 'z4uesf1kat',
-                name: '3mzc7eac8iwddj9epewcr9y66c2ks8eignexm9g9p8opx68jurg1vqat0u208hzhs8vr6xr91rja0wzs0k8hr8ot4jtp6vcbplvfcri2nnscyb5rs41yid4o3ottacdecop9bsbmkijbr2oo4mdvw7i452bo7rt9fokpltgci95cp57xumjzic55rgypw8c41aucvg5p1w5aco7u827c25p0hpsijv3e5ljrvwmgog9wzc8y9evbvkxgzmd9py9',
-                slug: '2gjul5720sualk2cmoecyuy52zx56y6ho1o1nartkdc9vbmmrr5ymn6o894eofqfqb81ednes688ilfwwbpqen4b30gcrv3niijeyiipbg62chiyhy9th79mt3k112mi6y2rkw4t9a3te59lwpviy4h5em5mw02m29ykr0muylgphplvp39wl4by3tzlinmbwri2l1rmto1b3f595b4bbi8li90rlmm80qly5fd6fdgzs6elszp1h38lcax9s09l',
-                latitude: 173.05,
-                longitude: 819.90,
-                zoom: 22,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: '0ngv65up',
+                customCode: '0vnzzsi10t',
+                name: 'v2f8pne6wuwt95ffmlxsgenqgbtecobc8amh2pv37shzi5rwrvxx8rd4tjk1kpjyavdgclithf65cr5lqdubxjk8mnbke0i1xzd5uwiyr75mijydpb0rwgwpbp5zuum0ihf3bc46cyej5aw67lvsifzhpf1yiajrp6uo06ivihfrvma1s0dri0w09cxq9kn152osw6wtjtyd44qltqeyoyj3u6zbg5qpy6v2cmjlxjhyihw33k70b0u8cm9xgyg',
+                slug: 'xo3bqpusx0wuje3vdk2sgc4bql0uvj8rlbtp5ksdleamlzton1gdgpeti3csg4ritxyrrdjdryt4qk86tswss42lm5s9ei711ejrj1rm3bs8fmhp5twq69ipxpueu5ldqxw2um3fm4rprb4gnj71gzkz3kb104cy9og7pt5ip379q49vbgy8zavvklpfwrqvz19aixcghzgi7lhqexnkg2eds9p6cuj1roedeiqmzx8n71dfzwpokbeizb0licdj',
+                latitude: 392.09,
+                longitude: 489.88,
+                zoom: 82,
             })
             .expect(400)
             .then(res => {
@@ -591,17 +591,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: '0ns6uxt7',
-                customCode: 'zxxou93yxq',
-                name: '6rnronpvz3008j19s8eybtre9juxpvwkkl619rjaj9expdy429r3iy0gp1286g1haivod2z1ha5cobe72sa358os6vw2013a1yko6rm8iue5nvcnclu5zuc8mkjbp9wkdzlnfd4z39svs6c405ckrpy4s77b191c3k5jwrowy11b5dqs9v7qct1imipfew65x8v30ru22spsvuhprs5gm0dx9z2s2gny16rxe38cu3yiw3m5kjeiwx3oyw4ymn5',
-                slug: 'yp3glsdap3l7megjd5u22u6fkbge1q0vmppvueje3a5bilck2ambureuw2i2zrq5bps2ignvd5179sq33ptyhbhpzfau12n4blw8fnuovsw24crauyq877iyo33h26ne1ja45mely2t9hogfp9oc5o03gnea7m9jzuepdshkxjv8rw1cqieytspqxcp5rcojttk04s2wpmi4vgrwzkb115dtwolfgz2xz7nzdb7ysz0bu4wv5uz6g08e8kyxks3',
-                latitude: 399.04,
-                longitude: 348.64,
-                zoom: 56,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'kzedplks',
+                customCode: 'opfie3yemi',
+                name: 'fadgpd2favs5gneu23ady0bklpeer3vb7wq542crwuywdrczy83lv6zpmwkjmugguui3blto94h0wau90uplxfs4vw1ezct4pwju3zl6l3g6fu97tl4nrgnj8fsa68pzff3vn7k73l6cqe2kfjo72xb51xsz7h69fryauhr0ogzf0e8pv7ss7ktvidurdx6mt56skr1gygr7r6fx1y4vkskclk960rl8scrin2jg4sbqwnjdn83ixrm6v9407at',
+                slug: 'yfjkrjr87sivvt1hcs6ts8icu8zpjpm21stsasd1djti2ewxvqg87veaieomvmbhydjd7q20pc4o3l1vc2ni9ymguq3tjnz1qt8zk7wbsy790tmpyzhbtwsa3pmg0rtuit9c215bsg2oku0gofb4m57b00n378h3oc6xrxd5vwx115aooajdwyqeamrf3ijaw8q796pbdqcwovb2x2girnc1iarwanaokwh97gfb1jhbdd0xpizjoxbw0mh90bt',
+                latitude: 995.76,
+                longitude: 888.02,
+                zoom: 37,
             })
             .expect(400)
             .then(res => {
@@ -615,17 +615,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'rd1ji7xp',
-                customCode: '8nbjyrkldh',
-                name: '119hnm9spdi2fpui24ijzhnz6qqn4j60bg7eegeagg6djepcbsj5cz2dyehrma948che48wlrjn9wimscjftzq7jekkzsnoylgmaa99oej46dpwitelug0atkobx1z966qzvkcrcm4k9nho88iw6cn6wjc3bzgnialmu52dzbwi530y8fqgbwtfbcpgmk4ka2fvk8o38ms656lurwd9yjj2zu2w8cxltlrxpfg0a0lud21n5a1xqdpgjbpa8f4u',
-                slug: '04pgratfltdob7nqj8ogqfk9zrolucmohjeffr0d2sstvdg9uc4dhefmzyjitu9vqo5aowxb6drs22eoa0tqgltmuwqcld0blao5r138tt2iolcs6j91nh3czjzu07axu59eyua0wwomfcdme0w16vcyxuyvk6t0r2kl0glxmdexb446zc3juame311o8l6mebyspokj8w365r0vx73tok2r8864w6kyq4bk7k2f8j9c554jpv2nmwp8y4q1go4',
-                latitude: 264.69,
-                longitude: 196.89,
-                zoom: 49,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'iiwxcljc',
+                customCode: '3o2bqtzmjl',
+                name: 'r5gipvzuglkjur3f68xav0is8z7b4p9vda446w43vbtidiv5klw6rguesq23tm8gkg3zz4oap783xzn539756y8fl9kleymb1u9iwtwrakb6qeglk0qj5pmmifb0abjowzkua3z2dqh2vjb0tthyyv5pm71gvbx11h97dkqo9ook11ebnvmbjktwbuwqjcrf42mvqdkmznzrjjblaxggeqskj9z9mkyyujj5xydpy1d0cif6o97w64aqz240soy',
+                slug: '9av8rplrwpufkixl4u7ms6j1k110kwe17ihafy2iepncg9s9u27wzpogu43mh59350fsmc4kspwjk2baqrxsim5hfbus9cfvdfrj7yl5b67v17gmcipti61bsegzhcqcjsdrcflwrv459hhbzczzn0espkddaqxin7q67qlhbry5bsup791mbnb4p7w9qcdj6650gdyosupzqi1cxhhy06a3oqluu8zhs8llnqia967oblh5iy1qvkuq78hwmg7',
+                latitude: 330.84,
+                longitude: 255.21,
+                zoom: 89,
             })
             .expect(400)
             .then(res => {
@@ -639,17 +639,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'qpkzs3nc',
-                customCode: 'jt9hr1gkbp',
-                name: 'cjvnb3jsjab68riameqvoopkmwe62oj72jgjllgal0jo09gp5nc43th3x33u974cfer2sntspe8cx4rhrptnvf4y8dhfoerga7y5yt9hn40olcwesup203qtdjw8waps5uefei88mmx5qdy2botbv43xl38va90kpu3j6o67q33gwjt0vtalj01p5otxorzuogh6hxmyovcmon08u7wufbebf1kxahvzi7sqj4na9l46ibam9kaq6f2tigfn70x',
-                slug: '6kr05i0xp566j0bm2rt2qyterdrbc2cjaoe6f3fjb9z13so9msc5rh99a4svpo1p7qhi28vv42n4qys78zz8gc4df6qviw5kiy43hrfge0lytty9annct4kkpu95ht0vqa8c2su8sa1doebixbg8nsvckvrknj8e60kohehaz7ocgaiy3vh5new0xam8petk2elpuqqdxwdmvhubvm46e71tkrn14puz4yvt3ye7ndqetwi7g1s48uw5bfywh3u',
-                latitude: 112.43,
-                longitude: 464.04,
-                zoom: 967,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'nj1x8euy',
+                customCode: '67yljr7ipv',
+                name: '4tdg1slpycxby8h7anf2378t3by6b8oqdi6oftpkodsf3lpebpqpxj1ltv1jx6g5pri0v2ntq36g6q7wjscj1kvj3lz7v9p4ac0oywsfcmhlc5kkvarzb925i5jubxqe1m3y85edjwiwtktho5fahaz18mzudlrghj97veohgihh0un55djw0x4mewre8td9lh0vz1lv4ck76rac52wbi9he3my6a7wgypmr5q3sim1wxl9ejfzuu36x80pr7ff',
+                slug: 'kok2pn17w45xa83mm6uhpj2txcmiocqs4m3x6tqdasm5sd6jsxd9iy9uoiky3k0d45misom2rrsc7rtyru4nki2oq6l29c07662bczhp78gu199m7bfno7q4tatzeonqplx1xmf3drdmkxa8nu57vuuetkmm13li92mothom84frbi90tgb3mspjkvgmn7wqd9jjiz4c5lzs7rt02uo6c6nbrhgb2ap45g15uzvhr437te0vrybwbwjyi743o75',
+                latitude: 119.02,
+                longitude: 503.47,
+                zoom: 418,
             })
             .expect(400)
             .then(res => {
@@ -669,16 +669,16 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'zal01tsw',
-                customCode: 'lzp71u461f',
-                name: 'o666ntx8ebmkzhdh0vx2vh68qlji2k1mniauza1xv1ycjfqkmgw8fe6m5lucfwz54vx26j94ygeiv8e9g29vs6wapano9mpwumgxbrmq7fa04txf2wv4jk5qyuldtalitaotpjeedi18sotqpqe9d9o42pzfmutgk1egegax6yeuc8btenz0wt3tdtmd0jicc07fiebvl9bvd9qij4rlanmrvyvwzhdomt91poedid6met337flhyq9np15upyp',
-                slug: 'lc2vl0qir3z62nfx5a3i99wshfv4399iorpbrk4x2nafhfd439t1glhtxvf6acrx14lnsni7h1u2hqf2rkg3wa7we8t32brl8b4tjhvjxlnav0sonzle3p7uwqisp2in7u14jpzg3yj66hkw8av95ac83q1aaoh6fxqjelkr45bp9fd7rxybw3e23yix3rd8vdh8mwl9nkinyn1roqopfs3tnk5g25iwmzkzaowufd3vc87mk33foafos5dfnzr',
-                latitude: 171.46,
-                longitude: 363.08,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'h9rfi1sf',
+                customCode: '1g07qubscl',
+                name: '35ts4ibjegujnwgmjetty46nkvon6pf7a12xn4hh3vhei8j2p0nqx8xjfxg6zene28or7eki8f7hg17s9mw41rm0hv54yu0d3oggr42ih1kdpe44b2lhyhkxhmlz1slakpcszrq6l87bbq0i2py4tpowyjff4h2gqe9lx3s1sizoyy0ag8zqjuhmp6i3zup5lg2vqn6fdtmk1zybfaxy53lj37oefgfs32oiw6e3anzerltbxs2t6al94upet53',
+                slug: '1enyvngd4a0gpn6ou6zwrqroaozmqlrfyzikwxq5xbl9o8ykylx32l6b7x661x88oplctoddfmzewrw0g9o7mw4qu9btglo68e3xdup88hj4b633kjw49h7yxy8vq1r8do18h82syo0m41vp9snfizvveun6gw337dg3jj4uwc9kxfva8oc5xffd2y1yhrj8g5ec7p1wagmtyclcpnroqq0f9decylpo5duhva6gugdqt5zgh81q4lncaj3e3kg',
+                latitude: 606.81,
+                longitude: 668.77,
                 zoom: -9,
             })
             .expect(400)
@@ -700,17 +700,17 @@ describe('administrative-area-level-3', () =>
             .post('/admin/administrative-area-level-3')
             .set('Accept', 'application/json')
             .send({
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'nyzhwgk6',
-                customCode: '339hvb158d',
-                name: '2j244xnd5rp2ae5lxmtii92rijgsb3rnp589roceojiikcbwmi5la3yh6iq4beo1vo9zosixwruzbirban1uhxjtcapz4cma3f3vknfg8klyfgpssw1pwicz2w1egbvlnjqum9r4ebhuflkag0xreclu86uaezd92igyi6oe6060idg5dom778w1izyuih69vwsgem01zt4rrix8jepv9hsgjwxry6j291pgjd49u9m070gtpbvjdj19vo4fdd9',
-                slug: 'i2wlcnyek3gbfpgzg89c86r5nqho4t1uaadecgeqaudu5nfbeviwctv8apobjue469i4ojulasdno9lz7hifpnxompxl5k2aqaly3kvhih2vwv7obqusncrj56gtofuvm7gt2pfc8egr4ilsu1iigfjkdl44rw974u7xk74irsxem9h2ivnpmlwd9ut6jyzw3kzasxgk0c8ee7m572odge54j3vyeb0chwkbu9mcbdt4p9gfsnjqb0cjwqvb8ea',
-                latitude: 833.21,
-                longitude: 378.53,
-                zoom: 38,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: 'ptlb826j',
+                customCode: '8tggwbjxyt',
+                name: 'j3n5dn7btyfzhnhrsb8cld0hr0mklh7qyb1o16zu2547oeumckfei167inwdv1a8ht7xaz3m1v08if6c5v7u0b4jfhim5ea7apn2br9a8ve3g3yqat2lp9hlhsxnqc1vwpg483a18siq9fejwc5kdc6su77c4uxl7omyxgfxmd3fn8mri4su3xi44757uotr7jvclfqvxiwuv28d01svw94r9rz8argp5bh888xqirx52z4q5d98njcgar45tpa',
+                slug: 'qmkiuhzn58qp3ni8vtyiaq5j4oc4fn7ju6whubhgo5c4s9fj26cuvfbyq1w0dl030oossc2rdqo558b32xeew1jxret836zry5iycelm8cpmx0jmnadj5v2l4bch623ya9fe521uw3mt17efg2l7gjbkohr7hexm7y6096drw71nc26qe9wgnwdnyns0gdstyq4ojvb5ic9r0l17tz9iose63sai0lj259cfaout3hzwtpk99j2e3znxr566ga5',
+                latitude: 418.74,
+                longitude: 194.54,
+                zoom: 16,
             })
             .expect(201);
     });
@@ -745,7 +745,7 @@ describe('administrative-area-level-3', () =>
                 {
                     where: 
                     {
-                        id: 'd668f991-3910-4650-80b1-40390ac6bf4f'
+                        id: 'fd5ae93e-a671-4956-af4f-d3a762d570b6'
                     }
                 }
             })
@@ -762,18 +762,18 @@ describe('administrative-area-level-3', () =>
                 {
                     where: 
                     {
-                        id: 'db6eabdf-b857-4197-a255-7291f07eda76'
+                        id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'db6eabdf-b857-4197-a255-7291f07eda76'));
+            .expect(repository.collectionResponse.find(item => item.id === '411bfbb4-cc8e-45c8-b579-c45bd8bafc31'));
     });
 
     test(`/REST:GET admin/administrative-area-level-3/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/administrative-area-level-3/6246bd9b-8b2d-4a57-8062-7aa4430f8551')
+            .get('/admin/administrative-area-level-3/c44bc27c-1561-4471-abe1-9939d1a6575a')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -781,10 +781,10 @@ describe('administrative-area-level-3', () =>
     test(`/REST:GET admin/administrative-area-level-3/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/administrative-area-level-3/db6eabdf-b857-4197-a255-7291f07eda76')
+            .get('/admin/administrative-area-level-3/411bfbb4-cc8e-45c8-b579-c45bd8bafc31')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'db6eabdf-b857-4197-a255-7291f07eda76'));
+            .expect(repository.collectionResponse.find(e => e.id === '411bfbb4-cc8e-45c8-b579-c45bd8bafc31'));
     });
 
     test(`/REST:GET admin/administrative-areas-level-3`, () => 
@@ -803,17 +803,17 @@ describe('administrative-area-level-3', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '963f9cb8-84af-49d9-b386-0ec5a30a7945',
-                countryCommonId: '4d9da707-71f8-465c-bbed-c5ded1b94d0f',
-                administrativeAreaLevel1Id: '5d53aeca-0fb0-483d-a8d1-594eaef64df7',
-                administrativeAreaLevel2Id: '091d0625-272c-4476-900c-0d87e4c09d66',
-                code: 'c8zf9qtm',
-                customCode: 'o1bedtpp58',
-                name: 'npyle3nmcse1azc0s93p5ih7sbzgj11zm6dwrxp989hr14idhuoh97ud2yzqjoqlvbq3qn8undprjmprntgq1p4r9j0lsinju09pz7t04nrrsz4eei072wb0lsea3qxn3d3w3463cofh6qiwa9twg22x73jt2lh3maictcg4yxogbrv0xk0w4s5vmke7zsdeyutjqhdatjyfx1twqo46b81dsa9wak37th80tq4qm1z1bip1bqpnalow20ipj8d',
-                slug: 'neraqc1yukk6ouri33ueceybl9gyby823ch0jorn9bpdto0zy964ejegud1vbsihmu61e7femgybt3pg8vj93pr036v0vedjldphd07zwzq6odulpkjwky9jdspvoy1apdkl47aiisxtuos7smeihmhi7mxdq4cpfi0c7awpgrgo9jka8cqlkyteanxev5nobbmv7o0azwhbteitk0eckngr586o99lj3tp1aofijnnyx3tdao67mg3baaihjo5',
-                latitude: 306.34,
-                longitude: 800.92,
-                zoom: 12,
+                id: '8d051619-27f4-40bc-a6ac-407128545cc2',
+                countryCommonId: '78e2e525-6c2d-48e0-a0a4-d6a8e964e4bc',
+                administrativeAreaLevel1Id: 'f605055e-e5db-4f40-b9a5-7e3f5f58ed58',
+                administrativeAreaLevel2Id: '1449e0f2-f7a0-42aa-823a-2a1c59c0573f',
+                code: 'ak4t3i8u',
+                customCode: 'be901dqno4',
+                name: '59f2lf0te6p70rq8znhipd0udatd2kdw74xaeswrwwbz3zgyyng50pu0yvbivp9s3f08pe6kg8yqim3bmxf86rougbku18dnmaxmapz3luyx9ka3qlwb0y5h0oppgsg37b7grvshhs30jdhyrufawzmulovoliqqdxrzlayoiu5v2pvx7krp5yedshae58zu4lf34wfh898qwv7zhy2a8l1twc1z12tqdtqi1jdu5mw0me8vjvtkw9h9x6t4ohz',
+                slug: 'jj4n4au4li0p0t1hm2ikuf90dr50rbwpk7vigx9x2gavmpf7b7scwt1fw1t2a8q736uxeu6v2wpz57frvus0usqhozcgmn36htx8xe85j9j8sp7kec9b39k8v50dn2b8e8bxb4tfqns6ugnoes1oaivsb73zcnivvjltvk51ntqxk8iaq4kskf59jdss7ltxokld9xsxuufosb0vvrp54s26wasafbg8n07ymhtuwah3aurnwpis2utv4l31n13',
+                latitude: 214.87,
+                longitude: 787.76,
+                zoom: 69,
             })
             .expect(404);
     });
@@ -825,26 +825,26 @@ describe('administrative-area-level-3', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                code: 'bqd2zqnl',
-                customCode: 'gyglvvub1g',
-                name: 'noy35d8bwk6nws9bld277wvceu9nnw6kl4z4kwtxfv5be7e8xg1e5b33xp4n8t2le76x4v4akwr3wvh7j9q1diygdnjlws6o2c1tsqglrxbbfzpkc4452nlwestaudthub0xbbl37yag277li4ql6jqigc9kquxhxjr5tajbt992fr73s1xlh5ty7dsk2m9w5vltk2v28j576ihuld557ck3ufcaaot7k4wvxt33q8wx7kwnrf7acrprptndmz2',
-                slug: 'd8rxukbc24c4ljkhaejuetc2s5xxegr0cbiauiadbr2jixc6xt8u1fbhd43hbvgaf4fjq4xz9qqxaex34xcye8fd5ey3udnl4qtdrfdv2wr5w3hr1qf5lt6a1e1drlsiqufz64yh4l6hq0x7uf7dasos797f2avzdav4ae1tefgldlpionuy1ttgthj0oxhnofaib6b8lj4nd8ortlieixxy4le8zpc1rk9blg181du5rj2f97qr9lu9l0cthkk',
-                latitude: 996.37,
-                longitude: 412.81,
-                zoom: 61,
+                id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                code: '1hxs5m3a',
+                customCode: 'mlefd92br5',
+                name: 'c60wd0rbzetnr6ihw7q1vhowlpclzbscix32g6lz93korjjt3a1q3kq6a38f2g6y85tsvikezwlgp4yu8vpohlels701avkdk2d66nib4uysrz5hyi3o333h808og79j5rakjjv7pru0rreiwfjkvbwovc07kojr7jdktw5rxzbihb0h1h3us6nlaca18p33xdiiafjthcaxcs448ph69fgi340zbt1f165ciqqv9ajk44cdxb32b3ybf8c2gvp',
+                slug: 'ec4pkuzbcp61njpi6qkzyc2fc32jzwlcl609hhaf9b1ei87em9j83futjj8se73joxpi80m5w709wmbu8ukdg7ns0b7r88mrr778bi4vjjv3sengseyxzciqxoyctqchrz9glvp7beucjnss8s50p215mpxa463wnc936rr7hdaugsf5c0puw1w71otkxrciff9hs2lch2fp0ebouch9mg2s2yzrvefkeddb4nz7v8661enq7vqknez26a1rjk2',
+                latitude: 976.10,
+                longitude: 325.07,
+                zoom: 41,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'db6eabdf-b857-4197-a255-7291f07eda76'));
+            .expect(repository.collectionResponse.find(e => e.id === '411bfbb4-cc8e-45c8-b579-c45bd8bafc31'));
     });
 
     test(`/REST:DELETE admin/administrative-area-level-3/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/administrative-area-level-3/33530f59-8e94-4835-92e5-5e45d2f57687')
+            .delete('/admin/administrative-area-level-3/6ae910f0-4254-40ad-a6b2-fb27af06781d')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -852,7 +852,7 @@ describe('administrative-area-level-3', () =>
     test(`/REST:DELETE admin/administrative-area-level-3/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/administrative-area-level-3/db6eabdf-b857-4197-a255-7291f07eda76')
+            .delete('/admin/administrative-area-level-3/411bfbb4-cc8e-45c8-b579-c45bd8bafc31')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -920,23 +920,23 @@ describe('administrative-area-level-3', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '83daf31e-e78a-46c0-ad06-b5f496395694',
-                        countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                        administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                        administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                        code: 'bshdm0eh',
-                        customCode: 'zgocxfelje',
-                        name: 'hp3xb5744m5y7roddwvsu4gwkvhpnuias3hxw56070ihafrt2830bk0nvb9nqd0my8771bcy9433q31jx324hs6fba4b6zg3gi6t0x9kr0k5b5e8xu7trgne6dfynliz0zfzo8v8jujk9th59o8usx6bzrbypvdo3mre2y8xu6y3lpcx438xk3e88zm03jy9mlx03o12xrgmia5fs34wfsnr4ilysj9ulr05vcm4au73z6mb5wbaz54ln0u88g4',
-                        slug: '3jda9nkl0gx7c9z44jlzxgh2uajz2c7v60b3je9xsv5zv5xw12r1qpr5pbcycfeqxku3mroy8cu9opszt7g3w0edbkwa1pi7jiw4yv16eqekf4qhg4it1955jlf84ppbm7wibdkunn8erjr5ikr0qizse66bdlaw8r8mql626tf5mfglt0xhleq9tp1ajkaly92fx5wlu72fg9ep3kwu8uppjzxob8uce9ivefas5f8yf5tn61pwekkuz1ym5mv',
-                        latitude: 52.22,
-                        longitude: 948.58,
-                        zoom: 84,
+                        id: 'a6186ac3-e148-4196-9579-2bb8fffb3ac9',
+                        countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                        administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                        administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                        code: 'x9b9vq5j',
+                        customCode: 'z1ll9qihlv',
+                        name: 'atdztln5krc9j1do6wz78fwcgq4fxqib5eq1qgavh61gmwxzzon9fsqweop7pc869pnzvx42e0cv13cygw0nsj749ddkjdbfz4pf5rtgluf06ipraqphq2b96n7r5vxgxypdqt5z97m0yjv3kf21cpgeyf4x0g3ce3d1vkuinx9it2vfzynxfx7bcr6a138xbrt5l427af39omq272jwn40jbuqwo4vtwquknxsd3kay8ydvskcirfmjq2wzt17',
+                        slug: '1xjrbzto1ei93rehhc51sx1sikhad42as0dqss8q35zr0v8v2znda2runeb2clczdtd2lofjaikp2vnic0a0q41o8e2nj0z5aro50tz4a97puxpgw67kp963mknx2rpfjsq6h8chrbbjwdqp3r9yz2a0ux3nskir5ecvqm1thflyat11c81bgn1leo5ywp6s6dcif3kxg8yj87clwcbsc6lo7mz0cfhbtfpvpwxsuelr1daamco0b0nmy8snhj3',
+                        latitude: 141.97,
+                        longitude: 294.34,
+                        zoom: 76,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateAdministrativeAreaLevel3).toHaveProperty('id', '83daf31e-e78a-46c0-ad06-b5f496395694');
+                expect(res.body.data.adminCreateAdministrativeAreaLevel3).toHaveProperty('id', 'a6186ac3-e148-4196-9579-2bb8fffb3ac9');
             });
     });
 
@@ -1004,7 +1004,7 @@ describe('administrative-area-level-3', () =>
                     {
                         where: 
                         {
-                            id: '638ce80c-8b4e-49b6-8aa3-9d8b9eef7ce6'
+                            id: 'c673d13c-7faa-4254-b0a7-7cb5f2c839c1'
                         }
                     }
                 }
@@ -1047,14 +1047,14 @@ describe('administrative-area-level-3', () =>
                     {
                         where: 
                         {
-                            id: 'db6eabdf-b857-4197-a255-7291f07eda76'
+                            id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAdministrativeAreaLevel3.id).toStrictEqual('db6eabdf-b857-4197-a255-7291f07eda76');
+                expect(res.body.data.adminFindAdministrativeAreaLevel3.id).toStrictEqual('411bfbb4-cc8e-45c8-b579-c45bd8bafc31');
             });
     });
 
@@ -1083,7 +1083,7 @@ describe('administrative-area-level-3', () =>
                     }
                 `,
                 variables: {
-                    id: 'cb508fd3-8beb-4fc6-bf63-3ab781bc851d'
+                    id: 'f140e836-9821-4677-8e7a-e539b99f37b0'
                 }
             })
             .expect(200)
@@ -1119,12 +1119,12 @@ describe('administrative-area-level-3', () =>
                     }
                 `,
                 variables: {
-                    id: 'db6eabdf-b857-4197-a255-7291f07eda76'
+                    id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAdministrativeAreaLevel3ById.id).toStrictEqual('db6eabdf-b857-4197-a255-7291f07eda76');
+                expect(res.body.data.adminFindAdministrativeAreaLevel3ById.id).toStrictEqual('411bfbb4-cc8e-45c8-b579-c45bd8bafc31');
             });
     });
 
@@ -1190,17 +1190,17 @@ describe('administrative-area-level-3', () =>
                 variables: {
                     payload: {
                         
-                        id: '038a4e51-30ef-4fcc-8733-156d91c045c5',
-                        countryCommonId: '7109949c-14f5-4102-b316-b1bbaf16e136',
-                        administrativeAreaLevel1Id: '94a3d567-6ef5-4902-8098-8433844ad496',
-                        administrativeAreaLevel2Id: 'f21bd16e-a1fd-4740-be99-e410af4861ab',
-                        code: 'mdgb8nu7',
-                        customCode: 'vucbc1tvd2',
-                        name: 'gltfigl642fudoala8347bfdnrpecib36cffn7ssbh4pcn18lfue1iwerye73eoa5iwbofv8b7nfyvumzo8gts5c69v4p94ib226alntm2ht2yi245skg3hpfaned2lrkt73iylb0ktllyqzhtvmj52b78kstxbflyhb0as7z9kgggp0pfkx6ge0lw1hb2s4h8esuhl52r4syp1v6hbsm5nggt7jmoblnnaspgarnezi8obliepu51c2o2elf6q',
-                        slug: '18fs39asdynztie6kvzxcmyx5wpfygs8sqldkhyluouy8fw9cf38qmjwdcwr1upvv3nql57toro3peyl32eo6ciyxivtcdoym6t2pnrhjky0pgwtxwrgcf6j9pxwenlctoq5a916cjhyq2zqfw45p4x047xeql8ts8l45xvis2vu5049c2k8zqlpizta1hdbdiw6mvhw56bmbp9nt1mk6u8yii8swbyuu15ekfdmcfl84zgz6gepm124f3ics2t',
-                        latitude: 641.53,
-                        longitude: 494.75,
-                        zoom: 68,
+                        id: '3b5f16be-4403-4dda-a2cd-13e1c1ab4d36',
+                        countryCommonId: '6efb9bde-ec9f-438f-8a5d-13a60be82871',
+                        administrativeAreaLevel1Id: 'aa74edef-8af6-4729-9d92-0ab1e3627a5f',
+                        administrativeAreaLevel2Id: '7707a7ab-d033-4462-9df2-983ad5ea7584',
+                        code: 'o392zi8t',
+                        customCode: 'uyfjlrwxqh',
+                        name: 'lacts1aqpgb2qre5oq7ejodoesa8pxtjq1oa5zabb799vrxx0rxa7j7up5b6gvh10xh8wzxssjey1iud0sgcdpy8vuhjsvkk35vwmsuzny5l4new01613ga4k9bwe7b0b8darvpp16auhthr3iyk2o0gqodzkbcc0bb8e82dwkpex6x31yz11uwocthskgaw708b9fmfk0htqd6v784wqq4phx73729neiqnssvhqqjjaz6mwj92humchb9wpd1',
+                        slug: '6fvsd91boeb4y1zoeuxqmws5miu7yq2g3wo68n8l30pnubgkscchijafwjd83p3n2gl7utzfpe3xl5my4kj39xi81a4ggmced9vguzesfocbufmmne7dxgd3uz3evscyi6rou74e2hfpuzb2ig1p3b3md8ljxc4n4cg425m2w6ncp23hkicovnqwt2r65pozmcrik9c5fhncfm5cgr5d4fs2ctipbdxrcnovvm7vb7q1klsk1i7yjy5nex37sil',
+                        latitude: 444.00,
+                        longitude: 930.19,
+                        zoom: 47,
                     }
                 }
             })
@@ -1239,23 +1239,23 @@ describe('administrative-area-level-3', () =>
                 variables: {
                     payload: {
                         
-                        id: 'db6eabdf-b857-4197-a255-7291f07eda76',
-                        countryCommonId: 'ef977582-dd4f-4327-9173-92f69b65cf8e',
-                        administrativeAreaLevel1Id: 'f1227150-5ab2-4417-8dfc-8d02ce296fa1',
-                        administrativeAreaLevel2Id: '41e64522-debe-41d0-9f8a-db9e3b433c06',
-                        code: 'se3o5yy9',
-                        customCode: 'fko8406tmj',
-                        name: 'tt8t6ge666j0v1k2uso5da30357brpa6xu6k262ipjmiu8q7bplg0w0n3hj8oecpg2ru7qeulyqky0z42qwrewkntxc4yw92gr5ky5tr67zzzccpyvv5eabx0n53urjzknfjkgcjeui4xpc1unrrywlx0h8h4nrj5k9vmsl14zizsdi4ygwqegl3r9q8dot174nvl98ke0wdijmyhcs9en522oom5fzk9g8iesws43o111y0tk59khnnzie15ub',
-                        slug: 're1fn7gwzl9drljgtwaxanb8zwi5ol3xv1df1qq0e3xlxtigfwf14r2x6axtjny3aln77up6dlo44wi4i7ml2jldadroumqr2acn8mvcvthjq5qx13v3zm9x59s911xh9gic4kvysgd0xeq6rhdqzziv1iiz81ws8g03a2jkvj717s7gnzq9frj348k0wesvuqfjtbyex7v6znxqlrweetaes3fht540axovjjkuq26sybr08xn6jucmsrtp6ou',
-                        latitude: 834.95,
-                        longitude: 111.59,
-                        zoom: 29,
+                        id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31',
+                        countryCommonId: '9a5b2646-d0ba-4236-86eb-3f5183001e61',
+                        administrativeAreaLevel1Id: '928ae2c9-47af-4efd-895b-29813fdf5648',
+                        administrativeAreaLevel2Id: '909c5277-ccde-4bf4-a97d-5f621e1c33b9',
+                        code: 'urrxxi4t',
+                        customCode: 'p92lozumrs',
+                        name: '4l7zd5qsab3yi8zu1m2xq552ftuhjwc9nj6zm7bufhgkks903nppwuzodc0tx50iuqq1auzrlf4nb7ky0cqgmfn9qpekzk9zsyynkkjl8s7zvrfi9bjjwfchxy6exa2zs4cpssbjnhe5v05jjhkpgqgwwvpr6tvtwm2cdcjsgp9k0h7u63vn1njb3r9q8fqajanhosa7si1uwfw71qpc0hv4kp1uyo4ro2ssnglptymx05cyugs4bk14yza6u3s',
+                        slug: '13vtjo544p5h70bq18gjlr3dt0jys2hjdzocsufv3fn4pseuhns54xroqpz343fshwx18pu9f2paegavw1u38s97ssilmfzhjan4e198jf3j349n2o9za2p96mzfwjhyckz7y62er98o1b2quri0a0wdej4sec8mhc3j11fna1r1s29b9ur5hczxped3bbemf1a5cjbhc3qcfc63m4xxy3ahgn6x78uapf7xwvuusdf1k6fghisb9h2fvkknznz',
+                        latitude: 669.51,
+                        longitude: 889.11,
+                        zoom: 25,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateAdministrativeAreaLevel3.id).toStrictEqual('db6eabdf-b857-4197-a255-7291f07eda76');
+                expect(res.body.data.adminUpdateAdministrativeAreaLevel3.id).toStrictEqual('411bfbb4-cc8e-45c8-b579-c45bd8bafc31');
             });
     });
 
@@ -1284,7 +1284,7 @@ describe('administrative-area-level-3', () =>
                     }
                 `,
                 variables: {
-                    id: '15414c6c-776c-4cdf-90db-7445220bec8a'
+                    id: '53cc7047-8ad8-43f5-9962-9d4885eacb38'
                 }
             })
             .expect(200)
@@ -1320,12 +1320,12 @@ describe('administrative-area-level-3', () =>
                     }
                 `,
                 variables: {
-                    id: 'db6eabdf-b857-4197-a255-7291f07eda76'
+                    id: '411bfbb4-cc8e-45c8-b579-c45bd8bafc31'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteAdministrativeAreaLevel3ById.id).toStrictEqual('db6eabdf-b857-4197-a255-7291f07eda76');
+                expect(res.body.data.adminDeleteAdministrativeAreaLevel3ById.id).toStrictEqual('411bfbb4-cc8e-45c8-b579-c45bd8bafc31');
             });
     });
 

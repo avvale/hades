@@ -6,12 +6,12 @@ import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.s
 import { DeleteResourceByIdCommand } from './delete-resource-by-id.command';
 import { DeleteResourceByIdService } from './delete-resource-by-id.service';
 
-describe('DeleteResourceByIdCommandHandler', () => 
+describe('DeleteResourceByIdCommandHandler', () =>
 {
     let commandHandler: DeleteResourceByIdCommandHandler;
     let service: DeleteResourceByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteResourceByIdCommandHandler', () =>
         service         = module.get<DeleteResourceByIdService>(DeleteResourceByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteResourceByIdCommandHandler should be defined', () => 
+        test('DeleteResourceByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteResourceByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteResourceByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteResourceByIdCommand(

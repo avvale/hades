@@ -6,12 +6,12 @@ import { attachmentLibraries } from '@hades/admin/attachment-library/infrastruct
 import { CreateAttachmentLibrariesCommand } from './create-attachment-libraries.command';
 import { CreateAttachmentLibrariesService } from './create-attachment-libraries.service';
 
-describe('CreateAttachmentLibrariesCommandHandler', () => 
+describe('CreateAttachmentLibrariesCommandHandler', () =>
 {
     let commandHandler: CreateAttachmentLibrariesCommandHandler;
     let service: CreateAttachmentLibrariesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateAttachmentLibrariesCommandHandler', () =>
         service         = module.get<CreateAttachmentLibrariesService>(CreateAttachmentLibrariesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAttachmentLibrariesCommandHandler should be defined', () => 
+        test('CreateAttachmentLibrariesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an attachmentLibrary created', async () => 
+        test('should return an attachmentLibrary created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateAttachmentLibrariesCommand(
                     attachmentLibraries
-                
+
                 )
             )).toBe(undefined);
         });

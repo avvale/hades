@@ -71,26 +71,28 @@ describe('UpdateCountryService', () =>
         test('should update a country and emit event', async () =>
         {
             expect(await service.main(
-                new CountryId(countries[0].id),
-                new CountryCommonId(countries[0].commonId),
-                new CountryLangId(countries[0].langId),
-                new CountryIso3166Alpha2(countries[0].iso3166Alpha2),
-                new CountryIso3166Alpha3(countries[0].iso3166Alpha3),
-                new CountryIso3166Numeric(countries[0].iso3166Numeric),
-                new CountryCustomCode(countries[0].customCode),
-                new CountryPrefix(countries[0].prefix),
-                new CountryName(countries[0].name),
-                new CountrySlug(countries[0].slug),
-                new CountryImage(countries[0].image),
-                new CountrySort(countries[0].sort),
-                new CountryAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
-                new CountryAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
-                new CountryAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
-                new CountryAdministrativeAreas(countries[0].administrativeAreas),
-                new CountryLatitude(countries[0].latitude),
-                new CountryLongitude(countries[0].longitude),
-                new CountryZoom(countries[0].zoom),
-                new CountryDataLang(countries[0].dataLang),
+                {
+                    id: new CountryId(countries[0].id),
+                    commonId: new CountryCommonId(countries[0].commonId),
+                    langId: new CountryLangId(countries[0].langId),
+                    iso3166Alpha2: new CountryIso3166Alpha2(countries[0].iso3166Alpha2),
+                    iso3166Alpha3: new CountryIso3166Alpha3(countries[0].iso3166Alpha3),
+                    iso3166Numeric: new CountryIso3166Numeric(countries[0].iso3166Numeric),
+                    customCode: new CountryCustomCode(countries[0].customCode),
+                    prefix: new CountryPrefix(countries[0].prefix),
+                    name: new CountryName(countries[0].name),
+                    slug: new CountrySlug(countries[0].slug),
+                    image: new CountryImage(countries[0].image),
+                    sort: new CountrySort(countries[0].sort),
+                    administrativeAreaLevel1: new CountryAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
+                    administrativeAreaLevel2: new CountryAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
+                    administrativeAreaLevel3: new CountryAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
+                    administrativeAreas: new CountryAdministrativeAreas(countries[0].administrativeAreas),
+                    latitude: new CountryLatitude(countries[0].latitude),
+                    longitude: new CountryLongitude(countries[0].longitude),
+                    zoom: new CountryZoom(countries[0].zoom),
+                    dataLang: new CountryDataLang(countries[0].dataLang),
+                }
             )).toBe(undefined);
         });
     });

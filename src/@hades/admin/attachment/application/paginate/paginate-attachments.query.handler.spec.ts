@@ -41,14 +41,14 @@ describe('PaginateAttachmentsQueryHandler', () =>
         mapper          = new AttachmentMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateAttachmentsQueryHandler should be defined', () => 
+        test('PaginateAttachmentsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an attachments paginated', async () => 
+        test('should return an attachments paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateAttachmentsQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

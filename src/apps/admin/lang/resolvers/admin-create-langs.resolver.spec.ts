@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { AdminCreateLangInput } from './../../../../graphql';
 
-describe('AdminCreateLangsResolver', () => 
+describe('AdminCreateLangsResolver', () =>
 {
     let resolver: AdminCreateLangsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateLangsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateLangsResolver should be defined', () => 
+    test('AdminCreateLangsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateLangsResolver should be defined', () => 
+        test('AdminCreateLangsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an langs created', async () => 
+        test('should return an langs created', async () =>
         {
             expect(await resolver.main(<AdminCreateLangInput[]>langs)).toBe(true);
         });

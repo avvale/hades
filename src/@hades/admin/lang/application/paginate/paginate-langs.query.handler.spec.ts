@@ -41,14 +41,14 @@ describe('PaginateLangsQueryHandler', () =>
         mapper          = new LangMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateLangsQueryHandler should be defined', () => 
+        test('PaginateLangsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an langs paginated', async () => 
+        test('should return an langs paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateLangsQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

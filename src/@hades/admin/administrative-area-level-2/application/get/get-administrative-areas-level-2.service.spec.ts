@@ -6,13 +6,13 @@ import { GetAdministrativeAreasLevel2Service } from './get-administrative-areas-
 import { IAdministrativeAreaLevel2Repository } from './../../domain/administrative-area-level-2.repository';
 import { MockAdministrativeAreaLevel2Repository } from './../../infrastructure/mock/mock-administrative-area-level-2.repository';
 
-describe('GetAdministrativeAreasLevel2Service', () => 
+describe('GetAdministrativeAreasLevel2Service', () =>
 {
     let service: GetAdministrativeAreasLevel2Service;
     let repository: IAdministrativeAreaLevel2Repository;
     let mockRepository: MockAdministrativeAreaLevel2Repository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetAdministrativeAreasLevel2Service', () =>
                 EventPublisher,
                 GetAdministrativeAreasLevel2Service,
                 MockAdministrativeAreaLevel2Repository,
-                { 
+                {
                     provide: IAdministrativeAreaLevel2Repository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetAdministrativeAreasLevel2Service', () =>
         mockRepository  = module.get(MockAdministrativeAreaLevel2Repository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetAdministrativeAreasLevel2Service should be defined', () => 
+        test('GetAdministrativeAreasLevel2Service should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get administrativeAreasLevel2', async () => 
+        test('should get administrativeAreasLevel2', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

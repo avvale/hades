@@ -6,13 +6,13 @@ import { DeleteAttachmentsService } from './delete-attachments.service';
 import { IAttachmentRepository } from './../../domain/attachment.repository';
 import { MockAttachmentRepository } from './../../infrastructure/mock/mock-attachment.repository';
 
-describe('DeleteAttachmentsService', () => 
+describe('DeleteAttachmentsService', () =>
 {
     let service: DeleteAttachmentsService;
     let repository: IAttachmentRepository;
     let mockRepository: MockAttachmentRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteAttachmentsService', () =>
                 EventPublisher,
                 DeleteAttachmentsService,
                 MockAttachmentRepository,
-                { 
+                {
                     provide: IAttachmentRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteAttachmentsService', () =>
         mockRepository  = module.get(MockAttachmentRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAttachmentsService should be defined', () => 
+        test('DeleteAttachmentsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete attachment and emit event', async () => 
+        test('should delete attachment and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

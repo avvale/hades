@@ -6,13 +6,13 @@ import { DeleteAdministrativeAreasLevel1Service } from './delete-administrative-
 import { IAdministrativeAreaLevel1Repository } from './../../domain/administrative-area-level-1.repository';
 import { MockAdministrativeAreaLevel1Repository } from './../../infrastructure/mock/mock-administrative-area-level-1.repository';
 
-describe('DeleteAdministrativeAreasLevel1Service', () => 
+describe('DeleteAdministrativeAreasLevel1Service', () =>
 {
     let service: DeleteAdministrativeAreasLevel1Service;
     let repository: IAdministrativeAreaLevel1Repository;
     let mockRepository: MockAdministrativeAreaLevel1Repository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteAdministrativeAreasLevel1Service', () =>
                 EventPublisher,
                 DeleteAdministrativeAreasLevel1Service,
                 MockAdministrativeAreaLevel1Repository,
-                { 
+                {
                     provide: IAdministrativeAreaLevel1Repository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteAdministrativeAreasLevel1Service', () =>
         mockRepository  = module.get(MockAdministrativeAreaLevel1Repository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAdministrativeAreasLevel1Service should be defined', () => 
+        test('DeleteAdministrativeAreasLevel1Service should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete administrativeAreaLevel1 and emit event', async () => 
+        test('should delete administrativeAreaLevel1 and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

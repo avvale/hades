@@ -9,7 +9,7 @@ import { AttachmentFamilyMapper } from '@hades/admin/attachment-family/domain/at
 import { FindAttachmentFamilyByIdQuery } from './find-attachment-family-by-id.query';
 import { FindAttachmentFamilyByIdService } from './find-attachment-family-by-id.service';
 
-describe('FindAttachmentFamilyByIdQueryHandler', () => 
+describe('FindAttachmentFamilyByIdQueryHandler', () =>
 {
     let queryHandler: FindAttachmentFamilyByIdQueryHandler;
     let service: FindAttachmentFamilyByIdService;
@@ -48,13 +48,13 @@ describe('FindAttachmentFamilyByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an attachmentFamily founded', async () => 
+        test('should return an attachmentFamily founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindAttachmentFamilyByIdQuery(
                     attachmentFamilies[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 
-describe('AdminFindLangResolver', () => 
+describe('AdminFindLangResolver', () =>
 {
     let resolver: AdminFindLangResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminFindLangResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminFindLangResolver should be defined', () => 
+    test('AdminFindLangResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminFindLangResolver should be defined', () => 
+        test('AdminFindLangResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a lang', async () => 
+        test('should return a lang', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await resolver.main()).toBe(langs[0]);

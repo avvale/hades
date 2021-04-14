@@ -6,12 +6,12 @@ import { countries } from '@hades/admin/country/infrastructure/seeds/country.see
 import { DeleteCountryByIdCommand } from './delete-country-by-id.command';
 import { DeleteCountryByIdService } from './delete-country-by-id.service';
 
-describe('DeleteCountryByIdCommandHandler', () => 
+describe('DeleteCountryByIdCommandHandler', () =>
 {
     let commandHandler: DeleteCountryByIdCommandHandler;
     let service: DeleteCountryByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteCountryByIdCommandHandler', () =>
         service         = module.get<DeleteCountryByIdService>(DeleteCountryByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteCountryByIdCommandHandler should be defined', () => 
+        test('DeleteCountryByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteCountryByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteCountryByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteCountryByIdCommand(

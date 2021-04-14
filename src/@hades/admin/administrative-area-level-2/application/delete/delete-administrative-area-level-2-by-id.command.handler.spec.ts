@@ -6,12 +6,12 @@ import { administrativeAreasLevel2 } from '@hades/admin/administrative-area-leve
 import { DeleteAdministrativeAreaLevel2ByIdCommand } from './delete-administrative-area-level-2-by-id.command';
 import { DeleteAdministrativeAreaLevel2ByIdService } from './delete-administrative-area-level-2-by-id.service';
 
-describe('DeleteAdministrativeAreaLevel2ByIdCommandHandler', () => 
+describe('DeleteAdministrativeAreaLevel2ByIdCommandHandler', () =>
 {
     let commandHandler: DeleteAdministrativeAreaLevel2ByIdCommandHandler;
     let service: DeleteAdministrativeAreaLevel2ByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteAdministrativeAreaLevel2ByIdCommandHandler', () =>
         service         = module.get<DeleteAdministrativeAreaLevel2ByIdService>(DeleteAdministrativeAreaLevel2ByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAdministrativeAreaLevel2ByIdCommandHandler should be defined', () => 
+        test('DeleteAdministrativeAreaLevel2ByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteAdministrativeAreaLevel2ByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteAdministrativeAreaLevel2ByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAdministrativeAreaLevel2ByIdCommand(

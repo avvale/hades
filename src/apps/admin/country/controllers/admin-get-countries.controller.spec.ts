@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
 
-describe('AdminGetCountriesController', () => 
+describe('AdminGetCountriesController', () =>
 {
     let controller: AdminGetCountriesController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('AdminGetCountriesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminGetCountriesController should be defined', () => 
+        test('AdminGetCountriesController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a countries', async () => 
+        test('should return a countries', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries)));
             expect(await controller.main()).toBe(countries);

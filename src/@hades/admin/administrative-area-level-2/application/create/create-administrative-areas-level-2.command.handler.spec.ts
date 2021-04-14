@@ -6,12 +6,12 @@ import { administrativeAreasLevel2 } from '@hades/admin/administrative-area-leve
 import { CreateAdministrativeAreasLevel2Command } from './create-administrative-areas-level-2.command';
 import { CreateAdministrativeAreasLevel2Service } from './create-administrative-areas-level-2.service';
 
-describe('CreateAdministrativeAreasLevel2CommandHandler', () => 
+describe('CreateAdministrativeAreasLevel2CommandHandler', () =>
 {
     let commandHandler: CreateAdministrativeAreasLevel2CommandHandler;
     let service: CreateAdministrativeAreasLevel2Service;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateAdministrativeAreasLevel2CommandHandler', () =>
         service         = module.get<CreateAdministrativeAreasLevel2Service>(CreateAdministrativeAreasLevel2Service);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAdministrativeAreasLevel2CommandHandler should be defined', () => 
+        test('CreateAdministrativeAreasLevel2CommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an administrativeAreaLevel2 created', async () => 
+        test('should return an administrativeAreaLevel2 created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateAdministrativeAreasLevel2Command(
                     administrativeAreasLevel2
-                
+
                 )
             )).toBe(undefined);
         });

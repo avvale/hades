@@ -5,12 +5,12 @@ import { DeleteAdministrativeAreasLevel3CommandHandler } from './delete-administ
 import { DeleteAdministrativeAreasLevel3Command } from './delete-administrative-areas-level-3.command';
 import { DeleteAdministrativeAreasLevel3Service } from './delete-administrative-areas-level-3.service';
 
-describe('DeleteAdministrativeAreasLevel3CommandHandler', () => 
+describe('DeleteAdministrativeAreasLevel3CommandHandler', () =>
 {
     let commandHandler: DeleteAdministrativeAreasLevel3CommandHandler;
     let service: DeleteAdministrativeAreasLevel3Service;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteAdministrativeAreasLevel3CommandHandler', () =>
         service         = module.get<DeleteAdministrativeAreasLevel3Service>(DeleteAdministrativeAreasLevel3Service);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAdministrativeAreasLevel3CommandHandler should be defined', () => 
+        test('DeleteAdministrativeAreasLevel3CommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAdministrativeAreasLevel3Command()

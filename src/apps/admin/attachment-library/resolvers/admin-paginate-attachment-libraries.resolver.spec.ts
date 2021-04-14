@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 
-describe('AdminPaginateAttachmentLibrariesResolver', () => 
+describe('AdminPaginateAttachmentLibrariesResolver', () =>
 {
     let resolver: AdminPaginateAttachmentLibrariesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminPaginateAttachmentLibrariesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminPaginateAttachmentLibrariesResolver should be defined', () => 
+    test('AdminPaginateAttachmentLibrariesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminPaginateAttachmentLibrariesResolver should be defined', () => 
+        test('AdminPaginateAttachmentLibrariesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a attachmentLibraries', async () => 
+        test('should return a attachmentLibraries', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibraries)));
             expect(await resolver.main()).toBe(attachmentLibraries);

@@ -6,13 +6,13 @@ import { PaginateAdministrativeAreasLevel1Service } from './paginate-administrat
 import { IAdministrativeAreaLevel1Repository } from './../../domain/administrative-area-level-1.repository';
 import { MockAdministrativeAreaLevel1Repository } from './../../infrastructure/mock/mock-administrative-area-level-1.repository';
 
-describe('PaginateAdministrativeAreasLevel1Service', () => 
+describe('PaginateAdministrativeAreasLevel1Service', () =>
 {
     let service: PaginateAdministrativeAreasLevel1Service;
     let repository: IAdministrativeAreaLevel1Repository;
     let mockRepository: MockAdministrativeAreaLevel1Repository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateAdministrativeAreasLevel1Service', () =>
                 EventPublisher,
                 PaginateAdministrativeAreasLevel1Service,
                 MockAdministrativeAreaLevel1Repository,
-                { 
+                {
                     provide: IAdministrativeAreaLevel1Repository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateAdministrativeAreasLevel1Service', () =>
         mockRepository  = module.get(MockAdministrativeAreaLevel1Repository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateAdministrativeAreasLevel1Service should be defined', () => 
+        test('PaginateAdministrativeAreasLevel1Service should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate administrativeAreasLevel1', async () => 
+        test('should paginate administrativeAreasLevel1', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

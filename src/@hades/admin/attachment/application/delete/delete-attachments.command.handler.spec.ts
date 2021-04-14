@@ -5,12 +5,12 @@ import { DeleteAttachmentsCommandHandler } from './delete-attachments.command-ha
 import { DeleteAttachmentsCommand } from './delete-attachments.command';
 import { DeleteAttachmentsService } from './delete-attachments.service';
 
-describe('DeleteAttachmentsCommandHandler', () => 
+describe('DeleteAttachmentsCommandHandler', () =>
 {
     let commandHandler: DeleteAttachmentsCommandHandler;
     let service: DeleteAttachmentsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteAttachmentsCommandHandler', () =>
         service         = module.get<DeleteAttachmentsService>(DeleteAttachmentsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAttachmentsCommandHandler should be defined', () => 
+        test('DeleteAttachmentsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAttachmentsCommand()

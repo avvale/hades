@@ -35,17 +35,17 @@ input AdminUpdateResourceInput
 
 type Query
 {
-    adminFindResource(query:QueryStatement constraint:QueryStatement): AdminResource
-    adminFindResourceById(id:ID constraint:QueryStatement): AdminResource
-    adminGetResources(query:QueryStatement constraint:QueryStatement): [AdminResource]!
-    adminPaginateResources(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindResource(query: QueryStatement constraint: QueryStatement): AdminResource
+    adminFindResourceById(id: ID constraint: QueryStatement): AdminResource
+    adminGetResources(query: QueryStatement constraint: QueryStatement): [AdminResource]!
+    adminPaginateResources(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateResource(payload: AdminCreateResourceInput!): AdminResource
     adminCreateResources(payload: [AdminCreateResourceInput]!): Boolean!
-    adminUpdateResource(payload: AdminUpdateResourceInput! constraint:QueryStatement): AdminResource
-    adminDeleteResourceById(id: ID! constraint:QueryStatement): AdminResource
-    adminDeleteResources(query:QueryStatement constraint:QueryStatement): [AdminResource]!
+    adminUpdateResource(payload: AdminUpdateResourceInput! constraint: QueryStatement): AdminResource
+    adminDeleteResourceById(id: ID! constraint: QueryStatement): AdminResource
+    adminDeleteResources(query: QueryStatement constraint: QueryStatement): [AdminResource]!
 }

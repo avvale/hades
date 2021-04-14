@@ -40,12 +40,14 @@ describe('UpdateResourceCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new UpdateResourceCommand(
-                    resources[0].id,
-                    resources[0].boundedContextId,
-                    resources[0].attachmentFamilyIds,
-                    resources[0].name,
-                    resources[0].hasCustomFields,
-                    resources[0].hasAttachments,
+                    {
+                        id: resources[0].id,
+                        boundedContextId: resources[0].boundedContextId,
+                        attachmentFamilyIds: resources[0].attachmentFamilyIds,
+                        name: resources[0].name,
+                        hasCustomFields: resources[0].hasCustomFields,
+                        hasAttachments: resources[0].hasAttachments,
+                    }
                 )
             )).toBe(undefined);
         });

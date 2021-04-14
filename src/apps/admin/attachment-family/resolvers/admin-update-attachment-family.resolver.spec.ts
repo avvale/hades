@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
 import { AdminUpdateAttachmentFamilyInput } from './../../../../graphql';
 
-describe('AdminUpdateAttachmentFamilyResolver', () => 
+describe('AdminUpdateAttachmentFamilyResolver', () =>
 {
     let resolver: AdminUpdateAttachmentFamilyResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -43,14 +43,14 @@ describe('AdminUpdateAttachmentFamilyResolver', () =>
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('AdminUpdateAttachmentFamilyResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a attachmentFamily created', async () => 
+        test('should return a attachmentFamily created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentFamilies[0])));
             expect(await resolver.main(<AdminUpdateAttachmentFamilyInput>attachmentFamilies[0])).toBe(attachmentFamilies[0]);

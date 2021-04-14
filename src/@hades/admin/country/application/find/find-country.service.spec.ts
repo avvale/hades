@@ -6,13 +6,13 @@ import { FindCountryService } from './find-country.service';
 import { ICountryRepository } from './../../domain/country.repository';
 import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
 
-describe('FindCountryService', () => 
+describe('FindCountryService', () =>
 {
     let service: FindCountryService;
     let repository: ICountryRepository;
     let mockRepository: MockCountryRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('FindCountryService', () =>
                 EventPublisher,
                 FindCountryService,
                 MockCountryRepository,
-                { 
+                {
                     provide: ICountryRepository,
                     useValue: {
                         find: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('FindCountryService', () =>
         mockRepository  = module.get(MockCountryRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindCountryService should be defined', () => 
+        test('FindCountryService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find country', async () => 
+        test('should find country', async () =>
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main()).toBe(mockRepository.collectionSource[0]);

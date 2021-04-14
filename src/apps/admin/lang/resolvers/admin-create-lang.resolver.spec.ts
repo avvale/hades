@@ -13,7 +13,7 @@ describe('AdminCreateLangResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateLangResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateLangResolver should be defined', () => 
+    test('AdminCreateLangResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateLangResolver should be defined', () => 
+        test('AdminCreateLangResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an lang created', async () => 
+        test('should return an lang created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await resolver.main(<AdminCreateLangInput>langs[0])).toBe(langs[0]);

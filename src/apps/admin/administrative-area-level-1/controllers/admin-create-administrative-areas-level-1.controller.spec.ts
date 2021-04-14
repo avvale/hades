@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel1 } from '@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
-describe('AdminCreateAdministrativeAreasLevel1Controller', () => 
+describe('AdminCreateAdministrativeAreasLevel1Controller', () =>
 {
     let controller: AdminCreateAdministrativeAreasLevel1Controller;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminCreateAdministrativeAreasLevel1Controller', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAdministrativeAreasLevel1Controller should be defined', () => 
+        test('AdminCreateAdministrativeAreasLevel1Controller should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an administrativeAreasLevel1 created', async () => 
+        test('should return an administrativeAreasLevel1 created', async () =>
         {
             expect(await controller.main(administrativeAreasLevel1)).toBe(undefined);
         });

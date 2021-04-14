@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 
-describe('AdminDeleteAttachmentLibraryByIdResolver', () => 
+describe('AdminDeleteAttachmentLibraryByIdResolver', () =>
 {
     let resolver: AdminDeleteAttachmentLibraryByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminDeleteAttachmentLibraryByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminDeleteAttachmentLibraryByIdResolver should be defined', () => 
+    test('AdminDeleteAttachmentLibraryByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminDeleteAttachmentLibraryByIdResolver should be defined', () => 
+        test('AdminDeleteAttachmentLibraryByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an attachmentLibrary deleted', async () => 
+        test('should return an attachmentLibrary deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibraries[0])));
             expect(await resolver.main(attachmentLibraries[0].id)).toBe(attachmentLibraries[0]);

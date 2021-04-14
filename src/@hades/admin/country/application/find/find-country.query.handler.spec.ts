@@ -8,14 +8,14 @@ import { CountryMapper } from '@hades/admin/country/domain/country.mapper';
 import { FindCountryQuery } from './find-country.query';
 import { FindCountryService } from './find-country.service';
 
-describe('FindCountryQueryHandler', () => 
+describe('FindCountryQueryHandler', () =>
 {
     let queryHandler: FindCountryQueryHandler;
     let service: FindCountryService;
     let repository: MockCountryRepository;
     let mapper: CountryMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindCountryQueryHandler', () =>
         mapper          = new CountryMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindCountryQueryHandler should be defined', () => 
+        test('FindCountryQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an country founded', async () => 
+        test('should return an country founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

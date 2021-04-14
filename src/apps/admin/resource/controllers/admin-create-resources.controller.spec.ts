@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
 
-describe('AdminCreateResourcesController', () => 
+describe('AdminCreateResourcesController', () =>
 {
     let controller: AdminCreateResourcesController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminCreateResourcesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateResourcesController should be defined', () => 
+        test('AdminCreateResourcesController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an resources created', async () => 
+        test('should return an resources created', async () =>
         {
             expect(await controller.main(resources)).toBe(undefined);
         });

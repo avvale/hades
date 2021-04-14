@@ -9,7 +9,7 @@ import { AttachmentLibraryMapper } from '@hades/admin/attachment-library/domain/
 import { FindAttachmentLibraryByIdQuery } from './find-attachment-library-by-id.query';
 import { FindAttachmentLibraryByIdService } from './find-attachment-library-by-id.service';
 
-describe('FindAttachmentLibraryByIdQueryHandler', () => 
+describe('FindAttachmentLibraryByIdQueryHandler', () =>
 {
     let queryHandler: FindAttachmentLibraryByIdQueryHandler;
     let service: FindAttachmentLibraryByIdService;
@@ -48,13 +48,13 @@ describe('FindAttachmentLibraryByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an attachmentLibrary founded', async () => 
+        test('should return an attachmentLibrary founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindAttachmentLibraryByIdQuery(
                     attachmentLibraries[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

@@ -9,7 +9,7 @@ import { AdministrativeAreaLevel2Mapper } from '@hades/admin/administrative-area
 import { FindAdministrativeAreaLevel2ByIdQuery } from './find-administrative-area-level-2-by-id.query';
 import { FindAdministrativeAreaLevel2ByIdService } from './find-administrative-area-level-2-by-id.service';
 
-describe('FindAdministrativeAreaLevel2ByIdQueryHandler', () => 
+describe('FindAdministrativeAreaLevel2ByIdQueryHandler', () =>
 {
     let queryHandler: FindAdministrativeAreaLevel2ByIdQueryHandler;
     let service: FindAdministrativeAreaLevel2ByIdService;
@@ -48,13 +48,13 @@ describe('FindAdministrativeAreaLevel2ByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an administrativeAreaLevel2 founded', async () => 
+        test('should return an administrativeAreaLevel2 founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindAdministrativeAreaLevel2ByIdQuery(
                     administrativeAreasLevel2[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

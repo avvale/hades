@@ -5,12 +5,12 @@ import { DeleteCountriesCommandHandler } from './delete-countries.command-handle
 import { DeleteCountriesCommand } from './delete-countries.command';
 import { DeleteCountriesService } from './delete-countries.service';
 
-describe('DeleteCountriesCommandHandler', () => 
+describe('DeleteCountriesCommandHandler', () =>
 {
     let commandHandler: DeleteCountriesCommandHandler;
     let service: DeleteCountriesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteCountriesCommandHandler', () =>
         service         = module.get<DeleteCountriesService>(DeleteCountriesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteCountriesCommandHandler should be defined', () => 
+        test('DeleteCountriesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteCountriesCommand()

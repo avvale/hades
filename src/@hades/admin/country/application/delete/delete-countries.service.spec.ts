@@ -6,13 +6,13 @@ import { DeleteCountriesService } from './delete-countries.service';
 import { ICountryRepository } from './../../domain/country.repository';
 import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
 
-describe('DeleteCountriesService', () => 
+describe('DeleteCountriesService', () =>
 {
     let service: DeleteCountriesService;
     let repository: ICountryRepository;
     let mockRepository: MockCountryRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteCountriesService', () =>
                 EventPublisher,
                 DeleteCountriesService,
                 MockCountryRepository,
-                { 
+                {
                     provide: ICountryRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteCountriesService', () =>
         mockRepository  = module.get(MockCountryRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteCountriesService should be defined', () => 
+        test('DeleteCountriesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete country and emit event', async () => 
+        test('should delete country and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);
