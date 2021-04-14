@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
-describe('IamUpdateBoundedContextController', () => 
+describe('IamUpdateBoundedContextController', () =>
 {
     let controller: IamUpdateBoundedContextController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('IamUpdateBoundedContextController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamUpdateBoundedContextController should be defined', () => 
+        test('IamUpdateBoundedContextController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a boundedContext created', async () => 
+        test('should return a boundedContext created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await controller.main(boundedContexts[0])).toBe(boundedContexts[0]);

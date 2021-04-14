@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 
-describe('IamDeletePermissionsController', () => 
+describe('IamDeletePermissionsController', () =>
 {
     let controller: IamDeletePermissionsController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('IamDeletePermissionsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamDeletePermissionsController should be defined', () => 
+        test('IamDeletePermissionsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an permissions deleted', async () => 
+        test('should return an permissions deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions)));
             expect(await controller.main()).toBe(permissions);

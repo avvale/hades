@@ -6,13 +6,13 @@ import { PaginatePermissionsService } from './paginate-permissions.service';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
-describe('PaginatePermissionsService', () => 
+describe('PaginatePermissionsService', () =>
 {
     let service: PaginatePermissionsService;
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginatePermissionsService', () =>
                 EventPublisher,
                 PaginatePermissionsService,
                 MockPermissionRepository,
-                { 
+                {
                     provide: IPermissionRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginatePermissionsService', () =>
         mockRepository  = module.get(MockPermissionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginatePermissionsService should be defined', () => 
+        test('PaginatePermissionsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate permissions', async () => 
+        test('should paginate permissions', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

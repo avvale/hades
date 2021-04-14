@@ -12,7 +12,6 @@ export class SequelizeRoleRepository extends SequelizeRepository<IamRole, IamRol
 {
     public readonly aggregateName: string = 'IamRole';
     public readonly mapper: RoleMapper = new RoleMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamRoleModel)

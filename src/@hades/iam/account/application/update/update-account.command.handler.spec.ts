@@ -40,17 +40,19 @@ describe('UpdateAccountCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new UpdateAccountCommand(
-                    accounts[0].id,
-                    accounts[0].type,
-                    accounts[0].email,
-                    accounts[0].isActive,
-                    accounts[0].clientId,
-                    accounts[0].dApplicationCodes,
-                    accounts[0].dPermissions,
-                    accounts[0].dTenants,
-                    accounts[0].data,
-                    accounts[0].roleIds,
-                    accounts[0].tenantIds,
+                    {
+                        id: accounts[0].id,
+                        type: accounts[0].type,
+                        email: accounts[0].email,
+                        isActive: accounts[0].isActive,
+                        clientId: accounts[0].clientId,
+                        dApplicationCodes: accounts[0].dApplicationCodes,
+                        dPermissions: accounts[0].dPermissions,
+                        dTenants: accounts[0].dTenants,
+                        data: accounts[0].data,
+                        roleIds: accounts[0].roleIds,
+                        tenantIds: accounts[0].tenantIds,
+                    }
                 )
             )).toBe(undefined);
         });

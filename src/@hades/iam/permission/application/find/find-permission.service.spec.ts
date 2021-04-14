@@ -6,13 +6,13 @@ import { FindPermissionService } from './find-permission.service';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
-describe('FindPermissionService', () => 
+describe('FindPermissionService', () =>
 {
     let service: FindPermissionService;
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('FindPermissionService', () =>
                 EventPublisher,
                 FindPermissionService,
                 MockPermissionRepository,
-                { 
+                {
                     provide: IPermissionRepository,
                     useValue: {
                         find: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('FindPermissionService', () =>
         mockRepository  = module.get(MockPermissionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindPermissionService should be defined', () => 
+        test('FindPermissionService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find permission', async () => 
+        test('should find permission', async () =>
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main()).toBe(mockRepository.collectionSource[0]);

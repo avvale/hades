@@ -55,10 +55,12 @@ describe('UpdatePermissionService', () =>
         test('should update a permission and emit event', async () =>
         {
             expect(await service.main(
-                new PermissionId(permissions[0].id),
-                new PermissionName(permissions[0].name),
-                new PermissionBoundedContextId(permissions[0].boundedContextId),
-                new PermissionRoleIds(permissions[0].roleIds),
+                {
+                    id: new PermissionId(permissions[0].id),
+                    name: new PermissionName(permissions[0].name),
+                    boundedContextId: new PermissionBoundedContextId(permissions[0].boundedContextId),
+                    roleIds: new PermissionRoleIds(permissions[0].roleIds),
+                }
             )).toBe(undefined);
         });
     });

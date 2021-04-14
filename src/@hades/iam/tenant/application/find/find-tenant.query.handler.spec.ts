@@ -8,14 +8,14 @@ import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { FindTenantQuery } from './find-tenant.query';
 import { FindTenantService } from './find-tenant.service';
 
-describe('FindTenantQueryHandler', () => 
+describe('FindTenantQueryHandler', () =>
 {
     let queryHandler: FindTenantQueryHandler;
     let service: FindTenantService;
     let repository: MockTenantRepository;
     let mapper: TenantMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindTenantQueryHandler', () =>
         mapper          = new TenantMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindTenantQueryHandler should be defined', () => 
+        test('FindTenantQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an tenant founded', async () => 
+        test('should return an tenant founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

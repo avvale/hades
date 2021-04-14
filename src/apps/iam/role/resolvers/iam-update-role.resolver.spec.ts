@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { IamUpdateRoleInput } from './../../../../graphql';
 
-describe('IamUpdateRoleResolver', () => 
+describe('IamUpdateRoleResolver', () =>
 {
     let resolver: IamUpdateRoleResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -43,14 +43,14 @@ describe('IamUpdateRoleResolver', () =>
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('IamUpdateRoleResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a role created', async () => 
+        test('should return a role created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await resolver.main(<IamUpdateRoleInput>roles[0])).toBe(roles[0]);

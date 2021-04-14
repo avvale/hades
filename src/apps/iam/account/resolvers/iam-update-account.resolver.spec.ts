@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { IamUpdateAccountInput } from './../../../../graphql';
 
-describe('IamUpdateAccountResolver', () => 
+describe('IamUpdateAccountResolver', () =>
 {
     let resolver: IamUpdateAccountResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -43,14 +43,14 @@ describe('IamUpdateAccountResolver', () =>
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('IamUpdateAccountResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a account created', async () => 
+        test('should return a account created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
             expect(await resolver.main(<IamUpdateAccountInput>accounts[0])).toBe(accounts[0]);

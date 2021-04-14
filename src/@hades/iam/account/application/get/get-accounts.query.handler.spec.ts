@@ -8,14 +8,14 @@ import { AccountMapper } from '@hades/iam/account/domain/account.mapper';
 import { GetAccountsQuery } from './get-accounts.query';
 import { GetAccountsService } from './get-accounts.service';
 
-describe('GetAccountsQueryHandler', () => 
+describe('GetAccountsQueryHandler', () =>
 {
     let queryHandler: GetAccountsQueryHandler;
     let service: GetAccountsService;
     let repository: MockAccountRepository;
     let mapper: AccountMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetAccountsQueryHandler', () =>
         mapper          = new AccountMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetAccountsQueryHandler should be defined', () => 
+        test('GetAccountsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an accounts founded', async () => 
+        test('should return an accounts founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

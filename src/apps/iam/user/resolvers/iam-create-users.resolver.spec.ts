@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { IamCreateUserInput } from './../../../../graphql';
 
-describe('IamCreateUsersResolver', () => 
+describe('IamCreateUsersResolver', () =>
 {
     let resolver: IamCreateUsersResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreateUsersResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreateUsersResolver should be defined', () => 
+    test('IamCreateUsersResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreateUsersResolver should be defined', () => 
+        test('IamCreateUsersResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an users created', async () => 
+        test('should return an users created', async () =>
         {
             expect(await resolver.main(<IamCreateUserInput[]>users)).toBe(true);
         });

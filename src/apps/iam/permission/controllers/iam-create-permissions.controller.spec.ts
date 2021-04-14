@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 
-describe('IamCreatePermissionsController', () => 
+describe('IamCreatePermissionsController', () =>
 {
     let controller: IamCreatePermissionsController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('IamCreatePermissionsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreatePermissionsController should be defined', () => 
+        test('IamCreatePermissionsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an permissions created', async () => 
+        test('should return an permissions created', async () =>
         {
             expect(await controller.main(permissions)).toBe(undefined);
         });

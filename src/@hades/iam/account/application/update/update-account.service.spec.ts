@@ -62,17 +62,19 @@ describe('UpdateAccountService', () =>
         test('should update a account and emit event', async () =>
         {
             expect(await service.main(
-                new AccountId(accounts[0].id),
-                new AccountType(accounts[0].type),
-                new AccountEmail(accounts[0].email),
-                new AccountIsActive(accounts[0].isActive),
-                new AccountClientId(accounts[0].clientId),
-                new AccountDApplicationCodes(accounts[0].dApplicationCodes),
-                new AccountDPermissions(accounts[0].dPermissions),
-                new AccountDTenants(accounts[0].dTenants),
-                new AccountData(accounts[0].data),
-                new AccountRoleIds(accounts[0].roleIds),
-                new AccountTenantIds(accounts[0].tenantIds),
+                {
+                    id: new AccountId(accounts[0].id),
+                    type: new AccountType(accounts[0].type),
+                    email: new AccountEmail(accounts[0].email),
+                    isActive: new AccountIsActive(accounts[0].isActive),
+                    clientId: new AccountClientId(accounts[0].clientId),
+                    dApplicationCodes: new AccountDApplicationCodes(accounts[0].dApplicationCodes),
+                    dPermissions: new AccountDPermissions(accounts[0].dPermissions),
+                    dTenants: new AccountDTenants(accounts[0].dTenants),
+                    data: new AccountData(accounts[0].data),
+                    roleIds: new AccountRoleIds(accounts[0].roleIds),
+                    tenantIds: new AccountTenantIds(accounts[0].tenantIds),
+                }
             )).toBe(undefined);
         });
     });

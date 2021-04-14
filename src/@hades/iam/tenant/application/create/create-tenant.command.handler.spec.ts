@@ -40,13 +40,15 @@ describe('CreateTenantCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateTenantCommand(
-                    tenants[0].id,
-                    tenants[0].name,
-                    tenants[0].code,
-                    tenants[0].logo,
-                    tenants[0].isActive,
-                    tenants[0].data,
-                    tenants[0].accountIds,
+                    {
+                        id : tenants[0].id,
+                        name : tenants[0].name,
+                        code : tenants[0].code,
+                        logo : tenants[0].logo,
+                        isActive : tenants[0].isActive,
+                        data : tenants[0].data,
+                        accountIds : tenants[0].accountIds,
+                    }
                 )
             )).toBe(undefined);
         });

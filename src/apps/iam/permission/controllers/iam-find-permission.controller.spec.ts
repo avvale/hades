@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 
-describe('IamFindPermissionController', () => 
+describe('IamFindPermissionController', () =>
 {
     let controller: IamFindPermissionController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('IamFindPermissionController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamFindPermissionController should be defined', () => 
+        test('IamFindPermissionController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a permission', async () => 
+        test('should return a permission', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await controller.main()).toBe(permissions[0]);

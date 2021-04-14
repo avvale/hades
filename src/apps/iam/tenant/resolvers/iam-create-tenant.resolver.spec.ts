@@ -13,7 +13,7 @@ describe('IamCreateTenantResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreateTenantResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreateTenantResolver should be defined', () => 
+    test('IamCreateTenantResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreateTenantResolver should be defined', () => 
+        test('IamCreateTenantResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an tenant created', async () => 
+        test('should return an tenant created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await resolver.main(<IamCreateTenantInput>tenants[0])).toBe(tenants[0]);

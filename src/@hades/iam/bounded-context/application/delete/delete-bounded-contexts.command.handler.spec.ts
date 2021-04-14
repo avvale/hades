@@ -5,12 +5,12 @@ import { DeleteBoundedContextsCommandHandler } from './delete-bounded-contexts.c
 import { DeleteBoundedContextsCommand } from './delete-bounded-contexts.command';
 import { DeleteBoundedContextsService } from './delete-bounded-contexts.service';
 
-describe('DeleteBoundedContextsCommandHandler', () => 
+describe('DeleteBoundedContextsCommandHandler', () =>
 {
     let commandHandler: DeleteBoundedContextsCommandHandler;
     let service: DeleteBoundedContextsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteBoundedContextsCommandHandler', () =>
         service         = module.get<DeleteBoundedContextsService>(DeleteBoundedContextsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteBoundedContextsCommandHandler should be defined', () => 
+        test('DeleteBoundedContextsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteBoundedContextsCommand()

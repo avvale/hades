@@ -36,7 +36,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     permissions: IamPermissionModel[];
 
 
-    @BelongsToMany(() => IamAccountModel, () => IamRolesAccountsModel)
+    @BelongsToMany(() => IamAccountModel, { through: () => IamRolesAccountsModel, uniqueKey: 'uq01_iam_roles_accounts' })
     accounts: IamAccountModel[];
 
     @Column({

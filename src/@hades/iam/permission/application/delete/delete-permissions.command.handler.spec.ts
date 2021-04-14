@@ -5,12 +5,12 @@ import { DeletePermissionsCommandHandler } from './delete-permissions.command-ha
 import { DeletePermissionsCommand } from './delete-permissions.command';
 import { DeletePermissionsService } from './delete-permissions.service';
 
-describe('DeletePermissionsCommandHandler', () => 
+describe('DeletePermissionsCommandHandler', () =>
 {
     let commandHandler: DeletePermissionsCommandHandler;
     let service: DeletePermissionsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeletePermissionsCommandHandler', () =>
         service         = module.get<DeletePermissionsService>(DeletePermissionsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeletePermissionsCommandHandler should be defined', () => 
+        test('DeletePermissionsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeletePermissionsCommand()

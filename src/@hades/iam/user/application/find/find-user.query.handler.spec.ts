@@ -8,14 +8,14 @@ import { UserMapper } from '@hades/iam/user/domain/user.mapper';
 import { FindUserQuery } from './find-user.query';
 import { FindUserService } from './find-user.service';
 
-describe('FindUserQueryHandler', () => 
+describe('FindUserQueryHandler', () =>
 {
     let queryHandler: FindUserQueryHandler;
     let service: FindUserService;
     let repository: MockUserRepository;
     let mapper: UserMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindUserQueryHandler', () =>
         mapper          = new UserMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindUserQueryHandler should be defined', () => 
+        test('FindUserQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an user founded', async () => 
+        test('should return an user founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

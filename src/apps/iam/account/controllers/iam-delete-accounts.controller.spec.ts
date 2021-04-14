@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 
-describe('IamDeleteAccountsController', () => 
+describe('IamDeleteAccountsController', () =>
 {
     let controller: IamDeleteAccountsController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('IamDeleteAccountsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamDeleteAccountsController should be defined', () => 
+        test('IamDeleteAccountsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an accounts deleted', async () => 
+        test('should return an accounts deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts)));
             expect(await controller.main()).toBe(accounts);

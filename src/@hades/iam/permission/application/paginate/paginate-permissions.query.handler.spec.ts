@@ -41,14 +41,14 @@ describe('PaginatePermissionsQueryHandler', () =>
         mapper          = new PermissionMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginatePermissionsQueryHandler should be defined', () => 
+        test('PaginatePermissionsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an permissions paginated', async () => 
+        test('should return an permissions paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginatePermissionsQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

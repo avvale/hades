@@ -8,14 +8,14 @@ import { BoundedContextMapper } from '@hades/iam/bounded-context/domain/bounded-
 import { GetBoundedContextsQuery } from './get-bounded-contexts.query';
 import { GetBoundedContextsService } from './get-bounded-contexts.service';
 
-describe('GetBoundedContextsQueryHandler', () => 
+describe('GetBoundedContextsQueryHandler', () =>
 {
     let queryHandler: GetBoundedContextsQueryHandler;
     let service: GetBoundedContextsService;
     let repository: MockBoundedContextRepository;
     let mapper: BoundedContextMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetBoundedContextsQueryHandler', () =>
         mapper          = new BoundedContextMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetBoundedContextsQueryHandler should be defined', () => 
+        test('GetBoundedContextsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an boundedContexts founded', async () => 
+        test('should return an boundedContexts founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

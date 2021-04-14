@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { IamCreateAccountInput } from './../../../../graphql';
 
-describe('IamCreateAccountsResolver', () => 
+describe('IamCreateAccountsResolver', () =>
 {
     let resolver: IamCreateAccountsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreateAccountsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreateAccountsResolver should be defined', () => 
+    test('IamCreateAccountsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreateAccountsResolver should be defined', () => 
+        test('IamCreateAccountsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an accounts created', async () => 
+        test('should return an accounts created', async () =>
         {
             expect(await resolver.main(<IamCreateAccountInput[]>accounts)).toBe(true);
         });

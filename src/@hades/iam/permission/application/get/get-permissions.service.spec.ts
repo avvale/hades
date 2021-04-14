@@ -6,13 +6,13 @@ import { GetPermissionsService } from './get-permissions.service';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
-describe('GetPermissionsService', () => 
+describe('GetPermissionsService', () =>
 {
     let service: GetPermissionsService;
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetPermissionsService', () =>
                 EventPublisher,
                 GetPermissionsService,
                 MockPermissionRepository,
-                { 
+                {
                     provide: IPermissionRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetPermissionsService', () =>
         mockRepository  = module.get(MockPermissionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetPermissionsService should be defined', () => 
+        test('GetPermissionsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get permissions', async () => 
+        test('should get permissions', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

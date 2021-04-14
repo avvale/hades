@@ -58,13 +58,15 @@ describe('UpdateTenantService', () =>
         test('should update a tenant and emit event', async () =>
         {
             expect(await service.main(
-                new TenantId(tenants[0].id),
-                new TenantName(tenants[0].name),
-                new TenantCode(tenants[0].code),
-                new TenantLogo(tenants[0].logo),
-                new TenantIsActive(tenants[0].isActive),
-                new TenantData(tenants[0].data),
-                new TenantAccountIds(tenants[0].accountIds),
+                {
+                    id: new TenantId(tenants[0].id),
+                    name: new TenantName(tenants[0].name),
+                    code: new TenantCode(tenants[0].code),
+                    logo: new TenantLogo(tenants[0].logo),
+                    isActive: new TenantIsActive(tenants[0].isActive),
+                    data: new TenantData(tenants[0].data),
+                    accountIds: new TenantAccountIds(tenants[0].accountIds),
+                }
             )).toBe(undefined);
         });
     });

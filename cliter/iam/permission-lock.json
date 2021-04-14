@@ -7,7 +7,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/create/create-account.command.handler.spec.ts",
-            "integrity": "sha1:b704dc50e5f1e6188491f8b633b38ee7b2a198e2"
+            "integrity": "sha1:00c7e26783aaba8cf896f3bff7908948ed6b008f"
         },
         {
             "path": "src/@hades/iam/account/application/create/create-account.command.ts",
@@ -15,7 +15,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/create/create-account.service.spec.ts",
-            "integrity": "sha1:bac0509482985fb33aefce14e8220421e65915e7"
+            "integrity": "sha1:07ef932e7a7d7840824273ca7d524272443e24e8"
         },
         {
             "path": "src/@hades/iam/account/application/create/create-account.service.ts",
@@ -27,7 +27,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/create/create-accounts.command.handler.spec.ts",
-            "integrity": "sha1:eda666953aa32cabf1883f94100b550eb20caafb"
+            "integrity": "sha1:c9f179ca074a6ca719abbaeb865883ab0adc523a"
         },
         {
             "path": "src/@hades/iam/account/application/create/create-accounts.command.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/create/create-accounts.service.spec.ts",
-            "integrity": "sha1:817f2cb8951c4272dac13b9bb28216a2bfa00dcd"
+            "integrity": "sha1:679e05d6e6579f96099acde0d8b951c7f237e456"
         },
         {
             "path": "src/@hades/iam/account/application/create/create-accounts.service.ts",
@@ -47,7 +47,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-account-by-id.command.handler.spec.ts",
-            "integrity": "sha1:1cf76fce7dcada4f8316e588bdeed11dea373ce1"
+            "integrity": "sha1:c9ad03197196f5920ceb8353def7487f31311b0a"
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-account-by-id.command.ts",
@@ -55,7 +55,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-account-by-id.service.spec.ts",
-            "integrity": "sha1:9e6bafb85294db11241a81bc845fa7ee3d4c97f1"
+            "integrity": "sha1:d5a9a07448f2a8c08abb807a806c743fd361698a"
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-account-by-id.service.ts",
@@ -67,7 +67,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-accounts.command.handler.spec.ts",
-            "integrity": "sha1:6b574b7bb009e2cb9f7df6656b2cc660ddfe4575"
+            "integrity": "sha1:3736d67c36e81dcdbdafa618e24f2e68d71e59c9"
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-accounts.command.ts",
@@ -75,7 +75,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-accounts.service.spec.ts",
-            "integrity": "sha1:92e97c358a34453dfdc0f10d0ad1c1bc46e579c3"
+            "integrity": "sha1:a832ce602f219178291f172d14dfd4b8d9902d8f"
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-accounts.service.ts",
@@ -131,7 +131,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account-by-id.query.handler.spec.ts",
-            "integrity": "sha1:2598dcd20d3546205ffebe5bc2d0e783887d5a53"
+            "integrity": "sha1:313434a4f06b9e540e23d57e7435edfc4eaca2db"
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account-by-id.query.ts",
@@ -139,7 +139,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account-by-id.service.spec.ts",
-            "integrity": "sha1:84782f023931eca89ce76595792ff9b53a431480"
+            "integrity": "sha1:8aa839f740cb0ae58660b7f08bd891cca7a0ba4e"
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account-by-id.service.ts",
@@ -151,7 +151,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account.query.handler.spec.ts",
-            "integrity": "sha1:815a032c5a63bf08c0a25f1b290ff4f15a5e0605"
+            "integrity": "sha1:7a2bf7c14cb8f10c7323944166d70d834e0ec07b"
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account.query.ts",
@@ -159,7 +159,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account.service.spec.ts",
-            "integrity": "sha1:a69d360491420b115880cf8651e43fea056d1092"
+            "integrity": "sha1:8d254a6d8b978cc957d9fcf389c1ac96eae3a63b"
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account.service.ts",
@@ -171,7 +171,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/get/get-accounts.query.handler.spec.ts",
-            "integrity": "sha1:248bb060d41812161614ed93e29228d0397ea2ca"
+            "integrity": "sha1:6b5b9709140f854c3eefbc852e50ee3469c723d4"
         },
         {
             "path": "src/@hades/iam/account/application/get/get-accounts.query.ts",
@@ -179,7 +179,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/get/get-accounts.service.spec.ts",
-            "integrity": "sha1:cce4815015478cd93ac72c908f8fd10bc0b2e651"
+            "integrity": "sha1:09fa372d9c4d19b04d62371b8c73ced090fbb1c9"
         },
         {
             "path": "src/@hades/iam/account/application/get/get-accounts.service.ts",
@@ -191,7 +191,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/paginate/paginate-accounts.query.handler.spec.ts",
-            "integrity": "sha1:3412ea597950116352e0fcffada04662b30136e9"
+            "integrity": "sha1:5630583f7e586581afcf06642c826d0d50b32dd9"
         },
         {
             "path": "src/@hades/iam/account/application/paginate/paginate-accounts.query.ts",
@@ -199,7 +199,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/paginate/paginate-accounts.service.spec.ts",
-            "integrity": "sha1:44ba41adf77be2d182c5d56632105dde32285672"
+            "integrity": "sha1:310cf3cb8db04b8d3379750c6a269e456ee585e6"
         },
         {
             "path": "src/@hades/iam/account/application/paginate/paginate-accounts.service.ts",
@@ -215,7 +215,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/update/update-account.command.handler.spec.ts",
-            "integrity": "sha1:db25bf3062bf11a55163108ac94a3df6f0541b31"
+            "integrity": "sha1:177e0d6404b8ec03dedf76ad3fc24ad4faf65d3c"
         },
         {
             "path": "src/@hades/iam/account/application/update/update-account.command.ts",
@@ -223,7 +223,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/update/update-account.service.spec.ts",
-            "integrity": "sha1:21ec1e17fe1218356b0804e06d9628e99ce495ef"
+            "integrity": "sha1:b6b961d2617e83898e09957b24b2021210cc4f21"
         },
         {
             "path": "src/@hades/iam/account/application/update/update-account.service.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:6a8de475c2f6a44e080b65215999e0e850bc3e11"
+            "integrity": "sha1:9024e5717b67a7c46ab5d3a01f34f8b2049d654a"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -267,7 +267,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.repository.ts",
-            "integrity": "sha1:38474a0f3f53268b03f324555b63f7326074ad02"
+            "integrity": "sha1:3884f8ef051a753be744d1a761b7ef61aca36800"
         },
         {
             "path": "src/@hades/iam/account/domain/value-objects/account-id.ts",
@@ -327,7 +327,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-create-account.controller.spec.ts",
-            "integrity": "sha1:e40106a85af50ea5eeec6328e2f6bedd2606887b"
+            "integrity": "sha1:f22cd3fff5fe1f10dc6877ef3939fff4208c7c43"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-create-account.controller.ts",
@@ -335,7 +335,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-create-accounts.controller.spec.ts",
-            "integrity": "sha1:c8127ec1dd2ec1566f12943d92c08263dbc5c199"
+            "integrity": "sha1:55abd0f79b1728cbe6e05846d7c8c579772de787"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-create-accounts.controller.ts",
@@ -343,7 +343,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-delete-account-by-id.controller.spec.ts",
-            "integrity": "sha1:431b0316c56ec843106e09b2a4ce167e16a81233"
+            "integrity": "sha1:0540ade68411ec6e32b57f75cb4593e26ef36cf0"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-delete-account-by-id.controller.ts",
@@ -351,7 +351,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-delete-accounts.controller.spec.ts",
-            "integrity": "sha1:41850128626c10cef38a958d3544d95add1ee504"
+            "integrity": "sha1:00de2297db36863decc2ddde0c07d962b764dc38"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-delete-accounts.controller.ts",
@@ -359,7 +359,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-find-account-by-id.controller.spec.ts",
-            "integrity": "sha1:3bd33ca96775df44fe827a64f802111b3cbbd73a"
+            "integrity": "sha1:6f1cb3bdc60ab1c9b4b8acbd988fdc6e627cf28c"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-find-account-by-id.controller.ts",
@@ -367,7 +367,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-find-account.controller.spec.ts",
-            "integrity": "sha1:886657da3d31de6dbe08e6706d8cbfc04f1a5ac1"
+            "integrity": "sha1:e775fef4a6fcd9340612d3f6dd9134b63f9e08ba"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-find-account.controller.ts",
@@ -375,7 +375,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-get-accounts.controller.spec.ts",
-            "integrity": "sha1:5d932930823508eb486e9471bea10c42452d5aea"
+            "integrity": "sha1:37c158fe52d825d7021b9e715c2ce14c3e5d7552"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-get-accounts.controller.ts",
@@ -383,7 +383,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-paginate-accounts.controller.spec.ts",
-            "integrity": "sha1:e3d8f122ab5c6e458c116f80053cc101ab7f02ce"
+            "integrity": "sha1:755ddf59806751f19972ceb7e2979ef1b56d8540"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-paginate-accounts.controller.ts",
@@ -391,7 +391,7 @@
         },
         {
             "path": "src/apps/iam/account/controllers/iam-update-account.controller.spec.ts",
-            "integrity": "sha1:312f4d68e79f096e2cc6934887fb638210d7e814"
+            "integrity": "sha1:1f28cf696bdb413d498f4f92c30c5da5b09c3fc2"
         },
         {
             "path": "src/apps/iam/account/controllers/iam-update-account.controller.ts",
@@ -411,7 +411,7 @@
         },
         {
             "path": "src/apps/iam/account/graphql/account.graphql",
-            "integrity": "sha1:2aef8016aba14b489870d9c7fb5ad8192765644c"
+            "integrity": "sha1:7288ddbe9c632f415c988337cf130fb34967f206"
         },
         {
             "path": "src/apps/iam/account/index.ts",
@@ -419,7 +419,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-create-account.resolver.spec.ts",
-            "integrity": "sha1:c488f3aa70ccdfbb4300225a0de4c8f1995d4566"
+            "integrity": "sha1:208ec3beddebebd11caf7d0dba4f8a0471d404ee"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-create-account.resolver.ts",
@@ -427,7 +427,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-create-accounts.resolver.spec.ts",
-            "integrity": "sha1:e6404a17255a7243c9d17d652a0f786e0cc9b039"
+            "integrity": "sha1:edf71c7405d86ae392e8bc4d033113e6f8dc5c7e"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-create-accounts.resolver.ts",
@@ -435,7 +435,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-delete-account-by-id.resolver.spec.ts",
-            "integrity": "sha1:79868fbc2567c7d3a72733ebf14ba5fde89862c0"
+            "integrity": "sha1:3f85c79f1bc4b7ca3da71694043f01e651d074b7"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-delete-account-by-id.resolver.ts",
@@ -443,7 +443,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-delete-accounts.resolver.spec.ts",
-            "integrity": "sha1:185df2631d942b660e6efd2aad47d133c7ed165c"
+            "integrity": "sha1:ff17edf1363f3d16d449573ae4717b5ba5f7c2f6"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-delete-accounts.resolver.ts",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-find-account-by-id.resolver.spec.ts",
-            "integrity": "sha1:42b1797421b2f5b172667e2ff171c1cc5dabd19a"
+            "integrity": "sha1:a24229ffd767bc73983be09897fb8f837fa9d20c"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-find-account-by-id.resolver.ts",
@@ -459,7 +459,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-find-account.resolver.spec.ts",
-            "integrity": "sha1:922fcf684e67c2be2baf2bbde5f0cb8b8ec6be5e"
+            "integrity": "sha1:2e60a7ed1f61b21407cbe7bfc22b930895b37135"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-find-account.resolver.ts",
@@ -467,7 +467,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-get-accounts.resolver.spec.ts",
-            "integrity": "sha1:b2b95ddaf301d638c7596f921b3ac969365d77ab"
+            "integrity": "sha1:f8794db5b02de3e7bbb6c36598831d7bd4a272b8"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-get-accounts.resolver.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-paginate-accounts.resolver.spec.ts",
-            "integrity": "sha1:bd9e15737f8f6c4d0d723ac200112b75d5050834"
+            "integrity": "sha1:7c24d862d412d2bb3e23b0add9e1ebeb9c0b07f3"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-paginate-accounts.resolver.ts",
@@ -483,7 +483,7 @@
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-update-account.resolver.spec.ts",
-            "integrity": "sha1:613e340471130b9f54986f19cc2fa8147583b3f4"
+            "integrity": "sha1:d37faac404f3cb618fb67bbb9ae785df42c30ddc"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-update-account.resolver.ts",
@@ -499,7 +499,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:9cd52284a635840d6b90ed557928ae41de2ac95b"
+            "integrity": "sha1:6bac150a37a0928cdd6fd8f8704f34d4eb43d88f"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.ts",
@@ -507,7 +507,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command.handler.spec.ts",
-            "integrity": "sha1:7768b52f9f893d90e2304aed138be193369345bc"
+            "integrity": "sha1:382eaee7cf482c0c0c7b2614d96bd8df7d12d4e4"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command.ts",
@@ -515,7 +515,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.service.spec.ts",
-            "integrity": "sha1:58911fd90387284f5c1bb6a3d4f6b879cbd8e513"
+            "integrity": "sha1:f68055f7c21efc234322f455288a24eca52e2f72"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.service.ts",
@@ -527,7 +527,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.command.handler.spec.ts",
-            "integrity": "sha1:cb73f7555bc3b7bae57912635d4fb9ab1e56b32c"
+            "integrity": "sha1:d0a0b920d8abd60f419603d3a4587549d8138c7f"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.command.ts",
@@ -535,7 +535,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:004e02d9146f2881701afbda86a16d287dcf77f6"
+            "integrity": "sha1:fc3b8d5950bbc88c4e158bdc25ad1ae91440be61"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.service.ts",
@@ -547,7 +547,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.command.handler.spec.ts",
-            "integrity": "sha1:f52624b8f708c471fbc98e48aa6a6371273e77e4"
+            "integrity": "sha1:de7a28424b26aa983b7a63cf2af4328f1da5b3e7"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.command.ts",
@@ -555,7 +555,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.service.spec.ts",
-            "integrity": "sha1:73e10e89f66e82f02c218512f0bffa1278c7ed38"
+            "integrity": "sha1:1a313867b4691abe67da4875b37a94d094207a4b"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.service.ts",
@@ -567,7 +567,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.command.handler.spec.ts",
-            "integrity": "sha1:a080b2e1dd31c63e1dee9afe7d2fbf2857b00108"
+            "integrity": "sha1:adb5ecb1d8af48109501a2915fb0fcbcd9362193"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.command.ts",
@@ -575,7 +575,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:680b5c3f50805a73d12b0552f97a673c7f0c54f1"
+            "integrity": "sha1:1e95233a07a756503afee8004eba18b83be59258"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.service.ts",
@@ -631,7 +631,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.query.handler.spec.ts",
-            "integrity": "sha1:ce5b75dbae8367eb5c2f0661c0abb8df01777950"
+            "integrity": "sha1:e951a31aaa9d978d4de2c864dd8b803931ec201b"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.query.ts",
@@ -639,7 +639,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.service.spec.ts",
-            "integrity": "sha1:b0573e05417add0d7e4f921b503029d4b97db39f"
+            "integrity": "sha1:6d0aeea6d9526f0c54eb031a1cb45e013edb9d29"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.service.ts",
@@ -651,7 +651,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.query.handler.spec.ts",
-            "integrity": "sha1:f3dff45be101f871fd92160d3f1040bcde330ad0"
+            "integrity": "sha1:bf073d3e42c78d0fe778b3492cca14e116cc9470"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.query.ts",
@@ -659,7 +659,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.service.spec.ts",
-            "integrity": "sha1:d4fa30800622acd22ae71ffb2f939cbea82685b9"
+            "integrity": "sha1:cbe546ffb974cd95929393790759bbcbc12b22fa"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.service.ts",
@@ -671,7 +671,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.query.handler.spec.ts",
-            "integrity": "sha1:5cdafb18c9f615e8e1ee6216c58115f2eb0fbd40"
+            "integrity": "sha1:78dd9fdf46249c5b5572c6cc109d218be414536d"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.query.ts",
@@ -679,7 +679,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:4f6fa7506594b40b10e4f9fb8b6a3c9b1edd6b54"
+            "integrity": "sha1:52faac2b28cab5467cdc18e605ccd47685db4797"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.service.ts",
@@ -691,7 +691,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.query.handler.spec.ts",
-            "integrity": "sha1:7595c0a6ab3057268b02019fd71e4d47c7ff7059"
+            "integrity": "sha1:2b1daa9f421a5e307a0c7077f058222451f855a2"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.query.ts",
@@ -699,7 +699,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:e7d4ede60e0a098e9f285de69743685622a23a58"
+            "integrity": "sha1:3d07621644390112f18cb4466e6735fe3883bc20"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.service.ts",
@@ -715,7 +715,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.command.handler.spec.ts",
-            "integrity": "sha1:e056e94fe4799b8d53ab17aa794ca1eed714f3dc"
+            "integrity": "sha1:559e6911235e4630106cdb09a5203c0434e8a648"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.command.ts",
@@ -723,7 +723,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.service.spec.ts",
-            "integrity": "sha1:a92a006ce63a7e983f88693a5300cbcc2e4d5ebb"
+            "integrity": "sha1:72dc7864475bcd58cd64567407fedaec5e53755d"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.service.ts",
@@ -759,7 +759,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:404bd39472295caf45d7a3b36be6ba44ce160f82"
+            "integrity": "sha1:44a1b51216465d72c54bd641aa3f8f4f9a7462d1"
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
@@ -767,7 +767,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.repository.ts",
-            "integrity": "sha1:df3da7e288e06f2898bd888b4cc3c3c3c20b53ec"
+            "integrity": "sha1:4c9eea78a19309bc297019790187de88a3580fdc"
         },
         {
             "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-id.ts",
@@ -803,7 +803,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-create-bounded-context.controller.spec.ts",
-            "integrity": "sha1:62dd4a7fef955324dfdc5fd9669c17fb782f349f"
+            "integrity": "sha1:597272eaceb6a254c57ec3ecb8a93ca9f28dc9bb"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-create-bounded-context.controller.ts",
@@ -811,7 +811,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-create-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:6fc2b273179eec6ee394de66a7a3a669d9be677b"
+            "integrity": "sha1:260a480cb6f64ee68c93341492ad6ed6ba457cbe"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-create-bounded-contexts.controller.ts",
@@ -819,7 +819,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-delete-bounded-context-by-id.controller.spec.ts",
-            "integrity": "sha1:381c695cfe659007c7a89a55107719e2aee652ff"
+            "integrity": "sha1:c84cfb15d0d4fa3d2ef7c2120f56c6b66203410c"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-delete-bounded-context-by-id.controller.ts",
@@ -827,7 +827,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-delete-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:9b6a66c5faa7a0f895e591d023189859dd73dc00"
+            "integrity": "sha1:45ef47fd1c273aed13e0b6d69cac5c3f966a26c4"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-delete-bounded-contexts.controller.ts",
@@ -835,7 +835,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-find-bounded-context-by-id.controller.spec.ts",
-            "integrity": "sha1:3ef2fd5c9630b958794dfa6e1f218058e8ab63cc"
+            "integrity": "sha1:131162a46119a4162013a6f4b177345964761e84"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-find-bounded-context-by-id.controller.ts",
@@ -843,7 +843,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-find-bounded-context.controller.spec.ts",
-            "integrity": "sha1:fa1987f06fe5adfff34205a06e18d500f97c11e4"
+            "integrity": "sha1:6e1dab90367bc3a3588cb22dfe7f8620de782416"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-find-bounded-context.controller.ts",
@@ -851,7 +851,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-get-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:035645ff13b5dce934101dfa1f1725917005c90d"
+            "integrity": "sha1:5e0e4546d91ce6aeb9d9bba8fd03fde47aaa3220"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-get-bounded-contexts.controller.ts",
@@ -859,7 +859,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-paginate-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:619f406f1af2b0680d1b0870e7dc25b7e0cfcfc7"
+            "integrity": "sha1:5a62cdc459e720d0d3f1a68e69f3216263396456"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-paginate-bounded-contexts.controller.ts",
@@ -867,7 +867,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-update-bounded-context.controller.spec.ts",
-            "integrity": "sha1:b699792c7da026cbd43ecd8d7b370d5db5c39553"
+            "integrity": "sha1:820071812c2a58d7652b46115e8bb7d72494e06c"
         },
         {
             "path": "src/apps/iam/bounded-context/controllers/iam-update-bounded-context.controller.ts",
@@ -887,7 +887,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/graphql/bounded-context.graphql",
-            "integrity": "sha1:0293433125d6a25ff543d6ac7fe454daa958ca80"
+            "integrity": "sha1:1b2691f6422bc6b81842f08018883a7c9e80fd80"
         },
         {
             "path": "src/apps/iam/bounded-context/index.ts",
@@ -895,7 +895,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-create-bounded-context.resolver.spec.ts",
-            "integrity": "sha1:460c1f0147b72f0b57d2a2b5252246a829841125"
+            "integrity": "sha1:4ea6aee5a88a646ddf378868fd9524521f41ddf7"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-create-bounded-context.resolver.ts",
@@ -903,7 +903,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-create-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:832329d9b0a66fe2ceea4fc1c9880c4ac7e82e1d"
+            "integrity": "sha1:ffeff686c8a1937139d8db908664a6eadf41ebb6"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-create-bounded-contexts.resolver.ts",
@@ -911,7 +911,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-delete-bounded-context-by-id.resolver.spec.ts",
-            "integrity": "sha1:45a7e80a7ac65a9b484364c89b83bb7a743bc151"
+            "integrity": "sha1:43f95fcf625f9421cdb3e268557cda65ee286af2"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-delete-bounded-context-by-id.resolver.ts",
@@ -919,7 +919,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-delete-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:bc8ff0ab6ea4ffd231c7afebb17c565250a64859"
+            "integrity": "sha1:93546af987c1652ea946c49abb28fef2348a8006"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-delete-bounded-contexts.resolver.ts",
@@ -927,7 +927,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-find-bounded-context-by-id.resolver.spec.ts",
-            "integrity": "sha1:ccc993f6663319e621047a81c2e6f57ef5d481cc"
+            "integrity": "sha1:f066f867fa7a55759390bb4cd31cb6c08dcfdae9"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-find-bounded-context-by-id.resolver.ts",
@@ -935,7 +935,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-find-bounded-context.resolver.spec.ts",
-            "integrity": "sha1:0e2c6996f37d1042c818ea6e1d11f250c3134549"
+            "integrity": "sha1:d4eca7e9982b99e699187ad35905320687d2037d"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-find-bounded-context.resolver.ts",
@@ -943,7 +943,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-get-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:581b26439723815081dfe1f3a0b2d10c7b532c8d"
+            "integrity": "sha1:b0a725d2241252d9b2471e961e08d0e62d071add"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-get-bounded-contexts.resolver.ts",
@@ -951,7 +951,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-paginate-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:3d1ecf8b37d6678137ff9916326e50eb43835682"
+            "integrity": "sha1:508178d39e5f056e2f840f2f4b04f4bffb8cfad3"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-paginate-bounded-contexts.resolver.ts",
@@ -959,7 +959,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-update-bounded-context.resolver.spec.ts",
-            "integrity": "sha1:4a2fc8d2d3327cfed9b7218e3efa241b7c2edfc9"
+            "integrity": "sha1:1ad8c06cab3ec6a42728f9c1d48b62e7ef2c9f4e"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-update-bounded-context.resolver.ts",
@@ -975,7 +975,7 @@
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:495c9fc428fcdf356168b2f21819757438b54950"
+            "integrity": "sha1:af52a085e5eed4fb9992ffcb35aa1aa1b91afba9"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command-handler.ts",
@@ -983,7 +983,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command.handler.spec.ts",
-            "integrity": "sha1:540352caff02214019ccfd772ed7277e1c32b08d"
+            "integrity": "sha1:481b0c3e48ffb39cfcd7a2951c10fd53aae36fda"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command.ts",
@@ -991,7 +991,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.service.spec.ts",
-            "integrity": "sha1:d015eb916e59df391bd18bad1ceba40d5eec83cd"
+            "integrity": "sha1:5e0aee26719d242b98495a33232bc5f6fbcb9fe1"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.service.ts",
@@ -1003,7 +1003,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permissions.command.handler.spec.ts",
-            "integrity": "sha1:8ee91b34f8c435640ba058c5a09831ec2edc26df"
+            "integrity": "sha1:c3936ae5dd0057b302909e9098dee8b04fee6913"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permissions.command.ts",
@@ -1011,7 +1011,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permissions.service.spec.ts",
-            "integrity": "sha1:52469b57f1ef1216a5263530b1b902e4e09d3fe4"
+            "integrity": "sha1:f7333878cb32e1270c94b8ed4ddbd07b0bbccb0b"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permissions.service.ts",
@@ -1023,7 +1023,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permission-by-id.command.handler.spec.ts",
-            "integrity": "sha1:f07f215454f3a7a32c78c234acb1efa4b7ad27a7"
+            "integrity": "sha1:86a8059dbff30417ca6e0c98d202eaa81da6baac"
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permission-by-id.command.ts",
@@ -1031,7 +1031,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permission-by-id.service.spec.ts",
-            "integrity": "sha1:628f2055dac1fe006838734c6dc80e82f247ac6f"
+            "integrity": "sha1:05d8df6694a749134479e67ffcb5ee85e106ed61"
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permission-by-id.service.ts",
@@ -1043,7 +1043,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permissions.command.handler.spec.ts",
-            "integrity": "sha1:9b454b6419782303f777822adee301daea69fd4a"
+            "integrity": "sha1:8f2848a865894bbfe3eb6a2ec1e9f08791322f2d"
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permissions.command.ts",
@@ -1051,7 +1051,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permissions.service.spec.ts",
-            "integrity": "sha1:fe2b6922c2aba95936d3ecd997080f801f1c14d3"
+            "integrity": "sha1:7fd58a56adba8e4b41bdb798d08bd1a6920442fa"
         },
         {
             "path": "src/@hades/iam/permission/application/delete/delete-permissions.service.ts",
@@ -1107,7 +1107,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission-by-id.query.handler.spec.ts",
-            "integrity": "sha1:31e84cea6234c583ae3f84b32864a5b44a48f12d"
+            "integrity": "sha1:a96a13b245672b01686f118ce0187e7ffa703546"
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission-by-id.query.ts",
@@ -1115,7 +1115,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission-by-id.service.spec.ts",
-            "integrity": "sha1:45b417eec266106e82b288b9572a16b7275be005"
+            "integrity": "sha1:1fe7f25b8462bb99544e4fec6ddd1087e629fc54"
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission-by-id.service.ts",
@@ -1127,7 +1127,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission.query.handler.spec.ts",
-            "integrity": "sha1:623ebbfa563deb97c8488dfae9f730ae3b31c05e"
+            "integrity": "sha1:bd10067f27941708857e83d8eb0d23169f05d711"
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission.query.ts",
@@ -1135,7 +1135,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission.service.spec.ts",
-            "integrity": "sha1:7c0ccb27af359d3d8847761289679a9106e1418a"
+            "integrity": "sha1:89460ad237b3d3ffef1b88de3d167acd0480f988"
         },
         {
             "path": "src/@hades/iam/permission/application/find/find-permission.service.ts",
@@ -1147,7 +1147,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/get/get-permissions.query.handler.spec.ts",
-            "integrity": "sha1:e0ddfc0a3c33625f1437e71ebafcb157863d233e"
+            "integrity": "sha1:62cb81ebc1b438bf62c83420085cc5e97885560b"
         },
         {
             "path": "src/@hades/iam/permission/application/get/get-permissions.query.ts",
@@ -1155,7 +1155,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/get/get-permissions.service.spec.ts",
-            "integrity": "sha1:13fccbeae49ebd1260df08f56ebdb6f038aac010"
+            "integrity": "sha1:56a2623a6dc2584ae83155ed7e616894406eef01"
         },
         {
             "path": "src/@hades/iam/permission/application/get/get-permissions.service.ts",
@@ -1167,7 +1167,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/paginate/paginate-permissions.query.handler.spec.ts",
-            "integrity": "sha1:3d7ef5b05370c5dabbca683dc33bb052e5ce36c4"
+            "integrity": "sha1:8b3ec201e66ad5a7c8a6c19aef61177bd69e51db"
         },
         {
             "path": "src/@hades/iam/permission/application/paginate/paginate-permissions.query.ts",
@@ -1175,7 +1175,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/paginate/paginate-permissions.service.spec.ts",
-            "integrity": "sha1:6356939055abd38b641998baff33ac5c85475fe6"
+            "integrity": "sha1:a3873281ba8fe9edebcc89e89dc8e160e9ca6f06"
         },
         {
             "path": "src/@hades/iam/permission/application/paginate/paginate-permissions.service.ts",
@@ -1191,7 +1191,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/update/update-permission.command.handler.spec.ts",
-            "integrity": "sha1:c1ce30dd7046afd8af2dab5f3c4cfc10dadd9037"
+            "integrity": "sha1:6c14f8b1c1b1107f1095065b47b5a311617f2e61"
         },
         {
             "path": "src/@hades/iam/permission/application/update/update-permission.command.ts",
@@ -1199,7 +1199,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/update/update-permission.service.spec.ts",
-            "integrity": "sha1:08c432043175030143fc316cdc44df310d2b86eb"
+            "integrity": "sha1:8921de6539fc55316467960224253a73eea78203"
         },
         {
             "path": "src/@hades/iam/permission/application/update/update-permission.service.ts",
@@ -1235,15 +1235,15 @@
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/seeds/permission.seed.ts",
-            "integrity": "sha1:2e3df3881c6d9006d1c8a9f9db2b9dbf0e115a07"
+            "integrity": "sha1:de852f575b755b7946ceb11ad66653e010b05ed3"
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model.ts",
-            "integrity": "sha1:32156ae28312a04933cbb1797d22a4a6a1043359"
+            "integrity": "sha1:c13f31f6d2dd8f43fff579916cf46378d80755e4"
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permission.repository.ts",
-            "integrity": "sha1:27c4581c38c063178a494b6970cdd80d628e6a35"
+            "integrity": "sha1:b34c88a72a588bad42ebf843257ffb083a14722c"
         },
         {
             "path": "src/@hades/iam/permission/domain/value-objects/permission-id.ts",
@@ -1274,12 +1274,12 @@
             "integrity": "sha1:d5135c46e644d2d1c68fd0493a70fe8eabd3f4e7"
         },
         {
-            "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permissions-role-ids.model.ts",
+            "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model.ts",
             "integrity": "sha1:d17b25c36e93131d7a5e05d6a0b6c2e6a2557ac3"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-create-permission.controller.spec.ts",
-            "integrity": "sha1:7a89e66f38115cf1d385ff9ba3a8ca6027e1f302"
+            "integrity": "sha1:5e235f47fcbc4fd84df4bc4859333a2f7c18a743"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-create-permission.controller.ts",
@@ -1287,7 +1287,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-create-permissions.controller.spec.ts",
-            "integrity": "sha1:516160a03a7d5e23d3dccc1c108965e185042f50"
+            "integrity": "sha1:5b2ca4f009469e4c5547a7615581505c2075a2b4"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-create-permissions.controller.ts",
@@ -1295,7 +1295,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-delete-permission-by-id.controller.spec.ts",
-            "integrity": "sha1:b55abbec2027a0116a9ccd14bdc0f7de99ef15d9"
+            "integrity": "sha1:0ace7832c9e0a77f38b1224910b26d66d8c3be5e"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-delete-permission-by-id.controller.ts",
@@ -1303,7 +1303,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-delete-permissions.controller.spec.ts",
-            "integrity": "sha1:1fe4ea4bf3063ef4ef37a9ee95aaa2aa3c7905e4"
+            "integrity": "sha1:587adc9f8ebb65538dff36377303c2de92bc232b"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-delete-permissions.controller.ts",
@@ -1311,7 +1311,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-find-permission-by-id.controller.spec.ts",
-            "integrity": "sha1:d5ee74dd0ea3eca3562541a20d1e7c41bb51f994"
+            "integrity": "sha1:55c6cb7eedd8aca98da8fc1fa283b8b15f316141"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-find-permission-by-id.controller.ts",
@@ -1319,7 +1319,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-find-permission.controller.spec.ts",
-            "integrity": "sha1:d6986e03827169092264875f9241639096c6b1ad"
+            "integrity": "sha1:dff6596bac589cb8e61b8e4a57aa03552fa995d4"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-find-permission.controller.ts",
@@ -1327,7 +1327,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-get-permissions.controller.spec.ts",
-            "integrity": "sha1:5b46bd77eac9d4f1e14d01adadc5532455aa6f0d"
+            "integrity": "sha1:40fa9c1ab94462ed32f7cc0c246b32e2f101c970"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-get-permissions.controller.ts",
@@ -1335,7 +1335,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-paginate-permissions.controller.spec.ts",
-            "integrity": "sha1:0031aa9b073c7a56e96ab69a90ddf3eaea78cc62"
+            "integrity": "sha1:09c027e5d16df563e5521bd0808a4af973a96c79"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-paginate-permissions.controller.ts",
@@ -1343,7 +1343,7 @@
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-update-permission.controller.spec.ts",
-            "integrity": "sha1:88bc028251fd5088d17be9710a3856a0aa8b2085"
+            "integrity": "sha1:52432e2279b121e748ff687236aa956f0fd3130a"
         },
         {
             "path": "src/apps/iam/permission/controllers/iam-update-permission.controller.ts",
@@ -1363,7 +1363,7 @@
         },
         {
             "path": "src/apps/iam/permission/graphql/permission.graphql",
-            "integrity": "sha1:0bd5ef9cdd289b70071c878c89727943cc7c347c"
+            "integrity": "sha1:e3cffdf9f121441ab855994f8896c029dc3bbe94"
         },
         {
             "path": "src/apps/iam/permission/index.ts",
@@ -1371,7 +1371,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-create-permission.resolver.spec.ts",
-            "integrity": "sha1:3af66c23c5b2fa5f1ef5560be770eed641e65113"
+            "integrity": "sha1:9a9fa9cb2848695e8da4af2e9a039f245d21d98b"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-create-permission.resolver.ts",
@@ -1379,7 +1379,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-create-permissions.resolver.spec.ts",
-            "integrity": "sha1:ac0738010181ab451892d5c3d406c83b53c754f8"
+            "integrity": "sha1:ea6d22a44ab7103916e6c06a2997704a649f62e7"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-create-permissions.resolver.ts",
@@ -1387,7 +1387,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-delete-permission-by-id.resolver.spec.ts",
-            "integrity": "sha1:16a785530dbdedda64a9e7ee535cffea7d0ee698"
+            "integrity": "sha1:df989af8423bef8430e0bcca79d980bc42eafdb9"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-delete-permission-by-id.resolver.ts",
@@ -1395,7 +1395,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-delete-permissions.resolver.spec.ts",
-            "integrity": "sha1:133bd175ddf66a5506a95ec576dfc6c0e89369b6"
+            "integrity": "sha1:84f3bdf438c65523df75cf0821bcbd2874f1addd"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-delete-permissions.resolver.ts",
@@ -1403,7 +1403,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-find-permission-by-id.resolver.spec.ts",
-            "integrity": "sha1:ccc20c008f8335720cd605d1a395644a28847faf"
+            "integrity": "sha1:562da382a4d3cf110b8f560244854a61faa41bec"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-find-permission-by-id.resolver.ts",
@@ -1411,7 +1411,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-find-permission.resolver.spec.ts",
-            "integrity": "sha1:60c88b13749bcb9e850f18136aa57f1c735dac1e"
+            "integrity": "sha1:a27e436eff81f26e0f8a96db6ef0a574f9fca952"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-find-permission.resolver.ts",
@@ -1419,7 +1419,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-get-permissions.resolver.spec.ts",
-            "integrity": "sha1:53ae49f358cbd69620bda0d6c59c237a7106af9e"
+            "integrity": "sha1:b0b314d23e3cfeea65711d783f9ae9bd6fd55b55"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-get-permissions.resolver.ts",
@@ -1427,7 +1427,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-paginate-permissions.resolver.spec.ts",
-            "integrity": "sha1:c960f1768fb87101498095b9ca2ddc1adaea514d"
+            "integrity": "sha1:8a2aa66dc48ab9c7683f19c56772cf730a873a10"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-paginate-permissions.resolver.ts",
@@ -1435,7 +1435,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-update-permission.resolver.spec.ts",
-            "integrity": "sha1:7eaeb5a730a28c08783f10bac6799a36abb2f365"
+            "integrity": "sha1:0417d3ad8c3c4ceac87f39c0f6a00a84832c9371"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-update-permission.resolver.ts",
@@ -1451,7 +1451,7 @@
         },
         {
             "path": "postman/iam.permission.postman.json",
-            "integrity": "sha1:2d48a1baf7259abf559c35e207c5d8040c0fa653"
+            "integrity": "sha1:2621221de5e085cb64ad6f092d41e5c1f8ee570a"
         }
     ]
 }

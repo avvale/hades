@@ -40,11 +40,13 @@ describe('CreateRoleCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateRoleCommand(
-                    roles[0].id,
-                    roles[0].name,
-                    roles[0].isMaster,
-                    roles[0].permissionIds,
-                    roles[0].accountIds,
+                    {
+                        id : roles[0].id,
+                        name : roles[0].name,
+                        isMaster : roles[0].isMaster,
+                        permissionIds : roles[0].permissionIds,
+                        accountIds : roles[0].accountIds,
+                    }
                 )
             )).toBe(undefined);
         });

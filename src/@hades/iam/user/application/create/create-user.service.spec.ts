@@ -63,17 +63,19 @@ describe('CreateUserService', () =>
         test('should create a user and emit event', async () =>
         {
             expect(await service.main(
-                new UserId(users[0].id),
-                new UserAccountId(users[0].accountId),
-                new UserName(users[0].name),
-                new UserSurname(users[0].surname),
-                new UserAvatar(users[0].avatar),
-                new UserMobile(users[0].mobile),
-                new UserLangId(users[0].langId),
-                new UserUsername(users[0].username),
-                new UserPassword(users[0].password),
-                new UserRememberToken(users[0].rememberToken),
-                new UserData(users[0].data),
+                {
+                    id: new UserId(users[0].id),
+                    accountId: new UserAccountId(users[0].accountId),
+                    name: new UserName(users[0].name),
+                    surname: new UserSurname(users[0].surname),
+                    avatar: new UserAvatar(users[0].avatar),
+                    mobile: new UserMobile(users[0].mobile),
+                    langId: new UserLangId(users[0].langId),
+                    username: new UserUsername(users[0].username),
+                    password: new UserPassword(users[0].password),
+                    rememberToken: new UserRememberToken(users[0].rememberToken),
+                    data: new UserData(users[0].data),
+                }
             )).toBe(undefined);
         });
     });

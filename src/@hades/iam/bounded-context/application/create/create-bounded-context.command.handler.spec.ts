@@ -40,11 +40,13 @@ describe('CreateBoundedContextCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateBoundedContextCommand(
-                    boundedContexts[0].id,
-                    boundedContexts[0].name,
-                    boundedContexts[0].root,
-                    boundedContexts[0].sort,
-                    boundedContexts[0].isActive,
+                    {
+                        id : boundedContexts[0].id,
+                        name : boundedContexts[0].name,
+                        root : boundedContexts[0].root,
+                        sort : boundedContexts[0].sort,
+                        isActive : boundedContexts[0].isActive,
+                    }
                 )
             )).toBe(undefined);
         });

@@ -9,7 +9,7 @@ import { PermissionMapper } from '@hades/iam/permission/domain/permission.mapper
 import { FindPermissionByIdQuery } from './find-permission-by-id.query';
 import { FindPermissionByIdService } from './find-permission-by-id.service';
 
-describe('FindPermissionByIdQueryHandler', () => 
+describe('FindPermissionByIdQueryHandler', () =>
 {
     let queryHandler: FindPermissionByIdQueryHandler;
     let service: FindPermissionByIdService;
@@ -48,13 +48,13 @@ describe('FindPermissionByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an permission founded', async () => 
+        test('should return an permission founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindPermissionByIdQuery(
                     permissions[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

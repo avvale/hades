@@ -13,10 +13,10 @@ export enum IamAccountType {
 
 export interface QueryStatement {
     where?: JSON;
-    include?: string[];
+    include?: GraphQLString[];
     order?: JSON;
-    limit?: number;
-    offset?: number;
+    limit?: GraphQLInt;
+    offset?: GraphQLInt;
 }
 
 export interface IamCreateAccountInput {
@@ -117,7 +117,7 @@ export interface IamUpdateTenantInput {
 
 export interface IamCreateUserInput {
     id: string;
-    accountId?: string;
+    accountId: string;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
@@ -144,8 +144,8 @@ export interface IamUpdateUserInput {
 }
 
 export interface Pagination {
-    total: number;
-    count: number;
+    total: GraphQLInt;
+    count: GraphQLInt;
     rows: JSON[];
 }
 
@@ -278,6 +278,7 @@ export interface IamTenant {
 export interface IamUser {
     id: string;
     accountId: string;
+    account: IamAccount;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
@@ -301,3 +302,4 @@ export type GraphQLFloat = any;
 export type GraphQLBoolean = any;
 export type GraphQLISODateTime = any;
 export type GraphQLTimestamp = any;
+export type GraphQLUpload = any;

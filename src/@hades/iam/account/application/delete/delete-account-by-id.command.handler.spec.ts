@@ -6,12 +6,12 @@ import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { DeleteAccountByIdCommand } from './delete-account-by-id.command';
 import { DeleteAccountByIdService } from './delete-account-by-id.service';
 
-describe('DeleteAccountByIdCommandHandler', () => 
+describe('DeleteAccountByIdCommandHandler', () =>
 {
     let commandHandler: DeleteAccountByIdCommandHandler;
     let service: DeleteAccountByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteAccountByIdCommandHandler', () =>
         service         = module.get<DeleteAccountByIdService>(DeleteAccountByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAccountByIdCommandHandler should be defined', () => 
+        test('DeleteAccountByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteAccountByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteAccountByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAccountByIdCommand(
