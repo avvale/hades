@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 
-describe('OAuthDeleteApplicationsResolver', () => 
+describe('OAuthDeleteApplicationsResolver', () =>
 {
     let resolver: OAuthDeleteApplicationsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('OAuthDeleteApplicationsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthDeleteApplicationsResolver should be defined', () => 
+    test('OAuthDeleteApplicationsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthDeleteApplicationsResolver should be defined', () => 
+        test('OAuthDeleteApplicationsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an applications deleted', async () => 
+        test('should return an applications deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
             expect(await resolver.main()).toBe(applications);

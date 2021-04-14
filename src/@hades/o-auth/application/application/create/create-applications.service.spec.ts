@@ -6,13 +6,13 @@ import { CreateApplicationsService } from './create-applications.service';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { MockApplicationRepository } from './../../infrastructure/mock/mock-application.repository';
 
-describe('CreateApplicationsService', () => 
+describe('CreateApplicationsService', () =>
 {
     let service: CreateApplicationsService;
     let repository: IApplicationRepository;
     let mockRepository: MockApplicationRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateApplicationsService', () =>
                 EventPublisher,
                 CreateApplicationsService,
                 MockApplicationRepository,
-                { 
+                {
                     provide: IApplicationRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateApplicationsService', () =>
         mockRepository  = module.get(MockApplicationRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateApplicationsService should be defined', () => 
+        test('CreateApplicationsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create applications and emit event', async () => 
+        test('should create applications and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

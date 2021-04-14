@@ -6,12 +6,12 @@ import { applications } from '@hades/o-auth/application/infrastructure/seeds/app
 import { CreateApplicationsCommand } from './create-applications.command';
 import { CreateApplicationsService } from './create-applications.service';
 
-describe('CreateApplicationsCommandHandler', () => 
+describe('CreateApplicationsCommandHandler', () =>
 {
     let commandHandler: CreateApplicationsCommandHandler;
     let service: CreateApplicationsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateApplicationsCommandHandler', () =>
         service         = module.get<CreateApplicationsService>(CreateApplicationsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateApplicationsCommandHandler should be defined', () => 
+        test('CreateApplicationsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an application created', async () => 
+        test('should return an application created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateApplicationsCommand(
                     applications
-                
+
                 )
             )).toBe(undefined);
         });

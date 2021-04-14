@@ -41,14 +41,14 @@ describe('PaginateAccessTokensQueryHandler', () =>
         mapper          = new AccessTokenMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateAccessTokensQueryHandler should be defined', () => 
+        test('PaginateAccessTokensQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an accessTokens paginated', async () => 
+        test('should return an accessTokens paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateAccessTokensQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

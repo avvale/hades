@@ -8,14 +8,14 @@ import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-toke
 import { GetAccessTokensQuery } from './get-access-tokens.query';
 import { GetAccessTokensService } from './get-access-tokens.service';
 
-describe('GetAccessTokensQueryHandler', () => 
+describe('GetAccessTokensQueryHandler', () =>
 {
     let queryHandler: GetAccessTokensQueryHandler;
     let service: GetAccessTokensService;
     let repository: MockAccessTokenRepository;
     let mapper: AccessTokenMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetAccessTokensQueryHandler', () =>
         mapper          = new AccessTokenMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetAccessTokensQueryHandler should be defined', () => 
+        test('GetAccessTokensQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an accessTokens founded', async () => 
+        test('should return an accessTokens founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

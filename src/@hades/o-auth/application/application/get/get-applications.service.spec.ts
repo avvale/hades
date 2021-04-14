@@ -6,13 +6,13 @@ import { GetApplicationsService } from './get-applications.service';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { MockApplicationRepository } from './../../infrastructure/mock/mock-application.repository';
 
-describe('GetApplicationsService', () => 
+describe('GetApplicationsService', () =>
 {
     let service: GetApplicationsService;
     let repository: IApplicationRepository;
     let mockRepository: MockApplicationRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetApplicationsService', () =>
                 EventPublisher,
                 GetApplicationsService,
                 MockApplicationRepository,
-                { 
+                {
                     provide: IApplicationRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetApplicationsService', () =>
         mockRepository  = module.get(MockApplicationRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetApplicationsService should be defined', () => 
+        test('GetApplicationsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get applications', async () => 
+        test('should get applications', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

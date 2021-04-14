@@ -13,7 +13,7 @@ describe('OAuthCreateClientResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('OAuthCreateClientResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthCreateClientResolver should be defined', () => 
+    test('OAuthCreateClientResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthCreateClientResolver should be defined', () => 
+        test('OAuthCreateClientResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an client created', async () => 
+        test('should return an client created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
             expect(await resolver.main(<OAuthCreateClientInput>clients[0])).toBe(clients[0]);

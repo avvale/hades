@@ -58,13 +58,15 @@ describe('UpdateAccessTokenService', () =>
         test('should update a accessToken and emit event', async () =>
         {
             expect(await service.main(
-                new AccessTokenId(accessTokens[0].id),
-                new AccessTokenClientId(accessTokens[0].clientId),
-                new AccessTokenAccountId(accessTokens[0].accountId),
-                new AccessTokenToken(accessTokens[0].token),
-                new AccessTokenName(accessTokens[0].name),
-                new AccessTokenIsRevoked(accessTokens[0].isRevoked),
-                new AccessTokenExpiresAt(accessTokens[0].expiresAt),
+                {
+                    id: new AccessTokenId(accessTokens[0].id),
+                    clientId: new AccessTokenClientId(accessTokens[0].clientId),
+                    accountId: new AccessTokenAccountId(accessTokens[0].accountId),
+                    token: new AccessTokenToken(accessTokens[0].token),
+                    name: new AccessTokenName(accessTokens[0].name),
+                    isRevoked: new AccessTokenIsRevoked(accessTokens[0].isRevoked),
+                    expiresAt: new AccessTokenExpiresAt(accessTokens[0].expiresAt),
+                }
             )).toBe(undefined);
         });
     });

@@ -5,12 +5,12 @@ import { DeleteAccessTokensCommandHandler } from './delete-access-tokens.command
 import { DeleteAccessTokensCommand } from './delete-access-tokens.command';
 import { DeleteAccessTokensService } from './delete-access-tokens.service';
 
-describe('DeleteAccessTokensCommandHandler', () => 
+describe('DeleteAccessTokensCommandHandler', () =>
 {
     let commandHandler: DeleteAccessTokensCommandHandler;
     let service: DeleteAccessTokensService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteAccessTokensCommandHandler', () =>
         service         = module.get<DeleteAccessTokensService>(DeleteAccessTokensService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAccessTokensCommandHandler should be defined', () => 
+        test('DeleteAccessTokensCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAccessTokensCommand()

@@ -12,7 +12,6 @@ export class SequelizeAccessTokenRepository extends SequelizeRepository<OAuthAcc
 {
     public readonly aggregateName: string = 'OAuthAccessToken';
     public readonly mapper: AccessTokenMapper = new AccessTokenMapper();
-    public readonly timezoneColumns: string[] = ['expiresAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(OAuthAccessTokenModel)

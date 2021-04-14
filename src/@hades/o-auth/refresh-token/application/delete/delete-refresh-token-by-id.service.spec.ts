@@ -8,7 +8,7 @@ import { RefreshTokenId } from './../../domain/value-objects';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
-describe('DeleteRefreshTokenByIdService', () => 
+describe('DeleteRefreshTokenByIdService', () =>
 {
     let service: DeleteRefreshTokenByIdService;
     let repository: IRefreshTokenRepository;
@@ -38,14 +38,14 @@ describe('DeleteRefreshTokenByIdService', () =>
         mockRepository  = module.get(MockRefreshTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRefreshTokenByIdService should be defined', () => 
+        test('DeleteRefreshTokenByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete refreshToken and emit event', async () => 
+        test('should delete refreshToken and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

@@ -57,11 +57,13 @@ describe('CreateRefreshTokenService', () =>
         test('should create a refreshToken and emit event', async () =>
         {
             expect(await service.main(
-                new RefreshTokenId(refreshTokens[0].id),
-                new RefreshTokenAccessTokenId(refreshTokens[0].accessTokenId),
-                new RefreshTokenToken(refreshTokens[0].token),
-                new RefreshTokenIsRevoked(refreshTokens[0].isRevoked),
-                new RefreshTokenExpiresAt(refreshTokens[0].expiresAt),
+                {
+                    id: new RefreshTokenId(refreshTokens[0].id),
+                    accessTokenId: new RefreshTokenAccessTokenId(refreshTokens[0].accessTokenId),
+                    token: new RefreshTokenToken(refreshTokens[0].token),
+                    isRevoked: new RefreshTokenIsRevoked(refreshTokens[0].isRevoked),
+                    expiresAt: new RefreshTokenExpiresAt(refreshTokens[0].expiresAt),
+                }
             )).toBe(undefined);
         });
     });

@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('OAuthFindRefreshTokenController', () => 
+describe('OAuthFindRefreshTokenController', () =>
 {
     let controller: OAuthFindRefreshTokenController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('OAuthFindRefreshTokenController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthFindRefreshTokenController should be defined', () => 
+        test('OAuthFindRefreshTokenController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a refreshToken', async () => 
+        test('should return a refreshToken', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
             expect(await controller.main()).toBe(refreshTokens[0]);

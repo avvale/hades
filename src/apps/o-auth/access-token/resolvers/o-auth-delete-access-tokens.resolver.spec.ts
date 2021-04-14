@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('OAuthDeleteAccessTokensResolver', () => 
+describe('OAuthDeleteAccessTokensResolver', () =>
 {
     let resolver: OAuthDeleteAccessTokensResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('OAuthDeleteAccessTokensResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthDeleteAccessTokensResolver should be defined', () => 
+    test('OAuthDeleteAccessTokensResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthDeleteAccessTokensResolver should be defined', () => 
+        test('OAuthDeleteAccessTokensResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an accessTokens deleted', async () => 
+        test('should return an accessTokens deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
             expect(await resolver.main()).toBe(accessTokens);

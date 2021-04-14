@@ -40,11 +40,13 @@ describe('CreateRefreshTokenCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateRefreshTokenCommand(
-                    refreshTokens[0].id,
-                    refreshTokens[0].accessTokenId,
-                    refreshTokens[0].token,
-                    refreshTokens[0].isRevoked,
-                    refreshTokens[0].expiresAt,
+                    {
+                        id : refreshTokens[0].id,
+                        accessTokenId : refreshTokens[0].accessTokenId,
+                        token : refreshTokens[0].token,
+                        isRevoked : refreshTokens[0].isRevoked,
+                        expiresAt : refreshTokens[0].expiresAt,
+                    }
                 )
             )).toBe(undefined);
         });

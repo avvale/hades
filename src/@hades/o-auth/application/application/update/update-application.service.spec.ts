@@ -57,12 +57,14 @@ describe('UpdateApplicationService', () =>
         test('should update a application and emit event', async () =>
         {
             expect(await service.main(
-                new ApplicationId(applications[0].id),
-                new ApplicationName(applications[0].name),
-                new ApplicationCode(applications[0].code),
-                new ApplicationSecret(applications[0].secret),
-                new ApplicationIsMaster(applications[0].isMaster),
-                new ApplicationClientIds(applications[0].clientIds),
+                {
+                    id: new ApplicationId(applications[0].id),
+                    name: new ApplicationName(applications[0].name),
+                    code: new ApplicationCode(applications[0].code),
+                    secret: new ApplicationSecret(applications[0].secret),
+                    isMaster: new ApplicationIsMaster(applications[0].isMaster),
+                    clientIds: new ApplicationClientIds(applications[0].clientIds),
+                }
             )).toBe(undefined);
         });
     });

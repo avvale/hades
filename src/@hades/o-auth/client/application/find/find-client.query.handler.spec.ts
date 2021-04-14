@@ -8,14 +8,14 @@ import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
 import { FindClientQuery } from './find-client.query';
 import { FindClientService } from './find-client.service';
 
-describe('FindClientQueryHandler', () => 
+describe('FindClientQueryHandler', () =>
 {
     let queryHandler: FindClientQueryHandler;
     let service: FindClientService;
     let repository: MockClientRepository;
     let mapper: ClientMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindClientQueryHandler', () =>
         mapper          = new ClientMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindClientQueryHandler should be defined', () => 
+        test('FindClientQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an client founded', async () => 
+        test('should return an client founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

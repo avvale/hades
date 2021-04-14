@@ -8,7 +8,7 @@ import { ApplicationId } from './../../domain/value-objects';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { MockApplicationRepository } from './../../infrastructure/mock/mock-application.repository';
 
-describe('DeleteApplicationByIdService', () => 
+describe('DeleteApplicationByIdService', () =>
 {
     let service: DeleteApplicationByIdService;
     let repository: IApplicationRepository;
@@ -38,14 +38,14 @@ describe('DeleteApplicationByIdService', () =>
         mockRepository  = module.get(MockApplicationRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteApplicationByIdService should be defined', () => 
+        test('DeleteApplicationByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete application and emit event', async () => 
+        test('should delete application and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

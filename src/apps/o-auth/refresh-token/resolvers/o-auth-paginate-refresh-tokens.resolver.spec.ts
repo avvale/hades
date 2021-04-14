@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('OAuthPaginateRefreshTokensResolver', () => 
+describe('OAuthPaginateRefreshTokensResolver', () =>
 {
     let resolver: OAuthPaginateRefreshTokensResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('OAuthPaginateRefreshTokensResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthPaginateRefreshTokensResolver should be defined', () => 
+    test('OAuthPaginateRefreshTokensResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthPaginateRefreshTokensResolver should be defined', () => 
+        test('OAuthPaginateRefreshTokensResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a refreshTokens', async () => 
+        test('should return a refreshTokens', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
             expect(await resolver.main()).toBe(refreshTokens);

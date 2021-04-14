@@ -8,7 +8,7 @@ import { AccessTokenId } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
 
-describe('DeleteAccessTokenByIdService', () => 
+describe('DeleteAccessTokenByIdService', () =>
 {
     let service: DeleteAccessTokenByIdService;
     let repository: IAccessTokenRepository;
@@ -38,14 +38,14 @@ describe('DeleteAccessTokenByIdService', () =>
         mockRepository  = module.get(MockAccessTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAccessTokenByIdService should be defined', () => 
+        test('DeleteAccessTokenByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete accessToken and emit event', async () => 
+        test('should delete accessToken and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

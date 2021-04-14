@@ -44,7 +44,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     isMaster: boolean;
 
 
-    @BelongsToMany(() => OAuthClientModel, () => OAuthApplicationsClientsModel)
+    @BelongsToMany(() => OAuthClientModel, { through: () => OAuthApplicationsClientsModel, uniqueKey: 'uq01_o_auth_applications_clients' })
     clients: OAuthClientModel[];
 
     @Column({

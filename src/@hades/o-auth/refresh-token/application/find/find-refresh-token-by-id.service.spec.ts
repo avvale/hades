@@ -37,14 +37,14 @@ describe('FindRefreshTokenByIdService', () =>
         mockRepository  = module.get(MockRefreshTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindRefreshTokenByIdService should be defined', () => 
+        test('FindRefreshTokenByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find refreshToken by id', async () => 
+        test('should find refreshToken by id', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

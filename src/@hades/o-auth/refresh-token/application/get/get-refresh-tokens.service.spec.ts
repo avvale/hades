@@ -6,13 +6,13 @@ import { GetRefreshTokensService } from './get-refresh-tokens.service';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
-describe('GetRefreshTokensService', () => 
+describe('GetRefreshTokensService', () =>
 {
     let service: GetRefreshTokensService;
     let repository: IRefreshTokenRepository;
     let mockRepository: MockRefreshTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetRefreshTokensService', () =>
                 EventPublisher,
                 GetRefreshTokensService,
                 MockRefreshTokenRepository,
-                { 
+                {
                     provide: IRefreshTokenRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetRefreshTokensService', () =>
         mockRepository  = module.get(MockRefreshTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetRefreshTokensService should be defined', () => 
+        test('GetRefreshTokensService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get refreshTokens', async () => 
+        test('should get refreshTokens', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

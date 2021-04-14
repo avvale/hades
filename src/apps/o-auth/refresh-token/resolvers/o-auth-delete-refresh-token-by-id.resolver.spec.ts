@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('OAuthDeleteRefreshTokenByIdResolver', () => 
+describe('OAuthDeleteRefreshTokenByIdResolver', () =>
 {
     let resolver: OAuthDeleteRefreshTokenByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('OAuthDeleteRefreshTokenByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthDeleteRefreshTokenByIdResolver should be defined', () => 
+    test('OAuthDeleteRefreshTokenByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthDeleteRefreshTokenByIdResolver should be defined', () => 
+        test('OAuthDeleteRefreshTokenByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an refreshToken deleted', async () => 
+        test('should return an refreshToken deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
             expect(await resolver.main(refreshTokens[0].id)).toBe(refreshTokens[0]);
