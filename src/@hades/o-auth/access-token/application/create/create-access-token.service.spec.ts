@@ -15,6 +15,7 @@ import {
     AccessTokenCreatedAt,
     AccessTokenUpdatedAt,
     AccessTokenDeletedAt,
+    AccessTokenExpiredAccessToken,
 } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
@@ -59,13 +60,13 @@ describe('CreateAccessTokenService', () =>
         test('should create a accessToken and emit event', async () =>
         {
             expect(await service.main(
-                new AccessTokenId(accessTokens[0].id),
-                new AccessTokenClientId(accessTokens[0].clientId),
-                new AccessTokenAccountId(accessTokens[0].accountId),
-                new AccessTokenToken(accessTokens[0].token),
-                new AccessTokenName(accessTokens[0].name),
-                new AccessTokenIsRevoked(accessTokens[0].isRevoked),
-                new AccessTokenExpiresAt(accessTokens[0].expiresAt),
+                {
+                    id: new AccessTokenId(accessTokens[0].id),
+                    clientId: new AccessTokenClientId(accessTokens[0].clientId),
+                    accountId: new AccessTokenAccountId(accessTokens[0].accountId),
+                    name: new AccessTokenName(accessTokens[0].name),
+                    expiredAccessToken: new AccessTokenExpiredAccessToken(accessTokens[0].name),
+                }
             )).toBe(undefined);
         });
     });

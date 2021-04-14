@@ -7,7 +7,9 @@ import { AppModule } from './app.module';
 import { EnvironmentService } from '@hades/shared/domain/services/environment.service';
 import { LoggerService } from './apps/core/modules/logger/logger.service';
 import { join } from 'path';
-import * as moment from 'moment-timezone';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as dayjs from 'dayjs';
+dayjs.extend(timezone);
 
 async function bootstrap()
 {
@@ -39,7 +41,7 @@ async function bootstrap()
     if (!environmentService.get<string>('APP_TIMEZONE')) throw new InternalServerErrorException(`APP_TIMEZONE variable is not defined in environment file`);
 
     // check valid timezone in environment file
-    if (!moment.tz.zone(environmentService.get<string>('APP_TIMEZONE'))) throw new InternalServerErrorException(`APP_TIMEZONE environment value has an incorrect value: ${environmentService.get<string>('APP_TIMEZONE')}`);
+    if (!dayjs().tz(environmentService.get<string>('APP_TIMEZONE'))) throw new InternalServerErrorException(`APP_TIMEZONE environment value has an incorrect value: ${environmentService.get<string>('APP_TIMEZONE')}`);
 
     // set data source timezone for application
     process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
@@ -48,7 +50,7 @@ async function bootstrap()
     // - create data in application scope, (createdAt, updatedAt, deletedAt, etc.)
     // - default timezone for dates received, if has not defined X-Timezone header
     // - data will be returned with this timezone, if has not defined X-Timezone header
-    moment.tz.setDefault(process.env.TZ);
+    dayjs.tz.setDefault(process.env.TZ);
 
     await app.listen(environmentService.get<number>('APP_PORT'));
 }
