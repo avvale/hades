@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 
-describe('OAuthDeleteClientsResolver', () => 
+describe('OAuthDeleteClientsResolver', () =>
 {
     let resolver: OAuthDeleteClientsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('OAuthDeleteClientsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthDeleteClientsResolver should be defined', () => 
+    test('OAuthDeleteClientsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthDeleteClientsResolver should be defined', () => 
+        test('OAuthDeleteClientsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an clients deleted', async () => 
+        test('should return an clients deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients)));
             expect(await resolver.main()).toBe(clients);

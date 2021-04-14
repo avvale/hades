@@ -6,13 +6,13 @@ import { CreateRefreshTokensService } from './create-refresh-tokens.service';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
-describe('CreateRefreshTokensService', () => 
+describe('CreateRefreshTokensService', () =>
 {
     let service: CreateRefreshTokensService;
     let repository: IRefreshTokenRepository;
     let mockRepository: MockRefreshTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateRefreshTokensService', () =>
                 EventPublisher,
                 CreateRefreshTokensService,
                 MockRefreshTokenRepository,
-                { 
+                {
                     provide: IRefreshTokenRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateRefreshTokensService', () =>
         mockRepository  = module.get(MockRefreshTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateRefreshTokensService should be defined', () => 
+        test('CreateRefreshTokensService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create refreshTokens and emit event', async () => 
+        test('should create refreshTokens and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

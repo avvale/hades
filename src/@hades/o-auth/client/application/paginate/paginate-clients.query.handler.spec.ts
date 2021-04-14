@@ -41,14 +41,14 @@ describe('PaginateClientsQueryHandler', () =>
         mapper          = new ClientMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateClientsQueryHandler should be defined', () => 
+        test('PaginateClientsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an clients paginated', async () => 
+        test('should return an clients paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateClientsQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

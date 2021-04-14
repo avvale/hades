@@ -40,13 +40,15 @@ describe('CreateAccessTokenCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateAccessTokenCommand(
-                    accessTokens[0].id,
-                    accessTokens[0].clientId,
-                    accessTokens[0].accountId,
-                    accessTokens[0].token,
-                    accessTokens[0].name,
-                    accessTokens[0].isRevoked,
-                    accessTokens[0].expiresAt,
+                    {
+                        id : accessTokens[0].id,
+                        clientId : accessTokens[0].clientId,
+                        accountId : accessTokens[0].accountId,
+                        token : accessTokens[0].token,
+                        name : accessTokens[0].name,
+                        isRevoked : accessTokens[0].isRevoked,
+                        expiresAt : accessTokens[0].expiresAt,
+                    }
                 )
             )).toBe(undefined);
         });

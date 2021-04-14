@@ -6,13 +6,13 @@ import { PaginateRefreshTokensService } from './paginate-refresh-tokens.service'
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
-describe('PaginateRefreshTokensService', () => 
+describe('PaginateRefreshTokensService', () =>
 {
     let service: PaginateRefreshTokensService;
     let repository: IRefreshTokenRepository;
     let mockRepository: MockRefreshTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateRefreshTokensService', () =>
                 EventPublisher,
                 PaginateRefreshTokensService,
                 MockRefreshTokenRepository,
-                { 
+                {
                     provide: IRefreshTokenRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateRefreshTokensService', () =>
         mockRepository  = module.get(MockRefreshTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateRefreshTokensService should be defined', () => 
+        test('PaginateRefreshTokensService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate refreshTokens', async () => 
+        test('should paginate refreshTokens', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

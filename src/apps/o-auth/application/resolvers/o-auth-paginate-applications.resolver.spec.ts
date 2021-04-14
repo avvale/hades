@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 
-describe('OAuthPaginateApplicationsResolver', () => 
+describe('OAuthPaginateApplicationsResolver', () =>
 {
     let resolver: OAuthPaginateApplicationsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('OAuthPaginateApplicationsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthPaginateApplicationsResolver should be defined', () => 
+    test('OAuthPaginateApplicationsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthPaginateApplicationsResolver should be defined', () => 
+        test('OAuthPaginateApplicationsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a applications', async () => 
+        test('should return a applications', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
             expect(await resolver.main()).toBe(applications);

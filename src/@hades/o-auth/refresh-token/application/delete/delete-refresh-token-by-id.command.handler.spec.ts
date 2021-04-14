@@ -6,12 +6,12 @@ import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/
 import { DeleteRefreshTokenByIdCommand } from './delete-refresh-token-by-id.command';
 import { DeleteRefreshTokenByIdService } from './delete-refresh-token-by-id.service';
 
-describe('DeleteRefreshTokenByIdCommandHandler', () => 
+describe('DeleteRefreshTokenByIdCommandHandler', () =>
 {
     let commandHandler: DeleteRefreshTokenByIdCommandHandler;
     let service: DeleteRefreshTokenByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteRefreshTokenByIdCommandHandler', () =>
         service         = module.get<DeleteRefreshTokenByIdService>(DeleteRefreshTokenByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRefreshTokenByIdCommandHandler should be defined', () => 
+        test('DeleteRefreshTokenByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteRefreshTokenByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteRefreshTokenByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteRefreshTokenByIdCommand(

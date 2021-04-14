@@ -40,12 +40,14 @@ describe('CreateApplicationCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateApplicationCommand(
-                    applications[0].id,
-                    applications[0].name,
-                    applications[0].code,
-                    applications[0].secret,
-                    applications[0].isMaster,
-                    applications[0].clientIds,
+                    {
+                        id : applications[0].id,
+                        name : applications[0].name,
+                        code : applications[0].code,
+                        secret : applications[0].secret,
+                        isMaster : applications[0].isMaster,
+                        clientIds : applications[0].clientIds,
+                    }
                 )
             )).toBe(undefined);
         });

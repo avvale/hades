@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { OAuthCreateClientInput } from './../../../../graphql';
 
-describe('OAuthCreateClientsResolver', () => 
+describe('OAuthCreateClientsResolver', () =>
 {
     let resolver: OAuthCreateClientsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('OAuthCreateClientsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthCreateClientsResolver should be defined', () => 
+    test('OAuthCreateClientsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthCreateClientsResolver should be defined', () => 
+        test('OAuthCreateClientsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an clients created', async () => 
+        test('should return an clients created', async () =>
         {
             expect(await resolver.main(<OAuthCreateClientInput[]>clients)).toBe(true);
         });

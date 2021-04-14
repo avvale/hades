@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 
-describe('OAuthFindApplicationController', () => 
+describe('OAuthFindApplicationController', () =>
 {
     let controller: OAuthFindApplicationController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('OAuthFindApplicationController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthFindApplicationController should be defined', () => 
+        test('OAuthFindApplicationController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a application', async () => 
+        test('should return a application', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
             expect(await controller.main()).toBe(applications[0]);

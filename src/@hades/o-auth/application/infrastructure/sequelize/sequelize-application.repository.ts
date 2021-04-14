@@ -12,7 +12,6 @@ export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApp
 {
     public readonly aggregateName: string = 'OAuthApplication';
     public readonly mapper: ApplicationMapper = new ApplicationMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(OAuthApplicationModel)

@@ -9,7 +9,7 @@ import { RefreshTokenMapper } from '@hades/o-auth/refresh-token/domain/refresh-t
 import { FindRefreshTokenByIdQuery } from './find-refresh-token-by-id.query';
 import { FindRefreshTokenByIdService } from './find-refresh-token-by-id.service';
 
-describe('FindRefreshTokenByIdQueryHandler', () => 
+describe('FindRefreshTokenByIdQueryHandler', () =>
 {
     let queryHandler: FindRefreshTokenByIdQueryHandler;
     let service: FindRefreshTokenByIdService;
@@ -48,13 +48,13 @@ describe('FindRefreshTokenByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an refreshToken founded', async () => 
+        test('should return an refreshToken founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindRefreshTokenByIdQuery(
                     refreshTokens[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

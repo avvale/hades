@@ -5,12 +5,12 @@ import { DeleteRefreshTokensCommandHandler } from './delete-refresh-tokens.comma
 import { DeleteRefreshTokensCommand } from './delete-refresh-tokens.command';
 import { DeleteRefreshTokensService } from './delete-refresh-tokens.service';
 
-describe('DeleteRefreshTokensCommandHandler', () => 
+describe('DeleteRefreshTokensCommandHandler', () =>
 {
     let commandHandler: DeleteRefreshTokensCommandHandler;
     let service: DeleteRefreshTokensService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteRefreshTokensCommandHandler', () =>
         service         = module.get<DeleteRefreshTokensService>(DeleteRefreshTokensService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRefreshTokensCommandHandler should be defined', () => 
+        test('DeleteRefreshTokensCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteRefreshTokensCommand()

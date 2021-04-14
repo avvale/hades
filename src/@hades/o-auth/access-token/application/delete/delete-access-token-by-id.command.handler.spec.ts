@@ -6,12 +6,12 @@ import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/ac
 import { DeleteAccessTokenByIdCommand } from './delete-access-token-by-id.command';
 import { DeleteAccessTokenByIdService } from './delete-access-token-by-id.service';
 
-describe('DeleteAccessTokenByIdCommandHandler', () => 
+describe('DeleteAccessTokenByIdCommandHandler', () =>
 {
     let commandHandler: DeleteAccessTokenByIdCommandHandler;
     let service: DeleteAccessTokenByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteAccessTokenByIdCommandHandler', () =>
         service         = module.get<DeleteAccessTokenByIdService>(DeleteAccessTokenByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAccessTokenByIdCommandHandler should be defined', () => 
+        test('DeleteAccessTokenByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteAccessTokenByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteAccessTokenByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAccessTokenByIdCommand(

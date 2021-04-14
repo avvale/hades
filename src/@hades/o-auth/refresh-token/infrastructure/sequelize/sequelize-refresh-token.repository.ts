@@ -12,7 +12,6 @@ export class SequelizeRefreshTokenRepository extends SequelizeRepository<OAuthRe
 {
     public readonly aggregateName: string = 'OAuthRefreshToken';
     public readonly mapper: RefreshTokenMapper = new RefreshTokenMapper();
-    public readonly timezoneColumns: string[] = ['expiresAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(OAuthRefreshTokenModel)

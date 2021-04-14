@@ -6,13 +6,13 @@ import { DeleteRefreshTokensService } from './delete-refresh-tokens.service';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
-describe('DeleteRefreshTokensService', () => 
+describe('DeleteRefreshTokensService', () =>
 {
     let service: DeleteRefreshTokensService;
     let repository: IRefreshTokenRepository;
     let mockRepository: MockRefreshTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteRefreshTokensService', () =>
                 EventPublisher,
                 DeleteRefreshTokensService,
                 MockRefreshTokenRepository,
-                { 
+                {
                     provide: IRefreshTokenRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteRefreshTokensService', () =>
         mockRepository  = module.get(MockRefreshTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRefreshTokensService should be defined', () => 
+        test('DeleteRefreshTokensService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete refreshToken and emit event', async () => 
+        test('should delete refreshToken and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

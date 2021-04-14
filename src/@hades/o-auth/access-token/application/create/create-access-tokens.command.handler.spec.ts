@@ -6,12 +6,12 @@ import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/ac
 import { CreateAccessTokensCommand } from './create-access-tokens.command';
 import { CreateAccessTokensService } from './create-access-tokens.service';
 
-describe('CreateAccessTokensCommandHandler', () => 
+describe('CreateAccessTokensCommandHandler', () =>
 {
     let commandHandler: CreateAccessTokensCommandHandler;
     let service: CreateAccessTokensService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateAccessTokensCommandHandler', () =>
         service         = module.get<CreateAccessTokensService>(CreateAccessTokensService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAccessTokensCommandHandler should be defined', () => 
+        test('CreateAccessTokensCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an accessToken created', async () => 
+        test('should return an accessToken created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateAccessTokensCommand(
                     accessTokens
-                
+
                 )
             )).toBe(undefined);
         });

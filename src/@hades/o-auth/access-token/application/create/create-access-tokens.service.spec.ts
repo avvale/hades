@@ -6,13 +6,13 @@ import { CreateAccessTokensService } from './create-access-tokens.service';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
 
-describe('CreateAccessTokensService', () => 
+describe('CreateAccessTokensService', () =>
 {
     let service: CreateAccessTokensService;
     let repository: IAccessTokenRepository;
     let mockRepository: MockAccessTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateAccessTokensService', () =>
                 EventPublisher,
                 CreateAccessTokensService,
                 MockAccessTokenRepository,
-                { 
+                {
                     provide: IAccessTokenRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateAccessTokensService', () =>
         mockRepository  = module.get(MockAccessTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAccessTokensService should be defined', () => 
+        test('CreateAccessTokensService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create accessTokens and emit event', async () => 
+        test('should create accessTokens and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

@@ -6,12 +6,12 @@ import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/
 import { CreateRefreshTokensCommand } from './create-refresh-tokens.command';
 import { CreateRefreshTokensService } from './create-refresh-tokens.service';
 
-describe('CreateRefreshTokensCommandHandler', () => 
+describe('CreateRefreshTokensCommandHandler', () =>
 {
     let commandHandler: CreateRefreshTokensCommandHandler;
     let service: CreateRefreshTokensService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateRefreshTokensCommandHandler', () =>
         service         = module.get<CreateRefreshTokensService>(CreateRefreshTokensService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateRefreshTokensCommandHandler should be defined', () => 
+        test('CreateRefreshTokensCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an refreshToken created', async () => 
+        test('should return an refreshToken created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateRefreshTokensCommand(
                     refreshTokens
-                
+
                 )
             )).toBe(undefined);
         });

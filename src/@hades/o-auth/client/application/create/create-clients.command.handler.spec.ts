@@ -6,12 +6,12 @@ import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { CreateClientsCommand } from './create-clients.command';
 import { CreateClientsService } from './create-clients.service';
 
-describe('CreateClientsCommandHandler', () => 
+describe('CreateClientsCommandHandler', () =>
 {
     let commandHandler: CreateClientsCommandHandler;
     let service: CreateClientsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateClientsCommandHandler', () =>
         service         = module.get<CreateClientsService>(CreateClientsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateClientsCommandHandler should be defined', () => 
+        test('CreateClientsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an client created', async () => 
+        test('should return an client created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateClientsCommand(
                     clients
-                
+
                 )
             )).toBe(undefined);
         });

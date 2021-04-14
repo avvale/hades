@@ -6,13 +6,13 @@ import { DeleteApplicationsService } from './delete-applications.service';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { MockApplicationRepository } from './../../infrastructure/mock/mock-application.repository';
 
-describe('DeleteApplicationsService', () => 
+describe('DeleteApplicationsService', () =>
 {
     let service: DeleteApplicationsService;
     let repository: IApplicationRepository;
     let mockRepository: MockApplicationRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteApplicationsService', () =>
                 EventPublisher,
                 DeleteApplicationsService,
                 MockApplicationRepository,
-                { 
+                {
                     provide: IApplicationRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteApplicationsService', () =>
         mockRepository  = module.get(MockApplicationRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteApplicationsService should be defined', () => 
+        test('DeleteApplicationsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete application and emit event', async () => 
+        test('should delete application and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

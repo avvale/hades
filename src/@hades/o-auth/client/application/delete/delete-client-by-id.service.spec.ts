@@ -8,7 +8,7 @@ import { ClientId } from './../../domain/value-objects';
 import { IClientRepository } from './../../domain/client.repository';
 import { MockClientRepository } from './../../infrastructure/mock/mock-client.repository';
 
-describe('DeleteClientByIdService', () => 
+describe('DeleteClientByIdService', () =>
 {
     let service: DeleteClientByIdService;
     let repository: IClientRepository;
@@ -38,14 +38,14 @@ describe('DeleteClientByIdService', () =>
         mockRepository  = module.get(MockClientRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteClientByIdService should be defined', () => 
+        test('DeleteClientByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete client and emit event', async () => 
+        test('should delete client and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

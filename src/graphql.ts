@@ -14,10 +14,10 @@ export enum OAuthClientGrantType {
 
 export interface QueryStatement {
     where?: JSON;
-    include?: string[];
+    include?: GraphQLString[];
     order?: JSON;
-    limit?: number;
-    offset?: number;
+    limit?: GraphQLInt;
+    offset?: GraphQLInt;
 }
 
 export interface OAuthCreateAccessTokenInput {
@@ -28,6 +28,7 @@ export interface OAuthCreateAccessTokenInput {
     name?: GraphQLString;
     isRevoked: GraphQLBoolean;
     expiresAt?: GraphQLTimestamp;
+    refreshToken?: OAuthCreateRefreshTokenInput;
 }
 
 export interface OAuthUpdateAccessTokenInput {
@@ -38,6 +39,7 @@ export interface OAuthUpdateAccessTokenInput {
     name?: GraphQLString;
     isRevoked?: GraphQLBoolean;
     expiresAt?: GraphQLTimestamp;
+    refreshToken?: OAuthUpdateRefreshTokenInput;
 }
 
 export interface OAuthCreateApplicationInput {
@@ -67,7 +69,7 @@ export interface OAuthCreateClientInput {
     redirect?: GraphQLString;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
-    isRevoked: GraphQLBoolean;
+    isActive: GraphQLBoolean;
     isMaster: GraphQLBoolean;
     applicationIds?: string[];
 }
@@ -81,7 +83,7 @@ export interface OAuthUpdateClientInput {
     redirect?: GraphQLString;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
-    isRevoked?: GraphQLBoolean;
+    isActive?: GraphQLBoolean;
     isMaster?: GraphQLBoolean;
     applicationIds?: string[];
 }
@@ -90,9 +92,10 @@ export interface OAuthCreateCredentialInput {
     grantType: OAuthClientGrantType;
     username?: GraphQLString;
     password?: GraphQLString;
+    email?: GraphQLString;
+    clientSecret?: GraphQLString;
     accessTokenId?: string;
     refreshToken?: GraphQLString;
-    clientSecret?: GraphQLString;
     redirect?: GraphQLString;
 }
 
@@ -113,13 +116,14 @@ export interface OAuthUpdateRefreshTokenInput {
 }
 
 export interface Pagination {
-    total: number;
-    count: number;
+    total: GraphQLInt;
+    count: GraphQLInt;
     rows: JSON[];
 }
 
 export interface OAuthAccessToken {
     id: string;
+    clientId: string;
     client: OAuthClient;
     accountId?: string;
     token: GraphQLString;
@@ -196,7 +200,7 @@ export interface OAuthClient {
     redirect?: GraphQLString;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
-    isRevoked: GraphQLBoolean;
+    isActive: GraphQLBoolean;
     isMaster: GraphQLBoolean;
     applications?: OAuthApplication[];
     accessTokens?: OAuthAccessToken[];
@@ -213,6 +217,7 @@ export interface OAuthCredential {
 export interface OAuthRefreshToken {
     id: string;
     accessTokenId: string;
+    accessToken: OAuthAccessToken;
     token: GraphQLString;
     isRevoked: GraphQLBoolean;
     expiresAt?: GraphQLTimestamp;
@@ -230,3 +235,4 @@ export type GraphQLFloat = any;
 export type GraphQLBoolean = any;
 export type GraphQLISODateTime = any;
 export type GraphQLTimestamp = any;
+export type GraphQLUpload = any;

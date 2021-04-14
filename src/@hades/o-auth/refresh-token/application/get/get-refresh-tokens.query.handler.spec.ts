@@ -8,14 +8,14 @@ import { RefreshTokenMapper } from '@hades/o-auth/refresh-token/domain/refresh-t
 import { GetRefreshTokensQuery } from './get-refresh-tokens.query';
 import { GetRefreshTokensService } from './get-refresh-tokens.service';
 
-describe('GetRefreshTokensQueryHandler', () => 
+describe('GetRefreshTokensQueryHandler', () =>
 {
     let queryHandler: GetRefreshTokensQueryHandler;
     let service: GetRefreshTokensService;
     let repository: MockRefreshTokenRepository;
     let mapper: RefreshTokenMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetRefreshTokensQueryHandler', () =>
         mapper          = new RefreshTokenMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetRefreshTokensQueryHandler should be defined', () => 
+        test('GetRefreshTokensQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an refreshTokens founded', async () => 
+        test('should return an refreshTokens founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

@@ -8,14 +8,14 @@ import { ApplicationMapper } from '@hades/o-auth/application/domain/application.
 import { FindApplicationQuery } from './find-application.query';
 import { FindApplicationService } from './find-application.service';
 
-describe('FindApplicationQueryHandler', () => 
+describe('FindApplicationQueryHandler', () =>
 {
     let queryHandler: FindApplicationQueryHandler;
     let service: FindApplicationService;
     let repository: MockApplicationRepository;
     let mapper: ApplicationMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindApplicationQueryHandler', () =>
         mapper          = new ApplicationMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindApplicationQueryHandler should be defined', () => 
+        test('FindApplicationQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an application founded', async () => 
+        test('should return an application founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

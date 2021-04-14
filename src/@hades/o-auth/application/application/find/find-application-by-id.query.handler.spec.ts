@@ -9,7 +9,7 @@ import { ApplicationMapper } from '@hades/o-auth/application/domain/application.
 import { FindApplicationByIdQuery } from './find-application-by-id.query';
 import { FindApplicationByIdService } from './find-application-by-id.service';
 
-describe('FindApplicationByIdQueryHandler', () => 
+describe('FindApplicationByIdQueryHandler', () =>
 {
     let queryHandler: FindApplicationByIdQueryHandler;
     let service: FindApplicationByIdService;
@@ -48,13 +48,13 @@ describe('FindApplicationByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an application founded', async () => 
+        test('should return an application founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindApplicationByIdQuery(
                     applications[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

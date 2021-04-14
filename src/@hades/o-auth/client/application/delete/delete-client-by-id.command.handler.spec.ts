@@ -6,12 +6,12 @@ import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { DeleteClientByIdCommand } from './delete-client-by-id.command';
 import { DeleteClientByIdService } from './delete-client-by-id.service';
 
-describe('DeleteClientByIdCommandHandler', () => 
+describe('DeleteClientByIdCommandHandler', () =>
 {
     let commandHandler: DeleteClientByIdCommandHandler;
     let service: DeleteClientByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteClientByIdCommandHandler', () =>
         service         = module.get<DeleteClientByIdService>(DeleteClientByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteClientByIdCommandHandler should be defined', () => 
+        test('DeleteClientByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteClientByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteClientByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteClientByIdCommand(

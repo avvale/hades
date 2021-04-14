@@ -9,7 +9,7 @@ import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-toke
 import { FindAccessTokenByIdQuery } from './find-access-token-by-id.query';
 import { FindAccessTokenByIdService } from './find-access-token-by-id.service';
 
-describe('FindAccessTokenByIdQueryHandler', () => 
+describe('FindAccessTokenByIdQueryHandler', () =>
 {
     let queryHandler: FindAccessTokenByIdQueryHandler;
     let service: FindAccessTokenByIdService;
@@ -48,13 +48,13 @@ describe('FindAccessTokenByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an accessToken founded', async () => 
+        test('should return an accessToken founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindAccessTokenByIdQuery(
                     accessTokens[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

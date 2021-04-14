@@ -9,7 +9,7 @@ import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
 import { FindClientByIdQuery } from './find-client-by-id.query';
 import { FindClientByIdService } from './find-client-by-id.service';
 
-describe('FindClientByIdQueryHandler', () => 
+describe('FindClientByIdQueryHandler', () =>
 {
     let queryHandler: FindClientByIdQueryHandler;
     let service: FindClientByIdService;
@@ -48,13 +48,13 @@ describe('FindClientByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an client founded', async () => 
+        test('should return an client founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindClientByIdQuery(
                     clients[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

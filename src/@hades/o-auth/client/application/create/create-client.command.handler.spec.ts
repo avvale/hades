@@ -40,17 +40,19 @@ describe('CreateClientCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreateClientCommand(
-                    clients[0].id,
-                    clients[0].grantType,
-                    clients[0].name,
-                    clients[0].secret,
-                    clients[0].authUrl,
-                    clients[0].redirect,
-                    clients[0].expiredAccessToken,
-                    clients[0].expiredRefreshToken,
-                    clients[0].isActive,
-                    clients[0].isMaster,
-                    clients[0].applicationIds,
+                    {
+                        id : clients[0].id,
+                        grantType : clients[0].grantType,
+                        name : clients[0].name,
+                        secret : clients[0].secret,
+                        authUrl : clients[0].authUrl,
+                        redirect : clients[0].redirect,
+                        expiredAccessToken : clients[0].expiredAccessToken,
+                        expiredRefreshToken : clients[0].expiredRefreshToken,
+                        isActive : clients[0].isActive,
+                        isMaster : clients[0].isMaster,
+                        applicationIds : clients[0].applicationIds,
+                    }
                 )
             )).toBe(undefined);
         });

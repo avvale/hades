@@ -6,13 +6,13 @@ import { GetAccessTokensService } from './get-access-tokens.service';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
 
-describe('GetAccessTokensService', () => 
+describe('GetAccessTokensService', () =>
 {
     let service: GetAccessTokensService;
     let repository: IAccessTokenRepository;
     let mockRepository: MockAccessTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetAccessTokensService', () =>
                 EventPublisher,
                 GetAccessTokensService,
                 MockAccessTokenRepository,
-                { 
+                {
                     provide: IAccessTokenRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetAccessTokensService', () =>
         mockRepository  = module.get(MockAccessTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetAccessTokensService should be defined', () => 
+        test('GetAccessTokensService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get accessTokens', async () => 
+        test('should get accessTokens', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

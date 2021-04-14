@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('OAuthPaginateAccessTokensController', () => 
+describe('OAuthPaginateAccessTokensController', () =>
 {
     let controller: OAuthPaginateAccessTokensController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('OAuthPaginateAccessTokensController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthPaginateAccessTokensController should be defined', () => 
+        test('OAuthPaginateAccessTokensController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a accessTokens', async () => 
+        test('should return a accessTokens', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
             expect(await controller.main()).toBe(accessTokens);

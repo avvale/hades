@@ -6,13 +6,13 @@ import { PaginateAccessTokensService } from './paginate-access-tokens.service';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
 
-describe('PaginateAccessTokensService', () => 
+describe('PaginateAccessTokensService', () =>
 {
     let service: PaginateAccessTokensService;
     let repository: IAccessTokenRepository;
     let mockRepository: MockAccessTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateAccessTokensService', () =>
                 EventPublisher,
                 PaginateAccessTokensService,
                 MockAccessTokenRepository,
-                { 
+                {
                     provide: IAccessTokenRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateAccessTokensService', () =>
         mockRepository  = module.get(MockAccessTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateAccessTokensService should be defined', () => 
+        test('PaginateAccessTokensService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate accessTokens', async () => 
+        test('should paginate accessTokens', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

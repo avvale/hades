@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { OAuthUpdateClientInput } from './../../../../graphql';
 
-describe('OAuthUpdateClientResolver', () => 
+describe('OAuthUpdateClientResolver', () =>
 {
     let resolver: OAuthUpdateClientResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -43,14 +43,14 @@ describe('OAuthUpdateClientResolver', () =>
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('OAuthUpdateClientResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a client created', async () => 
+        test('should return a client created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
             expect(await resolver.main(<OAuthUpdateClientInput>clients[0])).toBe(clients[0]);

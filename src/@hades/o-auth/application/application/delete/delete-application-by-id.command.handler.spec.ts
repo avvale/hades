@@ -6,12 +6,12 @@ import { applications } from '@hades/o-auth/application/infrastructure/seeds/app
 import { DeleteApplicationByIdCommand } from './delete-application-by-id.command';
 import { DeleteApplicationByIdService } from './delete-application-by-id.service';
 
-describe('DeleteApplicationByIdCommandHandler', () => 
+describe('DeleteApplicationByIdCommandHandler', () =>
 {
     let commandHandler: DeleteApplicationByIdCommandHandler;
     let service: DeleteApplicationByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteApplicationByIdCommandHandler', () =>
         service         = module.get<DeleteApplicationByIdService>(DeleteApplicationByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteApplicationByIdCommandHandler should be defined', () => 
+        test('DeleteApplicationByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteApplicationByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteApplicationByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteApplicationByIdCommand(
