@@ -3,7 +3,9 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { Op } from 'sequelize';
-import * as moment from 'moment-timezone';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as dayjs from 'dayjs';
+dayjs.extend(timezone);
 
 export class SequelizeCriteria implements ICriteria
 {
@@ -17,7 +19,7 @@ export class SequelizeCriteria implements ICriteria
                 if (typeof value === 'string')
                 {
                     const isDate = value.match(/[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/);
-                    return isDate ? moment.tz(value, cQMetadata.timezone).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss') : value;
+                    return isDate ? dayjs.tz(value, cQMetadata.timezone).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss') : value;
                 }
                 return value;
             });
