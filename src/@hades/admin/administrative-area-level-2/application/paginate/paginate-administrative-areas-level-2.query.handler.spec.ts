@@ -41,14 +41,14 @@ describe('PaginateAdministrativeAreasLevel2QueryHandler', () =>
         mapper          = new AdministrativeAreaLevel2Mapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateAdministrativeAreasLevel2QueryHandler should be defined', () => 
+        test('PaginateAdministrativeAreasLevel2QueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an administrativeAreasLevel2 paginated', async () => 
+        test('should return an administrativeAreasLevel2 paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateAdministrativeAreasLevel2QueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

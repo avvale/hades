@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
 
-describe('AdminDeleteCountriesResolver', () => 
+describe('AdminDeleteCountriesResolver', () =>
 {
     let resolver: AdminDeleteCountriesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminDeleteCountriesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminDeleteCountriesResolver should be defined', () => 
+    test('AdminDeleteCountriesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminDeleteCountriesResolver should be defined', () => 
+        test('AdminDeleteCountriesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an countries deleted', async () => 
+        test('should return an countries deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries)));
             expect(await resolver.main()).toBe(countries);

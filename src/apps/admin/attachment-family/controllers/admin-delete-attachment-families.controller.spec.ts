@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
 
-describe('AdminDeleteAttachmentFamiliesController', () => 
+describe('AdminDeleteAttachmentFamiliesController', () =>
 {
     let controller: AdminDeleteAttachmentFamiliesController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('AdminDeleteAttachmentFamiliesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminDeleteAttachmentFamiliesController should be defined', () => 
+        test('AdminDeleteAttachmentFamiliesController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an attachmentFamilies deleted', async () => 
+        test('should return an attachmentFamilies deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentFamilies)));
             expect(await controller.main()).toBe(attachmentFamilies);

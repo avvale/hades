@@ -13,7 +13,7 @@ describe('AdminCreateResourceResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateResourceResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateResourceResolver should be defined', () => 
+    test('AdminCreateResourceResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateResourceResolver should be defined', () => 
+        test('AdminCreateResourceResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an resource created', async () => 
+        test('should return an resource created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources[0])));
             expect(await resolver.main(<AdminCreateResourceInput>resources[0])).toBe(resources[0]);

@@ -37,14 +37,14 @@ describe('FindAttachmentByIdService', () =>
         mockRepository  = module.get(MockAttachmentRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAttachmentByIdService should be defined', () => 
+        test('FindAttachmentByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find attachment by id', async () => 
+        test('should find attachment by id', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

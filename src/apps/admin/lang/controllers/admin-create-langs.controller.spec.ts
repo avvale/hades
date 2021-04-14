@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 
-describe('AdminCreateLangsController', () => 
+describe('AdminCreateLangsController', () =>
 {
     let controller: AdminCreateLangsController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminCreateLangsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateLangsController should be defined', () => 
+        test('AdminCreateLangsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an langs created', async () => 
+        test('should return an langs created', async () =>
         {
             expect(await controller.main(langs)).toBe(undefined);
         });

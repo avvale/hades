@@ -62,17 +62,19 @@ describe('UpdateAttachmentLibraryService', () =>
         test('should update a attachmentLibrary and emit event', async () =>
         {
             expect(await service.main(
-                new AttachmentLibraryId(attachmentLibraries[0].id),
-                new AttachmentLibraryName(attachmentLibraries[0].name),
-                new AttachmentLibraryPathname(attachmentLibraries[0].pathname),
-                new AttachmentLibraryFilename(attachmentLibraries[0].filename),
-                new AttachmentLibraryUrl(attachmentLibraries[0].url),
-                new AttachmentLibraryMime(attachmentLibraries[0].mime),
-                new AttachmentLibraryExtension(attachmentLibraries[0].extension),
-                new AttachmentLibrarySize(attachmentLibraries[0].size),
-                new AttachmentLibraryWidth(attachmentLibraries[0].width),
-                new AttachmentLibraryHeight(attachmentLibraries[0].height),
-                new AttachmentLibraryData(attachmentLibraries[0].data),
+                {
+                    id: new AttachmentLibraryId(attachmentLibraries[0].id),
+                    name: new AttachmentLibraryName(attachmentLibraries[0].name),
+                    pathname: new AttachmentLibraryPathname(attachmentLibraries[0].pathname),
+                    filename: new AttachmentLibraryFilename(attachmentLibraries[0].filename),
+                    url: new AttachmentLibraryUrl(attachmentLibraries[0].url),
+                    mime: new AttachmentLibraryMime(attachmentLibraries[0].mime),
+                    extension: new AttachmentLibraryExtension(attachmentLibraries[0].extension),
+                    size: new AttachmentLibrarySize(attachmentLibraries[0].size),
+                    width: new AttachmentLibraryWidth(attachmentLibraries[0].width),
+                    height: new AttachmentLibraryHeight(attachmentLibraries[0].height),
+                    data: new AttachmentLibraryData(attachmentLibraries[0].data),
+                }
             )).toBe(undefined);
         });
     });

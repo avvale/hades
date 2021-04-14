@@ -47,17 +47,17 @@ input AdminUpdateLangInput
 
 type Query
 {
-    adminFindLang(query:QueryStatement constraint:QueryStatement): AdminLang
-    adminFindLangById(id:ID constraint:QueryStatement): AdminLang
-    adminGetLangs(query:QueryStatement constraint:QueryStatement): [AdminLang]!
-    adminPaginateLangs(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindLang(query: QueryStatement constraint: QueryStatement): AdminLang
+    adminFindLangById(id: ID constraint: QueryStatement): AdminLang
+    adminGetLangs(query: QueryStatement constraint: QueryStatement): [AdminLang]!
+    adminPaginateLangs(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateLang(payload: AdminCreateLangInput!): AdminLang
     adminCreateLangs(payload: [AdminCreateLangInput]!): Boolean!
-    adminUpdateLang(payload: AdminUpdateLangInput! constraint:QueryStatement): AdminLang
-    adminDeleteLangById(id: ID! constraint:QueryStatement): AdminLang
-    adminDeleteLangs(query:QueryStatement constraint:QueryStatement): [AdminLang]!
+    adminUpdateLang(payload: AdminUpdateLangInput! constraint: QueryStatement): AdminLang
+    adminDeleteLangById(id: ID! constraint: QueryStatement): AdminLang
+    adminDeleteLangs(query: QueryStatement constraint: QueryStatement): [AdminLang]!
 }

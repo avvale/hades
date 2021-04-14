@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
 
-describe('AdminFindResourceController', () => 
+describe('AdminFindResourceController', () =>
 {
     let controller: AdminFindResourceController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminFindResourceController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminFindResourceController should be defined', () => 
+        test('AdminFindResourceController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a resource', async () => 
+        test('should return a resource', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources[0])));
             expect(await controller.main()).toBe(resources[0]);

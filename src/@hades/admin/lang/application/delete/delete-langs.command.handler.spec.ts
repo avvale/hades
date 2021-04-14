@@ -5,12 +5,12 @@ import { DeleteLangsCommandHandler } from './delete-langs.command-handler';
 import { DeleteLangsCommand } from './delete-langs.command';
 import { DeleteLangsService } from './delete-langs.service';
 
-describe('DeleteLangsCommandHandler', () => 
+describe('DeleteLangsCommandHandler', () =>
 {
     let commandHandler: DeleteLangsCommandHandler;
     let service: DeleteLangsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteLangsCommandHandler', () =>
         service         = module.get<DeleteLangsService>(DeleteLangsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteLangsCommandHandler should be defined', () => 
+        test('DeleteLangsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteLangsCommand()

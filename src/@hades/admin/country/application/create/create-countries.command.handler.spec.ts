@@ -6,12 +6,12 @@ import { countries } from '@hades/admin/country/infrastructure/seeds/country.see
 import { CreateCountriesCommand } from './create-countries.command';
 import { CreateCountriesService } from './create-countries.service';
 
-describe('CreateCountriesCommandHandler', () => 
+describe('CreateCountriesCommandHandler', () =>
 {
     let commandHandler: CreateCountriesCommandHandler;
     let service: CreateCountriesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateCountriesCommandHandler', () =>
         service         = module.get<CreateCountriesService>(CreateCountriesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateCountriesCommandHandler should be defined', () => 
+        test('CreateCountriesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an country created', async () => 
+        test('should return an country created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateCountriesCommand(
                     countries
-                
+
                 )
             )).toBe(undefined);
         });

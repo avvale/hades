@@ -41,14 +41,14 @@ describe('PaginateCountriesQueryHandler', () =>
         mapper          = new CountryMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateCountriesQueryHandler should be defined', () => 
+        test('PaginateCountriesQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an countries paginated', async () => 
+        test('should return an countries paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateCountriesQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

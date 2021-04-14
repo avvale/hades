@@ -57,12 +57,14 @@ describe('UpdateResourceService', () =>
         test('should update a resource and emit event', async () =>
         {
             expect(await service.main(
-                new ResourceId(resources[0].id),
-                new ResourceBoundedContextId(resources[0].boundedContextId),
-                new ResourceAttachmentFamilyIds(resources[0].attachmentFamilyIds),
-                new ResourceName(resources[0].name),
-                new ResourceHasCustomFields(resources[0].hasCustomFields),
-                new ResourceHasAttachments(resources[0].hasAttachments),
+                {
+                    id: new ResourceId(resources[0].id),
+                    boundedContextId: new ResourceBoundedContextId(resources[0].boundedContextId),
+                    attachmentFamilyIds: new ResourceAttachmentFamilyIds(resources[0].attachmentFamilyIds),
+                    name: new ResourceName(resources[0].name),
+                    hasCustomFields: new ResourceHasCustomFields(resources[0].hasCustomFields),
+                    hasAttachments: new ResourceHasAttachments(resources[0].hasAttachments),
+                }
             )).toBe(undefined);
         });
     });

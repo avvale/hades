@@ -9,7 +9,7 @@ import { ResourceMapper } from '@hades/admin/resource/domain/resource.mapper';
 import { FindResourceByIdQuery } from './find-resource-by-id.query';
 import { FindResourceByIdService } from './find-resource-by-id.service';
 
-describe('FindResourceByIdQueryHandler', () => 
+describe('FindResourceByIdQueryHandler', () =>
 {
     let queryHandler: FindResourceByIdQueryHandler;
     let service: FindResourceByIdService;
@@ -48,13 +48,13 @@ describe('FindResourceByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an resource founded', async () => 
+        test('should return an resource founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindResourceByIdQuery(
                     resources[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

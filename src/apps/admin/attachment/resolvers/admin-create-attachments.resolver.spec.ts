@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachments } from '@hades/admin/attachment/infrastructure/seeds/attachment.seed';
 import { AdminCreateAttachmentInput } from './../../../../graphql';
 
-describe('AdminCreateAttachmentsResolver', () => 
+describe('AdminCreateAttachmentsResolver', () =>
 {
     let resolver: AdminCreateAttachmentsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateAttachmentsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateAttachmentsResolver should be defined', () => 
+    test('AdminCreateAttachmentsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAttachmentsResolver should be defined', () => 
+        test('AdminCreateAttachmentsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an attachments created', async () => 
+        test('should return an attachments created', async () =>
         {
             expect(await resolver.main(<AdminCreateAttachmentInput[]>attachments)).toBe(true);
         });

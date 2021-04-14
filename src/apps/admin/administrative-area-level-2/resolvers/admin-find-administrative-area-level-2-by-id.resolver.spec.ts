@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel2 } from '@hades/admin/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
-describe('AdminFindAdministrativeAreaLevel2ByIdResolver', () => 
+describe('AdminFindAdministrativeAreaLevel2ByIdResolver', () =>
 {
     let resolver: AdminFindAdministrativeAreaLevel2ByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminFindAdministrativeAreaLevel2ByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminFindAdministrativeAreaLevel2ByIdResolver should be defined', () => 
+    test('AdminFindAdministrativeAreaLevel2ByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminFindAdministrativeAreaLevel2ByIdResolver should be defined', () => 
+        test('AdminFindAdministrativeAreaLevel2ByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an administrativeAreaLevel2 by id', async () => 
+        test('should return an administrativeAreaLevel2 by id', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel2[0])));
             expect(await resolver.main(administrativeAreasLevel2[0].id)).toBe(administrativeAreasLevel2[0]);

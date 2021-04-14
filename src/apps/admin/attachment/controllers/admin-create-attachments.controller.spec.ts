@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachments } from '@hades/admin/attachment/infrastructure/seeds/attachment.seed';
 
-describe('AdminCreateAttachmentsController', () => 
+describe('AdminCreateAttachmentsController', () =>
 {
     let controller: AdminCreateAttachmentsController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminCreateAttachmentsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAttachmentsController should be defined', () => 
+        test('AdminCreateAttachmentsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an attachments created', async () => 
+        test('should return an attachments created', async () =>
         {
             expect(await controller.main(attachments)).toBe(undefined);
         });

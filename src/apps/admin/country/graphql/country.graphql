@@ -77,17 +77,17 @@ input AdminUpdateCountryInput
 
 type Query
 {
-    adminFindCountry(query:QueryStatement constraint:QueryStatement): AdminCountry
-    adminFindCountryById(id:ID constraint:QueryStatement): AdminCountry
-    adminGetCountries(query:QueryStatement constraint:QueryStatement): [AdminCountry]!
-    adminPaginateCountries(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindCountry(query: QueryStatement constraint: QueryStatement): AdminCountry
+    adminFindCountryById(id: ID constraint: QueryStatement): AdminCountry
+    adminGetCountries(query: QueryStatement constraint: QueryStatement): [AdminCountry]!
+    adminPaginateCountries(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateCountry(payload: AdminCreateCountryInput!): AdminCountry
     adminCreateCountries(payload: [AdminCreateCountryInput]!): Boolean!
-    adminUpdateCountry(payload: AdminUpdateCountryInput! constraint:QueryStatement): AdminCountry
-    adminDeleteCountryById(id: ID! constraint:QueryStatement): AdminCountry
-    adminDeleteCountries(query:QueryStatement constraint:QueryStatement): [AdminCountry]!
+    adminUpdateCountry(payload: AdminUpdateCountryInput! constraint: QueryStatement): AdminCountry
+    adminDeleteCountryById(id: ID! constraint: QueryStatement): AdminCountry
+    adminDeleteCountries(query: QueryStatement constraint: QueryStatement): [AdminCountry]!
 }

@@ -9,7 +9,7 @@ import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 import { FindLangByIdQuery } from './find-lang-by-id.query';
 import { FindLangByIdService } from './find-lang-by-id.service';
 
-describe('FindLangByIdQueryHandler', () => 
+describe('FindLangByIdQueryHandler', () =>
 {
     let queryHandler: FindLangByIdQueryHandler;
     let service: FindLangByIdService;
@@ -48,13 +48,13 @@ describe('FindLangByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an lang founded', async () => 
+        test('should return an lang founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindLangByIdQuery(
                     langs[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

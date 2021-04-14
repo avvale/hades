@@ -6,12 +6,12 @@ import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { DeleteLangByIdCommand } from './delete-lang-by-id.command';
 import { DeleteLangByIdService } from './delete-lang-by-id.service';
 
-describe('DeleteLangByIdCommandHandler', () => 
+describe('DeleteLangByIdCommandHandler', () =>
 {
     let commandHandler: DeleteLangByIdCommandHandler;
     let service: DeleteLangByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteLangByIdCommandHandler', () =>
         service         = module.get<DeleteLangByIdService>(DeleteLangByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteLangByIdCommandHandler should be defined', () => 
+        test('DeleteLangByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteLangByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteLangByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteLangByIdCommand(

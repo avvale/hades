@@ -6,12 +6,12 @@ import { attachmentLibraries } from '@hades/admin/attachment-library/infrastruct
 import { DeleteAttachmentLibraryByIdCommand } from './delete-attachment-library-by-id.command';
 import { DeleteAttachmentLibraryByIdService } from './delete-attachment-library-by-id.service';
 
-describe('DeleteAttachmentLibraryByIdCommandHandler', () => 
+describe('DeleteAttachmentLibraryByIdCommandHandler', () =>
 {
     let commandHandler: DeleteAttachmentLibraryByIdCommandHandler;
     let service: DeleteAttachmentLibraryByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteAttachmentLibraryByIdCommandHandler', () =>
         service         = module.get<DeleteAttachmentLibraryByIdService>(DeleteAttachmentLibraryByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAttachmentLibraryByIdCommandHandler should be defined', () => 
+        test('DeleteAttachmentLibraryByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteAttachmentLibraryByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteAttachmentLibraryByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAttachmentLibraryByIdCommand(

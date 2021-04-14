@@ -8,14 +8,14 @@ import { AttachmentFamilyMapper } from '@hades/admin/attachment-family/domain/at
 import { FindAttachmentFamilyQuery } from './find-attachment-family.query';
 import { FindAttachmentFamilyService } from './find-attachment-family.service';
 
-describe('FindAttachmentFamilyQueryHandler', () => 
+describe('FindAttachmentFamilyQueryHandler', () =>
 {
     let queryHandler: FindAttachmentFamilyQueryHandler;
     let service: FindAttachmentFamilyService;
     let repository: MockAttachmentFamilyRepository;
     let mapper: AttachmentFamilyMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindAttachmentFamilyQueryHandler', () =>
         mapper          = new AttachmentFamilyMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAttachmentFamilyQueryHandler should be defined', () => 
+        test('FindAttachmentFamilyQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an attachmentFamily founded', async () => 
+        test('should return an attachmentFamily founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

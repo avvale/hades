@@ -8,14 +8,14 @@ import { AdministrativeAreaLevel1Mapper } from '@hades/admin/administrative-area
 import { GetAdministrativeAreasLevel1Query } from './get-administrative-areas-level-1.query';
 import { GetAdministrativeAreasLevel1Service } from './get-administrative-areas-level-1.service';
 
-describe('GetAdministrativeAreasLevel1QueryHandler', () => 
+describe('GetAdministrativeAreasLevel1QueryHandler', () =>
 {
     let queryHandler: GetAdministrativeAreasLevel1QueryHandler;
     let service: GetAdministrativeAreasLevel1Service;
     let repository: MockAdministrativeAreaLevel1Repository;
     let mapper: AdministrativeAreaLevel1Mapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetAdministrativeAreasLevel1QueryHandler', () =>
         mapper          = new AdministrativeAreaLevel1Mapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetAdministrativeAreasLevel1QueryHandler should be defined', () => 
+        test('GetAdministrativeAreasLevel1QueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an administrativeAreasLevel1 founded', async () => 
+        test('should return an administrativeAreasLevel1 founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

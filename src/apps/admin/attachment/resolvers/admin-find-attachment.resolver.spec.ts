@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachments } from '@hades/admin/attachment/infrastructure/seeds/attachment.seed';
 
-describe('AdminFindAttachmentResolver', () => 
+describe('AdminFindAttachmentResolver', () =>
 {
     let resolver: AdminFindAttachmentResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminFindAttachmentResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminFindAttachmentResolver should be defined', () => 
+    test('AdminFindAttachmentResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminFindAttachmentResolver should be defined', () => 
+        test('AdminFindAttachmentResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a attachment', async () => 
+        test('should return a attachment', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachments[0])));
             expect(await resolver.main()).toBe(attachments[0]);

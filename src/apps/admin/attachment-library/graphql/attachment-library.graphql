@@ -49,17 +49,17 @@ input AdminUpdateAttachmentLibraryInput
 
 type Query
 {
-    adminFindAttachmentLibrary(query:QueryStatement constraint:QueryStatement): AdminAttachmentLibrary
-    adminFindAttachmentLibraryById(id:ID constraint:QueryStatement): AdminAttachmentLibrary
-    adminGetAttachmentLibraries(query:QueryStatement constraint:QueryStatement): [AdminAttachmentLibrary]!
-    adminPaginateAttachmentLibraries(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindAttachmentLibrary(query: QueryStatement constraint: QueryStatement): AdminAttachmentLibrary
+    adminFindAttachmentLibraryById(id: ID constraint: QueryStatement): AdminAttachmentLibrary
+    adminGetAttachmentLibraries(query: QueryStatement constraint: QueryStatement): [AdminAttachmentLibrary]!
+    adminPaginateAttachmentLibraries(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateAttachmentLibrary(payload: AdminCreateAttachmentLibraryInput!): AdminAttachmentLibrary
     adminCreateAttachmentLibraries(payload: [AdminCreateAttachmentLibraryInput]!): Boolean!
-    adminUpdateAttachmentLibrary(payload: AdminUpdateAttachmentLibraryInput! constraint:QueryStatement): AdminAttachmentLibrary
-    adminDeleteAttachmentLibraryById(id: ID! constraint:QueryStatement): AdminAttachmentLibrary
-    adminDeleteAttachmentLibraries(query:QueryStatement constraint:QueryStatement): [AdminAttachmentLibrary]!
+    adminUpdateAttachmentLibrary(payload: AdminUpdateAttachmentLibraryInput! constraint: QueryStatement): AdminAttachmentLibrary
+    adminDeleteAttachmentLibraryById(id: ID! constraint: QueryStatement): AdminAttachmentLibrary
+    adminDeleteAttachmentLibraries(query: QueryStatement constraint: QueryStatement): [AdminAttachmentLibrary]!
 }

@@ -60,15 +60,17 @@ describe('UpdateLangService', () =>
         test('should update a lang and emit event', async () =>
         {
             expect(await service.main(
-                new LangId(langs[0].id),
-                new LangName(langs[0].name),
-                new LangImage(langs[0].image),
-                new LangIso6392(langs[0].iso6392),
-                new LangIso6393(langs[0].iso6393),
-                new LangIetf(langs[0].ietf),
-                new LangDir(langs[0].dir),
-                new LangSort(langs[0].sort),
-                new LangIsActive(langs[0].isActive),
+                {
+                    id: new LangId(langs[0].id),
+                    name: new LangName(langs[0].name),
+                    image: new LangImage(langs[0].image),
+                    iso6392: new LangIso6392(langs[0].iso6392),
+                    iso6393: new LangIso6393(langs[0].iso6393),
+                    ietf: new LangIetf(langs[0].ietf),
+                    dir: new LangDir(langs[0].dir),
+                    sort: new LangSort(langs[0].sort),
+                    isActive: new LangIsActive(langs[0].isActive),
+                }
             )).toBe(undefined);
         });
     });

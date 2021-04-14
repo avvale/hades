@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel1 } from '@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
-describe('AdminDeleteAdministrativeAreaLevel1ByIdController', () => 
+describe('AdminDeleteAdministrativeAreaLevel1ByIdController', () =>
 {
     let controller: AdminDeleteAdministrativeAreaLevel1ByIdController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminDeleteAdministrativeAreaLevel1ByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminDeleteAdministrativeAreaLevel1ByIdController should be defined', () => 
+        test('AdminDeleteAdministrativeAreaLevel1ByIdController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an administrativeAreaLevel1 deleted', async () => 
+        test('should return an administrativeAreaLevel1 deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel1[0])));
             expect(await controller.main(administrativeAreasLevel1[0].id)).toBe(administrativeAreasLevel1[0]);

@@ -40,15 +40,17 @@ describe('UpdateAttachmentFamilyCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new UpdateAttachmentFamilyCommand(
-                    attachmentFamilies[0].id,
-                    attachmentFamilies[0].name,
-                    attachmentFamilies[0].resourceIds,
-                    attachmentFamilies[0].width,
-                    attachmentFamilies[0].height,
-                    attachmentFamilies[0].fit,
-                    attachmentFamilies[0].sizes,
-                    attachmentFamilies[0].quality,
-                    attachmentFamilies[0].format,
+                    {
+                        id: attachmentFamilies[0].id,
+                        name: attachmentFamilies[0].name,
+                        resourceIds: attachmentFamilies[0].resourceIds,
+                        width: attachmentFamilies[0].width,
+                        height: attachmentFamilies[0].height,
+                        fit: attachmentFamilies[0].fit,
+                        sizes: attachmentFamilies[0].sizes,
+                        quality: attachmentFamilies[0].quality,
+                        format: attachmentFamilies[0].format,
+                    }
                 )
             )).toBe(undefined);
         });

@@ -6,12 +6,12 @@ import { attachments } from '@hades/admin/attachment/infrastructure/seeds/attach
 import { DeleteAttachmentByIdCommand } from './delete-attachment-by-id.command';
 import { DeleteAttachmentByIdService } from './delete-attachment-by-id.service';
 
-describe('DeleteAttachmentByIdCommandHandler', () => 
+describe('DeleteAttachmentByIdCommandHandler', () =>
 {
     let commandHandler: DeleteAttachmentByIdCommandHandler;
     let service: DeleteAttachmentByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteAttachmentByIdCommandHandler', () =>
         service         = module.get<DeleteAttachmentByIdService>(DeleteAttachmentByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAttachmentByIdCommandHandler should be defined', () => 
+        test('DeleteAttachmentByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteAttachmentByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteAttachmentByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteAttachmentByIdCommand(

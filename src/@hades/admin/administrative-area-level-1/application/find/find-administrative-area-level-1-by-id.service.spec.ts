@@ -37,14 +37,14 @@ describe('FindAdministrativeAreaLevel1ByIdService', () =>
         mockRepository  = module.get(MockAdministrativeAreaLevel1Repository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAdministrativeAreaLevel1ByIdService should be defined', () => 
+        test('FindAdministrativeAreaLevel1ByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find administrativeAreaLevel1 by id', async () => 
+        test('should find administrativeAreaLevel1 by id', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

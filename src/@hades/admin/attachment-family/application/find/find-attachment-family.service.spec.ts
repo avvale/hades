@@ -6,13 +6,13 @@ import { FindAttachmentFamilyService } from './find-attachment-family.service';
 import { IAttachmentFamilyRepository } from './../../domain/attachment-family.repository';
 import { MockAttachmentFamilyRepository } from './../../infrastructure/mock/mock-attachment-family.repository';
 
-describe('FindAttachmentFamilyService', () => 
+describe('FindAttachmentFamilyService', () =>
 {
     let service: FindAttachmentFamilyService;
     let repository: IAttachmentFamilyRepository;
     let mockRepository: MockAttachmentFamilyRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('FindAttachmentFamilyService', () =>
                 EventPublisher,
                 FindAttachmentFamilyService,
                 MockAttachmentFamilyRepository,
-                { 
+                {
                     provide: IAttachmentFamilyRepository,
                     useValue: {
                         find: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('FindAttachmentFamilyService', () =>
         mockRepository  = module.get(MockAttachmentFamilyRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAttachmentFamilyService should be defined', () => 
+        test('FindAttachmentFamilyService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find attachmentFamily', async () => 
+        test('should find attachmentFamily', async () =>
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main()).toBe(mockRepository.collectionSource[0]);

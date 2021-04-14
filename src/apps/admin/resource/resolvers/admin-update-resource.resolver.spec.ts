@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
 import { AdminUpdateResourceInput } from './../../../../graphql';
 
-describe('AdminUpdateResourceResolver', () => 
+describe('AdminUpdateResourceResolver', () =>
 {
     let resolver: AdminUpdateResourceResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -43,14 +43,14 @@ describe('AdminUpdateResourceResolver', () =>
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('AdminUpdateResourceResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a resource created', async () => 
+        test('should return a resource created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources[0])));
             expect(await resolver.main(<AdminUpdateResourceInput>resources[0])).toBe(resources[0]);

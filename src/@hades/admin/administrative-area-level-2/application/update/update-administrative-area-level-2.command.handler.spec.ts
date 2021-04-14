@@ -40,16 +40,18 @@ describe('UpdateAdministrativeAreaLevel2CommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new UpdateAdministrativeAreaLevel2Command(
-                    administrativeAreasLevel2[0].id,
-                    administrativeAreasLevel2[0].countryCommonId,
-                    administrativeAreasLevel2[0].administrativeAreaLevel1Id,
-                    administrativeAreasLevel2[0].code,
-                    administrativeAreasLevel2[0].customCode,
-                    administrativeAreasLevel2[0].name,
-                    administrativeAreasLevel2[0].slug,
-                    administrativeAreasLevel2[0].latitude,
-                    administrativeAreasLevel2[0].longitude,
-                    administrativeAreasLevel2[0].zoom,
+                    {
+                        id: administrativeAreasLevel2[0].id,
+                        countryCommonId: administrativeAreasLevel2[0].countryCommonId,
+                        administrativeAreaLevel1Id: administrativeAreasLevel2[0].administrativeAreaLevel1Id,
+                        code: administrativeAreasLevel2[0].code,
+                        customCode: administrativeAreasLevel2[0].customCode,
+                        name: administrativeAreasLevel2[0].name,
+                        slug: administrativeAreasLevel2[0].slug,
+                        latitude: administrativeAreasLevel2[0].latitude,
+                        longitude: administrativeAreasLevel2[0].longitude,
+                        zoom: administrativeAreasLevel2[0].zoom,
+                    }
                 )
             )).toBe(undefined);
         });

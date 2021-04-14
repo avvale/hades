@@ -6,13 +6,13 @@ import { DeleteResourcesService } from './delete-resources.service';
 import { IResourceRepository } from './../../domain/resource.repository';
 import { MockResourceRepository } from './../../infrastructure/mock/mock-resource.repository';
 
-describe('DeleteResourcesService', () => 
+describe('DeleteResourcesService', () =>
 {
     let service: DeleteResourcesService;
     let repository: IResourceRepository;
     let mockRepository: MockResourceRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteResourcesService', () =>
                 EventPublisher,
                 DeleteResourcesService,
                 MockResourceRepository,
-                { 
+                {
                     provide: IResourceRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteResourcesService', () =>
         mockRepository  = module.get(MockResourceRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteResourcesService should be defined', () => 
+        test('DeleteResourcesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete resource and emit event', async () => 
+        test('should delete resource and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

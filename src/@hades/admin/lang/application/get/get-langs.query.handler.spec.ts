@@ -8,14 +8,14 @@ import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 import { GetLangsQuery } from './get-langs.query';
 import { GetLangsService } from './get-langs.service';
 
-describe('GetLangsQueryHandler', () => 
+describe('GetLangsQueryHandler', () =>
 {
     let queryHandler: GetLangsQueryHandler;
     let service: GetLangsService;
     let repository: MockLangRepository;
     let mapper: LangMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetLangsQueryHandler', () =>
         mapper          = new LangMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetLangsQueryHandler should be defined', () => 
+        test('GetLangsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an langs founded', async () => 
+        test('should return an langs founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

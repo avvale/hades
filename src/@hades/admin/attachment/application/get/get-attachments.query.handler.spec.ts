@@ -8,14 +8,14 @@ import { AttachmentMapper } from '@hades/admin/attachment/domain/attachment.mapp
 import { GetAttachmentsQuery } from './get-attachments.query';
 import { GetAttachmentsService } from './get-attachments.service';
 
-describe('GetAttachmentsQueryHandler', () => 
+describe('GetAttachmentsQueryHandler', () =>
 {
     let queryHandler: GetAttachmentsQueryHandler;
     let service: GetAttachmentsService;
     let repository: MockAttachmentRepository;
     let mapper: AttachmentMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('GetAttachmentsQueryHandler', () =>
         mapper          = new AttachmentMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetAttachmentsQueryHandler should be defined', () => 
+        test('GetAttachmentsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an attachments founded', async () => 
+        test('should return an attachments founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

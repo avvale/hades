@@ -8,7 +8,7 @@ import { AttachmentId } from './../../domain/value-objects';
 import { IAttachmentRepository } from './../../domain/attachment.repository';
 import { MockAttachmentRepository } from './../../infrastructure/mock/mock-attachment.repository';
 
-describe('DeleteAttachmentByIdService', () => 
+describe('DeleteAttachmentByIdService', () =>
 {
     let service: DeleteAttachmentByIdService;
     let repository: IAttachmentRepository;
@@ -38,14 +38,14 @@ describe('DeleteAttachmentByIdService', () =>
         mockRepository  = module.get(MockAttachmentRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAttachmentByIdService should be defined', () => 
+        test('DeleteAttachmentByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete attachment and emit event', async () => 
+        test('should delete attachment and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

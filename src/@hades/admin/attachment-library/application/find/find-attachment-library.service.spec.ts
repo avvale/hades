@@ -6,13 +6,13 @@ import { FindAttachmentLibraryService } from './find-attachment-library.service'
 import { IAttachmentLibraryRepository } from './../../domain/attachment-library.repository';
 import { MockAttachmentLibraryRepository } from './../../infrastructure/mock/mock-attachment-library.repository';
 
-describe('FindAttachmentLibraryService', () => 
+describe('FindAttachmentLibraryService', () =>
 {
     let service: FindAttachmentLibraryService;
     let repository: IAttachmentLibraryRepository;
     let mockRepository: MockAttachmentLibraryRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('FindAttachmentLibraryService', () =>
                 EventPublisher,
                 FindAttachmentLibraryService,
                 MockAttachmentLibraryRepository,
-                { 
+                {
                     provide: IAttachmentLibraryRepository,
                     useValue: {
                         find: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('FindAttachmentLibraryService', () =>
         mockRepository  = module.get(MockAttachmentLibraryRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAttachmentLibraryService should be defined', () => 
+        test('FindAttachmentLibraryService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find attachmentLibrary', async () => 
+        test('should find attachmentLibrary', async () =>
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main()).toBe(mockRepository.collectionSource[0]);

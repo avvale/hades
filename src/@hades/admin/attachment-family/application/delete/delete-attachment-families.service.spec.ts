@@ -6,13 +6,13 @@ import { DeleteAttachmentFamiliesService } from './delete-attachment-families.se
 import { IAttachmentFamilyRepository } from './../../domain/attachment-family.repository';
 import { MockAttachmentFamilyRepository } from './../../infrastructure/mock/mock-attachment-family.repository';
 
-describe('DeleteAttachmentFamiliesService', () => 
+describe('DeleteAttachmentFamiliesService', () =>
 {
     let service: DeleteAttachmentFamiliesService;
     let repository: IAttachmentFamilyRepository;
     let mockRepository: MockAttachmentFamilyRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteAttachmentFamiliesService', () =>
                 EventPublisher,
                 DeleteAttachmentFamiliesService,
                 MockAttachmentFamilyRepository,
-                { 
+                {
                     provide: IAttachmentFamilyRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteAttachmentFamiliesService', () =>
         mockRepository  = module.get(MockAttachmentFamilyRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAttachmentFamiliesService should be defined', () => 
+        test('DeleteAttachmentFamiliesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete attachmentFamily and emit event', async () => 
+        test('should delete attachmentFamily and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

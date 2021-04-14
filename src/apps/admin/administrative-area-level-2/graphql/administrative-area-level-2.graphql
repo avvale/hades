@@ -48,17 +48,17 @@ input AdminUpdateAdministrativeAreaLevel2Input
 
 type Query
 {
-    adminFindAdministrativeAreaLevel2(query:QueryStatement constraint:QueryStatement): AdminAdministrativeAreaLevel2
-    adminFindAdministrativeAreaLevel2ById(id:ID constraint:QueryStatement): AdminAdministrativeAreaLevel2
-    adminGetAdministrativeAreasLevel2(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel2]!
-    adminPaginateAdministrativeAreasLevel2(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindAdministrativeAreaLevel2(query: QueryStatement constraint: QueryStatement): AdminAdministrativeAreaLevel2
+    adminFindAdministrativeAreaLevel2ById(id: ID constraint: QueryStatement): AdminAdministrativeAreaLevel2
+    adminGetAdministrativeAreasLevel2(query: QueryStatement constraint: QueryStatement): [AdminAdministrativeAreaLevel2]!
+    adminPaginateAdministrativeAreasLevel2(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateAdministrativeAreaLevel2(payload: AdminCreateAdministrativeAreaLevel2Input!): AdminAdministrativeAreaLevel2
     adminCreateAdministrativeAreasLevel2(payload: [AdminCreateAdministrativeAreaLevel2Input]!): Boolean!
-    adminUpdateAdministrativeAreaLevel2(payload: AdminUpdateAdministrativeAreaLevel2Input! constraint:QueryStatement): AdminAdministrativeAreaLevel2
-    adminDeleteAdministrativeAreaLevel2ById(id: ID! constraint:QueryStatement): AdminAdministrativeAreaLevel2
-    adminDeleteAdministrativeAreasLevel2(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel2]!
+    adminUpdateAdministrativeAreaLevel2(payload: AdminUpdateAdministrativeAreaLevel2Input! constraint: QueryStatement): AdminAdministrativeAreaLevel2
+    adminDeleteAdministrativeAreaLevel2ById(id: ID! constraint: QueryStatement): AdminAdministrativeAreaLevel2
+    adminDeleteAdministrativeAreasLevel2(query: QueryStatement constraint: QueryStatement): [AdminAdministrativeAreaLevel2]!
 }

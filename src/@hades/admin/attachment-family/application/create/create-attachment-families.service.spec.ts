@@ -6,13 +6,13 @@ import { CreateAttachmentFamiliesService } from './create-attachment-families.se
 import { IAttachmentFamilyRepository } from './../../domain/attachment-family.repository';
 import { MockAttachmentFamilyRepository } from './../../infrastructure/mock/mock-attachment-family.repository';
 
-describe('CreateAttachmentFamiliesService', () => 
+describe('CreateAttachmentFamiliesService', () =>
 {
     let service: CreateAttachmentFamiliesService;
     let repository: IAttachmentFamilyRepository;
     let mockRepository: MockAttachmentFamilyRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateAttachmentFamiliesService', () =>
                 EventPublisher,
                 CreateAttachmentFamiliesService,
                 MockAttachmentFamilyRepository,
-                { 
+                {
                     provide: IAttachmentFamilyRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateAttachmentFamiliesService', () =>
         mockRepository  = module.get(MockAttachmentFamilyRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAttachmentFamiliesService should be defined', () => 
+        test('CreateAttachmentFamiliesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create attachmentFamilies and emit event', async () => 
+        test('should create attachmentFamilies and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

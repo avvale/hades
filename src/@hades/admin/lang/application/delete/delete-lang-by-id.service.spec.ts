@@ -8,7 +8,7 @@ import { LangId } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
 
-describe('DeleteLangByIdService', () => 
+describe('DeleteLangByIdService', () =>
 {
     let service: DeleteLangByIdService;
     let repository: ILangRepository;
@@ -38,14 +38,14 @@ describe('DeleteLangByIdService', () =>
         mockRepository  = module.get(MockLangRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteLangByIdService should be defined', () => 
+        test('DeleteLangByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete lang and emit event', async () => 
+        test('should delete lang and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

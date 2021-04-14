@@ -58,17 +58,17 @@ input AdminUpdateAttachmentFamilyInput
 
 type Query
 {
-    adminFindAttachmentFamily(query:QueryStatement constraint:QueryStatement): AdminAttachmentFamily
-    adminFindAttachmentFamilyById(id:ID constraint:QueryStatement): AdminAttachmentFamily
-    adminGetAttachmentFamilies(query:QueryStatement constraint:QueryStatement): [AdminAttachmentFamily]!
-    adminPaginateAttachmentFamilies(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindAttachmentFamily(query: QueryStatement constraint: QueryStatement): AdminAttachmentFamily
+    adminFindAttachmentFamilyById(id: ID constraint: QueryStatement): AdminAttachmentFamily
+    adminGetAttachmentFamilies(query: QueryStatement constraint: QueryStatement): [AdminAttachmentFamily]!
+    adminPaginateAttachmentFamilies(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateAttachmentFamily(payload: AdminCreateAttachmentFamilyInput!): AdminAttachmentFamily
     adminCreateAttachmentFamilies(payload: [AdminCreateAttachmentFamilyInput]!): Boolean!
-    adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput! constraint:QueryStatement): AdminAttachmentFamily
-    adminDeleteAttachmentFamilyById(id: ID! constraint:QueryStatement): AdminAttachmentFamily
-    adminDeleteAttachmentFamilies(query:QueryStatement constraint:QueryStatement): [AdminAttachmentFamily]!
+    adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput! constraint: QueryStatement): AdminAttachmentFamily
+    adminDeleteAttachmentFamilyById(id: ID! constraint: QueryStatement): AdminAttachmentFamily
+    adminDeleteAttachmentFamilies(query: QueryStatement constraint: QueryStatement): [AdminAttachmentFamily]!
 }

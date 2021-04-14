@@ -8,7 +8,7 @@ import { CountryId } from './../../domain/value-objects';
 import { ICountryRepository } from './../../domain/country.repository';
 import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
 
-describe('DeleteCountryByIdService', () => 
+describe('DeleteCountryByIdService', () =>
 {
     let service: DeleteCountryByIdService;
     let repository: ICountryRepository;
@@ -38,14 +38,14 @@ describe('DeleteCountryByIdService', () =>
         mockRepository  = module.get(MockCountryRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteCountryByIdService should be defined', () => 
+        test('DeleteCountryByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete country and emit event', async () => 
+        test('should delete country and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

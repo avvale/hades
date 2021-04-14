@@ -6,13 +6,13 @@ import { CreateAdministrativeAreasLevel1Service } from './create-administrative-
 import { IAdministrativeAreaLevel1Repository } from './../../domain/administrative-area-level-1.repository';
 import { MockAdministrativeAreaLevel1Repository } from './../../infrastructure/mock/mock-administrative-area-level-1.repository';
 
-describe('CreateAdministrativeAreasLevel1Service', () => 
+describe('CreateAdministrativeAreasLevel1Service', () =>
 {
     let service: CreateAdministrativeAreasLevel1Service;
     let repository: IAdministrativeAreaLevel1Repository;
     let mockRepository: MockAdministrativeAreaLevel1Repository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateAdministrativeAreasLevel1Service', () =>
                 EventPublisher,
                 CreateAdministrativeAreasLevel1Service,
                 MockAdministrativeAreaLevel1Repository,
-                { 
+                {
                     provide: IAdministrativeAreaLevel1Repository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateAdministrativeAreasLevel1Service', () =>
         mockRepository  = module.get(MockAdministrativeAreaLevel1Repository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAdministrativeAreasLevel1Service should be defined', () => 
+        test('CreateAdministrativeAreasLevel1Service should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create administrativeAreasLevel1 and emit event', async () => 
+        test('should create administrativeAreasLevel1 and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

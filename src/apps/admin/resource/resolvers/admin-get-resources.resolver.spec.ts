@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { AdminGetResourcesResolver } from './admin-get-resources.resolver'; 
+import { AdminGetResourcesResolver } from './admin-get-resources.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
 
-describe('AdminGetResourcesResolver', () => 
+describe('AdminGetResourcesResolver', () =>
 {
     let resolver:   AdminGetResourcesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminGetResourcesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminGetResourcesResolver should be defined', () => 
+    test('AdminGetResourcesResolver should be defined', () =>
     {
         expect(resolver).   toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminGetResourcesResolver should be defined', () => 
+        test('AdminGetResourcesResolver should be defined', () =>
         {
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a resources', async () => 
+        test('should return a resources', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources)));
             expect(await resolver.main()).toBe(resources);

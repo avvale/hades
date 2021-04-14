@@ -5,12 +5,12 @@ import { DeleteResourcesCommandHandler } from './delete-resources.command-handle
 import { DeleteResourcesCommand } from './delete-resources.command';
 import { DeleteResourcesService } from './delete-resources.service';
 
-describe('DeleteResourcesCommandHandler', () => 
+describe('DeleteResourcesCommandHandler', () =>
 {
     let commandHandler: DeleteResourcesCommandHandler;
     let service: DeleteResourcesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteResourcesCommandHandler', () =>
         service         = module.get<DeleteResourcesService>(DeleteResourcesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteResourcesCommandHandler should be defined', () => 
+        test('DeleteResourcesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteResourcesCommand()

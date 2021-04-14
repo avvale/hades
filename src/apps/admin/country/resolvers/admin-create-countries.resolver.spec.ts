@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
 import { AdminCreateCountryInput } from './../../../../graphql';
 
-describe('AdminCreateCountriesResolver', () => 
+describe('AdminCreateCountriesResolver', () =>
 {
     let resolver: AdminCreateCountriesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateCountriesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateCountriesResolver should be defined', () => 
+    test('AdminCreateCountriesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateCountriesResolver should be defined', () => 
+        test('AdminCreateCountriesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an countries created', async () => 
+        test('should return an countries created', async () =>
         {
             expect(await resolver.main(<AdminCreateCountryInput[]>countries)).toBe(true);
         });

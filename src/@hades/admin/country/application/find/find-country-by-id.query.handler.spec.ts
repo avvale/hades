@@ -9,7 +9,7 @@ import { CountryMapper } from '@hades/admin/country/domain/country.mapper';
 import { FindCountryByIdQuery } from './find-country-by-id.query';
 import { FindCountryByIdService } from './find-country-by-id.service';
 
-describe('FindCountryByIdQueryHandler', () => 
+describe('FindCountryByIdQueryHandler', () =>
 {
     let queryHandler: FindCountryByIdQueryHandler;
     let service: FindCountryByIdService;
@@ -48,13 +48,13 @@ describe('FindCountryByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an country founded', async () => 
+        test('should return an country founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindCountryByIdQuery(
                     countries[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

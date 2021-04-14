@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel1 } from '@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
-describe('AdminUpdateAdministrativeAreaLevel1Controller', () => 
+describe('AdminUpdateAdministrativeAreaLevel1Controller', () =>
 {
     let controller: AdminUpdateAdministrativeAreaLevel1Controller;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminUpdateAdministrativeAreaLevel1Controller', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminUpdateAdministrativeAreaLevel1Controller should be defined', () => 
+        test('AdminUpdateAdministrativeAreaLevel1Controller should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a administrativeAreaLevel1 created', async () => 
+        test('should return a administrativeAreaLevel1 created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel1[0])));
             expect(await controller.main(administrativeAreasLevel1[0])).toBe(administrativeAreasLevel1[0]);
