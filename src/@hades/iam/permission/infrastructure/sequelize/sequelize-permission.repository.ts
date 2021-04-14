@@ -12,7 +12,6 @@ export class SequelizePermissionRepository extends SequelizeRepository<IamPermis
 {
     public readonly aggregateName: string = 'IamPermission';
     public readonly mapper: PermissionMapper = new PermissionMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamPermissionModel)

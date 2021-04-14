@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 import { IamCreatePermissionInput } from './../../../../graphql';
 
-describe('IamCreatePermissionsResolver', () => 
+describe('IamCreatePermissionsResolver', () =>
 {
     let resolver: IamCreatePermissionsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreatePermissionsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreatePermissionsResolver should be defined', () => 
+    test('IamCreatePermissionsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreatePermissionsResolver should be defined', () => 
+        test('IamCreatePermissionsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an permissions created', async () => 
+        test('should return an permissions created', async () =>
         {
             expect(await resolver.main(<IamCreatePermissionInput[]>permissions)).toBe(true);
         });

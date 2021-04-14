@@ -8,14 +8,14 @@ import { RoleMapper } from '@hades/iam/role/domain/role.mapper';
 import { FindRoleQuery } from './find-role.query';
 import { FindRoleService } from './find-role.service';
 
-describe('FindRoleQueryHandler', () => 
+describe('FindRoleQueryHandler', () =>
 {
     let queryHandler: FindRoleQueryHandler;
     let service: FindRoleService;
     let repository: MockRoleRepository;
     let mapper: RoleMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,14 +40,14 @@ describe('FindRoleQueryHandler', () =>
         mapper          = new RoleMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindRoleQueryHandler should be defined', () => 
+        test('FindRoleQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an role founded', async () => 
+        test('should return an role founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

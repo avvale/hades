@@ -56,11 +56,13 @@ describe('UpdateBoundedContextService', () =>
         test('should update a boundedContext and emit event', async () =>
         {
             expect(await service.main(
-                new BoundedContextId(boundedContexts[0].id),
-                new BoundedContextName(boundedContexts[0].name),
-                new BoundedContextRoot(boundedContexts[0].root),
-                new BoundedContextSort(boundedContexts[0].sort),
-                new BoundedContextIsActive(boundedContexts[0].isActive),
+                {
+                    id: new BoundedContextId(boundedContexts[0].id),
+                    name: new BoundedContextName(boundedContexts[0].name),
+                    root: new BoundedContextRoot(boundedContexts[0].root),
+                    sort: new BoundedContextSort(boundedContexts[0].sort),
+                    isActive: new BoundedContextIsActive(boundedContexts[0].isActive),
+                }
             )).toBe(undefined);
         });
     });

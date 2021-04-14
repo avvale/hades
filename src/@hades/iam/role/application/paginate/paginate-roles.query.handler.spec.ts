@@ -41,14 +41,14 @@ describe('PaginateRolesQueryHandler', () =>
         mapper          = new RoleMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateRolesQueryHandler should be defined', () => 
+        test('PaginateRolesQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an roles paginated', async () => 
+        test('should return an roles paginated', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
@@ -66,8 +66,8 @@ describe('PaginateRolesQueryHandler', () =>
                 )
             )).toStrictEqual(
                 new PaginationResponse(
-                    100, 
-                    10, 
+                    100,
+                    10,
                     repository.collectionSource.slice(0,10).map(item => item.toDTO())
                 )
             );

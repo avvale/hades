@@ -5,12 +5,12 @@ import { DeleteUsersCommandHandler } from './delete-users.command-handler';
 import { DeleteUsersCommand } from './delete-users.command';
 import { DeleteUsersService } from './delete-users.service';
 
-describe('DeleteUsersCommandHandler', () => 
+describe('DeleteUsersCommandHandler', () =>
 {
     let commandHandler: DeleteUsersCommandHandler;
     let service: DeleteUsersService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteUsersCommandHandler', () =>
         service         = module.get<DeleteUsersService>(DeleteUsersService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteUsersCommandHandler should be defined', () => 
+        test('DeleteUsersCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteUsersCommand()

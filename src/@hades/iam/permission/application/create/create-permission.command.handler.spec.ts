@@ -40,10 +40,12 @@ describe('CreatePermissionCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new CreatePermissionCommand(
-                    permissions[0].id,
-                    permissions[0].name,
-                    permissions[0].boundedContextId,
-                    permissions[0].roleIds,
+                    {
+                        id : permissions[0].id,
+                        name : permissions[0].name,
+                        boundedContextId : permissions[0].boundedContextId,
+                        roleIds : permissions[0].roleIds,
+                    }
                 )
             )).toBe(undefined);
         });

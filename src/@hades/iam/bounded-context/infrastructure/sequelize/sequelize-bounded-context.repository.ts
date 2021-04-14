@@ -12,7 +12,6 @@ export class SequelizeBoundedContextRepository extends SequelizeRepository<IamBo
 {
     public readonly aggregateName: string = 'IamBoundedContext';
     public readonly mapper: BoundedContextMapper = new BoundedContextMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamBoundedContextModel)

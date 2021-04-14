@@ -57,11 +57,13 @@ describe('CreateRoleService', () =>
         test('should create a role and emit event', async () =>
         {
             expect(await service.main(
-                new RoleId(roles[0].id),
-                new RoleName(roles[0].name),
-                new RoleIsMaster(roles[0].isMaster),
-                new RolePermissionIds(roles[0].permissionIds),
-                new RoleAccountIds(roles[0].accountIds),
+                {
+                    id: new RoleId(roles[0].id),
+                    name: new RoleName(roles[0].name),
+                    isMaster: new RoleIsMaster(roles[0].isMaster),
+                    permissionIds: new RolePermissionIds(roles[0].permissionIds),
+                    accountIds: new RoleAccountIds(roles[0].accountIds),
+                }
             )).toBe(undefined);
         });
     });

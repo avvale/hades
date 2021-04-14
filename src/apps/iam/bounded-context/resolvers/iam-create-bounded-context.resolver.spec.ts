@@ -13,7 +13,7 @@ describe('IamCreateBoundedContextResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreateBoundedContextResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreateBoundedContextResolver should be defined', () => 
+    test('IamCreateBoundedContextResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreateBoundedContextResolver should be defined', () => 
+        test('IamCreateBoundedContextResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an boundedContext created', async () => 
+        test('should return an boundedContext created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await resolver.main(<IamCreateBoundedContextInput>boundedContexts[0])).toBe(boundedContexts[0]);

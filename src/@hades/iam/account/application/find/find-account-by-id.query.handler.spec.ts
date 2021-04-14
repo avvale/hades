@@ -9,7 +9,7 @@ import { AccountMapper } from '@hades/iam/account/domain/account.mapper';
 import { FindAccountByIdQuery } from './find-account-by-id.query';
 import { FindAccountByIdService } from './find-account-by-id.service';
 
-describe('FindAccountByIdQueryHandler', () => 
+describe('FindAccountByIdQueryHandler', () =>
 {
     let queryHandler: FindAccountByIdQueryHandler;
     let service: FindAccountByIdService;
@@ -48,13 +48,13 @@ describe('FindAccountByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an account founded', async () => 
+        test('should return an account founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindAccountByIdQuery(
                     accounts[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

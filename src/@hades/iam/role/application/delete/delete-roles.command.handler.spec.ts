@@ -5,12 +5,12 @@ import { DeleteRolesCommandHandler } from './delete-roles.command-handler';
 import { DeleteRolesCommand } from './delete-roles.command';
 import { DeleteRolesService } from './delete-roles.service';
 
-describe('DeleteRolesCommandHandler', () => 
+describe('DeleteRolesCommandHandler', () =>
 {
     let commandHandler: DeleteRolesCommandHandler;
     let service: DeleteRolesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -28,14 +28,14 @@ describe('DeleteRolesCommandHandler', () =>
         service         = module.get<DeleteRolesService>(DeleteRolesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRolesCommandHandler should be defined', () => 
+        test('DeleteRolesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () => 
+        test('should return void', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteRolesCommand()

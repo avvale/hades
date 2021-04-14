@@ -6,13 +6,13 @@ import { CreateUsersService } from './create-users.service';
 import { IUserRepository } from './../../domain/user.repository';
 import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
 
-describe('CreateUsersService', () => 
+describe('CreateUsersService', () =>
 {
     let service: CreateUsersService;
     let repository: IUserRepository;
     let mockRepository: MockUserRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateUsersService', () =>
                 EventPublisher,
                 CreateUsersService,
                 MockUserRepository,
-                { 
+                {
                     provide: IUserRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateUsersService', () =>
         mockRepository  = module.get(MockUserRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateUsersService should be defined', () => 
+        test('CreateUsersService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create users and emit event', async () => 
+        test('should create users and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

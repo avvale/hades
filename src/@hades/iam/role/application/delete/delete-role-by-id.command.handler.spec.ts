@@ -6,12 +6,12 @@ import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { DeleteRoleByIdCommand } from './delete-role-by-id.command';
 import { DeleteRoleByIdService } from './delete-role-by-id.service';
 
-describe('DeleteRoleByIdCommandHandler', () => 
+describe('DeleteRoleByIdCommandHandler', () =>
 {
     let commandHandler: DeleteRoleByIdCommandHandler;
     let service: DeleteRoleByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteRoleByIdCommandHandler', () =>
         service         = module.get<DeleteRoleByIdService>(DeleteRoleByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRoleByIdCommandHandler should be defined', () => 
+        test('DeleteRoleByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteRoleByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteRoleByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteRoleByIdCommand(

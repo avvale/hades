@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
-describe('IamFindBoundedContextResolver', () => 
+describe('IamFindBoundedContextResolver', () =>
 {
     let resolver: IamFindBoundedContextResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('IamFindBoundedContextResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamFindBoundedContextResolver should be defined', () => 
+    test('IamFindBoundedContextResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamFindBoundedContextResolver should be defined', () => 
+        test('IamFindBoundedContextResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a boundedContext', async () => 
+        test('should return a boundedContext', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await resolver.main()).toBe(boundedContexts[0]);

@@ -6,12 +6,12 @@ import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { CreateRolesCommand } from './create-roles.command';
 import { CreateRolesService } from './create-roles.service';
 
-describe('CreateRolesCommandHandler', () => 
+describe('CreateRolesCommandHandler', () =>
 {
     let commandHandler: CreateRolesCommandHandler;
     let service: CreateRolesService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateRolesCommandHandler', () =>
         service         = module.get<CreateRolesService>(CreateRolesService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateRolesCommandHandler should be defined', () => 
+        test('CreateRolesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an role created', async () => 
+        test('should return an role created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateRolesCommand(
                     roles
-                
+
                 )
             )).toBe(undefined);
         });

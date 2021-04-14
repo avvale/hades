@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 
-describe('IamPaginateUsersController', () => 
+describe('IamPaginateUsersController', () =>
 {
     let controller: IamPaginateUsersController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('IamPaginateUsersController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamPaginateUsersController should be defined', () => 
+        test('IamPaginateUsersController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a users', async () => 
+        test('should return a users', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users)));
             expect(await controller.main()).toBe(users);

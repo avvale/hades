@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { IamCreateRoleInput } from './../../../../graphql';
 
-describe('IamCreateRolesResolver', () => 
+describe('IamCreateRolesResolver', () =>
 {
     let resolver: IamCreateRolesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreateRolesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreateRolesResolver should be defined', () => 
+    test('IamCreateRolesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreateRolesResolver should be defined', () => 
+        test('IamCreateRolesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an roles created', async () => 
+        test('should return an roles created', async () =>
         {
             expect(await resolver.main(<IamCreateRoleInput[]>roles)).toBe(true);
         });

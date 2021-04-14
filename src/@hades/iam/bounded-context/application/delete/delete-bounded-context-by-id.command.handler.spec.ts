@@ -6,12 +6,12 @@ import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds
 import { DeleteBoundedContextByIdCommand } from './delete-bounded-context-by-id.command';
 import { DeleteBoundedContextByIdService } from './delete-bounded-context-by-id.service';
 
-describe('DeleteBoundedContextByIdCommandHandler', () => 
+describe('DeleteBoundedContextByIdCommandHandler', () =>
 {
     let commandHandler: DeleteBoundedContextByIdCommandHandler;
     let service: DeleteBoundedContextByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeleteBoundedContextByIdCommandHandler', () =>
         service         = module.get<DeleteBoundedContextByIdService>(DeleteBoundedContextByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteBoundedContextByIdCommandHandler should be defined', () => 
+        test('DeleteBoundedContextByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteBoundedContextByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteBoundedContextByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeleteBoundedContextByIdCommand(

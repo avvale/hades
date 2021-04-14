@@ -9,7 +9,7 @@ import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { FindTenantByIdQuery } from './find-tenant-by-id.query';
 import { FindTenantByIdService } from './find-tenant-by-id.service';
 
-describe('FindTenantByIdQueryHandler', () => 
+describe('FindTenantByIdQueryHandler', () =>
 {
     let queryHandler: FindTenantByIdQueryHandler;
     let service: FindTenantByIdService;
@@ -48,13 +48,13 @@ describe('FindTenantByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an tenant founded', async () => 
+        test('should return an tenant founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindTenantByIdQuery(
                     tenants[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

@@ -6,13 +6,13 @@ import { CreateBoundedContextsService } from './create-bounded-contexts.service'
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('CreateBoundedContextsService', () => 
+describe('CreateBoundedContextsService', () =>
 {
     let service: CreateBoundedContextsService;
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateBoundedContextsService', () =>
                 EventPublisher,
                 CreateBoundedContextsService,
                 MockBoundedContextRepository,
-                { 
+                {
                     provide: IBoundedContextRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateBoundedContextsService', () =>
         mockRepository  = module.get(MockBoundedContextRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateBoundedContextsService should be defined', () => 
+        test('CreateBoundedContextsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create boundedContexts and emit event', async () => 
+        test('should create boundedContexts and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

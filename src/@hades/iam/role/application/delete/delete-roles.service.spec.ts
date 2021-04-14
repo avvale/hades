@@ -6,13 +6,13 @@ import { DeleteRolesService } from './delete-roles.service';
 import { IRoleRepository } from './../../domain/role.repository';
 import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
 
-describe('DeleteRolesService', () => 
+describe('DeleteRolesService', () =>
 {
     let service: DeleteRolesService;
     let repository: IRoleRepository;
     let mockRepository: MockRoleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteRolesService', () =>
                 EventPublisher,
                 DeleteRolesService,
                 MockRoleRepository,
-                { 
+                {
                     provide: IRoleRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteRolesService', () =>
         mockRepository  = module.get(MockRoleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRolesService should be defined', () => 
+        test('DeleteRolesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete role and emit event', async () => 
+        test('should delete role and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

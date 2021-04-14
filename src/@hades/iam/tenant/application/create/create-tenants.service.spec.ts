@@ -6,13 +6,13 @@ import { CreateTenantsService } from './create-tenants.service';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
 
-describe('CreateTenantsService', () => 
+describe('CreateTenantsService', () =>
 {
     let service: CreateTenantsService;
     let repository: ITenantRepository;
     let mockRepository: MockTenantRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateTenantsService', () =>
                 EventPublisher,
                 CreateTenantsService,
                 MockTenantRepository,
-                { 
+                {
                     provide: ITenantRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateTenantsService', () =>
         mockRepository  = module.get(MockTenantRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateTenantsService should be defined', () => 
+        test('CreateTenantsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create tenants and emit event', async () => 
+        test('should create tenants and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

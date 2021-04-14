@@ -8,7 +8,7 @@ import { BoundedContextId } from './../../domain/value-objects';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('DeleteBoundedContextByIdService', () => 
+describe('DeleteBoundedContextByIdService', () =>
 {
     let service: DeleteBoundedContextByIdService;
     let repository: IBoundedContextRepository;
@@ -38,14 +38,14 @@ describe('DeleteBoundedContextByIdService', () =>
         mockRepository  = module.get(MockBoundedContextRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteBoundedContextByIdService should be defined', () => 
+        test('DeleteBoundedContextByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete boundedContext and emit event', async () => 
+        test('should delete boundedContext and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

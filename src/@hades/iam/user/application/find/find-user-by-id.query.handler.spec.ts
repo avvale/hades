@@ -9,7 +9,7 @@ import { UserMapper } from '@hades/iam/user/domain/user.mapper';
 import { FindUserByIdQuery } from './find-user-by-id.query';
 import { FindUserByIdService } from './find-user-by-id.service';
 
-describe('FindUserByIdQueryHandler', () => 
+describe('FindUserByIdQueryHandler', () =>
 {
     let queryHandler: FindUserByIdQueryHandler;
     let service: FindUserByIdService;
@@ -48,13 +48,13 @@ describe('FindUserByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an user founded', async () => 
+        test('should return an user founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindUserByIdQuery(
                     users[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

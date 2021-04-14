@@ -6,12 +6,12 @@ import { permissions } from '@hades/iam/permission/infrastructure/seeds/permissi
 import { DeletePermissionByIdCommand } from './delete-permission-by-id.command';
 import { DeletePermissionByIdService } from './delete-permission-by-id.service';
 
-describe('DeletePermissionByIdCommandHandler', () => 
+describe('DeletePermissionByIdCommandHandler', () =>
 {
     let commandHandler: DeletePermissionByIdCommandHandler;
     let service: DeletePermissionByIdService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('DeletePermissionByIdCommandHandler', () =>
         service         = module.get<DeletePermissionByIdService>(DeletePermissionByIdService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeletePermissionByIdCommandHandler should be defined', () => 
+        test('DeletePermissionByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeletePermissionByIdService', async () => 
+        test('should create the value object id and pass them as parameters to the DeletePermissionByIdService', async () =>
         {
             expect(await commandHandler.execute(
                 new DeletePermissionByIdCommand(

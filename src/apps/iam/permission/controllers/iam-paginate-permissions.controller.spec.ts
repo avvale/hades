@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 
-describe('IamPaginatePermissionsController', () => 
+describe('IamPaginatePermissionsController', () =>
 {
     let controller: IamPaginatePermissionsController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('IamPaginatePermissionsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamPaginatePermissionsController should be defined', () => 
+        test('IamPaginatePermissionsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a permissions', async () => 
+        test('should return a permissions', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions)));
             expect(await controller.main()).toBe(permissions);

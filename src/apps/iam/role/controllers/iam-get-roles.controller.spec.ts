@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 
-describe('IamGetRolesController', () => 
+describe('IamGetRolesController', () =>
 {
     let controller: IamGetRolesController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('IamGetRolesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamGetRolesController should be defined', () => 
+        test('IamGetRolesController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a roles', async () => 
+        test('should return a roles', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles)));
             expect(await controller.main()).toBe(roles);

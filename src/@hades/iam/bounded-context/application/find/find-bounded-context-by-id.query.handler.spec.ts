@@ -9,7 +9,7 @@ import { BoundedContextMapper } from '@hades/iam/bounded-context/domain/bounded-
 import { FindBoundedContextByIdQuery } from './find-bounded-context-by-id.query';
 import { FindBoundedContextByIdService } from './find-bounded-context-by-id.service';
 
-describe('FindBoundedContextByIdQueryHandler', () => 
+describe('FindBoundedContextByIdQueryHandler', () =>
 {
     let queryHandler: FindBoundedContextByIdQueryHandler;
     let service: FindBoundedContextByIdService;
@@ -48,13 +48,13 @@ describe('FindBoundedContextByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an boundedContext founded', async () => 
+        test('should return an boundedContext founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindBoundedContextByIdQuery(
                     boundedContexts[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { tenants } from '@hades/iam/tenant/infrastructure/seeds/tenant.seed';
 
-describe('IamDeleteTenantsResolver', () => 
+describe('IamDeleteTenantsResolver', () =>
 {
     let resolver: IamDeleteTenantsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('IamDeleteTenantsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamDeleteTenantsResolver should be defined', () => 
+    test('IamDeleteTenantsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamDeleteTenantsResolver should be defined', () => 
+        test('IamDeleteTenantsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an tenants deleted', async () => 
+        test('should return an tenants deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
             expect(await resolver.main()).toBe(tenants);

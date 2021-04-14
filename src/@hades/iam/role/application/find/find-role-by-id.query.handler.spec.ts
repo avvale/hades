@@ -9,7 +9,7 @@ import { RoleMapper } from '@hades/iam/role/domain/role.mapper';
 import { FindRoleByIdQuery } from './find-role-by-id.query';
 import { FindRoleByIdService } from './find-role-by-id.service';
 
-describe('FindRoleByIdQueryHandler', () => 
+describe('FindRoleByIdQueryHandler', () =>
 {
     let queryHandler: FindRoleByIdQueryHandler;
     let service: FindRoleByIdService;
@@ -48,13 +48,13 @@ describe('FindRoleByIdQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an role founded', async () => 
+        test('should return an role founded', async () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
                 new FindRoleByIdQuery(
                     roles[0].id,
-                
+
                 )
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });

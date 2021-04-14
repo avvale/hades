@@ -6,13 +6,13 @@ import { DeleteBoundedContextsService } from './delete-bounded-contexts.service'
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('DeleteBoundedContextsService', () => 
+describe('DeleteBoundedContextsService', () =>
 {
     let service: DeleteBoundedContextsService;
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteBoundedContextsService', () =>
                 EventPublisher,
                 DeleteBoundedContextsService,
                 MockBoundedContextRepository,
-                { 
+                {
                     provide: IBoundedContextRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteBoundedContextsService', () =>
         mockRepository  = module.get(MockBoundedContextRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteBoundedContextsService should be defined', () => 
+        test('DeleteBoundedContextsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete boundedContext and emit event', async () => 
+        test('should delete boundedContext and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

@@ -8,7 +8,7 @@ import { AccountId } from './../../domain/value-objects';
 import { IAccountRepository } from './../../domain/account.repository';
 import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
 
-describe('DeleteAccountByIdService', () => 
+describe('DeleteAccountByIdService', () =>
 {
     let service: DeleteAccountByIdService;
     let repository: IAccountRepository;
@@ -38,14 +38,14 @@ describe('DeleteAccountByIdService', () =>
         mockRepository  = module.get(MockAccountRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAccountByIdService should be defined', () => 
+        test('DeleteAccountByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete account and emit event', async () => 
+        test('should delete account and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
