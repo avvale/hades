@@ -1,7 +1,6 @@
 // commands
 import { CreateAccessTokenCommandHandler } from './application/create/create-access-token.command-handler';
 import { CreateAccessTokensCommandHandler } from './application/create/create-access-tokens.command-handler';
-import { UpdateAccessTokenCommandHandler } from './application/update/update-access-token.command-handler';
 import { DeleteAccessTokenByIdCommandHandler } from './application/delete/delete-access-token-by-id.command-handler';
 import { DeleteAccessTokensCommandHandler } from './application/delete/delete-access-tokens.command-handler';
 
@@ -25,7 +24,6 @@ import { PaginateAccessTokensService } from './application/paginate/paginate-acc
 import { GetAccessTokensService } from './application/get/get-access-tokens.service';
 import { FindAccessTokenService } from './application/find/find-access-token.service';
 import { FindAccessTokenByIdService } from './application/find/find-access-token-by-id.service';
-import { UpdateAccessTokenService } from './application/update/update-access-token.service';
 import { DeleteAccessTokenByIdService } from './application/delete/delete-access-token-by-id.service';
 import { DeleteAccessTokensService } from './application/delete/delete-access-tokens.service';
 
@@ -68,7 +66,6 @@ export const OAuthAccessTokenServices = [
     GetAccessTokensService,
     FindAccessTokenService,
     FindAccessTokenByIdService,
-    UpdateAccessTokenService,
     DeleteAccessTokenByIdService,
     DeleteAccessTokensService,
 ];
