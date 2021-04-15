@@ -54,5 +54,8 @@ aggregateProperties:
     nullable: true
 excluded:
   - src/apps/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts
+  - src/apps/o-auth/access-token/controllers/o-auth-create-access-token.controller.spec.ts
+  - src/apps/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.ts
+  - src/apps/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.spec.ts
   - src/@hades/o-auth/access-token/application/update/update-access-token.service.spec.ts
   - postman/o-auth.access-token.postman.json
