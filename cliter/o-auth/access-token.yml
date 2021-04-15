@@ -52,3 +52,7 @@ aggregateProperties:
   - name: deleted_at
     type: timestamp
     nullable: true
+excluded:
+  - src/apps/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts
+  - src/@hades/o-auth/access-token/application/update/update-access-token.service.spec.ts
+  - postman/o-auth.access-token.postman.json
