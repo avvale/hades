@@ -9,20 +9,13 @@ import {
     AccessTokenId,
     AccessTokenClientId,
     AccessTokenAccountId,
-    AccessTokenToken,
     AccessTokenName,
-    AccessTokenIsRevoked,
-    AccessTokenExpiresAt,
-    AccessTokenCreatedAt,
-    AccessTokenUpdatedAt,
-    AccessTokenDeletedAt,
     AccessTokenExpiredAccessToken,
 } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
 
 describe('CreateAccessTokenService', () =>
-
 {
     let service: CreateAccessTokenService;
     let repository: IAccessTokenRepository;
@@ -35,14 +28,19 @@ describe('CreateAccessTokenService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                CreateAccessTokenService,
                 MockAccessTokenRepository,
                 {
                     provide: IAccessTokenRepository,
                     useValue: {
                         create: (item) => {}
                     }
-                }
+                },
+                {
+                    provide: CreateAccessTokenService,
+                    useValue: {
+                        main: () => {},
+                    }
+                },
             ]
         }).compile();
 
