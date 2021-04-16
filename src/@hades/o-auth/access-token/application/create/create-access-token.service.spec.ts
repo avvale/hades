@@ -1,8 +1,9 @@
+// ignored file
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokensToCreate } from '@hades/o-auth/access-token/infrastructure/seeds/access-token-to-create.seed';
 import { CreateAccessTokenService } from './create-access-token.service';
 import {
     AccessTokenId,
@@ -61,11 +62,11 @@ describe('CreateAccessTokenService', () =>
         {
             expect(await service.main(
                 {
-                    id: new AccessTokenId(accessTokens[0].id),
-                    clientId: new AccessTokenClientId(accessTokens[0].clientId),
-                    accountId: new AccessTokenAccountId(accessTokens[0].accountId),
-                    name: new AccessTokenName(accessTokens[0].name),
-                    expiredAccessToken: new AccessTokenExpiredAccessToken(accessTokens[0].name),
+                    id                  : new AccessTokenId(accessTokensToCreate[0].id),
+                    clientId            : new AccessTokenClientId(accessTokensToCreate[0].clientId),
+                    accountId           : new AccessTokenAccountId(accessTokensToCreate[0].accountId),
+                    name                : new AccessTokenName(accessTokensToCreate[0].name),
+                    expiredAccessToken  : new AccessTokenExpiredAccessToken(accessTokensToCreate[0].expiredAccessToken),
                 }
             )).toBe(undefined);
         });

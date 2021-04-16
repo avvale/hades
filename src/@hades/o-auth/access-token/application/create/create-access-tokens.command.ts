@@ -1,3 +1,4 @@
+// ignored file
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
 export class CreateAccessTokensCommand
@@ -6,11 +7,9 @@ export class CreateAccessTokensCommand
         public readonly payload: {
             id: string,
             clientId: string,
-            accountId?: string,
-            token: string,
-            name?: string,
-            isRevoked: boolean,
-            expiresAt?: string,
+            accountId: string,
+            name: string,
+            expiredAccessToken: number,
         } [],
         public readonly cQMetadata?: CQMetadata,
     ) {}
