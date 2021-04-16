@@ -11,29 +11,29 @@ export abstract class IAccessTokenRepository implements IRepository<OAuthAccessT
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<OAuthAccessToken>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<OAuthAccessToken>>;
 
     // create a single record
-    abstract async create(accessToken: OAuthAccessToken): Promise<void>;
+    abstract create(accessToken: OAuthAccessToken): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(accessTokens: OAuthAccessToken[], options?: object): Promise<void>;
+    abstract insert(accessTokens: OAuthAccessToken[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthAccessToken | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthAccessToken | null>;
 
     // find a single record by id
-    abstract async findById(id: AccessTokenId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthAccessToken | null>;
+    abstract findById(id: AccessTokenId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthAccessToken | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthAccessToken[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthAccessToken[]>;
 
     // update record
-    abstract async update(accessToken: OAuthAccessToken, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(accessToken: OAuthAccessToken, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: AccessTokenId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: AccessTokenId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

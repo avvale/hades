@@ -1,8 +1,9 @@
+// ignored file
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { CreateAccessTokensCommand } from '@hades/o-auth/access-token/application/create/create-access-tokens.command';
 import { SeederModule } from './seeder.module';
-import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokensToCreate } from '@hades/o-auth/access-token/infrastructure/seeds/access-token-to-create.seed';
 
 export class Seeder
 {
@@ -10,7 +11,7 @@ export class Seeder
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext => {
             const commandBus = appContext.get(ICommandBus);
-            commandBus.dispatch(new CreateAccessTokensCommand(accessTokens));
+            commandBus.dispatch(new CreateAccessTokensCommand(accessTokensToCreate));
         });
     }
 }
