@@ -15,7 +15,7 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
     public deletedAtInstance: TimestampValueObject;
 
     get collectionResponse(): any[]
-    { 
+    {
         // to match objects, the http output excludes undefined values
         return this.collectionSource.map(item => cleanDeep(item.toDTO(), {
                 nullValues: false,
@@ -30,19 +30,19 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
     {
         let offset  = query.offset ? query.offset : 0;
         let limit   = query.limit ? query.limit : this.collectionSource.length;
-        
-        return { 
-            total   : this.collectionSource.length, 
-            count   : this.collectionSource.length, 
+
+        return {
+            total   : this.collectionSource.length,
+            count   : this.collectionSource.length,
             rows    : this.collectionSource.slice(offset, limit)
         };
     }
-    
+
     async create(aggregate: Aggregate): Promise<void>
     {
         if (this.collectionSource.find(item => item.id.value === aggregate.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${aggregate.id.value} already exist in database`);
 
-        // create deletedAt null 
+        // create deletedAt null
         aggregate.deletedAt = this.deletedAtInstance;
 
         this.collectionSource.push(aggregate);
@@ -52,7 +52,7 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
     {
     }
 
-    async find(queryStatement: QueryStatement): Promise<Aggregate> 
+    async find(queryStatement: QueryStatement): Promise<Aggregate>
     {
         const aggregate = this.collectionSource.find(item => item.id.value === queryStatement.where.id);
 
@@ -70,13 +70,13 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
         return aggregate;
     }
 
-    async get(queryStatement: QueryStatement): Promise<Aggregate[]> 
+    async get(queryStatement: QueryStatement): Promise<Aggregate[]>
     {
         return this.collectionSource;
     }
 
-    async update(aggregate: Aggregate): Promise<void> 
-    { 
+    async update(aggregate: Aggregate): Promise<void>
+    {
         // check that aggregate exist
         await this.findById(aggregate.id);
 
@@ -86,7 +86,7 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
         });
     }
 
-    async deleteById(id: UuidValueObject): Promise<void> 
+    async deleteById(id: UuidValueObject): Promise<void>
     {
         // check that aggregate exist
         await this.findById(id);
@@ -94,7 +94,7 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
         this.collectionSource.filter(aggregate => aggregate.id.value !== id.value);
     }
 
-    async delete(queryStatement: QueryStatement): Promise<void> 
+    async delete(queryStatement: QueryStatement): Promise<void>
     {
         if (!Array.isArray(queryStatement) || queryStatement.length === 0) throw new BadRequestException(`To delete multiple records, you must define a query statement`);
     }
