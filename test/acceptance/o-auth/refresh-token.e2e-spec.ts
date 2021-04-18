@@ -57,10 +57,10 @@ describe('refresh-token', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Fugiat odit ut doloremque voluptatem porro ab fuga ea mollitia. Eum voluptatem quia tempora perferendis sed incidunt harum ut. Voluptas dicta explicabo dolores modi et voluptatem ea. Molestiae voluptas consequuntur odio voluptates excepturi quo quaerat id ratione. Molestias unde autem minus dolor temporibus rerum quo quibusdam perferendis.',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Ut temporibus quia et. Et reiciendis non eligendi delectus. Id soluta quae quo molestiae consectetur laboriosam ipsam.',
                 isRevoked: false,
-                expiresAt: '2021-04-14 15:56:15',
+                expiresAt: '2021-04-17 21:47:10',
             })
             .expect(400)
             .then(res => {
@@ -75,10 +75,10 @@ describe('refresh-token', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Deleniti aut deserunt deleniti sed omnis dolorum placeat aspernatur voluptates. Repudiandae ea minima vel optio et itaque neque voluptatibus. Autem dicta rerum rem molestiae. Ut quas deserunt minima. Et ullam rerum maxime eos corporis quia eos dolores officiis.',
-                isRevoked: false,
-                expiresAt: '2021-04-14 19:48:52',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Incidunt delectus similique aut eius sequi tenetur neque qui velit. Beatae molestiae omnis. Similique molestias similique temporibus voluptas magni vel voluptatem est nisi.',
+                isRevoked: true,
+                expiresAt: '2021-04-18 01:51:30',
             })
             .expect(400)
             .then(res => {
@@ -92,11 +92,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
                 accessTokenId: null,
-                token: 'Suscipit voluptatem omnis consequuntur consequatur accusamus quas non. Necessitatibus nam dolorem consequatur cumque alias temporibus voluptas iure ut. Libero voluptas cumque asperiores vel temporibus ad ut mollitia labore. Consequatur qui repudiandae ullam rerum illo minus.',
-                isRevoked: false,
-                expiresAt: '2021-04-14 17:13:18',
+                token: 'Incidunt non officiis velit excepturi id nulla eos cupiditate eligendi. Non odit nemo fuga aliquam. Ipsum fugit numquam. Recusandae sed enim nihil animi officia est molestiae. Quis architecto et similique molestias modi ipsam quod non.',
+                isRevoked: true,
+                expiresAt: '2021-04-17 23:49:53',
             })
             .expect(400)
             .then(res => {
@@ -110,11 +110,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
                 
-                token: 'Magnam id voluptatem nesciunt odio cupiditate beatae. Quis consequatur perspiciatis impedit. Dolorem amet eum placeat eveniet reiciendis at delectus modi. Ea delectus harum.',
-                isRevoked: true,
-                expiresAt: '2021-04-14 16:31:20',
+                token: 'Et nesciunt magni sed et velit accusamus est. Natus pariatur illo. Dolore ut minima aut et sit non. Repellendus ea minus necessitatibus esse velit non inventore praesentium similique. Officiis ex omnis ullam blanditiis voluptatum sit.',
+                isRevoked: false,
+                expiresAt: '2021-04-17 20:40:03',
             })
             .expect(400)
             .then(res => {
@@ -128,11 +128,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
                 token: null,
                 isRevoked: true,
-                expiresAt: '2021-04-14 16:17:05',
+                expiresAt: '2021-04-18 04:41:57',
             })
             .expect(400)
             .then(res => {
@@ -146,11 +146,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
                 
-                isRevoked: true,
-                expiresAt: '2021-04-14 07:42:54',
+                isRevoked: false,
+                expiresAt: '2021-04-18 07:18:53',
             })
             .expect(400)
             .then(res => {
@@ -164,11 +164,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Aspernatur corrupti nulla. Minus dolorem minus amet aspernatur sit dolores. Rerum quos rem sint est voluptate aperiam rem sunt.',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Unde voluptates sunt ipsum ut. Repudiandae animi officiis et accusantium quia et pariatur fugit facere. Deserunt rerum id iusto aliquid vitae id provident rerum et. Accusantium et eos autem explicabo architecto ut. Sed impedit necessitatibus odit molestiae nihil sed iure atque optio.',
                 isRevoked: null,
-                expiresAt: '2021-04-14 21:56:35',
+                expiresAt: '2021-04-18 04:11:42',
             })
             .expect(400)
             .then(res => {
@@ -182,11 +182,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Tenetur consequatur sequi veritatis quo culpa et voluptate dolorum aut. Quia consectetur dolor dolorem et facilis. Animi velit assumenda. Et qui quidem qui in aut et consequatur voluptas dignissimos. Et qui quaerat saepe id. Incidunt beatae est esse odio repellendus est molestiae.',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Sint consequuntur rerum ea sint vero. Quia molestias ut. Et error necessitatibus libero totam quis omnis quasi.',
                 
-                expiresAt: '2021-04-14 19:26:30',
+                expiresAt: '2021-04-17 19:39:00',
             })
             .expect(400)
             .then(res => {
@@ -202,11 +202,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'rmwaoatisfwudfayr0idox01eq0gfhyiqct25',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Praesentium velit a in natus. Velit inventore sapiente eum explicabo nam voluptatum. Iusto aut perspiciatis harum nisi id.',
+                id: 's249ld9drdngfgmujx4w7avi596a7jultkwa0',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Qui sit et voluptas aut dolor. Laudantium quaerat quae sit. Vel et voluptate ipsa recusandae voluptatem consectetur sapiente.',
                 isRevoked: false,
-                expiresAt: '2021-04-14 08:32:11',
+                expiresAt: '2021-04-18 03:03:55',
             })
             .expect(400)
             .then(res => {
@@ -220,11 +220,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: 'y3nybhi1lwtrzezknae4qa3jxn7x76r5q6lj3',
-                token: 'Autem sapiente cum praesentium et quisquam occaecati. In illum explicabo qui sed. Labore animi eum odio est magni provident. Error magni dicta rem. Qui sit labore quis explicabo.',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '3tjgmfzzghtjp7dirxt2apvoumejdxjxh2clt',
+                token: 'Quo maxime qui nisi et nam aut. Quasi a voluptas molestiae deserunt omnis occaecati a et. Et voluptatum pariatur aut. Est minima error ut magnam itaque ratione molestias.',
                 isRevoked: true,
-                expiresAt: '2021-04-14 09:07:23',
+                expiresAt: '2021-04-18 11:19:51',
             })
             .expect(400)
             .then(res => {
@@ -248,11 +248,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Aut animi doloribus inventore id est. Ducimus a aut. Aut dolores soluta nobis qui ut. Quo consequuntur dolores dolorum fugiat eligendi incidunt. Et aut porro iste fugiat neque est et omnis. Qui voluptatem nobis iste fugit.',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Ullam rem esse minima. Consectetur expedita necessitatibus qui nemo error excepturi voluptatibus harum. Magnam non est unde commodi. Ut voluptate sed velit sit deleniti. Et in suscipit ut.',
                 isRevoked: 'true',
-                expiresAt: '2021-04-14 19:57:00',
+                expiresAt: '2021-04-18 08:39:25',
             })
             .expect(400)
             .then(res => {
@@ -270,9 +270,9 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Dolor vitae ipsa. Veritatis amet molestiae vel vel vel. Neque aut quo ullam architecto a esse quasi tenetur. Maiores consectetur odit reiciendis provident enim est quasi recusandae non.',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Et minus reiciendis et fugiat corrupti. Voluptates animi suscipit officia fuga numquam laudantium. Ex hic dolor beatae ducimus beatae rem sint quis. Voluptatibus repellat atque rerum consequatur est exercitationem delectus. Natus dolorem exercitationem perferendis qui aut facere repellendus et.',
                 isRevoked: true,
                 expiresAt: 'XXXXXXXX',
             })
@@ -289,11 +289,11 @@ describe('refresh-token', () =>
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Vel non consequatur et. Cumque et illo fugiat. Sed labore odio et.',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Atque facilis sit quo aut inventore. Occaecati laudantium qui voluptatibus nesciunt modi voluptatem ad quam ipsam. Voluptatem sequi qui adipisci rerum et tenetur ea inventore qui. Est voluptas tempore nam qui praesentium sint.',
                 isRevoked: true,
-                expiresAt: '2021-04-15 00:29:45',
+                expiresAt: '2021-04-18 12:58:20',
             })
             .expect(201);
     });
@@ -328,7 +328,7 @@ describe('refresh-token', () =>
                 {
                     where: 
                     {
-                        id: '404b8c95-af8a-47e8-887b-e5117ec26a40'
+                        id: '6f7a3873-d108-4476-87d3-14e40e6faee4'
                     }
                 }
             })
@@ -345,18 +345,18 @@ describe('refresh-token', () =>
                 {
                     where: 
                     {
-                        id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e'
+                        id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e'));
+            .expect(repository.collectionResponse.find(item => item.id === 'cf28c6f8-eb76-4a6d-b153-81bb9621b048'));
     });
 
     test(`/REST:GET o-auth/refresh-token/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/o-auth/refresh-token/5bf0d51a-dc00-497e-898c-37687882fcc2')
+            .get('/o-auth/refresh-token/ea801d64-1b65-4cdc-ad2f-73a90a223840')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -364,10 +364,10 @@ describe('refresh-token', () =>
     test(`/REST:GET o-auth/refresh-token/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/o-auth/refresh-token/c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e')
+            .get('/o-auth/refresh-token/cf28c6f8-eb76-4a6d-b153-81bb9621b048')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e'));
+            .expect(repository.collectionResponse.find(e => e.id === 'cf28c6f8-eb76-4a6d-b153-81bb9621b048'));
     });
 
     test(`/REST:GET o-auth/refresh-tokens`, () => 
@@ -386,11 +386,11 @@ describe('refresh-token', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'cdfdc063-07cd-413d-9704-d9a5a7e4dd01',
-                accessTokenId: '8a2a41f3-b8c2-4add-bcfb-e766d10a0eb6',
-                token: 'Iusto sit sit nesciunt sed culpa sit quis eum. Provident molestiae qui eum quibusdam sit. Alias sit quae ab temporibus. Id dolores repellat est vitae eligendi. Voluptatum eum ipsam nemo adipisci quam.',
-                isRevoked: false,
-                expiresAt: '2021-04-14 11:51:59',
+                id: '1c62fd80-53df-4e73-b043-18e5c0ecf84b',
+                accessTokenId: 'd5fdd019-e6c0-4813-a578-4ac072397ea0',
+                token: 'Vel et nemo aut qui dolor. Numquam facere fuga ut asperiores iste dolore hic. Qui eos sunt. Vitae nisi possimus nam.',
+                isRevoked: true,
+                expiresAt: '2021-04-18 04:50:50',
             })
             .expect(404);
     });
@@ -402,20 +402,20 @@ describe('refresh-token', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                token: 'Rerum nihil quisquam aspernatur mollitia. Recusandae est non. Veritatis minima soluta fugit. Sequi autem voluptatibus.',
-                isRevoked: false,
-                expiresAt: '2021-04-14 19:10:36',
+                id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                token: 'Quasi et perspiciatis quia modi. A culpa est odio et dignissimos quod amet. Officiis eum rerum sed. Eveniet modi aliquam laborum delectus et odio rerum cumque quas. Molestiae quia dolores similique non possimus sint iure nihil. Et minus quam deserunt non voluptas.',
+                isRevoked: true,
+                expiresAt: '2021-04-18 16:52:31',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e'));
+            .expect(repository.collectionResponse.find(e => e.id === 'cf28c6f8-eb76-4a6d-b153-81bb9621b048'));
     });
 
     test(`/REST:DELETE o-auth/refresh-token/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/refresh-token/3263fa3e-edb1-4c44-ac0e-aa3d362a560a')
+            .delete('/o-auth/refresh-token/e0b4fb82-701f-4810-8636-943c26972fe6')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -423,7 +423,7 @@ describe('refresh-token', () =>
     test(`/REST:DELETE o-auth/refresh-token/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/refresh-token/c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e')
+            .delete('/o-auth/refresh-token/cf28c6f8-eb76-4a6d-b153-81bb9621b048')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -485,17 +485,17 @@ describe('refresh-token', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'c837be61-2109-4e2f-94cf-b5c8d8d0b003',
-                        accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                        token: 'Hic repellendus fugiat aut voluptatem. Consequatur fugit distinctio voluptatem sint a et voluptas ab. Laborum consequatur est porro.',
+                        id: '6b0e9c11-34b6-4d39-b03d-9b41327913ed',
+                        accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                        token: 'Aut repellat sapiente voluptas quia quo rerum dignissimos quis. Rerum ex dolor reiciendis voluptatum fugiat dolores quo consequatur totam. Enim autem pariatur iste voluptatem exercitationem debitis. Aut sint est. Dolorum perspiciatis vel voluptatem nisi temporibus earum nesciunt ullam amet. Expedita sit mollitia ipsam quis sint dolores.',
                         isRevoked: false,
-                        expiresAt: '2021-04-15 00:17:54',
+                        expiresAt: '2021-04-18 15:58:23',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthCreateRefreshToken).toHaveProperty('id', 'c837be61-2109-4e2f-94cf-b5c8d8d0b003');
+                expect(res.body.data.oAuthCreateRefreshToken).toHaveProperty('id', '6b0e9c11-34b6-4d39-b03d-9b41327913ed');
             });
     });
 
@@ -560,7 +560,7 @@ describe('refresh-token', () =>
                     {
                         where: 
                         {
-                            id: '0149db39-8dd9-4624-8d46-d6adda3df5a8'
+                            id: '7aa6e70b-e6f3-41ae-b9b6-7aaefcece58f'
                         }
                     }
                 }
@@ -600,14 +600,14 @@ describe('refresh-token', () =>
                     {
                         where: 
                         {
-                            id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e'
+                            id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindRefreshToken.id).toStrictEqual('c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e');
+                expect(res.body.data.oAuthFindRefreshToken.id).toStrictEqual('cf28c6f8-eb76-4a6d-b153-81bb9621b048');
             });
     });
 
@@ -633,7 +633,7 @@ describe('refresh-token', () =>
                     }
                 `,
                 variables: {
-                    id: '5d8d16b4-fdfb-445a-9701-0f4245d85dfc'
+                    id: '9b143673-3d65-4212-bc9f-e267b81d1b66'
                 }
             })
             .expect(200)
@@ -666,12 +666,12 @@ describe('refresh-token', () =>
                     }
                 `,
                 variables: {
-                    id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e'
+                    id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindRefreshTokenById.id).toStrictEqual('c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e');
+                expect(res.body.data.oAuthFindRefreshTokenById.id).toStrictEqual('cf28c6f8-eb76-4a6d-b153-81bb9621b048');
             });
     });
 
@@ -731,11 +731,11 @@ describe('refresh-token', () =>
                 variables: {
                     payload: {
                         
-                        id: 'bca69bd2-b122-4ddb-8941-fb960bb28bb6',
-                        accessTokenId: '560c67f2-10a6-430e-8203-9bb5117c700c',
-                        token: 'Sed nostrum voluptatum. Vel quam ex sunt animi quia maiores excepturi voluptatum eveniet. Quia eum labore nostrum a aliquid necessitatibus error inventore nostrum.',
-                        isRevoked: false,
-                        expiresAt: '2021-04-14 06:17:17',
+                        id: 'fc6fa31f-c3df-4742-a24e-60e805c2691f',
+                        accessTokenId: '0902bf87-2062-4b41-aea8-262f94145f56',
+                        token: 'Reprehenderit doloremque qui occaecati dolore earum. Eos cumque soluta et perspiciatis. Maxime enim et fuga. Qui libero quasi ex modi odit. Quia quod et eum enim laborum ut porro suscipit repudiandae. Consequatur modi soluta eligendi a.',
+                        isRevoked: true,
+                        expiresAt: '2021-04-18 14:09:43',
                     }
                 }
             })
@@ -771,17 +771,17 @@ describe('refresh-token', () =>
                 variables: {
                     payload: {
                         
-                        id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e',
-                        accessTokenId: '4dc2df2a-c3d8-4aea-be7f-51b04be8dfad',
-                        token: 'Facilis ut autem doloremque sed. Aut qui provident eligendi velit. Quia natus sit iusto itaque repellat. Quod nihil sit culpa nisi. Delectus non dolorem.',
-                        isRevoked: false,
-                        expiresAt: '2021-04-14 17:33:51',
+                        id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048',
+                        accessTokenId: '70ef4121-124b-450a-9e7e-2db83374f3ca',
+                        token: 'Aperiam est officia nesciunt quae officia delectus odio fugit nesciunt. Molestiae repellendus labore fugiat. Soluta veniam consequuntur a ipsa reiciendis et nam. Est consequuntur veritatis minima perspiciatis eligendi minus. Quod aspernatur quia commodi sit. Quas ea ut et quisquam enim nisi.',
+                        isRevoked: true,
+                        expiresAt: '2021-04-17 19:46:55',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthUpdateRefreshToken.id).toStrictEqual('c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e');
+                expect(res.body.data.oAuthUpdateRefreshToken.id).toStrictEqual('cf28c6f8-eb76-4a6d-b153-81bb9621b048');
             });
     });
 
@@ -807,7 +807,7 @@ describe('refresh-token', () =>
                     }
                 `,
                 variables: {
-                    id: '61e78d71-2a7e-41f9-8747-6e0e3ca6c2b7'
+                    id: 'e9db8fe8-0328-471f-9777-edffc490994c'
                 }
             })
             .expect(200)
@@ -840,12 +840,12 @@ describe('refresh-token', () =>
                     }
                 `,
                 variables: {
-                    id: 'c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e'
+                    id: 'cf28c6f8-eb76-4a6d-b153-81bb9621b048'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthDeleteRefreshTokenById.id).toStrictEqual('c5b2c3f5-8c2e-4352-a176-8ba27a8c7f9e');
+                expect(res.body.data.oAuthDeleteRefreshTokenById.id).toStrictEqual('cf28c6f8-eb76-4a6d-b153-81bb9621b048');
             });
     });
 

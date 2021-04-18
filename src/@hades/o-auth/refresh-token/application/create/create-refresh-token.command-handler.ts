@@ -1,14 +1,12 @@
+// ignored file
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateRefreshTokenCommand } from './create-refresh-token.command';
 import { CreateRefreshTokenService } from './create-refresh-token.service';
 import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
-    RefreshTokenToken,
-    RefreshTokenIsRevoked,
-    RefreshTokenExpiresAt,
+    RefreshTokenExpiredRefreshToken,
 } from './../../domain/value-objects';
-import { RefreshTokenExpiredRefreshToken } from '../../domain/value-objects/refresh-token-expired-refresh-token';
 
 @CommandHandler(CreateRefreshTokenCommand)
 export class CreateRefreshTokenCommandHandler implements ICommandHandler<CreateRefreshTokenCommand>

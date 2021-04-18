@@ -9,8 +9,8 @@ import { OAuthDeleteRefreshTokensController } from './controllers/o-auth-delete-
 // resolvers
 import { OAuthPaginateRefreshTokensResolver } from './resolvers/o-auth-paginate-refresh-tokens.resolver';
 import { OAuthGetRefreshTokensResolver } from './resolvers/o-auth-get-refresh-tokens.resolver';
-import { OAuthFindRefreshTokenResolver } from './resolvers/o-auth-find-refresh-token.resolver';
 import { OAuthFindRefreshTokenByIdResolver } from './resolvers/o-auth-find-refresh-token-by-id.resolver';
+import { OAuthFindRefreshTokenResolver } from './resolvers/o-auth-find-refresh-token.resolver';
 import { OAuthDeleteRefreshTokenByIdResolver } from './resolvers/o-auth-delete-refresh-token-by-id.resolver';
 import { OAuthDeleteRefreshTokensResolver } from './resolvers/o-auth-delete-refresh-tokens.resolver';
 
@@ -26,8 +26,8 @@ export const OAuthRefreshTokenControllers = [
 export const OAuthRefreshTokenResolvers = [
     OAuthPaginateRefreshTokensResolver,
     OAuthGetRefreshTokensResolver,
-    OAuthFindRefreshTokenResolver,
     OAuthFindRefreshTokenByIdResolver,
+    OAuthFindRefreshTokenResolver,
     OAuthDeleteRefreshTokenByIdResolver,
     OAuthDeleteRefreshTokensResolver,
 ];
