@@ -39,13 +39,13 @@ aggregateProperties:
     nullable: true
 excluded:
   - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.ts
-  - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command.handler.spec.ts
+  - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.spec.ts
   - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command.ts
   - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.service.spec.ts
   - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.service.ts
   - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command.ts
   - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command-handler.ts
-  - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command.handler.spec.ts
+  - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command-handler.spec.ts
   - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.service.spec.ts
   - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.service.ts
   - src/@hades/o-auth/refresh-token/application/events/created-refresh-tokens.event-handler.ts

@@ -54,7 +54,7 @@ aggregateProperties:
     nullable: true
 excluded:
   - src/@hades/o-auth/access-token/application/create/create-access-tokens.command-handler.ts
-  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command.handler.spec.ts
+  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command-handler.spec.ts
   - src/@hades/o-auth/access-token/application/create/create-access-tokens.command.ts
   - src/@hades/o-auth/access-token/application/create/create-access-tokens.service.spec.ts
   - src/@hades/o-auth/access-token/application/create/create-access-tokens.service.ts
