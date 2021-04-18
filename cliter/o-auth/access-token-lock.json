@@ -211,7 +211,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/index.ts",
-            "integrity": "sha1:1e956e8da5789c5f651f75a99cc73241993d8fd7"
+            "integrity": "sha1:3e977044c02dddcbae4a3eb51a97dd67e6377b22"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/mock/mock-access-token.repository.ts",
@@ -219,7 +219,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
-            "integrity": "sha1:edbb0a629484ba05f41eba90d493e3f1690e3ee5"
+            "integrity": "sha1:af477c3897fc9793dea1b7151b36fe49edc7d690"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",

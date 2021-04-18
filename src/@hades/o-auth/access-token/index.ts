@@ -38,7 +38,6 @@ export { AccessTokenSagas } from './application/sagas/access-token.sagas';
 export const OAuthAccessTokenHandlers = [
     // commands
     CreateAccessTokenCommandHandler,
-    UpdateAccessTokenCommandHandler,
     DeleteAccessTokenByIdCommandHandler,
     DeleteAccessTokensCommandHandler,
 
