@@ -11,8 +11,6 @@ import { FindRefreshTokenByIdQueryHandler } from './application/find/find-refres
 
 // events
 import { CreatedRefreshTokenEventHandler } from './application/events/created-refresh-token.event-handler';
-import { CreatedRefreshTokensEventHandler } from './application/events/created-refresh-tokens.event-handler';
-import { UpdatedRefreshTokenEventHandler } from './application/events/updated-refresh-token.event-handler';
 import { DeletedRefreshTokenEventHandler } from './application/events/deleted-refresh-token.event-handler';
 import { DeletedRefreshTokensEventHandler } from './application/events/deleted-refresh-tokens.event-handler';
 
