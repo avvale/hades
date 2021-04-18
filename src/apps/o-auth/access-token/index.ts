@@ -9,8 +9,8 @@ import { OAuthDeleteAccessTokensController } from './controllers/o-auth-delete-a
 // resolvers
 import { OAuthPaginateAccessTokensResolver } from './resolvers/o-auth-paginate-access-tokens.resolver';
 import { OAuthGetAccessTokensResolver } from './resolvers/o-auth-get-access-tokens.resolver';
-import { OAuthFindAccessTokenResolver } from './resolvers/o-auth-find-access-token.resolver';
 import { OAuthFindAccessTokenByIdResolver } from './resolvers/o-auth-find-access-token-by-id.resolver';
+import { OAuthFindAccessTokenResolver } from './resolvers/o-auth-find-access-token.resolver';
 import { OAuthDeleteAccessTokenByIdResolver } from './resolvers/o-auth-delete-access-token-by-id.resolver';
 import { OAuthDeleteAccessTokensResolver } from './resolvers/o-auth-delete-access-tokens.resolver';
 
@@ -26,8 +26,8 @@ export const OAuthAccessTokenControllers = [
 export const OAuthAccessTokenResolvers = [
     OAuthPaginateAccessTokensResolver,
     OAuthGetAccessTokensResolver,
-    OAuthFindAccessTokenResolver,
     OAuthFindAccessTokenByIdResolver,
+    OAuthFindAccessTokenResolver,
     OAuthDeleteAccessTokenByIdResolver,
     OAuthDeleteAccessTokensResolver,
 ];

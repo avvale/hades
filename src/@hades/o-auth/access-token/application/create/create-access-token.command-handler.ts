@@ -1,3 +1,4 @@
+// ignored file
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateAccessTokenCommand } from './create-access-token.command';
 import { CreateAccessTokenService } from './create-access-token.service';
