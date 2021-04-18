@@ -2,12 +2,12 @@
     "version": "1.0.0",
     "files": [
         {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-token.command-handler.ts",
-            "integrity": "sha1:10d048b6df690ed1e9bfcf1d90487953e7d56acf"
+            "path": "src/@hades/o-auth/access-token/application/create/create-access-token.command-handler.spec.ts",
+            "integrity": "sha1:0471c9a73ddbefcac992eee9c5001010ed93c73f"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-token.command.handler.spec.ts",
-            "integrity": "sha1:0471c9a73ddbefcac992eee9c5001010ed93c73f"
+            "path": "src/@hades/o-auth/access-token/application/create/create-access-token.command-handler.ts",
+            "integrity": "sha1:10d048b6df690ed1e9bfcf1d90487953e7d56acf"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/create/create-access-token.command.ts",
@@ -22,32 +22,12 @@
             "integrity": "sha1:80cdb5c3a1a127cf8de246c5b6b9cd40d387360c"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.command-handler.ts",
-            "integrity": "sha1:52bf66a2c8dfe024fce79859646aec2a924a464d"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.command.handler.spec.ts",
-            "integrity": "sha1:213ec08daf18d100b60c1158abee918e7f6deee4"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.command.ts",
-            "integrity": "sha1:679ce4d2c36c719217a85eabf9b328333262aabf"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.service.spec.ts",
-            "integrity": "sha1:07e62e14f3f1263f1923a53b08ac8aad5ce0b971"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.service.ts",
-            "integrity": "sha1:923ee367df2bc13de9b06cd98c8f8d3467b326b4"
+            "path": "src/@hades/o-auth/access-token/application/delete/delete-access-token-by-id.command-handler.spec.ts",
+            "integrity": "sha1:e0a8b8eade40b441c09f11d1998ba9c6cd04b686"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/delete/delete-access-token-by-id.command-handler.ts",
             "integrity": "sha1:35c1229f049207a595c2aa47adf985b46c6d4e21"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/delete/delete-access-token-by-id.command.handler.spec.ts",
-            "integrity": "sha1:e0a8b8eade40b441c09f11d1998ba9c6cd04b686"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/delete/delete-access-token-by-id.command.ts",
@@ -62,12 +42,12 @@
             "integrity": "sha1:e10fe36e4561d1b236a978f311afdd1f208efb22"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/delete/delete-access-tokens.command-handler.ts",
-            "integrity": "sha1:172af815c3417c61f605105a62858c5c3ceb5c2d"
+            "path": "src/@hades/o-auth/access-token/application/delete/delete-access-tokens.command-handler.spec.ts",
+            "integrity": "sha1:fe9dc92d80283c10b3aa5ef9b5eaa750a7534dd4"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/delete/delete-access-tokens.command.handler.spec.ts",
-            "integrity": "sha1:fe9dc92d80283c10b3aa5ef9b5eaa750a7534dd4"
+            "path": "src/@hades/o-auth/access-token/application/delete/delete-access-tokens.command-handler.ts",
+            "integrity": "sha1:172af815c3417c61f605105a62858c5c3ceb5c2d"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/delete/delete-access-tokens.command.ts",
@@ -83,7 +63,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/application/events/add-access-tokens-context.event.ts",
-            "integrity": "sha1:ab3a0b285dcc0d590fd3be4cb0a808285a9a0b6c"
+            "integrity": "sha1:afda669bead27644e635de5be10aac74684274a8"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/events/created-access-token.event-handler.ts",
@@ -92,14 +72,6 @@
         {
             "path": "src/@hades/o-auth/access-token/application/events/created-access-token.event.ts",
             "integrity": "sha1:44e6642788e506aa29677dc6ded7922b4c17b508"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/events/created-access-tokens.event-handler.ts",
-            "integrity": "sha1:22eaa8a69dee29e4b221481a27a0ac457c1ea390"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/events/created-access-tokens.event.ts",
-            "integrity": "sha1:b5ca1bb19bdd64d9e8aaaa66a9d8d7880f724553"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/events/deleted-access-token.event-handler.ts",
@@ -118,20 +90,12 @@
             "integrity": "sha1:93ef14411f0db5962c5145b29477b548dc379c77"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/events/updated-access-token.event-handler.ts",
-            "integrity": "sha1:15651b0be163d840b3f0a6968c6d25cbad220d4c"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/events/updated-access-token.event.ts",
-            "integrity": "sha1:216c7eedac9d3e9d9a94835a8c8546275050e36f"
+            "path": "src/@hades/o-auth/access-token/application/find/find-access-token-by-id.query-handler.spec.ts",
+            "integrity": "sha1:526198b349022842229cca599fcabf17d0a0e46c"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/find/find-access-token-by-id.query-handler.ts",
             "integrity": "sha1:1e409e6dcdb78ff7a0b5ce828874b26fa3b16349"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/find/find-access-token-by-id.query.handler.spec.ts",
-            "integrity": "sha1:526198b349022842229cca599fcabf17d0a0e46c"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/find/find-access-token-by-id.query.ts",
@@ -146,12 +110,12 @@
             "integrity": "sha1:a11f8b1d971cd4d94b875babc5dc8e3feecc3476"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/find/find-access-token.query-handler.ts",
-            "integrity": "sha1:df11cb2e08f9e5d01b075a68122fbefa1add18a9"
+            "path": "src/@hades/o-auth/access-token/application/find/find-access-token.query-handler.spec.ts",
+            "integrity": "sha1:1940839d653c385a6c2af57ff4b867531aa18b98"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/find/find-access-token.query.handler.spec.ts",
-            "integrity": "sha1:1940839d653c385a6c2af57ff4b867531aa18b98"
+            "path": "src/@hades/o-auth/access-token/application/find/find-access-token.query-handler.ts",
+            "integrity": "sha1:df11cb2e08f9e5d01b075a68122fbefa1add18a9"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/find/find-access-token.query.ts",
@@ -166,12 +130,12 @@
             "integrity": "sha1:8abdfade90d8c1db4349f4ee9b074fe6a3467ce5"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/get/get-access-tokens.query-handler.ts",
-            "integrity": "sha1:8813dcf12f37c4d49f81465364c485c6ccb1698a"
+            "path": "src/@hades/o-auth/access-token/application/get/get-access-tokens.query-handler.spec.ts",
+            "integrity": "sha1:4694e57a09f4a705139179d96e2215a2ba6527fd"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/get/get-access-tokens.query.handler.spec.ts",
-            "integrity": "sha1:4694e57a09f4a705139179d96e2215a2ba6527fd"
+            "path": "src/@hades/o-auth/access-token/application/get/get-access-tokens.query-handler.ts",
+            "integrity": "sha1:8813dcf12f37c4d49f81465364c485c6ccb1698a"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/get/get-access-tokens.query.ts",
@@ -186,12 +150,12 @@
             "integrity": "sha1:bb7897e5fa5dccd79eca0d7358ddb99effd5b192"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/paginate/paginate-access-tokens.query-handler.ts",
-            "integrity": "sha1:c78c1bb9c3e7c7ec778704e6c38357b2aff8f945"
+            "path": "src/@hades/o-auth/access-token/application/paginate/paginate-access-tokens.query-handler.spec.ts",
+            "integrity": "sha1:3937e759e35f9964d7e5745fe3635a88f0e879b6"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/paginate/paginate-access-tokens.query.handler.spec.ts",
-            "integrity": "sha1:3937e759e35f9964d7e5745fe3635a88f0e879b6"
+            "path": "src/@hades/o-auth/access-token/application/paginate/paginate-access-tokens.query-handler.ts",
+            "integrity": "sha1:c78c1bb9c3e7c7ec778704e6c38357b2aff8f945"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/paginate/paginate-access-tokens.query.ts",
@@ -210,28 +174,8 @@
             "integrity": "sha1:98d144d48d83120f7e0c0d6362fa9638c653cb5f"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/update/update-access-token.command-handler.ts",
-            "integrity": "sha1:fee15c225c6f31f58a5aacaf0912e05920243b0e"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/update/update-access-token.command.handler.spec.ts",
-            "integrity": "sha1:646cb766c3043836f28773d26742973cfd747f2c"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/update/update-access-token.command.ts",
-            "integrity": "sha1:2c3640be5759a65aacd8b578079adaa104c35bf7"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/update/update-access-token.service.spec.ts",
-            "integrity": "sha1:9c5a81afa6b8cfc42386228f895193edc97bc690"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/update/update-access-token.service.ts",
-            "integrity": "sha1:2a4a260749ba45e9e38557101cd82f1f68506fc0"
-        },
-        {
             "path": "src/@hades/o-auth/access-token/domain/access-token.aggregate.ts",
-            "integrity": "sha1:0114af1970dc83ba53d0117c0435af00b02a6622"
+            "integrity": "sha1:4f2d3447f62f5351431e3b27fb863ad83643c85b"
         },
         {
             "path": "src/@hades/o-auth/access-token/domain/access-token.mapper.ts",
@@ -239,7 +183,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/domain/access-token.repository.ts",
-            "integrity": "sha1:bc8a04dcf98200d1dd13ea4fe4b6aaf2088c61b6"
+            "integrity": "sha1:0ed3db93f8bdddf36461afde5b07ab0d0ad9006f"
         },
         {
             "path": "src/@hades/o-auth/access-token/domain/access-token.response.ts",
@@ -251,7 +195,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/index.ts",
-            "integrity": "sha1:3f5618ee540259bbbe5f93d1a62bff8394aeb12d"
+            "integrity": "sha1:da35b5e9eff02f53f49aae00fd1441671fb32484"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/mock/mock-access-token.repository.ts",
@@ -259,7 +203,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
-            "integrity": "sha1:6e13d349ce9c38d09e8ee47df70d91ae6699f8d8"
+            "integrity": "sha1:ddfa97ed88e1b324642277b4bd2d76145e445340"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",
@@ -310,22 +254,6 @@
             "integrity": "sha1:6adb35623e936268496ae037a80657fa42834de4"
         },
         {
-            "path": "src/apps/o-auth/access-token/controllers/o-auth-create-access-token.controller.spec.ts",
-            "integrity": "sha1:080ea306c4e06ebc507b567c69f1a0079ca3ea61"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts",
-            "integrity": "sha1:0cef5fbbfab6f7dbf8a92481d7a243b46d62dbf2"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.spec.ts",
-            "integrity": "sha1:8db5a4a50cde9a1b010689f51bb5cd94ac5b6676"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.ts",
-            "integrity": "sha1:8022eca70146d76961d9a3a20782eafaff24bde1"
-        },
-        {
             "path": "src/apps/o-auth/access-token/controllers/o-auth-delete-access-token-by-id.controller.spec.ts",
             "integrity": "sha1:7d9058602b5363c54551584ca124ae772381d6b4"
         },
@@ -374,14 +302,6 @@
             "integrity": "sha1:fb2fdd08a462b27a8221f91a5f59847ec95ae724"
         },
         {
-            "path": "src/apps/o-auth/access-token/controllers/o-auth-update-access-token.controller.spec.ts",
-            "integrity": "sha1:443402d6c944fb3c685a10b017691b5e6f9c4b30"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/controllers/o-auth-update-access-token.controller.ts",
-            "integrity": "sha1:63dcd8a5d0c54afc3413cc9a11ca676e3303f62a"
-        },
-        {
             "path": "src/apps/o-auth/access-token/dto/access-token.dto.ts",
             "integrity": "sha1:e2a87bca85608b7a335f7953220f011bfe511a3a"
         },
@@ -399,23 +319,7 @@
         },
         {
             "path": "src/apps/o-auth/access-token/index.ts",
-            "integrity": "sha1:877101f6f03281201d40a2546ce489a26ca7048c"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/resolvers/o-auth-create-access-token.resolver.spec.ts",
-            "integrity": "sha1:b36583c443a8a23935209d6f44c0da7a3147773b"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/resolvers/o-auth-create-access-token.resolver.ts",
-            "integrity": "sha1:a005a91055ef6e6234e09cea1ee74259c880ce43"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/resolvers/o-auth-create-access-tokens.resolver.spec.ts",
-            "integrity": "sha1:30cc2e9e73faf36224979a4d1cf61b55b0a6aee9"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/resolvers/o-auth-create-access-tokens.resolver.ts",
-            "integrity": "sha1:4809329b070beb7a13e735c0938eb59eb6f6719b"
+            "integrity": "sha1:434deeb8fdce994e06280bd58377d814701bf1b0"
         },
         {
             "path": "src/apps/o-auth/access-token/resolvers/o-auth-delete-access-token-by-id.resolver.spec.ts",
@@ -466,14 +370,6 @@
             "integrity": "sha1:515aeb6c07e2b7c21725aef8ec429021eb0057bc"
         },
         {
-            "path": "src/apps/o-auth/access-token/resolvers/o-auth-update-access-token.resolver.spec.ts",
-            "integrity": "sha1:9774ffdb076188a856e90fe51fadb920d7bb16ea"
-        },
-        {
-            "path": "src/apps/o-auth/access-token/resolvers/o-auth-update-access-token.resolver.ts",
-            "integrity": "sha1:9239774e9709688006df4b86ec791f7e93fee489"
-        },
-        {
             "path": "src/apps/o-auth/access-token/seeder/seeder.module.ts",
             "integrity": "sha1:5928f21bd1e3c828f7856544b3905a1209ab8fe7"
         },
@@ -483,15 +379,15 @@
         },
         {
             "path": "postman/o-auth.access-token.postman.json",
-            "integrity": "sha1:5bfc2b2dc8cfa4aa0d5f862bb92d92cf2877ffad"
+            "integrity": "sha1:b3ec36aabac1a0830163db26aa229af0ec14e089"
+        },
+        {
+            "path": "src/@hades/o-auth/application/application/create/create-application.command-handler.spec.ts",
+            "integrity": "sha1:f5a7e31a653e430209823eb09ef1e871f210794b"
         },
         {
             "path": "src/@hades/o-auth/application/application/create/create-application.command-handler.ts",
             "integrity": "sha1:83f70248d4184c1963811e183872302e2e9a28a4"
-        },
-        {
-            "path": "src/@hades/o-auth/application/application/create/create-application.command.handler.spec.ts",
-            "integrity": "sha1:f5a7e31a653e430209823eb09ef1e871f210794b"
         },
         {
             "path": "src/@hades/o-auth/application/application/create/create-application.command.ts",
@@ -506,12 +402,12 @@
             "integrity": "sha1:cff827954593c3e6436c48ac0ec701f54529d73a"
         },
         {
-            "path": "src/@hades/o-auth/application/application/create/create-applications.command-handler.ts",
-            "integrity": "sha1:df506ac8519c4de9d35adef26a2797e533b538b3"
+            "path": "src/@hades/o-auth/application/application/create/create-applications.command-handler.spec.ts",
+            "integrity": "sha1:524d0cf5f9dc9ef3a13abd2fa9007b0c9aaeed35"
         },
         {
-            "path": "src/@hades/o-auth/application/application/create/create-applications.command.handler.spec.ts",
-            "integrity": "sha1:524d0cf5f9dc9ef3a13abd2fa9007b0c9aaeed35"
+            "path": "src/@hades/o-auth/application/application/create/create-applications.command-handler.ts",
+            "integrity": "sha1:df506ac8519c4de9d35adef26a2797e533b538b3"
         },
         {
             "path": "src/@hades/o-auth/application/application/create/create-applications.command.ts",
@@ -526,12 +422,12 @@
             "integrity": "sha1:e216d49b5c2a886188d916da172fb8793b796227"
         },
         {
-            "path": "src/@hades/o-auth/application/application/delete/delete-application-by-id.command-handler.ts",
-            "integrity": "sha1:19ed815a3ed0d40fb5527206d3d1f81ecd9f576e"
+            "path": "src/@hades/o-auth/application/application/delete/delete-application-by-id.command-handler.spec.ts",
+            "integrity": "sha1:409fa75e172d9f83cfae1f43368d687de23f7e61"
         },
         {
-            "path": "src/@hades/o-auth/application/application/delete/delete-application-by-id.command.handler.spec.ts",
-            "integrity": "sha1:409fa75e172d9f83cfae1f43368d687de23f7e61"
+            "path": "src/@hades/o-auth/application/application/delete/delete-application-by-id.command-handler.ts",
+            "integrity": "sha1:19ed815a3ed0d40fb5527206d3d1f81ecd9f576e"
         },
         {
             "path": "src/@hades/o-auth/application/application/delete/delete-application-by-id.command.ts",
@@ -546,12 +442,12 @@
             "integrity": "sha1:e0db536d98072d63d2b974669cb0f46e5ced7806"
         },
         {
-            "path": "src/@hades/o-auth/application/application/delete/delete-applications.command-handler.ts",
-            "integrity": "sha1:d9a2f803ee6e394abcc38b1091505cc216464081"
+            "path": "src/@hades/o-auth/application/application/delete/delete-applications.command-handler.spec.ts",
+            "integrity": "sha1:28167bc4c9b10375d68e4475ee6baa0f8501f1cf"
         },
         {
-            "path": "src/@hades/o-auth/application/application/delete/delete-applications.command.handler.spec.ts",
-            "integrity": "sha1:28167bc4c9b10375d68e4475ee6baa0f8501f1cf"
+            "path": "src/@hades/o-auth/application/application/delete/delete-applications.command-handler.ts",
+            "integrity": "sha1:d9a2f803ee6e394abcc38b1091505cc216464081"
         },
         {
             "path": "src/@hades/o-auth/application/application/delete/delete-applications.command.ts",
@@ -567,7 +463,7 @@
         },
         {
             "path": "src/@hades/o-auth/application/application/events/add-applications-context.event.ts",
-            "integrity": "sha1:016bc6b60efb2ab15dc07230e450cb8e24fb3d7f"
+            "integrity": "sha1:2ad1f16b6467587bd5e52d8477881f90051cbc83"
         },
         {
             "path": "src/@hades/o-auth/application/application/events/created-application.event-handler.ts",
@@ -610,12 +506,12 @@
             "integrity": "sha1:b782c90a9f28c5b99043236e6feac75f32f0f05a"
         },
         {
-            "path": "src/@hades/o-auth/application/application/find/find-application-by-id.query-handler.ts",
-            "integrity": "sha1:5808d9c6bbaced41b9dc96bf5e3b711fba120bbb"
+            "path": "src/@hades/o-auth/application/application/find/find-application-by-id.query-handler.spec.ts",
+            "integrity": "sha1:2e10283e015016fd21c9afea36033367aa1008e5"
         },
         {
-            "path": "src/@hades/o-auth/application/application/find/find-application-by-id.query.handler.spec.ts",
-            "integrity": "sha1:2e10283e015016fd21c9afea36033367aa1008e5"
+            "path": "src/@hades/o-auth/application/application/find/find-application-by-id.query-handler.ts",
+            "integrity": "sha1:5808d9c6bbaced41b9dc96bf5e3b711fba120bbb"
         },
         {
             "path": "src/@hades/o-auth/application/application/find/find-application-by-id.query.ts",
@@ -630,12 +526,12 @@
             "integrity": "sha1:3096cbc53a8dabb4b6d798bf096f556b698e570d"
         },
         {
-            "path": "src/@hades/o-auth/application/application/find/find-application.query-handler.ts",
-            "integrity": "sha1:a0cc126508813c108b9fd8564f532a38619f824c"
+            "path": "src/@hades/o-auth/application/application/find/find-application.query-handler.spec.ts",
+            "integrity": "sha1:4c08f9d415c8773f6fc183caf8ac6e42e7ac0e09"
         },
         {
-            "path": "src/@hades/o-auth/application/application/find/find-application.query.handler.spec.ts",
-            "integrity": "sha1:4c08f9d415c8773f6fc183caf8ac6e42e7ac0e09"
+            "path": "src/@hades/o-auth/application/application/find/find-application.query-handler.ts",
+            "integrity": "sha1:a0cc126508813c108b9fd8564f532a38619f824c"
         },
         {
             "path": "src/@hades/o-auth/application/application/find/find-application.query.ts",
@@ -650,12 +546,12 @@
             "integrity": "sha1:94d37aa0fccfe44fd81f08ccbd1a6d5d96a9f53a"
         },
         {
-            "path": "src/@hades/o-auth/application/application/get/get-applications.query-handler.ts",
-            "integrity": "sha1:46bb9df315c6e09926410ff1a1c57ed76b1e9a1d"
+            "path": "src/@hades/o-auth/application/application/get/get-applications.query-handler.spec.ts",
+            "integrity": "sha1:cb370a37526565c8baaaa75833b092d7a133a3f9"
         },
         {
-            "path": "src/@hades/o-auth/application/application/get/get-applications.query.handler.spec.ts",
-            "integrity": "sha1:cb370a37526565c8baaaa75833b092d7a133a3f9"
+            "path": "src/@hades/o-auth/application/application/get/get-applications.query-handler.ts",
+            "integrity": "sha1:46bb9df315c6e09926410ff1a1c57ed76b1e9a1d"
         },
         {
             "path": "src/@hades/o-auth/application/application/get/get-applications.query.ts",
@@ -670,12 +566,12 @@
             "integrity": "sha1:93e9dfcf7ad02ece3c407ba14c843e3cc178cda8"
         },
         {
-            "path": "src/@hades/o-auth/application/application/paginate/paginate-applications.query-handler.ts",
-            "integrity": "sha1:40082fecfbc739b13953fd9585efe56648587f9b"
+            "path": "src/@hades/o-auth/application/application/paginate/paginate-applications.query-handler.spec.ts",
+            "integrity": "sha1:d7d85a7ac459068e1a30d7aaf289fbe4b752439c"
         },
         {
-            "path": "src/@hades/o-auth/application/application/paginate/paginate-applications.query.handler.spec.ts",
-            "integrity": "sha1:d7d85a7ac459068e1a30d7aaf289fbe4b752439c"
+            "path": "src/@hades/o-auth/application/application/paginate/paginate-applications.query-handler.ts",
+            "integrity": "sha1:40082fecfbc739b13953fd9585efe56648587f9b"
         },
         {
             "path": "src/@hades/o-auth/application/application/paginate/paginate-applications.query.ts",
@@ -694,12 +590,12 @@
             "integrity": "sha1:e35d76c43a142a154d72fff8a34c474e5a109316"
         },
         {
-            "path": "src/@hades/o-auth/application/application/update/update-application.command-handler.ts",
-            "integrity": "sha1:b4e8731dec91d800c89de0a367da97a4f6169f29"
+            "path": "src/@hades/o-auth/application/application/update/update-application.command-handler.spec.ts",
+            "integrity": "sha1:30632c91d34c33ad76f193fe4152006706c6fd39"
         },
         {
-            "path": "src/@hades/o-auth/application/application/update/update-application.command.handler.spec.ts",
-            "integrity": "sha1:30632c91d34c33ad76f193fe4152006706c6fd39"
+            "path": "src/@hades/o-auth/application/application/update/update-application.command-handler.ts",
+            "integrity": "sha1:b4e8731dec91d800c89de0a367da97a4f6169f29"
         },
         {
             "path": "src/@hades/o-auth/application/application/update/update-application.command.ts",
@@ -723,7 +619,7 @@
         },
         {
             "path": "src/@hades/o-auth/application/domain/application.repository.ts",
-            "integrity": "sha1:dda80484c1a23b6a1abcb6e2e0dcda97f58089e1"
+            "integrity": "sha1:faf306984aeebd29e2ab876d29773d103a9e1f13"
         },
         {
             "path": "src/@hades/o-auth/application/domain/application.response.ts",
@@ -743,7 +639,7 @@
         },
         {
             "path": "src/@hades/o-auth/application/infrastructure/seeds/application.seed.ts",
-            "integrity": "sha1:19c5db8f4cc374a26123ec43c5b354427dc2ccd1"
+            "integrity": "sha1:f52fa437277fea5697be974270150a5b93457941"
         },
         {
             "path": "src/@hades/o-auth/application/infrastructure/sequelize/sequelize-application.model.ts",
@@ -883,7 +779,7 @@
         },
         {
             "path": "src/apps/o-auth/application/index.ts",
-            "integrity": "sha1:ff32bdc1a0cb396cdb41339c0d6c6a97e20b42cc"
+            "integrity": "sha1:747f481ac9782eb03f014be2dd0e66f497e682ac"
         },
         {
             "path": "src/apps/o-auth/application/resolvers/o-auth-create-application.resolver.spec.ts",
@@ -967,7 +863,7 @@
         },
         {
             "path": "postman/o-auth.application.postman.json",
-            "integrity": "sha1:d248ed422178caadf2ef2ac3d4d869990b1937f5"
+            "integrity": "sha1:7ba0a0798ff6ef1648b52881722ae2c8e8e96d42"
         }
     ]
 }

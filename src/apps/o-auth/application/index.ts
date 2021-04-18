@@ -14,8 +14,8 @@ import { OAuthCreateApplicationResolver } from './resolvers/o-auth-create-applic
 import { OAuthCreateApplicationsResolver } from './resolvers/o-auth-create-applications.resolver';
 import { OAuthPaginateApplicationsResolver } from './resolvers/o-auth-paginate-applications.resolver';
 import { OAuthGetApplicationsResolver } from './resolvers/o-auth-get-applications.resolver';
-import { OAuthFindApplicationResolver } from './resolvers/o-auth-find-application.resolver';
 import { OAuthFindApplicationByIdResolver } from './resolvers/o-auth-find-application-by-id.resolver';
+import { OAuthFindApplicationResolver } from './resolvers/o-auth-find-application.resolver';
 import { OAuthUpdateApplicationResolver } from './resolvers/o-auth-update-application.resolver';
 import { OAuthDeleteApplicationByIdResolver } from './resolvers/o-auth-delete-application-by-id.resolver';
 import { OAuthDeleteApplicationsResolver } from './resolvers/o-auth-delete-applications.resolver';
@@ -37,8 +37,8 @@ export const OAuthApplicationResolvers = [
     OAuthCreateApplicationsResolver,
     OAuthPaginateApplicationsResolver,
     OAuthGetApplicationsResolver,
-    OAuthFindApplicationResolver,
     OAuthFindApplicationByIdResolver,
+    OAuthFindApplicationResolver,
     OAuthUpdateApplicationResolver,
     OAuthDeleteApplicationByIdResolver,
     OAuthDeleteApplicationsResolver,

@@ -1,3 +1,4 @@
+// ignored file
 // commands
 import { CreateApplicationCommandHandler } from './application/create/create-application.command-handler';
 import { CreateApplicationsCommandHandler } from './application/create/create-applications.command-handler';

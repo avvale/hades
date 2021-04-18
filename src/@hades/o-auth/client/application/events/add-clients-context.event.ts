@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { OAuthClient } from './../../domain/client.aggregate';
 import { CreatedClientEvent } from './created-client.event';
-import { DeletedClientEvent } from './deleted-client.event';
 import { CreatedClientsEvent } from './created-clients.event';
+import { DeletedClientEvent } from './deleted-client.event';
 import { DeletedClientsEvent } from './deleted-clients.event';
 
 export class AddClientsContextEvent extends AggregateRoot

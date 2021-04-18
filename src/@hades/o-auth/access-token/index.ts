@@ -11,8 +11,6 @@ import { FindAccessTokenByIdQueryHandler } from './application/find/find-access-
 
 // events
 import { CreatedAccessTokenEventHandler } from './application/events/created-access-token.event-handler';
-import { CreatedAccessTokensEventHandler } from './application/events/created-access-tokens.event-handler';
-import { UpdatedAccessTokenEventHandler } from './application/events/updated-access-token.event-handler';
 import { DeletedAccessTokenEventHandler } from './application/events/deleted-access-token.event-handler';
 import { DeletedAccessTokensEventHandler } from './application/events/deleted-access-tokens.event-handler';
 
@@ -49,8 +47,6 @@ export const OAuthAccessTokenHandlers = [
 
     // events
     CreatedAccessTokenEventHandler,
-    CreatedAccessTokensEventHandler,
-    UpdatedAccessTokenEventHandler,
     DeletedAccessTokenEventHandler,
     DeletedAccessTokensEventHandler,
 ];
