@@ -175,7 +175,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/domain/access-token.aggregate.ts",
-            "integrity": "sha1:0114af1970dc83ba53d0117c0435af00b02a6622"
+            "integrity": "sha1:4f2d3447f62f5351431e3b27fb863ad83643c85b"
         },
         {
             "path": "src/@hades/o-auth/access-token/domain/access-token.mapper.ts",
@@ -195,7 +195,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/index.ts",
-            "integrity": "sha1:228e0673c339b1386a643db9761ec7af814e2d8c"
+            "integrity": "sha1:da35b5e9eff02f53f49aae00fd1441671fb32484"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/mock/mock-access-token.repository.ts",
@@ -203,7 +203,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
-            "integrity": "sha1:39224a3073cc1b44c9a7dbac468fd5b0e81de742"
+            "integrity": "sha1:c1e682fdaae2ef4aed8649efa1674b49eafe7560"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",
@@ -379,7 +379,7 @@
         },
         {
             "path": "postman/o-auth.access-token.postman.json",
-            "integrity": "sha1:ebdcaa51b2c2328d100b86b1182c9f84c036fec1"
+            "integrity": "sha1:77ab1db3bbb7917e5e14ba0e40b5104f6df48b3f"
         },
         {
             "path": "src/@hades/o-auth/application/application/create/create-application.command-handler.ts",
@@ -639,7 +639,7 @@
         },
         {
             "path": "src/@hades/o-auth/application/infrastructure/seeds/application.seed.ts",
-            "integrity": "sha1:4e0f27165212e26c8d43903f68c260e599497a2b"
+            "integrity": "sha1:a514cef313dc052750144eeb9dc8c35b70e25004"
         },
         {
             "path": "src/@hades/o-auth/application/infrastructure/sequelize/sequelize-application.model.ts",
@@ -863,7 +863,7 @@
         },
         {
             "path": "postman/o-auth.application.postman.json",
-            "integrity": "sha1:1db9e7e486f7df4d4251f4a9082362c1c716118c"
+            "integrity": "sha1:0b94b0e1116ec22b577ff62cc81c79e78b178d50"
         }
     ]
 }

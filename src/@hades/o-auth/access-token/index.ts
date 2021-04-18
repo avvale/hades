@@ -47,8 +47,6 @@ export const OAuthAccessTokenHandlers = [
 
     // events
     CreatedAccessTokenEventHandler,
-    CreatedAccessTokensEventHandler,
-    UpdatedAccessTokenEventHandler,
     DeletedAccessTokenEventHandler,
     DeletedAccessTokensEventHandler,
 ];

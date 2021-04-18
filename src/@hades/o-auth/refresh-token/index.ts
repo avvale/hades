@@ -47,8 +47,6 @@ export const OAuthRefreshTokenHandlers = [
 
     // events
     CreatedRefreshTokenEventHandler,
-    CreatedRefreshTokensEventHandler,
-    UpdatedRefreshTokenEventHandler,
     DeletedRefreshTokenEventHandler,
     DeletedRefreshTokensEventHandler,
 ];
