@@ -219,7 +219,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
-            "integrity": "sha1:e38b0843b60d9b90f07a3c54667b32751efc6c72"
+            "integrity": "sha1:08b8895a1b7c53a60435461a8d414357f3ecec07"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",
