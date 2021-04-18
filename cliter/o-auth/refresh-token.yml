@@ -37,3 +37,4 @@ aggregateProperties:
   - name: deleted_at
     type: timestamp
     nullable: true
+excluded:

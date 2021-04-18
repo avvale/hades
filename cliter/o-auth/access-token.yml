@@ -73,6 +73,7 @@ excluded:
   - src/@hades/o-auth/access-token/application/update/update-access-token.command.ts
   - src/@hades/o-auth/access-token/application/update/update-access-token.command-handler.ts
   - src/@hades/o-auth/access-token/application/update/update-access-token.command-handler.spec.ts
+  - src/@hades/o-auth/access-token/application/update/update-access-token.command.ts
   - src/@hades/o-auth/access-token/application/update/update-access-token.service.ts
   - src/@hades/o-auth/access-token/application/update/update-access-token.service.spec.ts
   - postman/o-auth.access-token.postman.json

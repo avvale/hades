@@ -22,26 +22,6 @@
             "integrity": "sha1:80cdb5c3a1a127cf8de246c5b6b9cd40d387360c"
         },
         {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.command-handler.ts",
-            "integrity": "sha1:52bf66a2c8dfe024fce79859646aec2a924a464d"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.command.handler.spec.ts",
-            "integrity": "sha1:213ec08daf18d100b60c1158abee918e7f6deee4"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.command.ts",
-            "integrity": "sha1:679ce4d2c36c719217a85eabf9b328333262aabf"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.service.spec.ts",
-            "integrity": "sha1:07e62e14f3f1263f1923a53b08ac8aad5ce0b971"
-        },
-        {
-            "path": "src/@hades/o-auth/access-token/application/create/create-access-tokens.service.ts",
-            "integrity": "sha1:923ee367df2bc13de9b06cd98c8f8d3467b326b4"
-        },
-        {
             "path": "src/@hades/o-auth/access-token/application/delete/delete-access-token-by-id.command-handler.ts",
             "integrity": "sha1:35c1229f049207a595c2aa47adf985b46c6d4e21"
         },
@@ -231,7 +211,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/index.ts",
-            "integrity": "sha1:bb99af7d8c21232043a716ebdedc215382cc2e96"
+            "integrity": "sha1:1e956e8da5789c5f651f75a99cc73241993d8fd7"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/mock/mock-access-token.repository.ts",
@@ -239,7 +219,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
-            "integrity": "sha1:b22f29d06ea2eb20e62bc8a37305bf3591143001"
+            "integrity": "sha1:edbb0a629484ba05f41eba90d493e3f1690e3ee5"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",
@@ -412,10 +392,6 @@
         {
             "path": "src/apps/o-auth/access-token/seeder/seeder.ts",
             "integrity": "sha1:49090f9f2bd7f7cbcdd52ccfecc6a4285d0eae43"
-        },
-        {
-            "path": "postman/o-auth.access-token.postman.json",
-            "integrity": "sha1:5c84303becdfc29378c7e351a3ff502517b6e603"
         }
     ]
 }
