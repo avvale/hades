@@ -38,3 +38,7 @@ aggregateProperties:
     type: timestamp
     nullable: true
 excluded:
+  - src/apps/o-auth/refresh-token/controllers/o-auth-create-refresh-tokens.controller.spec.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-create-refresh-tokens.controller.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-update-refresh-token.controller.spec.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-update-refresh-token.controller.ts
