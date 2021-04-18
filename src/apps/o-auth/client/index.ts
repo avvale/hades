@@ -14,8 +14,8 @@ import { OAuthCreateClientResolver } from './resolvers/o-auth-create-client.reso
 import { OAuthCreateClientsResolver } from './resolvers/o-auth-create-clients.resolver';
 import { OAuthPaginateClientsResolver } from './resolvers/o-auth-paginate-clients.resolver';
 import { OAuthGetClientsResolver } from './resolvers/o-auth-get-clients.resolver';
-import { OAuthFindClientResolver } from './resolvers/o-auth-find-client.resolver';
 import { OAuthFindClientByIdResolver } from './resolvers/o-auth-find-client-by-id.resolver';
+import { OAuthFindClientResolver } from './resolvers/o-auth-find-client.resolver';
 import { OAuthUpdateClientResolver } from './resolvers/o-auth-update-client.resolver';
 import { OAuthDeleteClientByIdResolver } from './resolvers/o-auth-delete-client-by-id.resolver';
 import { OAuthDeleteClientsResolver } from './resolvers/o-auth-delete-clients.resolver';
@@ -37,8 +37,8 @@ export const OAuthClientResolvers = [
     OAuthCreateClientsResolver,
     OAuthPaginateClientsResolver,
     OAuthGetClientsResolver,
-    OAuthFindClientResolver,
     OAuthFindClientByIdResolver,
+    OAuthFindClientResolver,
     OAuthUpdateClientResolver,
     OAuthDeleteClientByIdResolver,
     OAuthDeleteClientsResolver,
