@@ -1,6 +1,7 @@
 // ignored file
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { JwtModule } from '@nestjs/jwt';
 
 // custom items
 import { accessTokensToCreate } from '@hades/o-auth/access-token/infrastructure/seeds/access-token-to-create.seed';
@@ -24,23 +25,23 @@ describe('CreateAccessTokenService', () =>
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
+            imports: [
+                JwtModule.register({
+                    secret: '1234567890'
+                }),
+            ],
             providers: [
                 CommandBus,
                 EventBus,
                 EventPublisher,
+                CreateAccessTokenService,
                 MockAccessTokenRepository,
                 {
                     provide: IAccessTokenRepository,
                     useValue: {
                         create: (item) => {}
                     }
-                },
-                {
-                    provide: CreateAccessTokenService,
-                    useValue: {
-                        main: () => {},
-                    }
-                },
+                }
             ]
         }).compile();
 
