@@ -53,6 +53,20 @@ aggregateProperties:
     type: timestamp
     nullable: true
 excluded:
+  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command-handler.ts
+  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command.handler.spec.ts
+  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command.ts
+  - src/@hades/o-auth/access-token/application/create/create-access-tokens.service.spec.ts
+  - src/@hades/o-auth/access-token/application/create/create-access-tokens.service.ts
+  - src/@hades/o-auth/access-token/application/update/update-access-token.command.ts
+  - src/@hades/o-auth/access-token/application/update/update-access-token.command-handler.ts
+  - src/@hades/o-auth/access-token/application/update/update-access-token.command-handler.spec.ts
+  - src/@hades/o-auth/access-token/application/update/update-access-token.service.ts
+  - src/@hades/o-auth/access-token/application/update/update-access-token.service.spec.ts
+  - src/@hades/o-auth/access-token/application/events/created-access-tokens.event-handler.ts
+  - src/@hades/o-auth/access-token/application/events/created-access-tokens.event.ts
+  - src/@hades/o-auth/access-token/application/events/updated-access-token.event-handler.ts
+  - src/@hades/o-auth/access-token/application/events/updated-access-token.event.ts
   - src/apps/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts
   - src/apps/o-auth/access-token/controllers/o-auth-create-access-token.controller.spec.ts
   - src/apps/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.ts
@@ -65,15 +79,3 @@ excluded:
   - src/apps/o-auth/access-token/resolvers/o-auth-create-access-tokens.resolver.spec.ts
   - src/apps/o-auth/access-token/resolvers/o-auth-update-access-token.resolver.ts
   - src/apps/o-auth/access-token/resolvers/o-auth-update-access-token.resolver.spec.ts
-  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command-handler.ts
-  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command.handler.spec.ts
-  - src/@hades/o-auth/access-token/application/create/create-access-tokens.command.ts
-  - src/@hades/o-auth/access-token/application/create/create-access-tokens.service.spec.ts
-  - src/@hades/o-auth/access-token/application/create/create-access-tokens.service.ts
-  - src/@hades/o-auth/access-token/application/update/update-access-token.command.ts
-  - src/@hades/o-auth/access-token/application/update/update-access-token.command-handler.ts
-  - src/@hades/o-auth/access-token/application/update/update-access-token.command-handler.spec.ts
-  - src/@hades/o-auth/access-token/application/update/update-access-token.command.ts
-  - src/@hades/o-auth/access-token/application/update/update-access-token.service.ts
-  - src/@hades/o-auth/access-token/application/update/update-access-token.service.spec.ts
-  - postman/o-auth.access-token.postman.json
