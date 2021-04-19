@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { IamPermission } from './../../domain/permission.aggregate';
 import { CreatedPermissionEvent } from './created-permission.event';
-import { DeletedPermissionEvent } from './deleted-permission.event';
 import { CreatedPermissionsEvent } from './created-permissions.event';
+import { DeletedPermissionEvent } from './deleted-permission.event';
 import { DeletedPermissionsEvent } from './deleted-permissions.event';
 
 export class AddPermissionsContextEvent extends AggregateRoot
