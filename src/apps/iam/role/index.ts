@@ -14,8 +14,8 @@ import { IamCreateRoleResolver } from './resolvers/iam-create-role.resolver';
 import { IamCreateRolesResolver } from './resolvers/iam-create-roles.resolver';
 import { IamPaginateRolesResolver } from './resolvers/iam-paginate-roles.resolver';
 import { IamGetRolesResolver } from './resolvers/iam-get-roles.resolver';
-import { IamFindRoleResolver } from './resolvers/iam-find-role.resolver';
 import { IamFindRoleByIdResolver } from './resolvers/iam-find-role-by-id.resolver';
+import { IamFindRoleResolver } from './resolvers/iam-find-role.resolver';
 import { IamUpdateRoleResolver } from './resolvers/iam-update-role.resolver';
 import { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
 import { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
@@ -37,8 +37,8 @@ export const IamRoleResolvers = [
     IamCreateRolesResolver,
     IamPaginateRolesResolver,
     IamGetRolesResolver,
-    IamFindRoleResolver,
     IamFindRoleByIdResolver,
+    IamFindRoleResolver,
     IamUpdateRoleResolver,
     IamDeleteRoleByIdResolver,
     IamDeleteRolesResolver,
