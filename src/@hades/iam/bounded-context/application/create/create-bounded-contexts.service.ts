@@ -1,3 +1,4 @@
+// ignored file
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
@@ -8,7 +9,6 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt,
 } from './../../domain/value-objects';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
