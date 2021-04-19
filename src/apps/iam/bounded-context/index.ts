@@ -14,8 +14,8 @@ import { IamCreateBoundedContextResolver } from './resolvers/iam-create-bounded-
 import { IamCreateBoundedContextsResolver } from './resolvers/iam-create-bounded-contexts.resolver';
 import { IamPaginateBoundedContextsResolver } from './resolvers/iam-paginate-bounded-contexts.resolver';
 import { IamGetBoundedContextsResolver } from './resolvers/iam-get-bounded-contexts.resolver';
-import { IamFindBoundedContextResolver } from './resolvers/iam-find-bounded-context.resolver';
 import { IamFindBoundedContextByIdResolver } from './resolvers/iam-find-bounded-context-by-id.resolver';
+import { IamFindBoundedContextResolver } from './resolvers/iam-find-bounded-context.resolver';
 import { IamUpdateBoundedContextResolver } from './resolvers/iam-update-bounded-context.resolver';
 import { IamDeleteBoundedContextByIdResolver } from './resolvers/iam-delete-bounded-context-by-id.resolver';
 import { IamDeleteBoundedContextsResolver } from './resolvers/iam-delete-bounded-contexts.resolver';
@@ -37,8 +37,8 @@ export const IamBoundedContextResolvers = [
     IamCreateBoundedContextsResolver,
     IamPaginateBoundedContextsResolver,
     IamGetBoundedContextsResolver,
-    IamFindBoundedContextResolver,
     IamFindBoundedContextByIdResolver,
+    IamFindBoundedContextResolver,
     IamUpdateBoundedContextResolver,
     IamDeleteBoundedContextByIdResolver,
     IamDeleteBoundedContextsResolver,
