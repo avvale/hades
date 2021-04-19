@@ -2,12 +2,12 @@
     "version": "1.0.0",
     "files": [
         {
-            "path": "src/@hades/iam/account/application/create/create-account.command-handler.ts",
-            "integrity": "sha1:4e1601e7fe80115d3179cb93273223eb920ece21"
+            "path": "src/@hades/iam/account/application/create/create-account.command-handler.spec.ts",
+            "integrity": "sha1:00c7e26783aaba8cf896f3bff7908948ed6b008f"
         },
         {
-            "path": "src/@hades/iam/account/application/create/create-account.command.handler.spec.ts",
-            "integrity": "sha1:00c7e26783aaba8cf896f3bff7908948ed6b008f"
+            "path": "src/@hades/iam/account/application/create/create-account.command-handler.ts",
+            "integrity": "sha1:4e1601e7fe80115d3179cb93273223eb920ece21"
         },
         {
             "path": "src/@hades/iam/account/application/create/create-account.command.ts",
@@ -22,12 +22,12 @@
             "integrity": "sha1:f37b29a40115fde96dfbc8d925d76e01c09f390c"
         },
         {
-            "path": "src/@hades/iam/account/application/create/create-accounts.command-handler.ts",
-            "integrity": "sha1:95b74f78c6f5177b604c50c046a9cfafba3cae10"
+            "path": "src/@hades/iam/account/application/create/create-accounts.command-handler.spec.ts",
+            "integrity": "sha1:c9f179ca074a6ca719abbaeb865883ab0adc523a"
         },
         {
-            "path": "src/@hades/iam/account/application/create/create-accounts.command.handler.spec.ts",
-            "integrity": "sha1:c9f179ca074a6ca719abbaeb865883ab0adc523a"
+            "path": "src/@hades/iam/account/application/create/create-accounts.command-handler.ts",
+            "integrity": "sha1:95b74f78c6f5177b604c50c046a9cfafba3cae10"
         },
         {
             "path": "src/@hades/iam/account/application/create/create-accounts.command.ts",
@@ -42,12 +42,12 @@
             "integrity": "sha1:9c5bc0a88decd54b60aee836d1c504a1bce33933"
         },
         {
-            "path": "src/@hades/iam/account/application/delete/delete-account-by-id.command-handler.ts",
-            "integrity": "sha1:0954c25ca1ba37822f26c526e23b076e8dbc284f"
+            "path": "src/@hades/iam/account/application/delete/delete-account-by-id.command-handler.spec.ts",
+            "integrity": "sha1:c9ad03197196f5920ceb8353def7487f31311b0a"
         },
         {
-            "path": "src/@hades/iam/account/application/delete/delete-account-by-id.command.handler.spec.ts",
-            "integrity": "sha1:c9ad03197196f5920ceb8353def7487f31311b0a"
+            "path": "src/@hades/iam/account/application/delete/delete-account-by-id.command-handler.ts",
+            "integrity": "sha1:0954c25ca1ba37822f26c526e23b076e8dbc284f"
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-account-by-id.command.ts",
@@ -62,12 +62,12 @@
             "integrity": "sha1:d6531c6b6154d97cf981e34ef125fb6aec3bd413"
         },
         {
-            "path": "src/@hades/iam/account/application/delete/delete-accounts.command-handler.ts",
-            "integrity": "sha1:3c9a64bff21f170be8277c2941aff891b36485e1"
+            "path": "src/@hades/iam/account/application/delete/delete-accounts.command-handler.spec.ts",
+            "integrity": "sha1:3736d67c36e81dcdbdafa618e24f2e68d71e59c9"
         },
         {
-            "path": "src/@hades/iam/account/application/delete/delete-accounts.command.handler.spec.ts",
-            "integrity": "sha1:3736d67c36e81dcdbdafa618e24f2e68d71e59c9"
+            "path": "src/@hades/iam/account/application/delete/delete-accounts.command-handler.ts",
+            "integrity": "sha1:3c9a64bff21f170be8277c2941aff891b36485e1"
         },
         {
             "path": "src/@hades/iam/account/application/delete/delete-accounts.command.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/iam/account/application/events/add-accounts-context.event.ts",
-            "integrity": "sha1:a6c994bedb6dcea94c41387eb784e8e929cc0b2e"
+            "integrity": "sha1:f0dcb69f60d35b08b8ced04e8a7a3023a7cc4673"
         },
         {
             "path": "src/@hades/iam/account/application/events/created-account.event-handler.ts",
@@ -126,12 +126,12 @@
             "integrity": "sha1:fdc1c6adce6fe85f004a5e33c6574fc3ad290635"
         },
         {
-            "path": "src/@hades/iam/account/application/find/find-account-by-id.query-handler.ts",
-            "integrity": "sha1:7655accabe3ffde705603848513fc5211f0fdd7b"
+            "path": "src/@hades/iam/account/application/find/find-account-by-id.query-handler.spec.ts",
+            "integrity": "sha1:313434a4f06b9e540e23d57e7435edfc4eaca2db"
         },
         {
-            "path": "src/@hades/iam/account/application/find/find-account-by-id.query.handler.spec.ts",
-            "integrity": "sha1:313434a4f06b9e540e23d57e7435edfc4eaca2db"
+            "path": "src/@hades/iam/account/application/find/find-account-by-id.query-handler.ts",
+            "integrity": "sha1:7655accabe3ffde705603848513fc5211f0fdd7b"
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account-by-id.query.ts",
@@ -146,12 +146,12 @@
             "integrity": "sha1:ca5f147fb53322d76331fbead7ca039ce1db1bd7"
         },
         {
-            "path": "src/@hades/iam/account/application/find/find-account.query-handler.ts",
-            "integrity": "sha1:20b338e4bbaeed62ad1ff6bfdecf8e3339b594f1"
+            "path": "src/@hades/iam/account/application/find/find-account.query-handler.spec.ts",
+            "integrity": "sha1:7a2bf7c14cb8f10c7323944166d70d834e0ec07b"
         },
         {
-            "path": "src/@hades/iam/account/application/find/find-account.query.handler.spec.ts",
-            "integrity": "sha1:7a2bf7c14cb8f10c7323944166d70d834e0ec07b"
+            "path": "src/@hades/iam/account/application/find/find-account.query-handler.ts",
+            "integrity": "sha1:20b338e4bbaeed62ad1ff6bfdecf8e3339b594f1"
         },
         {
             "path": "src/@hades/iam/account/application/find/find-account.query.ts",
@@ -166,12 +166,12 @@
             "integrity": "sha1:a66bff6b5b05df059a784e1f39eefc0c559f9b05"
         },
         {
-            "path": "src/@hades/iam/account/application/get/get-accounts.query-handler.ts",
-            "integrity": "sha1:8992c4deabc20abbc009245551d820ecd50f0634"
+            "path": "src/@hades/iam/account/application/get/get-accounts.query-handler.spec.ts",
+            "integrity": "sha1:6b5b9709140f854c3eefbc852e50ee3469c723d4"
         },
         {
-            "path": "src/@hades/iam/account/application/get/get-accounts.query.handler.spec.ts",
-            "integrity": "sha1:6b5b9709140f854c3eefbc852e50ee3469c723d4"
+            "path": "src/@hades/iam/account/application/get/get-accounts.query-handler.ts",
+            "integrity": "sha1:8992c4deabc20abbc009245551d820ecd50f0634"
         },
         {
             "path": "src/@hades/iam/account/application/get/get-accounts.query.ts",
@@ -186,12 +186,12 @@
             "integrity": "sha1:ce66f2b31f29c810922e717020ca9f82cb967880"
         },
         {
-            "path": "src/@hades/iam/account/application/paginate/paginate-accounts.query-handler.ts",
-            "integrity": "sha1:23aa28b1b9ddac3724a707fb42e3a34bb3ffc13e"
+            "path": "src/@hades/iam/account/application/paginate/paginate-accounts.query-handler.spec.ts",
+            "integrity": "sha1:5630583f7e586581afcf06642c826d0d50b32dd9"
         },
         {
-            "path": "src/@hades/iam/account/application/paginate/paginate-accounts.query.handler.spec.ts",
-            "integrity": "sha1:5630583f7e586581afcf06642c826d0d50b32dd9"
+            "path": "src/@hades/iam/account/application/paginate/paginate-accounts.query-handler.ts",
+            "integrity": "sha1:23aa28b1b9ddac3724a707fb42e3a34bb3ffc13e"
         },
         {
             "path": "src/@hades/iam/account/application/paginate/paginate-accounts.query.ts",
@@ -210,12 +210,12 @@
             "integrity": "sha1:322d861ff49613dbf4a910219302840db11dd5db"
         },
         {
-            "path": "src/@hades/iam/account/application/update/update-account.command-handler.ts",
-            "integrity": "sha1:20753f33fbabafaf0f13554784d022c46f21acfd"
+            "path": "src/@hades/iam/account/application/update/update-account.command-handler.spec.ts",
+            "integrity": "sha1:177e0d6404b8ec03dedf76ad3fc24ad4faf65d3c"
         },
         {
-            "path": "src/@hades/iam/account/application/update/update-account.command.handler.spec.ts",
-            "integrity": "sha1:177e0d6404b8ec03dedf76ad3fc24ad4faf65d3c"
+            "path": "src/@hades/iam/account/application/update/update-account.command-handler.ts",
+            "integrity": "sha1:20753f33fbabafaf0f13554784d022c46f21acfd"
         },
         {
             "path": "src/@hades/iam/account/application/update/update-account.command.ts",
@@ -239,7 +239,7 @@
         },
         {
             "path": "src/@hades/iam/account/domain/account.repository.ts",
-            "integrity": "sha1:955cb355bbd60f323d505bf2f62a82d2e5339d9e"
+            "integrity": "sha1:970504c6a4ec178e6c6c9bd8841b89cff7c9d0fa"
         },
         {
             "path": "src/@hades/iam/account/domain/account.response.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:9024e5717b67a7c46ab5d3a01f34f8b2049d654a"
+            "integrity": "sha1:936c7efbc27d78ed6337a2752f5a6981f34bb2df"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -415,7 +415,7 @@
         },
         {
             "path": "src/apps/iam/account/index.ts",
-            "integrity": "sha1:bbb88a607b9e0f71a93b58c631795ca56e7565d2"
+            "integrity": "sha1:3d76fb1b07b87ab24e04a65697b90c9d10bffeb6"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-create-account.resolver.spec.ts",
@@ -499,7 +499,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:6bac150a37a0928cdd6fd8f8704f34d4eb43d88f"
+            "integrity": "sha1:d0a196bd86a2f3311801bd111b7b4aeb54368216"
         }
     ]
 }

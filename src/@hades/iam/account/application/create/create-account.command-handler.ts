@@ -1,3 +1,4 @@
+// ignored file
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateAccountCommand } from './create-account.command';
 import { CreateAccountService } from './create-account.service';
@@ -13,9 +14,6 @@ import {
     AccountData,
     AccountRoleIds,
     AccountTenantIds,
-    AccountCreatedAt,
-    AccountUpdatedAt,
-    AccountDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateAccountCommand)
