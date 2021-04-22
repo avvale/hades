@@ -33,19 +33,19 @@ describe('IamUpdateTenantResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<IamUpdateTenantResolver>(IamUpdateTenantResolver);
+        resolver    = module.get<IamUpdateTenantResolver>(IamUpdateTenantResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamUpdateTenantResolver should be defined', () => 
+    test('IamUpdateTenantResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('IamUpdateTenantResolver should be defined', () => 
+        test('IamUpdateTenantResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

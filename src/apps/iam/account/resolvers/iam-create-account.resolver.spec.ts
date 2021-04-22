@@ -53,7 +53,7 @@ describe('IamCreateAccountResolver', () =>
         test('should return an account created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await resolver.main(<IamCreateAccountInput>accounts[0])).toBe(accounts[0]);
+            expect(await resolver.main(<IamCreateAccountInput>accounts[0], {})).toBe(accounts[0]);
         });
     });
 });
