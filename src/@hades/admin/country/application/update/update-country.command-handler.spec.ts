@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { UpdateCountryCommandHandler } from './update-country.command-handler';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
+import { UpdateCountryCommandHandler } from './update-country.command-handler';
 import { UpdateCountryCommand } from './update-country.command';
 import { UpdateCountryService } from './update-country.service';
 

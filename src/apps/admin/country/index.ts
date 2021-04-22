@@ -14,8 +14,8 @@ import { AdminCreateCountryResolver } from './resolvers/admin-create-country.res
 import { AdminCreateCountriesResolver } from './resolvers/admin-create-countries.resolver';
 import { AdminPaginateCountriesResolver } from './resolvers/admin-paginate-countries.resolver';
 import { AdminGetCountriesResolver } from './resolvers/admin-get-countries.resolver';
-import { AdminFindCountryResolver } from './resolvers/admin-find-country.resolver';
 import { AdminFindCountryByIdResolver } from './resolvers/admin-find-country-by-id.resolver';
+import { AdminFindCountryResolver } from './resolvers/admin-find-country.resolver';
 import { AdminUpdateCountryResolver } from './resolvers/admin-update-country.resolver';
 import { AdminDeleteCountryByIdResolver } from './resolvers/admin-delete-country-by-id.resolver';
 import { AdminDeleteCountriesResolver } from './resolvers/admin-delete-countries.resolver';
@@ -37,8 +37,8 @@ export const AdminCountryResolvers = [
     AdminCreateCountriesResolver,
     AdminPaginateCountriesResolver,
     AdminGetCountriesResolver,
-    AdminFindCountryResolver,
     AdminFindCountryByIdResolver,
+    AdminFindCountryResolver,
     AdminUpdateCountryResolver,
     AdminDeleteCountryByIdResolver,
     AdminDeleteCountriesResolver,
