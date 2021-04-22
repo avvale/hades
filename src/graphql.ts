@@ -25,13 +25,12 @@ export interface IamCreateAccountInput {
     email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId: string;
-    dApplicationCodes: JSON;
-    dPermissions: JSON;
+    dApplicationCodes?: JSON;
+    dPermissions?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamCreateUserInput;
-    dTenants: JSON;
 }
 
 export interface IamUpdateAccountInput {
@@ -46,7 +45,6 @@ export interface IamUpdateAccountInput {
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamUpdateUserInput;
-    dTenants?: JSON;
 }
 
 export interface IamCreateBoundedContextInput {

@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { IamTenant } from './../../domain/tenant.aggregate';
 import { CreatedTenantEvent } from './created-tenant.event';
-import { DeletedTenantEvent } from './deleted-tenant.event';
 import { CreatedTenantsEvent } from './created-tenants.event';
+import { DeletedTenantEvent } from './deleted-tenant.event';
 import { DeletedTenantsEvent } from './deleted-tenants.event';
 
 export class AddTenantsContextEvent extends AggregateRoot
