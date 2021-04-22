@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { UpdateAttachmentFamilyCommandHandler } from './update-attachment-family.command-handler';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
-import { UpdateAttachmentFamilyCommand } from './update-attachment-family.command';
-import { UpdateAttachmentFamilyService } from './update-attachment-family.service';
+import { CreateAttachmentFamilyCommandHandler } from './create-attachment-family.command-handler';
+import { CreateAttachmentFamilyCommand } from './create-attachment-family.command';
+import { CreateAttachmentFamilyService } from './create-attachment-family.service';
 
-describe('UpdateAttachmentFamilyCommandHandler', () =>
+describe('CreateAttachmentFamilyCommandHandler', () =>
 {
-    let commandHandler: UpdateAttachmentFamilyCommandHandler;
-    let service: UpdateAttachmentFamilyService;
+    let commandHandler: CreateAttachmentFamilyCommandHandler;
+    let service: CreateAttachmentFamilyService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                UpdateAttachmentFamilyCommandHandler,
+                CreateAttachmentFamilyCommandHandler,
                 {
-                    provide: UpdateAttachmentFamilyService,
+                    provide: CreateAttachmentFamilyService,
                     useValue: {
                         main: () => {},
                     }
@@ -25,21 +25,21 @@ describe('UpdateAttachmentFamilyCommandHandler', () =>
             ]
         }).compile();
 
-        commandHandler  = module.get<UpdateAttachmentFamilyCommandHandler>(UpdateAttachmentFamilyCommandHandler);
-        service         = module.get<UpdateAttachmentFamilyService>(UpdateAttachmentFamilyService);
+        commandHandler  = module.get<CreateAttachmentFamilyCommandHandler>(CreateAttachmentFamilyCommandHandler);
+        service         = module.get<CreateAttachmentFamilyService>(CreateAttachmentFamilyService);
     });
 
     describe('main', () =>
     {
-        test('UpdateAttachmentFamilyCommandHandler should be defined', () =>
+        test('CreateAttachmentFamilyCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an attachmentFamily created', async () =>
+        test('should create the values objects and pass them as parameters to the CreateAttachmentFamilyService', async () =>
         {
             expect(await commandHandler.execute(
-                new UpdateAttachmentFamilyCommand(
+                new CreateAttachmentFamilyCommand(
                     {
                         id: attachmentFamilies[0].id,
                         name: attachmentFamilies[0].name,
