@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminLang } from './../../domain/lang.aggregate';
 import { CreatedLangEvent } from './created-lang.event';
-import { DeletedLangEvent } from './deleted-lang.event';
 import { CreatedLangsEvent } from './created-langs.event';
+import { DeletedLangEvent } from './deleted-lang.event';
 import { DeletedLangsEvent } from './deleted-langs.event';
 
 export class AddLangsContextEvent extends AggregateRoot
