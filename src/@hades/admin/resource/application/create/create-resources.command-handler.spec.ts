@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateResourcesCommandHandler } from './create-resources.command-handler';
 import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
+import { CreateResourcesCommandHandler } from './create-resources.command-handler';
 import { CreateResourcesCommand } from './create-resources.command';
 import { CreateResourcesService } from './create-resources.service';
 
