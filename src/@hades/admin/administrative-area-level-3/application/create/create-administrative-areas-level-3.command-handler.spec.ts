@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateAdministrativeAreasLevel3CommandHandler } from './create-administrative-areas-level-3.command-handler';
 import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { CreateAdministrativeAreasLevel3CommandHandler } from './create-administrative-areas-level-3.command-handler';
 import { CreateAdministrativeAreasLevel3Command } from './create-administrative-areas-level-3.command';
 import { CreateAdministrativeAreasLevel3Service } from './create-administrative-areas-level-3.service';
 

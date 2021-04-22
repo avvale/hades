@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { UpdateAdministrativeAreaLevel3CommandHandler } from './update-administrative-area-level-3.command-handler';
 import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { UpdateAdministrativeAreaLevel3CommandHandler } from './update-administrative-area-level-3.command-handler';
 import { UpdateAdministrativeAreaLevel3Command } from './update-administrative-area-level-3.command';
 import { UpdateAdministrativeAreaLevel3Service } from './update-administrative-area-level-3.service';
 
