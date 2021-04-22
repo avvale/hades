@@ -3,7 +3,7 @@
     "files": [
         {
             "path": "src/@hades/iam/tenant/application/create/create-tenant.command-handler.spec.ts",
-            "integrity": "sha1:6eac517dc0e9c0543dd8fed99f0aeb1cfbf43e81"
+            "integrity": "sha1:3ee16c3e9fd5d4a58fe1dca3f16396ff0394b838"
         },
         {
             "path": "src/@hades/iam/tenant/application/create/create-tenant.command-handler.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/seeds/tenant.seed.ts",
-            "integrity": "sha1:bd328fca36ab67de362c4626617c6232b038ee01"
+            "integrity": "sha1:b62a3b25b41658b8996d27394fdf1a09f4ecb45c"
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model.ts",
@@ -471,7 +471,7 @@
         },
         {
             "path": "src/apps/iam/tenant/resolvers/iam-update-tenant.resolver.spec.ts",
-            "integrity": "sha1:6be7c3606d9043c140621bf7a537ec85516797d2"
+            "integrity": "sha1:c1721c12d50e9b63eeed0fc8ec82c6c2b8b984f0"
         },
         {
             "path": "src/apps/iam/tenant/resolvers/iam-update-tenant.resolver.ts",
@@ -487,7 +487,7 @@
         },
         {
             "path": "postman/iam.tenant.postman.json",
-            "integrity": "sha1:ec49359a7e656a57aaafb86bce59260627f04589"
+            "integrity": "sha1:8bcfe55b28c218117af934a9e36794e8d270c043"
         }
     ]
 }
