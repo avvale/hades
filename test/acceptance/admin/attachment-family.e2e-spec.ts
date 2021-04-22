@@ -7,11 +7,8 @@ import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/gr
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-import { IamModule } from './../../../src/apps/iam/iam.module';
 
-const importForeignModules = [
-    IamModule
-];
+const importForeignModules = [];
 
 describe('attachment-family', () =>
 {
@@ -60,14 +57,14 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: '42bsvkrkt2to0br42x84a80xy5dprkjmtck8tevefuqx1fkg7qx9jz3tflr0l38ugjxi85e7wl8pi3wqtvk4737lr88lwwqe8lrcuiz9tkl9b8d6eh91u3uu4exacb919ezdjhtp1vzgn2vfm18dvbm6joalt2uwrest2mkdvim0hqchao56b5a43snqxlje07gaumhb4y8bk9bnje0g6iusw1cca3q7iy6118x9wkpx4sj82ck7yldb8se0b2m',
+                name: 'yr1dkmxc73rygqijwxwzojc0u6d4dbx4zsy995h936zwaoq1obgxf1k4gqcs4t3p3hjt8vyqtndx2myxfvtj4dpjod9pu94dkdu1d8d02lb31x8hw3xrx6r1y3m0cv784g2ryxdzj6e8m0k7lk8cavs4d4fgdioosv5bu8xtzcpx40a1p19pew37cuzp4hrje10mjzdc77qjl6jgb9rw73kjmbr7nv0r9zk924sngvct73betkxt7v0mx0y3n9m',
                 resourceIds: [],
-                width: 205011,
-                height: 630794,
-                fit: 'FREE_WIDTH',
+                width: 545699,
+                height: 214034,
+                fit: 'HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 388,
-                format: 'DATA_URL',
+                quality: 143,
+                format: 'JPG',
             })
             .expect(400)
             .then(res => {
@@ -82,14 +79,14 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                name: '1rrzouiw6e2kicjzqcfomalo2ztw1dg2mjk3dc082kuuqmp1lviq1tmog6supmqdcxiirs6pn0q6q3liivp2ju3mi2abppexoc1pf303zr45kywkhd0dxzdutl8wkswntrt2zw19z7pnl9k4foneev3tfqibk2z2ap2ujefbjppbhmztgsgvj5rgp1pq843q4cx934nt19bl6nb0ojjngbdhxtztthodamcdmltz3r1r46dfbclonigm38vvulz',
+                name: 'mxmofl9mojqszg0ilny41adi2zomorw2nzysfzngztzp97knjrxx6hcg0vxqu61yfnk4ztpyzqc84y65kxujr3711ga65584g0cfketuf8sc8q1j3l9q2xpz39wleubmhby7hcb2hnirmh8l62vnv7gdkxc7t5icg9c2b8hd9araukjhv3j42qm6e7q7ipf94f4e9f28eo8eiuupnvt135wetxrfdqcblvhk8p8j44opc9yttt58xgt4i2t1yy2',
                 resourceIds: [],
-                width: 773081,
-                height: 882265,
-                fit: 'FREE_WIDTH',
+                width: 228198,
+                height: 865389,
+                fit: 'CROP',
                 sizes: { "foo" : "bar" },
-                quality: 261,
-                format: 'DATA_URL',
+                quality: 557,
+                format: 'PNG',
             })
             .expect(400)
             .then(res => {
@@ -103,15 +100,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
                 name: null,
                 resourceIds: [],
-                width: 669568,
-                height: 359976,
-                fit: 'FREE_WIDTH',
+                width: 499469,
+                height: 741217,
+                fit: 'WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 424,
-                format: 'BMP',
+                quality: 882,
+                format: 'DATA_URL',
             })
             .expect(400)
             .then(res => {
@@ -125,15 +122,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
                 
                 resourceIds: [],
-                width: 770187,
-                height: 221949,
-                fit: 'WIDTH',
+                width: 836382,
+                height: 422303,
+                fit: 'FREE_HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 985,
-                format: 'JPG',
+                quality: 261,
+                format: 'GIF',
             })
             .expect(400)
             .then(res => {
@@ -149,15 +146,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'jq22ugvl8t92eaqk3f9zgsqfyjnlhginfvlj8',
-                name: 'e5jzdeimpz053k8vs3h5mc8nxm38tv1qbqiv4o8rf0jgy1e258yg4k2bsuh4122zegx0jw2w28xywbpafxsutetc8x2dj1ldrh0gsnssshdpod8o9mnaqge495fje20lgehcsi3zekxwk50l0zirffswijf1ddr70n5sr535pfhg4r1odq6k73luiyy4n5tlvghpvejqouik4qudihkd0cxjjme7ywjath5b3z81ocdrwrt9n5nojs0d0i99q3w',
+                id: 'qo4na6q04gs3u6tfm46nfg6ih0l0ds47kmosv',
+                name: 'vdlwoy30jjr64rolu81185jgifmscio1ldsjm6x1hf1o4ha1tkm1vcrtq718j1584tf9yfqcx3zh24l8cputo4smlely9crnpy30hvpx5563xaba2r0ibp0mof8xer6ib5594nnmxflqy7v1l5pdbn8qy751248u7gdqjzbkvxetwce8mt5trj7wgzd3icx0fpt35sgu839zmz48oretdf2lzqi9hvqs65rr0ihz2uiqfjdtkt0xzvje1ky9gjh',
                 resourceIds: [],
-                width: 497296,
-                height: 740092,
-                fit: 'CROP',
+                width: 583934,
+                height: 264120,
+                fit: 'WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 593,
-                format: 'PNG',
+                quality: 933,
+                format: 'GIF',
             })
             .expect(400)
             .then(res => {
@@ -173,15 +170,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: '3gut5c87taujpsg9r4q8nsze8y1id4x6pdzcvocipf24pqyo09go22ds6gxyke2nzv9g7wa6j6d8yd5bmfscdtuvs9otkfrqtpnqb318rmt9mif78orngdl3spozytke92ziy79dxasqujicnbf1vzvrocnswj2u495g73fi4jf14a6a3hf6c03u7s44wu3qw0ieipmr62ewnd2a3f0xpall96cokedrabj4g1bhu84d6zgttkdc3z7yni6e3ruq',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: 'ir2e910gdix6v0ed43eb9nr114psylipugymjx5cige2hz3w5y7cxphviahce74qyxiwdwqsntkuctuvgcfxpktrz26rcu74ymexi4blglf10am14405dueowea5eibxldcxxwjnmoxmseoj5dx9gty4mt4npej2nehplgd0ng1cbu2hdzih8ubfhwgz3aup2gwcxpeomyexl1gq0qqbmf40fvdpr7w1sad80d2uo4t2x7l879huof9x1fq3fidk',
                 resourceIds: [],
-                width: 288183,
-                height: 951952,
-                fit: 'HEIGHT',
+                width: 707371,
+                height: 265486,
+                fit: 'CROP',
                 sizes: { "foo" : "bar" },
-                quality: 681,
-                format: 'PNG',
+                quality: 958,
+                format: 'JPG',
             })
             .expect(400)
             .then(res => {
@@ -195,14 +192,14 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: '7pcf2ip93msu4z1a5wk4srolfzo2gm5x1bioefd0v3qh4x9ayypogie5rfgtmwmjrej6k8egv75di7kzcnqrzwhzl7tv4o7tca2cxuxi22p0z6gecrowqemjapkvg1yqkls1wd9c92ng5wsrakpch9nzgl0lefkksu69c6kozknfkdmwx6bbzq3eqsg9y51efvj7d8121164inuwbf1tgad2usdtj8aj8hao9nj3x9jficon0poacl79nz5a2ch',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: 'vyao9ag738crwxho8qn819n86c2ie675k6t8v7wo1qvud3ry211as32nlnmbuu8o62armw90lzkgtlvkao2v8fzn5gc0ek2jeo8vqr5qqyi54p97hom7w9ql7su6xwhhyj2twefo8z46voq6h1frxkfcl39torj5pnzh6bamxddqj389aeuye6luqsuyp06p90eiuziar18jqbbpglbodfa4l5e6ijzw9ums82ddftrkjyy78k3gtc7c0ebtqb1',
                 resourceIds: [],
-                width: 3095212,
-                height: 270877,
-                fit: 'WIDTH',
+                width: 3276377,
+                height: 110030,
+                fit: 'CROP',
                 sizes: { "foo" : "bar" },
-                quality: 505,
+                quality: 387,
                 format: 'JPG',
             })
             .expect(400)
@@ -217,15 +214,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: 't76wl3qxfd03torq9vfb7kc1tbeyxtau9k4bu6zuoahqhna7n6yhd50403qz9lkucq5t0musqklrqcknh7uood6aac6x6hom3kqt0fzmmkbvgnm65dcyt1jhxdyst75gw8epicoz6qmxjfka45uvjt0ghj5qqausmmjdvv517jeyhx9t97t70ngil4tdiyt836446uxylrxnwiqgl2y5nxtppkufi2p1ktah9qis127wj41x7hq2i3ti6lhh3sf',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: 'vjo6h2y3zym6whtk8i4d382kfdw2iab15hcmmmat89wy0izvmypggemh6dmyn5imlc0ih87dpsdpl63kpvem5jf80esco3pdow1dixeslw32zekmkxepstngeua6tjggm336zoane7z6otcbeq3a8fixaaywd0r4kw7m2jczlu6xti9942zlksqlmbrwdbnxxw65sw81o0l6v1qugopo4617e3ha1kk23aeoc2g3ojb4fvs7fua0lftdbpl4kn4',
                 resourceIds: [],
-                width: 568729,
-                height: 4963559,
+                width: 649175,
+                height: 2619557,
                 fit: 'HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 433,
-                format: 'BMP',
+                quality: 703,
+                format: 'DATA_URL',
             })
             .expect(400)
             .then(res => {
@@ -239,15 +236,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: '0dxfnqxbwup3wy3jk1sndvh7qugti4p6jk0jgict92rjv18ppx8vqbxywdc5if6e6on79sf7pxf9k5vei3ar2v594ums3qus98ij7q96agtay9znhred5731t4fv9ah54fji34cy7olv1m7a6gi3wz7eua8zfs5i0tz5r7vd4rnr2c44m65s8hlcj8a48vdjvrg4mnkv720lzveau04vi5lqw051zxw3veigb9x7ufgc8nd8yezmbuj187k9azl',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: 'xxdmjh9ug4he1zgh53bavzlnn83cwkbn7140e3htacmlj79jqertwcxd3c3uj4klaogtfdqwvomyl5zwpja7g4xovc03i537rh2kqvvefi2bvgrrwbwkcblssqx2vwn6dpkdecdny9lqlwkpnqdm8r9ewls69yqhnrikla9xdem09d9xw2gtu3savzh0801om1en86l2gszzwgkrpqnlxy1pcfg73w4i6h992nlq28wb4iqor30ljcw8zjp26xr',
                 resourceIds: [],
-                width: 846171,
-                height: 249776,
-                fit: 'FREE_WIDTH',
+                width: 760357,
+                height: 671539,
+                fit: 'HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 4346,
-                format: 'DATA_URL',
+                quality: 6523,
+                format: 'JPG',
             })
             .expect(400)
             .then(res => {
@@ -271,15 +268,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: '0chp2xkx9ii0ntoihy13tx4ac8g20et7v3vr5we92l9cdgthl5v00g367w4xcb0bpwgjobg2hmquxtqemxbdxjein0dkvxlbevzrgz1ms6keltqa5uim9km5cr10javesq389029fh9eckazs2o6gnazd0o6qlbf85rirrmx5n3i2qljgdheogw48ntaej7mpgaxeia894y5aphu07xrr37i5ncxxqwx6o95j6wao2ywlgemnpzmwl3j2ybyuwk',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: '4d6d7riawha48glvwpcwwblmdxsr9vpx247thda68sfd1882l11cm20gojqm9bxymuifx5ek5zwr15kwhrqsr39ygea5tq04zomf7en9drnvjqesbx8yc6grk360ae1x4bs2mrsfln09w53bqocyumbbafil8v2n7lg1so87dnqdoj1cec6g3d9jmhte56eyr5l68cgsf1vtb0s6m4ib4048gk9rw6uyao2g5jyoclqqueh1zpy691426b7pyji',
                 resourceIds: [],
-                width: 701915,
-                height: 906876,
+                width: 926075,
+                height: 498037,
                 fit: 'XXXX',
                 sizes: { "foo" : "bar" },
-                quality: 817,
-                format: 'BMP',
+                quality: 159,
+                format: 'GIF',
             })
             .expect(400)
             .then(res => {
@@ -293,14 +290,14 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: 'tzw5we0wzrb21ymuttl15jy4zboh7fixq9t1f2pxzixr0nnjcaj5sksj9u1em9sc86b52keefsv6aeel91f7mfwtynla5my9sawfsxqq22ehpshvwx5st0z69i6mtet2txosl2xks2kj255pwcoh5p9yzsodcmcf16yjlk4bunh1hl91clyua06g4ij06gna86ky24bcarterpst4byyklgen9lpkfec0rd4nt563el0nd504al8ydzy4jy1vbv',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: 'u59rmgknyttfwwgkuaxkp9cfvhezg0l6mv670us4ct4ppmjfmzjb61yww43gvju43zrqxsyngtn6is8w61r8o8s9gdk6imwxxc3enrzv74btf5ur1ud3opaczpq52ozsg78ec6fi4j0d5pnve3c41c024ww7w2ua5yp2r5ufjo6a8s3gm4l0pxbf0979sjllc7ahuj9uj3n30io1jkndro1l6rpf5gdab5adehxp8h40dgb4o5fzd4g2pwj9obx',
                 resourceIds: [],
-                width: 168904,
-                height: 940394,
-                fit: 'HEIGHT',
+                width: 474908,
+                height: 570313,
+                fit: 'FREE_HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 190,
+                quality: 928,
                 format: 'XXXX',
             })
             .expect(400)
@@ -318,15 +315,15 @@ describe('attachment-family', () =>
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: 'f77wyyp40pnx9muqgnbxtdf0qdplvkh9vvfmy4d6vm2wajt268ksxcox7w9roq904gf0wnnknz3hbyzerpjuxzibwsasop8sdbp3ij3f6mwnilymspfa6vh03qikpgn06b287tf993h5ww7h9m2gt694lhnkpoq4zm7x242dk3jhf4smz6evi3q48h6qfe5ksbghfv57u8kshy2f2p4h4jo1lwrytqnmn8b4y31kyxjy7kkeigjkzd7nik1oc37',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: '42jtyh8igkgz73ys89cubw3wpjnuq4k4foxz4q0wh5gd527fil14tlk41r7wn7wf840spry54onlyyfagblq4jb4wnb8zxu50jcystwx6z56smuzje17yn7gcxc5mqvsn3bajdc5h8r2tnc2lcez7426h90iv9n0x7g66m2d505lbd48ftj3bl9a6h2x1b6wnazq997wpj2kokon4rhd16sa8srd2p6tadm9xck1w0j6rsbd57tbq97lzyqt3d2',
                 resourceIds: [],
-                width: 347854,
-                height: 650089,
+                width: 694396,
+                height: 508428,
                 fit: 'CROP',
                 sizes: { "foo" : "bar" },
-                quality: 796,
-                format: 'PNG',
+                quality: 470,
+                format: 'DATA_URL',
             })
             .expect(201);
     });
@@ -361,7 +358,7 @@ describe('attachment-family', () =>
                 {
                     where: 
                     {
-                        id: '7ef2846d-32c7-4460-8bc3-cdc368076650'
+                        id: '681d4c28-8d62-4ebc-9be8-06897fdf2d06'
                     }
                 }
             })
@@ -378,18 +375,18 @@ describe('attachment-family', () =>
                 {
                     where: 
                     {
-                        id: 'e7e18f88-0596-438c-981c-df2687bc4be5'
+                        id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'e7e18f88-0596-438c-981c-df2687bc4be5'));
+            .expect(repository.collectionResponse.find(item => item.id === '2c0b2bf3-898e-48cc-83f4-4124ae060349'));
     });
 
     test(`/REST:GET admin/attachment-family/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-family/920b0e06-fd66-44fc-8b8c-50b8d64fb1c3')
+            .get('/admin/attachment-family/085b95bb-3b64-4f2c-8223-2ff7bf5be449')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -397,10 +394,10 @@ describe('attachment-family', () =>
     test(`/REST:GET admin/attachment-family/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-family/e7e18f88-0596-438c-981c-df2687bc4be5')
+            .get('/admin/attachment-family/2c0b2bf3-898e-48cc-83f4-4124ae060349')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e7e18f88-0596-438c-981c-df2687bc4be5'));
+            .expect(repository.collectionResponse.find(e => e.id === '2c0b2bf3-898e-48cc-83f4-4124ae060349'));
     });
 
     test(`/REST:GET admin/attachment-families`, () => 
@@ -419,15 +416,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '49c22d34-e2ba-4895-8991-bebf6c81ac02',
-                name: 'wrfphg2nv02e4j9ynruij1gm3j3n31as40hybdqpxicwkrbwau5gmx3ybsw19n3yqm6vps69ak6qd4hg9gfssnjlms3uqdahtx26sop3lfc1dlkbefh8cayrt0ch6zsn4haj5cjw3x5ru9sgzc3bwvgf532d8fyb9n44fp1m4usi7vxuoffwtvkfgl9txzokom8o1s5p1vq8jqbvootpu006ob37mzojadi4a8u4kkdfmpz4bhvfin08h3yaebn',
+                id: '06a21f45-ae81-4c03-b3d2-622b7932dfc7',
+                name: 'odq4yf82p4y5gu00064yf1jv4mwvkjm8oxqii5takp8ll7v13r9y7rhf4970gu974grrdi2gl8u14q1bwucr7o160cfgf0rm8isaydibfce54oeuaq2gkmnhi53rofy0q0318s2svbcn34dewaszwuloivp2ie96m76hakqoo8zo8zd1nnzqs7971mzo3ugxzwe102vjggqypac95nb0dqtxzq09o1s6a05jkfj62rorx8mdxj7s7yqgnd1r1j7',
                 resourceIds: [],
-                width: 602951,
-                height: 928268,
+                width: 229927,
+                height: 491226,
                 fit: 'CROP',
                 sizes: { "foo" : "bar" },
-                quality: 661,
-                format: 'JPG',
+                quality: 816,
+                format: 'GIF',
             })
             .expect(404);
     });
@@ -439,24 +436,24 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                name: '1tt7tfd3s5dpze02nu4u86lg3hgwbubr3e0fwsiro2nd06tk4tg3al1i6q2clmfcy6f718wje004taqobzqg3822a3ui2h8wk3nwcf0lgwcvknm5i98t0vxha8hu4wnjdgm4mbbl3w6angulhe63gwhy3nprw02s1dgo8s3jbsvk2q52sesyahhpf4ijg68ib79g1jabqvmsk54v7nan52cpt4ym75ixqkjs1uamxotbtnzfb52wsgtnm8egdak',
+                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                name: 'e3jivwx1n2a8oacwgw4nydg7rwceqovb74xszowukue6c4urafajg4uqikev11l1z5ntvwdjlunu9w6v0qbm9gauksehv07pv1uxba16896p6nl8h0pewvuwatmyoksjroowizelpsaag78r7gfscfq8h04lwtsxqjipehvvvm78vuhmhumpzsnusawp851m0anr92hnorpwekodf3vrduifa0xflf94m9cjld05okjbytf7kiu2vomvda9evkt',
                 resourceIds: [],
-                width: 370464,
-                height: 775839,
-                fit: 'FREE_HEIGHT',
+                width: 558047,
+                height: 171957,
+                fit: 'HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 582,
-                format: 'GIF',
+                quality: 474,
+                format: 'JPG',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e7e18f88-0596-438c-981c-df2687bc4be5'));
+            .expect(repository.collectionResponse.find(e => e.id === '2c0b2bf3-898e-48cc-83f4-4124ae060349'));
     });
 
     test(`/REST:DELETE admin/attachment-family/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-family/883a658f-55e7-4cfc-8948-6280f67b96aa')
+            .delete('/admin/attachment-family/51943ba7-0ddc-41aa-9d3b-f7dd28311797')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -464,7 +461,7 @@ describe('attachment-family', () =>
     test(`/REST:DELETE admin/attachment-family/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-family/e7e18f88-0596-438c-981c-df2687bc4be5')
+            .delete('/admin/attachment-family/2c0b2bf3-898e-48cc-83f4-4124ae060349')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -532,21 +529,21 @@ describe('attachment-family', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '56a99b90-7a89-4235-93c0-94b36ae7eef3',
-                        name: 'xnz57r2ryruz8gwxjw21ppsipe0nfvral6b2cqasfhdvrnkc2855zyexj9acg5hxrms9y7qxvt798994sm0qzve3f9fbj44wjlp4d8c911c54i56k082cdf5jvh0oadhdcyojovyt8o4h55a9jrq6w0wodr7jkqchi2etpyozo0sw45ow3byl8f1sqg9sp6bdtjvpc5rajtbyhuepxly5iqnw6fwymk28q517m89nvbymawmxg5jgr4xhwovgnn',
+                        id: 'cc2fe9f8-79a0-4f70-93f8-691fe8138223',
+                        name: 'ks9w7y5pww9hdjesi7ojt62zbk6umu4f2gqs73kwcd794vprlemyul44qjhsu12ehd6m5l3ilkuhwd1co6nwrza8yd9cdezbm83n9f2naj585gvblv0k8bxu23yflm60un59wel3kd6gn2oqq31n1epovsppvg34kijr4haqm0e0xgl1y1y2i9691xfuubvhz1quod5o6vngj20t8vh1mzlaqtjxqg9j5662oseymnydcl1mujn4y49k3hg6g03',
                         resourceIds: [],
-                        width: 396936,
-                        height: 369450,
-                        fit: 'HEIGHT',
+                        width: 873645,
+                        height: 315041,
+                        fit: 'FREE_HEIGHT',
                         sizes: { "foo" : "bar" },
-                        quality: 696,
-                        format: 'TIF',
+                        quality: 216,
+                        format: 'GIF',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateAttachmentFamily).toHaveProperty('id', '56a99b90-7a89-4235-93c0-94b36ae7eef3');
+                expect(res.body.data.adminCreateAttachmentFamily).toHaveProperty('id', 'cc2fe9f8-79a0-4f70-93f8-691fe8138223');
             });
     });
 
@@ -614,7 +611,7 @@ describe('attachment-family', () =>
                     {
                         where: 
                         {
-                            id: '3f180c72-c185-463f-9a3b-7a2d29e3c4e8'
+                            id: 'db6db493-c95f-4f25-bbcb-e6fb7d3fdb82'
                         }
                     }
                 }
@@ -657,14 +654,14 @@ describe('attachment-family', () =>
                     {
                         where: 
                         {
-                            id: 'e7e18f88-0596-438c-981c-df2687bc4be5'
+                            id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentFamily.id).toStrictEqual('e7e18f88-0596-438c-981c-df2687bc4be5');
+                expect(res.body.data.adminFindAttachmentFamily.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
             });
     });
 
@@ -693,7 +690,7 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '77f57659-9d38-4f63-860c-f3e3c5365778'
+                    id: 'd4deb41c-dd91-4ad3-bf3e-60e1de769efc'
                 }
             })
             .expect(200)
@@ -729,12 +726,12 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: 'e7e18f88-0596-438c-981c-df2687bc4be5'
+                    id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentFamilyById.id).toStrictEqual('e7e18f88-0596-438c-981c-df2687bc4be5');
+                expect(res.body.data.adminFindAttachmentFamilyById.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
             });
     });
 
@@ -800,15 +797,15 @@ describe('attachment-family', () =>
                 variables: {
                     payload: {
                         
-                        id: '45589445-184c-405d-a6a2-74c9a34770fc',
-                        name: '3iov4s0x3lmgunt490bzmip4z0rp1i73phaomcl5551fb1vgz44bgj9ldm14rtk46bebtvvuq9voc033ua3c5tshj8u91xpx17htyv9z2z83bd0ak3h6nlj3umybwgnbm7wuqebvwb5d0bxujd20j6f12gv3xbckkrju4kiwej410em1gr77xnpjyax02hgz39yrfbg5smaz7ds6gq2xvnx6vyx17yqiepqdrn3t35ax6j16hjx2fts3prpjjfv',
+                        id: '0c8fc24f-be9e-4a2a-be86-f7a95c4ca142',
+                        name: 'plhoawg8jv6ho7r880l101zow3x1fsi1wx9n4vyya4siofsz6mdtlamthmq8c834kiazt1q742cuezgnpoiwg1qxwqa4foyc5vmiv6js5xk9tq7e0btskitva9oj7x6k4tntz92x0qpnhp25fjubi43w5cf4phlrgbkokg1m6xtde2zr94szdgoa21brq9vhhajlfipzjpdo87y3dmygl8okyhbltmz3krmx6ecmri2nhthjb3wgcwv4u23est1',
                         resourceIds: [],
-                        width: 216578,
-                        height: 205371,
-                        fit: 'CROP',
+                        width: 743813,
+                        height: 440136,
+                        fit: 'FREE_WIDTH',
                         sizes: { "foo" : "bar" },
-                        quality: 383,
-                        format: 'BMP',
+                        quality: 203,
+                        format: 'GIF',
                     }
                 }
             })
@@ -847,21 +844,21 @@ describe('attachment-family', () =>
                 variables: {
                     payload: {
                         
-                        id: 'e7e18f88-0596-438c-981c-df2687bc4be5',
-                        name: '0pp8e7vcq0ejehbvrxll45ltg35oirwcoykz9ua612alys4klfhcpg9fxdsxi7yh986zjqmsego8wn90qv7w1x8uaxugt493b0vz4hxc3kqgklfm31j1irr6ls8noy8qthh0svermv0qtvolykayf1mruwxfbgpcn43k30aglm2umfdvlmr0qc6xoqy035bjaip1tovb8ftghd8mqcm1jh77003t828k5w0gypnq4dzyyw15mnxew62uwh494ki',
+                        id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                        name: 'bx4crfa50d9abi3pt4a4j97oip9yv9c2gw9bw3by4a1x9isrcc53owl3n6swb7qesa9t43hic24ly3v3pcvmxvjowghom76j4p47l4x8bqmt54lgl9jiovd6pyh2ue6noc4bhq3aqoqm9a1ct7pncdq1xqn96sqgt22cohw1tpjn9md8sb50ha34bx21r208bhg891c2v22qwascri3g1ziwpoi1t78lmjx85k5x6ob41ue8gsovwn7dn52bca6',
                         resourceIds: [],
-                        width: 848258,
-                        height: 494208,
-                        fit: 'WIDTH',
+                        width: 800759,
+                        height: 256235,
+                        fit: 'CROP',
                         sizes: { "foo" : "bar" },
-                        quality: 555,
-                        format: 'TIF',
+                        quality: 406,
+                        format: 'BMP',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateAttachmentFamily.id).toStrictEqual('e7e18f88-0596-438c-981c-df2687bc4be5');
+                expect(res.body.data.adminUpdateAttachmentFamily.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
             });
     });
 
@@ -890,7 +887,7 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '365d6bcf-9a2c-4b78-b080-d23fa71a9a22'
+                    id: '69bea403-f79d-4af8-acf7-69ffea20171e'
                 }
             })
             .expect(200)
@@ -926,12 +923,12 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: 'e7e18f88-0596-438c-981c-df2687bc4be5'
+                    id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteAttachmentFamilyById.id).toStrictEqual('e7e18f88-0596-438c-981c-df2687bc4be5');
+                expect(res.body.data.adminDeleteAttachmentFamilyById.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
             });
     });
 

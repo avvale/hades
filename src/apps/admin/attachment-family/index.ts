@@ -14,8 +14,8 @@ import { AdminCreateAttachmentFamilyResolver } from './resolvers/admin-create-at
 import { AdminCreateAttachmentFamiliesResolver } from './resolvers/admin-create-attachment-families.resolver';
 import { AdminPaginateAttachmentFamiliesResolver } from './resolvers/admin-paginate-attachment-families.resolver';
 import { AdminGetAttachmentFamiliesResolver } from './resolvers/admin-get-attachment-families.resolver';
-import { AdminFindAttachmentFamilyResolver } from './resolvers/admin-find-attachment-family.resolver';
 import { AdminFindAttachmentFamilyByIdResolver } from './resolvers/admin-find-attachment-family-by-id.resolver';
+import { AdminFindAttachmentFamilyResolver } from './resolvers/admin-find-attachment-family.resolver';
 import { AdminUpdateAttachmentFamilyResolver } from './resolvers/admin-update-attachment-family.resolver';
 import { AdminDeleteAttachmentFamilyByIdResolver } from './resolvers/admin-delete-attachment-family-by-id.resolver';
 import { AdminDeleteAttachmentFamiliesResolver } from './resolvers/admin-delete-attachment-families.resolver';
@@ -37,8 +37,8 @@ export const AdminAttachmentFamilyResolvers = [
     AdminCreateAttachmentFamiliesResolver,
     AdminPaginateAttachmentFamiliesResolver,
     AdminGetAttachmentFamiliesResolver,
-    AdminFindAttachmentFamilyResolver,
     AdminFindAttachmentFamilyByIdResolver,
+    AdminFindAttachmentFamilyResolver,
     AdminUpdateAttachmentFamilyResolver,
     AdminDeleteAttachmentFamilyByIdResolver,
     AdminDeleteAttachmentFamiliesResolver,

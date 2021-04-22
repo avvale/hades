@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateAttachmentLibrariesCommandHandler } from './create-attachment-libraries.command-handler';
 import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
+import { CreateAttachmentLibrariesCommandHandler } from './create-attachment-libraries.command-handler';
 import { CreateAttachmentLibrariesCommand } from './create-attachment-libraries.command';
 import { CreateAttachmentLibrariesService } from './create-attachment-libraries.service';
 

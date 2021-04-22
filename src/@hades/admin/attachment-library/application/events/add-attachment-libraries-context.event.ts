@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminAttachmentLibrary } from './../../domain/attachment-library.aggregate';
 import { CreatedAttachmentLibraryEvent } from './created-attachment-library.event';
-import { DeletedAttachmentLibraryEvent } from './deleted-attachment-library.event';
 import { CreatedAttachmentLibrariesEvent } from './created-attachment-libraries.event';
+import { DeletedAttachmentLibraryEvent } from './deleted-attachment-library.event';
 import { DeletedAttachmentLibrariesEvent } from './deleted-attachment-libraries.event';
 
 export class AddAttachmentLibrariesContextEvent extends AggregateRoot

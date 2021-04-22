@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateAttachmentFamiliesCommandHandler } from './create-attachment-families.command-handler';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
+import { CreateAttachmentFamiliesCommandHandler } from './create-attachment-families.command-handler';
 import { CreateAttachmentFamiliesCommand } from './create-attachment-families.command';
 import { CreateAttachmentFamiliesService } from './create-attachment-families.service';
 

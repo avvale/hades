@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { UpdateLangCommandHandler } from './update-lang.command-handler';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
+import { UpdateLangCommandHandler } from './update-lang.command-handler';
 import { UpdateLangCommand } from './update-lang.command';
 import { UpdateLangService } from './update-lang.service';
 
