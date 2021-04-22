@@ -11,29 +11,29 @@ export abstract class IResourceRepository implements IRepository<AdminResource>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<AdminResource>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<AdminResource>>;
 
     // create a single record
-    abstract async create(resource: AdminResource): Promise<void>;
+    abstract create(resource: AdminResource): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(resources: AdminResource[], options?: object): Promise<void>;
+    abstract insert(resources: AdminResource[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminResource | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminResource | null>;
 
     // find a single record by id
-    abstract async findById(id: ResourceId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminResource | null>;
+    abstract findById(id: ResourceId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminResource | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminResource[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminResource[]>;
 
     // update record
-    abstract async update(resource: AdminResource, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(resource: AdminResource, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: ResourceId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: ResourceId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }
