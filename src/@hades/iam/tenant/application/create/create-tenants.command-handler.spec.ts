@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateTenantsCommandHandler } from './create-tenants.command-handler';
 import { tenants } from '@hades/iam/tenant/infrastructure/seeds/tenant.seed';
+import { CreateTenantsCommandHandler } from './create-tenants.command-handler';
 import { CreateTenantsCommand } from './create-tenants.command';
 import { CreateTenantsService } from './create-tenants.service';
 
