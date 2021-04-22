@@ -1,3 +1,4 @@
+// ignored file
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateUserCommand } from './update-user.command';
 import { UpdateUserService } from './update-user.service';
@@ -13,9 +14,6 @@ import {
     UserPassword,
     UserRememberToken,
     UserData,
-    UserCreatedAt,
-    UserUpdatedAt,
-    UserDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateUserCommand)

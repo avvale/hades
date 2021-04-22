@@ -14,8 +14,8 @@ import { IamCreateUserResolver } from './resolvers/iam-create-user.resolver';
 import { IamCreateUsersResolver } from './resolvers/iam-create-users.resolver';
 import { IamPaginateUsersResolver } from './resolvers/iam-paginate-users.resolver';
 import { IamGetUsersResolver } from './resolvers/iam-get-users.resolver';
-import { IamFindUserResolver } from './resolvers/iam-find-user.resolver';
 import { IamFindUserByIdResolver } from './resolvers/iam-find-user-by-id.resolver';
+import { IamFindUserResolver } from './resolvers/iam-find-user.resolver';
 import { IamUpdateUserResolver } from './resolvers/iam-update-user.resolver';
 import { IamDeleteUserByIdResolver } from './resolvers/iam-delete-user-by-id.resolver';
 import { IamDeleteUsersResolver } from './resolvers/iam-delete-users.resolver';
@@ -37,8 +37,8 @@ export const IamUserResolvers = [
     IamCreateUsersResolver,
     IamPaginateUsersResolver,
     IamGetUsersResolver,
-    IamFindUserResolver,
     IamFindUserByIdResolver,
+    IamFindUserResolver,
     IamUpdateUserResolver,
     IamDeleteUserByIdResolver,
     IamDeleteUsersResolver,
