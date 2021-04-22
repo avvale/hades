@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminAttachment } from './../../domain/attachment.aggregate';
 import { CreatedAttachmentEvent } from './created-attachment.event';
-import { DeletedAttachmentEvent } from './deleted-attachment.event';
 import { CreatedAttachmentsEvent } from './created-attachments.event';
+import { DeletedAttachmentEvent } from './deleted-attachment.event';
 import { DeletedAttachmentsEvent } from './deleted-attachments.event';
 
 export class AddAttachmentsContextEvent extends AggregateRoot

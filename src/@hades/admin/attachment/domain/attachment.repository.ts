@@ -11,29 +11,29 @@ export abstract class IAttachmentRepository implements IRepository<AdminAttachme
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<AdminAttachment>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<AdminAttachment>>;
 
     // create a single record
-    abstract async create(attachment: AdminAttachment): Promise<void>;
+    abstract create(attachment: AdminAttachment): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(attachments: AdminAttachment[], options?: object): Promise<void>;
+    abstract insert(attachments: AdminAttachment[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAttachment | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAttachment | null>;
 
     // find a single record by id
-    abstract async findById(id: AttachmentId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAttachment | null>;
+    abstract findById(id: AttachmentId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAttachment | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAttachment[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAttachment[]>;
 
     // update record
-    abstract async update(attachment: AdminAttachment, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(attachment: AdminAttachment, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: AttachmentId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: AttachmentId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }
