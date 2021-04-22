@@ -11,29 +11,29 @@ export abstract class IAdministrativeAreaLevel1Repository implements IRepository
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<AdminAdministrativeAreaLevel1>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<AdminAdministrativeAreaLevel1>>;
 
     // create a single record
-    abstract async create(administrativeAreaLevel1: AdminAdministrativeAreaLevel1): Promise<void>;
+    abstract create(administrativeAreaLevel1: AdminAdministrativeAreaLevel1): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(administrativeAreasLevel1: AdminAdministrativeAreaLevel1[], options?: object): Promise<void>;
+    abstract insert(administrativeAreasLevel1: AdminAdministrativeAreaLevel1[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAdministrativeAreaLevel1 | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAdministrativeAreaLevel1 | null>;
 
     // find a single record by id
-    abstract async findById(id: AdministrativeAreaLevel1Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAdministrativeAreaLevel1 | null>;
+    abstract findById(id: AdministrativeAreaLevel1Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAdministrativeAreaLevel1 | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAdministrativeAreaLevel1[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<AdminAdministrativeAreaLevel1[]>;
 
     // update record
-    abstract async update(administrativeAreaLevel1: AdminAdministrativeAreaLevel1, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(administrativeAreaLevel1: AdminAdministrativeAreaLevel1, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: AdministrativeAreaLevel1Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: AdministrativeAreaLevel1Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

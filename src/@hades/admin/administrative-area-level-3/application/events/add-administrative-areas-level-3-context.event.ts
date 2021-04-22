@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminAdministrativeAreaLevel3 } from './../../domain/administrative-area-level-3.aggregate';
 import { CreatedAdministrativeAreaLevel3Event } from './created-administrative-area-level-3.event';
-import { DeletedAdministrativeAreaLevel3Event } from './deleted-administrative-area-level-3.event';
 import { CreatedAdministrativeAreasLevel3Event } from './created-administrative-areas-level-3.event';
+import { DeletedAdministrativeAreaLevel3Event } from './deleted-administrative-area-level-3.event';
 import { DeletedAdministrativeAreasLevel3Event } from './deleted-administrative-areas-level-3.event';
 
 export class AddAdministrativeAreasLevel3ContextEvent extends AggregateRoot

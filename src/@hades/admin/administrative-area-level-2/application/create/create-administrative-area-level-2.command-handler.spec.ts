@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { UpdateAdministrativeAreaLevel2CommandHandler } from './update-administrative-area-level-2.command-handler';
 import { administrativeAreasLevel2 } from '@hades/admin/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
-import { UpdateAdministrativeAreaLevel2Command } from './update-administrative-area-level-2.command';
-import { UpdateAdministrativeAreaLevel2Service } from './update-administrative-area-level-2.service';
+import { CreateAdministrativeAreaLevel2CommandHandler } from './create-administrative-area-level-2.command-handler';
+import { CreateAdministrativeAreaLevel2Command } from './create-administrative-area-level-2.command';
+import { CreateAdministrativeAreaLevel2Service } from './create-administrative-area-level-2.service';
 
-describe('UpdateAdministrativeAreaLevel2CommandHandler', () =>
+describe('CreateAdministrativeAreaLevel2CommandHandler', () =>
 {
-    let commandHandler: UpdateAdministrativeAreaLevel2CommandHandler;
-    let service: UpdateAdministrativeAreaLevel2Service;
+    let commandHandler: CreateAdministrativeAreaLevel2CommandHandler;
+    let service: CreateAdministrativeAreaLevel2Service;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                UpdateAdministrativeAreaLevel2CommandHandler,
+                CreateAdministrativeAreaLevel2CommandHandler,
                 {
-                    provide: UpdateAdministrativeAreaLevel2Service,
+                    provide: CreateAdministrativeAreaLevel2Service,
                     useValue: {
                         main: () => {},
                     }
@@ -25,21 +25,21 @@ describe('UpdateAdministrativeAreaLevel2CommandHandler', () =>
             ]
         }).compile();
 
-        commandHandler  = module.get<UpdateAdministrativeAreaLevel2CommandHandler>(UpdateAdministrativeAreaLevel2CommandHandler);
-        service         = module.get<UpdateAdministrativeAreaLevel2Service>(UpdateAdministrativeAreaLevel2Service);
+        commandHandler  = module.get<CreateAdministrativeAreaLevel2CommandHandler>(CreateAdministrativeAreaLevel2CommandHandler);
+        service         = module.get<CreateAdministrativeAreaLevel2Service>(CreateAdministrativeAreaLevel2Service);
     });
 
     describe('main', () =>
     {
-        test('UpdateAdministrativeAreaLevel2CommandHandler should be defined', () =>
+        test('CreateAdministrativeAreaLevel2CommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an administrativeAreaLevel2 created', async () =>
+        test('should create the values objects and pass them as parameters to the CreateAdministrativeAreaLevel2Service', async () =>
         {
             expect(await commandHandler.execute(
-                new UpdateAdministrativeAreaLevel2Command(
+                new CreateAdministrativeAreaLevel2Command(
                     {
                         id: administrativeAreasLevel2[0].id,
                         countryCommonId: administrativeAreasLevel2[0].countryCommonId,
