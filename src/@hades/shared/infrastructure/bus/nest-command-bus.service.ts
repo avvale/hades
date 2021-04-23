@@ -8,7 +8,7 @@ export class NestCommandBus implements ICommandBus
     constructor(
         private readonly commandBus: NestCommandBusImplementation
     ) {}
-    
+
     async dispatch<T extends ICommand>(command: T): Promise<any>
     {
         return await this.commandBus.execute(command);
