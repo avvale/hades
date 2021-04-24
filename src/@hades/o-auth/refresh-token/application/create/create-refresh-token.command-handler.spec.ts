@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { CreateRefreshTokenCommandHandler } from './create-refresh-token.command-handler';
-import { refreshTokensToCreate } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token-to-create.seed';
+import { refreshTokensToCreate } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-tokens-to-create.seed';
 import { CreateRefreshTokenCommand } from './create-refresh-token.command';
 import { CreateRefreshTokenService } from './create-refresh-token.service';
 
