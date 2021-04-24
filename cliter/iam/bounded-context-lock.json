@@ -3,7 +3,7 @@
     "files": [
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.spec.ts",
-            "integrity": "sha1:382eaee7cf482c0c0c7b2614d96bd8df7d12d4e4"
+            "integrity": "sha1:ec14eaf5b64e48feb1658fdf28c4243ccf6ac7ab"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.ts",
@@ -23,7 +23,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.command-handler.spec.ts",
-            "integrity": "sha1:d0a0b920d8abd60f419603d3a4587549d8138c7f"
+            "integrity": "sha1:00a244880c8a1d0752de02c83b207ca646fe7a84"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.command-handler.ts",
@@ -211,7 +211,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.command-handler.spec.ts",
-            "integrity": "sha1:559e6911235e4630106cdb09a5203c0434e8a648"
+            "integrity": "sha1:44c52d0380869715d5d34e76907d74249e9c2f7d"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.command-handler.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:c40b56c487012cfd3cc228176d97d3fdebbe4456"
+            "integrity": "sha1:379a3b324894ee512fdab1d4bdd7e4e13e991e2b"
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
@@ -459,7 +459,7 @@
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-update-bounded-context.resolver.spec.ts",
-            "integrity": "sha1:1ad8c06cab3ec6a42728f9c1d48b62e7ef2c9f4e"
+            "integrity": "sha1:df8daa41b2b0fdd8b60457fab8bc3a39280eb068"
         },
         {
             "path": "src/apps/iam/bounded-context/resolvers/iam-update-bounded-context.resolver.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:97aee5d50e7249123d8ca0c1c8f8f3ed6a6162ef"
+            "integrity": "sha1:b2343252ed6df4242937c5fdf003f9cae818a8e0"
         }
     ]
 }

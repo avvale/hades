@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateBoundedContextCommandHandler } from './create-bounded-context.command-handler';
 import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { CreateBoundedContextCommandHandler } from './create-bounded-context.command-handler';
 import { CreateBoundedContextCommand } from './create-bounded-context.command';
 import { CreateBoundedContextService } from './create-bounded-context.service';
 
@@ -41,11 +41,11 @@ describe('CreateBoundedContextCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateBoundedContextCommand(
                     {
-                        id : boundedContexts[0].id,
-                        name : boundedContexts[0].name,
-                        root : boundedContexts[0].root,
-                        sort : boundedContexts[0].sort,
-                        isActive : boundedContexts[0].isActive,
+                        id: boundedContexts[0].id,
+                        name: boundedContexts[0].name,
+                        root: boundedContexts[0].root,
+                        sort: boundedContexts[0].sort,
+                        isActive: boundedContexts[0].isActive,
                     }
                 )
             )).toBe(undefined);
