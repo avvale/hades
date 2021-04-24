@@ -12,6 +12,7 @@ import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { IamCreateAccountInput } from './../../../../graphql';
 import { FindClientQuery } from '@hades/o-auth/client/application/find/find-client.query';
 import { GetRolesQuery } from '@hades/iam/role/application/get/get-roles.query';
+import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
 
 describe('IamCreateAccountResolver', () =>
 {
@@ -70,12 +71,14 @@ describe('IamCreateAccountResolver', () =>
                 {
                     if (query instanceof FindClientQuery) resolve(clients[0]); // return client
                     if (query instanceof GetRolesQuery) resolve(roles); // return roles
-                    resolve(accounts); // return accounts
+                    if (query instanceof FindAccountByIdQuery) resolve(accounts[0]); // return account created
+                    resolve(false);
                 });
             });
             expect(await resolver.main(<IamCreateAccountInput>accounts[0], {
                 req: {
                     headers: {
+                        // mock jwt
                         authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImppdCI6IjE1MjQifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.oDME4U1e7-hco5Nyx2pUlO53jcm7x3zakYHWpnHUHzI'
                     }
                 }

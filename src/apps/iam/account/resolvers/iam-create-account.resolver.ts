@@ -99,6 +99,7 @@ export class IamCreateAccountResolver
             ));
         }
 
+        console.log('hoaaaaa');
         return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, {}, { timezone }));
     }
 }
