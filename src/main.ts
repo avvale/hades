@@ -8,8 +8,10 @@ import { EnvironmentService } from '@hades/shared/domain/services/environment.se
 import { LoggerService } from './apps/core/modules/logger/logger.service';
 import { join } from 'path';
 import * as timezone from 'dayjs/plugin/timezone';
+import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import * as dayjs from 'dayjs';
 dayjs.extend(timezone);
+dayjs.extend(advancedFormat);
 
 async function bootstrap()
 {
