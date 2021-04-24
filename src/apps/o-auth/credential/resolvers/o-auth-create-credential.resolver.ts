@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
 import { OAuthClientGrantType, OAuthCreateCredentialInput } from './../../../../graphql';
 
 // custom
-import { ClientCredentialsGrantService } from './../lib/client-credentials-grant.service';
-import { PasswordGrantService } from './../lib/password-grant.service';
+import { ClientCredentialsGrantService } from './../services/client-credentials-grant.service';
+import { PasswordGrantService } from './../services/password-grant.service';
 
 @Resolver()
 export class OAuthCreateCredentialResolver

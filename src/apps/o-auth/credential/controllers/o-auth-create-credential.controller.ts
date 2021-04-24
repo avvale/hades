@@ -5,8 +5,8 @@ import { CreateCredentialDto } from './../dto/create-credential.dto';
 import { OAuthClientGrantType } from './../../../../graphql';
 
 // custom
-import { ClientCredentialsGrantService } from './../lib/client-credentials-grant.service';
-import { PasswordGrantService } from './../lib/password-grant.service';
+import { ClientCredentialsGrantService } from './../services/client-credentials-grant.service';
+import { PasswordGrantService } from './../services/password-grant.service';
 
 @ApiTags('[o-auth] credential')
 @Controller('o-auth/credential')
