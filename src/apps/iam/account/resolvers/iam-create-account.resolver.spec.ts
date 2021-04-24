@@ -7,12 +7,12 @@ import { IamCreateAccountResolver } from './iam-create-account.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
-import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
-import { IamCreateAccountInput } from './../../../../graphql';
+import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { FindClientQuery } from '@hades/o-auth/client/application/find/find-client.query';
 import { GetRolesQuery } from '@hades/iam/role/application/get/get-roles.query';
 import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
+import { IamCreateAccountInput } from './../../../../graphql';
 
 describe('IamCreateAccountResolver', () =>
 {
