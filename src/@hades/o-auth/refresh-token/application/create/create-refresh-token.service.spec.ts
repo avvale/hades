@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { JwtModule } from '@nestjs/jwt';
 
 // custom items
-import { refreshTokensToCreate } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token-to-create.seed';
+import { refreshTokensToCreate } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-tokens-to-create.seed';
 import { CreateRefreshTokenService } from './create-refresh-token.service';
 import {
     RefreshTokenId,
