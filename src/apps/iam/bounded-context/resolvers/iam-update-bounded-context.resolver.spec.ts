@@ -33,19 +33,19 @@ describe('IamUpdateBoundedContextResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<IamUpdateBoundedContextResolver>(IamUpdateBoundedContextResolver);
+        resolver    = module.get<IamUpdateBoundedContextResolver>(IamUpdateBoundedContextResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamUpdateBoundedContextResolver should be defined', () => 
+    test('IamUpdateBoundedContextResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('IamUpdateBoundedContextResolver should be defined', () => 
+        test('IamUpdateBoundedContextResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
