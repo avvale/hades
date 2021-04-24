@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/role-to-create.seed';
+import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/roles-to-create.seed';
 import { UpdateRoleCommandHandler } from './update-role.command-handler';
 import { UpdateRoleCommand } from './update-role.command';
 import { UpdateRoleService } from './update-role.service';

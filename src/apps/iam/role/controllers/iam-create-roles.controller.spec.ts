@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { IamCreateRolesController } from './iam-create-roles.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
+import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/roles-to-create.seed';
 
 describe('IamCreateRolesController', () =>
 {
@@ -48,7 +48,7 @@ describe('IamCreateRolesController', () =>
 
         test('should return an roles created', async () =>
         {
-            expect(await controller.main(roles)).toBe(undefined);
+            expect(await controller.main(rolesToCreate)).toBe(undefined);
         });
     });
 });

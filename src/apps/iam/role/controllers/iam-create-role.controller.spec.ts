@@ -5,7 +5,7 @@ import { IamCreateRoleController } from './iam-create-role.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
-import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/role-to-create.seed';
+import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/roles-to-create.seed';
 
 describe('IamCreateRoleController', () =>
 {

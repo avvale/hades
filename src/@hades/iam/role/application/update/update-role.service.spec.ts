@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/role-to-create.seed';
+import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/roles-to-create.seed';
 import { UpdateRoleService } from './update-role.service';
 import {
     RoleId,
