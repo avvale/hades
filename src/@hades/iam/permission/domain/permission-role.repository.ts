@@ -10,29 +10,29 @@ export abstract class IPermissionRoleRepository implements IRepository<IamPermis
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint: QueryStatement): Promise<Pagination<IamPermissionRole>>;
+    abstract paginate(queryStatement: QueryStatement, constraint: QueryStatement): Promise<Pagination<IamPermissionRole>>;
 
     // create a single record
-    abstract async create(permission: IamPermissionRole): Promise<void>;
+    abstract create(permission: IamPermissionRole): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(permissions: IamPermissionRole[], options?: object): Promise<void>;
+    abstract insert(permissions: IamPermissionRole[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement): Promise<IamPermissionRole | null>;
+    abstract find(query: QueryStatement): Promise<IamPermissionRole | null>;
 
     // find a single record by id
-    abstract async findById(id: PermissionId): Promise<IamPermissionRole | null>;
+    abstract findById(id: PermissionId): Promise<IamPermissionRole | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement): Promise<IamPermissionRole[]>;
+    abstract get(query: QueryStatement): Promise<IamPermissionRole[]>;
 
     // update record
-    abstract async update(permission: IamPermissionRole): Promise<void>;
-  
+    abstract update(permission: IamPermissionRole): Promise<void>;
+
     // delete record
-    abstract async deleteById(id: PermissionId): Promise<void>;
+    abstract deleteById(id: PermissionId): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement): Promise<void>;
+    abstract delete(query: QueryStatement): Promise<void>;
 }

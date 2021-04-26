@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreatePermissionsCommandHandler } from './create-permissions.command-handler';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
+import { CreatePermissionsCommandHandler } from './create-permissions.command-handler';
 import { CreatePermissionsCommand } from './create-permissions.command';
 import { CreatePermissionsService } from './create-permissions.service';
 
