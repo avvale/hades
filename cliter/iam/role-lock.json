@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:dac0126ba9caef889d4c322c5974a0c8497bac4a"
+            "integrity": "sha1:ccbf969c68e7ea21a60f3542b42e5edd8ab65eb1"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -491,7 +491,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:861ed6bbfb908513b07941c06c80d223b78fd2e7"
+            "integrity": "sha1:8a90416eb241df6c7e402038234fea20ac9710ab"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.spec.ts",
@@ -751,7 +751,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:27b3560fddb2340e12b803e41c8425adab1bbc19"
+            "integrity": "sha1:64876d4de6f782f8ebfd81a79a9a3be713ad3a18"
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
@@ -967,7 +967,7 @@
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:b66491a57ed41a9cb2cb30632369377e8874ce27"
+            "integrity": "sha1:d38503c61ea74075f2fa27029c184da897c6e1b8"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command-handler.spec.ts",
@@ -1227,7 +1227,7 @@
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/seeds/permission.seed.ts",
-            "integrity": "sha1:27e333d249ad86afd62ec33b72c4724305eefba9"
+            "integrity": "sha1:e5b3bc002da00c1788646a6c5b45fd15b280a96a"
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model.ts",
@@ -1443,7 +1443,7 @@
         },
         {
             "path": "postman/iam.permission.postman.json",
-            "integrity": "sha1:bfa04190e7efd377f5cefe8c76c4888abb4d4fd9"
+            "integrity": "sha1:f9d91364c72e124e98fb9fdbd07a09ceb4549717"
         },
         {
             "path": "src/@hades/iam/role/application/create/create-role.command-handler.spec.ts",
@@ -1703,7 +1703,7 @@
         },
         {
             "path": "src/@hades/iam/role/infrastructure/seeds/role.seed.ts",
-            "integrity": "sha1:19b1401ccb1248467a349b02b8cc9bd376a491c8"
+            "integrity": "sha1:47afafb26f5987c01b01144ba30baf3976437bb3"
         },
         {
             "path": "src/@hades/iam/role/infrastructure/sequelize/sequelize-role.model.ts",
@@ -1923,7 +1923,7 @@
         },
         {
             "path": "postman/iam.role.postman.json",
-            "integrity": "sha1:b0bb88268190417955623de72b3129173873215a"
+            "integrity": "sha1:49c56d10674c3b54ebc9a7014d6e1fbf238bbfca"
         }
     ]
 }

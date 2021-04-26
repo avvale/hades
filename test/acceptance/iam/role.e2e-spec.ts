@@ -82,8 +82,8 @@ describe('role', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: '8z9d27gfxj5b0zqosm9b3m8fy6clozs3ab2yei98uzj58unjjmt94na5nt8bwwbni5uytanb0xcohl4gqc7eib48dg52bhv1rpuyusqj23vq4d6vb02ob66n3odelagk70tfyo2t6e26b3t396l1ho5tzarlwhohphvuk7xjj7dc3byawtzumfps4p4dhtu7ypsugyai9pvcy9k5quoo35mwmuymcgnw0eghgi9j4ny9ak73sne2lrcr40rkh1m',
-                isMaster: false,
+                name: 'uyo455uvw98zxy87zmax75mxxtjwn4fc5f21unrba85tjhtu91po2jinanh8ypp3yvg6em7xc7elqhyodvbw76tky1d4j54ob82pulz8amm9d00znz1qfw84e8hmyytgtv5i8wwmyg7vrr4xs7cep1vc2eirwj8igb9k2vdgvifrxp50m5jz4h4e7550bouvha5hnw08vdu8p0pjhlu1oq0nf3pl89jg1qgfcffjqcf6a4k17tqxwe5ao4zflia',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -100,9 +100,9 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
                 name: null,
-                isMaster: false,
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -119,8 +119,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
-                name: 'ylkdqer2o3jxbudui44o01186sfk0foeqwddfjv2dmblb7onqodbhmcymi3692juwus8ttfyuzao7olx86mq20bqo5r9r0q4htazb03cchah7n6ne05kt1zo2cbevp6ja5tz4ktycq76rnncqb07o6zrh0z9j0wrqp5cx9jd0sqcbhd334puxfbjhm5zppkqdm2wws69752jewlkusu0xgfpti2eumalvgmcbg3utr062bd5cxsidyb15x6rxtc',
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
+                name: '6b1nno6drxnb1h03kqtaby814tyo2odfk7rmz3xi3f7i8rt86l6xu7ucdd40i4t6zn9mkr7yfz54o629l9rovir5cathrvkw2ekbiq32wlxt4o9y6yf1t30m5g6prk886uk6ghueeykie7eczf1cjur66mzjndt3rsl82nyx4z2u5umebc4bi3m595u0itzczx69xxfo2512kbatti51048coim25xralixz05bssqkw0np37aso92f40vwu031',
                 isMaster: null,
                 permissionIds: [],
                 accountIds: [],
@@ -138,8 +138,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                name: 'cdx02u9w93r3hb3kkxr5a9jowwg7h77xer5ceo0my7o5o1ydwx97g0tak2e3r8ua243n3j8fo0vbzrpte938ghies3ey9il11eulwvaq4enye0yxsvyll5b9a18mmiojw319q5u0e6255m9yu0htbi0hm1hb82n41jgqbs6dn93nsbcv26zx7sfgqt1uiysfblfhijndviyl167saiigzlziqpvllcgx93iz1iwqzy0b31e97hk1lv22kpjhf8j',
-                isMaster: true,
+                name: 'jqdhwgcrqenwi5ecqpaq85upl2krjlx490wehb1i6ch758feavjys6an0tnv7og3rfh3xo98o26g37p0g681a58wd4ou3t9wd16blok816qrk6d8dq7hhsl36lth8kzh1lnag430vmkimf9u9tfsm88f9lghmf4lx2vg3egmke2hskm5a9uwch6fbeyf2561pggreqks2cabgf94le9iwu5qloyw38qiit8w6mgkddqo4qetkl4xv1si8ylls63',
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -156,7 +156,7 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
                 isMaster: true,
                 permissionIds: [],
                 accountIds: [],
@@ -174,8 +174,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
-                name: '1twdoq4nazndi1ykbumf7688ssgrik5xat0wdyo2i8dvmhzt2myjh39tj44tnd63h5kkzxtwb750y2bs8h8x66euhginvs9e73ssmfsyk6wwpswqcokcrsgojvnhw2djllke8gq7xrq7ecm63j0mb6r83jppm9uqjylh9rjpzgfuj33xwf6bv6gaxbbdl4thiqg0r13voxplviepk8ahywn096fcao7czlq3dgpkrariv2pl74u0g4z9snj2clb',
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
+                name: 'ggp0emtyz3tpwopd1bwfcq8i5uum8ueus1mz59ep4zi9smmc2l6cdayq4s7j8bswegqzvec7e3kysfrkb722f4yc9f6753mzfq28kaqj17auyg6ndzjgm6uf8vwfa7mbs93nqmnglouute72evppocexkh9d4mebpgaivx7bar7uplklc702zrenj2vsn037k0mfypany8537jg9rpvamuqw5022lilkuen02votrftaw7n0nm2po2khxq5s2yb',
                 permissionIds: [],
                 accountIds: [],
             })
@@ -192,9 +192,9 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'omnj6ilw1i659noei18w562r27ee4j7v2l5oi',
-                name: '33r2q9cavufcfw9ivdoe043t03w8u45vfeeti6ehgxjkftaq2uutdxkkcmf6gfg50dgkw1g0sv8quie9sj35ecx0xhgua3113hgdap80ugncs3vxf9wlm5ky9bq8cb4w923jcoyd8m4kr3kw0cstbcvx3dhu199z4y8giozhjrt9uqp904jh0ar7r155qbp427lhxlqtxw6qidz6x682af5e7cdpaqv3ezrhsmjau9mi28svvc9mocp1ds6coe8',
-                isMaster: false,
+                id: 'oa6nxmquj113qc61i1euiah8vejw5h42rg4wt',
+                name: '9chn0s7k257xqtl8ukhg71whu3gq3lkzdxy1vf095fvd7wglya74ptwyog5j5kawwv5fy4jnctok5mwvseaehqyvcc75dezzz5a4hldzgll8jyxbe01pbozqguxd5366o3aicbua2wiakkww78i7fcksvl0aponq002tinbpdiies7o7r2hhswkse72c8uj5db2pgo2gyxp98r09uiuehe472wu3ptviloz48ulbvhxawcug3nzs7m6i369gars',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -211,9 +211,9 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
-                name: 'ztail0o8kduekt234j0izcaqfqw4lgf5buuanbrgy2qyqmr2zbt1ho3h1nq992m1z603d0y0xoni210le07ur79yeyswgzvp92wmudjmdbedctij0qqsjt8job1nhl3tdobv4m2j72ggfu5vac3ab1me0dpxlwgjad1zyrxn758mqu58vlihslvs3ozauajq02s3afc4qh16dwcyxrpmt7qo019qu1k89otc0vikoq65filhv498ammjamdtmni8',
-                isMaster: true,
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
+                name: 'pgs7zte9ilv8yvvtttymrdu1f34k8mb8g7qua9xd69f5w6z32eag4irc0jjjpcfrwa8e8edbd93bbiq2wxh0fxpj7gxbrsmrb1ohgffmpiwbz1xpddnvw7iz5pz44h6xrm4qh6gto8ogo5g9uj34loizgu3zjf10rd5f8dyafyzljht5jmsx5k45gtmq26mnmr3p9vbwma0g6h637gdgtdenm8rtqw34fezjxq26kdj4o7me1l681ficss3tvtdj',
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -230,8 +230,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
-                name: 'jlkkyngz9502pwbxw94zg80s8e9i9wi95yb7x7l1l1m92mlw802kbffazwyasovgdp4oav7erm08h747pecaxq3u1lytop4xp7smgj8c1y8cclpjdvcyhlmf8kt2bmy21595bk25veydv5hlx5c87n5sse8jl0f82i7a330uq5syvyi47kh64eib89fclntlnbj1e7rgn6g40igxdw3s2eanj2w7ow8jn2c7cg70s3sf05mf5rgrc06ns5wor33',
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
+                name: 'gihajj4tpr4kfkp8uwwg38q4jyhqimh7hamr8szvjuv3k0bpe7crjg57cint3h9qsobgu80goq6u49b6qb16p5od5edatq12ypt2w35qcydl7bh670yaxsfz5qcp19wlchmh5qchue8ajjd2fgh8b6pkpt7onq72pww1cpndnb6gpook7o7wa6x1yi50asw1uqa82s117sw0rfu1zeb0mezzutmt3uuryu5xjbdo0n9qnfylx78a7n8u7atizb6',
                 isMaster: 'true',
                 permissionIds: [],
                 accountIds: [],
@@ -249,9 +249,9 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
-                name: '9t37eqr7yun46nmgf27669v41j8vwbaopww43t6ruab8wbsrcjsofiu0apnkvell6qewji3adv043bwgtbnn2y4hrzv5l9lcc0nrjrh8wq9dq2ttyed9ylnipr9cjyzvmc4ilqrruqnbrq2vckz93stgouu97uwqio04y89cigo2w8xv8inv50uvjzrzs03jl9r796ben0fq2h5wb9ix997w6wjb70i7jozfx0vduwwpsu12f4zmex9x3e4z1e0',
-                isMaster: false,
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
+                name: 'cole1arsm3dmyqqk8m92em2y96ce8orxddkr58b62570ca3py14t3588o82dj5fznjk9lx7v7mluwscm2bt5onjcoqkhg4avletld7z9gsgs0k2vgbze3fxrxav5h50j67nh7lqgz69xad2xfgdt1ju97bmypf73z67ba4jsok0uzvg3flew1klcw8w2k2s6ng3ifsozqdfzrqqwm8q0g54x8hg6njrsnf72apwy7wwk726tmw0bapzcvzutuka',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -290,7 +290,7 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: 'c37dab43-8121-42a5-ad00-3fd96c19f2b3'
+                        id: '6896fc41-8813-417c-81bb-06b6d4650f5a'
                     }
                 }
             })
@@ -308,18 +308,18 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: '68bd6820-a76f-4f63-b954-9d14b501f557'
+                        id: '5a08719b-171f-4fa2-914b-dd42b5813add'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '68bd6820-a76f-4f63-b954-9d14b501f557'));
+            .expect(repository.collectionResponse.find(item => item.id === '5a08719b-171f-4fa2-914b-dd42b5813add'));
     });
 
     test(`/REST:GET iam/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/225a9d6f-8b67-4676-9391-a6754be37f5d')
+            .get('/iam/role/198f7bac-bae1-4e1a-bd6b-f9d0e026f086')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -328,11 +328,11 @@ describe('role', () =>
     test(`/REST:GET iam/role/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/68bd6820-a76f-4f63-b954-9d14b501f557')
+            .get('/iam/role/5a08719b-171f-4fa2-914b-dd42b5813add')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '68bd6820-a76f-4f63-b954-9d14b501f557'));
+            .expect(repository.collectionResponse.find(e => e.id === '5a08719b-171f-4fa2-914b-dd42b5813add'));
     });
 
     test(`/REST:GET iam/roles`, () =>
@@ -352,8 +352,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '86d633aa-e21f-4da2-a35f-4e07f4c007ca',
-                name: '94ydpywqx4i9y35gtm6lwi5iousqs3gz50v0hzr5n4tzq8fqynze9rmk4u2qzkit6kit1nvohx3klsmvfjhv0za1pju4d63mcro1qmk354vhwql5gxqaezjuov642pnulakkuncdyzl1yc7wur1idns2g4uv0log8wzr29mu8o3atgnxjbbzg3fjbsarogxu3jd0hq5r524wpalpa2x567b15tmyr3tksgj2m2wjt9n4gf7ay31h8aepho46kpc',
+                id: 'c2dac325-4e5e-46f4-aad4-4a7e97f179ad',
+                name: 'sdsjquyk8tgjmmt2ndebw0bd1p8snpobwxx43j2jtwtr7csjm6icajjhmvrk6kwbhs7dvq2qcbsuo43s11i5hxk8k6nqj9nja913al3pkvgv168sscs5ynl2vkvvp78jxrczquge45dbdpen9gzrax972ohw4nue9ylc8zu5qw2zl31aislc1x4xn771plpkh58hyxvetjlo96jvp54poil04yv83u2gni40plw4ykkqhgqsjgrsw21f91d9xsr',
                 isMaster: true,
                 permissionIds: [],
                 accountIds: [],
@@ -368,20 +368,20 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '68bd6820-a76f-4f63-b954-9d14b501f557',
-                name: 'anr6o9qmwgx4qybz4xd14ctfqw1c06b1dmklkog7x2aym9cdxbsecvbpadlt7dblf21zgu53b3dqgiqrfyk2wmmz7cexwpem0pjy96xwydlpuv310ug4a5iburc2c3mrl1m25co3m5lnxz19i85f85aziacnc264s1r7oatkn4tt5r0stoyndsuhcvviidpzxmoag52p6e8zm4blnh5jauzjr85rhp059n40781hqsn2kf7ugeqhzyqec6g1yhi',
-                isMaster: false,
+                id: '5a08719b-171f-4fa2-914b-dd42b5813add',
+                name: '2o9z1mdpl8eokmr4e4jh6viajwj7gfi5t46kzru7iyeeuiu3slok52vsdkx759lcb11q8abgiy86nf0eiam48ltwdc82esvbye318g2xl2o58fnd1ftzsamk0agdi2zcvm2go8xfye637cz2vhv8ie45nei265t5epols08snmd4j4gzn8bkr79hw59n7w5uccwdaeb9sceo3j8j5lbdp6c2feezg8n1x2zhz22wy9r6z3ig2pewobjyy41poo6',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '68bd6820-a76f-4f63-b954-9d14b501f557'));
+            .expect(repository.collectionResponse.find(e => e.id === '5a08719b-171f-4fa2-914b-dd42b5813add'));
     });
 
     test(`/REST:DELETE iam/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/44ae6753-826d-4570-befb-940da851ec43')
+            .delete('/iam/role/2fc3a1af-cabe-4d0b-ad2f-5877d464ea99')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -390,7 +390,7 @@ describe('role', () =>
     test(`/REST:DELETE iam/role/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/68bd6820-a76f-4f63-b954-9d14b501f557')
+            .delete('/iam/role/5a08719b-171f-4fa2-914b-dd42b5813add')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
@@ -447,15 +447,15 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'd12a1eb6-38e0-45c5-8a1a-b1fcaaadd149',
-                        name: 'o4o77ftevyri55pel2hnuqvdyybojyjqqo010i72z6fi9mij028kdqq2unr2sutcwvfdgcswr5qubykx3ftyk4rgyf7cfma3sw6t9cxunmun9llzchex9eoxornnq8antm63dr5l9ikqu6jqraxk8za9lt1m49a1wu4irbu2d829adlpqgri9kjdbrz2axe0kc8ynnmxhn300bycag0x6bw814oo2gllaq2xuj4k3ha8fwbye33rrbc5o7iarri',
+                        id: 'cced423a-7b88-4815-8529-9c0154b5c967',
+                        name: 'bsram4zl7uel47ra2o61xqn8pqbwyga869pa4h6qdt46f60z0uupcvuxy78h2pqlnmfvvk6hdekh5l7sp9olslh0edoqizz7fo1a1did05933uqnpenq7q2fb1i0kg30iofyucbm15d4w3znah62yt1fqu7ka7sbl41m664xz3jilcbh9lanycu2t503ul66eqf84lbw8cnoa49pax8wz2xxvba5kga4l4l44chsazi9nlsxd7wn430kql3r6zx',
                         isMaster: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateRole).toHaveProperty('id', 'd12a1eb6-38e0-45c5-8a1a-b1fcaaadd149');
+                expect(res.body.data.iamCreateRole).toHaveProperty('id', 'cced423a-7b88-4815-8529-9c0154b5c967');
             });
     });
 
@@ -520,7 +520,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '51a0e95c-05ea-4c9c-b3da-a5ef23756eff'
+                            id: 'b984715c-c733-40d3-addd-fe6226c19a7b'
                         }
                     }
                 }
@@ -559,14 +559,14 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '68bd6820-a76f-4f63-b954-9d14b501f557'
+                            id: '5a08719b-171f-4fa2-914b-dd42b5813add'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindRole.id).toStrictEqual('68bd6820-a76f-4f63-b954-9d14b501f557');
+                expect(res.body.data.iamFindRole.id).toStrictEqual('5a08719b-171f-4fa2-914b-dd42b5813add');
             });
     });
 
@@ -591,7 +591,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: 'e0dd1206-4a0f-4770-b887-adae9715cb90'
+                    id: '601bbdc0-38a2-4f09-b94d-de01785a9d63'
                 }
             })
             .expect(200)
@@ -623,12 +623,12 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '68bd6820-a76f-4f63-b954-9d14b501f557'
+                    id: '5a08719b-171f-4fa2-914b-dd42b5813add'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindRoleById.id).toStrictEqual('68bd6820-a76f-4f63-b954-9d14b501f557');
+                expect(res.body.data.iamFindRoleById.id).toStrictEqual('5a08719b-171f-4fa2-914b-dd42b5813add');
             });
     });
 
@@ -685,9 +685,9 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'd0e06500-3256-47f8-adba-1a8d7161971e',
-                        name: '8ltme37vymq9gifbab030urtmtpukt6yfsgz20pn7dvz33jbuxpl4xzvs1918veesuj8ice7fc2aa9rjwssripvvjtwje5b0el7vek610cbh7yfryq6mzu7qfoknygh9ecdew196uhxe10epz1yjkbonigtz3gn2m6gp4dmex4h8v6qtza8bjtbx304xvugbtuwr9d9ua6zei989x9ej650wuve6uu7lyrmdd5ysyisgts72tnmajivyz7iaknq',
-                        isMaster: false,
+                        id: '531f5310-cd42-41e1-b29d-c87279f149bf',
+                        name: 'eob2wfmheanfx82wmnq2zsl4xurvinw96d145d24hil8tjik6d2gftbf5f8ifke2ywoecabp33ys86pdlktskdwq29siqniqm0qc1sp2zoggih3vdhj98iu9kbwrb0e5jt4te99crot7ejtt14oxd9aw1wjp8gfl5px8gcl47shmazfzne10e6u30wvtfnowg0u26s861x6k21sa9txovuenwuj4w4jm7lkjrar1h3lpaxthphw2pyy2qjyeimb',
+                        isMaster: true,
                         permissionIds: [],
                         accountIds: [],
                     }
@@ -723,9 +723,9 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '68bd6820-a76f-4f63-b954-9d14b501f557',
-                        name: 'ar5pe877inlxnt55hapxndo1davuqsjpwahmmtsko5pfi6im4mzeczrt38clnf637n138uz0w5eni7jmxhe4io5fhq1bu5dzktos6q7r1kfe954fm18ec0rxkcurwkizo06aham3yltkuue48tavi9pyrkq79janrbbws8djacadhjpa38p25lc0qxxpdsqqtxfkry5f3pgxbflythav69vfi1slj1qmqfp9vzdn35gthk9qmun6273dqkev87u',
-                        isMaster: false,
+                        id: '5a08719b-171f-4fa2-914b-dd42b5813add',
+                        name: '2wxps550z21le8wt8av5ogcgy6jbc1g9wqa8evxvbvj0d13ojb9nccpoz6cbkp54rgkrisn8dlea9jl575jpuowpku0mqdymaw3i2sse8dn1hea7o92e8hr21j5b4vfmrueu0i1lpew93pmdj98i06r6z4f87i1ghtg0go5pbeaozsqdgle5581j3kh88szbhyulu3b4wibnks5ew7e9g0wvqjpijaree28rd11us53ftpjtcdhuvsdkqe7uje8',
+                        isMaster: true,
                         permissionIds: [],
                         accountIds: [],
                     }
@@ -733,7 +733,7 @@ describe('role', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateRole.id).toStrictEqual('68bd6820-a76f-4f63-b954-9d14b501f557');
+                expect(res.body.data.iamUpdateRole.id).toStrictEqual('5a08719b-171f-4fa2-914b-dd42b5813add');
             });
     });
 
@@ -758,7 +758,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '043dd8b8-3b47-42dc-9a3e-1440425200d8'
+                    id: 'c1fc0a49-1015-4440-b698-14b27025e3fa'
                 }
             })
             .expect(200)
@@ -790,12 +790,12 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '68bd6820-a76f-4f63-b954-9d14b501f557'
+                    id: '5a08719b-171f-4fa2-914b-dd42b5813add'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteRoleById.id).toStrictEqual('68bd6820-a76f-4f63-b954-9d14b501f557');
+                expect(res.body.data.iamDeleteRoleById.id).toStrictEqual('5a08719b-171f-4fa2-914b-dd42b5813add');
             });
     });
 
