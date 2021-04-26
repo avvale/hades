@@ -3,7 +3,7 @@
     "files": [
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command-handler.spec.ts",
-            "integrity": "sha1:481b0c3e48ffb39cfcd7a2951c10fd53aae36fda"
+            "integrity": "sha1:beec98b6971d07efe596f06f2eeca69a38faed91"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command-handler.ts",
@@ -23,7 +23,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permissions.command-handler.spec.ts",
-            "integrity": "sha1:c3936ae5dd0057b302909e9098dee8b04fee6913"
+            "integrity": "sha1:88be82790d12cd80ccde6f2158e69071fba2da1a"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permissions.command-handler.ts",
@@ -211,7 +211,7 @@
         },
         {
             "path": "src/@hades/iam/permission/application/update/update-permission.command-handler.spec.ts",
-            "integrity": "sha1:6c14f8b1c1b1107f1095065b47b5a311617f2e61"
+            "integrity": "sha1:ec63d72aee6cd5d4cacfb082b2c9e1341879c889"
         },
         {
             "path": "src/@hades/iam/permission/application/update/update-permission.command-handler.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/seeds/permission.seed.ts",
-            "integrity": "sha1:2bcd42df1ed95f709edde45537404aaf7a7b108d"
+            "integrity": "sha1:b198905a63f94a0975728b808fa142d73af8164a"
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model.ts",
@@ -459,7 +459,7 @@
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-update-permission.resolver.spec.ts",
-            "integrity": "sha1:0417d3ad8c3c4ceac87f39c0f6a00a84832c9371"
+            "integrity": "sha1:f082344f0d2d0e976d01482d9a7fb4422ced18d7"
         },
         {
             "path": "src/apps/iam/permission/resolvers/iam-update-permission.resolver.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "postman/iam.permission.postman.json",
-            "integrity": "sha1:50500d74ebfe3dd58a18ca78b4b17b4c0c37644c"
+            "integrity": "sha1:3f273c3b56138bdc2afe6e8fdd86b1b8660bc33f"
         }
     ]
 }

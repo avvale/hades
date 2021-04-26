@@ -33,19 +33,19 @@ describe('IamUpdatePermissionResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<IamUpdatePermissionResolver>(IamUpdatePermissionResolver);
+        resolver    = module.get<IamUpdatePermissionResolver>(IamUpdatePermissionResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamUpdatePermissionResolver should be defined', () => 
+    test('IamUpdatePermissionResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('IamUpdatePermissionResolver should be defined', () => 
+        test('IamUpdatePermissionResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
