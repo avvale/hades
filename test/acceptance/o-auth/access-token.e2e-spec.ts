@@ -3,10 +3,18 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IAccessTokenRepository } from '@hades/o-auth/access-token/domain/access-token.repository';
 import { MockAccessTokenRepository } from '@hades/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { OAuthModule } from './../../../src/apps/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
@@ -14,6 +22,7 @@ describe('access-token', () =>
 {
     let app: INestApplication;
     let repository: MockAccessTokenRepository;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -27,42 +36,58 @@ describe('access-token', () =>
                             validateOnly: true,
                             models: [],
                         })
-                    })
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    TestingJwtService,
                 ]
             })
             .overrideProvider(IAccessTokenRepository)
             .useClass(MockAccessTokenRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
         repository  = <MockAccessTokenRepository>module.get<IAccessTokenRepository>(IAccessTokenRepository);
+        testJwt     =  module.get(TestingJwtService).getJwt();
 
         await app.init();
     });
 
-    test(`/REST:POST o-auth/access-token - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST o-auth/access-token - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send(repository.collectionResponse[0])
             .expect(409);
     });
 
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenId property can not to be null`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Beatae aut cupiditate sapiente. Sed illum officia ducimus quas quam. Et eveniet corrupti et molestiae rerum est ipsa. Et accusamus dolorem perspiciatis tenetur.',
-                name: '1n1eknukl616fr8mojo59kofd88em8ag7lrd1p0fimzrbeuci5o8ysdfrc0bf836do9rizghpzn05t2m7uasn4whtjmxivb4ocqb5a1fly14mf6tp15pbenf3knag975qwb09c23d6zxej4qdt2dxcxw22swkf2l0xo6veiyc6to4d772udepid3yzw9f55t1tkcls32er7i9rqc0j678mzwep05bk7k80xt3t6ldvwm58q2abckt2srrjsy181',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Possimus ipsam quaerat ex tempora adipisci eveniet. Nulla consequatur molestias. Dolorem repellat distinctio veniam culpa commodi. Eos ut ad voluptatum sapiente et et.',
+                name: 'gmuvt5fi1pshmdyo3gg047xq53fgn2q36a45dgembfly22ul12ru7k5v8uoqe108p4uvwko15atfc9pxq94w4fqx1r0hgi7qh6rgd0mu5bbm1gz7rr8j0obxy4n63i64yvaj4w7nribmviketytwy7x4nr0jipxzb7xvgxaulqvw2uq5uir1bpp5n7lzusman0p5nnv23q86itmhdbk42jk0aocjuecynzt0343on6jrjd1lqzx76b3m2yg98dm',
                 isRevoked: false,
-                expiresAt: '2021-04-18 06:30:53',
+                expiresAt: '2021-04-26 10:34:55',
             })
             .expect(400)
             .then(res => {
@@ -70,39 +95,20 @@ describe('access-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenId property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenClientId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Possimus minima autem. Nobis vel perferendis accusantium vero vero dolores. Sed a eos et dicta eum et explicabo. Recusandae numquam et velit perferendis aut cupiditate eos. Occaecati provident et ut et ratione esse nobis velit quia.',
-                name: 'pp7mqexi7vl4an39xgtpe14ujk008lefhmwzamrd95hhwrr8yxhhb5ozjgp7caiiq6z3rilv5cu2a9dnz94q0lbswh237xdifitslehurn8iuo2me7jca0mn6wvhnx5ti1on270h6at8uqly7fxd4r4t7q3l0gy1oakj3ajqgrrtsx68423qz2ebonzty2dd43y331070gn170tb5nzx4x2tmkpt93kyy5iz8bmdxrkm3p7p46k5xokmxc1v4u3',
-                isRevoked: true,
-                expiresAt: '2021-04-18 08:25:41',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccessTokenId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenClientId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/access-token')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
                 clientId: null,
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Minima quis fugiat et mollitia reprehenderit mollitia beatae maiores est. In enim molestias et eos eligendi qui quo molestias. Cum dignissimos illo quo et non molestiae ut aliquam et. Debitis a autem eum sint saepe ducimus.',
-                name: 'k84fmrplsfhdvxmavnqdmjl8oitv6chvp775qm2rpo4rg4e7o5kjtupjlts82wz9otcf21hfpge5s7b4o32v9j3z54stomvno2xdiwp78c8njl8l4u3ixhf2w4yjjcsdnjj0vjha6qi5n9atd251s1cstlb15uctngxamovtltfpzr4ohw7p2u0ln624jl64t9a1ja4hobk2f22tpfjxetiuknfks64qp61fk602wd2545896t6udfsdcdragpa',
-                isRevoked: false,
-                expiresAt: '2021-04-18 13:50:17',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Illum ut amet sit cumque sit. Minus maxime aspernatur provident et eius tempora eum. Rerum sunt dignissimos sunt.',
+                name: 'n1qo2uvudwdq59ysp9bt4ju1b79uif0lpo5xsewxtmvn8e76kogng804hjm2c2snevu8gzxry4ltbi3ecioi80v3zw34de6r71qrl5njzftlf8vtihrmiquonsy09f9ddod1irt8n62w1usi29y6o9yat23vcaeux57kwro76ryci2h9xd3msvf08j7nn6vjpl2b9wwc16y2rt95luox3q1t27q0s9g4cv3vj8sgbxeuoxw27eriazv2ysj3j1j',
+                isRevoked: true,
+                expiresAt: '2021-04-26 15:28:55',
             })
             .expect(400)
             .then(res => {
@@ -110,39 +116,20 @@ describe('access-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenClientId property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenToken property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Sint laudantium molestiae. Dolore explicabo est nulla provident maiores numquam. Vel beatae quidem quae sint temporibus earum ipsam.',
-                name: 'i1e5514uvpfcruinewr1xerkorjkh61k6yjqhl8u00dtcj40uxu0hwrtrotbjhh7ey1nbkzt6bx811dtlcli9jl5lc77mayttah3f62qu4t4uz6jvnsgwsoqrwfblqj53iurcf2cucl3fqdyoh95mx2izpcdj2l7m3uoh7sxqfbhgwt77er6edq16rj394grx08e4gqp4dhpr7r5819yxzf4uc5awdamtma6kaf5kdb3oozaeldjb8kal330iz9',
-                isRevoked: false,
-                expiresAt: '2021-04-18 11:51:27',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccessTokenClientId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenToken property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/access-token')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
                 token: null,
-                name: 'kpsjtnnallcwi5b8pdua6zfvf4qjgg2dpdbl44uw9eu533fg1futjdkq0mzs8b4cd46db6z94ysx8443ahhy4au53kzdw3t72rhtjn9wx8tk0gqootc8gk4jwrq01c39z6cvm3312jj3i71fmvlupy3awydkj7xsy889pvys3i2uhv95b0zz1u0fk7yd66b6zzuo71nqz0cvphay2y745a5nopksrofi338ils6qt5tnjxakmlvv6xnirro337y',
-                isRevoked: true,
-                expiresAt: '2021-04-18 19:09:50',
+                name: 'sz7ksflx7nuxjrhkbasslusslyipdu1u69txmbrwx1ra9d944626hcrl66ag7t07ic6fey3dz2yu57unbb74hdcz6sibi23hdutsgfafij0zby4f3nstit1unpfhhh0ox1l42exnikwyj8hr370nvkj7pzivm9cukgsn30znq41xry154ipiqfsb1k6lxycj0okt8gat1m5thsb8ux8u4ochn7mxr4iqbe6rw2yvq65dxlxg6sobxx34gl24m2i',
+                isRevoked: false,
+                expiresAt: '2021-04-26 17:05:08',
             })
             .expect(400)
             .then(res => {
@@ -150,39 +137,20 @@ describe('access-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenToken property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenIsRevoked property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                
-                name: 'g7z0i8ldp9blelbmegdruudqf6n4pdak0pqnjkdj9kcgcdgw0xf1e3tgt6x4j4yyqhmud8kiirng8zrtpk5hfxowc7pi5dbbr70db5qzr68zl3zxve4fnmi6fqvg0y40xwv01jemoce5zffkdaqib7zakuz2q2us67jha7sxhlnzdfl00ftp5csnhogutj0mmpn1rb636qge7293idgfgf5ek7xepvk4yho47k4w37mzbdfip4oudw2l8p784p8',
-                isRevoked: false,
-                expiresAt: '2021-04-18 13:41:22',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccessTokenToken must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenIsRevoked property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/access-token')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Ut tempora suscipit error qui culpa quia ut dolorem. Rerum culpa error sint. Dolorem tempora est. Aut aspernatur cupiditate illo ducimus.',
-                name: 'oj1g0gttbalitsg6iz8lj99z0ms4n77zkg9oa2bdvtcc7g27wi3ljslvqlp2cpbezyh2xgxd94tuztj5zqebyo0rx7oieei7gaclppo22ttac93trn4u665jb6ln1x48lzno5c1at5mak2fm3m22izfbx2c0jnr2pokbnys6ozbryg2j92tldmfet6wvhbtwq5jmsympegq3qm7xb87hk9459gv302c86vl99znb8vsw6gws54udo6wumeycnhn',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Sit iste sint dolor cum. Quidem magnam perspiciatis nesciunt ex. Natus harum illum. Earum distinctio accusamus similique dolorem ad dolore voluptatem.',
+                name: 'n0q6xab1c6o15i7ntznxhrh2c0eww5cwxuq27v127fxe80dvj8rfg8qrij60ohz1hxulvqk38hjm9z45q0bgkrs5al3lkqxmqhwxvrhfywsa0z6usfprlatfrlrt1yh6wf5q8uauy4fnt684vlv6rpkmn6n5ib6d9p53reo02eq9zwijspjre8ns5h1j6rgqzls8r6pg0cg9gmznha5mcgatfqs6xtgl476bltl1oakwl39c10x0vuoq1jtnqlt',
                 isRevoked: null,
-                expiresAt: '2021-04-18 15:29:33',
+                expiresAt: '2021-04-25 22:36:07',
             })
             .expect(400)
             .then(res => {
@@ -190,337 +158,392 @@ describe('access-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenIsRevoked property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Est minima voluptatibus et vel. Et tenetur illum ut qui iure. Ea excepturi ut eaque. Quia quia sequi veritatis pariatur expedita ut qui.',
-                name: 'niaiwwga63qst3swxxbm8vo7zjoov6oir58323103sr1xqq83oiretnkphtduf374vmgqwfrjms4jxmcfy09ha3wpvof0zpahd2cj5doeh7ekab8qtvyovinfd3acay7wghi798abz11qv8oy52s7zyrwrupehyil6auxe1ihsl24c2cckzgdkin1i5k10dmd0ak1slumjkawbaks4x3m5batcax9qkzbz730af37ppcp5kk2ucmfhcbmi3jvz0',
-                
-                expiresAt: '2021-04-18 13:27:06',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Voluptatibus voluptas et odit est. Ad maxime nisi. Nisi nesciunt adipisci quia. Id aliquam quis minus dolorem. Perferendis et modi ut quia inventore.',
+                name: 'ysblqou0ocbw1sx9cnu7a6pnd0p8u6osah9qbbxwnsbypkzalt8sgfuqzq7hun4mgsh289gha2h2l4dwuya467v49v1pld7s789kx24xu4574on197oz3f4dx901q98k85wfx6w8xalwmk78iptvhidc34r5h2s7yzhoush4ml1xk72dizo5hffkqpnd9qqlzebtho4bgcsqkbw5je111se8u9qire2mwmwy07l3d9f38w49ktx1hz26i5lpfqx',
+                isRevoked: true,
+                expiresAt: '2021-04-25 22:34:02',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccessTokenId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenClientId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/access-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Mollitia veritatis et voluptatem. Ipsa consequatur cum repellendus dolore placeat sequi. Magni voluptas cupiditate qui dolorum in.',
+                name: '4347udge100nym2q72ljwyizl4m10pjrh8k73uapg81xmxwomjwqgxixivccigrz26kqep673xw042bpgabcbqr7btrgi1dqt8rurvazlhzrs984zn9atdqtuap2xksz8n7420rr37ly06as3bau0wxdtszcoizkthlxz1yqesgo4zlkorvbkn3sm9e1lynnaa8kcneo6s2c5m1h4wi2d5z96247p8e43nt90hfck7msvwkguecq342tl4x4iew',
+                isRevoked: true,
+                expiresAt: '2021-04-26 06:55:53',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccessTokenClientId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenToken property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/access-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                name: 'we6qcoolqvuj4ued33c4du0c1fxcjy11yv4q2tyqna9ev531zm5lex8hf349rb757dv8epyemvhs3cwdvsxjf6u5docscpbvz1j3pvuj0dqsm8c9kxtgbss0rovn8bsjiuj1sgvlwzver5fz5x5tzlqe043xfscw7hdqx01xxvbqzpp03vfdm1xq3ws1034p43civ0dwxzyb9ws934dg0cfuvj5f9n1ye4nqnc0kngdk5o8ca2kmzuvyn4u0ikp',
+                isRevoked: true,
+                expiresAt: '2021-04-26 06:18:05',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccessTokenToken must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenIsRevoked property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/access-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Qui ex et omnis voluptatem blanditiis quia rerum. Ullam et laborum voluptatem rerum molestiae dolores in at et. Vel omnis qui occaecati veniam veniam voluptas asperiores.',
+                name: 'fldrea8zekp28vi4y5o2p8o9fr65fboss33chzjee6kwcf6t57j80jex9bbsk2zup1x1db010xsczzan5dnxe3h5dx3axsjw6vlrszd12yxeqwqunvs6eng6nwl89ugzmx2avybf7lxk48v9ho314e88f3w8rx0392c2acu836k385jx9lq1lcq5rqyw7kwqwst18xe4vnd2304mmwhcxjcrp9nuxiefwxcxghzoamp9okbz8cm7wf48d6bemhc',
+                expiresAt: '2021-04-26 08:32:44',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccessTokenIsRevoked must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a9lfoohhsslyk53z2pvbvxtimyx9d06t2ge5r',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Suscipit molestiae odio. Debitis aspernatur sint nulla vero placeat inventore molestiae et. Accusantium deleniti ex consequatur a nemo cupiditate.',
-                name: 'apj9k6k52pbpwg4enbbfbpkaghjznf3qpe3kp5ttw1a9i4nx7vaoc9h48ccnqmxrquzt1svvedsyet3po5u6t2whvm5evqoc1l6qnyfz432ifpq0vjtv1c3dto1q2tv3uvv3pkmbgsxyzljjoeafjh48l7fb2ovm56sy16sfkhac9w2m8gu99ku6sw8li6k3mb7w9of2cke6rhkfj68kzxsfc8mk4rqi2737fmiuzt29t96012hmdknvei4gexs',
+                id: '4ubhrvlk2d3szd2uxzpmcdkd71x67rhtnqy57',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Eos laborum minima molestiae saepe quia. Molestias qui assumenda iste dolores. Sint atque qui adipisci. Atque harum ut quia ut recusandae dolore optio. Accusamus ipsa quia et veniam unde iste. Debitis nihil fugiat voluptates ex vel sit perferendis.',
+                name: 'u5qsj0adi45lbfne1s8unc3x3c9y98xrnmohwco6l5lpdin5ofdczzb5x8sr1lhicfxv6zaqqu5t4swx4uo7hem3d13ind8nhsjqmy4389abhgsckrx8lon8qow6631c3vhh153cbmon2vmp22bva1skii3cza3m8rhlk4q5uc6lyi4bsnr38ortg15yq51dmtavfxyqs3dvzl31zbnneaaknx3m4y4gq550175bxtfpyk15vb64hllqwjhz0pm',
                 isRevoked: false,
-                expiresAt: '2021-04-18 09:48:58',
+                expiresAt: '2021-04-26 01:02:47',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccessTokenId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenClientId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenClientId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: 'waakepy53yc1b2bz4e4mzalbikxofpzbpqfjb',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Sint aut accusamus vero non voluptates enim quas repellat ut. Doloremque maxime aut cum repellendus vel mollitia veniam. Repellat ex ea fugit et amet minus tenetur temporibus. Quibusdam voluptas est repudiandae odio aut voluptas distinctio.',
-                name: 'sfuix92cwr3zdi62ecc6velj3797s5jyaptuvpa74lnzq8971jbg6wam3lt1fjpouzzey5wkjh15wvz2pdaxt7lvqc8d0jvnetryzcoa58hmw3s2610pudge0vbuio1hyzj2g9m7timvub0er8xxp5x59k8rhix961whjhaboehnqqx0rz0hn9dktl1j2okowk9uritpfycij8shvpqewrydmdjihsli86pa9s6ghy499k4w734kndj8dff847x',
-                isRevoked: false,
-                expiresAt: '2021-04-18 05:21:25',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'ic2pxyv26kbzloqorvlgrb3gffclo1hz8sra8',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Nisi molestiae enim asperiores sit hic. Temporibus et voluptatem sunt inventore nobis facilis temporibus. Dolor voluptatum natus tenetur inventore. Nemo voluptatem id odit et enim quod amet porro distinctio. Magnam itaque a rerum itaque et tempora aut fugit.',
+                name: '5ye2t0reampl41ya8of1yz97mmcoyujka31f6tlkz6x4b1c8c3dncwnaevfa5d34bds7d6hl8j346rm2tbj8obk56d0jp1vjptmvhjukmqyghfbyk8c3uf223xdnbukj2zjkl1ptzci1erli7fv39sllh3c8x5qbd11su22gephnze3ytsjw9hcvbdis3cigx3blsfjbej74syx74a0f34xjhrb8t7he2rh251dhx2lp07zy5fh7pnjg6jn5s6i',
+                isRevoked: true,
+                expiresAt: '2021-04-25 23:52:20',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccessTokenClientId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenAccountId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenAccountId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: 'x28m5mk09vnqwd2cz6acl9qx426fzcpsgduxu',
-                token: 'Quia et minus itaque sapiente. Corporis nostrum omnis deserunt dolorum ad saepe eos est. Ea optio et. Omnis velit sunt asperiores laborum cupiditate nobis nisi et. Est delectus enim sint assumenda natus similique voluptatem alias.',
-                name: 'pmjkz1zi4438dw86vrenhe3w6jruvdb3qtyr72lkh4udznbfyp3d6mszjv2v5sh6lg2tweri8p3rrvasuayng5au0vac97bgp6epevnhq17wqmf2wn3mv0hkys8sv1c29x7fle02vpbwrjrcqr3x30pptk28o4wylal5vasei1muq8kpy2reitpj4s8qbruzx9gmgdksq0nrtaig02vjs10m1n6s7l45wmr0aff303k3mgfa422csne124afcui',
-                isRevoked: false,
-                expiresAt: '2021-04-18 00:46:11',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: 'ckkzz2txo01robrp86x04xv2j2cfp0rzb1ote',
+                token: 'Non minus velit earum totam sed beatae quisquam sequi cumque. In eos quod quam est sit. Eum qui debitis sit deserunt at. Delectus aut autem et similique voluptas. Et non itaque in fuga voluptatem et inventore.',
+                name: 'b8c6vm1omc0j9xdj687zxeq6q4alseuynt03qgip5kpn7aiychess4atdnkqdt76q5dm392g04t2rgwkpa13ptkfdhjr9go3o5ufp3yqzx4u55dgn7pcj5u6sa88gvryf7zpfnvn57baso4je4tfy8r8xk4xubyivkuvjlemhyjbqb2xbmy4pcfj5c06vz6s688fsgm16fmwrdg76gjn20z1njqcqccesmzjhs3ov642u9hoa5l9ta1774l047m',
+                isRevoked: true,
+                expiresAt: '2021-04-25 22:38:49',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccessTokenAccountId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Corrupti sapiente veritatis maiores aut molestiae ad. Quidem ducimus aut facilis nulla. Fuga nam vel facere porro aut dignissimos soluta repellat. Possimus aut aperiam earum quia laborum cum debitis. Animi voluptas qui a. Mollitia molestias officiis placeat ut est enim rerum.',
-                name: 'iqoggmv83st1lgpq70zcbb20frolj0u8pcbxs5qe0ez3ublr5j0tvt7jzyska9c0uz8ifi93603tqnm1jxzvvoapx3bvt544m4it454e1ec76p1yq139oguucg1eol719xqszojkkq7s3coyiui6e4pbj2owjz58swkje3lvduzm70z1t20l8vbrl9izjbhnb9077ekij6pung6ivonrxadn9gwba4j8cvkaiywyfph69qzmoyzvop9vq7tojk6c',
-                isRevoked: true,
-                expiresAt: '2021-04-18 01:47:59',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Vitae nam fuga debitis tempora. Consequatur ullam id a voluptatem dignissimos molestiae. Quas a eos tenetur. Non doloribus voluptatem laboriosam sed voluptatem. Molestiae quo fugit.',
+                name: '5mwlb0f57u9hilm9xgimfy85jorfidl38310siycgoy91qzvfi18zfi99hjl6d6tkxxoffhyyf3k5w9lc8y8tujh9h7453uyrmrm9om9us9v7kanlwc57lf91b8xmeslmru346herjq80eei0jjwg9na0q3cnza1fvatil6knao13osi6g5rkfg3gf7qcnoko4fgob3oimnv73cq17mxkx4dn1riji99wnimte2xs9x7ltwmeh1ez43rnoh5uwjc',
+                isRevoked: false,
+                expiresAt: '2021-04-26 12:17:31',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccessTokenName is too large, has a maximum length of 255');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenIsRevoked has to be a boolean value`, () => 
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenIsRevoked has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Quis itaque nesciunt molestiae fuga est omnis aut eum. Tempore animi excepturi enim omnis dolor molestiae delectus amet ut. Accusamus sunt molestias ut. Voluptate quo officiis eaque aut fugiat iste quo non. Debitis modi facilis ea id et. Nihil occaecati voluptas blanditiis.',
-                name: '3etal83xks7otheln2sljm29qtrhkhjbt9u8e64hdrmtaqr7utpxrer8rfu6zpiplxprzdc9wb3v0nniohqvqtfajzxqa4toog1leo4zh9a85vmg3bjh648f2yd50qi1160g7cmcn6ergrvmgz193n7oo624iyxfsy3o6sv9irv5f0182eixmsx36ftjbpj6l6nh6ywye2rynye7e2qd5varx5v4yza85k7i8x7xp48cdql11vzlutmitv1lf2u',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Saepe voluptate qui enim vel sed voluptatem. Ut doloribus maiores culpa hic nesciunt. Et eligendi asperiores vel dolores ut rerum dolor.',
+                name: '7uayz8beuztd547okehuo8s2r4l4traim9qwgqfqr2gx33djaanypsra7kdf594dx8idkuzyof7uoeowdluve7d549a9wifedrhg2n6r3nat08w6yvmnsy1x8h7iea3hi346vl2tnpy4squ6pds8wy7je3axgec92mqceakz79xapaj0o7xga2tng6bj0gkzqgzqperoypr0r9awu4xtt4liqqykxi3324myxgzivn9aq0rc9lq7kzwwi3ipfrj',
                 isRevoked: 'true',
-                expiresAt: '2021-04-18 11:24:08',
+                expiresAt: '2021-04-25 19:53:03',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccessTokenIsRevoked has to be a boolean value');
             });
     });
-    
-
-    
-
-    
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenExpiresAt has to be a timestamp value`, () => 
+    test(`/REST:POST / - Got 400 Conflict, ExpiresAt has to be a timestamp value`, () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/access-token')
+            .post('//')
             .set('Accept', 'application/json')
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Occaecati sint aperiam magni nihil autem est perspiciatis quae ratione. Sunt nihil officia beatae omnis minus voluptas voluptatem ut. Numquam voluptatibus temporibus ab omnis quos. Et minima dolorem nulla earum reiciendis.',
-                name: 'nrkaozgqr2mrm20zfy2zp2ptztsvdgfe5ed2n3fkfnn23xnhx3tdmv4rgs3c7x6y1fltguex8jm8sx9gyy20dybzvpsi9cpsjykal2z6xg0bv0xzbne9aq4dqg7x0p25qiw0a7m4mggbvznz4xsrzr8la9t4hkfsxicn0zigeqplw40zcenw669mbdo2dto2ncawcvaebuxbmul9rff9pu8xi0e06y12i4orz6w4b6bwinq9yf5hitmf4uiotjp',
-                isRevoked: true,
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Doloribus quia est voluptatum. Ab error non enim molestias at. Ut distinctio voluptatibus repellendus perferendis nihil similique laborum. Est voluptatem et occaecati id magni dolores. Odit omnis aut ut placeat. Impedit architecto reprehenderit.',
+                name: 'iqph95zns8gxp4p5rkirwpxtny3lyovyyfhq232wtplgdcqar4lho2r31ope0a6s0tptagvfb2263mugu7za5ch973z8gk2qr0cpelelmz825ic4onlfv8ldc6s6cvcutxjugoo4ectf1bkxstrme2z5smanwjtmyiqbqtvemiu3dgbbmez8y6jqief19hamuuu1jn8n8q0yg6lw2kg0aglfufsn0xna4rjqu20zxem4p82qveqanhnsden00v3',
+                isRevoked: false,
                 expiresAt: 'XXXXXXXX',
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AccessTokenExpiresAt has to be a timestamp value');
+                expect(res.body.message).toContain('Value for ExpiresAt has to be a timestamp value');
             });
     });
-    
 
-    test(`/REST:POST o-auth/access-token`, () => 
+    test(`/REST:POST o-auth/access-token`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Impedit quia suscipit dolor. Vel repellendus quam optio aut. Molestias libero quo. Quia qui molestiae reprehenderit excepturi est eos doloremque.',
-                name: 'nvwzomrk7ljdhvckuo757goitqaoewbybhaciylgi9mcqmz3fqy8mrdmsrma65c4fyefde3aibez21f2xvlsn4vultq9g06ugwbb7wynle0x82srzbg94ywg2g0zmzjwolxx244a0g8lziti9ev1guep2dg1vfwq9nyk6fc4lmsg5v8mt4ukvpvxs97eq7mnxnex1ijtygcsgxxyhz9hgoynytfzywyco9ossco5xknen648y0tu793xsoot034',
-                isRevoked: false,
-                expiresAt: '2021-04-18 13:24:12',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Officiis voluptatum commodi corrupti et distinctio et. Voluptate voluptate facilis distinctio magnam et et maxime rerum. Quis voluptas nemo iste qui neque et. Ut animi quo.',
+                name: '3de5hww9p0ge02ig4fol0hn60h8wc3jnaew5sy19qjtrta11323ac62b7z9bvo8sogx8pfml6sti5efso3evy27ltja5yy62m6xjsvjitbkwrlx0q2djim2b1z52wpljtln3072jeqg7f4s3bk4ngj8t9ktzbdib20dyzwkdd5shylx2de1kw6v8p2pxysk65f2p0kndbqnkrya9y1st7v4r5zky7cbgrfpklzxrr3hy725mu7w43rw2103t3m1',
+                isRevoked: true,
+                expiresAt: '2021-04-26 02:36:01',
             })
             .expect(201);
     });
 
-    test(`/REST:GET o-auth/access-tokens/paginate`, () => 
+    test(`/REST:GET o-auth/access-tokens/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/access-tokens/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
+            .expect({
+                total   : repository.collectionResponse.length,
+                count   : repository.collectionResponse.length,
                 rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET o-auth/access-token - Got 404 Not Found`, () => 
+    test(`/REST:GET o-auth/access-token - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: '722317cb-a8dd-43e0-bbb3-75edfa85d6c1'
+                        id: '83d1ebe9-dacc-4b80-9990-3bbc522603e9'
                     }
                 }
             })
             .expect(404);
     });
 
-    test(`/REST:GET o-auth/access-token`, () => 
+    test(`/REST:GET o-auth/access-token`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: 'ee8d3b12-69e9-491c-9117-83445c22061a'
+                        id: 'a8db110d-0566-4de7-a241-2b358a3f168a'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'ee8d3b12-69e9-491c-9117-83445c22061a'));
+            .expect(repository.collectionResponse.find(item => item.id === 'a8db110d-0566-4de7-a241-2b358a3f168a'));
     });
 
-    test(`/REST:GET o-auth/access-token/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET o-auth/access-token/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/access-token/2f11855e-ea81-4959-9bbf-fdfdbcfdc381')
+            .get('/o-auth/access-token/3f8d0f41-e117-4057-9e1e-a7984fb34064')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
-    test(`/REST:GET o-auth/access-token/{id}`, () => 
+    test(`/REST:GET o-auth/access-token/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/access-token/ee8d3b12-69e9-491c-9117-83445c22061a')
+            .get('/o-auth/access-token/a8db110d-0566-4de7-a241-2b358a3f168a')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ee8d3b12-69e9-491c-9117-83445c22061a'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a8db110d-0566-4de7-a241-2b358a3f168a'));
     });
 
-    test(`/REST:GET o-auth/access-tokens`, () => 
+    test(`/REST:GET o-auth/access-tokens`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/access-tokens')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
             .expect(repository.collectionResponse);
     });
 
-    test(`/REST:PUT o-auth/access-token - Got 404 Not Found`, () => 
+    test(`/REST:PUT o-auth/access-token - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '5bb428dc-a755-4e78-a21c-626268d9510b',
-                clientId: 'fbee86d2-529d-409c-a306-549609b2faef',
-                accountId: '5c11e811-a0dd-43ce-af3d-eb738db97e4c',
-                token: 'Et error ea esse et et. Ea iusto quidem sit rerum nulla dolor quibusdam esse reiciendis. Fuga consectetur iure expedita eligendi praesentium.',
-                name: 't985s2xoseucngmsfjwm9bs2f14rbry65bjs7kbmc2z23qeye8qsm9wn3vnymijef7wdxgjhv7lt2qabpksatfdr83drgar6p846xn3fuyhe91au492omisyzdaowm9igm9j8d32pgnjoxivobn7q3yrk3m1qex6mhhigagt9v7ka3g1k67645ihd74jrs6n854pkcnocldwzexpdgacbs7jxu0tm7dj93h3i993lice24hezmw6r1dqb9ykybw',
+                id: 'f9c45396-fad5-47c4-87e7-5b94c8f0260c',
+                clientId: '057c5d9e-061f-401b-9d72-3a85c37ff4aa',
+                accountId: '7e70140c-278b-4fea-ad10-535b8f33ac90',
+                token: 'Corrupti laudantium sapiente eum dolorem sequi. Adipisci quo itaque quisquam est voluptate. Magnam quae id expedita quia et.',
+                name: 'dzwlg94p7h3rhwmszrlk5h70nh9cym9kqsg7lzfe2gtlc3rmgyk87w7b8vxzk1mb9kp4akiyi8mkm0zn3l8thhus2kbvx7uy45hvsam09zn5cib7renhssycwoh107d9mugc42mv6mttyoa73i7rfj8qix8enaopfid759c6j4c36susrucit4d8emc98mt49d0h33yu8lmn07lgu1lltsga6trl41ekx7g0fywq3lu793nz15adaahquf88wf1',
                 isRevoked: true,
-                expiresAt: '2021-04-18 01:28:11',
+                expiresAt: '2021-04-26 03:48:05',
             })
             .expect(404);
     });
 
-    test(`/REST:PUT o-auth/access-token`, () => 
+    test(`/REST:PUT o-auth/access-token`, () =>
     {
         return request(app.getHttpServer())
             .put('/o-auth/access-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                token: 'Rerum omnis vel eos quis tempora accusantium minima unde quo. Repellat ipsum excepturi. Ipsa quis nemo. Tenetur molestiae tempore. Eos dolor error.',
-                name: '6bxy0kzx2f1crocqdg8rcacbd1mzh6wh0ghjtow7auhm4nx839pav23a5492bfmj5hatd6lstvc9fff5higgzp8xz3uxlujx2klltuhmj8a2m6qeq114c68ys5f1weqtzrj2vf9v36y3pkux8p7dam7x47d9ve3b1m7uecho70hha1gjeb9wtzrtqaq0qw5xc966l22n2y9nogbm53jnajq5nrteem919bdwpzppj3idc1i9maon0sbt5aj0jxi',
+                id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                token: 'Porro autem et accusamus error. Rerum placeat reprehenderit repudiandae. Porro nostrum sunt ut. Eveniet voluptas ut corrupti ut aut. Aut voluptas quis eaque ad officia cum doloremque nihil. Quis eum est odio id ipsum et fuga ratione harum.',
+                name: '4jg508aevufetwxm90wzq4efzec7q04rfzeon3frq98ov8jv2c01lqiq1jgoa2m5cn2eid8khofjz31m7q73r02liwcgy242k1meh3oggsjbxqhfc25oj7demztwxcvigezr9axr0e13xnso2dgk8en8j63zsrntqc0998iku7uj8nfzgfn9tfggkavnof1j8vjlto649ynz92kg956lxeyxvu8md61y3n9boxe7dglkko23qti5d8o8qdqkj5h',
                 isRevoked: true,
-                expiresAt: '2021-04-18 07:49:01',
+                expiresAt: '2021-04-25 22:51:46',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ee8d3b12-69e9-491c-9117-83445c22061a'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a8db110d-0566-4de7-a241-2b358a3f168a'));
     });
 
     test(`/REST:DELETE o-auth/access-token/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/access-token/e70dadf9-960e-4eb7-b185-7a5ea2877244')
+            .delete('/o-auth/access-token/ab572c81-3df8-4aad-bd3e-3daf4349e50a')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE o-auth/access-token/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/access-token/ee8d3b12-69e9-491c-9117-83445c22061a')
+            .delete('/o-auth/access-token/a8db110d-0566-4de7-a241-2b358a3f168a')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL oAuthCreateAccessToken - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL oAuthCreateAccessToken - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthCreateAccessTokenInput!)
                     {
                         oAuthCreateAccessToken (payload:$payload)
-                        {   
+                        {
                             id
                             accountId
                             token
                             name
                             isRevoked
                             expiresAt
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
@@ -533,66 +556,65 @@ describe('access-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthCreateAccessToken`, () => 
+    test(`/GraphQL oAuthCreateAccessToken`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthCreateAccessTokenInput!)
                     {
                         oAuthCreateAccessToken (payload:$payload)
-                        {   
+                        {
                             id
                             accountId
                             token
                             name
                             isRevoked
                             expiresAt
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        id: '25f1a06f-1a22-4e27-882d-fb9f0b829157',
-                        clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                        accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                        token: 'Aut temporibus dolor repellendus. Sequi consequatur aut. Placeat ab eveniet laborum quis qui corporis ea. Atque adipisci sit culpa. Earum voluptas et modi eius ipsa amet optio enim eveniet. Explicabo vitae molestiae eius sit doloremque quia natus quaerat asperiores.',
-                        name: '42hf247z8la6f5ebl1463magd4akuew7jg1alxgdfjbwynwv0v13k0r134i4qgwoy5waenl5ywypr7x0k4igp9lykn44mrht9x7nyibt61mje4sktbgedtjumroepkm3saoh2fctsvf05xl2599chyhn2ngoo2p37fl6s0iffc9qg5cwcutzk67tyy7sb15ossa1x8pady448bjmeexne2kxqnts6v5peyxfl01pvrdxh7kl4hglgmslaagxrud',
-                        isRevoked: false,
-                        expiresAt: '2021-04-18 21:53:13',
+                        id: 'd30a98e5-1698-4e54-bbba-0c8dbf92134f',
+                        accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                        token: 'Natus adipisci nesciunt qui natus. Quo molestias atque autem et ipsam omnis. Ut quia suscipit harum eum possimus ut. Magnam voluptas eius est nulla omnis. Ut velit et nihil.',
+                        name: 'fp20ruafx3gnbw3lw3czd5mpf3ru7j3vu5tumtbd6r35i1x6facne93nllidp3s5zu1knebqyh7b0oomspaj3kvbnn4p45d3gdwasnfndqfw96t41v7wh4xirkf4z0btq9fvcugdldp09zyxbwjz5u7rvtoypdjbp4kwoi4c21jpwll7elc14hg22p312dx65i4ioh7pziyqw0z5sngbq3cnu2nl96jxw2btvs1y9gna2hrqfgxxvjw05iyfaq5',
+                        isRevoked: true,
+                        expiresAt: '2021-04-26 01:44:33',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthCreateAccessToken).toHaveProperty('id', '25f1a06f-1a22-4e27-882d-fb9f0b829157');
+                expect(res.body.data.oAuthCreateAccessToken).toHaveProperty('id', 'd30a98e5-1698-4e54-bbba-0c8dbf92134f');
             });
     });
 
-    test(`/GraphQL oAuthPaginateAccessTokens`, () => 
+    test(`/GraphQL oAuthPaginateAccessTokens`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         oAuthPaginateAccessTokens (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -607,17 +629,18 @@ describe('access-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthFindAccessToken - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthFindAccessToken - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthFindAccessToken (query:$query)
-                        {   
+                        {
                             id
                             accountId
                             token
@@ -629,13 +652,13 @@ describe('access-token', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '429bd785-d73f-48c9-93c7-2782b9715e75'
+                            id: '5923fd0b-dab7-486f-b995-5aaa7f125b6a'
                         }
                     }
                 }
@@ -648,17 +671,18 @@ describe('access-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthFindAccessToken`, () => 
+    test(`/GraphQL oAuthFindAccessToken`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthFindAccessToken (query:$query)
-                        {   
+                        {
                             id
                             accountId
                             token
@@ -670,34 +694,35 @@ describe('access-token', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: 'ee8d3b12-69e9-491c-9117-83445c22061a'
+                            id: 'a8db110d-0566-4de7-a241-2b358a3f168a'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindAccessToken.id).toStrictEqual('ee8d3b12-69e9-491c-9117-83445c22061a');
+                expect(res.body.data.oAuthFindAccessToken.id).toStrictEqual('a8db110d-0566-4de7-a241-2b358a3f168a');
             });
     });
 
-    test(`/GraphQL oAuthFindAccessTokenById - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthFindAccessTokenById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         oAuthFindAccessTokenById (id:$id)
-                        {   
+                        {
                             id
                             accountId
                             token
@@ -710,7 +735,7 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: '98c620bf-6f6e-42ab-a7eb-9a10e46aa887'
+                    id: '532d80fb-983a-45af-93f5-42eb8d5cc85d'
                 }
             })
             .expect(200)
@@ -721,17 +746,18 @@ describe('access-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthFindAccessTokenById`, () => 
+    test(`/GraphQL oAuthFindAccessTokenById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         oAuthFindAccessTokenById (id:$id)
-                        {   
+                        {
                             id
                             accountId
                             token
@@ -744,26 +770,27 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: 'ee8d3b12-69e9-491c-9117-83445c22061a'
+                    id: 'a8db110d-0566-4de7-a241-2b358a3f168a'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindAccessTokenById.id).toStrictEqual('ee8d3b12-69e9-491c-9117-83445c22061a');
+                expect(res.body.data.oAuthFindAccessTokenById.id).toStrictEqual('a8db110d-0566-4de7-a241-2b358a3f168a');
             });
     });
 
-    test(`/GraphQL oAuthGetAccessTokens`, () => 
+    test(`/GraphQL oAuthGetAccessTokens`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthGetAccessTokens (query:$query)
-                        {   
+                        {
                             id
                             accountId
                             token
@@ -786,17 +813,18 @@ describe('access-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthUpdateAccessToken - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthUpdateAccessToken - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthUpdateAccessTokenInput!)
                     {
                         oAuthUpdateAccessToken (payload:$payload)
-                        {   
+                        {
                             id
                             accountId
                             token
@@ -810,90 +838,14 @@ describe('access-token', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'b4d336f6-8622-409f-b98c-d5a64a3ed96c',
-                        clientId: '32d04864-052a-4a7a-aa34-d4c68125f2a8',
-                        accountId: 'cb61dbdc-e0b3-494d-855f-2a44c795e193',
-                        token: 'Debitis omnis unde consequatur mollitia porro perspiciatis doloremque. Odio eum voluptatibus cum veritatis voluptas modi quisquam ut. At hic quia totam et. Hic tempora iusto optio distinctio maiores.',
-                        name: 'l0bz9i4m849jp7975t486gc978fwmbdpjkznijo5te164pt32gq63k3iw4554i7nb74vo0qh1447t9848nycxcxzpm11hal7j7x6ky0m9pgbdxe6hpey23x2qfez7jbnt4eijhs1gzto67ihtg5m8hoi2k4n7mveo9885u2tt4llxpnrwkvz3us1n404vaw1r9pkmezo0e8r6sz0f2x3tijcz0xr47qkyhutn6pm90pwagrqnlpyulm3krf4vjh',
-                        isRevoked: true,
-                        expiresAt: '2021-04-18 02:43:28',
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL oAuthUpdateAccessToken`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:OAuthUpdateAccessTokenInput!)
-                    {
-                        oAuthUpdateAccessToken (payload:$payload)
-                        {   
-                            id
-                            accountId
-                            token
-                            name
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        
-                        id: 'ee8d3b12-69e9-491c-9117-83445c22061a',
-                        clientId: '323e5506-387d-4a68-9408-0ebeb7f8f7fe',
-                        accountId: '1b0471fe-10db-47b9-9c52-0df1a8f8d9d5',
-                        token: 'Cupiditate non alias quo aliquid. Unde nulla iusto. Voluptas quia eaque molestias et repellat quis consectetur veritatis. Animi sit vel earum molestias.',
-                        name: 'kvx17uvpc5twh6fmzppwakewvi5pngjtinuzvfitkv3qgw1d0uf0wfc0ifq043lhl325piphwynbvfbhwqaoyu6fvyey505xi0x0yt7oxi430do2hnldx4kq65ucqc9mrf8wsm809l7aagab2s1cb7w73hf8f3ls241goi6evjsc1rh53prfl7lwgwumqrk4z1oufsiqdz2079hnmergmca7w4mg3lnkhe8gk8tvgrajsxdly47p3nsrb2ffs5p',
+                        id: '20be48cf-a9f0-47c3-be07-fe3f8d609765',
+                        clientId: '72c95333-6b96-4d4b-a355-0a70c0d997a8',
+                        accountId: '4490381d-56e5-45d7-92e6-46c80d15883c',
+                        token: 'Ducimus aut laborum. Qui et libero voluptatem est. Quia dolores dolorum occaecati qui omnis sequi. Saepe voluptatem vitae maxime sapiente deleniti quia. Iusto quae aperiam sit et enim fuga quaerat impedit. Reiciendis est illum minus velit et.',
+                        name: 'lki9wuhijc11nnba5mlqaw084l9ix6ey694evm0hdg3nnl9aqbqpgwyff4dy58xts3i8xayn0wggcxindwpshqq3d1erkutm7x81zw8wa8nb50dhp8r4azadtcaxm5po4epqc80llh7hoffr55yg40amrqf7rd86660jio294ogbfxchc6rdbv0lo01km0lrzbs4cxszftqp5lfvh6ncsl0zrtszz2fppqubiez5db9nlpcku04py8lhj8auz0a',
                         isRevoked: false,
-                        expiresAt: '2021-04-18 06:32:56',
+                        expiresAt: '2021-04-26 07:58:59',
                     }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthUpdateAccessToken.id).toStrictEqual('ee8d3b12-69e9-491c-9117-83445c22061a');
-            });
-    });
-
-    test(`/GraphQL oAuthDeleteAccessTokenById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($id:ID!)
-                    {
-                        oAuthDeleteAccessTokenById (id:$id)
-                        {   
-                            id
-                            accountId
-                            token
-                            name
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'b10af74e-5204-4c98-ac1a-0d6e1e686461'
                 }
             })
             .expect(200)
@@ -904,17 +856,18 @@ describe('access-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthDeleteAccessTokenById`, () => 
+    test(`/GraphQL oAuthUpdateAccessToken`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    mutation ($payload:OAuthUpdateAccessTokenInput!)
                     {
-                        oAuthDeleteAccessTokenById (id:$id)
-                        {   
+                        oAuthUpdateAccessToken (payload:$payload)
+                        {
                             id
                             accountId
                             token
@@ -927,16 +880,92 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: 'ee8d3b12-69e9-491c-9117-83445c22061a'
+                    payload: {
+                        id: 'a8db110d-0566-4de7-a241-2b358a3f168a',
+                        clientId: 'bf459835-5582-4dbd-9631-89e06f2ec49a',
+                        accountId: '92b2c200-59df-4241-8862-18c1bd73727e',
+                        token: 'Laudantium aspernatur optio sunt quasi vel facilis. Aut exercitationem magnam. Sit qui ipsa eum culpa error consequatur id ut suscipit. Aut fuga corrupti voluptatum libero asperiores dolores. Aut et tenetur et corrupti rerum aperiam sit eveniet hic.',
+                        name: 'veyvsru4xw7g57ns462ji4tr2ndginv898taap0c28et7v7xy8xybjnk7qt77hbvnbitpkow2qfid6esh9mbu22tzwxkk50fs9dkcqcu1v4f5o0re4oqueee0ngv7zbkwuzrl4m27036l8mgwd8da01lysa3ns5lpvt6har2bhs4waoayabpjn8rqo0bqfykljvv1ksnnl7rcxoczy39x4ibz7mszhde91tlwjdnac7sgh57e40hhbbm6syy4y9',
+                        isRevoked: false,
+                        expiresAt: '2021-04-26 02:47:37',
+                    }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthDeleteAccessTokenById.id).toStrictEqual('ee8d3b12-69e9-491c-9117-83445c22061a');
+                expect(res.body.data.oAuthUpdateAccessToken.id).toStrictEqual('a8db110d-0566-4de7-a241-2b358a3f168a');
             });
     });
 
-    afterAll(async () => 
+    test(`/GraphQL oAuthDeleteAccessTokenById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        oAuthDeleteAccessTokenById (id:$id)
+                        {
+                            id
+                            accountId
+                            token
+                            name
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '04f2d7e1-5f3f-4588-9976-6e8a3bb954f0'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL oAuthDeleteAccessTokenById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        oAuthDeleteAccessTokenById (id:$id)
+                        {
+                            id
+                            accountId
+                            token
+                            name
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: 'a8db110d-0566-4de7-a241-2b358a3f168a'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthDeleteAccessTokenById.id).toStrictEqual('a8db110d-0566-4de7-a241-2b358a3f168a');
+            });
+    });
+
+    afterAll(async () =>
     {
         await app.close();
     });

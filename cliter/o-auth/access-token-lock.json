@@ -3,7 +3,7 @@
     "files": [
         {
             "path": "src/@hades/o-auth/access-token/application/create/create-access-token.command-handler.spec.ts",
-            "integrity": "sha1:0471c9a73ddbefcac992eee9c5001010ed93c73f"
+            "integrity": "sha1:f5cc1499a590aa6d1a76981f89f095ee0ca4febd"
         },
         {
             "path": "src/@hades/o-auth/access-token/application/create/create-access-token.command-handler.ts",
@@ -203,7 +203,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
-            "integrity": "sha1:ddfa97ed88e1b324642277b4bd2d76145e445340"
+            "integrity": "sha1:4ea4e30ad2afc2ebe980275843f4224208f72a85"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",
@@ -379,7 +379,7 @@
         },
         {
             "path": "postman/o-auth.access-token.postman.json",
-            "integrity": "sha1:b3ec36aabac1a0830163db26aa229af0ec14e089"
+            "integrity": "sha1:81428046b49725ab08e92c5d813f5ad1555c7128"
         }
     ]
 }

@@ -33,19 +33,19 @@ describe('OAuthUpdateApplicationResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<OAuthUpdateApplicationResolver>(OAuthUpdateApplicationResolver);
+        resolver    = module.get<OAuthUpdateApplicationResolver>(OAuthUpdateApplicationResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthUpdateApplicationResolver should be defined', () => 
+    test('OAuthUpdateApplicationResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('OAuthUpdateApplicationResolver should be defined', () => 
+        test('OAuthUpdateApplicationResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
