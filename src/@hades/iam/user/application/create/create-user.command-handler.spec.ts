@@ -41,17 +41,17 @@ describe('CreateUserCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateUserCommand(
                     {
-                        id : users[0].id,
-                        accountId : users[0].accountId,
-                        name : users[0].name,
-                        surname : users[0].surname,
-                        avatar : users[0].avatar,
-                        mobile : users[0].mobile,
-                        langId : users[0].langId,
-                        username : users[0].username,
-                        password : users[0].password,
-                        rememberToken : users[0].rememberToken,
-                        data : users[0].data,
+                        id: users[0].id,
+                        accountId: users[0].accountId,
+                        name: users[0].name,
+                        surname: users[0].surname,
+                        avatar: users[0].avatar,
+                        mobile: users[0].mobile,
+                        langId: users[0].langId,
+                        username: users[0].username,
+                        password: users[0].password,
+                        rememberToken: users[0].rememberToken,
+                        data: users[0].data,
                     }
                 )
             )).toBe(undefined);

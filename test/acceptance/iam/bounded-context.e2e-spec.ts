@@ -82,10 +82,10 @@ describe('bounded-context', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: '0xqjuuowf9oz3yr3x5u7s95x45ab72fb32oaw7h4e2o8n6ozw83x1ocyx6cbbfkatg537ur8j0dkcyw3bi2j7rkhff0ycfl0ztkjz2zup27m5wcd3i75ztnwegoijffrvz0bjj1w0uxqescnp5gk52mf8xi4h6y1pn4auuzi6r0tyaw69kzg4xt55v9pxb66qzeyx52pqxb0f01cy0rzixcutaan0shtbapkvrvhk3sryz9fcsjgz07h55t1o2k',
-                root: 'za55mduc8osuvmgqkl8t1vcox0rqfb',
-                sort: 945173,
-                isActive: false,
+                name: 'zfr8og4hv2q1hv85ccfwbyave0xcr9fpfva1fbtr4vu3v7wvbqafa33kjloqr78uu403o544ksyzqs9uyz1cmpioqm1ly2rwmacmlcwi2cavlaerwjahlargxjzwkfdhqej29wvec3l9cmca8wyor1txofhgigkq21z3uj3unixsypdvmrtg3yitynstepp12uzabtk1dwlmiajyldm4bdo8xevr0mvuq0dyq9a7fqlkxbazy7w672so712fa5g',
+                root: 'wekslpq97ueviq9sh2043z2lkt33m1',
+                sort: 636674,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -100,10 +100,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
                 name: null,
-                root: 'trlw817s0u0m1p105f6jygyfq1neot',
-                sort: 818150,
+                root: 'u67qrpjcvk0ep04tp8ipluds1ttlcc',
+                sort: 758644,
                 isActive: true,
             })
             .expect(400)
@@ -119,11 +119,11 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'izkdqutqwknrli2oyrcl487gz9h8o5ebuf3c1vndrfqxutd47wy0z6haf4iz6kuvows9kxswtxtyag17s8kpschnaw3cb8wfbwto26yh37jgrf6ztds9llopbalz4pcmpgx2pf7uet0q96itq9e99nfw8f03apaqfgwz9zavk309x0vl9xw8uzd8pq77pnlsr9tdod5jtqg16n6it5s6pimucbiywmiznkko6ph89zvnd8cdjmxujfu92z4panh',
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'ecs52r36kestssk5sv3yptnq5ca4sionsxbhcao2qca0utpxwtwea0wlz19fden6xlpfhuxbftxjxk56znhfljn92jgta2ygxgrl4lg9epe8lyj0219rjv8nyumcvk3jd6p8nrkodjc0430ak3zyayd0qxm4rmzi062ifwe9dcqcpp4rqlgfl2i1adg4hmcvn7ox0fi4fj1uiomtn0g37v5rhgsksm0dgop43kcquxwhcsbuy9hu38ulskc7v00',
                 root: null,
-                sort: 825154,
-                isActive: false,
+                sort: 427903,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -138,9 +138,9 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'kduaqfvvjwfvacruhuzwgy085n0bhqzpeww9ttqok4zhklal5v52nsol75h8g36x7xm99kuz4hvr188o1d0xhulpvq0grlquo77f4e9t2b8ld5sv1qgikqt93voekgc1aufbintrxmp5wovgfqlkfbbyzlfg5ehyt94i26r4u95aknar39jx2c0dju7kfldceoob9wajavfbvd0ur5dkpre0p4qfg8towoleho652jcc6lst4h8bsjpz7ejiqne',
-                root: 'y7psxwcs7tbbtybe7zxawgkyi92e2q',
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'hpfkhwj45fnivgfaxj90g85j7bsm9jok3vjh94g3696e2fmb7l9oz2o427la2btvxe96mn3o11q0bep9ze8ekmv1toq7xazkt1hz1v9vqydpmenoy8m3lrt234f91cm0irpxx9pdsbp6ljktf8g0po25z53rugpmnco2bcay1qfb0qahio2t3ngcghdbjr48tmorlzbq9396ygl4ktbh3o91mlgulzqooyufukg3vp5ip6mly9oierevr7rd1wk',
+                root: 'q0eu89wiw2f5c0leeuisgkboedqgdl',
                 sort: null,
                 isActive: false,
             })
@@ -157,10 +157,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'biznj5uzyjjfq5jmlkjwrkd1gkfmka06uogah06li9am1qcfae6yxq5h9dri205817jm0v6i7obmqmxtfprd368rofohglcn0xtck19mt5upudmxwpy8w0jan3vm3n44021rg45r2n3orkkcak41q8s3irfpla1568n46yu3a1vc99y0rvoz91e8au9ovhh98a0yzvznied91q4ksp02uk44gaxgpzbkcepvysfdq0cp32m5luqhoa094n6c6ks',
-                root: 'qywbn0rknl3zk36v4ouz2a7zfe9vol',
-                sort: 441390,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'vz1pdrsgf45avgb3yoqzb7wrt7i7htrnjhp27f3acvl9u2dj7nygpraz1e4vj4g9um5exybci1azzozaf2iqwqjqvam8xeabnw00bw0u831724za5aw66kccw680aj8frepv1yu6laqurmmf2a0d8o1vfuj01sdf73u9nh9dz1pzbmbi1jf34c1z2k0w9qwsa7z4e3efz3kojlzexpujbznq1aygm9dv5a83npk1vh6bet2z7g2xs1zp3xt8eyl',
+                root: 'j6lqzc2udx83zc4b30a4r2ev6x1m2u',
+                sort: 842441,
                 isActive: null,
             })
             .expect(400)
@@ -176,9 +176,9 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                name: 'b8n84j0cyz9pgzvrheus53o8jlwhfdap44s6r013tepglteozas9p5cwtal41wqq4bb7apur3zkb46mi9fohi3rrru2ra11fr54bjbytdkuw8983g7twoq14izr7jelcnle86cnj9pycbgo1qq8ro7un6zdr43bmo9pqiiidque33ukcwam1joephzkx53ubko47l6gzo1pl7orazcfmn0j5fnpb31mtgfdjjm7vnriq4u3jxj1imxnn70pphic',
-                root: 'wpwsbk7mi40bhm0cea50jsunix897f',
-                sort: 605666,
+                name: '6eg8qvwp2fatll4ihkid6r1gjkgorw4bvhirrg4hvwa4pvtx5dpyjycg5qtergc8lyy9ipcfyn6n8vk60gvwydq6nugvdppjsxu2o99moosx3bej33nocc37stygk5qljgpjp8j86kflfabdmcracnux9cmxarliv00in9egktteu78y9qpiinz775k9780dkw90t8iuomrlbkcabi8uevre0jkuh6g3nillfcafofzip8sk6o5rz56oxk3tr3e',
+                root: '7c27g89zox1am53c4msqkt7aa9uc8n',
+                sort: 103975,
                 isActive: false,
             })
             .expect(400)
@@ -194,9 +194,9 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                root: '18nrh2tsgawex20xid2zsjy617pq82',
-                sort: 590429,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                root: '5qke9m85lv8t7s4i6ue8sp0h4ez6ez',
+                sort: 371407,
                 isActive: false,
             })
             .expect(400)
@@ -212,9 +212,9 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: '7ck1o8dnrrb6enikob3huf1prxlywjx2rejjzu2iebxd4pa15gma83pv2dweslieq39lyy3o8xlc93io4ozrhnzyrytq3lcynw8mllf2cr3dgr7ufp8sqpaxyel2vh7ts14eke71slog9hsyragrem81qqn7wcppk7bm7ku5gzdv2a0poly1tcf5dfltaxat91i6598weiikkgzmhzky03ftei3pe1xorxwuffgby6emvpym2cyphll5ey4vh0w',
-                sort: 475588,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'e6i1pty2w7cbyxgc6751g0omfvnc04f74jdz666l5ymg2f49highxp4lc02dcr49jvuga0yygj4k7y6e6jgzobyxbb00moaid4ycvzuhdjsnkyph03pbv1ni6xzfnn7ha89isigvn9ip3hu8g2w7lfx57z7dzktvxt6hzy2uh3duzpfwbvg34j23591thzcscc2z4x2qxrtuiqjel04jt0y1qbrquhzs2pa81yyo3dag0m6xmwr8ibree5powb9',
+                sort: 418876,
                 isActive: true,
             })
             .expect(400)
@@ -230,10 +230,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'mifrla24rphs8rry2sndgawz8h9zd02xnp3xdfej0w4v77bbjnc9kfsh6lv42m4qzl53n7yzc6d89hdheqpgh5d7ceg8le124kvcglnxhwaqko2kxvap5e0d05wop4fsu0lka1vfuc7cbkcoo3efk2ks9hwgmtyx0y3j5v2vzyvj3qwqwb8jl0p1nnkbsps8q7nwte7qoog7v062qc1fw3zyg11qjoijqwypsmfxuq427rgxoq1mcq3uwjvtk0v',
-                root: 'ptocer9vy7olh45vds8g3c6s33gou7',
-                isActive: true,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 's16fp3xazu58b18nxsthyn4rhkvn6z10qt18fhuid1m4miy0s5wfx1b56ovqbmsszlnibhvpmx8q8ve9nn6dskgdbb7kyfu3ev4k1i9rb3mrnsa9ag9m5ifit0tluuf2m0pxb4rlrcnou1wsrcs0qw1lh2h99lu21zhr1m0biritfv4ir2d96gyayzfano87bvumylyii5lzkpeg5em04x9qoznyxrd58mt4yvzd2cqtkspjelzjmtxzs9pt5og',
+                root: 'dly02e9bwva1zhs0f6cfdg7e6ewn8h',
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -248,10 +248,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'mwirmo9krxbqu74sklvxifj6u4h34cagm5e07t7djs00ly5mtcp0o4mgpgxwnzp8u7iuptxeakk4zdm470jvi46m1s2awhn54ckqhi338sr3s1h2e4k50i7bjhderbdkve9lavt0vx3gf2my5mo9ljg5vwaqz1efto86wkgtolsp3gn07h7dgbyasd3usa9f4waau3kfqnvzrcl9bkpe0uxmrfudd55wulrzfvrrb2umiq399eoog67t1v009cv',
-                root: 'lhd2h1s8psskc6owr3fd7wgn1ao2ix',
-                sort: 275338,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'wmz42zhh40uat74wytahkm648p1eofb21vdrl83pn5xmhvsu0pj6m0uojpy8mvjv4idazgisbt3isfvkimya4z6tupqxz7cbatfo8smhnjtiqssub3x4iotfb6m8tv0rs1yshl4fs0s2tzi34ybaee37h1yc5lpvlu7qlbinguar60g4yn8an76nbllbtydq29rm7okt91v0f7pl7bh8pjsk0glbqf748jv9qto9r2kns0bxec1jm54j8yzfcti',
+                root: 'mbty0mfanpdrvikqdzdkzxc47qmepf',
+                sort: 893188,
             })
             .expect(400)
             .then(res => {
@@ -266,10 +266,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'dmxnyiihigi6tqla5otrllzrnprqrkysiymv3',
-                name: 'vze1zwz40lep7ts71o67qh4njidqi2hghlg5daz19be1a6tg1nnpyfih56nyzx3cqn10s4klf76orckqgd47fhdk37zgrpqjie4mtp9eritxb6o312v0qy7f6toimi3hus00fbjehbk64mhr4tlnmj6h58spluh8mkm2yp4v3wxr3rfss3iudwg14dxj6vp03glor9lum2frdsl0fw2p0ewosmh7blj55ioky6ouqg9tpyywhkomyjkaiysr882',
-                root: 'bskfgwfv8cla3362abccda6sujh3tu',
-                sort: 755315,
+                id: '1xx5vnpcnzqqaiax2wwhw67ejayfwwc388c8q',
+                name: 'rjvqxr3oe49n0doixchrj8a49vedmkk2fsatzlxbhr19kfnlabxbsc8p4hq0hqdsy3s9oml02doxycfz3lji983ntgopma1crw5obblh3aezh8l0vidmmy0d4tnsdsh6ujqrulq7dadzjpupo0mahnbuniwakgdu8wwg0vhz5obplskjkpih4mxwiy87zxfm2n54vty2fk69k0hj1in0cgfu5eb3rww7wxna092ie5izx5v4jh38v24kxudt2lw',
+                root: 'zq3paf9n63yyyzcjdsnczuqyqqvaap',
+                sort: 962738,
                 isActive: true,
             })
             .expect(400)
@@ -285,10 +285,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'mhqt485ng4dk1pe2ualqsh2306jgiwjecpip49exim73u0zh349zbtuiaqqijkcw7hfz0ad3ie8rdy80vsxyffh0pxsernys0n8kuomzs9odufgdx05cvlk080hn1f8maf921xdzse50rie6l8sgunrxixlykmw20rokkozj14hkm6jynf193ck8g5qo05jg2xzwrsghrl6hxbn2vdxlklgcimff2cyznnwdz2ife6oomsp5bo698eprmonrnhxn',
-                root: 'mfy5dy242kcmkqqh3pk2dujp2f8f7w',
-                sort: 198017,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: '49jo17ylx2r3ckl9g6ps5gi5ol5un117ovohnzidmbhogx2pp4seqb0gdgk2fz88poinpwypqhtyuhz52r5cfu5fba3oj2yq4szgbh8v7f9g8w2qmv58ds8geplsdmdk7kelfyezdpgve5tpx8l4i16smsw93rtn48x3ji6o734bc6cgpo1duokykhr6nd7pleaijy86aw4y4x69sms8c2mpv8irp5y9j695h63bsuotehj17r3kh9p0j3zk3k19',
+                root: '5ok88qr88xjoryblx2f3ihlyscddml',
+                sort: 205887,
                 isActive: true,
             })
             .expect(400)
@@ -304,10 +304,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'h2as4lsl64ugo7tphyycjsradninfetoga4kesihcbt5b4l31jgyja8dn6vvber7fewty9wgry2gb44zln2qif8qtledu4gdztn4of3uoff2kclupq30dgys8ir09j8b75s5ygv7ptfs4241cvj7rc9qyvqhmdja9mbt3qvsc6id29bgyq4m3cbcnb11vl4ctqtr0dbdqgbj3jtbenliy8jw4n3p3gfium0kfe6lz9vh1ycavv7pwwg351heon1',
-                root: '6m4aru6yff18s9tnehjjfrzrudd7al8',
-                sort: 703939,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'nj1ck5k3nxxchtfsrg5oiyt109shrz68wsdpqhxgqxkcrpi87ui9q4uk3ydxg2mkrxwm7ay6c3t43ad9dq3h4h22s1qhi11x5rmx2bjetx49a01k722zejuxdmf0y4qrgk7y6hnv34jmr85tt5c9lmlvxahl72e6jpc9a3eumglqmkj5vt3o5pb86p61bk2q78el8w2v312zvsvlfsh8vy67iu7ety68z6deijx6r0oyokvh28fdxmz5uu7xjtu',
+                root: 'xcfcr224tblkex5hzx4lt4a5ncbq7fj',
+                sort: 130528,
                 isActive: false,
             })
             .expect(400)
@@ -323,11 +323,11 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'likph090wf0jlbg49xvl0qlcaycnnj0bt9bhbccddjhuxvuj610h2ab1506rbikesvrlpgglmur11fuqi3jlqzmv7b97t4kslev7skf5xef7tpv9ei3237sn0jkkfdup82isc6bw8nhmxn1jeelpr5kgs7x68q46kml78jwkcyw3xxdms70r12qpv17fbl6nd8t7zizjwidpnhq61vbxywvvagn579uec9snflmsiswrppxr2kqtxqiu85khnf6',
-                root: 'wulylg2kp0k36ob7bw2fz8sazn5njw',
-                sort: 6816147,
-                isActive: false,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'q5mvnlmsh134oviihc8guvczt8xifxlnnrwrwulqt1tt4r9f5ik1fpf6yoq7rsqwnsjddveylgm24f9ml2oxn6epyo4ix0blw17dzdunu8etel64jk8y5nsh60ssgmo4zr9fj13938tx0vbjzke9iargzndkntq4qr01qyj051mft46vz2a389cvts447hpblwgxtrj5c9f918kku7nwwut88zme0x0mc4rde1o85rwg9jwgfkoxl1xdji7k5mz',
+                root: 'xlesob6zhudqcb039gycwzaqq29tou',
+                sort: 5240067,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -342,10 +342,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'ehxkd7lkr2imm6n9ibmtbry0j10hd3ktioub3xy915tlmipj9zd4f67iiu60urnei1lgzixfk3fn2c9ijyzbn6mxusm973x3q88259doxfd2nzmd7gggalbg9ta3lms7o8jvlz95dj70uhayw1ji99umo35tcsivq2ia009av7vkeaqz6og671nzba2k2zqkbl8jdb1mh9f8iobx9es8gn3g0yv0jcd6hwfrnd958j88cdtvzrybzfzfjw7icgu',
-                root: 'con1w81b10j3f3x98flxb7e7dpgzme',
-                sort: 916702,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'oyqz0v928w74u676coo7tcsr86wom5mwrhwssmdn3ooifv5b7xgklgsr10mzurb6y3976sixvvkxk8h4ipklqeea01q81d538e2whw0ak79ryfs329bytngz9wg4h5ry0m4oxyyndbiy8cjqtkedcixr8qkzal4bv0c694vv58k10f41ix1nfp53041l96xm56fu1md4boe6nxmnp5pjstd4vefa771w5ahjlrc0ehujnk6si7jiejpq4d7ssk5',
+                root: 'tfv5a3hnl1w1ugim7rml05n6u4xwan',
+                sort: 977349,
                 isActive: 'true',
             })
             .expect(400)
@@ -361,10 +361,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'tie4r75eqdm1sqrj5pjymb5x7uls8v1rn894j18unom066yg8whiow5j7dvt533t26nohh8pd3pa3epszv7l29fvlycvvlbfxvcy22n77z2xcnkgg6dezts28pbrafq29grp1klcxjvtewkhekt7p5yxtnq78q5hmg06hha7g6m2h6420us0txt41dvhk9hrh560ffuoc1ejj51uqge0g3bdjcw3ylbwp1d1azube2b9gtpihnp1rmswcv92btk',
-                root: 'w7uik2xz34rtgk0koj9oeec5p98b75',
-                sort: 387187,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'ilre47jh19vbdnu377vkq24e8dhzmizwo3hzk3rt7b0o68508ce9tacxjurv8zxg1p5ve5bxrepwtpmois2fc7yd8xxv5jc9p9x1priv6ws4d4qk2yrqp7c4aw6qsfibek9o77ujd3d8towain17xts2gfvhn6k1eg2hvem5y7vf9vgcmqx0nr6xd2y4ksyrbpvi848u6y4wbk8exlxeoiablv45cpj3ibicjak92ntqrv38p7j661u20m3ao7y',
+                root: 'wfpil5702qieves9kk616ltz10qe64',
+                sort: 634075,
                 isActive: true,
             })
             .expect(201);
@@ -402,7 +402,7 @@ describe('bounded-context', () =>
                 {
                     where:
                     {
-                        id: '96f72457-f2fa-4dbc-b6f5-fa2b4d27249c'
+                        id: '79f8701d-94fd-4834-80e3-ad15b771941e'
                     }
                 }
             })
@@ -420,18 +420,18 @@ describe('bounded-context', () =>
                 {
                     where:
                     {
-                        id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57'
+                        id: 'cef47bec-0100-46f9-9824-efbc05867634'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '1bccab0c-9cee-4ca8-9d2d-92355f197d57'));
+            .expect(repository.collectionResponse.find(item => item.id === 'cef47bec-0100-46f9-9824-efbc05867634'));
     });
 
     test(`/REST:GET iam/bounded-context/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context/c24fb648-92a9-4d8a-880e-163ab84a1b60')
+            .get('/iam/bounded-context/abdc1d00-7598-45de-a4e4-5fd1a9afa654')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -440,11 +440,11 @@ describe('bounded-context', () =>
     test(`/REST:GET iam/bounded-context/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context/1bccab0c-9cee-4ca8-9d2d-92355f197d57')
+            .get('/iam/bounded-context/cef47bec-0100-46f9-9824-efbc05867634')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '1bccab0c-9cee-4ca8-9d2d-92355f197d57'));
+            .expect(repository.collectionResponse.find(e => e.id === 'cef47bec-0100-46f9-9824-efbc05867634'));
     });
 
     test(`/REST:GET iam/bounded-contexts`, () =>
@@ -464,10 +464,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '37c49d70-af43-4079-bfbb-23a76361e236',
-                name: '0epcbbrq5fybyfk5zyap0kjv8zwq1lmqqqik1s5sfxfl9ksm3d1smqrrrznhxrwcbdl6z14358knkx2mz2v4qr9obwercdl03svgeyfsxxu9f7d5mfur5z16p0p1oj0csmvchc8tlkswlng166hmhwp71ityp6y4inhm6zvttzjb6i4lhtz1seqxseh9mos81avsuefyhhw9xxxkyn31ikief68bner91yjz3q1a4p471ei6mg7pra1ftn36jkw',
-                root: 'zk0cn3wftu30xz67hay2d9q8app9e2',
-                sort: 201918,
+                id: '87bb950d-4281-489d-a518-4befb950c241',
+                name: 'm49yqt82y0upxqrxbzwa4pd4gy90086bl6xmzxnfdwtpwd2c5k1ctby6wilec4w5oi63fy5dhf3ibi53vf7m0sav2jua7rwprsb6lesis2snz5gya8k2e0zklp0jorrhixzz05i83x97qjwahk0af1s6d35q6aisbp3jvy1l98fml9byaeiltdft8euyimsnfp7pqv1ib969z448s163s4t92ix9smmyjnhp22o4hdqyy88ops2yszt9gxxch9n',
+                root: 'u2x6721odglfa4s9q0l40q3drsxxyq',
+                sort: 501976,
                 isActive: true,
             })
             .expect(404);
@@ -480,20 +480,20 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57',
-                name: 'tqwnl14eo7qk8stwk8ib4otcr4lyi511z3xnkhle7jlja4swtv9iu61ehpl124cbwdd3n0pn5gsr0s60n3dsbjo6teu2qokhe0aarnt45l7vnxx7jg638yclzjctsq66yxyd1lvxlztugxeu4whvykim8wqc1nbi5m13xg5b8qfpuysdi5t6frhnhaeeovchy1y5mj1s2yc79o1tmh43pldff4k6bxj4pu7ly1eet0av36ksyfamij2u6wqkook',
-                root: 'q09rjr6gn3dykxpadgveeh39qb3vsm',
-                sort: 434037,
-                isActive: true,
+                id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                name: 'cb4nbu76m1uxj59v5kn4z0d3zli8jyemhlltaikmcq4b5wti4e90e5fkppoq85egzm24hjzj2d9grqaf6koefudiolfjpdnm50es3ovuwysu8nnw70mf1nfn6uretfex71r76de9lp5c2bee5uouwvh1fpat7xv5l0l0dncd2pbwvnwke7s7c0aig0hq9wgeuhulqd73ki83sol0n825ozytw6htrk30w40jhdlqnc8vztxhq53zk52ym5hu7kg',
+                root: 'qlhnj0lhw2w1y8c6kujksxboa0mq71',
+                sort: 867746,
+                isActive: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '1bccab0c-9cee-4ca8-9d2d-92355f197d57'));
+            .expect(repository.collectionResponse.find(e => e.id === 'cef47bec-0100-46f9-9824-efbc05867634'));
     });
 
     test(`/REST:DELETE iam/bounded-context/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/bounded-context/5378cd38-e157-4bda-98cf-31d38aaa7486')
+            .delete('/iam/bounded-context/4d8ee6f5-54a3-4ac5-9a40-e41a9d5793ff')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -502,7 +502,7 @@ describe('bounded-context', () =>
     test(`/REST:DELETE iam/bounded-context/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/bounded-context/1bccab0c-9cee-4ca8-9d2d-92355f197d57')
+            .delete('/iam/bounded-context/cef47bec-0100-46f9-9824-efbc05867634')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
@@ -563,21 +563,19 @@ describe('bounded-context', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '6ea340c5-01da-45a6-aced-b64bd597f97b',
-                        name: '6r23rpy6m4cztqya12iybvpy3vxwubxxig27v2p0og2neigu7qu1y2pq24x80y5yrjrm19vumr8js51fx54npmloomgy0qelagm6pqij8h36n65194m3v4dc2j7stms1tdkuz2k5vp09d4ddn3i1xaz1ymvdblcbd6qk4u07vagxh80bs6g6qwow75wy6eysk8ckhw12z0c6eokcl5klkvtarbjpxb6ca710dphvzwysgny3itms5w5333zd42j',
-                        root: 'h8ibo3qgbsv4yi87py9a47ysrvjjnv',
-                        sort: 999278,
+                        id: 'fdfc454b-63d2-4d8e-b759-bb5d5ad246ed',
+                        name: 'ep645xlvh91ypf3hwqxuf0t7r6oans569l41oscseo1fnxwoqiej2f9cezh4gufld6n52o3jxi1l89n9ckgc6odlzallp4zmqx9lwxlnvyi2lmicl014l1pbjieyoaju7w97c339e0j94z32ebd9654fphyukbht9v7m79nczkttp8horgmwbvt53r6mnve6n6w6py7zezxxfv8ifm34cs33qummd49qkajvqi3vslog103m55nbrnpjx4ic3t1',
+                        root: 'g8ppqydkce2gkpzvzdkxqniv8184w8',
+                        sort: 563636,
                         isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateBoundedContext).toHaveProperty('id', '6ea340c5-01da-45a6-aced-b64bd597f97b');
+                expect(res.body.data.iamCreateBoundedContext).toHaveProperty('id', 'fdfc454b-63d2-4d8e-b759-bb5d5ad246ed');
             });
     });
-/*
-    
 
     test(`/GraphQL iamPaginateBoundedContexts`, () =>
     {
@@ -625,14 +623,14 @@ describe('bounded-context', () =>
                     query ($query:QueryStatement)
                     {
                         iamFindBoundedContext (query:$query)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
@@ -642,7 +640,7 @@ describe('bounded-context', () =>
                     {
                         where:
                         {
-                            id: '42b454c5-9aca-4f24-8df8-ba8d8d4b667b'
+                            id: 'bbffb3aa-7df9-42ad-b3f6-668c11f2ab31'
                         }
                     }
                 }
@@ -666,14 +664,14 @@ describe('bounded-context', () =>
                     query ($query:QueryStatement)
                     {
                         iamFindBoundedContext (query:$query)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
@@ -683,14 +681,14 @@ describe('bounded-context', () =>
                     {
                         where:
                         {
-                            id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57'
+                            id: 'cef47bec-0100-46f9-9824-efbc05867634'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindBoundedContext.id).toStrictEqual('1bccab0c-9cee-4ca8-9d2d-92355f197d57');
+                expect(res.body.data.iamFindBoundedContext.id).toStrictEqual('cef47bec-0100-46f9-9824-efbc05867634');
             });
     });
 
@@ -705,19 +703,19 @@ describe('bounded-context', () =>
                     query ($id:ID!)
                     {
                         iamFindBoundedContextById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '2c5d46cb-97ad-411f-bff8-1b6844c5b091'
+                    id: '40085db6-01a2-48a4-9a98-e66b4e20e000'
                 }
             })
             .expect(200)
@@ -739,24 +737,24 @@ describe('bounded-context', () =>
                     query ($id:ID!)
                     {
                         iamFindBoundedContextById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57'
+                    id: 'cef47bec-0100-46f9-9824-efbc05867634'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindBoundedContextById.id).toStrictEqual('1bccab0c-9cee-4ca8-9d2d-92355f197d57');
+                expect(res.body.data.iamFindBoundedContextById.id).toStrictEqual('cef47bec-0100-46f9-9824-efbc05867634');
             });
     });
 
@@ -771,14 +769,14 @@ describe('bounded-context', () =>
                     query ($query:QueryStatement)
                     {
                         iamGetBoundedContexts (query:$query)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
@@ -804,25 +802,24 @@ describe('bounded-context', () =>
                     mutation ($payload:IamUpdateBoundedContextInput!)
                     {
                         iamUpdateBoundedContext (payload:$payload)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        : 79afc4ec-e757-42b8-97cd-7713d3b74549,
-                        : duplxvlz8uczpvcw1g5ity80cmnvxjcjesg2c67h8gpjucenr4sm0dx5ai68z9k30p3b7ypvmrpswh9rd925pn08w28yiq4hlrl8qr8h6i0r0v9re4zc17l2h7jqb3011tjiw8qgu0jkhpngzlax5dy3dktmiofaoq8c85sqgcsiy8ckhvc13y12ajb6ljl2osefjtt4nxtzrod2ougldhqgpgm8g874rm2fjeq8bpbnnjvrnznox7t9tti65cj,
-                        : vjrifzkcxhh4gg4tfc2h9rc6d0glym,
-                        : 628800,
-                        : true,
+                        id: '9d2528dc-76fa-4df1-9863-faad413eb2d0',
+                        name: 'k5q4ayepraqqvtsqh1azdg4bd798j408056nduvdqe7lrojhh2c0t7cp9k1w8uzh1a45f9v5r05dvionx0n2lm9eqs9bu27sgxwjnopom7kh8f54rgxksbw1qun1wb04ls4nufj2aintt8yaph7ndzzoy8mvwg08nxykhfb4qu8c47hf0t7fzyk8wl8ui77rzpf2gjl4gk1xfza02ecenx7lb7t2ok2e8z6dg1wrg0528kiq1yjvsll06uom383',
+                        root: 'gcxgl9vg6xoi4ucss3rzpxlgqvmupe',
+                        sort: 194953,
+                        isActive: false,
                     }
                 }
             })
@@ -845,31 +842,30 @@ describe('bounded-context', () =>
                     mutation ($payload:IamUpdateBoundedContextInput!)
                     {
                         iamUpdateBoundedContext (payload:$payload)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        : 1bccab0c-9cee-4ca8-9d2d-92355f197d57,
-                        : 4y5l2djvy6hyxqxog3i12tjgy9t7lopbyu15h51mtjefbvnmxji7cdoukwtwcmwo1cz2q0jzq81hfxaec7zqbervdmcq0byxwkubz23ik3ddnnwrziu6oxadg56cj0bgr3rtq2405vtx2uvqauceefftxkfsu1uc9t0grte2fzmm9cc5uz9zqkwlpyocso0jo5vgomkjlmovrcts8997dyeanjwzclj2r6oqncy9qgjrw6r331ltnetb99gkqlj,
-                        : rnz9rvbo65qhh3qr93gra5r328rnen,
-                        : 717491,
-                        : false,
+                        id: 'cef47bec-0100-46f9-9824-efbc05867634',
+                        name: 'lpf7z5il2xas2kj2gbilav866fyo0t7aznhz1ji9jlazohdzhhj9co437nitb9zshuxisfp8nc4cbb97ravfujupv4lc5zpfwv2351lkhx7dt1pwilfwogm9xp522r1vh79wphnxo1cnyeyabzyklb9uxc9wtc0ol0u3ykyq2082tbisyv08gu9pl8ts2cqajegaozakognr3kv6ff3uy99u92t1khyira9uz59f6dszdb501733jyhlitbbq8p',
+                        root: '1tixh4h34ayhd1fic614j1ktcjuu7w',
+                        sort: 747924,
+                        isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateBoundedContext.id).toStrictEqual('1bccab0c-9cee-4ca8-9d2d-92355f197d57');
+                expect(res.body.data.iamUpdateBoundedContext.id).toStrictEqual('cef47bec-0100-46f9-9824-efbc05867634');
             });
     });
 
@@ -884,19 +880,19 @@ describe('bounded-context', () =>
                     mutation ($id:ID!)
                     {
                         iamDeleteBoundedContextById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: 'd6ca98ff-eef1-4d7f-8886-d400b7113cb3'
+                    id: '01a7459d-cbfd-4ef1-8b18-358cbd9ecb09'
                 }
             })
             .expect(200)
@@ -918,27 +914,26 @@ describe('bounded-context', () =>
                     mutation ($id:ID!)
                     {
                         iamDeleteBoundedContextById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '1bccab0c-9cee-4ca8-9d2d-92355f197d57'
+                    id: 'cef47bec-0100-46f9-9824-efbc05867634'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteBoundedContextById.id).toStrictEqual('1bccab0c-9cee-4ca8-9d2d-92355f197d57');
+                expect(res.body.data.iamDeleteBoundedContextById.id).toStrictEqual('cef47bec-0100-46f9-9824-efbc05867634');
             });
     });
-    */
 
     afterAll(async () =>
     {

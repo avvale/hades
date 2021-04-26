@@ -3,10 +3,18 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
@@ -14,6 +22,7 @@ describe('account', () =>
 {
     let app: INestApplication;
     let repository: MockAccountRepository;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -27,44 +36,60 @@ describe('account', () =>
                             validateOnly: true,
                             models: [],
                         })
-                    })
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    TestingJwtService,
                 ]
             })
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
         repository  = <MockAccountRepository>module.get<IAccountRepository>(IAccountRepository);
+        testJwt     =  module.get(TestingJwtService).getJwt();
 
         await app.init();
     });
 
-    test(`/REST:POST iam/account - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST iam/account - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send(repository.collectionResponse[0])
             .expect(409);
     });
 
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountId property can not to be null`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
                 type: 'USER',
-                email: 'op0udy8r7t7pewcsxk53l6xict8t6iguo3eyacjsn75toplkj14gpia0g58l7cvyerpcmn0q87e0dg7gs8sb6kj72c2w1kcsh37bc0x3r3wzepcxddor1qbp',
-                isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                email: '91uflof1dch5ko2zqloigbrrtp3setqbnu1g7apnm23bz75p795yw13etyjtbtoyhzbt5p7uxdu4yqlud6e8xxsnlowomd3pk1p5vhvsewh3jka6ypcclq2c',
+                isActive: true,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -74,45 +99,22 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountId property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountType property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                type: 'USER',
-                email: '3wpwoesy27v5wgjgbcdbyvdb7w1klnby5sdys1w829qghhtz3cep7xm4ss6k96kxtd0amjbn9y0rqo0h5705z4gmtdso4z2rt484vd0umu57qyw0c5fx4r7e',
-                isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountType property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: null,
-                email: 'oofmd4pu38j6lhkvotcgnxes9dffi5x0rgx10z1w9p9asmapqudok3ydeqmgm9k6ijzyyvzjaw6gxkjflhwgjqrt0jpvzup5azgqiak1117u6axwlnezr39s',
-                isActive: true,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                email: 'sq66h1pq61sjxz2dijxygfr3skwnnxy2itsv7kuvehsv1bp2joq13jla2t6xqmhvvmwv72hzaoomc0w3ckxwxht1qg8g3cehijntie2gh68qaaxa6ngdttog',
+                isActive: false,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -122,45 +124,22 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountType property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountEmail property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                
-                email: 'gzfgfolqg61vy1g1crompu4mv7uhg2wp4s42bfmv0xt8qkbvmz7eksnw49gc2wze0y3ac16xdbzjq0ljp1shtm2pbaz2w8jnzesap7362rskhsyet4lv3y31',
-                isActive: true,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountType must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountEmail property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: 'USER',
                 email: null,
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -170,45 +149,22 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountEmail property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountIsActive property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'USER',
-                
-                isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountEmail must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountIsActive property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'USER',
-                email: '2tkuzk6zhmbj48eipyulzeesetelvzxj73hrlkdzoax2gncpdflfj8mmwms2jg33f464z5bsqayr9pmgmrlivt17yn9bgwinbqvgc8klrpfw153yxjdju524',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'SERVICE',
+                email: 'srx7pfkt3x1ucjmxbr19o7w30dtjerf4zvdf3xhqfzvk8qf6hg4u4yypqcff2955rszqa7pyvvore99h1dp31k6n76a4ojzrj0znylogkp3rpse61isjlym7',
                 isActive: null,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -218,45 +174,22 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountIsActive property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountClientId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: 'USER',
-                email: '2jpcwdcpkmmr1y7btkvvj404d3lahz6psw4qvs06i8y6oowdlgrgmxd2rebzsvcernp32cek9pxue6hpzq39p62dnkti7yclzm1r2o13cazmcmio1gs2pq6h',
-                
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountIsActive must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountClientId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'SERVICE',
-                email: 'k34fu4hcz28oqeqnvhx7hxkssag2o0p5z8vwl9zi50601f0k2f6x9ymvs6zxuorshug2ju6kbbmc3b615jndpuomyjehmspvh8pml2auis02rqcq8qcn1zp4',
-                isActive: false,
+                email: 'gh7ylnzfd1yz3le2wuisztko2lzafr3y5ipzr8cgz1o8slc4uq967jmleoknc2i5i3zcqkyev6jkx6tua48aax7r32b0yo85i10ad0e8y5104xjg00n3axsr',
+                isActive: true,
                 clientId: null,
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -266,45 +199,22 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountClientId property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDApplicationCodes property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: 'SERVICE',
-                email: 'o85sr1yaub5sfabqlfudm7rzui3fgzulohlpijp4qt3ruvq3w9fr07posztsvo4wehpr6dwh5cr90ddclxz1fdbwl3cxlownnna42h97ptaa2utvthqogtqt',
-                isActive: true,
-                
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountClientId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDApplicationCodes property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'USER',
-                email: 'ogu3bpcerq9s3cnb272229cp81zw6w9uc1r2t2yr1t0alb0bh2ie051g163jwimmw5x9wepypndxh47xcmmoe95qrgbl4dte4h9dz0db5peuzxozll9u0w46',
+                email: 'j7j0zbe1pgledutg5p72cbdhqvo8gkgx6ybppg80q2q4a892lbsnj7g5fruknr7ytwbh3zrtmgahapw1906vckua775k3mhpudg74c6ayeuzdz144od40hn2',
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
                 dApplicationCodes: null,
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -314,45 +224,22 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDApplicationCodes property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: 'USER',
-                email: 'jcvglzpcsch4ns1ktj6jlrsdg0wjordpag07pp8ogpoyq6dw4xldy5l8k9ffs25kr3m5gq2a3w6z7kcbj06abn1ylafh5wn062v7ym5br61ol2zme8rr74vq',
+                email: '33zlkgmwsdxqx020fkle6f0295ewfe3lms516cdh2wvthwzsnjusv1fjvf7vpbtueybwkq30tqe40upiqs4waw5xqv66txe95vlo15b7le8haat0y5bpouyc',
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'USER',
-                email: 'jzwchp3jvhvjs9naek8sqeea8ab4eo4v5hd7i1qfgltcbv52d6afiytdz7ww42761xmihcz77io8ut4poabtlau6bt6oesh5fkov8dbvtq9eq5e0jqbkfrae',
-                isActive: true,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
                 dPermissions: null,
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -362,45 +249,22 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'SERVICE',
-                email: '3r8pyw5r093naa2esoszi7d5r42b3x9h4lyhxkjkavgquiqzfsguwbrog9d2te4dkxpsv41vpan9iz4cmlgyax1kyng4axa7dzilmheon2o9k9msn1yoe1kj',
-                isActive: true,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'SERVICE',
-                email: 'yhelukc1442b0pwkv4n0fg7bqwbooxdj422n5ge0mfxm2wkmg1ttw83tl6txld4kfs1u1uyn2w01jh224bja2ytgk9risvphosuyho69ed4wdtbozu5lt9hm',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'USER',
+                email: 'ueaenk3iw072ohgw7zdl04ttxbpwd5tvgyqxrqftenlj5kehqrvp6qqm0snnid710krewuh3jvcbwoueho0lwkwmsszrwdw33blwbw2eczyx7ywrz5ori5em',
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
                 dTenants: null,
-                data: { "foo" : "bar" },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -410,21 +274,189 @@ describe('account', () =>
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
                 type: 'USER',
-                email: 'ddrpazf5yfb5ydf0ihmra2rmervk7t0mc27ug8zvp0eakwrircke32iru0dxxjixbo7fgmilx2zbf1386lth790kvusxdwgea77jo052tr0xwaqsbnbf9x5t',
+                email: 'wgej96ldjwmdhvdjdb5yf754fkbnap7ifasuxw4c4lonze34k9ef8cbp2o9tui0d9dhmpjuvxn2iazx24b8o0oq81g5fe1m38hyrzy3hngx8b7nocnfhk1c9',
+                isActive: false,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountType property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                email: 'ff948bxy3lyw8qwhvjii03b5cwidify7vqrpcoxytir9asg9oqvlanhck95yu74n12mumb7uqkkxxfnjy7qot788u2h4wcyhhy7iwej9cwmj3o3bosxecu7t',
+                isActive: false,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountType must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountEmail property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'SERVICE',
+                isActive: false,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountEmail must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountIsActive property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'USER',
+                email: '7ofqtahg80sg0oasl8o7uhrzfky6ehu299xofylrqiqrt3iow3jqymn2ygfj5a7uvzit0vd5iw1ppzmsi8kvm7j8xxte4jrb4pd7kul8v0bmjfz6zahxmg2m',
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountIsActive must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountClientId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'USER',
+                email: 'bfco2r670jn9ybld14rxo9qb2lixnzpvv6016ce3u8k4kwm66kmqsx2g4t5bzvmhsiio35kcsxwzbjnx4hgfl5tyvbkfdfp4szp2m9bkei20mn0rha12c3pc',
                 isActive: true,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                
-                data: { "foo" : "bar" },
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountClientId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDApplicationCodes property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'SERVICE',
+                email: 't7uxgs1p9xkf5xiwrv1n7lptb6i6z1bd0dm0w75g6e6byignucvid4jv2hz21xg92vlb3b3uy1ash1hyxjvxw62zexbpfnayzg2m5mgmgjgprev43goeb40a',
+                isActive: true,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'USER',
+                email: 'ys66cmedsdj54s3xgpiw0b8y4ml57pci2ef51flg1fs3xvnm4me8542in2blko69kol58swsgk96gq8epjopqmc6p6gerqlxp3ijkvjmh4046re1gvzxhm4m',
+                isActive: false,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'SERVICE',
+                email: 'ljm7g6s930gsk90u0yoyolixym03govmq26ffs16a0tvabg4lz961zx9anzrkit9qhlfn3u749nja11wfp2yfzyjtd6pwtmunmwocuzkebmizosfde9bun2f',
+                isActive: false,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -433,24 +465,23 @@ describe('account', () =>
                 expect(res.body.message).toContain('Value for AccountDTenants must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '6qjatshp3m3m1lz2rier002bvpeweljjhrbqh',
+                id: 'e8ebsbdwxrax36jyb02co4d3yqfb3bdkh7v0a',
                 type: 'USER',
-                email: '2ai2owaw11gpd58rx5bt0gvfb0or7qctgm69hmr8ywjek1jihpw6aduquarndtl0abtcg1b2gfignrko1bnybexpytbpcr3ad4uzl8lelfe5f93ci4e8n1xg',
+                email: 'nhbxqd1njbth1zimob9pbt1leyin6nr4th954tvfqtrdzng6n9v35x5fxixu2b3x0j98tf0fi3qli1agr4tk4926dy8iol8wi9satkn1ycypidna8missajg',
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -459,22 +490,23 @@ describe('account', () =>
                 expect(res.body.message).toContain('Value for AccountId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountClientId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountClientId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: 'SERVICE',
-                email: '7f53zd8dyob0qzitodla486890082ylu92rjn9d8rcr4x9xdj9jtnku0chnl3yp0cfx7h3ct4jflotcx988in7bs4sli6eteeit82btio2d2cf5nthvjfw7j',
-                isActive: false,
-                clientId: 'n4mzw4zs62tslpmdqht7h4v1lw8gspsthv8gu',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                email: 'zbf8yduyt2yhnl2v7c3rzr1x8hscl7pfmj61oa11pq3823p4sebc9p8wytv9l8qf1gc5h59hdhhycaksk4nmik5jy4f4anmgciihvfa1fkfpwxxgtjg76tus',
+                isActive: true,
+                clientId: 'v7lgsgp97px76738lwzz4706knj3gm8x3btej',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -483,24 +515,23 @@ describe('account', () =>
                 expect(res.body.message).toContain('Value for AccountClientId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountEmail is too large, has a maximum length of 120`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountEmail is too large, has a maximum length of 120`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'USER',
-                email: '16n891pieq16n4s2lwnmmcayj12kyn8fy42e9k56jx3ez8dyayly1x7653bxo15zjfjgfsw5arew2j0fao856l4po7sl8n85b8rwwami203ec09e6fw2ejlz5',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'SERVICE',
+                email: 'c8et2187vtppj054j2f9fszfwf56edeujvqusb84krcw3iwbh2o2fqnb9oxmne9yhqz6y1mudjjo1ucq7wo3lip45ae0oxaq9svfde4h848dhjfz8ey1mnkqn',
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -509,30 +540,23 @@ describe('account', () =>
                 expect(res.body.message).toContain('Value for AccountEmail is too large, has a maximum length of 120');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountIsActive has to be a boolean value`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountIsActive has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'USER',
-                email: 'lyzgk4welnjtqr4zzoaq2ommtc2vinhkxhd7077uklz2j2ku2786l0aeb78fcyew75r05s1dg14q0w5y2bp59vtq6y3r46a4tqmrai643t3u1jcyuw52c4sl',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'SERVICE',
+                email: 'dxbgqfd7a6ke12a2qajxdm8zxcpkhfkcts4mxjpk741j0n3g112qrr1p302iz09g9565ouctyuldad492uni6k40r4okoiznj1tg6x0iljz45sawyeczamv3',
                 isActive: 'true',
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
@@ -541,210 +565,214 @@ describe('account', () =>
                 expect(res.body.message).toContain('Value for AccountIsActive has to be a boolean value');
             });
     });
-    
-
-    
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountType has to be a enum option of USER, SERVICE`, () => 
+    test(`/REST:POST / - Got 400 Conflict, Type has to be a enum option of USER, SERVICE`, () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/account')
+            .post('//')
             .set('Accept', 'application/json')
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: 'XXXX',
-                email: 'uc3fhcojolmfiuegspq2xy7piw339c8lt4ka3zncdzr7rf6f0trepja7mh8ll7w8322dlzn97mry67cxc19hs4k4u0tp6kv2ivaudq33x72fspf72fv26wk3',
+                email: 'km64fhxtmsjmuyk5xp8oq13e3l56kqtf7kfr3bp2609v0rspyddgiaa6e49wf3z9ruyett75dgv5oyck42c8ipzsrg2v6xaqu63o432qohtw1fu3bkxpncpi',
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AccountType has to be any of this options: USER, SERVICE');
+                expect(res.body.message).toContain('Value for Type has to be any of this options: USER, SERVICE');
             });
     });
-    
 
-    
-
-    test(`/REST:POST iam/account`, () => 
+    test(`/REST:POST iam/account`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
                 type: 'SERVICE',
-                email: 'tku48143jxcq5wj4da03pa05d6d688v6lklr1k4ujw2n27r62j2h2wibeury95c4qjm7ub1mm4x3iu7g98f1lhrlnixz37whhqk8qi12emk0od68x1zg8f8t',
-                isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                email: 'y82n98bhcv6qsz2tf531bwjpvgj9nv9vub2ow9ahy01loi9a8ap4sy2bwijfyi6dquywqu5clogy0w9boli5peerbse4zbrgdowczrzn7tb5gprcx6z034yq',
+                isActive: true,
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(201);
     });
 
-    test(`/REST:GET iam/accounts/paginate`, () => 
+    test(`/REST:GET iam/accounts/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/accounts/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
+            .expect({
+                total   : repository.collectionResponse.length,
+                count   : repository.collectionResponse.length,
                 rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET iam/account - Got 404 Not Found`, () => 
+    test(`/REST:GET iam/account - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: 'd0d0b2a4-e016-4569-9d94-7673ae73a99c'
+                        id: 'e22f39ff-f898-475f-8310-28a55078e3da'
                     }
                 }
             })
             .expect(404);
     });
 
-    test(`/REST:GET iam/account`, () => 
+    test(`/REST:GET iam/account`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213'
+                        id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '7587d893-0ac2-4ef2-83e1-c35b2f3fd213'));
+            .expect(repository.collectionResponse.find(item => item.id === 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b'));
     });
 
-    test(`/REST:GET iam/account/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET iam/account/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/account/14b287ba-7c15-4288-92ce-94eb952a8997')
+            .get('/iam/account/4b7f1c45-f5b4-4270-8168-00a34b1af92f')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
-    test(`/REST:GET iam/account/{id}`, () => 
+    test(`/REST:GET iam/account/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/account/7587d893-0ac2-4ef2-83e1-c35b2f3fd213')
+            .get('/iam/account/f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '7587d893-0ac2-4ef2-83e1-c35b2f3fd213'));
+            .expect(repository.collectionResponse.find(e => e.id === 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b'));
     });
 
-    test(`/REST:GET iam/accounts`, () => 
+    test(`/REST:GET iam/accounts`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/accounts')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
             .expect(repository.collectionResponse);
     });
 
-    test(`/REST:PUT iam/account - Got 404 Not Found`, () => 
+    test(`/REST:PUT iam/account - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '7176ea4f-efc9-44a8-8721-67719f008e72',
-                type: 'SERVICE',
-                email: '95ubne4ishu2z5041vweryi8qbr0r70elxcn6uoscsjsgtgny8o0z8irymm3s8umyo2aba8vw8m6snjfegq855wx6stuzou2grfo60bpq91v9td46budto34',
-                isActive: false,
-                clientId: '4f7576b8-3920-4c21-86b7-e3a9b0fbf98a',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                id: 'eb52ce93-5c1f-4545-b360-435266f00860',
+                type: 'USER',
+                email: 'p69fx53tzdbzdk2fg5xp326rl3b03bw57q3x83h2ocg7gszpvrsr4svy3lxy01q4c3gyg0tg0dxsj84v07t136colvq8cqfatxyvlnpvsihytqi43mviyblp',
+                isActive: true,
+                clientId: '18429ee9-e44d-4b57-965b-a7daff0c61a6',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(404);
     });
 
-    test(`/REST:PUT iam/account`, () => 
+    test(`/REST:PUT iam/account`, () =>
     {
         return request(app.getHttpServer())
             .put('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                type: 'SERVICE',
-                email: '03omfte2ijjjk6ibwq6bhq7oolmteargpl3p06ow671q6d2u3flzoadqjzrbslwwdr6aljl7moqqfthdofsv90ozt7amaf51xproe3nndtbcxfyhnp65nspf',
+                id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                type: 'USER',
+                email: '2t2hl2tcsfwrylj9ncwmngszbaurvyqmaisyc35mxyae4fx7oa9mpfy6y6lp7nkpx75549j8mqr7vb2yb2tvsfwalvu89gh24dlt2qxtxw973s32lq5mxhyw',
                 isActive: false,
-                clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                data: { &quot;foo&quot; : &quot;bar&quot; },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '7587d893-0ac2-4ef2-83e1-c35b2f3fd213'));
+            .expect(repository.collectionResponse.find(e => e.id === 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b'));
     });
 
     test(`/REST:DELETE iam/account/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/account/8303d79b-7453-4921-9e72-3d3c3803b09d')
+            .delete('/iam/account/55d291e7-d819-48ed-b26a-6466baba75ed')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE iam/account/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/account/7587d893-0ac2-4ef2-83e1-c35b2f3fd213')
+            .delete('/iam/account/f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL iamCreateAccount - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL iamCreateAccount - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamCreateAccountInput!)
                     {
                         iamCreateAccount (payload:$payload)
-                        {   
+                        {
                             id
                             type
                             email
@@ -754,12 +782,10 @@ describe('account', () =>
                             dPermissions
                             dTenants
                             data
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
@@ -772,17 +798,18 @@ describe('account', () =>
             });
     });
 
-    test(`/GraphQL iamCreateAccount`, () => 
+    test(`/GraphQL iamCreateAccount`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamCreateAccountInput!)
                     {
                         iamCreateAccount (payload:$payload)
-                        {   
+                        {
                             id
                             type
                             email
@@ -792,53 +819,50 @@ describe('account', () =>
                             dPermissions
                             dTenants
                             data
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        id: '282952ac-f183-44aa-875b-f78cc8b98623',
+                        id: '4e5b429e-21af-409c-87f0-fa598940e5f7',
                         type: 'USER',
-                        email: 'xpbvopa78hi6ctbwe2xzjnenffelwtqrf889xtgrs1jkgr61w97ip0rgz4780la4hpyls4dtn5lxhgcwpt6k3pp48i0v2u97fj9h930t5sntms0zlmyiyo8z',
+                        email: '0yc7kbepnmswetuqjp759qfpe9ml8sqyl0dm36eilpwg6s925qhhgv73fkvgnak4pc9yz86732ri3dky79d08pmgzp1okwxo4fmz0awq3ffpaa12i4tqk59s',
                         isActive: true,
-                        clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
-                        roleIds: [],
-                        tenantIds: [],
+                        clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                        dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                        dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                        dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                        data: { &quot;foo&quot; : &quot;bar&quot; },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateAccount).toHaveProperty('id', '282952ac-f183-44aa-875b-f78cc8b98623');
+                expect(res.body.data.iamCreateAccount).toHaveProperty('id', '4e5b429e-21af-409c-87f0-fa598940e5f7');
             });
     });
 
-    test(`/GraphQL iamPaginateAccounts`, () => 
+    test(`/GraphQL iamPaginateAccounts`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         iamPaginateAccounts (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -853,17 +877,18 @@ describe('account', () =>
             });
     });
 
-    test(`/GraphQL iamFindAccount - Got 404 Not Found`, () => 
+    test(`/GraphQL iamFindAccount - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         iamFindAccount (query:$query)
-                        {   
+                        {
                             id
                             type
                             email
@@ -878,13 +903,13 @@ describe('account', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '6aad0a89-be0a-4d48-ac1b-df7177d0b6b6'
+                            id: '5b212354-8ac1-4aff-a1c3-91a317e49595'
                         }
                     }
                 }
@@ -897,17 +922,18 @@ describe('account', () =>
             });
     });
 
-    test(`/GraphQL iamFindAccount`, () => 
+    test(`/GraphQL iamFindAccount`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         iamFindAccount (query:$query)
-                        {   
+                        {
                             id
                             type
                             email
@@ -922,34 +948,35 @@ describe('account', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213'
+                            id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindAccount.id).toStrictEqual('7587d893-0ac2-4ef2-83e1-c35b2f3fd213');
+                expect(res.body.data.iamFindAccount.id).toStrictEqual('f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b');
             });
     });
 
-    test(`/GraphQL iamFindAccountById - Got 404 Not Found`, () => 
+    test(`/GraphQL iamFindAccountById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         iamFindAccountById (id:$id)
-                        {   
+                        {
                             id
                             type
                             email
@@ -965,7 +992,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '5da871ba-ef71-470a-8bc3-9041cbac8f49'
+                    id: '7aee6fca-9435-45d5-9fe3-e972fd8f31f9'
                 }
             })
             .expect(200)
@@ -976,17 +1003,18 @@ describe('account', () =>
             });
     });
 
-    test(`/GraphQL iamFindAccountById`, () => 
+    test(`/GraphQL iamFindAccountById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         iamFindAccountById (id:$id)
-                        {   
+                        {
                             id
                             type
                             email
@@ -1002,26 +1030,27 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213'
+                    id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindAccountById.id).toStrictEqual('7587d893-0ac2-4ef2-83e1-c35b2f3fd213');
+                expect(res.body.data.iamFindAccountById.id).toStrictEqual('f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b');
             });
     });
 
-    test(`/GraphQL iamGetAccounts`, () => 
+    test(`/GraphQL iamGetAccounts`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         iamGetAccounts (query:$query)
-                        {   
+                        {
                             id
                             type
                             email
@@ -1047,17 +1076,18 @@ describe('account', () =>
             });
     });
 
-    test(`/GraphQL iamUpdateAccount - Got 404 Not Found`, () => 
+    test(`/GraphQL iamUpdateAccount - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamUpdateAccountInput!)
                     {
                         iamUpdateAccount (payload:$payload)
-                        {   
+                        {
                             id
                             type
                             email
@@ -1074,16 +1104,15 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '459137c8-f7e5-49e0-93d2-9ed398a3cfe9',
-                        type: 'SERVICE',
-                        email: '8axf4pgz7k768sbwg4xz9m24ek2mz72m7jr2wnuw5lwfzlaud1fq2mvvhnr37x2qid4etoh3u7h9q0csmlxf2la2db05xwqo4s6cewbuapb4bghitxxpu8i6',
+                        id: 'b5d5ce58-1197-4c94-9f7e-e9e303839c42',
+                        type: 'USER',
+                        email: 'h1nr9nqjl60loxptpld6gsny0sqshlxm4jd1hzwe5z1tium27750awycj8h48bw3o9q0wm2qicq758s7z6zkhyv3ndyl0p4b4fotdrti9kdckj4uth8alr7u',
                         isActive: false,
-                        clientId: 'e683580e-3ba1-4256-acdc-2c42cd694b5d',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
+                        clientId: '96b19c1e-021e-49a0-a5b2-b451a605ad18',
+                        dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                        dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                        dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                        data: { &quot;foo&quot; : &quot;bar&quot; },
                         roleIds: [],
                         tenantIds: [],
                     }
@@ -1097,17 +1126,18 @@ describe('account', () =>
             });
     });
 
-    test(`/GraphQL iamUpdateAccount`, () => 
+    test(`/GraphQL iamUpdateAccount`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamUpdateAccountInput!)
                     {
                         iamUpdateAccount (payload:$payload)
-                        {   
+                        {
                             id
                             type
                             email
@@ -1124,16 +1154,15 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213',
-                        type: 'SERVICE',
-                        email: 'z23c0ssip5kq2gzjcu1sk9osplex0guyntq5ihbjop9sgmc1md6r3mtylxg24sg5luuxfveuazprqr5nhdeg3kw1r1vhtmxn90jcgvqojzntx0nq5bddbpqu',
+                        id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b',
+                        type: 'USER',
+                        email: '30sbmke9t6b0xgcrerwzrqfzxogd7a3hoezd4c6cophbra1q3geqt2jcx5slx7ykfa4nw5tn03ea7iq7iv5ujfkzymq4ji4l0qryhllvfs0mlwolfifhhfrt',
                         isActive: false,
-                        clientId: '0bec85f7-356c-4b0c-9343-84f6b60960f5',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
+                        clientId: '7651bb44-bc6a-4127-a5b5-cbe9677f8f56',
+                        dApplicationCodes: { &quot;foo&quot; : &quot;bar&quot; },
+                        dPermissions: { &quot;foo&quot; : &quot;bar&quot; },
+                        dTenants: { &quot;foo&quot; : &quot;bar&quot; },
+                        data: { &quot;foo&quot; : &quot;bar&quot; },
                         roleIds: [],
                         tenantIds: [],
                     }
@@ -1141,21 +1170,22 @@ describe('account', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateAccount.id).toStrictEqual('7587d893-0ac2-4ef2-83e1-c35b2f3fd213');
+                expect(res.body.data.iamUpdateAccount.id).toStrictEqual('f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b');
             });
     });
 
-    test(`/GraphQL iamDeleteAccountById - Got 404 Not Found`, () => 
+    test(`/GraphQL iamDeleteAccountById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         iamDeleteAccountById (id:$id)
-                        {   
+                        {
                             id
                             type
                             email
@@ -1171,7 +1201,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: 'c7c2a504-7928-46b9-9369-f853f7a5beb4'
+                    id: 'f0d7dd96-de0a-447f-9619-c6897911f456'
                 }
             })
             .expect(200)
@@ -1182,17 +1212,18 @@ describe('account', () =>
             });
     });
 
-    test(`/GraphQL iamDeleteAccountById`, () => 
+    test(`/GraphQL iamDeleteAccountById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         iamDeleteAccountById (id:$id)
-                        {   
+                        {
                             id
                             type
                             email
@@ -1208,16 +1239,16 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '7587d893-0ac2-4ef2-83e1-c35b2f3fd213'
+                    id: 'f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteAccountById.id).toStrictEqual('7587d893-0ac2-4ef2-83e1-c35b2f3fd213');
+                expect(res.body.data.iamDeleteAccountById.id).toStrictEqual('f5002b16-83f1-4d5a-8ae1-1ed5cf9ee77b');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

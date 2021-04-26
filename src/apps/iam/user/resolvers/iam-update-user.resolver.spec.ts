@@ -33,19 +33,19 @@ describe('IamUpdateUserResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<IamUpdateUserResolver>(IamUpdateUserResolver);
+        resolver    = module.get<IamUpdateUserResolver>(IamUpdateUserResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamUpdateUserResolver should be defined', () => 
+    test('IamUpdateUserResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('IamUpdateUserResolver should be defined', () => 
+        test('IamUpdateUserResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

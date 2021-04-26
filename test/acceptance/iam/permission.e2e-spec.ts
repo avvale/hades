@@ -82,8 +82,8 @@ describe('permission', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'v5rcttd620q7knnghgiuot5vicnx7f1gd3m2eyuuec9rrio0l7nhph608q47x2i3by1bx01rnwdiuelokagrtvbqtwedrlp9w7umm4t33ie87qftdy3x73d7xwegf89cfl0co0mr7mczl3807ywjocjd64vlfiawc2um2di626om3g60rx2hp5e2x6qdpb1yt2z1ynt2liccvshq4qd4xpes9qcas76jhvybc5atp3tvj5gfz8rqpc1pj31c4ok',
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                name: '1jd33qda8anwy1g254oab90b7uz7zxr1xgs26gv0bxa94m6ekvfw6xgn21oxi9o575jf3yk6ed5uqz0qfdf97btuqzaljwgw4ri36wkrci0cstdrcz00mtj6ng89xhcxmmjwaondfkxzpl055b47guiso1mwwf0xq2dage2kjot736dfu9wh67g23dwvy6u5yfuthhcmr5j80ethpgr7ygeqnujo720dqdwl5o33876di9aq2m9gv8m1x5eggow',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(400)
@@ -99,9 +99,9 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
                 name: null,
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(400)
@@ -117,8 +117,8 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
-                name: 'w3yrbb9pthxifit0gttcws3t3e8e9pzmn293jukspgc56bhr3rqrxggu8yy6a6oj6xkzl5hwju6c6r3v4bt5b41wbv0t11lvad3advn7bb93mjg4pg5943wg172mr9fstt834n9d996sskucjiy7havnz9pma8vsjey2jdag7s95fze3t9wefhw4gqch5c9dadtbtubqtxye6zzgpj0uwd23py2bg3l48gnlwrx0hjql4h79qmmfksvd1mvgnjm',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                name: 'myp1e6lh1jhfyf8xmlb55n6slyqvzkdoc9j1q0bogzt0vets0cby3fcsdvds2ykc30lgcjyamizaxkwcpjtkx4zs9wqdptjwnz1xfg9p90yyr7crwfx0rpoitrd42yrj788unhopkew8b8gt0h8itqmf9v1ay7s487kjtp2yjsvu01tiseok03s1qta8snrm52va1drtjmdki0rpsbc6x89v6wnq37xp2fwy0jk9bqyqetyms9x7f2s3k4y3a7l',
                 boundedContextId: null,
                 roleIds: [],
             })
@@ -135,8 +135,8 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                name: 'noj56e7dxwfzbccbrbws7sq30pld3zimo1t85r0eaphy4x4u63eevrtv4ftueeymcjbjk5gpzrvbejblk3jt52wsn6xo9eqdqsdv31qmkwejsv0p0kxb2d3hs7ygdof3zleqj7l6s3v6c4t5a04c3un5y79irrwq3xtszm3ibxg9sj5k6a4l23fyjcxvgjo05bwscxvg3gauu8yp2zgowagpqn4gsy5lj4fa0u0ew3uhd157v77reymh6lae9gi',
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                name: 'qb4zryrgxbrkwc40cb99reo6fq08fnj3rkhkoz73wgyc3nukdlzscer26jw8a1mm4b2fvfzwrxsniigmydr8uwn8s0anmzw6bilj557llsdc963f217foj8vzhc4ys9vqzqm05k3r7xoqpe5aiaex026z384apn9grvr194xgkejqmoa9fsdaecfiiylvec1h238jt5ckl9uukfgj1hzdlt0489xsxnayoq0aji84rurabbg1zfm56xbwok0a9k',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(400)
@@ -152,8 +152,8 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(400)
@@ -169,8 +169,8 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
-                name: 'xnkzcfhsxp828dz3nxoecuf06t5yhgiwg2tba2be7p1trqt65zdh3w8y9hvoyoln1kbaimq1emp3b4rdajvvyxf7e8uogixkb5jj5n4k7d2c31b7h51ueevmne07unryv81514mmtr3od2jv8179ande834ff38ydp37kpppquwhgnvs5v0a9gatocvmzp9rpronk86o4owadog3j86hrb27o24gkw8krikkvxt40n60z2sfxbsykj6osg87pje',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                name: 'srhvf0so2jzv63lp680j77v3q0t3bvf4bn2f0va8z7qtk45tdl7x3n7q6xc1lvr44ue6ew3lb7shjp39mevfgj0m69j84parwjfc44lbghnt2bavigsf538fcvvd79dtfp5o53lo1yoez52b42fhazquyynck9pplapd80w4r1ldwl8otamgqoa7wfa5s79er8lhz5ojd1jh3vok4ce003tj63fw2moshsq990ib3bn441bx20fnc5ow8d6n9lp',
                 roleIds: [],
             })
             .expect(400)
@@ -186,9 +186,9 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'lk1w5ssypis9svqqqugziq10q2ujxquof37mt',
-                name: 'iizsb3tvevkmxbj9vh057hkx3r0xq2vzo4c7w859jyu5z64msixzx4pvn9rf57pslpg7j40ak9bztn8lv608wxtgxmramlcotig9cilp0tmxyiyzd1uxhxymd6e7a9q98xh6wi8pm5rz7x1qq5ui3umydozere4gv11ki45dm7xikmwyzq1g5irk0gt96aqugkz16tg9ciennt89int638liuj26v86pdq69ua9v4hg3mq7r2qjn8ub184hy5av',
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                id: 'axiim44ipqzayxl6qisg5zni0nj3jwlruddw0',
+                name: 'u88gkn387ou8votdlzzf3ymf2nvn942x4n0fajusdr9t021nhua5k4n5buc96mo92rx3hgp6zz8vd2g6q5x1a2jnrjh2ftwq3jamuu5a7pwvtjjqx0gfmfcr1w53jd7yhvv7wd4t4e4iykxept3l4984p7v4w3u6bv74tao6xfxxzci5amj319g4s9ma9bqz4w10tvd6w93skoxv8amxzalhf1ls0bahps313hf6gskeiqjnxtf4ikp8rl40tin',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(400)
@@ -204,9 +204,9 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
-                name: 'fwvsi6z23hyqaknimkzwd1jsuk9n5hatrpqn21yfvwttjqua237vmxzmf5gswb44sws5if1sy0uz7govdj1r308fvdbglgx2flayonp6zy9jvtpg4wodfqchdodagj30j1azyn59xzs7uhh9f0wzi8etobp2wnjqt2475pt5hasm87enk1d9nqsud3ar1tcpt8xp19ju8kvyofaml6pezl8d3sag5lrb3d4o1g0c8tuw8n0i9m1pxa659xppn1x',
-                boundedContextId: 'plyq99lj20lb41g61lrtfgqsydvb11t93c3s3',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                name: 'tg6treamc9uovr378z87gorjlfflk9jy6ng1bhcvjpl4w7z2c5dtmmmkhieeugcprnb4q0on2dwymwmd4gnktqbgpjxmqef2b6g7qiudxyc6kj0kkshzj1hxzrk09sa2zzxzun2u0hyucuw2yvwpths2ukzcgz2rkn80mcqfd6jv246wws3cmb2wnqaacv0bxp2psy2j5geiw13xcm6120bk6qitlcp55ll3s5xgiz0uipnb2a98mshdqkkh0jj',
+                boundedContextId: '4z0l5te7f1qsfh3tsfhuc1q00siq45jwld87j',
                 roleIds: [],
             })
             .expect(400)
@@ -222,9 +222,9 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
-                name: 'pp7c1m040johlqolfr93eueajrdnpok7a01ylvcmu57u08ub5ajpaq42jye6aqniyfr3mm11q6c7dy206lcycidwnngibz4pf30q9sn3thd837fzl2fo3whflzgij7xrxwln0j2i0l33umrs1kqbqka4mupr4zbeg687jjv8suy420jb7edblcphjhsaob8yxm0hz9gt5ddykvdjenylfny5mjc2lbhofj97e74edk0497ff6m16fxtxjl8tl6k4',
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                name: 'qhczhjdhln7o2f1euek0pbbchcuy1erv9fwxxgm2ire63zqqrrupbrl0gslen57a1318kyfnasgcee48vtcx09o3t073v5es1c1ry4oyp2ot80szoagthn27yerifx62xw8ztlv107502ri1im20zsreg3tx0nq3un0ke65ftplnswttoyoaelbr4rppq2x3fmlroxq53csum7tzv5u91kt78cpkdgf9ayomnzm6f9gl6a72uv4qlrdhvkvwejiv',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(400)
@@ -241,9 +241,9 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
-                name: '8gkwzybs7w2jb54ouvcnopud0vyvyyzabclpls6pib32p1djj071kzpeqq1s8bu48xnhsbv4vk33bbjhbai1lle0zjltpba5cz6cajq38xusgnja98d3ll1ueqmbz2b45xkkrhnqo0tti2oyuulyxd8jdwolhq16bsy2ukxl9aga38xitb305aqq1xfcrlehliiv57vxpqyxtyu6ne604hmah2ei4ilv7izda32dyjisk8g8n3ew0fegsnh1c0z',
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                name: 'k6rwsoran1pvz9sn7xkx50yktvujeoirmmc1jvy2o5lgxe7ij4mgl7oz2z0bzffwaqc97eainuk1arlss95vkpemfdfwwwjn30z67afoppp688j1vlg40a0l88zh0n4io8ucqz8y69k0vfpsqwbp21ievcufmu2cdderksdccswgwlzcissdymtnrr5g1nr883em0d8xssb22abw4df319zq0mgbgbqdvszb4dz197pe988p3f3ovvfrcc1w4pt',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(201);
@@ -281,7 +281,7 @@ describe('permission', () =>
                 {
                     where:
                     {
-                        id: 'dc734aa0-9b80-4cd1-9cf7-e51882f64c01'
+                        id: 'f47f0e79-86cb-4ca3-86fc-b88294f4f8a6'
                     }
                 }
             })
@@ -299,18 +299,18 @@ describe('permission', () =>
                 {
                     where:
                     {
-                        id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf'
+                        id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '1b74bb3c-30b9-4273-88f2-311e7fe605bf'));
+            .expect(repository.collectionResponse.find(item => item.id === 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5'));
     });
 
     test(`/REST:GET iam/permission/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/f32c5a4c-7754-4eed-b81b-237bb8128959')
+            .get('/iam/permission/568bd2e8-edea-4c52-89bf-475ccf0a662a')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -319,11 +319,11 @@ describe('permission', () =>
     test(`/REST:GET iam/permission/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/1b74bb3c-30b9-4273-88f2-311e7fe605bf')
+            .get('/iam/permission/bd15cd18-46c6-4312-8df1-d30c7d83e3e5')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '1b74bb3c-30b9-4273-88f2-311e7fe605bf'));
+            .expect(repository.collectionResponse.find(e => e.id === 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5'));
     });
 
     test(`/REST:GET iam/permissions`, () =>
@@ -343,9 +343,9 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '06eeb184-19a0-49bb-912f-58ca47e7e49b',
-                name: 'dz1sxitf0feydfgaqaaekpb5qixbqeld56ertn0euigq89amm1aggg7hxaempve0uh2ny0eaap12wlpfg348f3wir7vewt4td132hm5drw0g0h22p2454vd64lle0qnznsxc4a821w8nvaodb8om3pjtnrzd1j2lpob30z7wqivzlmoo8vvg3q0b7bl7oq0q6hctpotyqwkds5ny3zz3t3fshifyavwreymxygqu5blbiioyubf2gbsch68p4sk',
-                boundedContextId: 'e0b1870f-c22e-4206-a3dd-b80e14f9c4bc',
+                id: '7a12beb8-0b0c-4fd1-b52f-a2be58750cff',
+                name: 'e1xas1t9g659k4qycxofrpdykdyw7f0wzrquixthmaykfydrrx5kk6pt6w5eebjy5t8z2sklz1d8p8d9zb7j9tdmydfrbhvqwtyi80vunltctcgqmg02ossexjkpk5fmgegwc2ptts6qel82sa1pnxlv0r1kkaep6li4575xgkw8hnuf6g11w49d15lpk1pmphfcsfmzzhkcc7kjkw5ixfam2ht2sjlvadska31rutz2law7ovz7d4s43qkk9ne',
+                boundedContextId: 'b0e74fd3-9926-45c4-afa3-ddbfbaa41ab6',
                 roleIds: [],
             })
             .expect(404);
@@ -358,19 +358,19 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf',
-                name: '3wb84god9k2u30tyyp6cshe5vu4pn7t2f196xc9e0zh82wrp6kuvfagwumviexkqvjfhll1ycjj4zvqzjvkb3kt7h8hf9411cxeovrhhwc6eksxk4bvl75vatd9c39ovgfmp5rsp4w67bp0ccyc3172593hdgmifr0sq5x14ysawgo6e04jw88g5ns3u9l2l761u15cmw4nguaozvl3kkwytjwpscb9hqkb5j7o1kp8aq1n43qqxuklh2pe6kbs',
-                boundedContextId: 'bd2fedbb-ecb4-4d95-804c-bfbc047bcfac',
+                id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                name: 'dm9pq6t183o6u0sik1sze9v3ib93ef7m5uq2fr50rhutdhc6o7fyu3ragbluqgxh44oj2w3zl3wuhu9gotkgvzn85qqd2hyf80c3bw11z9t9rcbi98whcw14zqtdrxxwrl8786rw1f7bw2qxv2vhf4vjabfou5exvf3uitccc9dezxv23bqf2u125so5s6n43gz4nfz4vilihfp1vow2bopg4d91kkrksfh3xd6jxp1925ckrfliqj3lr5or05q',
+                boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
                 roleIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '1b74bb3c-30b9-4273-88f2-311e7fe605bf'));
+            .expect(repository.collectionResponse.find(e => e.id === 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5'));
     });
 
     test(`/REST:DELETE iam/permission/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/ea8ecc2a-ecc9-499d-b76f-a5d2121c3477')
+            .delete('/iam/permission/c54abeea-72fd-4913-aafe-ac14c481dfea')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -379,13 +379,13 @@ describe('permission', () =>
     test(`/REST:DELETE iam/permission/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/1b74bb3c-30b9-4273-88f2-311e7fe605bf')
+            .delete('/iam/permission/bd15cd18-46c6-4312-8df1-d30c7d83e3e5')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-  /*   test(`/GraphQL iamCreatePermission - Got 409 Conflict, item already exist in database`, () =>
+    test(`/GraphQL iamCreatePermission - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -434,14 +434,14 @@ describe('permission', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'c3d45238-0d40-436a-b468-3636f2bebe70',
-                        name: 's8dumoh2v59nzldhoyzvmte43mkdr2cz9q05tjnqjb5c36rb561j4kpt819trxvo0py3zynme26nzfzkravz8le7wtozmhiwp9ht6n53ka0u2vl8075y8vpkdvt74ogznknegl0cngiq4clcbl33o9d6n4lqoykuyj1z8xnjxedhu59o97u3hv0fxz6tcmiu4mgu38u2g3upqhbia4jm6il0a0x4pfn7ct61hhcr71sf8c9lhj1jypxoansj3sr',
+                        id: '2b2b7d5b-ebe7-4306-b3d6-5d575a54015a',
+                        name: 'bey3zq945z0tmldw50xlt31lws7ory1gcjch8067xcnthah6sall386lsabcqfgnyo90rpnt2uubo13wck7v1i4eeow7llrizpyd6e4acqjgolgwqybsq4nihrp807kay6p8yp9q1u6zv56e9p65q3552h10bmiz2j9ra0vbu7vgcedvzq7zc0cr59daarof5kg9qgpjjawmltxwg0xrj661g8hiyyymagmabwfmyli44i8p9ohozw25nvttone',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreatePermission).toHaveProperty('id', 'c3d45238-0d40-436a-b468-3636f2bebe70');
+                expect(res.body.data.iamCreatePermission).toHaveProperty('id', '2b2b7d5b-ebe7-4306-b3d6-5d575a54015a');
             });
     });
 
@@ -478,11 +478,7 @@ describe('permission', () =>
                 expect(res.body.data.iamPaginatePermissions.count).toBe(repository.collectionResponse.length);
                 expect(res.body.data.iamPaginatePermissions.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
             });
-    }); */
-/*
-    
-
-    
+    });
 
     test(`/GraphQL iamFindPermission - Got 404 Not Found`, () =>
     {
@@ -495,11 +491,11 @@ describe('permission', () =>
                     query ($query:QueryStatement)
                     {
                         iamFindPermission (query:$query)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
@@ -509,7 +505,7 @@ describe('permission', () =>
                     {
                         where:
                         {
-                            id: '2fd8ac04-f14e-4612-95f4-768fb283a59b'
+                            id: '41f8aa6c-441c-4b1e-a316-f74bf324650d'
                         }
                     }
                 }
@@ -533,11 +529,11 @@ describe('permission', () =>
                     query ($query:QueryStatement)
                     {
                         iamFindPermission (query:$query)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
@@ -547,14 +543,14 @@ describe('permission', () =>
                     {
                         where:
                         {
-                            id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf'
+                            id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindPermission.id).toStrictEqual('1b74bb3c-30b9-4273-88f2-311e7fe605bf');
+                expect(res.body.data.iamFindPermission.id).toStrictEqual('bd15cd18-46c6-4312-8df1-d30c7d83e3e5');
             });
     });
 
@@ -569,16 +565,16 @@ describe('permission', () =>
                     query ($id:ID!)
                     {
                         iamFindPermissionById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '2b08be7b-7a48-4664-bed2-b3fcc6896682'
+                    id: '073db2a4-ed84-42a8-b57b-a217c1255ff1'
                 }
             })
             .expect(200)
@@ -600,21 +596,21 @@ describe('permission', () =>
                     query ($id:ID!)
                     {
                         iamFindPermissionById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf'
+                    id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindPermissionById.id).toStrictEqual('1b74bb3c-30b9-4273-88f2-311e7fe605bf');
+                expect(res.body.data.iamFindPermissionById.id).toStrictEqual('bd15cd18-46c6-4312-8df1-d30c7d83e3e5');
             });
     });
 
@@ -629,11 +625,11 @@ describe('permission', () =>
                     query ($query:QueryStatement)
                     {
                         iamGetPermissions (query:$query)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
@@ -659,21 +655,20 @@ describe('permission', () =>
                     mutation ($payload:IamUpdatePermissionInput!)
                     {
                         iamUpdatePermission (payload:$payload)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        : 02254c8c-1ee3-4909-9bc1-ccb787d6fc24,
-                        : kq9wmmbhbq7gv6jcgzr9eg263r3zl7da3zik4hjtls3swuu2b3x2gvxjipvzhlyvgmsrwvghwpki8b05li39cx4h013hetjy9y8xbbcqa3htlvl9dt1nkqmd3sdqnoqk4xtzdnpgw9a3uo9snfnxtq8o7fm17g43h89o9g8b4hpr4eyel4nvrwftz4braso36mxihabvirphzky4qfqptppm8tg22dt59l9bjmzipvtz98ym4k8fd3rv9elga16,
-                        : dc93fdbc-816f-4170-a623-0ec4fec9a6ad,
-                        : [],
+                        id: '52fcc055-34f3-40c2-8b91-669f27702ea0',
+                        name: 'dh7b0eaqrsc5aki7bhhd0atz7fuk5fiujbgw9b2ysujk5eo8lnhiy2dhgpu1729a0733u4hmj7j09ik63meofnq228wil0627jdga07q71qmwk5qtcxxecj7xqeqam23r3czmd0h4mpti5lm4415xy37skn0umooz85twe60lc37vczyrxt4hovgxjgnh1vilf9ohjn4mnf4qe3uon504l5wnuq2quzw6fodu7n16uxbe0hxhwhoey03geddaq7',
+                        boundedContextId: '06d4a1ac-8d22-4c49-a274-3b7ea3b6f171',
+                        roleIds: [],
                     }
                 }
             })
@@ -696,27 +691,26 @@ describe('permission', () =>
                     mutation ($payload:IamUpdatePermissionInput!)
                     {
                         iamUpdatePermission (payload:$payload)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        : 1b74bb3c-30b9-4273-88f2-311e7fe605bf,
-                        : wnaktefutofvwyb5d77sypt93irgm1802qfmnlzfyhuhh1l43vc3j6kgncl270fu8zpxi251rxm1dj9jawg8mfkavv40pg349vy1ijs46th7sv13mpfdth02stcxrdmkx5qaos69mxadkzemmrrltthg91njnvg0gxxg4xsl6j42abfyzkc0ay68vob5mp0jezc77waao2zft6an6oal1g0pwr6jzwnvf3ftlysun4p2she2viyqprl5o4m2kpj,
-                        : bd2fedbb-ecb4-4d95-804c-bfbc047bcfac,
-                        : [],
+                        id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5',
+                        name: '61793vkjccyzigicz6vdduuyt5js1309rjpyez8qxpw9bcvj4342kwknl695dzmfufcljcxj4ecwjyr4n4ef6c2b6go7kq72rbk0e0ktwf0p4gfvap3mxtrv9fci57w338x6fw3p9548m75287qjbn8sntmb09qeoehhtxoee2uhz2ggo4iitga6kb8itvfktjwe0kjjeiij6ed9e73nji3pj1djh4zt8sfd0c9lwv399f2loq50ni52usjekaq',
+                        boundedContextId: '1af41918-d565-4990-99f9-f51945b1dccd',
+                        roleIds: [],
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdatePermission.id).toStrictEqual('1b74bb3c-30b9-4273-88f2-311e7fe605bf');
+                expect(res.body.data.iamUpdatePermission.id).toStrictEqual('bd15cd18-46c6-4312-8df1-d30c7d83e3e5');
             });
     });
 
@@ -731,16 +725,16 @@ describe('permission', () =>
                     mutation ($id:ID!)
                     {
                         iamDeletePermissionById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: 'd46e1a4f-f6e7-44f8-bc99-7bc9f77fa13f'
+                    id: 'e2dd1e6a-88ed-455f-94fc-6d44ff8b47a3'
                 }
             })
             .expect(200)
@@ -762,24 +756,23 @@ describe('permission', () =>
                     mutation ($id:ID!)
                     {
                         iamDeletePermissionById (id:$id)
-                        {   
-                            
-                            
-                            
-                            
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '1b74bb3c-30b9-4273-88f2-311e7fe605bf'
+                    id: 'bd15cd18-46c6-4312-8df1-d30c7d83e3e5'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeletePermissionById.id).toStrictEqual('1b74bb3c-30b9-4273-88f2-311e7fe605bf');
+                expect(res.body.data.iamDeletePermissionById.id).toStrictEqual('bd15cd18-46c6-4312-8df1-d30c7d83e3e5');
             });
     });
-    */
 
     afterAll(async () =>
     {
