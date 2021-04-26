@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateApplicationsCommandHandler } from './create-applications.command-handler';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
+import { CreateApplicationsCommandHandler } from './create-applications.command-handler';
 import { CreateApplicationsCommand } from './create-applications.command';
 import { CreateApplicationsService } from './create-applications.service';
 

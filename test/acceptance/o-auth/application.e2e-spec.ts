@@ -3,10 +3,18 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IApplicationRepository } from '@hades/o-auth/application/domain/application.repository';
 import { MockApplicationRepository } from '@hades/o-auth/application/infrastructure/mock/mock-application.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { OAuthModule } from './../../../src/apps/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
@@ -14,6 +22,7 @@ describe('application', () =>
 {
     let app: INestApplication;
     let repository: MockApplicationRepository;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -27,40 +36,56 @@ describe('application', () =>
                             validateOnly: true,
                             models: [],
                         })
-                    })
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    TestingJwtService,
                 ]
             })
             .overrideProvider(IApplicationRepository)
             .useClass(MockApplicationRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
         repository  = <MockApplicationRepository>module.get<IApplicationRepository>(IApplicationRepository);
+        testJwt     =  module.get(TestingJwtService).getJwt();
 
         await app.init();
     });
 
-    test(`/REST:POST o-auth/application - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST o-auth/application - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send(repository.collectionResponse[0])
             .expect(409);
     });
 
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationId property can not to be null`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'nqgahbli2vyoxmlwi72f5vmwxk0l1h5q319sw4dd850r02zt9szt9jim5z6cqhomx648mf2w2xe4j0572szq1zlbyq9gshrkw1gtpckpw9wa8y4maxb19nuph9nsd5qcjomkacx0153p9dlvqo3gc15n8qmy31qtjdkw8ibfnvocz3fk8sm6l47jqnmjf4nwmowtru5uqeinmvnoe0u7sul8nd9vf99pmxz7cs1kkusrburzw8uw2wre8153edk',
-                code: 'vp4jb0udl5hc0p41n7hfytt9dzctt7gdvyk6pr89ip7mkfc8kd',
-                secret: 'otaishmofobzvxs2ozeuu1k2eni925cnvuay6cgog7c80dm0lb0bg65gd7cb7z9y307cq96x8egr5i0twr8mwat62r',
-                isMaster: true,
+                name: '6mlv9efqxcvfjducvmoigfof0hhiyhy4tg1vvpjmxg0zo0xepn2ancggony3ap9vtgic7k6z8ec5jn3bgqaqtij0tb9vnkejje5t6a9cdjrye94gsz03fltm51rolp0zxeoc9lxfhijxsw835kmo035zrbrmprqff70qpox9putg4r6zdva8pmap4iye0s2f341i7lpk5sjvzosv7wfmxjow3chn29oanhr0vek01hg5rfthh5k178ks7h364ah',
+                code: '3mutwuwdb5vdkc8b2pg79jqkehf78gj7amzi81l0otqdk4cb3w',
+                secret: 'cl66u1crjecza8vtjyv60zf0zqib85o1sc3i6xkir9f41h5r4xf9ncbs2703rodd76b6jxr5ypxx9nkgvj0419ssw7',
+                isMaster: false,
                 clientIds: [],
             })
             .expect(400)
@@ -69,36 +94,18 @@ describe('application', () =>
             });
     });
 
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationId property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                name: 'f90z6c4g5vtas4t44lqd2f01aiy5rio5yngvcc5e39eha0yepriuod0mtfgzjsay00dp4lg1wt3snh3bfgtzrdlgext846l4zxjncfjarzon50bji6f7rvz7mo0u4wei9p8xwzdkoe4zo0svd5ok0a3lunx3h566ck35u9z535vlw9peaokmfdtutp0awfwqi85aufgb3g1bwzrr1flfuctgphpfh7wudh8srpxdj6g10kwxo4e80n71hm1bqoe',
-                code: 'gopjbhssq96y06zg4opda5hk5lvp60rrcp4gmxqxzg1yd5oxo2',
-                secret: 'm82o1jvpjmuqvmdy6bb8x19fbui69sn9ubw3vm9nmnuts12sv9ypoa6l1bc1cx94mmnwp7eyi7qcq6gs2vh75kkq1r',
-                isMaster: false,
-                clientIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ApplicationId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/application')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
                 name: null,
-                code: 'vrot9qkoq6b281im8cwu82hpu88emio1od6q80zzfeqe8gooid',
-                secret: '0zr39uhuyfldl62euvrzvwoa07yhkkzs1peb85phc20s0req7h8dr6zt1ivqke3zz6tm2emkygaf8mq4cgq1wfnl7b',
-                isMaster: true,
+                code: 'azqdcraijczfdbwgf4z54e200qc08u0r8kaqijqxaijbp0b33c',
+                secret: 'wnfiyj6s2io0cm4xma1i1my3ja7slxl2mb73o1f4jdlwovjhojtki1f6y4nlt35isqo4nklatnt0xkx5z6xkyi3ugd',
+                isMaster: false,
                 clientIds: [],
             })
             .expect(400)
@@ -107,36 +114,18 @@ describe('application', () =>
             });
     });
 
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationName property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationCode property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                
-                code: 'a03a7f4i1el97x57weddfrxpwmeg8gy1g1w6dcieyxa121pouk',
-                secret: '59fc3lj0d90ohnxe5zc0tccddbzd10sea10suckvjn9ngy4qkae05m6n6gj8pw8brfcr7s2294nf58v4ms7b5xyamt',
-                isMaster: false,
-                clientIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ApplicationName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationCode property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/application')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: 'ftq5edjtkw9lod8l0pvs92iekwioud9cdnz9dy9yyphuam3btknh4cnflvo2e01f6x26wtpuze8a7u1ai5nu7ysb9c9ai9de6k40kvj5jod74jtb4kshfwvjx3g20uvl1fywj18fgdgq2286oi9h7caa9nqz47v3da5kgqfrand9wgqb47rkoxifdopfwb9sijuer1ajtz27xhz45zj4r8z7h6atsy1uql7a9mpij5sxo3mlxluqinhqcu3gdip',
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'ra5bt3bewfqd441n653wmxxm40c6eko11aqv1sehakz2m3em1zb825dao26601qsa31jk9mxalr4elbmyt78ayfjbinkj1gwsucdqbp4bshpmciuo0zv1ir4s2dnevgkdnn9b1h3bue247q1tx3deyleax6ygo3qagjvvfdp5x5rp83t2ryphssfb4hu20rbelikzgzbyk3kga51dno4w1qyt3uxtggrlc5cjz8k8xec6vmd84sdwo48lpba335',
                 code: null,
-                secret: 'ixlowz1aoyp83q76gnfxuaeyzpj1bwdsjezqy917bfg2r18s2dev66eez89ofbyprlvvy310g95a2i2xluoy09ohh7',
-                isMaster: false,
+                secret: 'l5ll6p76ivug8uexiefptf8dnb5cjngiy07cquboqt419d25jbrp6m0jkyrvwm4ama6pwcncxhppzp6x8laa48j6w5',
+                isMaster: true,
                 clientIds: [],
             })
             .expect(400)
@@ -145,36 +134,18 @@ describe('application', () =>
             });
     });
 
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationCode property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationSecret property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: 'colxado7an8jd45lv05xvqd04zyqyqkdkqcpkbyslza4d86rs7qt7gkvszo6dlje09pdg081714e353jpbwbp55rxuodavr19m641vnbqgliy0kyfa8xcng7ea0memg9d1p2uwekux5zb9y7tkjiksuevdtcpbh4mfa39nq67w6etlogn7tmlgj0k4nqhgwetz3l65yw5sc0j5xdkw0eg2o6pw0c6adek6g0x2ips7cev54q75xlv7n7g78qlbg',
-                
-                secret: '1sximklpxnllphj67gh1gboqpnt17pixeilt6mym1672aj2qucasm4rsh244sazapv4bthd996pvmbsaaxz9jt66hg',
-                isMaster: false,
-                clientIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ApplicationCode must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationSecret property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/application')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: '2d0dbscf7hkrqlnfytzt1qanzwwfvoeqch1cvtwqo2bicp65jk6now4wibsdlrutio3xz75612f8ipjab5vpwejz7bsvnr21efomdysj883y5euah8tzyzb0s094m8pkqu5zcl4pin21tw8f0gid7nijzu6sraypzrjkzpioqilxpd4n96rnr3ten9v9twk16rw048x8vxihqqaaa8ib4mvlinx8aynuy70o1vn5vaw5lviovuyb7q7mza34b09',
-                code: 'k0l7zp32cdeoc73n4upqvwwe66av9k6z65x5zqzpk9hrdfzwav',
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'zyxwziqzood187ab1thi7wzsu0tbolst2lhzhx9hk4zbkcsc2p3o1f3djohvog8a262nq4c6fei52hzxic2diosmkosfweg7fqhi7wdjcmrj0c3vpfxii59fk6hwjekb28lmlbjfcw71iw522xrbykgr2d7l72vw44mcx1t282s3ne7v1y33ujl3k10npp4xh1g7mpr0f54pz8efnn5oru6ztwz4pj9akke803yof22r89gs4vvtisgr5j67li3',
+                code: 'o4akh7j8tiyszakc2glgu88usolfurh779vgyoaqs7cdpve8ot',
                 secret: null,
-                isMaster: false,
+                isMaster: true,
                 clientIds: [],
             })
             .expect(400)
@@ -183,35 +154,17 @@ describe('application', () =>
             });
     });
 
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationSecret property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationIsMaster property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: 'u8pxfdbm0xu3ha67deaw489yb43heazxnoy9uncoktgr7bnvhspzq2znc7q9gdbjk2f6sa846nbpj45m0vm3cbfhgsg18kasmhco4r4b74ce3508ob22gni4c5984qp054ft3xyq4ueno94kjof6su669a5qi8x42yeiscaghz2r1zcbg4b6d1vi3za7jnojqktxiog62yo6lbv4rr1xsb68in08hxht2wgvpiz72xix0snb1sh80m2rzm9ogku',
-                code: 'meq56s9u422eaam3oyfb7fgil4kdmliakiijjvhm28jguxb8cq',
-                
-                isMaster: true,
-                clientIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ApplicationSecret must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationIsMaster property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/application')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: 'jne98fg1ri8ovg9mv36vg776xowrtafq7bprv80zejtj3uiq8da5rhtlmroie8kdyc9taz6kz3mi9q0fmdrhndksk2v1lu786s46up0y1h2q4ht5zna76ut3dzuc0222q9z8bpqv1eoyvv3pz17e5ohgz6nkzoaz6ci9f70314gso6gh0qo42tu0u1gf8vwfxu4cdc5r8r71th3709y83n6g5p48vjjrwut0rcu2oyivinr39i8fog15d2nxek3',
-                code: '71rtz6o4myzautxa44ew5cdhkl4059au3tcdmrmulzorfilen9',
-                secret: 'gptoruy359d4rfd7mopcmj3vw9u4y0z1oz73pd3cfletbqyjbefrjlj7ultdn3m6crn82ckye18emlfuaqeib8uozk',
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'dwa0vvndoleak0g5m6pxrpd813vnonfitnd9lkwrgj77kvfh5a99eb8rq3e4ou8oqkt2jtod02i9aj5acx5cq3351mtxz8a4znt5g9y1dj44klw4o6bh71lxvdoeoa5cl6qyqfhcyatz62i8eum0qq3ipjo43ulh1w8qlt2vfu9e7k1j0x3x1z15tpfd2sh4ibyrns3ti4b7q9r88azyfxpe4vtmiq3jy3jisvno6gcxrzjmomg3c8pr0bxug9g',
+                code: 'byrhxkv3avssouqo4qm0al2lk4loklfpeewuoboi2j6aq7adhm',
+                secret: '1abs2w4gbphux6vxwjz31qp86xl7vpmx8dec3n5jhuxpl4zkky5akcfv1tgt75hoilj6q8qyr8kape99ueualgl0n3',
                 isMaster: null,
                 clientIds: [],
             })
@@ -221,17 +174,93 @@ describe('application', () =>
             });
     });
 
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationIsMaster property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: 'fud6nbsadqhxlfx04gj9fmt5zot8mtlso9gwjrfnfbdoersrcwz5ae7xiscrc5hyiztlbk1ucr5n3iekokyrlyzjzoh1nb6vmu395t9laj19edtfdgvsa5ql1pxvp7wnwj6njfnvz9yzcwrd1kg1jkpu7pm7sypc5lgugper31aqk3r1yddwt2b385ssum8y07g5ui7wjwbsimh8jeg0xshwy3gn299hwa43w1z5u1915s98tihw8nl7txk8xtc',
-                code: '7q7i9a6rj9cbgq1wk7tmz2k3y8b40epck38mxgexyzh06sv5ee',
-                secret: '3agk2ytdvsey7xlpaaq639wy5j1zhk3y5myi55ghwfflkwfwobag4lz8n5x4j1kw9bob6v8dfadypt3pzdfoib9d4b',
-                
+                name: '7vv0t9dzvr2635lpcvr27ojqs9gl81nnsk2vg5uzbfg5hg4hjhsrfyw1x9b5w52qar6lphydd9bg8bihykwpkkp1lcoxkja9nr91i86ofotik8jtpnkz83uln9bdnik1ammijps913916e28ov48iv9cgsyx62vhoxydtn5dovsuq12cij47li3z0dqxdb3n617obhdeqzs8g7mww5a8taoay0hj80bmx05dt8cp3xmf5t7yzyggid409kyl25g',
+                code: 'bbkkc1rfw197mpipqdj4naf36pi2t1oob92us1niggc2gcu3uc',
+                secret: 'yprtzoolvo3p2r7jpjixbsb6zcaepmel7u4aajfijb0zuj905hys4gtt9t4zhd7eazztf2d8cgsu0g7z4x4o70vsn5',
+                isMaster: true,
+                clientIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ApplicationId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/application')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                code: 'nv3ken1izbg06b5x5rdp6wq9mhac005im0v0f31c4lzzqlwx0g',
+                secret: 'w56xtkgi6kqafntebqavf8yopwz4y60ksctyk7o52dq8rsbyhjq8znam3t03g1b7gdbgj52zlxkb5fcjjckhf7jdqq',
+                isMaster: false,
+                clientIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ApplicationName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationCode property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/application')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'rdmxwbnaca0t4yqs82qizo48r3lwggiz0cw1q4rirvi4nhihfnh83a1kc4fwtxdbgufxgwk52kyam05rae4nu98jh1yqm0x16dnushefocsynh02sl3ng07zr7fteh9tkue4g99v1dc8405q2z4jxlthovp9fekylozgiaoa5pfn02ecz005avtfy4sr1s4z64t20faoznpzj5pxuae4vaqvyn4d504fm2ch5tvm8ksnpolwpkis6odph59bnwl',
+                secret: 'iyz21lsd6c1v10n548kbtskljcg0mwh2vvr9yf6xmlefzg9mk4l2jkg6kss6i9435qgp9wuqwqmv0p8s9vqfu6a4pr',
+                isMaster: true,
+                clientIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ApplicationCode must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationSecret property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/application')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'j6kfhwygers364yb2oj4q0m384mo7dy1jfk0ivztnrsj7skn1wym5x8yy9kj1l9gdthmtk7n5uk6wb180mkrv1f2litdy0btek7amjyl8gmdrhnw20suz4b8raxofqjspioe0s9qpp2pgj2o3bin3x3oe62ggvx44q3f7yxtu258ciq9ufg924wa43p1rpn5c9s8ib69xwuxbqadtud6onosbkuc0cxwhds92yzm7avcxptei4f7vswwxjv651y',
+                code: 'xbfjbrd1xhi940j7yrxgnq1raj0fxvrbonxtcy7egd41ka2qt7',
+                isMaster: true,
+                clientIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ApplicationSecret must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationIsMaster property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/application')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'ueopf3ygv00yexlujltxmckos3k7xy7tbbynz3u6dbhz1isn2cxb1n4nbqcixpz4xlt6chletg3d7ngzpuov0k5c3tok3razg9mzuogu6apsuw4w1i6mn2l95j5pmyysdnf3wkosydq6i44w9dqhhhw6f6pbwhpt26husdcot8xmginbk10gvnm7ykzsy78cisbp7m30zpi19n317x4z19yxxu06nap1sx0vmylbairlvhe67py6ck66nyodcdy',
+                code: 'zhvsvuqlufrbm14tdrm794e04qoin6w0yk2d0uaxe7ml49uew4',
+                secret: '76caisvkrdthr4vh89v0t0j5wln8yrjfh9zyzf5wxdodfzaeo1qk2htq8voi101sspxp9kyzf711g4gwu4rsyya6nn',
                 clientIds: [],
             })
             .expect(400)
@@ -239,20 +268,19 @@ describe('application', () =>
                 expect(res.body.message).toContain('Value for ApplicationIsMaster must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'bius31atj6izsm96v92tnnzte0jl5en5nfjbw',
-                name: 'eh37hyeugzerfxofxw7fzou8cty4nn6ww1vutfh5cdwcrwmlcz2557hmhsges41tu3q37uqbhd851cgo09j2rwrnfu2nuwxpt1b4joo3t1yhcjyjonmsoi4tt3iatnoa9oj96tft3n41ansep5zevbnw6g7laudv0blmjwt22htlbydmdeugitaiky2dk734mgd7d5xjmnvwe8yyci0uyq3ql76dwoedlffrd63hnpdd1ia1dnxqabcpz81648m',
-                code: 'qz8zstgngzel3e5fq62w2f7tvu5gfr6cg4avqkrrhgeab0qlz0',
-                secret: 'vc07tgc831qz6ywzdh9zlnb61ptq6uiqtuaejr39oxufrq4x14fx8jw4cgi7puuf2eid69vq3lv4wsom9ejdm1qrac',
-                isMaster: false,
+                id: 's4psln3ul8jd1msmrlz2nnbd78w4qhdyiygz4',
+                name: 'h8bfszvvt869tm3z4qdnkpsy7742y0b992shumbavzhfmtuudno9rejpdknt2kwvue9lbckcdl0bjgb4h4hv1pcjno7q5sulolrzqvxaa386wmnze9ruxsaeownm3bbqrs4fs7sr746b8vopbges2e1hhldi0fucly95543qljflx77cdi6whh5r2o7gb75dajpgl3wmiybqltmvpi5enmuhko61q0ats4gr1xsyq2swp8ihaldffu3x6ycpspv',
+                code: '0dz6q36bozxdh8jf4qre3cb1db4v2etghelkt1rvbniq3psx31',
+                secret: 'lvjk1sr3vg28ah416udu5ypnatmcuw7jo6btgm3t7whynmwjrffxjr6c0qj91rpmdupr9nxdt7qqbsbayrieolzdq6',
+                isMaster: true,
                 clientIds: [],
             })
             .expect(400)
@@ -260,19 +288,18 @@ describe('application', () =>
                 expect(res.body.message).toContain('Value for ApplicationId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: 'qhcm46j2o4w4q2ewdp3pgkdr00strc8xixgbv5fvo0nh3evgrtx8og61orfsfhukj5lfvj9nmvtrbwtidrpl2nmdw9utxm8a67cvxuilxwsunlwlns7ft1q7v0984c75vj3ttxsyhalimjipa22voo7nj6ntnmp9lhbqfewd0314qvuwm7olnrbmsz694j3plttr5vg5q54ee853n2e5qhe4vuknqbyq6fe2m5lgfw2yymaxfth2ekwk4mhsdm7k',
-                code: '83p65quak3pxvvt665eb9o6by9azvq53zm1gm9w0hb9elhp2ga',
-                secret: 'wbymmzqye33kt9wf2v6mw04jhdh98sww4pmc57gug9vx5iaraec54c9d1fec04bz436yik0k1fcah2c67o9kh33dk3',
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'wyb4duo30w29af7elxomkw4qzvtz0bs4n5jyu1lduqneyz5fw5fnjjuvh1gsp37qm5mwfwy74dj4l5b71glds2y0sb12zsj1el0lfz004cg3g13adrqfptz01wl1xh3uccghnoiorqffglulo55ddhp1n7nr609u3d1fjr8y9pc7ty7i5w711vze7vafythbtpduln7q4okmtrihs3exia3gv004yc8a017td10tpd0m8rl6x8vxbi8ecphfour1',
+                code: 'i53bc95gg63ezhmwcww2vwe71ue6fwp3cb5wwwp4rqs4uh5pvx',
+                secret: '8x0tyl1z00d2g0f6a2vcf1xvd6jzmt6vw04rpoh7d6bij13ojqbkfqehziyhvkbcfn6ub15lzkbo4ofqquq8p3aitf',
                 isMaster: false,
                 clientIds: [],
             })
@@ -281,18 +308,19 @@ describe('application', () =>
                 expect(res.body.message).toContain('Value for ApplicationName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationCode is too large, has a maximum length of 50`, () => 
+
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationCode is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: '6erkmuf7d6tblpdgphke8u3x87ot9mgygmrnbhcdnv73it9o99x9x32fboh903y37fl8go7juz4f9jryb9me4lvxsydin11codr0p12e2iamwfsom8sda80mgp2ym6lw9xzfth9zjbtd5483hrmbza1oo3ka6bf9kkgp32k6ryr1wwusvhcpzmo68k07n4yf03hgs8jr0kbg8dccsrkt8dqh62vb9lit6eiie5mfwsdehquuuigq6t51q6vs9lr',
-                code: 'mkp7zxpaa59l3tei024vnqo3padkk861e2kcqs434rhm765nhmu',
-                secret: 'r0dn7ftuagpk44byicmmi64fftk00p20777leazqflycdadx71w7r21ebwrid5sy9l0c338kgepapywsomc53yk9vl',
-                isMaster: false,
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'btqwco805mjg3jo3kg0nofo19ev2cnegxiovd9p18r3xlhiig2hmpmlfqwk1fy2dlagiysz5ggwupq20oc4pb1y26g4lmm4otx60nf4qkici19pv220wz8es35grqw31cmipvsq073bnyj8ivvg84vamyyqy3yz0harrf213loycj494sefnoyp5vza25miz1shnec3040s04c3d08jgvovqvtqy93apt034x62bk4uyustg3ke2y6poveydwzl',
+                code: 'ev0e11vm27nl0a6uizy6x2nm3yt5bxixtzuzx9qjmhdz7ob759k',
+                secret: 'r6leznxix8qbbpnlttfjae0hdl5nwncd1wpif148s0bhrxwbjxftfjdtsyu635czqkxhqgmbp9tiqygsn6ooyibpr7',
+                isMaster: true,
                 clientIds: [],
             })
             .expect(400)
@@ -300,18 +328,19 @@ describe('application', () =>
                 expect(res.body.message).toContain('Value for ApplicationCode is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationSecret is too large, has a maximum length of 90`, () => 
+
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationSecret is too large, has a maximum length of 90`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: '2tlhync1au8phya8ztzf3y1bk4i8xzaznm097t82z76cb5mmzo66yc5z63xcznw42kbz4twuuda7i9a15fj6jsz7vz03kddbwpe5w8i6gqiqsiphc30w1q9qabjfbbyk0b15o0i2k5u8gjq4bpmb9lvcvquwzyc4569vrrncra8y7uzxh0ythf3ystwzkeo2i949ia5ttegd3oifdh8jyoukpjkxev8elvkx0gxhfj63q2kubi7hvflx7vvqykm',
-                code: '4oqol20xdf4d8h2lipdl7b6c2lmv1oxcg9r4pq78xti5zz7rjh',
-                secret: 'trlq1e5rfhpy4eejiiigjqex81a90nmfqyi2x12iw0m04onc033mu11bfoih0wu5njldkkmmx3jjihnnahv3aujntb3',
-                isMaster: true,
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'bpytoaf88w1c1wfbis3wch3omcdkkrpconx489p2uflogg2jq37ry1u2limuh440kma1iqtzeylhwq6xuigjh5s860z6m004ws3opatipa9jxdc45jtb3ojb13fza7kljuaazb525iyf3niutd3051lozxpmvstc8pjat6tgkxtll1yz51awqkvqe3u8mvqshrb1ccb0rq2c38uw60extmr1gpv2iq2cpais6pwjpx8m9cqd8kcdszznur6h51h',
+                code: 'x5kut0s495uj51wsgol33wrnq9xe5ibom275svenl8h8rirarb',
+                secret: '324app2vsi0ki6x0th263q62pnqzt9bgfoo3orro8xrzr8lgnu06ezjav7in0vrlsfuote0bvtf2mlxx1vr8ni5bp1u',
+                isMaster: false,
                 clientIds: [],
             })
             .expect(400)
@@ -319,25 +348,18 @@ describe('application', () =>
                 expect(res.body.message).toContain('Value for ApplicationSecret is too large, has a maximum length of 90');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationIsMaster has to be a boolean value`, () => 
+    test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationIsMaster has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: '0hwbkdf2jn31k5x9ujpkb9q0x3shvn0thy23d83b1jkskjfmoh4clysx3zib408u4p24tqlp4x6pjncsiu3oqbtqfa368zt19n92ul3qtbyqy0v03yfl9v96zj2p8w9788nwxyk6r3oogvmo3bix2xoq2qeedaqv4yjb0cm5vsbfotkvdq9zo8dmzsfaf5yths3qtdi9kuhha88cot8axnt73ka2aa35xzgcgm48q26avbsnqi3supw05aqpckg',
-                code: 'papwp7tdfdknc8ddos53yfnkjljoeootw9o87cjr9qgryy4buv',
-                secret: 'l3vsjs4kqtzqndbxuc6aw3l37czxanzwfr93kwghka9xrbyup4b9whxrb8trn4k39jun3lo8h7ylpw8w7yjmr9a8x8',
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'vvprvjl3h8nkclc6yuaulj43bse34edam4zj5h4ab4d8ep110snll6si4pwbazf5im6hogv3hgh04m1oj31t8ea2cjv0mnom06gm7ddrn79xpoptvtvsty91s4s5bf19ryk799ydsrpyia9tr6nua32puxm5n1f10cuzxsq33g6pjzvmdm9rzg8lt690nt0ha92gtbg2368q4ie7j3oxdk1b8gu6p28yd3rdxlkpy0268rr0z6hznbq50grt22l',
+                code: 'cnj20no9nt1hbnukblniltnvrd0v6hpf6ihv9b93fz3vjrzg46',
+                secret: '3x1oa6tvz3l0so04917hmngbmynydm8lyp5iqy53944wpdtn5wwvyc69vatjwr7xcp9pknhs844uta0pxjpvz7zy3i',
                 isMaster: 'true',
                 clientIds: [],
             })
@@ -346,182 +368,185 @@ describe('application', () =>
                 expect(res.body.message).toContain('Value for ApplicationIsMaster has to be a boolean value');
             });
     });
-    
 
-    
-
-    
-
-    test(`/REST:POST o-auth/application`, () => 
+    test(`/REST:POST o-auth/application`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: 'c46x3dpybqpqxqh66dsv8un5to96z122ue8kxe0tpfdqxrt2h7u42h3t75my1nc9jx9k6vmzyzvzjk9nb04eicq304yqnd4gea47op8inobj6pysb3hhp25byvvqpda0xqjkzyujy6qv0jl63chxed7ss3x0xv2fsj4c3rxo8nk6s5kq5hjn6vyitomkjc9gsugse7lesc6o3wgpzs8p73sei4apolxboudyk6ufag30ucn618any2yapmxbadm',
-                code: 'e53l8ws8ektxsuzd3l1hvsgz9fqyun8wtqi8qxgiwabmtltey7',
-                secret: 'bjszb7qe48v0qiy734l7y6qtqrd4m0rp1khu990icpscahyrslxht7pc6tnmkpuu2u9tjoa0ttctr91kki7l4c0ra6',
-                isMaster: true,
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: 'z701s52sxnxvgld8veeedbzmtz6yig9xavv5d6p4n9srvq1dklcix2259yc9tnhpels2yt1t7wymz2akfa42opzzf8zx2fn2cts2wlqunsyzsfvruqj2mwhvw3jj20qjrd7fsy4at6z7sh1cxoy54teqrtloyar9vrm9mmkgvrl9261q80j3i6egsxhcagazxcsusjxh88c6s3x47zcduo9tcmv6hi8h6xgeg2drgb5omo018j6c2m2fnsjd8p5',
+                code: 'as8vlvcww1jyvzzdhq5mh16zsnyaj92atogi4t5egtarhbwcwn',
+                secret: '40tx8fz5qnfhc1iwjn5syouosppz27p2gdagn1opag06ex8tcoq40xojns528fa0c67gq50fuabw45ixlynx3787nd',
+                isMaster: false,
                 clientIds: [],
             })
             .expect(201);
     });
 
-    test(`/REST:GET o-auth/applications/paginate`, () => 
+    test(`/REST:GET o-auth/applications/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/applications/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
+            .expect({
+                total   : repository.collectionResponse.length,
+                count   : repository.collectionResponse.length,
                 rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET o-auth/application - Got 404 Not Found`, () => 
+    test(`/REST:GET o-auth/application - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: '2d114a34-54a3-4148-8288-3a8a1d82f82c'
+                        id: 'acd96888-7b0e-43e1-acd9-ad6a1d2cb0d2'
                     }
                 }
             })
             .expect(404);
     });
 
-    test(`/REST:GET o-auth/application`, () => 
+    test(`/REST:GET o-auth/application`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: 'e8388624-924e-41a9-b693-f6f41db097f0'
+                        id: '5535c3f4-26f0-4961-916a-2159c79eb4c3'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'e8388624-924e-41a9-b693-f6f41db097f0'));
+            .expect(repository.collectionResponse.find(item => item.id === '5535c3f4-26f0-4961-916a-2159c79eb4c3'));
     });
 
-    test(`/REST:GET o-auth/application/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET o-auth/application/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/fe1a03c9-cfcd-4668-8979-4709389c51ed')
+            .get('/o-auth/application/9210ce82-012a-4c09-bdb3-247249ca1545')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
-    test(`/REST:GET o-auth/application/{id}`, () => 
+    test(`/REST:GET o-auth/application/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/e8388624-924e-41a9-b693-f6f41db097f0')
+            .get('/o-auth/application/5535c3f4-26f0-4961-916a-2159c79eb4c3')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e8388624-924e-41a9-b693-f6f41db097f0'));
+            .expect(repository.collectionResponse.find(e => e.id === '5535c3f4-26f0-4961-916a-2159c79eb4c3'));
     });
 
-    test(`/REST:GET o-auth/applications`, () => 
+    test(`/REST:GET o-auth/applications`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/applications')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
             .expect(repository.collectionResponse);
     });
 
-    test(`/REST:PUT o-auth/application - Got 404 Not Found`, () => 
+    test(`/REST:PUT o-auth/application - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '158da4cf-f1be-487a-b7fe-1f85fd8bf03f',
-                name: 'c9yrzyr8cai4ag784jyyx8k1brr0rb9q1xp5c8rre9n6d0s2z2vc9oxvz9w9ick2u60upo36rnm6136i0m8gc9vajkc1jkks4tkm1p6igd1pxntt5szmrfx34soli1fro03ptdgwdu61si8ak1gsed1sy6cmh45ta516pp1a0ij19mezb84p5it0m0e6l241mm5espempz3hi05zgz23v30tjomxjq2qh3305g9amux1vy6aaisbuikfzjpo4or',
-                code: 'qrb2atqchym24gstwu2lmcq0oua4iwyf478af8bi1hd593bf8j',
-                secret: '40j57a52wl83b69h96bn1fp4ldgidt3l7znzaz6sodnod5f17lirepkgdwzb3g35lz2hkdx9kl4ckc01mxy3shdrba',
+                id: 'a0ac1809-9731-4137-a71a-0dc864bf498d',
+                name: 'pndbba3d2hw10c4f0j0jebw8yp56p2lbmgbgewia1l56trxzk1jyi1czn91av3qqbeo3h7gx3ioyxcxig8byd8ls0iabywl1bj8hh2f9gaxsotlkd9mg90y2nkdztzuf0k6q06d6bhrkj5js0fkqjherdnlq3ag6bcrp0jvcwy88ub19euu5kb9nn952p45blh030caokkjdcr0nh9ikl992b21u10xemb8makj7j08af978rabf6nfn9ibn7t2',
+                code: 'qqchykcm4jm8kashfp7pxprdku6eech6gskhhgm48ix2qw6nqw',
+                secret: 'u7c4wqv3ssz6kmz0emx5aslzwsec9di6oev0en2n34u4hu5wk4jqwi3ztf4eg16joxmi09p1dbnoe2ivrrxnm0qfbo',
                 isMaster: false,
                 clientIds: [],
             })
             .expect(404);
     });
 
-    test(`/REST:PUT o-auth/application`, () => 
+    test(`/REST:PUT o-auth/application`, () =>
     {
         return request(app.getHttpServer())
             .put('/o-auth/application')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                name: '3j57ex8qlgnip9hwcnt9qbr9p1fwtxg4p4ogelt3tnsm1jpqdy6xrhe1j1cwa9sz7gfno2gojqm6dmgvugy5hr4kfo0qm25gjlasqle7n7xn4h3nq3v7v7ngfnv525bmgwpq1q2pore44tk4rl7f46zhbjnwzljf5k51atmko383ua5w5pve2eh6g94r87rsetdwr25yanhl7oj48nx0q8qfwgimxecjnkie2m5n0agmzcvtq74bycc6xq5u4t8',
-                code: 'soyin42or1wysispcap98lfiblb6m19dza4sgp7q5vwlxdr6id',
-                secret: 'f4nu1wcq1no8y6kb6pe87rxzdzwtmfpvtgtesxmvtos8ztpbloaukxgzt8056aj8yeq5c18ziswbi1kwlilsg64ihe',
+                id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                name: '2sdlisr924d0v01ty541hvc6ykw7bxtyjkxl2f9dh8bh9q3098aib7b5ias2vt85gzv950gjh7u4zpbrzagfbdh2ep2qotep9h5vbf0rk444xu5pvqj9v3oi2mqihdmh245n0lbdrdiocbblfvc4jz7347zs5gr7fltkveclvk7xk60eaxgj8ubpmza7gr0vp4yu9qyxmwkaao67j83flqr9d3sms76zt7w2odu0y5gby2ccxtggx27wjmzg6bj',
+                code: 'g8czamg3qu5kybxjby1y2xt1oes6ft6wggiu2cf6e7gosswkzp',
+                secret: 'dz16q7cjwj29535hk7op7ecx8s7nqf8agu511mrkrrx68f5hoffdqhfonddx8avta25e1yh7pg1y0sjgau2vzw4gcf',
                 isMaster: true,
                 clientIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e8388624-924e-41a9-b693-f6f41db097f0'));
+            .expect(repository.collectionResponse.find(e => e.id === '5535c3f4-26f0-4961-916a-2159c79eb4c3'));
     });
 
     test(`/REST:DELETE o-auth/application/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/2a748b14-f57f-4536-8bc4-eb126e431816')
+            .delete('/o-auth/application/321b90f4-cc09-4548-8dc0-05b73377192c')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE o-auth/application/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/e8388624-924e-41a9-b693-f6f41db097f0')
+            .delete('/o-auth/application/5535c3f4-26f0-4961-916a-2159c79eb4c3')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL oAuthCreateApplication - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL oAuthCreateApplication - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthCreateApplicationInput!)
                     {
                         oAuthCreateApplication (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             code
                             secret
                             isMaster
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
@@ -534,64 +559,63 @@ describe('application', () =>
             });
     });
 
-    test(`/GraphQL oAuthCreateApplication`, () => 
+    test(`/GraphQL oAuthCreateApplication`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthCreateApplicationInput!)
                     {
                         oAuthCreateApplication (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             code
                             secret
                             isMaster
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        id: 'c0d77901-7077-43f7-88ec-26249b78d9cd',
-                        name: 'utw747bvcali78e9ym4oyqdzsppwphed90hfl4qihlgnrlfevwmrgin9fe2sv8432k9j648fes3opl40ohrzuv01wrfyb6mmoftp4xtjtkp9n1n1ajw8mnr8dgujydd4dyakvt16e3fvsmjihjadj0n875fthpkwoyqgrkytxbwa4va3ylg4tk6zi688hutiyj9cy4txxmxfurnky4ki3hxjucmpw5rzgeert5w23g1lr80a35frmu28b5db0oh',
-                        code: 'pdi7nh7vvdnzggoyrbeif1hnscn4ppzn6qn0jlkjbqgdrhekff',
-                        secret: 'u893yghlxqybxukz4b5gaqf1yoaytqwr2xdrz0ormbearoj5qz67mdzflaq05bzkdkh27ev3omsb7g6w1h0hrpbxm6',
-                        isMaster: true,
-                        clientIds: [],
+                        id: 'f2ea50bc-2677-49ad-8e1b-a9b4ec6c280b',
+                        name: 'y2bcyv65p259d5fb0phnytur327pa2mgnx7ggbnsv7qd68vm5ui3hn9gx6h99em41xxuvz6mmqcts7xjs53i4isgddghif5vl04cttdq92rg03mymfqzvk2euyjljclcxx0txeud5ej2gn78bbjsnb7qmpzmsia2rrrim5qerb20bj1wr58wa53p053sbx9s4e1ymzjtahvh6z0g438f9xlhfzfdczatmgtr8yjzucwi6v8txhvdc3njkqg7od7',
+                        code: '4ylj917coflpcilhscurmo37hsxiy97xqk3y0jjt0fvjrt3t03',
+                        secret: '8jgahgy8f3mcdq8p4qszmac5joo5is2f8l7mfm9ae84l196wl33nd45mr7e9xmu21m1p5fqh3uqlvn3mzpev901rge',
+                        isMaster: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthCreateApplication).toHaveProperty('id', 'c0d77901-7077-43f7-88ec-26249b78d9cd');
+                expect(res.body.data.oAuthCreateApplication).toHaveProperty('id', 'f2ea50bc-2677-49ad-8e1b-a9b4ec6c280b');
             });
     });
 
-    test(`/GraphQL oAuthPaginateApplications`, () => 
+    test(`/GraphQL oAuthPaginateApplications`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         oAuthPaginateApplications (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -606,17 +630,18 @@ describe('application', () =>
             });
     });
 
-    test(`/GraphQL oAuthFindApplication - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthFindApplication - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthFindApplication (query:$query)
-                        {   
+                        {
                             id
                             name
                             code
@@ -627,13 +652,13 @@ describe('application', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '9ff571c5-d4b3-4caf-a0d9-8a320f432f6b'
+                            id: '753227ab-c191-4be2-982c-84e6227ed1c8'
                         }
                     }
                 }
@@ -646,17 +671,18 @@ describe('application', () =>
             });
     });
 
-    test(`/GraphQL oAuthFindApplication`, () => 
+    test(`/GraphQL oAuthFindApplication`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthFindApplication (query:$query)
-                        {   
+                        {
                             id
                             name
                             code
@@ -667,34 +693,35 @@ describe('application', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: 'e8388624-924e-41a9-b693-f6f41db097f0'
+                            id: '5535c3f4-26f0-4961-916a-2159c79eb4c3'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindApplication.id).toStrictEqual('e8388624-924e-41a9-b693-f6f41db097f0');
+                expect(res.body.data.oAuthFindApplication.id).toStrictEqual('5535c3f4-26f0-4961-916a-2159c79eb4c3');
             });
     });
 
-    test(`/GraphQL oAuthFindApplicationById - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthFindApplicationById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         oAuthFindApplicationById (id:$id)
-                        {   
+                        {
                             id
                             name
                             code
@@ -706,7 +733,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '894fda5e-100e-459f-a375-b547b479b902'
+                    id: '98d01586-259e-4c3a-a423-72563aff7a71'
                 }
             })
             .expect(200)
@@ -717,17 +744,18 @@ describe('application', () =>
             });
     });
 
-    test(`/GraphQL oAuthFindApplicationById`, () => 
+    test(`/GraphQL oAuthFindApplicationById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         oAuthFindApplicationById (id:$id)
-                        {   
+                        {
                             id
                             name
                             code
@@ -739,26 +767,27 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'e8388624-924e-41a9-b693-f6f41db097f0'
+                    id: '5535c3f4-26f0-4961-916a-2159c79eb4c3'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindApplicationById.id).toStrictEqual('e8388624-924e-41a9-b693-f6f41db097f0');
+                expect(res.body.data.oAuthFindApplicationById.id).toStrictEqual('5535c3f4-26f0-4961-916a-2159c79eb4c3');
             });
     });
 
-    test(`/GraphQL oAuthGetApplications`, () => 
+    test(`/GraphQL oAuthGetApplications`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthGetApplications (query:$query)
-                        {   
+                        {
                             id
                             name
                             code
@@ -780,17 +809,18 @@ describe('application', () =>
             });
     });
 
-    test(`/GraphQL oAuthUpdateApplication - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthUpdateApplication - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthUpdateApplicationInput!)
                     {
                         oAuthUpdateApplication (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             code
@@ -803,12 +833,11 @@ describe('application', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '43b50b79-0b40-4312-960d-9560b5bc984d',
-                        name: 'uzdluxfen17inw6sk5myn4u05hev6k97i9neuur1ncb5k78y1k057mgg2dtwsdisujup9x8zg7bptvyxkradhue2gw7c63s11ys8vjbboauv6l9i1zzgee5ajqkm2c81rm6gpeklz0akg5ls9987jjh8vl5weflltcekaqbgfa6ujtf8j2jsyjikzk8wajk4509m4lnnfc9p2d5eg9nqggzyyfeb6mi0oxc7tgsjquh26wje56hvbnemcaokmak',
-                        code: 'uje5p8awxf3l7ey37emdi4mu2a5msb23dcvfuyvv1cymm9t03o',
-                        secret: 'oevnmqn09dvjya0amzr914vo33toilrncr4xg2zknrlvw994r1wiebqkn4hrz05r6vn1s6xy99j1653xflxwr5bvds',
-                        isMaster: false,
+                        id: '56031501-82db-48ff-a9f1-f154463499b3',
+                        name: '4mizanlkzncqbtotf62occldje85b6kpzuhc6t9ml97api61ej2kd4i6q14lw68l3ehzbdtmrbvvy3c2pvjrip20dwnw1oi57yyhecawj64vnrh953obaynnh6rcylwjnrj4w2ahszgas2cmnj50rs4mu61q63uxhn3g397vzndivjjjc9hzlhsyhzmvrqvyxj5pm5iclyl7mde4un6zbc9qfa6l1c3pv5ga7iarm0e2q1y2jhb11a767xn23rm',
+                        code: 'f04cyl5i1klw0k6xve6dx03rbs7825vqvauw6sm1rplnlj09cq',
+                        secret: 'jn14jm8i4qm8ahvmcbaqf1vfiri58hjhako6eha6c3vm68cbf34gz78g3u2yju3ooa3ibect84kwzbkrwwsbhxm5vw',
+                        isMaster: true,
                         clientIds: [],
                     }
                 }
@@ -821,17 +850,18 @@ describe('application', () =>
             });
     });
 
-    test(`/GraphQL oAuthUpdateApplication`, () => 
+    test(`/GraphQL oAuthUpdateApplication`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthUpdateApplicationInput!)
                     {
                         oAuthUpdateApplication (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             code
@@ -844,11 +874,10 @@ describe('application', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'e8388624-924e-41a9-b693-f6f41db097f0',
-                        name: 'syplobdyls54t19560qwbtgk53sfhs8wupwigh8k4rdor0ocf5mkndcy6r68k7p829msedmewcujp842i18y1cvoa005hxuui8u711mn2fequdrwxv0qbttcb2kabv87o0aauanepsbrq1ezjs79ymi0r48o2f4ijxrkfkc7fzkczkfnbegevy8hnvusla8ai6wbc7b11fxnxl1yr6bw50r0x0qp49hvenb0uevhy5m0hhda61x0dg0aby9qzje',
-                        code: 'h1ufl99qwrraio9ritee2ty9jzhcj4ti9hl3rqle748frb3awo',
-                        secret: 'eikctt4qjz26146c50b5bz6hxu0tumainmocspg7t7mae160iz0hrendrq9e0ctz5wp9dl1ncv83dybzqlwg8m55mj',
+                        id: '5535c3f4-26f0-4961-916a-2159c79eb4c3',
+                        name: 'pkelyo0p2gxcsbzqj1q6xxutanpnxddrb1r8exx6pk8ixuy15nlmdqiquobur9rtd2dxn7hbk6sr7bkdcr4mhb968kdkrcsvu6zzhcipl0yjvtwy177vfz4iy9j640jenkypr69loy2jvfv3inxriug9qzdyv670naxof4quhkmkimkq2c9m2r00n8zs5odjvslf9opyiue1fwfx1k2g4xwgjduv9ih9odd1stgkabnfi46pi96bvuedhwwh4gc',
+                        code: '3xqj6y7fbe8ufrhkvel0qigxxtjpgezgydniiobz1y6gm2q75v',
+                        secret: 'bmrhc55rurpiq8b05wrknc4jmbgem44nm41109pluvrgg2n15mh95226tw9clvj848r7vax7hmgpkjvm1dzmoulosf',
                         isMaster: false,
                         clientIds: [],
                     }
@@ -856,21 +885,22 @@ describe('application', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthUpdateApplication.id).toStrictEqual('e8388624-924e-41a9-b693-f6f41db097f0');
+                expect(res.body.data.oAuthUpdateApplication.id).toStrictEqual('5535c3f4-26f0-4961-916a-2159c79eb4c3');
             });
     });
 
-    test(`/GraphQL oAuthDeleteApplicationById - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthDeleteApplicationById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         oAuthDeleteApplicationById (id:$id)
-                        {   
+                        {
                             id
                             name
                             code
@@ -882,7 +912,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '07b79388-a894-439f-9bf9-588356ecb524'
+                    id: 'e340fa42-aa75-4359-a124-3d0a8e750138'
                 }
             })
             .expect(200)
@@ -893,17 +923,18 @@ describe('application', () =>
             });
     });
 
-    test(`/GraphQL oAuthDeleteApplicationById`, () => 
+    test(`/GraphQL oAuthDeleteApplicationById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         oAuthDeleteApplicationById (id:$id)
-                        {   
+                        {
                             id
                             name
                             code
@@ -915,16 +946,16 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'e8388624-924e-41a9-b693-f6f41db097f0'
+                    id: '5535c3f4-26f0-4961-916a-2159c79eb4c3'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthDeleteApplicationById.id).toStrictEqual('e8388624-924e-41a9-b693-f6f41db097f0');
+                expect(res.body.data.oAuthDeleteApplicationById.id).toStrictEqual('5535c3f4-26f0-4961-916a-2159c79eb4c3');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateApplicationCommandHandler } from './create-application.command-handler';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
+import { CreateApplicationCommandHandler } from './create-application.command-handler';
 import { CreateApplicationCommand } from './create-application.command';
 import { CreateApplicationService } from './create-application.service';
 
@@ -41,12 +41,12 @@ describe('CreateApplicationCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateApplicationCommand(
                     {
-                        id : applications[0].id,
-                        name : applications[0].name,
-                        code : applications[0].code,
-                        secret : applications[0].secret,
-                        isMaster : applications[0].isMaster,
-                        clientIds : applications[0].clientIds,
+                        id: applications[0].id,
+                        name: applications[0].name,
+                        code: applications[0].code,
+                        secret: applications[0].secret,
+                        isMaster: applications[0].isMaster,
+                        clientIds: applications[0].clientIds,
                     }
                 )
             )).toBe(undefined);
