@@ -33,19 +33,19 @@ describe('AdminUpdateLangResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateLangResolver>(AdminUpdateLangResolver);
+        resolver    = module.get<AdminUpdateLangResolver>(AdminUpdateLangResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateLangResolver should be defined', () => 
+    test('AdminUpdateLangResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('AdminUpdateLangResolver should be defined', () => 
+        test('AdminUpdateLangResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

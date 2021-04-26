@@ -3,17 +3,29 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-const importForeignModules = [];
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
+import { IamModule } from './../../../src/apps/iam/iam.module';
+
+const importForeignModules = [
+    IamModule
+];
 
 describe('lang', () =>
 {
     let app: INestApplication;
     let repository: MockLangRepository;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -27,44 +39,60 @@ describe('lang', () =>
                             validateOnly: true,
                             models: [],
                         })
-                    })
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    TestingJwtService,
                 ]
             })
             .overrideProvider(ILangRepository)
             .useClass(MockLangRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
         repository  = <MockLangRepository>module.get<ILangRepository>(ILangRepository);
+        testJwt     =  module.get(TestingJwtService).getJwt();
 
         await app.init();
     });
 
-    test(`/REST:POST admin/lang - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST admin/lang - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send(repository.collectionResponse[0])
             .expect(409);
     });
 
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangId property can not to be null`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: '2',
-                image: '8',
-                iso6392: 'vj',
-                iso6393: 'dfd',
-                ietf: 'wytbp',
+                name: '6',
+                image: 's',
+                iso6392: 'ri',
+                iso6393: 'thz',
+                ietf: 'ms7ix',
                 dir: 'LTR',
-                sort: 255794,
-                isActive: true,
+                sort: 989476,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -72,43 +100,22 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangId property can not to be undefined`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                name: 'r',
-                image: 'q',
-                iso6392: 'f1',
-                iso6393: 'pyl',
-                ietf: 'zpfxt',
-                dir: 'LTR',
-                sort: 893309,
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for LangId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/lang')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
                 name: null,
-                image: '2',
-                iso6392: 'ka',
-                iso6393: 'c78',
-                ietf: 'co6tj',
+                image: '1',
+                iso6392: 'k3',
+                iso6393: 'grb',
+                ietf: 'ku50f',
                 dir: 'LTR',
-                sort: 253235,
-                isActive: false,
+                sort: 568063,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -116,42 +123,21 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangName property can not to be undefined`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6392 property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                
-                image: 'p',
-                iso6392: '7w',
-                iso6393: 'y9u',
-                ietf: 'f250i',
-                dir: 'RTL',
-                sort: 618084,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for LangName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6392 property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/lang')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'm',
-                image: 'u',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'r',
+                image: 'b',
                 iso6392: null,
-                iso6393: 'mpj',
-                ietf: '3nv00',
+                iso6393: 'fkd',
+                ietf: 'opq0j',
                 dir: 'LTR',
-                sort: 194797,
+                sort: 759349,
                 isActive: true,
             })
             .expect(400)
@@ -160,43 +146,22 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6392 property can not to be undefined`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6393 property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'o',
-                image: 'w',
-                
-                iso6393: '86l',
-                ietf: 's6feu',
-                dir: 'RTL',
-                sort: 799833,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for LangIso6392 must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6393 property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/lang')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: '2',
-                image: 'l',
-                iso6392: '4d',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: '5',
+                image: 'q',
+                iso6392: 'pj',
                 iso6393: null,
-                ietf: '21q5r',
+                ietf: 'tqnac',
                 dir: 'LTR',
-                sort: 545858,
-                isActive: true,
+                sort: 813005,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -204,43 +169,22 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6393 property can not to be undefined`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIetf property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: '3',
-                image: '8',
-                iso6392: 'ba',
-                
-                ietf: 'fkvky',
-                dir: 'RTL',
-                sort: 352688,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for LangIso6393 must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIetf property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/lang')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'l',
-                image: 'o',
-                iso6392: '2f',
-                iso6393: 'e8b',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: '5',
+                image: 'w',
+                iso6392: 'xs',
+                iso6393: '70q',
                 ietf: null,
                 dir: 'LTR',
-                sort: 195523,
-                isActive: true,
+                sort: 568030,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -248,43 +192,22 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIetf property can not to be undefined`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangDir property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'd',
-                image: 'y',
-                iso6392: '83',
-                iso6393: 'ry0',
-                
-                dir: 'RTL',
-                sort: 247845,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for LangIetf must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangDir property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/lang')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: '9',
-                image: '6',
-                iso6392: 'oo',
-                iso6393: 'q4y',
-                ietf: '0r573',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: '6',
+                image: 'd',
+                iso6392: 'hp',
+                iso6393: '9dc',
+                ietf: 'v40en',
                 dir: null,
-                sort: 705082,
-                isActive: true,
+                sort: 386008,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -292,42 +215,21 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangDir property can not to be undefined`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIsActive property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: '2',
-                image: '3',
-                iso6392: 'aq',
-                iso6393: '9cd',
-                ietf: 'u9f3b',
-                
-                sort: 754603,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for LangDir must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIsActive property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/lang')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: '9',
-                image: 'z',
-                iso6392: 'po',
-                iso6393: 'jrv',
-                ietf: 'bhbly',
-                dir: 'RTL',
-                sort: 149239,
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'b',
+                image: 'l',
+                iso6392: 'zi',
+                iso6393: 'm0v',
+                ietf: 'rszem',
+                dir: 'LTR',
+                sort: 525207,
                 isActive: null,
             })
             .expect(400)
@@ -336,44 +238,175 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIsActive property can not to be undefined`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: '3',
-                image: '9',
-                iso6392: '1l',
-                iso6393: 'kt3',
-                ietf: 'mrlv6',
+                name: '6',
+                image: 'n',
+                iso6392: '2l',
+                iso6393: 'tmz',
+                ietf: '8mdee',
                 dir: 'LTR',
-                sort: 106818,
-                
+                sort: 494810,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                image: 'i',
+                iso6392: '3k',
+                iso6393: 'h3g',
+                ietf: 'rkful',
+                dir: 'LTR',
+                sort: 641965,
+                isActive: true,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6392 property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'y',
+                image: 'e',
+                iso6393: 'pr0',
+                ietf: 't8udx',
+                dir: 'RTL',
+                sort: 291498,
+                isActive: true,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangIso6392 must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6393 property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'm',
+                image: 's',
+                iso6392: '5a',
+                ietf: 'vb9hy',
+                dir: 'LTR',
+                sort: 117197,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangIso6393 must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIetf property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'q',
+                image: 'p',
+                iso6392: 'hk',
+                iso6393: '71u',
+                dir: 'LTR',
+                sort: 168917,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangIetf must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangDir property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: '1',
+                image: 'f',
+                iso6392: 'ja',
+                iso6393: 'gpi',
+                ietf: 'qdj1k',
+                sort: 652416,
+                isActive: true,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangDir must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIsActive property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'b',
+                image: 'q',
+                iso6392: '6j',
+                iso6393: 'jsr',
+                ietf: 'p10xd',
+                dir: 'LTR',
+                sort: 664671,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for LangIsActive must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'k0bpgssud4hym9ug9cusj9vwl378oi04ong9i',
-                name: 'g',
-                image: 'v',
-                iso6392: 'ua',
-                iso6393: '1q0',
-                ietf: 'evb3d',
+                id: '2dqw90fdrz4bkrtdnmujllruffh5b93vy8w71',
+                name: 'l',
+                image: 'y',
+                iso6392: 'o8',
+                iso6393: 'fk3',
+                ietf: 'xwk7v',
                 dir: 'LTR',
-                sort: 508445,
+                sort: 484488,
                 isActive: true,
             })
             .expect(400)
@@ -381,21 +414,22 @@ describe('lang', () =>
                 expect(res.body.message).toContain('Value for LangId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6392 is not allowed, must be a length of 2`, () => 
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6392 is not allowed, must be a length of 2`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'k',
-                image: 'q',
-                iso6392: 'pbj',
-                iso6393: 'orj',
-                ietf: 'yz4v1',
-                dir: 'LTR',
-                sort: 740505,
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'e',
+                image: 'r',
+                iso6392: '3nu',
+                iso6393: 'blt',
+                ietf: 'qrwau',
+                dir: 'RTL',
+                sort: 473439,
                 isActive: true,
             })
             .expect(400)
@@ -403,67 +437,68 @@ describe('lang', () =>
                 expect(res.body.message).toContain('Value for LangIso6392 is not allowed, must be a length of 2');
             });
     });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6393 is not allowed, must be a length of 3`, () => 
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIso6393 is not allowed, must be a length of 3`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'h',
-                image: 'a',
-                iso6392: 'my',
-                iso6393: '7g77',
-                ietf: 'xw85k',
-                dir: 'LTR',
-                sort: 838181,
-                isActive: true,
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'c',
+                image: 'j',
+                iso6392: 'ns',
+                iso6393: 'ix7b',
+                ietf: 'z0ceo',
+                dir: 'RTL',
+                sort: 967169,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for LangIso6393 is not allowed, must be a length of 3');
             });
     });
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIetf is not allowed, must be a length of 5`, () => 
+
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIetf is not allowed, must be a length of 5`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 's',
-                image: '3',
-                iso6392: '2l',
-                iso6393: 'tu5',
-                ietf: 'di04qa',
-                dir: 'RTL',
-                sort: 754448,
-                isActive: false,
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: '9',
+                image: 'w',
+                iso6392: '5q',
+                iso6393: 'ivv',
+                ietf: '9m4ku1',
+                dir: 'LTR',
+                sort: 467060,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for LangIetf is not allowed, must be a length of 5');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangSort is too large, has a maximum length of 6`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangSort is too large, has a maximum length of 6`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'w',
-                image: 'l',
-                iso6392: 'kr',
-                iso6393: 'nzj',
-                ietf: 'a2l4j',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: '7',
+                image: 'x',
+                iso6392: 'dj',
+                iso6393: 'fjs',
+                ietf: 'xq1j0',
                 dir: 'LTR',
-                sort: 4933717,
+                sort: 4081901,
                 isActive: false,
             })
             .expect(400)
@@ -471,29 +506,22 @@ describe('lang', () =>
                 expect(res.body.message).toContain('Value for LangSort is too large, has a maximum length of 6');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangIsActive has to be a boolean value`, () => 
+    test(`/REST:POST admin/lang - Got 400 Conflict, LangIsActive has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'j',
-                image: '6',
-                iso6392: 'r8',
-                iso6393: 'cbf',
-                ietf: 'co9ep',
-                dir: 'LTR',
-                sort: 246025,
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'g',
+                image: 'a',
+                iso6392: 'w6',
+                iso6393: 'lbe',
+                ietf: '8iyiu',
+                dir: 'RTL',
+                sort: 357776,
                 isActive: 'true',
             })
             .expect(400)
@@ -501,202 +529,206 @@ describe('lang', () =>
                 expect(res.body.message).toContain('Value for LangIsActive has to be a boolean value');
             });
     });
-    
-
-    
-    test(`/REST:POST admin/lang - Got 400 Conflict, LangDir has to be a enum option of LTR, RTL`, () => 
+    test(`/REST:POST / - Got 400 Conflict, Dir has to be a enum option of LTR, RTL`, () =>
     {
         return request(app.getHttpServer())
-            .post('/admin/lang')
+            .post('//')
             .set('Accept', 'application/json')
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'f',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'l',
                 image: 'i',
-                iso6392: 'gu',
-                iso6393: '60r',
-                ietf: 'xk6tl',
+                iso6392: 'i3',
+                iso6393: 'ewe',
+                ietf: '38lh1',
                 dir: 'XXXX',
-                sort: 158212,
-                isActive: true,
+                sort: 634145,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for LangDir has to be any of this options: LTR, RTL');
+                expect(res.body.message).toContain('Value for Dir has to be any of this options: LTR, RTL');
             });
     });
-    
 
-    
-
-    test(`/REST:POST admin/lang`, () => 
+    test(`/REST:POST admin/lang`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 's',
-                image: 'r',
-                iso6392: 'zm',
-                iso6393: 'y43',
-                ietf: 'wm8zd',
-                dir: 'LTR',
-                sort: 478223,
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: '7',
+                image: 'l',
+                iso6392: '1s',
+                iso6393: 'a78',
+                ietf: '6jnpy',
+                dir: 'RTL',
+                sort: 832854,
                 isActive: true,
             })
             .expect(201);
     });
 
-    test(`/REST:GET admin/langs/paginate`, () => 
+    test(`/REST:GET admin/langs/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/langs/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
+            .expect({
+                total   : repository.collectionResponse.length,
+                count   : repository.collectionResponse.length,
                 rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET admin/lang - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/lang - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: 'ebe8cb26-6957-440f-aa3f-1db7a4683e26'
+                        id: 'fde75789-ac15-4b22-ae95-b9701ed08ab3'
                     }
                 }
             })
             .expect(404);
     });
 
-    test(`/REST:GET admin/lang`, () => 
+    test(`/REST:GET admin/lang`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053'
+                        id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'f9646e2b-4f9f-4cdc-b052-868cfcd43053'));
+            .expect(repository.collectionResponse.find(item => item.id === '6b9c1623-e0a2-4d6b-b873-dfd8bec07435'));
     });
 
-    test(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/319195df-a1c8-40f8-83a1-470dc1713e3c')
+            .get('/admin/lang/7223e120-5b72-4719-abe3-24f060194284')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
-    test(`/REST:GET admin/lang/{id}`, () => 
+    test(`/REST:GET admin/lang/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/f9646e2b-4f9f-4cdc-b052-868cfcd43053')
+            .get('/admin/lang/6b9c1623-e0a2-4d6b-b873-dfd8bec07435')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'f9646e2b-4f9f-4cdc-b052-868cfcd43053'));
+            .expect(repository.collectionResponse.find(e => e.id === '6b9c1623-e0a2-4d6b-b873-dfd8bec07435'));
     });
 
-    test(`/REST:GET admin/langs`, () => 
+    test(`/REST:GET admin/langs`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/langs')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
             .expect(repository.collectionResponse);
     });
 
-    test(`/REST:PUT admin/lang - Got 404 Not Found`, () => 
+    test(`/REST:PUT admin/lang - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'a5875998-1a0f-4727-b977-bf83ee500672',
-                name: 'g',
-                image: 'w',
-                iso6392: '9w',
-                iso6393: 'hpm',
-                ietf: 'w26uy',
+                id: '8ff9de42-3f20-4990-a28d-6ba003c66e12',
+                name: 'n',
+                image: 'u',
+                iso6392: 'bo',
+                iso6393: '8rb',
+                ietf: 'laiv2',
                 dir: 'LTR',
-                sort: 413841,
-                isActive: false,
+                sort: 863602,
+                isActive: true,
             })
             .expect(404);
     });
 
-    test(`/REST:PUT admin/lang`, () => 
+    test(`/REST:PUT admin/lang`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/lang')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                name: 'p',
-                image: '7',
-                iso6392: 'k0',
-                iso6393: 'pfa',
-                ietf: 'r81n0',
+                id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                name: 'w',
+                image: 'g',
+                iso6392: 'ok',
+                iso6393: '1bg',
+                ietf: 'xmvwi',
                 dir: 'LTR',
-                sort: 271866,
+                sort: 620406,
                 isActive: true,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'f9646e2b-4f9f-4cdc-b052-868cfcd43053'));
+            .expect(repository.collectionResponse.find(e => e.id === '6b9c1623-e0a2-4d6b-b873-dfd8bec07435'));
     });
 
     test(`/REST:DELETE admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/b40211b4-3423-4dad-b2b2-2e14c9b0cf1c')
+            .delete('/admin/lang/d6c565a8-d8a2-4962-8d11-b1e7d7dacea5')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE admin/lang/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/f9646e2b-4f9f-4cdc-b052-868cfcd43053')
+            .delete('/admin/lang/6b9c1623-e0a2-4d6b-b873-dfd8bec07435')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL adminCreateLang - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL adminCreateLang - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateLangInput!)
                     {
                         adminCreateLang (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             image
@@ -706,12 +738,10 @@ describe('lang', () =>
                             dir
                             sort
                             isActive
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
@@ -724,17 +754,18 @@ describe('lang', () =>
             });
     });
 
-    test(`/GraphQL adminCreateLang`, () => 
+    test(`/GraphQL adminCreateLang`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateLangInput!)
                     {
                         adminCreateLang (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             image
@@ -744,51 +775,50 @@ describe('lang', () =>
                             dir
                             sort
                             isActive
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        id: '35498a5e-24dd-43c5-b456-d8d2af952896',
-                        name: '6',
-                        image: '1',
-                        iso6392: '11',
-                        iso6393: 'kqj',
-                        ietf: '8jzkg',
+                        id: '831cf19d-a0db-4814-8ab3-c77f067a365a',
+                        name: '2',
+                        image: 'e',
+                        iso6392: 'as',
+                        iso6393: 'ev0',
+                        ietf: 'dcwrq',
                         dir: 'RTL',
-                        sort: 957992,
+                        sort: 588130,
                         isActive: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateLang).toHaveProperty('id', '35498a5e-24dd-43c5-b456-d8d2af952896');
+                expect(res.body.data.adminCreateLang).toHaveProperty('id', '831cf19d-a0db-4814-8ab3-c77f067a365a');
             });
     });
 
-    test(`/GraphQL adminPaginateLangs`, () => 
+    test(`/GraphQL adminPaginateLangs`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         adminPaginateLangs (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -803,17 +833,18 @@ describe('lang', () =>
             });
     });
 
-    test(`/GraphQL adminFindLang - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindLang - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindLang (query:$query)
-                        {   
+                        {
                             id
                             name
                             image
@@ -828,13 +859,13 @@ describe('lang', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '28c52285-175a-42ed-8f7e-5b4dea9c286d'
+                            id: 'f839cf0a-462e-4edf-ba71-e80ed729758d'
                         }
                     }
                 }
@@ -847,17 +878,18 @@ describe('lang', () =>
             });
     });
 
-    test(`/GraphQL adminFindLang`, () => 
+    test(`/GraphQL adminFindLang`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindLang (query:$query)
-                        {   
+                        {
                             id
                             name
                             image
@@ -872,34 +904,35 @@ describe('lang', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053'
+                            id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindLang.id).toStrictEqual('f9646e2b-4f9f-4cdc-b052-868cfcd43053');
+                expect(res.body.data.adminFindLang.id).toStrictEqual('6b9c1623-e0a2-4d6b-b873-dfd8bec07435');
             });
     });
 
-    test(`/GraphQL adminFindLangById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindLangById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindLangById (id:$id)
-                        {   
+                        {
                             id
                             name
                             image
@@ -915,7 +948,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '819d43fc-4ba4-4aa4-8232-cc8d25e0f495'
+                    id: 'c8fd454f-94bf-4487-a4a7-7cffb9f3dda9'
                 }
             })
             .expect(200)
@@ -926,17 +959,18 @@ describe('lang', () =>
             });
     });
 
-    test(`/GraphQL adminFindLangById`, () => 
+    test(`/GraphQL adminFindLangById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindLangById (id:$id)
-                        {   
+                        {
                             id
                             name
                             image
@@ -952,26 +986,27 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053'
+                    id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindLangById.id).toStrictEqual('f9646e2b-4f9f-4cdc-b052-868cfcd43053');
+                expect(res.body.data.adminFindLangById.id).toStrictEqual('6b9c1623-e0a2-4d6b-b873-dfd8bec07435');
             });
     });
 
-    test(`/GraphQL adminGetLangs`, () => 
+    test(`/GraphQL adminGetLangs`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminGetLangs (query:$query)
-                        {   
+                        {
                             id
                             name
                             image
@@ -997,17 +1032,18 @@ describe('lang', () =>
             });
     });
 
-    test(`/GraphQL adminUpdateLang - Got 404 Not Found`, () => 
+    test(`/GraphQL adminUpdateLang - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminUpdateLangInput!)
                     {
                         adminUpdateLang (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             image
@@ -1024,100 +1060,16 @@ describe('lang', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '72794950-9681-4a6a-ac8a-b8623ac229de',
-                        name: 'c',
-                        image: 'y',
-                        iso6392: 'i4',
-                        iso6393: 'n4t',
-                        ietf: '27y04',
-                        dir: 'LTR',
-                        sort: 545814,
-                        isActive: true,
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL adminUpdateLang`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:AdminUpdateLangInput!)
-                    {
-                        adminUpdateLang (payload:$payload)
-                        {   
-                            id
-                            name
-                            image
-                            iso6392
-                            iso6393
-                            ietf
-                            dir
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        
-                        id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053',
-                        name: '5',
+                        id: 'dc95ab30-4a04-4625-8897-fc5042cb5fd7',
+                        name: 'u',
                         image: 'n',
-                        iso6392: 't5',
-                        iso6393: 'b6q',
-                        ietf: 'yrtcw',
+                        iso6392: 'z8',
+                        iso6393: '738',
+                        ietf: 'fhmho',
                         dir: 'RTL',
-                        sort: 958974,
+                        sort: 429891,
                         isActive: true,
                     }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.adminUpdateLang.id).toStrictEqual('f9646e2b-4f9f-4cdc-b052-868cfcd43053');
-            });
-    });
-
-    test(`/GraphQL adminDeleteLangById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($id:ID!)
-                    {
-                        adminDeleteLangById (id:$id)
-                        {   
-                            id
-                            name
-                            image
-                            iso6392
-                            iso6393
-                            ietf
-                            dir
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'cafc172a-3c57-4c19-9e6c-00d4ac8fcb3d'
                 }
             })
             .expect(200)
@@ -1128,17 +1080,18 @@ describe('lang', () =>
             });
     });
 
-    test(`/GraphQL adminDeleteLangById`, () => 
+    test(`/GraphQL adminUpdateLang`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    mutation ($payload:AdminUpdateLangInput!)
                     {
-                        adminDeleteLangById (id:$id)
-                        {   
+                        adminUpdateLang (payload:$payload)
+                        {
                             id
                             name
                             image
@@ -1154,16 +1107,100 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: 'f9646e2b-4f9f-4cdc-b052-868cfcd43053'
+                    payload: {
+                        id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435',
+                        name: 'g',
+                        image: 'v',
+                        iso6392: '1j',
+                        iso6393: '274',
+                        ietf: 'b8ord',
+                        dir: 'LTR',
+                        sort: 368770,
+                        isActive: true,
+                    }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteLangById.id).toStrictEqual('f9646e2b-4f9f-4cdc-b052-868cfcd43053');
+                expect(res.body.data.adminUpdateLang.id).toStrictEqual('6b9c1623-e0a2-4d6b-b873-dfd8bec07435');
             });
     });
 
-    afterAll(async () => 
+    test(`/GraphQL adminDeleteLangById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        adminDeleteLangById (id:$id)
+                        {
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            dir
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '135e777c-9d19-4147-a2f6-d67a951b73f3'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL adminDeleteLangById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        adminDeleteLangById (id:$id)
+                        {
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            dir
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '6b9c1623-e0a2-4d6b-b873-dfd8bec07435'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.adminDeleteLangById.id).toStrictEqual('6b9c1623-e0a2-4d6b-b873-dfd8bec07435');
+            });
+    });
+
+    afterAll(async () =>
     {
         await app.close();
     });

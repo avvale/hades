@@ -41,12 +41,12 @@ describe('CreateResourceCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateResourceCommand(
                     {
-                        id : resources[0].id,
-                        boundedContextId : resources[0].boundedContextId,
-                        attachmentFamilyIds : resources[0].attachmentFamilyIds,
-                        name : resources[0].name,
-                        hasCustomFields : resources[0].hasCustomFields,
-                        hasAttachments : resources[0].hasAttachments,
+                        id: resources[0].id,
+                        boundedContextId: resources[0].boundedContextId,
+                        attachmentFamilyIds: resources[0].attachmentFamilyIds,
+                        name: resources[0].name,
+                        hasCustomFields: resources[0].hasCustomFields,
+                        hasAttachments: resources[0].hasAttachments,
                     }
                 )
             )).toBe(undefined);

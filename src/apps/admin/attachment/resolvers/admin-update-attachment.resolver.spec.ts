@@ -33,19 +33,19 @@ describe('AdminUpdateAttachmentResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateAttachmentResolver>(AdminUpdateAttachmentResolver);
+        resolver    = module.get<AdminUpdateAttachmentResolver>(AdminUpdateAttachmentResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateAttachmentResolver should be defined', () => 
+    test('AdminUpdateAttachmentResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('AdminUpdateAttachmentResolver should be defined', () => 
+        test('AdminUpdateAttachmentResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

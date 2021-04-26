@@ -33,19 +33,19 @@ describe('AdminUpdateResourceResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateResourceResolver>(AdminUpdateResourceResolver);
+        resolver    = module.get<AdminUpdateResourceResolver>(AdminUpdateResourceResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateResourceResolver should be defined', () => 
+    test('AdminUpdateResourceResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('AdminUpdateResourceResolver should be defined', () => 
+        test('AdminUpdateResourceResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
