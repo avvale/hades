@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:861af47a7540cc7610a861714b9f0526cae8959e"
+            "integrity": "sha1:ccbf969c68e7ea21a60f3542b42e5edd8ab65eb1"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -415,7 +415,7 @@
         },
         {
             "path": "src/apps/iam/account/index.ts",
-            "integrity": "sha1:72fff342c5cfdad3514d5eb12be6207599cd0e99"
+            "integrity": "sha1:10c30aed05f4c59f5a713ab2cfbe086b4b600672"
         },
         {
             "path": "src/apps/iam/account/resolvers/iam-create-account.resolver.spec.ts",
@@ -491,7 +491,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:c93d35e21bc2ae919838c4faaad744dcbd9cc0af"
+            "integrity": "sha1:8a90416eb241df6c7e402038234fea20ac9710ab"
         }
     ]
 }
