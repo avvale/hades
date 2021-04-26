@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CreateRolesCommandHandler } from './create-roles.command-handler';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
+import { CreateRolesCommandHandler } from './create-roles.command-handler';
 import { CreateRolesCommand } from './create-roles.command';
 import { CreateRolesService } from './create-roles.service';
 
