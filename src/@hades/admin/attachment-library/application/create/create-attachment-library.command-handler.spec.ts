@@ -41,17 +41,17 @@ describe('CreateAttachmentLibraryCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateAttachmentLibraryCommand(
                     {
-                        id : attachmentLibraries[0].id,
-                        name : attachmentLibraries[0].name,
-                        pathname : attachmentLibraries[0].pathname,
-                        filename : attachmentLibraries[0].filename,
-                        url : attachmentLibraries[0].url,
-                        mime : attachmentLibraries[0].mime,
-                        extension : attachmentLibraries[0].extension,
-                        size : attachmentLibraries[0].size,
-                        width : attachmentLibraries[0].width,
-                        height : attachmentLibraries[0].height,
-                        data : attachmentLibraries[0].data,
+                        id: attachmentLibraries[0].id,
+                        name: attachmentLibraries[0].name,
+                        pathname: attachmentLibraries[0].pathname,
+                        filename: attachmentLibraries[0].filename,
+                        url: attachmentLibraries[0].url,
+                        mime: attachmentLibraries[0].mime,
+                        extension: attachmentLibraries[0].extension,
+                        size: attachmentLibraries[0].size,
+                        width: attachmentLibraries[0].width,
+                        height: attachmentLibraries[0].height,
+                        data: attachmentLibraries[0].data,
                     }
                 )
             )).toBe(undefined);

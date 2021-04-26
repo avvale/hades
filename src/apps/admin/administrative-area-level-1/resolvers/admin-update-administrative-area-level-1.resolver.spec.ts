@@ -33,19 +33,19 @@ describe('AdminUpdateAdministrativeAreaLevel1Resolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateAdministrativeAreaLevel1Resolver>(AdminUpdateAdministrativeAreaLevel1Resolver);
+        resolver    = module.get<AdminUpdateAdministrativeAreaLevel1Resolver>(AdminUpdateAdministrativeAreaLevel1Resolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateAdministrativeAreaLevel1Resolver should be defined', () => 
+    test('AdminUpdateAdministrativeAreaLevel1Resolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('AdminUpdateAdministrativeAreaLevel1Resolver should be defined', () => 
+        test('AdminUpdateAdministrativeAreaLevel1Resolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

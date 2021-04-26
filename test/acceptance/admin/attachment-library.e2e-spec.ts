@@ -3,17 +3,29 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IAttachmentLibraryRepository } from '@hades/admin/attachment-library/domain/attachment-library.repository';
 import { MockAttachmentLibraryRepository } from '@hades/admin/attachment-library/infrastructure/mock/mock-attachment-library.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-const importForeignModules = [];
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
+import { IamModule } from './../../../src/apps/iam/iam.module';
+
+const importForeignModules = [
+    IamModule
+];
 
 describe('attachment-library', () =>
 {
     let app: INestApplication;
     let repository: MockAttachmentLibraryRepository;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -27,46 +39,62 @@ describe('attachment-library', () =>
                             validateOnly: true,
                             models: [],
                         })
-                    })
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    TestingJwtService,
                 ]
             })
             .overrideProvider(IAttachmentLibraryRepository)
             .useClass(MockAttachmentLibraryRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
         repository  = <MockAttachmentLibraryRepository>module.get<IAttachmentLibraryRepository>(IAttachmentLibraryRepository);
+        testJwt     =  module.get(TestingJwtService).getJwt();
 
         await app.init();
     });
 
-    test(`/REST:POST admin/attachment-library - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST admin/attachment-library - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send(repository.collectionResponse[0])
             .expect(409);
     });
 
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryId property can not to be null`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'wws5v4w4m4kccb95qpifnvn7uuyp5o97wk3bvpqdv4so45266q5eiyuy27k5so8hq3pkh50sv4ipgact8j2gan7i1lu7rbqcaqqsxj1ude2qh2qe3417bkd7ojxsczsjmq833f20c0i6ijkf6els3314ggrp1uz5r434j9pppxniuft3mfygh0swjalggphw5pnkr4bryfobbglvrh8vd8n757ue5cn6pswjlmza0iefj8bvjmiukbxzlh91m5x',
-                pathname: 'umrs1u4uw9snjpz8k5z5ckkg6gbp8akmqmd5jm1h1szd4hepqvdvenecytbbed9pdxnwx7zno56rey8kd2mndxgyvg5rf901z29f9ubps95zf8zyqniiguxzg4l13t341v145q31ydvlkybe6sn7udu6k9uq6o1jdv4o1cwlpmb1khr3keve1valq3v145c80ini66ah9mbxyrk2ryrugqnmf3xnb3ifftw68ome81wovmwtmtndhxnkoa0c7bnoqz0ibdtjzpagkft9r0zbvsyu9bdvtchoc8fex1x9h7evv3dm57rgi4pfyem575mnj9yn687t39utn03sz35fkbknihw37bwa9dnuvsgaahoai48ynn70jyk0tb7aa5c6sns6rcj0fpjhaksy1fe4hpehj70hwrtd12pe9znk1fg7m59ey64lelf0nfnj6nsev7illgv88v03bx8yr02rnojs3nr9r2wkuwfih2b89namoy3k8p3dvnm99y1d9z2vfuci00lyxveb46p1xk5oeigd8hyh5kfo69h6qg2qajgdfrfsadayculdrrdkglwyyjdmd39egn23sjbv3damu60xp9grez71mk7bzet59n8jj7exrk8vjpgup53pwwno3ipd5jcrwp2katntvcxyi6blq42810zegr1cvfgpxaeuxq6gcex6ytkse1syuff5b02o3xuim0rxewz9prostcllgjp3937xnhguc3st53wokslquzr1qkuja21fr73lwd81fzqd4dfc0xga66tq7ar0wco6f3wc3gk6a8ir9dg2apobzdxadqsgpd3e6xyq8fp420mglrs8l9uql87mudargwbupjehgdjwianm5xe5q1argv0dq1cpfevaaflfw4rwij13oqcwx1qgafonp5vytcoa9me54ndeehqberjkpsshzya3l4bao3264nw6mmozj1anpk9kkfmnq5kqrjj5wvctzl4wy60kw3yrdoea3q35f21t2f7cr44lxvtu',
-                filename: 'mcmi1e3yh91lafiofegdgc8lbkhgzbteqqjrtct8wbk4byohvvx2m6pfmhzjgpdpeghcrkqj5nhpqawha713h4kk7jia181vzup147qta05nxp6qk5vmdtmhr0k6zjg1i5nymehh1n7kr3u2csir4z8sep8zi3lzthiuon1pizy7g7m5cowutyhaggm9wx67gf7orl3zcf7ehxobg0d0vhac90tmh1grefhxsjxw284lbx7rkbfzavm3aegx8kr',
-                url: 'ws3zx6s7y258x4rsxkd5xnt1yalsk8dnzkr7li10xl5i4e1cqcj2z93hlrmjft4ju4rrcky77paxaywkqxz2zgweazydgpet6efrnebkt49oblwja7cxp386qevzxblc64jlm2wn2rltv5hudlra4yu66ghnndqiwy90ev7sk823240yxaioh38wsql987sk8b20tw9r0ecue0bsxv1x2jrvtgtl5g3eob2jy7r1oasij1z16xs6gsrd7w9n9u4h8hndqwjii9e6g6xane2wrs7sdp4h51gh70l85yco1wwwhr0kuca54ouqg4m0t0tubfd7zj0ggvaxduvo9izkv3k7x6sek2ria9b4fjcqsd0iljp25gdb0662qpkypju2241yr2z5gfiirjmrtkwdmm2c5s7270wpau4eynhpo9dlx5g2vhdranm1iu3km25y6udbymhrsv2dbe2vsmxpp6galjycrc173zh39gt5mp4pm8l64hjzjz6i96nznd91thhua9k79fqvyi3xq5bt157wfqcp40fcr5t6upmmtv69tld91qtau45ckuc13y9xhfvzh60qx7em6xtakcywb8vfprvh7us1tr6x5uqdmouwz6sjz533ozzssgjbequ6lut5mjtlyrjuonxt9gv9a9lx1agv1zfociwqy2r8bctbr2idfke266h4cq9cn53xfz1w6yx9y34jlkwgrm6u3fqflcpx7z1kyql0of2ti5c4d72xobhlakj96jcj3wq9ndtcq0dg12nf5mrfbs030nmu9tvcalg86uw1x1jpna86hdvule8us0aurca4vb6y7jgekd017heu842daupf2rab00fmes99flc0zhotclpge0j739r2u9shdo2cv8v9hujycvo0gazaey4qlcdgsobm1zt6hwauhk8j2afiby9m7r9epf3lz2w0q89874cowupxkl0nn2axpc8u0io1doctgtgch2ve78cz8xub5wf0wqmylsegrptqkxlqec3c',
-                mime: 'n0zu1c3wi0ejo1rfqkws6kenfkhe95eopwndjhcgdua53zceg3',
-                extension: 'saofe61cz2yayddiy25x3r0ogybalfpn019d6njncdjwn45yz4',
-                size: 7284785513,
-                width: 252779,
-                height: 601929,
-                data: { "foo" : "bar" },
+                name: 'o3ws1tmelu7nn7l6pjxm3w89k5pg9wla99sg4y1h3rfitru7kww33l6ccdmdaehnwqor4kgu3uy3orhwgm1dfufqk6mvu0650bsf71h77ck552z56bpm5paxtwl3xbut5m7qevbjo8o8h0179qrldhjob0azvqy14ij7iozz3sdf4mbe74ay2gddj4htrrz0t9kuwjfpfwkxwtn8luisgizmuzjh0do4t79mr5rzm8eiu884xnkrl9wwhr2l4dq',
+                pathname: 'pm05zgccjd3rf075d6k4db4zk2ifov820fbzqz06s2y07ghd71fp9cv14y4xjralknadbotlajrjc5ddbfm8k9umxr9ukb1a0p1smnfbr0ptz1bgnlhwh6eur6upqdn6qozmlss5t8nkkp4gqx7vs26jny2qtkchfcdd7e0fedzyi0rs8ik1argb7ihw7onbmfbkpt4qfpb046cbmb6i4pjk2csie0wejw80xcegx0sy6b7mzqar65nntxvv6wa7qvuj6wnzjned9kegcg3t0l5x92an5swnolse4m5qlh3rv63utu1bo2exvhhversh8m9ro931vv9dq08f81gphlr9dflcn5mqvkw3klwpsk9hln7hcg33w4vp1omq74c6rtq8mm0qh585i461fegu5l92icohxbcjwjm73nvzcg5afqmoaq7m58wimgvn9j6dq7rwrjgxe2hybi5xvbv6lzh7ymuxvs8dj1wxzila1pk4mvl73lleibabyiv0n6e5lungwiajpvsnuvpaht412n3mf5015960ehvnx40izs8xzxftiskv57xzisxnshni0im711acqo0mbhr7xv72f37pqui62dd958wpn80div82vkpalgxxwmrb14bdz2sb2l6ewdhrlax7h5i7slzuypejausjfzqmppqosh03q2fas25q5gfwc1com0oon5mkiileijstrn9dxtpakc71gdcwxua0dlx4qm769arqb8sr5nvj6ofiafxvbo0e0eolnhjunkria396gkcjrbrhv7jpnelhgtbsey86odjx51gzqblyy9hz9uwwgh5x4augrnc9453l495m290l9f5usby9ws0caqcl1dvljniobwilz8wzrmyr1hgwdi6oejvfx1rlgystkqg265ob1x6xzmtu0xu5iuvzxsxqv42smhra0e0cx14cmf3sqx6wosyk5ct4ycbuxxqlrgx8guhd3t9wnawpkc9sf7n2x2oqblz4cnp5mzxzls7ozlpe2ycr',
+                filename: 'lkstctdw6ohcs18zmkabq559whz1c2y63cdpulw3co8fxpby123gla6vpe649td81e4adl90u8kuj73dhzg1bn08gh8lcrwkas07bkfw7p67ossx77boypx5nfqds9dj0dsmbs0iaflyfg6s36i7sikpaynmg1oco59luvwn4ni1afavp547pqc7inuwabfmot3b5nmem9y8giuveiopjaoc5mfezj9t9nl4ptp7wg2a6qqmwl3lpcx2le0x71k',
+                url: '5d3w7amltmz57oowjat31hhc1cypj1yrbqqjxp80rc9jgc8nlucui1d1d03a4wt7hadezhlasenp7frxvjyp5e55h55v2mz9ffwsauhqwz9zawzco825ds2l11pv51xkn5lkcsiw227ihah8pon75ssva93lu0iht57bnwwb14t6wtogyr0usrbi7lkp1n3pwrriwxkmfybyeti8fiiuymv1cr4tu6d9dnnxym2ew8ylm3puxiae45bqo9zz2zg4sbu5h1o7o4g5fwbrsadv2xh7m67z9cfdv7yifmgq8ekpi5i0i5tweuarbiiau7tu5xhw5iq0akk4s8wnld26s58hsl6aqekub07lsa5rgnbaxgzt2qurkcvkngrtrvstt4vmvz9pm0whphkx3cfefd8he6tzrj9rpg9ofrcddqhkpjopwpcrtg04f3fbui1xoanmyifte969ajll4dyfo6sayhxxe2zpscxt473dp5z849nvg7vdz201jffl7efg6aq66agnyb82t53q92k6clzauysx7smje5jojli3okdbe1a0v35v3e9w6i45qw75qgf15ibmlw0zdneuj4rg7vc939itsmelld27pavp3pfd148i03blzav6f2b33k5edafljhdz5n45yhf6r9u0z6ue5v4mtppr7hbzw98x77mfnon3j4rdif8x02hjb8tcogu9ix8xgi2zzk3docbeq04d8dhvno6rtbccdl1kj67y3f90md17be4maehkmzarwkr27370mzh7oki286kkkax444yc1vdekdru0jt0z09gg3u38p8j5m3z2gfixhkm6lbiw6jxds10spn2zgaybio7p5ljqo46836c9bb8nlme4d5ih12n1suxkl4l2tsyv7jd4y6me8v2k68rlgw1lnz53x3r9q4qfhvgkju2ggcieaxtds1lohxfl57hs86cd751zy2f9w3na9fp1zep8g9q3shn6680u8foe7dj87wyzhf2d4535klltrr3xhhc',
+                mime: '8arctbvyl0b5lthiauzh48m9kbk922aguq1h0t8zxkknu6vefa',
+                extension: 'qlhuh3fbygcmhhvysnd36ymn5lru3o09vinx4rh5do8kg1x9j9',
+                size: 6692515222,
+                width: 147089,
+                height: 242468,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
@@ -74,47 +102,24 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryId property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryPathname property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                name: '9bp788zhgm7f8wwrrx2mqqbolyxpdfrch67g5c48yb6iul45mxzw6uw334po29x7ywpn9a4rclm88r438dg5iry5uk6eqekbb3p481d0gbqe04rv58xoczss6jrkn3xhmar2iwmic69v2y5xtj60vja0p5j6fiok9uvsy97unt4dqyjx28mxxpkz557m1t42vip55zuumt69u352ezd3rhb7gl079yiyqkdcc3mnj93li3blspbnvsdb3wdyr1s',
-                pathname: 'uga0m7p34sbbi5acfxxadpw4juzeywi5aec87cd55sbls81tnx9udu9sju8k6iyor4gp9r4ta2aphjwobomql89wmzeobhy3ou89lpzlt7zk7ecgrpoqprqf4phujpdinnvpjo6x4yh51umr79ldzwlh6ezncrk28p9847tmlscgts7qahin2we7r4xulo3mxl1weqaxuq0jdxdil1scbgbij80gk0zisft6p4tkmqhq8qvvcqzvcvh6qjl1e7iu2rn7zirqm6gbatpevx3s4l21fbasc3c7xqtp1jk6bdvmsibmp1tgd6m8j20rytln7m5sfds4g0vuhqeqv5eol3grgojqtqg8znj2nulr1ayp1ls2umzw30xauyefalirqtnhc3g36d5na705axjnx8sy5ovvjgj732fhczto2trbiditd0eo552gy6ozeqvnf7b17spai0c53ck33tyynz31hhknjmo671ipkrpf67an8af1qsneqts6iavwekm44jh1mytyxem8tyt92z9oum8fbtk1b2t19tzfhzob24r9do8zqih495l3bfxv0k484drfwv2ov42mjqn5nafwer2xkm9n0atpwfug70f6spi5hhl95jg1zrbe5hk0jtzg29lb4v31shz091ed8dfs5fu4wlhlag1vtufhlmhqx1gwtz4bhxoufcwhlw1xny3p9e8773g3p4zy2fcue8q5fuugkj5fqxfq1nbrrbs52skck6nutu2x4hsdrffbmsz3qeifp6w8gn4u230lx7g8zn9lp2dcz0gnx0906a2r1scs1yb4yhe4bdkaadplkm8ub2oeycywlttcbn1dhdu2zy81wfbj229q1qtz4t3aaw32c2r0bogec75iffwefxmr01bor1qd6y5scscij0rf1d64705b26ztj0k7gr65cyss0kx799fftdk86ul1nt0fvkbpaagdxi5a0nosjf0yfw0lwpax1l98z5kk43nmkjkk9daeby30cttb62yng6g9',
-                filename: 'vvwgd6lbehwrz3kwitlxzgxcbzkivcbfv3zfsclxlaeb3p7hvrvs1xvuozv6je76dl4ukwikbo76wltirfvtfbrifgwqr0yrmnk1jymg2x4q8bxt6y27dnof76uh04ohfb1n87y5kwi22krnrax3tb73lrod3a3elejeemk7txnryxhus18m3kpf7br2q2hqdn81oltj8xz4t7acxlt0nubsq130t9dcijw2r8do61etvz2pwvalpduatvfycla',
-                url: 'hxkznxiqzgki1wfap0tfh8erz5icjaqawery0c4sb4joj8skge2n42rjooesud0h8ptem5hl5r4axxozkcljy37motlg3fh7lj0h7wtb56ufjb5o7ifzhv1s48pk1c2ecwzcquwlq7o3ynd29ygsh1e46w6ii2q7khdu8fl10o8r9zy32ivxosyozjz81hp1g9ydcfnls3yeoouuek602lxhzf5hygco2st02js1sb7c155ua7fguuldzv9cl7gv7nn2r8aejsxphs6y73tese1roh0hufwbnselc86u0g3x7fivd28x7j3kxz5mxvxl7ap2wqdk931se9crh3pqk8fqwk605v7rlgprzixh7dekp4zwy6npp89vjmr6tjmnitnlnzgtlg2vceu9jayfdi3tx8dx16dvchyng5ke6sxa1mxqa2aysl2ap4olxz9hwzch91oeden1rm90bvyeyw103q7quo62n4tlmz04dwl46vwxmko7fv8jpost78d8qi08wk4tsxg13ou19azp2c5ma51dcwg1324uf1zy4g6ypf3hckkyydyd4uj44r6uobw8x5n4wo7lxdj7v0zfbkjfamehx0afncx22vdxhsipgyhzympx957y7kellp7fkez35ko3s1z4gru6v77fet797qvjwsnfwnkipvu9br6zwhznd5w565lo8gak7bis0bvyus02rbd452d9k7xp12twsl7k4sfv2t9xoa2orxkgptgt8uqt4a8vvdagf7rabg7dxxi1j50ad1km70xciz1pu35xw7ic5j3cstwsgl6fppcae4pb8l3keczbzh7dno5oirfdzm751oh392fvt9e8ketvaboup1xthe1umhnazau4op4sgmrfczc0seuctwwcbhpm97b83ryykxdjmt7qmo234hml3lnw2xt4xlgcq7x1yzxd1x7ritzmu102h1vkcez6lz0fit6nskn7xm9fep2csar33kqo6n00fqi84dcbvxhg50x77ag4wg34',
-                mime: '3xbvwypngi22jpi042tblmfuj6h0i6qp0nhdah4yn53ijw8uf7',
-                extension: 'r3ajyp2x7t56n7jlvwqlrrpbfobe3i8at3ogxnqq8ur2o7i70o',
-                size: 5667004129,
-                width: 689224,
-                height: 603045,
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentLibraryId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryPathname property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/attachment-library')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: '8vlmbz10rwp38v7yi8p24x4a782c7wztedtbyincb9ogslfkjz24vo552rj64ictjnmrhvag096daurdvsl5gm7dgf1trffu3j5n6wow7ov3yeivadk8uau9is5e2y9ekzirp8ih3hi8qzi6euc81c78z301sfquhr9wz5b4dgglyni6v7o5ajtcsgwedswy8igyc9nw83v4f0t7abj4m8b71luozoyvyg50rncbkbknl83u51aulquaqe5vhm5',
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'jf98bvw9wp837eg8ut1jnaek4plnmjsrs2a20trqc3ed3dn1hrj02nnpz3aiaafs4i6kgamig8g7u0twio7sip3bvp8va72jyuuko2p8zybl4z2m2knjuesjuxxt9txkdtthr4oe43l2q92h7wa10tveqkcbfhdf21ot7y2pt0tdss8wzqvx9mchpywzqd7izog418kew0pqjy9sj6kvwe8783n31245pu81090wx8stzycnwzi4u4kkjh8hyhd',
                 pathname: null,
-                filename: '17g0dihdy1dwcc1wzuofjnw8ud18wbv88xd0fgsy7a28a5abmnmbj8dsycpq03fygn5td1vn3rat53z9fzquoprk9ffwm7k9uozcda2h53wdpj28tilt30pw583rtthmdk674awab2xnw111k49jewb1ng83qeraihkmmeejbya0kpslewch2dej77zbjff7z8jup7qovodocmm4j0k0oekev1ypez6q9ipe4twqmfx48y4nvp8ppbhpw4ixrf5',
-                url: 'p8b2fl6jjopece0eo0pmg3kwpaou4w5cvv1l0i0j80mosimctqcashwbo1rcii28clxzaos93oa4ypr8581xnfny2j2x0zjemuptmjp60pvjso2tfynu26td5yx720elm4gmpiugyxw4gqrym20ve0ayjsg0h71sq7oro88tsrxcz7kr85gquqa1u5akxpyn1p4gdgi3zg6yikmka6h6n02fp39x1us9gtoj7n9y2cykfusfqt5hj8j1965lfdkmtev1alh6i08m3umc8rqhto27u9vyzyzmc2llre4i0jw1lfalsi0iecpwjprfceiw6n02xqubpu8singe945qtsa8qgf6x2n5mcizhrp2pexfwo6x53waxyyiu2wjix69x08oltjru4pxd3mlog0rfhzhzjypl2dk0hwstam29xcn1g7dzdq2i2hlwk5e02tp3a9oo9pr4q4urdyvnoj4jtsler71b267i8ru4bd142gawxugwj9qh57vacibcoru1yv90xsp9ts0bl5zfl72gwkz6xo6ckef71hgvwyp6ebiviami5vod46kdxhut2w7gmlq91lw0l2m3tic58pktdzm7h67qge0pdwobjy2symy4u3snld92z1iwq6mbj7w48v607lcyfqnur925om2mhlebssrlzmwyue3jwcl2qxubwhr3zrqq37ivnqi7mqm3p73yb58qr3u3y7z9zoetujthjyvdeynbhj3uio5m398t5wccab8owh7h7gwbx3xnbdbrazb1r8yjirf1chppk801wrcs7og4f9jad1kjgthkpmsyrsn9d9oyxtc8apv07xb7tfmxoat4icm9jvr5hzlhc3sz1jfy1ybtwqibbfdv5djboiu0duzo2oer5fxc2mvm49qrl3znyexv8yepg3hzvmbbona74h4b3t1ag0eac1y5ectuetk94wajn5u3zcusbib0twgbi5cb0is9wruxoz8lcw21nd5vj23ffnnjyhuvigndyd7wjr1d1hb',
-                mime: '72rzf35zan670ubg14lg6guszqtjkaxnslovdb6awjh4dooxgw',
-                extension: 'hnzmrnkkznstz7de3rvz0ggdd8na8lcd6e99ocrnsa7cfo16m8',
-                size: 1068380410,
-                width: 651549,
-                height: 598279,
-                data: { "foo" : "bar" },
+                filename: 'qjmqz4395xpgo8ooerm0me3kq44hjj04gknv7t65djde4inbdrscm89vripslk7rp3ai20kfsbmlg1f45mr3fow0fsrfglt8mqera386ix9i4sgtt0isruw5w84xnkb802uwxxqdpqb80iaq2m6dnwcn6xdp5rwsx63q7eokwl1mwwjbmu881uf1aw3syu4tzm9k0372dbhwou1tnw2ngy38k0c98yk1pn2ev6iufneljbycq80wvgi9zyt7n0n',
+                url: 'gg4tqzhgcrkskd9momtzzgrky042s2jsgsujeloe703fihs24pbknxsdmtdoqnbc1dbqewm8zmbsxwkcj744g9j51dnbyqqbkrmtb59uzaexbuuvs1sdqf3btwdjejo7f6by3f7usgfx1x8kqgdm2izo8s3k72hp9u3vj08edsebq8cey75vxcuu2n8ji1l6bbtd8021p6ug4cfeve1blvtcgoryld4qt7ct54n3qpmahln37ce73ydck0ueh502sfup5fiw8dbhph25p4fooz5c4nzpf3deib4ocnyab4wl37j87019s9wddqnbzzuf8pc5spvtkx95uto2164d90asfc5vw3ait3k5hghnu2rzyg0zex4nf08r72lf88h63cura2f65eanaed1hdbhp6ud9gi2gom8yvjdgv3yxpiqci4n04provfaq26n0r2o837j1jahbuxdm1yv9ediqjaj3axwj866uj1fgujkdgxo1ppvfsokj9izduhbm20rhvznjbvojetna080s9zu8mvnsiyk93dsi6ufepvmje0oq9cibmczeqncywm3sgpi02fd17irqpglt2pjrt5zy4xbd743atro00tykimx44hl1kgvhc1uz9xkp2sw1hpbxf4uptmss0jjg60rs8ihkvzziu7g84kia3e4ugnarsor8qav27frsdm87zd9e742s0knasf4d4ecx8krxxizi9lowe5tmjscipcw4nrelo6qjgk5ddo97n6tpvtg177zmr9o3bnv82csb6j5ywu1g7w7qyyrt7bzsebs1r2slbnv88oxu5dvc15m78hxsr0u0klkln0emds6rtly9itxoohpdo3ah77n96p5ehqem2llo50ghjcx591l4m1hodz5obhpqjv4dg8yjaxoukubxfdbesb4xojmf69mfvxoqsxwdc6ktoyzt1v7oja5lej1fplb8omo1vaivh01kf2c7yvcn0ploo2ahna3v2xk2yvv54hds7ge8urfiwvzfgb2',
+                mime: '86bts074qlppldk6l9hrjikwttbksepub9iyoeztxkk9be6mof',
+                extension: 'wff7vjclgmb7t8wu1fpg0jm9i2dpfo2a76hs5jv0pskidbeir0',
+                size: 6231694487,
+                width: 802649,
+                height: 897726,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
@@ -122,47 +127,24 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryPathname property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryFilename property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: '29flzvrxywnz2g7yw1vki91l910gcrw496cp2cq977f2bqtewavl624o903ltn9libl87pfqwqszwhrw43ucr1pztjwy25xn52y4xrwluhuewgltoso55vn6oyeiwc2sb1uuubdggd7hdbm7oy6y84au4gmfd6ks5hpjriu9z5ehkpeop4hatosnixlbm5798benozlt0kbnwj0jmaqlztw8dm2c7ne9ym09f61zk141mxz303r5umk2b59ct8i',
-                
-                filename: 'rp0c6h48x2qx485noalq8qw7pdomgsar3g5ahvuw90oycs5ufucdwhan77zajm3jjw9fxp3yw04x1a2dptvgykjzeb4606n5tjyicejmk0hrzs3xi0fxdj121w84zqce5cu15up8m6qdnhoyi3r7zta10ksrr972pn1pxjmghj8de50oru23i9pgc1h2okql1zs3pfu9halnels5a5i9dkc73ep3u959tliyyoas043gtv3tu35e4wrjy9946zr',
-                url: 'd2vaqu8wgx1hy7ogc7ldktdol3juwvjv5w507f9aethx3zmahy5ueo7qaajstff2t1m04dfanev25zxdw6vxwuvyolykmcp0yyualz9e94ft98tezy80r64u52k9nrjuz2s0m8ayka3xe09oqt99h41cfibf05wqrp368zws1t5usdcvqrr8whgndu64cm32n2j7nvz41el07pf660qu4okjk1wynr8ld54vxtys8lgw1z6wsc2p55ddlpqzq0bxzjgtauzpgmyu0vb53v6sk8iljeltjflh02w4wbq7v302c2nb2lv21c18jdfxu6ehl1lis6dmnfxa8ppozuaxnor9q6zkziwkdqf76otablww56qheo2gpbpt4jo6b3r0pkoe6sawd3kwjzknjha8mg2t4f2hcuwodfogxu5yhsbbhcre3hu4v0ocm3i39nz2wnqn3qaigkrjllltuwx4tai7uaj6ebup6jmf4q4ubheyjo2xyfs68zkeljwi0a7kzth15p86wegrhbn16iv97wanlb3fixqcno2cq9osx5iidv4b8mb0wmjnebif6smzo7mjt5u4ilry8c1q7uwonij5kyu67eg157fk3zfnx499g89u4wjch6c1mepji2r10am2oh4rvp0rfiuyjnz4kmpa02ca7t97fhpt1qzv6kakhjiezza3fl5y4uc3y7i7w3ldxq3matscessexm04wl3a2lu83gb3q45k7c415m8fb12byxzd4zf5gk57kwfbyeku6iayfk36smakp3qv0zwtpc4w6hbrqbjvskcokth9jlfvcw28rvgzvni7uqiiit2c4nbrw5se0khszeptdw5tjzqot5apq6f1caj5xiduupskz953w01w6v0drkl6y52280addn0q2dpwr1vxwo14aqnz2i0ttku60uxsw3rmyj078nripiqi4bus81ax7emn5s0rgpst9fv9cliap3vva4s1w5cv9w64ombpkjoekyy0igcy3hel8j19o0tz',
-                mime: '9hzhsh6xh3aaroa88m2b8mnzw2qmanoojwdz84by3fyrn7gy1s',
-                extension: '6777dbfeoucnhyuihbsuy0gozxwxvqfams374gzhosbdewyg2t',
-                size: 5013051807,
-                width: 929104,
-                height: 354291,
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentLibraryPathname must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryFilename property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/attachment-library')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'dtc411f7y11mode21l205cwzgpt6wjh8yth3w6r1d94o8ghsh84oz9aq557gn8ef269x1hikoy6mo93jisrlfasmqiuybkuk5kr7vdnhhv493v15bg5emilf7u80nrkip6ad12zdtou77tvpw8sbmlc7spdtg1gvua9nb95i6xfj72v4ix3mjbysaxqscdbjyjuwd99wcl4bkmlzncnexygmlzm2ihq3vot7uz2ukf8l0mdivm8febr1dicfbw1',
-                pathname: '4jgdthdacvo26cwcr42bdcn0o971r7o37sw07tnsd6g7cjedl8lgibovqzbc3mryjytvgfzhzj46bdysz1yhssgr7cs82krmwqlw1i8tz9w7bm4ejidv6zn23zn8vuhgkabm78u63icxko4n68w3njorecoh5e8zwq2wzb9iir28ly72wn41laspz157b3i8d7v21eomw8hjnueaxvn31my00vw0qal6cnp8a12l2fbbzcbbichjefoyf4b951ki29wv4osj4h1c6835b5xreyxxquv6c1eccb85rzl59umk6nnz45ezkzz8wchal3psze0xbnmgutm9t0nj76fddva7na2aiss7e1ato92nojy4p2u07yvvqbup3vwxkybrcwylgthdeivmhn2npjz3r6luzsvginwknju41v7a4p8wcgzn92mn5apy0njp06ch41ncufi0hf4sucy07w37f0r4bs7h4s1rignmhjkly3c5qw59vrl8sii5elbd4toqzklwqu445gkzrjl9pda8lba0r8hxhlv14kxz3yjndvh5dlwoqs54fyv3ssz4z0jisn7ojgpbl41allq50iat80crzhhsxgdyawyv8t2aamlgh58po8xonj40sj2glffxe9pb5shy9tbilh91rgkosxm44gl4o02slnzeg3wrqmin7v3v3gh9mc42mc8prqzfi0ft2198q5gt8puvtbcpj98p2inyrk0s66bytxc4dfno3k3qqivuyj9csaf2flcbgpywpgw5k2qs2w6mcozaz1o7nwbnyl372b4cdrg2xomdfo561l2n7vnlhwayyn9dcuuz3dzd5s03im4p863ya1ze0wsh5u6vp34snyg3ovvifo72bttzlevj2wvjm2d94ufpdyx3b2i26pc6spscu93alksbggq09mqbbexqylw6maenp4rcgn6nkjjjvg3oqqksyjuw6yrvj8l6pillsk3n3dguxoov6bwkdb2685xoflgwvutspwgskegduhpf',
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'juqkwvi2dd1bqu8tsug42rpx65p56hmud7jfxptuafjji5dti4m25friw9hn35jxejh13a9hmr8x3fgf4ol4qjb9cn2qppf5gr0u2tm52lgispbhw2znhutzevmz9qnhbmst8vu4xvqdil89c1ugujqtfkq5xmgokpvuoxemilejxszor71jizncrqhy1ji8mo7ex69qwunuyt0v4fx7u50ratx91hdxiq1yfb8j0xb1kiehhd0hl7oa27ueesk',
+                pathname: 'thxdf4f04l6xyg57kp12voef5qk5f52jpki8faivo0vgjro5k2pthcrf7bji6fve8439iggcilano7d4lcx07ys9s2skke8idqa7zcpieomxds3t920qfknoti0e9r26achg1e76e9ana2046n91s1v5lrrsgw9t4r0sga6jash85e620qdidty953ls9yble07z6t9zy592j4gpsry1llgxuu8zk82f1vlnpkmqt0sc32lzeb92q8j16ir9g6e3rhrc7vn06povz2cs01zbqegwk0yhh13n4fte87fm2gz70fz3akx4oiq97rf84eil3ulgjt14s1khks8bq79m0sonft3so9kj3fg07hjyslu5cl5bcccbu661i49tslqfnkuy50cexps9oztc1uzvioi1u8wydy4cha915eq8ctgv3rz0hf00mxsno23ur7obxdwjs9b7kwmvvoibcqoxes9jezpjdewdtgc6tct7tf5m4axy9ki10ylv8kv6r7xp8a5az6cudr8ek2cjbdfnftwqh2a4wov0fqubevopqg35lk71k8qju54wwdoe84z5bhucb2ytskwib2ozi594e98xe92m348mu2rvdc9jkypspozuz5rngvwrg3awj8mtpgdxf7yq0ihfbvqws3w33v47carfotv15804jgz6q8tul4gcxel2oz4to4wmdll6ni38gqj7fkfbkdm65njycjcniduzs4az013tw5bo2j9jt99jym5701nqtdwjsojn52s7sx1lq1lhtvxpng4cdwfzywpuvbqdiwvyua27er730wudbobdnvpn39bbm7d18h3lspbcpdbedadkirn7p6wvamswtepdeq0wipobo4ichzrdsp55qnlezeyrf5fjgrjacrz5mserl5ythf6u72a8ohoo7o770has7p5750edk76nufxywi64l9u88a29fd330gg62rsfzfp4j53x93lxmnylbp3d8mx5ld1qg3w5lm17pn8znaifk1ltl1y5',
                 filename: null,
-                url: 'b8za8z4p8fmtkaxl0sp1jxcqzmftg5x2oe1yn92fvi7te0113vx0wag71jsijn802emu8ky8m8alm3iss6lqg1pz49sk7mxx66l15bavhkxceqsjlh6zeslf7pbs1plslejjn5o7u03so05ijm7puwadxfxk813nvg0l750xrva4ta5vudqalgyd91nsvxn348oo6vwm2jkt42sr5z6unbip04u5ey39kum1l9v5le7cz15dsdxynke0470sy84gnv14ziqfgzpo0dj55j6o08b9pqc6wrpmwchld6f0kxcm10ylic1jtr9c44sw8d1wzmd9fg0fe8hendx4frbxdwpf5bpit07i5pgb2qixaimjnyptse902v5jianhfhuxxzfa69kzy1oyko4370e20s8f2v2io7v28qmwln3gcd6iiay8i35v5u8j9cretretm665t3au6mx778dn5stlo7giynashnbxs2l99rcwv2n9rjx3lgh18jbmpyt6mdnr8ol22zgn4abz64w4cvplyhap7wrjy83m11nyama7mj82bw5p0rl8f4ww5g4iqiisnpu6c9ukug5ynisdqn39f7lh770fb0mh1ns05nwbmal5licyzvo6f5ck3xy0vdgsfqwyjqegpeu60ogfdhp9any5zmjnl30mdyxgt8bcesqcsz0pz1vit2s442aw4itkrwm490267juj5alx67owda76hao9zxyfer6mx97s7qaxce74gb9no5h1pat6iu0agrpmlr2xrbrv5eknguul6kevswij40g57176j7ihko9a4cn0mtb0wqynj6qv91khm2lqu1dmneir7alvzrq7mzy25f6w788m212ctyujtavmwlgpl5s2bc9n3iciaqkw2un4yepfzp7onet5hihotrfa04lod471bog7l2lctz8db3ktpjce0tbi3291b1o4vde5iaphz3ebaa258c02cmbnw0a6pmj5x7vg9wyverhq4qlg9q3f7j7h2qll26c9',
-                mime: '28kchw6u64hk964ew7cjzz5zfpd6ek1vq39ntus2url48fqfhr',
-                extension: 'ik9x5ddj2n39uxpf6os0i552txdaz6k0ponrn0v969lrd5bcqp',
-                size: 8566243899,
-                width: 903670,
-                height: 737724,
-                data: { "foo" : "bar" },
+                url: 'qgqdi051re0p4ug1x1tokce6n6ejc8f4lsj0hsokb7kbwptbi4uj5dmlm3hm1h3enk1b74knom8stjvaxg5dixcyuh7mke2s0ginv81tlpotzmdrr7xjkd7giaxs5mt7c512nz4rx9wofp5f1ie6s5vt7986q1buditpkuzpf7vmkqq4lxfnrphsld1kxivi1iarsm4akd16mhamsapvovycmi006qj319ko0tez10yl43dwrvqlso1g2j8l9ewld63emn4xigfov8b3zc1882p2vxuw93oir2fht9f3plbzimcmd3xi61a9aoke8mljfbx00j240x1t3nu7l5nfops4gnlylb01od1rifniq6ca9h2civfuierlmaspm7iv0r0jed82en87c0l9u5vq1kd8757hwnwf59vmxwf2c5ijk7wqe845gwllfxtpx0f31ylo972lrufl5joxmtu2x95yklaw7axef1qrzt0z7ixo0caw80480q2a6zwzcv5lxhizdsl25npv6qg4ihfau7jfn8epfvabl2jpmsk19268isms5wxeey9tl07dz92ebv3yh47pvjpj7kx8zoxe5eee873ehkauittf3yyrm223kpcskai26374ov767jcqw3y6qq9ov9lycrer2373dejf6k0puq2673jjen8ybka9ggneb41t0mpthbt8z0rg43rj9fbzqf81klbpjms4p87xk140aqlvp3nt48rd51yp9jivnxbj2op6mob422x0r9m4dh3omrsu9ywags03okg7m3dpmyqdi06bwa4m8n3nfr1c8bp1ok8v7pn4t7anii93t6346yyiebshuac9iflygpydvnyqfjgx323ksfn70mreu2a8no63ogitr68yor4odom0r9xhtla7ba1rexun9gcxc0aq7hifj4p395js4xl4cuwue0t2r5c1mo2y045bob5e56drapz2nhxppn2rkm135aidrwte9ebz2uaqop8kuqx0kdw06nr90c2n',
+                mime: 'cg98fmyt28jqhtkoqwnazbo4oe03jhrr0z4cbkhajq1aucdits',
+                extension: 'are4x4xyeybeuwzeg8btun16c68bafzuxsv2nvn0lo7w3nckes',
+                size: 7262977994,
+                width: 836037,
+                height: 291391,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
@@ -170,47 +152,24 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryFilename property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryUrl property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: '7c9m12qy9rua5rkvtd7k4y7644jjmwk1l9et13veslb9dcozi7ibel1vw4u9th0ldzb6dhg5hagazzp6jerid3olh2sctobbrme0ubpost1pndopuqzs3tt3l11fx0whirv30mz3hw5ogf7k3hx6xkb7mu6ycujdkg88duex2k564lu3deh0hf9gra6eg8yoy6tlgh54vbdqqethckke4chexk2aenz5nw2ody9bgvsevxji12pmub2yqq1kh6e',
-                pathname: 'v5e7yajyi1kt6lwrtsslv6qbl82kqrrwp4p5kn60s2822evu9bnz7e71x1isyvjyu13y3n8z0ri71dzgr85p20lewz8shg4r9otj4a2sbavpaaka4l23cynkmswju7qi10ysqzo47xxc1v9pptiulcv8bzrnsj3d01w2c6yendtsy9s0povuyh1vz7d7mwrx2ehemm5hxbeas12ep916jfuob7sf9jqwuilcjdpt30d7cz482po5xbvwtklxleub0fx0l65vkgrmf40el44xi057ehu612222dmy2t3k2jkecuiuceyu3nr7905o0ffnb58wegiefgsy1qxco6lc2vexf44y9uj7457b7o36roningm6t3dbn3bayyd4zweob7lbhs0o0ovj7hp1rktdl6kocv7iir6lunipd95n56g7aux5bi6kujbknx5k8hmt1u9eli723hi4txyxfsut2tlj467q1enebkiepvuwj6v44qlgmsud9z2f51vml6gvgbuje6814olnti2qimj714d5nafryf6vwi86g0gvwpam3nqni69o2qrfwtnm4xysveg0cwncd2ezw98xjbf7erfeq9eqhx7rkxcovd19cr6kynrix6aoaddw3erabnv5hp9qlaouv4pfv8to6t9su3xdmkt7873764guiem68gou3r27e59h9155fcycaymn9lpj69b947x8s4laf7nmsihvlckk46tymgq2w0695zec0fof1ki20wlhmedwktxiz7pizz8arr3vfbt8p7q4extg97gr5qvoqqtnm7l19jeiczparythiub8kb70sfkk4u4oitns1df5kb7m0os9xylc7ajyuvh2g5j5k1b736asnlaj3h948x4dvsy7uhgha2jueunu7mgbis567g4l8v3xj18pvojva9zbb4hiej8q4nsj30lrhpofff21wuyuh2rsx1bej075eazeo5pqeqx3c535hnzig3ufys3u92y094cwo6778neg43hr8vvw',
-                
-                url: 'u0qwnu58mjpuetg9n5uydovhho1xpvq7uchtdtfbvx6sevhe9elmgvk94dwhixw5d2h4rpv5w4uv8o0jdo5t6atq1s2bap7zezyzmcx9urtp597nev097y8glsp9hbflaunfqrjf3phw7p7fwaxp97vfy2goi3hk2d28pwqql4m6o4c98zxg0u55426du8fpjgpp2876t5jmg8de7v7t1y8tikdrobk0oc2dlhhedxncrb5wfu0kmbvdy00bg0ncm2w7o3fn8j2e8lobqkxlkqn40jnxoepy13axl5xagvyf4hdzs4crf62xv90csuzhn4iq69uca2ejj0l819es0f52k0dxjhmra2ognpmly1tj31ohz0l6ximhhoufucfhur00tt1aadp8kwtz7y1ihngof37nn8mpfccvzttelh60lxxz977i5eqtrlu8so7y8206df7254lqoicky51ggio2ev5crovb6ix4o4ndevhhrlp00n8anqauax06hr1vglsqcr605k1ixf66mducrpe1fvxqdkw5n2eot1judpvpbmlox05pngqdw77p323fzdcukorp57wjfb7gwcn9f7xn4gqf4ocmmrqhubq136yd4nad58r09t4975e2pp5fii3px1q6dva1wi8l5d0yh34lq1d8n60w2281muecqaumwcp2mjgyym0hlwsdcshruzrsarn9rl0amilq2rojb9j9ebxney09t16z4mgbcznefls7kmg6iw66z6sj6logz2shab0m5eijq1ibfnhpckhww6rkv7nm78buuq9peutgrps16ye0su377z8omhvlfcm9195ffnyqkjche6g9grslx2mbo2p6efyxlwpahw9qiwbqv9cbenzd7k5qm4tr94hebrbvir68j5n7l0p9qhijzncv89u4kpqp83x95jep8lqcgtjk9zdmifx8z9yhdb4s3ug1903uir34sbopl31r8do8e6tjowjqrz1w09nbmph1vrqvots31fbxuob7',
-                mime: 'y0hwj37jcehdyp91i26bkg2s2dh1424nwwvxfxozztz0bkd2t4',
-                extension: 'akaex5phsgfzrmtrxpxom5gv2ioynr64pqh8ramcvsp53qx8ic',
-                size: 7225499261,
-                width: 376039,
-                height: 399512,
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentLibraryFilename must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryUrl property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/attachment-library')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: '0luz9msj3gj9lk77dmyvxfjyz0kp66way0pjelq0azsf01j05sa0ruqcd9xyyqeu8hf49pcrba3hq2o8ocpwsn068lhmb4s8patn82n3c5iv3t6vi4j9j5zdpg76cqi9ttfqrszgpgmntwy7fr8ojl3un5pv4ib3ykj7jfwrhrhpuef8xmt76nmrmc8gx3y7f498n2u7fkbub6hrjw6b7p789lq345ap11ckerusz8664ze6bll4nqhbpixeeo5',
-                pathname: 'vpemjkqw4wkzepqww7i7f0j2nwa4qjrcthjy3rgnlq6oqonbinyqjtc4olec0nngdblcyz5794uo4k0cexgx70c9h5vo05bf52ml3q4tnm9acuw055beqkzpko1ov2krn099o0g1dtzey55i8hjdu7nygyxtlcmwpnbu76w80lwszvv6gkbzuzpokausfeyk167e370pfiy63vns5h4ooe74u1oyp3ilns1ut2gm535cdl28onyudj3ugtwu067x6eral419y93tzh4u66ufialbdkyknyf95uwciv8ys0ywvaasix0gz1m8ymp5pakongv0g7f1jr4dj9ssvs8h8c91tg5p1x320azw0dzrj8r84hieyvoavzkhhsxr7ly69i8yqzwjqcnul8uaprcfgo3pwded3mq7lvx5zg4et5qsgmjr4wzvd7wioyhzepres132o24di6utdr7wvkzbb19a6gyujw2yxxaxp4c473ovd38ypg9vb616ac00ecvo5r0s4qgdkj2vftz5f7clou441lkd9nn3uqh3j80b6slnji6tfan8xo9sg99r8f0082tv60ttse81kipc2z90afw3feeirlz2kqiiv3i04scue2n8kx4y503xj9tq6uvq4ih4kdwdc3660yfwqz9plh8ksjbkfqvosyhqkas7zblwrao187me4mhhda76gwp6ly8m9hc1d8pq3gjgy3zj8nfyb2o3lmzg2fvgpn9cfztbo62az64z6cl71inki7clhzvzekln1uexi9epj4wrcl3nkg54wheneypg1gjl61scg8uryp06yz6r8g0yg91nqt7fdwlesf6by5e82d583scda66iqjqh0ufk3xsrcmzkcaoa3jahrfiad3vbmeg0s303e8hwxjlnqhn8z4oy834dscrseiaap54dtzgxf1t13dp8qm1kfb5rf5stxatt2tg87cg16pmxyfy2q9d4fxele1fh3rb0y0o3msajbk6qddc5bnyg03jqkx5nsib0',
-                filename: '8gh4tzwpspdrj0ixicyhg7ptr53zla0a75swrvn6r1vm2iv6td7hnrewgh7g4nsdd5f5bowf4d2y5yv9ntqbh6gi2svlyy8ce3a6ge1gwy731hto561n9fx4cf5x4jfdrwhr3r842vegcgd28rq7rpz5zi4ph8vhon2in41vksmo27bl7lp60pa4qu9a9g9ayf1p0dltcw9jm9pr3qrez674yfqu0n5cps6xbrmzvk9jhmrmed7wku18e4gjd22',
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '9vw1nfsbs7u1cocwp6hmo0zj8z6s3nnlbqfk88tcryndbi1ulkq8bi17q9fekkh1j5m1oxvhqjadcrlyalgo6erqtor9hoqhgxprcl6hc77m0nu7og3ivoxg74vfpoll3trffajxu6cunc2houh3caty172x23mgyacdips56gx6q6c2ij790wwlijno1hsj78i0w875stokkje4ylg6rxu9ankyxvb5sqjvs3d23r4kkal42o98agmpob9mi43',
+                pathname: '095323iqkz68mzsft1k1wayxhwmr151lejd30hsqlmhm1ve7dw903ky20yslme359pamsqan0he24twvnih23w395nyw7bxu9pztp51vlvx1yiyeyckpkj0ktc2g1kxe8hu1bkb7s3z9a2cpratbyjopp0sqt6hw1nu8ebjir7w66e1zgfbgfgnepweuojnnjqs7ecsq8utcg88kew4xi38m20y2uojvf1mcr3eseozndnk0pu0rjsximmueg2efymitiqc59bd5lzns21l1hvwd25e4bj60xjlnn4vnibygoecgrult3miatluhsci7oi6w6dada0klepn5xhpvlvwqanqqpso0qduphv8qrxu3qyc9a6sxm2a21kn488l4rye0eraextue4yxkplnfgtcg635k1o3wag2zz65ejwtf1etz9d0vd1ogezd48nnsowyy8g42y8pf3fi8bgnnqbb533hu9az572iy10skzwixbkja6kqo8gg51weeloa3zm0iucc0pwzj5txexzz1c4wl3oq0gcq5sjdn9bykq3ron46ktz7c20blt21w42l62yhvb31enkdl8imxklp0xrpa7gwrds1tjlvvn8c82k0w0heiyo9ec88i7jilb3ytqvgwl3ooebfuua22m0vpjglrgm0oga0fagulm5jyymqiebpv9d2wruee388q7ww1rdv5rthclfb5crsouap7rcxjft0we4nrodv84ie46ambthe72uxudhyweiid9n8nz34d4r2aq0t6n34si075u96mey06i7w7xoy611wvi3qh1t5n0uniirbjyzevw07t6ijwikzw1w5snrsurar38jysxgths89dfw26khmzjf1c38kzuihx0ck4p4dgs4jqnus0l168i1gyako3xhr0d1mj96edzpl9q2lbtoz5ym1wbjiv4aonjufxbqubg1u8xzfiatejsu4qh62ta0x2ahd4jm92nsv38aw8grlcf4v2lrr9maf6ee38bh7c6yjm',
+                filename: 'ee71irr31skn3e9c0q9sgohwvn9g6itidone75u2zr1ickmin7bkmd5mxkowzi0rayr6wykfbe99d6hl2h176v05xlnbfmng4uepcjsgb7hnbn1xcn69hj2bcm27fnk6h49u94jtyzs3fvar9zg8frmrp66y2n4g4d87z9j6149z7q6rfr1j1gtoel0kpyp7hhvie2oitk1k8cjmgn7re3vilfgx4hwo6yqnt5ehcosul4g1bu6cuz806f4fjm6',
                 url: null,
-                mime: '408q3y6hjq3up4n6m1q60kfajhf1ia6tu652tcfq58jk5kt70q',
-                extension: 'kvi1da26y4lvh257mykvy5x0bp8kf7y8yllht04wvgm3purk0k',
-                size: 4753813146,
-                width: 753237,
-                height: 619151,
-                data: { "foo" : "bar" },
+                mime: '9ac73v87gpuisxrz91ufp0udzr8cbzv02tx9t30bj3nt4h47xg',
+                extension: '32wgis8799l5twpgymys6pqzoomgwrvgzn644rd9vjpt2ymzik',
+                size: 6669267472,
+                width: 961575,
+                height: 650865,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
@@ -218,47 +177,24 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryUrl property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryMime property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'qwjhkeupvncitz6yfvvrgj8lmo6qnnms8h2wegznmx6eutklhp3tolyqt51rdnheg2kpptv3evi5tmgdx2zpnab38li79xyclroyvjtx3cb6vv02l0jxnulxazena75w1yru6ax4ikw6ykhoggf27jpll24e4fcv382q0n4m1ajokig64yosd4x2tgs0dyfkjji9gsm8gq6042e6gv2xvg1xmz3rk1kguhxpfwvgu5so1seeue717rihnu7ssqi',
-                pathname: 'dyu5z8ciblojf11vbmzllof73aqa59yucx50rzx3i31yvokyd21jszpz38bkwu6zwc15q6z5hugxfxjse5nzm7lvd6y2cy9uv6adrm4bq7gn3cruedphei7roirlcklmxobmm1qpvxm1p0vncox0yfon7m030xar287cyssm1gnwol66xbhzjfmfpipxdbbfo6wxt7kiuz1je05b1e6qjd1sb002ynbc4t85hgdi5xkfxy79kquxphls3cr28ta6dnar0jhandpguotu6fj91wdrdk7p8dljeq8pwzd39qfhk3jiwt0cr06lzw3bf7m7d8lg1apg6xnbn4wbk95m4qwnip2i0oojwmbc0q03u72376hwzbs09p2fax978pseuupq4xhlrsmmrxrdflse4x41gew0fc0be1igi8xteprkmscrudksmfkkqjiz0ref2jaswya4pfplow0pwx74soyswxqvozbyy5pelr64kjqbklb99s0q8lw5bwktofhvupyfha3xf9e0xfjnzc2bitnu809omfc0lhawapz8jhkb0thv1sizlz0o2fvqp88rvhvugq0le2ev75qmpcsk4ilen5jzqhjsq1sgrh2c7rhrsym9591cc7wg9n1izyh5xnalxkzunbjy1au86eu80arbg0aack06nhkdt5dz28r093dyom0jvko0wzucvpn1b1ggpmrtpgon5c6r8nlj733dlexs446wwefwr8e74q5p4ff1xxspxkzjsvipmulwwnsss1km10hnh7yiry51c1vzu95b65etaqnfocelld3qf5qq14v6k3pvowma0xn0ovwnhxdtzefox35ll5a4e1z5oppvt0adn34tlmsjn7ihzpde29eqtcgi9fm4gs3tilrn0wrqzesd7g35t6pi8xmlfivek9fvf276efxf749gzdqclfcztnnwsvvx2p8kqbvbmz74oxg8w1vwj9roapy4usa8s53qmj8eesqkzhlr54xvrgoov2kq5agxq8qw',
-                filename: 'gw2ga6pd9koitvw2pbegwwmsshlls8g5qojtm65r2km3qlsbo5eay2tmudjq7i5py95huy61pn9y1sa1ey94wqww6oze6u5x9l7oi43dk0d0nexcyi6b8vmoj1ipe4ipuz75f80mlpwsjzrod4xta2z7f0ndokcg43j6vvykro6tsgpimzdtdicv97919u7i30zu6836s4v20a1igr48oe7vn6fg39r6d5o7e1p98lcav09y8pqm9b8087zd9qv',
-                
-                mime: 'opac6t7etjo57s1iccruwc1nu3cqbpklhzo9r0c8eq9x2a8a7d',
-                extension: 'qplvb93ybt5zvq0wweug8zplctl61xq8d1qna1i003ue6geosh',
-                size: 5233365164,
-                width: 829106,
-                height: 905561,
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentLibraryUrl must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryMime property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/attachment-library')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'ai6uamx1f10lkrxriuw30vebfwgtsd0mqdaop349ggicpevilrppbrzxbebu3yeo74srzyn145wl63f7qjnjgfj96r62kwqlwgkkal9gox76fc8yyxftb2yzyearqgct5wwc6axcxvc6li9xnpkcsxl9u1fp74slb3ga2iyxf0gbz29h2maz3lg464hvamqywt2rpi83t90gf6g3601u10fpgc3kzmu632f17h8knnpm3x2m3s0kb4u1bzfmp8u',
-                pathname: '0bh7wru104mvc08zi2bn63yzs03x13c5znb9j8eif1pbz9jnigq4v12beabab35btkgp68kxr1rhhaw5vbw91psv95cliap9hizqwggr4irdhztmu7cu7ar0ca33woq7svxffmb5sn39dcjauxl9btvppkaamk9mmwdw5uvlenr390kzru5yqcj7oeh8jt6iih3sezxq3csvo2b814ntkhp4hojv70cpghxxauv885pcjzrtlbpxmq7zhizjb66iw1g6jd3hr0rnbe10mdz5z7cz8n6knv1m03kfwdnt1i1w9eqo1f38k5628s3dp1q1jxtl08fb7aojvucorls57n691oselxz9e97icjai8bswzykbesjxgbchuduytti1v400vetzh2x2teg8rkgwh74r3lmtwsn0jk2xaw3lnbnxyu8e12t6kxnchmq404x9zrp8kh2ln498kg5319rczk02q5fw0lxq7uuk51sxl7jrx52eqycihbymtkp7j3f3927lvxkfmjifa10nbraenkjpfjl66bv28qtopp7bjqtkwcfunwuugmp7c6frzpyaxc3a4ps7fc0mi2q7svllxbcl2p0ef48cht34qmgk7wiw50bwg5gy54lt5pcwl9s0fiqu1toiitk5g2kpt87djtulqjlrbm3w39nx6yer3715hcvo3qj8fxhkon9rt2gwyywyic26gv6few4lhne3g5jeh0x4vvti4yune6ikoqxpqxue3wc3xqeqsf62mctye6tijnzmk4fyu0m42wlhahl1l9xgcinrlnydjrp0nppjtjqg745s8qvgcep7vvzivonseo08xys0mmtrybesbrpfv11fhoxqc15ww6wulafb3hea16yeurz36hg6op8orlxqh55kl492yzomxpmuumhm51picbk39c0ktwgta45u856q44e2b70mrujo4t48r3ierv6s5dcy9ew4s7iblas2ya7motd3j6ljxr29x82xjpvsqlg94rkh0u0yjnuz',
-                filename: 'q7v3hhjlokuwfs6ma69kv5ny6gn79n779y5ln270h7yz5c28ofkx8hvl9xm4b9dx3jvx9xf2cfrdfu2ng4h54pwy0ktesxlpo19wvfj5wwrpozgp1qaqh5prxp1n5hx8mlqgxhx37ble8hbqk153mpic3w0vsdtyc6zblgsplqwjzbns5g1p7mai62w61rkol7u94055rywccnwpn1hpcx294pcxc41kgjw1uoqpk8t3v4sxak5n8kzn10ssxxp',
-                url: 'uvfd5sn7wy780gum9ddi72iyxa1fqtmepp5i45fze499chais2532jcer5s1r31zom1mhdvmu6rv1rd8073eq1802vj893a45w4qfeyad89rnnklweqf2hb1gjogjbv44py954na4xgoatd6e4ozr2yk9t6d8tivgkonk2q7b0p9cb9zmo7u1cfg44ony4g7iyfw9s1c6z2wrmne2ntuwr9w7q7il8ybp21c5klrdutdrxinzqp747hz4udp3aj7h2wkjj8ylwct0kdl7ov2jyyb942q4ldey3nrlb5c1vn6dsol4ir3h86i023ncxep3kn6mmsm5gwv0oe9yt3h9jp5nuq82xwdeh3x3ly7beutc9mivvihz7jyscjgs3fcrlxst07vdaauuvy5try97fv329isioavu9ivzst10pv4r0102yohxa0f1y4ok7wd84xsw35dexbf0axz33xpjwlha5yonqn3m3reg72lu36q5gb8uly8elr9w7sz4gd0x5o9ncmfex22r554j8qdd8j4qi7xae1ghwz1qyehnizi1xzn5i3kvedf0excpb0hv8qg6kfesvlh0np911hfc19smin6x1b48nwsh9z0zcdyv7psoyfd3xqkjywbisylmymqnm57ro4xp99nzsxzf00ul9f8j8glyo1r5xpnrjp87i6vq1ao9amn36gu00dj8kkjxq52so5tlcjy37xnczphmd0tinvd2zu08pa8z73i6jg4z0v4crcp8y1iw4raixtg023vkdmyiwcrru6kon9dmk188z3agz3njezqat2sxgbxa6jqg4i6sauxjv8qtrv7gz5x0pgh3405jmdpelyv8fnpuv6qh5demqij2042pbpktqd0kwrhmcx97uti3e8yznoyk0trh8bbywtrecesgir7q3uslu9o15lg4s1i4kuw9524aac07tuov9fic7etdus3vqy9ed1sk3o23gzzsyxju0ufub0x1wkzv7i6vs904n3pmjn40fz3a3pn',
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '0nkb74rztkzmqfw0wbrxvhmlx0uyayqa65k2r4ztjoi7p2z50a12y76o1yk4yf1rsht5tjfw8c7cc8hu670o9bqxgtc9fagj4848xreqr1wl1jl7t6gglnmalocge5mn0grij7m4jvrvqhweayb1e0dve4anancj7m9jk78pg8tst3356f4df97p8dw6dpuc79bsf63updrok1e7j1q9k1ctd4v26erw4jnw1l7pwj4tpch5r768oodueg7er0l',
+                pathname: 'dadb2jy0re4yvpchlcqx9n0fb2kntgrafcb1zc8zydlw585ap49zs8iun7hnxbrjawd6bl2axt19rfqnishf04nfcitntpzu397gx3fxpvu40yah11bme35zza64ehtwtwmuu4k49bv3aoojf6ukyt65fkqzm4mufgqp7o7pbshvc5t7vn8pne81tszo4y21lu9is5xbi3qlcubkwl7jyx87ezb0pjsnfs3xpu4za87aypejvaj6rf5w8hjuva3kn7f38uh7a3bph4bgcjpdpkt8eyepm0hxqhog3h45is3hck2i1fi2us77m9tvc0txcv578ria8thpa3a10dvgzo2oswplt2jx1z3wfp1cw5degyvi2maw3l2yc02lut3hnyyonpqz55ad9vwl4lb8fi7baq0tdvh96byea0n27txy6t5uias53o4og8drbg56bksvnp845c1773n9i690xz42xva3eodm6zvkxf4bnz55w7qbyvlbuhpqac47g6x74nlv8f4ue7qryc6qq0y2tlbvpjvfba6943c4bgewr3wvvz36wsrf0oxnxk0zcrd09xlkc5xsp13x49anmynoqto33qdoewb0v17s87fdf8rtjtayy1zmgxug2hkmg5tkhfbq35drmxq0r97wyzwuwzxqvb7e0s6154jdtd3ovfps6e6o795jd2dtrswxqdrc8svqk486qddn0wd58pdy5hbsz7gg6lhg28lszc4iw7y6ltn43xg0qu8ceu0yugpbqov13c1tmy1xs042mw9lmiv5259g52pah8kttdscotoumafcf31gw3q3dg6qn2bk7uufq5xv82h6rsei4h1d01nh2pkx9l734om2fmumbr0g4nq7t2rt4yb00lx0s6hervaqnr00l0u4ilw0f9z5i7yq57eotifcnv93ea58g28o3o8mgdemi9odombmwnx5lcuf23d2tv5jn3k24kmh83qn55goecwvrahebwvspk7zpl90lw6dxyvfxhvsl8na',
+                filename: 'dl24ul58filr4wyousm1lmjig3elbtxi2enaf6nscgnk9wmw72cat3b7hxrlzc6dgw9m3bt91z2t8rec3xzw9wa4szndi57mipxrith6ia4bu9774ejnr8oxkz3rvjx4iubw8ly3jg5c249q4w9w64ugu6rsiasgmbu0dudrbku3oxfxys1m9jckzouei4hm29yrs60cw2n6x0b3iwhe7mxp9zpc75cze4x81jkrqghx5ysdkyecfrm8fn7zp0x',
+                url: '6g7wjqf4j35oyzkkp9p8lec8x8u2o3469034z0wnptjz2z2kss4mfvx3rmefybo47qbov8y5j7s8d1s8uijnyvp1390a6ac2d1q44xz7ohof2p8sq7wxj8uby3g8geb2y7pqsgj68etwnbfwwzr5andw0p1585s8ho6rorvfkzwsnmatggg4e4jf0wrgyc1hqi0pt7zb5ovr1ew3vsfjj6uadb0upbaq8yj0zge0i7uke3ffvh9tv52infx6fhmj68kwscosv23biu76ou4i0897m2udtztu117xsydcupbm32rrr75r2oj26pt27sbu3u9kph7q0c6ysf93fv4g4lk6peb4mrc1jgv9lf9q60p9n9f64za06ghhb6x7ittlczhf9pzjos3blgqd14gt3krx4gbj9uqe2ggrufio81avz8oskmk38abjdal21e5gao6gj73x5xnzbxrb1fpp8n0tdq0akcg1mjquo7rys7slq7svkrxxh6lnefmalkn28no8d783x8eku88xsr7egdca1v7qkzbtowiq23f54e97zbtjj05xvdabd0ibx10pqz98p521vmnj2zbc74ol0fg93b3n096986vpzj7i0nu7jol9xaftghjy1qfuu2ea5g85wkchzuftzuq5v8be8o5ch6ua3lp2qwxxht2ukdjwliozpe3399tah0f68g1jiqnnue47kvzlti5t3k6jdlvr54zge0nnu4izpy32biqufq98v500qlunzg4e5t1ytfremri10oslwth697dqvk88hm88omeoz9aoju7xculbmatqyx9g1x0pod8q378qltjf2in4l3regpnajxl075r8pa42j00c37yisswfsb0xsgzg9eujow5sq1vqi7cyomeltd8r5hxa5kbdybxqh1otkog88j335y8l9qkmrrlx6k53ut6hq4oe3owvyb9fhbkyne6rtcvw62k974h2h7jc22ybli5r7jrz6je6ub1tptggza36nkhvjapbuayk',
                 mime: null,
-                extension: '2pz39m74aq0r2xna3nxbzfmt4v9s441cmbpwnhxptsgepyq23h',
-                size: 5869586545,
-                width: 866211,
-                height: 734309,
-                data: { "foo" : "bar" },
+                extension: 'auzwfqd1s0opw1oppizqyzh9k68mihtucvd5w2r9rjvvmu1tg7',
+                size: 9599393430,
+                width: 102517,
+                height: 269388,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
@@ -266,47 +202,24 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryMime property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'evuu190qovdw6nab73fh12cclq7ze5ppnuwefj5d4kwhxiouscdiurxoua9bjf3o3n86sfskdpm687h25zstmok4bh9q4k522eiiiwvjkctj00ey1q5em9ib0kjiwb65zopd9rdwi2inog8jk3q1fdpy5870n4br81qmvxtu98vulcex1q9bcslhp3u2y8brfr16oen9wfbzwxa3dgkgdcryz3gs3bwrnblb93368i7g7m99jlbxoumajfbuhg0',
-                pathname: 'beqiofztjnvl3mutodu2vqlpmq6h4nb1hwgh8mx2ufdhszqfghy8132x2rdkpen13918rispr0rcmdb5btg7c3pg5zeqr8ftvg3ytscjfi2xhvvh0lauwwn43eklg66hagahpxkrvb3oqmvctm7ui4dpih5rl50yy2rwzmrb0lh3pw8azgw733evorban522kgcyw8jd5ssv7xcwe4wt09itwggftxjtxj4hl2c7r5e6dyrgwirj0ceklbvjce6l62ommcn5af8jp1j9oma3qtpsjhjiavsi1y136tc4ybt8ar52k3qfk0gi18txkzbdlkddbpk4qdudbk0fxfe6plzopkuacb703wl4j8mrh9b6kijdfs99w3vo353wzjbgltrkulp7f6puz22pjsqg0xhtgkpumg1ad7cd6zf4f04h05js9fqfqesmmykpq8ivyyrgd3nd07gygtk763xzyxqfac8pc64kx2kvsitf913pr7oln6mk124rjo1o4jaciht07csqf6vlyx6tj2mvg6z1be92oiwmny9oh0ogp25fv5ema559k4qcpvxh9l2durloxm4subwtyupw9xzb86jujr2zm1ctiyu89kpjkak9p3foc414sou53cr1j8d39lvlgfocbojne98dd6oshgvpsis5q280mvsyw2yobcec2tf0tyil9bh0nxuuikhyccrulgq34u9uygzhyw7whwbjz6w2r5qtzklxq5agy16x3ybu9swzvlmi0h62yjyb5dfddmcosziobuwtyf0l3zbxpn781l7ut1sucztt7y3ejnaqnddlqcsdsp3qj7tijfwaremc1oft9t089dd4h58akrlcmre09uh1l1rmlx54lhkeenjphh0hn2czg0a8a4ro8majndz3a2anx6emj6gnvsojlkhcw8a76ymdn1u4mgxcbqu1s5xnhl6t9sf8u8fauvpx6zh3f1717a4yh2v2s8k4pke7muurh9qiqabbwpzjnq49ibgqfndq78tq',
-                filename: 'ax3s95j6b9k7oci28aaa4r1xmsnh81rdm7lawhhn3wg5jg2mwfueew39vtcjodgkchjop63k6jw9u68k62jhp0d6ad9yrm0bojg2ffqz5honf0144z29ys3drbcipn4vzhuym3189yw98bii51clsp5wp2bpn37ifxz93sx4tumflru6evdit5f21yrlk8j5bdk3jia4pjwwzui6lb0c9eqe7jr911g78zxayip6y9xofp1lgxoew1pgajczprg',
-                url: 'rs7x1i6a6pufxvf2tnr4hub2wcmeywb1pyvd4k3r19girsxz3z7q65honculc1b1nxganiljj3l7u5gt55040hq00sdpj530u8vhqabbd6oi5lriwe6wcecwa9fdphsnoakfe5vzr9poarme8a8ygo7ogwjegn7ohsev5pe1js0lw85lu2bcefk3ka6wurl0lwj1bfvzbd3dkdovr1akf69y3vg9mt9taijttlrs5hgu5q1t2uyu8wj1ox0gdlw3ms01i6zq5ojw9tp4lb619zfo51kradx6upgdqd4euyuwxhvu74phpkxkc6r2l0xg2w56k18t0ig9bjsdkkb8dfkzqpo4tk076jmfvuytxbuhf54g8qvxxx9jo2l33zlcfhdjx0uexivyt1jmvxlbi3z5m96zcntp0ola10yus0qljd8ui4zwb79qrizq2mc638ihzt0ohxbl6wla16qq5ov7yjv116ozz0fgksucbhfsxztmmz2kmcgirf0j6irdawcvzf1vwb7sowy0qvbpe6t194b3xu6c1fbymxq7qqvszh9vxovtl123psbsfe1l708hpz4jzs8qpmjhkjymhaze95i785tuuuva5dyop35icr1x5l4fyyxjpqlhv8cdjv0elvze2ozic2awoetwmtwr3juthddet9rpnlnni1gdg3jmfr31l8x5u715lo9ijthenesb3veycym5p7jcyocj4hdk2xkmvl25wiio3fo0f4h7lydv4v1vlsu9dh54q1vd2jdb22sw19yhevg4z7ijsi85vl67124apbe3n5mjav6lww38uwrcpcsry8ftpec0u954uvlsebpj6q3x4kbzibyuzmepmyamn1uda1qoycvd2nv0xtbvo6jjnvcowbqytd59adtoy2xcqr62xwxmjr5907cv8nbet53ogqmo5a2vzgriaio9okydpy314byapzxnwd08z2pyjxy9x9fr5pvpjy3cqb738dl3jrzn0kvrzz0vxsx7az1zvpup',
-                
-                extension: 'x8nflvs8tnd6lplqrpalse48nbh0lbxbx6u92kyh196k7q5hg8',
-                size: 9029692155,
-                width: 439261,
-                height: 206535,
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentLibraryMime must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/attachment-library')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'd2555cryk0z0oek15s2dl04tz8bv11syq9kwryywpnumoxg6oclfyew0haw7i3fu88eide43bt5ewm5fpcs9zol67ct221hqion9mn7myt7zw7udwwavq37di9h8gpr435dyptxllqonhs41ano17z8epkcp9hxmr54z17f2di4mop2qh6ktg2ffe3k4igxf8px05qhuh48ykmv8cksgx3tnsc7nq2a4ls8tfda4h0exvls7c96hc8rtewx8ndc',
-                pathname: '6wmf7ru1lexh7rzimxj0telols0ci2ge5lnjy6gwpjt6wo9vxifaigp930w82lf3gnrp9dsur7u1vmu6bopayr1m9d5bmp7dn71i6np2pts9gt0dpjajc5zu1u1jv350vsbf4degjhcy50pnh5ne1czvpmb1ud0zcq3xcfkm45j5ia8pa95w4gft7g0bw9bxk5rk1kl05mktxtdhd17eqcbs6mrkggwm0gai2w0pf1nto3983j6ett16q0nm6dkdspjy5ai88abkj36mgnkivpmmimrqw5pnmfkdns87lsgiip9jmq71j6bs0fih1xzgozs3dfwjwfawzhu5mdgswbnnfg96ewfprplioqmm4mutg4oet6glv8n6mjdugig9r5negitc0cs1ta5tr6kmsbd57dro83w2tdxi2s6dp25bahbrixrawnsprbq7j9zcsszszdsgnjcf36lisrbtukd3v76z3nn4d9lkf19foitked5g4fig9o6jlk452p6i4hvgla0n9xzxzs6gnxqedpr2c59hij85dx2iny9onvnuiwxfyfujbp6wbftw8k7upap6tojby8pdjl38bc9qethffmyl3zg8liobnm8vbiazt1b5pu8kia9gq5ijhc2mmgsfn7au66m2hsl3s02gvvo31rrtg4c9s2v9bxplk3xbgtnse4ium94tcqhb94osg5yft2crrj77z5a1i38ig06bwoo6z8kkxn7sp1jukwjd5oq8vxswhskh0v2tc1zkzjsibtxxass21o5nmex9fo28ng3zaz6vy47u8vkk9q1ycr73i446clunz7z0j5yrw5jqreviwspks0dthelgjixdmh32lfzgga7gqzdarhzsdzj6iayxft72cdim52rjgge8m78ua8nr0wjmmpceust6j9grb0fdn47ag7t4bp6qi9wgm80sdlwfufxcmzyoov1itfgdhxqbtd1svxyy2rfsijexobzob2z4kayypg2a8vsufn1g52x7q0be3acj',
-                filename: 'mjqzggbu265rguzser8c4gs3d5ildj543mynrhm5gejfmpsf9qc2b6hlwl9t75gtfej68res5tcz3hki7uughw3fzjcunp5nihhqnxy15rye723c3ws2bk2h62fp8llpjsyyxgfy4wgehlylho7qtr354f806z1f0jfxbk65dfcha023fglkwlhugzmfbm01qolxmt452cbxkmmwbsono1kg8cfl5ud4jbab7m6n49nzwycz3anfgdzg00lk8gc',
-                url: 'u8a84sd08zz05a8854otpwt2k2ud8dkltggiov1vgbhn7iibx10m1axt0hctzx8g0d2fj349vkgm4ep4jzv9tf4jud8g5vifeuxhn2s7sv6tgy762re7b9kybf4ygsgg54qgmzjtfgow6mlh03ul4mkm8oniygmwgrxuu8l2rwuokwyh6wxkg95r0lx1i464bg4s6fmsir96yyh4wb2iuj5uibvfnfm6l08mhj5ktzetsb9s6vr64myrsdde780cx2qx5198mku76vq1gq78xv0tdwhb57f4g3907t317htaohgxtsbkkko4bvu2s3x211fcyasl92ujw3yx79qr35uje1ysnvv6lzzrjiccw1m8nhu2a56fmgkn6rx1xewy4980rt8yfh5qm3cvfl7zxazxvbqvqxpacbnmk7wejwznpkf5hh08osbp6m7zd2cqxqbteqwnxm6ni89f4fmfscv5zfanw27hcago0aoft40vxfvjvchk7ei8tnb1g3qo7j69ad7sjc57mwdyq528n9vogsc9djrcba7gr3lpcyv77k5y01hd40r1uuknpn8pgv4zm3k06p1y7ditqeo85cr15ahqkeatqqoo5n5vciulpor81z3kop19zu77fx30y3csivkvjxti2p0zwfcq3xp01plwt08gws8f16ru98qjbvv4ul59705dnsfxa6a6svq835cnerhhya6d7vzdeamx9xb9bb3rgwomdp498hse1dsqgxo9e8yt11rovtwdmv7s99jbc0rjmq7go17qcspw8y329i800985sq8nx89pc7ycjozz77p4gjbwhknte3r78eafo45a62jxpv5a237muuchjlel14g7afiz6k1ggxcf5ow8d7o6h5yl3gpqg1ela08jwr2oamq3peiq5mnvst8zrhd1ff3vk2x5ze4kpu648hcrsj51o1bcgqdj5rirzo34u5v7jz4n9h9vjx60oq2iq07xuw3rkzkrkz7j1to3yoz2wjn3jqjvyyxr',
-                mime: 'g9ji14mtb8ctrikxcwoma6ods4djslz2mqr4f1qa92olrn91w7',
-                extension: 'rpx9jm7ndwxobmh1sz71gnvhif9sdi2d6sk6brsl7jw88ez006',
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'dmofjq5e98vevbq3lrowa53f7k7vycbupdrrqf54plbukewluxwvgujr025zij2zi6hydkd01yggnxwpen9smzw8nuc41ckrgqvxsht8tfkcke5dwtcvueaarnqc72f6afhuvzzf6egljomoro1lf3190ty7qjodyz0rxuztq6dzhhe99s9c9pjel67f80niga4uhnmis8bh2ke7agefp7i5z328r7lvseuynf6d69s7cgqcdvpl47e44ycoeba',
+                pathname: 'nwcd7pe76n9olciumshg11g6qelbytg32cdvb59k8ptrdewsv7swfcns5jwaskwg57kgbb3b5qq32y4tbrci5bd1w069zgkeicoy7zdufwadqlf61ajdnui5ke85eotyxcyqoj0ka10n3x7pd5v7cn1zafq301mthq22rnphcyvh4vcjugx0tjfyys3f1zgx31ueuehulgzo19g1pucczzt6tr4kox24heibbw5k0muq5tm4d2yfehcnq1fa79vqx3682j1tvw532jbtwl08144ppab5jlijm7px0eqjvnirskxb7dmmjjpxqkfvfotooyyn68yb537er6xcd2b23uzaj5grbfqkcp54ztwgyt7xqilggxghmphnzpa2qlqyltfmyrn6lpfxkst58i4oe7ehvmgg5380lnf2fclmzg0fhjkuduh7hh36hji5k65tmq88m7yumxypcqlh5qdgkid54cxc5c2xwqnwbq34ak6zyi83c87b6xx1lxcf8vj289x1q5kc7foubuhgska1zszywoymvaxmjue5hwtt5h2temrnuaxaad3qckw46usyuat8f385kdfs9xb64hlstl77rmz6upns3c7fryvrecq6w8ulv6sooame292tbyvir9hlpuks8sxicbz3hl9a5hmoz8w0ly1gcw5e5mm3czgeyj4ksv1s00j64k6ud2ritnzmc3tzuy31rakwcxvzox97uod09614x4rgk6m53ab1zk98302n9tzxs9h4h163i34qrzsaoskl6oe30w6f075gq3tealj4f7q5jy73vd9o2rznouheuidvnz745x2zy15qezapiwqulsyacscfk6e4cx42cz3ar7d186hvezv87r2n0lymthdw7w4rb8qtdzey1omtqqclaxu78x5zl3ecsmfx6lnp5cebqa2elsjy9pip4p7t2tlzjp9ef85g6vsazjjo621az46ezoiv1e2kozzu9r4d6l7pypwrlr77tq3gu4g72jigag8q4zzk',
+                filename: '571m51kziovd9xquw4aouuzpqahmfdwf3jdtnzov6gojmxkf7l7etwhn8jh7rfzw5hkgza6owaw55dp3jt3r1ruit6j80kl5jka62k2ltw4ol1t3hoog0umd1qyiqplknd8u9uilgai4pl537e1y9fbbtx9kg2vml1vljzg2vexbt6xlp5l0wsz8pt8fvqpk618ej57imelas45e9gdec6ppdt04xw7t9qr2krh30aafunl2upjiuy3qhvep0dp',
+                url: '3ol4oc89j4hjx7acetzkkxoa1n2xddlzbzz2py72kv4pyfmddjfcwpsp66j2fl24bk5m691y3ovgr2k4zacx4tph3twyeoff8sewc8yyno3u02q1x1kah2you7hrg6nkt8h0dk8dmwehsfmkz06jiuglo0dvwtldlerdfp6c78qunjvjlmqeyl05ev73ynh3h7t4izcq51xt07w3goz9ngra3ad4iv0p0tesk7vwgu2o07eaq1a2rxs21lv88gpw401n9a1y7uf8uw1r8d2l04c0bnqqdup4xbi32psv7wojngmqtju8lxjot5p1n1a5n4vljoeluqmqi09pmmpxuoj4jgx9pmb9ptki5v3zov73s5wpaxakmhcoenixmrhtccm5l378oiyvnvcg4tkxwq9x21dioxu2oizp0et2ugvp6vpmf2n2p3xv7xnw32859e8w9acrkcpi5gaytwcmqvw15h9mmts096jfplhesahtkj1smawymntxtn0ewc03vhlsar9ifcaolznvu0m4y77i6rmx42k47unydbmyt497uxtv1d2qeach9yb2zkvm14twh68t7qvsqjzhbpf6uj5ot4lwmmyb8d43blamw0kxzegz0zjik3szy0pz41lg9z7r50rf4fq9en3je4oo2mye19044p49fmqe6hq496mucleykug2vqbpraaaw8rut9igcb1pje8dq98fgedk5lptcafifwbhvadonf5zx6ffhsp5bkuhb4a8d2f5z5wnn8349nehrctjjjn3jzv9fzyalzq3a415grjbxvb79hjyrb8tiv9xw02ymptals40l3cbyfk1redt16kskihmabsmc2go3fxlkz9zuf6gv9eboov6mgdx03n6ctu0g44mkqjak1mo0ewldv9vgrqsnhzcrervf1dyk31q28aocjbfeamy26lralou6t4ps8hl6e9bpnnpfli2ibqxnygs8oqawr9go0bfdnfkgi8tt07o0nt8n5r7inqjpu01nal2',
+                mime: 'dpr6ae3wmvfpoiuwxkxgt13ugyc9kf9fk22xielq5dh8bdvn8o',
+                extension: '5e55ccrc5o6u8tmestvvu0rknrql5hl7z383bjq6x2uv4keur3',
                 size: null,
-                width: 218553,
-                height: 518835,
-                data: { "foo" : "bar" },
+                width: 111873,
+                height: 993231,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
@@ -314,485 +227,609 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: '4kyr6vjajn1l85our2de6w8d61ktl57zdjsmt7uziz03shgvz87y6wzh0s1hwth5ziq9257cazqmwgnbevk71fjebfua1eyzpim84jxt8psisqyrtcp57jysok63ymsq8pmjuy7l8ouiccittcuce2hggzu0fa6a88lsekg2330yl3f53rv18chxvley21gon39xm5um00a7h10ogl4e6g4p4b22mphao913qeur0m8758goargus1snwadgwul',
-                pathname: 'hlf3e4kl6m66fwrmubztsvuk486px2fcnghiwnx6fbklmm1l8jq03jktiw5muxy5l4cmlfknbd3kuhqey61lgbudpie4tf6vcu6bxoonol7esc2syj5rebj5m6awh4xswch3bg2zs1rqy80b7z43xbo1ozlw3oeanr9jrhytm82xooxh01jix7hywbabknw33mdrqb87eqo37qco3queajjcr1b3kkp2m9mnu6fkoy9csbmt8lr6q69o72wwzswntaxxsthbbw1id8dbpphftqrc0laqkz57tsq749k6naevynx1nlepe3yv1q9q5h99dfhwvu6g3f2ph4ajzz6b2kiapszi5ygud2znjxht8w2izxd1vicagoc6kn0a5vq3m003wcb8f4oo5a2xx4dk79wwzeos37l985z1lxn4bpdlfg7ha1f403xr8suo6349lvbch3h587gf45wd76nf00tbc6eah2861pemtyigqtu58p1suaht3lnkv1io2ai0dq3iz2j7k4la9jgb53g9rvmaaajohf3e9ftbikytkaax92knxvwixr1iablk8wqk9fwdf6wobu6x5k7gv4c44hzif1y3xntcxste9wnbk3hmbxlvaoj2wfu1z7v1uxla8nzq98v5zk5rnhy97zmnovgvpohhdjgo2zsi93jh293rznwl9pw62z8earu47aigztp6fjcz63uwqxzh0xsr8xvqea54e6xha6cm4mx3gqpq6t1g6onjxpxgwd9wzepnfrzdynocl51m7rmz1pwu9f4goaw2irknuk0xl2639oewctvf5ngqzqjqmzftstpuj1j4tv8hc6krtem87vwl7tmlekz5mp00oe0mi6gtfqr8aviy4k8trjgljvbetyfd48vn0idomr4xqtuep8x6mkktcv974rmlxjhsq27ufivr4q0ox600rekt4gletc5jw8ryt9d50f4xabpviz9sxjtt36qv8et789jdpycepdmobjqznazhgj77vchf5270',
-                filename: '563p689g257h0utcsbw6ybsua1yiql8zk9ekvtmbexcnhzmjsfq9ka1048vgtt2qy3lo76gpzwzp79ipg4m1mzh8h0kpz5xet6utp3dey6lw9mf2ung1ai8nzjaogkyhe7vbklbfzthgy0c08fitoapeec03ye5iz3k7kv0ywn5o65gj01kf9urynx23jtumb02q4gbbpvzu831nm6ehl5g19iq8qyhz4wokarcfmt9jswgzh1n3ds51hvhp84f',
-                url: 'q60tyyh8tjospu9e2z4pxo7y199ohyr5xiekgpemqxjrfc66vfcz44reqsxvd3w2kzm4qwwww30633pg47r4peqints9rgb3aijhqax2jbxb5gq523ooo8493wp1yanwkurv7aukv9canunhmdec08uid7ditb695wd61y3gii6cpw1bim4juvjhybu7w9zplta5853xef64mmad2pfn1jgjtop7rr9mxqlbpu25x9w1n0alshpm7brr0aiimqiwjf3od8gw8evw1e9vdn0miegfc7t3sgbkjl1v659eegjb65ftghe09x1cqh8d6l26nuok1hsu2xtsoj7wgbzt569vow2b9i5fpbpacdbz0wbctg5ts6ee3vf45ikcu3f96n8h2zfpl539ym6et9ujyv7fjst60hpn1z8mtbhl923u1c65fm9fuchmnvm40ri6u7ph02pazpz6ju587gupwr3kzvewk5mr018iar0qtod60xarkvs0g3ifxddepif9ktkt4cdyjtmmx3agk16446gnc34sg11oncee95yilcpleaftl1q9p9q3vz123ldxlmg4bt9b01hl7muqayfblgw8ocykq22sbk3wnlqd34dd4i7z9bjbwdrj3ymwlbdw1hsmy9c1lzqf7r8l57sb1xcbp5s5hfd8luj18pgl5vatm182yp1c56nkoauji3o0irozckem8amgludogwo1yfo33glojmlm1slrwubta4hkjlbx9ca03zomodmtvyrnjefxala3zrc3p5gn62by8wl0s2goszqt5o34ceyo9dnfo2w024du903ip7vh54l60msxxqqu6cjqp5pdfutcclbxjgd403jzwf1yl6howikisamc7nn1bjzyg8uub8ryshbrqmptzbnwnq1a6hhy4y7pm83sp2ggbcbh7fxa7eifrdufvr0me9kmm757p59j722e5d6iukx3mlpkma89als0ossntme97y5ybjfhp2jlk9mrpa8tes0dizibw1ct',
-                mime: 'n93f04lom15k6a8preq8y51kfsmrbtjexaz8sbq2ukzfq8lal8',
-                extension: 'bsysj530qh86ri18m60pw3f1f6zquq67kmihilpn6yoj6lud5b',
-                
-                width: 120824,
-                height: 664843,
-                data: { "foo" : "bar" },
+                name: 'fh6l17h5idk0wuxlx22j63w4gl7pxjyns9ti8qs2m00m7uqgrgwff1a0l80mawnlbzst0foja47fmi2ukb5xmbbf5tse2qeqo7xherhl4s4zco0q0pirc7q5t98rafyrj5zcf9omjqq3oa6ln9el2h8s5lio9a7b60sn7c8gdktpcj842jh1lsy3qpuc7fqvxuikb3e95wegerhaqvybdgqtsbk5ej67c3je4j1sr3ya4ma6zhql51ehh8eufan',
+                pathname: 'eu2zr79zid2zt1xiyih6qd9ebodrsclmo88v5zr7tofq4qrb422cp6xg9efps41ky9yccdh8e2yz5d3sdc03h9asggxp2zqzjr76j07v96ct53w1scdzn8w6skbpelm5f1r1uq23fxn54nqbbu78lgaiifsbkwmnfqx8ud87i6w7hbxk3tr41dlwabqyudc1bndxgaswlnn7b039wzfx1p6hvyftfgtvc3a9uj12wb6jww1gj1pd0106rhgjehm0nfziq2ukkbhaqbgiio25k5iujgb9j78q1fxt03sikpsijana3t9p55kcreojfj7onxs8w9fkiix4p0xwbqhhbqk9zx04f3ef2sp8a8gvxr19amjqozvv37unxoj7wok1c0o7rbaa9vtlmyfjx1scv5hndg92m4c4b5w5d3aoeua7yd07xk5rzm6e4ej3aubk3imh47dphmd9yz2vi6jn0aok0obsnsu07yvt7ztrky83ydyr601qwenia0ihphif6fbe22qv77mh1g1tmj6xj1hk06w4bi0988k2niz8yxz7ek4eszdar412nfdwvqukdyjd2zcqmk9kk0sl3hp5x08cvomljxypdd22ia0j5kqh9xszuhexswk4valdxisp8w23l12kkpsdjhz60t0xhs1q7eunej9mh0tc4pkir4zgaerc94ew11yn3v8i519nrsfxq36jczudo25u6fl3r5fxkz0no0gj09dc1bhkqg9oczwuamdvx8ltfxubzj3i1slp21z9y0rnm1r50gjhmrjth9r0lpor6djbxi9zmdrd3vk3d9rm11zjm2kpnmx466omwq4b7e1zzvj0tw5s2adoi1padyijzq11s5bym1xybjvn1hhiotflji07ecakzz1nu4u79l81v25nvxshaftzd1mfgof8a8dtymsmq7tq47ghhurnnule5kelqb6bl2w8884oi6ux2km91egimlz1dkeh9hk89h5tl7mcjpyblv1q1vtz99234z56yw1j',
+                filename: 'pwr0ffdijjzd412pgb5y3u4pbf1zuidr8n4kztkqd1waadw65o62rko4ebhb40x82ghwqz5i7xs45ne3mo29h7g1mj6p0owms9b3dqc8il9pj74l203mcvslrwz1dsfrwemdst6a4v4zflntcwlvefzmk2h22wxcj8jkckuxhyb8mp1yi65jlcqsq4pvbwzxora0buxss2s69qaw7pwcvpyh8e8lj39bicernh8rtg5j5fj2rt32dstwht5azhz',
+                url: '2qye4hxkuuekcyhcjiamxkwza76z3yfopqv5qphks0g6n7zbymkqrrpnbk55pi53rrgreuvk4nqr6m5pmsfehyj4hs6oe6jpwejwklg76ur679fa1ncovsvh9o8vaj440ntuho7zw2194lypzdnqcnwcf8fw0ggayidncumchl11872zmizsqbdmtj7u7koobidtyengbzcs22moirv1p7716vsem8v85hn9ceoty6qjnzei5hx16iudpu6c7kigpp2futl4841v9sqzon1dqug7fmrfpy7stvuo3rq8ssge50ritlrbcz0mzu8mcxabww4odpautkczxgsoobe0hhvy40twzdq3c8sc21ok4b7xce9i3fis5xj6gvtmex0vpavcx5c6rcna9z3ofgy5qj05g8j37a2k9ndnzg4730zuyi22pshn0hqo00ofcfuw72w5fiq4z63lzs89xudkttedkjgtkktu5uxstzdlbeye4wilim6vclrum3aq852egd8s3zbxmv1l0p5in38xpp41b1evj4pweoj5g7oz6xqrqw57q6l3ncpd64uw9qnikfspdtmj52r8y6cjmnzcgwv1lnntn8xqq09mmq67octu5qq42byrk0b3cmv3zwylgbj3u0pkc2e1xg85q3yxvkvqxqkry1trxq48j4c30dxgg14yhevo8meh7wc3kzkihol1k9dzr5v1dzehckkk1qyvf8pc8q932yle4z0eb0pem5d5i1p3czqvqf5i9s4tdi2n0q0nmfwuj82v2vhzkuw9tc44vfdil2kkiu3z1aaa58bjwr3cb7zb2nm06siv0vhaf6gyhtfc6374r2ce8p81op9tnfnrsz2y3cotvdd8nmd9a8m97369wf9g6h5hfkfj275k5d9lgtcfovj6c2kziaunerfupeblqgiasjnblxx5bz6b4qefoy8vhe8afnrig0iwwhu3olukxk9i4nw8iaa23nlb098bdfxnh2wj3itmiuy7ve6uet7ety3r',
+                mime: '72t1ehs0r4epxrmrf6vh9lp6uu64c1l1ewjblkth4cerqa6bst',
+                extension: 'g94xajlidcuwyz0skt36m3g6l0185ik4bmv5asgywfkjjqklbh',
+                size: 6968852040,
+                width: 994529,
+                height: 348256,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AttachmentLibraryId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryPathname property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/attachment-library')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'qfptvwr5vpzm4xfx2rtipk32aead5uteu7ix3943remmvl6p8cgxepfng0ta2ybfxk434frigibdzrt9xn6obgxsrv6ij7gfnbfr3j77y7ehkupj5ko0e0sppph2o8nqxxiynwd3hb3uagwmj0pr2zlt7yqph3gw2n6b1n9dvjaifipjycj5t6xcv8n284v1on7qbxxy3irlzm1nqmdq0q9enaoagdkmgggvde8bclrrl9oz006v5pml8fycwbd',
+                filename: '9pib6ra4qampqofojt8w447mhbm0zncp583hzys6ysetlqk9g9vf4afh953wngi6d3aqqqlt1ws1hdouu8lqrsunb0wcbxut64n9a56lq2cze9xb64q1pktowzslxzf8tudsywbysg231afzg6eariqzrm35t2aep4vrp59oxapn745ye68t4sf35ui9i15lqoo76mxki7vthdvibxklihfijy11dpz2rz7r3g0yfw5w6bu2itvdgtiexllmh65',
+                url: 'f0zsyfd6r5qi36c2wlh5q5a925olopc67bzuppwkeqdd5d819a40n6ew62i852y9zjaht34txxxkdi2vh01mv2uz6mzpsdq8ljkv4yj8apdhngq2k5lb8m38utq6zj9t3mkq40p9dzbguc7ucjuitnze1h94ii66gnexqkc3ow5llrwhmtevps0x75kn04zkhcassmjn0pl8gt5rdneqml6rrvrwq7cl1w4sbkybs87tjnw0zyz96vavisdsru7ao6h9axiefabx1iye98dnd67uow0rwogr79li56hhlkqz1t28ydr7kb5y1ci1ve1h4a69vl5haqwdwju217iipz60yfjt8xgr6eikxbn3nlhbiyr9tyoqkjt2j6boiyjotho3aucupca7no9ro3mzd6xu0bd7r00ufk7ljsgsztbhc0xtind6z1hvekvl0fwu0pnufdii3lquzx0hhv42sy0xckmfqctw7rvpc7quu8yil779ndwqm93rh4tm1g5fm4jv4xzpa2gx08ec3gxrlv9pjctzsv7blnzk0vi8l3uwavifc7y8myal4553toakbh3kas9wxw4mlzu18fw9zoibnjfnr923rrmxsi886b8rvnm0jxju0xsyyzmv8g1tl9ejt2jpuu48mmm9v9yz3cqlwhf0tukz9zfxn8pm7f5xf377ztkgvyr40rqgsyaf9deyps0410j31t0f9pg0tc01xq2fc3aiik3vquecln6ul7kpr6yz536583mf440yt8hidq0j5226a810tnmrir1xf89rjn89gfe97myqza84owgh9zw00f450pfnfet4mspxju22hn24i6j7xj9b9775hia2ufntusuu4cepfocak41dqvezjp5xvojqr2b8yf1ujs6e8mruh202bgkdlbj03b1qu8snrw3pzw1af61fdvs146b0kgsqbb9b3jjlkmi5e76sdhbq4qwjbvmwxoenzyrcpbzp5xb6wjc9blyddt0kmxr0bnvw6z89niwv',
+                mime: 'c5uzvvvimr3y4k7z8kx6d2vxt4i4nxyssghzd7qjylcpsjs20j',
+                extension: 'dq5us0rcbrvuiaq3gmplscnng3x86wykssdvelhnorlnsqi9v8',
+                size: 2682914056,
+                width: 778067,
+                height: 942159,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AttachmentLibraryPathname must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryFilename property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/attachment-library')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'dlwbwgggroxzejga3qtbx9vnqn5y5ivee6kv1356lvgfk093lgmnq9tlh4vxd44zexq9ef1ourdnaevdw4hb8lefvf81h3yiwitgdzhbx97jn56y412yetju58u2qcv3ne6p201ze22kgzkll8gk2m2m6x1biydxnmr8tfdxeond04mjj3ii8aj8eyvxraiyxru4qyn2dvcryo2y2og2hqlaio3mbmz6htevh76s7tiwcb676f1c9k8a8y7kjon',
+                pathname: 'xmhb9pygsjonxeoo1el2gw4lq5pbjxcrc4u8iipn07ks2wkmwhuka0du6qkizr28gee7g8o4e4hzho5xpqwhe1a6w22whykxxocfd9x19usp9yep9xt08pkncxs8xzrdo93v6jhrazaug0fh2glgui48qvn5shscjz27gpnp9igh7jovnh9al2bs0l5gg6dxxr85a4gmoubrhsvd18k2k1diezkm3qeh9lpelmp6iodpjt32il9f9zeaui0vp6cpmjkbt8gxp4l5gp6crxd9ypivgm4r9h8lxt2mgldctz0ety2mwtkd2klf0a4knd4mphc21zakxczlhnl89wepkws4amehxq8vl2zin0tsgc83fvlf5je7vo6lll04cwbxmtad044j2dvnalr55ky4b8m6o73y0zf07mox31rn5j7993uf43pvz74128hgxz4wydlhrx5z1w0pf4ih4jqb7fftng3oa7e3rhasn6tob8y7baxea852epniprv0peyoipr2sb56dh1qfrf0cof57aolgs3kjsetbrltrngp4b6ji8qf9e39ls3p64zxgynt59zh6ihl4e95e54oatqelr0x9oo8b1xzg2nlbvarirjxzg2ix1pby5s47v0fgzuv4drettpublp0pczcp8yocw4texawy6g1pblcigfzigtexndx9z2vwn1987dxd1krgr505p9g1hqvgnuzkld895dd9n5v9svk47y5d6polkr7axnhsj1oi5j95ui8kp7dlvujgyu4viuhgo8xixytlxxg5b738q7n9z8bx0geiakwunej0yyum358j46x1gidzexgac923xl2yl6pqzxjps7xzzeoyj5wp33hqwl0aqrx6f5tsl98rd8hoa16hgq5sd5h6poxmqnwpuj5jzz4gzptp069r22i6ud2aphqn2hd3sjyx6aegv2rrvmy1ekgkp5hi73gdcu26itks1ysfm92mw4hqa3x5fdhaeb8uca1tiykfus74ilgedb5hxjq',
+                url: 'f4mpnhs1dgscoh88m1jpcm9ne99nxdnh5p5o7g7jpzffioadxh32rc637zzs3ni8ts3pyco4agrlr5x8ec8wahw6lrhzput0o7yobvaqbuszln4d6pf9r9lbz8oiaix5l90azt37515ca1tnwaxlq2yo8fbytgg9pjz5tsipsgsqz85lzl2kjxo3jvagegsypva6435mhib37hl0ghrj1x5w1shys0ncmve2r41c7tgsb86o2qemov7gv0ke3w6kkwhs6rkm6afzv3k3j44k18pe7unwok97458ucz0lx9v00nn8w5lycb03whofj4nrspw9xc3hwir64wix3z7q7ugsm3ugfm7fwae58z6cn1rbs29sksqf3pypotbcv1wzxz3i2uzsa7rt52ny2juqdpdt7j2alhbhngpsjdx6vqxy6jbfsycitsrm7k7c1c3zispkbu0d0dedced2ibtmknk1s7gkhbvjp8tougxxb9bhrgrrweik8rj412hi88hc37trfew83wgtgwcp1qhu70tscacq42at832q8477jo7r8lprejll8kzun4399u5zkb3czjf3sgpmbabb2f4xnrw8r8kqbov6uz3i7263knzdynz30428y2tsyi8oz9aoq0lh577apzs0n16s39y401bac18psx7i3opce87ae2ru3bt7h66jz5qndnj3npu970wx319omc9qi0dwnciazxqgi8rrwluezm5ktzebcxpzb80mojtkcp4lkik5aa0fpuhcoqck74fpcle9f3uhtnp93vyshcpxt0blrjcvx42f5j1y8ixcodmnogf1nw4a0cp7suqbls6uvvxoe9uplkn54amje5vomt8msdnpopnf5zrv7kr6lpr4bv5b061di3dgct1u34e6k0u7j5gfwo0cvjz15s9fets2y15ybsp71rj4f8vyorhz60px9qtai6i7v6gtt4cymkcset6reuq3vpkc7nqdlwy2xz4sthdc3x67s12tnvzha1si9y8e',
+                mime: 'ohbp2sqbhxcasdgs0cdd5to7h31gw69qbbhiy7d77hdfr419bc',
+                extension: 'up1ttp9mfbtda9v9b1r6momz7ehepykloh7akvp57cqjw8g2jv',
+                size: 6609139230,
+                width: 166820,
+                height: 756714,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AttachmentLibraryFilename must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryUrl property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/attachment-library')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'empno4go1lgvd3khlz4jhou017doe02gxv7j3e6cji96y6edx8wm17putwbp3h2hu8hadepvo1uhromn4cz4bosh0qa7by6zhr5to9sc86oycrjwgqv5wjm4dejkmxeq2oowhsgxhiimbnbwbl8uu14a1ufhy1fsxfj96b3rqwc86uqv09zktbr6jqfzay6ffumo3d0orhoemgvuzv4dfrhwkdt3r0wlf5hw3nkyx3z5at4ccoey2m8b6b4mlrt',
+                pathname: 'qjdoueaxv6qunt909vny1b8l5upfohz5wq0ak54hrim2lzz9ijhcw0xzrc8sswyur39h70ds10ahw9j1bj3kpc0b92j60i8xfoxkxxuag7owf8b555kpocg0syicisvagy4apeimp2wq2j7unvkc7vzdlwa4stsosrmvagtyo4f87bohb6kenm14gcdkdqlmuwchawbc99ua3eejr6qcsfdbfc3sm81t3zg7grd4lixbu6avvdk76newh01gqe0wyjholxbifj4tdqaa9wipwp8c5imhdwkzq5jl9vwhyukb45rxs4axvp30oqiw9qvkfybto72fe6cynxnd862l4vx4vrt5yzdsekh51puk8phyn1z9zpa9t3ps0hw4tzv5gnq47gvurzay986fdwxa757tmafl1y2pcs1cu31q740dwqhiohp9xxcfjr6vcx9n5m18kqhaina8y7ihrxusj8a9zjminihg350k53epx41cy8kfad727pu0iekj2vwgx0tm8td26t9uf6paizmtaqdaba9mcszmiff8jzoi894oqnm617vb1dxc1ep8v0lw27w3ra4l3hsbio9wn2bw45mj5rtwqcypfh3woiulan8mtcqqo87tly8yesfoqrqjaq1pabxwlwrh6vucx8efvyezslj055dlh3t6npftwv3zygp9jej1f5cpaja5ttp19e7qn8yk039g01tsmtj5wbdd5tfk5ri9xes5qwv5zdigbc2v89ojw059rd9okdijokd9um08nc3cd7oouvdke0qz9odp0yohj5g6sv69k1877b5fo3o06791iki0eaj0mwtdxoud72qsyyuh8qossxdwkttxri3rdqwmgycc3o7reea6zv9zyjgiwfpvpt8yrrj6ek71vdw39yv7tq807qak77c940e8godgcgnwnisnpv8quljgluwxm5wpwr0y61wf35bjw75sg12b7l98hspnuvdxaya9bfkgs6kugp5ezewo1pcs0zz46exmu35u',
+                filename: 'z2y4d7q2z14fzonaavchp970jl7blfndnna1yarw89ilr05xfjznw18d8l9pbti6u5nncg2l8iukg2dh8f034du14dvyb5oyufye0kovn1zgbx82w6ncsddrdo7upm8k9c341vp4w7qe2u15mrpm26xqdnzejsahvqyzxuif5u01pmexqrvj7hqsm3t9vmdds2rg6mf0fsq74immsvfsqxnvxuvntfqhuw6ffn2svv1ai146v4oo1d510bgh1vj',
+                mime: 'yfn9df9ybqnim9btlo3vbv7hv7lzzd81e1ooihvjhlgn569e06',
+                extension: 'ub68vt5c1llnpfmupa2xmtr4lak23blcwwuei1pz7uthgc2pf7',
+                size: 5863493114,
+                width: 337098,
+                height: 811228,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AttachmentLibraryUrl must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryMime property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/attachment-library')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'uj7uxs3snzohi7fxuy226k78t7dyl8d16xb3u3q0zckbon5gll7dz92iqc2bn7z867sjyzcqt8chh0qrndvnggatn5zvmfgojtz3u19y8x87gui3w05whoub1rwxf9gofn05wvgusnwl7zi7uuwbltq4277tegtrep7fdfk2iqg84oyrffgbx0sd0f7j35mucxo3ymkowr8glcjau7vgu1e5y44l1zqpsyjcayz3hh86el3wubfj7z6hirutak1',
+                pathname: 'qx20yheu4bdwpi1ej8i9uh4ttwuvbmnj92lkkhj3kedns1foh02audksoub7f23rvu1l5zgfbg3t9k5hs8ezwazrnd066g17c5urhs798ai1ljiwgqnel2anv207bcbe7mu6nk7sgyfgir0mhmwz7gntjakvxtrv7fstruln2sy73wa4uly97qcag72ddp9yx4gcz3u90cnmxmsx46iijppj6rbeqvhierje1n9a1zn9pc69k2bmb1kag1uh72uk0ycm4sym3damk1jdbll9qkb845lk7v62uptjmeqbrage131i8j851ovy7dzqrri7oqpbpk4aifmjuqlka3fdowi4xzd5t6vu1v9zjpogpgf8kpjzjo6yvzti7hf37t83e8e8lalg2djfli242bed8ggkyafz0xy9qany0348h1vwq3yzifyrezlp9etvevrqvma8ws7rypwugsbh42arw0ba959qmyr1ymwrsevk2tw67nltnvobsmgd3t4x8ygbl8p4ctfnrticy4mc1i1wcfdxu154nrrxxdesx8kk9i0xh38h7jkteunsad8l93txd1fgqlp85b5okn2zyral6gjwjddodcqb5gcrikl1170udi61f7w7kspgqr0887jqf6bwqpcu6j72pnc1pnt43p2hvgomj0y1ke1f9sms3tles7vv9iyln6zo7jygup0zpwnrwqo56greftpznvwu1trr9ef1ak3a80v4efwiy8rtcrlp974cnz69vg0t572b9xozlxwdpbjbxnigbur3aflofn5xhl3g9bu5ha8gu2i89npsxxxva0ww6xb6ftnfeezwft4l6hmy6f91pxh99tkjj29nfvmp75rq39dwql4cwkcpq2a2n9b8ilzjxm7m5dn235ovq8awdskutfu1b9fbeqbpjunlv963a57ig1ubw8lcin3ercbmyrgmey8py2p7x73lmzuq3yu8hmqdh2u3cqdllw1jzxbzusec7bkxb6osjzfqz56f77vngpnp',
+                filename: 'jm47hikyrw1jaf4222rju23fum822uw7qapmdy81kffn81uaoiihbgqija43btl2863w453et5h9jgg69x2xcitvws9subpfs3qs8dbdv1ojz3vwlv93wvcznjzwxoa0x4e69k1r5f56mwzamrf8vcl1kug1eczgi1szr24o8rcp2vrba2nr5l6mfsko0dbkkhl48rpza1aueqbr8qcpgae841ak6z08ct4mz5o83wssfilheb84rt7cteqfavk',
+                url: 'dc8atr5ab9e7ppfe4r21gvi1djjvuauqbzntscnrc2z52jddjuf8inqqh0xz4ism3lv3vh30ytlv6h0ny3znig244ss8ixnc35hjzwt44126jgh3mqtjrysk5d2dizvoik3jrhbjusvh3kpiwpftelu07pfu8m059fxyv0ye8f0r3fbdh2d9gzlwby7feo316e3wvr0od8d1u2xt5kfm744wl2ey10ajx3rwejbikdacxuhu81z2efxejnrb7dg81uhrzo0uzfraj72eqezrswdvi33c1ck8s1wq983jlskclxd0qri5kcfiiyfntl5ch2b7eks33vz3k821yuai87u6f2d3oro7xqfy4h8h9ai5ob7ij1r698nv0y7lp1bjrvwry01x7koegnlimzzy9sl8zms6293oxda50yfb16pw2kkmjymg9ggugrdbkpk7cy7tq920dp3sbaa5wixp15ijduiosasl0sybbyi4i56ihcgwv1blz1w70cpcmxpzi6jtijcg52kruggh0pdemown6wwd0luvjuf4snbhvmedrfeflw8xnmby0uqc2cqwehcfj95pvf1cl79vkhev0qfx0kh8sh3bdrdxoiitenaxecnjqkrnjtkklvew8auc4rvi0l7p9th5b3zqa9wfx92thc5gtg1c4z6w09qzzzmg03bg2pephitehsb9qbmlhdswbgu83ipo79d8n17nvd2t9v1tzi3r2mr5bbaprt3jndlh8l6as8sx6owjw9eg8fvs1toig9z9z0g55riatcu6h2y5opiieyh3vjdvpqw9t6iavxcnf0xedxwqqyjerrfie8zbkkheifnzwdh51ozxk2vzu23qkwtsdeo25dzbnphueegnlysv73upe9krebwccsoi6ys69qii8oynjgrngbo6ae8wdwqzqmgenbyfozymomc34f2f00ri776awxt5tbt9c2k5ivgeme8mhn2g0gkrapy5rhe78r1u4e0leymruq5da612vfd92hs0',
+                extension: 'wq4bl4wojn2f93c1tx2lozllwglyrw6akk8h8c0ne55o3kuyp7',
+                size: 1419771623,
+                width: 730345,
+                height: 414933,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AttachmentLibraryMime must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/attachment-library')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'uix9goelfvdfonwhe0ep7jx756cwmdeo65ac9ixvhgqoyo84qw8ybfb3gt1tsn3n9uuyy9mcu3yknqpnejka5ui5a9k6qei8015jqnu0fsg7nr6ayem7d418vxxff29gjox3r51ch9ao89gyxgwnq5g8gcmk7twwqf1yua2ehd658kpf4hjnmk1t00ikywu5xlcd0uy6ngio24e3hlhmj3v7sl2jxyti3pxn1zn5i0or117t1vynnpy47a61vcx',
+                pathname: '6138m92dp1izh1zvw8yvkrmpyzy2akcyuuxbslv777p8imum5e0o0laj7jkt0z12hryh3l8djjkheqxgs6os36j6uww87w7r9ify9y179ktdpp4uehbcl9yaizhdew3r9g9hjox2hz977eoxb4nnaouhx3n64cg8z9dem8f6kwny9vusq5dbvx8pdle6vyrm7nxk7zfr6pfq5owdn35nchmz7r22ubygclldf83hr39epag68wbc6fntk7wen9tcd68oaw0feh5q9k2usd1632b7t0bbephnm5gvjepl64sq4wryyiv8hcqvw5hg9vxtqdb550k597yoq2ovkh24cw9wt9j60odku57pzaab3ughgs4yeyezo6wkpkot7g3eo50tzhmpvmrwwzmjs9ljgx18o5f5uvmuw0tw3z0pnlmvo41zi7jiepnm7wnlpf821yeevaretmgdkc2o47jafuaxpmx66z88z1199y61r1lhycfcjw6jcsert0gnw6knlon1n9vlo1dtibap2nzvc4gtdv9o4s2gcpe6nnbof40yyk09savhu89k9f35438fxyq6wf9i2xa7v0zgpzmcj2ejm7gjgxsec0me8mctjx1sdislk14ppfdim00a5f96k8wzv3sxk4eiocewosl4a2xldwyc7bnh2hvd4aj8u1fty7m46f8fqe0utlbd3wupyhh9e3utmlba4bhqsnh5gdljqjek7a31cm2jgbsfmzsaqvhr3qkei0dh0lf0thv1yk6rhqpx1mafnvhyv0sivpyqp3hlumu2fkqw5amhob9rge7rpn2piroutkp67899khpv4yq53426473bjaj98466od5p6ceql4he1a4wh2yeu4vzr9u4rcn07vq5ticzy1ge5nnny9dwkii1786q153tyfz402pauqfq38i3yf35mf6jtuime5tknimcfvt8g3fvo9usl110pgcjemmgvsb4p0505mouar66ctenk1j9f0q8bkm7vtzjfgqfmevo',
+                filename: '1613c33kojndeak4b2dtyh6xr8q5vqor0hfye3stw27g4ti7pi2ixzp77h3p6n431huqqmnltoaa6a5jccdfk02afdka72frm57i7e7r5q8ryt4j9c75dbdcmkexho7orlbodpsjcr5rusmx88ygtwfti8g4d35zln9ryse00ohb0fa9j4r68qwojivs13ipmopivfnn2k15mxoih3ri4xdpmkdzinjp425madia1bm5jkqga1g7829j8q8dogh',
+                url: 'jb3zj1viluvlso3cxkbsnev2rej6a0wa3btpf2qqaukl6e576pxvvgmf2g60gb9au7z98dce8qgvvejstb66a09byjul7172iol6cwrajcsgjfi347c9p3fmncuhgxhzt1m09qg0u0jvmki8fhhxyrpju07ywbll9f1tx7ax3ktrwbah6tfw5df7hght7yqzlnx1qj8nkv7710s0g6exmig7xy08muop0fbkihqkz4fh8ygwuvp6jb1bwpez5a61wy0bdoo1nv6qowtod06s5u8bvk8omexhww5k5fvsbvpsn36tlun050ncs0yha1uvtvclihd81qlt976p4b3ogtojy4668zt4b2yreir5m8elct6vqvzdo7a8se2oeftlkzmbsxh1sla9cpcnf7oyo9hjq8u6bz46ltc83jk2lywcnsccbme7jia4vrder32mhqun1ydlcw72ws3iopgwzujzxm6pgajlahuixhhzv6g8y175cf10jxofeu3s0velik6u85b9u6dvff0ksvae8ti9589rvybuk4p07bu4aam30b6dpvksqb8r9hworm66zng2mpdugv02vsz6q9o5sktbsf8y8n4krbt980wwg2l6kfywyq0kxmg5oy8vhv7m6ejk5dgbrsq2qlvghy6xqyc965htb6uj7sp2qhc2lwlfghpv1283rbl3i80bkkcwb0gbpw796wqmiscnw360ara76hezo6lbhn2vp0hps29wbt8sa1uxqpw9e5w1m0o0xhwdaqtk9yx9lf3qxr3soawkt6n0zki568ygntxg7b6lyck5it6vg5xmeclyl7fb55p2o6ciu766y9f2xp1gv7v325gpw5sa4a9kuuftnnn54rw7gs36pior67m1icn73i1tkost6v1rbpprn2qxslyu3rcm8b301n6sd82dqiyqkuom3btkqy7dtkj9218vaauk77cwl9ygcbbwgu37s66v7ch69nej10tmna5l88465d3pafj27irvu6kj28x9',
+                mime: '1mmuqpak0bt5dm6fi6d036lbftrf6qh0jtk9vhac74pn6zx2sz',
+                extension: '1lyn4srobxq0x0kovk1tn45d32aas7arbqh8g29087ib39hzvk',
+                width: 544270,
+                height: 722021,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibrarySize must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'tv4l0vy79wl9wstt0wap43djlxe3xb35bhny4',
-                name: 'se4gyomfw6m43e0nyn7j3di0d9jsykvq6m09lfnm3f0ovceyui1j9g3weyavf98c2o3epa54puzefpjane277q44jvxz6ns1u2gbnaozpyl9z7vjpcw3vu7s7sus3xyf8joy02121cfjczhr42q4geop63ght8vennxo4anwhgod1o38krt0ha7x7k23zd1u6i0dmqlo9opyqxm7tdd5ohl1onb5fgwvlo4wvu5uq2euipujs98ktr8hodysku7',
-                pathname: 'lgpc8u4p599jllmitwldiqhwioqd26utci8j7fcuvj4bnh7x4dcvtuwq34c0nyhf8xrmwjilaffyy8q1bgd4t9z9n2aimb3dsachfuct30k5y5pfz7hqkcimb66pej3j93fac6ye5spm2aqqzvba7ilgal7i2o6jehsjfmirpnxy3ybnvurpnq0bchis4xh6qv4iwabwmz86g6z8iefuzo0oqvedinrz081kou2yw88hfik8fh0eiagyf71ic192yhuo7vrsiljwqsup742z7pomlrdhh0hlgaioyse80wq9sptoaz9emhd70ewq5qviow6i9fp83ztsoknlr7t90p0ck6sfug4qzdc344bcfzvsnxa7tpwpsr8gpkdfz36ehajwinxmead0k34nqmiyl315dlkzebpxesyen5g9biesixnuzyd96kc1x952zo9gvgrgs4lt803xl30z50aslbvywu9zh8izu96edon9514hgvjrom6zanr0s0qe6ck6mio7rk534uejyq4n3x7su2kqqpx0ui7j9g7olk5j36boyzdltos2wdcnvrzsyrlkovdear406vha2ygq81r8xttsawov0qed8tfq504gbjv3y9x292d49eygitpb2d2ryqlt3knh7kkq4whxi57h2eor4sv3kc58udl9c02bpv9h8hzp945wyr9uzv4g5v3ro8oxvoa66q4yk59msum8baod3ww0dcwykt0bn5at4jy0uuohyfa8strl5pebuxgq6i8ccd103k49kx6zel7i7jq467jup9hb098sffqjixzbua8h2rmso0p4ixfvm3ke8q9fls8hqb184k0fsxbt8qckvq5zkz694vd7aa419xfvii9y8h23igezsdfaumhlmuurc8jya9phwdprzc5s4pzz23uiu0jy4lpe1d2c66dn7aqtv12jhdlhk1mv0upn3qsb56ohju7n6ws9x0gh00skxkbcberdkurphlzlu70hg88b03dzn0e90v1r1iro',
-                filename: 'qmglh8rutwf9j18gj88bx1ikqh29hdrj7bnzboe3jhiw57vlbcdtgeiurps1584bcxdy0jvum3lvpaavifkayb55sx207p77b64wizh98m4kzqoqw37a73npak1p0lxgscyz6l6629nxjoeqt6djviamssikrjnf1npwe031afmd5ctzq3smsbcbd58f9oc043u1145t2mlqpwb4gn72kuiy11ituzx929636lbwsappbkiclk8rwoc25eofo3p',
-                url: 'xmq6aludozn47aci2d0jxmp67fdkc3oci030qf0d5r0vlmpx1vcenr9hrgu0doys2rhjig0jklflkz6tqhbzvuirbklkvjbk8rntce08086xrplachekpcudr2eyhnxip7pfa4b6aqmne7iedlibnrigx7ivlib5tj5ijnfnr4u10f7j468c75jkyzgm2701swnp0685df8bvev9czzrz9dm8nf6pp6g8l0ssmfda1nkwcppyl0pxgw75s3qoo4djq62mxzkc3y3dq9a0d3xiothhkw4if8d56904yk6won4fsoghatpl40sxcmjn3iika65nluc7vk4ivbf3f4v1whlw1xtlrcpejz383m38nf16zl4ihfmelcjoaqmuxw11z9gljxbhq4er8gv3zea8od9zy142lpvoy0cm6if9akunan6z2i9cxli9oj5h1ppxc63avte2lx9ne692zwetx7al0p5gjl6cafz9vvnnz0v5wue2a8eyrh1ynflgj0ksamz4ejkq8ol3o05xxshv5820dnbwcgtqxpxt9gwseerqqobf0tysawn5mju6t7tuqyhfksdh3pfx0zfatvnt0iy273q64xs0q03lmr3srlvcp4m2ennmlyxllzuuw55xwt0aoh21f89wgcz2gmqyp0bviwieoft7dxo5qs6rx4urb2w9rxgpyytkq43dcb43yw4k5f8w03e5prp79ka6u9hy4ein217olvkxzvt7ccdavgd2bky937lhqr5dcuh001mxe047n0tr3d70d62wi4xcfpbayl6ggy7nd1239h72ua6x2z8whprgmh0rsnlkvzw9y3hjl3w82h32130i517tzkpgq66i6l5t3dmnpmhxzghpkcp4cxd563ynwd3d2ylcpt4hvctrtr6a54wump4mfre2v832maw5kkdix0cqhgvjqtnxf1u1uzc2knugo6nztx6duryu932l1wo8bhx1vet34kfkg83zoxujpuhqvxfincz6euv7e71mash',
-                mime: '4ehjsweg1hbfm3z1prj8ppa37j0hiwnlf4bumxnuf24u86xja9',
-                extension: 'qxtd5vreslybi3jvwyfie0jullmvb9z1jxewaj5qmy6o0a7tf9',
-                size: 1219321697,
-                width: 725373,
-                height: 977101,
-                data: { "foo" : "bar" },
+                id: 'zm9u1wuetgq39eogyadivmziepttcsvlxs7p6',
+                name: '5dz8zfpye2lgdxh98l3svzjtynyr841w71igpbiot2pwfivmd8cxt2tlcnqxgmbmexdwjn3pubovkmq21hpozp3psi05in079eto4vkpwejjzaf7khjizliapdovcak350wx30rdyfl61syjnabsnv5c91qoageit2z4ynwwnwtbh64jxdl04ec2959u0juaqfza7hfz5b5gdt3agsu0pa9rya5f4mbnv29411c9kj02hqoo571kqn6xyw0f6qr',
+                pathname: 'lwkwq3lximmvcbrnn8qw7i0ut8xic10s4wj5bg0nvf8l9mm3rtdnnt6yex80rcucg746v44jzauzt0ekhbuzad2ek3ukjrt420jpwmpyaov4jksvhqmeze6b5pjlwpftjc79ov6chwuaw2u23dvwrbifi5gxry2pps9uwz0mw0zvfvuuafjrupi7q9h3y2bsh96qxn19fwpsib4utb32oxzbwymex7yp94pb9qpa2o3yhw4koztm722cztjtbebcnsnhup4wsa0rr2flrj3lnkdswye08ttm7bq17x67zk1l63vzngevnga7atag0qvitxmmm07w34km6w6n7olbz5yre16ej83lexsj43kjz2wpyd8mpm1n86jlugojz11j3wj6wcdebttim7qvl4i5of2xsmn9fx660a236js2svbd9zu9cxid5ujknfpibqim8loaiwqewmj74rpg5b2ggdivho6wvo9yndtcmttxuyixfx4l6pxn3941xpmyb56z4wcsrhrqf3qmgf531tzk8dkpnb03vz560311gertfck9tr7g27thsk267k826vy8n2ylk1vmp0dzxdpmjyiikuklrpk4a0v4fng8umcga4lq5xf4tw0xkt0fi161l8cgufvqszg6gu9y7g6dpwycy40p4f07fkr00whmkxvvp54meirl3mc3uifcqrfpje6x1yurbd417hqb5l3jdx1sg7mukl4x8oyif3yxhwxi5svcrksneiqp2nthkt7jqcno93qz90n73gr5n2weosnokpdhmqy7f35u3lw2hiapjnt7jdl8f4p0n2quheq4kpmw2x3mnccu3x2ktcpangvqspcdcg6odemrtplx7yypyh07wurs2tn39k7ltw076qmod61vjnjusv2tmksicgso43dqtscxpe2itboqybhhlcr10mabms69y2tq1tbkh5th3i8j2j5wxa7d8vp2m6we1t99csjds6a1r39if22mmliri62f1x3fu1yibz59vaug',
+                filename: '0b5vhgij427e9hceduedtspdzjuqz3uu9r14e81g0shu6u0pq6s9uu299sbbc8b9lcoo0k4m6nkbq0cvdnzig252a492khagq5yqbs6helw071daymb4ajce1erxeoaip5hghgq8dmrn3y6i5n9kd4wlzbiur78784ioh2ude4bvwk5yio3mejy53ewbybpf0vhvbvjsgxuybq71cqrwgs4cp15cgentlsw3qehep4teftco8tquj3sgemy8fn5',
+                url: '7r6omdjvt6dejgbajmp7cjg4qpfi75mm8wsvyebj13xaj9h4gj7d25bgdcs2ub22gwq60mhhrxj9i6jcpvvtwal3726ooxmujfnp1svbvudb7avsxftjd3xyib9acx6e7mpmvc0lcjnchkjuhrcdoflbkbg64o3re4qtufpu70jkzqoebi2k7qipu8vfy8znrnin4d9ht3evq6ion0zte3hlfyhe20ud5e8dc2f86fb8wkypahsmybriks1qrqgccyi8jel6kf6n1r98j143cn2jmj20dw2rl9yt3jc9vw3ods1g80211wf4wzdgpkia2dhz1wj9gwt07kqzryelb9b7ngb57gibk5qnhetbq9fz1wdl3xx88fq06d8kj1fmtajk6atlpirbno901q8d5h24u6o21fla6p3c3eefdvk4nf9zuo5n4ls4svtilo7pk8wr12uny6k1n8reck1cd6ul90w4fzq8hnkvmycyxte48yzok3yg1sjolfklyobnsa22yeeho27g7afvcauao9akg3txcjxm445qy4ok0up2dl8zto2rjyqym33fq1dbchyzcyz5vob49u2d3rtzrl4f9mytv2aipmxpqx1lqd6xnl27qb9u0jcl2ydz66qpc3f1l4cur4jotvozvrh3rukmvkhgscmyf6mqd0417x9olfh6e3f8uiif1aedps5qx62su08bqe1f37izi35f9ckiv5q6i20l2x5xt9f3w3nwb9spmasnhaqfds0s9uwxymefs2fo4d1jswo8pa7ucc7zqejghqzkjnyrw2q0cnsusv4gab0ewrd01ve5t1u7xtn7k2s2x27nqkhgjwj0bkn8ra1i6opc84muyr9hgb0jdmygz68zu1wyeej5aqdbjgb86r0zqx93p8i2l9u9mzbkfquk1xowikqwq2d9raxrwdis990zaxi0gi00ampvuf1gg3gklojg3koynai679kxv1t1b5tzrkd7uik1tnpz279saywex348fpsam50e',
+                mime: '9rzslr4oq7m0nys9326rt8q2xzku1el4mg3naoujv6oinb8ku3',
+                extension: 'nuzuj22tlrfhv3t1g6vlxfyqug185fzfaiijv81gvg43nbn99b',
+                size: 5723436899,
+                width: 439861,
+                height: 618176,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'ecxarquo1q9uptmbtta29agapmgtnfkfa7ybwpyu4yg03e0s42ufys12awipj82ui3daydpvq4bdoowiycqs98r8mkm5ycvjlqbg2v6u7q2otk78h3r653bjd1z96i8sbeq25sji06smfs8207kd83epzth5ji8f80u9f1h0pw61geznvac0u7ht9qt0fc3i97xfy3auokv8ktl2o9mnvuw2yt95vofmft6e4vvvzt3cq7fpajsuesow2386krtm',
-                pathname: 'ix4h8hwqz78723wg0whw35dwj2vsxfle4sr4op9fn3asl1e0bgmepxguxhyxh332axiwpk2ukjf25b29oc81v73qpdpaqx6pwen3dciu6bs18tfmuidwrn8devz5e21hmxgu6fhqx6sudjqw5h3rqeylqvnvqd65guq9aq2h2rcd0lsoxl1joqkdj2zifo4699u843t73ymfwhye93oev3y8acfugplc2xjn25wc0k6h83o3h7o9jetgzwvbxl0lwajsrbntso2bx1cu02rpae8hxn1t9umw6xyovj8gjk62pmuillx5f3fre2ehmy4gs7srvh8yezenmojx6fey6co3xcoccf0ewcbc9qx0osvhrorqntmy977vmmu562oh6txdkuadne3y217jrt0u1grsnlpa9310nzpod43ulksj0h8epzc9oiahnczap4lez5hkbxij8krrmpsztsboj1mswzr0oyb8xc1ym8k678bhzpin7h1dltb80sfh51xy50ug2b2u4cf6s6rq0ch0s53cgf61yynibrk2x7m4zaloir2hja421jioimaxdsk287lg6da6ddf45j96214wis8f13uro62p477j5557yumx21zvmdlyhtm5d710t1oa6tni1y8fqgju55o33x48hbwijicenqy2ca9zkzllkgvzz9vn16dzu9ymdiksb0hvni26mv3s5tetsjw4nme3odz3tfxk1wyzinyi90tbpv61sd8cnswk26epx6mupt8qy4w97gulwdl03svaf6xl16kbexpyop44onwe00ao6jdslok95g0g8hvuen9sn4rz7hx6n8al5rffof1lhi8jw57gahfmu1kmc9ghf9514l9hcuzsbaj4u42bl57189ej3ktviolfmiutg36ika9kctr9f8g2gxf8ngj8njj3809hm1zpugtpp7xzoq28jooglex75b8wzea97vo1tz0mvqtlujxd5y3hffq25bly6z9p7djsmw3almek1idoj5a8',
-                filename: 'jk8s803hixr3j2x5gld26pntvfhvothu6mbijqeadx2p1we9bmczj5nhox5k8hsu7zygt02eiq2kdwvqv7qdyg6ee3ciq145h9537w3l8dl11zbbg93p6yh06i2iish4e47gy043w67ipx3ji1qw2cep1xzwz8f7tbzc31fwk4t3cgsr797uekphkglu75xucrsyv5r503lxl0ljpnyc789xkht331rzawl23hcms6pn3l1dpqzvsv5dzzrqffu',
-                url: 'qonos21h6hbxsrhu8y5lw1umr4250eh20onj42ioisqitbhgoktumbyovgxfu358h9a2e1js9007nzjn1vsbirk7vzk5r36vfowhiov98pre7bnz0j0jj4s5ektqnqyy4qruxgi7mjog2qmtyp7fe639q143fowpixlzywchqaygyq7nk8kj6292lkg6c7dno7qlvlua9kdofi423uar31l1g7uwbj03voisuu2s2yzfyxc3j2xid5zzshb73bvhnfuvpmzzmed8yi329nnn2cb85gb8t2i8b60wczywnwv0qz5otn7d5c1ri0gwth1p9z8qwobb9q1at05dlxj3auw5ij6a1bv4xylxpq1r7jywfsbbjkpbxve4dzukb9zz3rfmq9q5c1svg8aw7r4smppo29asqlpwontnmioaqda7zorevfoemtnqwkifo0n6zpkojck2czf84chss070stug59gcckxb3tfdlessx1ugl75oxdxahriqws1u0yr047gpj98khk9fc7weodcj4wnvi5dl97ilpk6pedeu9vmtufgum1gvp98aucipa1pwwifszwjhn2bmhx1k0s7y92l3fxerv0pl5cnj2tx024f029au5u5756bv4z8338cdiggmz6ur397synea8ipa3hcskeukqflcy5n93pilrq7suzr450dh3c0jy268776rxtdhmnoo3reoentk6rfq4w3ahzcqu1nws9f74wuf7trarxh0kh3463dx5t1i8rglpvczrwktc559kb2xhr17gufce8hki9xw3yo0b82l5f911sh4n6nk5c3m5ffxe72rcwmjhg44gfjbxcpwybxlsv6kufgzhhk1pk11b6nqpuqwo0tulha7tmzqhcj4dvm0fuko2jgi6ad5ex21y7pbjfwd8dy6472cmv0siqz41rbosz58iv3wtxb3vqptdljuru8cr5ws1oghz6mm7d9jnjnto8a3l6gi3vayfdrtr5vdzuw17kf4i6po727u0tb1',
-                mime: 'lky5azd1ha9nc2sv23cn9v7bqrfzamoeekzz5uyheviygheex8',
-                extension: 'mbvlk8flumovwmk5loooqfepf0mw1cxcozvhbbiu431ev0j3an',
-                size: 2456631951,
-                width: 733733,
-                height: 494750,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '0hbqjodszkl5jltywq7r2dv5sf0wlpr8eai4tsvp5ck2xxcpe5aof9i67i0x8ul4gfa65ycfut6348rdu59ie7yfkx81m1vcvqu8pw1buodsj587dkdbz06pdu2jlek5magmfl0uth1ragqc9bpknr8mtni4efphqwk1aj4gu985mdatpmhv0chrzmveogsmqvpqvoha8fm82ywqk6wgjbrgaj4aqyhm14doin6sptksnrle1g1s2z8rtdg5nm2f',
+                pathname: 'shp1lix4w7hfcwe06sbyuqs8uiq0zkvwflmt4ua7c8zvceoqa2kqm8v5vx28x6fmkgtnqvy1h0n568qmh5pudhg5w8lxpbztie16nkck76wbj2t9fmjkzbz99e7lbeyjphob4bk5m3zkkxbphsd5p5jb91rlzk29ngemeiwn1ue4jouui6v5uicsa6i5iq86tpvalm753jkb8sotbjdh4t2mrgdp0243sistls4bg5hiwpwsoxh3da1xi7ckndtjvqiwqylmcdmqdbb9zlfc0v8g8c8fxy5b1z74dosigllgxvj2muw2ewnhle80de3vspv5re075wlzaft6v8sbc4x215qfo4v4d1o5jlj83v439dsom061sio0idyljh2pahtnb4ez7gkcvg1wfswuqe81j5xdy2pgrfqzjxj56bgh1nsahoiovnyrcv6h1eop63p8dff3omhycffmxf7m6x88uzv166hzuxkv2tc91uoxz2b4dhcygcih6q5scry3kg6j5vu9r6mrdbxes455yugw0hb9x86ptpli7pcmzbvl8d1ggp1cm9641cyzbrgw2sxlrvee488pcm5g6l9rn5k0vm7km4lbuuawwxzmgtugmcs4f3dmjhp9hfptbutx8nyv701k6ur1hkg24zkwp8xe6p66ej9wzzbgk19eh3ofga8dzar15x4bevlny7yvxincqn3vijq2y1pd953rdswej47j45lzeiccpuhlt78se9xu1cu682buvbkud075cn48crb8b95lkvb6byibsj8timucmxnqhg44nk8wvm49k0idw81zfsiuc1lhi065mu5fkvkd8bhd4y8a0twylm0xmotl0hrv7jthbsaos0et984hdwrxb0q54nio988hzaplnwwwwsd14582ah0ehu77dlw6bto96bgn36k9gxywu9ss333i8xmsbjbw50pmtsn7a0x8taiuvvmel5orh0kzmiepb1zxlxjj3d5wm3ovilyzmc5mu45dky4cuz3w',
+                filename: 'qgxkps2xpxad4pge9lth8263d4c8ng5gccbs236p1ubs258oz22hx8cvcm80huxx0tohtp6zq9hzih4bzum44k86rhmrt9a22i79qonhhslqh2jky56qplgzerj3opb43dm05y502rvccasqd2tj3h8yjqkt6pm62yogypk7x0mj1vgey4jbdcw8can7damqrwvkb66n6wzf8ndz1ebbppyfvgl8rurjs35vbouf98h2hbihfqyn1sieli48uak',
+                url: '01if9no69wzda8v9opg2cae5aepxxueo05r5fy8zukyf1chjcemecz1o9jjchbvbn9esf2sh15odlg9azre2x6so4rmrmx16flkcz46qf45wqmg9jnct1y55covz4rge0r3st9u3nk1e11xtaaxvpaf3z6vti3toku41jivgcsxqrkool2jljiis58t8yyt608g1n4zyobqh8j0ctz3n5enh21hhfcf1rxi73x28b0yzbpvbafw80xswmzvepyjsof93dnm0jxngnlyqrjidrpocgsmamw5fshbcvw9i0gtzn92h6e3i6fm05ziv4itpyaeoyfkki1sglpoqu9363yn7x1o6eevzdtazjx7elysbrmsrk6f9lqmwvyjlycpmb00xey03ghgqgp7l5huqq5up9yg8yokficb6c9g0hpxpxly45ubvqor0x7h63wv4klvm7xhro9ssaxzfshcddn6jw5y5w042ignwn2r4x7djcphon65qy7qqrohdm7xh492sygndc92hyb59z596hudpskovmk5or3pocl57wtrtu4nb7875vm3l8vmcse2wn0tj4k2pu4n8uqn2qzul6ugbt3nj8lhams084fqa3tnm124i1z6m7p7x0jhfa24wsw5pacdopvqv03ktwo4olonri6mx7uqi3jsoclufj96ov3ms1yk1ub682yvsfbdkyu26smuwlh3ootk8s20s5znwhu60abeu34iystwnn66qw76kbb9nfb057b2wnamni6s0t2rkac8nizz75eoz6mmga1akn3wiio9hza78scyf94ahwka5va1hyf9tgibaf3ho91rxd0bk2et0aurgy0tcnkfxdkxmk7i6ciaax9ijhnstk5q49ggma13g80rmru3d8byu5swli2f2t3nr0e4yzrsad2omd1extc0es3lm0ao37hg4byy8rt51yh7idx24mheg01kayowlgthgn8sdu28olsvhlizzz1z6ewzyqr151ekcc7e60mgisrxl',
+                mime: 'clv3l19roy7gwqqs1ft5l3c0yp5u9kyskq2zb87fwis1nsui96',
+                extension: '2f5aqd00f1dbzmhz220cqbr6xqw5omf592k0uz9cu80vrxbuoa',
+                size: 6193611684,
+                width: 518192,
+                height: 217931,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryPathname is too large, has a maximum length of 1024`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryPathname is too large, has a maximum length of 1024`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'f0i7t54cs0dp4rct70clsqmzgaqx8e7053p0v7dcwnkivi6apauhems4dugwn6aeww4nqi2hnjay4xva9y16yb8eux4ec5fud06txafhni4larliixtizgl6bn670otkltx9md5n2n9p3so8kktii8i773u5ead5q2rv842s1lel8zkw21w3pc8zitd3565se4wvj1lytdovsgrvgpb5elds1fsubspwxp7w7inbcnzh1ke2x2r896ux7r4jlfn',
-                pathname: 'r5bjoq4pvjy0nkluylenjgt0so2vufkdrho46tyzl954t9shvke1w6th02uyrv8ciufqctggg2ey9v46if5khmxw3xvtz31kxodvtlrtqd21u9imz13us0sfmmyypnti50agih5og84ctkeuyfsa3l24w3qhol2kkqbu9xbkwawj3jbu4b0od0qn9d2pj81sr174h4kitjx1y46pc37a7hk4eavqjq7eeeuvgeulmn6nhgc2l431p5vca5ranqj3qut25znvy1jgw83wax8jblyog3p9pkii8mnb54xffmyw7c4mdxucw7xge4h0sn2nn4du85g0cnfo58k21qm0kcf6y64gkbx9wd5b3sdf6dm8kfh83bw0p21sysvn7y62lv9wn1mjl3isc032svu0bfxs4zbno2l9ajxfhzt8syh1j9e19rc8ej8hyva9jm8i1o5khmj6wt0wq3iyg335cd0sh8aclil2hj0b8dvu77ew1hwa7hxe4vao481248f8d9zu8jq9vc8c21gc8lypbmooe90kbny0yr1outwl2n6jm41q1w68eajoa100obkgwj8mvn2vqe9lfnsahsq46nv6f7sa6q1icsoool9jt8y7tk39tas7iwx4umrc8rg0k55k2jjcjmase21aczl41f31zzqf5bjc7e5l2x2dt2es0i3agt2allzw3ojrmb8n1duyvxcr9dh6ruicmv9c3bxbnzqp1oj5f1a8nqyrewupr6p50k07dazvurbeof8ptvaiisu2h419h2c88ps9t5z6afaunkzpa0mu4goc50ong4jn0kvek863dxiy94feqxh6jokftac7auwxs60157qybx9nwpiacts595yo3acoi5wszz3e0h31wyrx0jdkscm90yqibhsyau3qgblyzggyo7lo1pyo064fdhk53ylmlo7wxq0sqbc9gw6cl5tfbyggc2hc4lxtana7iys1iw0fyn4r2r9lktetave57ho0eww46f4d7901jdgexri91',
-                filename: 'yzkyig6rirf2uokygo50rqs94qhunm4w0kwmqpqij7sbwnegtlkb0j9yy8m71vn5ody1no8n0yjuz38p79zxh5aq3tcpa6hwfeymzhgywz3s0ep6d5s163fyi78brexx4f4eb8k4755m28bih5f8b3o0coem1ibd0ib4wnaexqxxsl2wrtbo1v7fghjbrcx996vxmky7a6o79noawj0v2bxkuytqxq5f805juhai6vkwqji6av79lv6em2356v0',
-                url: '51wuv4asay35n33t7yaj1ebokynd806o4d44uydulg3nqgj8t62plqynkeiyxkteup60z79r9obkyqmrjn5r7cdiz1cbe1uixdmyeril8zj4l4ahqlxy5wzati2m0v2dle0e0xeqqfja3kv4f9y6wyjogjbxig328ml713r7daq3nhmsq5bna8iigrdho2r1blmajxep97unyj80mrhjjmyou74gv39rkw0nd5lkaloernbpj1ivpq3qjrrbewoehmzp37ev8ce83u7bvrd0402zu4vwmba9r2uozbdoy0j98js8kti8pj985q0lcf89d2uocwz1aurnnzbyvbyi7l17xrap6zf0fkbtp2lwdh2io63zw0kwut989qrhjqbx12e3rzvv3ikuohgmkfur4jdnjcv6p0o7aiqquqzl6y9ah88jmgor71yrevb7hvtjts2v0cjsvrk72y1lfwhfroml6sw74f9vbrp253kbekczvbre12dnetywn6uqolg04o2szi188z1104nibr17mxjtb2p62gblrnkf6v7qcowb27hsgwa4i095wcutgnbks0ud2jgbmlgqwbarbofjeksqq843c57kfgla7jevxc12kfl8ytrru5mz8kkbwcpjvckijql011081kzzb8cz7xezeo91ekqhj6z37vvbmq2co4ouv6evavhbusfaz0uycowg7in5npfn737868fu3voq5xwm9obi8bksfv23obhv2mxi17bxqj7h5aqaw165mdbh4268lr9u0m8thr7jzyc9tzbsfjalzdiiyxtdvdibj3zo6uv8gmhra0wli0aknssp9evtvsg0qts34scv742uk68khix14zvyha1pr8wdlmfyqx910v6jwed63kk9kotas1vga8dx1ayemvs19hmtjk0iio5ii49okyx0xjip1x2pyibj6d8r2voubs2rxrlkkl4z2fmsqknbdd9cor7vi9w0xxbssczjctg7u7qzkvwrbqea1el0eawgqrdk',
-                mime: 'fgpf8otwi56f5y8dvbu24v92vwsxzaapivnakwdknu1nkdsvaq',
-                extension: '3dbmxjgzenli20zoh4nbbncr9uitl2ch6s5zuczezezgccwn7l',
-                size: 1833834224,
-                width: 115827,
-                height: 735283,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '8nd6a0gv3ourhtlz9nueeo6m3ebfrgblcwn5bt2c31rscnzrdlk4db6lgh2yo5ay9nw6j7lq28wpgau7agnooqd2vh0y1mr5xhel99nzqdyc9yfsaxdardmcn95ml80voqvb8tleucwr048y3zhwee9gb8ggr5thaaqidyzuu1y7olylzx16fz21j157tf9q90jxy24wsh0svoxc81fo8ir3cen77wm36wznjq78j6ofzxht41rmm0q57exa5d4',
+                pathname: 'mekn4slv8footh3t89b68e5q2os4wdtcjiar6xj1lq8iied29efzjum83dd629o66iireu51hw5ul8dzk61b29z6o7o5k3h2thfiisi25ple7864eoyfb84lz9gj8k7jmgv0ye71z52rtwi9g1yrrm75f5rkokwo62a0xwczgceffdiaj9un4zm401kimwyyg1qamsbhmiwgbxi0cicxafj1hfefwkn3c7v9nql1ix1e6v36bpy6qagvx7ce9uni8c0rzyrshcmdy1wb3ligqou513ojl7ivqrcuhbom2xzwgjexp9topa3dmx3d8gy2mnxem7l8atmwk6spto1q9sjzyxrcwz6x64prb927xblzn6606rdyrp5tb639xy6sb57migqjiyusupktsgeyajtbwxky0hlxiq2rl01ry6tptkyk836abj5asmxrns4067zo24dtzx375a9yu60yv3ld747m6937si8n7qfsl9zx3y5sxdfxw67ulsxhihml518rwk2ik6fl89gmq1posvrvx60iv9x2ie4qrmp4zhbk9c01wo8g636v17fzwvuexe4u1db4cdkja6zk5hqkng0q2wjxkn8oc26ocqxc5az51frcbo32988jqstc2eofm45s9uqlpgi7yc05xpodhgqzrz8dxokcmwx8e56acrmuv02jyu3c0lw27njjx38obyxaqz6rmkwv139gvu0g4n2uifj0bqdclsd3eer1iu8t0fosd5ov1xb0gbwk3slb98ikmes1unt2vb7q5ri1x9iio0omi8p61fqcmqs6oqbhgrxo8qmqvsxa01qtgx28z6hhz76rs2wg1w2ccu96usj20o7vid6trr7mnsssimd2mih4qzhy1yaryigdw5ga87ldrxz4kgxtnag5efu3kddanc4k9flg18gxxphpmnb45k87qonvquyd09q1d193fthtwktfgiyx1tmp6z30tyboqww682ta82893f7dneqzuiuzsy7jsi1bfvrq4hzhw',
+                filename: 'qv8xq6bkgcpayj7qny0korxu0uzfs1qh4ha8eo1kkxyjpokmxane0x81n0caf2vpqitxd3e0iuxbvt4l1iinq5t9vm9dcadqiam1ub32p0ypnrqzi38gf4jsute9r4sn5j5vwvxvpf927advyr5v94mxa0x3h30j8t3us0875xjy0pfjyhys1k3mmxkxy3yxo41m9s2schkl85181kok9cd7dttjo6axuq3eaf1f9q7xkiyn97y4wsaywqcjxzw',
+                url: 'p1no3ghul3pqjmknkflcj760a1th4m3tf8si9or2snfpxy5myitdr3jghtwxfcd1nyypa3vg92mhteyv6u8v0dzqhczf5aigc74cuo66m8kffpy8l8h4vfdy5be7bd1cr4ol39iorz1n59ox0z47v2b856ohx62bkp857jxxynj1zonnldtd19yd4u8h3sp6y0kdcfj6dd40zbo4hixbfawy0bn2xfmwvqqwpjyzc7ezfuq38bdhl2moutguoldya7s1ncky0gulidixpha5anghp3itav173np21uwra9anzdnc4yts9v42z5w1a8bzyixf6wo6mg7kkogpl3zh90fcoliyrpdb36b5cd7qda02dq3i365xhha6jvp781abcwypqxlomz4l76umaqm1zgy49oi69pqb2som9ftdm5iy3hctwlw0lj20446c8vl2ld8l9cbpoyi2mvek0dq9c2dd5d3kj2c89y08logvt9k541zdps4zimmz4h0qk5putkhl5vr175nyhil29e6wukjllxyd26twpln4qpfmbdk3ayyxq8r95l7ct8ownpy70vvlsbju8k2tamabel0nfuylw8wwcpsbe04xazej9aw7xhp8l30a9137622fvq381a98vtcnjy65x9402wms7hhedeu54k0h69yo02zinl20f5wiqma37ypmw9jr77v8i6c0ekfbh8k40994882q2xwsqn73cfvs05v3lvf7w8vk88vmr7uhdph4jvq672eb7odmcinss8dm3m76z4h2juy8077c4ak7k6ztandku9ufvj8yzqvv6pbu8gie0806rx5aa1rkz95t50gjesucg4utff6088r56ij8c8qckhebsgd3p9a2sh37pvcrx37ydf2y4w6srepuibafh3ghojaaztftr56v1j4wgp3l353c0ggjyn7pf0f2bls7mib18vjkkviuiu3nd2awnx26vldtw7ihyp2ul4t56ppudpyzvw23fx39npir16abkvsc',
+                mime: 'wweucmbtj681z7ph2cbbffcj0hix873z1lxwwb2uoivk5s71th',
+                extension: 'nvp6i7vr5eyzb0am77grd13x7ay4vsf0cifbaqncgsf93vw7xr',
+                size: 7887079742,
+                width: 977660,
+                height: 334195,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryPathname is too large, has a maximum length of 1024');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryFilename is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryFilename is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'qwftqg01brqkqsrx79nylk6x90a9bfh4n1eljrqqflz2mgj87eg0pgk210f5frj3nnnk7aybiyk44djqtaq8m3prkylijtaxyos77rdmtaeejbpugiwbfe6wmyvzb040fsp0xbuvre1igvg3nt2stifjpto4w24dplnib8t0sg7wsm18glo2nwl353aoygyd3bstlxtubewuuv3ynu6o42109ph7ex7zvr7ls84e9yhearz1y029rk0e1cedg7u',
-                pathname: 'ji333as0zcbbrci49nuprak0nrg3y1wtlq82p0pjvcpneo87gh96b89uj92y3h5smowwcztjdo1e3m1p0ect4hizh7sipw29xjsevbxf62ocz015gxo8iibwp5q6r5v6n3btk5ej8lm5akmou8ui7fbsf9bi2jllk09aavbmoof28bmbs1dzoz18xu58ft3dwh8052n68nbdxnmi46zofq30ayjhm9pkc4j3q1x9d8aqgsl2r7jcpfb01abdrtix56e3ygx56uylaqy7pb4z3sc9g596s7em5zr2bsv8tq6o1hb9lxuqo9x6knpauvhm8wj6g3jk2by3mwac0me706ztduc5cgva0b6x6rqupjids87kozyptktz3z6atzos2zw2n2qs1ocnkxvfd7vakmv87tf1dyzu3ldgy59uyxv8k9wsb547zfevbff2ux7yz04c1n34aesb1aqf3ippirtzwjhslityru0qblsjdbulclcs2phepziur7xcpl1ummshd8yukjiz4c6lr37z5cn8jyffryh8c9ew11pkan3zizmpa421yk8y4pw3jouabk0nsjpkq2vp6bfkvlfvm3zdt9wnc8uhr6t9iidprq2lk50rdkasv8xygsdywad61xq8vt3gc5mdf1nrmytdjjt1ep1ywx47b0yiosxq4b9hlllk1ui148qvew7xyenjju2a6nvwr66748iusi7t69vkv7o6341rqhzojdi2t1kmozc0e354invm0w3hkddncyjamctg3jiqktdk5q6t6rq5znhhvmr6ptgm0ev3880vhfz1x9tj74gxs2rtk05ih95os4vxlrh51h9c9dly8o779bfgqcjxdsjttnrk84sumxm5qm4hksmlh356rn3dwna3iixte0jgxuesosacvxmkt4yf3hl8oplxvazzcssy6gf2xhbr5u0l5rbvzx0tue0ij22n2979527lddqs4pf3a3mjpy0ilnm7twx0xdga8t53xbebzwpwvwan4x01',
-                filename: '0zpz03netnjm0w2m3metmc212xhtmhzpohmsmlra4r1yyukp3xi25xdchon33699i5sc9djhv40h925g8a94nycj4sudie8lpsg4s4yx2ec53hyqrkflsor8iwntrcpllfrxkb6rqlvw8hwst8a4ltzfsvnezah0smacqr6m3fuk0iigqr3ebajpsvaeopnlgvkyc4dxxd3xiqo2io7hj5hyhhunjq2hgf0qc8d758h9om74ec9okck3r3kkiril',
-                url: 'r6ia6vtabvqdbl0h884jg8jbxby8y6ltj8zwlv3gnh21xfbqzratg1zy3tj6yrkhi9j2w679bc2c1rw0h8y4on3vopb3fcg0i3741ttlpftlgvu4n568qhy2d5isw3mmqihrj715h5y0q5d60aj6wmv0fl7zzhtltn07belj8izwssy82h8fbo8wm59lxelcm6x0sleg8kiij0adoj3m7aj3c2m1ue2ilbi3rlb7paasujfbqgtnf67n0xcxdsko59ld0bxd83tnrb0k7mxl9q5xnundm970xrp2k71m5c35grbuura2x8rueu2k62smcfodjl7ilkjpvz3gl8f15v5i3qy3uxzvny3ux7foe1ecrsevdkhq20j4h4iulk2z3j0b72jgkapvb8ycbccm87rrv6qmr52a87txkb3rnxwfbzsqr8bvpnlq6jj4z30johto3ilxi79impbk5h5k1g7q89g5w5z3xxh56emmxj2l5909r1e0wrld73s0zfh03kvkcsao0j7swoevdzgsan9f45t38nbjj47fq5jicnngs56ek6w9qh1r8ppd486l759njz8xdj7k4upupauqmlq5amxph5yndkqoxerqp1299v4uf2y87iirmqcki1mi2qn23ljlqubsir3nsl1wj7cj35iftou83qqqc2lfyvi4kn3jy679f5kj9yiairxghcelchi4thfv4ozat22pnag4fakha3quf3ljbzducc29her3lhdxm068pbknq7cgtzw9yqblnkn9g2mlxaepvwgn361tcpg0nrfh3tmmxzjvpktupjk5km3wznqgzv9u599d0mc4sx0ek272qqt6zuqbwpp3gd4ft8qv7lq23jqiffkjf3ze1k009ve3tq9jr28yc9gw3po02llpvzjod8kksa9ec878yvfvtymma0l56w1q2l7crk085ahev1opmbq25odmrnkch7e7iu613l9p11ikaulvp4px1co46vra40br5sms70khwr508h6p',
-                mime: 'm3ad2opsv93wwtekv4en28nxrli74w26adkrbygq2o7vjpq061',
-                extension: 'n0m709ep5kaztf80biqww93dxgnx2s5t1xps5567el6qh6771o',
-                size: 5828994633,
-                width: 238715,
-                height: 774556,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'oh39b0u4msntrcujmzz7qnwxtt6v1lbcasdipmu8npl6li4qoo5v130fd1ac7rahtlckoxoye0aaq9kv2iefekpryq3ahcub7gf9w3ondxzlepy9gjbycshfs2q9g33nz1ix6tfxcqnw6g5w0wfukpoocx0u1xmb55hf82hgjqoqotwn92865swvcccdqv687dk8wgawebun2w0wrx9gopao89kdsdj561ssu5py5byjv0uxno5b41y810cvltz',
+                pathname: 'lnnzf5rxf1djne3iafjtzayx401o6l9bj1gjunk6c4ltiyefgqe5dhoq0afm5e8vqfa277i69ax4scajvtams3vh9d6ul2wlhxiw08gzxysbrah1v3pa45d6fgprli442qph59m7nwi5neqnt0yx0suid9rlwdsv0ok2cvlp69b5dzrpkj400bm172hntntjulz5aluw6chnh61d6nvxp6azm9fbjy0yr5swogbyoj8vaf407d326lm32gbq1hjvs0op5ukjrzi6tl3osn8n0qcgsqr5uxp0eb9yni3dvrjqsx9nt6umjfi40k2t986iy2mdpxrh40yl6pzuj4acr18cfnyg08ja4m40htnck4bu011wiuolx2h0ln7oyoaugahy7qmtpglj894uy8who82mphcm23834k415qyjm9xst2wf4efdxbkpp2c54knbsm4r0qc7wb9apbssgrekyvcejogr0khqu1a92fihsg8k4peo0r1wnyrsxqs2yl96l88ljggnx5fm1glvv62z6trlljt175cpr0t4dggsqxyn1nqjr2klizz0oo525q93ujtxvyfqjvwxur73nbb3mrsm78rhaklhjpywhe1zy37pt92uieynrvb8265qk1vfc51ew3rgzapcxwcyk1qow7g8juakyv0tcut2t02nwid5q7mquuvtfijszsy1uxn15vkgqc48o7u6l00oii0953apjr3sc4c35wh70afz9v4vnmfpx2rg654hp3kuh4te9htpejj9zyzq6gbewlbnc9qop2iq8hmaabi2itxa21btn1j59dimgz15z8eght7ep4jxxjw1oj6r56a1pi4i2u6q6kwholegujiffxtwyqqwcsaf6t7z0tz3dy2k6bgq9iu97g9ho6a7l6vhb1bdt60ieyecd5k0mxzt1dixkiwqijdlsr0xmf92lyhdj9cb112dg33i8vojvgp5cjfhekxxxdnts1qsna4y318n79nhkorztasw9y7w5khh16xc',
+                filename: '1nexzd36dnvg2s9ucxeumwklkd3wnmfily5oivs3xkwa5n2y57jrydvns661h081ts501svuo8qivag9spvsnuhoeiujx7rm3bq7bcg3c5uoxp6ivju1kjrd9awyuj6y8jmieog8yaij1nk2k9wxx72kh0l3asavpcdxhkmovmd7832igqbnxka5s7esh4kpw3hamu22cvk8coudyg5ntepsswn3k6jr7ckjoicqk6jskb9du2vsbd1rq5b23q79',
+                url: 'j7gxfzp0vqkcib2tmc73re6jkxw97rx56psbjwobhjmemei57lp1l0lxx8dbt7mhuu284rlagi8sgxvxm33a72kglv2gq8w5kb2r1t42id8np8lgzafje520va5nqw5wpsg4yp9v8rcl98hc27ko8llcdtidwad3vf4p4h1ydh71wpru5hd5anc7re8k5tauhhtcwkv5scuo06v11lf73i3pkxskwgnurb445tciq82ae80x9zt6rx900y76rw59rdgkcn1op7morq5461jf22anlehzwxu7oa8lr538d9dhih74wwshd5tz38ukrbt8c2d9ttqvnwuqr2j0igxwir26xukp4mw5mcvld2vcghw4gs5b7vt0hzt79ect2sjf47xtiofppbf8cpkxfsvdvfkcg5mej7s0l98k6czyfgi0nhvbjgyp51xii8ksgb29mjfp2l2y6lzn5f133s6982gd726wur5u1dugit476jgjq2qaijqpkiy7slr5sceaz5hx0ivqcsg3zmfvmhnalv6cy0hz1a0y61e82qvz7db5ebwjmej9nb4wkb3evpq16kvzccjleq6g87qs0fj1gwozsmhxp1xorrm1k5f2eoqkrxhefruhjpxmbdjxy3gvx2lwov7hzx339mwb1dluckmon6jxibtl9m3fnl5nwlu3urculso8zi8u4o07qfoomoiyebk3pr2vmd0zxtvx5pb62b632npv1qb7cxff81kaj6q55ciypbqd2bq2w7vftm14273z4mwyiii7836gt1ewv9guxsbgcu9izhtekj3wq7dympxds8nf5hdrmow9eiy82xnxjbll8uq3r8lphn7u4ozzko88nqn1b0cthprcougpluwdzp2aggrbus2c1tl4s4l03ri5m321ky4lnbwtalfsa3duoklf5evguwc0xh0upmx02hildgxjl1aem4d0offoag2vt2qhvvd85vflrdmxl6t5vwxf6rx25h0awbkxobvecpy0m0wwu3od',
+                mime: 'gv2qiepnidse2tl879727s05p72voylww9yfs7b0qmvlkcxuya',
+                extension: 'g35qa9tovgcow188c24adg80yzuczns83wcw5rcje9tn1ue9kn',
+                size: 7477253688,
+                width: 181859,
+                height: 872742,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryFilename is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryUrl is too large, has a maximum length of 1024`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryUrl is too large, has a maximum length of 1024`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 's5f1f37zzltx6on6cudke0nf2takgyh9eynqvmt1okwhqhfzwzpy2pdxm6x28bv3do082axp13yd0v8i3lh85go18cu08ppuvvg1v300wuvk00v068g3ikh61zj55uabgkorz91j8phlcq79dody0njsswd7hzzku59gmkircvrlm2ngf9od6exc7ywqid30dzanroslmukpd2yqj9cne4hb47kud4weu0g4051eq04co5dvviuo2ngnu5l55tz',
-                pathname: 'egd1zmo61r2ncpzwydkr6cu57965ohqg2t8vsqzexhqhxjjcz9pb1smb8iafjjg9i0hhkor6xr5rdasykpdudt587qakcypqydvfurqpp1ezi79ji62ew9pbknl6p8g5mfllbsljad194yfsddl6mpt0scsw3ea8lbz0sbo63xmi2nuv0q3lz9lso34xsp85842rd4vr4at5ogwjxfq9xjmri0zr3f7ex6i5jsewqn0uc2wa7u66smo2s55wui9ujnn5276gqwptlda2tmrm63r01c1ag6ta30q56b7up4rsr67i05lnvo6gd2newhq817pn3mhcoeviv4d94gmu2dm0kpw5yqwki6rfyrowom7zrn2o50uxuiit04w7pmag2tamcjrs0uho6ve2rgudscjhp1d3qsnslrzkae2v7lp7l6lm29rqt5gq2yewyfigycop0ieh5em27jwtvo36xgtvb6hihnynjwboskjoffc1gm38jos0etitgzz4b9w421p4q53fs42xv2r4m1s8n4i0gquqss5zfmklvc1k8d0yphvl4aqinr7x5kh2lr0tao4e8sqy4i9jxbbdeeydbcxxbqiyvb7j73mtybwb57c5rsrm01xs3wi63h2jrvqfnea6m21hcesi0k9wrfkmxdvvwxvgnblz7u0xuz4619gtcuincn5idf27jkl95nv4cp70w2u98shvj6rhgae6s56v9b8n0kyntr5ef1imp1mnqp8hprsvznh9axhqyagd2g8qt5jvatuj2r838hah9l0ocn3kkoj9gfaqyu3ykvuoe12oh7blmrvq0pkswjhas7rhz0kwvf92s58d44wx1mywjxsy7oy6h0xalil4ss1fjxcl8hgzy2hrxm49fu2g6fotpy4m2xfsqye62dekq1d6c0hkaiwvu5n18ijuqgfq551y35m9nst5dop9zbyoo2xyynx2ymeqeoq7zyd31zhgimyq7l12pasbpy9mhtggyvpfkwseh8cyfeyu7toy',
-                filename: '2rb76b1vv19h1fv62p9setbscbij1z2mjwoc47rw43t6f3i7uj22zdw5emakrhvu3kk5dwormymfr4r536a1izavljkiaw0a7y6dz6yykm5tkyh4whnptgo2yglxjz522wnvooatcu3svj6od1kqtnz2dtb8e8o5v4yt0fsamnsewxou52o9wyo7fpgdnglr8txargf6u8ta10onpmmvrepm9i110htlewyjowa9houpm1o4uidtuna1kuwmj4e',
-                url: 'nuq5zzrdeh0bnt4i2vi72p5r352ajzw910wjfatup2fbyoww6opfe5dza819vkxitud5xope1cssnanu82dllmfp46j80h5s5m9815gdzcy9c9su9e3u5n4n3oznol3oiyvyylgdxoxmzx4kc3vhwbjt7v3upy1x2r0iwtljgjovj8rpx95wc6s1styat4aawd4lfnjkj6mqtzo77ynr6mkrcyx2ddny1w22014ao7pl7a475xxfnvwvvtgsdn9pnoll9qamdibzsbdqo06ffd6ah8qybtrh2uqnaauvb4zcvpkm2e8vyczarnooull670t4edtal8clela0pufpp3k2ww8dsegip01zotojhuj60rv5tnrd5h7knxwroejjltihlbebhu6dwqg0kbiuz78mycljrh1rhawez0y2kxsvlfzcnuqlsb1u443gna58e4mqanhafguz2fa2h4ft69ryz5hvhpdc57v89px4frh39bqarfb73vfzb9ir4vsr89pz11bzznhgsevgknjnayiybxox8q7b1ri3ulnfg7opnerldrclxyh5rt820lvnrh4ymdegwywqy6ois4cjwf9u1yjkge10sgwecunvo55np3lceonr5vy32taxbdof0uwf60ic19yp7ysah005bpjfj1itelmthjxakbrsy3xh4d0vfpkzrv04mllut0nroomce780jum7y450uv14zw7ceck36dohmsfldpfspp1gqwad2p36mgahj4pk5xai524fu6bnlxfb325bgcotn4zvcnjk3u23ck3udvw0nfzscmcoqzzuvkkev26dw2p3ye82emibibhvozf2lunahv6kgpvy7unewqkhqn3yal1fcfeh4p3ds14hlm0rudg7awjwzyiiu0nggex7gint5q71qiqrr0hjutba30p2fdxn946wb4kgagjddkgjcknip1mahuscj4inwlrjecwd32uofptdn0pl1s9ejezhnh5xisfc47tc5pzta4q4binms',
-                mime: 'cmp4szpmj79eav0kk5ymaqxi9vn588128ssiq0yr9vdzpdztcn',
-                extension: 'hxcjc3al602l89dueawsowwyqnf2p7j93vlq99wvpaziv2jeh1',
-                size: 1403663420,
-                width: 715294,
-                height: 129577,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'pgtn5a14hd7ahcgs7jk4h9dxqqtr3qe5kn6utvyh50iapfsd3yibsllavjzm69zih3m0vw44mi75uv1caefo7c58elpfk7n2x836pdhqazxavt4fkapjo5dkomlhse5jb26nonvoolwq1x35nuym75f248bfzdecau3b8043zmnosoz65gufm27xcbs3rmcvp4g6ugoytx8ln9dpo1d43kzxj60ctaq994jc6cnkc3oe8f045l4o0lyh2oazhe6',
+                pathname: '21b4ww5pv3v641avq9ea7lkscr4o9c512isf3y75a3tmjud66fhnyzdsotcw28ix0bix6facd1w7tu39fffyo6ug133q0r3xl2fmgb5tix8yrjxdcx0ashekdg3rcgfv2zoqvy49dbzp9mkm0j94vps6th5i39mmenlqdqlsftnfno4nwxk70dsq0bh684uluvh4f9jhp0r3qec6oe6ia9gr9dihkbag4urh93o8leeq8hrb4ey2nt8gmx0l1nheqwzmi0ldggror982ij0b6hbv5rtv06vzjnc1n7pgf8tranc9opwwgsrp3lz96jnroknlhq3dsgfztg2x7qo3jpueh7qfc3vq7dkvhc2h8b0g4dw5mau9b3ap7pbta4spjcmpdhtkay5guf296fhniw9iha7zygpxe3ahamgs7vvljv28d8lbvhaxt6ba4swrhao1n5p1afxf0xbmivfm9v2vrymkypptobm0k3jidgna3x3wfuyxhzyo132rtp1ym5qd3jjh11ndhggu10guq9xv8pkubn2j347ebd5wfpvxtgb8zflxcmbv6wqq4fhnh4ueounds8m5sdsjdua0ti11sjt4vox57piu0gkdigxtjows4msqqi2oi2ohxkaoy8ehvbglsx684su2ozo8qw92p92riamxydekq8qww2z7gokn163edr8apab63vrixo74g685lhk2lwyanpkvjwq4k8o83ra35tg26y70c1bjyjshlk6qhwug1qqnehrsesa4zpexv99v2gdaq4pm33u086u0o4s1wyc2j38l7czh93krrl1smlzthrbcrk0yunw9mcttk81t38yrt6la09w7fkzdysyv6qky5e2clrh0d6cs1jcgatbsdh48km7qvh6pwm2boywt42sngjcg16ndlf4pis1nvm71a22g2bidxbd4xfo2ra0do2s7dws9tdsmqukkk9dt291xndhqlnp5p3edabk2ocd002bsqdx1vutvexafygje7xb5q3ef',
+                filename: '91oqhpdw968k3agsulrywmca7x1pnm88xpcot9ciz7mt66c0yeil8do60wb2rkpq8f0o0h7hju60yi9b6ldmx01jepf4v3dxq3cl45l7i8eibwno42lq4oak43a63dp93yr6t88ifrvxgz02s0o3v6hs4e89b0m76mnlcolc2ii7wkl4kphh3oipcbgndzh002scwalwajl5b1kkj2ed0pkl1p3cvqo156clhoq9yg8ami8g09wkmbuoouik2zj',
+                url: 'oi663odgrevgbw6kry3vv1wxbyzlpoghzfamz90yip0htmxnwbgz0hxiegqvvkmlvhe61umpg64iywp8wjm5f15ctdxn0b5ocwi6j1vlmkj6bkndxpd0rjxvflxhkxjx2olqwhjxy7tqk480qn6gxjthgxwlkfniofowa2d9dp75hybl2sdtfgtokuyl6dwfjhewlqob2l7ca2sh100qs8u5otg1sgoe0t8snansvm6jpfdb47z1cutto6dnrwac3npjr2qlcegvxmwlzl2zpo6px31spjjckrlgflvfjwwf038q4mxxgac49w1esvgz7w6c0hsw5f6x6ngpzg7smcdramjjiokeifhkychgk9bz6b15ia3ul29noyvya2xjv60gipbhiz1wtvdud4lm8p29928kx2dalnicvom4o7qdqz9trxwo68pjfkqhqionm3wgpn9upskyh1sveathtr28pxzuhy6e72yyf4zl3kjtd5k9tmp95l5rtbtqauc3vvs7yhkew6rr97rk7gr228m0gt9hx9ddg39mf1uxiaqt5zo4d58m5bbgu8mvgk6nhjilyh5pullk8uar1gy3znyf9by3urfzz9t72rw49apo4kev9xcs0xrey35qvt0wgtldm7l55fmgazb2iwgzyjwch6efyezl4973fpprb0u9z7wc8sg7gj2jf7jst4ja1ml372xujkyp06xkjsh99m0d59y99rjaymx8p2914nl356nuqzc9az7vvwho66rp9lovrv90mgazsskpr2ajy0o22ohbx2ovy5tzijb08530wsle6ofo5lu34j2vvnssegarilzg69us0dskzgo46mf6jw4kfs67vntt0c3xkymiumtdhr4gkpt6ihlv2rf560ecxm788bm5e8l898doqhp9yzh4nm2jvnqm38970wqjv9yp2pdcee7ud2fp4b05pczq6zyvd1q3k1oy5zl061505nf79fapsjcl5u1ltl4q3sxsfhy86qjhvl9fgtyno',
+                mime: 'spl3v3ya2o4kh2fivkgggtpwbg7f6klc1ipguhmoztzdhv3mbg',
+                extension: 't85r7jbzybrzrsv9wzwnstqvyf8umx6dg8mv5kqeftztycdaym',
+                size: 3033155158,
+                width: 459900,
+                height: 136302,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryUrl is too large, has a maximum length of 1024');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryMime is too large, has a maximum length of 50`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryMime is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'cbjnys12lnm8ghcery2nm5h6uhmdsolyhbrjyv7k5dg65lsoyleg4yjx9u2wlr4n2l9zqq3etx5q9wjc2vruk513q3dq4u8o2955rdyvc1ec64cosxgn38m3zwc69gn9w4ucgscqp07tojcuo53xy3yemsm6b213b87e5x8w95wfm5hmdnuom4ew21v63xlvrfg6d5va7q0fifa0lv393qm0dzdb6zl4fx8o4a7jft5czpj2z1xlsv9kw2rfwf9',
-                pathname: '2bqdx871r3efzu5zmw7di7b6wc1lw0an1rqvwbugkefz75891d5ju40n9fnau6uq2t2nwz5lols8xlhtcu2u9wfdyyt73mqp3gvrm6cl99b0ym0z8krj7q16olggstlik278vaqt61o3hz6ueliuz7xycashdyf4ligfmqv5y7x0f8uom7luzzorv7b0yj5z05fygeslkdcd4glsd7wgh78zbz32qb7g5bz6yy6xdmft9w0vs1xwzv6u8roenjwz17idutgkq1as4gf8httos4pb2pq8jgvd38pv9vezzdexn550zv40ij41nnl3iwgi7xhjxm6if3xnstw1v8qfn7g7mah13hocfenksziguuao7rhsyv7di6svcw3voipqqa5dv7t99impplqb3fbb94liox22q1h0tewi8lsxzzrdaonb0uy0anatunitfi5axv2n6e8r4ze2y73yumhs9dkpijxjacl53w51acf8ja3a5l8ya0ef3x9dqgvn5nvw8gy8tajl8kf0c8yudnvpii0k3r10omvcl1buqn5s0qsncdzg0jv41l0gszbm8ihwpqt70ity9frubf5phltlnfcyeadmfe49tg494u71k44cejh5l1rnma197870x3c4rr6003n4w94pclamfk065sacfrjdvdkmcir4k8soyhksx0hdi2gt5m8csuryp82bebintuoa299tbps5ll2ckllm1maayc381yvw7o5g3qum2qi8s920yxx0u4vnoetsjs53c5j9a9dnpavntn1mhyadhime8wvrrnhrlawinx4lkqh367rfohyz6och9xtxr2ntsb06nyk9tew0zsdfzpiy604hn4l95cc0ib1g62j8rjoi9wtjqow3n0qmhgmgj6yq1nwgtx3ii47m48fl6pzczahvix8xk2couhx50z6wt0kebfwo6szry4v4f1tvi9sss49mv99dkufjt2n20ixc7n044tbrxir80v0egcqjd1koh1h2vy4pnqzfigg8',
-                filename: '2rt0r98jcih9yy5l3u42f4nwhmvjp9x5bo6joenojmnp0xtk5dfpgm6we08n9iv4aw9vypsaxdtyry0wv9phv3viush7aie9cwttkem6tfdv3e0tposzmkc6vdm0062faq6lmhscks1kwowkzglayj1yz2ns2prcjah928ks76ezromxko87tr2t38pktne4pjg4tqo1kixlgtu98taxe9kzjw5qviusydhemp6p4zlpxnzaf5htc867go0km4y',
-                url: '40er1lho6thp68sikpv7buako6pekh348oub5mtk9brsj4z9nmfi50my1ib65qockoias3o4r5jpvhh5iasjc5gygyq1mdb5ugso6tubyeyc28yx6v5saf649k3ykgfo8w4odiavqlb9rbnos0dkyzb2op8qn5kjppj5rw4b9wph7xt0ost8o7yjfnk3p6w2odx651swj6m2m4n6j8le0ypkzoabf832zg1k7yg4s0zg6b1e56mit29iudasi0knnl1pyf31ypsmx975jyaq066oxxyf79enypp3r54gqy7ubyoqgwzgzxqqw9z8olbc2wjxwrnk6xaammq7q3049wpu1oyi3gmy8o59dd1zhdwrkd4lnj4g57il7mlena6lv7h4vouoe59700qichndiie2q2b6gp6p4x9z11nc5kfceqspw0q1nbqfvh98dlbdibubv54f9hh70aeueh7211vhz5qapvq5mp0w5xlbf49f6nulgeewkn9401ty3denp8os7n2gprqwhvqovp6brhqcnpmdfbpy80383xn8v4t4mm55cglqmlmb6pcaclnoumfglob4uf1b139gw25rdrvv72wp0gqvyun52hyor5wby7kdbgwpvofrh9qbvk5vqb230dcbldjjlcouh0ehott2nke2wn4xqr4dvtwnmi93pr5nsutht6sxylabl2oncmdn7t7mrp32qi4rqoek7kpcndgfm6qt1snw00uywpzt8y9yw7nnu86a8qtw043ot0wk9uq7ty79jmug7urf56z87uayfzf42ao0hlnn47wk5tenlf28ze7t3k1hi4w857qeyc1iziz4hz0nwgzy98uwebcmyv5wsndz8xr8wgj2yy5dqkya77py8d087f7iqx3334mc6fzr490aerfoyiccszg5foea5zmn4iy27zuxd7io0f17mwelf93vqg886b04pi1jme394c5xq8idva6awswmn88jorg5o7hsgkyesgmfqfpbxnt0t0khuwvg',
-                mime: 'vwl9puwpr4d1dnzfrgwiljhemgb8k35q9fdixn5vn8ikt6en7g8',
-                extension: 'hlxb0dor2tu8nfdkiomnoc705eb2b02w2lloly7r9h98w05e8s',
-                size: 6591534775,
-                width: 271551,
-                height: 329677,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '2hje8m7zjsp2nfo5gc6v3lik34cq3mdzbqi6l7k0tbbaneqa7odmxrv3ivrv9sdluy4836b3afldz1j8oyhntilth1rfyllu1hfazx1yvllu2yea3h29nrocybfz48m5u10m09a3scperaeljw62pokpkih3fk27ffre1n82093y0pbq2glm95lmy5ysnv3zxu6448vmb9g3a6oo76bx118faasm2dzikvwghbd0etk67ktjhr9npgz0mjtxqfb',
+                pathname: 'nojb7wpmzqiegajjv4w5soaqu0yybj2p3qnfm8tlo8238eyi9pws1tn3vm43jcgu5km7lhl2cjxj67hr2rnoyy9vfeatl8kwh566vcmfn4wo5oj36hfup2l2dr3hnxulvo9ti53cm1rhh11rcui4d2gtbtje4f4mgtuauqnp5qmxn0uicgm8m3b9h4t9pxkahs320o9oniygm7nh0btekktgyk2z4iehbi5mize56yfkddwev8p1k33i4lhd27u3hfsoog6gekou590jz9s4792y8c87zpmwqyniukta47truyc10rvvbc98nyh3khsz4iujwbgu90359u1rm9647rpb8xzrv77xt5wi1ah5xcuxfgjrcds8uybsiiow02zbj294kpuva6tsn8w0kd7u46iny0axb50j26zt1ug2zvn7uovybfqwd1mriwgum3gsffxgrhz3th9bpk50qhdhqf1kuc62ktxj79zme05h8yx71am0jq1e1aahdnjmht6ny4w85761290vku1qg0cxc3jy2a5h4946ug8redvms614rv0ijtl3mbfqcb8jnnce32iiyvzgf8x23e3r8uhrxlbq4dxzdfbg2hjq6dkxodoejldpp87eaarxanm1xtuqab6ids3flv9itybejgg1i0cjf047khkk32lcmbj7mcpmqkv3s5ek4bmatqigbpd4fgwqzl59npntotifkv554tyd6aphhy21hz8d48s9nk8jzwq9saioojwnirh1tmk3equ99karhzdy2y4jjadi6ov3oq5z88c18f5ul20ov7kkhe38l025fzvm6pj2b84p0zt7tcvqmxrozgx9cn60custzv7w2ms731g9627xp0xlumbhnhkr4hc6mlh40d43k5eevsy2frlzsx2abb53q1ltf2p0swg51iqacud3wrw6j70lorp8hqw9oo2mo4x4j8jfmjxllystlbbbeudfdvyysit3rou8gwq7iyhy12567wz30u2fqiqv47y5n8eo',
+                filename: 'm8dw87wj91dzv00dwlh9q4oiceg30c1j1bgkp1aal8oxxcnjnj1e548tz04sjw4t2emgagzfh0xancot8gz8n82qslmfwmec1nflt4ia855z4xxk6u8axkk3hxnkru071n6g7kby1zdwtxna8pxzfbl27su1853ixpx5fqgkro7lvwpmdncm41ek73wxl7mbzt29pwrkx0lpk90r9sy7nd2knwb2h0btvw8w6nlpg0osh9wb8eqxdydra57jkme',
+                url: 'cm0jvtxuafjlkpqige2hawcwdnjc3iybiuy74tmlh5lbexyqog6hhy2biljuadgcxzu74rg36fnxt9nx9s8awet450tcfgtwxbunht00l4tc6oij1ne0xgx5d0jskxii2kb6k4586oaem9ncgyi099ghgx8q3r7e9pm9hakalyjutd8d8b38zpv0e7yjt249ujt1pd733i1i0n6ayuoeyqvoh3uz6w1u4god1gps3fwkt2quc594dcchg8htazlzrytgxr9py25b1qsxhw18z6ybpj7bkcu3cbpftyiu79i8jx601hl753df56a3kvjmvkdkk38r8auq3bruk1iyme19et73cf1oayay07bon7d1hkdbtcbzk9ld8jexrb73vdbw5d4yudsqkqu6mopqvkoyhjgiwgininp6bfonaydlsyt7cjgd1c35try7bfpnsffvapweqqr0fq3kya39jnviir0ivgqzliz2mukyzgfglus6f3htfemmfkd0retz83jmngbkpch80t6eiqy4zklemt0g5m2wka8s5pa7r8pleuk6lk9vko8fwluqbog3tf7040q8ciax0c1076gmpvi9i6ydyeh1qm7aayf87d2aaxxpb4yjbmbkjlaz7kef124i2zgy8c752mb0jtxgzotbo9i9gd5z404xcog4wzzj7qvrxbdlz329dtheje92ayuduh67as9lszafjf11vr6kul0yyvthy895t2ufesdgt44fowqeupjtsy9r5zmwz99xwso97ieqfofrimu3f4tkoasml7h8mh7xs2nrb37omp6h1jkkwosb6x7fjlhve6vsu4dvr87w6mm772appuq3q21egdj88coc3zisiqvvdt9dsvhlqxq0zpxnof5yydtqtr8lqigdmw0aagbkv65o5eazg2rpyjh30qvprxdte5cd5yb07f20vtb2ybdlujlmthw1uh352qq6une55qbgwyljb5nzyvd0sxxcn4i434awxdkwncsx0zlpz5cz',
+                mime: '1ztkv2wl9gkqy9c2afsf7142usp2bg5flmrukg4fuwswlhv8yok',
+                extension: 'gsdqpde8foqzke2dq904gvrw032mbsn4nu4z0hsj2pjv692umh',
+                size: 1311855500,
+                width: 993418,
+                height: 103817,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryMime is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryExtension is too large, has a maximum length of 50`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryExtension is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'y3o7w66om2o7imy79bvdz0v6euy5wmrjqyumwuiqi3v33c7fjwg9fwdmwd6px6omr3jk39mmg320w5ncmapoitkuflidkvcg0gcb4o1ijp7v0mvgwffwp85nn01sncmiu7zzgstnflizmrbfdmwpc2udrspaws34365qgl63ject8osp12846nktnqs42spcv5evmfzgajed0j499nukqiyvnuh896ds5o39wz6vhx6dexvkvqjb1nv90ncxffz',
-                pathname: 'rhf80bzkpjzglp7lx1f4r6my6oxmd8mpuqon5r9kgv1p1513revrxgb30bre48sfqmmqbha4pg5lg3aiyc5pjpip4lc1mp7pr14ctds62omfk9me3185zzk1onqrssqecpn9xdyqnrwiyuybks0ulkvqo08k9y7dkf7xggsujahxg2mi6isfoymt0ssoldddbcp3syxscpfajp0qbwglmfkp8k5299okohvpris08yz563yc2gmz1wq21ybdo3jwt26ew5w3kz5vkurb6zpsdu7n411edswmln2fkg6i3ryzu5h832hzcx9guhtlcec4q394x1qp8fvkcocilwzo6px7tycjldwb4gq6wbaih8w3lsa7meqkmuozmpixj3wd2aiaydhqvfq0g9mlldh84r5uoz3y09fhqqakip43km73z9l76g3q3il2nm69cg2w7h8xs9tceattw0yfh89jnh02catty8v4ctad5vae9o5dbbohig1zl3ofa980j890jukuvmxprkwwj0vq8q34fn035z6lwwy5o68hybptpjyuwhtlhb43k224xvvrsd1uv6dfhfsnd5z9lg7grnaunjsveq6lxl5fbk8woz6dly3xilshl4itn6c236v618308at9vktwmepjs4aiir8h099wvxaxhgn54vsr35hgudadbfv9ytu9hsnwikaorpcn1a4a7oo3gsn1fv0ds2kfj8rryww8umjewlk5ky3mjf3pghnr6ce57evwjx0qol4txg8xnvg501g9vsdyb62ntndqh6cen6b02bhe3qmlnosf7p7nstn4xqev3nziyzyviazagtgycxg4g0vumxahqjg1svkrrn5w91iaa4ev4llhtvysuw39cve903di01scw6qx4eurr4kucs2krftk7ol1kpvgqqoukp89teg7utkh0qz3w9d238x31kmyn8mwf1kpkop29a2uc66c8u8o9puh0l327l4ntx9yooxabkxeq9e986p7dzbjwwsumgff',
-                filename: 'r46hgmih5jaewlcxodslib6igqieqmh0ejd7jp19qzvofzylcn7n344v3qduwaq9kkxwvvundy8qryc78tqn9qbc44dr0pqvpx8gbwbdvvb5tug0tq9ph77bpc8groyxa8thip2bw0stsra4151lcg84073awoiu6o0z3e2lt8ugol2qsoigfy6p9719fbtq8cl60rkasp87g0z6pddsgor2tnk2emv8i2zakyfmqgbcsov1i2haqis4vv6laa0',
-                url: '8vs2u5obapz120z1ck546ig8izhoqwduymvmvu3dzh26m29zxu5ezxft0brlfuakeo9n6x94zdtybk9xieg4fovzne6wzotwhzv95hvrzoltcesfrmod10s79ky9epk2enjo6lmny9g9cw7al8mkdmeifibpfvngid7tohqz5sk1x018qhmc275a176wxfr1t9jz8ycupr7plgavrot26iigw2joxyeokgtm0ld27a2834y4xnt8btfftd7xim3t7e9b6ab1lpen9sj2k9obc7akqcewtykpvu6m83fnn3l5prx4kemc5l5k7uknn2vig7bxfhc0gx3ade9lnbwp1uf0ffkrwaafmqceis7g88uxn999m68nveihfsm41d5zu5jt5gxovdgak1tawkqkb3xl8yyrxudf9ffb2u3estz4ymr50s9zfbu51hueyi8yiyi195mvv1g9ymfqt8thwh9zdstbxnruowuzh8n1ai43ot22zo3xtdy27xm65tm0zj7lheu6cs08kbp1wxiknibocvhfuiuuib6yqv3o0afzidjn9hap79pbxqr2y66dcjnoat9g3qd2u975qvmx5n9tws6jxqb8jj94h53co6zcjiltk1c3o9ded66tkie1nlsyjrbwgiz0k5at2xcqcdolfjaqh0hdfu03v890r822j0kwb6b7idwdbfeq6m712h53k4gk4uewtvt09124qbx3svltrw4kb4akl29vjxgecdyl7pbqhvukl7t8725xl1coqgal4biswmsoj55xwlz24e3ima3orgl8lo9tp9v7pum3r8hsl1ns79o8yyzwwai3n18c3fqsawyurap3c4a0wbcj2mhtpvqam4afiwh4ihbn6fsqc0twhinjg6u4nxgqcgcm6c5a2qeabkovpzwopkl2t3w9dzdpl0xrw23dyhh416s7533eon791ryxtfsc5cqveriiodu0kdu3245e9djhvu9b3n9rmyyh5kwenrc6z2gow3yiv9uacnwy',
-                mime: '2xhcg9vv9qhkkhva37pidbep1e67ej80u4kdnm7rm57dw4vj6v',
-                extension: 'ybbmi8oz8o3x6fib37bwgi8mheb6gij9edxzf5fnnxc2ux835it',
-                size: 4248470737,
-                width: 401931,
-                height: 638325,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'w5bcunorr9zl0uetmqnoqfjpcsiwbt7g9z85jkcolpyjmm4xkmvhgcu0gx9dtrkxixzxa9i8s6o6zwk4j9gz9h930818jlv4oc0gojguxy4vx3k3t4s6dl6utd2psscu9e9u228gqhj6p1fjczskzqd46ow19qs4gmqlaeq1w43urqzxow5i8ecymbtbs4sqv4pdfppupc1h5ram4gdbebdb053i79i56r45pkwjd937g3s6gx5r4bdo9mpmmyu',
+                pathname: 'o00lw4o987wsbnxygnrtd0sa9grwf0pnqpqsx0kqirjbj8cya27mh3f5nhjug9u3bn8z2f6kh92k6se57lcajj79huzx1lhk9n900jji06v4myth66ibn1npqgh29vfukhzjoko1ea9ks5y50djywb79yarhuit4im9vs3fdx7hrlkyfmmtgtxfd0rpj3fz3vv83adxf0y7bxqy5sfgqeyyh02cex1tlvnzz5gqwggdnfvdjve9pxtr5fuha63xite8wq7tp10334ewbbl5zoiorszas8ki2f8oi5z4i8k16rs56edimrtpz56whoqpmrdjlutda52ij3si4g2sebodou4iedxs3gvmm7jw3jakxju318gbxg535nijw0rrk3mbix8s2yi2mhi86iqs9pt5wcfc22clroycupx3tigbhryfqzfxp1ux0wzyno270arzkydck5v57zuscc98pkbmuxz093jd8gd8of213ao18c5o2e3bzpwm7ofrocon7bfi1adlxp2l446v9kn63cqss37n7m2dgg98mokvzm76653xdgxclff9sx22drhy0rpzn3okmc0dd2jvezj7pg8vubbzbkvc6aojl3xutwqrtp73t2g1lekdv71x2997c3h5j89xm4xjtsjfhtgfoakzvfdfkiel2zc86zm7440lxucqivhmh9cm4hxr6vgkk45w95nzhuzxrh1tj6zqugxcb2clbjtqk39e4z7egrj4xox9rsacttp0kpsv62hxfs9h87epg9o5xlav46bh06vbgb9uytq6dzbbpvt2cas0qd35apmu59fqkccjnb1tawdv0cwglqlo4c4cayjq18n4zhv1e7vhmekxcncpqcgrk4qsmnuwynfml7yxhwjs9rf0g5z6wiwzb2ctl2kbgy3qlunxiwet6mxjr9dhgdc7bcn5timuc68b1labwqj243tx5zl1gsxgrsjyiw9la8s1qwalco6akjduimgvh58qz2orx59ioiuwoidwjdhnt',
+                filename: 'gog9gs2atg80akuj9geoy3mboj8bi2ec5ipe6ft5hof1x2y0rs89br6qnx1x9uwcjm0lbyxdhk5szhpzlz2b5i9did7ttqfp74zpnn2c5zfq1xft652q5f0rdjcitzu6qjn4xcfrjjgze0we0pg2y14ec5uknvnqp8vrqi02g39t41r0c9rmbomnkrwoo4hix3uwksnxcxt2ouawdk5o3q2i1u6n9hv2gm5r5efjxjmyt9myysuzslbj8ie6k08',
+                url: 'kdp6kw4pyfusglk0omb5f8i9vk55homv0c7z6lkl5al1mfnaykoxevw4qr07wl4mex4jljmfopw48pzt05o004r8rymbb6d51bg4ixs6cdh0g7i6er01kyk5oib5vz1tpj2p0tj3lzm6txt8gjovimfqek0wtt7hlphsw25ob1gf78mpr85yxz9hgneqy1d3mbkfrdqu9bpn90ils7xs9e2pgyfg6vw0xy5titacp2up3tb5ebbtk3d5ck1oznc3q1l9pzybpaj5br6a9angs4zfflor3phn1r3pmcscuw4vkx1zdw9yeqod07ehb69ul091je3h81ovhl7ovkztg7hfn2q32q51yfc86b0mq0gzym85bfm1idq98j7sni9yykxdb4w1sh7ghjf6tedulcfm019gubtjbpzufh8oxzmmzmumnywcarbtgl4upnmg03e5xuc6l9may6slwnc2mj2nmvam2q19znvs70149n5o3jhslas5aqhjytlpfeai6h2sr6ax6byma5wujjqcxg1zpcwcol6pbyrhxubpkh5g5eycs0jovyvfl4y82wysudj6uujbgvbzm32bqfe79lx98ylmk976ofjyazo5up4l7k8eld8a8ypvp44k24ecn2x2mdziim76h4d81fv5dw62arnwfi7tmirnv9o1kynmdiuzsrhv824xf9pfoqbx4zyyvojh87wtjm47lgsi3bt4xfzpce602efd9pide1047gq3n29932mr84g0d53vidp4ckju1hs858za41mve7cncjkg6ygozad1ra5zfsbulwfs8s7l3d2hf1nhbe18h5txiruiclzvzsjvni3qm7xubpkn8paot7y81x89p9lkh3lqakb0mb5ybfx7c7altdtgn3hmcfb0yzb7x0hd6op3ori97wm65topnq73yh19oc7prj4876xasyl2r3jzu3tujyvr7qoruk8uuwt6v7xewpbgi37nj2df26mhvjcumh9etj7gsx8soxraimza',
+                mime: 'eye2avv3livrgp0ggbkburk4k9qzzaav520oihjlzidfo9xm22',
+                extension: '281kv8szxr6iiecdh0oz492wi90ywbr5emgoemhajegerrls7ku',
+                size: 5870295541,
+                width: 162296,
+                height: 748931,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryExtension is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: '08pjfdhpnge7gyl0q9fmndmeggcryhnyuaulave9d7s0i533de2skn58karp8usvif711vie8u16rvlm7ns7kwkhmibjadus9rg0f4rtrgtw3bnmlm04znv894ffgyy8x3mr5wk0pie5yoe0tdnec2q986iwqkgm7bhwp37gi3ggmatctvc05oxflzt86ky5itfekum1szzjwi9vmnkk0iju3st4uh88bigjzu77xmtxlute6kt6ztu1xqwa5dh',
-                pathname: 'vnsmxlqm6miszaad2xt12dwbk71iunvg5znp4x3nhetrc56mj5ievpcz266wo90qnrwxm9uhj0birv0h080poqbcf7o4fak1rtr40bpcy2pl2ipvqrs09bjm7k1t3bdq0m18ln6ype7acgbh75dcgn0btjp3brxe6smgf82gc612ssjab15jqlv9fdh9a1qp1jf4ow6mi5sg0frp6r0rg35szo2igkq2buis2klc3fg7xqzq5b3egp36k9x4sq83lyzxfoy6d5n9bhdht9k2ptxoh7r7wv4ncftyivx8qti6oqn5qtuvnjsl3w436ah72eco14mop0vyure8h8p4eumim5yyhthjg2jnrsvi74medin57m2nmavqa9fa7i1kidiqzkkacajmdcby3kfjfukmrnntkp99ydvpkxi5vab0su74rksmmfdxs9v9eeenx2usloionm2x0ogcou628gn7i3b5xpz46mjye1tzdqxhuuvs7khm4apmydra1qrdhnfk3z2o2g4okk5xmjyfkfl0i9903t5shrdvn5de3dhh9saop0iu5udjw2w3lxzydxxb3ozpe0oqy1uhh1jcm8rfdfpc8uzivi71wp367t1wtex3xdlvadvt5rtmia8j08nh90d2gg2ofesewl96mbu3rt8gc4vd13ib2duzop82rqzbfts7yfiylk1jvf7ys3z1qj90gbxj53k7llcpju8n2hop5jubp5x5k8ob3f1vgfegw8exlmmwpzjvt0exmndsu7l9268cfhwsowtigpyysfjo7rdcijn2py9rgi67vdmzga5lonfeafd05pr134z1uv9pek45koqva9jewqstzxj690039h0cod6yrk38i18ct9uqxx1bxm4bd5odhdj7oxxgryz00muqp7fhen6fiy2o7wa10yoz5un0hovj199sig3ctgahcpkaig2rbad928c2gvir6sqhr48cxbfjm6emxr4ai0fizf42ki3zl4krmxvecdrs2oxemppg',
-                filename: 'eol3zz7mju6suadfylxzr14rb5b27ki3qbd13jk2zjugo9yizzmkj2shc0a4v4tlb3odho7x0pvzxr20b7lubuz33gcnhb41sk0e0ri6l91qcltoiy40omzin2tn23ro6vck4vk7nro4saftevo1yzdo3at5g7dyrh5x9myabzu0rkqfdu2010ez0f63yyfuy72dk6u8lph4rc95f9p2748uw3fssgu6i0xv1g2t0y6spjplnqa9j8yapbopw5n',
-                url: 'wbhzoh5s5xkugslbzs5ijt6e7rjq410brnht8v79we8gm2itakf3w2hg8f65qcrcleapx2baljzttknppzoog8lb054uf62r5xlw60gb70o0qb354rqlpte5t5ru6zujhbzg6fprkbwm89nu1hgz2wf2gok81lk8yo1mdwro9o86ky7nzrky1fdg6jmdit612x607f8bmtl9xxq5ez7hlcpm1kcw9646im2b9wljj5q0qqx88qxkwuram95q1qxj6vougkfdrx7vvydhjsk3qsa1hcmauhw2lwc3y8gjr0wxflzw1g5tjjf5e31lm1skouq68pvh62zf9ncktxkvzenx3m9jvgpyzvqyr7s20xg1045pzqbr3atp7o4hq27slvkolmeehtddnof8phed711z4eo3zocifkmfvyexi40iiy5ohikt4znatpl7avi2cdwsm02w7ymoqh2pl3iz5dwhumt2b6h1cekkx2bdw1a8kibtbd5x9s9vh5smuz9hnq64oi2eqr2f9ytiwxr5t8trps7zsho22np1bnb9keqsm7w7u3jvf4o9fv8uq70e58i2ob2on5bciik1oun2ucqvkhcpyeymu4mj0601jty4lo01boeht5od950zcjb82vrueq8dugbimdgtwphd5awphe13sfaps7gc8rtkrp23pkn3kctip6zbxgdk1uci0haaf6pz6xig98nqa7yixquaxkv58c4ezs2eb37lc31x5mejrxe7bakagvwyshlxdh7vks49os81meyzzbfl4zu1xrkyavd38qyugeloyvkbjnf0pt8llxgtd4slstngh5cbj6e5o7hlsrro7la16kryg2gboji3amfzlzokmqlnlsq8vnyhbuf7pqs37pqgdz93l7m61wcp5yg0jr7uxh0gi5ed069sa3exjydipyv1t7lp7i4upcwha007t0t506yntppi08xaals0ia7lhz0abgd4v5tbzrjlsmxxo5o3p8aw2nfi42tkkakei49y',
-                mime: 'wnlodxsfr6x6dxbehfflt8vz4zo5d9mekrk4q2rl42xpkvpepw',
-                extension: 'abonlttax9bofwly9us6cvgqmdvjddk1lia80oafiq3mknyiob',
-                size: 66605708440,
-                width: 121432,
-                height: 260706,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '0vke9dwic3lbwoioxf44x7p2ypy93jzs742cq0g3x0crgjz8mr8x22avyz0b2py6wy741wr3p9za55z7oprgeof1edvaqhizkkldt9lrw0qhss5gqd2m8sw6bljerbeqzt6auocnvuuaon4evsx9mnlq0th78hs1azbleso1h69q69438eaorx0g9trrq6zkmd4wycqdauh98u28avomr1marn0ti59szb69wn2tlw6e60sy48t0tb7v3k29371',
+                pathname: 'wg7buw8qu76cyrb2daai4xq0bit9nl2u990kvoehv3phao1m433zkpgzkjztr6g3lovyv5h451zhz7fzum1ndg9kl9tbiufr6y14npjy26zo7hcr2uij9tzsdy67gy906c9b8i4nmxjgcd8v2cj598t309uo3chkrzn501w1ppjcta8n77smgfp878iw5hlaf7y0fsnaqbampi2glsypfn4q602ug10zkuhq1g66veu2wjcgczhyvsgl27xvaopxsjenkcsxfa8kmlgify1y9zwlw4ms73hdcdggqs4izbnx18xbgmhg91vgxf7fkz9lix18v9hnsrua3opdger4rm0tkreoayebrfn4tgl2ns9tx8l3zvyl0onfr6gc8un695lmgru3aqpag7ia5m5rnjyuovmeedtnv16lwrdycc69akjtfxvy4tthahh4sx0avygxgnrgqtht1zwnecrtwdbdzfr93b76x4g3dtx84llzp68jkku5r8lir8zp4w4c3vpvt9soh1uzgof4s94g6paevsquwmmeft7dvgvjfkf99sjulv9kdegi0bt1xg55xkjy2v698bqkk2cjejtglvon1vyzgoh72mtp9oglyw5t6i6mqg190lrnw33s7c6zslzrk8ojpjwiqukpupfl7j2civ86v2vir1d1b9jj3jbk714opyxei8gsukuf99pqpt4nwpvbl685ruha1e1phnvvr0e4prbc22nfsfnpfvfgqispdjd2lwboawee8lhlkc1xcmn0maku635p0oy31u37httio9a8y0e3urt1i3hfwyprysrs2e8dt2ukgurmx15lnubpqy8kqke3g2p3j2qsaly8hlp2o48emj4e63g5yyti3zq2gj9feialq7hkel5eswn0l3ht87ykry3prxp5j025iv5q17c4qkab16nhkiyhcnkij1du5rg3czg2qhhkgq18oar2j83k8pve3m49egrngwqszj5pfqm1bd65somg4jkmati3fmxndz52',
+                filename: 'igh65badyje7tv1mx7imird3skoshbeyuylsoivpspo19tehh4peixrg1coi7rfx7xprtp27xrcxsj3e79j5wu2ungigchi9ftz1662bkpnlgqe0607i6zka0vl7qejqzmwexcd1i3cwdgz7402wgdvplakr76z900kcubs8a9ymkvol131jb37ghcebda8yfhe7tz8jxy454p3i9wzr6pa45yvgq9cwsucoqzbwz0ha5zvqa0do80av20rkveb',
+                url: '381r2ufcdtnpleb19rgobo0ql51tvlkhd2dixcqdrpis9r9mn5o4wncvnrf6nxbuds368pgoq8nwf2poas1y9ya3h5dtgl9i28yupr08fjb84symusqi2tccz4ah40c4lb03bo7wnkdku6msc6oiiw6dl5khxhyds4715aa9fvxghltg5do3v9giyrh6bjnm1y65x7e07wa694t2bpn1f44nv9tugk7z58f8s3sgmwvvatgqxbkx3snow5ghzsf87s1pyy8g2plha49nyo5w2toa5zvp48cztn6kz2gz8am8ap3923uncohlyo6fahq3mhe1vqiruqk810xi0hpxa9g1vrp6b5rcsobj2tw0k8iu5m71ku014x19df9lbxh1o3fnrh06q61mtl28gshi5so4bni4hpi94aufkwjd1guu5ql8d1v8rbi1h4noz3won059gq853v5sjr5hq046aghsthn9jnu22bhzw1uf8259gx5h9xg8a1fn32bbln1m4jl3dna48p8oaw09zrd3otj5mejq2dn7ddojiq9jyu7xkxd88ukid59uxh2veknj8tg1w1x2bspiic6yjt1e4sqba4tns8u0nux9l83y8897m5u5bwavp2dniv9mwqxa7opgkdrcast2d4a8s0pyyzog78hrlag3x43xhjfwzojdqfy8vbgm6vdtvoukp5rtvoafj8lk391vniyda12a558wn24rmw9p4dglwgmu9dfyt42u9lrbffmh1qn9q0ty6f6mfk24ldmzpoi8qsyby3e15dp1pnvhhc8yaq30h8wsacb11bxrh6edqd96fgeffr3h4fy8pikk5r0wvujetuxyq18w8x9s27mhotbh6i239tf16pimmdpzr8zlymct6i8xydj4yt9ulzzv6i3pwo8qu9tyleybr9awnkwdbk6ghz0qhxzy98wmpxthnorbst3xslt8xln2zz87zlmd2a394aytmjp302yhsqblilf2nx6g41zauihzcuiuzsz3',
+                mime: 'ps6cygnvr87at7ksiyqg29p3cyc30z24tmu13z9gzi17dlp9v2',
+                extension: '1h2ybann27dodfiddykw4uqejopj3q8il63nr7byv8g2p3dgnu',
+                size: 64981746522,
+                width: 365120,
+                height: 736357,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibrarySize is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryWidth is too large, has a maximum length of 6`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryWidth is too large, has a maximum length of 6`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'xrdo5yi1zw27cr7lc5enhz4mjca0fto70acqm4u92bi0ypddonb5aq5d2lgko1ewxbhk9rqariw0y5ix493exeo1w0yis5xornh2cfonfrir1od02qz2by0uy1tslaxq1oiyzzq9idz0orjp450nt7e4iq6ezf40s0n3vq34ll6i693jmj8k3n1rryh35r86kro593jevqe033nrssmd356wveiobmem4s797zc4xpqbl22warvrneptl4yse8z',
-                pathname: 'nj7ilvr8uqvzo117hdq33pvckat3hjj2gng76j54uydj3u7u8l0m1l8olkcrzmcq0l54fuqj1jilmwt8c1i5gqra3wqyrevs6jnefdjas90vcgiegx2yh70af2tqkj93gbbwkkslq3dl5815coqeibe1ogtz1e38ce8tbv3w0esgj1wjyrmt4c8qutyx2f90rxslvm42o2u1qxks1l5zjwhqzgru6l6fwa803kynk3odhwtofnobkclxgo1z93ez8sctzfma4xauftbrywswv2lxs2q9x9cchtztngz8wijbdwzctguvl1ta7xxgpxfmj4tuh0g93bu2sch7da3ghgxsctxf07vlukgchit1pna0naofub575dafksyezluocuxzlvq7cc35a07s7kpatrs0zx2ihb8t9iv3wy9kozqwg6j2iaxqxupyse29z7cyo9cwb1tao1qlzotypgrzrjs32w3fjbcy4kzwe5876wywtu391zxywfomsvnveiz191ujvmti8nuxukesx0sha0a6cm3nr4qnal2w9ytxxz2wqj4gqz6p3ru6pj4zmojz2ai9x5ynrc0ij4fo96s82we85ipgzd6ww6vx7jgjcs8t7c108w1obryc9zlxxjx841k7nbnev73aq4n9ggpcdo1i0x9td9852g5tsu7r6t2fnugt06lceekw795p1ek8noppfccjgeslkmo0cfbwbd26kec0ye5lsbb1qas25p0ptmgb5i0qkzjwr1h2f2ndoodfr7ig3alaf7q65p6ot8lg9rxnfvuhtyzkgs00njf80xe7irlqg6mt6hia57080fkwz7at4zulf6wh65bh64m6cqrlv66zavasrfe3qj5ypt8nnkzc1mbgqbu8bmcq9x3rp8i35q6j121bwkyr6aubjmtnoe8rrl0spej0ms0h43lyntgpqpml9xkhaxyilst0p6xhujkxe2d79eesh1hd8ewu8m8t1ya4p1vtsgbl6mfnsniyvriut6g4by8t',
-                filename: 'efx9rslht5l3kjthmy4jmo6i25bc7tufbmtgz38svqnnafjt5pcyi0q1c0m7bym7rooldmls7j91p0gvk6p40v32cv68g29xrs0qcskmfbgservj91zkdl6ttunnpguk749vprvclyxvb8gcabzrzovbcpsdhp3xstiap12fc7y9qnoltnfiozmveuxtyapqf0z5l1bsf1slmw8t2b6plt5itrsbc1nbc08i0rolpdnsgb7d4vn3kv5dzebylns',
-                url: 'e0y3ye4k7rw24zfq3zhgd1ftblcze3j7g02m9yt9jez7hphvgdestfw0nwuxorzvtxpgzbyxrsbz08hrerbbzc1y3i4mmqom1s9twa5aon77siywnxs1q66d6bhxzz9dmcd252ivei8zzjz4p97ckzw8ml6ntr9evjvotqehuwugyz8s3s1cwi76gy26ijyfneqfztda5qc1r85qt139v9bnehai2d7iv1c91r25tkzqk8z2kf95zqjpha2y9zhktouifrqcgylkewzqwkb254mxabs22lbgy9u4iejryut4apv17uokqvlhrzwa8evm4cc6sz0j2rpkdd1m53gogoss2fkjshh90emx07sczu42w55gwgtsxk2p6c7sl68mlqul7khddkmuy74soq9mhnjs6fzjj9hrn8uc0aaibntnkgoxvlif7f8tt8bte0lkvv8idlzbx3e8lyll9nbjw3pr9w83hx5wbie1tm5gjulkhqrqllv6bd7q4p4rstppu4kpqi8o3bnnxey8px5rlw7jl7c2fmf2usrhbae7ed79lf2ic3r8cllrtbqq1bu8zbsts0q9ol262xeeh2qwsl8kih10djnblrmznln4uudr32ctxk3zvcbtnc2k2h2r6zc4azf289pujola14etgjoknqfyxbkz68cdajl0iuvokp33pc9fnn3vdzqhig9qeaac3ojgt4vnkaafkj5uuzdvp9l22myo35aelnevdonb1k8h3o78rxm91eowm7fxwaqw495bhxz87g8ibroo9i7gmu2ynyznfymfvkl8i1gxzq9xq9x18n2wj6kv79csyk1722hl1lkmld7x1covnew1cqpp7ivklsyxm9643qb4gmwyi99z6dypz0mv6u3s5y2n79jg11559w31ren1wlrk3utmd6an11m6zr9tcai3uh3ewhi4bfkefe5hfk0fow41efczuesee1swirk6xx6j30yk16tv9l35ir5cal4drmalwb8r6oos22aizi1f',
-                mime: '6mty4gl2nk0793zk31qqklrvkxnxhejwusir01pnusl35ofng8',
-                extension: 'yuajeeuknwis2oeqwstyo0wuqz3ta8ybbrccqhqm2t2ft3ltkk',
-                size: 9123078369,
-                width: 7191429,
-                height: 806927,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'ab5z9hleorj6mx2w8y8721x18226f8mgwfhd80q2ce7utxcdfxut84whbqhybxk12q9keqfddkxelfwtd1lhzf267zsnpnhktvpuo00behp7ugkjw2xc7gnb442uu9ekx973me90czyv6ryfvhvm98k7n06szes6nbbdpph9cbj5titrr0w1mbgi18ao52oayz90h9yy3dsjpkyyajklie28qe3r8c4mq6qymsxm26s4nssxilmxpt5ha5g7s53',
+                pathname: 'sk2m9ujd47e3bsmcj1uhdv6ntctub7n3zcdf3h72gocx5dw5axoj7kptsvr48rb901vb06emyl44rsbflwle6hba97l0ejc0kw0bt40j30wkh7dzppsjspqc7j4wlo0vasa8j0x5eqo2jmdfa5uf7wr16df4bfjihud7x8howbq3kgtlxj15oh8nigg3oad8vz34b6cwehcljuchms002uug4fsslq8b6sgmfw4r0nvd2c1s5and87diiz7e1mgccnr41uvoprwhtx8b9v2e57hz4v1gd3320l3zbsq8v161ibi4uq5oeqddq9z2k4lrwgg6fzh48ybqv8pfrmh9twuzv6acpv0i9esc1t2jimz0l68kxhkem5pxqwrkv509o5a2gr4xuf8x2k019lu5x21zu6kz7sc7f6aij1e99a4kdc7ww5vqyiwadcdu3hsyjo1l04e47jr6j6osfgt97tigetvdv488w0a05yyyf1loe59lj41k0y00o2bd1qxbaqou9yh22ffq5tqvihlqaiqvzaaqfpf2x9kptli6nquieijwqtxcw7v91mpdaiuyoxzhwwsvtbsdh353ve67z7zf0s5ybseret7m47wpuatozm7c4vhqk6v4r2v9z211f8n7g8pyzdc9u45fl5tsm2d0df7k37a7jdx2jvkwhyt9wj8wi1fdew2shdqbutwiycygrg8ylk9sa72yjxbaxof5g719grpv9otftoi832e2n5iqbxyc6mny7s1awyiar4lqvar3q1ykxrligx0ok2kikdolyymfzgmhkus8vsfxw56brbcsqh1c3vx996uod6qiatq3t2pxtyhi5k7u6whenr3r6pkg4hclkzytba2lbt3sojmvmblsekh0g1mc3gylhk02y3jkoif9uayqi5bf1m20ingyh2u2ws55b3j3dfnz8fdcdbsskpfn2xp3fmd7l08590m1yl7atmsz8y45tngbk4wfw8ryjvxni4r0qmdibp0nisy8wbk1420n',
+                filename: 'ixr2js3j1ipjmajx7r2o67qzuis1j0pr89eediz22axxhsazrb6mii93mfv206qy248m7w1sg7otp0zwsbjtti714u51aiiedio6gg5mxpdh78u1ja2uhsckbqy0hv04gexnejer9crinligysy9o0u4i8g6r2ocunyln6b89p3bmrmcg0kvudjc1tad0crdiijnu1ahko0joxdtysqrdxudpnl5er55s0ctcta3mtxvsvrppd7lhidg7b2d61a',
+                url: 'c65uy94o6dquo56tkmgk5xve7hlguocvawodgjxmqg3fgr7vrukffyv1fytnlz4widfbrnbr2boqva97k3x11p2i9qcshkl815wwj1hks8tuxc85lyz679l0qst11aclduabkz33povfhtb3jpu14566m13a06wktwxbhequc8s983wqgzyqg0zids2da5dsypmi6ftcr3pjtew83j4cemal2y6lyz9cdvk6ml6ynk9xpg36dhsnatztlsqlnzqvuhuxyzhqblkexavy3l625c08xmir1ot9l0ajbirjbpzzo69ozxydxofp0xsdbfitdmu5eovz1hu8nnyqhuxoupckrczc3eaiub6scxhw22fkfve6mmkb91jmfj2o1wn4i6h14qyz9e9p45aebxipxi14odq77v1zrk36taqgnvhg5kz3adyb59yue8aah0qvkt0x9hxrtgp0k9wz3c8igppxq4irtcdzxqw9xw61zgf298wl5vvsnokxxqwvphukosp3oazqh38da3r6ewiaubw1kjbjn6x9kdr3b2f82ybdlzzb84rvsawlfo3fmckxgnsl8m05k7myf7or2as6i967fat2wlqa33tcp5abf7izrkl3qdwqgh6szjnsmefcv947f65vspyjsd7pcs9zmsjks7s6zozo0fxydv5ft630u43srx61okkblanx7aoevc47vscrkd2f9iibval5p2ceddxxrlwjl98wce0h0icck2av34llxhd4gid90w6ej6of1iacihd54v73h7jvmbiruntnlq3n89t5xjehacp1buguyjv91tdhloxkeggov8k051fe6xc592k2h9he3vpqdfxdieawjjkkme9jlzksrng19n8p71jwxmj8dlygah81vge38cbmstk28b61inb4a6yfni5mc93ldmfvaox9k97rc5gsu3odte9wuzczk1816f2kdbmgis2pwxstt3b8w8p0ueeb5gii0hq30269jffiwzb7tuaegfb6arfq',
+                mime: 'wd8reb0mdl72dgwqx8z04zys329udekbhuhpxsjz4hupri0dpo',
+                extension: '7jzhsvf7axy8cz6lbvbtiu654ltatksy43g935saq50hod4cf9',
+                size: 9179416871,
+                width: 7895322,
+                height: 654855,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryWidth is too large, has a maximum length of 6');
             });
     });
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryHeight is too large, has a maximum length of 6`, () => 
+
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibraryHeight is too large, has a maximum length of 6`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'hihe3dlktg3j3pwml5xehu55brgdpcdk902mv1rz0ppombxdf2kuk3j4mb2m97mmf4bhu7nqbb09jz33iyn07bx8l9gudkz97cgmc3gjk7y6mlclw8ckn9yuq7rqfgzvx1x4g300631ashjws4cxednxguhdqhynsb1r36oq9y38fltukzr4ytdvj6whvcih67b96uua4svaspo5za2sm6c6g794sh7lnwn8gbj4y623bdanncg6onwlofrk7xq',
-                pathname: 'de9i33ytaedynv0et0kgr03i341yj09dxpw0ll8fieflv2q7xx4rl46ingzjigwbg299ib4q7ievz848v7zm4t4nhyyuamioccq9qd44prfhc4zsbqepropcmbfiexi2ukf47vjs42yifccm11d3tsew8ztpqtdr2vitan1krs6aug9izs3cfe0gdbgbvn6siswtcw0heiqpi4wy95abhpxf9ault7pe4em507advx2ak2g2bzwjyb7rbx9hw8p8ruap0gbgr08w6cv5gjz9bo99vc8xf1x8saf6oaqwt8ve9d8lcj0iuwcamgrlp4wkp4gofagtn31ut5lzbl42y5ceohcjkggncmufw4rki0tpxr2lvrnq6b1z5ssaydjnywkyk5xyed02gc83vpkfh2tw62edefijfvgn6cw5ul7pofwzi56847xkmh3hwpbsbhrpol746v32iwb6zsr2oybh81gsk6f92keksqf7udkdh85f6jk7r29x4ghuwr5chp2x4ssro1paubmdxg5fbx371gjptiatzb0hdh5qty20ms03tkzw0e3qch105tlm57k0xvva83500y8nf85sbnut5pr6m07zx16j6q25uar37s7hgfu7i6mkgqsxm782wz6cgxoyqcnbg8u1hq5jyyaqz4gcm78klent1kael26cobfkctr5v17a1fteo7u0lv2uoty8ptgb5ej35iu5kiiki5t5li9vaf4bsozm7qym8dw91lq1y3dhkwrk0dgjf8s61x3wweu2g1lrugwc7m0w2ocnni2bb4y93kas3onidysz458kbrfbpq2f7ao6gqwmy306ia3g6k36x8qa08ikzckqt53mndtvvrzyfwp243k04smqcrxfrxlulvh69jcbk9z7t7xyfhhn1ytl7eucmtgceex5gyu8xisavosmq4wbqdgodhm20595q0n346pevb1tollf7vm8dx9cqefil66lk5mjzdhei0l8g9pku6kbgzu0irtlttgsydzo',
-                filename: '3xizf8up2ph7302a5872qvmixpfedg0hp8iid8om7jcmeng5vnubxuibjprb1yo24o1yvs08y490sb0e98eluici6kjczp7pmr8zbkxpmtz8i43ivs7iowu995i7a9ksy9i5qnvi16vxjygr1itqgteadiop1ukxg630p5lzyizd81xsywxr985xq6k43eh3n7dydd7wfqigiccv85kfryqtjwrunv2w071xq0odylli9ylc90gvf02xa5ozyop',
-                url: 'jhzxi89xg49y1rjzh46y3rxce7e6omngximemkc2kdhh0x8x7gwj7y4wu5ntg5jxclk1thzwd9g93x0zz6wg2s9l0g8qshiknf39nzlubil03aw10d189y6wzisxf540z3spnof27ytzlk226fjxxt982hx7lfniuk7u4r1cp2hsm6mtvphjbrd7093zsu7ag30lc502ztzoiqdk8xel54226c83m1w7s0pyzyr6y8hge3qpc0t6fy1htyostsxnlin1osp20wsuxg3f919pzbet9xyoxpkf4b6g09bp4boraa95qmyv90ntbwofzuszln272ibdtbvygih6kjjascc6oiwihtvn8aght5vnwydsl1jvdqsdm52irr2n6u5gnlem1cg5gq5mhlx0gisr51ocznzh8gp5xfqy63a6i6bvq8ps5hrs8rfp2dvbmzw5g52io26qezcmshoqe7ksv24ohbcxvl92nb1e8tg6zesdt4epaegu0v0gh8ebp1ahthgl4e87au0fch3qyrepw0k8x59rxt5s0hvklw2x07i9kbj13nu45yhxfm1dr073c0zmcepreknss7d27zahna9xzigy4haeejfbt5vpwvy9kz9bgqz85igoywercyx55ri4p2lnrx45hfuz8yzefgb9rzploinarlzqmxxuciczy1uas6ix9vec3udra24e9vs20vq3ub6888lgwsgn8j07veyk8xs4zomcen9ppu4o2tjbe9teltjjexck41iux2jbeu6neu41j1q48ljtse1159mli31u4bdx4o9l4rp0xioplsmik0kshzfzcvagv9im38h1eysz9kbzd2d8vg09v0kfi8vjmznmuzlriy4jhrppitedsmo9e639rkb2lxodnvmxbbcine5u91tcee9f8po8767yhy30zgfh82hyc93aaw0xyvrexa0sm5q5dtpvv163aet7f1kz1623g36qhcewf9emlsgqwvoaho00xy5eds7eljvkdqjswul4',
-                mime: '5eogpqa32bk43jntpmrka3mgb8rqd1zmbl94m27pzte3v5y4m4',
-                extension: '1bu0lj7m0i76k4zufvulyd8ly68bho6lxiqp7iwjpqnibe6xl7',
-                size: 9054988680,
-                width: 844430,
-                height: 5300271,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '6gc386poylnonfwzs8zz5woviv4yybq4kltvk5g267yi6j9i481uncbbnoo0qdf673hrgwv2vrxti6wihquvpdeaki5pa1trnjh0fxxc8xe4yxxbzu1lhofrwrvtevt07jl8x64h5lqbm92k33e9tvewcah77f9we7o0o9tr6rqne3wg8y8y7pyi6be7lm7lhm1emogarcfjmxvs09x7jc03cat721ukmvin6ty89mtvqqblahfy4kct69ryrei',
+                pathname: 'fqtj2685rl6gqinwgg82uvz0kchtoa8wkt44zjau2zv6110vtpv093a1ejytwnpl78c0h4yy54vdjeaezbghs8191ke6kndbvn91832wcdhf8apgwe22h4j25nusdj3190uaotzvihlmn7cbygb74te5v72relok9phhe60hhy2etfdb3h251wnmy42ijq04mq3dirkspqnpxusx0s34ozhuagldi64yy58p0wkhw9wvut95g0cwq14ot3jzbtpc9cs9uje3vuldrbugmfpnxc540edwak5xzj6jmy560dinu145lc79vqvlgtzrqldr08d8am7so4wd75jc27az9h0js91acd8kjewyosqjrd7ngyng643rgtlkj2z7djujfkthacd874r1cy1qkazb8n8bkhmkb60xuvvaqp4043n3307t7ifliumb1t6yv4lf1jtlyyjie9rnnzk8w12jmenyf3xnx7liczxcu6c32nqtt6be8tl3rjoswsmk5huv7qsi144tewovuq4hqocdd4u9o17zmxl47bbnh7s26rujqgaamuep993k5ov8yslv8agt53uknnci6jigwmzvozjr6qugaus6unb6rhi996zkdgk2hzhi7p3x3atxfys2jgn4sea37zslvd8cr0jfo4fiso8en6dda09tszy3kqyxu8chadgxh6jm0icw0xib2cymx5h3aem0okf8dflr5hmju0ca7rz9ri2yhdbd3stgnj2issstcngskymthcah1d9u5dro8xt4khzf884w1cefmm5p86f5owvhu6ifdzeh2yzvgynechadlt740848ihetj30el8y37y07ks2edz6lflop88h7si7pucmfu2vfdq197gaqec9t0y4hc8r3zl0p37wfpvkeflsmeopkalqtjkrzdnv11v6cp5yjh030npsssme3ymu6u414wklucj9hd807f0vs05gyf5duo7dmqf70r9qh43hd3lwadzwyh201t5gfpbavpmswo9aa',
+                filename: 'v3oy1kcfrrr6h6a6ztns5pjbao4vodtlmtszlhzkjslfqk1wmsbcgb7tuuzs9wkpishezdkk1gr3cz9fadmqxazrfuxpson2b5cq86jpldwnerzmetgqz6pg1qyuvrc6osqi2pfwfn1thonkxxr30wozygbtlb5ns0lkfwzxqdjzhrodeodgdpcr5bp4jsfx6ckunggdaucqhtxlukqv4wmvhoa0cnq4p6etyj7wkd3t3d6jn0rbq0fm96bkt7d',
+                url: '0dkujs5s6mu2suvquq4xszfsm0992ij297phf4diom1r421x0l5s1ev0vt6xfp8i5wwyz9kpi7dkto22puocc88ttvkinokbq00iqmslv4baif1ifbhhbp8f3n00xz0dgst1zoohllsilcuqe2dk43o8g1cujbxsn0zoww0am2lsd6ry4cl9w6i46w6nbl4k1mbrup4byeykwplj919cs6ilbafhormuxvdy3jbxezyximrueqe33zi9hlnd1nzsvz609oc9pbsk9aq05rbxwnsrbhwymbnc64f8h9n12zl820suvkcm5yyiszjlr0aunwjesoe71plcn2il91ivwvk9patd9iiekcq64cdzcyj3gci8h6jkr7qjzmex508wox9fjhuzr2h3lkfom3nfad02jhizgp0alce8in370n1rhr6xs87rnk27fu69vll18av91q046y3t4u1ytp26ttfg74jlji0q2dwvjkozx4ktzor1ohwonh9o4ahkb6igtpc73v2nmq690u4wg3j0wkskvejwz48dt7c99wst71kx37o2u48acexdcue4vy1ut8udtbtqm0s0kzm6g9mg15pnm8afue2smg97ig122k99pkewdux34wuwim118be95xja6goukrt4oeksf8wbu78fbohgpp34vzm7emjn6uyrt0r3f5kq9mctsotcyg1mzh5uoex1ju51exlt84e44vxkbxsnhm3an20juz1ta1zagn08uvxqfipbh17uzxjt2fk52ycm5zqbffg6qd7uiaafphihtlfeopsu0lzyel3cbzgnoghbmtcddtb86iwg2zwpxt1tp3l6tueuicamiw0jjuzowdsorlmllavvol7i6wmadt7f5yz9uq3k1e0aoy2s7qpgwpmc251b54o7t3irmsiqljt1y3h3ik8q6z37w149o28w225r135e0xoh82eejdic2umixmdjislqoujcyb2zxplxwcvq4xr5x42lk9dc4y0geounmhlkhl7o',
+                mime: 'htlmbwh8aiuma07arqzsxlebajo26jo7rstxt8qyv5mb3qhnnr',
+                extension: 'q2rpl4as43kf556ofbozxn1sq528xuv1cclgx94j7q4dy97nlb',
+                size: 6367858505,
+                width: 475265,
+                height: 4372941,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentLibraryHeight is too large, has a maximum length of 6');
             });
     });
-    
 
-    
-
-    
-
-    
-    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize must have a positive sign`, () => 
+    test(`/REST:POST admin/attachment-library - Got 400 Conflict, AttachmentLibrarySize must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'xcc8ck779wylia12s547p8vcuobiu2nylc9rp66ekazra4hw5uuhahx4xcj3obk9pwdults76howy6r7cauvr327rryu39gfetbo4gkgncc4aqkxp9h0yhtzojg0wxidr1gf9qv3x082wk3zemn0lu0lpgm0x3d5m3q464psipl679vwg1dyj8s1rbt9eg788jxi8jczlslgtal2jya4edsic2bkn7ae5bzfmovu6c00ciuuco40g8dhzyt5u2z',
-                pathname: 'uy8i2a4w36v3ajthlfhl3yir7ar1sd84lk7i3rmlocm2otkfg9ko0y1dgvvj3l0ezwga7u1t99s768ptk2fjxbvf02ww1n44iujx9c8pf4kjwdsoyp4w5zxte4w7mw3fl5r7lpqg4mrt2sfl44mdgtza9pnjd7j5vktbytqlnh8w9jpbzjkagdzagiegez0g3227qyjbirzio15xdlsp4dy9ca2c07rxghbwdbk1th191y7ovklvdregzlmnhg2vq2ll9z3laoo19ut0h1uc3f5azv6sgoi1fmqepm0iiwltpejeto9nwi5ccqie15udjmo7beu1551cpxbw7mld41r8tu5ycwnk5ml5yppr23z5wuj2053amn4smr8bdxp3ub18amixit2c35pp550lk0k4tvfawat2mvn9mno52wmjileez0tohs6314cq74czlua3hgp3qj76po48lkulddul315aom1odyjy8cy22dz1rlb7h9ri2tq97031wx28lckcu7dnggdh2tk84phtizz3kk4v2cbmfqkz1pwhlmy0kx1i6b35m4rx2e96qgg9wpygnoo16v3ua5isv5fikj1vxjqyxuuy8nxhos5776kpucvfbb4gov6kweuzjpydjx6rwan9knj5guaim2kvvpi4ayockbz2pn7a3n33d008e86159phkj8f1rut47cbdaparbm8jirns72iun86oyiucfehg4spovjkqjdpb6iwl9vi3ba6givryzinhp52da4wz9t3hwdb0oy2xudi71v3n89e1c40powvxcmu2qf23wpjmjv0boyy2awndu1bl18s7wuvshu3tf99zhy1ozl6qxsheh91bja1lj0vh4d8b2y0frv8agz4wr32tnhiig435sf77hxoh188g0f41g7i5vkh0g1f9za4vr5df742um1pf5erjc56sd34jelhy4u7ongggy27j13ktidfslgp7rlvtf6cn1tbffcy6xkllro5rlyybg96vfbo1oio',
-                filename: '6t8hb7pq3aatc782r97n7kigyiq7viwxl5nnl26tdlhoow6epgcky2bp0lq8hyv49g0pjee5x5dd6r0qt3sjdq5zpc5ycx05c6o4mds7ee78syig2tabjy1zc1gt1zalcc3aseduo6jthptgm5cbjkn15jpfy71rl92eh78mg2r6p2kic8w19rzs90j2qtah6o586xbu5hx57cj7ekqzznsn4gp01ff27xstjd635mv6b938cfpotz7hd503fyj',
-                url: 'iurxgl2eoi671x2k5pcayzl3noyogfywa30d5jv7i9nb66cuyyyn04hrha2b50g6epwmm3ptl42ao217xuza4voxxid5vcgflrlx9ldbxcp3oyla66gxdq2u9jeo9drb310smmvwyi4stjgk9sc8whmfqj3hg9y1uvc9mvmw87mq8rq8gkdxlofa2gur2mn1t46yj4wbhfftgnmxoea5hug764a2exsaze3v9qctudk1n15jn38e86d29lboa43dr905xi6xrd7dcqimbi7caugdnz6fdgvwnwwnaemskxpprton164rpgprl8t251mym1eqp2jdiizxbm70ao8784utotu5xv0440ehowa6ebiwjc2qrxi3em7fu75z2j3vl2mvzze6z7ruo29h8aglzd8xjf0nz3mji5ozt2tbfnt9kyouwlmj9mvx2bw8ar584fo9t6brerkdvi8h1oy2ad7xz6ozc13fb7qlrzawud5tymaix2gtvromt4ko2li503apcaxy14p8hwbu1ycq6vwrlmw9llrq62v90k405ahlazxcwdmcvjknu34md0hh8be9xzed710yv4cow55s2wd8egq7alxmps8qx49v67pq76i6lclhehpcrlvdhhcyvxyyeqo1t7436dgd457th9r6cjjq88ne1ivm6eghmu7dkpmvg7tkyno6awi6y2uf1qfk9df75f8iq6ktu6vzoqbvreydbuppp0rfl5wxjm6ycelj4svnmuijn0ifosk7qaynmib81ryc3jhy3fgmxl4d5tmcw636pv2hc06a6vcwrtp4zc5w840xag5o41nijc9it1welwpc8xnzys88y3vjyhmd6j3qozzrjfmrko9i5z7whak7yrkgmxlry2cd9ryw336236ei1kscbuieukxpje2cu0b3ljeylmz7y03aowtzvh4tp4ag7hvr2kihlwqrtf8icm28o8m9hf3m5y5c5gkyjc5tdn9y86uhd78la9bixuyg9pmxxjrfj5xz',
-                mime: 'ddpz7wni2174o8oe0molyh951skf7qbo61wxlz1rpnv7joz46e',
-                extension: 'ntmygdzdolqtpb2w7fvupa9uej6tlpjw5h3xcfi1hc9co2qa0i',
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 't6kpaho3b0hq6d2odfhv0xgbmbx6ics8tcetk9vzhemvif448eurx6fse3pote05xizauhby3t4yturfdwxzdpr2aeeir2n1id6vfprstfgpgsc4qoy7cd7sggxuwk1jqz98n30bfbhrwxp16p5l61ugdinmnjjae9loxq5ss26letwdi5uqojdw7wvxisxmgyech1dv2x30w2h2a0ytq7qhdiox34u78yjvh4jk6lzyxq4awq0vqjc1ck3wj37',
+                pathname: 'yv9z3gpg3vvwizwupptyrl80avl9cwdm3rzfigjgksqf11caokrud36ber8snpfu974lzsm178jiliz177hbc7ulht7m7unrixkhyvscnomz7sjvfsm4undjx5y2iuc81jqajrxm6omejmgw248b390bsg2dw5cqn09jsoxoddfw3pow1i4xu4h6ynbbtrseboz10ogn52jpe2eittwaxnrbyjckz6cbm5vk0782weilpz5028sb3y4fhdduycqke3mh0vhhk6oqpm3oznuwiaalawhqmiqc5aemvs9avvjc8pa3c1fyolg5ad2cc6u0c16vktlvoypivzyvjt8dyxmnp8udxcg5bfg2q05gv0aspucetnxgh0f9t0q04wzzrrkpe9xx9u47bmi54erz1vr8pzrwj2av7cydi6cija2r5q30pdgvxsyvbg51f8kj01t4iyfs3qo95dru2egzehumv2exctte88lnufk16f8a6m0ua2dffxahoxhjnui9yjmgajsspbh8huf08z4kco5v9rnff7sdid26jyfg21i31o1gqzxh5zoiab4ux5vc5jwzqnscuq0d8mkeuevlgyepioepfxb7obziky9szlr03xjogsjcfj8rk2pehj299gbjffdpfn3nn4nzv97wooqodxhtvbkr47dy0uy3tgdkf5s82xmvpgsagno2ukf8xti5z0zbvd9ux1atexgpq9hxg497xs9je3kajn4zviliibjfrxsnrnjouhwxvy31t0jr3aauw3wo1g4cplc4012em2j51poik1g314t06ysfcc2xyon3umc0nfamrinvmte3uyj4zlaj51gobz7eycl45wn7bzcg6k1uob6dgv8vtpkbnugsgevedpu6ao099n7tt104rfh0glbnd995k7jcnm5208kpucypchxn4jkv9n10sokqrkl9xo9w8xepp8v5ok81esmixvcu9ztfctsoydches835b21b1cibfehxr7yev3p9uv4d5tw7i76',
+                filename: 'mdauf4k8xi24vzumtrw97u4h9ml81f9k243qdsi0xrxuqytl8b0m033ojsn54b20d4srb9ffq6zh82itfj733pvgts6sloserq4wocr5rc6e7ukygvqk09q3a6v3lkoaageth0qn1tea08ysku6ja837s0olehgt5ib8ff0y5rxe0gfx0un05tb3pz092uv77b665t7wn4hmof6y1xiazvgw76nrssr83o177f4qtp4vd9iyfapwc2hjc6di4vi',
+                url: 't9uqrxczrhuarfykhnngum8co7g95bqadnyvmf2dvnayoml1jpfgkzmyoi7ikdyov5rpf1ewoqk8fun5zxzisde0l0kwv5t6i6pwno1sxndn1re79sdjvb95q9cs06905j4o9hq0pyehy93mj4sg1dnnce2gbikel5f7cwnra2tlg5b0ze9olsw8ds39xia3u0yha5neec4sp54tidocqo405ml13hhd2mil40bw2ufu8glp1jljc223g45jk9m1p9m7bftg9fg8oz3hjxf3q0lhk7evm6835g8c0pbofj4pjsqmkcgeihr6s163wz7qptsk5sosyaqr8ybpk5s2u64n9941yurm3q5ck8v2ui94a19ius1wofvwg273vaeo3ibqbxqav27e6ulkr3a8b0qzqxxox59gctrbbo09o9p41cc2b0xj8pduina1yghut0ap7zo9vw1m0xnrl0rizbvfz3qdh3sm0e22n2yjnklctjqr7jg5vznkp8vg3z7dti6vy8pho2tbe6fg3z6otxx4kbg4kvk20n6e4970p8h6g2s9ryex8ocdk2xebo75ypst1h2fpl7ugqtyk3vlbdeqhajybzwjenv8qj3g00f061hrhkzsngni3j1cu2jjk4gpd9zjxhr0p3379mhdv698877o8z4rlz43hw6lipzj86r6zmqmp1qz228nl2z6pc78wuyecoyheptii778psh9x4to5rq2bk8w0ef4m3migsw5v3vpw5a3hsxv1od6jfhnesb4rvfwsh50ccilngidqx6541nms5tnj9oyedqlz5w6wos0stwpvp8l1p7rlxbq3bfm7i66ouslxpzwwjiex6xvtnat49m8lp7tej3xu4b0b0kcodirhg0u8g7suukh1hdoh9ikv8wkg16m8ld6035teo6ziurd9qcu656dszfkkscof3mcb5nb5z5yj0hykdo0g5yox04bdex2k7yp8bpdfrf1ee845a9adaahdrqzga55df02ene7kzwn',
+                mime: 'f54pne3iyoxp2go32eza085e8gxpnt2v55nopp56735wrceqkc',
+                extension: 'ezudg2p2zizbu00stprgw7djczy5chhfqcbo7hx0rf9utu4reh',
                 size: -9,
-                width: 192678,
-                height: 729268,
-                data: { "foo" : "bar" },
+                width: 979921,
+                height: 159282,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for AttachmentLibrarySize must have a positive sign, this field does not accept negative values');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    test(`/REST:POST admin/attachment-library`, () => 
+    test(`/REST:POST admin/attachment-library`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'twy1pnlza3y39gpghri2p7e19jtqbq6ehybdhce1p46r3iyencszuktaqdbrahlafmhfjnb9jtq4i1hpnfptikjg28by921zbraw41xos6alk3crhi6a36mj3dmmail06tjboxlaywesh0o5d4bywk3vlwurvwos4ndj2nzk94tgniu730l7gbgxqiecqvjj68ew5s9exy3hve5ej47uygh3o8uen0hsoirb0nkaa5ip4ur8133rzwczbe2yicz',
-                pathname: 'i6frug45vb40pxs7rkquxnmokksx10ml0czk5y8l9n2gah2sz3i6fdespbd7w0u2s266m3fhcrszhvb93h6j50in9g9trd3cbgvopc8z5hju2mwsyr49ocojmbcm5j73t28p6hhf93p1m8q49qoewt81deh3ffh7vljfso23de8x838snik9vc2i6zt5hgpxb2r7gqcoiw3srkobhyd7ty0m2g4w6is2h66upni1vc05o2d34uwpb3cxq0puhuqteknrrk5sab5h72kltktiukda8icwrpzt0xlv81gh208zaewaq9wyckcngpdsxtjgq3317tcrwraue0g1fiiowbxeaw26u0pra5fe86jzlnjxiadqjfd02ludhb2zuvwzrbmr36xafj6sbnr0cg53ta10hnvwnrr9yqay4u80k8gmm8x3bnr3nyv1yn2n4s940jmkcutiinv2iwennc9sk8tj0mrmsf4rp9q2njxxlwnk52ezb9x3i62xnlnln7npsvq340eg5oek28bfqlbdp4cc2c66bu6r1v0dgoaxat16exa4934snderyyh3zv2v3i4dc25kzuo9mgkpdbeqy7q8wy7c6g1r8zuen6kpuuvpxuun19i4m5qm2525i4s0m3rddjc684boql0kths1wee9uqclfujw0wxxapieolqzouhogvn6gv2pagziswn8mfz7b870sb778ecvoiqoaexedbrgj16ow8im8mligfj66qyqyeh22ni5nfhwd1l1xfxxulphpx4mmyc0hia9g7wfq8gvl7953mncp5mwq3aj4mbkjf94y7k3tkaye380dcialwi2vtek21af5mophbvxn6ykrnggohs8tnfjsl73xh2j6yj375wr6xni34eof5d3e7n5gzc1ja3bvjwsipp9el8l3vcfiaq4n7s7v23jzeopipwjs6svrd8rbtirk7dgo2x84uypoq42a58yfx2hg3ezaefnawwkezcgivz0s708if2pxta2jicteary',
-                filename: '1h2io2wzh9wmtgsbb4cjv413jzzncsrtly4oo24qkyzcvn9rflox2o1o1t68f2y90oji9ynaz8p0ryo6q01lmikuct4x3rqlmg3swrms5b1tpe523aijk2bd95kn1w1te8sc94dnk6igssymfuyowffe3uwqqo9brndsolxkjmznhonqc21p367h0tjt2g9akwz4bzzn0gninjbvsmht1b0u257ifor129ptaimwe9p2qcsuzskmfwhop6lz9bi',
-                url: '1uzrpyjamqj74p3qhvo2lzavajav4d7a3opgzoi2bnw0dizzc5nlm50lyoyseqm2oj62ovrenivy30ooibcrcwio9q3lhf9obe26qpjrc1aa68r5a0hn2fagzc8isavq3w4nhu7m3fnf3pllj19iybrk8oz44b32bkani3pic22lucyqivkvlcg9z2clt0z2ho00wqa9dvz0z6r11brzmefvnh1goilvt8f1l0n5eyeq95gzfv1gx4t0e5ul48q7ieb6m421zbndp8w2hkdb6kh7ho3qzryec48y534g3iemtuqwaw2lh3gx4wqbpy2mm2n06nl1z2npe839fsisggq4hj8h9dybwpiutee16lctym5q85o5u3m54s0vkaku2yjc97is1mzct1dfswgm3svqhs3bmqgqav0w1j04vri07n7xecrswoz7hpeyls7qprawqowiss5log60g1acuw8e8j5vpcrinjz60t0czx69q6cpor3xkydnca6fzwe9ej71qtp7e1613g8d1wvnxop6qmfj1a3rghr0b0geonn8kc137m6rl2y93tbrwahtlnr9lbf10cdkoxi29xwq6r5dyw8kj3ozzcge8wxeclox6htkjxedii2oyoym001jdz2e8v9gqwbedfahxtpqcfmzl1vpbf3t11b2c8apyge46k1xdosruvlc3p17u2iuwsco58v8h4e4h0ve6ebzdrnj502iu1fiplcwz37xizdglh5nyjn90q70hm5o0iff6gi5umoi73tp623uc1c6d6zgu4hh966788wirwjslfnkrksocltbjt4cdc8gicc446aauohvja2ll3qg9y978001m78efraizol3cv9hr2auihvyoev24qdepl8ckagjfpqj37gthif6f4t0pbsnpuddqvuor1tsu550ylhkintm68v4cfte6l2ym2a226on8rgqh5k5yeed9a8row67wtyhl8e14hf5p6b4rjpu9rck9b1cpxv4pgswa6rd832t',
-                mime: '87pg0gz0v3n4wq1wzccvvjc5fv82eh172t9hx2rcbxuld74fu4',
-                extension: '1p40o4eozn0sp3ygx2ns71mvtylbrxhj8l29f1k6hr6xmzkh7c',
-                size: 8966118169,
-                width: 545818,
-                height: 406248,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: '4xl7fw180qbjpwj5edeu73t6k8h0k610spy8pbsju8bt1hsgfnav6qvrano573zztvlcxvqs1qdvq9k86cdfwz23q5v5dg4a1qtamrti34ycwjapemrkphze6b46lrbbbw1fa0sm11z2eytikil0hhchs1idqzojo2g6vvyzlh43d0sfc68y7wou1i0iwsfsyigsj0mb43in7he1efrjy6vof2kkkunjrwuobwc4iclayq93a9c0yfsljb1hoq6',
+                pathname: 'pc9gi0kdnnmb660gr1i05xoyn8rnxr7vas2gex4pmdyv8fyz3tdg5tywovk848rdsgm6ofn9vkigj3mxhwns5d394doj58uwjfampt6cbh5tnw75p8nuymgpbp9wui2bemkbhp3wo56kdmekfd0eo3nse9np0lnkg7iyh1bmmsblh00u9yscybihuipa3u2qg3kfpgll9168yqy5r66p8rq8m0oooaeh73e3jqu8rzn2e4mgfflm1899ki4tuy4xtnob53hdpb5wkiioc2grpit0in6cfz9g7yjvvvh674pbdeu0v14z2yjzdmzcejtmh611db19bq55zkeow1yv61l5fpoh9f6svo6l990pad5hokthmpfzu94ymvnbue8usk5m0xgccqkfuy34vl3majcit5ukbysq1253q10xrvi68fstowhn23dpf6cu3uja50kb4uahvw9fugrfwczzmxc7xoxj6k473wyqwkw04w4jvq63bubaoptt7atp3llag3vvgvwoqfjrfxxcvon3ce2bw583iu3q5kkekc899rdl7abrnhyijob04d9532jdw4exr7qfqy4mh273zl8f5pz69ksbtf4otxa73wvhlpfnpnqj92h6xd3i0k19tb013kr0gxynd5e2hp9d26v6j47cwphjjdubi4ru2fgrb4xw0jinvtw5bzwbu89j10z5r93wgstzjkeva1etrueki5vw1oawhgj6uo8ko82pl9lup0ho541lmevxzkme7jv79uflmjt47enngadpze1zo7lju879ephlu08unlmxj7u3453hu68vx58uejjlhig16gw1xvpuot49pdilwfnjqoipbsl27ry1cufqqvkegx7hf2brehvbs3fqfbbgodulejp965g7jq2s014mdr5k5julsfq366ms02oaqyn8yhzm8ee9i1u4xnnf5rr9qfqzt1awlg82bm11ulumbhatcrmog7np2y1be7awrfe6l3zw87gf10mmqz8e0jw3131w',
+                filename: 'i9t8c7cupfqj645cruopfzvloh6d84fxzyw844jscbe515h2joqp06pdjtpo2y6jb0vf0umpvcbimdiiml36q5qfs32lexclty8ax9shpe2ioj4k4xy7zzrwwsmfwbofgobqoyoula72j6ntaluk3tq3moau2hbqnzaxyztl8yl0gbdlnc7bga0od8keu29db6r0jo2mgfcj1nitr3ptkw6ds7cpi8gxx0mamz668mu2qidchdcbp3qvdb40ru6',
+                url: 'hcxtjjcwh2grfwi6yftext66vxvxuy7fbe8jo0uyhhhij83l2khe3txi409022n3yr7vglsqzh44ohzeaz9ye7ode51jdg6465ey9soc1pdt3vzi6549v9kultwbn3o5h77h8e9f4wre51o5er1344ctesk8am61k7i6v3vit7z0xaaxtd2fuwnz9rkcszivkegeyxw7m9mbaggtb1we0rewttbn140q6o0xtgpm6tvb3g9zi8jygqb0j47gju2eikyzo0erusukha06vdnxekelyt4ykfmsj6ig59f51426m9pekc999re3k8vc4rqdu4582s6h77tit70sph5t584eh4sdkoi3uf3e9qpk4wky54rtn5fwxh5e6kxak122wvkbn94mbj3mxynw7gmskpp07mvpoldqathe3kg10gbb5enj427fs1scuqq7zewan0g0jtzy5zx6fnwlojwuof1yunxzbv2nv7gasfs1ovgc4dgsj72lok53g29olgog9kyypb06542gtdq7lwlam5drkv9qhn9ur4xoq65ubedwgefd5nrbb31xqnc5gk40fdzza92fgjs3mpvo65skh7gf23x6jmu5jr710j4g2pst3n2eiy3lrmmjq7mlrhlwg3kl2pzzgcynalsvlpnhfsu04x5zcz8nw3ofcblw2udpvzyv0azwnc7mhml470ow9jsgs3cro0eckbxtxxpkny19x7k4iw6vh3qxkjyyz8v3m9pnxi4csoii58nalq14vatrn2rgulyp2vxkptpel0z203ktqu2rx7nroue8emns3nz56he71abais7k3ey6iy50ih3qcfdapoo4asz9g5pr0xu2drpp671mtx82hi3vyqfh27jxuwcq1hnnk90v9gpvbedale8yccklpnb0y8rqpp48wbuwcwuwamiysrzjk27hqrbx2oqj9gxu2wchousujorwpl2s5f105msfjuvyvcmsbmrdnbmhu5qmddvn3wpit4cri2jpqhipvttr',
+                mime: 'g6t4j6y4e7sx5lakyx3ptnjydvsknda91egxfb4isabp4qm5ke',
+                extension: 'szy56lau4zh117vx1631xiqtn0bk5aw3cio2f8xwuqhavxzn0i',
+                size: 3032725861,
+                width: 603693,
+                height: 627200,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(201);
     });
 
-    test(`/REST:GET admin/attachment-libraries/paginate`, () => 
+    test(`/REST:GET admin/attachment-libraries/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-libraries/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
+            .expect({
+                total   : repository.collectionResponse.length,
+                count   : repository.collectionResponse.length,
                 rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET admin/attachment-library - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/attachment-library - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: '9c2457c2-15c6-4a24-83b5-8541ef2a7333'
+                        id: '5b07a617-7698-4a63-a730-9adc1846c005'
                     }
                 }
             })
             .expect(404);
     });
 
-    test(`/REST:GET admin/attachment-library`, () => 
+    test(`/REST:GET admin/attachment-library`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc'
+                        id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'a246ab6f-c46f-4547-94e9-88859b6a37bc'));
+            .expect(repository.collectionResponse.find(item => item.id === 'fa49a562-9bc9-4c5e-a6eb-98d756365a30'));
     });
 
-    test(`/REST:GET admin/attachment-library/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/attachment-library/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-library/38e3bb7c-7ad7-4510-920e-bf095124be8a')
+            .get('/admin/attachment-library/5fa9a300-6010-4031-b11a-ec08f499e39f')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
-    test(`/REST:GET admin/attachment-library/{id}`, () => 
+    test(`/REST:GET admin/attachment-library/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-library/a246ab6f-c46f-4547-94e9-88859b6a37bc')
+            .get('/admin/attachment-library/fa49a562-9bc9-4c5e-a6eb-98d756365a30')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'a246ab6f-c46f-4547-94e9-88859b6a37bc'));
+            .expect(repository.collectionResponse.find(e => e.id === 'fa49a562-9bc9-4c5e-a6eb-98d756365a30'));
     });
 
-    test(`/REST:GET admin/attachment-libraries`, () => 
+    test(`/REST:GET admin/attachment-libraries`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-libraries')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
             .expect(repository.collectionResponse);
     });
 
-    test(`/REST:PUT admin/attachment-library - Got 404 Not Found`, () => 
+    test(`/REST:PUT admin/attachment-library - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '47a386f8-9eff-4899-9096-f794f528d125',
-                name: 'p7tvtwlc66857f43ad7cceqmwfv9rzn3bsmq40co6gao1vzsn764j06mcxxx8qc41b7ci3zwekg40b0kyvqej5x0bkfjopr82tzsx49l6iobzwj6ygaatr7h0pweyn7skh6ofkdy4xvqh3sc8214174leoxbdelvxtnenylfislwoirjdity03n0qd9qfqym14nruksrw9828m4649a1pjs45y80axfnu272ekgcjtocjxhc8odpectgp5yz77x',
-                pathname: 'hmlwzab8gh7iemqb53r80ziylmcb5z0unt3t6udjet2zuey5hqksfb9c3tr8ar5f6rroa4r2aln01tc5nj8tljhtetp1lbas13vz8u79wumxnwzzxakcqaip8f4s29xj7a3mu8xgwzpt0i8pwqbmsjre2aeir6i9s4qsahunntnhwo79i5hanvcrqrry7vu4mlr4ufgz4s3zy3vmq0rubqza5tf9yleyf34y3h3xepn20sbdfbkk5shjg4mm1db6h3z96iyra6i5nmg6ce8ifhgoxe777g5bpuxkmas05ffcf9k8xy5gggl1g6zfrifwiizmtokjoavzn5bc2iuruinpzyjh9z9uoxgfum2aserzm1ooitulykydtwl6rkz5rtu9ibdzm1nm0kyn77m6uunz3uledt38424kwqgitkd3ary11jkjplhr64r3jdalog49qmbttk32j8g0elwjzs725ca54iqowesul95lfw9pbpdgflqpqszj8qz04c9zh3kchpermp3r52wcr47frw6t1l0bntkntxqb3u91kk5kp3jrzy38rgcrqxw9w2dw7x9a17r0ythkdqt3esa6anggttcl4b9akx2pkz48ohztayrovxp4tewn2g8kky91j6o2zpahw2uujyhvhhxrgpf9htusyaiwcctpe8cctw6n55iym9dr12nbd6xw5no10zulzum8bir7kcpmnwl858cacd28yc1xdtd4ji8dmhb9hm2l83x56vo9obzoxh9dobuyc12j1sylw3bgnlzqyq6n20uk4aia2muohl4v9jo7grit3xuez0ibp7y5f5oat6f11s465ihzu4t17dcdsvv6w2cgfz6xpqtbtte1e8jy4jm30eymo434h49k4kwhf81zfcqw59be2uvfou4wjyczx5sed5gmrxtruss81pebnvwxr41q587l5ld7pkjufqedyj91fwc70x0azls9nj9stgn8p8gagd5dyxwwoahtp4nihzvv6jf7qow8ttxm',
-                filename: 'najluh8l8jcwqmmg1ksnksfn8iiuarn9vymvzw2265nvrfez2eifp0ar65aaoyyzg1a7vf7qracfp63pyk9ba6x08soh8jv0tepp69lc70zqn8xq38fpd1r1ebj14ooo104m85xc4uchkumxs9b0ugmaxhtrgx61o1wbsesmlipw59sqje4k465vex2qz9q83m08wwz6g9c14all9foqoo740xvkmkwd5vd8ioq1l4pn94o974zfvc1v8msup77',
-                url: 'syv27e2q0rh2p6hcp21q94gskdzljgsexkyt17g362uo0kzvo6y8ea7u7cpmwrd7nn2xqybc0nrmi0ufmhlrfcxypel1ds6wll5qq21sb5u86tpco5dbdxfh0iywu7uiqgryccm0ov84xpavjj3dr284v1iz1gsgt7w9vffread4npls114jcmb1jr8nbf0civo98wwhauaytknzwldofl9wzh5i3jh2pe7188p9yjmtgfuf9kynwdqwqnvt3zsdf5wgnbev8bq5kek0b8b6j94inoqweg2srpd3fs88auqp39dgge5ifp2xx8gr7wal9agmvga5qzm3g74xpupiltd6cwidzocolkpya70o6u96boz2l78zkph73yjefdeeaklfzsy4vzexbd2ou2nr8ntxu0zoq83jidpamf41nbn7vedrvtxw06xpvs6w155pwxttc45p9ac28urk50kvcfr6hqletjhli2rfr9xrtko4m0e2spk6w4t4be7sk0p619gnypa5bkgce9lv6pdz358s73mqta86bos5ks2pb60zcqphhxf1acen1jeumwluyiky1b7u4gli0kmwvf0g3p1gl6imzteqe0w1q3ktbpf8hri29r8c4pv9g74fjhjaakp7lj9lpxr0fa2az6lfnjk4b6pobqxtclazlszcd2lk8inl33k6jy3ocu19o8vqrav0sim9wbmf17zgnqetgjenz2snkohn90dqaoe9u7g5t4o2e8pol9i44jezfribexktctye1tr37guwdm5jsdp6eoz6e46ofnwik8wrjp536irbj9x9rcritlke4wvtdbvo2ar2zhqcph16dc48m1timtv240r9veea7yr98on9c6dwmdr6ecubzbbxzslby59hua27jio7xlfeml2kapjuysm645e0uptmta2wqjtt5dlb1snzj01odwmh57bwg84smpttony8ir4osdvn9cmeacthtpxwmiwhdrhtqj0qx9kwtoznq0bq2hpzymx2',
-                mime: 'kp1i340erumhbmqd3x74h4m5d0tdx9b7wzk2h0p6gvplovrja4',
-                extension: 'fgwjmg3mvrbjiytj9xl0pw801tigt9domoiz7o8ocfo8hg0khf',
-                size: 6122148809,
-                width: 705340,
-                height: 743226,
-                data: { "foo" : "bar" },
+                id: '46300970-cae0-4c5e-ab73-b5e6a00df7b0',
+                name: 'mfubzp707v9567kqzk4701vs92gl17a4rzphr6im8g0g7jau3375q5qkpk9m7vt0sq6xiecwnjx2904djxl0uk5gcu6njcqibbn6qfbqro3lnziu5zrrt1mqccsmcz2kw1mrxoezi2rxoj471kgcdglhex92putrvvthzfqpmx2b1ra4wosaqr9gpoeh82807ae9mrmvwi1p0e2enrig7lbrf3f5d0qt3k2nj2xe0eahxs37ex6jtrcbp1c7hg6',
+                pathname: 'nnfb9kzmvn327xm3re1nijfk03sz7fxrmrl5q19vp1m0mzcpit4qk3dxgiqoqhy8godqj8virynlzd0b7mz0euiw3vluwl4p9wr1wk1shve1y1x8ru32xyhzfv6yetxvk48nddwsxp405ivcfkgvs1kher2bjedfinut0e5u8kmax08a0lxyof3e6llae8h8lvzw35jwrkb852oz356j1xv3n31h9wbbnddaf0l816c5rorpzbl07ejkygp9nao4cm80x8py0nf6rx2rplm8k6g3bzao6x16ki3d8qxos9okcrxk5lbd5p2bwzsr0oq0w9hcz5datfviso1d2fol1tfsyjhjego0rag1oroguycfz3t0he2ekp3oe4sqr6z0y4y4ifw19bwnf3jey46qx646qnnhvx6dfglhvbfe3y4z537rode4j9zz1hw27x0jodo1ztn676oepc3es6hiv1rvdwacsvkrzcn9fjr57um6hi53wrcoc3j119y0ne5dqdqppg9p9dkt3gwkiiqwlw89w0mp18hgha1p5eqg9rm0plv47lmlbeuaek0igaiho651ia8j448sg18p3zb6xhbs4y5wyzaau7ulfxeipmqsprqyg313g9o8qqb97ij0m9dz6tkca9n9ljfa2h5yu47msj15msvz9z60626z42jayro0lsnybrpj96g8m5zuaddu2p1e4feroxc2dd7axohgv2n5a349tvc0um9ctf7du8fytkzy9qanutyji34zvawdk3ge5w03sm9mbmyskksql4k0t3upt47zy1582iqqndvdqeq0pgocl4ogyjjz7iqmase6gexleb018dsuj3eqt46aranwsofljpf62m6kndr0qwnlyou4iezzy923tmlna7bcewi76zll264a2kf4ejr1axrenn2ffjzhxhd3fo38k0xtg4zbtz7f5ide5alxy665ie11x5ry4ig04sfeovncrplvujsfv48hv34e1xusjmgxhjvvm74bv78z',
+                filename: 'nwqlimv0vde7qbzvs6y1k9mvw56yxrn5zks6n1e6zs0s3jupao3jxs3tqevkth3tkvgpk0mdrfj3hk1c6eedsckmkfuef5e0vbqhnf0gn4tzpums9owqy8vouncfh7krkieup3en7yfjjnrjb6ptj09oetezf6vwex6zj107irpybfy5mvqtiki2itntb042g7ah87ejqau6gd0cofnq7cjgwrpe6cmif86qmve5z7d5pa35z3lk5lw3hxntbfp',
+                url: '1fbmwj8rwgnntls7x6i8wbfidf6u4cx9qi1nq048ipcz5nj9yh6hhvipdkz38mjvbcbrs4xhkr0xwr42489cdphsssmlea0e5yctn09mxfnzas5wfrscdts4j9h968nhxjpn10wtetakc2052w3smv07v9zrzs4iq5dcsdsr7jmc81f44amz577ujmqf8vpso0q8hy70uairdxswnm7e2nd1dztj7fxc17oxmqiukuc0ya8g2k3s0okph8uiah9zk20iq68vl4n12xmtly7t3h9j3ra3rfoj73b9f8sdopcdpu4vusanhdh96fb7g9bnozrbjz34s30d26sj2jv5hnuyfky1ur3elkwvkr28x9c87wojoh8b68w4ec3ecwutq3glyt9tw4avxdk98h28si3tvmjmdc42uk6vt9ddz4pykjmhr0aq6hx7xo52puzrvmcqykzpj0qzofhni2z2plz2ssjsjtc6wd4spx8la3dgvwvh9o1jc9cnce43glen53c2ot9332fttm0vpbndca2a42tsvlmr3dpw1hicmx9d92a3vq2i8fzg4bukeqorxfsvwkc26kjc01h8ni8yunzret6t1i0grpb7t0fa6207rcw0i37dedy5xgs75fpofprvbfrpgwe0bqpb85r9ap9z5g8e5lz24e09y2dh604jom3ppzp1fqg2t496csa9l580ufp4git86ggquyr78ckf7djynriziudjtpwp0y4vehrkwrwin658ex073eg53dha8r69oi2ybvqt7giq3b9stnr23ee9utx1kgghff5xpjdlwxvoe354wpnk2osvcko75fihg1pb13avfd5w2vo8pjm2ligsk9reui17whx8ixzmdkjqye1lqj1wo1a4o10kxcs6ho1vx3zz13f50s0irui88c1497hulb4gul7b6vgm2iju3cc31aar2mj87w9czfsbtpcgimyafc6pfq56zt8dau7he8extp9d5dbxpbii9z5i0c2go6coa5bx',
+                mime: 'e30aei2w5x9nj5uxuvz8ij2akl4fok4ij4x8o305ajy1enm8vk',
+                extension: 'gqpytdqatfno7pzux68ujgdc2bgtwfcmyhdbnrmvxjzxchuuny',
+                size: 5599490208,
+                width: 603746,
+                height: 283954,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(404);
     });
 
-    test(`/REST:PUT admin/attachment-library`, () => 
+    test(`/REST:PUT admin/attachment-library`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/attachment-library')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                name: 'kpvvz8xrlxs5qxl1olvs7vb9j4t829dh15v91zir8pn9hg4bvlq0w2a8q6e9eudllbklukml4lo1acqbsruia15nk5z9elvyprkwo1kjerl8rg70ifepc5ic5f88gtncghljv4j9y5izm9xmd7kanq2sz7prwm0uombs5p64776krnejp7a7drh9guzb60cu3sou84l5xh8lzae75zpob0525ww6tpbcy6hoof4h1x5fwdkurg0zd7i31m3qi9k',
-                pathname: '4cjjy3kr6062i819pfkmxeec2s9h8gouofi3aywgwbzf5zjmk4nsg54dz6xupzwtkast4gqc4zxmacl2fjxb7aiabcz7p15kbxsgokg5h4qrxggbc6fi38wb9mnp70jbfq2m2j98e425l3qtoalkznq35im9av8qa1uolh4zqa4inotrk0d5u4qr9axhwiotc8ox7bm7smnt29mesgpkppt82oyt6ytuk2nxo8dbciwdm087gdezvqlbqlinlpfj3xahvdjlx5ija06gdt722nne20bzvx34qmjq8ucsawibduv0zw0m1fdlfcmt97liv4ya2aioo3till3torc0k15gwuya1trk3p8446k05kstrajqu8zup63g93b27w1j244nsghyrn4e7r1qq5npx3uzx741nyb4n8gpnx4ng32nf6uzo4u33tvpwbg9x7k05lt5yldb1h2x5nwykwapcraurkz7vgkjmstk0jh5jr8kas37pc36hbmy4iechyute4yipal67qd6c1pdvelnip9vpuijq69ypyw9tr6f9cylrrfkag679zau7dhf2nt6n9nflxaqbgywybihaih7cfokqc1phfog9dskt1hum2enbap1b8n0vwzmx9vbodo0mo11lsz2z7ed2w8mxjqhov4fhq3ww6nahjinlhqe016lvdxiltozi5r8tmlsksl4x4b0i4fdkssso4q8d8r56mc3kq5sgnklr5ltrdws528l4dhxocox4lzvlppwcdghp7hgk5fe8mzgwlx69lmnmae3uaxtpxr5m4r1vezxy1favpg2qc7abonaho2jz4u57ligaib6bv0g9xt8e4n1sk06dpzr9nyf81ut497jur1sgvqeaalry0g9fu1mfikwy17auuyvkoyvrx0ltabja8zyis3mck8q9nsqu36aazoofyibbnvtdj5qxvl92qtrfax96l67k9r7df6b1unrpta8j6gxk9jqg1pt0jzzix1cghz05mccq4repkrpq21l',
-                filename: 'q0z8f6ptgjyh6vj9u8reauguiqjduur6ymey5ic0diy0da64vhzloqvnspj2zluygm1sonkhzptch15btrjv1szenam0x1aohxd9nu3bb6txo5o5jtjdm1numvy8jgkll34c5lvz5pozmc0349q6saqeun2o6rhwgvc5a7tab5p4g26vng57wrkpf8q0kpj2hwgwp6f8c79isur08v6y9xjbd0tqx6a3cf4rzjlbv9xbvie0u4y017gip261jxs',
-                url: 'qdur7v2s6ouecjecl9f3p61snaapon4m1yi48jeu2e9lc115jejk4vwrm20q272i59s6epelzjs8cbm4zdu58glz5d8r3fuxoer2l0py832s1m8boytbsmjb80b0437smnkakai0gez7g3lwzu8a7429l4edi1rfvcfoacpymqx4llqcon9ln9dpl6ry52mwljxu17y7ee889ynnz0p4w96aym1y9fmys9i1grgmx1c6ax81ik83uosq3wlaik0pvoy0aq3s95xykfeyj0jbw80ip4r7xk1ip71r02mhc9j9k80mqjernu1c59smq0lu9yybylq7jwakbgvfpuuf5wvn33816wbgn8nhsosihkuwnnz8t0vx1e3nw9eu1rclghv1lh1lq5ila325y4osyaheypkau8caukeg6yhdwh0qmk5pcpoj4ysfhdpmbzsstbye84pmwwi5d8xco1ho7e19p3u2c7pbpd4hrj4y1pjezdun9vd0v13jqm7bx0bw7hqlj0laca28i3jusy5rdlh5z0lfv5ld2dmcbiiighwc98gfvc5cm5h07yz32yn9r19q86lc4yrswcww08yiv8u9imzvldgcmmp4qc5t3st9ddi6901solcs3phoerb9969j01xl88ym5ypzartzx4ac9oep5aco5xacz4cnd6sszvdtmyxte8pjxk2yl8ykoeewubblxa7q4zswzt8otyevv0ezydxku0wyqa1hs9f3wxozc91jo0k6lusuil5uzd3ktsknuml6sld3r1wkw6sqlgbbvmt674v87b1079m6h1248uf2upj6fi498vr8ui8un8zxdg3q8xz70mu5v9v0hl3pn5lww9qhiv83l5cwaxnekhjwbcmbqlgk6ptwpe7p71yswj535crm5k7lzeiwkkmp38gksgm3vmxllm6lx05ezj08akiks7m8q27dcarxyhtkl2zqjj94xhfzh9zemb4bqawz5ki62pkbotiaitu3l7qstz7vpjwoxh0r',
-                mime: 'cxw3lry5md4u4v641n9pbcinikrwuxtnz26nqi0x0pukxtp1jn',
-                extension: 'q7olnp7zafu439i2by360nibqtxnp3spcxung9dlrmue0lkzoo',
-                size: 8366031306,
-                width: 222769,
-                height: 788531,
-                data: { "foo" : "bar" },
+                id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                name: 'lha3ecrjan2z1bpk0cd467evdprev8kqmctslswg9rdd81skv5fjh3c3xgv7o9rqqfhqggd6agpkp36h46lapwkmme44kgg33zeomeaz3xjckxpif1pben45oysjpwge6fjzlloyuhz9yopixvx2sezzuklps3c3kp8ljrgxezhoxcxr9mhjy9qjy0hx43xfbz8kk1pbejtghuz4qt6oref7w0b28ssby2emtpcwyssu6nq3tdo2g65r2y3a5lu',
+                pathname: '5p67r6gq1wpmauzvg0tssu1almsemauupsbfklklg7x2mmny3ij6hvku2sb6fznt0yrjdzhzj88mumq4046jrs9djma41a7a9zkpem60125bl5pqimkicw9shc2rmpzluqkgyhqhlw7om7xifvahcpv7aa752kxfu6mrphpf6ai59lb32b54cqscjskuzd4ruq114xwkp88235f2ze8itm1pbl8zg411iopn61eabn39hyte5vo77whhacztk449vu8aw0ww9j4n79i8wk09nkvyamn6hihe0qlkve1dxaipe2vih6f88pkbjlzjsv9nj9itlphj40hg6zqiq2f3krzemb1wt18s7toq52ipmv1t43xnwgv17r29w4hxc3qhyx2ln5kwd291q4l8imzy3teobr1jwbnxby9a72ws12i3kwd4fiulm7qzasytgamp3ylbflvptz814jltgvx49jh4t1g9uqvabjhb1w7srl7zlx01tn17nmekhiwa3hjtw7hsojtfwre73srthdw3ietbwi2c27pfqi8o4ioodr9vupk22bvwf6y5ogilmlkwkk9kkh19xbe7u7em5q06ggdfq29okb7ir2fdvqlhz6b45yhj8b706rdx8fljovxt3u8j7pku3iyaint7227acybt9c41l7gkgbq21uhri24y52ty34uv4x9zqha7ufz1ahg2izadml9tmh4od990yv4qtcid4lmxnos9gpug5fkv725wjqiqyqgij5e2yqgntsbzm7bzyiove5mxegx1c28emt73e6rmzz8grje7yjn9kdbeynjpfxiz46g9g24y68tf3yb37impsn21uu7myop7piwcrrn55ea4cy7bsu461z8c50dnxw9zkaupmlwd1yrv93y6tmiglaxyrgphh090mhubb95iw14zf34hxixdg0pwtb9g23hjjxs6p6ckuc9pk0mv4nwvv5auhlobjlgpp47f7001v5kfotpx4yffs9yqz0owkxae8qqdnoos',
+                filename: '6od3m357qrculwk47cgtcjbkzzpermwnmwfbpyrpc05h8dkdc40wvtn1pkvvkmwypqm2yaznhrk500gvrxrt3rflxr16ayasdpnoslys7ty9d6bhf8z09bjnbtsz36wfp81frpd3p9rlocacmhp310bf65u9i5lbvmfbbqub79z9t0h20odjyq3ttxdwqd2xjekeei3qi801ihpgztf34rkw9i0430kjg68p8hr73mwq9elln73ure38kqmolzj',
+                url: 'ylp9fshye90zq3x07xiacv2b93dc67rpbuf9aqyi6of9re6agzk0n2o2e4o2mdmpjbfp2m4uswuhli6oxy9p1kkftaqn884s8j7pa9eukg2zrp9m689zfxc42nstxmhptj9b2ewq701bro7xmi5nluje7ui8nuxgmz1c0xp4pig2mu21ahksmpjmccdob0hgrp2547vlamf63l39xw1c93lyafmnqo56epjvya3uw22llhsz2mxw8b9i8704w0w9l14wma1z9ofte43gbes4umo64ortrk6cu0nzrw1alfqd5zwyyhwsb591yeh568bpsf56an8nbw3srsptb592te7otxd32k4q4rz447j0uuwujcfqxz8om0cthxwqcb0ghhw24gdzgz1i0mw0bpw8k21lzokuz0cd2v7zj3oytas7e062kfdhihoj91ckdov9a0huah68i6ysp01n0knmffk6ifwuzdeheejqjrgsgykqpt1mvu38w4d8j86n6lk4x6y25duwna28v4dfdnfy39zgn5qpk9xgo9nosw3ggy7xsa53mfu4yo78yw6s2rt68w0snpoa2572lf8pl569myubball85daa7zolp37i6n29760u773b1xd2s1ou17hi21ppqbq7z36hi37f1x0gj39m67kvbakxex7ib6nyda0m4p6j97313kiu1q9d6gqjjfreavkyjehih8po8tzphrco6q2qc0nf393cjvf2z1wp2sjotn41pta2l4jz0loxawjtogm49z8zx3fty5k831hh9cwwgq24y02oc2p6i0mxyda8bjnitrufzjdf89mjia7rfdxf4evrmi1nj9dg0wnldxpp3d3efquiv00cxdk2qc0af0zipaiaf88ku3ropm5c0oyxrss5a2zpcna2rockojz7d6iryyxsuv3801fpgyiggsi9amsi8h2rq5xc8fv8bqy1zmhrc3iagvv4mw50bnyzkr7f5epdoupiaprgp2c4mttgdgepnr3upva',
+                mime: 'h3fippu0tqmw0qoq6g6mv3p3oeiq7hc89ye75ilct2296fler4',
+                extension: 'a9kjmie81luhbs8gh8boujn11raub08j22dk1fpy3nuijvld9m',
+                size: 6042928676,
+                width: 555477,
+                height: 623819,
+                data: { &quot;foo&quot; : &quot;bar&quot; },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'a246ab6f-c46f-4547-94e9-88859b6a37bc'));
+            .expect(repository.collectionResponse.find(e => e.id === 'fa49a562-9bc9-4c5e-a6eb-98d756365a30'));
     });
 
     test(`/REST:DELETE admin/attachment-library/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-library/2e18958a-dde7-4053-8c9b-66663104b4e0')
+            .delete('/admin/attachment-library/9af1fe85-f17a-4f70-a36f-8313384bdad9')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE admin/attachment-library/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-library/a246ab6f-c46f-4547-94e9-88859b6a37bc')
+            .delete('/admin/attachment-library/fa49a562-9bc9-4c5e-a6eb-98d756365a30')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL adminCreateAttachmentLibrary - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL adminCreateAttachmentLibrary - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateAttachmentLibraryInput!)
                     {
                         adminCreateAttachmentLibrary (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -804,12 +841,10 @@ describe('attachment-library', () =>
                             width
                             height
                             data
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
@@ -822,17 +857,18 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/GraphQL adminCreateAttachmentLibrary`, () => 
+    test(`/GraphQL adminCreateAttachmentLibrary`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateAttachmentLibraryInput!)
                     {
                         adminCreateAttachmentLibrary (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -844,53 +880,52 @@ describe('attachment-library', () =>
                             width
                             height
                             data
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        id: '563a8173-46bb-4226-96cf-39f1cda14f3c',
-                        name: '1dmmxuj1zok844km8wtipcfzrj7u9p9amx2rb2unyye3fyfvufzsdjw195uwr4bn6y6qahre43am23qx5d8fp95jtor5oxztkfwtrgr9c7u311eowj0ego70k20d3o6yq4oftf0woorxmxb03m5r4atjob5xnyefm31expljh1t5mctncw7ryp930sq9026jxxfbb61c3j5neal0o01jx46aztch7ss4hcljym57fe6ssj6tcqbe0vzo0r0x6bk',
-                        pathname: 'l3o40tw5uiraqhy995ilyvy5jmbh95bnmt8wc0xkexngt61ioefo318wqm5lnz27ac64dc41jmnqsy5ev4xpftmq8q0jcani8182zb6j0w925yroi87u9zykkwf9mp1u56wyahxwjhdswj4l7odg0jzklwfho46ajskrf81zwfw3j982sswf3fw7b2uzfel5ng54em07iumrypcwemzc21fpacfbkypx1e8744hozbs87vrn4d20m50im3rc3cgp478kxtzzehdstf67gmbrpqub951lrht8q5egvfz5sinixspcdyeowjrun2msj4wukit5rtrhkr25x9yqk28lz5vqb0np93meqxsgkxk5cx9drwzfq2mb845d6eo2ufj0z0ysxr8l010wmb6yuhevt51xu120c7ot95hf68ay363kvn4hm8svcz4zzjpx792s9tq4qkrekvc36xl9ya0apeydtbo0huvin7jorlicpus7jtsz0h71zr0jjm4r4rpwkavrwxik0z8kkd6amxp506e32niv5s2tx370yfk6cx4oip9tixxe8n716b0resmnwxdnnl9zupxjiat541yzpxkmbwi5a1nrqclhxgj2l1n898u3kkum22bf8nqgqc42x9vndq3ff143j8o6m7jhby25e0uxqrktf6bg2eqi1w2tma2u0gojjzklha09b1fpy4ksmsvakf28314kihggy067r8ufaqenq179ohvgpbszwgitd8wf8dqdev488i4jblfz8fugzu4vwjmsc42n6dq50fq6im91toxmqsuw7f2voy7ox7r85hc5sf7blbya305w0bhumslhtlehghu12gfd3kb49rpy41grvg5m06pp7ts8yw7axs7fqjovr7yo8f314jxrh3icpjjfbh9ui600h5lv7vv3m90unucpfynj4ut7fcyuzwq7atamk0k1h3prpz4jnbmttkfop8wy79u0hleafwf11kfccmm0cmp9p9ixarycfx0c7jwuxx4b',
-                        filename: 'pacngy1irmgwi4rihvk6gm1lsjhbaa4wuog14lpaogz0qeywwgywu25xd99xbrctj668v6qdklqld2xpjdyypqftzwrsoktxpbxy6ex5z1bbs1ko5xfcwkfieizr1bq0osxovgc1jc7s1yozrxk9zc1qv00qf2u4b8ikw4wraql9ukpwrs9ozuptbyl84guanstbexcilzxn8gk6ac33l1txpak6fwco0a59pkzml2uepuh9y4nvw31vhdyjgod',
-                        url: 'iawng08bs53zxdpclo5wq5ug2ua1llk3t33dxzdd0r8yoe2dctbpp3h7tldhf06yxkjdvxh9huvq3lkrk4u8rdyx9nwhpmuco3i4huiaq7gqo4txmtbkuqn7at35szlcjw7ghto5jvpg5zw1f4u5iuy4s56l36ub6ua044r3hiomtcy1tj82f7tt2yjx3de5cbpo3c1b0224efyenb72v18vld7s2zieq8c4x6qzlhfb2xit8qn5gmf6gdkfacxuw5awmztedz8fzo3habbqj6wb6qdfp1j8vesnryc1vmu6gayvoozsy58t9pi8cbnuibq90mq6ug0adgnjz73qgpvuzuzzhffqhmarh3dfgztfy1rnbzaoheq3p7bkr8fn3j77m7qp7snj2cirvyn1702logr3o9be2inp8ee8gjxhwoipyjohw515vgu94gdg8pi0c0dsr1a87vx8kf3na0maka5a6ldx5v3m2z7hkmb1iofvmfuz9v96ypez9i6d2ey1b4iyzccsa8w3xwrscsaubxa6znop53j0ymqe1qqhw2u5cvwri51nmji35eh3jpokvy7f6ei7nv8hdess3cbh2th4gioi4f5snyayd1rifjd3hpfwoiaotuhxp0r1l79rwh8cc6h3zf91zk65kqfo0whc9il9p505fwvehg218wjbitfrz8t0wz62er1oowfrue68w7755tyssjqitxxbq92k9hk6d54424dkl031hkn433jbu2v4ouifo6mgmafit38aigj75ld5jc6rj1m7m3e9c35rf1tz7b0e1lbzoqo785mqdkz7kq634rdqbrp4a4zzc011c3thalaprqbnsxig212uir86t3dncqjlkwug29f6ya1zkoexkplujyxbpajmwzgytgkt6weqslrewglomql9l9sukuf27dcx7ai8i1diz9x8omdgwpc9hxapcbno9b13z4d7jktq1t02p1r77lkqldbg0m0kszqje20n4r5id2tv6dta66xs',
-                        mime: 'erw4ssv1ejkjvxh0q4g3uukh5dmfotrf14h2iq7w38fuko9our',
-                        extension: '3t3cr8lz5n93kavpzpeyl6h50eoynh0u2518i4wd7fiakcvw8h',
-                        size: 3191156489,
-                        width: 543234,
-                        height: 907762,
-                        data: { "foo" : "bar" },
+                        id: '3995fb01-e4f9-4a31-a9db-8a89070ad7e4',
+                        name: 'pyqqxmpqas8edhmoi2zz7f7uv6wf2074knyx2kvoqxkpdgdf65mcnwvx243njs9t9uas4d24m898oqhb55ug5s0de7yunfh8sh1sscdiihax3q9yf2wgq354fcdha4ttjo4vxpq8w0hvoen7npw5c3j1qjl52hl4j35zf5jzntnj5mbq51jbv55ls005mdm7z1i7ht1avzpfku583dtc4p3ed3lvvxhotfugzs8ozj9k993ils2tw36h4r4hh84',
+                        pathname: 'b0zkzo9dhxz99p4p3a6bxwo14aqpxh1tk0tizzb94r5qp5pp5r644zoq0n37l45ktsjnsa07n2joij7qiwcw33uxc9p7jfgatos6fh2br0xehio6mpyi6cg7rdjxel59q9ot2u0nreeimktpldf6gigjlmp354y30e0akq6ge04sas1zgsiebk3tfxtt3fz0ufikoueqkhwlih5skb0iydwlumtr0hrj89ru9mwg5g93edcbqcdxfge92fq9l5e2cqe0l5dqx7lpu45nkb002jhcehyrgz642lbfn610z7f66bf28yhsi9cu7m783c6idxq3d8mgljz94gx8dg0tnc8kx7hs08lryw4sl5fy6bdtkxdzeahppf5qcfyrahg5v8jtz42cndkdq0dpj72mv3mcz48m77daymub4gvkcqpcgh240of32pa51xgnjdrswurw5xr2z7v7v832gcd1g5037iq75uqzprekkzwdfovhmicunwbzx4w32wud21fsklf72gh1g4hp9qqh3hw0bbabesjmzp13c72p1mcdls0nk8n9zxeeonc5t599xr4rj3rbu6ak100x1mqnq4mwju0obrwylgsbatx42e7yj79wwlofmjvejh1l9j5gapdutkv66ihzw01ab8hb3kt087knuq3wdm7958gry02s90ia2u0uv77453f9178e8e7vmmnm9uhkt90dkc48dz5vsozopqntqllnq91fkea0vql4vj8svjojxebfc84ldofajq0ns4izuxt75h24sdgle8l7hhxto7t1wv8ncmf43we7vxphgcgb63aqkyy3vwzim82k2baui69r73ret7xoxowm4bjnt9tfx3zxgohu3w5zy4fll6syy9cs4yfgf6lsdlxi21f9tdgbwipw6yeuozt52cenpdl9i9grmjccess63zh0lttqxl0lhwgvdb0jbnhddom123b9ddvp5r0p31ihkt3hyj6ffexoiuv6d5jg29saqz5mto696b6gz4a2',
+                        filename: 'b93zhyv82p6zp2wc2h5f72zwutgueqagmetw5apnxskcqud56bx3wczwgwz1qdflq8wwlfq7bhrqrg2cuwrhvwnvmgunm9sumgar5ezt31gp9vql8in8ld9x3yxx0jchkp23bqsc50pqvbf85xfphfywamm266tumi411dci5zczt1xvsvxnajwx96y5gocagtvrawadn1j162rucdzu31m9qtjvb8ecld8fzmvz5opex2z4q9ux1hckejsdn9f',
+                        url: 'z6lycrpfb3u2f57mza856dyk13emwvqbz8mldl2admakn26aj0qvknapintutvtc3dl2jl01ytfe5cls08tnu0lswtdu7nae8cnrbasjc9zwbpkn9pmldnwmbwvd8xkyvub1qgkiu9g0y3ydp52evqnc095srjx6o9jr6he1ts6j4wjf314m75fq2ku0y0jjn125bmc6y6txaki9et4o4aereedzmqhev51ffem2bib4qzhryqg6s5dgxcaoa54jgk40cal7jehsl3jjkxzxh0z4tk9ih8vzvjsb7c0who5d3pz2e57a360hb6its5vu94qtb4nek9y477c1px274n8o8gi40jgjmzwpjil7rcrtr4zhqk93o490tiwbcqym9aalctxcsjo06ksmcxi352uujxpwcq8v86htey86rne8av868koxz7ou5emg8dgga9ygnknenwa1xrmddqehjsg82exu7h932zo9wo42pdivwll2btdfcekygjrmb9t40bkqxlg5iea2tqpxtn9uwfoco84352qdi825fu48yakes1p2crnrmdhdc47nlvjy9afmyts2t39xf7auarof5xee8efukh9xouegzo7gabmf1nwene9okvanngxxfegklqljbojq09mv5c9scv8hmxhhwxpokl21x9prldkmcrwp87f8e5qj7yha4myidaraqqasolcurrn0tudxxzj0l7z88e5fy6w70v1l9sc71g0h3j4jcunbvalgpgxe1116091y8n5q18o8s5owtgj98hq791svuk36p3kpeez62txo87a8xpdw6qliw99pv08deu8ht1x0fttm5tx64hush9rcmcedo8l6470f2vauei99v48nzthsqg3985juxtvz1ywi1qassv3hx15ydi6h9lhbjewsirk51f53entrfam9dc0nd86y4rov7jcqroi00bh30r2k2oth3f9zlpgv59bixgw14gb4oq6o5t1su3u08e2x0uzuwb1m29v7ykq7',
+                        mime: 'ftymv24kh4x4yixc5pab2k4fdxj78ccgemdhpu4ecnmrvc1pee',
+                        extension: 't2sl25po37o3336hihh93zcetlsmzqy3r5dyalz1o25ajb66aq',
+                        size: 1323852180,
+                        width: 468681,
+                        height: 131322,
+                        data: { &quot;foo&quot; : &quot;bar&quot; },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateAttachmentLibrary).toHaveProperty('id', '563a8173-46bb-4226-96cf-39f1cda14f3c');
+                expect(res.body.data.adminCreateAttachmentLibrary).toHaveProperty('id', '3995fb01-e4f9-4a31-a9db-8a89070ad7e4');
             });
     });
 
-    test(`/GraphQL adminPaginateAttachmentLibraries`, () => 
+    test(`/GraphQL adminPaginateAttachmentLibraries`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         adminPaginateAttachmentLibraries (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -905,17 +940,18 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/GraphQL adminFindAttachmentLibrary - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindAttachmentLibrary - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindAttachmentLibrary (query:$query)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -932,13 +968,13 @@ describe('attachment-library', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: 'f2df0224-427a-4291-90f6-68bf121e8c33'
+                            id: '21f86aac-4e53-4c00-af60-6d4cebe34770'
                         }
                     }
                 }
@@ -951,17 +987,18 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/GraphQL adminFindAttachmentLibrary`, () => 
+    test(`/GraphQL adminFindAttachmentLibrary`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindAttachmentLibrary (query:$query)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -978,34 +1015,35 @@ describe('attachment-library', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc'
+                            id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentLibrary.id).toStrictEqual('a246ab6f-c46f-4547-94e9-88859b6a37bc');
+                expect(res.body.data.adminFindAttachmentLibrary.id).toStrictEqual('fa49a562-9bc9-4c5e-a6eb-98d756365a30');
             });
     });
 
-    test(`/GraphQL adminFindAttachmentLibraryById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindAttachmentLibraryById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindAttachmentLibraryById (id:$id)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -1023,7 +1061,7 @@ describe('attachment-library', () =>
                     }
                 `,
                 variables: {
-                    id: 'd3947987-8409-4708-9c59-48a89f41eafd'
+                    id: '07814068-ab7d-4023-b088-d2a37ae1263f'
                 }
             })
             .expect(200)
@@ -1034,17 +1072,18 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/GraphQL adminFindAttachmentLibraryById`, () => 
+    test(`/GraphQL adminFindAttachmentLibraryById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindAttachmentLibraryById (id:$id)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -1062,26 +1101,27 @@ describe('attachment-library', () =>
                     }
                 `,
                 variables: {
-                    id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc'
+                    id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentLibraryById.id).toStrictEqual('a246ab6f-c46f-4547-94e9-88859b6a37bc');
+                expect(res.body.data.adminFindAttachmentLibraryById.id).toStrictEqual('fa49a562-9bc9-4c5e-a6eb-98d756365a30');
             });
     });
 
-    test(`/GraphQL adminGetAttachmentLibraries`, () => 
+    test(`/GraphQL adminGetAttachmentLibraries`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminGetAttachmentLibraries (query:$query)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -1109,17 +1149,18 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/GraphQL adminUpdateAttachmentLibrary - Got 404 Not Found`, () => 
+    test(`/GraphQL adminUpdateAttachmentLibrary - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminUpdateAttachmentLibraryInput!)
                     {
                         adminUpdateAttachmentLibrary (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -1138,18 +1179,17 @@ describe('attachment-library', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'b60de43c-1a3d-4a06-bf82-698b7b3a706c',
-                        name: 'mu185fcojre1wkpwgocd4gqsc8auasv7wxqr2l84zk7zqm9uk88mazox1upq7y5agh4csgahqqbbhdtq2dlrfedlanbx5adkncp8xlhw7s2408sbuz408ykk1p9jkxh6lrzvys38uw17kz5fmm25u6dzpxlmmucynvvagi7eo9x6gyfe19hh8xo64ufyhmj56wwus8pwg10lq5d8umk351a8qzbjynyml2ae445u6xk30d2cwijp2swfd9eb8q8',
-                        pathname: '3q06wqmxtave9fprblew7td0b1niroc95uq3ksckddflubbjbrlf2onbb7fk4k5xtr5skmpqjacjp35hbjoa27wjsk7j37fudyckitrmrvh1pts46u7trl7wesxbvoo4yassy7hdqkq6kxzh94iw5312zpnklow8fyqpwrgfpw5x4w53deym84tvynw7fnd5w9ww1qn3jbe3r2tqblpotraoinn2esc608badxdx3vumo1a7catv96akbhk03fovdlydf6i9jn8ht720i0p0j43px5yc7evt1fav5cpyoeti94lx88fjpql7j3lh44thbll5sh05y5kayugsu65ap8ccwov15m37c301oaingfc19prhh68d0xctfqtcngpwnc5ejeqw1nvdiptmxn7kdd05cxwxj85wnm8k1035bchyc5i36rn72i6smg36ap2w46ky2umafn7rkdvstra6i407oi5d2oapl1o8thqtq5wnkzmvkdcdmq6zyvdghuck6ye5d6wmfejr0ibhnpk0amypogx9qx4rn6xmkeakaputzgg8m6co1keiqhw32gv4oe4l0y25flkt50dm6yu0lr7jdckxp1ijb1c0gkjt5qliz8o9drd3zxk0j15g0729xvdx0e0w9nbp24e52mpu2g7bx6ggok52c0aozd1mmt4u1p5y8ceush91slh49y0fixlkbxoqvkzil8p2pzrdr1ncmp0815ffm12xml88ye1eg90hp2zk76td66jgtap21oo45ykreptvw9itiaqcku422nnuuu9msgc4ycfeqcrexp521yg3hs542vf6zgqxglgkhjn7rygbb9o07uv8cphfcdwzdfhwf9mc7ind5daod5lrqwdu57zflkq0kunsoqg6527ly44s748e9s4okhkcd7e5y0jxmsn6c7q51d1z9hfhowc9nedjg825zqtjqhl731u8hx9o1l6xwsunehtqsj9t3vco2dmolrbpx782zvyk510rpkw7e4r6at6z',
-                        filename: 'fmxwjzpt5e0ji4rvco81eklcqs1tm1y6bal05psmlajl3xwzg4zz1wos8tomrj6829zemj01ozvde4hyw83uc980zyds1odqbq2x6n0yy436wg52m66th58qxryyjaut3oj2tl4kkiaeb34esxai4ozkmf9vase8wl4v5n1eh252t25a7unjcj7vxjuqm4bjppf6zjoyqegxxl2en7v0kuf4svzfpxnrn2dqq247ijro08nezexsl1zyt111xlb',
-                        url: 'xuttnzjwz5lf4kyudkjy31r1ohyzbb2h7py3brkcr1r0rrvzcfqembvuy17c2a25hux2xb13phvmx67uzu9bwkf6xalbnl68dtji55o7m0qh152c269tb25fdx7g84a1kp9zotz0yhz7lv94wgqrki2nyse9tk4tfz2u04pbi3juo7uf0hvyxvu7r5vcdc41hraf1cbrea1cjxksx1r4p0u6yc83y0eqi7kmdly8c3yfqa30ytlhm1awfnpxabrl6i53hdoqldfw94ji3r5jt369te1y0vd6487mb1sxithzf4g6ealy3njdnxcestb5xn8eze2inwip27vxkxd0ncaj4cw26fqtjalmkoo6dzp0yf0cnkwcg9k868w24rklrqiefe7a7q1qppmx10yhxzel2h5bx1pnjow9ns08fqjyeq59gcr4x1d4gxhwdw9hktc7y565q1t3nswtwsw83bx54xnhtvb85jyauu5g2ak93lg2rar5hpuzwu0lszjfoqzpa9xw7cktvyeq2bqafn7u3ftl24xql54x90sy5j8jhi7dduocf8armorecnzurtuyms4lpbvbawhfsxychvoalr8akcfge5x75zoyrvq7o6ok2eoyy9h3st9fzjxapca8ikuvzho3raco101o35vmqrsjcgps2t3jtehel6idwkhh8dhg0wu9igfythvm15r60xr0wintoojakzaoag0gv56jiut4u7pnszrj7awzmitj0nybgffwq7wu5t9ix0zyhm8vo1dtk8h8p4wzuh13gt5mkwyd29m7wtavz4eli4wd2t01i52vuiz3zt8juhyevg901roe4hdm19e82577sonv1wtkpprpw680adi072821q1esn3n5kstndxl69g8nzjg1bhp89uiyq7h27mjauu8x8uwm21ewk7j3ppxqagltkg1nh3hpwnx0sy5x13xqg7fnrcls6gfvrrtpslqmwz1w1littjhc2qxn06as1mraus3dyp48oc753se',
-                        mime: 'gcha19vp8vyl2scmh8s8gplvsgeit428nfakvzb2lmg10gspgy',
-                        extension: 'hded1d1d8kb9gkjc0ax0gga9zvty3xsw11zh6es6375y9z2xan',
-                        size: 1032901699,
-                        width: 162414,
-                        height: 268869,
-                        data: { "foo" : "bar" },
+                        id: '652f20cc-7c4f-49c4-9f35-ca6356e39433',
+                        name: '76iszsyudycshrtqyd3tn43atto10r88ob8zpcgiauw4fk8qir8ym2xmw4txnicsbgw457i2786o8820wfeltgpboxxrvdkxzim26ohgyaegmxihi0hf50pv0trlsra6uq8y3c3tc3p21cksn45exp3iburh9qyhzjd02ojfe3tf6yz862y8znf5spm1cegdztm0jlsti8n9xj8k3ge5hg2pq2ele3418w07qstqhe4v25gkoyx0jnigq9sibme',
+                        pathname: 'q2xwzcuo3hz0iwewawiqrsnm1gg3b5ishfhgo0ncv06ghtvoezylr3x6cdohiwq3c6m84fp3mafyac0jyua7g4rt4spfmti8hmr91vosw1tvao65472qdn6hkzrexsu8htsfzz6an8de1wnx0xfiwxflorp7u79q9lf1iodet45lyylf4x1rv0utzo256z4ugrph40ekoye7o3bl6sfbujz0abtemyrwkf6nba0eaii90w4aymbxj9hgryfrfcckk2yfgduqas94y5tayl5osnm1901vss230fkojeahiz6wkz6og0xneqqmbu4npipmkjk7ikbtamn4y8lcr4cc46gc551rzpn2ckuyxydtlh43ziyxcvr8r5fwmcv6tt28dvecntaapgy28ek3tqhehx9ilqpgi8vifj10vwos5gx52uh89k48jdy2jwio04ylorvag0q5mkhumszvup0pzsrn9xr4ouhfqadz0x62ybxo2rrp094o1bqbtqn0zebmy6fkdr5ynaq2gorpyhqowd3r79876r947cwrcij11xwyvtjx0v1eaj0t6gwv5eycqgfio8yo8czl3df91pcangnfrd59j25gk1n3fcxzp3jtg9ep4xo0yur28mnp15q332fspzf9sv7g06b4nj4un2s1xnjn99bhtrplt7qnx7ttki1q91ywyurxe2rjkdc3yk3xbvssm1sdlcw22o3u9459gxan54mhyulnke4htuyspf73o7otyrxqfkaoq0glzu393fc9avta0q7pbbmtcvg9cnezckqgcc2wi84qewcoi2lg0scdxvzqwlj1qgo5j49u7x9epj8hfkfn82rdi3llhjuiold0u2rutow8j6ik9q6sjyfnw1pq0cz4im63i1sdvvpkkni1lozqijz2e4zzwzh58tn7jkkajxoek51yf5f8p8au26sh7kgw1cxhb5s848vt0s21pylsa43xcme47iikvzvb7rjfcb3385or7ipvlh4ocwnxfdgi51i9',
+                        filename: 'oatr61w17haad9iphtq7acsrxdi1u5vjwjhziqqkxgs9ood9phynoxfa8uwkn75p2vz7d7fm65eidiz54snqrbzhwimgih4tcx58pn4iugqsn4tjscokxe5cncj8fmyetfyva956rak8jeivicg4ye14z87d368z7xqx7pyc9jchsyt1vxu4u6w1wvyc57k6bmmhwlc5fds1m2sdil7tu2ar47r1pl2w7t6shdm3jqfs9ftmp14xlpfksdegqus',
+                        url: 'vx10smx95wqjqb2gxzm051bdekbei8gneljerwknb3u70nl3lyzj2suk8xie3u6bz62rwyuw449mmoss9u916b7xjt2jthnnkdb3l0m7rl6m0mnlm2sxus7sa4ijmsinp1tqhc120pwde9qxj52498w12kb7wqv04tgbvzb36fksle7jgjoedjaxqipnpwtynrcqgwjghjwbr9qr9zwvk5rbbc261c17dv2wac9rbrkcv9p9ikepde0gtpq80999du914jzp0zeah1kkwgiev7udduqftyicc38yi8f4mpiy5x37pkxtwvnpbutjaplixsgs5zq9be32mp02atx4zdmaz3n2epdh5ql2ywdgz4ow3viol07qydnhddh2tjucqb94xezve0fj4zpoeqedjeqazn5qhdwdpbxcivkwx2v98sk08pnhbdktaq68oh81gqq78h8tzmrrffvfy64th8zv76kal94vmm1j524kknq0dggts5td4318abuhfj9oenxs2pm6ceduiyvky0phn78ym2m6ty0534ssl0612guksunwv7krqz01pm1056te0q1fdsdwfol15gfxfmdi58cfls6qn0gi8kxaetfu80xz5w1afqopexopz53q9du4xoxk4wixtj3gmc1482nv1jua7bzoq1nomd6f4g7u53fvnb5q83r3w29aj4cqlti8d08qjy89iz8pvu8iope66rueb8ow3gosvsq77vn5ci6trbllf6hbfxn94etpvuje4471ctdzaj5ksvhkbnp7nhexkik21yai7yjlcbavlioapdaw8t9e57zim0o2aeuy8s5jmj3otwolhnlyvbnyah1rblp837ggemnxdmqgjhzdwpaa5gr7kqqa3ovzrlgxz0hdcl8uhdos8k8i3cmcqskypjcu54z1rerlfbr1eehjq4ueq05enckh7grvlebmjkgyf97x1e6fc5bhrl7k2ih0h7li92mabe1a732mjp3k1vvrfpx80kocv3s80xj0',
+                        mime: 'pv36pe5nmue2bdrcp939o5q6ixrmqvwh4uw433mixkbtogw08k',
+                        extension: 'b4lwt7e7tsuriv66hws9flu7g7ivh266ehrv52mf15ckioasvb',
+                        size: 9375065206,
+                        width: 312390,
+                        height: 908218,
+                        data: { &quot;foo&quot; : &quot;bar&quot; },
                     }
                 }
             })
@@ -1161,17 +1201,18 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/GraphQL adminUpdateAttachmentLibrary`, () => 
+    test(`/GraphQL adminUpdateAttachmentLibrary`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminUpdateAttachmentLibraryInput!)
                     {
                         adminUpdateAttachmentLibrary (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -1190,38 +1231,38 @@ describe('attachment-library', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc',
-                        name: 'x4mcwo2qwho9py8cznvas8ynxvqgd33wbzgq17pq9k7id5a5y0gusgy2unuku5mjjwwxs8hfofwptu47m2t1hkjgvf6vykowo8xuxj0ozgil8j66hw5vunrb5rtdbk8chkyf9senzk2wloont3fg46vmktcc8p4xun1udiv49l40grcnje69ohabvx2ffgzls75aa2y2mcrif8rw0qnbsxha96thc5mkia9j4m1x3c2taj49oi945xlnzjh5dp8',
-                        pathname: '8jae4cuhrjkxt8sav3ax3h2x10p4xknj3amc2mvgsg0ux4odgcm4adfqq2bevyn8p2a3tm090d0x8njylx4qy7b97rns5hivpt4m1oteimyojzqw4i1zx2ioy991tg567glihilwr8bzacty3z9t2w8347xwsyhc8bvjeuvl7l6wudbytff669thpc82777pdp7v93salm6al0yzygo893i9nwkes8jw2gtlihxlo1v8f3hw38uyb8j1jdao6bq9bobskpfqqajr47j9mzuov448neibq776wvdhxmmdf07jn5sl55dbtemuzjnvijh9z51ek534anjfrhugziu0dqvhr15hke4y6fe3c7gogja8viv2aesqbpwsfyalbw5m0ztmqktut26blnz4x88fxnho07844vdkvtdvtts62zp3bvsws3aesf58smnbfeam6kluk2ltjo0nj31r8t60gi1msc2qjbbymcytkhg7hgh61d1csxy9mrve3hp2tngxwuvpnijs6m6cj436ufcigdnac7x82enkv2qtoad8jezac457ct2asrpcw6lemkm9fjzpis1gm7613rseqebfqhkb01gskisrzvh8fljlt9si849dtcqd63bqngztspfp0p4gdle5edbdtgopcctu60052605ncyg51r2c0ut98m213p2npgcgnjdy8euwajwopb8v090ii4yezkgd32qwjaktte8coucrahfikw2yf9yrw1xepg9k29qscuauqb8iii0g9a8peopbifnmhiu1ba8twtp1e1b1sq2etbt5d9bpt4arnhzjw8w9n1jpf7262xj1c25k7hi8flxxhh5fw7anxk1c85ipclbzf4u2voo24f3o91hku1xzwzdoq6xdqvlbda2sld3spnvvs5bxogodfj41uvbewo4qryv0keimqj2n8kkj3p69szkzq82m20oumk9oecak27zcglnciy8o6ib7usoooeme6beg4iako2j4k2cuy03inhq1q6d',
-                        filename: 'whsr9hcfppvrie77e799p7299hzfu2w1hr37o8m9qyrlaw0ciapsh7dbg0xyc3ks3770jrnk8vr861m0xl5c7inm66orr41det2kax3gm4t8fqdcoa89ly6rlxa89o36jcvgj3s05k09lh0xrop2c93z5f6gm1awiimopttv0ewa0e9jxiqd4xdss4zx8po0pkln50h5ggyd7f4oftybjq5l4o9ahs9h4c09f3oaojtz9b9s8mj38uia4vgjqll',
-                        url: 'spz12146l3oc08p2h14lvzhtwbegkn21qvdjnasf7h7564jmpeujkdqs8iiiwevrpxcl485aezlfq63wgki217mzpo7nvzzkjwmwyg6tzsr8yvexqcjlp7awjh2sbhfs8qeceezkrzcqakutfpbzdbtai192czrqzjvn6qy1fra2plwx7y4p8mbpbjqlzej9rzj1aqe5va356cf52c3tmah7phkmu7x7165ts2cwhmu0wozzho63up7tlm9gdbkb4ue2qlnguzkgn56zfvn1ehou9alpcl0l2wuueevk3054zb1qcib4y0fy9ycis0nolwqk0qeb06mmsiwv6bfynnachk9q2yscsh0riov9q39rtrvfd2idh5bavwnwx5h2aep2gcwnhqorvnu53421k25d9vm6il3jaaqhecsxcxoxfm0un274y9j4arfsbrm5fwamhma8pol72iftvnhkdj7n2bb0xonfcj6p3l2jlkkimo65g1rohlfvblq7u3bypm8jzmxca8o5thdz7hll1womyo1dm1zho0yrdzgtgiwns2dt6c6frdnmjce5k6mtkks8xtdnq3gqu3wnnluz5p5qor36r9xwuuhytcyu3tpygvcr9gtdnbtan0s0zr7yhgkvtznhedrw526loh0ir6oo5qajp0vs9o159ekj3j8w7fek2kikaoit1bacl2cke7u22zir7ej251e6wty4h024d0v9up5m261wp4in5e7j3glc76035uc15fzgevgfdi5ey24ixs882zbp82r92sl800osqqy7zorthun1zyiwh59c7d7myvg64xug2rhvzmsf19ap8hka5si54ym3xwpgkilcg8qll5s0z191d7bnyxae699q3rfnii7yeimx9jds2tol65svj8xt38pmrrbh85ap6p5aatnj2angsvd6kl03q284zpa24nu1w9d0goyhvffbhz2a2tomz5u83da7s49wgfxgl908l71924bcb263vs5b5fl1635lwesi',
-                        mime: 'fyqxgvsl1ch70jr5oa95ndh9657n7gw7sfg9jqf1vo0m64pw1n',
-                        extension: '53b3ork89fshse5gkwl2tgt8mc6bud7w8dlc4ur0qj7pycw4zm',
-                        size: 5102599979,
-                        width: 499263,
-                        height: 313499,
-                        data: { "foo" : "bar" },
+                        id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30',
+                        name: '0woyfsyyr5v0fzufszj4jjfneno4uc4xw918cc9ifeutr23kkoa5cdjb8pngmpdajn381e50vqsqlklvbcgd23bpikeh4telwbodbfypb2n98qawu2la388rigfihj9bv6ur50ztzo2crjo2zfpojwms66qobow9t9n9lamla1ehpn8bbseyik4n5ihdqdfp217udniliynxv5z41cdojdpqkzlae7v48kd3e9w0dvmxn8bbpih8skksoy9u90f',
+                        pathname: 'gc1ob6ox9g7oak13adbm2ny5ra5a0aygn7vzt8jgc406xnmyvlq4avyo1atif5eqnhnrczraus36iecaz3w5nkq2ohsxc6qim22qbv4m1bztkavfcuvelzvtlqncm9p4i9i4z8m1jfmzqu97t7t5ocknxf2v4trwaqcnoihsdsaboyoej3mpi6i8o1mofe4jsas63hi4nwqd9fq7nxtpo9s5kq5f97lcwhvbfu0frop41xml4uslebuq4hglikljhf65fkkf0o9hhe858zqaugkkiu21offaka8hfz86ewzkjvzeo5j067277bnbzklafjkdzfj8x96rq82yw9eeugzpdynddayx5l9xbzfjk0x6mfokfwckek5gi8lydccg8w3jz0k6ol8d65by2wdk36z0nbqbafbpgnnaj6ur5abigbajuzjmsuct6rnayayey1z1yb2f62isj8yjw0eux9qqpi7y8f1ewce5d2kawbbxjws94qs4bhpgsqrfssfgqdr1hobmar7u5cvyxo2q6bpsgqm9ex1cpurabq8nvoq76xgh6r4tnjcrtiqyepnv6lkgzm7tqpdqyesk3rlousxorfhh2kr6d3dqiho6mut3s96elu46s7bfux8pqjhm6hliti4mccwy5brv8jmhbin8hruu653tlm24rk6p97mt4ped39qai2zgyz7ts57tqs655tf3c8vv498euvar6vabr3s2hedkofwd1a7l22bc1b2gg91bcb4w9kzsbut8ugey2l44n7xw1wjhfevku63zzxwih5ju7k6uvyztenisirl03ment0zb2pvvi55pjxnnza566d0pme8bme1ygag7e0c9qd5adifmf1iumwb2fn5jjjr84ropmkjg9e3t3m35rs4yb0oh6l6eys3kxn1suwu4du7lvanbne6tmm6aqckkv5p57aes8fhyq20zketgu2o5onktnoeuflspc0zufd80lqciwiov33sj9agbt88olpfi421e9dmwlpfp',
+                        filename: '1dlk9bah7255k7nih9iqrinc43s7t6gop9nuzo14mfcsi0rnpuhugmt3clm1om2rrt1qxqt15rtuxnigvlbg2my0itd33measnw3139grshe8zl2hs8g650fe3o3yf6huie9rh1qdizdo5gj53fdw52kewvzq42k68ym2qulpzh6qw4ek6gd79cqqmle2pn0gqb8rpcd8bvwtl4e91l9yc6jyx3sfikcczqsmqyq95fvnn3q3iiahtjo5og1lwp',
+                        url: '3ycldmgmolfsnc7y76kbhequv9dndc2fqqfzxsowszpi3vomcnvmkwi8c92t1ttk5w1a01ttfwghjjwxx2wh3b0epnhup48aq12vfkckxsx9khqoxw4ftjgrnp3nv7xh1iao6fs05646n86ym8pzmjjhcx3sjlo1nhk2msb4say73dfger8aqers7i10063a7luifoaamom2c2nqxhp2teht1wyffo3y30scz040lqv1uvnu6ac6u3be2xixfle2srth6gx4ptx03047x3i0wjtrs64qyzo2ton8irbq4ogznch4olcilzqx218vtx1kzaa1vsi5uy9ehcbdjx98pqiak868lxo03dt7uwkdmuv34hd0cyo50gzksvzxbsvhv0hg81vd21mvhzkssnsace859fgkju5gyku08u6v0l6g9tuxcbsetxz67cfrpkf5sr59h0zsvinl43v8m7t1tm6ki1u0lv5znpl0ftbeimlm3e0yfthpy7q8i7n4t7tjnofc8eqbie47950c4prak3hijrmveznxms4uo13jx6zx6ob1myygg7sbqvqejxwirtao7xkibzoimn1h9yqy4k5ewwtity6o7hc4qy51jq1r9tlfc5mxs5ubnowv3jh7yar4jwd3ptr9twmznk2mdwxu2ksom3drev68sml91o0asflvjqmekmoyr95qiuui131l0jq1x1jhrev990f6ngfo34kudyii4iaalqg1064yvkb33khpcwe7auy7csu74p7326bhjwo44jdlxabucbqw0tng4cuvenqn9j3xpnucj59t8c9hxh495qny9locezq86bgxlvj097m089f96hu2ldsp3pgdmb5mc5n2elerqcr1y8lo0q7af25vtfif0zk0yp1nw9gq8ry9thsjsnaumke2jw9re64tj3eargw0fudlba1299it2gc5apu8cbc82q9q3i6vysib1gssywfuyuym5v1tae4mw4bl3912qoeefme958p4pl5xm7i7',
+                        mime: '4xrcnpkqganlr8c2pf0qtx712uzuqfza45r6t76fzhqd62zc44',
+                        extension: 'ks1lu6dndrd7323t5q7y4cdq5ihdu84p52vct1iac7usl4zbdy',
+                        size: 8461046157,
+                        width: 189757,
+                        height: 622913,
+                        data: { &quot;foo&quot; : &quot;bar&quot; },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateAttachmentLibrary.id).toStrictEqual('a246ab6f-c46f-4547-94e9-88859b6a37bc');
+                expect(res.body.data.adminUpdateAttachmentLibrary.id).toStrictEqual('fa49a562-9bc9-4c5e-a6eb-98d756365a30');
             });
     });
 
-    test(`/GraphQL adminDeleteAttachmentLibraryById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminDeleteAttachmentLibraryById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         adminDeleteAttachmentLibraryById (id:$id)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -1239,7 +1280,7 @@ describe('attachment-library', () =>
                     }
                 `,
                 variables: {
-                    id: '800a108b-0ca3-4a98-acbb-4551cc03c0e1'
+                    id: '9ac145cf-7159-43c0-9004-77eb750d39a9'
                 }
             })
             .expect(200)
@@ -1250,17 +1291,18 @@ describe('attachment-library', () =>
             });
     });
 
-    test(`/GraphQL adminDeleteAttachmentLibraryById`, () => 
+    test(`/GraphQL adminDeleteAttachmentLibraryById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         adminDeleteAttachmentLibraryById (id:$id)
-                        {   
+                        {
                             id
                             name
                             pathname
@@ -1278,16 +1320,16 @@ describe('attachment-library', () =>
                     }
                 `,
                 variables: {
-                    id: 'a246ab6f-c46f-4547-94e9-88859b6a37bc'
+                    id: 'fa49a562-9bc9-4c5e-a6eb-98d756365a30'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteAttachmentLibraryById.id).toStrictEqual('a246ab6f-c46f-4547-94e9-88859b6a37bc');
+                expect(res.body.data.adminDeleteAttachmentLibraryById.id).toStrictEqual('fa49a562-9bc9-4c5e-a6eb-98d756365a30');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

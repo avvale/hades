@@ -33,19 +33,19 @@ describe('AdminUpdateAttachmentLibraryResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateAttachmentLibraryResolver>(AdminUpdateAttachmentLibraryResolver);
+        resolver    = module.get<AdminUpdateAttachmentLibraryResolver>(AdminUpdateAttachmentLibraryResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateAttachmentLibraryResolver should be defined', () => 
+    test('AdminUpdateAttachmentLibraryResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('AdminUpdateAttachmentLibraryResolver should be defined', () => 
+        test('AdminUpdateAttachmentLibraryResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

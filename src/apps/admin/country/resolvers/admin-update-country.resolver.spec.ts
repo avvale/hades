@@ -33,19 +33,19 @@ describe('AdminUpdateCountryResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateCountryResolver>(AdminUpdateCountryResolver);
+        resolver    = module.get<AdminUpdateCountryResolver>(AdminUpdateCountryResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateCountryResolver should be defined', () => 
+    test('AdminUpdateCountryResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('AdminUpdateCountryResolver should be defined', () => 
+        test('AdminUpdateCountryResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

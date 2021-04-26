@@ -3,10 +3,18 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IResourceRepository } from '@hades/admin/resource/domain/resource.repository';
 import { MockResourceRepository } from '@hades/admin/resource/infrastructure/mock/mock-resource.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 
 const importForeignModules = [
@@ -17,6 +25,7 @@ describe('resource', () =>
 {
     let app: INestApplication;
     let repository: MockResourceRepository;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -30,41 +39,57 @@ describe('resource', () =>
                             validateOnly: true,
                             models: [],
                         })
-                    })
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    TestingJwtService,
                 ]
             })
             .overrideProvider(IResourceRepository)
             .useClass(MockResourceRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
         repository  = <MockResourceRepository>module.get<IResourceRepository>(IResourceRepository);
+        testJwt     =  module.get(TestingJwtService).getJwt();
 
         await app.init();
     });
 
-    test(`/REST:POST admin/resource - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST admin/resource - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send(repository.collectionResponse[0])
             .expect(409);
     });
 
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceId property can not to be null`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: 'zhdxgdxjjgmxhdw4gpgo9h5tl2531rnuiz949zmrg5xd7g4gmeb7at6oyr5kie076vl5vfyjt2fllha40vzcrsr123iicf5vwk963u8okqs72blq7zll1vf2t9auf1kmvebjip48nrtam4aufxmcuq0na0skyr68ewjmsizs41szu9bjtgvasj6v7p7jxeqrdjlvzl2ymf8mnqxynx88gn4h56ascvkeqiasijoal4zca81l4jeu5vmcwmjcjvr',
-                hasCustomFields: false,
-                hasAttachments: true,
+                name: 'rsq5fm8316pa2tjuqh00a8nbi2zg3j6j91yjm0i9nfvlmrq71llq5txbliakyve0x9xz1yog5eq1dz108szfqgkgf5pudvnsla6pili0sh7bseyn13b0r66t4yeh0j2tvv1lgi6jkii70yquluiq26u989hm7rdiap6g4gq60gkgr0bn9h9xlxhpin1n8kv7mucppf1pizmlkaxqe474b7zniqqag5ngvce1oiwbt2rpaf0e3p2dy50orqotgne',
+                hasCustomFields: true,
+                hasAttachments: false,
             })
             .expect(400)
             .then(res => {
@@ -72,36 +97,18 @@ describe('resource', () =>
             });
     });
 
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceId property can not to be undefined`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceBoundedContextId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
-                attachmentFamilyIds: [],
-                name: 'ozdru6awwm2gcw5octw5mmqpjbrw02txvv1fevaissr0wd5tseigbn4cs9l838yz82fcj5zyxjafclq2fyxfyt7t43ih06mztplyqnamyiucix5szjqzvn7ygu9rcb21spulf2flzofvq82itqcsny62svv88xmyda6j2bo9rsotiiwgp7z2jumhj0gin3uxzod2cxprx84hzmwwq3mcbnqty4ns9omh8zi9vatc1agrx0d9krlu3flfhj1f9p6',
-                hasCustomFields: true,
-                hasAttachments: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ResourceId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceBoundedContextId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/resource')
-            .set('Accept', 'application/json')
-            .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
                 boundedContextId: null,
                 attachmentFamilyIds: [],
-                name: 'ba15mdiuujt6nn9p851nlzws3gnjmbjafmb8zpxuiykj3vwkd6ixj3a95rlzyeibfoqtyj1di34q32p9prn938xhm18g5wkavo95zwmmkhskrzv4201nqtotmufnd17p5jnagelwmclr7zinwi5eyfqzcp9m0pmsjcqa2fm544f7x7kkm7q18e2wxld2eqjyu870541rjxrd5fts3mhrq4ut285lap1wpvu1j4pgbgh49z0kdp06abekc7tc2i6',
-                hasCustomFields: false,
+                name: '6qv6lbd5k99gubimjm2gubcxhxk9krt7kglfnq2j6n0z4r7hkpouiyt7sn36zbpbxx92fzvdznpf45jhgx30c48gmtmv1uvf616evssez0q9cylcqjcn491bxgenv287afzlxgxxshxgpg3h0dh46nc9m2nv4hx9o9cxy4jp37bnlc4zp6mb80ezyfcdyalzip8941z99dk4bvnf6pygk3jvtaibci8qf13j8wwic8odjuu5a4n9grxy2imdvoh',
+                hasCustomFields: true,
                 hasAttachments: true,
             })
             .expect(400)
@@ -110,37 +117,19 @@ describe('resource', () =>
             });
     });
 
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceBoundedContextId property can not to be undefined`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                
-                attachmentFamilyIds: [],
-                name: '19aveqm0imrw2nd8symfsffao57q5cwkktx7ry406imk8hfwpxtuu6r4fpy7ah8zr19z2peri1digcpngbkfb1eq7jb5cz071l2550p5p32xutpsw42j9ucngppdnd7f7bi7x77sft1p6vm2uhxr9oh3rge2e1t3hxivqz4sw36lq8fw5i5dhwvir8a9ukilefgdavfhurxj7k5tc527ngwvq4dp98q4o3k2jioxlgmx01ficmjs7igqyhjlryu',
-                hasCustomFields: false,
-                hasAttachments: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ResourceBoundedContextId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/resource')
-            .set('Accept', 'application/json')
-            .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
                 name: null,
-                hasCustomFields: false,
-                hasAttachments: true,
+                hasCustomFields: true,
+                hasAttachments: false,
             })
             .expect(400)
             .then(res => {
@@ -148,37 +137,19 @@ describe('resource', () =>
             });
     });
 
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceName property can not to be undefined`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasCustomFields property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                
-                hasCustomFields: true,
-                hasAttachments: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ResourceName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasCustomFields property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/resource')
-            .set('Accept', 'application/json')
-            .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
-                attachmentFamilyIds: [],
-                name: 'p531e67e70mp00et8k4duc0s5dxfz2cvfd9oljqeuzezauxbejkp8x5k4w3fm0rbg4daahtt2i2aqwfdjnlw0zpluumqy0sjslhdwztmi7o6043zxgecp6q0zui9trnvf96nabkadim3h8rz82xwwhyj1lso2u6st6w45st07mkyl46p18tima3ywdwmjvwmjm4k7q2rznx62ywt89ppgqouzhmynqdehtoa8c3aujczbb7mcf7awzq1r2i4sns',
+                name: 'arr4894nom15uzzkof4zxswyroihgodmlc5wxcrn6j2mt88m287162gori8l8b4nss7u2ibyk8ki95bn313bzbn2oqnry2k0wyyrsg2396mybn0s3eg4jdgaqjuhr6v1hd9csn984j9s6hko18lfcun0fe3438mmwq2hcc3zjaktrlz4abgfxgo5rkv2lks3cv97kn5x3iwsvue8u01omn31qv7qqxnb3mdvdx1m62r62q2y9j01f8gphe4zc3l',
                 hasCustomFields: null,
-                hasAttachments: false,
+                hasAttachments: true,
             })
             .expect(400)
             .then(res => {
@@ -186,35 +157,17 @@ describe('resource', () =>
             });
     });
 
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasCustomFields property can not to be undefined`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasAttachments property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: 'fxbr0nsonz527k2oclfr7xjjk37ufjgnormtloeeskmj8ev16zhwzh8gjbektgxpk8wgc22wv8mpxcjafcsr00xclsrltg2ul2tsizvaw0wyhtjdzblwtn50b6ojjif6ntfcu4d0pritmzhzamz5rz2y42hu07rws7sv3v4l17zwvvoesc8op9uejs897qswp5t6x6wf8yk7utgb1bu10jho35luhcw5pjwfpg99kf8dx9npyhp55vunjwe6rvz',
-                
-                hasAttachments: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ResourceHasCustomFields must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasAttachments property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/resource')
-            .set('Accept', 'application/json')
-            .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
-                attachmentFamilyIds: [],
-                name: 'rnwghtcp0te6qaix0281y4yh8oet9sw8zyg4h9kpz400upuo0awqxr0ap9iaou20bnzf07e3cb490tvd7fot6h3c9brrpoehm5ziwoz4qn5r78f0f909ht2rvwxo05edpd09ckztxrco0mnjwd3222v66iyeusxgagsugd6yweac9whn7ekegxtydglypcd3nw64thi2w5ppn6gbspgpc81jc7m1z8y5du7qy87mht7n0c0v5sach1gxlf0ly0k',
+                name: '2h7312y4of44ey3viojvpb6bl8tertmszmfce30lvps6g2mooqyxxifftgoaqvykbmd4jmnlbch1i3j16413zcf78pdejug5q03u8s2t4wj4y5uuw66kjxjoxsfg5qspzjfmo7wt63dny9etxg1yre3jig726k00hdhey32derldd08b0xnn3adzsgsfnjby51t0d6jm8mq8lzwota4l7vbx3yky3mcg3gqcjhw17xo07obkgqezch6qok8upgy',
                 hasCustomFields: true,
                 hasAttachments: null,
             })
@@ -224,104 +177,172 @@ describe('resource', () =>
             });
     });
 
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasAttachments property can not to be undefined`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: 'rjcfnad3ai1rtoh7m38d0efs6zrb97c3bw29s3xbvatd196qxrche46si5y8eleqyju6lvdawl6q6lrfwgjulx41shpbxopo5cmiavssttvmga50f4tzkysp5kwunppcsdgzq2cqki6eodo4w7jvy9hz52ivzoza6i25wx93ncxueb144xsdszgmw9krljogln265d71h82cox01r5ssnu4cfz3y6cz1n7um2ecyt1a1jba7t47bgdk6ul4cl2u',
-                hasCustomFields: true,
-                
+                name: 'xivp4xmq0i6s9kvalbc2nskmhan8nqqayx3uhto0hl3g5beysvsdsqew5f6lq26idiglurimvzak58oybq3so6h3s9c7bp85ylz329edn9rb10xddoe0gg5npehfwi3bzkeuwj0725vhmqi14uwes89d08bowogt7lehupi8jgqex1pfb1hrl21mfzewymdlfljexrvzfa2egceaul2x5d9rt7uiwss5rx5eufqxwmp39tdy2e6oduvdk45otoi',
+                hasCustomFields: false,
+                hasAttachments: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ResourceId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceBoundedContextId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/resource')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                attachmentFamilyIds: [],
+                name: '3tebflxoocqfa1ka3z87hjoa4jfyvsoywfz0yakjs8uncuao3mae7v2z523kkdqwzo3agyxuukkn8m4g6s7tvnmb4uztrvqyjry29vsjau9r11c4lgos5yvdtzs5lq5rpm4g8crrrr7q0h1uguevsoarx8acp1f1lmbka9jhrqj440vz2fcvs0pyig0z090sh4itpz4lvw7pp21q1qd9s7d4qbz1pblrm8ayyqtsaxg0ysvmfrwdg3qxmkewm3n',
+                hasCustomFields: false,
+                hasAttachments: true,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ResourceBoundedContextId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/resource')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
+                attachmentFamilyIds: [],
+                hasCustomFields: false,
+                hasAttachments: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ResourceName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasCustomFields property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/resource')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
+                attachmentFamilyIds: [],
+                name: 'f4pj0mt23hgmz4e0t1iuxctq5yweop473h1ksjpg0dgjej1513qve1drymg5cd3ddhsgk6estb3f1o2vm9x22dkgkur75rlkskj3h57we1t8nspn9f6eaqu74mak8a2alxzhn2leslgbm3858t10etgjjtbqptnff3nkegmhg7kmn5gqaloafaqbqzcfhuwtjwm2z344ggmequcbc0kcspio7kmrgjxgc28toj089qyxp2mjp6xi7yldt27hmrr',
+                hasAttachments: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ResourceHasCustomFields must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasAttachments property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/resource')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
+                attachmentFamilyIds: [],
+                name: 'vora2mnypill6lc76tql9c8he17v6tg17s7cayik2ri6c8xy9m8rv82yyk503r0yb2ev739m44iyc702vmtsiuktru5hjqmals4jct5785hxq3f4h3aez60ra3yrvyph5h0sw9obcy3bjhmns1prbu3ejq3o4rins5vdh15u99zhcos2yb8qc1fuqkl34qfyjncpr2n5fyandqtf37s4o6bikwaidi1c0zqyxev0curzddqzne5tlbqbl124udn',
+                hasCustomFields: false,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ResourceHasAttachments must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'uka88bh7nqtv6itt1gjielajvfhbhpyws0nai',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '7lfbogujf0d48a8tx4mccvq237mdgb3mgmh34',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: 'd2avgtmdrisjdlqxmfjujiekghdqfphii4caxctvn7x5vhgjgps276xwab9pl41e5ty499ar54fxkut0pkczw3qfmnmcf9uqc5fgz084qst8d7bo13es8vswuvv9hu3j4j9up63pl1wu0wz315sh8jtrukksxj75fj9mff3rsc5zquhedc9lhczvlr4tn0k8snwv4epsh4txxxj9iasv9o6yywrcueux1zk8sczbzw8evpr4h4e40xejnrdilal',
+                name: 'byczk644e5nybsryofneytimpa2suxudukovwqo3igvqwzxshgcl1xnbrln59j736p8m4vhbjuzzazjfmg3c6s63mget8h5oygjwjng7ric56qddmg2t41dtbncstn236h90jzxfqjobzkso2u1t0lan2egaph6r8l7mnbu9t4gtlwu13hp2k9q7jqva502i9oy34dacq9stap28k762qjv01rnf5v8l8oejiak2s1iijdrqb9co0tch7z9weo1',
                 hasCustomFields: false,
-                hasAttachments: false,
+                hasAttachments: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ResourceId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceBoundedContextId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceBoundedContextId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '3rcvso7uywvkpujh9afhrerldcdb3n1e0s8lr',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: '78h88bokmw7yyyn4mtbbphuw7k0w12hvuebvg',
                 attachmentFamilyIds: [],
-                name: 'so9res5wep117py7ik1p7yl3tmf38vlolbxcpo3au0184i73q1xk7ltp8cvnv8uwixyfn55nbeolspeuy70qgkg1mlyhnoq78lh7rjzglr20hiyts11329ihj09s0svkg00c7azhlm0j34gavdp1clpxsz4wgx4r8ukhnnm3hxc20to6axcxgiobr6aa24fz7iwkm06innlmfumbxnmdj084kgw8ty9q2civq8iau19srswst70cidkp25fg2t3',
-                hasCustomFields: true,
-                hasAttachments: false,
+                name: 'ojp0glzmgihg0cchohe9ki9tnb7kgeau5u55jxuehj2ab3en2xjskv465vmseqgnaoezscq3r4wsqp26vrxki1vs4q3y2h3muxbq93jtho0lzctc3rl8cgfe24y45zaoy19tgzk0nho6xq4wskxg0qnl80ii1soxe2ipqf2lxnn49htwv9nf7m5w3j5dmd64uwn73czv2bxxm3domgqm5utes8t9dpn07jw30pyfc2svrlsnasz3lfytpd2jtkv',
+                hasCustomFields: false,
+                hasAttachments: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ResourceBoundedContextId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: 'yg6kvk7rl96uhgv0stqm4o6h47denoh3882qd6aa49d71ud9xzv98g8natfu29c1ie4yltkv0ho1w6hdo9op22hipjsfxdnpuz94mdhlv4z800vv1mru63bktj0uv7q8swy0sotgddcfidv62ov7q56k9pzp4mhtgwnv8u0kw0jwppiee99zw6s2p6lmc0rn6aigh24lqeqet47ai0hg9e0l2lmrcnbay30gsxho3vfio50kp6l2hcvn7lmqnfxm',
+                name: 'wk88fuqb0gw56nlszh2monyi6gbyfx3t5c3kshfj1sxo63zdplet6u1phhsbkjp4ea8az27oltlbqc8q7awt8x93at4liv4sd4gi6q4wf9odizbp7r6istcdi4brxhjup9762fqkzdzfbgf32d6vmmm58g0v4l6vjwni7snlb1lf06bepgg9dirlvwr7ibaflkabehwggg532hewu78796dtsseycxm6vpea0n6kxsofdj40rk7417ynff9k2fih',
                 hasCustomFields: false,
-                hasAttachments: true,
+                hasAttachments: false,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ResourceName is too large, has a maximum length of 255');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasCustomFields has to be a boolean value`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasCustomFields has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: '4s2ef2mjnx3i8072t0ou86ksyhqosh97b6bcg88h2xx21wihzlufujz238vd5fw20mp77ifsiumgf87scai257yo0dgxwy4fxm518ey7gpma0n9kun2x6lmcnfcm646i40ut52wnudgkp1jwmacqjp70a49hfgr6uh5gym8s3h8pebqj88c3lz81oqu6yit8rso53dr8ndhjidzggrlnisgtvd8jrng0wca45xxxq1r3vdh2d3fzi0tdyogtbs5',
+                name: 'n55vkzdzukuomos3ngaqh1uyq5f8m4fox94s59jvald2vupfp3g8302nwcmt3sx1wtxrqdla09j0o8xzdh0tvbtwjek55osw6g6ctyh7qm5fj9pjd3vyo3iuue4kipn28gd8anhjtysf29jidgot7crylvaqnpb2fshorfztureq0e29crlt8k1rsb5fbmuwi9l73hshi6drskop6vtv66v2n13v5bow53s59x6f2qlff3d2ck4bgkuz97xs7ej',
                 hasCustomFields: 'true',
                 hasAttachments: true,
             })
@@ -330,17 +351,17 @@ describe('resource', () =>
                 expect(res.body.message).toContain('Value for ResourceHasCustomFields has to be a boolean value');
             });
     });
-    
-    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasAttachments has to be a boolean value`, () => 
+    test(`/REST:POST admin/resource - Got 400 Conflict, ResourceHasAttachments has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: 'dhyca0bbz2p8miw7d66nf36r4qvnbuf3o9uggyed6mpg83k8x69r3k7xbkk4om3t87liqxo1lv4ul4k7vdnx063w88hh5ui44nh1302rhnxy8ygfkvr3hv3gloxamoeyqhpspg5roqpev63y5eu5thi6v3z7on0udionge7m3kvlhu3h345jks5rczjgqshpxy86tyt8ordtucgzknit3u52i0iafgvtgsv8orqlom5cqa7atfxbuk8ptischca',
+                name: 'kvisdt69yluu5s2e1q14gic2w92ucr0xqm27k7njo5ufneyfviivg6bvnvy29zu2a289pe23ubitvfqpn0wprowcixrnqgrhoczekfek0y4dt4ofrocqgjuw5awsrqjsaommuyomchmfl0mu36kfxke3iz6ch8d6w4022nxe0n1egrfobtjt8sx4apcdwpece1cphwtkf8izna3engiq2skfiu0zz72mq7dizf73pt4e2uimw815s6a1a67m541',
                 hasCustomFields: false,
                 hasAttachments: 'true',
             })
@@ -349,181 +370,184 @@ describe('resource', () =>
                 expect(res.body.message).toContain('Value for ResourceHasAttachments has to be a boolean value');
             });
     });
-    
 
-    
-
-    
-
-    test(`/REST:POST admin/resource`, () => 
+    test(`/REST:POST admin/resource`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: 'ap6p0ddrg5veeq2u7tb0uuxjpqxfib8a3jmj4b37i5iqkaw7i4s6xr325xbwgx5uqlu4n3u9hnxma8orhzhl43hypbw1k2e3aienbijzhf5h2pmxobzsy17apli5dpzl9ytphe0878hf9tawhvh6923u520k21gm0vxo378wu1t9y75tkx3x2ajqbg2i4i39nlkqpbr8l4fqybpv8d31j1d70dqs0caydoyot1479cie3psjty4zw23xvrz5xyh',
+                name: 'od6jsbtbqj4n6p87n86pdvfvp98di8dvoj7v2tq73lub1np4hocdxqqu3aryrc72yn95d383ak3qcstebf4iv4dbwoba6fivmmqwkaye5ed1e44olpo6eyri87idibaoobp09e14nn3magqlh4bgsrxek8l360wq39utzh3418krg6qa93nicf7lfz9obokqaju0ug768t51o15bthksa43k82k11z6zn4jom77jc98bl6t0409r51j1d256jlq',
                 hasCustomFields: true,
-                hasAttachments: true,
+                hasAttachments: false,
             })
             .expect(201);
     });
 
-    test(`/REST:GET admin/resources/paginate`, () => 
+    test(`/REST:GET admin/resources/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/resources/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
+            .expect({
+                total   : repository.collectionResponse.length,
+                count   : repository.collectionResponse.length,
                 rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET admin/resource - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/resource - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: 'f62cd769-6285-4d54-9ba0-7368466d5c1a'
+                        id: '193f10e6-aaeb-4469-97f8-c0d1ce37456a'
                     }
                 }
             })
             .expect(404);
     });
 
-    test(`/REST:GET admin/resource`, () => 
+    test(`/REST:GET admin/resource`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: '62b08714-ec1b-4474-a94f-b89692575ddf'
+                        id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '62b08714-ec1b-4474-a94f-b89692575ddf'));
+            .expect(repository.collectionResponse.find(item => item.id === '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74'));
     });
 
-    test(`/REST:GET admin/resource/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/resource/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/resource/7fa0f11a-1be8-43e6-a5e0-839328fe7834')
+            .get('/admin/resource/839f4a2b-892c-4f12-8d32-b6a07b6ed1c6')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
-    test(`/REST:GET admin/resource/{id}`, () => 
+    test(`/REST:GET admin/resource/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/resource/62b08714-ec1b-4474-a94f-b89692575ddf')
+            .get('/admin/resource/07e11f5c-1cbf-4efa-bfd8-d52c2482cb74')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '62b08714-ec1b-4474-a94f-b89692575ddf'));
+            .expect(repository.collectionResponse.find(e => e.id === '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74'));
     });
 
-    test(`/REST:GET admin/resources`, () => 
+    test(`/REST:GET admin/resources`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/resources')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
             .expect(repository.collectionResponse);
     });
 
-    test(`/REST:PUT admin/resource - Got 404 Not Found`, () => 
+    test(`/REST:PUT admin/resource - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '5c9e96ce-f2d6-46e6-95d9-7d5e362dd0c2',
-                boundedContextId: 'f070d15a-d9e6-451b-9b69-bb4bda7b73c0',
+                id: 'b4691be5-8ffd-4d0e-b841-a9ba5ef82a7b',
+                boundedContextId: '24ec4380-4b1b-40bc-9565-9e3f918e90f2',
                 attachmentFamilyIds: [],
-                name: '9y0aalv0e991w9q0xdcjh8oqrhv7ttromivawr7qlet2mywu59ezjyi70y0y76rqf8i0pzbd4z8z9uxtix2ab7tnbbdci2qvbl74n7fpjk0ef5p410u2c1uf6k706edvkfr8vtwyhf3qzuf7eicobsr9318pon1dfc9bd4u6b9dej2n0t8ntr5tauciwwi8rkq5sf9fd2ry3dinddcutks001azke8qps7bzbrq4n49a6rmd0gzajbe5yz1s1xx',
+                name: 'wua2m5j1hz9sivp7akttyux08ofsvb5ithterkcwa2xjzueynsodit94wvcv04htu87320dtfk53war6n7ejz1gedkfpk9hqorqa32zh35u98siu5mwr0yx4turl2wflpgpl1hm1baax55fjifgnpkecz0kd3lkfm6dvgxh6243vfis0wm1li88swv6fcm5lujuxi8ojniqdwbrk2tojcoflh56oyuu6qnm3hum1r1gi91q519t55e9dadiui6f',
                 hasCustomFields: true,
                 hasAttachments: false,
             })
             .expect(404);
     });
 
-    test(`/REST:PUT admin/resource`, () => 
+    test(`/REST:PUT admin/resource`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/resource')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
+                id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
                 attachmentFamilyIds: [],
-                name: '430w4uh2ir84i597m1wqvbvg044t0jnon0jlri4f78mkpwngybs7uuh2rngtkw55ptwnlgt0xgg8n9guqh27tqhl08zshf0e4gxt97atq5vijy12gi1vtuhzkozvh5icm9frvmp5qeskajucjwswjb6uhd9udacx6r89h0b5j01tv8dv9ykez0rmnbao1guytkz9p0nno5ore1k50c8iwt5k2rterw4isuxakc1xlfgtlbjosb19hnngjd64nuz',
+                name: '3o1495fl41wbvqb83k0cwwi6mg6rovtlzwy9ryp7h4ejpd8nlo9krhvyotb7o9l8mrmomf7igifql5gdcubfjw6jiaym7qlyyjm1kwt9kj6w56l1fhxewis09u1j3hnoyel3jhr1nbsiv1w5bkxt4fiikpggcmwi0s245qma9u8i0mbrtsjpafs5al9jgq37nn2fuc0cy7v16g8qyvbwl8fb8ai8qstzl20396w8axdab5atr46pv9uzcg3rjin',
                 hasCustomFields: true,
                 hasAttachments: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '62b08714-ec1b-4474-a94f-b89692575ddf'));
+            .expect(repository.collectionResponse.find(e => e.id === '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74'));
     });
 
     test(`/REST:DELETE admin/resource/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/resource/1a9f2f1d-75f6-43ab-a3d5-00273b4a9fb5')
+            .delete('/admin/resource/eddc67cd-7d5e-48d5-adf3-655a58fc1c67')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE admin/resource/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/resource/62b08714-ec1b-4474-a94f-b89692575ddf')
+            .delete('/admin/resource/07e11f5c-1cbf-4efa-bfd8-d52c2482cb74')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL adminCreateResource - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL adminCreateResource - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateResourceInput!)
                     {
                         adminCreateResource (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
                             hasAttachments
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
@@ -536,63 +560,61 @@ describe('resource', () =>
             });
     });
 
-    test(`/GraphQL adminCreateResource`, () => 
+    test(`/GraphQL adminCreateResource`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateResourceInput!)
                     {
                         adminCreateResource (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
                             hasAttachments
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        id: '1c7e73b3-b690-41e0-9c0f-6bfeb974b88c',
-                        boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
-                        attachmentFamilyIds: [],
-                        name: 'dnqkiu6y4np6xh2hhwriu108m4cdi9v9g25nyat8i2vl6rrlpxfds80dj4nj9glcf1zx2zrmwol2cjcgrnwzt4nsk8463ztlus9a0pj6ajnfd1ecbtvmd7sgrcrifmz76tew8wihx5xifjp4p2ay0qkf2suhk5tpq4ifkdn6e6f9r2epb7zr8elj1klw7sx04ebgkyh7rnqo6ogozqnfucyy1ejbyhje4hi68xkrrf2aqdd0z4q2w965nihm17s',
+                        id: '61710423-3b7f-41f4-8884-7684efef2abb',
+                        name: 'czu5jk19heinr030q4iq6gnwiu0k98qdfvx3j1tcyqxprzvwxz5xr4k5ciuveg6cfce8pevq7zyfqahzngamsu9fpzz8m1ay5zz30ox5uzn9b4tj096wfofd5mck803659gy2sw4vbg870zlxs4llcnhn4eklidrifjmwkovpm8rtzzl15qc6ag37tzk3a7f2n5dqv7ai53m88ezqagretdfu8w8l3ghegoj8hq3hkmt4zq1stoul53txxq8ydy',
                         hasCustomFields: true,
-                        hasAttachments: false,
+                        hasAttachments: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateResource).toHaveProperty('id', '1c7e73b3-b690-41e0-9c0f-6bfeb974b88c');
+                expect(res.body.data.adminCreateResource).toHaveProperty('id', '61710423-3b7f-41f4-8884-7684efef2abb');
             });
     });
 
-    test(`/GraphQL adminPaginateResources`, () => 
+    test(`/GraphQL adminPaginateResources`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         adminPaginateResources (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -607,17 +629,18 @@ describe('resource', () =>
             });
     });
 
-    test(`/GraphQL adminFindResource - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindResource - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindResource (query:$query)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
@@ -627,13 +650,13 @@ describe('resource', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '7b498826-813a-4681-855e-487b826d213a'
+                            id: '9bb78c18-37d3-4936-affb-b96b9b874596'
                         }
                     }
                 }
@@ -646,17 +669,18 @@ describe('resource', () =>
             });
     });
 
-    test(`/GraphQL adminFindResource`, () => 
+    test(`/GraphQL adminFindResource`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindResource (query:$query)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
@@ -666,34 +690,35 @@ describe('resource', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '62b08714-ec1b-4474-a94f-b89692575ddf'
+                            id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindResource.id).toStrictEqual('62b08714-ec1b-4474-a94f-b89692575ddf');
+                expect(res.body.data.adminFindResource.id).toStrictEqual('07e11f5c-1cbf-4efa-bfd8-d52c2482cb74');
             });
     });
 
-    test(`/GraphQL adminFindResourceById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindResourceById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindResourceById (id:$id)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
@@ -704,7 +729,7 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: '12220c1f-5d3b-4562-abc7-e113322ef30c'
+                    id: '59452fe4-55a9-4f88-bfe0-ab5bf9d3e233'
                 }
             })
             .expect(200)
@@ -715,17 +740,18 @@ describe('resource', () =>
             });
     });
 
-    test(`/GraphQL adminFindResourceById`, () => 
+    test(`/GraphQL adminFindResourceById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindResourceById (id:$id)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
@@ -736,26 +762,27 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: '62b08714-ec1b-4474-a94f-b89692575ddf'
+                    id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindResourceById.id).toStrictEqual('62b08714-ec1b-4474-a94f-b89692575ddf');
+                expect(res.body.data.adminFindResourceById.id).toStrictEqual('07e11f5c-1cbf-4efa-bfd8-d52c2482cb74');
             });
     });
 
-    test(`/GraphQL adminGetResources`, () => 
+    test(`/GraphQL adminGetResources`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminGetResources (query:$query)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
@@ -776,17 +803,18 @@ describe('resource', () =>
             });
     });
 
-    test(`/GraphQL adminUpdateResource - Got 404 Not Found`, () => 
+    test(`/GraphQL adminUpdateResource - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminUpdateResourceInput!)
                     {
                         adminUpdateResource (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
@@ -798,51 +826,10 @@ describe('resource', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '6f685f7e-8495-4524-a730-ad7a4f1d5603',
-                        boundedContextId: 'ae9ad187-8d84-4700-b29a-b1c269c783d1',
+                        id: 'c580ef05-42e9-499b-9fdd-d0213b2e86bb',
+                        boundedContextId: '1ee5729d-067f-4728-b64d-62ca5f3217a7',
                         attachmentFamilyIds: [],
-                        name: '60nv8377y0608smviqh7qhe99225kr0ebqbfsb51k5b2nerd973m1fouogpadgraabubg9z7njz4ioq7bkmajjfb9ve9dh2pw296t2i2j8ojlpacglxb07rh0bq87um43fmd1y3knctx5cdeua15qhdakfa2le9c2t1mbsy3uqunz8nfj5gd2q2uzjx7y7muvzhlwj7jdnx3q7kev05sg6w9ehajit9k7b746xvjq34x41h2qatz5r33ewa59ss',
-                        hasCustomFields: false,
-                        hasAttachments: true,
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL adminUpdateResource`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:AdminUpdateResourceInput!)
-                    {
-                        adminUpdateResource (payload:$payload)
-                        {   
-                            id
-                            name
-                            hasCustomFields
-                            hasAttachments
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        
-                        id: '62b08714-ec1b-4474-a94f-b89692575ddf',
-                        boundedContextId: '7bfe3b7d-c0c6-4748-a9f6-48daa9627572',
-                        attachmentFamilyIds: [],
-                        name: 'lld2mgxwbfj7ovndjgpb46ptzegm3cd11n1wfdzmlv6o5qqyhkg6pk7pkylu8cuirbewawjfvbrl4xhx5pa8b4l4yfma6qb6cxbfyd1q199k517ieaor6elpc90jxl1j7uigo0rlu96suq9duv2l22r78gxgvfyp9pnhertbdos0ow4hevwpydlblmrg296yrp0jj3vy0oyvf6m1rtz9vy35kx7pqvzqzr7lz3ascc2idm8wjp6fyp0a20fxllj',
+                        name: 'ysn7th7njaevklp5n39ql2tc264ooggx2r97f74zwp4ffbkxkq86oznwiywv3jfsj0mk3cvctiaxyk2x3fk9npaxmbm3k6k9i9wndupaud6xw68xeefrsmlro7fede358ps3e30yyjfxrfhsf0kvjjvpizqj1p96tgk125iravlgqojkvhgqd172k215wb8cliug4s74fz8tdsvg67597xyslgijbv38epyla8c4c9kutnbex54g45d3apegv1g',
                         hasCustomFields: true,
                         hasAttachments: true,
                     }
@@ -850,21 +837,24 @@ describe('resource', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateResource.id).toStrictEqual('62b08714-ec1b-4474-a94f-b89692575ddf');
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
             });
     });
 
-    test(`/GraphQL adminDeleteResourceById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminUpdateResource`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    mutation ($payload:AdminUpdateResourceInput!)
                     {
-                        adminDeleteResourceById (id:$id)
-                        {   
+                        adminUpdateResource (payload:$payload)
+                        {
                             id
                             name
                             hasCustomFields
@@ -875,7 +865,45 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: '1f40123f-d853-4a9b-8d2b-b8c0d7dae61f'
+                    payload: {
+                        id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74',
+                        boundedContextId: 'd45ec392-db38-437a-b950-1f48c9fa9e7d',
+                        attachmentFamilyIds: [],
+                        name: '9vw8vyhpyr0uso64qb8t8no2f6ydujndomhyhci1dhuf5vjnm44ngz410chwabkq7jvc0nj0320dpucq48mwl08414erh53hddt32y5zb2r8syslzcb35l6jejeq54m0guwule3gvrs116rcikr0ffpr5xdvnx98frm4tf6bt45sfv3qjx95quoyptiyebln3d0dmjeruta2gjf4o4r5fnhp39er1zov9rmxbkf5mypl2sdkryw1peabzhw305y',
+                        hasCustomFields: true,
+                        hasAttachments: true,
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.adminUpdateResource.id).toStrictEqual('07e11f5c-1cbf-4efa-bfd8-d52c2482cb74');
+            });
+    });
+
+    test(`/GraphQL adminDeleteResourceById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        adminDeleteResourceById (id:$id)
+                        {
+                            id
+                            name
+                            hasCustomFields
+                            hasAttachments
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '6bf091a1-dd9e-46af-9996-fe7154011c77'
                 }
             })
             .expect(200)
@@ -886,17 +914,18 @@ describe('resource', () =>
             });
     });
 
-    test(`/GraphQL adminDeleteResourceById`, () => 
+    test(`/GraphQL adminDeleteResourceById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         adminDeleteResourceById (id:$id)
-                        {   
+                        {
                             id
                             name
                             hasCustomFields
@@ -907,16 +936,16 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: '62b08714-ec1b-4474-a94f-b89692575ddf'
+                    id: '07e11f5c-1cbf-4efa-bfd8-d52c2482cb74'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteResourceById.id).toStrictEqual('62b08714-ec1b-4474-a94f-b89692575ddf');
+                expect(res.body.data.adminDeleteResourceById.id).toStrictEqual('07e11f5c-1cbf-4efa-bfd8-d52c2482cb74');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

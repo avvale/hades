@@ -3,17 +3,29 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IAttachmentFamilyRepository } from '@hades/admin/attachment-family/domain/attachment-family.repository';
 import { MockAttachmentFamilyRepository } from '@hades/admin/attachment-family/infrastructure/mock/mock-attachment-family.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-const importForeignModules = [];
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
+import { IamModule } from './../../../src/apps/iam/iam.module';
+
+const importForeignModules = [
+    IamModule
+];
 
 describe('attachment-family', () =>
 {
     let app: INestApplication;
     let repository: MockAttachmentFamilyRepository;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -27,44 +39,60 @@ describe('attachment-family', () =>
                             validateOnly: true,
                             models: [],
                         })
-                    })
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    TestingJwtService,
                 ]
             })
             .overrideProvider(IAttachmentFamilyRepository)
             .useClass(MockAttachmentFamilyRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
         repository  = <MockAttachmentFamilyRepository>module.get<IAttachmentFamilyRepository>(IAttachmentFamilyRepository);
+        testJwt     =  module.get(TestingJwtService).getJwt();
 
         await app.init();
     });
 
-    test(`/REST:POST admin/attachment-family - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST admin/attachment-family - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send(repository.collectionResponse[0])
             .expect(409);
     });
 
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyId property can not to be null`, () => 
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'yr1dkmxc73rygqijwxwzojc0u6d4dbx4zsy995h936zwaoq1obgxf1k4gqcs4t3p3hjt8vyqtndx2myxfvtj4dpjod9pu94dkdu1d8d02lb31x8hw3xrx6r1y3m0cv784g2ryxdzj6e8m0k7lk8cavs4d4fgdioosv5bu8xtzcpx40a1p19pew37cuzp4hrje10mjzdc77qjl6jgb9rw73kjmbr7nv0r9zk924sngvct73betkxt7v0mx0y3n9m',
+                name: 'o8mg6v53aqccet0rj2pvuc77rbo8sxni3w5y3u9jeq7htt5xxl0ekucq2ss0wfd1ud9brd6wfo9s73ol75zd7qhj83nmasxadup4qq49p7ogfifttunbbo28l74occjyg2s86bolku3yw2fqa5fdyf2p90ayhrw85tvgbn123dretghiwfgipc9lmbawycpx1bhcipv38bn7f8v8cgf1eack3gyllucvhpg8cioobdeup0jtyrhuyhqykvsmaxz',
                 resourceIds: [],
-                width: 545699,
-                height: 214034,
-                fit: 'HEIGHT',
-                sizes: { "foo" : "bar" },
-                quality: 143,
-                format: 'JPG',
+                width: 680030,
+                height: 573340,
+                fit: 'FREE_HEIGHT',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 105,
+                format: 'GIF',
             })
             .expect(400)
             .then(res => {
@@ -72,43 +100,22 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyId property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                name: 'mxmofl9mojqszg0ilny41adi2zomorw2nzysfzngztzp97knjrxx6hcg0vxqu61yfnk4ztpyzqc84y65kxujr3711ga65584g0cfketuf8sc8q1j3l9q2xpz39wleubmhby7hcb2hnirmh8l62vnv7gdkxc7t5icg9c2b8hd9araukjhv3j42qm6e7q7ipf94f4e9f28eo8eiuupnvt135wetxrfdqcblvhk8p8j44opc9yttt58xgt4i2t1yy2',
-                resourceIds: [],
-                width: 228198,
-                height: 865389,
-                fit: 'CROP',
-                sizes: { "foo" : "bar" },
-                quality: 557,
-                format: 'PNG',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentFamilyId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/attachment-family')
-            .set('Accept', 'application/json')
-            .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
                 name: null,
                 resourceIds: [],
-                width: 499469,
-                height: 741217,
-                fit: 'WIDTH',
-                sizes: { "foo" : "bar" },
-                quality: 882,
-                format: 'DATA_URL',
+                width: 638974,
+                height: 711384,
+                fit: 'CROP',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 116,
+                format: 'TIF',
             })
             .expect(400)
             .then(res => {
@@ -116,90 +123,111 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyName property can not to be undefined`, () => 
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                
+                name: 'zn0ohpuruyppeqxy147suv7cc7hsadvxk7g72phvfu2ipxta0f6s1djxmidcsqp8z9lug1wa4ktdi5fxo20nqwglz7kk548g3mz0d33cxpp6qzqww8tzmxifgbd1lxds0j53ngsyqiop14tod3a753dqcdhp028qjikws4rw33qjbgxfy1ook0vbkysd83nqm91pgs4nsi056hlx0d5m5pt5r2x4omachg0g0ojsaocsrjgms6u3vy8g69egors',
                 resourceIds: [],
-                width: 836382,
-                height: 422303,
-                fit: 'FREE_HEIGHT',
-                sizes: { "foo" : "bar" },
-                quality: 261,
-                format: 'GIF',
+                width: 676980,
+                height: 287629,
+                fit: 'WIDTH',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 640,
+                format: 'DATA_URL',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AttachmentFamilyId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/attachment-family')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                resourceIds: [],
+                width: 605669,
+                height: 567700,
+                fit: 'HEIGHT',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 944,
+                format: 'TIF',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentFamilyName must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'qo4na6q04gs3u6tfm46nfg6ih0l0ds47kmosv',
-                name: 'vdlwoy30jjr64rolu81185jgifmscio1ldsjm6x1hf1o4ha1tkm1vcrtq718j1584tf9yfqcx3zh24l8cputo4smlely9crnpy30hvpx5563xaba2r0ibp0mof8xer6ib5594nnmxflqy7v1l5pdbn8qy751248u7gdqjzbkvxetwce8mt5trj7wgzd3icx0fpt35sgu839zmz48oretdf2lzqi9hvqs65rr0ihz2uiqfjdtkt0xzvje1ky9gjh',
+                id: 'dt4o8n3mqijjkzssc2fqyvkbor9o6j1nq8xfw',
+                name: 'ioip7neglh2cu1icu5b2sjj4fcqqsbsyp22z60kzc6tb5pw2f5cql0gim5xnegyqs78gj1zks8yq265kbmsxz561y2n5w0yjbdutnp8x75118y3yilsc5u826o5sderst75h6q7pzqeq1y5p4n4dnouxymiagkmqr1j4h5h1cs9ryh6mjpxuz87pjk6p9jv3cqykukeqo4ia9hkk7290v4iacwqft9j3xu181okho3icslndp0eomi2ybo5gp50',
                 resourceIds: [],
-                width: 583934,
-                height: 264120,
-                fit: 'WIDTH',
-                sizes: { "foo" : "bar" },
-                quality: 933,
-                format: 'GIF',
+                width: 192979,
+                height: 387248,
+                fit: 'FREE_WIDTH',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 739,
+                format: 'TIF',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentFamilyId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: 'ir2e910gdix6v0ed43eb9nr114psylipugymjx5cige2hz3w5y7cxphviahce74qyxiwdwqsntkuctuvgcfxpktrz26rcu74ymexi4blglf10am14405dueowea5eibxldcxxwjnmoxmseoj5dx9gty4mt4npej2nehplgd0ng1cbu2hdzih8ubfhwgz3aup2gwcxpeomyexl1gq0qqbmf40fvdpr7w1sad80d2uo4t2x7l879huof9x1fq3fidk',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: 't509c7mlyblzzuhww9577sjdeq0ozewvlsn6hd2h09ceph903je9nl03w5ike9c9brc0t1cb2howzbgrxogfeomlbjqoxb8ah2rsvhxqitmoss040bhx36aig6kuybupamkf07q0qo95p2u678ug36k20vjml1huzfe809xy211g39kuwytcexeb0poy3eihxrpnlsj5wkoaj3d017i4cblup7oxcsgr2aeawhxld28bssbzgonkpbm4v9ir3yrn',
                 resourceIds: [],
-                width: 707371,
-                height: 265486,
+                width: 420347,
+                height: 221561,
                 fit: 'CROP',
-                sizes: { "foo" : "bar" },
-                quality: 958,
-                format: 'JPG',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 857,
+                format: 'DATA_URL',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentFamilyName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyWidth is too large, has a maximum length of 6`, () => 
+
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyWidth is too large, has a maximum length of 6`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: 'vyao9ag738crwxho8qn819n86c2ie675k6t8v7wo1qvud3ry211as32nlnmbuu8o62armw90lzkgtlvkao2v8fzn5gc0ek2jeo8vqr5qqyi54p97hom7w9ql7su6xwhhyj2twefo8z46voq6h1frxkfcl39torj5pnzh6bamxddqj389aeuye6luqsuyp06p90eiuziar18jqbbpglbodfa4l5e6ijzw9ums82ddftrkjyy78k3gtc7c0ebtqb1',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: '7bd8ho56jcqe6nclck79klm36jpi6y6emzuc8jl5osc9698ep17b528mi4veevo6txf6d2lzuez6dva2d4bxdtv8a5k87iqngj3yc4sesb494d3dm6o20l6o40utqnhqtm91p2r843iw1k21gipa576ac8fqb947ohba7zyogd9ie0aqlcozf8lzq4c9yh1iutdnxov38tymn3igxfre3kr6cqlwl1zc6qj9suyf1hseq3ganmt3n76cm6dqe7p',
                 resourceIds: [],
-                width: 3276377,
-                height: 110030,
-                fit: 'CROP',
-                sizes: { "foo" : "bar" },
-                quality: 387,
+                width: 4859069,
+                height: 779771,
+                fit: 'HEIGHT',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 548,
                 format: 'JPG',
             })
             .expect(400)
@@ -207,276 +235,274 @@ describe('attachment-family', () =>
                 expect(res.body.message).toContain('Value for AttachmentFamilyWidth is too large, has a maximum length of 6');
             });
     });
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyHeight is too large, has a maximum length of 6`, () => 
+
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyHeight is too large, has a maximum length of 6`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: 'vjo6h2y3zym6whtk8i4d382kfdw2iab15hcmmmat89wy0izvmypggemh6dmyn5imlc0ih87dpsdpl63kpvem5jf80esco3pdow1dixeslw32zekmkxepstngeua6tjggm336zoane7z6otcbeq3a8fixaaywd0r4kw7m2jczlu6xti9942zlksqlmbrwdbnxxw65sw81o0l6v1qugopo4617e3ha1kk23aeoc2g3ojb4fvs7fua0lftdbpl4kn4',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: 'ez2ouwhepvqzj2o1bo97feq9bk6pkufz33xw45wbeg23qbcvm8rqs1jg04rrl80dcmg2dlio6zocsx40wdxr3hklzuw0xvn03jgwwonwj5c6fdme9da5f7nia9si998xlw77irt2ciibvd24ma8pxjirfs5gx7hh56hi7kb8evvtzarztj4f8m5715fq7dozs43jbzhzbz1cyke2vm2aivkqm9wh83oi0ds8et78wdvfhpw2f0tdxyj8hnxuqu6',
                 resourceIds: [],
-                width: 649175,
-                height: 2619557,
+                width: 922279,
+                height: 6678829,
                 fit: 'HEIGHT',
-                sizes: { "foo" : "bar" },
-                quality: 703,
-                format: 'DATA_URL',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 416,
+                format: 'TIF',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentFamilyHeight is too large, has a maximum length of 6');
             });
     });
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyQuality is too large, has a maximum length of 3`, () => 
+
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyQuality is too large, has a maximum length of 3`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: 'xxdmjh9ug4he1zgh53bavzlnn83cwkbn7140e3htacmlj79jqertwcxd3c3uj4klaogtfdqwvomyl5zwpja7g4xovc03i537rh2kqvvefi2bvgrrwbwkcblssqx2vwn6dpkdecdny9lqlwkpnqdm8r9ewls69yqhnrikla9xdem09d9xw2gtu3savzh0801om1en86l2gszzwgkrpqnlxy1pcfg73w4i6h992nlq28wb4iqor30ljcw8zjp26xr',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: 'cd9kzykygbxm3o2j8a222hejb8mysy0j25rezq0cm2vezesbo35q2zwtpez4wsdqbmh8bau62co9jtpb9l3ws7zux2iyf49r08n0xxiv2v9hpwiukjswq9nkppz4i3i8ydqsy1l4efh9kl74xp0jpl1ddj6r68ztogk2geuo5b0uomiihtn5wpm0ppbngq9e41l25xif3crqovqsqb7awgamjih2nh8ck72hyr2epy9mdjuxej83ebbjj8obt03',
                 resourceIds: [],
-                width: 760357,
-                height: 671539,
-                fit: 'HEIGHT',
-                sizes: { "foo" : "bar" },
-                quality: 6523,
-                format: 'JPG',
+                width: 188912,
+                height: 623242,
+                fit: 'CROP',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 6652,
+                format: 'TIF',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AttachmentFamilyQuality is too large, has a maximum length of 3');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyFit has to be a enum option of CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT`, () => 
+    test(`/REST:POST / - Got 400 Conflict, Fit has to be a enum option of CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT`, () =>
     {
         return request(app.getHttpServer())
-            .post('/admin/attachment-family')
+            .post('//')
             .set('Accept', 'application/json')
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: '4d6d7riawha48glvwpcwwblmdxsr9vpx247thda68sfd1882l11cm20gojqm9bxymuifx5ek5zwr15kwhrqsr39ygea5tq04zomf7en9drnvjqesbx8yc6grk360ae1x4bs2mrsfln09w53bqocyumbbafil8v2n7lg1so87dnqdoj1cec6g3d9jmhte56eyr5l68cgsf1vtb0s6m4ib4048gk9rw6uyao2g5jyoclqqueh1zpy691426b7pyji',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: '17q4b8y8qx4r7ngzzxfpsjwnmz5fo0tg3btl43odgfp389ynypp4pi50zwq5osiv61zdsje48yp9hwvprx26z37s6n5cmstv63ye0syk5j6fszon3ht7762c9nd7aqt68xshxzo1mlip867yj5dz9ur8ppkg7762zmxxreupexs5cm7oatqtvzx455z2t27c7el9ohwj07001bp80pc0ytuepo3ltecogv1tzvurt8jdctd0ip649qfu66qpvod',
                 resourceIds: [],
-                width: 926075,
-                height: 498037,
+                width: 671906,
+                height: 619813,
                 fit: 'XXXX',
-                sizes: { "foo" : "bar" },
-                quality: 159,
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 581,
                 format: 'GIF',
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentFamilyFit has to be any of this options: CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT');
+                expect(res.body.message).toContain('Value for Fit has to be any of this options: CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT');
             });
     });
-    
-    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyFormat has to be a enum option of JPG, PNG, GIF, TIF, BMP, DATA_URL`, () => 
+    test(`/REST:POST / - Got 400 Conflict, Format has to be a enum option of JPG, PNG, GIF, TIF, BMP, DATA_URL`, () =>
     {
         return request(app.getHttpServer())
-            .post('/admin/attachment-family')
+            .post('//')
             .set('Accept', 'application/json')
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: 'u59rmgknyttfwwgkuaxkp9cfvhezg0l6mv670us4ct4ppmjfmzjb61yww43gvju43zrqxsyngtn6is8w61r8o8s9gdk6imwxxc3enrzv74btf5ur1ud3opaczpq52ozsg78ec6fi4j0d5pnve3c41c024ww7w2ua5yp2r5ufjo6a8s3gm4l0pxbf0979sjllc7ahuj9uj3n30io1jkndro1l6rpf5gdab5adehxp8h40dgb4o5fzd4g2pwj9obx',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: '4i2tx9sqw464odbe04tyjwdb29bgvylthqssv6yqwctl12co20sx3hoq9kl1skzlher5sle2h037rrgmuef2g3z83i3gy59y83hn36pnndnb65z1wzv7v9f98w9rutlobzx5g4zrlg2h915w753kbmcrmdfzuty0hy8amornoiiyyjoaz4l5rixu2u1tev1m9m8ztg49e2hikg1rl969fmqnwbikrzi6sdcvqcflu59aikvuw3tnk0vllhipe6n',
                 resourceIds: [],
-                width: 474908,
-                height: 570313,
+                width: 413715,
+                height: 102106,
                 fit: 'FREE_HEIGHT',
-                sizes: { "foo" : "bar" },
-                quality: 928,
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 386,
                 format: 'XXXX',
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AttachmentFamilyFormat has to be any of this options: JPG, PNG, GIF, TIF, BMP, DATA_URL');
+                expect(res.body.message).toContain('Value for Format has to be any of this options: JPG, PNG, GIF, TIF, BMP, DATA_URL');
             });
     });
-    
 
-    
-
-    test(`/REST:POST admin/attachment-family`, () => 
+    test(`/REST:POST admin/attachment-family`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: '42jtyh8igkgz73ys89cubw3wpjnuq4k4foxz4q0wh5gd527fil14tlk41r7wn7wf840spry54onlyyfagblq4jb4wnb8zxu50jcystwx6z56smuzje17yn7gcxc5mqvsn3bajdc5h8r2tnc2lcez7426h90iv9n0x7g66m2d505lbd48ftj3bl9a6h2x1b6wnazq997wpj2kokon4rhd16sa8srd2p6tadm9xck1w0j6rsbd57tbq97lzyqt3d2',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: 'pxpcjqfcdrkj6t7kfwgta6o1hg0vaeah79urflfsj8bycuhtwzxow7r225a7mlrld7av92pvlo87fe9q66jpr7z3zfm5r8z6xti70hb1nki34tjeya7d5wkh7f259ztefmuewuybyixz0d5ke9spvvcmxn07e4dzjq3al4cucjkes72zc4312nwbnbinwlf2rstv79qnz6ridr8putv8etdhcewpxi198481j8ok1te1ljh6jwruaxftbwshjcq',
                 resourceIds: [],
-                width: 694396,
-                height: 508428,
-                fit: 'CROP',
-                sizes: { "foo" : "bar" },
-                quality: 470,
-                format: 'DATA_URL',
+                width: 266904,
+                height: 263290,
+                fit: 'WIDTH',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 358,
+                format: 'TIF',
             })
             .expect(201);
     });
 
-    test(`/REST:GET admin/attachment-families/paginate`, () => 
+    test(`/REST:GET admin/attachment-families/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-families/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
+            .expect({
+                total   : repository.collectionResponse.length,
+                count   : repository.collectionResponse.length,
                 rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET admin/attachment-family - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/attachment-family - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: '681d4c28-8d62-4ebc-9be8-06897fdf2d06'
+                        id: '7563cd77-f81a-4543-b408-53ad675dc357'
                     }
                 }
             })
             .expect(404);
     });
 
-    test(`/REST:GET admin/attachment-family`, () => 
+    test(`/REST:GET admin/attachment-family`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
-                    where: 
+                    where:
                     {
-                        id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
+                        id: '539fea5d-91ff-4765-ba30-a3214ccd652b'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '2c0b2bf3-898e-48cc-83f4-4124ae060349'));
+            .expect(repository.collectionResponse.find(item => item.id === '539fea5d-91ff-4765-ba30-a3214ccd652b'));
     });
 
-    test(`/REST:GET admin/attachment-family/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/attachment-family/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-family/085b95bb-3b64-4f2c-8223-2ff7bf5be449')
+            .get('/admin/attachment-family/4d92db56-305c-476e-826b-cdd5abc97089')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
-    test(`/REST:GET admin/attachment-family/{id}`, () => 
+    test(`/REST:GET admin/attachment-family/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-family/2c0b2bf3-898e-48cc-83f4-4124ae060349')
+            .get('/admin/attachment-family/539fea5d-91ff-4765-ba30-a3214ccd652b')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '2c0b2bf3-898e-48cc-83f4-4124ae060349'));
+            .expect(repository.collectionResponse.find(e => e.id === '539fea5d-91ff-4765-ba30-a3214ccd652b'));
     });
 
-    test(`/REST:GET admin/attachment-families`, () => 
+    test(`/REST:GET admin/attachment-families`, () =>
     {
         return request(app.getHttpServer())
             .get('/admin/attachment-families')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
             .expect(repository.collectionResponse);
     });
 
-    test(`/REST:PUT admin/attachment-family - Got 404 Not Found`, () => 
+    test(`/REST:PUT admin/attachment-family - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '06a21f45-ae81-4c03-b3d2-622b7932dfc7',
-                name: 'odq4yf82p4y5gu00064yf1jv4mwvkjm8oxqii5takp8ll7v13r9y7rhf4970gu974grrdi2gl8u14q1bwucr7o160cfgf0rm8isaydibfce54oeuaq2gkmnhi53rofy0q0318s2svbcn34dewaszwuloivp2ie96m76hakqoo8zo8zd1nnzqs7971mzo3ugxzwe102vjggqypac95nb0dqtxzq09o1s6a05jkfj62rorx8mdxj7s7yqgnd1r1j7',
+                id: '06975687-24ce-4cd8-bb83-b0d5adaa7e1d',
+                name: 'ji7i6temot3pe8sbsu51ae77mqjbduk16tm7rpfsomf034mcybut8oc5sn4qjutlugguvvc5y9dcnv8qvb5970mzfk9t8pxjl7fyltpyndpnpkl3l2e0so69meu7808kblk00zu3d8lg5qap441gaxc2mxgm2dg28bfkg17descj0r8z25owtlcc3z2uwl54ipbqwuqh02qf9gw3hgv8ltsgx8i4gau1kf22k858ke91oimx9pcm8byqbi39e10',
                 resourceIds: [],
-                width: 229927,
-                height: 491226,
-                fit: 'CROP',
-                sizes: { "foo" : "bar" },
-                quality: 816,
+                width: 783775,
+                height: 464674,
+                fit: 'WIDTH',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 901,
                 format: 'GIF',
             })
             .expect(404);
     });
 
-    test(`/REST:PUT admin/attachment-family`, () => 
+    test(`/REST:PUT admin/attachment-family`, () =>
     {
         return request(app.getHttpServer())
             .put('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                name: 'e3jivwx1n2a8oacwgw4nydg7rwceqovb74xszowukue6c4urafajg4uqikev11l1z5ntvwdjlunu9w6v0qbm9gauksehv07pv1uxba16896p6nl8h0pewvuwatmyoksjroowizelpsaag78r7gfscfq8h04lwtsxqjipehvvvm78vuhmhumpzsnusawp851m0anr92hnorpwekodf3vrduifa0xflf94m9cjld05okjbytf7kiu2vomvda9evkt',
+                id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                name: 'rq6adfjexhamhnrdjdknaz1jeuzhitl1l02z3pjcnezsbeehmunvlyh9q3hf10hcoo4i5xggtanof0htn52v9tter6ybdkwz9sv8p0upq8i72uui03doetkh9gkm6lrym8qn8ympxdanpsc99owf48pwx4i02tw63q5pqu4b1sllgqafmrztce1trs71jgt16fqdrs29dmyzc2rrh882fa9l5gykw23tskfy0v6ku93nwocwh6vszlg53tgr8z5',
                 resourceIds: [],
-                width: 558047,
-                height: 171957,
-                fit: 'HEIGHT',
-                sizes: { "foo" : "bar" },
-                quality: 474,
-                format: 'JPG',
+                width: 727944,
+                height: 424659,
+                fit: 'WIDTH',
+                sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                quality: 781,
+                format: 'DATA_URL',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '2c0b2bf3-898e-48cc-83f4-4124ae060349'));
+            .expect(repository.collectionResponse.find(e => e.id === '539fea5d-91ff-4765-ba30-a3214ccd652b'));
     });
 
     test(`/REST:DELETE admin/attachment-family/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-family/51943ba7-0ddc-41aa-9d3b-f7dd28311797')
+            .delete('/admin/attachment-family/cddbd32a-cb7b-4dde-8ae0-7af5ee046ac7')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE admin/attachment-family/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-family/2c0b2bf3-898e-48cc-83f4-4124ae060349')
+            .delete('/admin/attachment-family/539fea5d-91ff-4765-ba30-a3214ccd652b')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL adminCreateAttachmentFamily - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL adminCreateAttachmentFamily - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateAttachmentFamilyInput!)
                     {
                         adminCreateAttachmentFamily (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             width
@@ -485,12 +511,10 @@ describe('attachment-family', () =>
                             sizes
                             quality
                             format
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
@@ -503,17 +527,18 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/GraphQL adminCreateAttachmentFamily`, () => 
+    test(`/GraphQL adminCreateAttachmentFamily`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminCreateAttachmentFamilyInput!)
                     {
                         adminCreateAttachmentFamily (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             width
@@ -522,51 +547,49 @@ describe('attachment-family', () =>
                             sizes
                             quality
                             format
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        id: 'cc2fe9f8-79a0-4f70-93f8-691fe8138223',
-                        name: 'ks9w7y5pww9hdjesi7ojt62zbk6umu4f2gqs73kwcd794vprlemyul44qjhsu12ehd6m5l3ilkuhwd1co6nwrza8yd9cdezbm83n9f2naj585gvblv0k8bxu23yflm60un59wel3kd6gn2oqq31n1epovsppvg34kijr4haqm0e0xgl1y1y2i9691xfuubvhz1quod5o6vngj20t8vh1mzlaqtjxqg9j5662oseymnydcl1mujn4y49k3hg6g03',
-                        resourceIds: [],
-                        width: 873645,
-                        height: 315041,
+                        id: '3ffb3db8-4a72-40a5-8cd1-002ece3c051a',
+                        name: 'qfukii8dlhe9wh12r9bqinhl4knafdxvxzvcke3ycon5z1ppilq15xaji0dqquzjh3y69niigr243deqejw75b57wt1lx3cr2tqwzomprlj2bsycwdbifrcpu0clayd6nas4bv3y4qj8hxkuvf3ql0zb53pynt8rlgk49lfkqkco9iqr3oia6c4u44bgwnc03jk3j6m5gusk7dqgkkzfuy34ezm7kll7w1noedhnf8zedjcw8udyp729rr85lte',
+                        width: 198894,
+                        height: 570009,
                         fit: 'FREE_HEIGHT',
-                        sizes: { "foo" : "bar" },
-                        quality: 216,
-                        format: 'GIF',
+                        sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                        quality: 756,
+                        format: 'TIF',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateAttachmentFamily).toHaveProperty('id', 'cc2fe9f8-79a0-4f70-93f8-691fe8138223');
+                expect(res.body.data.adminCreateAttachmentFamily).toHaveProperty('id', '3ffb3db8-4a72-40a5-8cd1-002ece3c051a');
             });
     });
 
-    test(`/GraphQL adminPaginateAttachmentFamilies`, () => 
+    test(`/GraphQL adminPaginateAttachmentFamilies`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         adminPaginateAttachmentFamilies (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -581,17 +604,18 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/GraphQL adminFindAttachmentFamily - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindAttachmentFamily - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindAttachmentFamily (query:$query)
-                        {   
+                        {
                             id
                             name
                             width
@@ -605,13 +629,13 @@ describe('attachment-family', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: 'db6db493-c95f-4f25-bbcb-e6fb7d3fdb82'
+                            id: '68e6a15d-d6f8-427e-a3e0-c286e4623ea7'
                         }
                     }
                 }
@@ -624,17 +648,18 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/GraphQL adminFindAttachmentFamily`, () => 
+    test(`/GraphQL adminFindAttachmentFamily`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminFindAttachmentFamily (query:$query)
-                        {   
+                        {
                             id
                             name
                             width
@@ -648,34 +673,35 @@ describe('attachment-family', () =>
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
-                        where: 
+                        where:
                         {
-                            id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
+                            id: '539fea5d-91ff-4765-ba30-a3214ccd652b'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentFamily.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
+                expect(res.body.data.adminFindAttachmentFamily.id).toStrictEqual('539fea5d-91ff-4765-ba30-a3214ccd652b');
             });
     });
 
-    test(`/GraphQL adminFindAttachmentFamilyById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindAttachmentFamilyById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindAttachmentFamilyById (id:$id)
-                        {   
+                        {
                             id
                             name
                             width
@@ -690,7 +716,7 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: 'd4deb41c-dd91-4ad3-bf3e-60e1de769efc'
+                    id: '5e28c1f2-5cf3-49bb-9fd7-3eb3a57fe539'
                 }
             })
             .expect(200)
@@ -701,17 +727,18 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/GraphQL adminFindAttachmentFamilyById`, () => 
+    test(`/GraphQL adminFindAttachmentFamilyById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($id:ID!)
                     {
                         adminFindAttachmentFamilyById (id:$id)
-                        {   
+                        {
                             id
                             name
                             width
@@ -726,26 +753,27 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
+                    id: '539fea5d-91ff-4765-ba30-a3214ccd652b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentFamilyById.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
+                expect(res.body.data.adminFindAttachmentFamilyById.id).toStrictEqual('539fea5d-91ff-4765-ba30-a3214ccd652b');
             });
     });
 
-    test(`/GraphQL adminGetAttachmentFamilies`, () => 
+    test(`/GraphQL adminGetAttachmentFamilies`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         adminGetAttachmentFamilies (query:$query)
-                        {   
+                        {
                             id
                             name
                             width
@@ -770,17 +798,18 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/GraphQL adminUpdateAttachmentFamily - Got 404 Not Found`, () => 
+    test(`/GraphQL adminUpdateAttachmentFamily - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:AdminUpdateAttachmentFamilyInput!)
                     {
                         adminUpdateAttachmentFamily (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             width
@@ -796,17 +825,98 @@ describe('attachment-family', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '0c8fc24f-be9e-4a2a-be86-f7a95c4ca142',
-                        name: 'plhoawg8jv6ho7r880l101zow3x1fsi1wx9n4vyya4siofsz6mdtlamthmq8c834kiazt1q742cuezgnpoiwg1qxwqa4foyc5vmiv6js5xk9tq7e0btskitva9oj7x6k4tntz92x0qpnhp25fjubi43w5cf4phlrgbkokg1m6xtde2zr94szdgoa21brq9vhhajlfipzjpdo87y3dmygl8okyhbltmz3krmx6ecmri2nhthjb3wgcwv4u23est1',
+                        id: '07114492-105a-43c1-ac14-4b65adb29847',
+                        name: '8dkthifdsw57gufip4vs3hw60llvegfxh98datxuysbo3tiokep58azd5n5hy1bzyaykz7olqd9kuwiksnjynm2l2urcft2af8afmdbmch10tehxclzty7lmng260tff17ikkdevgnvrc8th95exyxkle42lmc01inyq87zghkhg4nhml28ri64r1xew4apwnjn7h5w93ovl8hjld1o96jmbbf54zfymt5r78r2xml5xgj951zi7g2ii7av263l',
                         resourceIds: [],
-                        width: 743813,
-                        height: 440136,
+                        width: 471320,
+                        height: 259436,
+                        fit: 'HEIGHT',
+                        sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                        quality: 187,
+                        format: 'TIF',
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL adminUpdateAttachmentFamily`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:AdminUpdateAttachmentFamilyInput!)
+                    {
+                        adminUpdateAttachmentFamily (payload:$payload)
+                        {
+                            id
+                            name
+                            width
+                            height
+                            fit
+                            sizes
+                            quality
+                            format
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '539fea5d-91ff-4765-ba30-a3214ccd652b',
+                        name: 'tw5w3fqrdeuoahksft1h89xc78fvr70ygqtq11agxar9a9xogq72eeyidzra6p2gxiy3kausy8ixzjrpy51uxajlia4yjk0hfcjnt0yxyk7xewvkh51s2buvjvupp55np88fcprv2xjqa1h5hm6f6yr82tqddiosatts7hykftw3l0xllhbi3nh86onwfr9mji54xs2pefiuyc4lwf5rnsnj5vzhoh2otpc6tma9gdvxlerk2j5v0b8sl2udekx',
+                        resourceIds: [],
+                        width: 708478,
+                        height: 191572,
                         fit: 'FREE_WIDTH',
-                        sizes: { "foo" : "bar" },
-                        quality: 203,
-                        format: 'GIF',
+                        sizes: { &quot;foo&quot; : &quot;bar&quot; },
+                        quality: 698,
+                        format: 'JPG',
                     }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.adminUpdateAttachmentFamily.id).toStrictEqual('539fea5d-91ff-4765-ba30-a3214ccd652b');
+            });
+    });
+
+    test(`/GraphQL adminDeleteAttachmentFamilyById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        adminDeleteAttachmentFamilyById (id:$id)
+                        {
+                            id
+                            name
+                            width
+                            height
+                            fit
+                            sizes
+                            quality
+                            format
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '20f9ab8b-3fdb-41fd-a5b0-3ead4a06eada'
                 }
             })
             .expect(200)
@@ -817,62 +927,18 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/GraphQL adminUpdateAttachmentFamily`, () => 
+    test(`/GraphQL adminDeleteAttachmentFamilyById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:AdminUpdateAttachmentFamilyInput!)
-                    {
-                        adminUpdateAttachmentFamily (payload:$payload)
-                        {   
-                            id
-                            name
-                            width
-                            height
-                            fit
-                            sizes
-                            quality
-                            format
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        
-                        id: '2c0b2bf3-898e-48cc-83f4-4124ae060349',
-                        name: 'bx4crfa50d9abi3pt4a4j97oip9yv9c2gw9bw3by4a1x9isrcc53owl3n6swb7qesa9t43hic24ly3v3pcvmxvjowghom76j4p47l4x8bqmt54lgl9jiovd6pyh2ue6noc4bhq3aqoqm9a1ct7pncdq1xqn96sqgt22cohw1tpjn9md8sb50ha34bx21r208bhg891c2v22qwascri3g1ziwpoi1t78lmjx85k5x6ob41ue8gsovwn7dn52bca6',
-                        resourceIds: [],
-                        width: 800759,
-                        height: 256235,
-                        fit: 'CROP',
-                        sizes: { "foo" : "bar" },
-                        quality: 406,
-                        format: 'BMP',
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.adminUpdateAttachmentFamily.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
-            });
-    });
-
-    test(`/GraphQL adminDeleteAttachmentFamilyById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         adminDeleteAttachmentFamilyById (id:$id)
-                        {   
+                        {
                             id
                             name
                             width
@@ -887,52 +953,16 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '69bea403-f79d-4af8-acf7-69ffea20171e'
+                    id: '539fea5d-91ff-4765-ba30-a3214ccd652b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+                expect(res.body.data.adminDeleteAttachmentFamilyById.id).toStrictEqual('539fea5d-91ff-4765-ba30-a3214ccd652b');
             });
     });
 
-    test(`/GraphQL adminDeleteAttachmentFamilyById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($id:ID!)
-                    {
-                        adminDeleteAttachmentFamilyById (id:$id)
-                        {   
-                            id
-                            name
-                            width
-                            height
-                            fit
-                            sizes
-                            quality
-                            format
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '2c0b2bf3-898e-48cc-83f4-4124ae060349'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.adminDeleteAttachmentFamilyById.id).toStrictEqual('2c0b2bf3-898e-48cc-83f4-4124ae060349');
-            });
-    });
-
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });
