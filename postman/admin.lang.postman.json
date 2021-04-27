@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "2a36d2e9-e1d1-43a4-9d1d-6077c78d3274",
+		"_postman_id"   : "155b3a84-401d-4307-8e92-3fed26048b56",
 		"name"          : "@hades - admin/lang",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -14,7 +14,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminCreateLangInput!)\n{\n\tadminCreateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tdir\n\t\tsort\n\t\tisActive\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\", \n\t\t\"name\": \"s\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"07\", \n\t\t\"iso6393\": \"r9h\", \n\t\t\"ietf\": \"qltyk\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 877859, \n\t\t\"isActive\": true\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\", \n\t\t\"name\": \"u\", \n\t\t\"image\": \"1\", \n\t\t\"iso6392\": \"u7\", \n\t\t\"iso6393\": \"yq1\", \n\t\t\"ietf\": \"g8986\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 922799, \n\t\t\"isActive\": true\n\t}\n}"
 					}
 				},
 				"url": {
@@ -38,7 +38,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[AdminCreateLangInput]!)\n{\n\tadminCreateLangs (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"c6c0ad70-efc7-47d4-88ae-b2a8f569f799\", \n\t\t\t\"name\": \"s\", \n\t\t\t\"image\": \"q\", \n\t\t\t\"iso6392\": \"5h\", \n\t\t\t\"iso6393\": \"agf\", \n\t\t\t\"ietf\": \"5uhlz\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 707577, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ea3a29dc-ed50-4145-bc9b-3530c62bf44e\", \n\t\t\t\"name\": \"2\", \n\t\t\t\"image\": \"f\", \n\t\t\t\"iso6392\": \"a2\", \n\t\t\t\"iso6393\": \"6tz\", \n\t\t\t\"ietf\": \"9v8m1\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 847715, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"af277207-fb05-4211-be12-60a175ace485\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"image\": \"1\", \n\t\t\t\"iso6392\": \"yn\", \n\t\t\t\"iso6393\": \"deu\", \n\t\t\t\"ietf\": \"vfyt5\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 838313, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"51d6e306-2bc7-4df8-bc40-c21b116728ae\", \n\t\t\t\"name\": \"3\", \n\t\t\t\"image\": \"1\", \n\t\t\t\"iso6392\": \"ae\", \n\t\t\t\"iso6393\": \"fa4\", \n\t\t\t\"ietf\": \"rqk4c\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 924684, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1b530557-d931-47ba-9b67-9d891f0179a9\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"image\": \"6\", \n\t\t\t\"iso6392\": \"l6\", \n\t\t\t\"iso6393\": \"a1j\", \n\t\t\t\"ietf\": \"cl0c2\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 615386, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1f5b008a-3d25-4a7a-9ab0-c6a17b6bd71d\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"image\": \"g\", \n\t\t\t\"iso6392\": \"4c\", \n\t\t\t\"iso6393\": \"fpd\", \n\t\t\t\"ietf\": \"y63x7\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 113997, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7eda5efc-5f16-4752-b873-630317085940\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"image\": \"c\", \n\t\t\t\"iso6392\": \"sq\", \n\t\t\t\"iso6393\": \"q9s\", \n\t\t\t\"ietf\": \"wnyir\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 771865, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7384e748-484c-498b-88af-54e71e2f75d8\", \n\t\t\t\"name\": \"u\", \n\t\t\t\"image\": \"m\", \n\t\t\t\"iso6392\": \"ec\", \n\t\t\t\"iso6393\": \"xo4\", \n\t\t\t\"ietf\": \"gzt94\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 400471, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c0134b7b-2367-4b0d-8636-baaf6da59945\", \n\t\t\t\"name\": \"u\", \n\t\t\t\"image\": \"k\", \n\t\t\t\"iso6392\": \"z4\", \n\t\t\t\"iso6393\": \"mzc\", \n\t\t\t\"ietf\": \"019ha\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 268338, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"390bd4e0-d609-4326-9ee6-420fce752963\", \n\t\t\t\"name\": \"7\", \n\t\t\t\"image\": \"u\", \n\t\t\t\"iso6392\": \"f7\", \n\t\t\t\"iso6393\": \"pi7\", \n\t\t\t\"ietf\": \"clplv\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 112971, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3f37ae8f-fe74-4c15-b99b-dced52ea18c5\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"image\": \"f\", \n\t\t\t\"iso6392\": \"ff\", \n\t\t\t\"iso6393\": \"dkh\", \n\t\t\t\"ietf\": \"yytqa\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 972506, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"10d94dd7-2a49-4a3f-96ac-e2939a0240c2\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"image\": \"j\", \n\t\t\t\"iso6392\": \"os\", \n\t\t\t\"iso6393\": \"awg\", \n\t\t\t\"ietf\": \"c6a6j\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 492970, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"306ee741-b627-4de3-885e-b7c292beb885\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"image\": \"i\", \n\t\t\t\"iso6392\": \"zl\", \n\t\t\t\"iso6393\": \"nkf\", \n\t\t\t\"ietf\": \"0edxd\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 708614, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"365e9fea-d66c-4839-8b96-5cb5f04b2c2d\", \n\t\t\t\"name\": \"a\", \n\t\t\t\"image\": \"h\", \n\t\t\t\"iso6392\": \"ge\", \n\t\t\t\"iso6393\": \"uvw\", \n\t\t\t\"ietf\": \"2frva\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 304113, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"db858562-42c1-48ce-991c-baf423bd82e1\", \n\t\t\t\"name\": \"1\", \n\t\t\t\"image\": \"h\", \n\t\t\t\"iso6392\": \"jn\", \n\t\t\t\"iso6393\": \"jcn\", \n\t\t\t\"ietf\": \"6zuk1\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 936757, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8d97f471-42a7-4968-86dd-dc62625ebf5b\", \n\t\t\t\"name\": \"s\", \n\t\t\t\"image\": \"z\", \n\t\t\t\"iso6392\": \"pd\", \n\t\t\t\"iso6393\": \"z7e\", \n\t\t\t\"ietf\": \"rgu3o\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 410970, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5cec1e4d-e0e0-4d23-a5da-77ce3c827fcd\", \n\t\t\t\"name\": \"3\", \n\t\t\t\"image\": \"j\", \n\t\t\t\"iso6392\": \"dm\", \n\t\t\t\"iso6393\": \"eln\", \n\t\t\t\"ietf\": \"bbeyb\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 553774, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"69c46f9c-2dae-4443-8e8e-4d580ca81e9c\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"image\": \"a\", \n\t\t\t\"iso6392\": \"8o\", \n\t\t\t\"iso6393\": \"50h\", \n\t\t\t\"ietf\": \"tca90\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 852471, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"efa0655b-be29-4237-add7-5fa37dbb1a9e\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"image\": \"7\", \n\t\t\t\"iso6392\": \"j3\", \n\t\t\t\"iso6393\": \"e6n\", \n\t\t\t\"ietf\": \"n1t4d\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 195678, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"42821f5d-d95a-41a4-b7df-c90175523173\", \n\t\t\t\"name\": \"r\", \n\t\t\t\"image\": \"c\", \n\t\t\t\"iso6392\": \"qx\", \n\t\t\t\"iso6393\": \"due\", \n\t\t\t\"ietf\": \"2p0nv\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 391533, \n\t\t\t\"isActive\": false\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"7d6daaf1-2f88-4b06-b51f-fb2a6adf0037\", \n\t\t\t\"name\": \"1\", \n\t\t\t\"image\": \"u\", \n\t\t\t\"iso6392\": \"ed\", \n\t\t\t\"iso6393\": \"99r\", \n\t\t\t\"ietf\": \"onhpn\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 440215, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"02c51a84-f700-4890-b9ff-600c2aee46db\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"image\": \"b\", \n\t\t\t\"iso6392\": \"oo\", \n\t\t\t\"iso6393\": \"34g\", \n\t\t\t\"ietf\": \"gmszm\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 771223, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3f58fa3b-b73a-433d-b7a8-d6984561d992\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"image\": \"q\", \n\t\t\t\"iso6392\": \"n1\", \n\t\t\t\"iso6393\": \"ujt\", \n\t\t\t\"ietf\": \"2ybai\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 996578, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"19c43147-9c4a-498b-96e0-d83698478bc0\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"image\": \"8\", \n\t\t\t\"iso6392\": \"gi\", \n\t\t\t\"iso6393\": \"mcj\", \n\t\t\t\"ietf\": \"j9g6z\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 124709, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"59e10e51-bf31-4fd0-a620-1c3109c2eadf\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"image\": \"r\", \n\t\t\t\"iso6392\": \"y7\", \n\t\t\t\"iso6393\": \"okz\", \n\t\t\t\"ietf\": \"k0e0s\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 807399, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"59ade6d2-e20f-4b8f-97cb-9030483075ec\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"image\": \"e\", \n\t\t\t\"iso6392\": \"7r\", \n\t\t\t\"iso6393\": \"kb4\", \n\t\t\t\"ietf\": \"yldu9\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 604755, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bce9df1b-3cee-4869-a6e8-43fa4fae806f\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"image\": \"1\", \n\t\t\t\"iso6392\": \"q5\", \n\t\t\t\"iso6393\": \"1gp\", \n\t\t\t\"ietf\": \"fzs9r\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 929369, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7177285b-7c6c-4305-a685-17b83740e6f7\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"image\": \"p\", \n\t\t\t\"iso6392\": \"ve\", \n\t\t\t\"iso6393\": \"nd8\", \n\t\t\t\"ietf\": \"kqpsr\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 243071, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dfc9603f-368b-4f2e-84f7-2220eadb2326\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"image\": \"1\", \n\t\t\t\"iso6392\": \"k4\", \n\t\t\t\"iso6393\": \"kms\", \n\t\t\t\"ietf\": \"qrdgp\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 469478, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"be1e2289-2db0-4e17-a717-8cd89a242bf4\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"image\": \"z\", \n\t\t\t\"iso6392\": \"w3\", \n\t\t\t\"iso6393\": \"jh3\", \n\t\t\t\"ietf\": \"ub197\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 296886, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"49cd724b-0c8d-45f4-8fab-030a2308f63e\", \n\t\t\t\"name\": \"7\", \n\t\t\t\"image\": \"w\", \n\t\t\t\"iso6392\": \"33\", \n\t\t\t\"iso6393\": \"o4b\", \n\t\t\t\"ietf\": \"vom6o\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 378827, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1aa6da69-38de-4f92-8d6b-782423d91913\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"image\": \"1\", \n\t\t\t\"iso6392\": \"yk\", \n\t\t\t\"iso6393\": \"3t7\", \n\t\t\t\"ietf\": \"h5f1t\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 276762, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"267c8571-a0b0-4a5b-9bbc-23f0e83e9a67\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"image\": \"x\", \n\t\t\t\"iso6392\": \"qo\", \n\t\t\t\"iso6393\": \"bk8\", \n\t\t\t\"ietf\": \"t2cyx\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 652860, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ec0974b7-abad-45b4-85cb-eb5392ce1600\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"image\": \"y\", \n\t\t\t\"iso6392\": \"7a\", \n\t\t\t\"iso6393\": \"obv\", \n\t\t\t\"ietf\": \"kiu5b\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 192523, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fff860cb-f412-4bcc-b3cc-02c34431591f\", \n\t\t\t\"name\": \"u\", \n\t\t\t\"image\": \"6\", \n\t\t\t\"iso6392\": \"mi\", \n\t\t\t\"iso6393\": \"xuc\", \n\t\t\t\"ietf\": \"nsqxt\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 362932, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4caa7bd4-92d3-4ca0-bfb9-c34e88684f0c\", \n\t\t\t\"name\": \"0\", \n\t\t\t\"image\": \"j\", \n\t\t\t\"iso6392\": \"3l\", \n\t\t\t\"iso6393\": \"xlg\", \n\t\t\t\"ietf\": \"vrly1\", \n\t\t\t\"dir\": \"RTL\", \n\t\t\t\"sort\": 204914, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"61900757-3112-4bed-b347-83f63bee9f90\", \n\t\t\t\"name\": \"a\", \n\t\t\t\"image\": \"1\", \n\t\t\t\"iso6392\": \"3v\", \n\t\t\t\"iso6393\": \"fcb\", \n\t\t\t\"ietf\": \"6wkb9\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 160811, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"71dfcc7c-6a74-446a-b785-05a191e3f4e1\", \n\t\t\t\"name\": \"b\", \n\t\t\t\"image\": \"e\", \n\t\t\t\"iso6392\": \"y2\", \n\t\t\t\"iso6393\": \"21j\", \n\t\t\t\"ietf\": \"qmrsj\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 377683, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e2ea6f16-31a9-461a-b18b-233803680ab3\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"image\": \"c\", \n\t\t\t\"iso6392\": \"gc\", \n\t\t\t\"iso6393\": \"ya3\", \n\t\t\t\"ietf\": \"b9iow\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 703532, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"17b47c56-728f-4553-8483-1b024ffaa062\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"image\": \"i\", \n\t\t\t\"iso6392\": \"i1\", \n\t\t\t\"iso6393\": \"wse\", \n\t\t\t\"ietf\": \"f8rt1\", \n\t\t\t\"dir\": \"LTR\", \n\t\t\t\"sort\": 160887, \n\t\t\t\"isActive\": true\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -86,7 +86,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:QueryStatement)\n{\n\tadminGetLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\"\n\t\t}\n\t}\n}"
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -110,7 +110,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:QueryStatement)\n{\n\tadminFindLang (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\"\n\t\t}\n\t}\n}"
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -134,7 +134,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($id:ID)\n{\n\tadminFindLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\"\n}"
+						"variables": "{\n\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\"\n}"
 					}
 				},
 				"url": {
@@ -158,7 +158,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminUpdateLangInput!)\n{\n\tadminUpdateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\", \n\t\t\"name\": \"x\", \n\t\t\"image\": \"o\", \n\t\t\"iso6392\": \"v3\", \n\t\t\"iso6393\": \"8zs\", \n\t\t\"ietf\": \"bv717\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 189937, \n\t\t\"isActive\": true\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\", \n\t\t\"name\": \"3\", \n\t\t\"image\": \"u\", \n\t\t\"iso6392\": \"7e\", \n\t\t\"iso6393\": \"woe\", \n\t\t\"ietf\": \"un5z0\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 137507, \n\t\t\"isActive\": true\n\t}\n}"
 					}
 				},
 				"url": {
@@ -182,7 +182,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($id:ID!)\n{\n\tadminDeleteLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\"\n}"
+						"variables": "{\n\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\"\n}"
 					}
 				},
 				"url": {
@@ -235,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\", \n\t\"name\": \"9\", \n\t\"image\": \"o\", \n\t\"iso6392\": \"63\", \n\t\"iso6393\": \"z5t\", \n\t\"ietf\": \"kej5b\", \n\t\"dir\": \"RTL\", \n\t\"sort\": 787195, \n\t\"isActive\": false\n}",
+					"raw"   : "{\n\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\", \n\t\"name\": \"n\", \n\t\"image\": \"b\", \n\t\"iso6392\": \"0m\", \n\t\"iso6393\": \"knl\", \n\t\"ietf\": \"e1xkm\", \n\t\"dir\": \"RTL\", \n\t\"sort\": 495024, \n\t\"isActive\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,7 +269,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"40eaeb02-5d69-4631-83f2-17352b049b28\", \n\t\t\"name\": \"c\", \n\t\t\"image\": \"b\", \n\t\t\"iso6392\": \"7r\", \n\t\t\"iso6393\": \"l9m\", \n\t\t\"ietf\": \"8jrdj\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 285019, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"eafd117b-d025-40d1-a6b6-87026c44f831\", \n\t\t\"name\": \"e\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"ub\", \n\t\t\"iso6393\": \"5ha\", \n\t\t\"ietf\": \"wv53g\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 869065, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"b13de1cc-58f6-47a8-8acd-801004df060c\", \n\t\t\"name\": \"p\", \n\t\t\"image\": \"q\", \n\t\t\"iso6392\": \"b2\", \n\t\t\"iso6393\": \"ox0\", \n\t\t\"ietf\": \"ugniv\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 652643, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"2693340c-a217-473b-93aa-6fff3a9d9006\", \n\t\t\"name\": \"1\", \n\t\t\"image\": \"o\", \n\t\t\"iso6392\": \"ix\", \n\t\t\"iso6393\": \"gyz\", \n\t\t\"ietf\": \"dwynu\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 680584, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"fdd7d92d-0507-486c-ad0e-1bba8f78e05b\", \n\t\t\"name\": \"l\", \n\t\t\"image\": \"3\", \n\t\t\"iso6392\": \"cg\", \n\t\t\"iso6393\": \"248\", \n\t\t\"ietf\": \"c6a5f\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 396018, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"88662993-d25b-461e-a8bb-193225114e0c\", \n\t\t\"name\": \"o\", \n\t\t\"image\": \"3\", \n\t\t\"iso6392\": \"pk\", \n\t\t\"iso6393\": \"zkz\", \n\t\t\"ietf\": \"3jx73\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 669138, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"3aff1d80-d209-460c-97ea-406c2f02621d\", \n\t\t\"name\": \"4\", \n\t\t\"image\": \"6\", \n\t\t\"iso6392\": \"1g\", \n\t\t\"iso6393\": \"c4g\", \n\t\t\"ietf\": \"yw0mm\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 681335, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"03b40305-db17-45cf-a70b-9500ffc33033\", \n\t\t\"name\": \"9\", \n\t\t\"image\": \"q\", \n\t\t\"iso6392\": \"5l\", \n\t\t\"iso6393\": \"fg8\", \n\t\t\"ietf\": \"eqstd\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 399779, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"97bcabc2-de45-45e8-9287-976580e82937\", \n\t\t\"name\": \"f\", \n\t\t\"image\": \"i\", \n\t\t\"iso6392\": \"ha\", \n\t\t\"iso6393\": \"n9b\", \n\t\t\"ietf\": \"rkizw\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 355101, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"d0b69700-04c8-4901-a1a7-c1ebb64505fb\", \n\t\t\"name\": \"0\", \n\t\t\"image\": \"c\", \n\t\t\"iso6392\": \"4p\", \n\t\t\"iso6393\": \"evy\", \n\t\t\"ietf\": \"hzmyh\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 923706, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"2d13f10c-54ff-4796-934a-a8f24939eab6\", \n\t\t\"name\": \"k\", \n\t\t\"image\": \"y\", \n\t\t\"iso6392\": \"ay\", \n\t\t\"iso6393\": \"36w\", \n\t\t\"ietf\": \"c26vm\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 345338, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"81bf7391-f56f-4203-8bf3-12e47fae5c2e\", \n\t\t\"name\": \"y\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"hw\", \n\t\t\"iso6393\": \"tce\", \n\t\t\"ietf\": \"brlsc\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 390844, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"146450dd-8ed4-44d9-8f68-72f5141e343f\", \n\t\t\"name\": \"x\", \n\t\t\"image\": \"q\", \n\t\t\"iso6392\": \"i4\", \n\t\t\"iso6393\": \"zzh\", \n\t\t\"ietf\": \"rdzj6\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 393150, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"fdaf6922-ca72-4375-bb5f-0fd3ee42dbe8\", \n\t\t\"name\": \"d\", \n\t\t\"image\": \"n\", \n\t\t\"iso6392\": \"qb\", \n\t\t\"iso6393\": \"pey\", \n\t\t\"ietf\": \"vr5i1\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 958886, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"40f35f29-6916-4f75-a678-92b5949f4b34\", \n\t\t\"name\": \"t\", \n\t\t\"image\": \"z\", \n\t\t\"iso6392\": \"7k\", \n\t\t\"iso6393\": \"0dk\", \n\t\t\"ietf\": \"lz7cw\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 588544, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"e0303381-4609-42f5-a7ac-3d88ecf93f48\", \n\t\t\"name\": \"0\", \n\t\t\"image\": \"9\", \n\t\t\"iso6392\": \"5u\", \n\t\t\"iso6393\": \"scq\", \n\t\t\"ietf\": \"5jxvm\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 401538, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"7a7ab791-c451-4eb8-8ef3-03d23cccbef5\", \n\t\t\"name\": \"m\", \n\t\t\"image\": \"o\", \n\t\t\"iso6392\": \"6v\", \n\t\t\"iso6393\": \"ve6\", \n\t\t\"ietf\": \"xdwty\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 536602, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"f1c7781c-24db-4360-b497-3afb0a2a2545\", \n\t\t\"name\": \"t\", \n\t\t\"image\": \"l\", \n\t\t\"iso6392\": \"oi\", \n\t\t\"iso6393\": \"d79\", \n\t\t\"ietf\": \"xvjq7\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 218971, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"35d70962-0f73-481f-86b2-295fad23be2e\", \n\t\t\"name\": \"z\", \n\t\t\"image\": \"j\", \n\t\t\"iso6392\": \"ol\", \n\t\t\"iso6393\": \"52k\", \n\t\t\"ietf\": \"6rsy5\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 626280, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"7ed44475-1607-44e7-98ab-2da3593e3aef\", \n\t\t\"name\": \"b\", \n\t\t\"image\": \"a\", \n\t\t\"iso6392\": \"wx\", \n\t\t\"iso6393\": \"4nx\", \n\t\t\"ietf\": \"wfuti\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 609572, \n\t\t\"isActive\": true\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"6ca6c1e4-4b6e-429f-88a8-958b74ed0097\", \n\t\t\"name\": \"0\", \n\t\t\"image\": \"s\", \n\t\t\"iso6392\": \"37\", \n\t\t\"iso6393\": \"13s\", \n\t\t\"ietf\": \"vuj2j\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 474020, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"371e56fb-8df2-4d88-a12a-303e003dc812\", \n\t\t\"name\": \"7\", \n\t\t\"image\": \"3\", \n\t\t\"iso6392\": \"68\", \n\t\t\"iso6393\": \"3n0\", \n\t\t\"ietf\": \"ml3l1\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 307168, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"c1abdd00-3b0c-4575-89a2-a337b8092b9c\", \n\t\t\"name\": \"3\", \n\t\t\"image\": \"c\", \n\t\t\"iso6392\": \"ix\", \n\t\t\"iso6393\": \"xyd\", \n\t\t\"ietf\": \"wb5zd\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 145166, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"ab1d79d6-2b0c-4e2b-a2c3-64f235ad57dd\", \n\t\t\"name\": \"x\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"1z\", \n\t\t\"iso6393\": \"p90\", \n\t\t\"ietf\": \"midku\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 870875, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"541612fd-9c0b-4daa-8653-ecbf3e861e6f\", \n\t\t\"name\": \"r\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"yl\", \n\t\t\"iso6393\": \"7aq\", \n\t\t\"ietf\": \"6maf6\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 784624, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"b6a22f42-b151-4561-9658-6d56a4856a6c\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"t\", \n\t\t\"iso6392\": \"gt\", \n\t\t\"iso6393\": \"56q\", \n\t\t\"ietf\": \"xcry4\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 923899, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"60c203b5-3948-4075-961b-ccf507b72fc9\", \n\t\t\"name\": \"a\", \n\t\t\"image\": \"i\", \n\t\t\"iso6392\": \"9h\", \n\t\t\"iso6393\": \"mdp\", \n\t\t\"ietf\": \"j9fdx\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 204043, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"87bdbb41-4b15-4f6b-88ac-8e159301480b\", \n\t\t\"name\": \"7\", \n\t\t\"image\": \"p\", \n\t\t\"iso6392\": \"kq\", \n\t\t\"iso6393\": \"3j2\", \n\t\t\"ietf\": \"45qjq\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 329682, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"1be8ae10-66b9-415b-b508-8eb7d565cc5c\", \n\t\t\"name\": \"8\", \n\t\t\"image\": \"f\", \n\t\t\"iso6392\": \"g2\", \n\t\t\"iso6393\": \"sk0\", \n\t\t\"ietf\": \"os8d4\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 708781, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"496f4b39-0cd8-4746-b37f-6c9510ed109f\", \n\t\t\"name\": \"f\", \n\t\t\"image\": \"z\", \n\t\t\"iso6392\": \"0w\", \n\t\t\"iso6393\": \"0ew\", \n\t\t\"ietf\": \"1v5ji\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 368920, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"73d32803-6986-43d1-97c1-013816b9e3a5\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"5\", \n\t\t\"iso6392\": \"tg\", \n\t\t\"iso6393\": \"xhj\", \n\t\t\"ietf\": \"asw9p\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 145937, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"98af0a7d-f494-429b-86e1-a214d18c45ff\", \n\t\t\"name\": \"y\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"fi\", \n\t\t\"iso6393\": \"chi\", \n\t\t\"ietf\": \"lsuf9\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 703730, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"3273e9ce-6779-40dc-89a3-f73246938a17\", \n\t\t\"name\": \"d\", \n\t\t\"image\": \"k\", \n\t\t\"iso6392\": \"k3\", \n\t\t\"iso6393\": \"0m5\", \n\t\t\"ietf\": \"hszl5\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 840703, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"e7bbbb52-eef6-426d-a591-1e26db58af24\", \n\t\t\"name\": \"p\", \n\t\t\"image\": \"5\", \n\t\t\"iso6392\": \"62\", \n\t\t\"iso6393\": \"9vh\", \n\t\t\"ietf\": \"383k9\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 125807, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"6f80ea37-851d-4593-9b7f-95561c376d5b\", \n\t\t\"name\": \"7\", \n\t\t\"image\": \"s\", \n\t\t\"iso6392\": \"s7\", \n\t\t\"iso6393\": \"x1g\", \n\t\t\"ietf\": \"a3eqj\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 711375, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"2b0dda41-99de-447c-9d3c-869d617bce0b\", \n\t\t\"name\": \"a\", \n\t\t\"image\": \"i\", \n\t\t\"iso6392\": \"gv\", \n\t\t\"iso6393\": \"vz7\", \n\t\t\"ietf\": \"ekrsd\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 714484, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"f3c03e78-7653-4e59-9c08-400324086ca2\", \n\t\t\"name\": \"m\", \n\t\t\"image\": \"p\", \n\t\t\"iso6392\": \"ge\", \n\t\t\"iso6393\": \"dmb\", \n\t\t\"ietf\": \"po9ky\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 610607, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"fc1394df-56a6-4068-abd8-2557246bc9cd\", \n\t\t\"name\": \"5\", \n\t\t\"image\": \"w\", \n\t\t\"iso6392\": \"z6\", \n\t\t\"iso6393\": \"lml\", \n\t\t\"ietf\": \"ellaa\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 703649, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"878a4d39-4fdf-4bb4-bbd5-0a74573b7b53\", \n\t\t\"name\": \"f\", \n\t\t\"image\": \"0\", \n\t\t\"iso6392\": \"lv\", \n\t\t\"iso6393\": \"n07\", \n\t\t\"ietf\": \"7o7g0\", \n\t\t\"dir\": \"RTL\", \n\t\t\"sort\": 199061, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"045b8f01-7040-4ee9-bcf8-5b56298d67a3\", \n\t\t\"name\": \"q\", \n\t\t\"image\": \"g\", \n\t\t\"iso6392\": \"ki\", \n\t\t\"iso6393\": \"cw7\", \n\t\t\"ietf\": \"sqrey\", \n\t\t\"dir\": \"LTR\", \n\t\t\"sort\": 248568, \n\t\t\"isActive\": false\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -344,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -426,14 +426,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/lang/d6a762ad-c73f-454d-9a41-529bdc2bb7fa",
+					"raw": "{{URL}}/admin/lang/97a3639d-19fd-463d-a07c-de251e6e912e",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"lang",
-						"d6a762ad-c73f-454d-9a41-529bdc2bb7fa"
+						"97a3639d-19fd-463d-a07c-de251e6e912e"
 					]
 				}
 			},
@@ -453,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"d6a762ad-c73f-454d-9a41-529bdc2bb7fa\", \n\t\"name\": \"9\", \n\t\"image\": \"l\", \n\t\"iso6392\": \"f7\", \n\t\"iso6393\": \"8uo\", \n\t\"ietf\": \"ei0t2\", \n\t\"dir\": \"LTR\", \n\t\"sort\": 367701, \n\t\"isActive\": false\n}",
+					"raw"   : "{\n\t\"id\": \"97a3639d-19fd-463d-a07c-de251e6e912e\", \n\t\"name\": \"q\", \n\t\"image\": \"o\", \n\t\"iso6392\": \"t8\", \n\t\"iso6393\": \"19g\", \n\t\"ietf\": \"d6ylx\", \n\t\"dir\": \"LTR\", \n\t\"sort\": 596308, \n\t\"isActive\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -495,14 +495,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/lang/d6a762ad-c73f-454d-9a41-529bdc2bb7fa",
+					"raw": "{{URL}}/admin/lang/97a3639d-19fd-463d-a07c-de251e6e912e",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"lang",
-						"d6a762ad-c73f-454d-9a41-529bdc2bb7fa"
+						"97a3639d-19fd-463d-a07c-de251e6e912e"
 					]
 				}
 			},
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "f9f9dec3-ad76-49d1-9795-7759ac346d73",
+			"id": "a0682090-de3e-434d-8396-823ae3b77368",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"
