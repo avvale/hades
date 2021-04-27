@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed.ts",
-            "integrity": "sha1:ea7f6ffd64eac12074a698259a9b69e8a4bde8c8"
+            "integrity": "sha1:09536e53bbe6bfbea0e7103e929c1312909cd464"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-1/infrastructure/sequelize/sequelize-administrative-area-level-1.model.ts",
@@ -491,7 +491,7 @@
         },
         {
             "path": "postman/admin.administrative-area-level-1.postman.json",
-            "integrity": "sha1:f15d8b7d6342413a7a9fd1ca92dd2e5d135f5278"
+            "integrity": "sha1:c4f6fa90e114c55996d6a48ba4db7ecda303f02c"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-2/application/create/create-administrative-area-level-2.command-handler.spec.ts",
@@ -751,7 +751,7 @@
         },
         {
             "path": "src/@hades/admin/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed.ts",
-            "integrity": "sha1:1e08701669c6956a4fe2e6b49dd706baf44e7682"
+            "integrity": "sha1:a361e8f4780f64de5e7433b7b0f6842b25e8b8b1"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-2/infrastructure/sequelize/sequelize-administrative-area-level-2.model.ts",
@@ -987,7 +987,7 @@
         },
         {
             "path": "postman/admin.administrative-area-level-2.postman.json",
-            "integrity": "sha1:723e8c342093e5922456a89ec044796843e5face"
+            "integrity": "sha1:92dc135ea16f1880f35baef0b3db6fa290d53813"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-area-level-3.command-handler.spec.ts",
@@ -1247,7 +1247,7 @@
         },
         {
             "path": "src/@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed.ts",
-            "integrity": "sha1:2bb30048dd568cd4c3f5a7850b9905ceea8ac720"
+            "integrity": "sha1:6e9ba6793fcadce1ddd12376afc9cdb706ef0371"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-3/infrastructure/sequelize/sequelize-administrative-area-level-3.model.ts",
@@ -1487,7 +1487,7 @@
         },
         {
             "path": "postman/admin.administrative-area-level-3.postman.json",
-            "integrity": "sha1:e6fb8718c43a005527d5588c13d10a3fea5c2474"
+            "integrity": "sha1:aa73471968ffbe2ed403cf02ff98ee1428c38dce"
         }
     ]
 }

@@ -13,9 +13,9 @@ import * as _ from 'lodash';
 import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { IamModule } from './../../../src/apps/iam/iam.module';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
-import { IamModule } from './../../../src/apps/iam/iam.module';
 
 const importForeignModules = [
     IamModule
@@ -33,6 +33,7 @@ describe('attachment-family', () =>
                 imports: [
                     ...importForeignModules,
                     AdminModule,
+                    IamModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
                         useFactory: () => ({
@@ -85,14 +86,14 @@ describe('attachment-family', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'brv1uwvynncdeiufy000z9gta5pr0eq443zbk1m2a008vad9udtj9mlaxdkdau3hdrmd23blfgmztf7eh5w7v7699xd6syo84r7oihil678vxyo9xeozya3fgiukd3vfq2o9hxyfnwyv6mdw5leul85aksygrj6td7jaw290olvc203hvv3treq9z10lyc39z8nh74zr7xl5rjigilttlw274wwsg3c5u58lsim4v7d9l661wwbgdzeqzo8hcik',
+                name: 'd',
                 resourceIds: [],
-                width: 220429,
-                height: 726425,
-                fit: 'WIDTH',
+                width: 4,
+                height: 7,
+                fit: 'FREE_WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 416,
-                format: 'PNG',
+                quality: 8,
+                format: 'DATA_URL',
             })
             .expect(400)
             .then(res => {
@@ -107,15 +108,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
                 name: null,
                 resourceIds: [],
-                width: 578529,
-                height: 956517,
+                width: 7,
+                height: 4,
                 fit: 'WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 555,
-                format: 'JPG',
+                quality: 2,
+                format: 'GIF',
             })
             .expect(400)
             .then(res => {
@@ -130,14 +131,14 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                name: 'hl57fp15af48nh3g31y5pnvvmrpjeahkoeju5f738eoqn9siq47gpi15j1g40gweodjo3o3vxzpcf30c42uqrgu1tt0fp1zd8ln7x7j5ue528d8sfwjscb8ly3uyux2881hu8vak2pyt8jer0q5smgjt3i4djozz6mp4hc9yao5ai6z2570lx2ivdlvnrqse5a5xkmsmp0wh5zbfz2h3311y7pd23emp5phxg3mdshdac9jomeu3alq1qj9yb7p',
+                name: 'w',
                 resourceIds: [],
-                width: 481512,
-                height: 701378,
-                fit: 'WIDTH',
+                width: 7,
+                height: 4,
+                fit: 'FREE_WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 298,
-                format: 'BMP',
+                quality: 2,
+                format: 'JPG',
             })
             .expect(400)
             .then(res => {
@@ -152,14 +153,14 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
                 resourceIds: [],
-                width: 283589,
-                height: 594564,
+                width: 8,
+                height: 7,
                 fit: 'FREE_HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 844,
-                format: 'TIF',
+                quality: 3,
+                format: 'DATA_URL',
             })
             .expect(400)
             .then(res => {
@@ -174,15 +175,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'o6nx38glnw5d5dw7hmttm1ggifs461yja169j',
-                name: '57igvnbnbdlfptlp0ytkqlmqdhmeaceaqccathu4c7npblzgqf5optcjz3r7cvnm9pr8ooatxo4nxziqzfthxhwbnwvm8n5cfivo5nj4sm5nd5d8jnuvise3vjpvemm6pdjeviyi1n0pob853385c6hngxr8sxg7rhu8v66nbhaoohalav27wdutn9uqcgjgtylupalvptnfoghjckb0y9n7qcidi8xfo3rkwg1y7kgirz5zmrxjjl40f4edyhh',
+                id: 'xvpv0vfpmkhab7rzddgrs5vbltxmscgawumyh',
+                name: '0',
                 resourceIds: [],
-                width: 507948,
-                height: 139067,
+                width: 2,
+                height: 6,
                 fit: 'HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 775,
-                format: 'JPG',
+                quality: 9,
+                format: 'TIF',
             })
             .expect(400)
             .then(res => {
@@ -197,15 +198,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: 'sokj1f58wv180qzmwpapej7u74er0kuk3vwbmf3h04q0vvrx06m9xlscrsl8q0z34ff81hbdcrenhs6kjhkki8jkgtc6kv4yz07s19jbwdf3x46dlmd4yp5gb60jbtkbft93u892yppbxc6bgwn6kc2uhhdk9gbyi2880uzxk2xa03ecsdvqkk0mxgr69srxy1ifcanaxm0yz6hs1i6zdqj0czeckw25304saqkiy0dbz2m75uek2vpblh7o3gfr',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: '054u1r7l5iisp0288y6ua2cuhk55akd3zd97bx2kilkdcuqv39kgcl8wi20a09uumcexu1thcitkwb8hw9fvuflufnjr63a0pm6d9ykrhkkhy0lwcdjgij2lauhnwowhmjndp7ndwrbjyxpsrox3npj6famsuwcbu9s2cnw8l9bmszh5sfi6d74530fgprprr9wyub5fc1w143l8843ur5ozythsyz1vwb0jkhwrbszyg57tbhn9bo5s8swjm5in',
                 resourceIds: [],
-                width: 779026,
-                height: 919498,
+                width: 7,
+                height: 6,
                 fit: 'FREE_WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 871,
-                format: 'GIF',
+                quality: 2,
+                format: 'TIF',
             })
             .expect(400)
             .then(res => {
@@ -220,15 +221,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: 'rqqm22ehsc9kecsrocco6wu5hiznfhcs0mzu8oy770zxfndfxtic8iojplb43ddeuwa40xkwi73j180tu9mpp9hatbsy61i2ke7frlbaaaw61zctifgds0rwjf2zte51wyke6uw6jc2p5w6peowetabkng9enemwegrd9e0obe0dm01ko56anv9hw7k8q45fhir0lsakzk8joqlswjemyr5515u2dclg0nfxh3n0b1bejhqvhst2l6j4u2ytt19',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: 'c',
                 resourceIds: [],
-                width: 2108543,
-                height: 671478,
-                fit: 'CROP',
+                width: 8231582,
+                height: 4,
+                fit: 'HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 687,
-                format: 'TIF',
+                quality: 8,
+                format: 'PNG',
             })
             .expect(400)
             .then(res => {
@@ -243,15 +244,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: 'ryu52cixnym55lyknpdjsns0lr0lf1ut60p4kdmu1muynjwiknsdzy8aqbuzo9219xdl1nhcy3biowtn1mxvpqrd4yrpnshy3ghbhfulla3jp1cvd3wxjqtfgb5okwrp699gt1ikl8xc0zk79r8kh0g0xs3mp9ybb5cpwftdruj8ao88b26pvozfm0ce9rjmbe8rdfbdhnmblour35van9o6161kwfje7rtkmibz5mthxw7l7gl1gt1lfoe998i',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: 'n',
                 resourceIds: [],
-                width: 217515,
-                height: 1226310,
+                width: 2,
+                height: 5218931,
                 fit: 'HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 459,
-                format: 'GIF',
+                quality: 5,
+                format: 'BMP',
             })
             .expect(400)
             .then(res => {
@@ -266,15 +267,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: 'dkeri2j2bhv7tky1ggculx1hw1h8knsibpouwuzuitrnv0iqu8kl0leddpdin7acr689na2e5bjqvvgbkjpp2iedvm0la7vzomx4tnc4866tw15ppg4n3c7m2yeue29upiejztu9obw5h728tmzqqynjxo6hw5uvofkklca70l3f2xyn49blexf3c203y5zjnvi6oiljzchtho7mrk96sw92gls0b2j414lrce5s0zh80t0tfwabowewvpq9mvt',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: '4',
                 resourceIds: [],
-                width: 685794,
-                height: 456689,
-                fit: 'CROP',
+                width: 7,
+                height: 4,
+                fit: 'FREE_HEIGHT',
                 sizes: { "foo" : "bar" },
-                quality: 7327,
-                format: 'PNG',
+                quality: 2630,
+                format: 'GIF',
             })
             .expect(400)
             .then(res => {
@@ -282,46 +283,48 @@ describe('attachment-family', () =>
             });
     });
 
-    test(`/REST:POST / - Got 400 Conflict, Fit has to be a enum option of CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT`, () =>
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyFit has to be a enum option of CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT`, () =>
     {
         return request(app.getHttpServer())
-            .post('//')
+            .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: 'v2te36890fvtur5jd4b5t25tqmgm1b7qbk85hd5nl8t8tjqzztb9ngki0pglmgwlpkhxwgkjzfet2b2bikj6ygz4nlq19iy1u9p8a527eu8hg8zriywv3w732i8c7yrgty2buv6atfbly9fdqr9gi2j02xrbz1wy2679sphqn8990z9cyd8rsccmy0hzqvyzda87htc7tdfrllzy5tny4ozxi16yswe5f1i9ov7fya8dc496fw8e4osnbuowm3b',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: '2',
                 resourceIds: [],
-                width: 898743,
-                height: 863768,
+                width: 7,
+                height: 6,
                 fit: 'XXXX',
                 sizes: { "foo" : "bar" },
-                quality: 410,
-                format: 'BMP',
+                quality: 5,
+                format: 'DATA_URL',
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for Fit has to be any of this options: CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT');
+                expect(res.body.message).toContain('Value for AttachmentFamilyFit has to be any of this options: CROP, WIDTH, HEIGHT, FREE_WIDTH, FREE_HEIGHT');
             });
     });
-    test(`/REST:POST / - Got 400 Conflict, Format has to be a enum option of JPG, PNG, GIF, TIF, BMP, DATA_URL`, () =>
+    test(`/REST:POST admin/attachment-family - Got 400 Conflict, AttachmentFamilyFormat has to be a enum option of JPG, PNG, GIF, TIF, BMP, DATA_URL`, () =>
     {
         return request(app.getHttpServer())
-            .post('//')
+            .post('/admin/attachment-family')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: '241to455f583ko1cqjlasvsa4qcmncoth4s5w8wp4vchzro9dh9kwjh7oh27t24cmnl7owspzk46graqhwky6543jgbk601kd106zunmou42y7hrnv9jiva66iuc8fhx56g9bzccsmcbv8f2i6p7v8q01jr6vfwsz5aglrteh3uxm06rlvxb8kij2wz7jxawhs72rtp3c6anp0qfwrl5hy6uqebryulv6wcngnle45j4jw9g9isgtflcz644a20',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: 'b',
                 resourceIds: [],
-                width: 339127,
-                height: 233784,
-                fit: 'WIDTH',
+                width: 4,
+                height: 1,
+                fit: 'CROP',
                 sizes: { "foo" : "bar" },
-                quality: 950,
+                quality: 9,
                 format: 'XXXX',
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for Format has to be any of this options: JPG, PNG, GIF, TIF, BMP, DATA_URL');
+                expect(res.body.message).toContain('Value for AttachmentFamilyFormat has to be any of this options: JPG, PNG, GIF, TIF, BMP, DATA_URL');
             });
     });
 
@@ -332,14 +335,14 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: 'hdk6cestl61shjhprzc6hoba5gtzwy0fgh8j3ttt5930zw1fkpfnwtxk4mhuhb1f0df9704j6l8bs26extvnee1mpokczi1u19xf7o5aop7kdkhu1jivhpuy18a80jmpr0we5p7q3wguznp89djqiqkj9yvgibj8tzjk7atuj7icvfnafojkf12ob2vo420f8qve2lfbme5fznkirtoenhq40fl3mpm8ssfl9dmfr38go4kxnuz7380vjeympw0',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: 'm',
                 resourceIds: [],
-                width: 475048,
-                height: 460167,
-                fit: 'FREE_WIDTH',
+                width: 7,
+                height: 5,
+                fit: 'CROP',
                 sizes: { "foo" : "bar" },
-                quality: 482,
+                quality: 6,
                 format: 'JPG',
             })
             .expect(201);
@@ -377,7 +380,7 @@ describe('attachment-family', () =>
                 {
                     where:
                     {
-                        id: '077b2711-7a3c-40d8-85a2-c97180f9b0c3'
+                        id: '307bcb02-2a1e-4ffc-9a34-414d54838896'
                     }
                 }
             })
@@ -395,18 +398,18 @@ describe('attachment-family', () =>
                 {
                     where:
                     {
-                        id: '303c0f40-4411-4a94-a50f-8d75604dd6ed'
+                        id: '85776fe2-c6b0-4458-862f-ef69bdc248d5'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '303c0f40-4411-4a94-a50f-8d75604dd6ed'));
+            .expect(repository.collectionResponse.find(item => item.id === '85776fe2-c6b0-4458-862f-ef69bdc248d5'));
     });
 
     test(`/REST:GET admin/attachment-family/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-family/77ac2dc5-2cb1-424d-8643-63593c6b9427')
+            .get('/admin/attachment-family/a15855eb-a5f5-473c-a612-566fe28c6e91')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -415,11 +418,11 @@ describe('attachment-family', () =>
     test(`/REST:GET admin/attachment-family/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/attachment-family/303c0f40-4411-4a94-a50f-8d75604dd6ed')
+            .get('/admin/attachment-family/85776fe2-c6b0-4458-862f-ef69bdc248d5')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '303c0f40-4411-4a94-a50f-8d75604dd6ed'));
+            .expect(repository.collectionResponse.find(e => e.id === '85776fe2-c6b0-4458-862f-ef69bdc248d5'));
     });
 
     test(`/REST:GET admin/attachment-families`, () =>
@@ -439,15 +442,15 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e813a9bd-37e3-4bb2-b57e-2b7abbd9f7cc',
-                name: '5b8t2mx149z5p72sbx9ydiono7wrgxx9uzl3hrexfge30zzjvoxm9nbdc8qit2nmsu8l6mj9xoybqe6b1qk296rsw4bvsgn2swxt2joul3552y1uyg7vmohuv0mi4wvwd5xkzvonwyfller9egor3havas3m9ddjsha177n0ex5e540yc89ns5tzhn1mkjewxuxhigun4eaqp034mpj68roioldinshrqg3wfbc6ufrbkh5811fshtr95nqv4lz',
+                id: 'b0ff86f0-f904-4092-9004-3540a8834c46',
+                name: 'x',
                 resourceIds: [],
-                width: 380671,
-                height: 544107,
-                fit: 'FREE_WIDTH',
+                width: 4,
+                height: 5,
+                fit: 'WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 606,
-                format: 'DATA_URL',
+                quality: 3,
+                format: 'GIF',
             })
             .expect(404);
     });
@@ -459,24 +462,24 @@ describe('attachment-family', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                name: 'cw4ewvypsnbr5467e7633o19spt0i1qftwm6m2949x0qz2onxa1tf1xd19gqkjesylr45xpst7bsnmkrd6nh9pq8ggkzbx724wysql6vdwxrdvihfv8hi34hc9vytzquxeqvazmozzh70xaqmo7l5nowu32i84y2uwvmxu1k3twg9cn9bswrmdvyi81sfy2ejtbpf4dlbungg8tx6z9yfbep2c1hy4gu09tyle6wlzxb23g6awc3fijcnc7rqdu',
+                id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                name: 'x',
                 resourceIds: [],
-                width: 556781,
-                height: 248210,
-                fit: 'CROP',
+                width: 9,
+                height: 7,
+                fit: 'FREE_WIDTH',
                 sizes: { "foo" : "bar" },
-                quality: 973,
-                format: 'PNG',
+                quality: 9,
+                format: 'GIF',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '303c0f40-4411-4a94-a50f-8d75604dd6ed'));
+            .expect(repository.collectionResponse.find(e => e.id === '85776fe2-c6b0-4458-862f-ef69bdc248d5'));
     });
 
     test(`/REST:DELETE admin/attachment-family/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-family/f14cdb0b-6ce6-4cc5-b623-3a7728c7aec7')
+            .delete('/admin/attachment-family/4b2236ba-ac3e-4cb0-8627-1d4cd78da32b')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -485,7 +488,7 @@ describe('attachment-family', () =>
     test(`/REST:DELETE admin/attachment-family/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/attachment-family/303c0f40-4411-4a94-a50f-8d75604dd6ed')
+            .delete('/admin/attachment-family/85776fe2-c6b0-4458-862f-ef69bdc248d5')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
@@ -552,20 +555,21 @@ describe('attachment-family', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'd5f482c7-89bd-4cb6-a796-91eababe12a4',
-                        name: '660yewng6mszyykr5i6ewutifd3u08rmb8qahj5qut6k41yrkqleh07mat8nhgf5bc00ogt3erv2u6vfurbrqabuv2f4n23g2xpmiy6z8xulox6e6irrvaqnrie6py70fjcgzmkf61hk7xjbrhk7is73b4jfttwok9993ro3bphk9m5qxhq1ek0g9kjtju8q4y8lpqxjo9qb62xmiib4wlswodn8ecaf8z7oz7sgpko1h5lt69100setnr5etfq',
-                        width: 682486,
-                        height: 198569,
-                        fit: 'CROP',
+                        id: 'f7488c3d-5a7f-4678-8081-2f35aeeb366d',
+                        name: '4',
+                        resourceIds: [],
+                        width: 4,
+                        height: 2,
+                        fit: 'FREE_WIDTH',
                         sizes: { "foo" : "bar" },
-                        quality: 641,
-                        format: 'DATA_URL',
+                        quality: 1,
+                        format: 'GIF',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateAttachmentFamily).toHaveProperty('id', 'd5f482c7-89bd-4cb6-a796-91eababe12a4');
+                expect(res.body.data.adminCreateAttachmentFamily).toHaveProperty('id', 'f7488c3d-5a7f-4678-8081-2f35aeeb366d');
             });
     });
 
@@ -635,7 +639,7 @@ describe('attachment-family', () =>
                     {
                         where:
                         {
-                            id: '682f56b2-ecef-4b67-927b-3e33df39183c'
+                            id: '51e49899-45bb-4ac3-b389-6efdbcb6882e'
                         }
                     }
                 }
@@ -679,14 +683,14 @@ describe('attachment-family', () =>
                     {
                         where:
                         {
-                            id: '303c0f40-4411-4a94-a50f-8d75604dd6ed'
+                            id: '85776fe2-c6b0-4458-862f-ef69bdc248d5'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentFamily.id).toStrictEqual('303c0f40-4411-4a94-a50f-8d75604dd6ed');
+                expect(res.body.data.adminFindAttachmentFamily.id).toStrictEqual('85776fe2-c6b0-4458-862f-ef69bdc248d5');
             });
     });
 
@@ -716,7 +720,7 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '087e5ddf-3824-4848-a462-28fc7303ee99'
+                    id: 'bef834ab-ac8d-4c48-bd77-90f7dbf13306'
                 }
             })
             .expect(200)
@@ -753,12 +757,12 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '303c0f40-4411-4a94-a50f-8d75604dd6ed'
+                    id: '85776fe2-c6b0-4458-862f-ef69bdc248d5'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindAttachmentFamilyById.id).toStrictEqual('303c0f40-4411-4a94-a50f-8d75604dd6ed');
+                expect(res.body.data.adminFindAttachmentFamilyById.id).toStrictEqual('85776fe2-c6b0-4458-862f-ef69bdc248d5');
             });
     });
 
@@ -825,15 +829,15 @@ describe('attachment-family', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '25eb2781-cfe9-4bcc-b767-853ee821bcd6',
-                        name: '9g3vk5dicruivi0nmwn45kes9n9lk84dv9v6ti427x9o5umhir3cq7t3gcgav1jrsacdid54n2hs0uqv7yv5rwm7818lcc6th2rkaot6741b9ahbut7rz2cfbpto2oxar8ztp2vs04yqgzdvskuh0dyl7bhwhjgpxh59j48mkfa1yzs8twsc9y6kwmxcx3rzzpzw8axou2mddu6n4uj1skmxqq2382696e4vkzjwuzztz3tgzqskwe9gy2wlv3o',
+                        id: 'b64feec0-8c91-4029-94db-48e689f13453',
+                        name: 'n',
                         resourceIds: [],
-                        width: 165076,
-                        height: 991491,
-                        fit: 'FREE_HEIGHT',
+                        width: 5,
+                        height: 4,
+                        fit: 'HEIGHT',
                         sizes: { "foo" : "bar" },
-                        quality: 490,
-                        format: 'TIF',
+                        quality: 1,
+                        format: 'BMP',
                     }
                 }
             })
@@ -872,21 +876,21 @@ describe('attachment-family', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '303c0f40-4411-4a94-a50f-8d75604dd6ed',
-                        name: 'a8bd6bkknw58f6chm8apy2ttjepd7n33sl6kbrqdowjv7pnmtuni2mp5eumlretd5j9novszq5qkapmrk1pyxddyh3f3sqrga4nndy4y8m2gxwnvdc328iau7xvlcoecva8pfsihwbon3puwywdo0hbkg0bu4znipywkwai69pa3z2c5enp7rirkvuy9rycknm5hjesqo6togh8a8e7o8abfx06wbnmtuc56uyj9zxpxkr119mqrcissfm35wzc',
+                        id: '85776fe2-c6b0-4458-862f-ef69bdc248d5',
+                        name: 'k',
                         resourceIds: [],
-                        width: 209148,
-                        height: 486860,
+                        width: 7,
+                        height: 8,
                         fit: 'WIDTH',
                         sizes: { "foo" : "bar" },
-                        quality: 867,
-                        format: 'TIF',
+                        quality: 1,
+                        format: 'PNG',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateAttachmentFamily.id).toStrictEqual('303c0f40-4411-4a94-a50f-8d75604dd6ed');
+                expect(res.body.data.adminUpdateAttachmentFamily.id).toStrictEqual('85776fe2-c6b0-4458-862f-ef69bdc248d5');
             });
     });
 
@@ -916,7 +920,7 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '28bf83f0-4131-414a-89a8-be3713b6b523'
+                    id: 'f34510d2-fea1-43b8-ba5d-caff3a34c172'
                 }
             })
             .expect(200)
@@ -953,12 +957,12 @@ describe('attachment-family', () =>
                     }
                 `,
                 variables: {
-                    id: '303c0f40-4411-4a94-a50f-8d75604dd6ed'
+                    id: '85776fe2-c6b0-4458-862f-ef69bdc248d5'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteAttachmentFamilyById.id).toStrictEqual('303c0f40-4411-4a94-a50f-8d75604dd6ed');
+                expect(res.body.data.adminDeleteAttachmentFamilyById.id).toStrictEqual('85776fe2-c6b0-4458-862f-ef69bdc248d5');
             });
     });
 
