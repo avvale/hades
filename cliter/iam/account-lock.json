@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:ccbf969c68e7ea21a60f3542b42e5edd8ab65eb1"
+            "integrity": "sha1:2f75e6d757704c3e3a3b2b9cdb670193ed294e59"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -491,7 +491,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:8a90416eb241df6c7e402038234fea20ac9710ab"
+            "integrity": "sha1:84df604448c5ca344cd035119ee9a337ab6b9ed4"
         }
     ]
 }

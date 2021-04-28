@@ -81,13 +81,13 @@ describe('account', () =>
             .send({
                 id: null,
                 type: 'SERVICE',
-                email: 'eynpf6t82qdkm0ybexprp7wxefnipbtoz2g3s0cf7co22k3zcwctf874w3v06mdfpg92mzq3clpvmvokhvn6yeoambodkzf8kw5cdw7mh396wuw2uq7zfcxv',
+                email: 'm5m0rufh1eo2c5w2mcakyt692cofxmsn4rnnoad3k6ewy3wkfzz7apnouio5rnmiklx3u9w23v0jajou1r7le8t19xma78k0ft7hepizjn753oeizsworhx9',
                 isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '05cbeee0-68d3-4f32-94b3-c370c95645bf',
+                dApplicationCodes: {"foo":51265,"bar":78203,"bike":"*K@ZO0nI4,","a":"k7/42y['od","b":72063,"name":20809,"prop":18643},
+                dPermissions: {"foo":63903,"bar":95841,"bike":82604,"a":"dIg[71-]eL","b":53180,"name":"#4z(#nI76d","prop":"56P>E*jr#&"},
+                dTenants: {"foo":"OzXQF:gRG6","bar":30266,"bike":":Ej,%)EFqr","a":"lZ_kwLk1Lt","b":53585,"name":"N^yW6nh4/r","prop":"NeDWa.Qp(|"},
+                data: {"foo":78222,"bar":77594,"bike":"vhz%_#e7l)","a":18918,"b":"d;ZV{?Pp!<","name":39709,"prop":"l8f2)28AHm"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -104,15 +104,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
+                id: 'c8fddc7a-ac8b-40ca-893e-c09fb2314535',
                 type: null,
-                email: '2p2rcfho6ni0pqgspnyv6co7eoigcc5tw77p9jcl0uam0n3ftejqu4u1txkwxrg0pspykorumz64mqjlwnjd31rrme4scszph18p3c8d9ma06oq07jeo9f9t',
+                email: 'wf1z63mlv20ta98e24lw6kgvy317xvuvzspnms1gz91ekggc3pyzaqams8ta2l0jw6tybbnlish28h9stiunrj8ckgs33zrg8iy02vgjy56vs1nbn6tbdy2l',
                 isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: 'bcba2f88-516a-4898-a95c-669447df589f',
+                dApplicationCodes: {"foo":"l01Z1#h#_Z","bar":15989,"bike":"2jX!/\\QGVo","a":"=f+.HG]]ue","b":21711,"name":"4b5&!ZTU\\g","prop":"]3W6vfC%\\H"},
+                dPermissions: {"foo":90877,"bar":5695,"bike":"`PyTQ_on$a","a":"_'!R/ae)Bn","b":"qbGv=Z?-O^","name":"_t9#V.O(*o","prop":"S%Z@w8Tl\\f"},
+                dTenants: {"foo":"wY,)^H)-r)","bar":47344,"bike":31683,"a":31622,"b":6092,"name":"OD!D9Mh.VE","prop":82604},
+                data: {"foo":55729,"bar":"Ia3sEEtA@q","bike":75969,"a":"31VYqtz#WY","b":82782,"name":"R7seL0:$^<","prop":"%-$u?Lai%s"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -129,15 +129,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
+                id: '7852e6f1-1cf4-42b6-a4d0-ae484bdf59d9',
                 type: 'USER',
                 email: null,
                 isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '3c1224a0-69ea-4c31-8410-31eb0a3354c6',
+                dApplicationCodes: {"foo":99897,"bar":"rUBZj\\n&\\o","bike":22128,"a":"l??c(Ev][H","b":"6h3i:3EE/8","name":"[\\k%<sg%'g","prop":"?c!6O'Zig8"},
+                dPermissions: {"foo":"odj-o%XFJz","bar":57920,"bike":12569,"a":46368,"b":"o7_;v{-qAF","name":"8b;Bg\\'zaW","prop":"30f{h-P=h]"},
+                dTenants: {"foo":"zV>Ns=w\\!@","bar":41498,"bike":34033,"a":"dgp&3|HlY=","b":"88B>,1Iy)b","name":")fF&){u3lD","prop":55707},
+                data: {"foo":95125,"bar":85086,"bike":"&1|{r7E@yc","a":"*Odbd%Wp_O","b":"(+Xfj{()>!","name":30809,"prop":8510},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -154,15 +154,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'SERVICE',
-                email: 'uhq0bq1mkfc1b950rnajmxuq0d9159s07opk8lph48ig0oxanjhs7el2oyju2on35m2yrzy0sbqjlfxo35v6cu1a8ucriwsxkj8ixvlrlrh7kd7h9qbxdx9m',
+                id: '200a05e3-03cf-4f35-b79b-f834ea1e4ded',
+                type: 'USER',
+                email: 'irtpnckdkxtj3yzdz6226rcbqdag3txj0gj89hivkpv0daulanq17h8ev63thl9dg71j6e3q08hsiygt5rthynedqrc3fgy3jpyeddo5b9519fkoqus0myvq',
                 isActive: null,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: 'db4484e6-2ab4-46a5-9a49-a13f45752729',
+                dApplicationCodes: {"foo":"9p8BSUsasV","bar":"QtGA:uuK7d","bike":"sR8&|b+^Dr","a":"T)'`C=Xn[V","b":"r^oi!wfnT0","name":63191,"prop":"=Lj_5}|SYD"},
+                dPermissions: {"foo":"-a%]@fc-Wi","bar":"G:V[ICWuH*","bike":83926,"a":"I`\\LWc@/$e","b":90771,"name":"^Zc5&`w%C+","prop":"w)U;Q>y`C5"},
+                dTenants: {"foo":16397,"bar":37131,"bike":"R-o%aq:;v:","a":"jA<s#m|^'V","b":33075,"name":"#^^+bz0zl0","prop":"4Y\\N6;0Jf7"},
+                data: {"foo":"]Gr\"RG4AGG","bar":"nUG3JK=\\xB","bike":48696,"a":78655,"b":53138,"name":"WVW'+'GTAp","prop":"`qxTRpT\".>"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -179,15 +179,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'USER',
-                email: 'cenm0aawq1llzcak1kkc6y6orhksvyz7zh0r1jo0reba1wgjtre5g7yny69hkc3rtosicljbv9rf06zx7ou9duvs4rm49kkettsd8lh5dem18zsoh1kz3unp',
-                isActive: true,
+                id: '6499f7de-1ac0-4ad5-88ee-9e3a2e1417e3',
+                type: 'SERVICE',
+                email: '9lg7esx5yrio7pywnvdxr3kk16v4g9ex5m1j6dt3p9ojk6xe0tay4j5brcc90fgmch2z8kyuoqmwu9eagzd53caujpwd6biyk3amgj7suhpnbhre9vrn91yl',
+                isActive: false,
                 clientId: null,
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                dApplicationCodes: {"foo":70779,"bar":646,"bike":8743,"a":".>8P^/{wQ^","b":"gA?u*LD\"j<","name":"r/u()7J*7-","prop":66617},
+                dPermissions: {"foo":82049,"bar":95488,"bike":32054,"a":"*F40)Zb,:B","b":"p(yxaqGL5:","name":"$K3|SED/_@","prop":15931},
+                dTenants: {"foo":71962,"bar":57636,"bike":7060,"a":"$b7LI=wB{a","b":"e$D|lGE2<\\","name":16905,"prop":95571},
+                data: {"foo":"Zl]E]WS]9-","bar":26234,"bike":"asa6e]XZ/i","a":50720,"b":96051,"name":98897,"prop":14826},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -204,71 +204,21 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'USER',
-                email: '01emxcl8uci4emneovqttjx588y4i073fgnti36b7zbz22jp1xgszu0rhirdihu0d13yqfnsnx88y2459fw70uir9v0u8d0vp2hc7lmqd3jkker7o54ox69w',
-                isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
+                id: '36eadaef-babd-4c7e-aca6-9a902e9bf2d6',
+                type: 'SERVICE',
+                email: '63rj3gw6o5msigebeffhb4ocgs9zd960qji2qbnou9h7e49oiw7roctlw7cseoxh959ockcduxwgjambuj6dxdcfc2set4w6vgqppt2oq1dzngh7uzouzh0p',
+                isActive: false,
+                clientId: '803fb592-134b-4486-b803-ccf15ed1d243',
                 dApplicationCodes: null,
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                dPermissions: {"foo":63367,"bar":44394,"bike":"J=Hb(kv$[]","a":2079,"b":78431,"name":5388,"prop":"#n-<DB9u&i"},
+                dTenants: {"foo":37959,"bar":"F$A[l5o:<Q","bike":"QQeWh%/s6w","a":13519,"b":45320,"name":93540,"prop":42474},
+                data: {"foo":43336,"bar":92904,"bike":37738,"a":82734,"b":2247,"name":"Fx<+_>+Mn>","prop":53579},
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be null');
-            });
-    });
-
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be null`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'USER',
-                email: 'lwtdc0lms5ckpfxlrg48zby4l4ikb4xuejdd3e4138t1e5kwsayvu5a2wbzcc3wxklu2nswataza5wn4xalzt2wsqcqlvppxhy4t4clewfns6fkltkhm5g0b',
-                isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: null,
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be null');
-            });
-    });
-
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be null`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'SERVICE',
-                email: '14gozqitzlle1k8jalal6vo5muc3pi5z7dfieaiga8jau58a8fkuie49xutpmnacs1jliwazzeriqjqa1biat2eujsdg20cwst8i5symxxleurjxznvha44v',
-                isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: null,
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountDTenants must be defined, can not be null');
             });
     });
 
@@ -280,13 +230,13 @@ describe('account', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 type: 'SERVICE',
-                email: 'bd2orarq4ho4idc6jj7tl6juo86msojmd2tx59mpoiyiz2j2lufe6goyc4o3w83yhmd5g4354j5s686cmns5ri1fa7r7s3bsef51lpbeid1k1clqmhkifacs',
+                email: 'y4kia89la36gf3d16s7ivrhcfnxdgp11pyrgomza3474igfk66s8ayolon7a4xvru8mn08h6icw7zk2c2pb4qgdz5finsdaxrfmh4addnmohh06t5gob2ilf',
                 isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '39912804-0a47-45e5-818b-949157e1d572',
+                dApplicationCodes: {"foo":45997,"bar":17827,"bike":"ZxdGxRkJ_\\","a":"(VuGA64>yZ","b":8624,"name":71411,"prop":20182},
+                dPermissions: {"foo":33318,"bar":30406,"bike":91707,"a":"4gc\"W%x,61","b":"R_RQM*e5.V","name":"|1cr>ML{`@","prop":"z(nMqgw@@N"},
+                dTenants: {"foo":"?s]<c@?4y6","bar":"6UpvlMeBf*","bike":"`ck.9Q\"vB'","a":"amhf0Mn?;2","b":"ox@\\&BrLS2","name":",-'a7h)\\-X","prop":"/3W#Q+}MJ2"},
+                data: {"foo":86252,"bar":57633,"bike":72059,"a":1381,"b":"#eFE(MBT*c","name":79383,"prop":")Wu2ea$rCu"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -303,14 +253,14 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                email: 'idvhi53usv9freujiqryil9d0h1oz2s29f8rf1m6nu3pz23y2b60qdshyh39un3ksw601dpax473z02gyepu0493pwzgzd2o02xddl8z5eo1ltc1oqj8zzfg',
+                id: '12205adf-5ee3-4448-9b48-e57e7b587c35',
+                email: 'aoszfmp81daxbb836ti1py9pagu2e1qqbaovuqt55654uc2azedwt03loamphe64g6ikq7tdfq4p2r82nffcomrxq6kurtdqelagit1mkywdvym2urmejvpw',
                 isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '3a476ff4-2de9-469f-8834-91d214ae3931',
+                dApplicationCodes: {"foo":99363,"bar":21676,"bike":":<*[$B5:t5","a":"PZL[h)s$gD","b":29706,"name":1821,"prop":"qt,oc\"}%CF"},
+                dPermissions: {"foo":84832,"bar":"'kNP4p<G_s","bike":42508,"a":9963,"b":98479,"name":97756,"prop":90867},
+                dTenants: {"foo":51994,"bar":"8S-Qg_xeEa","bike":694,"a":"E9?\\Cq(A3l","b":66292,"name":"zD]uG6e7ee","prop":"8vOu!<(A*m"},
+                data: {"foo":"L(v0Za>y4D","bar":"sdhzLe4wiM","bike":76338,"a":"Nq^-pibtPY","b":42355,"name":"981fjtspJb","prop":80510},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -327,14 +277,14 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'USER',
+                id: 'a9a4efa1-ac3d-4377-95db-f7b40183bf84',
+                type: 'SERVICE',
                 isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '409ea473-6899-46b3-93dd-8ab3a81c408d',
+                dApplicationCodes: {"foo":"49{%\\a;U+U","bar":"MX#leeYbgk","bike":66472,"a":26246,"b":"iO{S!.2rP?","name":"3m?\\jX>!9J","prop":"-_2>:AEi`M"},
+                dPermissions: {"foo":"pwK07o>Lb3","bar":"8`jI@qK(p'","bike":"ter`E0L6`[","a":"E);nmq5/3O","b":81239,"name":78728,"prop":49105},
+                dTenants: {"foo":72936,"bar":38841,"bike":"K%as|EiF!8","a":"xL\":l--o{%","b":"NI}a6i45hD","name":"ax4e(?xVvu","prop":73615},
+                data: {"foo":"S[:E34pJ0s","bar":"@l+IL,&wRy","bike":13175,"a":"U0H?k>2zUW","b":77391,"name":33434,"prop":22561},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -351,14 +301,14 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'SERVICE',
-                email: '79057xe8wiwps1wprjm38nz7g4xkevm82xprp9wdf2daluta9fvpo1vlc4z57yjzt7ubmdx79abmthezy2h9pczzd9x5okbefv0h4bs4to76dqiisks4aabf',
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                id: 'b1604da5-de3b-498f-bb74-4fcb5f94ba7b',
+                type: 'USER',
+                email: '8f5rzsbaakgm38wj0drw2elf1sh044hygm03xxnmzlbn92itgsye4p81xdf8yn3d351hxoxvjjjjkca6doaik93cszhvy5bdokr8zuf23t3njafty2c6vxvq',
+                clientId: 'd38512fd-ced4-4210-8ee9-674d407207d5',
+                dApplicationCodes: {"foo":90573,"bar":"E6&<mMmW6G","bike":76601,"a":61699,"b":40479,"name":"4KEg8:-Cn7","prop":46669},
+                dPermissions: {"foo":3758,"bar":"E'*xW*+w?k","bike":66002,"a":"vej8?pD6ku","b":65077,"name":"/Ww<M?<,Qd","prop":"19)cxIfh7s"},
+                dTenants: {"foo":"6q'1\\p9Bv>","bar":15010,"bike":59055,"a":52441,"b":"kUs9og-GSq","name":28347,"prop":"0V1>={NnH["},
+                data: {"foo":18486,"bar":17145,"bike":43969,"a":21420,"b":"}Ty1923[=>","name":"CynPO*!iX{","prop":"`fX_@ubGR<"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -375,14 +325,14 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'SERVICE',
-                email: 'rtrtk8ek8i49xdyjhhh3eezy15u4253ipmn1sc188ynqm7pnjsrzzyqnjdqtxluyn66k7psyieh857rco4oixi4yzaysqmaowdqrfdzog21qf47d9yuulrs7',
+                id: '189f8468-8011-431a-871a-ef4d1896b160',
+                type: 'USER',
+                email: 'gg8m02zcxw0b0oji9vtgt2horh533mvno7d0kx7tcjhyu94xx0twfriuwlsqilo4qvicmqodsi1buoodvtd95je3aceapn669lje196x544wcpcln6fsyw97',
                 isActive: true,
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                dApplicationCodes: {"foo":"p8/k55ukx6","bar":"V}bOU-ku5?","bike":72001,"a":"da@7+fSg^J","b":74460,"name":62700,"prop":"5}MYARGeAs"},
+                dPermissions: {"foo":"cKl7>GmrU]","bar":50179,"bike":72789,"a":"ZHzGVO&W_)","b":27383,"name":28799,"prop":98147},
+                dTenants: {"foo":"8_*{cs{3?r","bar":3469,"bike":"8[%,)5*AD-","a":13854,"b":83057,"name":"LONYp$c7_\\","prop":"hZEzZp|P;e"},
+                data: {"foo":69960,"bar":43626,"bike":"<W/_ms;cG7","a":79849,"b":55453,"name":"[C<Z%xg5)}","prop":"t0Tgm%3kYV"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -399,68 +349,20 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
+                id: 'c83015b7-35ea-4115-8de1-91abd027650d',
                 type: 'USER',
-                email: '6ogfk87juwkfj2gn0xl5w0102llmndvfwaxohzuygd8ddvff4j9tijsbag61rjrlfbee5e0knkml681l5yh89awbt2yzy7y0ecmtzwa73b36ip37cydaikzc',
+                email: 'b2suqq27anqgzf6xpao8pfqe0vucebp4c3ena245v07gfws9fliuvl069z0ml5dou58jc46511vd1l27z2l5o47jvi8fl933w31ynszlzm0rpf5c3brr3we1',
                 isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '26a795bc-0a99-4ddf-b08a-ab8f3219fa09',
+                dPermissions: {"foo":75008,"bar":90593,"bike":14204,"a":"8Lm0;:!e`(","b":"M/THYt$<G9","name":"|9p9'GKR_H","prop":"RJy#U9HQWK"},
+                dTenants: {"foo":58852,"bar":2917,"bike":75605,"a":61743,"b":68950,"name":".wB\\7m84sk","prop":31318},
+                data: {"foo":".Osb?Gg]<B","bar":96071,"bike":56648,"a":94833,"b":"rYdI:Sb^;;","name":43127,"prop":"'3[/Eznc&:"},
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be undefined');
-            });
-    });
-
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be undefined`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'SERVICE',
-                email: 'nm34syezo5ix9mu6ie3kaoxard87kigy3hlpnxuuqwjvf9ovvqty47dcnmplhs07rwu224j8qgcmeu8ihbn1nrff34d00ev2369tho6kcyks10l5vh7a54rk',
-                isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be undefined');
-            });
-    });
-
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be undefined`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'USER',
-                email: '4kcxkx2378mixx7tuowz6mspbnz8wlaw22i3tpe4rcz659e7d49wkue81q4euhhjsduznnbrcusq01qbc2umx09382co559ln6kww25kmgqn43nohlfolzsm',
-                isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccountDTenants must be defined, can not be undefined');
             });
     });
 
@@ -471,15 +373,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '3ohwgnnmsjeermhfe0ev6cyn75oytvmf12gak',
-                type: 'SERVICE',
-                email: 'i4j1j9oyc71ibubkjerjo6bt7mhcs1oaazk6xidgogg4k2m6d0y1awghlz5c3ywl0ur01i23kc9qwcu15m9p9t78xrkbso4kntb241z09hypjdsyyfiwc678',
-                isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                id: 'ga5om8cp8aoo0qrx7sm9ju646ylq6gkj18yn3',
+                type: 'USER',
+                email: 'czdw47z0159qvcm8ikpd8fwwejrbrpbmjqmtp9jl8j3vm9hwkxw826263sg50i17050va1y42mcudgohwqzcu21rose9ub0kr2qldno2g67fauhsesggmp6g',
+                isActive: false,
+                clientId: '94632f9e-cade-444e-8b80-458fd4768480',
+                dApplicationCodes: {"foo":">GAQYN_uDq","bar":12320,"bike":"4,_}*>|WfF","a":70937,"b":19562,"name":68282,"prop":"U@nk_g}}D["},
+                dPermissions: {"foo":"=YoJ!hg63[","bar":")GOHWl(lR\"","bike":"}/x]yuOrH\"","a":"?.OAg-eVWL","b":82335,"name":"g@]*!'0\\0)","prop":61598},
+                dTenants: {"foo":"w#IbT9DR/g","bar":22030,"bike":"qdsp|%tvj}","a":"*E{B<AobPA","b":"@s#\".r.=`L","name":"q.Dh']v@Z{","prop":38678},
+                data: {"foo":"wkhKTD{auS","bar":"5L_A93le7T","bike":95622,"a":"g:[k<PD(A&","b":"\"M]wn:xs{6","name":"7jfe=g2^81","prop":47880},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -496,15 +398,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'USER',
-                email: 'jjjj1otxtdj4hmr1hzeesswfesw8bgxc3rszcogrsnorlzvca10zniza3w23owjefd3mbgz2lz70yg50tebgtrqu55drhov5t8db4o8q87tmj9zl79cleyiz',
+                id: 'daf83a81-d63e-4b0c-8764-8aa63733c1e3',
+                type: 'SERVICE',
+                email: 'cfb6wcqq0rerzm42tciyqtp5tshbfu7omi8p2fjsxbl8m7h4asx8xq4e544d69plp23jkx73m1anacd2ta5ju8470en631wt3fshn8f1um0cs90bjaw1tdkz',
                 isActive: false,
-                clientId: '4pv6cr68pt4blsthtwgv4v499pxqoc1zgfp65',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '7nffbkrtnh99qxua8wfwsf8sdb20bbe9q9kge',
+                dApplicationCodes: {"foo":5712,"bar":"%5nUhZ;%CO","bike":"bcerFg`<1R","a":"}u6?f{c^)b","b":81041,"name":"\\tJC=?6VF@","prop":65231},
+                dPermissions: {"foo":35027,"bar":"tAq1I92rea","bike":"12>X_T:8Eu","a":2426,"b":11620,"name":63741,"prop":"V-o$Cy[LG^"},
+                dTenants: {"foo":99907,"bar":"DT5Ey>=E-t","bike":33801,"a":"C-l8fERvO^","b":42716,"name":";8_J4[Ay=G","prop":72972},
+                data: {"foo":"LQ<(.=`zL]","bar":"zM@r9YuLgY","bike":51984,"a":"%|Bl{ZDI69","b":"3l]0}PP,8:","name":"}F$N{}1cd9","prop":"Uw%th?/l1E"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -521,15 +423,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'SERVICE',
-                email: '1y5nz4yoimehxdswv1rdctjjtsfdpioafh94asv5hbbrue0d7hrpdqrmnt0nkjsqk4oolipeujo9kg7a5iyph48noto3naib3yrskj5i7mc16npcerx50l5zm',
-                isActive: false,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                id: '0f54579c-9bb5-47f5-866d-1c723f16b4b3',
+                type: 'USER',
+                email: 'gsnj7lwrfzqi8nckxs2ol6iwu24ikfd0ds4zaqlfyemjcznqv78s8jfjxu6ejr5l79w714z61kmdnf76191k4mrgvdmup35796we8ntndywiud84wpx9fc555',
+                isActive: true,
+                clientId: '02e4c9e3-d5e7-44c9-a860-a32cdac853ea',
+                dApplicationCodes: {"foo":">Ni>3uXxHZ","bar":33431,"bike":25849,"a":93588,"b":"A$CcSfxns%","name":"jM%EWK=Da;","prop":"MTv[;)'*P8"},
+                dPermissions: {"foo":61322,"bar":28759,"bike":"/rTh=nscQn","a":7482,"b":"JIR5z=}!GA","name":";|H)hTBr%_","prop":44133},
+                dTenants: {"foo":96850,"bar":"]^;*<hY(Qg","bike":"J=n'(2:oh%","a":61853,"b":70758,"name":19574,"prop":"#U1gCk.SLU"},
+                data: {"foo":"_u]fK/.jk3","bar":79079,"bike":"4MNG*%7O58","a":"fLeeWw}P*;","b":"5'3}Fbg]vt","name":"S:)--[l]G,","prop":46528},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -546,15 +448,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'SERVICE',
-                email: 's8e0nk5m9ctyyo60m9klo9vq3dqelzow4ktb3bmbur3lxh99e06hj47a4ikox57avm2zftmd293on2299ugiyx4c1uta77frvueinl8x87zq4j9dc1qo3r1k',
+                id: '3936b09a-0949-4011-8ca6-64b206fe6009',
+                type: 'USER',
+                email: '4i2l9ufogkpoao1lvkmu2y3dsbw923ctq802grbol00jeled87sj70p5ccvsk7brfy5yob4vwrbcvto2xf3gbcsojyw0haeg4hzbg6q6vromocxblh874eki',
                 isActive: 'true',
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '91872919-c55a-4ed5-b4a1-3eecce7c616b',
+                dApplicationCodes: {"foo":70622,"bar":"[p`!]0Y5=@","bike":"KNtBbxnp(o","a":"v2}3zpA4An","b":86720,"name":":IfF&Tu-9K","prop":1433},
+                dPermissions: {"foo":96804,"bar":27190,"bike":59634,"a":75149,"b":"?Ww!f:3n@Z","name":17078,"prop":"MWe-SdqD5t"},
+                dTenants: {"foo":"b4(cd$AyeU","bar":49500,"bike":63668,"a":98772,"b":"Jdt|CoK)e%","name":31850,"prop":":Iq[rPhg*C"},
+                data: {"foo":34940,"bar":"%Zp8!;9KcT","bike":97376,"a":"9QP$ns_l}!","b":38801,"name":8809,"prop":81129},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -563,27 +465,28 @@ describe('account', () =>
                 expect(res.body.message).toContain('Value for AccountIsActive has to be a boolean value');
             });
     });
-    test(`/REST:POST / - Got 400 Conflict, Type has to be a enum option of USER, SERVICE`, () =>
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountType has to be a enum option of USER, SERVICE`, () =>
     {
         return request(app.getHttpServer())
-            .post('//')
+            .post('/iam/account')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
+                id: '4b354db7-efd9-4fb3-a941-8e4049d09dbc',
                 type: 'XXXX',
-                email: '9qy47kcw3f9ees7etx3k6uzf655npcf33qb56z4vomi52uqaog32lyhc1httrxenns0p6vg725gjtbjad0jg5x5d9dlzxs2o4wfqanmllox0r8ltpzobqz4l',
+                email: 'x5cp622txa00yzf44ypn2zf7fbmo83fpvj0ihllq841gvibgx25lkc1zbnyzjiqmafi12luslc38lzxtt6p54zd8gho402tc85mrw3ohqurc0w11pq0i1pkk',
                 isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: '672e26a1-d393-483a-82a8-84ac83669db4',
+                dApplicationCodes: {"foo":"Nf!8oVDb6q","bar":27753,"bike":15881,"a":"UkE=O@zL>K","b":36958,"name":"Tf$G9PD`E%","prop":"N|y\\GJdAgV"},
+                dPermissions: {"foo":"!gxi1yz5V0","bar":"h|^8-W7w!W","bike":",[wrO/:((<","a":24228,"b":"Cx`$_>0;q4","name":72600,"prop":47767},
+                dTenants: {"foo":"v!Ic{\\=c14","bar":46444,"bike":"!`M:8rXSx[","a":",$*9kZM1{0","b":"p7)r8LSxP]","name":86707,"prop":"dKV9:\"<Cuh"},
+                data: {"foo":3386,"bar":29661,"bike":";?UPi&%djm","a":5296,"b":6088,"name":"V_!(TE{i21","prop":6336},
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for Type has to be any of this options: USER, SERVICE');
+                expect(res.body.message).toContain('Value for AccountType has to be any of this options: USER, SERVICE');
             });
     });
 
@@ -594,15 +497,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
                 type: 'USER',
-                email: '7p5r0zcfcfii42mnoabh19hqd6d54kcwahcpoxyoiq0vaejpep1d9f2yedjdjilpqtg91jqu799kjxch15zi79msou76rskrybmxj509zogryvnbqiux7ttr',
-                isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                email: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                isActive: false,
+                clientId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                dApplicationCodes: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                dPermissions: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                dTenants: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -641,7 +544,7 @@ describe('account', () =>
                 {
                     where:
                     {
-                        id: 'c2a3ede1-9d68-48a9-aac8-0905e59f1993'
+                        id: 'f408ff97-d0c1-478f-b8e1-86a6e145b975'
                     }
                 }
             })
@@ -659,18 +562,18 @@ describe('account', () =>
                 {
                     where:
                     {
-                        id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49'
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'ec7bb7c5-252c-41a3-9124-840b26e21b49'));
+            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
     });
 
     test(`/REST:GET iam/account/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/account/e39db8d2-e8fa-472c-b5a4-826acd2fd025')
+            .get('/iam/account/65c0d35a-ae1d-415d-8e38-c7888c1ef54f')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -679,11 +582,11 @@ describe('account', () =>
     test(`/REST:GET iam/account/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/account/ec7bb7c5-252c-41a3-9124-840b26e21b49')
+            .get('/iam/account/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ec7bb7c5-252c-41a3-9124-840b26e21b49'));
+            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
     });
 
     test(`/REST:GET iam/accounts`, () =>
@@ -703,15 +606,15 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'cc0963bf-6dd6-4b7e-882c-d8699408d823',
-                type: 'USER',
-                email: '83i79ru9lwnjdjlpsn24wr8o1vk7ghnlfon8cm2z34s5seebiumexyi3t8omowe1ez1svoj4tpow42sp9r4p4r6cuizu7x8cdv7p5gktdy7ksljxe1vfm6p1',
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                type: 'SERVICE',
+                email: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281',
                 isActive: true,
-                clientId: '36150899-8fc1-4663-b548-f81deefbd033',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                clientId: 'bdf096b0-633a-4fa0-b0f9-065c35331eb3',
+                dApplicationCodes: {"foo":",:Sa$Y0&,0","bar":91331,"bike":76594,"a":"5Lxla?wL:D","b":59728,"name":"_J]GZaJCnG","prop":">ak[H{iLa9"},
+                dPermissions: {"foo":"?ZrObR{hL#","bar":66383,"bike":":BHb$eQ`BD","a":"hX$G`f?`Cu","b":"{XdaGx}wRK","name":"\\q#\"K,*lKS","prop":40020},
+                dTenants: {"foo":57535,"bar":81869,"bike":67003,"a":".YNn,URF+f","b":"Y]85Oup4,m","name":45498,"prop":98098},
+                data: {"foo":48820,"bar":"E9|F\\g>Vc;","bike":84212,"a":")]d8#|u5S\\","b":"0uR;YN)%Z;","name":"<Wg;S84Y1H","prop":"[OF8wg\"'#7"},
                 roleIds: [],
                 tenantIds: [],
             })
@@ -725,26 +628,26 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
-                type: 'USER',
-                email: 'uar0wxx4zt0ablczbjfgxseoa3dfrd0ta2anlgrf32f2r7auqdymjxqzzn4ugqid0ez3tv3z9qj4do7aqbxg77utw9zgwgp4ausx5a8bzgtb9c2xrvby8f2q',
-                isActive: true,
-                clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                type: 'SERVICE',
+                email: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                isActive: false,
+                clientId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                dApplicationCodes: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                dPermissions: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                dTenants: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ec7bb7c5-252c-41a3-9124-840b26e21b49'));
+            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
     });
 
     test(`/REST:DELETE iam/account/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/account/97ed907c-b7d1-4e41-8b7e-7f378a13497e')
+            .delete('/iam/account/3ef43c0f-77e0-469f-9725-c4242e964f90')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -753,7 +656,7 @@ describe('account', () =>
     test(`/REST:DELETE iam/account/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/account/ec7bb7c5-252c-41a3-9124-840b26e21b49')
+            .delete('/iam/account/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
@@ -788,8 +691,9 @@ describe('account', () =>
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
-            .expect(200)
+            //.expect(200)
             .then(res => {
+                console.log(res)
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
@@ -822,21 +726,23 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '7251be7b-f2c6-4fc6-9dae-cd1f8f02d294',
+                        id: '6d1aaa06-a92c-4abc-86dd-5b347441ddaf',
                         type: 'USER',
-                        email: 'n82ib7u3oldozsjsdujoggvh7ix5ttrutvgujoi4xz3oam0tv1zizho5255cyzhxjtepuhyukpfr4mic4l0brmr6hy9s0rrpptnvqxjn0jgzawudtzvoe4re',
-                        isActive: false,
-                        clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
+                        email: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hh',
+                        isActive: true,
+                        clientId: 'd22a5aa6-9263-4a1c-9608-5f6fe599130f',
+                        dApplicationCodes: {"foo":"l}%WGf#G45","bar":"z^&8&}X#FB","bike":"8@26+wa7s,","a":54083,"b":"$Y0&,0\"u:h","name":"5Lxla?wL:D","prop":59728},
+                        dPermissions: {"foo":"_J]GZaJCnG","bar":">ak[H{iLa9","bike":"?ZrObR{hL#","a":66383,"b":":BHb$eQ`BD","name":"hX$G`f?`Cu","prop":"{XdaGx}wRK"},
+                        dTenants: {"foo":"\\q#\"K,*lKS","bar":40020,"bike":57535,"a":81869,"b":67003,"name":".YNn,URF+f","prop":"Y]85Oup4,m"},
+                        data: {"foo":45498,"bar":98098,"bike":48820,"a":"E9|F\\g>Vc;","b":84212,"name":")]d8#|u5S\\","prop":"0uR;YN)%Z;"},
+                        roleIds: [],
+                        tenantIds: [],
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateAccount).toHaveProperty('id', '7251be7b-f2c6-4fc6-9dae-cd1f8f02d294');
+                expect(res.body.data.iamCreateAccount).toHaveProperty('id', '6d1aaa06-a92c-4abc-86dd-5b347441ddaf');
             });
     });
 
@@ -907,7 +813,7 @@ describe('account', () =>
                     {
                         where:
                         {
-                            id: '619bb5ab-1449-41c3-a99d-01f6c37b1e91'
+                            id: '427a8607-650b-40ae-9eed-9cf066a28219'
                         }
                     }
                 }
@@ -952,14 +858,14 @@ describe('account', () =>
                     {
                         where:
                         {
-                            id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49'
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindAccount.id).toStrictEqual('ec7bb7c5-252c-41a3-9124-840b26e21b49');
+                expect(res.body.data.iamFindAccount.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -990,7 +896,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '2fedd102-079e-4d96-ba94-e5fd12c79866'
+                    id: '2cb95f99-0533-4cc6-bae2-246df6230515'
                 }
             })
             .expect(200)
@@ -1028,12 +934,12 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindAccountById.id).toStrictEqual('ec7bb7c5-252c-41a3-9124-840b26e21b49');
+                expect(res.body.data.iamFindAccountById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -1102,15 +1008,15 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'd2420c4a-9009-426b-9324-7a4caee966d7',
-                        type: 'USER',
-                        email: 'rr6i6zs79eo1jnxqp3h0kjnvk4zdh9hg0g2d1vldrligy65ba3njwt90joovxykplq94i2hd4gfirjtle4hyrnhsa4cxenpgcyzoh8o1p6h0isif3uytgkq0',
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        type: 'SERVICE',
+                        email: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281',
                         isActive: true,
-                        clientId: '3fb97b15-78e8-421e-82fe-290787cbced6',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
+                        clientId: 'bdf096b0-633a-4fa0-b0f9-065c35331eb3',
+                        dApplicationCodes: {"foo":",:Sa$Y0&,0","bar":91331,"bike":76594,"a":"5Lxla?wL:D","b":59728,"name":"_J]GZaJCnG","prop":">ak[H{iLa9"},
+                        dPermissions: {"foo":"?ZrObR{hL#","bar":66383,"bike":":BHb$eQ`BD","a":"hX$G`f?`Cu","b":"{XdaGx}wRK","name":"\\q#\"K,*lKS","prop":40020},
+                        dTenants: {"foo":57535,"bar":81869,"bike":67003,"a":".YNn,URF+f","b":"Y]85Oup4,m","name":45498,"prop":98098},
+                        data: {"foo":48820,"bar":"E9|F\\g>Vc;","bike":84212,"a":")]d8#|u5S\\","b":"0uR;YN)%Z;","name":"<Wg;S84Y1H","prop":"[OF8wg\"'#7"},
                         roleIds: [],
                         tenantIds: [],
                     }
@@ -1152,15 +1058,15 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49',
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
                         type: 'SERVICE',
-                        email: '8j43kztae3ev6kdfknrenkyp84u50mfd39vfn0xn8ujagsbt6f16kjjlvp0legu5zx0x0v2j3kz69dh5x6mw7k60cw7aedhqk9yd4zgmrt05uginq1otauxk',
-                        isActive: true,
-                        clientId: '1c3f6c0e-318c-4124-af48-be1463c73099',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
+                        email: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                        isActive: false,
+                        clientId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        dApplicationCodes: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                        dPermissions: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                        dTenants: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                        data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
                         roleIds: [],
                         tenantIds: [],
                     }
@@ -1168,7 +1074,7 @@ describe('account', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateAccount.id).toStrictEqual('ec7bb7c5-252c-41a3-9124-840b26e21b49');
+                expect(res.body.data.iamUpdateAccount.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -1199,7 +1105,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '2664f4c1-e884-4a2f-b774-5a233537ce30'
+                    id: '9bb63dc4-5af7-4001-a224-1eecffb21f33'
                 }
             })
             .expect(200)
@@ -1237,12 +1143,12 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: 'ec7bb7c5-252c-41a3-9124-840b26e21b49'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteAccountById.id).toStrictEqual('ec7bb7c5-252c-41a3-9124-840b26e21b49');
+                expect(res.body.data.iamDeleteAccountById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
