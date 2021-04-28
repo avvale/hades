@@ -86,14 +86,14 @@ describe('lang', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'd',
-                image: 'y',
-                iso6392: 'a',
-                iso6393: '6',
-                ietf: 'm',
-                dir: 'RTL',
-                sort: 9,
-                isActive: true,
+                name: 'e',
+                image: 'i',
+                iso6392: 'gw',
+                iso6393: 'fe8',
+                ietf: 'gop23',
+                dir: 'LTR',
+                sort: 185196,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -108,15 +108,15 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
+                id: 'cf819dde-9fce-4b35-bf6a-a4ee8da3169f',
                 name: null,
-                image: 'v',
-                iso6392: '2',
-                iso6393: 'b',
-                ietf: '2',
-                dir: 'LTR',
-                sort: 7,
-                isActive: false,
+                image: 'o',
+                iso6392: '6n',
+                iso6393: '0kv',
+                ietf: 'tmyiw',
+                dir: 'RTL',
+                sort: 150841,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -131,14 +131,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'h',
-                image: 'g',
+                id: 'b2cb7cbb-0628-4874-bc1e-6c9122963ff8',
+                name: '1',
+                image: 'e',
                 iso6392: null,
-                iso6393: 'u',
-                ietf: 'o',
-                dir: 'RTL',
-                sort: 1,
+                iso6393: 'igu',
+                ietf: '4tkje',
+                dir: 'LTR',
+                sort: 191918,
                 isActive: false,
             })
             .expect(400)
@@ -154,15 +154,15 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: '6',
-                image: '9',
-                iso6392: 'e',
+                id: 'd3981a1a-b648-430e-b7c7-7e869c383ad4',
+                name: 'x',
+                image: 'a',
+                iso6392: 't9',
                 iso6393: null,
-                ietf: 'm',
-                dir: 'RTL',
-                sort: 4,
-                isActive: false,
+                ietf: 'q96ug',
+                dir: 'LTR',
+                sort: 271227,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -177,14 +177,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'j',
-                image: '4',
-                iso6392: 'n',
-                iso6393: 'h',
+                id: '1c61355f-826f-4037-9e8d-55093ad64376',
+                name: 'l',
+                image: 'e',
+                iso6392: 'qx',
+                iso6393: 'p7u',
                 ietf: null,
                 dir: 'LTR',
-                sort: 3,
+                sort: 764147,
                 isActive: true,
             })
             .expect(400)
@@ -200,14 +200,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'q',
-                image: 'z',
-                iso6392: 'k',
-                iso6393: '9',
-                ietf: '9',
+                id: 'e73c558b-234e-4d0d-bdb8-aa5aada6199c',
+                name: 'd',
+                image: 'k',
+                iso6392: '0q',
+                iso6393: '0rm',
+                ietf: '5vff3',
                 dir: null,
-                sort: 8,
+                sort: 371857,
                 isActive: true,
             })
             .expect(400)
@@ -223,14 +223,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'k',
-                image: 'a',
-                iso6392: 'y',
-                iso6393: '0',
-                ietf: 'g',
-                dir: 'LTR',
-                sort: 5,
+                id: 'e72877a6-0116-4e7c-9ccf-82587bcf10b6',
+                name: '3',
+                image: 'i',
+                iso6392: 'yk',
+                iso6393: 'xa0',
+                ietf: 'nb9l9',
+                dir: 'RTL',
+                sort: 955139,
                 isActive: null,
             })
             .expect(400)
@@ -246,13 +246,13 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                name: 'n',
-                image: 'l',
-                iso6392: 'o',
-                iso6393: 'b',
-                ietf: 'n',
+                name: '0',
+                image: 'm',
+                iso6392: '49',
+                iso6393: 'xvd',
+                ietf: 'fxudo',
                 dir: 'RTL',
-                sort: 3,
+                sort: 439998,
                 isActive: false,
             })
             .expect(400)
@@ -268,13 +268,13 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                image: 'k',
-                iso6392: 'l',
-                iso6393: 'q',
-                ietf: 'v',
-                dir: 'LTR',
-                sort: 6,
+                id: '6e7029d1-c0cd-42e8-8b97-01b6ee93d7f1',
+                image: 'x',
+                iso6392: 'it',
+                iso6393: '1pa',
+                ietf: 'yaa8s',
+                dir: 'RTL',
+                sort: 819288,
                 isActive: true,
             })
             .expect(400)
@@ -290,13 +290,13 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'd',
-                image: 'y',
-                iso6393: 'y',
-                ietf: 'u',
-                dir: 'LTR',
-                sort: 6,
+                id: '44ead336-8158-4ddb-a634-37c3a0a9b28e',
+                name: '5',
+                image: 'i',
+                iso6393: 'k2y',
+                ietf: '7peme',
+                dir: 'RTL',
+                sort: 132271,
                 isActive: false,
             })
             .expect(400)
@@ -312,14 +312,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'r',
-                image: 'f',
-                iso6392: 'm',
-                ietf: 'b',
-                dir: 'RTL',
-                sort: 8,
-                isActive: false,
+                id: '609f29fe-75b4-4130-b18c-fb17a32c0abd',
+                name: 'x',
+                image: 'w',
+                iso6392: 'fn',
+                ietf: 'vqkhg',
+                dir: 'LTR',
+                sort: 679077,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -334,13 +334,13 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'd',
-                image: '3',
-                iso6392: 'x',
-                iso6393: 'x',
+                id: '2dbc6a39-81a5-42d6-88bf-56a5b4083b80',
+                name: 't',
+                image: '9',
+                iso6392: 'fw',
+                iso6393: 'r66',
                 dir: 'RTL',
-                sort: 5,
+                sort: 640658,
                 isActive: false,
             })
             .expect(400)
@@ -356,14 +356,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'x',
-                image: 'i',
-                iso6392: 't',
-                iso6393: '4',
-                ietf: '3',
-                sort: 5,
-                isActive: false,
+                id: '12fd55ef-dca7-4a3c-b50f-daf9923a5753',
+                name: '4',
+                image: 'x',
+                iso6392: 'ji',
+                iso6393: 'ly1',
+                ietf: 'gzmiu',
+                sort: 782120,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -378,14 +378,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'g',
-                image: 'i',
-                iso6392: 'q',
-                iso6393: 'm',
-                ietf: 'c',
-                dir: 'RTL',
-                sort: 2,
+                id: '49cfc069-b90d-47cd-9fc6-12353c7c6e1f',
+                name: 'l',
+                image: 'z',
+                iso6392: 'kr',
+                iso6393: 'te9',
+                ietf: 'itwz9',
+                dir: 'LTR',
+                sort: 508067,
             })
             .expect(400)
             .then(res => {
@@ -400,14 +400,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'ls75olzh77j5k7u98kvxdwjvc2xzlm8bsi6di',
-                name: 'i',
-                image: 'b',
-                iso6392: '2',
-                iso6393: 'e',
-                ietf: 'h',
-                dir: 'LTR',
-                sort: 8,
+                id: 'exo5gt020cq7wgxccf2uvz2d28mbkuun4wh4j',
+                name: 'b',
+                image: 'y',
+                iso6392: 'a4',
+                iso6393: '9i8',
+                ietf: 'yizro',
+                dir: 'RTL',
+                sort: 908836,
                 isActive: false,
             })
             .expect(400)
@@ -423,15 +423,15 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'x',
-                image: '9',
-                iso6392: 'rkh',
-                iso6393: 'v',
-                ietf: 'p',
+                id: 'c7ac6000-d781-4d93-abad-68076c052f52',
+                name: 'l',
+                image: '7',
+                iso6392: 'n8l',
+                iso6393: 'f79',
+                ietf: 'gy8iz',
                 dir: 'RTL',
-                sort: 8,
-                isActive: true,
+                sort: 690395,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -446,14 +446,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'z',
-                image: 'u',
-                iso6392: 'i',
-                iso6393: 'egqu',
-                ietf: 'g',
-                dir: 'LTR',
-                sort: 3,
+                id: 'fbe57746-8237-4fd8-883c-0eacce5312fb',
+                name: 'a',
+                image: '2',
+                iso6392: 'ed',
+                iso6393: 'i2ib',
+                ietf: '9n2b0',
+                dir: 'RTL',
+                sort: 802054,
                 isActive: true,
             })
             .expect(400)
@@ -469,15 +469,15 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: '8',
-                image: '7',
-                iso6392: 'p',
-                iso6393: 'm',
-                ietf: '2ndtj6',
-                dir: 'RTL',
-                sort: 9,
-                isActive: false,
+                id: 'f372d7a1-64dd-416d-b446-a908797afd9a',
+                name: 'r',
+                image: 'd',
+                iso6392: 'p8',
+                iso6393: 'ec2',
+                ietf: '6oertz',
+                dir: 'LTR',
+                sort: 741608,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -492,14 +492,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: '7',
-                image: '9',
-                iso6392: 't',
-                iso6393: '4',
-                ietf: 'y',
+                id: '9ece47c5-84b4-4c48-aeeb-b2aa32c58eb1',
+                name: 'n',
+                image: 'u',
+                iso6392: 'c8',
+                iso6393: 'd3a',
+                ietf: '1rgxl',
                 dir: 'LTR',
-                sort: 3594458,
+                sort: 9201680,
                 isActive: true,
             })
             .expect(400)
@@ -515,14 +515,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: '0',
-                image: 'r',
-                iso6392: 'z',
-                iso6393: 'x',
-                ietf: 't',
-                dir: 'RTL',
-                sort: 4,
+                id: '9f1dd27e-d2a4-4a53-9d58-10b6b5fe1b1e',
+                name: 'a',
+                image: 't',
+                iso6392: '6n',
+                iso6393: 't1z',
+                ietf: 'gg1da',
+                dir: 'LTR',
+                sort: 967345,
                 isActive: 'true',
             })
             .expect(400)
@@ -537,15 +537,15 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'h',
-                image: 'u',
-                iso6392: 'a',
-                iso6393: 'r',
-                ietf: '9',
+                id: '8fe12a44-fa84-41c0-8456-95ab838e5bb2',
+                name: 'a',
+                image: 'a',
+                iso6392: '5k',
+                iso6393: '1me',
+                ietf: '5q665',
                 dir: 'XXXX',
-                sort: 4,
-                isActive: true,
+                sort: 715145,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -560,15 +560,15 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: 'a',
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4',
                 image: '4',
-                iso6392: 'n',
-                iso6393: 'z',
-                ietf: 'l',
+                iso6392: '4i',
+                iso6393: '4iy',
+                ietf: '4iyw9',
                 dir: 'LTR',
-                sort: 6,
-                isActive: true,
+                sort: 417647,
+                isActive: false,
             })
             .expect(201);
     });
@@ -605,7 +605,7 @@ describe('lang', () =>
                 {
                     where:
                     {
-                        id: '4f608864-4b50-4e2e-858b-f6b9a9ab6d1d'
+                        id: '836fdb04-2fb5-4da4-b901-f4cb62f72e2f'
                     }
                 }
             })
@@ -623,18 +623,18 @@ describe('lang', () =>
                 {
                     where:
                     {
-                        id: '97a3639d-19fd-463d-a07c-de251e6e912e'
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '97a3639d-19fd-463d-a07c-de251e6e912e'));
+            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
     });
 
     test(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/2d4700a3-c916-4b0f-9bd3-82bfa24f359e')
+            .get('/admin/lang/16df18d1-ae00-4072-a1c9-64b88705b2f1')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -643,11 +643,11 @@ describe('lang', () =>
     test(`/REST:GET admin/lang/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/97a3639d-19fd-463d-a07c-de251e6e912e')
+            .get('/admin/lang/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '97a3639d-19fd-463d-a07c-de251e6e912e'));
+            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
     });
 
     test(`/REST:GET admin/langs`, () =>
@@ -667,14 +667,14 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5826d3dc-6731-4397-9556-6c9f02258122',
-                name: 'a',
-                image: 'd',
-                iso6392: '0',
-                iso6393: 'd',
-                ietf: 'o',
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                name: '1',
+                image: '2',
+                iso6392: 'v8',
+                iso6393: 'rbe',
+                ietf: 'xch6i',
                 dir: 'LTR',
-                sort: 3,
+                sort: 747481,
                 isActive: false,
             })
             .expect(404);
@@ -687,24 +687,24 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                name: '0',
-                image: 'g',
-                iso6392: 'n',
-                iso6393: 'z',
-                ietf: 'n',
-                dir: 'LTR',
-                sort: 6,
-                isActive: true,
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4',
+                image: '4',
+                iso6392: '4i',
+                iso6393: '4iy',
+                ietf: '4iyw9',
+                dir: 'RTL',
+                sort: 467909,
+                isActive: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '97a3639d-19fd-463d-a07c-de251e6e912e'));
+            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
     });
 
     test(`/REST:DELETE admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/7c52ebb8-bf33-47ef-975f-7f67ff1e1973')
+            .delete('/admin/lang/0778df9b-37c5-449c-8b38-8741fe2e4856')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -713,7 +713,7 @@ describe('lang', () =>
     test(`/REST:DELETE admin/lang/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/97a3639d-19fd-463d-a07c-de251e6e912e')
+            .delete('/admin/lang/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
@@ -782,21 +782,21 @@ describe('lang', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'b9abd8dd-2fe4-4e18-aa0b-a74b43586c2b',
-                        name: '8',
-                        image: 'm',
-                        iso6392: 'b',
-                        iso6393: 'p',
-                        ietf: 'o',
-                        dir: 'LTR',
-                        sort: 9,
-                        isActive: false,
+                        id: '0ad2d3be-618a-4b22-9250-2abaa3586dca',
+                        name: '5',
+                        image: '8',
+                        iso6392: 'yr',
+                        iso6393: '5l1',
+                        ietf: '4uut8',
+                        dir: 'RTL',
+                        sort: 446302,
+                        isActive: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateLang).toHaveProperty('id', 'b9abd8dd-2fe4-4e18-aa0b-a74b43586c2b');
+                expect(res.body.data.adminCreateLang).toHaveProperty('id', '0ad2d3be-618a-4b22-9250-2abaa3586dca');
             });
     });
 
@@ -867,7 +867,7 @@ describe('lang', () =>
                     {
                         where:
                         {
-                            id: 'e2430f56-acee-4862-bd9b-4c2a5a4f6301'
+                            id: '0882ec52-2a4c-425c-b93b-9ba21e9142e6'
                         }
                     }
                 }
@@ -912,14 +912,14 @@ describe('lang', () =>
                     {
                         where:
                         {
-                            id: '97a3639d-19fd-463d-a07c-de251e6e912e'
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindLang.id).toStrictEqual('97a3639d-19fd-463d-a07c-de251e6e912e');
+                expect(res.body.data.adminFindLang.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -950,7 +950,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '1db1d7cd-802f-4e91-8fce-e7cdd1223ff6'
+                    id: '23abe56a-6424-475e-9999-75a4b12e5a45'
                 }
             })
             .expect(200)
@@ -988,12 +988,12 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '97a3639d-19fd-463d-a07c-de251e6e912e'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindLangById.id).toStrictEqual('97a3639d-19fd-463d-a07c-de251e6e912e');
+                expect(res.body.data.adminFindLangById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -1062,15 +1062,15 @@ describe('lang', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '7be1ab11-6ffe-4a03-9dfd-477928fb87d6',
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
                         name: '1',
-                        image: 's',
-                        iso6392: '8',
-                        iso6393: 'g',
-                        ietf: 'f',
-                        dir: 'RTL',
-                        sort: 3,
-                        isActive: true,
+                        image: '2',
+                        iso6392: 'v8',
+                        iso6393: 'rbe',
+                        ietf: 'xch6i',
+                        dir: 'LTR',
+                        sort: 811934,
+                        isActive: false,
                     }
                 }
             })
@@ -1110,21 +1110,21 @@ describe('lang', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '97a3639d-19fd-463d-a07c-de251e6e912e',
-                        name: 'n',
-                        image: '8',
-                        iso6392: 'v',
-                        iso6393: 'q',
-                        ietf: 'l',
-                        dir: 'LTR',
-                        sort: 8,
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4',
+                        image: '4',
+                        iso6392: '4i',
+                        iso6393: '4iy',
+                        ietf: '4iyw9',
+                        dir: 'RTL',
+                        sort: 882843,
                         isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateLang.id).toStrictEqual('97a3639d-19fd-463d-a07c-de251e6e912e');
+                expect(res.body.data.adminUpdateLang.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -1155,7 +1155,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '4decfb93-2488-46ad-bcab-25f013069729'
+                    id: '45e458da-7f19-4c54-8e75-62807b4a7be4'
                 }
             })
             .expect(200)
@@ -1193,12 +1193,12 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '97a3639d-19fd-463d-a07c-de251e6e912e'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteLangById.id).toStrictEqual('97a3639d-19fd-463d-a07c-de251e6e912e');
+                expect(res.body.data.adminDeleteLangById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
