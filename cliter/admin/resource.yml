@@ -11,6 +11,7 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
+    faker: datatype.uuid
   - name: bounded_context_id
     type: id
     length: 36
@@ -20,6 +21,7 @@ aggregateProperties:
     relationshipModulePath: iam/bounded-context
     relationshipKey: id
     relationshipField: boundedContext
+    faker: datatype.uuid
   - name: attachment_families
     type: relationship
     nullable: true
@@ -34,12 +36,15 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: false
+    faker: database.column
   - name: has_custom_fields
     type: boolean
     nullable: false
+    faker: datatype.boolean
   - name: has_attachments
     type: boolean
     nullable: false
+    faker: datatype.boolean
   - name: created_at
     type: timestamp
     nullable: true
