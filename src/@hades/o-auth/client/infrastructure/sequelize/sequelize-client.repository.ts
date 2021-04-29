@@ -57,6 +57,6 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
             }
         }
 
-        await this.repositoryIntermediate.bulkCreate(intermediateDate);
+        await this.repositoryIntermediate.bulkCreate(<OAuthApplicationsClientsModel[]>intermediateDate);
     }
 }
