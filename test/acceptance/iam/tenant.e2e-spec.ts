@@ -393,7 +393,7 @@ describe('tenant', () =>
                 {
                     where:
                     {
-                        id: '2f64c667-f25c-4aee-a900-8e2dbcaef618'
+                        id: '0813b6d0-7832-4a50-92b3-5b2c145c4f53'
                     }
                 }
             })
@@ -422,7 +422,7 @@ describe('tenant', () =>
     test(`/REST:GET iam/tenant/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant/b806a0a1-4a1c-4286-9279-fc6faf3c1eb4')
+            .get('/iam/tenant/3fd35dff-18e6-44c8-951e-3fc35d4c640d')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -488,7 +488,7 @@ describe('tenant', () =>
     test(`/REST:DELETE iam/tenant/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/42e8f647-bbfa-4eae-8dc4-6f4436350a1a')
+            .delete('/iam/tenant/a3a2a71e-9a82-46de-b37b-6947d0ffec67')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -560,7 +560,7 @@ describe('tenant', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'fa4c176d-d024-4d2b-932c-c96504f35919',
+                        id: '2a649b4a-3fa3-4c88-9c5f-ec1943ee2efa',
                         name: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio',
                         code: 'cdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4k',
                         logo: 'je3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59',
@@ -572,7 +572,7 @@ describe('tenant', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateTenant).toHaveProperty('id', 'fa4c176d-d024-4d2b-932c-c96504f35919');
+                expect(res.body.data.iamCreateTenant).toHaveProperty('id', '2a649b4a-3fa3-4c88-9c5f-ec1943ee2efa');
             });
     });
 
@@ -640,7 +640,7 @@ describe('tenant', () =>
                     {
                         where:
                         {
-                            id: '007144a6-b825-4289-92f9-c25941a95571'
+                            id: 'c7f7c69e-55f2-43bb-b364-47a74a2f37bf'
                         }
                     }
                 }
@@ -717,7 +717,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '2c9f24f9-d0f3-481c-a6a7-934619ab987d'
+                    id: '864a3250-7910-4ffe-825c-ecc57fea30f7'
                 }
             })
             .expect(200)
@@ -903,7 +903,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: 'e79bb744-9efd-41c4-a9dd-357999f88933'
+                    id: 'bf1024ae-e914-491b-9455-f96273943bf8'
                 }
             })
             .expect(200)

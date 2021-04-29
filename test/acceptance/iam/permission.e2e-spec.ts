@@ -281,7 +281,7 @@ describe('permission', () =>
                 {
                     where:
                     {
-                        id: 'f7483588-64b9-4a31-98b1-55cde2d88d1c'
+                        id: 'e80ddf7f-5274-4cb9-9e09-a0233e77d1df'
                     }
                 }
             })
@@ -310,7 +310,7 @@ describe('permission', () =>
     test(`/REST:GET iam/permission/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/9160c725-4428-4f97-be1e-55fe4311836f')
+            .get('/iam/permission/fb333bb3-f936-431f-a691-e0356f520156')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -370,7 +370,7 @@ describe('permission', () =>
     test(`/REST:DELETE iam/permission/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/02549acf-a332-44f6-9425-74e6567a50ab')
+            .delete('/iam/permission/9fedc083-3f05-40ff-8221-0cb335624965')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -434,7 +434,7 @@ describe('permission', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '68a21b69-4189-439f-bf49-6d4b84b59bf1',
+                        id: 'b5ef13cc-e1bc-443b-a09a-848a4296ef9b',
                         name: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio',
                         boundedContextId: '56fc906a-c5a5-4eaf-9bb6-ffe878ad0071',
                         roleIds: [],
@@ -443,7 +443,7 @@ describe('permission', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreatePermission).toHaveProperty('id', '68a21b69-4189-439f-bf49-6d4b84b59bf1');
+                expect(res.body.data.iamCreatePermission).toHaveProperty('id', 'b5ef13cc-e1bc-443b-a09a-848a4296ef9b');
             });
     });
 
@@ -507,7 +507,7 @@ describe('permission', () =>
                     {
                         where:
                         {
-                            id: 'd99c275d-ec97-4056-9791-7f176f951dd1'
+                            id: '2209574a-c24b-42e3-92f5-1bfd0a1e11a0'
                         }
                     }
                 }
@@ -576,7 +576,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: 'bbdf48b4-2446-4a81-8c70-362e77f3beb8'
+                    id: '55bad7f1-963f-4a18-92e6-d8c5844d2646'
                 }
             })
             .expect(200)
@@ -736,7 +736,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: '688157d4-3431-4a05-871c-dd2ba192979c'
+                    id: '03bf87fd-7e2d-4dec-a8b2-85e34d3d6c29'
                 }
             })
             .expect(200)

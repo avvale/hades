@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:2f75e6d757704c3e3a3b2b9cdb670193ed294e59"
+            "integrity": "sha1:e858e56237b3f015bd829bc3513e8fc2815bd81e"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -491,7 +491,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:84df604448c5ca344cd035119ee9a337ab6b9ed4"
+            "integrity": "sha1:b064fb995169f65d008ae9da5c2126f0719b4c0b"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.spec.ts",
@@ -751,7 +751,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:a96e203d1860ad593959fddf463abbe6c358b9fa"
+            "integrity": "sha1:3af49122b348b9bf5302b83cb63cf2c732e2d557"
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
@@ -967,7 +967,7 @@
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:6c8a9ca234143a584872d122291cf59005ea555d"
+            "integrity": "sha1:a6a281935d21f161af53dfac6268093cd2242e4e"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command-handler.spec.ts",
@@ -1443,7 +1443,7 @@
         },
         {
             "path": "postman/iam.permission.postman.json",
-            "integrity": "sha1:2c127482d15ef0020c9ccc145c4c2d0a93a3de71"
+            "integrity": "sha1:b298291c2d8119513b871c61da204625101d60f8"
         },
         {
             "path": "src/@hades/iam/role/application/create/create-role.command-handler.spec.ts",
@@ -1923,7 +1923,7 @@
         },
         {
             "path": "postman/iam.role.postman.json",
-            "integrity": "sha1:b83cfdc92cf5effa9ae4dd419a892105d48c24b5"
+            "integrity": "sha1:755dda6586cbf4d803eb2e747d65d51a911d1d9b"
         }
     ]
 }
