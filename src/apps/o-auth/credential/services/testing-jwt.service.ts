@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { Jwt } from '@hades/shared/domain/lib/hades.types';
 import { accounts } from "@hades/iam/account/infrastructure/seeds/account.seed";
+import { accessTokens } from "@hades/o-auth/access-token/infrastructure/seeds/access-token.seed";
 
 @Injectable()
 export class TestingJwtService
@@ -16,7 +17,7 @@ export class TestingJwtService
     getJwt(): string
     {
         const accessTokenPayload: Jwt = {
-            jit: '859b3f64-6c8e-40c5-949d-5eabb501443e',
+            jit: accessTokens[0].id,
             aci: accounts[0].id,
             iss: 'Hades Testing OAuth',
             iat: parseInt(Utils.now().format('X')),
