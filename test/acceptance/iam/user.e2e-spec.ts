@@ -624,7 +624,7 @@ describe('user', () =>
                 {
                     where:
                     {
-                        id: '5cb1c5a9-e942-4e01-8e9a-c98060f901f2'
+                        id: '22ae55e3-d11a-4f9c-bf84-a839459600b3'
                     }
                 }
             })
@@ -653,7 +653,7 @@ describe('user', () =>
     test(`/REST:GET iam/user/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/user/5c3265e2-a737-4d41-9aa3-c363eba5f0da')
+            .get('/iam/user/5b0988eb-5855-42d8-aa3b-7769e3b8297e')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -727,7 +727,7 @@ describe('user', () =>
     test(`/REST:DELETE iam/user/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/user/675af35d-9e2c-456e-a4c9-c8adc26bd6a8')
+            .delete('/iam/user/d888af2e-148f-4ab2-b652-b9646672bde3')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -809,7 +809,7 @@ describe('user', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '446eb9cc-98b8-4868-a78b-a52b653bdf34',
+                        id: '0d5fbbd5-26ea-4366-84cc-91b98c7ba70a',
                         accountId: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
                         name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
                         surname: '3tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm',
@@ -825,7 +825,7 @@ describe('user', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateUser).toHaveProperty('id', '446eb9cc-98b8-4868-a78b-a52b653bdf34');
+                expect(res.body.data.iamCreateUser).toHaveProperty('id', '0d5fbbd5-26ea-4366-84cc-91b98c7ba70a');
             });
     });
 
@@ -898,7 +898,7 @@ describe('user', () =>
                     {
                         where:
                         {
-                            id: 'dc8ca8f8-f4fd-4ef4-9e7a-0a43635273ce'
+                            id: '1cb9b580-df67-42ba-b5fa-4fbd67a73559'
                         }
                     }
                 }
@@ -985,7 +985,7 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: '2e0aa4ae-49aa-4096-af0e-5218c4ed4a01'
+                    id: '37dba1a4-a7f1-4791-8eff-1c1258416226'
                 }
             })
             .expect(200)
@@ -1204,7 +1204,7 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: '9d00af62-6b06-497a-9a67-bf73cf167c10'
+                    id: 'd66d700e-29ad-4b1c-82bd-b5fd498ff59b'
                 }
             })
             .expect(200)

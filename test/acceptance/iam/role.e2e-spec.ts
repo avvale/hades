@@ -290,7 +290,7 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: '36b59539-5945-45f2-add3-611fd3f61002'
+                        id: 'f18a2468-d046-4e48-8c3a-bd30ec3d142d'
                     }
                 }
             })
@@ -319,7 +319,7 @@ describe('role', () =>
     test(`/REST:GET iam/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/13df2211-f3c5-40e5-99e8-f35c2e4f8bac')
+            .get('/iam/role/597ec4c5-49e4-4ab6-81cf-9fab718aee29')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -381,7 +381,7 @@ describe('role', () =>
     test(`/REST:DELETE iam/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/c8263d6e-eba8-4cab-a73a-62a7379e5feb')
+            .delete('/iam/role/09d31f8c-d269-4985-89fb-8bda598436d2')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -447,7 +447,7 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '4397d871-3fb6-4692-a193-4d0fbe084886',
+                        id: 'a49b08cc-7f38-4b1d-98ad-4fb368b1c65b',
                         name: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio',
                         isMaster: false,
                         permissionIds: [],
@@ -457,7 +457,7 @@ describe('role', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateRole).toHaveProperty('id', '4397d871-3fb6-4692-a193-4d0fbe084886');
+                expect(res.body.data.iamCreateRole).toHaveProperty('id', 'a49b08cc-7f38-4b1d-98ad-4fb368b1c65b');
             });
     });
 
@@ -522,7 +522,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '4e4db418-af0e-44b5-8ed8-f6bcbab5248b'
+                            id: '64a54cf1-30d8-42c5-831c-4a9cc3c3aa93'
                         }
                     }
                 }
@@ -593,7 +593,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: 'bc334a0f-560e-41f1-9736-6da8dbd98763'
+                    id: 'abb39f79-293c-4aa1-92ce-67dab4bd209f'
                 }
             })
             .expect(200)
@@ -760,7 +760,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '25a9fd15-a35c-4670-b8f7-1f3f5d5553ca'
+                    id: '2f3bf5be-667c-4f24-b5ae-9c64c044fb57'
                 }
             })
             .expect(200)
