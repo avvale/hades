@@ -171,7 +171,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
             )
         );
 
-        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
+        if (!modelInDB) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // clean undefined fields
         const objectLiteral = cleanDeep(aggregate.toDTO(), {
