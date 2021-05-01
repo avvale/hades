@@ -11,7 +11,6 @@ export abstract class MockSeeder<Aggregate extends AggregateBase>
 
     get collectionResponse(): any[]
     {
-        // to match objects, the http output excludes undefined values
         return this.collectionSource.map(item => item.toDTO());
     }
 }
