@@ -17,7 +17,7 @@ dayjs.extend(advancedFormat);
 
 async function bootstrap()
 {
-    const app                   = await NestFactory.create<NestExpressApplication>(AppModule, {logger: true});
+    const app                   = await NestFactory.create<NestExpressApplication>(AppModule, {logger: false});
     const environmentService    = app.get(EnvironmentService);
     const loggerService         = app.get(LoggerService);
 
