@@ -5,7 +5,7 @@ export class AdministrativeAreaLevel2Response
 {
     constructor(
         public readonly id: string,
-        public readonly countryCommonId: string,
+        public readonly countryId: string,
         public readonly administrativeAreaLevel1Id: string,
         public readonly code: string,
         public readonly customCode: string,

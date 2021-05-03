@@ -6,7 +6,7 @@ import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-leve
 import { CreateAdministrativeAreaLevel3Service } from './create-administrative-area-level-3.service';
 import {
     AdministrativeAreaLevel3Id,
-    AdministrativeAreaLevel3CountryCommonId,
+    AdministrativeAreaLevel3CountryId,
     AdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel3AdministrativeAreaLevel2Id,
     AdministrativeAreaLevel3Code,
@@ -65,7 +65,7 @@ describe('CreateAdministrativeAreaLevel3Service', () =>
             expect(await service.main(
                 {
                     id: new AdministrativeAreaLevel3Id(administrativeAreasLevel3[0].id),
-                    countryCommonId: new AdministrativeAreaLevel3CountryCommonId(administrativeAreasLevel3[0].countryCommonId),
+                    countryId: new AdministrativeAreaLevel3CountryId(administrativeAreasLevel3[0].countryId),
                     administrativeAreaLevel1Id: new AdministrativeAreaLevel3AdministrativeAreaLevel1Id(administrativeAreasLevel3[0].administrativeAreaLevel1Id),
                     administrativeAreaLevel2Id: new AdministrativeAreaLevel3AdministrativeAreaLevel2Id(administrativeAreasLevel3[0].administrativeAreaLevel2Id),
                     code: new AdministrativeAreaLevel3Code(administrativeAreasLevel3[0].code),

@@ -4,7 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { IAdministrativeAreaLevel3Repository } from '@hades/admin/administrative-area-level-3/domain/administrative-area-level-3.repository';
 import {
     AdministrativeAreaLevel3Id,
-    AdministrativeAreaLevel3CountryCommonId,
+    AdministrativeAreaLevel3CountryId,
     AdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel3AdministrativeAreaLevel2Id,
     AdministrativeAreaLevel3Code,
@@ -53,7 +53,7 @@ export class MockAdministrativeAreaLevel3Repository extends MockRepository<Admin
 
             this.collectionSource.push(AdminAdministrativeAreaLevel3.register(
                     new AdministrativeAreaLevel3Id(itemCollection.id),
-                    new AdministrativeAreaLevel3CountryCommonId(itemCollection.countryCommonId),
+                    new AdministrativeAreaLevel3CountryId(itemCollection.countryId),
                     new AdministrativeAreaLevel3AdministrativeAreaLevel1Id(itemCollection.administrativeAreaLevel1Id),
                     new AdministrativeAreaLevel3AdministrativeAreaLevel2Id(itemCollection.administrativeAreaLevel2Id),
                     new AdministrativeAreaLevel3Code(itemCollection.code),

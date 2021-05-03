@@ -3,7 +3,7 @@ import { UpdateAdministrativeAreaLevel2Command } from './update-administrative-a
 import { UpdateAdministrativeAreaLevel2Service } from './update-administrative-area-level-2.service';
 import {
     AdministrativeAreaLevel2Id,
-    AdministrativeAreaLevel2CountryCommonId,
+    AdministrativeAreaLevel2CountryId,
     AdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel2Code,
     AdministrativeAreaLevel2CustomCode,
@@ -30,7 +30,7 @@ export class UpdateAdministrativeAreaLevel2CommandHandler implements ICommandHan
         await this.updateAdministrativeAreaLevel2Service.main(
             {
                 id: new AdministrativeAreaLevel2Id(command.payload.id),
-                countryCommonId: new AdministrativeAreaLevel2CountryCommonId(command.payload.countryCommonId, { undefinable: true }),
+                countryId: new AdministrativeAreaLevel2CountryId(command.payload.countryId, { undefinable: true }),
                 administrativeAreaLevel1Id: new AdministrativeAreaLevel2AdministrativeAreaLevel1Id(command.payload.administrativeAreaLevel1Id, { undefinable: true }),
                 code: new AdministrativeAreaLevel2Code(command.payload.code, { undefinable: true }),
                 customCode: new AdministrativeAreaLevel2CustomCode(command.payload.customCode),

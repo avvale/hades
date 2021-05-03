@@ -5,7 +5,7 @@ export class CreateAdministrativeAreasLevel3Command
     constructor(
         public readonly payload: {
             id: string,
-            countryCommonId: string,
+            countryId: string,
             administrativeAreaLevel1Id: string,
             administrativeAreaLevel2Id: string,
             code: string,

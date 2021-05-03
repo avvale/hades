@@ -42,7 +42,7 @@ describe('UpdateAdministrativeAreaLevel2CommandHandler', () =>
                 new UpdateAdministrativeAreaLevel2Command(
                     {
                         id: administrativeAreasLevel2[0].id,
-                        countryCommonId: administrativeAreasLevel2[0].countryCommonId,
+                        countryId: administrativeAreasLevel2[0].countryId,
                         administrativeAreaLevel1Id: administrativeAreasLevel2[0].administrativeAreaLevel1Id,
                         code: administrativeAreasLevel2[0].code,
                         customCode: administrativeAreasLevel2[0].customCode,

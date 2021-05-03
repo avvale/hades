@@ -42,7 +42,7 @@ describe('CreateAdministrativeAreaLevel3CommandHandler', () =>
                 new CreateAdministrativeAreaLevel3Command(
                     {
                         id: administrativeAreasLevel3[0].id,
-                        countryCommonId: administrativeAreasLevel3[0].countryCommonId,
+                        countryId: administrativeAreasLevel3[0].countryId,
                         administrativeAreaLevel1Id: administrativeAreasLevel3[0].administrativeAreaLevel1Id,
                         administrativeAreaLevel2Id: administrativeAreasLevel3[0].administrativeAreaLevel2Id,
                         code: administrativeAreasLevel3[0].code,

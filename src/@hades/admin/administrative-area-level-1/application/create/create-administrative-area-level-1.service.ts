@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
     AdministrativeAreaLevel1Id,
-    AdministrativeAreaLevel1CountryCommonId,
+    AdministrativeAreaLevel1CountryId,
     AdministrativeAreaLevel1Code,
     AdministrativeAreaLevel1CustomCode,
     AdministrativeAreaLevel1Name,
@@ -28,7 +28,7 @@ export class CreateAdministrativeAreaLevel1Service
     public async main(
         payload: {
             id: AdministrativeAreaLevel1Id,
-            countryCommonId: AdministrativeAreaLevel1CountryCommonId,
+            countryId: AdministrativeAreaLevel1CountryId,
             code: AdministrativeAreaLevel1Code,
             customCode: AdministrativeAreaLevel1CustomCode,
             name: AdministrativeAreaLevel1Name,
@@ -42,7 +42,7 @@ export class CreateAdministrativeAreaLevel1Service
         // create aggregate with factory pattern
         const administrativeAreaLevel1 = AdminAdministrativeAreaLevel1.register(
             payload.id,
-            payload.countryCommonId,
+            payload.countryId,
             payload.code,
             payload.customCode,
             payload.name,

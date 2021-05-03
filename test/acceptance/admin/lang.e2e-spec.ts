@@ -2,8 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
-import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { MockLangSeeder } from '@hades/admin/lang/infrastructure/mock/mock-lang.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
@@ -14,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 
@@ -24,7 +24,8 @@ const importForeignModules = [
 describe('lang', () =>
 {
     let app: INestApplication;
-    let repository: MockLangRepository;
+    let repository: ILangRepository;
+    let seeder: MockLangSeeder;
     let testJwt: string;
 
     beforeAll(async () =>
@@ -35,11 +36,12 @@ describe('lang', () =>
                     AdminModule,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
                     }),
                     JwtModule.register({
                         privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
@@ -50,11 +52,10 @@ describe('lang', () =>
                     }),
                 ],
                 providers: [
+                    MockLangSeeder,
                     TestingJwtService,
                 ]
             })
-            .overrideProvider(ILangRepository)
-            .useClass(MockLangRepository)
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
             .overrideGuard(AuthorizationGuard)
@@ -62,20 +63,14 @@ describe('lang', () =>
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockLangRepository>module.get<ILangRepository>(ILangRepository);
-        testJwt     =  module.get(TestingJwtService).getJwt();
+        repository  = module.get<ILangRepository>(ILangRepository);
+        seeder      = module.get<MockLangSeeder>(MockLangSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
-    });
-
-    test(`/REST:POST admin/lang - Got 409 Conflict, item already exist in database`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/admin/lang')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send(repository.collectionResponse[0])
-            .expect(409);
     });
 
     test(`/REST:POST admin/lang - Got 400 Conflict, LangId property can not to be null`, () =>
@@ -91,8 +86,8 @@ describe('lang', () =>
                 iso6392: 'gw',
                 iso6393: 'fe8',
                 ietf: 'gop23',
-                dir: 'LTR',
-                sort: 185196,
+                dir: 'RTL',
+                sort: 480019,
                 isActive: false,
             })
             .expect(400)
@@ -115,7 +110,7 @@ describe('lang', () =>
                 iso6393: '0kv',
                 ietf: 'tmyiw',
                 dir: 'RTL',
-                sort: 150841,
+                sort: 445757,
                 isActive: true,
             })
             .expect(400)
@@ -137,8 +132,8 @@ describe('lang', () =>
                 iso6392: null,
                 iso6393: 'igu',
                 ietf: '4tkje',
-                dir: 'LTR',
-                sort: 191918,
+                dir: 'RTL',
+                sort: 280013,
                 isActive: false,
             })
             .expect(400)
@@ -161,7 +156,7 @@ describe('lang', () =>
                 iso6393: null,
                 ietf: 'q96ug',
                 dir: 'LTR',
-                sort: 271227,
+                sort: 690402,
                 isActive: true,
             })
             .expect(400)
@@ -183,8 +178,8 @@ describe('lang', () =>
                 iso6392: 'qx',
                 iso6393: 'p7u',
                 ietf: null,
-                dir: 'LTR',
-                sort: 764147,
+                dir: 'RTL',
+                sort: 284529,
                 isActive: true,
             })
             .expect(400)
@@ -207,7 +202,7 @@ describe('lang', () =>
                 iso6393: '0rm',
                 ietf: '5vff3',
                 dir: null,
-                sort: 371857,
+                sort: 256745,
                 isActive: true,
             })
             .expect(400)
@@ -229,8 +224,8 @@ describe('lang', () =>
                 iso6392: 'yk',
                 iso6393: 'xa0',
                 ietf: 'nb9l9',
-                dir: 'RTL',
-                sort: 955139,
+                dir: 'LTR',
+                sort: 573178,
                 isActive: null,
             })
             .expect(400)
@@ -252,7 +247,7 @@ describe('lang', () =>
                 iso6393: 'xvd',
                 ietf: 'fxudo',
                 dir: 'RTL',
-                sort: 439998,
+                sort: 635053,
                 isActive: false,
             })
             .expect(400)
@@ -274,7 +269,7 @@ describe('lang', () =>
                 iso6393: '1pa',
                 ietf: 'yaa8s',
                 dir: 'RTL',
-                sort: 819288,
+                sort: 887941,
                 isActive: true,
             })
             .expect(400)
@@ -296,7 +291,7 @@ describe('lang', () =>
                 iso6393: 'k2y',
                 ietf: '7peme',
                 dir: 'RTL',
-                sort: 132271,
+                sort: 653850,
                 isActive: false,
             })
             .expect(400)
@@ -317,8 +312,8 @@ describe('lang', () =>
                 image: 'w',
                 iso6392: 'fn',
                 ietf: 'vqkhg',
-                dir: 'LTR',
-                sort: 679077,
+                dir: 'RTL',
+                sort: 595680,
                 isActive: true,
             })
             .expect(400)
@@ -340,7 +335,7 @@ describe('lang', () =>
                 iso6392: 'fw',
                 iso6393: 'r66',
                 dir: 'RTL',
-                sort: 640658,
+                sort: 824968,
                 isActive: false,
             })
             .expect(400)
@@ -362,7 +357,7 @@ describe('lang', () =>
                 iso6392: 'ji',
                 iso6393: 'ly1',
                 ietf: 'gzmiu',
-                sort: 782120,
+                sort: 510074,
                 isActive: true,
             })
             .expect(400)
@@ -384,8 +379,8 @@ describe('lang', () =>
                 iso6392: 'kr',
                 iso6393: 'te9',
                 ietf: 'itwz9',
-                dir: 'LTR',
-                sort: 508067,
+                dir: 'RTL',
+                sort: 853169,
             })
             .expect(400)
             .then(res => {
@@ -407,7 +402,7 @@ describe('lang', () =>
                 iso6393: '9i8',
                 ietf: 'yizro',
                 dir: 'RTL',
-                sort: 908836,
+                sort: 512900,
                 isActive: false,
             })
             .expect(400)
@@ -429,8 +424,8 @@ describe('lang', () =>
                 iso6392: 'n8l',
                 iso6393: 'f79',
                 ietf: 'gy8iz',
-                dir: 'RTL',
-                sort: 690395,
+                dir: 'LTR',
+                sort: 473799,
                 isActive: false,
             })
             .expect(400)
@@ -452,8 +447,8 @@ describe('lang', () =>
                 iso6392: 'ed',
                 iso6393: 'i2ib',
                 ietf: '9n2b0',
-                dir: 'RTL',
-                sort: 802054,
+                dir: 'LTR',
+                sort: 479788,
                 isActive: true,
             })
             .expect(400)
@@ -475,8 +470,8 @@ describe('lang', () =>
                 iso6392: 'p8',
                 iso6393: 'ec2',
                 ietf: '6oertz',
-                dir: 'LTR',
-                sort: 741608,
+                dir: 'RTL',
+                sort: 495194,
                 isActive: true,
             })
             .expect(400)
@@ -498,8 +493,8 @@ describe('lang', () =>
                 iso6392: 'c8',
                 iso6393: 'd3a',
                 ietf: '1rgxl',
-                dir: 'LTR',
-                sort: 9201680,
+                dir: 'RTL',
+                sort: 2563985,
                 isActive: true,
             })
             .expect(400)
@@ -522,7 +517,7 @@ describe('lang', () =>
                 iso6393: 't1z',
                 ietf: 'gg1da',
                 dir: 'LTR',
-                sort: 967345,
+                sort: 817289,
                 isActive: 'true',
             })
             .expect(400)
@@ -544,7 +539,7 @@ describe('lang', () =>
                 iso6393: '1me',
                 ietf: '5q665',
                 dir: 'XXXX',
-                sort: 715145,
+                sort: 209177,
                 isActive: false,
             })
             .expect(400)
@@ -553,24 +548,14 @@ describe('lang', () =>
             });
     });
 
-    test(`/REST:POST admin/lang`, () =>
+    test(`/REST:POST admin/lang - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                name: '4',
-                image: '4',
-                iso6392: '4i',
-                iso6393: '4iy',
-                ietf: '4iyw9',
-                dir: 'LTR',
-                sort: 417647,
-                isActive: false,
-            })
-            .expect(201);
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
     test(`/REST:GET admin/langs/paginate`, () =>
@@ -588,10 +573,20 @@ describe('lang', () =>
             })
             .expect(200)
             .expect({
-                total   : repository.collectionResponse.length,
-                count   : repository.collectionResponse.length,
-                rows    : repository.collectionResponse.slice(0, 5)
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
+    });
+
+    test(`/REST:GET admin/langs`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/admin/langs')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .expect(seeder.collectionResponse);
     });
 
     test(`/REST:GET admin/lang - Got 404 Not Found`, () =>
@@ -605,11 +600,31 @@ describe('lang', () =>
                 {
                     where:
                     {
-                        id: '836fdb04-2fb5-4da4-b901-f4cb62f72e2f'
+                        id: '83d920f1-89a4-4a4c-a604-6cc66c7f0a16'
                     }
                 }
             })
             .expect(404);
+    });
+
+    test(`/REST:POST admin/lang`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4',
+                image: '4',
+                iso6392: '4i',
+                iso6393: '4iy',
+                ietf: '4iyw9',
+                dir: 'RTL',
+                sort: 401166,
+                isActive: false,
+            })
+            .expect(201);
     });
 
     test(`/REST:GET admin/lang`, () =>
@@ -628,13 +643,15 @@ describe('lang', () =>
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/16df18d1-ae00-4072-a1c9-64b88705b2f1')
+            .get('/admin/lang/68bd9e70-a79e-41d3-9f48-c0677f6aeaea')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -647,17 +664,9 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
-    });
-
-    test(`/REST:GET admin/langs`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/admin/langs')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .expect(200)
-            .expect(repository.collectionResponse);
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:PUT admin/lang - Got 404 Not Found`, () =>
@@ -673,8 +682,8 @@ describe('lang', () =>
                 iso6392: 'v8',
                 iso6393: 'rbe',
                 ietf: 'xch6i',
-                dir: 'LTR',
-                sort: 747481,
+                dir: 'RTL',
+                sort: 659201,
                 isActive: false,
             })
             .expect(404);
@@ -693,18 +702,20 @@ describe('lang', () =>
                 iso6392: '4i',
                 iso6393: '4iy',
                 ietf: '4iyw9',
-                dir: 'RTL',
-                sort: 467909,
+                dir: 'LTR',
+                sort: 816591,
                 isActive: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/0778df9b-37c5-449c-8b38-8741fe2e4856')
+            .delete('/admin/lang/3d7e303e-7177-4226-86b3-27606e69ab03')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -745,7 +756,7 @@ describe('lang', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -753,50 +764,6 @@ describe('lang', () =>
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
-            });
-    });
-
-    test(`/GraphQL adminCreateLang`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    mutation ($payload:AdminCreateLangInput!)
-                    {
-                        adminCreateLang (payload:$payload)
-                        {
-                            id
-                            name
-                            image
-                            iso6392
-                            iso6393
-                            ietf
-                            dir
-                            sort
-                            isActive
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '0ad2d3be-618a-4b22-9250-2abaa3586dca',
-                        name: '5',
-                        image: '8',
-                        iso6392: 'yr',
-                        iso6393: '5l1',
-                        ietf: '4uut8',
-                        dir: 'RTL',
-                        sort: 446302,
-                        isActive: true,
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.adminCreateLang).toHaveProperty('id', '0ad2d3be-618a-4b22-9250-2abaa3586dca');
             });
     });
 
@@ -829,9 +796,90 @@ describe('lang', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminPaginateLangs.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.adminPaginateLangs.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.adminPaginateLangs.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.adminPaginateLangs.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.adminPaginateLangs.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.adminPaginateLangs.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+            });
+    });
+
+    test(`/GraphQL adminGetLangs`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        adminGetLangs (query:$query)
+                        {
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            dir
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {}
+            })
+            .expect(200)
+            .then(res => {
+                for (const [index, value] of res.body.data.adminGetLangs.entries())
+                {
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                }
+            });
+    });
+
+    test(`/GraphQL adminCreateLang`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:AdminCreateLangInput!)
+                    {
+                        adminCreateLang (payload:$payload)
+                        {
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            dir
+                            sort
+                            isActive
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4',
+                        image: '4',
+                        iso6392: '4i',
+                        iso6393: '4iy',
+                        ietf: '4iyw9',
+                        dir: 'RTL',
+                        sort: 956058,
+                        isActive: false,
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.adminCreateLang).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -867,7 +915,7 @@ describe('lang', () =>
                     {
                         where:
                         {
-                            id: '0882ec52-2a4c-425c-b93b-9ba21e9142e6'
+                            id: '2e85d282-7634-4aaf-b9b2-e626f0ef5f61'
                         }
                     }
                 }
@@ -950,7 +998,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '23abe56a-6424-475e-9999-75a4b12e5a45'
+                    id: '4f5defca-a49c-4d6a-94fe-b0f22a5db654'
                 }
             })
             .expect(200)
@@ -997,43 +1045,6 @@ describe('lang', () =>
             });
     });
 
-    test(`/GraphQL adminGetLangs`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        adminGetLangs (query:$query)
-                        {
-                            id
-                            name
-                            image
-                            iso6392
-                            iso6393
-                            ietf
-                            dir
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {}
-            })
-            .expect(200)
-            .then(res => {
-                for (const [index, value] of res.body.data.adminGetLangs.entries())
-                {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
-                }
-            });
-    });
-
     test(`/GraphQL adminUpdateLang - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
@@ -1069,7 +1080,7 @@ describe('lang', () =>
                         iso6393: 'rbe',
                         ietf: 'xch6i',
                         dir: 'LTR',
-                        sort: 811934,
+                        sort: 524242,
                         isActive: false,
                     }
                 }
@@ -1116,8 +1127,8 @@ describe('lang', () =>
                         iso6392: '4i',
                         iso6393: '4iy',
                         ietf: '4iyw9',
-                        dir: 'RTL',
-                        sort: 882843,
+                        dir: 'LTR',
+                        sort: 717129,
                         isActive: false,
                     }
                 }
@@ -1155,7 +1166,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '45e458da-7f19-4c54-8e75-62807b4a7be4'
+                    id: 'c6d00121-1f8a-4a82-a40c-731a46ac675a'
                 }
             })
             .expect(200)

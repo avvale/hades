@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import {
     AdministrativeAreaLevel3Id,
-    AdministrativeAreaLevel3CountryCommonId,
+    AdministrativeAreaLevel3CountryId,
     AdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel3AdministrativeAreaLevel2Id,
     AdministrativeAreaLevel3Code,
@@ -25,7 +25,7 @@ import { AdminAdministrativeAreaLevel2 } from '@hades/admin/administrative-area-
 export class AdminAdministrativeAreaLevel3 extends AggregateRoot
 {
     id: AdministrativeAreaLevel3Id;
-    countryCommonId: AdministrativeAreaLevel3CountryCommonId;
+    countryId: AdministrativeAreaLevel3CountryId;
     administrativeAreaLevel1Id: AdministrativeAreaLevel3AdministrativeAreaLevel1Id;
     administrativeAreaLevel2Id: AdministrativeAreaLevel3AdministrativeAreaLevel2Id;
     code: AdministrativeAreaLevel3Code;
@@ -46,7 +46,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
 
     constructor(
         id: AdministrativeAreaLevel3Id,
-        countryCommonId: AdministrativeAreaLevel3CountryCommonId,
+        countryId: AdministrativeAreaLevel3CountryId,
         administrativeAreaLevel1Id: AdministrativeAreaLevel3AdministrativeAreaLevel1Id,
         administrativeAreaLevel2Id: AdministrativeAreaLevel3AdministrativeAreaLevel2Id,
         code: AdministrativeAreaLevel3Code,
@@ -67,7 +67,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
         super();
 
         this.id = id;
-        this.countryCommonId = countryCommonId;
+        this.countryId = countryId;
         this.administrativeAreaLevel1Id = administrativeAreaLevel1Id;
         this.administrativeAreaLevel2Id = administrativeAreaLevel2Id;
         this.code = code;
@@ -89,7 +89,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
 
     static register (
         id: AdministrativeAreaLevel3Id,
-        countryCommonId: AdministrativeAreaLevel3CountryCommonId,
+        countryId: AdministrativeAreaLevel3CountryId,
         administrativeAreaLevel1Id: AdministrativeAreaLevel3AdministrativeAreaLevel1Id,
         administrativeAreaLevel2Id: AdministrativeAreaLevel3AdministrativeAreaLevel2Id,
         code: AdministrativeAreaLevel3Code,
@@ -109,7 +109,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
     {
         return new AdminAdministrativeAreaLevel3(
             id,
-            countryCommonId,
+            countryId,
             administrativeAreaLevel1Id,
             administrativeAreaLevel2Id,
             code,
@@ -133,7 +133,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
         this.apply(
             new CreatedAdministrativeAreaLevel3Event(
                 administrativeAreaLevel3.id.value,
-                administrativeAreaLevel3.countryCommonId.value,
+                administrativeAreaLevel3.countryId.value,
                 administrativeAreaLevel3.administrativeAreaLevel1Id.value,
                 administrativeAreaLevel3.administrativeAreaLevel2Id.value,
                 administrativeAreaLevel3.code.value,
@@ -155,7 +155,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
         this.apply(
             new UpdatedAdministrativeAreaLevel3Event(
                 administrativeAreaLevel3.id.value,
-                administrativeAreaLevel3.countryCommonId?.value,
+                administrativeAreaLevel3.countryId?.value,
                 administrativeAreaLevel3.administrativeAreaLevel1Id?.value,
                 administrativeAreaLevel3.administrativeAreaLevel2Id?.value,
                 administrativeAreaLevel3.code?.value,
@@ -177,7 +177,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
         this.apply(
             new DeletedAdministrativeAreaLevel3Event(
                 administrativeAreaLevel3.id.value,
-                administrativeAreaLevel3.countryCommonId.value,
+                administrativeAreaLevel3.countryId.value,
                 administrativeAreaLevel3.administrativeAreaLevel1Id.value,
                 administrativeAreaLevel3.administrativeAreaLevel2Id.value,
                 administrativeAreaLevel3.code.value,
@@ -198,7 +198,7 @@ export class AdminAdministrativeAreaLevel3 extends AggregateRoot
     {
         return {
             id: this.id.value,
-            countryCommonId: this.countryCommonId.value,
+            countryId: this.countryId.value,
             administrativeAreaLevel1Id: this.administrativeAreaLevel1Id.value,
             administrativeAreaLevel2Id: this.administrativeAreaLevel2Id.value,
             code: this.code.value,

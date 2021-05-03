@@ -4,7 +4,7 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     AdministrativeAreaLevel2Id,
-    AdministrativeAreaLevel2CountryCommonId,
+    AdministrativeAreaLevel2CountryId,
     AdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel2Code,
     AdministrativeAreaLevel2CustomCode,
@@ -31,7 +31,7 @@ export class UpdateAdministrativeAreaLevel2Service
     public async main(
         payload: {
             id: AdministrativeAreaLevel2Id,
-            countryCommonId?: AdministrativeAreaLevel2CountryCommonId,
+            countryId?: AdministrativeAreaLevel2CountryId,
             administrativeAreaLevel1Id?: AdministrativeAreaLevel2AdministrativeAreaLevel1Id,
             code?: AdministrativeAreaLevel2Code,
             customCode?: AdministrativeAreaLevel2CustomCode,
@@ -48,7 +48,7 @@ export class UpdateAdministrativeAreaLevel2Service
         // create aggregate with factory pattern
         const administrativeAreaLevel2 = AdminAdministrativeAreaLevel2.register(
             payload.id,
-            payload.countryCommonId,
+            payload.countryId,
             payload.administrativeAreaLevel1Id,
             payload.code,
             payload.customCode,
