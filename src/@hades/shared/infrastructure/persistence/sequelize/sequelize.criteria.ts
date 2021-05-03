@@ -3,8 +3,10 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { Op } from 'sequelize';
+import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as dayjs from 'dayjs';
+dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export class SequelizeCriteria implements ICriteria
