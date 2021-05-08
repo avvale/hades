@@ -7,15 +7,17 @@ import { AppModule } from './app.module';
 import { EnvironmentService } from '@hades/shared/domain/services/environment.service';
 import { LoggerService } from './apps/core/modules/logger/logger.service';
 import { join } from 'path';
+import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import * as dayjs from 'dayjs';
+dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(advancedFormat);
 
 async function bootstrap()
 {
-    const app                   = await NestFactory.create<NestExpressApplication>(AppModule, {logger: false});
+    const app                   = await NestFactory.create<NestExpressApplication>(AppModule, {logger: true});
     const environmentService    = app.get(EnvironmentService);
     const loggerService         = app.get(LoggerService);
 
