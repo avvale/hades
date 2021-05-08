@@ -2,7 +2,7 @@
 type AdminAdministrativeAreaLevel2
 {
     id: ID!
-    countryCommonId: ID!
+    countryId: ID!
     country: AdminCountry!
     administrativeAreaLevel1Id: ID!
     administrativeAreaLevel1: AdminAdministrativeAreaLevel1!
@@ -21,7 +21,7 @@ type AdminAdministrativeAreaLevel2
 input AdminCreateAdministrativeAreaLevel2Input
 {
     id: ID!
-    countryCommonId: ID!
+    countryId: ID!
     administrativeAreaLevel1Id: ID!
     code: GraphQLString!
     customCode: GraphQLString
@@ -35,7 +35,7 @@ input AdminCreateAdministrativeAreaLevel2Input
 input AdminUpdateAdministrativeAreaLevel2Input
 {
     id: ID!
-    countryCommonId: ID
+    countryId: ID
     administrativeAreaLevel1Id: ID
     code: GraphQLString
     customCode: GraphQLString

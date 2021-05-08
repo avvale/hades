@@ -2,8 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IAdministrativeAreaLevel1Repository } from '@hades/admin/administrative-area-level-1/domain/administrative-area-level-1.repository';
-import { MockAdministrativeAreaLevel1Repository } from '@hades/admin/administrative-area-level-1/infrastructure/mock/mock-administrative-area-level-1.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { MockAdministrativeAreaLevel1Seeder } from '@hades/admin/administrative-area-level-1/infrastructure/mock/mock-administrative-area-level-1.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
@@ -14,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 
@@ -24,7 +24,8 @@ const importForeignModules = [
 describe('administrative-area-level-1', () =>
 {
     let app: INestApplication;
-    let repository: MockAdministrativeAreaLevel1Repository;
+    let repository: IAdministrativeAreaLevel1Repository;
+    let seeder: MockAdministrativeAreaLevel1Seeder;
     let testJwt: string;
 
     beforeAll(async () =>
@@ -35,11 +36,12 @@ describe('administrative-area-level-1', () =>
                     AdminModule,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
                     }),
                     JwtModule.register({
                         privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
@@ -50,11 +52,10 @@ describe('administrative-area-level-1', () =>
                     }),
                 ],
                 providers: [
+                    MockAdministrativeAreaLevel1Seeder,
                     TestingJwtService,
                 ]
             })
-            .overrideProvider(IAdministrativeAreaLevel1Repository)
-            .useClass(MockAdministrativeAreaLevel1Repository)
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
             .overrideGuard(AuthorizationGuard)
@@ -62,20 +63,14 @@ describe('administrative-area-level-1', () =>
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockAdministrativeAreaLevel1Repository>module.get<IAdministrativeAreaLevel1Repository>(IAdministrativeAreaLevel1Repository);
-        testJwt     =  module.get(TestingJwtService).getJwt();
+        repository  = module.get<IAdministrativeAreaLevel1Repository>(IAdministrativeAreaLevel1Repository);
+        seeder      = module.get<MockAdministrativeAreaLevel1Seeder>(MockAdministrativeAreaLevel1Seeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
-    });
-
-    test(`/REST:POST admin/administrative-area-level-1 - Got 409 Conflict, item already exist in database`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/admin/administrative-area-level-1')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send(repository.collectionResponse[0])
-            .expect(409);
     });
 
     test(`/REST:POST admin/administrative-area-level-1 - Got 400 Conflict, AdministrativeAreaLevel1Id property can not to be null`, () =>
@@ -86,14 +81,14 @@ describe('administrative-area-level-1', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                countryCommonId: '67052f9b-d805-4fdf-ab31-72a018f2c99a',
-                code: 'gehl9rte',
-                customCode: 'i7ln4ick75',
-                name: '3f7kidhtexs3q2npk7ia9mn4xvrk5lxbbtd84cbcke3k7tlcxem5ea1dsfb0435wighenu8v4ci75d2nlcuws7jqnntygtsaett02d6kg5apn1nvrnu1a2eklmlqzejfruybkmhmqqo3h9p03yomn9mp30sytw1xyeg1q6xqlcjidj0d1qbc2929ubaoc5aozeunzy2c3a7s9zjimf2nlqwwqwjuwo3xofmbavzspa85rtsuba1644qq8vpy4mk',
-                slug: 'ca9adqq2vf0k4zeqqh3jbt4txyyvrufgo8lmw7l3wh8pug3a7h16b7kf9mpywuhq8xho1otrqbr9el382nz411ib275rqclpkm8s44s97t744s1gzy9r9ozhp44mqsgsb7z87l6etcqktqjum0ainr9dbc1lch1ik8h31dm5uje5zcz71q5oq91i4ppf3cljkbmpx1lq0m8f4kwkawji65yuy3ofpjxvbuas48x5o0wrrllu6g77yj8ujravbgl',
-                latitude: 87218522286644540,
-                longitude: 21323459231155944,
-                zoom: 46,
+                countryId: '07618209-ee91-4ea5-a710-11204e49aff0',
+                code: 'r6y8pvxb',
+                customCode: 'wkw2xnxryr',
+                name: 'ukl4rt8aegu8kc7sbh4chkjkey6pmlng2jvftc4qgleamr4ajothkrebm2bg5bgdm1246bmfyvtat8rftgrtvgdttbu0bp6w8yxetu9llaizfixbhs94lvej9ochp457oppsug66gx0l48pbmmi4r7i60ebrcefwzyud3icmefhad8z1bj04zyxv5uwu5m4rbq9m5c8m1o3yg43rox1x6z5dnmmnqqp7smwhlwfwh1w3tczoc865ixsqrjklmw2',
+                slug: '7o16lim877qn0sdg8ljbt241iou9eoegny0qqjpketj2hw0juz182vefkxg36cu5kym474fw2k0e4kljh16v7sd4f346zj2wr007dyhh52wu6g59jmwum0ts3qu702yrtn5h0k19jigkfyxs3kqj3e8joccexan9qdem8gvr397i4whcnq8zyim8x7t24kwrlyiwzwrcwmk3qh5d6thmi82p5bn0lpaa53qvgs7tj9uiqlmfo8rpcj19c41kyt0',
+                latitude: 81831461605759550,
+                longitude: 33150369432421316,
+                zoom: 50,
             })
             .expect(400)
             .then(res => {
@@ -101,26 +96,26 @@ describe('administrative-area-level-1', () =>
             });
     });
 
-    test(`/REST:POST admin/administrative-area-level-1 - Got 400 Conflict, AdministrativeAreaLevel1CountryCommonId property can not to be null`, () =>
+    test(`/REST:POST admin/administrative-area-level-1 - Got 400 Conflict, AdministrativeAreaLevel1CountryId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/administrative-area-level-1')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'b4e9eb93-977f-4104-bb62-b20aa1988fdd',
-                countryCommonId: null,
-                code: 'ldsjfnd8',
-                customCode: 'ofy8izzb7a',
-                name: '8o7l6dnqc1b9qioq0rwuzf6hqdhmonc8d08v8x19jctnp8zqvwln2z998s4psnnn5itbeeat54wseoxjkxcnu1za7lpvty6pslwfzumcfcgb7scouw79r8maxzuxdi1j6u77yzgr68jlzfigpz57b2gds7ym2vsnorxmxsqg4acsg2ng90vj23l3lo7n5gbpovsyth5evjleewwbb81ej5kb2xfrlmapg5z0nv6pbgzc4h6pcpz6oj0455zkpaq',
-                slug: 'jg7wjuknb8712f9c35j4amtd9ejgj8o8jsva5ojdr317b3shxtsn8wnnubg8gg0l2zwjgbkl8cdsoggsqkwpz8gn8id13l2vemlqwhsty61vlsnd1wwb6u48q063ttp9zjfazxkg2cqbvxvrbtdogqx7glvvjv2m8ds48keqvifgp3z268tpugjxr6kdrfmmgxy2adm99q1xta74j4xi3wzug20o20gdji58g18oh8j57fuu6cs22bos8uf5s9d',
-                latitude: 28276062432703990,
-                longitude: 33943662791933956,
-                zoom: 41,
+                id: '44be948e-7365-49a3-84b7-f72082fe1057',
+                countryId: null,
+                code: 'g8ducgog',
+                customCode: 'mr94n1hahq',
+                name: 'bqd75yf1uetlovug6kf1pnob9h48r9ao2k6i9k38h6635d1awhapw92y30z3dadrommoyhyqy6h9rq43x9vyrolrhc3j2jzuz7o25v2ekkrf973gk03bwd2wmv2yxw60eqeg2r4z5ukr2caey7kgftil14cqj4uh64ahr76p0dtoo617hyitgucj45q2mnb12c9vabvy5bgkb13nxmdp93fqvemdztxkp0055puydq8ry98p338b0z0hzu5m4op',
+                slug: 'bbypm3vfmbwi3t8kfwh9sf29j6yvm6r2ivlay8ic5vowlbq5b9fcdm4q8oxsxyq3p9xtk7jxjjotznq5d04bhovmq9l7fq7ljns848ug6cmhqr1fsf2xtrnr96emqzqngridnjjh83oe1drkob0opz3c0qxc0r8lcc0aj7lxa7aoayjvkps049mjr6rnbhuhwgnh37tduerd1700rilugltzgheeuhdt2gwbyyhuxp2kxuxdw4izkez4nomag6l',
+                latitude: 77822325872448180,
+                longitude: 68823794982915864,
+                zoom: 17,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryCommonId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryId must be defined, can not be null');
             });
     });
 
@@ -131,15 +126,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7ec5f1fc-7c52-4fda-9d99-115ec73d6918',
-                countryCommonId: '8abdeef5-233d-4af7-9e8c-d349f63d5ab2',
+                id: '85792472-81bf-4092-b7c0-d59e9387d88c',
+                countryId: '65c73660-e40d-4159-a540-acfd63aa0614',
                 code: null,
-                customCode: 'rbcv0z08b1',
-                name: '1tws60pzlkmb0mzzat3txqapsrpwy30maaniaozwsg6m62m594t9qllon0uet78sp2k2k35s2fv5r3g0h0tf6l2ze77fk6ud0s52au9llfn595hm0mzx81x8e8hzq63cp8dy9lue59ycnzhwjjnk02p0dzp25xepi7c7tmuilt4jmjj64bjylkq6mbdbrgfothgwlnynzxw9awh7fzgr7rrvkoevfcmgostbfphdbahv7lm6ihb0sgnikb14trw',
-                slug: '7y9n1iek25tbie4i375q2sld9t75gxhx8ginyb279aiansc89vi8hxq0i5kv675ym57h3hwgx858j9mw4jj5s7gpu23ka0pbscys5oelbmnzpbxytm7kegglprqde45hic9z4csoc93185dogqwaxi7zj8pueli54c7vp29vayhyjse1he518xtljb5m1braqjiequ1qhmocxkidk3q7qk3eremaay6lr58tgyb4ohb9ofbpgq9mabd6dey6vqd',
-                latitude: 26115679514363790,
-                longitude: 11423667738217090,
-                zoom: 54,
+                customCode: '84sbtip7s5',
+                name: 'u9mfehxju54f4xcjsrtmxt5g9qn2tkua79d6gmpstlq5zl1mbslztgk1zf4edgrxzrwvogntfuziubed9m2gfavjezaousfbsshygd4vdnttk0po1xyk1agmawa8hdt8xwvbeqhyrl1kali4c9w1uyivd02o9mfheizswquvub6fu47u4m8qsj02nto73toireu3kl6qaafu177limh9s78qeznita0um5qtw1zqu6045gwci627c6i6b1mfs16',
+                slug: 'bvktym7xhrtljc08yz5wgg6skbdqqw2k1gpbrx7palb0yz2zcky5yp9vh8sotv6r61utsr2eyvry1fzdrli10eh6pr2fqha8ee6nuf6sipa2z8ipclwtawzr7r7qaamx3b0gyvdyx935nd8gpwhiy70g5r34tkhe8s3ckfintsuxzhpmn8yz0s0y3tiyvbr4ynkxxcqlf8g9x5xeq8il3oa3gs46vm91v6fa0ibj6hytkvvwuaxf80dbixru1nc',
+                latitude: 48980585179921630,
+                longitude: 10799099584100804,
+                zoom: 79,
             })
             .expect(400)
             .then(res => {
@@ -154,15 +149,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f8edd984-f7a0-4884-9ce3-a1e8769a05ae',
-                countryCommonId: '30c2297b-3c5f-4e34-8e24-b9278fc0878d',
-                code: '4xspp87m',
-                customCode: 'k11pg0azb1',
+                id: '90342048-9980-40ee-8732-da3795359981',
+                countryId: '402abf35-0e83-4a24-854d-b4c0f1489705',
+                code: 'qz6bxilm',
+                customCode: '4u20vbcwn6',
                 name: null,
-                slug: 'to39kvd7fs4mckvisi1clk882dh3r4wnr8z1b33rebbutmtdtxqifs30t38j5jv2ghraomtr56kjbhp95uncdbhssmd2oqd32ob5funqnx8v5g1nz72mohywqtd4prk2g396suc0nbl38igfjlza1p7pf5uiq99voutk3t571bymzc3q3p1zbnj0j3nubygy0aqc8okx1vu99c6jhw1qiv3splt33lcjho28ryzbw7jz8ixm5tdwyq6yikxjtb3',
-                latitude: 96589781019916620,
-                longitude: 27775479051726228,
-                zoom: 88,
+                slug: 'hr9f1zfzd2swg5ulxtlnxyvilihqdwl1gq2ky39x3sb25rhrjzmlyizse39musv789pgjry2flz93k4ivb9bsdibzi05t6jtusgyrvkad06pix979to10ukzzjwl31yxohg0iaw6f02eo3ilwdnafd905sjee379rf5a9j7j9626aq2ieekt1ucbzk9duuu7wfyfllzjzezw2o0a2fksh9j0q10e6n5k28fu844ofvhi3ft9mwvcsr36nozkkpk',
+                latitude: 94037676405690050,
+                longitude: 98689857217148700,
+                zoom: 97,
             })
             .expect(400)
             .then(res => {
@@ -177,15 +172,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '286e9741-cce2-4098-8ff2-cd25587a0aa9',
-                countryCommonId: 'e8fde87c-6b65-420e-9c8a-ed4d3b380e84',
-                code: 'ly8elc9a',
-                customCode: 'cmav5pyt8r',
-                name: 'uo4bxnzodjezt2pio7cs8qjn7pynhavmb1y1qp3lr9b8y8ncurl8q3955olvlmb6i4n88jhz99irkb4pai0oq1cgyyzygpa10zzq9qvasd8e24v1whwpb4wsaeej2p5crmyy53np4pb8209oy1zcvws25b8ggu6bs9tfna8idkgkopag67uosmdzh87nq46bsydxw03g6giyognk7721bynfbbf5ztj30qe3lvdou1ahr1ats3mdtae0f8lhc91',
+                id: '07e66c60-ee1b-4dc9-8ed2-1d91f9b75680',
+                countryId: 'b415e0cf-2fbb-4395-a591-77392d69bb94',
+                code: '2oip8ctu',
+                customCode: '0gwqe51r8i',
+                name: 'x0rtd91c8n38epzc9r2y3vskdobkssfkl4bmaqq6sjwzojr1edtqombbsp1zetfgcq3mnm3nzje7laiwy7bcof3vvfsflcjz60nbkocoh889jmekndw4ru4326kql9mac05aj00qvto3d6an2y1luuopy9z7gvmcgnd53tk9dxfpovri6u0yzu4vp60dxes45kskogzxwkpm4ik1d0ifemly0vjqqnischhh4nkx265ikamu0axspzud2ce8b15',
                 slug: null,
-                latitude: 23052163187455504,
-                longitude: 90922944537350320,
-                zoom: 80,
+                latitude: 96353579131015120,
+                longitude: 29781250791004136,
+                zoom: 23,
             })
             .expect(400)
             .then(res => {
@@ -200,14 +195,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                countryCommonId: '6f9992ec-c745-4014-827e-324571be6984',
-                code: 'cuewqv08',
-                customCode: 'qq62ci5cr0',
-                name: 'cevmtay7xjvqqburwvnj88ufrvkwp676spsacaxs3x638hs7rcvv90qekz1md2cd5dp7ulxtc1o080qflc5k9yrv6nh9jm5y8wga566tvblcn1ejcsj5i9i8p8coxo9e12o8i185bcekpmsu3ef5fycua917rkefxsoiggllsthwspbgzfi01z0ousyfp3fctmazctc1y6l2wezjlerx7khrw4cgn72648vpr7mgpdda8kfgyl4yrtfoesxrdg8',
-                slug: 'vx6ovdtaxh4v29ulac57h1ax43z5krc2rmwlop33jt5y2x92bc26qgq6bd8wtim2rpaosvcjc7r9whyq87ymfvehasl3lzcxkoa7fk2jpe1f1i9ug6nmwom9vrum1nawjnu1yupn7gy80gddburqhp05hk61aohdetfmurgkoeyp4t6k1fl24eicbufk6a4colmaq0cj5q7nkj5p4v6i9eg4qr3tzas3wryfq0k88dsmqu3b71yfvto0aqettlv',
-                latitude: 32923353206277080,
-                longitude: 43327056881873320,
-                zoom: 38,
+                countryId: '36c08c70-7ba6-4765-83f5-c34dd15109a8',
+                code: '9q1988bu',
+                customCode: 'xx0e8kecf0',
+                name: 'i2co5nnp8mba5uhpsn4dgqia5jn4vrgrqxp8su05gs280vxdy9yxexf89kfufxd2d51nfjn5wf2eniaol0veeouy88mgo5gvqorqhvpsncsc99btm47ofierm9gg9bv5rmuz4501fzwpd2if62f89ohk9vcus4ao4oqaojjfsp71s9j7kccntut6grcjv9h6meigebs14lisfq6y798weakq1mv1rlboc1qsc330otcl5kaphj2tshs4g1d6dom',
+                slug: 'lwcaldsmqg4i520ijctwqgprwg6zofvk8vgqfxea0d4cqdgbud37lgsz14lzg2938q7oixkmzmh2r8s3drb4sm11ubm71a4d8ah4md4nawtyopxxm7k8wfnrpx44wr1fdw73izqwb0juctikx2r8qw7y0dkk3rxdjrkgkomfexqlw8phemnt31vv2lirwgi28410byvav6w66zqmonurf8pjzkbwi3q80skomef0ucsozvsjsb2ajq331951ex5',
+                latitude: 65745696497879896,
+                longitude: 88582301858534350,
+                zoom: 52,
             })
             .expect(400)
             .then(res => {
@@ -215,25 +210,25 @@ describe('administrative-area-level-1', () =>
             });
     });
 
-    test(`/REST:POST admin/administrative-area-level-1 - Got 400 Conflict, AdministrativeAreaLevel1CountryCommonId property can not to be undefined`, () =>
+    test(`/REST:POST admin/administrative-area-level-1 - Got 400 Conflict, AdministrativeAreaLevel1CountryId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/administrative-area-level-1')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b741c38-359b-47b5-b1ef-adca7be69703',
-                code: 't8va9ymk',
-                customCode: 't2cwnxoayb',
-                name: 'agrqh2kd9av62ldchbc6vwk9v9fw07qsvsigli5qi3z1o8eo4gdstlnk3ujnxkdyie2fhrm4y3rw0u924codjm1imoe043myfws0s2g7p8x0ik38daif3gjkayppoe212j7hug6ry45n9e542bpj56nbv0crm9xblac3uga0tmlwo68lh3wo3wubzgj173b5trpyph7hhkux4d5zqzyo8hy835t030mlsd3ne6f7kkf141zkirkjz9beqd1tgvp',
-                slug: '6cl4qzv3319tldlgtnx8bx1igkue94uu7sc304096l2jjrydga0ub61nn38zh7hbtwb9yfuxfixkwxu2gnxxbzylrdx086ge7jtvz69knpj4o4xi3va0rznrzjgcr4ueefdsncpzn3cq613fn3uip3r6m4uc6hg3yvymiirmn847g3zdgxjprntog3rx6u8rhy7m6rqva9jtpceej3yixls31thaj9judmqagdxvc4iq2r7eh9c2gr3fkv6647o',
-                latitude: 67758932130800510,
-                longitude: 35866416239565804,
-                zoom: 82,
+                id: '65f6bc0e-cdb3-484d-90f8-d7f09a1ae98e',
+                code: '3xy2s5qw',
+                customCode: 'f0tw7pixgn',
+                name: 'yikv4wdw5pym9eewang2op345u5fyf61wgcuyg7sd50gxshmz9sti3evxf70k4rgtbv8bi5v76lzhcma7rw2ba0sdbfrzrxmdb9yel9b5m2lpd9fjq71ecfrxtjd22h3pj8dn5ivj4700g3cqbdfsgef2zc4ro2jimc5l6616m9omoyw9edmtkadmy7ac8iduz975sd5vaxklw9raz3dnkrlrlcioeyy9sthzq537kx8j5p1tohbr9p1xxe9l6n',
+                slug: 'hmwkcqks0mku1eijdg1oipw8ajmgoo11ta8a3i70c196xbqycgncronx3yhqdjo9zt03xk4pqfzvq6qlcu42ih2owxvq9gzuir6164jumy2pru25uaxefgakzyzblo3gbofl0daom1e2tdh73ozd19l2sawhpfd5v2r7v1xfm7txol4bjys877dwdb57aty86pib9nhwwz4gv1v9cibg3f202dvhl6kcw9fxrxn4nvk8ag4gvw6owr5sfld2mxw',
+                latitude: 41757236553954430,
+                longitude: 44757987615049440,
+                zoom: 79,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryCommonId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryId must be defined, can not be undefined');
             });
     });
 
@@ -244,14 +239,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'b43951a0-05f8-40d7-a03c-b546c88909e0',
-                countryCommonId: '597d6c69-82f8-4c50-9a7b-20f824ebc013',
-                customCode: '22mw40s7zi',
-                name: 'q8y1wug82t4wh5yhfx3vu0xwrtqyt7q22m791lda6zn55c4mg5l263ytb2tqdwt7voqvnav6i6uuiy4h50efyejgw3vmr1ak6xxgbyhtb2pxnpzqcqt76b4i8bryw1bc6ynk9qyfzhys278ueamawvc6wlvffwbeon85nchiewo43dp1kj69m1zjohpl17e8waz5oio3s8ovytbscp371p75bxji77rhm75jojqq9mnltjsa5vprsq673m14h0j',
-                slug: 'svpqj7dtogr3aolbfz0feys7al6jz01l56750m5zfexzplb3w849izio92270dcj12xreoxriav1wlhwh9fr3w3lpnzm2wv5e9kzd4rr14q6w16gg6d57qxeinupewcg6ahk3ofdf16dz25abdanfyahtnjbmvcg48ofg36cqhh3j2ca26gxr8zjbjn56dtvm94lg7kd6ya7i6ei622kq2tbyzrnwk586wkk750jyzgixvbt71141p0m2tva16y',
-                latitude: 83293124426372430,
-                longitude: 78216523913696400,
-                zoom: 83,
+                id: 'a01a997b-a7c8-467d-849f-5fbd6db025a7',
+                countryId: '1abc102e-b82d-478a-b1e1-e06a208c72e3',
+                customCode: 'efmyeosq9o',
+                name: 'tbpvu5p6jzg9vpp7qncbveohmtmmeyuinwxdlwoovup36hw4sl74a3cvpvfm36a0nvj9u26l792lo5v7rrh6vcwpbwoffg4slh1lrp8g2inl29wsi9u62yoj0s3urxi56i1uncbca2pig52inkwxukfrkrx84sb71mbmw3qut8cv1truf88hk34j175rwk755v89091x7fut7cg48yte9cvsbnd8juojpot49wpquu8n4fcrng13vzgofhpt1ow',
+                slug: 'iwvzd0k57ixh2a4b6f34pu8c1n68ox01y2e5axd2lw2sai5yncke4x6k7i822nxpz5rdpmx1si9iup7x1vhtok917g5n95yqjqz9w005scruvhsb6mlzxsk4yexxx91weifnvugfwbcximtvejqfuao6ppvc483onhvckjkph4pcdr6fn7298zk827l9mkj8iwe5fwzh5j8zkhlyyzg85jg9e6qh76zy1ui01jfhvutacvz2vhgd2kc69nbsyqw',
+                latitude: 54355678087260750,
+                longitude: 65234141815934950,
+                zoom: 65,
             })
             .expect(400)
             .then(res => {
@@ -266,14 +261,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '6b91c375-5b08-49f6-ac91-b4998ee17e92',
-                countryCommonId: '4e03a1c1-2d6f-4869-8a00-3667571a9c30',
-                code: '37p99xw0',
-                customCode: '9mji4t7dug',
-                slug: '2fh4fxr1tr46esovzkgw7otb9bd2jnh2izzwu8upoqsisi9k9hmhkzotofcpl8tlu0bdldij27m2ylxmfzifg0raszluuwsttpvf4td3h5c5r72q0mujdcnxq12gzdyvdbu0yy62qb4bem75y8k1hyaosht91jh11084y9d2u4x0rvugbc14oghttteftweo3y833683y1sts8bbvsk44awyjhie8wj3uaai4ws0dkkcjgqwshan6qhpvqkvmh8',
-                latitude: 19129960990427988,
-                longitude: 84617757816376400,
-                zoom: 27,
+                id: 'a17d348a-bf00-42cd-802a-1b9a5ebc2866',
+                countryId: '993299a7-6e0f-4c18-a920-71047d2f552f',
+                code: 'yqbjinv9',
+                customCode: 'g1vdztxq31',
+                slug: 'mvgzyhrbwkbiwtwyc08uvughne0untgxkdxvmgxrbjtiugbfdcaararx35on3grkrw989ooqte8m8kkncppgs0txjso7tkmk3rka3onaswj2x31879hsj06p7bp2xtm51j2rjgtulj48a5bgn4cwpe26q07tmkfouyquukeqpy4gtt3ctf0poc4hpcouqzw75m86hqo4jggkh2pjdmks95btlhvrfbbrt3w0uyvsb9vz4cxit3xzbv1uabhgq1d',
+                latitude: 83023996642103580,
+                longitude: 52281186013178660,
+                zoom: 31,
             })
             .expect(400)
             .then(res => {
@@ -288,13 +283,13 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'feb0a5a8-308a-41ab-b4f4-1d2ed22c9cf6',
-                countryCommonId: '12aa8c55-a44b-4664-a2c0-fc0cb672f22d',
-                code: 'cbn8nb0q',
-                customCode: '5tsxzjqw15',
-                name: 'k4pg7wpkg94l2hyuoxxarp5kpnph9f0jyk040sj8l8r3nsbpl2jeod7m6u3frt5f7wqc0dw24q36eewdcvj5gvx8aon8t3324qfmr1h2d9ni52zzyacq8pr3yejavs8343j0097fg3osx40vfzlkc1q1jxbvfmsuosf77d58852p79ar1ouey2p2t0mojtvwsjol4bqe1ltcanyz8xhirdvbu7ncamys6u1v21dapvnxgcuov6gwyjbjwqzzp0g',
-                latitude: 78188621288377250,
-                longitude: 74931863133431780,
+                id: '7e75e9ef-a7dd-4634-af8a-3dfb97e8d6b5',
+                countryId: '5a669a74-09d5-4c53-8dbf-ec6ef5f3698a',
+                code: 'jybbkzi4',
+                customCode: 'ao507kmhay',
+                name: 'f3oiv76wlfhvmqsaud1iox8bpavcplum2mzsny6bhymnac7d8dya7n9q3j9y2mg79t3jg8h0eotyn1wscn56460b40cpm46wri2op6o3yo2yx43znl8lppbcovuvnn8ta3g749vitl5ne02r815sow1ajf5ujyr1bmedxc84t205fistdyb26jt5yhnpkmjh1ax4gsr8ha1nmdf1k56dsj7kykre4xn7d6hg693nqv3vwr3qrlef51v0iucswbv',
+                latitude: 44628392918052510,
+                longitude: 57888630107532264,
                 zoom: 81,
             })
             .expect(400)
@@ -310,15 +305,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2vdm8bt81g5j1fb6l29so3jyatlo45lalqbt2',
-                countryCommonId: '332ca19a-1ea0-4744-9e01-d9f6c1571b41',
-                code: 'be0qsu6p',
-                customCode: 'jqxvzv37sb',
-                name: 'teihno7o5dl8497zg7jnoowlfdoxag6zbjkpqti4c2dowb50nier5ily8e3agrdtz4c8hmwk6yto66kawl8j5tjr9tgqcwrra7ng884wz3kbcz8ybj4mehsgy6njdozd3zq8vr3qoox5ptu5lrnrmw0ympr70qjnausr8wnbarowpey5agi68b1gf4576sj3ytel16tgb5hqdxy47w5q8lt4jus7w97h7jeu7q8bse8k4fe15e8dzoj6g3hf513',
-                slug: 'jaa7r1vgdw8586at9b1eprtbfkttdhyox45yalrhb1qsze1x3qt90ml6bk2873dbfxoqr00krr2nfpreuelmht9o3ox3zb9fkqvosrrnllpftvqr95l3nx8ukepvt6hedx87yh598t2gervp5yeqvan4u0oykxevvuz5txi36xjxz80dqfa3fhd8h09tl61esr3wkjqkjxflz1d3vz30c33uv31x5xa2bpa9e75r6zyrsshe8c55m6cla1ajub0',
-                latitude: 76498171192120320,
-                longitude: 60556346135219110,
-                zoom: 35,
+                id: 'wxu79hvmwhda2ldc61jsam5vhi6tp4tlslluc',
+                countryId: 'a75d0005-1a1a-44c0-9741-f107c80219e0',
+                code: '11fdfgds',
+                customCode: '755x68jcje',
+                name: 'r64qnaqek1w30xmtr75vg733xi1x4hhb67dlkifxgixnkjjcadrqgks1r3f549ospr69saz9gd9yryftljjgwla82wsnpv7yrg5al4wmb34qglejkxfa8xismbr1qywvtqskezgzwxn4xsipjfsm4a4khq8qb97t6s1jtoy06u9l2kkj1d4sp2gk1yz24vctk4j9m7381p84zi8tap35hc123aki7qri7dzb2md0xow0fjvu1r4tbydkjlheu8a',
+                slug: 'w5qwjzg3g8982t8shtxr69swbp1h7t1pqa5ajlejx5mbi9pl62s9yuhq8v8mp0ir7gdcwscqfgpfcn0czqy0dh9ydgzcy36y75utork7rdbjazap7txn0mqzodex9gnp5yfvf1hv3qxuas43qyowde1cl9n9csqto60n68p11kdlunopjq7mquj6zqc0yubol4tsonhmuiqs1rgqql2zxycj7ldlioj0tzebq1y6exrzk3rf3e2s5xgv9lndcfh',
+                latitude: 16240742214033764,
+                longitude: 93933360331740160,
+                zoom: 48,
             })
             .expect(400)
             .then(res => {
@@ -326,26 +321,26 @@ describe('administrative-area-level-1', () =>
             });
     });
 
-    test(`/REST:POST admin/administrative-area-level-1 - Got 400 Conflict, AdministrativeAreaLevel1CountryCommonId is not allowed, must be a length of 36`, () =>
+    test(`/REST:POST admin/administrative-area-level-1 - Got 400 Conflict, AdministrativeAreaLevel1CountryId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/administrative-area-level-1')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '59f4bbb6-af16-42d9-abd4-eef250f6158f',
-                countryCommonId: 'q3byjkin1eydi0zumemnqsddvlkjwbgn529w9',
-                code: 'nxs900k8',
-                customCode: '0vje0stu2u',
-                name: 'owbd8cyubdpq0bgxii5xvqafagnpgwz17yevzg5p9zcx92ro2959rs2rcilc81dk9jfvavg66qrjcsrm66cpjj8ri8do29c7ngr7836otghopxl0fhm9z07hs3i4pt1m7a0izdt2molr55eqe7kjpk9qyar4v14q2r0q3qh58wta8c89q2fdabn3fet2lhbyod1bx3gje4m79p9zmgmcfo5x8i5onlbapuhh0mw3ilhzhcx8b6tza6yks34urur',
-                slug: 'po1caumqs0zdiqe304e8qwktkyz0y7wehudtgvwumroh6lvr024bhwziwet60wxdjez9cx1thvae8t531l2iifykzocqfqdz9hpayiziyrk9bg5u8zv3n2f9uhi7cnb7j6w3bro87vq3kr19oirajxolu7o3w927iizjg4y5dkv5eb6sa5z6trur9gg1km6jhloqug67nsabkclug7ozd71qsl083x0puy2p99yp35yvt7oy3hsss302ji2uoj7',
-                latitude: 57263454561776500,
-                longitude: 34722859601345230,
-                zoom: 33,
+                id: 'b5a50c84-fd86-453a-8a2e-1494ee6faf3d',
+                countryId: '2k9k303tsh2wnhbzha7eyxnwvwvs8o611jgjd',
+                code: '8v0w3sez',
+                customCode: 'k25de6v1gu',
+                name: '0vsbw71eiaqddr25nj11aap3msc60wwqtkh3kqyndy0dzza9dexqfzk3y3b28rpxxx59xdw2fpmkhyyragnh4u2bvvnqrfufxe6del5vl81bseas2qp0kiqf9xhefi3e5foh4zzk4n7ldhgiphkpt00wy1wq4zighc6eln29owxkc4fgj18m8h3o8is4vthxnadcluok6fro3wzngzuxinvz5hx1l4xgjv7dqo3n6zefkmlql4vreyijt67w53x',
+                slug: '5ft86rbuxuhdjhpsir6rlwf6xq57767ptfh14lqh3e283q8joode7fahp7yyc6f8b8ahrpdii9hdhanuszdgb20rnz255663scsvkybeiqi0s5ypt5twt8fh5hpqe7hh78voe9j5fi5bfv3rlb3e2ppi9o6j0cuzxefmiurwgu6kx1xxh21goj2uybx3yp6xtr9nxlrycu334b6i7pvdggghc9evwbhyve17iqbb7e3fbsqda1hcdepneh016xg',
+                latitude: 48179066649815784,
+                longitude: 82117871298162670,
+                zoom: 69,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryCommonId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryId is not allowed, must be a length of 36');
             });
     });
 
@@ -356,15 +351,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2509d094-5966-47f4-9d4c-bf1029fc8115',
-                countryCommonId: '59003d9e-54c6-4db6-9285-6fec0472d687',
-                code: 'nvpp0ezei',
-                customCode: 'd2x37hhnvn',
-                name: 'dcy3ray521d6t1rumgkmx4m0o2cxs9zw9e7uoaw2kyx19lfk65779gzbldlpyn6h94itxfv33ohwspo27k22sdsdwzvqaimu7v36v4yy7aq8qplv89w42a1zgswyxau8j7spvrfhjlr2erarjp3ri9s77qxu9vrvbkmw3z3unwmnl6cis3ivxz4mg3eq3g30dd3r6z7lnztnbwkookfioipvcitlqm6kwh2oymbp6b8ekszav786glpgkmjcm81',
-                slug: 'uihgj761pqg8d95vjh5u11sy3vr7jvwjwqns9u2t7p37u26szjj5ywnosyzr4jg7dhtc6rhmmsggs1ivb73tezf2w8e71xk9a5mz8d6pcsanr9w0jbtmua4ob6lt0g2j3bnd75s9u1kqkzjx389whfqjrddd8k5wyae5dm63yjda3g5owgq7rqzdmi9877ibxth1lmp31qac64m6jt6qppxij0viv19094ntbk5t076wpbay9bfgh1jdaue0ja4',
-                latitude: 69146835888666910,
-                longitude: 31035973254757600,
-                zoom: 23,
+                id: '1091a96b-183b-4e64-84f9-668eafcd2fbf',
+                countryId: 'ba1a20fa-d150-4510-b50c-7e61ceb7512a',
+                code: 'un3rmivgz',
+                customCode: 'zz7r2ftq5z',
+                name: 'sxj387jnnlqm79v182kta8eaoev9ezqiqcwwxk6ici7x2dj480fitl48o66hw51ztpdlea80qu5vlymygjt81wuc204yufu2bkyspmki7atoxjvwutdwgieqa3d8id65yjc9df28dd07wqrio1qhqvb2uccu3gmx9imiyoglo8a9eonx68k0jqmmky1ljv9yainngzsp3f2kmwyw7i9xqbwxtfgle2tbon953kfgpozgd8ebojoo04kdeq5etc0',
+                slug: 'yb91z81zf59wi6xdt63azxehe2yqc4mr59mh7cy34j1konx1mjykz8zver6esck74gk42by4dwlpgtbmhp91it2boynaslbkrrjhu598pdl86knkw9licdsc6e1fshlq7eyreaag486maieefmlt7uuxs9ua3xjlhucfs88ydx62rhibjb5cok5k3w9l97d01lsw2jsevbs1q7a6xsicoaj2x0571etmg2t2tryypza5nzz07yme7xz88q62bxd',
+                latitude: 10885766329807794,
+                longitude: 55410272531218620,
+                zoom: 80,
             })
             .expect(400)
             .then(res => {
@@ -379,15 +374,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '385ae2f3-a890-4171-ada3-7208c1c9d78b',
-                countryCommonId: 'd06f0061-8725-4c8e-acf8-1788c921a9f9',
-                code: 'j83o09o4',
-                customCode: 'r9xe41una26',
-                name: 'rqezk1olt7lmpapcvry7u3m6818cxq3ueuq9jxj1l4rr2j0gt7c07d1vvssap5d5t0riprqpcdd6qd6xl7qko1g3yy1cgyxu5d37pkd0pejte3aikv50m69zt7760ly4ahu8feti887pig0c6d53z1asojqs7ml9h04ubl8e1cys98z6h1fksahl6betv3rat5fdhgpv529ne000pwfo7znmjvm5y28j3gjoyi4ktizju6jxvyepakvi7p526nq',
-                slug: 'njsk54a0uibtj2ldx5r8cfmxo8hnukl6e1e00n9f88e1bx6mfgrgodhba5lnvhonfsmubpy9zw1b2xf65s03xwl9antimnws0h8b0r1szbvpfapfppmg0lee7tiw2zoaa81jvlep1pxax5aggm2vusytiemxcjqdts3k1p54daeqcwzom3m1rkfqiuce8n1sju0i831h4y5pfad55kp3cw23n80i5cc641qupvn82f8uf2j3zcvqn2yez7s9y33',
-                latitude: 19246819213599160,
-                longitude: 78657201371045180,
-                zoom: 26,
+                id: '8b70a12c-a93c-4f6e-a776-c8e920da67e9',
+                countryId: 'acf2f576-79f5-4624-85fa-f36c7708adeb',
+                code: '8k7hfr4h',
+                customCode: '3l6qwfc1lws',
+                name: '1j7y0lrva4at5elxkpbnncpvh2vh76wb89td5iv6ckqgwr47asrtzq75z3kvnv7e16a34ia6w31k7guzatbmdx2gl3c0aazymuk5bo9ukyz8qc0bacgur8qtpackm7jojhhfpf00psgah6x4btbrilutuooqbpd9ybvlvobkawrs0uv4ihr7w2od0qfop4hs6z0snhw3wpop8hc7mfyny203axwxpd4r2hcp95g3q2ag8l43e4gpiia2fabapv4',
+                slug: '6t4tr3tlp1x924dpylihjxe5uttcdtg5828y0u9fy5rmzg0w9ip2rqfwwici1h766jcjwok42i86oy04bk07tcuxz7af7a9axsq7stss029cgwehvnen7qc8yek3xuqg0nsi7if5d492iz8kw1920gruzzo6ut1omv9udtz6zlb9s0etmihi33c9cdiyjsdj9u4qpk0nag7ahbq7wr3zuad9n0hofbpg4ew2avqjddoypws09fnjkov4d308o35',
+                latitude: 70313309847161384,
+                longitude: 90001224348362750,
+                zoom: 37,
             })
             .expect(400)
             .then(res => {
@@ -402,15 +397,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7e4a7de6-7ed0-4a12-9949-b63bb8aa4027',
-                countryCommonId: 'ce0272f1-62b2-460c-86b2-63e70387a6dd',
-                code: 'bloaxnry',
-                customCode: 'mqfipwxnjk',
-                name: 'on1uparbjia5qethanvzor9ihli2xwerqypapqtuddhur5piwiqccr3p4rgabka923dcc9l4khcc8lvzks9pfbpf64ya57mqdozh7qpbqxre4gpkuiacfdrwarsk9nee95n4z88mu15zsxtl06ur1bfduht6fkdplhl6rd161ve8m9bddei3m25d4o4rx4k1nkr4o4q1iy68zyvmn1zpwbbrddu2kk4zdndi7fqy59y3eayg4v8artb80wg1n9rs',
-                slug: 'b976kaz150gxufx5o8kwnz1lq9ynz9u4g55w9pga7h0uiz1h47l9i2o726ylb3xhmvqiyvbdugbwri4k8rzsxna5x3xlojshlmnt549xy62v7z6ed34uvb7a3guhrks4rxpb5a9z3l0u87ug8cpyrpsoolb0i2r2wg035iii5njdbiuj9hjprwzdjtvvldg8zu3rc20znc3pj7bmlvxmeqikffwejddik8n6xmm84nkghblt23n4ueprr4079zh',
-                latitude: 15342948431717748,
-                longitude: 32418644572280612,
-                zoom: 62,
+                id: 'e6e23e3f-9d81-4e77-b163-20632fa5dfa0',
+                countryId: 'a50eabf7-1bbb-4af2-8910-ac0c4af4bd16',
+                code: 'bvwr68x1',
+                customCode: 'phgsm9h96p',
+                name: 'fha53suuupi52p91n0rfs9n0yen384sw4wkydchofemjwa6lpfi4c1x7ciw9hpx40p3mx0lrq8pxhenvydu8q6j31nnc5gzwvhy1wum2jyt0envjqvuv73jvzvn1rv1e8m6c5o166ybzw4aok0mnad4yv03ia48y310eveh2adrrm7k0evv2urgwdgjgssujoofdli49roi1ai7pst2vx0h4mqon3lhnsa3dwke18hrx1zqithb11505bdluj3d9',
+                slug: 'eeh1eeftoi3db3l66dg3s4iurrdyl6vkr1bae1lisnc7s6tucm76i2atpk5gbwje1nd8ril8iau2p0yldyx8qnuyew8wyogunyzsucdkafomnc98lzzw3gwk2m8b36a0jc0k2ob49m0zgm0tpkdjxkelzncnmkljy058ahnd7go2qvqyz1n3au5xdcurmp3pgqsgc1eu9lr2wy55v5fq0xsosvm3p4mvydgtqtq60pka0zl3rjcsbghc2laqlio',
+                latitude: 13981252684504960,
+                longitude: 94500438471693780,
+                zoom: 72,
             })
             .expect(400)
             .then(res => {
@@ -425,15 +420,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'faef97c0-5f22-4dc6-8273-67c168beb7ce',
-                countryCommonId: '20617982-6167-4762-a317-bc3df12e8619',
-                code: '9ocystlq',
-                customCode: 'dfn28sht8m',
-                name: 'wxphgc4kcwfd65bssxq1z1nc4w40gpod0ou6ekwnsbswexgtpz65ck31y1jo3b8bgfdpuf1ak8r4cb65hv9sfilx2107nf5g482v2etat9bw22b6g68viotj2tvhm14cj5hkcpt781z3oubx9llf0g771i3au4bqfvucf0nyiac92el9fehtslma7719aaiwoemn58r7flv1mvwmgmblni48rpp70r6jv7a2huo5xmczi5fz3zfp6v0yqlv77ed',
-                slug: '9excotruoddwsvtmatk0k2xxk5jymjwl8v431qg4ry39127wzgsbgbqu33vyaeokipqd1wdu1ad2u8uixi154s9gysg3ca7zq0d5350x97wjr6ilh3ac6msfa1kuzs9sxhzml9yye06wkf64ed136m6rpkby3yf0b17an364b80t2f074qgzxnoklqo32visrvl1nkmzr6vy4bmb3fmpdtgjiq5aq4n5u6kqvee72zsg51mqgathjl531jv2c4hi',
-                latitude: 69985104826727890,
-                longitude: 32129876679313390,
-                zoom: 44,
+                id: '22bab0ad-0165-4bef-b3c6-9cc8fbb43f59',
+                countryId: '6f056e7d-f484-4b39-af5b-e79c3ea41c12',
+                code: 'unljsufr',
+                customCode: 'hz113s05fv',
+                name: 'h1eak8dk4cgkuy13g2xazw4s5317q69uc51a0wsycit8pwp93y6hsvq3iysolg4ul5ncx2uvonlhm57yr1ae9c0gn6wuyd2e0nctbxf34qwe3fceed76eaivqhzpryxkyyt81k31u7da71ui7tbc0iplydwe84xipw2am10duv5hul6uetdlni40fg8v1283lcu30bo7b6gackw9bnhmusf1ort4qk0tq9nikj09nudk1uno60nj4scl21ubl1e',
+                slug: 'k0eg00tjuxiosdrjf6cktv466ewwelyvbr39wdcl9glrqqy6vvxh4k5423skx2nkgdkfmf1lf7pl0gey80gie8ckriw0s9d683hdx4n83aplstk8y32o9tcyyw8q126yn4m6wtdzdtktcb7g500v4l5ya314yxlvmtjaa1sxwzsrok4146824uoabw64kq2mngw58hxbipqvwhaymo0kf9lhd27tigesh5v8ws29sqz6sg4ne2ku16g3liag3wf6',
+                latitude: 20039040205320190,
+                longitude: 72574585674608420,
+                zoom: 30,
             })
             .expect(400)
             .then(res => {
@@ -448,15 +443,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'f7398d2b-eb2e-4e08-8ecf-9af5d5140615',
-                countryCommonId: 'b02d3d44-ac37-4a9e-b448-f55402491f25',
-                code: 'ncb4z90u',
-                customCode: '3k6197rjfd',
-                name: '96my4k7gimww9yjrpl0vnt4gbwjyxuv2k651hxtqlgdqt9b5zb93tkgothlm2b6wf321ji3yiii7qd4e5yf7thbh3n1ri5hghnsv3l228nol14ngqcbz6dp612sodmlxq2h8j7jy8v2ah5r01f679ultg1omquysbmwvpm4u9t6paulr1c8vi7lv1eseor3jqzoea6q3di1s6cqdysrssqbu8rnhxwzl70rifbv5nwkip44g5t4ue05uhgiyi4i',
-                slug: 'g3uf2hfdh7qrrprr8l1nthtwfncjv5hgjqryapi9cbr08y657u6ivhyxhxcupri90b9rnda0o2w44rekvwq1u8ypfh6vi1m9fppg71qighg56pxl935ycuic6xuir66gp8z25nk66bhofyiynwavbiin23t6pr7irlfqj5trdhisy55gnxjy0fyvq4tg6yhlfip24y11549n91p9gs1cjue0wpn8e46e4o5iqsfr77eqfiqhv40s8k8enyrf08b',
-                latitude: 423384610150712200,
-                longitude: 22095433431802970,
-                zoom: 85,
+                id: '21e41a8b-29df-42fd-b491-98bd8a35ecf5',
+                countryId: '99e3a79d-4369-4a1c-8a69-158d1e5f07b8',
+                code: '0i2pqwhq',
+                customCode: 'hy7w2gbgxm',
+                name: 'hgt91m6r0ahiv7m0op1cowtz28ipqx1ytg0iuoid665n4gk8mr0ctrwsj088sdv7mfyrpmfnlz495rzv41jbb68y9zd6u59pd0e626izngdr6hqz4ls0ut6djnnaa4vjwlwqahuk07iystv4a8bee5qlvb41n166ot6ytmlfgicwdujnxhrckwpcdefi7ozlrj19bevfl1xbi7ob37evvpyir0ieon9fub5fu40ns6m6d1t09bukcuf2pxlfu0c',
+                slug: 'lwccq4rg0zeq35qpgat7ticwl9a9undm4ylwr1eq3qy7wj6vargsil8ctmxh0gp6ca83knnyf26pzqm5053cok8x9ty0drq7oizxsetpq5knlql8p5zjea20ezlylyogyaw39dyti7ycd5k5pston71bm2lx12c4gbfgdu7qqz6468hx1zb5wxt0d8dhb8a9kvy1tpj42x6aklxxj2z2s8jhrggjdw18vho3vzyk2v6tm4e45di85it53tx705f',
+                latitude: 197457268017250560,
+                longitude: 21449288215996296,
+                zoom: 80,
             })
             .expect(400)
             .then(res => {
@@ -471,15 +466,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '47255977-fd66-41d8-913b-dc902c9f4d61',
-                countryCommonId: '2211c9dc-c25d-48aa-aac8-3d7879fde0c5',
-                code: 'hgsrkm5h',
-                customCode: 'hwvmx88wm9',
-                name: 'f6ndxmdal907866j5ljjl9amg4p8n6c6wng5iqt76d0syq7022iqcu5v5zs3ph3lq2i1rt7gi5z7ca95twqy09oq554jac8l8gra01y2ie9xv1wg2myw41ou7uiwziudld8zd62k8326bcnb86sc0cv0s183y1sefdzhqbma4guec9ks4la6tfbnoredt3rpkxsu8yxm82eb8njtvg5jsko99b145fkgd6nf6bifqhpq7cntk8dv7szw01zp5im',
-                slug: 'q9fth7w8pr3cwavxd5xfw5x1waoqlupzb9rz2abczjdi5n31utr2j0652gzkewq1ysf21pebbnrrdgpizeh5p7arq7rai46jn9w29a06y4g09x6h9a3qjwvvuya6bvp5f30pxr0wldbpgh5n0p3rrz2hgj85s1sg9158dfgyadsghhs41k0rw4ahaop8no336520bqilzor0zvip5xkv17i8p7d6d39lzjffnwphh7dy4fwqmx969sptu5sm766',
-                latitude: 30787278711537916,
-                longitude: 843680563506594700,
-                zoom: 63,
+                id: '53b441d4-a47c-44fa-88fa-7ddf93a8d136',
+                countryId: 'db86b2a6-de38-4c99-b317-1aec69fd1b11',
+                code: 'i8w49t7x',
+                customCode: 'gfsy763f9w',
+                name: 'lyhfesy2d9hsnocurpsfizaltynkg4iec60g31tn12dcq5tbsewa342blwiluy4ye88tdn2n0uv12krk3kl9t0gq546fbfv1fsma0kvlk9biv4lt07re5obcyc3pp408wcjpubrt5cdt333bwjaejxky1zbx4dcpwvzi1p4149ll1584md7cnw7bay6hkcmevurt0darslnywshhttjf7pqe9s6edp7auj4rdlhob30x1c8d0loezvs2p22ezrc',
+                slug: 'ou19x7k3ojc00wnf54xrhlsvoxk032i8z8xmiofhm883oog2g4kuohtd8f80k4hzlr53pk3ps0bqolbv3z29wqi07vav7e7rt6fapidq8i74d2uh4ipirdm914vzazd5tk15oabrgnwr0u09ocgrwq458030unb18yfgt2sfmeyiba8x32awc9li13ro1blrgw40xtslhpr5u8m0f20b193q4d19qaoy1huoz7e5nw6kosq16t21lswr07x9xrv',
+                latitude: 30168761415080836,
+                longitude: 775400098473163000,
+                zoom: 30,
             })
             .expect(400)
             .then(res => {
@@ -494,15 +489,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'b61845d0-7032-4aa4-a0bf-e0797141e912',
-                countryCommonId: 'c38afccd-b691-4b74-976f-165a3beafa6b',
-                code: 's7u5he7r',
-                customCode: '7fgxffzon3',
-                name: '8mup1gzvyb149m9ffe0os2f48ncq8mpzldxtp515ftlbek8wfrqz2o8pcgar92t4pldmy97kgi9xuc81oyh7lkclm1qdg5ub1fs24z7ahz41cjzz8kbqc0m4w5lhp7o6em2asjswt1e9l3qohoptqeqok0g80kbpkbkafg2crsf8s8eqf9t3kbexz8wy4808ykgk47t3w7awdz91htatasitnvblellhrx2quml13qtycjjkf65bqj7gxl5zqyy',
-                slug: 'g9d79evtj8t2h6trwwx4es6tkalqcqveto43cz0ioegu6ddaagokzz83eoyvt9o31dlcqg2bxb96s2uhi2lkj1ziv48txfh1f9mf85xqn2o0oy8votokb16p1aphvp41lk771te2kci6ak1w878bqylkljnc5ghalo5qy0ta65dhue82seafl5l6xs0mm93hiwuag80u9mbltn7z72zvx5njccgb0hpyy03aqtr1k1199ylnxraz8gkdfhdnqqh',
-                latitude: 11337481231535566,
-                longitude: 21862796056376750,
-                zoom: 906,
+                id: '16f90b3d-1b03-443f-8426-1ff5941443a4',
+                countryId: 'cb0daa00-6e0c-4d92-9938-e9df85ec5adb',
+                code: 'j9ee464u',
+                customCode: 'tlnc905iv7',
+                name: 'pykmfj59qp3n7ub6dyiiwvm268s6tbmbyeve137k5z5b1mh2noczetrtqsh84e7k119qh8h3g6g34tzdfoncouut79yidp3dmgm66qxj0eivytd99nbkkcasrwyows7oq4jnsx8up4r78qefdjqoniwndt05rvdri7d8fa5eoqezgkvsjmock4hmuy7vrhbvqsot0y3r267qafmol1cwlsn6235s18egvql9uziis22zmmylyozt2622ekl42a2',
+                slug: 'd9wbr81wycnfiqj5onwian2bdkno6tbfxj03pxf3s8blbhpelbx0rmkbdabe8e6mt03sp46unatwqtq6lbay2t35jymy32vbs805wpu9fdpt1c1roivhhtkgar4ecgt39jdho0z72t6vgqktvkpiuofk6d8vls5k2jaqbkz25c1z6ned98kxln04cuh7ylh7oy9zvlrwxnan5av9uvshnkijaafp51a7r4cxqimjefhc93x0yi4y2oy825746nm',
+                latitude: 71754776281049110,
+                longitude: 40257482246054270,
+                zoom: 560,
             })
             .expect(400)
             .then(res => {
@@ -517,14 +512,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '07bed8f8-c5b8-4070-a7bc-23149053677a',
-                countryCommonId: 'b5b96fd4-f2ac-4513-8c5e-5868c29cef08',
-                code: 'z56vldmj',
-                customCode: 'rkvhmarwwh',
-                name: 'ojcaia6ofnlbyge5q9uevcnzvkx62blj3xeddh55al0q8psytbmj8ick5gt4uubplayy8eslq64f67kuryg96qgp6lljbpzovtj3rcnvcmfoc67ql573xblyoxv1mmtzkwczd4g5ww7i5bds1vu43mjtu4ddw4v8r3yb0vlkx0u9oy2ffvovak1ozb0bvegkk4vd1kwb0pr275d6ky1z7tkwi6156nt9bkgpxye80jr8v64ljoruczu7uurcz2h',
-                slug: '4uugk0abgiijhet7lwoi0qyu4jtliugm4uih92y91oeeffgru11r2w6mqkbfmgll0ot70w23lke4yimsp99vsj1s2shj9lbazh22qg9ojy9cj3oydqqr6js4402vzc9l84hbehhbh07s92s3fkq4opgkzoisrpmazto7dyi6rjxpcqmwgc6si0bzqlalt9rzzdst0mxs8zccv2nlpyl55tq5kcbh3llmvft4geiklv83lmva8666wcdrpx2jyky',
-                latitude: 44433744912519570,
-                longitude: 43598678954467470,
+                id: '3e651899-c146-4dfc-ad6a-2ebcec73d33d',
+                countryId: '51c15962-b4e1-4021-80c4-518810b3f693',
+                code: 'cjl21ef9',
+                customCode: '4h17u8th8z',
+                name: 'qek8sp88z1co0ddl2me3y5vjnlvp903uf4l26ottgpglqq07jrc8x7a4y7sorwqh6hv2eo6srkvm03d2n51la0rqjisk9tr85z8tb02e1md9895bx0j3qyteux1mqejncp9bz0p0frya06vp3gqx8gdpyx4e0dvt7zqio8o39rw1q16jbjibhki0m4nkjgvtli6j5d49oo98maf2y98kae1pno7x598vd4gl2ozjpumii9ztqgjli3yvs3f8k62',
+                slug: 'zaueyd9xl8j1h42r5qrhq9zy72cmo4sx1t6efpspmk0ar1iwef5m2cr60szlhkjyd8u2p93foqori0gx9afsg1qsd14p2h6lc2aj66aa5wyndzq3t2azk5qtmf8i6lmjjgxninvddzh9tf2vr9nlabsdh6qvwzsrkp0s9mkt3g1nmn3mreh13stcu36yb5hqgbr1f77f9lqmczi84ywbbkp357ni3xonkuzd9v8setnd2h4rnrtsqjsv29k2xyd',
+                latitude: 71579597416880650,
+                longitude: 27333530192130440,
                 zoom: -9,
             })
             .expect(400)
@@ -533,24 +528,14 @@ describe('administrative-area-level-1', () =>
             });
     });
 
-    test(`/REST:POST admin/administrative-area-level-1`, () =>
+    test(`/REST:POST admin/administrative-area-level-1 - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/admin/administrative-area-level-1')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                countryCommonId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                code: '4iyw9pws',
-                customCode: '4iyw9pwsdx',
-                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                latitude: 32409588176795452,
-                longitude: 87557647984153520,
-                zoom: 98,
-            })
-            .expect(201);
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
     test(`/REST:GET admin/administrative-areas-level-1/paginate`, () =>
@@ -568,10 +553,20 @@ describe('administrative-area-level-1', () =>
             })
             .expect(200)
             .expect({
-                total   : repository.collectionResponse.length,
-                count   : repository.collectionResponse.length,
-                rows    : repository.collectionResponse.slice(0, 5)
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
+    });
+
+    test(`/REST:GET admin/administrative-areas-level-1`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/admin/administrative-areas-level-1')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .expect(seeder.collectionResponse);
     });
 
     test(`/REST:GET admin/administrative-area-level-1 - Got 404 Not Found`, () =>
@@ -585,11 +580,31 @@ describe('administrative-area-level-1', () =>
                 {
                     where:
                     {
-                        id: '8005da80-0d43-4369-a7a6-a26f4564405b'
+                        id: '49533bf4-bd88-48ce-a0d6-0867a89516cf'
                     }
                 }
             })
             .expect(404);
+    });
+
+    test(`/REST:POST admin/administrative-area-level-1`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/admin/administrative-area-level-1')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                countryId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                code: '4iyw9pws',
+                customCode: '4iyw9pwsdx',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                latitude: 75885719421715520,
+                longitude: 22998571571649830,
+                zoom: 76,
+            })
+            .expect(201);
     });
 
     test(`/REST:GET admin/administrative-area-level-1`, () =>
@@ -608,13 +623,15 @@ describe('administrative-area-level-1', () =>
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:GET admin/administrative-area-level-1/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/administrative-area-level-1/cf209bed-7dc2-4ab4-bc5a-8a9c180497ef')
+            .get('/admin/administrative-area-level-1/b43795c6-56cd-47ef-a37e-e203e62862b7')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -627,17 +644,9 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
-    });
-
-    test(`/REST:GET admin/administrative-areas-level-1`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/admin/administrative-areas-level-1')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .expect(200)
-            .expect(repository.collectionResponse);
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:PUT admin/administrative-area-level-1 - Got 404 Not Found`, () =>
@@ -648,14 +657,14 @@ describe('administrative-area-level-1', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
-                countryCommonId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                countryId: '01d3c56e-5728-46aa-8427-4d9639511b96',
                 code: 'scnln7a3',
                 customCode: 'oqw0khx3oh',
                 name: '2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbk',
                 slug: 'pahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox1',
-                latitude: 49852823101601970,
-                longitude: 91166364718533400,
-                zoom: 29,
+                latitude: 33910915640140332,
+                longitude: 38479195454014696,
+                zoom: 59,
             })
             .expect(404);
     });
@@ -668,23 +677,25 @@ describe('administrative-area-level-1', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                countryCommonId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                countryId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
                 code: '4iyw9pws',
                 customCode: '4iyw9pwsdx',
                 name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                 slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                latitude: 17339100768256676,
-                longitude: 61168176248363500,
-                zoom: 62,
+                latitude: 74707137969540260,
+                longitude: 48424031866954480,
+                zoom: 58,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE admin/administrative-area-level-1/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/administrative-area-level-1/ca861735-a62b-44c6-8a70-67db83184c53')
+            .delete('/admin/administrative-area-level-1/2fa856b1-763f-4e96-9103-074b87908b24')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -724,7 +735,7 @@ describe('administrative-area-level-1', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -732,49 +743,6 @@ describe('administrative-area-level-1', () =>
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
-            });
-    });
-
-    test(`/GraphQL adminCreateAdministrativeAreaLevel1`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    mutation ($payload:AdminCreateAdministrativeAreaLevel1Input!)
-                    {
-                        adminCreateAdministrativeAreaLevel1 (payload:$payload)
-                        {
-                            id
-                            code
-                            customCode
-                            name
-                            slug
-                            latitude
-                            longitude
-                            zoom
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '04528622-f7d5-47cd-8222-7ee846d25259',
-                        countryCommonId: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
-                        code: '12v8rbex',
-                        customCode: 'ch6iemni95',
-                        name: 'gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4',
-                        slug: 'kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z5',
-                        latitude: 58196297881474440,
-                        longitude: 21815862880003190,
-                        zoom: 92,
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.adminCreateAdministrativeAreaLevel1).toHaveProperty('id', '04528622-f7d5-47cd-8222-7ee846d25259');
             });
     });
 
@@ -807,9 +775,88 @@ describe('administrative-area-level-1', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminPaginateAdministrativeAreasLevel1.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.adminPaginateAdministrativeAreasLevel1.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.adminPaginateAdministrativeAreasLevel1.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.adminPaginateAdministrativeAreasLevel1.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.adminPaginateAdministrativeAreasLevel1.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.adminPaginateAdministrativeAreasLevel1.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+            });
+    });
+
+    test(`/GraphQL adminGetAdministrativeAreasLevel1`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        adminGetAdministrativeAreasLevel1 (query:$query)
+                        {
+                            id
+                            code
+                            customCode
+                            name
+                            slug
+                            latitude
+                            longitude
+                            zoom
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {}
+            })
+            .expect(200)
+            .then(res => {
+                for (const [index, value] of res.body.data.adminGetAdministrativeAreasLevel1.entries())
+                {
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                }
+            });
+    });
+
+    test(`/GraphQL adminCreateAdministrativeAreaLevel1`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:AdminCreateAdministrativeAreaLevel1Input!)
+                    {
+                        adminCreateAdministrativeAreaLevel1 (payload:$payload)
+                        {
+                            id
+                            code
+                            customCode
+                            name
+                            slug
+                            latitude
+                            longitude
+                            zoom
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        countryId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        code: '4iyw9pws',
+                        customCode: '4iyw9pwsdx',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        latitude: 17542070744190774,
+                        longitude: 33770067518903016,
+                        zoom: 39,
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.adminCreateAdministrativeAreaLevel1).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -844,7 +891,7 @@ describe('administrative-area-level-1', () =>
                     {
                         where:
                         {
-                            id: '7dec840e-e25a-4e1d-bf94-1aadc29bb0b6'
+                            id: 'a8e30b73-632f-4014-a7de-513ffef5dfb0'
                         }
                     }
                 }
@@ -925,7 +972,7 @@ describe('administrative-area-level-1', () =>
                     }
                 `,
                 variables: {
-                    id: '0b04e5dc-e2ce-43d3-b231-d0cdf7cd0783'
+                    id: 'b36cc160-c9bf-4a12-8eef-a7621be6cad4'
                 }
             })
             .expect(200)
@@ -971,42 +1018,6 @@ describe('administrative-area-level-1', () =>
             });
     });
 
-    test(`/GraphQL adminGetAdministrativeAreasLevel1`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        adminGetAdministrativeAreasLevel1 (query:$query)
-                        {
-                            id
-                            code
-                            customCode
-                            name
-                            slug
-                            latitude
-                            longitude
-                            zoom
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {}
-            })
-            .expect(200)
-            .then(res => {
-                for (const [index, value] of res.body.data.adminGetAdministrativeAreasLevel1.entries())
-                {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
-                }
-            });
-    });
-
     test(`/GraphQL adminUpdateAdministrativeAreaLevel1 - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
@@ -1035,14 +1046,14 @@ describe('administrative-area-level-1', () =>
                 variables: {
                     payload: {
                         id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
-                        countryCommonId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                        countryId: '01d3c56e-5728-46aa-8427-4d9639511b96',
                         code: 'scnln7a3',
                         customCode: 'oqw0khx3oh',
                         name: '2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbk',
                         slug: 'pahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox1',
-                        latitude: 90673145812696450,
-                        longitude: 52515657206892536,
-                        zoom: 46,
+                        latitude: 63139276240672120,
+                        longitude: 94791581483256880,
+                        zoom: 70,
                     }
                 }
             })
@@ -1082,14 +1093,14 @@ describe('administrative-area-level-1', () =>
                 variables: {
                     payload: {
                         id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                        countryCommonId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        countryId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
                         code: '4iyw9pws',
                         customCode: '4iyw9pwsdx',
                         name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                         slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                        latitude: 45353054227856030,
-                        longitude: 42050448770276180,
-                        zoom: 52,
+                        latitude: 14622061037548500,
+                        longitude: 70605596869595260,
+                        zoom: 67,
                     }
                 }
             })
@@ -1125,7 +1136,7 @@ describe('administrative-area-level-1', () =>
                     }
                 `,
                 variables: {
-                    id: '371c1b13-eb43-41e6-8bc1-401ffc40e715'
+                    id: '27d91d3b-5b5a-40f3-bf86-4cb822bf33c9'
                 }
             })
             .expect(200)

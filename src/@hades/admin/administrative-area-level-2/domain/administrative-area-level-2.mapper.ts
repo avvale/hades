@@ -4,7 +4,7 @@ import { AdminAdministrativeAreaLevel2 } from './administrative-area-level-2.agg
 import { AdministrativeAreaLevel2Response } from './administrative-area-level-2.response';
 import {
     AdministrativeAreaLevel2Id,
-    AdministrativeAreaLevel2CountryCommonId,
+    AdministrativeAreaLevel2CountryId,
     AdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel2Code,
     AdministrativeAreaLevel2CustomCode,
@@ -72,7 +72,7 @@ export class AdministrativeAreaLevel2Mapper implements IMapper
     {
         return AdminAdministrativeAreaLevel2.register(
             new AdministrativeAreaLevel2Id(administrativeAreaLevel2.id),
-            new AdministrativeAreaLevel2CountryCommonId(administrativeAreaLevel2.countryCommonId),
+            new AdministrativeAreaLevel2CountryId(administrativeAreaLevel2.countryId),
             new AdministrativeAreaLevel2AdministrativeAreaLevel1Id(administrativeAreaLevel2.administrativeAreaLevel1Id),
             new AdministrativeAreaLevel2Code(administrativeAreaLevel2.code),
             new AdministrativeAreaLevel2CustomCode(administrativeAreaLevel2.customCode),
@@ -95,7 +95,7 @@ export class AdministrativeAreaLevel2Mapper implements IMapper
 
         return new AdministrativeAreaLevel2Response(
             administrativeAreaLevel2.id.value,
-            administrativeAreaLevel2.countryCommonId.value,
+            administrativeAreaLevel2.countryId.value,
             administrativeAreaLevel2.administrativeAreaLevel1Id.value,
             administrativeAreaLevel2.code.value,
             administrativeAreaLevel2.customCode.value,

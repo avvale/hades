@@ -15,6 +15,7 @@ import { EnvironmentModule } from './../../../shared/modules/environment.module'
 
                 return {
                     dialect: environmentService.get<Dialect>('DATABASE_DIALECT'),
+                    storage: environmentService.get<string>('DATABASE_STORAGE'),
                     host: environmentService.get<string>('DATABASE_HOST'),
                     port: +environmentService.get<number>('DATABASE_PORT'),
                     username: environmentService.get<string>('DATABASE_USER'),

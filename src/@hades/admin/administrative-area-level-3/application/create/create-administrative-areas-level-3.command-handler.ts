@@ -3,7 +3,7 @@ import { CreateAdministrativeAreasLevel3Command } from './create-administrative-
 import { CreateAdministrativeAreasLevel3Service } from './create-administrative-areas-level-3.service';
 import {
     AdministrativeAreaLevel3Id,
-    AdministrativeAreaLevel3CountryCommonId,
+    AdministrativeAreaLevel3CountryId,
     AdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel3AdministrativeAreaLevel2Id,
     AdministrativeAreaLevel3Code,
@@ -33,7 +33,7 @@ export class CreateAdministrativeAreasLevel3CommandHandler implements ICommandHa
                 .map(administrativeAreaLevel3 => {
                     return {
                         id: new AdministrativeAreaLevel3Id(administrativeAreaLevel3.id),
-                        countryCommonId: new AdministrativeAreaLevel3CountryCommonId(administrativeAreaLevel3.countryCommonId),
+                        countryId: new AdministrativeAreaLevel3CountryId(administrativeAreaLevel3.countryId),
                         administrativeAreaLevel1Id: new AdministrativeAreaLevel3AdministrativeAreaLevel1Id(administrativeAreaLevel3.administrativeAreaLevel1Id),
                         administrativeAreaLevel2Id: new AdministrativeAreaLevel3AdministrativeAreaLevel2Id(administrativeAreaLevel3.administrativeAreaLevel2Id),
                         code: new AdministrativeAreaLevel3Code(administrativeAreaLevel3.code),
