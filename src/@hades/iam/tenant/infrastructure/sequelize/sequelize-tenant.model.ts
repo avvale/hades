@@ -4,7 +4,7 @@ import { DataTypes } from 'sequelize';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 import { IamTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
 
-@Table({ modelName: 'iam_tenant', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamTenant', freezeTableName: true, timestamps: false })
 export class IamTenantModel extends Model<IamTenantModel>
 {
     @Column({
@@ -37,7 +37,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     logo: string;
 
     @Column({
-        field: 'is_active',
+        field: 'isActive',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
@@ -55,21 +55,21 @@ export class IamTenantModel extends Model<IamTenantModel>
     accounts: IamAccountModel[];
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

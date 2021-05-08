@@ -2,8 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IRoleRepository } from '@hades/iam/role/domain/role.repository';
-import { MockRoleRepository } from '@hades/iam/role/infrastructure/mock/mock-role.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { MockRoleSeeder } from '@hades/iam/role/infrastructure/mock/mock-role.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
@@ -13,6 +12,7 @@ import * as _ from 'lodash';
 import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 
@@ -21,7 +21,8 @@ const importForeignModules = [];
 describe('role', () =>
 {
     let app: INestApplication;
-    let repository: MockRoleRepository;
+    let repository: IRoleRepository;
+    let seeder: MockRoleSeeder;
     let testJwt: string;
 
     beforeAll(async () =>
@@ -31,11 +32,12 @@ describe('role', () =>
                     ...importForeignModules,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
                     }),
                     JwtModule.register({
                         privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
@@ -46,11 +48,10 @@ describe('role', () =>
                     }),
                 ],
                 providers: [
+                    MockRoleSeeder,
                     TestingJwtService,
                 ]
             })
-            .overrideProvider(IRoleRepository)
-            .useClass(MockRoleRepository)
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
             .overrideGuard(AuthorizationGuard)
@@ -58,20 +59,14 @@ describe('role', () =>
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockRoleRepository>module.get<IRoleRepository>(IRoleRepository);
-        testJwt     =  module.get(TestingJwtService).getJwt();
+        repository  = module.get<IRoleRepository>(IRoleRepository);
+        seeder      = module.get<MockRoleSeeder>(MockRoleSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
-    });
-
-    test(`/REST:POST iam/role - Got 409 Conflict, item already exist in database`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/role')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send(repository.collectionResponse[0])
-            .expect(409);
     });
 
     test(`/REST:POST iam/role - Got 400 Conflict, RoleId property can not to be null`, () =>
@@ -242,20 +237,14 @@ describe('role', () =>
             });
     });
 
-    test(`/REST:POST iam/role`, () =>
+    test(`/REST:POST iam/role - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/role')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                isMaster: false,
-                permissionIds: [],
-                accountIds: [],
-            })
-            .expect(201);
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
     test(`/REST:GET iam/roles/paginate`, () =>
@@ -273,10 +262,20 @@ describe('role', () =>
             })
             .expect(200)
             .expect({
-                total   : repository.collectionResponse.length,
-                count   : repository.collectionResponse.length,
-                rows    : repository.collectionResponse.slice(0, 5)
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
+    });
+
+    test(`/REST:GET iam/roles`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/roles')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .expect(seeder.collectionResponse);
     });
 
     test(`/REST:GET iam/role - Got 404 Not Found`, () =>
@@ -290,11 +289,27 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: 'f18a2468-d046-4e48-8c3a-bd30ec3d142d'
+                        id: '99588c5a-d991-4937-a29d-5b22301047ce'
                     }
                 }
             })
             .expect(404);
+    });
+
+    test(`/REST:POST iam/role`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/role')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                isMaster: false,
+                permissionIds: [],
+                accountIds: [],
+            })
+            .expect(201);
     });
 
     test(`/REST:GET iam/role`, () =>
@@ -313,13 +328,15 @@ describe('role', () =>
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:GET iam/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/597ec4c5-49e4-4ab6-81cf-9fab718aee29')
+            .get('/iam/role/77ee309b-9bb5-47c5-a8b5-1ac833ba42f4')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -332,17 +349,9 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
-    });
-
-    test(`/REST:GET iam/roles`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/roles')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .expect(200)
-            .expect(repository.collectionResponse);
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:PUT iam/role - Got 404 Not Found`, () =>
@@ -375,13 +384,15 @@ describe('role', () =>
                 accountIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE iam/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/09d31f8c-d269-4985-89fb-8bda598436d2')
+            .delete('/iam/role/b2bea56b-79cb-4719-937c-a093f1f3e645')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -416,7 +427,7 @@ describe('role', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -424,40 +435,6 @@ describe('role', () =>
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
-            });
-    });
-
-    test(`/GraphQL iamCreateRole`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    mutation ($payload:IamCreateRoleInput!)
-                    {
-                        iamCreateRole (payload:$payload)
-                        {
-                            id
-                            name
-                            isMaster
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: 'a49b08cc-7f38-4b1d-98ad-4fb368b1c65b',
-                        name: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio',
-                        isMaster: false,
-                        permissionIds: [],
-                        accountIds: [],
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamCreateRole).toHaveProperty('id', 'a49b08cc-7f38-4b1d-98ad-4fb368b1c65b');
             });
     });
 
@@ -490,9 +467,74 @@ describe('role', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamPaginateRoles.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateRoles.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateRoles.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.iamPaginateRoles.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateRoles.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateRoles.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+            });
+    });
+
+    test(`/GraphQL iamGetRoles`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamGetRoles (query:$query)
+                        {
+                            id
+                            name
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {}
+            })
+            .expect(200)
+            .then(res => {
+                for (const [index, value] of res.body.data.iamGetRoles.entries())
+                {
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                }
+            });
+    });
+
+    test(`/GraphQL iamCreateRole`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamCreateRoleInput!)
+                    {
+                        iamCreateRole (payload:$payload)
+                        {
+                            id
+                            name
+                            isMaster
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        isMaster: false,
+                        permissionIds: [],
+                        accountIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamCreateRole).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -522,7 +564,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '64a54cf1-30d8-42c5-831c-4a9cc3c3aa93'
+                            id: '223480f4-5ab1-4819-8e69-373c71715963'
                         }
                     }
                 }
@@ -593,7 +635,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: 'abb39f79-293c-4aa1-92ce-67dab4bd209f'
+                    id: '351d9bf9-678a-4175-b6fd-6dfc08aca4e4'
                 }
             })
             .expect(200)
@@ -631,37 +673,6 @@ describe('role', () =>
             .expect(200)
             .then(res => {
                 expect(res.body.data.iamFindRoleById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
-            });
-    });
-
-    test(`/GraphQL iamGetRoles`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamGetRoles (query:$query)
-                        {
-                            id
-                            name
-                            isMaster
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {}
-            })
-            .expect(200)
-            .then(res => {
-                for (const [index, value] of res.body.data.iamGetRoles.entries())
-                {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
-                }
             });
     });
 
@@ -760,7 +771,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '2f3bf5be-667c-4f24-b5ae-9c64c044fb57'
+                    id: '88b8c363-b380-4a64-8cb5-7102ff389ea0'
                 }
             })
             .expect(200)

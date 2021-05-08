@@ -2,8 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IUserRepository } from '@hades/iam/user/domain/user.repository';
-import { MockUserRepository } from '@hades/iam/user/infrastructure/mock/mock-user.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { MockUserSeeder } from '@hades/iam/user/infrastructure/mock/mock-user.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
@@ -13,6 +12,7 @@ import * as _ from 'lodash';
 import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 
@@ -21,7 +21,8 @@ const importForeignModules = [];
 describe('user', () =>
 {
     let app: INestApplication;
-    let repository: MockUserRepository;
+    let repository: IUserRepository;
+    let seeder: MockUserSeeder;
     let testJwt: string;
 
     beforeAll(async () =>
@@ -31,11 +32,12 @@ describe('user', () =>
                     ...importForeignModules,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
                     }),
                     JwtModule.register({
                         privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
@@ -46,11 +48,10 @@ describe('user', () =>
                     }),
                 ],
                 providers: [
+                    MockUserSeeder,
                     TestingJwtService,
                 ]
             })
-            .overrideProvider(IUserRepository)
-            .useClass(MockUserRepository)
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
             .overrideGuard(AuthorizationGuard)
@@ -58,20 +59,14 @@ describe('user', () =>
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockUserRepository>module.get<IUserRepository>(IUserRepository);
-        testJwt     =  module.get(TestingJwtService).getJwt();
+        repository  = module.get<IUserRepository>(IUserRepository);
+        seeder      = module.get<MockUserSeeder>(MockUserSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
-    });
-
-    test(`/REST:POST iam/user - Got 409 Conflict, item already exist in database`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send(repository.collectionResponse[0])
-            .expect(409);
     });
 
     test(`/REST:POST iam/user - Got 400 Conflict, UserId property can not to be null`, () =>
@@ -570,6 +565,65 @@ describe('user', () =>
     });
 
 
+    test(`/REST:POST iam/user - Got 409 Conflict, item already exist in database`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
+    });
+
+    test(`/REST:GET iam/users/paginate`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/users/paginate')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    offset: 0,
+                    limit: 5
+                }
+            })
+            .expect(200)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
+            });
+    });
+
+    test(`/REST:GET iam/users`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/users')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .expect(seeder.collectionResponse);
+    });
+
+    test(`/REST:GET iam/user - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '56918e94-e2d1-4b50-9ef5-7e674011d623'
+                    }
+                }
+            })
+            .expect(404);
+    });
+
     test(`/REST:POST iam/user`, () =>
     {
         return request(app.getHttpServer())
@@ -592,45 +646,6 @@ describe('user', () =>
             .expect(201);
     });
 
-    test(`/REST:GET iam/users/paginate`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/users/paginate')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query:
-                {
-                    offset: 0,
-                    limit: 5
-                }
-            })
-            .expect(200)
-            .expect({
-                total   : repository.collectionResponse.length,
-                count   : repository.collectionResponse.length,
-                rows    : repository.collectionResponse.slice(0, 5)
-            });
-    });
-
-    test(`/REST:GET iam/user - Got 404 Not Found`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/user')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query:
-                {
-                    where:
-                    {
-                        id: '22ae55e3-d11a-4f9c-bf84-a839459600b3'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
     test(`/REST:GET iam/user`, () =>
     {
         return request(app.getHttpServer())
@@ -647,13 +662,15 @@ describe('user', () =>
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:GET iam/user/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/user/5b0988eb-5855-42d8-aa3b-7769e3b8297e')
+            .get('/iam/user/cfcda9c1-66dc-48df-b354-a96dfa5608c0')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -666,17 +683,9 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
-    });
-
-    test(`/REST:GET iam/users`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/users')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .expect(200)
-            .expect(repository.collectionResponse);
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:PUT iam/user - Got 404 Not Found`, () =>
@@ -721,13 +730,15 @@ describe('user', () =>
                 data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE iam/user/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/user/d888af2e-148f-4ab2-b652-b9646672bde3')
+            .delete('/iam/user/cd123421-5c1a-4977-98c5-eb94edab5621')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -770,7 +781,7 @@ describe('user', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -778,54 +789,6 @@ describe('user', () =>
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
-            });
-    });
-
-    test(`/GraphQL iamCreateUser`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    mutation ($payload:IamCreateUserInput!)
-                    {
-                        iamCreateUser (payload:$payload)
-                        {
-                            id
-                            accountId
-                            name
-                            surname
-                            avatar
-                            mobile
-                            langId
-                            username
-                            password
-                            rememberToken
-                            data
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '0d5fbbd5-26ea-4366-84cc-91b98c7ba70a',
-                        accountId: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
-                        name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
-                        surname: '3tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm',
-                        avatar: '0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmx',
-                        mobile: 'nqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bx',
-                        langId: '826f16bc-7297-447a-adb1-6514ef358762',
-                        username: 'weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2n',
-                        password: 'obxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbq',
-                        rememberToken: 'qm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd',
-                        data: {"foo":8265,"bar":11354,"bike":",<1&@'vm9q","a":"iuA'mm20kz","b":"$;x_ju.5d\"","name":89737,"prop":"gD7a{rx|zc"},
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamCreateUser).toHaveProperty('id', '0d5fbbd5-26ea-4366-84cc-91b98c7ba70a');
             });
     });
 
@@ -858,9 +821,96 @@ describe('user', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamPaginateUsers.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateUsers.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateUsers.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.iamPaginateUsers.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateUsers.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateUsers.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+            });
+    });
+
+    test(`/GraphQL iamGetUsers`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamGetUsers (query:$query)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {}
+            })
+            .expect(200)
+            .then(res => {
+                for (const [index, value] of res.body.data.iamGetUsers.entries())
+                {
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                }
+            });
+    });
+
+    test(`/GraphQL iamCreateUser`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamCreateUserInput!)
+                    {
+                        iamCreateUser (payload:$payload)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        accountId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        avatar: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        langId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                        password: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        rememberToken: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamCreateUser).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -898,7 +948,7 @@ describe('user', () =>
                     {
                         where:
                         {
-                            id: '1cb9b580-df67-42ba-b5fa-4fbd67a73559'
+                            id: 'a47b33af-8fa2-49ab-8946-f086467cf345'
                         }
                     }
                 }
@@ -985,7 +1035,7 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: '37dba1a4-a7f1-4791-8eff-1c1258416226'
+                    id: 'e16d3309-b6f5-4354-bff1-3007d01b574c'
                 }
             })
             .expect(200)
@@ -1031,45 +1081,6 @@ describe('user', () =>
             .expect(200)
             .then(res => {
                 expect(res.body.data.iamFindUserById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
-            });
-    });
-
-    test(`/GraphQL iamGetUsers`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamGetUsers (query:$query)
-                        {
-                            id
-                            accountId
-                            name
-                            surname
-                            avatar
-                            mobile
-                            langId
-                            username
-                            password
-                            rememberToken
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {}
-            })
-            .expect(200)
-            .then(res => {
-                for (const [index, value] of res.body.data.iamGetUsers.entries())
-                {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
-                }
             });
     });
 
@@ -1204,7 +1215,7 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: 'd66d700e-29ad-4b1c-82bd-b5fd498ff59b'
+                    id: '42368c31-ba8d-48dc-a628-6efdce44c74b'
                 }
             })
             .expect(200)

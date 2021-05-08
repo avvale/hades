@@ -6,7 +6,7 @@ import { IamPermissionsRolesModel } from '@hades/iam/permission/infrastructure/s
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 import { IamRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
 
-@Table({ modelName: 'iam_role', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamRole', freezeTableName: true, timestamps: false })
 export class IamRoleModel extends Model<IamRoleModel>
 {
     @Column({
@@ -25,7 +25,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     name: string;
 
     @Column({
-        field: 'is_master',
+        field: 'isMaster',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
@@ -40,21 +40,21 @@ export class IamRoleModel extends Model<IamRoleModel>
     accounts: IamAccountModel[];
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
