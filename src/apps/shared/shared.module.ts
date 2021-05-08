@@ -2,11 +2,13 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { SharedProviders } from '@hades/shared/index';
 import { EnvironmentModule } from './modules/environment.module';
+import { AuthModule } from '@hades/iam/shared/domain/modules/auth/auth.module';
 
 @Module({
     imports: [
         CqrsModule,
         EnvironmentModule,
+        AuthModule
     ],
     controllers: [],
     providers: [
@@ -15,7 +17,8 @@ import { EnvironmentModule } from './modules/environment.module';
     exports: [
         CqrsModule,
         EnvironmentModule,
-        ...SharedProviders
+        ...SharedProviders,
+        AuthModule
     ]
 })
 export class SharedModule {}
