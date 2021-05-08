@@ -31,6 +31,7 @@ import { DeleteCountriesService } from './application/delete/delete-countries.se
 
 // models
 export { AdminCountryModel } from './infrastructure/sequelize/sequelize-country.model';
+export { AdminCountryI18nModel } from './infrastructure/sequelize/sequelize-country-i18n.model';
 
 // repository
 export { ICountryRepository } from './domain/country.repository';

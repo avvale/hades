@@ -1,5 +1,5 @@
 import { AdminLangHandlers, AdminLangServices, AdminLangModel, ILangRepository, SequelizeLangRepository, LangSagas } from './lang';
-import { AdminCountryHandlers, AdminCountryServices, AdminCountryModel, ICountryRepository, SequelizeCountryRepository, CountrySagas } from './country';
+import { AdminCountryHandlers, AdminCountryServices, AdminCountryModel, AdminCountryI18nModel, ICountryRepository, SequelizeCountryRepository, CountrySagas } from './country';
 import { AdminResourceHandlers, AdminResourceServices, AdminResourceModel, IResourceRepository, SequelizeResourceRepository, ResourceSagas } from './resource';
 import { AdminAttachmentFamilyHandlers, AdminAttachmentFamilyServices, AdminAttachmentFamilyModel, IAttachmentFamilyRepository, SequelizeAttachmentFamilyRepository, AttachmentFamilySagas, AdminAttachmentFamiliesResourcesModel } from './attachment-family';
 import { AdminAttachmentHandlers, AdminAttachmentServices, AdminAttachmentModel, IAttachmentRepository, SequelizeAttachmentRepository, AttachmentSagas } from './attachment';
@@ -33,6 +33,7 @@ export const AdminServices = [
 export const AdminModels = [
     AdminLangModel,
     AdminCountryModel,
+    AdminCountryI18nModel,
     AdminResourceModel,
     AdminAttachmentFamilyModel,
     AdminAttachmentFamiliesResourcesModel,
