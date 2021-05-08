@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "a89fa72f-c643-49a9-af5c-c1575d92ef85",
+		"_postman_id"   : "9dbc6268-89a8-421a-b36a-a9e1da504d0f",
 		"name"          : "@hades - admin/resource",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -14,7 +14,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminCreateResourceInput!)\n{\n\tadminCreateResource (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\", \n\t\t\"boundedContextId\": \"bad7c561-2b50-4f78-9530-b52e21114d64\", \n\t\t\"attachmentFamilyIds\": [], \n\t\t\"name\": \"58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\", \n\t\t\"boundedContextId\": \"1c9208e5-1faf-44b1-825c-abbf770e5fcf\", \n\t\t\"attachmentFamilyIds\": [], \n\t\t\"name\": \"58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}\n}"
 					}
 				},
 				"url": {
@@ -86,7 +86,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:QueryStatement)\n{\n\tadminGetResources (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\"\n\t\t}\n\t}\n}"
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -110,7 +110,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:QueryStatement)\n{\n\tadminFindResource (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\"\n\t\t}\n\t}\n}"
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -134,7 +134,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($id:ID)\n{\n\tadminFindResourceById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\"\n}"
+						"variables": "{\n\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\"\n}"
 					}
 				},
 				"url": {
@@ -158,7 +158,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminUpdateResourceInput!)\n{\n\tadminUpdateResource (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\", \n\t\t\"boundedContextId\": \"bad7c561-2b50-4f78-9530-b52e21114d64\", \n\t\t\"attachmentFamilyIds\": [], \n\t\t\"name\": \"d57ntwhny3s0bnapjoos8frefkqbotdfp9ncpll5qs9qj63bfh3v70ihmea40d1e9e5hp4ubifqfz7bkze5v437wo6fqhnol3143ocw8eaf98djdg7utfpo244znyyfxyp19q31nmvagmoz9oa8x7ahqviwcr4yiol60x2amfqwvagtj1mdnmnv9j01hr00iy26r0ygdulwidd72t6wfq5ws3ry0iooio5zd5xmu8fmgf88ex0fs0x69raky2k0\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\", \n\t\t\"boundedContextId\": \"1c9208e5-1faf-44b1-825c-abbf770e5fcf\", \n\t\t\"attachmentFamilyIds\": [], \n\t\t\"name\": \"d57ntwhny3s0bnapjoos8frefkqbotdfp9ncpll5qs9qj63bfh3v70ihmea40d1e9e5hp4ubifqfz7bkze5v437wo6fqhnol3143ocw8eaf98djdg7utfpo244znyyfxyp19q31nmvagmoz9oa8x7ahqviwcr4yiol60x2amfqwvagtj1mdnmnv9j01hr00iy26r0ygdulwidd72t6wfq5ws3ry0iooio5zd5xmu8fmgf88ex0fs0x69raky2k0\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}\n}"
 					}
 				},
 				"url": {
@@ -182,7 +182,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($id:ID!)\n{\n\tadminDeleteResourceById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\"\n}"
+						"variables": "{\n\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\"\n}"
 					}
 				},
 				"url": {
@@ -235,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\", \n\t\"boundedContextId\": \"bad7c561-2b50-4f78-9530-b52e21114d64\", \n\t\"attachmentFamilyIds\": [], \n\t\"name\": \"eyc58ezpgxg8ncfzzyjgwwtu6f2ymp1mfd4hkss4dfsmyrjq1q2ben97svn2mbg5hlt1wf6cqwk3h5reze1hikf3n44eyjowx0f6qxo6x2aiotuyn369wss6g0s7654ze36004yeidszrf8jja7wjmzf4jeotqkpdo3qrw5nbpyxfh9linkm0w18q3iuiiw0dv38tsnef5e95cbuuh6ozh01zuaxpw6wuk6l8pvr3x9ps7mfrwwuomfhkmn4lp8\", \n\t\"hasCustomFields\": true, \n\t\"hasAttachments\": true\n}",
+					"raw"   : "{\n\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\", \n\t\"boundedContextId\": \"1c9208e5-1faf-44b1-825c-abbf770e5fcf\", \n\t\"attachmentFamilyIds\": [], \n\t\"name\": \"eyc58ezpgxg8ncfzzyjgwwtu6f2ymp1mfd4hkss4dfsmyrjq1q2ben97svn2mbg5hlt1wf6cqwk3h5reze1hikf3n44eyjowx0f6qxo6x2aiotuyn369wss6g0s7654ze36004yeidszrf8jja7wjmzf4jeotqkpdo3qrw5nbpyxfh9linkm0w18q3iuiiw0dv38tsnef5e95cbuuh6ozh01zuaxpw6wuk6l8pvr3x9ps7mfrwwuomfhkmn4lp8\", \n\t\"hasCustomFields\": true, \n\t\"hasAttachments\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -344,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -426,14 +426,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/resource/b19356e5-0795-404f-9866-a12cdfea51af",
+					"raw": "{{URL}}/admin/resource/ea526407-70bf-4bc8-b67b-feef56972193",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"resource",
-						"b19356e5-0795-404f-9866-a12cdfea51af"
+						"ea526407-70bf-4bc8-b67b-feef56972193"
 					]
 				}
 			},
@@ -453,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"b19356e5-0795-404f-9866-a12cdfea51af\", \n\t\"boundedContextId\": \"bad7c561-2b50-4f78-9530-b52e21114d64\", \n\t\"attachmentFamilyIds\": [], \n\t\"name\": \"96axs61ckduo9hr8viqy78yrtlrtc1nu0mya363l5z1bzjv457h3dsftu52qo9iqetpnj83hle2gl5uesk6fm8o2b09pi8fllput2py0pg8vp89uiomfjpnwxafwz9gsvst2yjwd53m5ov62b1uy6apwdrxzb8ayt8aify980udebksc5v02bws4vcdagi3e1v3y6p45bbqngw5jxs4j197o0la1d7ll5enkmra9sp8mdiy39fxxr3x0m9e5nuh\", \n\t\"hasCustomFields\": false, \n\t\"hasAttachments\": true\n}",
+					"raw"   : "{\n\t\"id\": \"ea526407-70bf-4bc8-b67b-feef56972193\", \n\t\"boundedContextId\": \"1c9208e5-1faf-44b1-825c-abbf770e5fcf\", \n\t\"attachmentFamilyIds\": [], \n\t\"name\": \"96axs61ckduo9hr8viqy78yrtlrtc1nu0mya363l5z1bzjv457h3dsftu52qo9iqetpnj83hle2gl5uesk6fm8o2b09pi8fllput2py0pg8vp89uiomfjpnwxafwz9gsvst2yjwd53m5ov62b1uy6apwdrxzb8ayt8aify980udebksc5v02bws4vcdagi3e1v3y6p45bbqngw5jxs4j197o0la1d7ll5enkmra9sp8mdiy39fxxr3x0m9e5nuh\", \n\t\"hasCustomFields\": false, \n\t\"hasAttachments\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -495,14 +495,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/resource/b19356e5-0795-404f-9866-a12cdfea51af",
+					"raw": "{{URL}}/admin/resource/ea526407-70bf-4bc8-b67b-feef56972193",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"resource",
-						"b19356e5-0795-404f-9866-a12cdfea51af"
+						"ea526407-70bf-4bc8-b67b-feef56972193"
 					]
 				}
 			},
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "4a89d65d-ba10-4982-9537-cefc8179e14c",
+			"id": "787a6447-ea2d-4a3b-90c6-856863ce824d",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

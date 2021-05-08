@@ -29,6 +29,11 @@ aggregateProperties:
     type: char
     length: 5
     nullable: false
+  - name: custom_code
+    type: varchar
+    maxLength: 10
+    nullable: true
+    index: index
   - name: dir
     type: enum
     enumOptions:

@@ -1,5 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table({ modelName: 'AdminLang', freezeTableName: true, timestamps: false })
@@ -47,6 +46,14 @@ export class AdminLangModel extends Model<AdminLangModel>
         type: DataTypes.CHAR(5),
     })
     ietf: string;
+
+    @Index
+    @Column({
+        field: 'customCode',
+        allowNull: true,
+        type: DataTypes.STRING(10),
+    })
+    customCode: string;
 
     @Column({
         field: 'dir',

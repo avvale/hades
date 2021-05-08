@@ -10,6 +10,7 @@ export class CreateLangCommand
             iso6392: string,
             iso6393: string,
             ietf: string,
+            customCode?: string,
             dir: string,
             sort?: number,
             isActive: boolean,

@@ -40,6 +40,12 @@ export class UpdateLangDto
 
     @ApiProperty({
         type        : String,
+        description : 'customCode [input here api field description]',
+    })
+    customCode: string;
+
+    @ApiProperty({
+        type        : String,
         enum        : ['LTR','RTL'],
         description : 'dir [input here api field description]',
     })

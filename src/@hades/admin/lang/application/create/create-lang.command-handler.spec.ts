@@ -47,6 +47,7 @@ describe('CreateLangCommandHandler', () =>
                         iso6392: langs[0].iso6392,
                         iso6393: langs[0].iso6393,
                         ietf: langs[0].ietf,
+                        customCode: langs[0].customCode,
                         dir: langs[0].dir,
                         sort: langs[0].sort,
                         isActive: langs[0].isActive,

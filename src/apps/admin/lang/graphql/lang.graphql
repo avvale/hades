@@ -11,6 +11,7 @@ type AdminLang
     iso6392: GraphQLString!
     iso6393: GraphQLString!
     ietf: GraphQLString!
+    customCode: GraphQLString
     dir: AdminLangDir!
     sort: GraphQLInt
     isActive: GraphQLBoolean!
@@ -27,6 +28,7 @@ input AdminCreateLangInput
     iso6392: GraphQLString!
     iso6393: GraphQLString!
     ietf: GraphQLString!
+    customCode: GraphQLString
     dir: AdminLangDir!
     sort: GraphQLInt
     isActive: GraphQLBoolean!
@@ -40,6 +42,7 @@ input AdminUpdateLangInput
     iso6392: GraphQLString
     iso6393: GraphQLString
     ietf: GraphQLString
+    customCode: GraphQLString
     dir: AdminLangDir
     sort: GraphQLInt
     isActive: GraphQLBoolean
