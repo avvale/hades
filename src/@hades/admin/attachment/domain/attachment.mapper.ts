@@ -4,8 +4,6 @@ import { AdminAttachment } from './attachment.aggregate';
 import { AttachmentResponse } from './attachment.response';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -85,8 +83,6 @@ export class AttachmentMapper implements IMapper
     {
         return AdminAttachment.register(
             new AttachmentId(attachment.id),
-            new AttachmentCommonId(attachment.commonId),
-            new AttachmentLangId(attachment.langId),
             new AttachmentAttachableModel(attachment.attachableModel),
             new AttachmentAttachableId(attachment.attachableId),
             new AttachmentFamilyId(attachment.familyId),
@@ -121,8 +117,6 @@ export class AttachmentMapper implements IMapper
 
         return new AttachmentResponse(
             attachment.id.value,
-            attachment.commonId.value,
-            attachment.langId.value,
             attachment.attachableModel.value,
             attachment.attachableId.value,
             attachment.familyId.value,

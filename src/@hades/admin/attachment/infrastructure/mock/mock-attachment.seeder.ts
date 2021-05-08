@@ -2,8 +2,6 @@ import { Injectable} from '@nestjs/common';
 import { MockSeeder } from '@hades/shared/infrastructure/persistence/mock/mock.seeder';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -51,8 +49,6 @@ export class MockAttachmentSeeder extends MockSeeder<AdminAttachment>
             this.collectionSource.push(
                 AdminAttachment.register(
                     new AttachmentId(attachment.id),
-                    new AttachmentCommonId(attachment.commonId),
-                    new AttachmentLangId(attachment.langId),
                     new AttachmentAttachableModel(attachment.attachableModel),
                     new AttachmentAttachableId(attachment.attachableId),
                     new AttachmentFamilyId(attachment.familyId),

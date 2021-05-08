@@ -3,8 +3,6 @@ import { CreateCountriesCommand } from './create-countries.command';
 import { CreateCountriesService } from './create-countries.service';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -42,8 +40,6 @@ export class CreateCountriesCommandHandler implements ICommandHandler<CreateCoun
                 .map(country => {
                     return {
                         id: new CountryId(country.id),
-                        commonId: new CountryCommonId(country.commonId),
-                        langId: new CountryLangId(country.langId),
                         iso3166Alpha2: new CountryIso3166Alpha2(country.iso3166Alpha2),
                         iso3166Alpha3: new CountryIso3166Alpha3(country.iso3166Alpha3),
                         iso3166Numeric: new CountryIso3166Numeric(country.iso3166Numeric),

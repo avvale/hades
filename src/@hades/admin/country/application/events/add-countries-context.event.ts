@@ -25,8 +25,6 @@ export class AddCountriesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(country =>
                     new CreatedCountryEvent(
                         country.id.value,
-                        country.commonId.value,
-                        country.langId.value,
                         country.iso3166Alpha2.value,
                         country.iso3166Alpha3.value,
                         country.iso3166Numeric.value,
@@ -60,8 +58,6 @@ export class AddCountriesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(country =>
                     new DeletedCountryEvent(
                         country.id.value,
-                        country.commonId.value,
-                        country.langId.value,
                         country.iso3166Alpha2.value,
                         country.iso3166Alpha3.value,
                         country.iso3166Numeric.value,

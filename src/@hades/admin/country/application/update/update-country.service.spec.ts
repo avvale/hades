@@ -6,8 +6,6 @@ import { countries } from '@hades/admin/country/infrastructure/seeds/country.see
 import { UpdateCountryService } from './update-country.service';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -73,8 +71,6 @@ describe('UpdateCountryService', () =>
             expect(await service.main(
                 {
                     id: new CountryId(countries[0].id),
-                    commonId: new CountryCommonId(countries[0].commonId),
-                    langId: new CountryLangId(countries[0].langId),
                     iso3166Alpha2: new CountryIso3166Alpha2(countries[0].iso3166Alpha2),
                     iso3166Alpha3: new CountryIso3166Alpha3(countries[0].iso3166Alpha3),
                     iso3166Numeric: new CountryIso3166Numeric(countries[0].iso3166Numeric),

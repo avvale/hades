@@ -18,7 +18,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: AdminCountry
     relationshipModulePath: admin/country
-    relationshipKey: common_id
+    relationshipKey: id
     relationshipField: country
   - name: code
     type: varchar

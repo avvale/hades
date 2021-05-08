@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -43,8 +41,6 @@ export class CreateAttachmentsService
     public async main(
         attachments: {
             id: AttachmentId,
-            commonId: AttachmentCommonId,
-            langId: AttachmentLangId,
             attachableModel: AttachmentAttachableModel,
             attachableId: AttachmentAttachableId,
             familyId: AttachmentFamilyId,
@@ -71,8 +67,6 @@ export class CreateAttachmentsService
         // create aggregate with factory pattern
         const aggregateAttachments = attachments.map(attachment => AdminAttachment.register(
             attachment.id,
-            attachment.commonId,
-            attachment.langId,
             attachment.attachableModel,
             attachment.attachableId,
             attachment.familyId,

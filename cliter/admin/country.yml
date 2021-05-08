@@ -11,20 +11,6 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
-  - name: common_id
-    type: id
-    length: 36
-    nullable: false
-    index: index
-  - name: lang_id
-    type: id
-    length: 36
-    nullable: false
-    relationship: many-to-one
-    relationshipAggregate: AdminLang
-    relationshipModulePath: admin/lang
-    relationshipKey: id
-    relationshipField: lang
   - name: iso_3166_alpha_2
     type: char
     length: 2

@@ -1,11 +1,8 @@
-import { LangResponse } from '@hades/admin/lang/domain/lang.response';
 
 export class CountryResponse
 {
     constructor(
         public readonly id: string,
-        public readonly commonId: string,
-        public readonly langId: string,
         public readonly iso3166Alpha2: string,
         public readonly iso3166Alpha3: string,
         public readonly iso3166Numeric: string,
@@ -26,6 +23,5 @@ export class CountryResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        public readonly lang: LangResponse,
     ) {}
 }

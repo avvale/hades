@@ -1,8 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -27,13 +25,10 @@ import {
 import { CreatedCountryEvent } from './../application/events/created-country.event';
 import { UpdatedCountryEvent } from './../application/events/updated-country.event';
 import { DeletedCountryEvent } from './../application/events/deleted-country.event';
-import { AdminLang } from '@hades/admin/lang/domain/lang.aggregate';
 
 export class AdminCountry extends AggregateRoot
 {
     id: CountryId;
-    commonId: CountryCommonId;
-    langId: CountryLangId;
     iso3166Alpha2: CountryIso3166Alpha2;
     iso3166Alpha3: CountryIso3166Alpha3;
     iso3166Numeric: CountryIso3166Numeric;
@@ -56,12 +51,9 @@ export class AdminCountry extends AggregateRoot
     deletedAt: CountryDeletedAt;
 
     // eager relationship
-    lang: AdminLang;
 
     constructor(
         id: CountryId,
-        commonId: CountryCommonId,
-        langId: CountryLangId,
         iso3166Alpha2: CountryIso3166Alpha2,
         iso3166Alpha3: CountryIso3166Alpha3,
         iso3166Numeric: CountryIso3166Numeric,
@@ -82,14 +74,11 @@ export class AdminCountry extends AggregateRoot
         createdAt: CountryCreatedAt,
         updatedAt: CountryUpdatedAt,
         deletedAt: CountryDeletedAt,
-        lang?: AdminLang,
     )
     {
         super();
 
         this.id = id;
-        this.commonId = commonId;
-        this.langId = langId;
         this.iso3166Alpha2 = iso3166Alpha2;
         this.iso3166Alpha3 = iso3166Alpha3;
         this.iso3166Numeric = iso3166Numeric;
@@ -112,13 +101,10 @@ export class AdminCountry extends AggregateRoot
         this.deletedAt = deletedAt;
 
         // eager relationship
-        this.lang = lang;
     }
 
     static register (
         id: CountryId,
-        commonId: CountryCommonId,
-        langId: CountryLangId,
         iso3166Alpha2: CountryIso3166Alpha2,
         iso3166Alpha3: CountryIso3166Alpha3,
         iso3166Numeric: CountryIso3166Numeric,
@@ -139,13 +125,10 @@ export class AdminCountry extends AggregateRoot
         createdAt: CountryCreatedAt,
         updatedAt: CountryUpdatedAt,
         deletedAt: CountryDeletedAt,
-        lang?: AdminLang,
     ): AdminCountry
     {
         return new AdminCountry(
             id,
-            commonId,
-            langId,
             iso3166Alpha2,
             iso3166Alpha3,
             iso3166Numeric,
@@ -166,7 +149,6 @@ export class AdminCountry extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-            lang,
         );
     }
 
@@ -175,8 +157,6 @@ export class AdminCountry extends AggregateRoot
         this.apply(
             new CreatedCountryEvent(
                 country.id.value,
-                country.commonId.value,
-                country.langId.value,
                 country.iso3166Alpha2.value,
                 country.iso3166Alpha3.value,
                 country.iso3166Numeric.value,
@@ -206,8 +186,6 @@ export class AdminCountry extends AggregateRoot
         this.apply(
             new UpdatedCountryEvent(
                 country.id.value,
-                country.commonId?.value,
-                country.langId?.value,
                 country.iso3166Alpha2?.value,
                 country.iso3166Alpha3?.value,
                 country.iso3166Numeric?.value,
@@ -237,8 +215,6 @@ export class AdminCountry extends AggregateRoot
         this.apply(
             new DeletedCountryEvent(
                 country.id.value,
-                country.commonId.value,
-                country.langId.value,
                 country.iso3166Alpha2.value,
                 country.iso3166Alpha3.value,
                 country.iso3166Numeric.value,
@@ -267,8 +243,6 @@ export class AdminCountry extends AggregateRoot
     {
         return {
             id: this.id.value,
-            commonId: this.commonId.value,
-            langId: this.langId.value,
             iso3166Alpha2: this.iso3166Alpha2.value,
             iso3166Alpha3: this.iso3166Alpha3.value,
             iso3166Numeric: this.iso3166Numeric.value,
@@ -291,7 +265,6 @@ export class AdminCountry extends AggregateRoot
             deletedAt: this.deletedAt?.value,
 
             // eager relationship
-            lang: this.lang?.toDTO(),
         }
     }
 }

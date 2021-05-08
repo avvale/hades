@@ -21,7 +21,7 @@ export class AdminAdministrativeAreaLevel2Model extends Model<AdminAdministrativ
         allowNull: false,
         type: DataTypes.UUID,
         references: {
-            key: 'common_id'
+            key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',

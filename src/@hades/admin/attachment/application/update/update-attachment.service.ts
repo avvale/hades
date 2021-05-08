@@ -4,8 +4,6 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -44,8 +42,6 @@ export class UpdateAttachmentService
     public async main(
         payload: {
             id: AttachmentId,
-            commonId?: AttachmentCommonId,
-            langId?: AttachmentLangId,
             attachableModel?: AttachmentAttachableModel,
             attachableId?: AttachmentAttachableId,
             familyId?: AttachmentFamilyId,
@@ -74,8 +70,6 @@ export class UpdateAttachmentService
         // create aggregate with factory pattern
         const attachment = AdminAttachment.register(
             payload.id,
-            payload.commonId,
-            payload.langId,
             payload.attachableModel,
             payload.attachableId,
             payload.familyId,

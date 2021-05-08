@@ -3,8 +3,6 @@ import { CreateCountryCommand } from './create-country.command';
 import { CreateCountryService } from './create-country.service';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -40,8 +38,6 @@ export class CreateCountryCommandHandler implements ICommandHandler<CreateCountr
         await this.createCountryService.main(
             {
                 id: new CountryId(command.payload.id),
-                commonId: new CountryCommonId(command.payload.commonId),
-                langId: new CountryLangId(command.payload.langId),
                 iso3166Alpha2: new CountryIso3166Alpha2(command.payload.iso3166Alpha2),
                 iso3166Alpha3: new CountryIso3166Alpha3(command.payload.iso3166Alpha3),
                 iso3166Numeric: new CountryIso3166Numeric(command.payload.iso3166Numeric),

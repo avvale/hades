@@ -42,8 +42,6 @@ describe('CreateCountryCommandHandler', () =>
                 new CreateCountryCommand(
                     {
                         id: countries[0].id,
-                        commonId: countries[0].commonId,
-                        langId: countries[0].langId,
                         iso3166Alpha2: countries[0].iso3166Alpha2,
                         iso3166Alpha3: countries[0].iso3166Alpha3,
                         iso3166Numeric: countries[0].iso3166Numeric,

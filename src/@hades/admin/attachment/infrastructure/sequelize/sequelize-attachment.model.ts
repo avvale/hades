@@ -1,5 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminAttachmentFamilyModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-family.model';
 import { AdminAttachmentLibraryModel } from '@hades/admin/attachment-library/infrastructure/sequelize/sequelize-attachment-library.model';
@@ -16,27 +15,13 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     id: string;
 
     @Column({
-        field: 'commonId',
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    commonId: string;
-
-    @Column({
-        field: 'langId',
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    langId: string;
-
-    @Column({
         field: 'attachableModel',
         allowNull: false,
         type: DataTypes.STRING(75),
     })
     attachableModel: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
         field: 'attachableId',
         allowNull: false,
