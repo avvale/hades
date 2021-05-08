@@ -2,8 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IApplicationRepository } from '@hades/o-auth/application/domain/application.repository';
-import { MockApplicationRepository } from '@hades/o-auth/application/infrastructure/mock/mock-application.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { MockApplicationSeeder } from '@hades/o-auth/application/infrastructure/mock/mock-application.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { OAuthModule } from './../../../src/apps/o-auth/o-auth.module';
 import * as request from 'supertest';
@@ -14,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 
@@ -22,7 +22,8 @@ const importForeignModules = [];
 describe('application', () =>
 {
     let app: INestApplication;
-    let repository: MockApplicationRepository;
+    let repository: IApplicationRepository;
+    let seeder: MockApplicationSeeder;
     let testJwt: string;
 
     beforeAll(async () =>
@@ -33,11 +34,12 @@ describe('application', () =>
                     OAuthModule,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
                     }),
                     JwtModule.register({
                         privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
@@ -48,11 +50,10 @@ describe('application', () =>
                     }),
                 ],
                 providers: [
+                    MockApplicationSeeder,
                     TestingJwtService,
                 ]
             })
-            .overrideProvider(IApplicationRepository)
-            .useClass(MockApplicationRepository)
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
             .overrideGuard(AuthorizationGuard)
@@ -60,20 +61,14 @@ describe('application', () =>
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockApplicationRepository>module.get<IApplicationRepository>(IApplicationRepository);
-        testJwt     =  module.get(TestingJwtService).getJwt();
+        repository  = module.get<IApplicationRepository>(IApplicationRepository);
+        seeder      = module.get<MockApplicationSeeder>(MockApplicationSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
-    });
-
-    test(`/REST:POST o-auth/application - Got 409 Conflict, item already exist in database`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/application')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send(repository.collectionResponse[0])
-            .expect(409);
     });
 
     test(`/REST:POST o-auth/application - Got 400 Conflict, ApplicationId property can not to be null`, () =>
@@ -371,21 +366,14 @@ describe('application', () =>
             });
     });
 
-    test(`/REST:POST o-auth/application`, () =>
+    test(`/REST:POST o-auth/application - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
-                secret: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44',
-                isMaster: false,
-                clientIds: [],
-            })
-            .expect(201);
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
     test(`/REST:GET o-auth/applications/paginate`, () =>
@@ -403,10 +391,20 @@ describe('application', () =>
             })
             .expect(200)
             .expect({
-                total   : repository.collectionResponse.length,
-                count   : repository.collectionResponse.length,
-                rows    : repository.collectionResponse.slice(0, 5)
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
+    });
+
+    test(`/REST:GET o-auth/applications`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/applications')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .expect(seeder.collectionResponse);
     });
 
     test(`/REST:GET o-auth/application - Got 404 Not Found`, () =>
@@ -420,11 +418,28 @@ describe('application', () =>
                 {
                     where:
                     {
-                        id: '2c12dd6c-8ed4-48c1-9d0e-a1e73fdfca2e'
+                        id: 'd862fabf-cc7a-465d-add9-ca925953b63a'
                     }
                 }
             })
             .expect(404);
+    });
+
+    test(`/REST:POST o-auth/application`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/application')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                secret: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44',
+                isMaster: false,
+                clientIds: [],
+            })
+            .expect(201);
     });
 
     test(`/REST:GET o-auth/application`, () =>
@@ -443,13 +458,15 @@ describe('application', () =>
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:GET o-auth/application/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/394a15d0-3585-48b1-b84c-95865652e34c')
+            .get('/o-auth/application/200499b9-01ef-449c-8bee-86b4dbf24d99')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -462,17 +479,9 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
-    });
-
-    test(`/REST:GET o-auth/applications`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/applications')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .expect(200)
-            .expect(repository.collectionResponse);
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:PUT o-auth/application - Got 404 Not Found`, () =>
@@ -507,13 +516,15 @@ describe('application', () =>
                 clientIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE o-auth/application/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/41934ad1-7bc3-4ac5-8bfa-f8764ee422cb')
+            .delete('/o-auth/application/ea7fd2d5-a4a1-4fe3-8408-cc3eaceef5f5')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -550,7 +561,7 @@ describe('application', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -558,43 +569,6 @@ describe('application', () =>
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
-            });
-    });
-
-    test(`/GraphQL oAuthCreateApplication`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    mutation ($payload:OAuthCreateApplicationInput!)
-                    {
-                        oAuthCreateApplication (payload:$payload)
-                        {
-                            id
-                            name
-                            code
-                            secret
-                            isMaster
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '18d4f1fb-5182-429a-8f35-bb39facb2962',
-                        name: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio',
-                        code: 'cdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4k',
-                        secret: 'je3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af',
-                        isMaster: false,
-                        clientIds: [],
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthCreateApplication).toHaveProperty('id', '18d4f1fb-5182-429a-8f35-bb39facb2962');
             });
     });
 
@@ -627,9 +601,79 @@ describe('application', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthPaginateApplications.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.oAuthPaginateApplications.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.oAuthPaginateApplications.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.oAuthPaginateApplications.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.oAuthPaginateApplications.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.oAuthPaginateApplications.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+            });
+    });
+
+    test(`/GraphQL oAuthGetApplications`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        oAuthGetApplications (query:$query)
+                        {
+                            id
+                            name
+                            code
+                            secret
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {}
+            })
+            .expect(200)
+            .then(res => {
+                for (const [index, value] of res.body.data.oAuthGetApplications.entries())
+                {
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                }
+            });
+    });
+
+    test(`/GraphQL oAuthCreateApplication`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:OAuthCreateApplicationInput!)
+                    {
+                        oAuthCreateApplication (payload:$payload)
+                        {
+                            id
+                            name
+                            code
+                            secret
+                            isMaster
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        secret: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44',
+                        isMaster: false,
+                        clientIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthCreateApplication).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -661,7 +705,7 @@ describe('application', () =>
                     {
                         where:
                         {
-                            id: 'ebfa683c-cce9-4fac-a879-b3b642ec262c'
+                            id: '5f487222-dd6f-46d2-91b8-17529689b8b6'
                         }
                     }
                 }
@@ -736,7 +780,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '4316ac00-f968-4e4d-9662-0e6fac4f6154'
+                    id: '5cb352e5-4b40-428d-b03f-f22952afb964'
                 }
             })
             .expect(200)
@@ -776,39 +820,6 @@ describe('application', () =>
             .expect(200)
             .then(res => {
                 expect(res.body.data.oAuthFindApplicationById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
-            });
-    });
-
-    test(`/GraphQL oAuthGetApplications`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        oAuthGetApplications (query:$query)
-                        {
-                            id
-                            name
-                            code
-                            secret
-                            isMaster
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {}
-            })
-            .expect(200)
-            .then(res => {
-                for (const [index, value] of res.body.data.oAuthGetApplications.entries())
-                {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
-                }
             });
     });
 
@@ -915,7 +926,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'd0612bab-d2b6-41f7-9b47-c4f29338617b'
+                    id: '53f5bd3f-bc88-4b0e-91ff-80ebd7e6d94d'
                 }
             })
             .expect(200)
