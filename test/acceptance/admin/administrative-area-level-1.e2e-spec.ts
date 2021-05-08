@@ -81,14 +81,14 @@ describe('administrative-area-level-1', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                countryId: '58c2307a-1a8f-4ee8-aa20-ee59f4f5b3bc',
-                code: 'rroo8v11',
-                customCode: '9ei2yj969z',
-                name: 'zc8hddf32g11bcb56kbby9geczzp7t2yngdaygfs665oql5xiz7ha573fnpg997fbuceczgp2jvzy2xnsbpwm1absedvmo3jlv16kbnjokfx6d3zl9q5jv8h13nbytrd9m1w4ky7xp13i6w8iicncfm5x3gqiuidts7a45iaoyz0puyw2roqs5un626z7jvsnpv2p2kk3ck1xkrcomcbk4b1ienvec6r6azr40kkui4ym6dyem2ujx32wuoxff0',
-                slug: 'blztf9iz2zsrbbx0hjrfhehtekrjf6iqfvn0xdqgvopv97mhigu82bndyxkcsy4lei2caipn0n7ss16r2xu13zhrh0jhh2szh2h8mdk4qjkzh5qo7ct7sxjeqsctwdjviwwv2wr2rd4gec03fj069sb87grzr4nz4ko5bpfibuscxtda0xs7gmtww6n3h0n20uj6xbw2mld195p8baihtzoj54qftkmub72no0ra8v0lkh67xm3aize64p16xff',
-                latitude: 72927433324906400,
-                longitude: 67604616496678010,
-                zoom: 48,
+                countryId: '07618209-ee91-4ea5-a710-11204e49aff0',
+                code: 'r6y8pvxb',
+                customCode: 'wkw2xnxryr',
+                name: 'ukl4rt8aegu8kc7sbh4chkjkey6pmlng2jvftc4qgleamr4ajothkrebm2bg5bgdm1246bmfyvtat8rftgrtvgdttbu0bp6w8yxetu9llaizfixbhs94lvej9ochp457oppsug66gx0l48pbmmi4r7i60ebrcefwzyud3icmefhad8z1bj04zyxv5uwu5m4rbq9m5c8m1o3yg43rox1x6z5dnmmnqqp7smwhlwfwh1w3tczoc865ixsqrjklmw2',
+                slug: '7o16lim877qn0sdg8ljbt241iou9eoegny0qqjpketj2hw0juz182vefkxg36cu5kym474fw2k0e4kljh16v7sd4f346zj2wr007dyhh52wu6g59jmwum0ts3qu702yrtn5h0k19jigkfyxs3kqj3e8joccexan9qdem8gvr397i4whcnq8zyim8x7t24kwrlyiwzwrcwmk3qh5d6thmi82p5bn0lpaa53qvgs7tj9uiqlmfo8rpcj19c41kyt0',
+                latitude: 81831461605759550,
+                longitude: 33150369432421316,
+                zoom: 50,
             })
             .expect(400)
             .then(res => {
@@ -103,15 +103,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '3d6b0bac-b4c1-4d92-a46c-3387a71383fc',
+                id: '44be948e-7365-49a3-84b7-f72082fe1057',
                 countryId: null,
-                code: '2uok71i9',
-                customCode: 'xn0p6xj3cj',
-                name: 'um6ielsnwef57skvxh7qs7a4f8efhud9lzrbh285b4km9l2s7qxtzvo4szulkzn839g4mh0ndcxfsmw6enwvj4jnhr163ptxouyednok3khh2sc58xkaohz2fnp1klg372dqzx81rs3sus5gnbvipoq2r5qdbnusgkspdebc6441smh6o7oqdewus80tzfhwc5swf3cc4zxc6brh9yudn03a59v2p403vgmfpgcjy4bgte94m58pmgubdutwedy',
-                slug: 'crjvukfbqcttdmd29rpevvcuqq642nezlugnhq11hte0byr9cuk7n3il74afbkaa11vgwvoa7v8yhlqsvgka2613pmdhavawlvuigeygb81zvnjmj2qz4xtqjs78z9dm4ac8wuadfmkif7rsegqlmwdc0kjj233bvyh059z8r4v7e47fxgrbysmpdathpd3wowhqe4udsyadp9puahi754ys3wzb03tuv7uaf25zgkybkdt9z2ku714etdibx7u',
-                latitude: 87575440052113820,
-                longitude: 75908720968755170,
-                zoom: 64,
+                code: 'g8ducgog',
+                customCode: 'mr94n1hahq',
+                name: 'bqd75yf1uetlovug6kf1pnob9h48r9ao2k6i9k38h6635d1awhapw92y30z3dadrommoyhyqy6h9rq43x9vyrolrhc3j2jzuz7o25v2ekkrf973gk03bwd2wmv2yxw60eqeg2r4z5ukr2caey7kgftil14cqj4uh64ahr76p0dtoo617hyitgucj45q2mnb12c9vabvy5bgkb13nxmdp93fqvemdztxkp0055puydq8ry98p338b0z0hzu5m4op',
+                slug: 'bbypm3vfmbwi3t8kfwh9sf29j6yvm6r2ivlay8ic5vowlbq5b9fcdm4q8oxsxyq3p9xtk7jxjjotznq5d04bhovmq9l7fq7ljns848ug6cmhqr1fsf2xtrnr96emqzqngridnjjh83oe1drkob0opz3c0qxc0r8lcc0aj7lxa7aoayjvkps049mjr6rnbhuhwgnh37tduerd1700rilugltzgheeuhdt2gwbyyhuxp2kxuxdw4izkez4nomag6l',
+                latitude: 77822325872448180,
+                longitude: 68823794982915864,
+                zoom: 17,
             })
             .expect(400)
             .then(res => {
@@ -126,15 +126,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '67924fc7-885d-4b6c-885a-21e9acd88b1b',
-                countryId: '73649557-bf52-4b9a-b633-69d1151265f3',
+                id: '85792472-81bf-4092-b7c0-d59e9387d88c',
+                countryId: '65c73660-e40d-4159-a540-acfd63aa0614',
                 code: null,
-                customCode: 'ruu6ymnt9t',
-                name: 'uuhpq9sdn0dhxr6vu6fo1zebgnelhlzl90dz1bq0m1h6s2q85khu3twty0uvmdogwsc92a86ex21dm7o0j2aq2r55w7withbdslno1yczzw2m4fxvtz7g8r1v6wpobg1a0qkjof8oqbaofipy538wumr7uo494pdrhgyrahk02dqf4mv0lqf5uz4jkicgqw6x04fjrvqfdznmzx8k5x9f8qmsr0nq8zy8r40r5vc8hx7oxms9qjwx2l9s5bzxlj',
-                slug: 'lvqxy17kelvlg76m877lcou66pmfv11o6hyryxeemm6coqqrshvw23p7eio8jxb5mk8fgbpxdho1p0ibcaaxz09o9wlo1za8fbgw56kogc54jl3kdy9e2oyyiph7okcln85uk4lm78lionr7445hqgorcp67eaj4xl7p76b67a8ahfgf818soh2mzn9yb2cm7h8tb7nbszt2cxw9y3c8da2xyjk3cqttry124l4cr0vc0axjqbbslphpmcs99cj',
-                latitude: 42468413556029310,
-                longitude: 79068663256583470,
-                zoom: 32,
+                customCode: '84sbtip7s5',
+                name: 'u9mfehxju54f4xcjsrtmxt5g9qn2tkua79d6gmpstlq5zl1mbslztgk1zf4edgrxzrwvogntfuziubed9m2gfavjezaousfbsshygd4vdnttk0po1xyk1agmawa8hdt8xwvbeqhyrl1kali4c9w1uyivd02o9mfheizswquvub6fu47u4m8qsj02nto73toireu3kl6qaafu177limh9s78qeznita0um5qtw1zqu6045gwci627c6i6b1mfs16',
+                slug: 'bvktym7xhrtljc08yz5wgg6skbdqqw2k1gpbrx7palb0yz2zcky5yp9vh8sotv6r61utsr2eyvry1fzdrli10eh6pr2fqha8ee6nuf6sipa2z8ipclwtawzr7r7qaamx3b0gyvdyx935nd8gpwhiy70g5r34tkhe8s3ckfintsuxzhpmn8yz0s0y3tiyvbr4ynkxxcqlf8g9x5xeq8il3oa3gs46vm91v6fa0ibj6hytkvvwuaxf80dbixru1nc',
+                latitude: 48980585179921630,
+                longitude: 10799099584100804,
+                zoom: 79,
             })
             .expect(400)
             .then(res => {
@@ -149,15 +149,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '9326c1fc-4c0b-4b6b-b671-214d5b520e51',
-                countryId: '94a4a21f-13aa-4632-a786-bb60b88089c3',
-                code: 'j93t0opn',
-                customCode: '2fnkx7frik',
+                id: '90342048-9980-40ee-8732-da3795359981',
+                countryId: '402abf35-0e83-4a24-854d-b4c0f1489705',
+                code: 'qz6bxilm',
+                customCode: '4u20vbcwn6',
                 name: null,
-                slug: 'f4zy53p57v8nwtp2edb39l4jxdqxk67l0g52zrvt4megs3swnggb3ivfrs70rcqi7t9k8wnlnnnigaxik307jchm5yr22d21tjee8lp0nrx9qo5aoznkszzapneh6p1yd7pybbso75k0s1sdzw1sctez8o9t8ne3paltaaqtwvduc59jjw65919qxukxqr65j005dcgbugtmdrzfuuxfv2ru1fhtv0v5yttcgva2l3cebq994917dnht1ex0ga1',
-                latitude: 32514384856546984,
-                longitude: 98456088132663440,
-                zoom: 76,
+                slug: 'hr9f1zfzd2swg5ulxtlnxyvilihqdwl1gq2ky39x3sb25rhrjzmlyizse39musv789pgjry2flz93k4ivb9bsdibzi05t6jtusgyrvkad06pix979to10ukzzjwl31yxohg0iaw6f02eo3ilwdnafd905sjee379rf5a9j7j9626aq2ieekt1ucbzk9duuu7wfyfllzjzezw2o0a2fksh9j0q10e6n5k28fu844ofvhi3ft9mwvcsr36nozkkpk',
+                latitude: 94037676405690050,
+                longitude: 98689857217148700,
+                zoom: 97,
             })
             .expect(400)
             .then(res => {
@@ -172,15 +172,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '27050875-2814-4d60-bf9e-2429f00df38b',
-                countryId: '73fa10c9-cb5b-4663-9637-1f5d97c85bc5',
-                code: 'tcv9d7g2',
-                customCode: '8jqvdezwzo',
-                name: 'q0yqla1dtiyuo1m1w0s0pr23aym65u54vg03130zfrnz588556h0arcjg4ziv058lstdb6mn6gh71oiwdorn5l88kz5fu59hogggtp0jq03yeuiq0fq93lm1gqj7maehggkko6eczz05sks9x3na82zxh1rdeobooq2gvd26q3fd7hq7md8bqbcd497p9wzn4aybjw9wzgp6gzljp0bi033go8s3gpx9r20va1p1vhonaygtoxtcggqfjd3wffb',
+                id: '07e66c60-ee1b-4dc9-8ed2-1d91f9b75680',
+                countryId: 'b415e0cf-2fbb-4395-a591-77392d69bb94',
+                code: '2oip8ctu',
+                customCode: '0gwqe51r8i',
+                name: 'x0rtd91c8n38epzc9r2y3vskdobkssfkl4bmaqq6sjwzojr1edtqombbsp1zetfgcq3mnm3nzje7laiwy7bcof3vvfsflcjz60nbkocoh889jmekndw4ru4326kql9mac05aj00qvto3d6an2y1luuopy9z7gvmcgnd53tk9dxfpovri6u0yzu4vp60dxes45kskogzxwkpm4ik1d0ifemly0vjqqnischhh4nkx265ikamu0axspzud2ce8b15',
                 slug: null,
-                latitude: 20389100440256970,
-                longitude: 25905602009618196,
-                zoom: 47,
+                latitude: 96353579131015120,
+                longitude: 29781250791004136,
+                zoom: 23,
             })
             .expect(400)
             .then(res => {
@@ -195,14 +195,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                countryId: 'dc3c2a1e-0e5f-4c3f-8459-118caca96a00',
-                code: 'nnzugy8h',
-                customCode: 'uusbi26qt7',
-                name: 'xloli5n4kgabn9eoj6y4rwxjsufzu86in0abj8py04yqqoe9h6w94vyci4kpvz1szypja93uq1hedyz53ry7y1w0yc3fjcg7jpk9fronlkjtg5iqr0967445g73mvsx1h6oagesc4ngka60kp7xldb417hgc3wznzxw458d1dvuuc6uf1y25z0zy7ax3txclhl870lthjo07ui1odv9mk2ptom54cbva3av60as4xnmx2bewnr90onnsf96w4om',
-                slug: 'qo4c8ttqhggclw1fsdumoia2zg7kd3m25rqg47psd1mt9vhhyw8ot9dr1dmsp0fcro1k2hnofm4ywyyam843r6hudjjpmxivaxp2cm19bbn7je22r55y8ol7xxj6ov6w7c4rlr20njdyqcpewhy6kxaxjk5pkoevpysy4v5rxiar6z2kqjw6jrnlutbzs9n4q17b2i3esfurst06mp501evh8ccvaf30ekk42d54ih63fg69a3kdxk0ll3q5fe4',
-                latitude: 82492358425878320,
-                longitude: 88710641047815500,
-                zoom: 58,
+                countryId: '36c08c70-7ba6-4765-83f5-c34dd15109a8',
+                code: '9q1988bu',
+                customCode: 'xx0e8kecf0',
+                name: 'i2co5nnp8mba5uhpsn4dgqia5jn4vrgrqxp8su05gs280vxdy9yxexf89kfufxd2d51nfjn5wf2eniaol0veeouy88mgo5gvqorqhvpsncsc99btm47ofierm9gg9bv5rmuz4501fzwpd2if62f89ohk9vcus4ao4oqaojjfsp71s9j7kccntut6grcjv9h6meigebs14lisfq6y798weakq1mv1rlboc1qsc330otcl5kaphj2tshs4g1d6dom',
+                slug: 'lwcaldsmqg4i520ijctwqgprwg6zofvk8vgqfxea0d4cqdgbud37lgsz14lzg2938q7oixkmzmh2r8s3drb4sm11ubm71a4d8ah4md4nawtyopxxm7k8wfnrpx44wr1fdw73izqwb0juctikx2r8qw7y0dkk3rxdjrkgkomfexqlw8phemnt31vv2lirwgi28410byvav6w66zqmonurf8pjzkbwi3q80skomef0ucsozvsjsb2ajq331951ex5',
+                latitude: 65745696497879896,
+                longitude: 88582301858534350,
+                zoom: 52,
             })
             .expect(400)
             .then(res => {
@@ -217,14 +217,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7cdd81ec-10af-48f8-861c-7d66f39bf4af',
-                code: 'lbkaxeln',
-                customCode: 't6af27k56h',
-                name: 'qd726iqv4whfj5dbvxfltejxg8k69204w36nox5ntpw1pfa52c522xwh7pzjzff0o8pdhhhsmnfe3p0zefy7ecm8xwd4kk2jxie1fsbunsqspgit728670m1fcqo0j19t5rtquyd5nur48a6aon6zd8gidktsgxb7crlnmud79ua0glr6dslxjrmvkglzugwbujxng69b08csv8dwv72xkmjwj5ftykdam2dt7b4yegymcbfialbgdg61xglgi2',
-                slug: 'uqnbp8fz1pjd2lfimuivfmk5tib3vafw96r6oufb2wiwg9uy2lbaa5gqjxsko2tumfren7vbul7jiu8m2m45ku9r7e8d8ykna5ubuzbcbuyn1qdrar19i41ocbrsef8z691czrdvbnuqllefvwguw89v32navm9hno7ihz6tpm0zupzwcg6aaxauu34nb3owm5jl1ajz3ydp8hna10nlzllukojwqyj2hhvnln14cpmiwzwwn7587ls8uqpdgpe',
-                latitude: 75958565851222300,
-                longitude: 30605642019752156,
-                zoom: 96,
+                id: '65f6bc0e-cdb3-484d-90f8-d7f09a1ae98e',
+                code: '3xy2s5qw',
+                customCode: 'f0tw7pixgn',
+                name: 'yikv4wdw5pym9eewang2op345u5fyf61wgcuyg7sd50gxshmz9sti3evxf70k4rgtbv8bi5v76lzhcma7rw2ba0sdbfrzrxmdb9yel9b5m2lpd9fjq71ecfrxtjd22h3pj8dn5ivj4700g3cqbdfsgef2zc4ro2jimc5l6616m9omoyw9edmtkadmy7ac8iduz975sd5vaxklw9raz3dnkrlrlcioeyy9sthzq537kx8j5p1tohbr9p1xxe9l6n',
+                slug: 'hmwkcqks0mku1eijdg1oipw8ajmgoo11ta8a3i70c196xbqycgncronx3yhqdjo9zt03xk4pqfzvq6qlcu42ih2owxvq9gzuir6164jumy2pru25uaxefgakzyzblo3gbofl0daom1e2tdh73ozd19l2sawhpfd5v2r7v1xfm7txol4bjys877dwdb57aty86pib9nhwwz4gv1v9cibg3f202dvhl6kcw9fxrxn4nvk8ag4gvw6owr5sfld2mxw',
+                latitude: 41757236553954430,
+                longitude: 44757987615049440,
+                zoom: 79,
             })
             .expect(400)
             .then(res => {
@@ -239,14 +239,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '47325eb9-8f66-42f4-b0a7-209d06df920d',
-                countryId: '1359e36d-2b04-4c19-825e-efa179156ee4',
-                customCode: 'r6dpvokem1',
-                name: '8spyuc5pjtxbroewp3bfxw1otpqw5ga1v53ib58110pc38hbtpo2v7z74ouygmqxv5ydikhr0n5uqze99nq5zaepn34ofe6cn21z6gsapefodjr96ttixkti3fuforb5wl7ykk7vgp0tzx82h0jj5tbpl79162agv5tt6zoij4ubwr6wjsvz1zlpacqm02yr1hkgpq0dxlfynvdqbakn11cxv0hacddzq8vpptuqrrh5ji531pv2uye5z156giu',
-                slug: 'h96eclzr6zf25f5erqd0xsl3d2mp1amdbrmx1g19ouyls0lxpcci0qwn10ibpf6n20a7vg0qnfi1t6kmzjj57zl4od5cbk0y6u9sumzrjimaamwu1j7aqngoly543bm0vkitcmylv2thj0wnem2x8v8k1kjdu6ofs7rulc9x2zc5chrbwt889n1zqgpprcy19tuyml4zyo0lez48zz5f8ogwiitma089ctz33njg77y2gpmisrph1fjyl7ppc1s',
-                latitude: 74321834194876750,
-                longitude: 56372998799435816,
-                zoom: 99,
+                id: 'a01a997b-a7c8-467d-849f-5fbd6db025a7',
+                countryId: '1abc102e-b82d-478a-b1e1-e06a208c72e3',
+                customCode: 'efmyeosq9o',
+                name: 'tbpvu5p6jzg9vpp7qncbveohmtmmeyuinwxdlwoovup36hw4sl74a3cvpvfm36a0nvj9u26l792lo5v7rrh6vcwpbwoffg4slh1lrp8g2inl29wsi9u62yoj0s3urxi56i1uncbca2pig52inkwxukfrkrx84sb71mbmw3qut8cv1truf88hk34j175rwk755v89091x7fut7cg48yte9cvsbnd8juojpot49wpquu8n4fcrng13vzgofhpt1ow',
+                slug: 'iwvzd0k57ixh2a4b6f34pu8c1n68ox01y2e5axd2lw2sai5yncke4x6k7i822nxpz5rdpmx1si9iup7x1vhtok917g5n95yqjqz9w005scruvhsb6mlzxsk4yexxx91weifnvugfwbcximtvejqfuao6ppvc483onhvckjkph4pcdr6fn7298zk827l9mkj8iwe5fwzh5j8zkhlyyzg85jg9e6qh76zy1ui01jfhvutacvz2vhgd2kc69nbsyqw',
+                latitude: 54355678087260750,
+                longitude: 65234141815934950,
+                zoom: 65,
             })
             .expect(400)
             .then(res => {
@@ -261,14 +261,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'c4224bdd-83cc-42d6-b8f0-552d1d8a17d8',
-                countryId: 'e4fdf631-cffb-46b5-8d02-8069b18eb0d9',
-                code: '2bcc7jxa',
-                customCode: '9lwr5ie6vi',
-                slug: '5mditn9jpdnpmfaorwqrkw6w1jnnjpzh1lp3yxyq1aj5hue4kypopzep7hiz9c9wy18qoutxzjp6auwm3zdy4gtxxlrnse0s83schllb9ss6eofzzny5ra4kzmdu16ey98dh2lszvjxgl8rdlvcexob96x4kx1judqbgbciredjktdf1rqkkyy2rp890o9yglfedloehlmfl8x1civwomxayrhzlmu5ynhpmqjxmslojntbhn5kzyygytrwioin',
-                latitude: 95388526920949540,
-                longitude: 51241607968165064,
-                zoom: 29,
+                id: 'a17d348a-bf00-42cd-802a-1b9a5ebc2866',
+                countryId: '993299a7-6e0f-4c18-a920-71047d2f552f',
+                code: 'yqbjinv9',
+                customCode: 'g1vdztxq31',
+                slug: 'mvgzyhrbwkbiwtwyc08uvughne0untgxkdxvmgxrbjtiugbfdcaararx35on3grkrw989ooqte8m8kkncppgs0txjso7tkmk3rka3onaswj2x31879hsj06p7bp2xtm51j2rjgtulj48a5bgn4cwpe26q07tmkfouyquukeqpy4gtt3ctf0poc4hpcouqzw75m86hqo4jggkh2pjdmks95btlhvrfbbrt3w0uyvsb9vz4cxit3xzbv1uabhgq1d',
+                latitude: 83023996642103580,
+                longitude: 52281186013178660,
+                zoom: 31,
             })
             .expect(400)
             .then(res => {
@@ -283,14 +283,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'a6a46c0d-c47a-4ae5-a1e5-e493918d74b6',
-                countryId: '665a4aaf-42d8-4a68-aa34-9c5d85ce1dc9',
-                code: 'nu2icckx',
-                customCode: 'bxq8wibc3g',
-                name: '1p0lwbg4cfp3sqm9553758k40ho8kvk730t5c5hdg6ehxdu6v7ycm5c3076oh6li3v57v1gnf4ib2m32npqgnmyf22z5a2ns0ykgm0gmobyel5xgndzyghn52wrsy9hjjj3ojqzgg25sm4jtmxgxvadx76tzyly8byw6l5hnxttl47ic7fz3f2f5qldexqm9k9wmpr4o43lxz9dn5o2kj1724wx83vpe2et5e4jfr4nuk0qo74656bscc83daq6',
-                latitude: 13509351798580692,
-                longitude: 13327711769803190,
-                zoom: 19,
+                id: '7e75e9ef-a7dd-4634-af8a-3dfb97e8d6b5',
+                countryId: '5a669a74-09d5-4c53-8dbf-ec6ef5f3698a',
+                code: 'jybbkzi4',
+                customCode: 'ao507kmhay',
+                name: 'f3oiv76wlfhvmqsaud1iox8bpavcplum2mzsny6bhymnac7d8dya7n9q3j9y2mg79t3jg8h0eotyn1wscn56460b40cpm46wri2op6o3yo2yx43znl8lppbcovuvnn8ta3g749vitl5ne02r815sow1ajf5ujyr1bmedxc84t205fistdyb26jt5yhnpkmjh1ax4gsr8ha1nmdf1k56dsj7kykre4xn7d6hg693nqv3vwr3qrlef51v0iucswbv',
+                latitude: 44628392918052510,
+                longitude: 57888630107532264,
+                zoom: 81,
             })
             .expect(400)
             .then(res => {
@@ -305,15 +305,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'enbao2yp7mn9ox3dgeg6f1jlsevxlu0nuexbc',
-                countryId: '7523f76f-7120-4baa-bdb7-ca041c9ad41b',
-                code: 'bcq799o2',
-                customCode: 'f67t5dqdd5',
-                name: 'f4z3qdmp4gsss0d6obc1st53jripyu5fzqnj95yb02sb4fzucz15im5io95gjlz7vh5eyg7u6agm5qyyxdxa51163q9zfse68oiqpfsg5zyc37fkohmztjkjpo77b0sqioax0fp8c4spvqodz9ynqo3x1332ezrbdluamwt303ddboaicsk5vy2lhi5vnhmao6f5ni0yboakzhb5t2s1s4ze9qxiobnzd0ruq5ay9sch2tat9wg6r4plf7k67ut',
-                slug: 'yl2gmixnxfadzssuc3apwbqyg3adklxzn9oh10rizov3oy1szbxrgos8tkcfufjgz9mimouw1kfsvfyoq2kk0v5p061qobbqfazegoezydtvc1a8pqa3b1l3l84wqx0z38v3hoty9vstsksovjtkgoy7qjisq7bcc5ozgdyoeiw6y8t72puxa2el3ra10tcia17wbkr58nzkc2jh2d4bq9ntfumbldfakndcfc1fgxef6ufdc77yqgx4u1bd7pw',
-                latitude: 40529549575517576,
-                longitude: 71893625041374910,
-                zoom: 33,
+                id: 'wxu79hvmwhda2ldc61jsam5vhi6tp4tlslluc',
+                countryId: 'a75d0005-1a1a-44c0-9741-f107c80219e0',
+                code: '11fdfgds',
+                customCode: '755x68jcje',
+                name: 'r64qnaqek1w30xmtr75vg733xi1x4hhb67dlkifxgixnkjjcadrqgks1r3f549ospr69saz9gd9yryftljjgwla82wsnpv7yrg5al4wmb34qglejkxfa8xismbr1qywvtqskezgzwxn4xsipjfsm4a4khq8qb97t6s1jtoy06u9l2kkj1d4sp2gk1yz24vctk4j9m7381p84zi8tap35hc123aki7qri7dzb2md0xow0fjvu1r4tbydkjlheu8a',
+                slug: 'w5qwjzg3g8982t8shtxr69swbp1h7t1pqa5ajlejx5mbi9pl62s9yuhq8v8mp0ir7gdcwscqfgpfcn0czqy0dh9ydgzcy36y75utork7rdbjazap7txn0mqzodex9gnp5yfvf1hv3qxuas43qyowde1cl9n9csqto60n68p11kdlunopjq7mquj6zqc0yubol4tsonhmuiqs1rgqql2zxycj7ldlioj0tzebq1y6exrzk3rf3e2s5xgv9lndcfh',
+                latitude: 16240742214033764,
+                longitude: 93933360331740160,
+                zoom: 48,
             })
             .expect(400)
             .then(res => {
@@ -328,15 +328,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '77ae89d2-f13d-4073-b7c2-f146179f75a7',
-                countryId: 'dvisskfc6o4ijibdixiytvlv2r941y16wvw5p',
-                code: 'wgfnvxh7',
-                customCode: 'pohu7lqy33',
-                name: 'dx6vk3n90a74hhxq34vhdhyexkoavd4sgvihacdt949cvk013v5vm600ra4qwyh0xvt7ffycy15r0twds3fe9mlg162u4wnbj03av4z2l8n86hdeevyn9b168i58in4ur6rkpva876ypt77rxq1j4hytpl625x8bvl3gf75j4mn40z3v3julb5kqato6uu8tissfodhjwdt9y8bw4f6its8gx7ywmr35tv7jdts0lmwu3dq7g3dwsc4hf1e0dly',
-                slug: 'bd018t9spsjodjonhbcn4u5uw4ve23ht07puwn5qsegjq5xk6vn6ryfp1yzbukyfnqbrdteriq6qp4tg40mh2hp6fj7d48082fb5jdx01zqxqh0s3opsihh7gxjutgookhh5kju0ieohjoqxijjspjnej9eryg9unmzra1mox76wry3xe62w8o5jfwj4y5zvcalomald14hglem4jvtupr4vsu2bifi3u84wb1fws2ikp36c94jexuf3r6p7z95',
-                latitude: 37934163386956660,
-                longitude: 51829494665854330,
-                zoom: 81,
+                id: 'b5a50c84-fd86-453a-8a2e-1494ee6faf3d',
+                countryId: '2k9k303tsh2wnhbzha7eyxnwvwvs8o611jgjd',
+                code: '8v0w3sez',
+                customCode: 'k25de6v1gu',
+                name: '0vsbw71eiaqddr25nj11aap3msc60wwqtkh3kqyndy0dzza9dexqfzk3y3b28rpxxx59xdw2fpmkhyyragnh4u2bvvnqrfufxe6del5vl81bseas2qp0kiqf9xhefi3e5foh4zzk4n7ldhgiphkpt00wy1wq4zighc6eln29owxkc4fgj18m8h3o8is4vthxnadcluok6fro3wzngzuxinvz5hx1l4xgjv7dqo3n6zefkmlql4vreyijt67w53x',
+                slug: '5ft86rbuxuhdjhpsir6rlwf6xq57767ptfh14lqh3e283q8joode7fahp7yyc6f8b8ahrpdii9hdhanuszdgb20rnz255663scsvkybeiqi0s5ypt5twt8fh5hpqe7hh78voe9j5fi5bfv3rlb3e2ppi9o6j0cuzxefmiurwgu6kx1xxh21goj2uybx3yp6xtr9nxlrycu334b6i7pvdggghc9evwbhyve17iqbb7e3fbsqda1hcdepneh016xg',
+                latitude: 48179066649815784,
+                longitude: 82117871298162670,
+                zoom: 69,
             })
             .expect(400)
             .then(res => {
@@ -351,15 +351,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd0266620-bb09-4c54-a668-c25ecde57f62',
-                countryId: 'de051716-d1ad-439e-907a-cce5c99656c1',
-                code: 'qpmx6ngf4',
-                customCode: 'l0m6u8lntm',
-                name: 'u1qf4l9z9y96l1prg2ya7b38w9c6h1ombqv2v524592k55vg2cvxxw6p4v51ysnnmhfcm0k963vgbspjkt85srkzn9evwbgs0tc4gf6sdtuzm176wfijtafp8gvmbusik4c3wwb4t5630q61r9fv76ehuz0cudozilyeos6pg6zievtr22199s60zv8f4j63pqhmiwje8kkhw8e81mhitmbh56i5sagrs2vqttnvjj3n9cvfva7ibpfoud5fuw4',
-                slug: 'gd93xn1t10ii8vel8784yevmxu52672fojga91zg96mx2umbsny9ryhgtrfy9am8lursyr6174zns94h1mzmnptlv1beurqhduqh1ofz8va2zao9fitpz9b45fzv56fvpfc8sdjudbrmasl0bbdyw73jchjr3q07dbp5ouwlg6q61ded3oyh8y1da90q8oz57io87c3ek100xfw8gusj3v01i2pe7jai7fj8anb9gpvmivarmhp5cvzvlhb1d9c',
-                latitude: 24131299453718950,
-                longitude: 40266064713535950,
-                zoom: 39,
+                id: '1091a96b-183b-4e64-84f9-668eafcd2fbf',
+                countryId: 'ba1a20fa-d150-4510-b50c-7e61ceb7512a',
+                code: 'un3rmivgz',
+                customCode: 'zz7r2ftq5z',
+                name: 'sxj387jnnlqm79v182kta8eaoev9ezqiqcwwxk6ici7x2dj480fitl48o66hw51ztpdlea80qu5vlymygjt81wuc204yufu2bkyspmki7atoxjvwutdwgieqa3d8id65yjc9df28dd07wqrio1qhqvb2uccu3gmx9imiyoglo8a9eonx68k0jqmmky1ljv9yainngzsp3f2kmwyw7i9xqbwxtfgle2tbon953kfgpozgd8ebojoo04kdeq5etc0',
+                slug: 'yb91z81zf59wi6xdt63azxehe2yqc4mr59mh7cy34j1konx1mjykz8zver6esck74gk42by4dwlpgtbmhp91it2boynaslbkrrjhu598pdl86knkw9licdsc6e1fshlq7eyreaag486maieefmlt7uuxs9ua3xjlhucfs88ydx62rhibjb5cok5k3w9l97d01lsw2jsevbs1q7a6xsicoaj2x0571etmg2t2tryypza5nzz07yme7xz88q62bxd',
+                latitude: 10885766329807794,
+                longitude: 55410272531218620,
+                zoom: 80,
             })
             .expect(400)
             .then(res => {
@@ -374,15 +374,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '1648e69e-43af-4660-b3bf-49d4fd7594e0',
-                countryId: 'e12624b7-2d5b-4c5b-b298-082bdb979891',
-                code: 'wsre6axo',
-                customCode: 'f7suhoq208p',
-                name: 'k6hd575l9nu8wkgq4wo9kvjj1hstquhefhdurv2ssjpae0jf6g76ti5jgq6k48nygzlqt8au1xpnge2kcpyyy3q3zsge3btx4oz8eglgwfhba26oqb4kk84mp9vrcndfojx9gxoiy9hmtjvnosygscgf4qhk9gtb2g8ctcnty3et3bpjnuj4fyf7tqzh942ll8rtszyn9l7iuzourfr3fuwrh1n6z7nklnfyy3xlb7cpn29ucjfcnp9t7rlbeqh',
-                slug: 'gdc84pxv32hh94rjiyjk7bjvw83avn47m2zu5c1eq0hbxngiyh6r4vochmdzyjdjb1et2upbqj2j060ioas1lktqy9xx0hh6gba58hqs2d98aainspzkigy8br5w3obtwz5sqf38apwznirjkd965c2zbqgry0wn0g0fcgvn8nisu6qetfmvky02326d0ejf8lmzh1dm88vl4p02tvd0cyxiuo78nnv2diahy9pq45w4c6y40ylct8k2bpkudtg',
-                latitude: 93524127499350430,
-                longitude: 61323352374993280,
-                zoom: 33,
+                id: '8b70a12c-a93c-4f6e-a776-c8e920da67e9',
+                countryId: 'acf2f576-79f5-4624-85fa-f36c7708adeb',
+                code: '8k7hfr4h',
+                customCode: '3l6qwfc1lws',
+                name: '1j7y0lrva4at5elxkpbnncpvh2vh76wb89td5iv6ckqgwr47asrtzq75z3kvnv7e16a34ia6w31k7guzatbmdx2gl3c0aazymuk5bo9ukyz8qc0bacgur8qtpackm7jojhhfpf00psgah6x4btbrilutuooqbpd9ybvlvobkawrs0uv4ihr7w2od0qfop4hs6z0snhw3wpop8hc7mfyny203axwxpd4r2hcp95g3q2ag8l43e4gpiia2fabapv4',
+                slug: '6t4tr3tlp1x924dpylihjxe5uttcdtg5828y0u9fy5rmzg0w9ip2rqfwwici1h766jcjwok42i86oy04bk07tcuxz7af7a9axsq7stss029cgwehvnen7qc8yek3xuqg0nsi7if5d492iz8kw1920gruzzo6ut1omv9udtz6zlb9s0etmihi33c9cdiyjsdj9u4qpk0nag7ahbq7wr3zuad9n0hofbpg4ew2avqjddoypws09fnjkov4d308o35',
+                latitude: 70313309847161384,
+                longitude: 90001224348362750,
+                zoom: 37,
             })
             .expect(400)
             .then(res => {
@@ -397,15 +397,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '782d0ada-e945-4a5b-a2d8-9afc45b5de9a',
-                countryId: '23fb4699-5e60-4352-b4c7-8e3a1dc8cae9',
-                code: '7pz20ttz',
-                customCode: 'swlo6bmsbv',
-                name: 'pl03c1zh1dwa26xsc9enferh87pjebr4o7lr80r3vjtjowqksdpl6vkqyp0hfip5ca4y2dl3i41gl00c09vosne3o42l0pnxzgrtvivzng7u8tcsjbrdsu6pq09yuoxtq8nxdzidf7knm2szq0k9b8kt3q3c1de8h3w1k07iqigwlyzg1xdzulp2to8zqp3q6l85w7pegs2q55511o57qkqa1nqytfp4jqarrpqv4ysr8zrctzmwdatjgjd5qvzy',
-                slug: 'wn01hmle6hp7h2o0tefbct7gryxray9pps53zya0ovu9t9o3pmlq94yrsn7jm0avosfjer3miy59mnux1a2zx27ag1iwmvs8v0jlvqcp0yu75uaank6ifu1d9mb5y8r5avcepp3wt5otsv2ikklmkbwjaaixodlhm2rdhuzxi0xuuf7waondfxy4t4t08ujcfr3irt5ji32bbir4yivu1wojcw20ng8jpm2yvb78f8i3ukyvdbd956xj6073dtx',
-                latitude: 13519260407047758,
-                longitude: 36658893911415940,
-                zoom: 21,
+                id: 'e6e23e3f-9d81-4e77-b163-20632fa5dfa0',
+                countryId: 'a50eabf7-1bbb-4af2-8910-ac0c4af4bd16',
+                code: 'bvwr68x1',
+                customCode: 'phgsm9h96p',
+                name: 'fha53suuupi52p91n0rfs9n0yen384sw4wkydchofemjwa6lpfi4c1x7ciw9hpx40p3mx0lrq8pxhenvydu8q6j31nnc5gzwvhy1wum2jyt0envjqvuv73jvzvn1rv1e8m6c5o166ybzw4aok0mnad4yv03ia48y310eveh2adrrm7k0evv2urgwdgjgssujoofdli49roi1ai7pst2vx0h4mqon3lhnsa3dwke18hrx1zqithb11505bdluj3d9',
+                slug: 'eeh1eeftoi3db3l66dg3s4iurrdyl6vkr1bae1lisnc7s6tucm76i2atpk5gbwje1nd8ril8iau2p0yldyx8qnuyew8wyogunyzsucdkafomnc98lzzw3gwk2m8b36a0jc0k2ob49m0zgm0tpkdjxkelzncnmkljy058ahnd7go2qvqyz1n3au5xdcurmp3pgqsgc1eu9lr2wy55v5fq0xsosvm3p4mvydgtqtq60pka0zl3rjcsbghc2laqlio',
+                latitude: 13981252684504960,
+                longitude: 94500438471693780,
+                zoom: 72,
             })
             .expect(400)
             .then(res => {
@@ -420,15 +420,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '4cc25e49-a6a5-4418-aaa3-9a63b163f564',
-                countryId: '84432900-93a9-408f-8df4-8969bab195b3',
-                code: 'js14ma6m',
-                customCode: 'fq84splmng',
-                name: 'hha0aeejvvtnvu7j9esbwm2fmkmavwm7ouk8rwgyy29fusxrvabzign0x417i3pe19ntp2vvvcf93xb84s5zqq01dimiignrqx5cqb1u45bvqb39rwwo9b82kire6da8mi09kb88yimcw0t5nd33gepw5k160i72u0r72lf2quwstij04jn1533mmeo0ip3c5bvc550pwb59hj55rknpiwydbxl4u1y1aw0m29jxoj20yq3u55p62y1ux801z26',
-                slug: '5p0vm5f7gvm1892gb0ccsioopx0b7vv63dwktkxhng5tci0sozsjli0o0gprlv73sxx5wq5xw7gh71wzgl1xujw0axqrzywbn71r9e3tyuxp5i2n77onhx5nvbtramgv4gmm4dxkdzrvcfvp0pwac8jkcu7au2udjljg3e61ypizkkysu1opup2lj3jrn9ry70fyr5y7vn3mvsopm6zhqo07a54sozm4qx4kpjhhk4w2s3b6v18fgq6m7n12nb9v',
-                latitude: 29524114468873810,
-                longitude: 83112338359459170,
-                zoom: 33,
+                id: '22bab0ad-0165-4bef-b3c6-9cc8fbb43f59',
+                countryId: '6f056e7d-f484-4b39-af5b-e79c3ea41c12',
+                code: 'unljsufr',
+                customCode: 'hz113s05fv',
+                name: 'h1eak8dk4cgkuy13g2xazw4s5317q69uc51a0wsycit8pwp93y6hsvq3iysolg4ul5ncx2uvonlhm57yr1ae9c0gn6wuyd2e0nctbxf34qwe3fceed76eaivqhzpryxkyyt81k31u7da71ui7tbc0iplydwe84xipw2am10duv5hul6uetdlni40fg8v1283lcu30bo7b6gackw9bnhmusf1ort4qk0tq9nikj09nudk1uno60nj4scl21ubl1e',
+                slug: 'k0eg00tjuxiosdrjf6cktv466ewwelyvbr39wdcl9glrqqy6vvxh4k5423skx2nkgdkfmf1lf7pl0gey80gie8ckriw0s9d683hdx4n83aplstk8y32o9tcyyw8q126yn4m6wtdzdtktcb7g500v4l5ya314yxlvmtjaa1sxwzsrok4146824uoabw64kq2mngw58hxbipqvwhaymo0kf9lhd27tigesh5v8ws29sqz6sg4ne2ku16g3liag3wf6',
+                latitude: 20039040205320190,
+                longitude: 72574585674608420,
+                zoom: 30,
             })
             .expect(400)
             .then(res => {
@@ -443,15 +443,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '2b63a862-1aad-49dd-afcf-a900f6d0e673',
-                countryId: '84aca1ce-6116-4c62-b54a-10e978160490',
-                code: 'awbtic98',
-                customCode: 'fsrrplco0s',
-                name: '3k1es35hvo48kw1ku2bxavc33tava1625w37m5lto1iyecnvadlnvml18z27m7p77ldpe0o4f9wvjca30x0914rnbij56y7ptqmhqr7ua3dphiyrqgwwfxdok6upazog4wcltaf7fqtomqb828cckf34f5q2rr5cc6jw0mtvn2d574bi3c1z7uxf2sohe1vc7v7ut7lb9g0zrwilpna94cc8g1wicj5pgd8ialjb1oh8rpacw8obs2vfplxpnf6',
-                slug: '4kq0ensb2me6r6hctaor0kkmct7nkqzc5iso7plm0dzhvlllvyjmxydgdv8ewnvt45x7x6ijeyk8fpmskrr778mgr0w3ot0wlzkwmcjcpczn5e53p3atpuzetva9us86uvj1rv7lap6mkbzt8oawcj7zr5c6kszb3id7pwfe2vrmo36m3blv3487a2po0wa8wzzswsuhli05o1hu9d1ojmm37wzuwluh4nb391a1poi24asgv0fyys65ebl8rbu',
-                latitude: 284328454716982820,
-                longitude: 90434143781000850,
-                zoom: 50,
+                id: '21e41a8b-29df-42fd-b491-98bd8a35ecf5',
+                countryId: '99e3a79d-4369-4a1c-8a69-158d1e5f07b8',
+                code: '0i2pqwhq',
+                customCode: 'hy7w2gbgxm',
+                name: 'hgt91m6r0ahiv7m0op1cowtz28ipqx1ytg0iuoid665n4gk8mr0ctrwsj088sdv7mfyrpmfnlz495rzv41jbb68y9zd6u59pd0e626izngdr6hqz4ls0ut6djnnaa4vjwlwqahuk07iystv4a8bee5qlvb41n166ot6ytmlfgicwdujnxhrckwpcdefi7ozlrj19bevfl1xbi7ob37evvpyir0ieon9fub5fu40ns6m6d1t09bukcuf2pxlfu0c',
+                slug: 'lwccq4rg0zeq35qpgat7ticwl9a9undm4ylwr1eq3qy7wj6vargsil8ctmxh0gp6ca83knnyf26pzqm5053cok8x9ty0drq7oizxsetpq5knlql8p5zjea20ezlylyogyaw39dyti7ycd5k5pston71bm2lx12c4gbfgdu7qqz6468hx1zb5wxt0d8dhb8a9kvy1tpj42x6aklxxj2z2s8jhrggjdw18vho3vzyk2v6tm4e45di85it53tx705f',
+                latitude: 197457268017250560,
+                longitude: 21449288215996296,
+                zoom: 80,
             })
             .expect(400)
             .then(res => {
@@ -466,15 +466,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '747c7ab1-e893-470b-a6cf-776b7cb99f25',
-                countryId: '658c0743-e2ce-4033-9025-7f00018b1e5d',
-                code: 'ea23owa3',
-                customCode: 'lic2hn91c8',
-                name: 'z15bav2fs0x3ngggwbulfqlfmez0r7fv7kqoas4j4phi8775ip5l5520q7en7bkb19gx0tlf5y8dl3bks2pspoatsvncwkkw8z0zdc3bpizfjgcjm6lvtahysys7t6eboggjvgdigpxmntnqw3je5ywqym8ohd6w3qrcr5emc1eoe4qpsjj70pj0agty07919ew9s0k83bonipugw8zei4m1cxydxgvox62u19b03lhs12p8r1jlbuetfpiq0us',
-                slug: '98f2f6tq08kl8gmpo4b2x234j490y1p81cwb7l1t7k2lxg9z3eg80dm335li0hmtljlzgj6w4uhjz80o2ww8jl842yilcjo3tsx4ceghxipoay7nb7mdskqv4bi28jzm4r8lj1dq3voxx4kz8ny2jaez1lzvqwl97zo112fe3at26qpqyp3vp2rwcm5y751mdcug3y0seq86kzd30j9jgxsxehtq6jnlqah69x12trfnfzu3aibz6ufzfjy7ms2',
-                latitude: 51581265809953770,
-                longitude: 773764116737057700,
-                zoom: 35,
+                id: '53b441d4-a47c-44fa-88fa-7ddf93a8d136',
+                countryId: 'db86b2a6-de38-4c99-b317-1aec69fd1b11',
+                code: 'i8w49t7x',
+                customCode: 'gfsy763f9w',
+                name: 'lyhfesy2d9hsnocurpsfizaltynkg4iec60g31tn12dcq5tbsewa342blwiluy4ye88tdn2n0uv12krk3kl9t0gq546fbfv1fsma0kvlk9biv4lt07re5obcyc3pp408wcjpubrt5cdt333bwjaejxky1zbx4dcpwvzi1p4149ll1584md7cnw7bay6hkcmevurt0darslnywshhttjf7pqe9s6edp7auj4rdlhob30x1c8d0loezvs2p22ezrc',
+                slug: 'ou19x7k3ojc00wnf54xrhlsvoxk032i8z8xmiofhm883oog2g4kuohtd8f80k4hzlr53pk3ps0bqolbv3z29wqi07vav7e7rt6fapidq8i74d2uh4ipirdm914vzazd5tk15oabrgnwr0u09ocgrwq458030unb18yfgt2sfmeyiba8x32awc9li13ro1blrgw40xtslhpr5u8m0f20b193q4d19qaoy1huoz7e5nw6kosq16t21lswr07x9xrv',
+                latitude: 30168761415080836,
+                longitude: 775400098473163000,
+                zoom: 30,
             })
             .expect(400)
             .then(res => {
@@ -489,15 +489,15 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'b24c75f7-810b-405a-ae24-81c15c44ed40',
-                countryId: '8074583e-2a22-4212-85a2-5ac136a9618e',
-                code: 'fl1t4h64',
-                customCode: 'g39585xseu',
-                name: 'mhixk8tuyx13rmwz68mddamhv9v6cvhbfwqmx3a5zs04zn900v3mmoeqzjckj5kdnkp2qi1uri1g7xqfx21wbcm03vbagi79h37zpsdhugupzk94oe18w3c0dqshzr7mze5ooyv3uyj2ipdfvkz8b8in54tg3f6mjrcusykuu5vym7s1wvoshgaq8i1jvd39gn6d7ajsa7ui0oqb6s0x6rghj0g6p9sjbln9tcltbeiagtfvz4yme775xcs01pz',
-                slug: 'xwepwim94ahiylbfybx3tzjnefa9af3y36vo9gmcdfuu74k60oh1sn6r3pgxqkoar6kfunlyxu4bz9gwjd1blzowfrdetf97khbg8zzqt44qoyw58uvdxmm1iirhj630imvuakfhypnskx0c6tjeruom6o3wh4h2h7rbx848c2uw7yiloqig04vcwuwk0b2ngl07axlh1f7961j40e7emgsvjxft6r68lqragl8h4um1lfdw6xqfnzy8t79w8y4',
-                latitude: 17484467027426600,
-                longitude: 67166553682713784,
-                zoom: 466,
+                id: '16f90b3d-1b03-443f-8426-1ff5941443a4',
+                countryId: 'cb0daa00-6e0c-4d92-9938-e9df85ec5adb',
+                code: 'j9ee464u',
+                customCode: 'tlnc905iv7',
+                name: 'pykmfj59qp3n7ub6dyiiwvm268s6tbmbyeve137k5z5b1mh2noczetrtqsh84e7k119qh8h3g6g34tzdfoncouut79yidp3dmgm66qxj0eivytd99nbkkcasrwyows7oq4jnsx8up4r78qefdjqoniwndt05rvdri7d8fa5eoqezgkvsjmock4hmuy7vrhbvqsot0y3r267qafmol1cwlsn6235s18egvql9uziis22zmmylyozt2622ekl42a2',
+                slug: 'd9wbr81wycnfiqj5onwian2bdkno6tbfxj03pxf3s8blbhpelbx0rmkbdabe8e6mt03sp46unatwqtq6lbay2t35jymy32vbs805wpu9fdpt1c1roivhhtkgar4ecgt39jdho0z72t6vgqktvkpiuofk6d8vls5k2jaqbkz25c1z6ned98kxln04cuh7ylh7oy9zvlrwxnan5av9uvshnkijaafp51a7r4cxqimjefhc93x0yi4y2oy825746nm',
+                latitude: 71754776281049110,
+                longitude: 40257482246054270,
+                zoom: 560,
             })
             .expect(400)
             .then(res => {
@@ -512,14 +512,14 @@ describe('administrative-area-level-1', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e78206c1-230c-4599-a9dc-a5ce7c9d2aef',
-                countryId: '995946c8-cbf8-40ca-8208-68130b28b862',
-                code: 'w8a1bcvi',
-                customCode: 'qfzmxy0f5x',
-                name: 'paqlly0swssx8ql6q9vzqohrzi1s9mo39qipaa12lskqoqufoil277l05fei7a7ggvvlzsinjo92xqyagx5g6dpx8u8spp7g1axdkfr9daurwwo50fgwty59vtbryx1n27x7j08uduujfya9arp2p2da4jl21hs879w8483qmhcccxm3v9w1b9xujee832erucvevtei5qa5qxnzus3ltyvwqpnyi4whsxc1394gc8zxog2cwvz95vyx2r5htyp',
-                slug: 'um1e3m52ml9tpf9valotxcqrjr2bmohhr42q0l1aackgy1mm46srzcb7lvrlme7zac0umzfailv7l1oqb780hogglzejqir783mpnm235k6g3jx3w4q1vyyy34ejmrrqsqo8u7qxeg6gvo8ghmvs4eg6a8226k78qjr0l0nt1zwl384juqq2l56io6q2ebcref8iiivm31wzyckj5fbtrayuivniha53zddysnkh9wtfprh9v80vnsbrljcn7lo',
-                latitude: 40895224245254140,
-                longitude: 43633327931694870,
+                id: '3e651899-c146-4dfc-ad6a-2ebcec73d33d',
+                countryId: '51c15962-b4e1-4021-80c4-518810b3f693',
+                code: 'cjl21ef9',
+                customCode: '4h17u8th8z',
+                name: 'qek8sp88z1co0ddl2me3y5vjnlvp903uf4l26ottgpglqq07jrc8x7a4y7sorwqh6hv2eo6srkvm03d2n51la0rqjisk9tr85z8tb02e1md9895bx0j3qyteux1mqejncp9bz0p0frya06vp3gqx8gdpyx4e0dvt7zqio8o39rw1q16jbjibhki0m4nkjgvtli6j5d49oo98maf2y98kae1pno7x598vd4gl2ozjpumii9ztqgjli3yvs3f8k62',
+                slug: 'zaueyd9xl8j1h42r5qrhq9zy72cmo4sx1t6efpspmk0ar1iwef5m2cr60szlhkjyd8u2p93foqori0gx9afsg1qsd14p2h6lc2aj66aa5wyndzq3t2azk5qtmf8i6lmjjgxninvddzh9tf2vr9nlabsdh6qvwzsrkp0s9mkt3g1nmn3mreh13stcu36yb5hqgbr1f77f9lqmczi84ywbbkp357ni3xonkuzd9v8setnd2h4rnrtsqjsv29k2xyd',
+                latitude: 71579597416880650,
+                longitude: 27333530192130440,
                 zoom: -9,
             })
             .expect(400)
@@ -580,7 +580,7 @@ describe('administrative-area-level-1', () =>
                 {
                     where:
                     {
-                        id: 'd405cf6e-fcd7-4cc0-9c1f-4bb18de099fb'
+                        id: '49533bf4-bd88-48ce-a0d6-0867a89516cf'
                     }
                 }
             })
@@ -600,9 +600,9 @@ describe('administrative-area-level-1', () =>
                 customCode: '4iyw9pwsdx',
                 name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                 slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                latitude: 62384117281201440,
-                longitude: 34223228696350390,
-                zoom: 61,
+                latitude: 75885719421715520,
+                longitude: 22998571571649830,
+                zoom: 76,
             })
             .expect(201);
     });
@@ -631,7 +631,7 @@ describe('administrative-area-level-1', () =>
     test(`/REST:GET admin/administrative-area-level-1/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/administrative-area-level-1/3a45495c-c3ba-4fa9-9c2c-d1423b976069')
+            .get('/admin/administrative-area-level-1/b43795c6-56cd-47ef-a37e-e203e62862b7')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -662,9 +662,9 @@ describe('administrative-area-level-1', () =>
                 customCode: 'oqw0khx3oh',
                 name: '2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbk',
                 slug: 'pahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox1',
-                latitude: 40094819807012220,
-                longitude: 63570135769978830,
-                zoom: 33,
+                latitude: 33910915640140332,
+                longitude: 38479195454014696,
+                zoom: 59,
             })
             .expect(404);
     });
@@ -682,9 +682,9 @@ describe('administrative-area-level-1', () =>
                 customCode: '4iyw9pwsdx',
                 name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                 slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                latitude: 37158423788457290,
-                longitude: 84672997925006600,
-                zoom: 27,
+                latitude: 74707137969540260,
+                longitude: 48424031866954480,
+                zoom: 58,
             })
             .expect(200)
             .then(res => {
@@ -695,7 +695,7 @@ describe('administrative-area-level-1', () =>
     test(`/REST:DELETE admin/administrative-area-level-1/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/administrative-area-level-1/dde3c54e-6fb7-4b1b-b94d-c1ad52d5d232')
+            .delete('/admin/administrative-area-level-1/2fa856b1-763f-4e96-9103-074b87908b24')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -848,9 +848,9 @@ describe('administrative-area-level-1', () =>
                         customCode: '4iyw9pwsdx',
                         name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                         slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                        latitude: 34572195693098190,
-                        longitude: 31286582546054596,
-                        zoom: 80,
+                        latitude: 17542070744190774,
+                        longitude: 33770067518903016,
+                        zoom: 39,
                     }
                 }
             })
@@ -891,7 +891,7 @@ describe('administrative-area-level-1', () =>
                     {
                         where:
                         {
-                            id: 'b1bd08a6-274b-4f82-9f9c-5457dee04699'
+                            id: 'a8e30b73-632f-4014-a7de-513ffef5dfb0'
                         }
                     }
                 }
@@ -972,7 +972,7 @@ describe('administrative-area-level-1', () =>
                     }
                 `,
                 variables: {
-                    id: 'e1cf93ba-7d0d-4ec6-822b-c0091006f334'
+                    id: 'b36cc160-c9bf-4a12-8eef-a7621be6cad4'
                 }
             })
             .expect(200)
@@ -1051,9 +1051,9 @@ describe('administrative-area-level-1', () =>
                         customCode: 'oqw0khx3oh',
                         name: '2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbk',
                         slug: 'pahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox1',
-                        latitude: 45110540798097440,
-                        longitude: 41913458703692210,
-                        zoom: 16,
+                        latitude: 63139276240672120,
+                        longitude: 94791581483256880,
+                        zoom: 70,
                     }
                 }
             })
@@ -1098,9 +1098,9 @@ describe('administrative-area-level-1', () =>
                         customCode: '4iyw9pwsdx',
                         name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                         slug: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                        latitude: 92722658772268910,
-                        longitude: 90914672698612900,
-                        zoom: 46,
+                        latitude: 14622061037548500,
+                        longitude: 70605596869595260,
+                        zoom: 67,
                     }
                 }
             })
@@ -1136,7 +1136,7 @@ describe('administrative-area-level-1', () =>
                     }
                 `,
                 variables: {
-                    id: '6870f538-6267-4977-9a7a-c4974be0b1a6'
+                    id: '27d91d3b-5b5a-40f3-bf86-4cb822bf33c9'
                 }
             })
             .expect(200)

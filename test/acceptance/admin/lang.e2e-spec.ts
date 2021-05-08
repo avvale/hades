@@ -86,8 +86,8 @@ describe('lang', () =>
                 iso6392: 'gw',
                 iso6393: 'fe8',
                 ietf: 'gop23',
-                dir: 'RTL',
-                sort: 480019,
+                dir: 'LTR',
+                sort: 754104,
                 isActive: false,
             })
             .expect(400)
@@ -109,8 +109,8 @@ describe('lang', () =>
                 iso6392: '6n',
                 iso6393: '0kv',
                 ietf: 'tmyiw',
-                dir: 'RTL',
-                sort: 445757,
+                dir: 'LTR',
+                sort: 127862,
                 isActive: true,
             })
             .expect(400)
@@ -132,8 +132,8 @@ describe('lang', () =>
                 iso6392: null,
                 iso6393: 'igu',
                 ietf: '4tkje',
-                dir: 'RTL',
-                sort: 280013,
+                dir: 'LTR',
+                sort: 214118,
                 isActive: false,
             })
             .expect(400)
@@ -156,7 +156,7 @@ describe('lang', () =>
                 iso6393: null,
                 ietf: 'q96ug',
                 dir: 'LTR',
-                sort: 690402,
+                sort: 874637,
                 isActive: true,
             })
             .expect(400)
@@ -179,7 +179,7 @@ describe('lang', () =>
                 iso6393: 'p7u',
                 ietf: null,
                 dir: 'RTL',
-                sort: 284529,
+                sort: 251418,
                 isActive: true,
             })
             .expect(400)
@@ -202,7 +202,7 @@ describe('lang', () =>
                 iso6393: '0rm',
                 ietf: '5vff3',
                 dir: null,
-                sort: 256745,
+                sort: 730937,
                 isActive: true,
             })
             .expect(400)
@@ -225,7 +225,7 @@ describe('lang', () =>
                 iso6393: 'xa0',
                 ietf: 'nb9l9',
                 dir: 'LTR',
-                sort: 573178,
+                sort: 263463,
                 isActive: null,
             })
             .expect(400)
@@ -246,8 +246,8 @@ describe('lang', () =>
                 iso6392: '49',
                 iso6393: 'xvd',
                 ietf: 'fxudo',
-                dir: 'RTL',
-                sort: 635053,
+                dir: 'LTR',
+                sort: 249435,
                 isActive: false,
             })
             .expect(400)
@@ -269,7 +269,7 @@ describe('lang', () =>
                 iso6393: '1pa',
                 ietf: 'yaa8s',
                 dir: 'RTL',
-                sort: 887941,
+                sort: 235281,
                 isActive: true,
             })
             .expect(400)
@@ -291,7 +291,7 @@ describe('lang', () =>
                 iso6393: 'k2y',
                 ietf: '7peme',
                 dir: 'RTL',
-                sort: 653850,
+                sort: 707293,
                 isActive: false,
             })
             .expect(400)
@@ -312,8 +312,8 @@ describe('lang', () =>
                 image: 'w',
                 iso6392: 'fn',
                 ietf: 'vqkhg',
-                dir: 'RTL',
-                sort: 595680,
+                dir: 'LTR',
+                sort: 547587,
                 isActive: true,
             })
             .expect(400)
@@ -335,7 +335,7 @@ describe('lang', () =>
                 iso6392: 'fw',
                 iso6393: 'r66',
                 dir: 'RTL',
-                sort: 824968,
+                sort: 213061,
                 isActive: false,
             })
             .expect(400)
@@ -357,7 +357,7 @@ describe('lang', () =>
                 iso6392: 'ji',
                 iso6393: 'ly1',
                 ietf: 'gzmiu',
-                sort: 510074,
+                sort: 501084,
                 isActive: true,
             })
             .expect(400)
@@ -379,8 +379,8 @@ describe('lang', () =>
                 iso6392: 'kr',
                 iso6393: 'te9',
                 ietf: 'itwz9',
-                dir: 'RTL',
-                sort: 853169,
+                dir: 'LTR',
+                sort: 745396,
             })
             .expect(400)
             .then(res => {
@@ -401,8 +401,8 @@ describe('lang', () =>
                 iso6392: 'a4',
                 iso6393: '9i8',
                 ietf: 'yizro',
-                dir: 'RTL',
-                sort: 512900,
+                dir: 'LTR',
+                sort: 336022,
                 isActive: false,
             })
             .expect(400)
@@ -425,7 +425,7 @@ describe('lang', () =>
                 iso6393: 'f79',
                 ietf: 'gy8iz',
                 dir: 'LTR',
-                sort: 473799,
+                sort: 197671,
                 isActive: false,
             })
             .expect(400)
@@ -447,8 +447,8 @@ describe('lang', () =>
                 iso6392: 'ed',
                 iso6393: 'i2ib',
                 ietf: '9n2b0',
-                dir: 'LTR',
-                sort: 479788,
+                dir: 'RTL',
+                sort: 338124,
                 isActive: true,
             })
             .expect(400)
@@ -471,7 +471,7 @@ describe('lang', () =>
                 iso6393: 'ec2',
                 ietf: '6oertz',
                 dir: 'RTL',
-                sort: 495194,
+                sort: 796778,
                 isActive: true,
             })
             .expect(400)
@@ -493,8 +493,8 @@ describe('lang', () =>
                 iso6392: 'c8',
                 iso6393: 'd3a',
                 ietf: '1rgxl',
-                dir: 'RTL',
-                sort: 2563985,
+                dir: 'LTR',
+                sort: 3400294,
                 isActive: true,
             })
             .expect(400)
@@ -516,8 +516,8 @@ describe('lang', () =>
                 iso6392: '6n',
                 iso6393: 't1z',
                 ietf: 'gg1da',
-                dir: 'LTR',
-                sort: 817289,
+                dir: 'RTL',
+                sort: 813261,
                 isActive: 'true',
             })
             .expect(400)
@@ -539,7 +539,7 @@ describe('lang', () =>
                 iso6393: '1me',
                 ietf: '5q665',
                 dir: 'XXXX',
-                sort: 209177,
+                sort: 275696,
                 isActive: false,
             })
             .expect(400)
@@ -600,7 +600,7 @@ describe('lang', () =>
                 {
                     where:
                     {
-                        id: '83d920f1-89a4-4a4c-a604-6cc66c7f0a16'
+                        id: 'd9bbe663-0217-4a2e-b66a-6dc317d8f0b4'
                     }
                 }
             })
@@ -620,8 +620,8 @@ describe('lang', () =>
                 iso6392: '4i',
                 iso6393: '4iy',
                 ietf: '4iyw9',
-                dir: 'RTL',
-                sort: 401166,
+                dir: 'LTR',
+                sort: 903980,
                 isActive: false,
             })
             .expect(201);
@@ -651,7 +651,7 @@ describe('lang', () =>
     test(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/68bd9e70-a79e-41d3-9f48-c0677f6aeaea')
+            .get('/admin/lang/7c418421-7b1e-4e60-a13f-0a2b80bf8131')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -682,8 +682,8 @@ describe('lang', () =>
                 iso6392: 'v8',
                 iso6393: 'rbe',
                 ietf: 'xch6i',
-                dir: 'RTL',
-                sort: 659201,
+                dir: 'LTR',
+                sort: 587191,
                 isActive: false,
             })
             .expect(404);
@@ -702,8 +702,8 @@ describe('lang', () =>
                 iso6392: '4i',
                 iso6393: '4iy',
                 ietf: '4iyw9',
-                dir: 'LTR',
-                sort: 816591,
+                dir: 'RTL',
+                sort: 851603,
                 isActive: false,
             })
             .expect(200)
@@ -715,7 +715,7 @@ describe('lang', () =>
     test(`/REST:DELETE admin/lang/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/3d7e303e-7177-4226-86b3-27606e69ab03')
+            .delete('/admin/lang/d75f3903-fa54-4481-8d18-d9e0580658e4')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -871,8 +871,8 @@ describe('lang', () =>
                         iso6392: '4i',
                         iso6393: '4iy',
                         ietf: '4iyw9',
-                        dir: 'RTL',
-                        sort: 956058,
+                        dir: 'LTR',
+                        sort: 157590,
                         isActive: false,
                     }
                 }
@@ -915,7 +915,7 @@ describe('lang', () =>
                     {
                         where:
                         {
-                            id: '2e85d282-7634-4aaf-b9b2-e626f0ef5f61'
+                            id: 'c531543d-748d-42e7-8557-3ab96f0cb2bc'
                         }
                     }
                 }
@@ -998,7 +998,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '4f5defca-a49c-4d6a-94fe-b0f22a5db654'
+                    id: 'b4a5f2a8-ca54-49de-ba58-4483e9cdacb0'
                 }
             })
             .expect(200)
@@ -1080,7 +1080,7 @@ describe('lang', () =>
                         iso6393: 'rbe',
                         ietf: 'xch6i',
                         dir: 'LTR',
-                        sort: 524242,
+                        sort: 486204,
                         isActive: false,
                     }
                 }
@@ -1127,8 +1127,8 @@ describe('lang', () =>
                         iso6392: '4i',
                         iso6393: '4iy',
                         ietf: '4iyw9',
-                        dir: 'LTR',
-                        sort: 717129,
+                        dir: 'RTL',
+                        sort: 780472,
                         isActive: false,
                     }
                 }
@@ -1166,7 +1166,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: 'c6d00121-1f8a-4a82-a40c-731a46ac675a'
+                    id: '763f229e-1827-48ae-a81b-547af4067adf'
                 }
             })
             .expect(200)

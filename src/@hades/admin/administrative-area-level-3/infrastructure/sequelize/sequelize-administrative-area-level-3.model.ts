@@ -5,7 +5,7 @@ import { AdminCountryModel } from '@hades/admin/country/infrastructure/sequelize
 import { AdminAdministrativeAreaLevel1Model } from '@hades/admin/administrative-area-level-1/infrastructure/sequelize/sequelize-administrative-area-level-1.model';
 import { AdminAdministrativeAreaLevel2Model } from '@hades/admin/administrative-area-level-2/infrastructure/sequelize/sequelize-administrative-area-level-2.model';
 
-@Table({ modelName: 'admin_administrative_area_level_3', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'AdminAdministrativeAreaLevel3', freezeTableName: true, timestamps: false })
 export class AdminAdministrativeAreaLevel3Model extends Model<AdminAdministrativeAreaLevel3Model>
 {
     @Column({
@@ -18,7 +18,7 @@ export class AdminAdministrativeAreaLevel3Model extends Model<AdminAdministrativ
 
     @ForeignKey(() => AdminCountryModel)
     @Column({
-        field: 'country_id',
+        field: 'countryId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -34,7 +34,7 @@ export class AdminAdministrativeAreaLevel3Model extends Model<AdminAdministrativ
 
     @ForeignKey(() => AdminAdministrativeAreaLevel1Model)
     @Column({
-        field: 'administrative_area_level_1_id',
+        field: 'administrativeAreaLevel1Id',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -50,7 +50,7 @@ export class AdminAdministrativeAreaLevel3Model extends Model<AdminAdministrativ
 
     @ForeignKey(() => AdminAdministrativeAreaLevel2Model)
     @Column({
-        field: 'administrative_area_level_2_id',
+        field: 'administrativeAreaLevel2Id',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -74,7 +74,7 @@ export class AdminAdministrativeAreaLevel3Model extends Model<AdminAdministrativ
 
     @Unique
     @Column({
-        field: 'custom_code',
+        field: 'customCode',
         allowNull: true,
         type: DataTypes.STRING(10),
     })
@@ -116,21 +116,21 @@ export class AdminAdministrativeAreaLevel3Model extends Model<AdminAdministrativ
     zoom: number;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

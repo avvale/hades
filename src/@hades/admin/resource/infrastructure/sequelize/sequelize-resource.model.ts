@@ -5,7 +5,7 @@ import { IamBoundedContextModel } from '@hades/iam/bounded-context/infrastructur
 import { AdminAttachmentFamilyModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-family.model';
 import { AdminAttachmentFamiliesResourcesModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-families-resources.model';
 
-@Table({ modelName: 'admin_resource', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'AdminResource', freezeTableName: true, timestamps: false })
 export class AdminResourceModel extends Model<AdminResourceModel>
 {
     @Column({
@@ -18,7 +18,7 @@ export class AdminResourceModel extends Model<AdminResourceModel>
 
     @ForeignKey(() => IamBoundedContextModel)
     @Column({
-        field: 'bounded_context_id',
+        field: 'boundedContextId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -44,35 +44,35 @@ export class AdminResourceModel extends Model<AdminResourceModel>
     name: string;
 
     @Column({
-        field: 'has_custom_fields',
+        field: 'hasCustomFields',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     hasCustomFields: boolean;
 
     @Column({
-        field: 'has_attachments',
+        field: 'hasAttachments',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     hasAttachments: boolean;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
