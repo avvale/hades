@@ -1,7 +1,7 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminLangModel } from '@hades/admin/lang/infrastructure/sequelize/sequelize-lang.model';
-import { AdminCountryModel } from 'dist/src/@hades/admin/country';
+import { AdminCountryModel } from '@hades/admin/country';
 
 @Table({ modelName: 'AdminCountryI18n', freezeTableName: true, timestamps: false })
 export class AdminCountryI18nModel extends Model<AdminCountryI18nModel>
