@@ -42,7 +42,7 @@ export enum OAuthClientGrantType {
 
 export interface AdminCreateAdministrativeAreaLevel1Input {
     id: string;
-    countryCommonId: string;
+    countryId: string;
     code: GraphQLString;
     customCode?: GraphQLString;
     name: GraphQLString;
@@ -54,7 +54,7 @@ export interface AdminCreateAdministrativeAreaLevel1Input {
 
 export interface AdminUpdateAdministrativeAreaLevel1Input {
     id: string;
-    countryCommonId?: string;
+    countryId?: string;
     code?: GraphQLString;
     customCode?: GraphQLString;
     name?: GraphQLString;
@@ -66,7 +66,7 @@ export interface AdminUpdateAdministrativeAreaLevel1Input {
 
 export interface AdminCreateAdministrativeAreaLevel2Input {
     id: string;
-    countryCommonId: string;
+    countryId: string;
     administrativeAreaLevel1Id: string;
     code: GraphQLString;
     customCode?: GraphQLString;
@@ -79,7 +79,7 @@ export interface AdminCreateAdministrativeAreaLevel2Input {
 
 export interface AdminUpdateAdministrativeAreaLevel2Input {
     id: string;
-    countryCommonId?: string;
+    countryId?: string;
     administrativeAreaLevel1Id?: string;
     code?: GraphQLString;
     customCode?: GraphQLString;
@@ -92,7 +92,7 @@ export interface AdminUpdateAdministrativeAreaLevel2Input {
 
 export interface AdminCreateAdministrativeAreaLevel3Input {
     id: string;
-    countryCommonId: string;
+    countryId: string;
     administrativeAreaLevel1Id: string;
     administrativeAreaLevel2Id: string;
     code: GraphQLString;
@@ -106,7 +106,7 @@ export interface AdminCreateAdministrativeAreaLevel3Input {
 
 export interface AdminUpdateAdministrativeAreaLevel3Input {
     id: string;
-    countryCommonId?: string;
+    countryId?: string;
     administrativeAreaLevel1Id?: string;
     administrativeAreaLevel2Id?: string;
     code?: GraphQLString;
@@ -263,8 +263,6 @@ export interface AdminCropAttachmentInput {
 
 export interface AdminCreateCountryInput {
     id: string;
-    commonId: string;
-    langId: string;
     iso3166Alpha2: GraphQLString;
     iso3166Alpha3: GraphQLString;
     iso3166Numeric: GraphQLString;
@@ -286,8 +284,6 @@ export interface AdminCreateCountryInput {
 
 export interface AdminUpdateCountryInput {
     id: string;
-    commonId?: string;
-    langId?: string;
     iso3166Alpha2?: GraphQLString;
     iso3166Alpha3?: GraphQLString;
     iso3166Numeric?: GraphQLString;
@@ -576,7 +572,7 @@ export interface OAuthUpdateRefreshTokenInput {
 
 export interface AdminAdministrativeAreaLevel1 {
     id: string;
-    countryCommonId: string;
+    countryId: string;
     country: AdminCountry;
     code: GraphQLString;
     customCode?: GraphQLString;
@@ -775,7 +771,7 @@ export interface IMutation {
 
 export interface AdminAdministrativeAreaLevel2 {
     id: string;
-    countryCommonId: string;
+    countryId: string;
     country: AdminCountry;
     administrativeAreaLevel1Id: string;
     administrativeAreaLevel1: AdminAdministrativeAreaLevel1;
@@ -793,7 +789,7 @@ export interface AdminAdministrativeAreaLevel2 {
 
 export interface AdminAdministrativeAreaLevel3 {
     id: string;
-    countryCommonId: string;
+    countryId: string;
     country: AdminCountry;
     administrativeAreaLevel1Id: string;
     administrativeAreaLevel1: AdminAdministrativeAreaLevel1;
@@ -876,9 +872,6 @@ export interface AdminAttachment {
 
 export interface AdminCountry {
     id: string;
-    commonId: string;
-    langId: string;
-    lang: AdminLang;
     iso3166Alpha2: GraphQLString;
     iso3166Alpha3: GraphQLString;
     iso3166Numeric: GraphQLString;
