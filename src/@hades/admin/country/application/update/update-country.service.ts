@@ -4,8 +4,6 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -41,8 +39,6 @@ export class UpdateCountryService
     public async main(
         payload: {
             id: CountryId,
-            commonId?: CountryCommonId,
-            langId?: CountryLangId,
             iso3166Alpha2?: CountryIso3166Alpha2,
             iso3166Alpha3?: CountryIso3166Alpha3,
             iso3166Numeric?: CountryIso3166Numeric,
@@ -68,8 +64,6 @@ export class UpdateCountryService
         // create aggregate with factory pattern
         const country = AdminCountry.register(
             payload.id,
-            payload.commonId,
-            payload.langId,
             payload.iso3166Alpha2,
             payload.iso3166Alpha3,
             payload.iso3166Numeric,

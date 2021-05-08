@@ -10,18 +10,6 @@ export class UpdateCountryDto
 
     @ApiProperty({
         type        : String,
-        description : 'commonId [input here api field description]',
-    })
-    commonId: string;
-
-    @ApiProperty({
-        type        : String,
-        description : 'langId [input here api field description]',
-    })
-    langId: string;
-
-    @ApiProperty({
-        type        : String,
         description : 'iso3166Alpha2 [input here api field description]',
     })
     iso3166Alpha2: string;

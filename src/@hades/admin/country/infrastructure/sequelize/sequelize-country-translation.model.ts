@@ -1,5 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminLangModel } from '@hades/admin/lang/infrastructure/sequelize/sequelize-lang.model';
 
@@ -14,9 +13,9 @@ export class AdminCountryTranslationModel extends Model<AdminCountryTranslationM
     })
     id: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'common_id',
+        field: 'id',
         allowNull: false,
         type: DataTypes.UUID,
     })

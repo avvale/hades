@@ -6,8 +6,6 @@ import { attachments } from '@hades/admin/attachment/infrastructure/seeds/attach
 import { UpdateAttachmentService } from './update-attachment.service';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -76,8 +74,6 @@ describe('UpdateAttachmentService', () =>
             expect(await service.main(
                 {
                     id: new AttachmentId(attachments[0].id),
-                    commonId: new AttachmentCommonId(attachments[0].commonId),
-                    langId: new AttachmentLangId(attachments[0].langId),
                     attachableModel: new AttachmentAttachableModel(attachments[0].attachableModel),
                     attachableId: new AttachmentAttachableId(attachments[0].attachableId),
                     familyId: new AttachmentFamilyId(attachments[0].familyId),

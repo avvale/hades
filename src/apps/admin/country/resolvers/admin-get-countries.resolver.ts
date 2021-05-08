@@ -3,9 +3,9 @@ import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
-import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
+import { Permissions } from '@hades/iam/shared/domain/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from '@hades/iam/shared/domain/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@hades/iam/shared/domain/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';

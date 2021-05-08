@@ -1,6 +1,4 @@
 export { CountryId } from './country-id';
-export { CountryCommonId } from './country-common-id';
-export { CountryLangId } from './country-lang-id';
 export { CountryIso3166Alpha2 } from './country-iso-3166-alpha-2';
 export { CountryIso3166Alpha3 } from './country-iso-3166-alpha-3';
 export { CountryIso3166Numeric } from './country-iso-3166-numeric';

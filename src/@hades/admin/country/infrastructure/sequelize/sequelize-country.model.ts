@@ -1,7 +1,6 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
 import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
-import { AdminLangModel } from '@hades/admin/lang/infrastructure/sequelize/sequelize-lang.model';
 
 @Table({ modelName: 'AdminCountry', freezeTableName: true, timestamps: false })
 export class AdminCountryModel extends Model<AdminCountryModel>
@@ -13,30 +12,6 @@ export class AdminCountryModel extends Model<AdminCountryModel>
         type: DataTypes.UUID,
     })
     id: string;
-
-    @UnderscoredIndex
-    @Column({
-        field: 'commonId',
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    commonId: string;
-
-    @ForeignKey(() => AdminLangModel)
-    @Column({
-        field: 'langId',
-        allowNull: false,
-        type: DataTypes.UUID,
-        references: {
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
-    })
-    langId: string;
-
-    @BelongsTo(() => AdminLangModel)
-    lang: AdminLangModel;
 
     @Column({
         field: 'iso3166Alpha2',

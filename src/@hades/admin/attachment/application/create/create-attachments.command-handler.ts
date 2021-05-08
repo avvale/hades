@@ -3,8 +3,6 @@ import { CreateAttachmentsCommand } from './create-attachments.command';
 import { CreateAttachmentsService } from './create-attachments.service';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -45,8 +43,6 @@ export class CreateAttachmentsCommandHandler implements ICommandHandler<CreateAt
                 .map(attachment => {
                     return {
                         id: new AttachmentId(attachment.id),
-                        commonId: new AttachmentCommonId(attachment.commonId),
-                        langId: new AttachmentLangId(attachment.langId),
                         attachableModel: new AttachmentAttachableModel(attachment.attachableModel),
                         attachableId: new AttachmentAttachableId(attachment.attachableId),
                         familyId: new AttachmentFamilyId(attachment.familyId),

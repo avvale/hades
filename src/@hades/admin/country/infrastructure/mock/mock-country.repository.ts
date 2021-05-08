@@ -4,8 +4,6 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { ICountryRepository } from '@hades/admin/country/domain/country.repository';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -62,8 +60,6 @@ export class MockCountryRepository extends MockRepository<AdminCountry> implemen
 
             this.collectionSource.push(AdminCountry.register(
                     new CountryId(itemCollection.id),
-                    new CountryCommonId(itemCollection.commonId),
-                    new CountryLangId(itemCollection.langId),
                     new CountryIso3166Alpha2(itemCollection.iso3166Alpha2),
                     new CountryIso3166Alpha3(itemCollection.iso3166Alpha3),
                     new CountryIso3166Numeric(itemCollection.iso3166Numeric),

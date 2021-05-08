@@ -10,18 +10,6 @@ export class CreateAttachmentDto
 
     @ApiProperty({
         type        : String,
-        description : 'commonId [input here api field description]',
-    })
-    commonId: string;
-
-    @ApiProperty({
-        type        : String,
-        description : 'langId [input here api field description]',
-    })
-    langId: string;
-
-    @ApiProperty({
-        type        : String,
         description : 'attachableModel [input here api field description]',
     })
     attachableModel: string;

@@ -2,8 +2,6 @@ import { Injectable} from '@nestjs/common';
 import { MockSeeder } from '@hades/shared/infrastructure/persistence/mock/mock.seeder';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -48,8 +46,6 @@ export class MockCountrySeeder extends MockSeeder<AdminCountry>
             this.collectionSource.push(
                 AdminCountry.register(
                     new CountryId(country.id),
-                    new CountryCommonId(country.commonId),
-                    new CountryLangId(country.langId),
                     new CountryIso3166Alpha2(country.iso3166Alpha2),
                     new CountryIso3166Alpha3(country.iso3166Alpha3),
                     new CountryIso3166Numeric(country.iso3166Numeric),

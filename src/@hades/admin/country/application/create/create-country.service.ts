@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -39,8 +37,6 @@ export class CreateCountryService
     public async main(
         payload: {
             id: CountryId,
-            commonId: CountryCommonId,
-            langId: CountryLangId,
             iso3166Alpha2: CountryIso3166Alpha2,
             iso3166Alpha3: CountryIso3166Alpha3,
             iso3166Numeric: CountryIso3166Numeric,
@@ -64,8 +60,6 @@ export class CreateCountryService
         // create aggregate with factory pattern
         const country = AdminCountry.register(
             payload.id,
-            payload.commonId,
-            payload.langId,
             payload.iso3166Alpha2,
             payload.iso3166Alpha3,
             payload.iso3166Numeric,

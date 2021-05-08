@@ -25,8 +25,6 @@ export class AddAttachmentsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(attachment =>
                     new CreatedAttachmentEvent(
                         attachment.id.value,
-                        attachment.commonId.value,
-                        attachment.langId.value,
                         attachment.attachableModel.value,
                         attachment.attachableId.value,
                         attachment.familyId?.value,
@@ -63,8 +61,6 @@ export class AddAttachmentsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(attachment =>
                     new DeletedAttachmentEvent(
                         attachment.id.value,
-                        attachment.commonId.value,
-                        attachment.langId.value,
                         attachment.attachableModel.value,
                         attachment.attachableId.value,
                         attachment.familyId?.value,

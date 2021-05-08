@@ -4,8 +4,6 @@ import { AdminCountry } from './country.aggregate';
 import { CountryResponse } from './country.response';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
@@ -27,7 +25,6 @@ import {
     CountryUpdatedAt,
     CountryDeletedAt,
 } from './value-objects';
-import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 
 export class CountryMapper implements IMapper
 {
@@ -81,8 +78,6 @@ export class CountryMapper implements IMapper
     {
         return AdminCountry.register(
             new CountryId(country.id),
-            new CountryCommonId(country.commonId),
-            new CountryLangId(country.langId),
             new CountryIso3166Alpha2(country.iso3166Alpha2),
             new CountryIso3166Alpha3(country.iso3166Alpha3),
             new CountryIso3166Numeric(country.iso3166Numeric),
@@ -103,7 +98,6 @@ export class CountryMapper implements IMapper
             new CountryCreatedAt(country.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
             new CountryUpdatedAt(country.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
             new CountryDeletedAt(country.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
-            this.options.eagerLoading ? new LangMapper({ eagerLoading: false }).mapModelToAggregate(country.lang) : undefined,
         );
     }
 
@@ -113,8 +107,6 @@ export class CountryMapper implements IMapper
 
         return new CountryResponse(
             country.id.value,
-            country.commonId.value,
-            country.langId.value,
             country.iso3166Alpha2.value,
             country.iso3166Alpha3.value,
             country.iso3166Numeric.value,
@@ -135,7 +127,6 @@ export class CountryMapper implements IMapper
             country.createdAt.value,
             country.updatedAt.value,
             country.deletedAt.value,
-            this.options.eagerLoading ? new LangMapper({ eagerLoading: false }).mapAggregateToResponse(country.lang) : undefined,
         );
     }
 }

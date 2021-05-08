@@ -12,7 +12,8 @@
         "baseUrl": "./",
         "incremental": true,
         "paths": {
-            "@hades/*": ["src/@hades/*"]
+            "@hades/*": ["src/@hades/*"],
+            "apps/*": ["src/apps/*"]
         }
     },
     "exclude": [

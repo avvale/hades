@@ -1,8 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -36,8 +34,6 @@ import { AdminAttachmentLibrary } from '@hades/admin/attachment-library/domain/a
 export class AdminAttachment extends AggregateRoot
 {
     id: AttachmentId;
-    commonId: AttachmentCommonId;
-    langId: AttachmentLangId;
     attachableModel: AttachmentAttachableModel;
     attachableId: AttachmentAttachableId;
     familyId: AttachmentFamilyId;
@@ -68,8 +64,6 @@ export class AdminAttachment extends AggregateRoot
 
     constructor(
         id: AttachmentId,
-        commonId: AttachmentCommonId,
-        langId: AttachmentLangId,
         attachableModel: AttachmentAttachableModel,
         attachableId: AttachmentAttachableId,
         familyId: AttachmentFamilyId,
@@ -100,8 +94,6 @@ export class AdminAttachment extends AggregateRoot
         super();
 
         this.id = id;
-        this.commonId = commonId;
-        this.langId = langId;
         this.attachableModel = attachableModel;
         this.attachableId = attachableId;
         this.familyId = familyId;
@@ -133,8 +125,6 @@ export class AdminAttachment extends AggregateRoot
 
     static register (
         id: AttachmentId,
-        commonId: AttachmentCommonId,
-        langId: AttachmentLangId,
         attachableModel: AttachmentAttachableModel,
         attachableId: AttachmentAttachableId,
         familyId: AttachmentFamilyId,
@@ -164,8 +154,6 @@ export class AdminAttachment extends AggregateRoot
     {
         return new AdminAttachment(
             id,
-            commonId,
-            langId,
             attachableModel,
             attachableId,
             familyId,
@@ -199,8 +187,6 @@ export class AdminAttachment extends AggregateRoot
         this.apply(
             new CreatedAttachmentEvent(
                 attachment.id.value,
-                attachment.commonId.value,
-                attachment.langId.value,
                 attachment.attachableModel.value,
                 attachment.attachableId.value,
                 attachment.familyId?.value,
@@ -233,8 +219,6 @@ export class AdminAttachment extends AggregateRoot
         this.apply(
             new UpdatedAttachmentEvent(
                 attachment.id.value,
-                attachment.commonId?.value,
-                attachment.langId?.value,
                 attachment.attachableModel?.value,
                 attachment.attachableId?.value,
                 attachment.familyId?.value,
@@ -267,8 +251,6 @@ export class AdminAttachment extends AggregateRoot
         this.apply(
             new DeletedAttachmentEvent(
                 attachment.id.value,
-                attachment.commonId.value,
-                attachment.langId.value,
                 attachment.attachableModel.value,
                 attachment.attachableId.value,
                 attachment.familyId?.value,
@@ -300,8 +282,6 @@ export class AdminAttachment extends AggregateRoot
     {
         return {
             id: this.id.value,
-            commonId: this.commonId.value,
-            langId: this.langId.value,
             attachableModel: this.attachableModel.value,
             attachableId: this.attachableId.value,
             familyId: this.familyId?.value,

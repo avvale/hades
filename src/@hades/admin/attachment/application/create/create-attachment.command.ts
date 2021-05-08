@@ -5,8 +5,6 @@ export class CreateAttachmentCommand
     constructor(
         public readonly payload: {
             id: string,
-            commonId: string,
-            langId: string,
             attachableModel: string,
             attachableId: string,
             familyId?: string,

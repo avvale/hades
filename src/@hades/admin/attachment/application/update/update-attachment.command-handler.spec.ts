@@ -42,8 +42,6 @@ describe('UpdateAttachmentCommandHandler', () =>
                 new UpdateAttachmentCommand(
                     {
                         id: attachments[0].id,
-                        commonId: attachments[0].commonId,
-                        langId: attachments[0].langId,
                         attachableModel: attachments[0].attachableModel,
                         attachableId: attachments[0].attachableId,
                         familyId: attachments[0].familyId,
