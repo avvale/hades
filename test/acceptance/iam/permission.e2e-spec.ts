@@ -2,8 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IPermissionRepository } from '@hades/iam/permission/domain/permission.repository';
-import { MockPermissionRepository } from '@hades/iam/permission/infrastructure/mock/mock-permission.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { MockPermissionSeeder } from '@hades/iam/permission/infrastructure/mock/mock-permission.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
@@ -13,6 +12,7 @@ import * as _ from 'lodash';
 import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 
@@ -21,7 +21,8 @@ const importForeignModules = [];
 describe('permission', () =>
 {
     let app: INestApplication;
-    let repository: MockPermissionRepository;
+    let repository: IPermissionRepository;
+    let seeder: MockPermissionSeeder;
     let testJwt: string;
 
     beforeAll(async () =>
@@ -31,11 +32,12 @@ describe('permission', () =>
                     ...importForeignModules,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
                     }),
                     JwtModule.register({
                         privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
@@ -46,11 +48,10 @@ describe('permission', () =>
                     }),
                 ],
                 providers: [
+                    MockPermissionSeeder,
                     TestingJwtService,
                 ]
             })
-            .overrideProvider(IPermissionRepository)
-            .useClass(MockPermissionRepository)
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
             .overrideGuard(AuthorizationGuard)
@@ -58,20 +59,14 @@ describe('permission', () =>
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockPermissionRepository>module.get<IPermissionRepository>(IPermissionRepository);
-        testJwt     =  module.get(TestingJwtService).getJwt();
+        repository  = module.get<IPermissionRepository>(IPermissionRepository);
+        seeder      = module.get<MockPermissionSeeder>(MockPermissionSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
-    });
-
-    test(`/REST:POST iam/permission - Got 409 Conflict, item already exist in database`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/permission')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send(repository.collectionResponse[0])
-            .expect(409);
     });
 
     test(`/REST:POST iam/permission - Got 400 Conflict, PermissionId property can not to be null`, () =>
@@ -234,19 +229,14 @@ describe('permission', () =>
     });
 
 
-    test(`/REST:POST iam/permission`, () =>
+    test(`/REST:POST iam/permission - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
-                boundedContextId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
-                roleIds: [],
-            })
-            .expect(201);
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
     test(`/REST:GET iam/permissions/paginate`, () =>
@@ -264,10 +254,20 @@ describe('permission', () =>
             })
             .expect(200)
             .expect({
-                total   : repository.collectionResponse.length,
-                count   : repository.collectionResponse.length,
-                rows    : repository.collectionResponse.slice(0, 5)
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
+    });
+
+    test(`/REST:GET iam/permissions`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/permissions')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .expect(seeder.collectionResponse);
     });
 
     test(`/REST:GET iam/permission - Got 404 Not Found`, () =>
@@ -281,11 +281,26 @@ describe('permission', () =>
                 {
                     where:
                     {
-                        id: 'e80ddf7f-5274-4cb9-9e09-a0233e77d1df'
+                        id: '8f2f5c59-71af-4765-aa01-82b5f4677455'
                     }
                 }
             })
             .expect(404);
+    });
+
+    test(`/REST:POST iam/permission`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/permission')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                boundedContextId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                roleIds: [],
+            })
+            .expect(201);
     });
 
     test(`/REST:GET iam/permission`, () =>
@@ -304,13 +319,15 @@ describe('permission', () =>
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:GET iam/permission/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/fb333bb3-f936-431f-a691-e0356f520156')
+            .get('/iam/permission/32a98cde-1dea-420e-b1b8-71adf533ad94')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -323,17 +340,9 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
-    });
-
-    test(`/REST:GET iam/permissions`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/permissions')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .expect(200)
-            .expect(repository.collectionResponse);
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:PUT iam/permission - Got 404 Not Found`, () =>
@@ -364,13 +373,15 @@ describe('permission', () =>
                 roleIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE iam/permission/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/9fedc083-3f05-40ff-8221-0cb335624965')
+            .delete('/iam/permission/81bd4e6b-e573-49f8-816c-34fad28c51e2')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -404,7 +415,7 @@ describe('permission', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -412,38 +423,6 @@ describe('permission', () =>
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
-            });
-    });
-
-    test(`/GraphQL iamCreatePermission`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    mutation ($payload:IamCreatePermissionInput!)
-                    {
-                        iamCreatePermission (payload:$payload)
-                        {
-                            id
-                            name
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: 'b5ef13cc-e1bc-443b-a09a-848a4296ef9b',
-                        name: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio',
-                        boundedContextId: '56fc906a-c5a5-4eaf-9bb6-ffe878ad0071',
-                        roleIds: [],
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamCreatePermission).toHaveProperty('id', 'b5ef13cc-e1bc-443b-a09a-848a4296ef9b');
             });
     });
 
@@ -476,9 +455,71 @@ describe('permission', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamPaginatePermissions.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginatePermissions.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginatePermissions.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.iamPaginatePermissions.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginatePermissions.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginatePermissions.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+            });
+    });
+
+    test(`/GraphQL iamGetPermissions`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamGetPermissions (query:$query)
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {}
+            })
+            .expect(200)
+            .then(res => {
+                for (const [index, value] of res.body.data.iamGetPermissions.entries())
+                {
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                }
+            });
+    });
+
+    test(`/GraphQL iamCreatePermission`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamCreatePermissionInput!)
+                    {
+                        iamCreatePermission (payload:$payload)
+                        {
+                            id
+                            name
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        boundedContextId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        roleIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamCreatePermission).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -507,7 +548,7 @@ describe('permission', () =>
                     {
                         where:
                         {
-                            id: '2209574a-c24b-42e3-92f5-1bfd0a1e11a0'
+                            id: '12292504-abe5-4af2-919f-8e006d7fe065'
                         }
                     }
                 }
@@ -576,7 +617,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: '55bad7f1-963f-4a18-92e6-d8c5844d2646'
+                    id: '271771b9-e690-4759-824a-e90a3b513478'
                 }
             })
             .expect(200)
@@ -613,36 +654,6 @@ describe('permission', () =>
             .expect(200)
             .then(res => {
                 expect(res.body.data.iamFindPermissionById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
-            });
-    });
-
-    test(`/GraphQL iamGetPermissions`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamGetPermissions (query:$query)
-                        {
-                            id
-                            name
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {}
-            })
-            .expect(200)
-            .then(res => {
-                for (const [index, value] of res.body.data.iamGetPermissions.entries())
-                {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
-                }
             });
     });
 
@@ -736,7 +747,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: '03bf87fd-7e2d-4dec-a8b2-85e34d3d6c29'
+                    id: '0ab1dc1d-ca8e-4046-b90b-906600e4ab7a'
                 }
             })
             .expect(200)

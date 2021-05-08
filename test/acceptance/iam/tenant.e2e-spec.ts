@@ -2,8 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ITenantRepository } from '@hades/iam/tenant/domain/tenant.repository';
-import { MockTenantRepository } from '@hades/iam/tenant/infrastructure/mock/mock-tenant.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { MockTenantSeeder } from '@hades/iam/tenant/infrastructure/mock/mock-tenant.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
@@ -13,6 +12,7 @@ import * as _ from 'lodash';
 import { JwtModule } from '@nestjs/jwt';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
 import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
 import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 
@@ -21,7 +21,8 @@ const importForeignModules = [];
 describe('tenant', () =>
 {
     let app: INestApplication;
-    let repository: MockTenantRepository;
+    let repository: ITenantRepository;
+    let seeder: MockTenantSeeder;
     let testJwt: string;
 
     beforeAll(async () =>
@@ -31,11 +32,12 @@ describe('tenant', () =>
                     ...importForeignModules,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
                     }),
                     JwtModule.register({
                         privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
@@ -46,11 +48,10 @@ describe('tenant', () =>
                     }),
                 ],
                 providers: [
+                    MockTenantSeeder,
                     TestingJwtService,
                 ]
             })
-            .overrideProvider(ITenantRepository)
-            .useClass(MockTenantRepository)
             .overrideProvider(IAccountRepository)
             .useClass(MockAccountRepository)
             .overrideGuard(AuthorizationGuard)
@@ -58,20 +59,14 @@ describe('tenant', () =>
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockTenantRepository>module.get<ITenantRepository>(ITenantRepository);
-        testJwt     =  module.get(TestingJwtService).getJwt();
+        repository  = module.get<ITenantRepository>(ITenantRepository);
+        seeder      = module.get<MockTenantSeeder>(MockTenantSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
-    });
-
-    test(`/REST:POST iam/tenant - Got 409 Conflict, item already exist in database`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/tenant')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send(repository.collectionResponse[0])
-            .expect(409);
     });
 
     test(`/REST:POST iam/tenant - Got 400 Conflict, TenantId property can not to be null`, () =>
@@ -343,6 +338,65 @@ describe('tenant', () =>
             });
     });
 
+    test(`/REST:POST iam/tenant - Got 409 Conflict, item already exist in database`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
+    });
+
+    test(`/REST:GET iam/tenants/paginate`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/tenants/paginate')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    offset: 0,
+                    limit: 5
+                }
+            })
+            .expect(200)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
+            });
+    });
+
+    test(`/REST:GET iam/tenants`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/tenants')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .expect(seeder.collectionResponse);
+    });
+
+    test(`/REST:GET iam/tenant - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '4450bd3c-6865-4264-8a63-ba399f4c80db'
+                    }
+                }
+            })
+            .expect(404);
+    });
+
     test(`/REST:POST iam/tenant`, () =>
     {
         return request(app.getHttpServer())
@@ -361,45 +415,6 @@ describe('tenant', () =>
             .expect(201);
     });
 
-    test(`/REST:GET iam/tenants/paginate`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/tenants/paginate')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query:
-                {
-                    offset: 0,
-                    limit: 5
-                }
-            })
-            .expect(200)
-            .expect({
-                total   : repository.collectionResponse.length,
-                count   : repository.collectionResponse.length,
-                rows    : repository.collectionResponse.slice(0, 5)
-            });
-    });
-
-    test(`/REST:GET iam/tenant - Got 404 Not Found`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/tenant')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query:
-                {
-                    where:
-                    {
-                        id: '0813b6d0-7832-4a50-92b3-5b2c145c4f53'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
     test(`/REST:GET iam/tenant`, () =>
     {
         return request(app.getHttpServer())
@@ -416,13 +431,15 @@ describe('tenant', () =>
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:GET iam/tenant/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant/3fd35dff-18e6-44c8-951e-3fc35d4c640d')
+            .get('/iam/tenant/06045fe5-968c-4e0d-a7b3-aa916aa46603')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -435,17 +452,9 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
-    });
-
-    test(`/REST:GET iam/tenants`, () =>
-    {
-        return request(app.getHttpServer())
-            .get('/iam/tenants')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .expect(200)
-            .expect(repository.collectionResponse);
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:PUT iam/tenant - Got 404 Not Found`, () =>
@@ -482,13 +491,15 @@ describe('tenant', () =>
                 accountIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '28fe4bec-6e5a-475d-b118-1567f2fd5d25'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE iam/tenant/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/a3a2a71e-9a82-46de-b37b-6947d0ffec67')
+            .delete('/iam/tenant/dbc021ca-0808-47a7-9bf4-ba08279b5d68')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -526,7 +537,7 @@ describe('tenant', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -534,45 +545,6 @@ describe('tenant', () =>
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
-            });
-    });
-
-    test(`/GraphQL iamCreateTenant`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    mutation ($payload:IamCreateTenantInput!)
-                    {
-                        iamCreateTenant (payload:$payload)
-                        {
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '2a649b4a-3fa3-4c88-9c5f-ec1943ee2efa',
-                        name: '58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qio',
-                        code: 'cdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4k',
-                        logo: 'je3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59',
-                        isActive: true,
-                        data: {"foo":33664,"bar":91292,"bike":"?yGqBiu!.;","a":46790,"b":"J2JrTgHYaw","name":13571,"prop":"wP3Ll{3dXb"},
-                        accountIds: [],
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamCreateTenant).toHaveProperty('id', '2a649b4a-3fa3-4c88-9c5f-ec1943ee2efa');
             });
     });
 
@@ -605,9 +577,82 @@ describe('tenant', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamPaginateTenants.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateTenants.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateTenants.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.iamPaginateTenants.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateTenants.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateTenants.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+            });
+    });
+
+    test(`/GraphQL iamGetTenants`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamGetTenants (query:$query)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {}
+            })
+            .expect(200)
+            .then(res => {
+                for (const [index, value] of res.body.data.iamGetTenants.entries())
+                {
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                }
+            });
+    });
+
+    test(`/GraphQL iamCreateTenant`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamCreateTenantInput!)
+                    {
+                        iamCreateTenant (payload:$payload)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        logo: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        isActive: false,
+                        data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                        accountIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamCreateTenant).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
@@ -640,7 +685,7 @@ describe('tenant', () =>
                     {
                         where:
                         {
-                            id: 'c7f7c69e-55f2-43bb-b364-47a74a2f37bf'
+                            id: '4916bacd-eb5f-4452-b74c-ceeca2b46beb'
                         }
                     }
                 }
@@ -717,7 +762,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '864a3250-7910-4ffe-825c-ecc57fea30f7'
+                    id: '208c0d93-02bf-454c-9836-d91ba7b0a953'
                 }
             })
             .expect(200)
@@ -758,40 +803,6 @@ describe('tenant', () =>
             .expect(200)
             .then(res => {
                 expect(res.body.data.iamFindTenantById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
-            });
-    });
-
-    test(`/GraphQL iamGetTenants`, () =>
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamGetTenants (query:$query)
-                        {
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {}
-            })
-            .expect(200)
-            .then(res => {
-                for (const [index, value] of res.body.data.iamGetTenants.entries())
-                {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
-                }
             });
     });
 
@@ -903,7 +914,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: 'bf1024ae-e914-491b-9455-f96273943bf8'
+                    id: '58c78864-28c8-4da9-9486-7aba69d2db01'
                 }
             })
             .expect(200)

@@ -1,5 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamUserModel } from '@hades/iam/user/infrastructure/sequelize/sequelize-user.model';
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
@@ -7,7 +6,7 @@ import { IamRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { IamTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
 
-@Table({ modelName: 'iam_account', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamAccount', freezeTableName: true, timestamps: false })
 export class IamAccountModel extends Model<IamAccountModel>
 {
     @Column({
@@ -34,36 +33,36 @@ export class IamAccountModel extends Model<IamAccountModel>
     email: string;
 
     @Column({
-        field: 'is_active',
+        field: 'isActive',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     isActive: boolean;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'client_id',
+        field: 'clientId',
         allowNull: false,
         type: DataTypes.UUID,
     })
     clientId: string;
 
     @Column({
-        field: 'd_application_codes',
+        field: 'dApplicationCodes',
         allowNull: false,
         type: DataTypes.JSON,
     })
     dApplicationCodes: any;
 
     @Column({
-        field: 'd_permissions',
+        field: 'dPermissions',
         allowNull: false,
         type: DataTypes.JSON,
     })
     dPermissions: any;
 
     @Column({
-        field: 'd_tenants',
+        field: 'dTenants',
         allowNull: false,
         type: DataTypes.JSON,
     })
@@ -89,21 +88,21 @@ export class IamAccountModel extends Model<IamAccountModel>
     user: IamUserModel;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

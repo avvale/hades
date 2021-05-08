@@ -5,7 +5,7 @@ import { IamBoundedContextModel } from '@hades/iam/bounded-context/infrastructur
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
 import { IamPermissionsRolesModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model';
 
-@Table({ modelName: 'iam_permission', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamPermission', freezeTableName: true, timestamps: false })
 export class IamPermissionModel extends Model<IamPermissionModel>
 {
     @Column({
@@ -25,7 +25,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
 
     @ForeignKey(() => IamBoundedContextModel)
     @Column({
-        field: 'bounded_context_id',
+        field: 'boundedContextId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -44,21 +44,21 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     roles: IamRoleModel[];
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

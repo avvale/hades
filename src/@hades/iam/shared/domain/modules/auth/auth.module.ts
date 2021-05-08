@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { SharedProviders } from '@hades/shared';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { EnvironmentModule } from './../environment.module';
+import { EnvironmentModule } from 'apps/shared/modules/environment.module';
 import * as fs from 'fs';
 
 @Module({
