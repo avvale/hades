@@ -3,7 +3,7 @@ import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequel
 import { DataTypes } from 'sequelize';
 import { OAuthAccessTokenModel } from '@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model';
 
-@Table({ modelName: 'o_auth_refresh_token', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'OAuthRefreshToken', freezeTableName: true, timestamps: false })
 export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
 {
     @Column({
@@ -16,7 +16,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
 
     @ForeignKey(() => OAuthAccessTokenModel)
     @Column({
-        field: 'access_token_id',
+        field: 'accessTokenId',
         allowNull: false,
         type: DataTypes.UUID,
     })
@@ -33,35 +33,35 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     token: string;
 
     @Column({
-        field: 'is_revoked',
+        field: 'isRevoked',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     isRevoked: boolean;
 
     @Column({
-        field: 'expires_at',
+        field: 'expiresAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     expiresAt: string;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

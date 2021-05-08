@@ -5,7 +5,7 @@ import { OAuthAccessTokenModel } from '@hades/o-auth/access-token/infrastructure
 import { OAuthApplicationModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-application.model';
 import { OAuthApplicationsClientsModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
 
-@Table({ modelName: 'o_auth_client', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'OAuthClient', freezeTableName: true, timestamps: false })
 export class OAuthClientModel extends Model<OAuthClientModel>
 {
     @Column({
@@ -17,7 +17,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     id: string;
 
     @Column({
-        field: 'grant_type',
+        field: 'grantType',
         allowNull: false,
         type: DataTypes.ENUM('AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD'),
     })
@@ -38,7 +38,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     secret: string;
 
     @Column({
-        field: 'auth_url',
+        field: 'authUrl',
         allowNull: true,
         type: DataTypes.STRING(2048),
     })
@@ -52,28 +52,28 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     redirect: string;
 
     @Column({
-        field: 'expired_access_token',
+        field: 'expiredAccessToken',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
     expiredAccessToken: number;
 
     @Column({
-        field: 'expired_refresh_token',
+        field: 'expiredRefreshToken',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
     expiredRefreshToken: number;
 
     @Column({
-        field: 'is_active',
+        field: 'isActive',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     isActive: boolean;
 
     @Column({
-        field: 'is_master',
+        field: 'isMaster',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
@@ -88,21 +88,21 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     accessTokens: OAuthAccessTokenModel[];
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

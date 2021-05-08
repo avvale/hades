@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "7ab5f330-be0c-4535-9c40-9fa643ca467e",
+		"_postman_id"   : "67a8833b-dea0-427e-bf38-1dc98a112121",
 		"name"          : "@hades - o-auth/application",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "754981c8-94fe-432c-9dd1-729745b8568b",
+			"id": "a2644997-41c7-44e6-a403-d5de64e2ff43",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

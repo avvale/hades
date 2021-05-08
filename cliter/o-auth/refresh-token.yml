@@ -64,3 +64,5 @@ excluded:
   - src/apps/o-auth/refresh-token/resolvers/o-auth-create-refresh-tokens.resolver.ts
   - src/apps/o-auth/refresh-token/resolvers/o-auth-update-refresh-token.resolver.spec.ts
   - src/apps/o-auth/refresh-token/resolvers/o-auth-update-refresh-token.resolver.ts
+  - src/apps/o-auth/refresh-token/seeder/seeder.ts
+  - src/apps/o-auth/refresh-token/seeder/seeder.module.ts

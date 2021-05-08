@@ -4,7 +4,7 @@ import { DataTypes } from 'sequelize';
 import { OAuthRefreshTokenModel } from '@hades/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model';
 import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/sequelize-client.model';
 
-@Table({ modelName: 'o_auth_access_token', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'OAuthAccessToken', freezeTableName: true, timestamps: false })
 export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
 {
     @Column({
@@ -17,7 +17,7 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
 
     @ForeignKey(() => OAuthClientModel)
     @Column({
-        field: 'client_id',
+        field: 'clientId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -32,7 +32,7 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
     client: OAuthClientModel;
 
     @Column({
-        field: 'account_id',
+        field: 'accountId',
         allowNull: true,
         type: DataTypes.UUID,
     })
@@ -53,14 +53,14 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
     name: string;
 
     @Column({
-        field: 'is_revoked',
+        field: 'isRevoked',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     isRevoked: boolean;
 
     @Column({
-        field: 'expires_at',
+        field: 'expiresAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
@@ -71,21 +71,21 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
     refreshToken: OAuthRefreshTokenModel;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
