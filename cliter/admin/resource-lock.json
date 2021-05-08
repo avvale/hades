@@ -263,11 +263,11 @@
         },
         {
             "path": "src/@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed.ts",
-            "integrity": "sha1:3da5e4552c4912b866dabcc389bd107f767f58cf"
+            "integrity": "sha1:5dde607bc1756516dbb184879cbfdaa98d0045b9"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-1/infrastructure/sequelize/sequelize-administrative-area-level-1.model.ts",
-            "integrity": "sha1:13c127addc77e057ec0fd903cb41fa87b8ddc6a2"
+            "integrity": "sha1:3ed0f89c3ec0bae91e2205fcc24ea38135994745"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-1/infrastructure/sequelize/sequelize-administrative-area-level-1.repository.ts",
@@ -495,7 +495,7 @@
         },
         {
             "path": "postman/admin.administrative-area-level-1.postman.json",
-            "integrity": "sha1:78066b964d7da76b228694149d28793010019b0e"
+            "integrity": "sha1:54a798e0a50cd7d6ef9c0b88b3424eea337409b8"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-2/application/create/create-administrative-area-level-2.command-handler.spec.ts",
@@ -759,11 +759,11 @@
         },
         {
             "path": "src/@hades/admin/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed.ts",
-            "integrity": "sha1:b31bfd5fddbd379ba0250da13b97cf53dd37d5a9"
+            "integrity": "sha1:714ca90e4c582e5c88b4da87beeeca0590a3453c"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-2/infrastructure/sequelize/sequelize-administrative-area-level-2.model.ts",
-            "integrity": "sha1:cdfb1f46eec4068ee78808c4e9d19302807407c9"
+            "integrity": "sha1:5a15306ec75d7a6cecea1de0153efe79648571bc"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-2/infrastructure/sequelize/sequelize-administrative-area-level-2.repository.ts",
@@ -995,7 +995,7 @@
         },
         {
             "path": "postman/admin.administrative-area-level-2.postman.json",
-            "integrity": "sha1:028d5f5932bea0d35df5ebd5f5b69cfb5a0ba24e"
+            "integrity": "sha1:bd3f1154d1951b798d911d21219138462c71b705"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-3/application/create/create-administrative-area-level-3.command-handler.spec.ts",
@@ -1259,11 +1259,11 @@
         },
         {
             "path": "src/@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed.ts",
-            "integrity": "sha1:1aaed7593503e72ab8f7a51296032599f72e74cf"
+            "integrity": "sha1:e68f5b30b97f2b62335a49b9cac615c2ec31d2ee"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-3/infrastructure/sequelize/sequelize-administrative-area-level-3.model.ts",
-            "integrity": "sha1:542f635122335f4a12a1c7758f17ce54461703e6"
+            "integrity": "sha1:cd894ffd4284eb2e48771f64a4f74ef9f84ea630"
         },
         {
             "path": "src/@hades/admin/administrative-area-level-3/infrastructure/sequelize/sequelize-administrative-area-level-3.repository.ts",
@@ -1499,7 +1499,7 @@
         },
         {
             "path": "postman/admin.administrative-area-level-3.postman.json",
-            "integrity": "sha1:155d8518b5c56e3f79eaaefbfacdbc0621706ffc"
+            "integrity": "sha1:f182ac739a1dbe1405681584caa2ff3e4135e755"
         },
         {
             "path": "src/@hades/admin/attachment-family/application/create/create-attachment-family.command-handler.spec.ts",
@@ -1763,11 +1763,11 @@
         },
         {
             "path": "src/@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed.ts",
-            "integrity": "sha1:de6e3caecfaaad849c858fdd87b57f147637219d"
+            "integrity": "sha1:db017f1c6c9134dd3e3342439732819fc1016423"
         },
         {
             "path": "src/@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-family.model.ts",
-            "integrity": "sha1:9522bba18d4fc4789b554066ea5e22c36edf8923"
+            "integrity": "sha1:f8df370db662ed941a801c0d893a78d4e9e742f2"
         },
         {
             "path": "src/@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-family.repository.ts",
@@ -1999,7 +1999,7 @@
         },
         {
             "path": "postman/admin.attachment-family.postman.json",
-            "integrity": "sha1:a6bd7cbc61328f5458257805e8055ef770bc81b5"
+            "integrity": "sha1:09aa94c2ef8b2cb39c00e44c8e423384ffbb73ce"
         },
         {
             "path": "src/@hades/admin/attachment-library/application/create/create-attachment-library.command-handler.spec.ts",
@@ -2263,11 +2263,11 @@
         },
         {
             "path": "src/@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed.ts",
-            "integrity": "sha1:21d8cc61b3a75b432c549383d8903909f597fa58"
+            "integrity": "sha1:0499452897052b58decf84017c916f98d56c51cd"
         },
         {
             "path": "src/@hades/admin/attachment-library/infrastructure/sequelize/sequelize-attachment-library.model.ts",
-            "integrity": "sha1:7dc30ca9a2cf21b2b30f76e243b6fe7c33bd657f"
+            "integrity": "sha1:986d7083b7fad0347b94e33d177ae1be70463f80"
         },
         {
             "path": "src/@hades/admin/attachment-library/infrastructure/sequelize/sequelize-attachment-library.repository.ts",
@@ -2503,7 +2503,7 @@
         },
         {
             "path": "postman/admin.attachment-library.postman.json",
-            "integrity": "sha1:a41e3474ac9fe825276060b5716a55c25403c485"
+            "integrity": "sha1:7ce1a2cb40c6b6f082f684ca66feec7c8056f712"
         },
         {
             "path": "src/@hades/admin/attachment/application/create/create-attachment.command-handler.spec.ts",
@@ -2767,11 +2767,11 @@
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/seeds/attachment.seed.ts",
-            "integrity": "sha1:4beae4f72ed2550ae9500b5d9f7851d6b6849d97"
+            "integrity": "sha1:69c8be5cf9b72b420799ea9218b357a86ada53f8"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.model.ts",
-            "integrity": "sha1:41c0af760e56db006421abaa363790381f3f09f5"
+            "integrity": "sha1:e8eac0957bedce6de80ec0383656dd2477b75668"
         },
         {
             "path": "src/@hades/admin/attachment/infrastructure/sequelize/sequelize-attachment.repository.ts",
@@ -3047,7 +3047,7 @@
         },
         {
             "path": "postman/admin.attachment.postman.json",
-            "integrity": "sha1:edbb22a7cd85c5b9701647570de95c43429b9ea6"
+            "integrity": "sha1:8bfff4082b1ce0e00b7592b77e69bb9ede95adff"
         },
         {
             "path": "src/@hades/admin/country/application/create/create-country.command-handler.spec.ts",
@@ -3311,11 +3311,11 @@
         },
         {
             "path": "src/@hades/admin/country/infrastructure/seeds/country.seed.ts",
-            "integrity": "sha1:fad048acebe7fe5eff5d7216b8ea26dd6d13cb25"
+            "integrity": "sha1:b82d7b57b7afd0637b73fc01a083b7be545c0cd3"
         },
         {
             "path": "src/@hades/admin/country/infrastructure/sequelize/sequelize-country.model.ts",
-            "integrity": "sha1:969610c646ae5288c4914fd02e6b2bac0f59d4f8"
+            "integrity": "sha1:06506bab0511339b7666d18a6dd076c332f5ff37"
         },
         {
             "path": "src/@hades/admin/country/infrastructure/sequelize/sequelize-country.repository.ts",
@@ -3579,27 +3579,27 @@
         },
         {
             "path": "postman/admin.country.postman.json",
-            "integrity": "sha1:d569ea85f185ecc6773bb7948056ef343f2acaac"
+            "integrity": "sha1:75f0fda09bc9cfaec55754e650499b0db573c5fd"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-lang.command-handler.spec.ts",
-            "integrity": "sha1:b24dff740606591f70504d6dbba71c34a541c3d6"
+            "integrity": "sha1:7e6f0f4c6f6c31b8250e90ff43edbd910dfa719c"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-lang.command-handler.ts",
-            "integrity": "sha1:c021c85c233b767a2bba2bdc715c57f887961853"
+            "integrity": "sha1:8498b037cbd8ea475c249b0f7a2b2900b015f026"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-lang.command.ts",
-            "integrity": "sha1:2026f3c022b07961a139ca233e299cc63ff7e2a2"
+            "integrity": "sha1:20dbe8183528034ddc056c74277e936b0988c978"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-lang.service.spec.ts",
-            "integrity": "sha1:2bff6c175cdf833ae89de99358e1ae68a086ef61"
+            "integrity": "sha1:a9b925022d0acb2955b288419488129cb91b2d74"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-lang.service.ts",
-            "integrity": "sha1:c119a18679053e680fd3ffb9b304ff21f1adaf11"
+            "integrity": "sha1:9deb13a44116533cce17bfbad263eae0f73f7d93"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-langs.command-handler.spec.ts",
@@ -3607,11 +3607,11 @@
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-langs.command-handler.ts",
-            "integrity": "sha1:36e4efe31872994c254de1fe3ac6226ae7f9c305"
+            "integrity": "sha1:5bab5af23e805f1dca4bbf00566d7741066c21cc"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-langs.command.ts",
-            "integrity": "sha1:e065150d04723396276c87e293553bc717a4ee04"
+            "integrity": "sha1:487807d0fcd999d1237ee7e4c1f8091eaa050be3"
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-langs.service.spec.ts",
@@ -3619,7 +3619,7 @@
         },
         {
             "path": "src/@hades/admin/lang/application/create/create-langs.service.ts",
-            "integrity": "sha1:73011490004b2c76aa5ef24e3b87418e3dac0963"
+            "integrity": "sha1:93e4c9a601c934c58a846781d71f06671adca5ea"
         },
         {
             "path": "src/@hades/admin/lang/application/delete/delete-lang-by-id.command-handler.spec.ts",
@@ -3663,7 +3663,7 @@
         },
         {
             "path": "src/@hades/admin/lang/application/events/add-langs-context.event.ts",
-            "integrity": "sha1:3cca104076c013baab5d17735e3bfb167ea215da"
+            "integrity": "sha1:76029930ff1ba2b60092076a124d3c22d8458d0c"
         },
         {
             "path": "src/@hades/admin/lang/application/events/created-lang.event-handler.ts",
@@ -3671,7 +3671,7 @@
         },
         {
             "path": "src/@hades/admin/lang/application/events/created-lang.event.ts",
-            "integrity": "sha1:ef37155cf011062af209fdc33de37f264894596a"
+            "integrity": "sha1:e5a6efb7f9b09525b47750b53ce3d303d43db81d"
         },
         {
             "path": "src/@hades/admin/lang/application/events/created-langs.event-handler.ts",
@@ -3687,7 +3687,7 @@
         },
         {
             "path": "src/@hades/admin/lang/application/events/deleted-lang.event.ts",
-            "integrity": "sha1:5f682b6032cff5b28d4af5074b763d7b6be1509f"
+            "integrity": "sha1:37915bc69e135460ee774990958abfbc191085e7"
         },
         {
             "path": "src/@hades/admin/lang/application/events/deleted-langs.event-handler.ts",
@@ -3703,7 +3703,7 @@
         },
         {
             "path": "src/@hades/admin/lang/application/events/updated-lang.event.ts",
-            "integrity": "sha1:71958c66372a19a324946ab61a091f8492734d71"
+            "integrity": "sha1:1e4d67c0d005ffd7f1d82337dc9f71fb8e5a6c0e"
         },
         {
             "path": "src/@hades/admin/lang/application/find/find-lang-by-id.query-handler.spec.ts",
@@ -3791,31 +3791,31 @@
         },
         {
             "path": "src/@hades/admin/lang/application/update/update-lang.command-handler.spec.ts",
-            "integrity": "sha1:7ad28d8e876c27e6a30aee0a03ad97583cc2e42d"
+            "integrity": "sha1:009e20ef869ca44e4c6c408f57d4f95b01a8023a"
         },
         {
             "path": "src/@hades/admin/lang/application/update/update-lang.command-handler.ts",
-            "integrity": "sha1:6a1e110f13a2dd589293e5442783fa358e15d5f1"
+            "integrity": "sha1:46f16d0b9cb258b258784370cc92bfba73efd0c4"
         },
         {
             "path": "src/@hades/admin/lang/application/update/update-lang.command.ts",
-            "integrity": "sha1:46252b0ea185a2cebae2c97d0d086cb18968c93f"
+            "integrity": "sha1:5301815855a5603835f6b1861d04bfb1df23e76c"
         },
         {
             "path": "src/@hades/admin/lang/application/update/update-lang.service.spec.ts",
-            "integrity": "sha1:d2ef98680eed52213853482a040cfc8f36b57985"
+            "integrity": "sha1:2962eefe41529c7500e5a64ae334201f9cb97759"
         },
         {
             "path": "src/@hades/admin/lang/application/update/update-lang.service.ts",
-            "integrity": "sha1:8eeec5b4c6184a73a433d4b50c1ce0ae6e028a67"
+            "integrity": "sha1:e30939e4eeea8565b4af52208775053ef77e2c44"
         },
         {
             "path": "src/@hades/admin/lang/domain/lang.aggregate.ts",
-            "integrity": "sha1:518178e16930d3dcab982c2964df30ed34796b4e"
+            "integrity": "sha1:a476d00b034d7566d246e7ccb8738550233533e1"
         },
         {
             "path": "src/@hades/admin/lang/domain/lang.mapper.ts",
-            "integrity": "sha1:fd257a75e466d26b0bc53e4eea4a24b446c740ef"
+            "integrity": "sha1:0d11c67a19c6119e373d0a42d9f910dbf10a19ed"
         },
         {
             "path": "src/@hades/admin/lang/domain/lang.repository.ts",
@@ -3823,11 +3823,11 @@
         },
         {
             "path": "src/@hades/admin/lang/domain/lang.response.ts",
-            "integrity": "sha1:05dd46b6ef8dcd60e182bccf0f7e87d101c791a6"
+            "integrity": "sha1:7d184af7fd3deccddddc03614cd789760906efc0"
         },
         {
             "path": "src/@hades/admin/lang/domain/value-objects/index.ts",
-            "integrity": "sha1:84c6ea9d44a730899001a215da9a37e8dac67af9"
+            "integrity": "sha1:89da28bbee4b530e2c41c367b50984d4641e8b60"
         },
         {
             "path": "src/@hades/admin/lang/index.ts",
@@ -3835,19 +3835,19 @@
         },
         {
             "path": "src/@hades/admin/lang/infrastructure/mock/mock-lang.repository.ts",
-            "integrity": "sha1:d111979f424ab6ffeae559bd5681917139365117"
+            "integrity": "sha1:1449b399e26a63e6801fb059de9b5787fc6a9d58"
         },
         {
             "path": "src/@hades/admin/lang/infrastructure/mock/mock-lang.seeder.ts",
-            "integrity": "sha1:489cb38a195aae36cd5bc9d2f5b6afaa935b067c"
+            "integrity": "sha1:337b81af681e05e5615c2ba67624d76924e069d7"
         },
         {
             "path": "src/@hades/admin/lang/infrastructure/seeds/lang.seed.ts",
-            "integrity": "sha1:b8843d30bbc7992987680dd41c51e1a7fcd4f102"
+            "integrity": "sha1:241e3d8a48b50e79f0b38504dd0b5a6c29b96bd8"
         },
         {
             "path": "src/@hades/admin/lang/infrastructure/sequelize/sequelize-lang.model.ts",
-            "integrity": "sha1:b3ff510334ea459093c68a5970acfee19bb9389c"
+            "integrity": "sha1:5a75bb3fc7ecbc19350368f40e5d018977117dea"
         },
         {
             "path": "src/@hades/admin/lang/infrastructure/sequelize/sequelize-lang.repository.ts",
@@ -3876,6 +3876,10 @@
         {
             "path": "src/@hades/admin/lang/domain/value-objects/lang-ietf.ts",
             "integrity": "sha1:c7a8366147a533c90f71cd80cb277f4e287517cf"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-custom-code.ts",
+            "integrity": "sha1:f86f34b0a8ea6ca5f986fb7d81fee71f6993f168"
         },
         {
             "path": "src/@hades/admin/lang/domain/value-objects/lang-dir.ts",
@@ -3975,19 +3979,19 @@
         },
         {
             "path": "src/apps/admin/lang/dto/lang.dto.ts",
-            "integrity": "sha1:3e796b9343b86171619e5f5664b5722fa9798a17"
+            "integrity": "sha1:1fa19a7d7587a09fa8eccd17f41cd3c6c84542e2"
         },
         {
             "path": "src/apps/admin/lang/dto/create-lang.dto.ts",
-            "integrity": "sha1:0ddfed00fad603efc196db4325cea5392799576f"
+            "integrity": "sha1:3ac2142b6c4034bf3e205f866dc823d6e08dc61c"
         },
         {
             "path": "src/apps/admin/lang/dto/update-lang.dto.ts",
-            "integrity": "sha1:0d4f3ae09c9c0fc12fdfde37fbff3833147c9e71"
+            "integrity": "sha1:6cb8d01b9493de4f4b8c2dd631e14f375f021176"
         },
         {
             "path": "src/apps/admin/lang/graphql/lang.graphql",
-            "integrity": "sha1:7ada0cc50220e3f00a05b2d2144116fd989f63fb"
+            "integrity": "sha1:b1c7201b0e2300debce5b1050440e54e5287d3fc"
         },
         {
             "path": "src/apps/admin/lang/index.ts",
@@ -4075,7 +4079,7 @@
         },
         {
             "path": "postman/admin.lang.postman.json",
-            "integrity": "sha1:6882105a8254977ea5182cb628f3f266f7d947f1"
+            "integrity": "sha1:a3a71b698437057b2b94e2aabab3ade72a2079c2"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resource.command-handler.spec.ts",
@@ -4339,7 +4343,7 @@
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/seeds/resource.seed.ts",
-            "integrity": "sha1:35b142e0cf265eac1a060eddaaf92eb8673b7160"
+            "integrity": "sha1:b734eff03727acc0031b45f82b553f038de81ef7"
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/sequelize/sequelize-resource.model.ts",
@@ -4559,7 +4563,7 @@
         },
         {
             "path": "postman/admin.resource.postman.json",
-            "integrity": "sha1:e986885881171b3a81c11ceb6ef0ebf04e183d91"
+            "integrity": "sha1:7f003f242b18db56725e00274f2dc5b5ee0af250"
         }
     ]
 }
