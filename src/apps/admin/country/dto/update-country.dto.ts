@@ -10,6 +10,12 @@ export class UpdateCountryDto
 
     @ApiProperty({
         type        : String,
+        description : 'langId [input here api field description]',
+    })
+    langId: string;
+
+    @ApiProperty({
+        type        : String,
         description : 'iso3166Alpha2 [input here api field description]',
     })
     iso3166Alpha2: string;
@@ -40,6 +46,18 @@ export class UpdateCountryDto
 
     @ApiProperty({
         type        : String,
+        description : 'name [input here api field description]',
+    })
+    name: string;
+
+    @ApiProperty({
+        type        : String,
+        description : 'slug [input here api field description]',
+    })
+    slug: string;
+
+    @ApiProperty({
+        type        : String,
         description : 'image [input here api field description]',
     })
     image: string;
@@ -49,6 +67,24 @@ export class UpdateCountryDto
         description : 'sort [input here api field description]',
     })
     sort: number;
+
+    @ApiProperty({
+        type        : String,
+        description : 'administrativeAreaLevel1 [input here api field description]',
+    })
+    administrativeAreaLevel1: string;
+
+    @ApiProperty({
+        type        : String,
+        description : 'administrativeAreaLevel2 [input here api field description]',
+    })
+    administrativeAreaLevel2: string;
+
+    @ApiProperty({
+        type        : String,
+        description : 'administrativeAreaLevel3 [input here api field description]',
+    })
+    administrativeAreaLevel3: string;
 
     @ApiProperty({
         type        : Object,

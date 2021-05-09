@@ -1,3 +1,4 @@
+// ignored file
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminCountry } from './../../domain/country.aggregate';
 import { CreatedCountryEvent } from './created-country.event';
@@ -25,13 +26,19 @@ export class AddCountriesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(country =>
                     new CreatedCountryEvent(
                         country.id.value,
+                        country.langId.value,
                         country.iso3166Alpha2.value,
                         country.iso3166Alpha3.value,
                         country.iso3166Numeric.value,
                         country.customCode?.value,
                         country.prefix?.value,
+                        country.name.value,
+                        country.slug.value,
                         country.image?.value,
                         country.sort?.value,
+                        country.administrativeAreaLevel1?.value,
+                        country.administrativeAreaLevel2?.value,
+                        country.administrativeAreaLevel3?.value,
                         country.administrativeAreas?.value,
                         country.latitude?.value,
                         country.longitude?.value,
@@ -53,13 +60,19 @@ export class AddCountriesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(country =>
                     new DeletedCountryEvent(
                         country.id.value,
+                        country.langId.value,
                         country.iso3166Alpha2.value,
                         country.iso3166Alpha3.value,
                         country.iso3166Numeric.value,
                         country.customCode?.value,
                         country.prefix?.value,
+                        country.name.value,
+                        country.slug.value,
                         country.image?.value,
                         country.sort?.value,
+                        country.administrativeAreaLevel1?.value,
+                        country.administrativeAreaLevel2?.value,
+                        country.administrativeAreaLevel3?.value,
                         country.administrativeAreas?.value,
                         country.latitude?.value,
                         country.longitude?.value,

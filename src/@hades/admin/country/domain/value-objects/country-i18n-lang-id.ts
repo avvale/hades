@@ -1,14 +1,14 @@
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { DataValueObject, ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class CountryLangId extends UuidValueObject
+export class CountryI18nLangId extends UuidValueObject
 {
-    public readonly type: 'CountryLangId';
+    public readonly type: 'CountryI18nLangId';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
-            name: 'CountryLangId',
+            name: 'CountryI18nLangId',
             nullable: false,
             undefinable: false,
             length: 36,
