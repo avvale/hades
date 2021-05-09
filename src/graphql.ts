@@ -263,13 +263,19 @@ export interface AdminCropAttachmentInput {
 
 export interface AdminCreateCountryInput {
     id: string;
+    langId: string;
     iso3166Alpha2: GraphQLString;
     iso3166Alpha3: GraphQLString;
     iso3166Numeric: GraphQLString;
     customCode?: GraphQLString;
     prefix?: GraphQLString;
+    name: GraphQLString;
+    slug: GraphQLString;
     image?: GraphQLString;
     sort?: GraphQLInt;
+    administrativeAreaLevel1?: GraphQLString;
+    administrativeAreaLevel2?: GraphQLString;
+    administrativeAreaLevel3?: GraphQLString;
     administrativeAreas?: JSON;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
@@ -279,13 +285,19 @@ export interface AdminCreateCountryInput {
 
 export interface AdminUpdateCountryInput {
     id: string;
+    langId?: string;
     iso3166Alpha2?: GraphQLString;
     iso3166Alpha3?: GraphQLString;
     iso3166Numeric?: GraphQLString;
     customCode?: GraphQLString;
     prefix?: GraphQLString;
+    name?: GraphQLString;
+    slug?: GraphQLString;
     image?: GraphQLString;
     sort?: GraphQLInt;
+    administrativeAreaLevel1?: GraphQLString;
+    administrativeAreaLevel2?: GraphQLString;
+    administrativeAreaLevel3?: GraphQLString;
     administrativeAreas?: JSON;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
@@ -864,13 +876,20 @@ export interface AdminAttachment {
 
 export interface AdminCountry {
     id: string;
+    langId: string;
+    lang: AdminLang;
     iso3166Alpha2: GraphQLString;
     iso3166Alpha3: GraphQLString;
     iso3166Numeric: GraphQLString;
     customCode?: GraphQLString;
     prefix?: GraphQLString;
+    name: GraphQLString;
+    slug: GraphQLString;
     image?: GraphQLString;
     sort?: GraphQLInt;
+    administrativeAreaLevel1?: GraphQLString;
+    administrativeAreaLevel2?: GraphQLString;
+    administrativeAreaLevel3?: GraphQLString;
     administrativeAreas?: JSON;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
