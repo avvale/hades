@@ -7,13 +7,8 @@ type AdminCountry
     iso3166Numeric: GraphQLString!
     customCode: GraphQLString
     prefix: GraphQLString
-    name: GraphQLString!
-    slug: GraphQLString!
     image: GraphQLString
     sort: GraphQLInt
-    administrativeAreaLevel1: GraphQLString
-    administrativeAreaLevel2: GraphQLString
-    administrativeAreaLevel3: GraphQLString
     administrativeAreas: JSON
     latitude: GraphQLFloat
     longitude: GraphQLFloat
@@ -32,13 +27,8 @@ input AdminCreateCountryInput
     iso3166Numeric: GraphQLString!
     customCode: GraphQLString
     prefix: GraphQLString
-    name: GraphQLString!
-    slug: GraphQLString!
     image: GraphQLString
     sort: GraphQLInt
-    administrativeAreaLevel1: GraphQLString
-    administrativeAreaLevel2: GraphQLString
-    administrativeAreaLevel3: GraphQLString
     administrativeAreas: JSON
     latitude: GraphQLFloat
     longitude: GraphQLFloat
@@ -54,13 +44,8 @@ input AdminUpdateCountryInput
     iso3166Numeric: GraphQLString
     customCode: GraphQLString
     prefix: GraphQLString
-    name: GraphQLString
-    slug: GraphQLString
     image: GraphQLString
     sort: GraphQLInt
-    administrativeAreaLevel1: GraphQLString
-    administrativeAreaLevel2: GraphQLString
-    administrativeAreaLevel3: GraphQLString
     administrativeAreas: JSON
     latitude: GraphQLFloat
     longitude: GraphQLFloat

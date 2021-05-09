@@ -61,6 +61,27 @@ export class AdminCountryI18nModel extends Model<AdminCountryI18nModel>
     slug: string;
 
     @Column({
+        field: 'administrativeAreaLevel1',
+        allowNull: true,
+        type: DataTypes.STRING(50),
+    })
+    administrativeAreaLevel1: string;
+
+    @Column({
+        field: 'administrativeAreaLevel2',
+        allowNull: true,
+        type: DataTypes.STRING(50),
+    })
+    administrativeAreaLevel2: string;
+
+    @Column({
+        field: 'administrativeAreaLevel3',
+        allowNull: true,
+        type: DataTypes.STRING(50),
+    })
+    administrativeAreaLevel3: string;
+
+    @Column({
         field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
