@@ -268,13 +268,8 @@ export interface AdminCreateCountryInput {
     iso3166Numeric: GraphQLString;
     customCode?: GraphQLString;
     prefix?: GraphQLString;
-    name: GraphQLString;
-    slug: GraphQLString;
     image?: GraphQLString;
     sort?: GraphQLInt;
-    administrativeAreaLevel1?: GraphQLString;
-    administrativeAreaLevel2?: GraphQLString;
-    administrativeAreaLevel3?: GraphQLString;
     administrativeAreas?: JSON;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
@@ -289,13 +284,8 @@ export interface AdminUpdateCountryInput {
     iso3166Numeric?: GraphQLString;
     customCode?: GraphQLString;
     prefix?: GraphQLString;
-    name?: GraphQLString;
-    slug?: GraphQLString;
     image?: GraphQLString;
     sort?: GraphQLInt;
-    administrativeAreaLevel1?: GraphQLString;
-    administrativeAreaLevel2?: GraphQLString;
-    administrativeAreaLevel3?: GraphQLString;
     administrativeAreas?: JSON;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
@@ -310,6 +300,7 @@ export interface AdminCreateLangInput {
     iso6392: GraphQLString;
     iso6393: GraphQLString;
     ietf: GraphQLString;
+    customCode?: GraphQLString;
     dir: AdminLangDir;
     sort?: GraphQLInt;
     isActive: GraphQLBoolean;
@@ -322,6 +313,7 @@ export interface AdminUpdateLangInput {
     iso6392?: GraphQLString;
     iso6393?: GraphQLString;
     ietf?: GraphQLString;
+    customCode?: GraphQLString;
     dir?: AdminLangDir;
     sort?: GraphQLInt;
     isActive?: GraphQLBoolean;
@@ -877,13 +869,8 @@ export interface AdminCountry {
     iso3166Numeric: GraphQLString;
     customCode?: GraphQLString;
     prefix?: GraphQLString;
-    name: GraphQLString;
-    slug: GraphQLString;
     image?: GraphQLString;
     sort?: GraphQLInt;
-    administrativeAreaLevel1?: GraphQLString;
-    administrativeAreaLevel2?: GraphQLString;
-    administrativeAreaLevel3?: GraphQLString;
     administrativeAreas?: JSON;
     latitude?: GraphQLFloat;
     longitude?: GraphQLFloat;
@@ -901,6 +888,7 @@ export interface AdminLang {
     iso6392: GraphQLString;
     iso6393: GraphQLString;
     ietf: GraphQLString;
+    customCode?: GraphQLString;
     dir: AdminLangDir;
     sort?: GraphQLInt;
     isActive: GraphQLBoolean;
