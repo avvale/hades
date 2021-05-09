@@ -1,5 +1,8 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
+// ignored file
+import { Column, Model, Table, HasMany } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { AdminCountryI18nModel } from './sequelize-country-i18n.model';
+
 
 @Table({ modelName: 'AdminCountry', freezeTableName: true, timestamps: false })
 export class AdminCountryModel extends Model<AdminCountryModel>
@@ -11,6 +14,9 @@ export class AdminCountryModel extends Model<AdminCountryModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @HasMany(() => AdminCountryI18nModel)
+    i18n: AdminCountryI18nModel[];
 
     @Column({
         field: 'iso3166Alpha2',
@@ -48,20 +54,6 @@ export class AdminCountryModel extends Model<AdminCountryModel>
     prefix: string;
 
     @Column({
-        field: 'name',
-        allowNull: false,
-        type: DataTypes.STRING(255),
-    })
-    name: string;
-
-    @Column({
-        field: 'slug',
-        allowNull: false,
-        type: DataTypes.STRING(1024),
-    })
-    slug: string;
-
-    @Column({
         field: 'image',
         allowNull: true,
         type: DataTypes.STRING(1024),
@@ -74,27 +66,6 @@ export class AdminCountryModel extends Model<AdminCountryModel>
         type: DataTypes.SMALLINT.UNSIGNED,
     })
     sort: number;
-
-    @Column({
-        field: 'administrativeAreaLevel1',
-        allowNull: true,
-        type: DataTypes.STRING(50),
-    })
-    administrativeAreaLevel1: string;
-
-    @Column({
-        field: 'administrativeAreaLevel2',
-        allowNull: true,
-        type: DataTypes.STRING(50),
-    })
-    administrativeAreaLevel2: string;
-
-    @Column({
-        field: 'administrativeAreaLevel3',
-        allowNull: true,
-        type: DataTypes.STRING(50),
-    })
-    administrativeAreaLevel3: string;
 
     @Column({
         field: 'administrativeAreas',

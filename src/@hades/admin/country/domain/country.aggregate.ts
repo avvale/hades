@@ -6,13 +6,8 @@ import {
     CountryIso3166Numeric,
     CountryCustomCode,
     CountryPrefix,
-    CountryName,
-    CountrySlug,
     CountryImage,
     CountrySort,
-    CountryAdministrativeAreaLevel1,
-    CountryAdministrativeAreaLevel2,
-    CountryAdministrativeAreaLevel3,
     CountryAdministrativeAreas,
     CountryLatitude,
     CountryLongitude,
@@ -34,13 +29,8 @@ export class AdminCountry extends AggregateRoot
     iso3166Numeric: CountryIso3166Numeric;
     customCode: CountryCustomCode;
     prefix: CountryPrefix;
-    name: CountryName;
-    slug: CountrySlug;
     image: CountryImage;
     sort: CountrySort;
-    administrativeAreaLevel1: CountryAdministrativeAreaLevel1;
-    administrativeAreaLevel2: CountryAdministrativeAreaLevel2;
-    administrativeAreaLevel3: CountryAdministrativeAreaLevel3;
     administrativeAreas: CountryAdministrativeAreas;
     latitude: CountryLatitude;
     longitude: CountryLongitude;
@@ -59,13 +49,8 @@ export class AdminCountry extends AggregateRoot
         iso3166Numeric: CountryIso3166Numeric,
         customCode: CountryCustomCode,
         prefix: CountryPrefix,
-        name: CountryName,
-        slug: CountrySlug,
         image: CountryImage,
         sort: CountrySort,
-        administrativeAreaLevel1: CountryAdministrativeAreaLevel1,
-        administrativeAreaLevel2: CountryAdministrativeAreaLevel2,
-        administrativeAreaLevel3: CountryAdministrativeAreaLevel3,
         administrativeAreas: CountryAdministrativeAreas,
         latitude: CountryLatitude,
         longitude: CountryLongitude,
@@ -84,13 +69,8 @@ export class AdminCountry extends AggregateRoot
         this.iso3166Numeric = iso3166Numeric;
         this.customCode = customCode;
         this.prefix = prefix;
-        this.name = name;
-        this.slug = slug;
         this.image = image;
         this.sort = sort;
-        this.administrativeAreaLevel1 = administrativeAreaLevel1;
-        this.administrativeAreaLevel2 = administrativeAreaLevel2;
-        this.administrativeAreaLevel3 = administrativeAreaLevel3;
         this.administrativeAreas = administrativeAreas;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -110,13 +90,8 @@ export class AdminCountry extends AggregateRoot
         iso3166Numeric: CountryIso3166Numeric,
         customCode: CountryCustomCode,
         prefix: CountryPrefix,
-        name: CountryName,
-        slug: CountrySlug,
         image: CountryImage,
         sort: CountrySort,
-        administrativeAreaLevel1: CountryAdministrativeAreaLevel1,
-        administrativeAreaLevel2: CountryAdministrativeAreaLevel2,
-        administrativeAreaLevel3: CountryAdministrativeAreaLevel3,
         administrativeAreas: CountryAdministrativeAreas,
         latitude: CountryLatitude,
         longitude: CountryLongitude,
@@ -134,13 +109,8 @@ export class AdminCountry extends AggregateRoot
             iso3166Numeric,
             customCode,
             prefix,
-            name,
-            slug,
             image,
             sort,
-            administrativeAreaLevel1,
-            administrativeAreaLevel2,
-            administrativeAreaLevel3,
             administrativeAreas,
             latitude,
             longitude,
@@ -162,13 +132,8 @@ export class AdminCountry extends AggregateRoot
                 country.iso3166Numeric.value,
                 country.customCode?.value,
                 country.prefix?.value,
-                country.name.value,
-                country.slug.value,
                 country.image?.value,
                 country.sort?.value,
-                country.administrativeAreaLevel1?.value,
-                country.administrativeAreaLevel2?.value,
-                country.administrativeAreaLevel3?.value,
                 country.administrativeAreas?.value,
                 country.latitude?.value,
                 country.longitude?.value,
@@ -191,13 +156,8 @@ export class AdminCountry extends AggregateRoot
                 country.iso3166Numeric?.value,
                 country.customCode?.value,
                 country.prefix?.value,
-                country.name?.value,
-                country.slug?.value,
                 country.image?.value,
                 country.sort?.value,
-                country.administrativeAreaLevel1?.value,
-                country.administrativeAreaLevel2?.value,
-                country.administrativeAreaLevel3?.value,
                 country.administrativeAreas?.value,
                 country.latitude?.value,
                 country.longitude?.value,
@@ -220,13 +180,8 @@ export class AdminCountry extends AggregateRoot
                 country.iso3166Numeric.value,
                 country.customCode?.value,
                 country.prefix?.value,
-                country.name.value,
-                country.slug.value,
                 country.image?.value,
                 country.sort?.value,
-                country.administrativeAreaLevel1?.value,
-                country.administrativeAreaLevel2?.value,
-                country.administrativeAreaLevel3?.value,
                 country.administrativeAreas?.value,
                 country.latitude?.value,
                 country.longitude?.value,
@@ -248,13 +203,8 @@ export class AdminCountry extends AggregateRoot
             iso3166Numeric: this.iso3166Numeric.value,
             customCode: this.customCode?.value,
             prefix: this.prefix?.value,
-            name: this.name.value,
-            slug: this.slug.value,
             image: this.image?.value,
             sort: this.sort?.value,
-            administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
-            administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
-            administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
             administrativeAreas: this.administrativeAreas?.value,
             latitude: this.latitude?.value,
             longitude: this.longitude?.value,
