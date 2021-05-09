@@ -65,9 +65,9 @@ export class MockCountrySeeder extends MockSeeder<AdminCountry>
                     new CountryLongitude(country.longitude),
                     new CountryZoom(country.zoom),
                     new CountryDataLang(country.dataLang),
-                    new CountryCreatedAt(country.createdAt),
-                    new CountryUpdatedAt(country.updatedAt),
-                    new CountryDeletedAt(country.deletedAt),
+                    new CountryCreatedAt({currentTimestamp: true}),
+                    new CountryUpdatedAt({currentTimestamp: true}),
+                    new CountryDeletedAt(null),
                 )
             );
         }
