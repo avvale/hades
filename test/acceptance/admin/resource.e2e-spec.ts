@@ -419,7 +419,7 @@ describe('resource', () =>
                 {
                     where:
                     {
-                        id: '23a87aa7-7b15-4d36-a9eb-e854bdc6f883'
+                        id: '9ecc94a6-2830-406a-8ce4-fc894905f3b2'
                     }
                 }
             })
@@ -467,7 +467,7 @@ describe('resource', () =>
     test(`/REST:GET admin/resource/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/admin/resource/ca3110a3-6dd6-49be-bab2-08a176f3a652')
+            .get('/admin/resource/141d6ed4-7025-4264-a55f-aba069948033')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -525,7 +525,7 @@ describe('resource', () =>
     test(`/REST:DELETE admin/resource/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/resource/e272d961-ab5b-416f-9bc0-43b4394237d0')
+            .delete('/admin/resource/f6ee2cdd-d7be-435e-b93c-3f6068d422bd')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -702,7 +702,7 @@ describe('resource', () =>
                     {
                         where:
                         {
-                            id: 'd7109374-0f7d-4013-8333-949a37cc06f3'
+                            id: 'faef678d-64e7-4bdc-b68e-4558c6268b09'
                         }
                     }
                 }
@@ -775,7 +775,7 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: '5aa9393c-b7fd-41ff-828e-7ddd69401cf6'
+                    id: '04d6b9b5-205e-4527-bebd-f205ba656d2e'
                 }
             })
             .expect(200)
@@ -917,7 +917,7 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: '6c5105c4-9383-48e6-92f4-9a57b286cb0d'
+                    id: 'e0f84619-b41b-43a6-845b-122a41fc7a93'
                 }
             })
             .expect(200)
