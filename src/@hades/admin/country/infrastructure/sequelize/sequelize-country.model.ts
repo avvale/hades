@@ -1,9 +1,14 @@
 // ignored file
-import { Column, Model, Table, HasMany } from 'sequelize-typescript';
+import { Column, Model, Table, HasMany, DefaultScope } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminCountryI18nModel } from './sequelize-country-i18n.model';
 
-
+@DefaultScope(() => ({
+    include: {
+        model: AdminCountryI18nModel,
+        required: true
+    }
+}))
 @Table({ modelName: 'AdminCountry', freezeTableName: true, timestamps: false })
 export class AdminCountryModel extends Model<AdminCountryModel>
 {
@@ -16,7 +21,7 @@ export class AdminCountryModel extends Model<AdminCountryModel>
     id: string;
 
     @HasMany(() => AdminCountryI18nModel)
-    i18n: AdminCountryI18nModel[];
+    countryI18n: AdminCountryI18nModel[];
 
     @Column({
         field: 'iso3166Alpha2',

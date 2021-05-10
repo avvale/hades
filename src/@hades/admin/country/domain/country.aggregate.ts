@@ -28,23 +28,18 @@ import { CreatedCountryEvent } from './../application/events/created-country.eve
 import { UpdatedCountryEvent } from './../application/events/updated-country.event';
 import { DeletedCountryEvent } from './../application/events/deleted-country.event';
 import { AdminLang } from '@hades/admin/lang/domain/lang.aggregate';
+import { Utils } from '@hades/shared/domain/lib/utils';
 
 export class AdminCountry extends AggregateRoot
 {
     id: CountryId;
-    langId: CountryI18nLangId;
     iso3166Alpha2: CountryIso3166Alpha2;
     iso3166Alpha3: CountryIso3166Alpha3;
     iso3166Numeric: CountryIso3166Numeric;
     customCode: CountryCustomCode;
     prefix: CountryPrefix;
-    name: CountryI18nName;
-    slug: CountryI18nSlug;
     image: CountryImage;
     sort: CountrySort;
-    administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1;
-    administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2;
-    administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3;
     administrativeAreas: CountryAdministrativeAreas;
     latitude: CountryLatitude;
     longitude: CountryLongitude;
@@ -53,6 +48,14 @@ export class AdminCountry extends AggregateRoot
     createdAt: CountryCreatedAt;
     updatedAt: CountryUpdatedAt;
     deletedAt: CountryDeletedAt;
+
+    // i18n
+    langId: CountryI18nLangId;
+    name: CountryI18nName;
+    slug: CountryI18nSlug;
+    administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1;
+    administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2;
+    administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3;
 
     // eager relationship
     lang: AdminLang;
@@ -283,6 +286,24 @@ export class AdminCountry extends AggregateRoot
 
             // eager relationship
             lang: this.lang?.toDTO(),
+        }
+    }
+
+    toI18nDTO(): Object
+    {
+        return {
+            id: Utils.uuid(),
+            langId: this.langId.value,
+            countryId: this.id.value,
+            name: this.name.value,
+            slug: this.slug.value,
+            administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
+            administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
+            administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
+            administrativeAreas: this.administrativeAreas?.value,
+            createdAt: this.createdAt?.value,
+            updatedAt: this.updatedAt?.value,
+            deletedAt: this.deletedAt?.value,
         }
     }
 }

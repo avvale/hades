@@ -25,6 +25,7 @@ import {
     CountryUpdatedAt,
 } from './../../domain/value-objects';
 import { ICountryRepository } from './../../domain/country.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { AdminCountry } from './../../domain/country.aggregate';
 
 @Injectable()
@@ -33,6 +34,7 @@ export class CreateCountryService
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ICountryRepository,
+        private readonly repositoryI18n: ICountryI18nRepository,
     ) {}
 
     public async main(
@@ -87,6 +89,7 @@ export class CreateCountryService
 
         // create
         await this.repository.create(country);
+        await this.repositoryI18n.create(country, (aggregate: AdminCountry) => aggregate.toI18nDTO());
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const countryRegister = this.publisher.mergeObjectContext(
