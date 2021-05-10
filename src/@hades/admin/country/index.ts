@@ -37,6 +37,8 @@ export { AdminCountryI18nModel } from './infrastructure/sequelize/sequelize-coun
 // repository
 export { ICountryRepository } from './domain/country.repository';
 export { SequelizeCountryRepository } from './infrastructure/sequelize/sequelize-country.repository';
+export { ICountryI18nRepository } from './domain/country-i18n.repository';
+export { SequelizeCountryI18nRepository } from './infrastructure/sequelize/sequelize-country-i18n.repository';
 
 // sagas
 export { CountrySagas } from './application/sagas/country.sagas';

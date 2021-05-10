@@ -25,6 +25,7 @@ import {
     CountryUpdatedAt,
 } from './../../domain/value-objects';
 import { ICountryRepository } from './../../domain/country.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { AdminCountry } from './../../domain/country.aggregate';
 import { AddCountriesContextEvent } from './../events/add-countries-context.event';
 
@@ -34,6 +35,7 @@ export class CreateCountriesService
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ICountryRepository,
+        private readonly repositoryI18n: ICountryI18nRepository,
     ) {}
 
     public async main(
@@ -87,7 +89,8 @@ export class CreateCountriesService
         ));
 
         // insert
-        await this.repository.insert(aggregateCountries);
+        await this.repository.insert(aggregateCountries.filter(aggregateCountry => aggregateCountry.langId.value === '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a'));
+        await this.repositoryI18n.insert(aggregateCountries, {}, (aggregate) => aggregate.toI18nDTO());
 
         // create AddCountriesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

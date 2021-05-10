@@ -1,7 +1,7 @@
 import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { Model } from 'sequelize-typescript';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { CQMetadata, HookResponse } from '@hades/shared/domain/lib/hades.types';
+import { CQMetadata, HookResponse, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
@@ -116,7 +116,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // ** side effects **
     // ******************
 
-    async create(aggregate: Aggregate): Promise<void>
+    async create(aggregate: Aggregate, dataFactory: (aggregate: Aggregate) => ObjectLiteral = (aggregate: Aggregate) => aggregate.toDTO()): Promise<void>
     {
         // check if exist object in database, if allow save aggregate with the same uuid, update this aggregate in database instead of create it
         const modelInDB = await this.repository.findOne(
@@ -131,7 +131,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
 
         try
         {
-            const model = await this.repository.create(aggregate.toDTO());
+            const model = await this.repository.create(dataFactory(aggregate));
 
             this.createdAggregateHook(aggregate, model);
         }
@@ -144,9 +144,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook called after create aggregate
     async createdAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
-    async insert(aggregates: Aggregate[], options: object = {}): Promise<void>
+    async insert(aggregates: Aggregate[], options: object = {}, dataFactory: (aggregate: Aggregate) => ObjectLiteral = (aggregate: Aggregate) => aggregate.toDTO()): Promise<void>
     {
-        await this.repository.bulkCreate(aggregates.map(item => item.toDTO()), options);
+        await this.repository.bulkCreate(aggregates.map(item => dataFactory(item)), options);
 
         this.insertedAggregateHook(aggregates);
     }
@@ -154,7 +154,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook called after insert aggregates
     async insertedAggregateHook(aggregates: Aggregate[]) {}
 
-    async update(aggregate: Aggregate, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
+    async update(aggregate: Aggregate, constraint?: QueryStatement, cQMetadata?: CQMetadata, dataFactory: (aggregate: Aggregate) => ObjectLiteral = (aggregate: Aggregate) => aggregate.toDTO()): Promise<void>
     {
         // check that model exist
         const modelInDB = await this.repository.findOne(
@@ -174,11 +174,11 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         if (!modelInDB) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // clean undefined fields
-        const objectLiteral = cleanDeep(aggregate.toDTO(), {
-            nullValues: false,
+        const objectLiteral = cleanDeep(dataFactory(aggregate), {
+            nullValues  : false,
             emptyStrings: false,
             emptyObjects: false,
-            emptyArrays: false
+            emptyArrays : false,
         })
 
         const model = await modelInDB.update(objectLiteral);
