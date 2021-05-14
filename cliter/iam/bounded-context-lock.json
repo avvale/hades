@@ -263,11 +263,11 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:7101c7f755aedc9df3b0df3a706fa0a354c6a4ad"
+            "integrity": "sha1:1057eecb107afddc62e9688f461a44219e3ebd75"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
-            "integrity": "sha1:fbc71ac8ee78052446ebedaf73fb3b7afb9c4f3a"
+            "integrity": "sha1:1f90ea84b19406fef78e2d779c1db22d6bd156a1"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.repository.ts",
@@ -495,7 +495,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:92c3ca4301afc65826f8183f256d9fa418f4ae31"
+            "integrity": "sha1:95e1d7b2ad30723c71fbed9d94288196f867f7e0"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.spec.ts",
@@ -759,11 +759,11 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:dd4d05efe03f15b7ea70d75982e5e50c635ddc3b"
+            "integrity": "sha1:87a75a27dfd4582f361698b05c862a3f48c229d8"
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
-            "integrity": "sha1:ce50763b4c027cbc699ade4f1c61c8fce43eec9a"
+            "integrity": "sha1:cc14b231559594df421581c0bb2691a88d8b620c"
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.repository.ts",
@@ -975,7 +975,7 @@
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:ae340e0b19cb21dbf467c5498777febd8d2728a0"
+            "integrity": "sha1:d653b8a01443cb19667b29f0747819db378fa0ce"
         }
     ]
 }

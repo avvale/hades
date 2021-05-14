@@ -3,19 +3,19 @@ import { DataTypes } from 'sequelize';
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 
-@Table({ modelName: 'iam_roles_accounts', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamRolesAccounts', freezeTableName: true, timestamps: false })
 export class IamRolesAccountsModel extends Model<IamRolesAccountsModel>
 {
     @ForeignKey(() => IamRoleModel)
     @Column({
-        field: 'role_id',
+        field: 'roleId',
         type: DataTypes.UUID,
     })
     roleId: string;
 
     @ForeignKey(() => IamAccountModel)
     @Column({
-        field: 'account_id',
+        field: 'accountId',
         type: DataTypes.UUID,
     })
     accountId: string;

@@ -1,5 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 import { IamTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
@@ -51,7 +50,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     data: any;
 
 
-    @BelongsToMany(() => IamAccountModel, { through: () => IamTenantsAccountsModel, uniqueKey: 'uq01_iam_tenants_accounts' })
+    @BelongsToMany(() => IamAccountModel, { through: () => IamTenantsAccountsModel, uniqueKey: 'Uq01IamTenantsAccounts' })
     accounts: IamAccountModel[];
 
     @Column({
