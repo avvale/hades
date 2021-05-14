@@ -1,5 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamBoundedContextModel } from '@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
@@ -40,7 +39,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     boundedContext: IamBoundedContextModel;
 
 
-    @BelongsToMany(() => IamRoleModel, { through: () => IamPermissionsRolesModel, uniqueKey: 'uq01_iam_permissions_roles' })
+    @BelongsToMany(() => IamRoleModel, { through: () => IamPermissionsRolesModel, uniqueKey: 'Uq01IamPermissionsRoles' })
     roles: IamRoleModel[];
 
     @Column({

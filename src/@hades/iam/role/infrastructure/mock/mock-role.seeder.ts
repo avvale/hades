@@ -1,3 +1,4 @@
+// ignored file
 import { Injectable} from '@nestjs/common';
 import { MockSeeder } from '@hades/shared/infrastructure/persistence/mock/mock.seeder';
 import {
