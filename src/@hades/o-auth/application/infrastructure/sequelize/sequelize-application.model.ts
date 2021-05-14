@@ -1,5 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/sequelize-client.model';
 import { OAuthApplicationsClientsModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
@@ -44,7 +43,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     isMaster: boolean;
 
 
-    @BelongsToMany(() => OAuthClientModel, { through: () => OAuthApplicationsClientsModel, uniqueKey: 'uq01_o_auth_applications_clients' })
+    @BelongsToMany(() => OAuthClientModel, { through: () => OAuthApplicationsClientsModel, uniqueKey: 'Uq01OAuthApplicationsClients' })
     clients: OAuthClientModel[];
 
     @Column({
