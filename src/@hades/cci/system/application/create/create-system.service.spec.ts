@@ -61,15 +61,17 @@ describe('CreateSystemService', () =>
         test('should create a system and emit event', async () =>
         {
             expect(await service.main(
-                new SystemId(systems[0].id),
-                new SystemTenantId(systems[0].tenantId),
-                new SystemTenantCode(systems[0].tenantCode),
-                new SystemVersion(systems[0].version),
-                new SystemName(systems[0].name),
-                new SystemEnvironment(systems[0].environment),
-                new SystemTechnology(systems[0].technology),
-                new SystemIsActive(systems[0].isActive),
-                new SystemCancelledAt(systems[0].cancelledAt),
+                {
+                    id: new SystemId(systems[0].id),
+                    tenantId: new SystemTenantId(systems[0].tenantId),
+                    tenantCode: new SystemTenantCode(systems[0].tenantCode),
+                    version: new SystemVersion(systems[0].version),
+                    name: new SystemName(systems[0].name),
+                    environment: new SystemEnvironment(systems[0].environment),
+                    technology: new SystemTechnology(systems[0].technology),
+                    isActive: new SystemIsActive(systems[0].isActive),
+                    cancelledAt: new SystemCancelledAt(systems[0].cancelledAt),
+                }
             )).toBe(undefined);
         });
     });

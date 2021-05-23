@@ -8,7 +8,7 @@ import { SystemId } from './../../domain/value-objects';
 import { ISystemRepository } from './../../domain/system.repository';
 import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
-describe('DeleteSystemByIdService', () => 
+describe('DeleteSystemByIdService', () =>
 {
     let service: DeleteSystemByIdService;
     let repository: ISystemRepository;
@@ -38,14 +38,14 @@ describe('DeleteSystemByIdService', () =>
         mockRepository  = module.get(MockSystemRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteSystemByIdService should be defined', () => 
+        test('DeleteSystemByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete system and emit event', async () => 
+        test('should delete system and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

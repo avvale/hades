@@ -6,13 +6,13 @@ import { DeleteSystemsService } from './delete-systems.service';
 import { ISystemRepository } from './../../domain/system.repository';
 import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
-describe('DeleteSystemsService', () => 
+describe('DeleteSystemsService', () =>
 {
     let service: DeleteSystemsService;
     let repository: ISystemRepository;
     let mockRepository: MockSystemRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteSystemsService', () =>
                 EventPublisher,
                 DeleteSystemsService,
                 MockSystemRepository,
-                { 
+                {
                     provide: ISystemRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteSystemsService', () =>
         mockRepository  = module.get(MockSystemRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteSystemsService should be defined', () => 
+        test('DeleteSystemsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete system and emit event', async () => 
+        test('should delete system and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

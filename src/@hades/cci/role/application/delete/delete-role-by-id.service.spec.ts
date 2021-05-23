@@ -8,7 +8,7 @@ import { RoleId } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
 
-describe('DeleteRoleByIdService', () => 
+describe('DeleteRoleByIdService', () =>
 {
     let service: DeleteRoleByIdService;
     let repository: IRoleRepository;
@@ -38,14 +38,14 @@ describe('DeleteRoleByIdService', () =>
         mockRepository  = module.get(MockRoleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteRoleByIdService should be defined', () => 
+        test('DeleteRoleByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete role and emit event', async () => 
+        test('should delete role and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

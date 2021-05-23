@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciSystem } from './../../domain/system.aggregate';
 import { CreatedSystemEvent } from './created-system.event';
-import { DeletedSystemEvent } from './deleted-system.event';
 import { CreatedSystemsEvent } from './created-systems.event';
+import { DeletedSystemEvent } from './deleted-system.event';
 import { DeletedSystemsEvent } from './deleted-systems.event';
 
 export class AddSystemsContextEvent extends AggregateRoot
