@@ -11,32 +11,32 @@ export abstract class IChannelOverviewRepository implements IRepository<CciChann
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciChannelOverview>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciChannelOverview>>;
 
     // create a single record
-    abstract async create(channelOverview: CciChannelOverview): Promise<void>;
+    abstract create(channelOverview: CciChannelOverview): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(channelsOverview: CciChannelOverview[], options?: object): Promise<void>;
+    abstract insert(channelsOverview: CciChannelOverview[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview | null>;
 
     // find a single record by id
-    abstract async findById(id: ChannelOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview | null>;
+    abstract findById(id: ChannelOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview[]>;
 
     // get multiple records
-    abstract async getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciChannelOverview[]>;
+    abstract getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciChannelOverview[]>;
 
     // update record
-    abstract async update(channelOverview: CciChannelOverview, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(channelOverview: CciChannelOverview, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: ChannelOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: ChannelOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }
