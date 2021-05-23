@@ -6,13 +6,13 @@ import { PaginateDataLakesService } from './paginate-data-lakes.service';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
-describe('PaginateDataLakesService', () => 
+describe('PaginateDataLakesService', () =>
 {
     let service: PaginateDataLakesService;
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateDataLakesService', () =>
                 EventPublisher,
                 PaginateDataLakesService,
                 MockDataLakeRepository,
-                { 
+                {
                     provide: IDataLakeRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateDataLakesService', () =>
         mockRepository  = module.get(MockDataLakeRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateDataLakesService should be defined', () => 
+        test('PaginateDataLakesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate dataLakes', async () => 
+        test('should paginate dataLakes', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

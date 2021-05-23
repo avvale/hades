@@ -263,7 +263,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed.ts",
-            "integrity": "sha1:ebcd4bb1cc2aa689f2a9b0acc1b2a5a6d60cb1eb"
+            "integrity": "sha1:0b6fd80ae0879e18e7c107eff859297a60b4d1fa"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/sequelize/sequelize-channel-detail.model.ts",
@@ -527,7 +527,7 @@
         },
         {
             "path": "postman/cci.channel-detail.postman.json",
-            "integrity": "sha1:f71226ee75a5e4dfeedbbbf72a2b27f31f561c4f"
+            "integrity": "sha1:22553a181e936011821d7f737ecd52b5cb85d77e"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/create/create-channel-overview.command-handler.spec.ts",
@@ -791,7 +791,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/seeds/channel-overview.seed.ts",
-            "integrity": "sha1:0dc90789bf86b400bf29c0b433f182b02d560181"
+            "integrity": "sha1:daae503983ccd8b579f5486e9f43bf5066e7fc4d"
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/sequelize/sequelize-channel-overview.model.ts",
@@ -1051,7 +1051,7 @@
         },
         {
             "path": "postman/cci.channel-overview.postman.json",
-            "integrity": "sha1:aa9f40ad62f19434569c12c6b6e1b6c86f6f7b88"
+            "integrity": "sha1:d49e079735f1f27dbe2603109e7cd0a55db416c0"
         },
         {
             "path": "src/@hades/cci/channel/application/create/create-channel.command-handler.spec.ts",
@@ -1315,7 +1315,7 @@
         },
         {
             "path": "src/@hades/cci/channel/infrastructure/seeds/channel.seed.ts",
-            "integrity": "sha1:1e3e06a12ebdb71bdc5fecc2c75932e835e97b67"
+            "integrity": "sha1:03d021f99ce3b371ec6ea97714447d91a62dbfb2"
         },
         {
             "path": "src/@hades/cci/channel/infrastructure/sequelize/sequelize-channel.model.ts",
@@ -1663,7 +1663,7 @@
         },
         {
             "path": "postman/cci.channel.postman.json",
-            "integrity": "sha1:fdb114edad32b9cc042e24a89ff691d82a9e2f4c"
+            "integrity": "sha1:f7d8d6ee7c9d3cf794b4d027c1686c9c947d5a18"
         }
     ]
 }

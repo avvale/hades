@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { channelsDetail } from '@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed';
 import { CciUpdateChannelDetailInput } from './../../../../graphql';
 
-describe('CciUpdateChannelDetailResolver', () => 
+describe('CciUpdateChannelDetailResolver', () =>
 {
     let resolver: CciUpdateChannelDetailResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('CciUpdateChannelDetailResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<CciUpdateChannelDetailResolver>(CciUpdateChannelDetailResolver);
+        resolver    = module.get<CciUpdateChannelDetailResolver>(CciUpdateChannelDetailResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciUpdateChannelDetailResolver should be defined', () => 
+    test('CciUpdateChannelDetailResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciUpdateChannelDetailResolver should be defined', () => 
+        test('CciUpdateChannelDetailResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a channelDetail created', async () => 
+        test('should return a channelDetail created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channelsDetail[0])));
             expect(await resolver.main(<CciUpdateChannelDetailInput>channelsDetail[0])).toBe(channelsDetail[0]);

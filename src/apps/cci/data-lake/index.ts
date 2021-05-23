@@ -14,8 +14,8 @@ import { CciCreateDataLakeResolver } from './resolvers/cci-create-data-lake.reso
 import { CciCreateDataLakesResolver } from './resolvers/cci-create-data-lakes.resolver';
 import { CciPaginateDataLakesResolver } from './resolvers/cci-paginate-data-lakes.resolver';
 import { CciGetDataLakesResolver } from './resolvers/cci-get-data-lakes.resolver';
-import { CciFindDataLakeResolver } from './resolvers/cci-find-data-lake.resolver';
 import { CciFindDataLakeByIdResolver } from './resolvers/cci-find-data-lake-by-id.resolver';
+import { CciFindDataLakeResolver } from './resolvers/cci-find-data-lake.resolver';
 import { CciUpdateDataLakeResolver } from './resolvers/cci-update-data-lake.resolver';
 import { CciDeleteDataLakeByIdResolver } from './resolvers/cci-delete-data-lake-by-id.resolver';
 import { CciDeleteDataLakesResolver } from './resolvers/cci-delete-data-lakes.resolver';
@@ -37,8 +37,8 @@ export const CciDataLakeResolvers = [
     CciCreateDataLakesResolver,
     CciPaginateDataLakesResolver,
     CciGetDataLakesResolver,
-    CciFindDataLakeResolver,
     CciFindDataLakeByIdResolver,
+    CciFindDataLakeResolver,
     CciUpdateDataLakeResolver,
     CciDeleteDataLakeByIdResolver,
     CciDeleteDataLakesResolver,

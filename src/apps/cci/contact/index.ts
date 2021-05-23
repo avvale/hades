@@ -14,8 +14,8 @@ import { CciCreateContactResolver } from './resolvers/cci-create-contact.resolve
 import { CciCreateContactsResolver } from './resolvers/cci-create-contacts.resolver';
 import { CciPaginateContactsResolver } from './resolvers/cci-paginate-contacts.resolver';
 import { CciGetContactsResolver } from './resolvers/cci-get-contacts.resolver';
-import { CciFindContactResolver } from './resolvers/cci-find-contact.resolver';
 import { CciFindContactByIdResolver } from './resolvers/cci-find-contact-by-id.resolver';
+import { CciFindContactResolver } from './resolvers/cci-find-contact.resolver';
 import { CciUpdateContactResolver } from './resolvers/cci-update-contact.resolver';
 import { CciDeleteContactByIdResolver } from './resolvers/cci-delete-contact-by-id.resolver';
 import { CciDeleteContactsResolver } from './resolvers/cci-delete-contacts.resolver';
@@ -37,8 +37,8 @@ export const CciContactResolvers = [
     CciCreateContactsResolver,
     CciPaginateContactsResolver,
     CciGetContactsResolver,
-    CciFindContactResolver,
     CciFindContactByIdResolver,
+    CciFindContactResolver,
     CciUpdateContactResolver,
     CciDeleteContactByIdResolver,
     CciDeleteContactsResolver,

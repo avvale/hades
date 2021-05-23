@@ -14,8 +14,8 @@ import { CciCreateModuleResolver } from './resolvers/cci-create-module.resolver'
 import { CciCreateModulesResolver } from './resolvers/cci-create-modules.resolver';
 import { CciPaginateModulesResolver } from './resolvers/cci-paginate-modules.resolver';
 import { CciGetModulesResolver } from './resolvers/cci-get-modules.resolver';
-import { CciFindModuleResolver } from './resolvers/cci-find-module.resolver';
 import { CciFindModuleByIdResolver } from './resolvers/cci-find-module-by-id.resolver';
+import { CciFindModuleResolver } from './resolvers/cci-find-module.resolver';
 import { CciUpdateModuleResolver } from './resolvers/cci-update-module.resolver';
 import { CciDeleteModuleByIdResolver } from './resolvers/cci-delete-module-by-id.resolver';
 import { CciDeleteModulesResolver } from './resolvers/cci-delete-modules.resolver';
@@ -37,8 +37,8 @@ export const CciModuleResolvers = [
     CciCreateModulesResolver,
     CciPaginateModulesResolver,
     CciGetModulesResolver,
-    CciFindModuleResolver,
     CciFindModuleByIdResolver,
+    CciFindModuleResolver,
     CciUpdateModuleResolver,
     CciDeleteModuleByIdResolver,
     CciDeleteModulesResolver,

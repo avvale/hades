@@ -6,13 +6,13 @@ import { FindExecutionService } from './find-execution.service';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
-describe('FindExecutionService', () => 
+describe('FindExecutionService', () =>
 {
     let service: FindExecutionService;
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('FindExecutionService', () =>
                 EventPublisher,
                 FindExecutionService,
                 MockExecutionRepository,
-                { 
+                {
                     provide: IExecutionRepository,
                     useValue: {
                         find: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('FindExecutionService', () =>
         mockRepository  = module.get(MockExecutionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindExecutionService should be defined', () => 
+        test('FindExecutionService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find execution', async () => 
+        test('should find execution', async () =>
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main()).toBe(mockRepository.collectionSource[0]);

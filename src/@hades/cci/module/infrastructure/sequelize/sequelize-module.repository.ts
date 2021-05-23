@@ -12,7 +12,6 @@ export class SequelizeModuleRepository extends SequelizeRepository<CciModule, Cc
 {
     public readonly aggregateName: string = 'CciModule';
     public readonly mapper: ModuleMapper = new ModuleMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciModuleModel)

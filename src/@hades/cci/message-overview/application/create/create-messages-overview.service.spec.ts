@@ -6,13 +6,13 @@ import { CreateMessagesOverviewService } from './create-messages-overview.servic
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
-describe('CreateMessagesOverviewService', () => 
+describe('CreateMessagesOverviewService', () =>
 {
     let service: CreateMessagesOverviewService;
     let repository: IMessageOverviewRepository;
     let mockRepository: MockMessageOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateMessagesOverviewService', () =>
                 EventPublisher,
                 CreateMessagesOverviewService,
                 MockMessageOverviewRepository,
-                { 
+                {
                     provide: IMessageOverviewRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateMessagesOverviewService', () =>
         mockRepository  = module.get(MockMessageOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateMessagesOverviewService should be defined', () => 
+        test('CreateMessagesOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create messagesOverview and emit event', async () => 
+        test('should create messagesOverview and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

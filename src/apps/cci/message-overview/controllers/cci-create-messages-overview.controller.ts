@@ -5,14 +5,14 @@ import { CreateMessageOverviewDto } from './../dto/create-message-overview.dto';
 import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
-import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
+import { Permissions } from '@hades/iam/shared/domain/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from '@hades/iam/shared/domain/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@hades/iam/shared/domain/modules/auth/guards/authorization.guard';
 
 // tenant
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
+import { TenantPolicy } from '@hades/iam/shared/domain/decorators/tenant-policy.decorator';
 import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantPolicy } from './../../../shared/decorators/tenant-policy.decorator';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';

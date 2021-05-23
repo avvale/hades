@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { messagesDetail } from '@hades/cci/message-detail/infrastructure/seeds/message-detail.seed';
 
-describe('CciDeleteMessageDetailByIdResolver', () => 
+describe('CciDeleteMessageDetailByIdResolver', () =>
 {
     let resolver: CciDeleteMessageDetailByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciDeleteMessageDetailByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciDeleteMessageDetailByIdResolver should be defined', () => 
+    test('CciDeleteMessageDetailByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteMessageDetailByIdResolver should be defined', () => 
+        test('CciDeleteMessageDetailByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an messageDetail deleted', async () => 
+        test('should return an messageDetail deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messagesDetail[0])));
             expect(await resolver.main(messagesDetail[0].id)).toBe(messagesDetail[0]);

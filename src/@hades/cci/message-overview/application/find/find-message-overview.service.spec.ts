@@ -6,13 +6,13 @@ import { FindMessageOverviewService } from './find-message-overview.service';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
-describe('FindMessageOverviewService', () => 
+describe('FindMessageOverviewService', () =>
 {
     let service: FindMessageOverviewService;
     let repository: IMessageOverviewRepository;
     let mockRepository: MockMessageOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('FindMessageOverviewService', () =>
                 EventPublisher,
                 FindMessageOverviewService,
                 MockMessageOverviewRepository,
-                { 
+                {
                     provide: IMessageOverviewRepository,
                     useValue: {
                         find: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('FindMessageOverviewService', () =>
         mockRepository  = module.get(MockMessageOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindMessageOverviewService should be defined', () => 
+        test('FindMessageOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find messageOverview', async () => 
+        test('should find messageOverview', async () =>
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main()).toBe(mockRepository.collectionSource[0]);

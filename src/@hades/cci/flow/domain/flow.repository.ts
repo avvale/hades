@@ -11,29 +11,29 @@ export abstract class IFlowRepository implements IRepository<CciFlow>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciFlow>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciFlow>>;
 
     // create a single record
-    abstract async create(flow: CciFlow): Promise<void>;
+    abstract create(flow: CciFlow): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(flows: CciFlow[], options?: object): Promise<void>;
+    abstract insert(flows: CciFlow[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciFlow | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciFlow | null>;
 
     // find a single record by id
-    abstract async findById(id: FlowId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciFlow | null>;
+    abstract findById(id: FlowId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciFlow | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciFlow[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciFlow[]>;
 
     // update record
-    abstract async update(flow: CciFlow, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(flow: CciFlow, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: FlowId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: FlowId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

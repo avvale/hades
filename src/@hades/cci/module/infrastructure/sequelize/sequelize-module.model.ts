@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 
-@Table({ modelName: 'cci_module', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciModule', freezeTableName: true, timestamps: false })
 export class CciModuleModel extends Model<CciModuleModel>
 {
     @Column({
@@ -17,7 +16,7 @@ export class CciModuleModel extends Model<CciModuleModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -32,7 +31,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -40,7 +39,7 @@ export class CciModuleModel extends Model<CciModuleModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -55,86 +54,86 @@ export class CciModuleModel extends Model<CciModuleModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
     systemName: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'channel_hash',
+        field: 'channelHash',
         allowNull: false,
         type: DataTypes.CHAR(40),
     })
     channelHash: string;
 
     @Column({
-        field: 'channel_party',
+        field: 'channelParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     channelParty: string;
 
     @Column({
-        field: 'channel_component',
+        field: 'channelComponent',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
     channelComponent: string;
 
     @Column({
-        field: 'channel_name',
+        field: 'channelName',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
     channelName: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'flow_hash',
+        field: 'flowHash',
         allowNull: true,
         type: DataTypes.CHAR(40),
     })
     flowHash: string;
 
     @Column({
-        field: 'flow_party',
+        field: 'flowParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowParty: string;
 
     @Column({
-        field: 'flow_receiver_party',
+        field: 'flowReceiverParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowReceiverParty: string;
 
     @Column({
-        field: 'flow_component',
+        field: 'flowComponent',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowComponent: string;
 
     @Column({
-        field: 'flow_receiver_component',
+        field: 'flowReceiverComponent',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowReceiverComponent: string;
 
     @Column({
-        field: 'flow_interface_name',
+        field: 'flowInterfaceName',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowInterfaceName: string;
 
     @Column({
-        field: 'flow_interface_namespace',
+        field: 'flowInterfaceNamespace',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
@@ -148,7 +147,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     version: string;
 
     @Column({
-        field: 'parameter_group',
+        field: 'parameterGroup',
         allowNull: true,
         type: DataTypes.STRING(255),
     })
@@ -162,35 +161,35 @@ export class CciModuleModel extends Model<CciModuleModel>
     name: string;
 
     @Column({
-        field: 'parameter_name',
+        field: 'parameterName',
         allowNull: true,
         type: DataTypes.STRING(320),
     })
     parameterName: string;
 
     @Column({
-        field: 'parameter_value',
+        field: 'parameterValue',
         allowNull: true,
         type: DataTypes.STRING(2048),
     })
     parameterValue: string;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

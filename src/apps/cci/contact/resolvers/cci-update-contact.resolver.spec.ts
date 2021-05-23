@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 import { CciUpdateContactInput } from './../../../../graphql';
 
-describe('CciUpdateContactResolver', () => 
+describe('CciUpdateContactResolver', () =>
 {
     let resolver: CciUpdateContactResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('CciUpdateContactResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<CciUpdateContactResolver>(CciUpdateContactResolver);
+        resolver    = module.get<CciUpdateContactResolver>(CciUpdateContactResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciUpdateContactResolver should be defined', () => 
+    test('CciUpdateContactResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciUpdateContactResolver should be defined', () => 
+        test('CciUpdateContactResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a contact created', async () => 
+        test('should return a contact created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(contacts[0])));
             expect(await resolver.main(<CciUpdateContactInput>contacts[0])).toBe(contacts[0]);

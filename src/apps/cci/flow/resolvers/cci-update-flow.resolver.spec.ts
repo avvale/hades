@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { flows } from '@hades/cci/flow/infrastructure/seeds/flow.seed';
 import { CciUpdateFlowInput } from './../../../../graphql';
 
-describe('CciUpdateFlowResolver', () => 
+describe('CciUpdateFlowResolver', () =>
 {
     let resolver: CciUpdateFlowResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('CciUpdateFlowResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<CciUpdateFlowResolver>(CciUpdateFlowResolver);
+        resolver    = module.get<CciUpdateFlowResolver>(CciUpdateFlowResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciUpdateFlowResolver should be defined', () => 
+    test('CciUpdateFlowResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciUpdateFlowResolver should be defined', () => 
+        test('CciUpdateFlowResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a flow created', async () => 
+        test('should return a flow created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows[0])));
             expect(await resolver.main(<CciUpdateFlowInput>flows[0])).toBe(flows[0]);

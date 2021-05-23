@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CciGetExecutionsResolver } from './cci-get-executions.resolver'; 
+import { CciGetExecutionsResolver } from './cci-get-executions.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.seed';
 
-describe('CciGetExecutionsResolver', () => 
+describe('CciGetExecutionsResolver', () =>
 {
     let resolver:   CciGetExecutionsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciGetExecutionsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciGetExecutionsResolver should be defined', () => 
+    test('CciGetExecutionsResolver should be defined', () =>
     {
         expect(resolver).   toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciGetExecutionsResolver should be defined', () => 
+        test('CciGetExecutionsResolver should be defined', () =>
         {
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a executions', async () => 
+        test('should return a executions', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions)));
             expect(await resolver.main()).toBe(executions);

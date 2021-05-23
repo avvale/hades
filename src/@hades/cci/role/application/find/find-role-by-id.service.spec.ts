@@ -37,14 +37,14 @@ describe('FindRoleByIdService', () =>
         mockRepository  = module.get(MockRoleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindRoleByIdService should be defined', () => 
+        test('FindRoleByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find role by id', async () => 
+        test('should find role by id', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

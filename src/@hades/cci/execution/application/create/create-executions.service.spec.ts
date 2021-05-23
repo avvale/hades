@@ -6,13 +6,13 @@ import { CreateExecutionsService } from './create-executions.service';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
-describe('CreateExecutionsService', () => 
+describe('CreateExecutionsService', () =>
 {
     let service: CreateExecutionsService;
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateExecutionsService', () =>
                 EventPublisher,
                 CreateExecutionsService,
                 MockExecutionRepository,
-                { 
+                {
                     provide: IExecutionRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateExecutionsService', () =>
         mockRepository  = module.get(MockExecutionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateExecutionsService should be defined', () => 
+        test('CreateExecutionsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create executions and emit event', async () => 
+        test('should create executions and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

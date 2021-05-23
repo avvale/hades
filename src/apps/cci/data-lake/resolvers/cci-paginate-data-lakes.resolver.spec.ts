@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.seed';
 
-describe('CciPaginateDataLakesResolver', () => 
+describe('CciPaginateDataLakesResolver', () =>
 {
     let resolver: CciPaginateDataLakesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciPaginateDataLakesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciPaginateDataLakesResolver should be defined', () => 
+    test('CciPaginateDataLakesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciPaginateDataLakesResolver should be defined', () => 
+        test('CciPaginateDataLakesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a dataLakes', async () => 
+        test('should return a dataLakes', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(dataLakes)));
             expect(await resolver.main()).toBe(dataLakes);

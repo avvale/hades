@@ -14,8 +14,8 @@ import { CciCreateSystemResolver } from './resolvers/cci-create-system.resolver'
 import { CciCreateSystemsResolver } from './resolvers/cci-create-systems.resolver';
 import { CciPaginateSystemsResolver } from './resolvers/cci-paginate-systems.resolver';
 import { CciGetSystemsResolver } from './resolvers/cci-get-systems.resolver';
-import { CciFindSystemResolver } from './resolvers/cci-find-system.resolver';
 import { CciFindSystemByIdResolver } from './resolvers/cci-find-system-by-id.resolver';
+import { CciFindSystemResolver } from './resolvers/cci-find-system.resolver';
 import { CciUpdateSystemResolver } from './resolvers/cci-update-system.resolver';
 import { CciDeleteSystemByIdResolver } from './resolvers/cci-delete-system-by-id.resolver';
 import { CciDeleteSystemsResolver } from './resolvers/cci-delete-systems.resolver';
@@ -37,8 +37,8 @@ export const CciSystemResolvers = [
     CciCreateSystemsResolver,
     CciPaginateSystemsResolver,
     CciGetSystemsResolver,
-    CciFindSystemResolver,
     CciFindSystemByIdResolver,
+    CciFindSystemResolver,
     CciUpdateSystemResolver,
     CciDeleteSystemByIdResolver,
     CciDeleteSystemsResolver,

@@ -6,13 +6,13 @@ import { PaginateSystemsService } from './paginate-systems.service';
 import { ISystemRepository } from './../../domain/system.repository';
 import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
-describe('PaginateSystemsService', () => 
+describe('PaginateSystemsService', () =>
 {
     let service: PaginateSystemsService;
     let repository: ISystemRepository;
     let mockRepository: MockSystemRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateSystemsService', () =>
                 EventPublisher,
                 PaginateSystemsService,
                 MockSystemRepository,
-                { 
+                {
                     provide: ISystemRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateSystemsService', () =>
         mockRepository  = module.get(MockSystemRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateSystemsService should be defined', () => 
+        test('PaginateSystemsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate systems', async () => 
+        test('should paginate systems', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

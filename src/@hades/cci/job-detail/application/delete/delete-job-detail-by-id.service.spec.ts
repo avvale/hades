@@ -8,7 +8,7 @@ import { JobDetailId } from './../../domain/value-objects';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { MockJobDetailRepository } from './../../infrastructure/mock/mock-job-detail.repository';
 
-describe('DeleteJobDetailByIdService', () => 
+describe('DeleteJobDetailByIdService', () =>
 {
     let service: DeleteJobDetailByIdService;
     let repository: IJobDetailRepository;
@@ -38,14 +38,14 @@ describe('DeleteJobDetailByIdService', () =>
         mockRepository  = module.get(MockJobDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteJobDetailByIdService should be defined', () => 
+        test('DeleteJobDetailByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete jobDetail and emit event', async () => 
+        test('should delete jobDetail and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

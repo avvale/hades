@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 
-@Table({ modelName: 'cci_flow', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciFlow', freezeTableName: true, timestamps: false })
 export class CciFlowModel extends Model<CciFlowModel>
 {
     @Unique
@@ -25,7 +24,7 @@ export class CciFlowModel extends Model<CciFlowModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -40,7 +39,7 @@ export class CciFlowModel extends Model<CciFlowModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -48,7 +47,7 @@ export class CciFlowModel extends Model<CciFlowModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -63,7 +62,7 @@ export class CciFlowModel extends Model<CciFlowModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -91,7 +90,7 @@ export class CciFlowModel extends Model<CciFlowModel>
     party: string;
 
     @Column({
-        field: 'receiver_party',
+        field: 'receiverParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
@@ -105,56 +104,56 @@ export class CciFlowModel extends Model<CciFlowModel>
     component: string;
 
     @Column({
-        field: 'receiver_component',
+        field: 'receiverComponent',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     receiverComponent: string;
 
     @Column({
-        field: 'interface_name',
+        field: 'interfaceName',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
     interfaceName: string;
 
     @Column({
-        field: 'interface_namespace',
+        field: 'interfaceNamespace',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
     interfaceNamespace: string;
 
     @Column({
-        field: 'iflow_name',
+        field: 'iflowName',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     iflowName: string;
 
     @Column({
-        field: 'responsible_user_account',
+        field: 'responsibleUserAccount',
         allowNull: true,
         type: DataTypes.STRING(20),
     })
     responsibleUserAccount: string;
 
     @Column({
-        field: 'last_change_user_account',
+        field: 'lastChangeUserAccount',
         allowNull: true,
         type: DataTypes.STRING(20),
     })
     lastChangeUserAccount: string;
 
     @Column({
-        field: 'last_changed_at',
+        field: 'lastChangedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     lastChangedAt: string;
 
     @Column({
-        field: 'folder_path',
+        field: 'folderPath',
         allowNull: true,
         type: DataTypes.STRING(255),
     })
@@ -175,21 +174,21 @@ export class CciFlowModel extends Model<CciFlowModel>
     application: string;
 
     @Column({
-        field: 'is_critical',
+        field: 'isCritical',
         allowNull: true,
         type: DataTypes.BOOLEAN,
     })
     isCritical: boolean;
 
     @Column({
-        field: 'is_complex',
+        field: 'isComplex',
         allowNull: true,
         type: DataTypes.BOOLEAN,
     })
     isComplex: boolean;
 
     @Column({
-        field: 'field_group_id',
+        field: 'fieldGroupId',
         allowNull: true,
         type: DataTypes.UUID,
     })
@@ -203,21 +202,21 @@ export class CciFlowModel extends Model<CciFlowModel>
     data: any;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

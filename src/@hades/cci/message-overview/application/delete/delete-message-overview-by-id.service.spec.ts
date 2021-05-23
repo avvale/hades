@@ -8,7 +8,7 @@ import { MessageOverviewId } from './../../domain/value-objects';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
-describe('DeleteMessageOverviewByIdService', () => 
+describe('DeleteMessageOverviewByIdService', () =>
 {
     let service: DeleteMessageOverviewByIdService;
     let repository: IMessageOverviewRepository;
@@ -38,14 +38,14 @@ describe('DeleteMessageOverviewByIdService', () =>
         mockRepository  = module.get(MockMessageOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteMessageOverviewByIdService should be defined', () => 
+        test('DeleteMessageOverviewByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete messageOverview and emit event', async () => 
+        test('should delete messageOverview and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

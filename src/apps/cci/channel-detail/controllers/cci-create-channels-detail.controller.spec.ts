@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { channelsDetail } from '@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed';
 
-describe('CciCreateChannelsDetailController', () => 
+describe('CciCreateChannelsDetailController', () =>
 {
     let controller: CciCreateChannelsDetailController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('CciCreateChannelsDetailController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateChannelsDetailController should be defined', () => 
+        test('CciCreateChannelsDetailController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an channelsDetail created', async () => 
+        test('should return an channelsDetail created', async () =>
         {
             expect(await controller.main(channelsDetail)).toBe(undefined);
         });

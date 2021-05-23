@@ -55,10 +55,12 @@ describe('UpdateRoleService', () =>
         test('should update a role and emit event', async () =>
         {
             expect(await service.main(
-                new RoleId(roles[0].id),
-                new RoleTenantId(roles[0].tenantId),
-                new RoleTenantCode(roles[0].tenantCode),
-                new RoleName(roles[0].name),
+                {
+                    id: new RoleId(roles[0].id),
+                    tenantId: new RoleTenantId(roles[0].tenantId),
+                    tenantCode: new RoleTenantCode(roles[0].tenantCode),
+                    name: new RoleName(roles[0].name),
+                }
             )).toBe(undefined);
         });
     });

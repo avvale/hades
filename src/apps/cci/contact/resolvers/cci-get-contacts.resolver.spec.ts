@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CciGetContactsResolver } from './cci-get-contacts.resolver'; 
+import { CciGetContactsResolver } from './cci-get-contacts.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 
-describe('CciGetContactsResolver', () => 
+describe('CciGetContactsResolver', () =>
 {
     let resolver:   CciGetContactsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciGetContactsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciGetContactsResolver should be defined', () => 
+    test('CciGetContactsResolver should be defined', () =>
     {
         expect(resolver).   toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciGetContactsResolver should be defined', () => 
+        test('CciGetContactsResolver should be defined', () =>
         {
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a contacts', async () => 
+        test('should return a contacts', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(contacts)));
             expect(await resolver.main()).toBe(contacts);

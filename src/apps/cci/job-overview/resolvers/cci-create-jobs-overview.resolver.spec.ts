@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-overview.seed';
 import { CciCreateJobOverviewInput } from './../../../../graphql';
 
-describe('CciCreateJobsOverviewResolver', () => 
+describe('CciCreateJobsOverviewResolver', () =>
 {
     let resolver: CciCreateJobsOverviewResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateJobsOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateJobsOverviewResolver should be defined', () => 
+    test('CciCreateJobsOverviewResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateJobsOverviewResolver should be defined', () => 
+        test('CciCreateJobsOverviewResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an jobsOverview created', async () => 
+        test('should return an jobsOverview created', async () =>
         {
             expect(await resolver.main(<CciCreateJobOverviewInput[]>jobsOverview)).toBe(true);
         });

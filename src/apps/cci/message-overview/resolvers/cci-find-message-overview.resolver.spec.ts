@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { messagesOverview } from '@hades/cci/message-overview/infrastructure/seeds/message-overview.seed';
 
-describe('CciFindMessageOverviewResolver', () => 
+describe('CciFindMessageOverviewResolver', () =>
 {
     let resolver: CciFindMessageOverviewResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciFindMessageOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciFindMessageOverviewResolver should be defined', () => 
+    test('CciFindMessageOverviewResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciFindMessageOverviewResolver should be defined', () => 
+        test('CciFindMessageOverviewResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a messageOverview', async () => 
+        test('should return a messageOverview', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messagesOverview[0])));
             expect(await resolver.main()).toBe(messagesOverview[0]);

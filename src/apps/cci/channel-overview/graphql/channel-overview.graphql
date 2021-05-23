@@ -71,17 +71,17 @@ input CciUpdateChannelOverviewInput
 
 type Query
 {
-    cciFindChannelOverview(query:QueryStatement constraint:QueryStatement): CciChannelOverview
-    cciFindChannelOverviewById(id:ID constraint:QueryStatement): CciChannelOverview
-    cciGetChannelsOverview(query:QueryStatement constraint:QueryStatement): [CciChannelOverview]!
-    cciPaginateChannelsOverview(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindChannelOverview(query: QueryStatement constraint: QueryStatement): CciChannelOverview
+    cciFindChannelOverviewById(id: ID constraint: QueryStatement): CciChannelOverview
+    cciGetChannelsOverview(query: QueryStatement constraint: QueryStatement): [CciChannelOverview]!
+    cciPaginateChannelsOverview(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateChannelOverview(payload: CciCreateChannelOverviewInput!): CciChannelOverview
     cciCreateChannelsOverview(payload: [CciCreateChannelOverviewInput]!): Boolean!
-    cciUpdateChannelOverview(payload: CciUpdateChannelOverviewInput! constraint:QueryStatement): CciChannelOverview
-    cciDeleteChannelOverviewById(id: ID! constraint:QueryStatement): CciChannelOverview
-    cciDeleteChannelsOverview(query:QueryStatement constraint:QueryStatement): [CciChannelOverview]!
+    cciUpdateChannelOverview(payload: CciUpdateChannelOverviewInput! constraint: QueryStatement): CciChannelOverview
+    cciDeleteChannelOverviewById(id: ID! constraint: QueryStatement): CciChannelOverview
+    cciDeleteChannelsOverview(query: QueryStatement constraint: QueryStatement): [CciChannelOverview]!
 }

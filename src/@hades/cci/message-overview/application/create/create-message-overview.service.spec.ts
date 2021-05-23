@@ -71,25 +71,27 @@ describe('CreateMessageOverviewService', () =>
         test('should create a messageOverview and emit event', async () =>
         {
             expect(await service.main(
-                new MessageOverviewId(messagesOverview[0].id),
-                new MessageOverviewTenantId(messagesOverview[0].tenantId),
-                new MessageOverviewTenantCode(messagesOverview[0].tenantCode),
-                new MessageOverviewSystemId(messagesOverview[0].systemId),
-                new MessageOverviewSystemName(messagesOverview[0].systemName),
-                new MessageOverviewExecutionId(messagesOverview[0].executionId),
-                new MessageOverviewExecutionType(messagesOverview[0].executionType),
-                new MessageOverviewExecutionExecutedAt(messagesOverview[0].executionExecutedAt),
-                new MessageOverviewExecutionMonitoringStartAt(messagesOverview[0].executionMonitoringStartAt),
-                new MessageOverviewExecutionMonitoringEndAt(messagesOverview[0].executionMonitoringEndAt),
-                new MessageOverviewNumberMax(messagesOverview[0].numberMax),
-                new MessageOverviewNumberDays(messagesOverview[0].numberDays),
-                new MessageOverviewSuccess(messagesOverview[0].success),
-                new MessageOverviewCancelled(messagesOverview[0].cancelled),
-                new MessageOverviewDelivering(messagesOverview[0].delivering),
-                new MessageOverviewError(messagesOverview[0].error),
-                new MessageOverviewHolding(messagesOverview[0].holding),
-                new MessageOverviewToBeDelivered(messagesOverview[0].toBeDelivered),
-                new MessageOverviewWaiting(messagesOverview[0].waiting),
+                {
+                    id: new MessageOverviewId(messagesOverview[0].id),
+                    tenantId: new MessageOverviewTenantId(messagesOverview[0].tenantId),
+                    tenantCode: new MessageOverviewTenantCode(messagesOverview[0].tenantCode),
+                    systemId: new MessageOverviewSystemId(messagesOverview[0].systemId),
+                    systemName: new MessageOverviewSystemName(messagesOverview[0].systemName),
+                    executionId: new MessageOverviewExecutionId(messagesOverview[0].executionId),
+                    executionType: new MessageOverviewExecutionType(messagesOverview[0].executionType),
+                    executionExecutedAt: new MessageOverviewExecutionExecutedAt(messagesOverview[0].executionExecutedAt),
+                    executionMonitoringStartAt: new MessageOverviewExecutionMonitoringStartAt(messagesOverview[0].executionMonitoringStartAt),
+                    executionMonitoringEndAt: new MessageOverviewExecutionMonitoringEndAt(messagesOverview[0].executionMonitoringEndAt),
+                    numberMax: new MessageOverviewNumberMax(messagesOverview[0].numberMax),
+                    numberDays: new MessageOverviewNumberDays(messagesOverview[0].numberDays),
+                    success: new MessageOverviewSuccess(messagesOverview[0].success),
+                    cancelled: new MessageOverviewCancelled(messagesOverview[0].cancelled),
+                    delivering: new MessageOverviewDelivering(messagesOverview[0].delivering),
+                    error: new MessageOverviewError(messagesOverview[0].error),
+                    holding: new MessageOverviewHolding(messagesOverview[0].holding),
+                    toBeDelivered: new MessageOverviewToBeDelivered(messagesOverview[0].toBeDelivered),
+                    waiting: new MessageOverviewWaiting(messagesOverview[0].waiting),
+                }
             )).toBe(undefined);
         });
     });

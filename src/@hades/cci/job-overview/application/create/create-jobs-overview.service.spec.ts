@@ -6,13 +6,13 @@ import { CreateJobsOverviewService } from './create-jobs-overview.service';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { MockJobOverviewRepository } from './../../infrastructure/mock/mock-job-overview.repository';
 
-describe('CreateJobsOverviewService', () => 
+describe('CreateJobsOverviewService', () =>
 {
     let service: CreateJobsOverviewService;
     let repository: IJobOverviewRepository;
     let mockRepository: MockJobOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateJobsOverviewService', () =>
                 EventPublisher,
                 CreateJobsOverviewService,
                 MockJobOverviewRepository,
-                { 
+                {
                     provide: IJobOverviewRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateJobsOverviewService', () =>
         mockRepository  = module.get(MockJobOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateJobsOverviewService should be defined', () => 
+        test('CreateJobsOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create jobsOverview and emit event', async () => 
+        test('should create jobsOverview and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

@@ -8,7 +8,7 @@ import { FlowId } from './../../domain/value-objects';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
-describe('DeleteFlowByIdService', () => 
+describe('DeleteFlowByIdService', () =>
 {
     let service: DeleteFlowByIdService;
     let repository: IFlowRepository;
@@ -38,14 +38,14 @@ describe('DeleteFlowByIdService', () =>
         mockRepository  = module.get(MockFlowRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteFlowByIdService should be defined', () => 
+        test('DeleteFlowByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete flow and emit event', async () => 
+        test('should delete flow and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

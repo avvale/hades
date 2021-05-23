@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { modules } from '@hades/cci/module/infrastructure/seeds/module.seed';
 import { CciCreateModuleInput } from './../../../../graphql';
 
-describe('CciCreateModulesResolver', () => 
+describe('CciCreateModulesResolver', () =>
 {
     let resolver: CciCreateModulesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateModulesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateModulesResolver should be defined', () => 
+    test('CciCreateModulesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateModulesResolver should be defined', () => 
+        test('CciCreateModulesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an modules created', async () => 
+        test('should return an modules created', async () =>
         {
             expect(await resolver.main(<CciCreateModuleInput[]>modules)).toBe(true);
         });

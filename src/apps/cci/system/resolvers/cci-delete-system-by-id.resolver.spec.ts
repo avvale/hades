@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { systems } from '@hades/cci/system/infrastructure/seeds/system.seed';
 
-describe('CciDeleteSystemByIdResolver', () => 
+describe('CciDeleteSystemByIdResolver', () =>
 {
     let resolver: CciDeleteSystemByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciDeleteSystemByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciDeleteSystemByIdResolver should be defined', () => 
+    test('CciDeleteSystemByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteSystemByIdResolver should be defined', () => 
+        test('CciDeleteSystemByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an system deleted', async () => 
+        test('should return an system deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await resolver.main(systems[0].id)).toBe(systems[0]);

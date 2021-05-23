@@ -37,14 +37,14 @@ describe('FindFlowByIdService', () =>
         mockRepository  = module.get(MockFlowRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindFlowByIdService should be defined', () => 
+        test('FindFlowByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find flow by id', async () => 
+        test('should find flow by id', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

@@ -14,8 +14,8 @@ import { CciCreateJobOverviewResolver } from './resolvers/cci-create-job-overvie
 import { CciCreateJobsOverviewResolver } from './resolvers/cci-create-jobs-overview.resolver';
 import { CciPaginateJobsOverviewResolver } from './resolvers/cci-paginate-jobs-overview.resolver';
 import { CciGetJobsOverviewResolver } from './resolvers/cci-get-jobs-overview.resolver';
-import { CciFindJobOverviewResolver } from './resolvers/cci-find-job-overview.resolver';
 import { CciFindJobOverviewByIdResolver } from './resolvers/cci-find-job-overview-by-id.resolver';
+import { CciFindJobOverviewResolver } from './resolvers/cci-find-job-overview.resolver';
 import { CciUpdateJobOverviewResolver } from './resolvers/cci-update-job-overview.resolver';
 import { CciDeleteJobOverviewByIdResolver } from './resolvers/cci-delete-job-overview-by-id.resolver';
 import { CciDeleteJobsOverviewResolver } from './resolvers/cci-delete-jobs-overview.resolver';
@@ -37,8 +37,8 @@ export const CciJobOverviewResolvers = [
     CciCreateJobsOverviewResolver,
     CciPaginateJobsOverviewResolver,
     CciGetJobsOverviewResolver,
-    CciFindJobOverviewResolver,
     CciFindJobOverviewByIdResolver,
+    CciFindJobOverviewResolver,
     CciUpdateJobOverviewResolver,
     CciDeleteJobOverviewByIdResolver,
     CciDeleteJobsOverviewResolver,

@@ -13,7 +13,7 @@ describe('CciCreateExecutionResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateExecutionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateExecutionResolver should be defined', () => 
+    test('CciCreateExecutionResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateExecutionResolver should be defined', () => 
+        test('CciCreateExecutionResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an execution created', async () => 
+        test('should return an execution created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions[0])));
             expect(await resolver.main(<CciCreateExecutionInput>executions[0])).toBe(executions[0]);

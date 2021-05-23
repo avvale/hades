@@ -14,8 +14,8 @@ import { CciCreateFlowResolver } from './resolvers/cci-create-flow.resolver';
 import { CciCreateFlowsResolver } from './resolvers/cci-create-flows.resolver';
 import { CciPaginateFlowsResolver } from './resolvers/cci-paginate-flows.resolver';
 import { CciGetFlowsResolver } from './resolvers/cci-get-flows.resolver';
-import { CciFindFlowResolver } from './resolvers/cci-find-flow.resolver';
 import { CciFindFlowByIdResolver } from './resolvers/cci-find-flow-by-id.resolver';
+import { CciFindFlowResolver } from './resolvers/cci-find-flow.resolver';
 import { CciUpdateFlowResolver } from './resolvers/cci-update-flow.resolver';
 import { CciDeleteFlowByIdResolver } from './resolvers/cci-delete-flow-by-id.resolver';
 import { CciDeleteFlowsResolver } from './resolvers/cci-delete-flows.resolver';
@@ -37,8 +37,8 @@ export const CciFlowResolvers = [
     CciCreateFlowsResolver,
     CciPaginateFlowsResolver,
     CciGetFlowsResolver,
-    CciFindFlowResolver,
     CciFindFlowByIdResolver,
+    CciFindFlowResolver,
     CciUpdateFlowResolver,
     CciDeleteFlowByIdResolver,
     CciDeleteFlowsResolver,

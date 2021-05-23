@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-overview.seed';
 
-describe('CciDeleteJobsOverviewController', () => 
+describe('CciDeleteJobsOverviewController', () =>
 {
     let controller: CciDeleteJobsOverviewController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('CciDeleteJobsOverviewController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteJobsOverviewController should be defined', () => 
+        test('CciDeleteJobsOverviewController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an jobsOverview deleted', async () => 
+        test('should return an jobsOverview deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsOverview)));
             expect(await controller.main()).toBe(jobsOverview);

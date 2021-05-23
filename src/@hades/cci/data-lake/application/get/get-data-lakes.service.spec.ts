@@ -6,13 +6,13 @@ import { GetDataLakesService } from './get-data-lakes.service';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
-describe('GetDataLakesService', () => 
+describe('GetDataLakesService', () =>
 {
     let service: GetDataLakesService;
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetDataLakesService', () =>
                 EventPublisher,
                 GetDataLakesService,
                 MockDataLakeRepository,
-                { 
+                {
                     provide: IDataLakeRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetDataLakesService', () =>
         mockRepository  = module.get(MockDataLakeRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetDataLakesService should be defined', () => 
+        test('GetDataLakesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get dataLakes', async () => 
+        test('should get dataLakes', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

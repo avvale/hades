@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-overview.seed';
 import { CciUpdateJobOverviewInput } from './../../../../graphql';
 
-describe('CciUpdateJobOverviewResolver', () => 
+describe('CciUpdateJobOverviewResolver', () =>
 {
     let resolver: CciUpdateJobOverviewResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('CciUpdateJobOverviewResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<CciUpdateJobOverviewResolver>(CciUpdateJobOverviewResolver);
+        resolver    = module.get<CciUpdateJobOverviewResolver>(CciUpdateJobOverviewResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciUpdateJobOverviewResolver should be defined', () => 
+    test('CciUpdateJobOverviewResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciUpdateJobOverviewResolver should be defined', () => 
+        test('CciUpdateJobOverviewResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a jobOverview created', async () => 
+        test('should return a jobOverview created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsOverview[0])));
             expect(await resolver.main(<CciUpdateJobOverviewInput>jobsOverview[0])).toBe(jobsOverview[0]);

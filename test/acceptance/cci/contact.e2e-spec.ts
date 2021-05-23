@@ -2,12 +2,20 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IContactRepository } from '@hades/cci/contact/domain/contact.repository';
-import { MockContactRepository } from '@hades/cci/contact/infrastructure/mock/mock-contact.repository';
+import { MockContactSeeder } from '@hades/cci/contact/infrastructure/mock/mock-contact.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { CciModule } from './../../../src/apps/cci/cci.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [
     IamModule
@@ -16,7 +24,9 @@ const importForeignModules = [
 describe('contact', () =>
 {
     let app: INestApplication;
-    let repository: MockContactRepository;
+    let repository: IContactRepository;
+    let seeder: MockContactSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -24,53 +34,64 @@ describe('contact', () =>
                 imports: [
                     ...importForeignModules,
                     CciModule,
+                    IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockContactSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IContactRepository)
-            .useClass(MockContactRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockContactRepository>module.get<IContactRepository>(IContactRepository);
+        repository  = module.get<IContactRepository>(IContactRepository);
+        seeder      = module.get<MockContactSeeder>(MockContactSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST cci/contact - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'qlc8nv70msp3gr7i4vtb0irek6au38oezaxvtfkdriwxv3sxiw',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'n2mewm3jehjzl7sqjhto',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'ikns9w708nsnowihbboymjiq0qxfxqm00kvjiwnygz6if53mwf5txszx0njuany5kylecmtc1auu6xov3izfbsw6lexk6b0g5e4mr4f902x9858duprk1idkaez373wljrhzk4ehf2o1bfzz96ewntpjagt864qktezjjjzyficd166hs13v5w0kfu9fehwo0njpeecjbe6ee3zykk6u5wegsvm14z624vmmdvftctpwus8xzy6bq726llk8v0d',
-                name: '7hx3tbd291wj5zo8q073zjw5qy05gatd7waxq9dhd621aac86v1ndube9dwz897x5l14u9etiag4df7qpmas4bhaexb95h62s590p8euv8lveetb7fyclckyfm4ehbd39l10d2f48n4q1gj31bez1odrsyvzdv54mif5jalvh4pjatlka0uvn0pw5mjx4jkc82yz3nj8pouobgcr8d3ak0oxfao7483r8wxp22e0gx388ek4exbhs43f0alk4au',
-                surname: 'dhlqkru96as2j519pw3anb6wz9127rdc8l6sd5otq537m1wfrmu8ezjztywa66x1csezrojjueftsfvfx99tnrcxxkr5t6rolt169hitcldjuare006ba5v0epfcoz4i1xxasof5miy961kc2akyhtj0auby94xxv6p7hhvg6zro9chntrgkv7tgnql809ofn16h4fxind83m3ph9pxjr11u0dsghi81h9134s4382dv9yi76istzu762al8gb4',
-                email: '7lofw66f9lliinclx1cl8iq8oc8uxfbivv0e1m4j3zju0engmqm8gmarwu87a3laxh644r8rrstdhaohc83wkbmi4pz9tz9gz54uvvdhjernwfhewubd6vcr',
-                mobile: 'jus2i1rchpt3d4yzz5w3ildk495nh4n55jy68nb22rb0ot2oi6a1imkjnihp',
-                area: '4p6q6ct0zeoy1mj97lxver51kzcblvjxw4656yassekejc5sh78cmsi8jwqpxqcv4lm9xm41iis9m4jtjvv2vay6z0ldj373s6vmkaw3zdf4wyfvg4n1wffn3djxh6ofmou5w4ljgqk4ylu66i5vqse9ojf85aj37v9t2532l690g4s0tmxbobxckjv932wifpxt42mgh92wjyydtxirn4p29tzmkh1jba9wwuz4o56k9dxvv4vw26atc09lq5c',
+                tenantId: 'd1327d7d-2de8-4c3a-a67d-a54a34818f4f',
+                tenantCode: 'w6epmbb0sydilne2uiiup6gm9ort4prak0b8n4iwxvvuhe6s9e',
+                systemId: '4b10af98-a3d2-4a99-948b-45f35a2dd02e',
+                systemName: 'dcbpme83ed6eqygzl8oe',
+                roleId: 'f4bcf2f9-16b2-48fa-9c55-d1d209683c1a',
+                roleName: 'kcvguwbp8ceu2ybxc61h6efdjqzjn2uby4fhep2cwy7n02gqafursjme413cu9meydipz82trfngfffaolxpntidfqfspiiqfyj6cdgkd9c6wps3hkgr4l7k3j3u6w3u70qsqswy0xb1hsiz1yybeiycby9c95ufdfkwk2lnnuday8vqyek6a2m1jvwkb5nyj0snhiovfpz4yhfa7vooftlghebx5a1ftvlz71oou926ipnd5hh1uqnens7zkt6',
+                name: 'eoj1hr6e4jewgzlw4hcag26tjmanuc6y6wd3mreq298l9qajourch8ds878gzehqy0c90j4o9kuxt7mg0d02xcl5804rmzgmoc3hu94mnqdruo46ess79rcianugpvvgyklp381ajiaaszd3f18ze2qh1x7w7jbk3zuor7iqir6326ngmhlw32cdzz1ot054fl5g38yivzmhhzfb062xjox9r3ii2klrpp6a90o1vhd9zqkvnv5ok3sf9hkphve',
+                surname: '93mf4mzdmi04oej6lnwogr7r6ojuj7m3s3fr5703htee9ox66zmyocofnvys7lyyani90dns1hllr293i7gc3j3p69ocxigmmpcgu99xgkvjg39dw98jvv7uiu9b66e4rs9g29dzje46bkw6p8he9uqpfjq0c6aiyfyu6s7u2rxvmdf6j5fo9mfjunfsjaawdvyj280l3c5t2l7rn8duftybooy3prc05w5g14wwiwxrkpycoiyk1podu06xjwa',
+                email: '489bt1wxlf1g5tzpklu9eg1q0j5l5yqwlkbkakbw27saz9e3dwc2nfuksgzkd4t47nmty40a04ep6f0jorhuy0166pbxu6te2k82jb1ljtygt9hl59tdgabx',
+                mobile: 'pv627aq20q3i5gjaepstw2yhzb4q68h2cb66ss4q14rvqrp13t4wleb35flq',
+                area: 'txago5dlt8blzq321z5og9br9lccvavrumwa7bbyzvzop3nr388bs9o29y0poxk39lad99l1kl0z4wy8mednpoecnkrdrw0eb7fdv05cfuywyhu5c5pf9972rzypsyx2nbxf6qtiasckujfgd5j4aje9dfc8p42vkelvuopumo5lq0zmcixeoqv06h24s33s87oj8r2msqyv3vnm4y27ye3fut63gfypszleqg398zn3s3dc3esuneklb0tti8t',
                 hasConsentEmail: false,
                 hasConsentMobile: true,
                 isActive: false,
@@ -81,52 +102,25 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactId property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'x92lnj8kc0iy5x5t9yyeptvv2sljzf6tab6arxe43x1h1l1pdc',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'yuc2p4kjwiwbml1nznfa',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'qsemq1wx408jknbsg0pi2znxxazg71hzjjyy3yf9rhl4b8zo3kcxvx504inm4wpgm8dyv9zo7b2sueaihjugu2si0tcdgkqhkf5cnu7ph1doulywf6v8se4qn1lb8vzuvx0esl0t33w232kxx9mgoad8v3dom9bo8w4xfev0gbdh7axhh4sd4wkchwj1u5n7ifko9hjrf9mff53fl89c87zrn2pxl6jhspxgzfgitzm1h2nsz7ry7hj8k84exr4',
-                name: 'jdsu58gi61b6ll55yn2wv1f963fpeuyb83z4zo511ljgrsxf11nzbru0d0688hmnlz74le5ic0sv8stn9b8kc7xcx96b3el7wu346ddhcb3l1jxab4v023oxerc8371mxuhs1tmnn636mkow8y9f52n5xgmbbiun4cr50qbtzd2jdph444f3cpeovw2qf2k0t4nlxohyyjiuujh3psaz9ympp2s9j4xdws9ffsakdsopok2kbp0xt5yay3tobeq',
-                surname: 'k73vnhqfmg3x293t986gns6gg0zeaka0hylxcoeroha9klirwonkjlenk46yzkpk7t7ii7l2p5kjhia528v6fgfp1oyxblvj2ymvtit80bv8qppv2a2rdotam0t3tj4w3gg2atnv8nquibbt4ud7aufevjy8ylszlveshwgvf1kaj2tzmm9jffd2q01p8vqlld4hdp4cmm2odzj08caul2nlqfohxzznbxal2r9ofw0zf2xsuibqfkbwvknl5v6',
-                email: '9qtnms3iq1nid7lor27rnbjbuzs5k4q8akitou1z1soiwjty508whdlvptwpskco48664d0877mn5xwwmwkgh5xd3u0kk5288jxsuprpuaqu2ga1ltrnfgck',
-                mobile: 'lsftok732zlfqpnk6yesxvtcka93wma0cj2q1oh4igj2ig8ulg2i0qtl4ep0',
-                area: 'n76spox2e7y7mtjbo2h41pon5k9ok64zgwqkgvokspjxcvhgh7qq9re7izybnozsamgjfgzh0ers6u02wrt99q9h5b4e65uuawfrbadt7kf2fif0mkyv1r18oxj3s464uzthayfjrh5lbq4nfo69ycqtke3ovlvodqe8kd1ul3bxkkwx6powh78czo8x8uxgkwab62l1fihsskkh4j24fuw5fblazybjxryz9628p1v75aymvtz5r5y1mw0qc1p',
-                hasConsentEmail: false,
-                hasConsentMobile: false,
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
+                id: '36ba94a3-bbe4-45ab-934d-fd00debd146d',
                 tenantId: null,
-                tenantCode: 'txs6pz2b2p0cbhnwzg551ua87rzyrr6ijnx1r37331eyrcqcas',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '4slqg8efb7tz2gmdd3kc',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'mo061fnn9kw3lu3e2lqm8tfc9r6otwkbyp90220rsil6hrzx0qlyqqxtl2ws0tanjn0wmpcfq13lekh92qzndm0amgfkqdpzt3x28z1i0oygcfwzx1rg5q23g7gs2us4oqwhwyij9ezdupwcxxtfswwwak8swc1fuqiem8cdlbim7caj1u62xxg8yuz10uraf8p9ohwztchyzeolbkq20isp3degeuvekfqc994l2biwzb7oe6z9nwsj69ucqt9',
-                name: 'pi53k1d4kwh1kpzkkwex9eh14rw5xyvmupowae1l2waeorommxce7zl7jcbr0e8nti3cbzuhma7vcwb4hdyzebaqudcdqywwn8z1urvcasecwl82lxtqn55k47fjq6lnt0gtfb4k1s7ygkrmphweqmsf54kw1w47mcfkwi75vzosyvsn23o5seiipe2pnhnumxjl880q4iszpcaiuni3sw781srjvdaww3bgta5jouw2ud8xygc0g290jziixv7',
-                surname: '2c0vah7e8rk93uvcqe8qhovf9t6wimbyjjb4lfw259qhj2506se3zp6iza9xh32vbxezft54qcd8oo6llfzlvxvfujjiowpgp57uh0qhmn1yj44r7xlzko79fn65udicbmuw6qid0xzr9lf02w5tzqlci0hbg2ojgaju0r5jreo3xftlpie5jofnat2q262m4g50q0dh4st9fyjtkfbs2rsa3jd3og2ad2vf3iknh1eoddd2gtgd9mluyy7rwcp',
-                email: 'mlvoj85t73x2ame23ab3d20x6cdwyvuqopeamog3i5majdkj6s465v23r924ul9d1b7etpz9nsx9pkdhrwg4maam6k8zfmokpailhsq7biyg9s410vj6s72h',
-                mobile: 'jnsium6yfthj04syz3492wzy4b1qjlraodxsgbiz2njgamu5wuqdxanl6m08',
-                area: 'tyo8qysylmf30fha12yw6fcg66hdamc79o803ggfc61g2w9skug51d8mi0svhlgoaf5v277v6ag2fvji2bqbixuhq3doe5xhfkhhe1nwzikg4k88o2roolntaq5a53405g6ayvylxqf5sg0ae01gcikike5950o60ebzh9yijlg0t7zcg83dfk4plvhqkzlb2i4swvwuci5cz5vpr1t592rj52mo754gfrzuri03pibs4xzgh6dz3bg0855qttf',
+                tenantCode: 'sf5s47cg2d0lvge69k4uvlypmz84zxsgyn5wangxwkaonjimiu',
+                systemId: '0138d475-1b68-4db4-89d2-ed33127e3430',
+                systemName: '95sco8pdkj8gzmzaswc1',
+                roleId: 'b67aa5d7-28a7-4521-8dcc-745ffb35b310',
+                roleName: 'bgbnnk3k2w8zo4tj43d110o58brywh24howvyw5xz2loqawc6sj74jh2jl3g7meav2knio63wjeehhivui2vah3l3gskxu1v4wbe75j76x6zd6gxykrc92oes1kl1g4umnw54jt4kgo0g4vlwgzl652u5i89zd1vxcb52keemvtkvsyy1uf3z7yq0d5prvhy804xoyd8jm0zp9mf1sh2xn5foaf3qe37zjk7vsulpyyxn5gjn7mupyn6zqul80n',
+                name: 'iy3em1or36p5x5h3xnrz8x4bixgn7sj63d8jt8fp915haoo1cetip731gls13dr7o383fdzzajcaukol673062smtxbgj0uoj6jzw8oomn6mzibd79qhdy31aoxbfli4pgcj2c47kfrvdwmvi2l4iqt55ku00o15hnx1n4lpbrsz51ihff3m26og220kak9003j7ohdd74rwsi58i9c4o6u680mnwaqobvavsr9sgc570eiuzshgx85fjfyndjs',
+                surname: '8r0oalbrs6q168eh7her87nyaiebqs5fvcw7sm7rwm7gvno1h9wvx47ruucj9plgilz93lq7496c6v5lp2q880c8ix9c22faihtip3sxrespudg5gkdo914dbaluk0bxf80xzqu8ui8kqknnxa65n85ctihxle7oxg6wcei0mdv1benbw8i1wlf3iz18dvuid3ynd2ayaaumrkc41htwe9r6kzxcmxffao4cvtgbqa11xmjjkbovtezmi1cxcqg',
+                email: '0wfibebp1zpv7fhooshhfn65vi31rgp032gcy5zcenfvrzg9xua28mdd3kb2ohk9csdgx6kx5x9qabqyxll0hlylz29scxxmg8oqb0ft94iy0xyt8v5c6g2a',
+                mobile: 'jfi63t50539qsa1w2hks98aicp7ry5a1uqf3bte0bs54z8o7e8sxzeicx0jc',
+                area: '9q7g2p2pqpmcbu5vz722c5frddrsb3xldgiid22ovy8g33utrv07tlo58vjmy22ef4eaja4u8gn0j5bfr5eenkj590vj16cqpy3o0gjfqf59kahj657wbsl0vn6606pfnh8gk0othnii2qo8bio7afbw6qt5jqdwmituho3wix3klxffotk7bo2e1deh37tc9sr67li0caguivkruhea7qulm6gkfgydezh7xzhmwaipvsbqtg692ciq5ku7ujs',
                 hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: false,
@@ -137,55 +131,28 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantId property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantCode property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                
-                tenantCode: 'h1ds5mawbxvjd21yxoowblyj0xarg386crmcvrhdiegrv2flpk',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'a8ndzca36lnfmp8trwub',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '9jy3rw22zghnmztbt8toya9saqn2ldonirzshn62gqohblg53urip07stn6kakjcvolg2e1aayvulh00hs6hlb5f2v1tj2ea1te9ndtn8k3a6uirjg5lsjl9w5ptxb3yhswumoksuirkbrk8d85lru9egqotp17uzd6rhlaz1m017m2xgaec0mxwe7kgwmjppw4tt6eablydzafyq5bruq56d3gkivdfwhygbs8n2xphiu0k2wes6mx0bahk8d2',
-                name: '85nktdk5uqdviluh302zv858xiew7zgat5cqlfiqll3m0zbddluqdhofg1sfseaifaahxlyalty08hgatjkqnkmxppjkt1dxuif3rog9wns6m73ftkse0y6wwnp3ecwz9fgfijcwcs1gb10yb0b5smgsy7mfhr5odj53pliegsjkotl1asim4hbdnyo9bjbpvrgbm1i1jgllbxdpzyc1vlwivzd7gj19wydoc79h7wt4zw6grgs9ocjcs3v4tqc',
-                surname: 'qbo17e4p0s2sf2l5jrcgowp4evexi5b109r7cvua4xumculv1bl0k618uoihxjszgbu10jgjf3u162chwbuqr1zf1u9k28o97g57g88nzwro1zf7sp853hhz8uw8f60mlbd1iq4u0i5ez71ykmygslfyzbhvmipaov7y01d8oa0yw8n66fb9zaxr7d6m14kwszqt9e5fcx9y3vx6qdcxwpllxc0mi42ebb5bng1tg6tpbtavda8uyzyhxo2c3yd',
-                email: 'sma9nc5p036mowkps56tgc8ah68rn7543tapf8cvgkvuqgjuvd4kqd1lxhhw643mv9m1p2e55300coapba5wd9mihfik6xr5hojzgafxk2wr84tyxb8ek1pq',
-                mobile: '7jezklvcsnoxj9ys2vt8a7ozyoxxpxy4psummzb69pzbcp0q15m12ykdqz77',
-                area: 'vrxti69mhjpacvy4ary4emgw35jd1il18lmsvvx472jgfec19u63e3l90staj02wrq0qcabixz35ofi6jq1oix20thv396ggipi8p020vyb5t5e7j3215b7jthuo4etlt6ejce92ya4058igg5v5uw0diq7z4ajwlao92ntonwhmypucxyzebmlghwr03e3jb97ini7lgpcybv72whegwh27lja3snv3qgvn8rv9wigm13udlvcki4g1afs6tcp',
+                id: 'd9941333-f7e4-4192-b4fc-503c7e1d4a77',
+                tenantId: '402d7e04-3ccf-46b2-a83b-b3ddedb985c2',
+                tenantCode: null,
+                systemId: 'd83abfdb-34ba-4b64-a05b-0d5b5d312d4f',
+                systemName: 'wgt2gowj3q6we1rq1nf1',
+                roleId: '99e02824-4660-4d2e-8c59-47cddd1898e8',
+                roleName: 'ft5muwcp06h8i7j1b35vvjiycumgqrns9n4k5gve6og00e3jpxbvnzwyxq5rxzkrqwqh5jn5sn9o1bz6zbxhiov3by3267xzxzy3gz1dsmn6pzdj8xfra4lqf58wqimlf4mzr7q37kpt3dndchdfkb72icgmsrtuimkwmrjequpze4aawugl3ox0ihzm5rdb6re65u8jguq9jd4uz4chzi5gxzwqt8vnkz69o2w8atp3pebk6ejknm9q3v5kr87',
+                name: 'vfe2njj0urse8mokvqmwet2b53vpz72zfujfa0rmet1h1oc4s2bjpy7p85qgb51eh9gcvxqef9xhfhln9vrn8c2obbflb4yqcnoohyo2irurh4ss7p557mvged2wtghf8gd2vkbnxvhotvjy84zpm0025ml9jf5h1er51iejl5t3tbqjxgpbhfkrhwf7svq4bswh1bbe60bst4ujo0nzqc33rf2m8msk6k4ybi80x2f2qw9ee4rkctp9pe58rte',
+                surname: 'aygwq0n3shi300qt7bbcv1au2k8yx1psrh6mfv0w53xpcbw1vo79haub63k39p9b1ga2ox86d8ypyn5zt23spvgn6c8c7chcbri9wqnu2y8wstoznewkgufajuby4i289v2rwzpo0vz1tjsvw8wqq25128ueoaudbq02x2jup6fplbon3qvdc8q87nvfvo49lefyjqoanwog6p0jghwrwf5ijb687j2ku59b10ox4vyqzs93bu4wwvc5t6gk0yi',
+                email: 'e78uao97dle0en2upmq92ykm0072y5q24ha39xrvnoyhyjz44x4nlq2y74z4qob73odtd63ul2mg8d0jnc6u8be1v3b1jurp2hrpjyydil6j8e6el4bjxf2z',
+                mobile: '92awq2dl45tac34mujlexqsjltvlkb8tvmjsyvwkw3jtpn009ykeyjtufvnf',
+                area: '9o2nhjk93mpsoxa4aa3vpvrg710c6sfqs3bjny8pclfgddoutzq95yl5tsolivlqnai1bguck834t7s4fx0djy2vf68gv5t682jaltp35kxo69wn4cqybsj2rbut5d28ar0h72fsv8r9rs7puukd0mhe3adh07tgtrqtr01y3es4x1h6fnb1h81oizqbnm6666c9b1qq6t6ah5p12bhalht1etdijj35fl2waxsaicviheuwpmma9re0lha4c40',
                 hasConsentEmail: true,
                 hasConsentMobile: true,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactTenantId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantCode property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: null,
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'l1y5w8gj7bmifteaqkec',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'udkxf5m8t6i4m7khr8srenel3uie3w5munp0crmvzokk00j5j9g4c2khrkrk7rwh1lqqe3r2cye9cp02hzrjakjyc2djfqxflsfsme146yuer2zvzo45qng78et92bgkub0u3hsz7rio6k5vsylsodizfikecaltj45ntvhq09f6eiwd7wi328el0jihn8ng3sw9ma23arrseqawrl641ebx15nk02lqhsfkolyv42xe6buox5kkt33330h50x1',
-                name: 'b7fs8vxcdemgy42jrygbvruhdjxapzxk5ogymidnb3rhz0tm2umdrh9aefyb6drwjqd5zn4y0sj6e1svnalxh9scoy4b5oxmgrli67z34qt0mlqz7nnz9y4cggvmhbn5j1ac697lpj7x0997j77tzlmy7h4g62c2wbv7hlhfkjunie20iq3423szmkkjckzsmi683kfwvnyp2k36kh1qukgehit3q0vbh3uhfzj0jd478c4s421wvl2o6mw2q70',
-                surname: 'faf9kv8vhtrr7oeai4m09z11u1q5r62ipp2rq7erzztn6umki0pgd7f7t3u7j7t15trxx9sf0eoaq9xotqlqih4ai98s7zb66fyj8hoibp0xgmokh0elg0oqb58wa0kee8c2q4vu7cfg1zp5mpezu1y19yxzjfaxcs70rvng5lewjoqdix4acnikuqlkohbg0eehbwqmlepjvrljr71f5uopv4sbe6y43qzanh2x80jeqkq4l62t9f0znl5uhq4',
-                email: 'jsa0skftw05fvjn01usexwq0zsueosbvpq2xdqennv2vb2v8gxheaa4s5s9u3a1d2ockh1ns8apouzxj4agroyfkb8scfwsnhijxmn4er1ho8bl4x8t6x1rj',
-                mobile: 'm2e3rgejooqyl9o5nhghrd2cl9fvbx0maony86xz7n8rm5o9tyhwmzthooh9',
-                area: 'pm7d26yzdtcn892v8grt4d9vvix4c8ocplnkmevutvcgyaumtuk0kvwgpf8zlu0fgcq3ow967l2htwkq7oan9qutqg64kvtgiq7e5njyppxzph2u49swdza0dqi75dmi0z43hq4j7f3a2v9282ofn4a6lemgbrsixq7g9t968ve5cet9e6uhlspg37i37e2novewb007jeji1u23zc63pywf0qoesuy9c15a5jxs79b5rauk9lw9i3i60nt26pa',
-                hasConsentEmail: false,
-                hasConsentMobile: true,
-                isActive: true,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -193,54 +160,27 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantCode property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'k1qjmp8xqec0tgyy2q9f',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '8np6voqza76fv4g5t8jr84jvsnf80osf6bgpkp1asr90v2b4tkhkc29pjtw69dv32vrut9hdxuldnip7940gsrv6yb8rxw9nhq4s9a380dsoxtnhs0r3nxmouxgk5etf9pedwweyio4kvw92uglhsyqihwhjwvs6peoo8gi7iyqox2f50tcycm09wjevtzdj5x23xnnat1hlthnlzuh7sst3x8lxnqp33kb4lu7zjvatx1vl5akrqdflqiq5pzj',
-                name: '83ck0ens48zf18yy93z5145p6rwnsb8o4li4s3wjt2ayxicbb74ae5isbzvz4dxw2psc5iwbu33qsg4mg7jjeuyvho82rs6ilwrfngsdjghsfmrbaywm6lcku92c90rc94ysu2t1c17i98s9a1x23rf7c9ehrvqx4lfkh3xvlw1i0hr2ljjwejyhg664p3jald10da20dnhgc97o4k2mdupq0m6q6bbtnv2fdwvyefkw8xsll31jkqywhr78ir1',
-                surname: 's7moefj4u7ec9b4cy500qnlnaz45lzwtczsf7rs9nz3ht86m6m3ttjj3m7nfke2xmc0aamci6ie1v2r0b1s1okb31tb171zscc1nyee133lt87l9s75gzkh5d7dosiyjl0kxcio9es1jdwad9n1td47ui09ej6r8kj4i5zfb08j429to43tsvnwxi1x8gulghabg5wgha5kms63t9sjqsoz2rtahbkee94xzwhv8ptk5yrnkxooj5lbitfzdvai',
-                email: '7pfe39zn88ma3psjmuo2me0c659hxxi0mclt4v4o1dqmubkgzb4j7pr3ih26r7gzg5impraufvrxc6ys6nuky78iysdonxm2qvyuvkvehc3xdqpo2kcxa2eo',
-                mobile: 'fslnvptemn3rg13ts3z513m90agdfagh101afej2z3qcnikbbjv8jr3aaffv',
-                area: 'syxz3edskz26u115db4yrh7c94cimcrx7mndimr95jov37j99nfd7fzbabhfejvadjedsig4ephnz5eywcjpnrcvowg98o5kk6olkq19s5pk637y11i3eg6ziq8jf73vnvy10hmpfmkevble9uwwptq5qacrmvnv3umhmbwxavbol31cbet3u1l5lquleliam046ck3rfbo2exrj2tlfqt2zlvzm6hq9c8ntvl3q3j10eamhlx46lt61uzbdhbe',
-                hasConsentEmail: false,
-                hasConsentMobile: true,
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactTenantCode must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: '1kjz9jem2stu4lbbmx6by4r4ip2vonrnjmju6pgj9grflofj9z',
+                id: 'b7988c64-ee1a-4da2-93c3-1feeed7cef9b',
+                tenantId: '589c97c1-9e14-4505-a813-8592868bcf67',
+                tenantCode: 'wxy0s5u59k30gyh4mk9yydjjqgd2j2fqhm42gxhobzrn019ips',
                 systemId: null,
-                systemName: 'o6a58ecc76pxralvxfck',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'nwoi6buekp50rojfrm1fxe2n5b4dmkx7ejnb3s1jpub65me6je036keh5w3np2ciyq1bs6l8st0021l3qcex8tfgp2frvghq14p2zn05wqxhbqh7b6x79esh9609ltheqbp8t8mckfefyfnlg6sh2nbpr7u0vzm6as7g4by6rku5d9wmjmiwj8na4aa6omplpjrqxqbdsfxu15axl04tu4a2dukvdze6nidzxb0cxp4cmogj22bv7dnou6asja8',
-                name: 'v2rg17o3ovwqi8ec9uiuka8du9a1jhkzk7r4uec8iva0la8af8vowlxrqibjqmarlkdqxwlq65mydi903jc8z9qneul4nip2gigfoyajbt4i318aswcqh79mc8qbcnbd03bawp7dpz7cg98u6eiv7l7rdoltnc3mda8mr1fl5m1owsg0g1ts0cm3mqjoss4pl7lrvbr4dqo6ukca2lb3kc18uhstt0rxpwveeokzdt7hk7563vqcqap9j548r6d',
-                surname: 'z4qfsmus37vk7fyqarh0xr16wg8eccvd4cgwja231pju752dw4el6fzl6s4lgouvm3v4leci0eewnf0wybc8vjdvxk6fac8efvw3f20760nceisald1zv2hthje00i7ilhq2m7a7bvyny7w0dy7628j4bd8gga8sy7hsz0g4e4wc4ktmfw3w8rl0ml038rfygkdg2jh2szjxzxp3alezplnd0cdc8mvkd61ngcezuw3o8jzlsrmvwhdveiynrfa',
-                email: 'ebkkff5ongel4f2tdp61j6shq1eqsvnl5wq35lyqnovn9wsshyf4igrhbqsh407nlfobthjp6kowkpdqgsb3h8ka69nhjhxuuhu7rd1hweif16jcaduraoyc',
-                mobile: 'p9gjwdl4thkms34sx5lejtn5o1gbcnqcr1o3u7z2wr68ai7rmylwkjfqk6by',
-                area: '49so3kc02t0xdz1h8xwhb8gzceqorcin3r25hucthbuzy2q4ups995exlh20sj8b5ysz22h15g8myaadkbwdo9f9eamqxaq5y2duteqjfjyy3sghnhhlxricpo7f1wysd2zu023g1d8b9el39l2rftfqxtgejmqbyvb54i0pre83c8nx9bvg7qc41q3ysqpdpzvv6n37wi6ry9pcgieqe2j5st3iv7zkghyci3bry4c771aj8f87ivb5zxmx6ug',
-                hasConsentEmail: true,
-                hasConsentMobile: true,
+                systemName: 'j0ohwhzue2exkuz83nc6',
+                roleId: '402fba91-f425-44ae-9721-f6803aa51ecb',
+                roleName: 'ee1nsr8nfb27hyerdn4auplbx8w4x9c9hzh08br1ui31gugbahfhu7acp8kfdjbnfol9tcxb1r7rej7m537brdi3c1abye5n3lo0nku0kttkymxdmzc3cyzswoibkn3gkb3gnfn8to2sgvopwe625aij733fhotgzlkjmj1hrds88u8b781hw5a8be788gxeha6hoe67pnlj0vdi688e16cfcmxzic7kia5nlhvfchyp1ilx1ewbla4nqapqdd0',
+                name: 'naeonyy6o3289xovek7icnxdsuljnf7gg5tk6s8n16fww5y2jcbm5jyunomb7kqih0y7t0d8ntkuqvu014jqducn7mymopvx6khwyhzsaz7x9tp427vvuxs0idufzb6q74c5bxzv5whyt8e5u9phq8fpeqop1hg49u1pgl8z49fu2uj9gzv9ulp8pihwd06ay7mlwxn3ici3bgnt153o1zijrc4fplf7drvyolaqpkmmbkjmi7b64e1njw9wdlj',
+                surname: '8af85iosple1b96ib5i4h2u6bwqbhnjuxnmmfuqun64ljj4l1y9do7c1an98djyvfpmpn8yugzy4q4qxvruwml8p7l1de2l6v1ibb1f1zwhji6xs8ptgszq0b27e0bb7jo1g54oapuuz62yf78q5t1g873kduuvbm1d4e6qy7nz3nq3joucwc3qimmrjfwp1zvvxjpxscj1uxwpe2t9xng2u8x0qr0cugu9jwm3gfkn92cr25bv3arhofcw2vzq',
+                email: 'e3k893ginavijdgq3sc7vkl3ykj9foyaxd8mba6hxmpdozdwb1jwdipoa1gywjd9c97vx6ap79h24shvlbkowx4nlln423m3yuqoai99uaeh6eppw6p4tsx7',
+                mobile: '55qoi21ljih7xwdkhy7cwpelz20ux2txxmcj9wzxll7pp36vjnteoodxz2dg',
+                area: 'zebla1e5zgo6suxrrb26777j9irv30q24108urlm2z7wvvj9mzmb42uxtin64lnmexti6web1z1kvij7svb14y57n1adyc0lj1mttstzaj93mmxwozz402wbwa6uedgz2cax43b5hr0kcauafhth57fum3dm6qfumeeae6lq5pexuqnrmwglzda126dzyfir9ginicqjaro4nbsdjyfrmo1vdz75jw9p82wdjjrpxwmkkann0okjpt6djpgjjup',
+                hasConsentEmail: false,
+                hasConsentMobile: false,
                 isActive: false,
             })
             .expect(400)
@@ -249,54 +189,27 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemId property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'n99gityymux8i9kbwm6t3bvk92uvkshnozq7ievo6wzuvcfz44',
-                
-                systemName: 'ulzm8d946lifhz6xryfn',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'g9e2hk2vvv2rudq6t1373vjkwg5vpir5yxssiswgcou1ayyooxw0enifx31x1bjuu73g0x2f8vubsyd1x1ywk9kbxru1sasb44tqxroh4tvr74kr1lg8whz2x69lfdlektupa5xavgsfb9dcqlc6ixe1tuc7j3jmsx9194dtd29qh40jpdu84yq0jq5jseucxb6hnwqrdl75l4k2sjzeus6uts9dspgt50pypl5cafet3oyrmqgjwnju2k8ebjq',
-                name: 'c7y8v3c3fyv6dr72xxpgl5sz57vftwrnfx95gee0p9bq12eyoq6yy5ahul48eteig6qygvran7ke38khux9t692eacg4ayb93cby4fzxf2k08nv9fjl32oqwhdyad5hl922f9sw9yxsx233g0p3yckekuppgslum2eki24houdfdyk5e666fn39ekz536arh4ufpjeu49j352p5zrigi777jzr6j7tw0y8dt1iyev7zy82pxz09zv0rcsv388bu',
-                surname: '287bdbuyuvzx0m3aah8agot5rwhrg8s9jpo5io6u9ut98uc2ssz3bo8eb5al037wz86fzzazqie1tcd3eihkowk3yf8fpz96e6bb0d02gmwmikjn64u4b4vrh26yb7ybv6rl72nhivb8xgqbwh9bpt4vbcy7k1xom7kh0w49tw7fzj63lnicehilxfqcxgro6brszkpw6a60b7hmx49zn3y4y3yzkyhu892yz1jmy9wv8pr9r3ujf9suxv9s27v',
-                email: 's70epub147ud7stw2xmwxpipvl9gv0nwem2kg9qp438af0aeaqo88ybsvz2lxtuq6784lm00evcquhfr9sgwhh3utizeiqgidobx3zl5ufu6eoj9cpqp3l8n',
-                mobile: 'nxwephyj1r2hblay98z8ylsbristaziuv4hf85fellr6abrmd4kc5ssxkdcg',
-                area: 'c3g3mc48ztmhvocjhzqlw0nivo5g4pzlv18xrlssp5hm8qc5a6odst2i58ns9rtet1i9sfs0kzs7s5x5k5qe0d34y65wp7ofxpsakuzieciholi23sfazl2ic34rhtaozhy8g9mson11237vyvtrl1qm5ddm7gzjzm28j05620hw7utgmx6h5exh2s3xuie3p144w7acgdeem626ee5n1rquw3vjbyv87ucduqwi8q0jogd9xk3wiwq8gbbz23r',
-                hasConsentEmail: true,
-                hasConsentMobile: false,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactSystemId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'em2ggvvzc5lcyd5im2z5ounekj139rrgynyk1h0mpxto8l1si4',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
+                id: '9f994087-1001-4fc3-a627-071dfcf120d4',
+                tenantId: 'd5e05f10-ea08-40dd-8064-ab66e38fa082',
+                tenantCode: 'qongl943432eh301tu57vnjivhfku0i0tkbhb2sy18kim2ukn7',
+                systemId: 'c57523da-1759-45e8-8835-6a30c2e25f38',
                 systemName: null,
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '893kisw3agiz69tf82fkvo5r560gp2462etozx2sh313vbrslnqc6kydmjg938buhy1s7opfjmszgwo4o0c8js7pagaelxdpg9msg6f38qf62b5hjfceypum386zo20umikn6swsmuobxs3z8p79t1mzb9x7origopfna76z4ikj2j7tqn38fhrzy6ipxc1lwn9a8a2d1okho0lznomlk1uaunxbz4qpsckh4f2da6e077qx56eq19jqzw5gmuz',
-                name: 'ezq8gi8ndlvlg7g9fouciwy9a4ucdvjzherr2hsb11bmexhxqqwpahlzh1ux75xrboki0neerdj7lcg45zwqvmdde5c5k7bzvxbswzeopt6964s5k0jw7ovww289eka5owkym9sbrt0a8co6kc4vyf8mfr5qlv5wm362duww8wf2pf1c35qg4n3d6slfiluyyp7cses74fk8d9i2imskgwyqi2v41dri5pwmpfbq7saaskw8w9cjonc7f40oo1m',
-                surname: 'iqo4aaun4igb4kbz8869x3c69nmub4zqi9w95wjdpcbehijm4j74ayqqd9q0woqf78ouh6cpieak7j3iqd20fku0hgu6cxvvn44356qvyzseizlhe4lrgv4nia9ryz6uwawwqfjezlszrgd54g813y5fmv3g4fxysozjjrlgl3odo2oi5fhpa4oa0vtdbndx0zn5cs27rthlad18rgnsobbj80jmszkjtaj0fvilou6fekxpl3e6yfxyfd39dhr',
-                email: '0rmly90cb9w208xoe96hy7e7hgb4co5x4kamgzty378wiybrlsfda0ht8hwofhu1b75nleuugdjzbnv97np7ufm32czuuvfcp36jg9d77kuwwwbo3srxjphm',
-                mobile: '5hqp8n75ly26v4vlc5g3ctc3s2c9kn02hl9jcfxdg1obigx19fugwpo25h9e',
-                area: '32hdd63vq4gd9i6ewww0aftjkqk41hhept5k3rp000uvh1mf4z4v1yed4ogsmmk9walvm1xidyfsuyemsenqnym1r38rbmq7v3ldjve4vdlhtrwnfdlyra97oj0ybym1tv1mkumerlzzc9finj9cuongnginme726tswhhrikgpp7p4l4lxgwqe0cqha1urqdtxt8cbrb7jp9t5sot8yzopxdxvvuhama0janshgjon98fv32ms3fs8nf6ms8pj',
+                roleId: 'be35b8d6-5530-4cba-ab52-0c09a15c8393',
+                roleName: 'qhkewns54vd60iahziaa5txzdrp96kmmyg44vo22jjnkaa7k2wmdo4mgzou5rmly4mil7n4wmrpzrfjarcp4r4eopry7d87ke92o57gqry5r7v8aw0airtmkckwstg1c62ubckexfchxur1ehbwcc09mgfhn2g5pmn5fydg3kuqc28y5aryhyizcw3fo58slthnaz8f7ovk2n9vbamjubwmgqhr0k2jm5kevrd7yil9uzk0lykoqqlb5hojdfvx',
+                name: 'z9z70046je5jg29q9wca2npo85batso1qsytd2ktc7iw19llgi4f7omxbgtwpp8b98o5tmf2mt3z1l6armzffwazmgorxsr1acl20x94ezsvqibe0wj2b0tsclw4pnm2o4qnwgqmm162f32w21o4ty1gnwwjjj6gqn3lleks15lakkg8pxur89u4sdc03ge3eypel4anh3oryhtf0n3swym4p930shqb054ftnnqehgksg35n2eeclir3sfamow',
+                surname: '0qn52i0cqyt0gn7qfp5reqnufb6fyrg2p3t7cy4zupkmn03thk51vexkzz2t1ddam743fqv0ywqazngq4qip3au0202ebkn29ejkedhy3j6e71xc1qi99w2top5oyrroe99u5py9dnojbnr3by7fs4albvy62rlrwr0tezl47g238k5mfohtegqbx3x05divrm4ezghw6xb9haqbpsi3l8w0eobifw84wwzkndcxruj6kt0khgqt8arrw6atimv',
+                email: 'lyjjftujyeapnv9zxisqdp9yu5la9etlu3bmdfwonkhl7hxahbetntn4egemu9rbl7bsi1dg75jbi2q79ytclwma2ndv13ukpjr7qwwalt98ndbjb3xuuz9c',
+                mobile: 'yhntkt6w4q9huhvjtmkucum1795dcoa7wjnrdu8cv23j6bo5hqo2ubrleloy',
+                area: '9biawwyn8nz6badlci5qhk75xtf7wphit6zwaixxlgsz7yn3n6tbupebz0zdquw61yv22svoo5h1ocn6eo1j5sntlbb1orxhs2arzzkwdfqpbpun4wxbubmzshcdi2m7nw0wnw3sipj5k6luyegt9rm57k7wle1qb2zl78rz4ixn0syll6jvptkjssuq69ack8pi5zjc52ufnvhsn1xp4px4rj5539e5m7jwmy1bnax7x4k9qqebc7e8at2dvu9',
                 hasConsentEmail: false,
-                hasConsentMobile: true,
+                hasConsentMobile: false,
                 isActive: true,
             })
             .expect(400)
@@ -305,55 +218,28 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemName property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'sqctj0wpsmojgxb9osh4omo95vs2g56is2mjim1m1mnhxu89b3',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'sue33of4gl3222v74vq1sgmyekthz0kwv9d7mnj2nrk81uh5nu6h0ey5hzkl9szbnf2fh0uxt4zkxgi12ny8iiulrxc5xzbnq250xmkiv0ztpkt6gyvtsl3mq6qvy5pk0i1nap2c3ekx5gkw0t587feis1b8demusqm1qjlnzcc2kiep4myefg9qwano5s671fnmg5l95a2ullp0rhmivcypoya7hnsxbas7quv6thil09om5u621sax8jkpolq',
-                name: 'nuah1ppvj18qsl81p5i62giixyyjauf3esgp4x3ncvh9i2njtgyk42fd0njmiic3c4gsr2g1z7wo8kgohn2bx64dljgf3ae8cwyidfbyxh8xixzt09cl01uh68vmep50fvdia7fy5y15uou6zvoz76ebnl1fzm7bitxt1m11dcwhw4fkd1f19o1bmu1fxkywbh6y1iea28dxjpd1n18q1emm1jjl57108wi52ium2dcpx28149oe2m5tgtglqv3',
-                surname: '6zf2haex7y7hta06tcvyfoktp6bldt94bi4dkh4iikr4g3ytc1c3dtjjzz8928iribcar10yr80c56fyk4b3ump8npvyarr38kp7025vcpgq9lodpp4d56x533apmke8saqspyrk9x0ars03sj78g83s9frei2ksgp5vy8ig3jlkcn31sbi1vdt6956qnjopptlwhemsc5bvm398s3l6j26jc7qx3w2ff3jeum1z4mekn10ofyeszvjls2vbqjd',
-                email: 'x4f0gn5d1ez1h2qj63jig9lxzepr8r7z1j63ouboh0rbl1mtcuxo3r8fle352afcwebgh7g4qc6joqydjgi4gjadit7ei0lbr69j2khsit8r0g4wpw6eaopw',
-                mobile: 'jb7mbzxr9r14q8xtmm3v09ozl8mzb9q7i21rieyf0meus5b54qwzbmene5qb',
-                area: 'uj2r5hna0122w10imtawd3l6irkulw6o3g2acczks4um52nmppxshkzpbwptsr7ha5ltj0hpxfqhyann6pe6p5nrwfmfqmb9qxxrwhvpwes27mjhyqxxwuubipkow8i1kslbodlc425ep7vcqj5pvwywwq88jhpsivi1vplx4iinx9d9dyxlkxnmy2aede3mnilfraezcy8y43fctjs70f7zecabi1xxbmxs68r2zjrb2f922nbs3hwmpfwxabz',
-                hasConsentEmail: true,
-                hasConsentMobile: true,
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactSystemName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: '1lm56padflo12xe3tud4rp5kubxzot1m4obtgh8ez86vnn8yg1',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '0ahrkedew9hjlmwop52p',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'jgww6xhg8zll9id48bs8yt83po7jnq0xu6a7u4yyljc6y1tyvhdwlctmg4anbsftvlyvxjl9dq7rh8usqt4ejork5obkmaf0s3vkasilpaejn1z6nzzt0x550bb4wqyqxjii1z1pw261pprie1wwx8gsh16gd4yk8aldqvr8jdz1o79jzec5n2ci5xux3r6xfjjfkd3ylzo69ttx4rns0f71z1vwz2ne3txhhqcimfpjkrkg28tuv94f6m70qpq',
+                id: 'ef2c599c-8b8b-4da8-8137-9b0a3319ea31',
+                tenantId: '0d90325d-6b88-4d26-81f4-56c1cfeb3afa',
+                tenantCode: 'rtqj5n65l243mz4u9tljaakdeffnzz7lqeyilka8tle7z8xiud',
+                systemId: 'd028361f-fc62-49ff-aaf3-4e5e40c0b207',
+                systemName: 'z54dfc5neufi2oslbf6x',
+                roleId: 'f4c731d2-a980-453f-9807-71cd295047db',
+                roleName: 'v8hr9kniqopb1tbqeek1jj6ej6izigxuhpjcbv2u44s1cg07bwyojd65nldmphzcx8tnlmq2ihadtwkqzqtq5w655jccsdiiuek0ikfp3v89r3yuhx6w6djanpgn629r49e8qypndcr7riz8ukjm1bvdfm8vm40kgh5oifn1hsz6ytce38chmf6gll8rkawwjm16jjqnvtwnktyls9tfcc5ph70a5qet5jqiwkwjnefmkv30iz31zxxg8n7qs5n',
                 name: null,
-                surname: 'bv5g09cy9ec8voh6rzxneywcf8fnd35lqczcrvwv4t30121r8j7kl51mt5vzimo9cxpc4yo3zfybhpbkms55sadgbataye0yoxt505lu8nhta8fvbi81rmnzx2qgoreelbbpnagtx4jkm3k8vlbuy95srhid5a96k1b4s69ukhzeu56quh2ut6sr2yengxn22mxtgxxhredu0qbwpvjsxeucfjnn4ncxcy021anks3ie25uqwkvabyr40s33q0l',
-                email: '4mgyo4snefw1pydnn3fnkbvgme01djdgoii552d1yj5yj9hq55bbzd41qo36egdqnsj67qrb3z45hpwx9yauiiceixsauqaxz29ag2ppf7z3x6nafwdl063f',
-                mobile: '466w1xmltnlb63s0xj07cdt0pkaupdysq5hivh9ct5asc4ijkzaadhxr6un3',
-                area: '425w8fd31y7if819wr9kwn0v6ax8hkb7obwbb09yig6ss70gdy119vpdggevwog92y52i238zjygj2xwztu23uchaefu858bwehaesv7l8b84ubop9fzpdl35ed7x4uz79mcjgp3bs6up5ckiidpbd5ixmiitfkxia5blgcij2ls6bv5fjratkm7yoc7hf5tc0wr90hwrl1q1cjpohmnketouq3y8xbq65nuuee1hsjj5yu2xrdxybakchynjyj',
-                hasConsentEmail: false,
-                hasConsentMobile: true,
-                isActive: false,
+                surname: 'oml5es8z4jv99o6y4ryyzls6wgtvxullapgtrn5hyrrvm55jcvdx80aadsl88yks2l9bnlzy2cetxpp4t8e455oih1cxu4zyoag2no49hk8liywj943ghdas5nq19sy7b41zn4og2qy0qhhr5bhhm4pj6obf8cs01n8isxob64y4hgmguzpbzgcv4vx69uotut4925lb8t23fpn2n4l7383xqtsbt7nuxo7hut6cpt8ytax66ugnhw04jrjdcc5',
+                email: 'jnily1xyt4icgy15aaow988ta6n3j9f4id6o307d2b0i380twq5vstsw8jw150qz7tfuiavzasevqeix4qsi4xf8qqgpbkfz6mk44n20on44hqzda7h43gr9',
+                mobile: 'd4yny2htwkk89mbn708uakb7gkt1tgnm6y9zejw21t82fjxz9605b6t43phg',
+                area: 'lmoi5birgfrwluqqt5ckhnv0xgb9g3ctr2hswq6axzrarff88zu4438wlstgp3rexb3bxp2oa770qv6nuylv9npsunulszm8a4sme3hdua411fh67w2lzuvpv47k025kjvdre5pi4e691ig8aq8dq5271li9oxax6mcp9fb6ar19ik1jrcot6y1719ijl67hdj0lu2twb142ju7zitjsp2mo70chuv9povgd20ji70lcn0g0nlsqabpqm8fx5z1',
+                hasConsentEmail: true,
+                hasConsentMobile: false,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -361,52 +247,25 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactName property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactEmail property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'qd7k8u478oy1v2brp7t2cwo2k89up4xwfd868pr1y793j4imr2',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '5ll5iq1b8fb65ieg97be',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '6bxrvv6ul9rrxz7joefakp3icr4mc76hx67k8swp5pkgqpwfwzcl286ah10ffum8cfrzxrjvqfa947aj5m3ub3nvymduatx2fxaiin2nfy7v9vole1h1e2o81joetec7s07kb490j3dvbq9wxxum0jt8t98ogqvk75xz8p1dyytwqjhuqw3llqh8mk8azzg4dfdfyks0dmo7fps9ghnxgfd2176xclnz50ak5zbr8gg7zoienz47v7rt1i2ylpb',
-                
-                surname: 'm18d3aba26ax24aut34gq75aavxchkxe0peapq6cw19j7wec6egooe78lmz9nlnda6hvpgjpx8cgwyjosbwuxl7y6knszlk4x2ehqeja8vtjtfpp1nldfrwgdcofpfkh6uak219su2ho3ak32yju59epsohtfmsip88dws5mswhkw9zvwugg8uqwhc6bbz09i7gmtdyge58ddos7k73d2872wb7i6vokz8qgac0767thlob6xl78iqi2ome7u3h',
-                email: 'c1ixmdi48xhpgi3ynr20go8zc4lzrqld5zzo8p95sigq1wpogou3y2w3z9fg0qy9tvhv1cwiohuht5a8ofq2oqdz0teznryl0nshid1qaxapek0avmujmlv4',
-                mobile: 'ncbua84p2bdzk9klqpgtrf36je8xtx7ybzgnqrjdjegi5pxgqczd8e9516oz',
-                area: 'oyg5a78r2tgf7ag9w2j4440xtrw5o59j8mnko1mkeaax2eiz2zc7nci5uky15tp7tic15oghc2q9vwn9s21vlwetnug9qnx3klv2wef39hxwgew7ompyuc5pwaxz9ejrbl5qg7u492j0skt5vbwgfptcj9mvgw9ingnebgpp49aipd445d7kqfy8jkozo507azk52c7pszj3yy7i8zz2ky6u3j9srnzjqu28sztiilur1m2w0dsk3lsllnas1nk',
-                hasConsentEmail: false,
-                hasConsentMobile: true,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactEmail property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: '81ei7ase2hanyvsfzokrucd388zn2etrch7zk15cpm8nwtng9i',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '8bnrfof6wnqcvtozu8e9',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'sduqghiwcl8mvyrazcdep6eh3ay3ameicfti2p78vxryj3nx2lx2cxxoyba1hg6z5ybb1tyx4adners9majywwbyn98d28u5e2e78bqt04crai62o8rz3ow4g379qez0chd8kkubsk5stxvvlj2lr7xx62d4qqj1kewwjygdk0hczfk1ypj870g3qa4inn93x9j80gflskt2t2r9s68euz9zi511xcrt5rf8fkjnmi4qni7xq5eu5vjzu6k7rap',
-                name: '8vteeeloe2ub3v983181z00tfqwd6ygu6gvip3lfcovm3zg9bjdj9exleylhyqacxyiqpjxs4a9jpdaqzacjh0mhhx23iee42d1nqrn5saq1lobltwv5mdu8bjk3436db5lpwhjotk4lvhikqoowmbto8gnydnd5mqiar9swrrp8jbho0jm4kt1q234p4s3tovxj7jbpv57aui8tjtj2xzxisv1aer60p5lxef68kma3g6cfapsrso3ggqg7g46',
-                surname: 'x1tp5fp6i2949a2k624a9s74rxko2axy25x8c0x6ld0xrvah1cm5jq1vw4ly6shtg8q04zojvrc537mh12qg4vh4jl1lvo2vkbzb4wf76rh3aoob63oy4gqdsk6js6zf7eqjpo9fut0lo8xgmw44m5wxol4ans4ejpqjuegz69dvcs0vulcx0eh68cvdv8jut9nli1mre4s3yq1ehk8o54o5g016wtktun0fntwrpa2v9y876jzjs3t3loz2my5',
+                id: 'ccd75826-c026-493e-a19a-4ce7a9ae735d',
+                tenantId: 'a77589d0-8a9f-4419-ac9b-c65ec74f1c00',
+                tenantCode: 'nqfr9a03xd888uwn5vfgf50v2x7j4oh96dp2rj90rji8x0ee0x',
+                systemId: '4bbdf37f-793b-43e5-ab7d-84b7b8a48d0c',
+                systemName: '0mnr5ffourgotygas48q',
+                roleId: 'd6ba2569-c0cb-483d-b6ef-f17548e96aad',
+                roleName: 'zzenjdato1cdeo7oo602ayjrek9dbyhnbhszskkvf2fbhs763untehusdyg2y6e6ggiszkql03kjsmigjll2ln2e0pozmnvg6k1l3ig1c0t5khh6ivthf5irehgpubj7x96rg2m4f6ukev3czd1xeo4pnc0r23oxihwyjvyl5elz9m2mvgch3m59xfsouxx2fbth51thre6u2hxbvrl199oaqr4rt3sgdfhwbfb8cw6gh9uevsw8ih6g398zmrd',
+                name: 'puew9skbie4waq2tnw9nqcucki61vo1xpx0eh4jxmoj1h9kookveggyh1pms1ag84xnotqgpnnubjldiftth2c11kxyzwa5lzki8vqzbls9yuv9szeso7o5v2usb3wo95698l2d38s7oxcih5swavalz24qxoni7v0de40osoqje9r029zkiram1rlpp1dzlul4susbhm1be5k374inhp0vo9j00t1wb44lbfmo6ai8fcafvigzum7zdi7a07x5',
+                surname: 'qzp2me8bln08jba0qd7wgg7g5bu2ayu3ewaj1f8p83hrm8ttewfxcuphmbh6uw26fdshi3p7hzbxt83bbu2wxn2lrx325ga3bwsyn87p3v684u6v6gsja4gxpdj5wt2vl5cx8h3tpd6qfszcogd6edgxtbfdsykcjbnvzk6ailvxodskyu260ad3ksxexawd6qm9qa1g9y2kkstrpwcq4gn4tg8lcqtc2m3frdm3ppeimlj4fmflwyllmj0ypse',
                 email: null,
-                mobile: 'wuu6pei253ee5p7o26gnnsmuc4e3uj5a4r6ie1ovcp6rlu1n2fgl0kj9yf75',
-                area: 'c180teqgswmo42s6sh0kecm92h5u9tvvmyv1t036hnryccuyvr3fdisn9xgmfzpfk7xvjcqn89neu78xzsc9xf69hwj05csrogo4uxl8ldc1r2nlijv1y75h8zjhuz0nxm3ujxenbit5gbtczdrsu0t5o7kdnnh8qmv3ascce5mof8d1nez3ztmi9vqg9eec3xy7apnaqeq4n49vg7jxohxde3bstvmj9lce06n8mj3mgui6o6vl9ukvqngonao',
+                mobile: 'n9zakqmvlgjy67zcckebvw3bflsn6rscwo1vombuv18xb682dlqyz2zqy1yu',
+                area: '6gv1mswqf1uxrorwjbooik9taeksfj9lroy97a7wylqcebs7q53nsjh8ryk9kdfpm5asnqc6o5xd5yk72jb5xbs4yzuopkg8cnhzzq5hlhzfcbdhlgr7myjbpjlvr3k8jl2iaa2liwqipm1t4c2685yx1mdl9ql0hkywy3alfgznph4c5xru5sklxiacqn8novgtqsr6dkg6k3oecht61n5jhjesg635uu6i0mw0hxp1k52mz9yx25s4oi1b0g3',
                 hasConsentEmail: true,
                 hasConsentMobile: false,
                 isActive: false,
@@ -417,55 +276,28 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactEmail property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentEmail property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'r43izwfjc3ghqdx1mzi0kqk8j24yk2dzmiehjk44fnfhqtax2d',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'qljo1off1jyy31okdu9r',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'sj4pt98s5fh9c4fvp4q5t3ovsdbzlk7kopmqse8wyz71f5o49o8k9v0r1nu4jfpdm8zqqtxh51kqh2cysdbs47etvd11ti3dswjd9cfdksx0d3kl03f68bz8mz47i7njbdrnlmt6oe5ly77xqzwutwssro4q9izakhmktcs82giohlij3oqdac6fbai8qqx2x4ktpg79t6syrrtbs03rqb1poa230emay6yurtof2r1qyixb50vak4tyihz17fy',
-                name: '9cqh9xh4dpuo8rjh9xfiqrlcla2n0gp677o0evil8iirxvmru3fichfbzezzj3lehsnmdac1fm2kyft4d1qslfvoliqezopo80gmyc6p4rtpe4arxyt4ruc1gwo9niiv76tfzftl1l3232ffnt8l4a6oj159qxrx1i3tw5xma2x3rzocwobcde0v2wa24m3780s4cumtfhdt3i0fqrfzr8r2enu3shd7lwghkllxnv13j6jqjz91nn6lopk1efr',
-                surname: 'etd8c7nxrnn8kjdjoy7x6n8xc58xba76ze87j8y3lrjcksutnyoe0u9xw4uy2vju8tim0n670gbx9yp61h0u9buqquh5b0bpcxcqtojgzmbvtkzyktrta6owjb6r05dfl65psr2d16d69uu8gxps8apbwnujx76d44i8p1rnkm5ls5n2csdm4mmjyuom97zwgzbi1fc9j06tmbuci1o1ryjryppxv7wgptcqzqf9ijfwui8i81v88ifx4jdikan',
-                
-                mobile: 'xmuc58aetcdmkdol232w18zm4ldk51u3hkaxnvh34n3dyykwpleo1f4yooko',
-                area: 'ibql7zxe3xk7tw8ag7a5a460bgbtm2c3dbwlxascylvqtrgwkf555qdxqiav4wa4f752ew013c12kgcrzagvlnymjnx7dmduplbid3wipzj9dtnisl6lil1fe3vhfhxhbbuynmqboexlksq6u79890cuju4j6azqxyhjesnwfds6tervxpgu4l29p3vz8i1d0w9d2djpucld59or73hh0m8a3d3g7e7jnfqth0w1h18z1bis8bo2yq41zak131f',
-                hasConsentEmail: true,
-                hasConsentMobile: true,
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactEmail must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentEmail property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'bpzawrk7v8cqoc8pdxoufh2bithhkjzzwuwr7yj1pkaaarq6tb',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'dt0qvh01gr5g1qsuwmm0',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'r92shkv88xvxkf0uxoz3grh467xi2uxvsu3zya5pqo4g8sl4ppskna24ys971kjr65n260foy0v2c7vzvab9hy26tnig3qhml7e4eg43zxuit7iyqwai10y1nhan63bw11mvkr5yg4luzvge8rs2cub09mqtcvrbz3qga4ntk3miphnj6f8gkuj2y600rbog9juxf8orfi8ql8dmv7v18m87csxvyh526hurbwwuv4ark2bw50ab4h97dztidra',
-                name: 'p5ai6zan1lhtonn6vp872ws8rkgozeofdc153ur2zmd2lhsgntl55nmk5hsxzs2xf2i89589mg9jaiy3e0i1f1cuspmbkulva3a9n0wapmyu0f54utq5or15zmm15fmqk7qbj3z89fqa8oo7y3zl6lqzqcx97jkv7bwc0z0vj21gnumsvom7inn46xvdjode4ucl6j25f926vvc8i18lndi73qljig73ozixjczfslkgrik5ofdpiuzntgs8rz9',
-                surname: '6gmbi7pbdxt3jqzdmhgg1e0e4n6c66zf4bh5m0g4y5178iug3g8xf1oxrb3bwzx5y0vkmsusvyh2xh8jl30x2kgejv2wmbg05b3q2u36zg4is0i3vi5uaqtxono9nurv7uxfpcxjwqotzidbybv3lu8t854joyxwqt506ab8fd3rh41rkecnf2chsl05g9zj3sx4a1pan8qoasggpcmk8zlpl3trux6iw6mrrefcbvl80to1iy96y2h4u67wgeo',
-                email: '44h8apszysi94sorvr8zfizcehef48ollu5cplb0cvy2rxqeqo6y0kdlgzb05s1krqffsw5d1jhp7czy5b7lodt8vkro6mqk6kzblbicy68jspi3v3zlfcsr',
-                mobile: '1ov2h1init5of9nszna0q47y7dj9296n7j1waflbzddhlj5paly2svq3uods',
-                area: 'kkflsrb57evpimp58qizgdl9rmjxld9eymop9ueli94nsyzk7nbq8ypc4qwx9840zbl2y8rw9spp8wwox05o7ca1d23ioi200ncmss866ksa7fatijgm4i7c0nycz9e33xjyf7t1fdv7jp42df8jfqb4rzhzox4zv7csg1rxzlll7w25nw95jcd0x9zw5s0z69q9nuog3m1wu4i73fzak4v2ipjte226y9q8xo38njj8rmx24czjgjt7gkc3h4c',
+                id: 'c0e76c5b-4da3-4f9e-8696-e3eaee3511b4',
+                tenantId: '1a0dc224-5125-471e-b585-333ab73d15aa',
+                tenantCode: '1sft6178h5c0xsfz2bdc1dwsd0goz2p7yk4kw0ozeqmzmbbayv',
+                systemId: '268b8fa8-6eeb-4f2b-a836-9f6426984954',
+                systemName: '3ybenfp888j1i7axafbj',
+                roleId: '04425567-3c40-4c3d-8401-515bd802e2f8',
+                roleName: 'ht1nrzytfqxz956qabq7x2oz6fa605upllnabk2n1oxpt8py4f3oqtz15ixmygfr4efn0cug44emvmp13y0azx1yrw5v22ox22ptmav6k8mek521jm0nzhqak9d0dkavdtur8njewycn1fhylw9j266a99uz5con47g2byx50l4qq71mqxkid874boeqple9n8pit6azutsojtrpkr2ovn2stciwzctl3hlfoi2b4kfmzmc3lmhby12crfcbv05',
+                name: 'k7wjxobn4k0gd5pqzpzzwoshg407cfllkmxwhhjt689t242i8u4fm8u6lc3drs1di21mzvhs6nxfbxukn4n7lar42skov8cn4m1s91hsjh1xpj6wskfsfmeyka3srmx9hd1frry17cnvlo2mnakaifj1p8rnainh3ahz97ajsf1rl48e5nbxoikqhlw8w5gr1wdnpu15mghltkvokck14a2df7p28mm77ataz7lhtze7al34t5v5nspbrlpv8n1',
+                surname: 'hdzwowtlvt7pc9kem82wtdjmez990o69h631pgvkv64whwshh6ndfwbkkxq7boaky86p3w1ntysachcebvbbvar47s4z1p4pqzj3749ds5z52xqui8gnfvuu2l9e8oc7fthk82xzo5fn579w9hxsc7xemv9ke4en8m0qofs250b4jf7jqmzuz4cv4yn0ii5pf79oho3zlpznjxgzum3nnv8277kys4t3q9cjaq22o8bged1pzjndlcw55t0fmhb',
+                email: 'a0wro6sbzxbibgmwc43tmph17c0vthul6cap304311enwn7ottvtwuav8wfv75gnuv2lly9yodtuls1adgml39f7230834w83c20hze83efia43kchphq8t2',
+                mobile: 'n0vu9bilq0nhbm5pz1gaaqfmzp2fektsr05buhm0aj4m3v54ki7lyg3t2ssd',
+                area: 'z9vw32z8moy689fbtaa6z58c5si4ygyvb88d1gvhqekaosbtuxud4hcyfpur2u88h3gmwmx5urz960tu4zw222se49o435h3k7v8c69hv6j5gdlv7znjrb60gfrq30948g2uy6cy4uw7l9n0yllerlcfvo41jwrvatint2l0g13p9sd6vw10ie20auc8ki37p1jvz7lb439qj6c0nlfz566mrgztit1cqsufgb0kxyc19cwhyo6f3t1cnbpneti',
                 hasConsentEmail: null,
                 hasConsentMobile: false,
-                isActive: true,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -473,52 +305,25 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentEmail property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentMobile property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'a4k7jtxme4dq7ord50t3uyy898brk7wt4x9d1rhzpsatoez5vj',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '6kf74eld9o6r6l3y1qkf',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '11c1uaqyhfckmram2hahp3k73mulnuol0b9nha9fsoisqldo3w9ugaxpq3mrww3i5gvyghndksa3ms9q0of1nf489t6jbjm2gcxzklv14ue663ghm54wnt5b1utiarfppl3diywtfjwqckxiua7yj4oqgtvg4sd9mei6oxssgcebc10h6qz0qdqhafh9adw918pcwd7kb8tsnjx5345iygzb4bide0f09rpzxrrr2r73sqdxvcfv9d90ozhn89l',
-                name: 'pvdek79hqi2xq1v8umutf8jvkyy8xmd4pkbm7aa00ho3npwiq8cjsgq21a21dkagt2lr7nferhccg1gpokk71l8bqranet2o1hlov6f02w78j5gszf17i4zsjey3icah5hx79nyd7835cya7omss1zoj5eizwbmu5p05qmp2wkvjwlpf215zxacvqbequnw7c2g1o4r4spjjezacudt1oso7de04whytuvxgqifobhbaty9o0tb7dhlegh2scaw',
-                surname: 'xs0tsw6g55uzg8ybdnugh1wmo7wxuzke9npnc536hmlovmjqwexetnflgvkheh4kdumrsd3ua2z4ymwq2mhf24abd0m7zx5s3bnqgw35ww5a4lgw4j0bwnzxbm08mnteqpl89zk3ab2wrcutfhe9tmjn555dujeh5zbml2kwant90wmq5ob3x1ligftl615o4vkjgp3w8f55p2th16d7umte4iy5tv9bgw4m8v7hm0zkv5ha7z161oyr2yca4ro',
-                email: 'pkg5rg1c5c0za5493btdhvhey3ye4vvpoqmtiszr1dqxj2qzn6swun61sf0i72znsye61fjcl7uthz7b8sw57o1qkexvg86a4x11uu2apzh8zct0q26pf4w4',
-                mobile: 'gmwbquj0xolqv425i1hhnq546n6f8q8m0pj4pg3g4xe7icvwm1maada6cghx',
-                area: 'fnait5bgv8ajpfrsrplf05c9vt8nkgxasrbagqa7hkp3qvxy7fy8zsznhxvnaiabmp7hagdijpvwnu41u154ybrp3g5ope4qmwan61hv1gvyrauqbov14509c6or8ouoen9jdju2v3dbd3ckr8meml45ut4zrf3kbup5exzalrrqskma288vvqmmilfaczxpznpicbo4gfmjczxhnizzd2gx0cs6bo9a47n1k23sdpqgpog1xmx24ya7rvpybl9',
-                
-                hasConsentMobile: false,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactHasConsentEmail must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentMobile property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: '29un9qqj9b1jyilfmf92uk8qgd3wjet94eh7ruzlfa10z6dv3q',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'e8opyhvwvyw62cxoilq5',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '62jpcwx3ahdg6kbcj9ohg1v4asle8ruyquuv70x89zhnoqgi14wcok18o4fms8117n9faxrpp5e2k9ewqgn0x7dazpx62wsixs27v1z72qla5a7z7f83zzszzgtv48mo5gcrozzg34qt7htcqsfm9gypo4go1gaoxcv1i1fogw7dkj5n7faxw90gfpzq76e1ivltzvwyl8sm78g33ukogzwjjaw84evphpdzcbzv9xh00smlfke5lmifjzobpk4',
-                name: 'db07cqm3zllbmjnqg8ejnxl62mktkuzqnajpaj3eyvclzcz9vwshh8axvdzpusgkw0504ik4ufeotdmejo177qbzvdvqnig2tudb64j2vuvi2z316wum2sjoh3t6xy6i78avp7ipm9c9l7rbxdu4sl2xcm6yqlaii0zaroizm3llldwxu4fawi5qvka2hxge5yh0xkoz0yhmf8h6gih01g9h4r8vxt7v6bdx97dwub48zub81m387efo6wa89w5',
-                surname: 'vm7maar60z995hupln4shher8azrj3za5idtonoy2h7zj4pe6nhkz8pxe995l1xc5p4emro5anfm0ztbyt90ntbj25fvoaidseyldkq0orwjmim71sqiqz9qhk3za3sepf60pvcb3qhxetgkzk4o69ks5m0o1vvnwrog55616uiy1upgx0vr9pa4dc85gx32756p20hbgbaav5s6v4kwa9maqzvnjsx374ohez2ac1miajib4tvesbfwsluy601',
-                email: '0tgaaqfmsd5a222k0708v49e28cw69x7n8u2kdkp95ys0eq5lp0r677b1e314um9hfmnyutq1z5bqru9w1yipxfxgj5jmtabe736bsv4r4kc3z4qfgg0996c',
-                mobile: 'nqpxmtliinh91h1jzpenz4iiqrvay0o6ym7v15bkswd2di03si4pyb26563r',
-                area: 'iejhoipnn1n4wk2c0mchnscn8bwi7jng7egltod1i1al9htlhklpocknrvs2lx1hr9j2hv80foo5bgstb40iqonbngblev1fmmdaxl8j7vm4d5hsay4zersg09ym53c2xy4r65nz179dhqpgqeojdcku6o2jh70d76kdiu0fjmq3pn7zu7e3xxlmjzwg2wxqlq6f2uot3vyurb8ovme9wbb2df7jzrlc86dakxps5epxwwzxo5kj3njkg491jqj',
+                id: 'b475eace-490b-4184-873d-7e7cfb98588a',
+                tenantId: 'd20c1a1e-a42d-4603-80f8-4e301ae7deb0',
+                tenantCode: 'yz6xky6pejgb0r568framk2f5tj0lcwokobop91dz645e5sjn8',
+                systemId: '302cda8d-a720-4c51-b9b6-e5e1603b69af',
+                systemName: '9g1x3f7uqcuax5ao4g16',
+                roleId: 'c5d1c7bc-48e7-4c94-92a7-f77a19a8252b',
+                roleName: 'olk21ovt4g1rvy723h4xfm2l77ugz58efz777du5ximmn0pr1escq8h3ew6fdp64bvgjf88cl6ekf7k5qkxg6zxc9p3fj2abbflqitatz8uuqukpx01fxiaghw0smf4dxfkwaqcr9mjdx6q662oyowitnni58wvs40iba096rt7kg0z4egqnxkty2t8ia5cnjm6u1m7nx3e7q0mta3b99dq6hpugxhsdd7h7oawrwo5b999x2yaztmprcn3fdl8',
+                name: 's0n4wkp3suzxsr8jrcr7unh5q809mudyf2z26shcc130340tlfqilyu22eo1mac00er2w2mlglwphp3bp8zf0fotq48osb324digb8urokj47ms0c74s4r2u8p8rmaum9wi9ukaqatbqrm1vg0rlqwobvjhd0eavzyqopwa899rmhcr9rmc4su868uogkycd1n9eytqrqnoz9266sxdpfor3wyme8q9ksde9304atma1fym6tccv6iycxzfdjxy',
+                surname: 'tedoeh1ywfchgottp8fqdj30n1criwxwcdvvuz3r18s4jjyoisfmku5s58d11s9fdchmi6vu4f244enfj612tosruunoo83ajd5pdciux5aq4m4eerjjy6lk36cjiowuaodkrudoogyp61pm1q5xpkkntw36776fkvxmlxmdw4qufl3kszsw1gcy5k4e29pzptdk71qxndf9rvvlgcr3acx09kz4u8lvvfyfbycwydzons7u3xvwj3d4ibfoewf',
+                email: 'nt9qz7mmos7gp1qw06vunl2py5v9ct7ya76q4qrpwmja3uweei09saky92gi2z100bkarp5y3trwgvoy7g6imhszl5yicvprhumqdwv95manc3hxl8msw5da',
+                mobile: '3oixh7osve67gagt1qfmrtgyktk1s3swawt8fbokbaxouijmwn717wt5fa5l',
+                area: 'g2k4pt2stgpc8wx9k16sz4oa7y8y5st8rhn0harbnvyllwvosgq76knj69x39cuj88kejf1798fq8u78c9vedspaqdgjizt7vqxeo5tekx458pz4hcug6a35yk5173txyd0vapqaj45pn4oy259rmo00ct7xm8ceseuretjvbpktbe7kjk98eoi1kl6yhb6jeqgoe06zydiuzpysv5sw07j5sy88dol3vhw066qiviwha38n4y3vr3azr5o8fmo',
                 hasConsentEmail: false,
                 hasConsentMobile: null,
                 isActive: true,
@@ -529,54 +334,27 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentMobile property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactIsActive property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'unhv7bjgzcxn60nd1nitkupbra8kkpvzagl8l4d4bws1h0aj4c',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'opszkp92teixfx1alnrj',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'if751dl0a1tfjyov6sxm3n8333bjjxzxsaqbist0gt6shv06rguxddoezkdmsje1w20e0pvafuhepihubz9r6zvbvlup5vpqvm7ray56a85sqlkh8sgnu64okci8lhgv0u6lg0mh61d3qqwru4rbyc0jvt8sv0nlog92vzh9clnslln92tb7mk72lce6nq9s4j0api85la7a5bs6ueiv6ke6k64ck6x02opprmsy9kwvyw6j4tcemygtlfxixkb',
-                name: 'j36k6t519zkq6hjhsjhklior2eux7ddeacsf8517hpp8vtrb5v8ag34hul4hysrv2ikp3pmr28w70u3cztpu1m9hz518ptstxbltsiwtw5ouloyuav9a2ttqpzk2x5jy06rd8ajlntny45snw9nshg8vwsj5ddoh8volk157w4fbjsowfqdoglfu9qys02fv1bisqc4hgkvzqs4h9h2tc07seeltnfhrvmc386sbsq67dnjsd3fn1ysxzos7cj2',
-                surname: 'vbzn7k5ivn0c8737fkqmli9ytlcyss8uxa75vf1fpeue0otl7p6bou9dmdd1dc467sjlrenirwkmh0nrj5b1qz8jvs7lahbpg6ro334y5xshieirsjuwl67j4zle3bovayihxya3rggubh07dmzgkeruiwhh11kqw3tkse2v3fm3mhxvxxd3bjn5krsh6wfe7krsmy8hxen827qr44jklubpgs9zlv6qlcutcgmch1aovjy4qjyr2pb89xeco52',
-                email: 'xzffvvg5omlgf4wpyis8ryhuh1oow9cdr6pbb0p2uykto1pi93nvlt97cdlx7pj04x4f4tr1gh26lr5iytibvz40d6y1okcduc6v8ng9jc8ldppm3hj9tq9q',
-                mobile: 'nvrc0oi14eeatizbwnmkpy1gwcsl41l29jfx9v9w16y6c509r149czqgh3s0',
-                area: 'ie8wqcm1je2jcgm88a5ze0l67eb4goeo2xtnwfm9c41evemz7m2163q8lmko4plm72tbdpaygzxnkp5f2a1t1nzggel8bs85rpnrv69jk1qiwvo8g4djfdzbi1up3hxsdjaq47gwwiraxyvluk20gpb6pdsulux8j3qwyjfmw2e8437g71iybmkttnscvzdqlelgu439btihy9xu6gqd4f4uey1dhq0egqon6z46hdgs5co3jk4ip30w0g9nath',
+                id: '4e418530-a81c-46ce-8a94-9923d83e8982',
+                tenantId: '883b4eac-3f45-46fa-aa71-3a63cb2150d0',
+                tenantCode: 'trjs6vcum5m6r4engtr3vxajkd0w9f44t0h7c9n4ih0ztub5fu',
+                systemId: '1f49be77-fedd-46cf-8dc6-b06c14633862',
+                systemName: '5xzu0dxedb2k18jdiobv',
+                roleId: '1f2bf745-04c8-45fe-9bb2-c76b3fb817f3',
+                roleName: 'pn1ifjl3w7l0o11fe633nwl5xsyg23nyavfi1ar6ofzm9qz06dmh0tmtb8cm7cut7dvbqkykglmg9w5w3efeo1gvdzvz6vekehhj7jl9gu1ddjzpvt3f9002y8z6r0ncdhszvzterfezq0ia0fdhtxh2qsw16xsbw3vmv645b5be0rndi0ikx09qvc7ry9q67r4bvld05hmaxg26m7ouz7al76avg90i4cchhjfwy2iqypxnisiada42h8kqyaf',
+                name: 'ppkn5fikyuepb9no29l350r7q0m29ht5f9hfh50uno2zuepqc2s6il404j354ejfk1l011gyqp71d3wyh8266tjgftlfdb4v7qbmm28zk6fx3ax70qzgyfkkqwwqh6u1o8gzo2yxvdw3zobih1vtt6kh6cguydza8t3ci9m3zlpbtdq8ie5lwws290anwm9goxb48n6o19vbuusogubahcmxdojjsbx26bckz0m58ll23unmphtu4ag7qegvsvg',
+                surname: 'mzw1lvtta1kgzyv2nvxxt2xbgzlwikrl4zu8s514rem6gro8z81tlsceol20yefrazwl6sqlgn2crmzqhbjzy7i1gz2vswdnughpi6o4sx7m388hqyr9ipe7zjkq248zhrg3b2e38m9poajh0zo3xhyy8a2dga8glvvv78f0al43n3rd6soyw9mllmf7li3g25wk35182ygl76mbzevx6yhlcb3m133ze1gom4ojapm22l9s3q1x4yg28voxmps',
+                email: '02uvbhtyl5jn4krjg0xx3craz83geqyyxt7go7cl4dv309mlm5c4bncbsv5i19sehsc3v8uts6i46bwh314dzohbr03pfjxnik6rtgz930i86na2eptggngt',
+                mobile: '8lxjdxlacw3l7thon338xtchwjllb9x15qix3p4tn0oq3hf4dj1k7x6ytu5t',
+                area: 'wlb7m8ucwbq8tev42cec8odshghqpny99ee6e9e75dv2usjxofofld1yjv9mli4ef80zprxyyq115u67fuln1tu977lpqzja4ab5s9lw1awb1ip9ipmthoevfadgnm0plegb9ltrbaf20dx3806io0cnjgmnvl5su6u9xkiuvh2jfs1tizoe8g8cc77xje37uu2kjkgx4tqdvl5uun0dltlc9gz9qwc4h5goo336ec73nohhxwuq3ezxo391zqv',
                 hasConsentEmail: false,
-                
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ContactHasConsentMobile must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactIsActive property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'n4dbpilihbwr85sa02oic0i2ihnyac1zc2h3c4xmjkl1jvcxgz',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'i9us76welvkjdh86ujy8',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'yrsag2hsn37lhvvtt1dmoti64y3114qacudhyjvyk49z0eis9ha8xpe8pb8p8nrj2qr8sezm4j3xy2x8wvbd1pkl9sxkp93a9g8uuwdv3gs7gzqn4we78y775mcrk24jonomyvvjw4faw36c5c7788qh6vv8n9awo45kohatn61zydjzm1mtj6hbkp71cxz5kicpx0nwfcjva96npslll14x74wpbevyzjbaldgfcfkfgmeor9rjcn6jxbsvd03',
-                name: 'vwcvxl6386p0qlndq580yoncgcm7x28cbzstq005152ks5q7bu7ihhioykzk9le2bh0ry91zhnt8lgbejk4jeshm533qsgivmrzr4oyanwz21ih9gbt1wy838zfxh0sehpj83ei1p8mc7eb0i6hmkw27elvh2lbl5vyt6inadvnluz1vm3593mp8i5wyxo0k1oj10hrqtlnkxvhuhag4d3ve42r27xotw7bwrtwthl4d5xo06iui4dodzo0u19n',
-                surname: 't9aucmzr6q0tocrr8heqn8x9diaqbhwbt2kkrrtjyz4g4bnk6ufn06hsorr2ybpu6rfx90sv7xublm4eckmviyhto32hz35j4eiabc6gfs46aw7vmso80mnmf0frmy3h1iu8lzmlztn80x35vtd2ret5zbvj5k5gclznaf67n1eeku3iiis8h066avy8y58pj4bng8qjtdkeac4wek63jg9gny45szgnaa1l0klu5xc8z5tkfli4ydcdbbmqtw5',
-                email: 'go8yhbwkc5ljuy5wfm441m7tv3dzyrsm0evugdg68nbjge1zvsd1y0shy32c3l48v9m38o3stwx3u0hl1rus3i3b63naxawpjsr04t9996at7x57h88qtaf9',
-                mobile: 'hr1js0n0xbr0csueq0r0jcr42noqhw0hno20uqu70qvam8cmqvuqse83j150',
-                area: '4kt49qqto0mjcscbegyp5hty3a15hzg7fpc3uyj32mtenv7v3gfff61bmnp9c89nv2jq6q5j66igjska30g948f04w152u5vsqawq0g223dni4pv6yj8s5v7im0xig1r040p7qdob04za34al4y9ac1sm317l8gddw1qzfu0i31lj7dd9y9fgvrzo30iuu3m0tg1a7afkoeb0nkn8qlde6e7kraqno396e708xjr9csjjbr0e1h3cfjfmhbhsi1',
-                hasConsentEmail: false,
-                hasConsentMobile: true,
+                hasConsentMobile: false,
                 isActive: null,
             })
             .expect(400)
@@ -585,83 +363,335 @@ describe('contact', () =>
             });
     });
 
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactIsActive property can not to be undefined`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'fda0s4i0n9l9ibpcgy44g4fa3r2c8s3klr3f5ntcr8on0iqi14',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'cn1d2cfs81bpxz7b0kw3',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'g3plrsndfve36ibu1ps6ao54p6g425ant372i93p9he8nohhwqvuz0tnesik3b0q2fhj40zc8o4hmszaver53kp9ws8hrxaqbuggerav585uj4dkz6l2boug8gvyefiv2j467lmvw3rasxocqcdjeqaes907i6sh99v35omlfl9ujtpi9qhdsohnkza2lk63dvp7v9ubxen69zjtytgkue1gc9aw4x05wm7wexy3t9lmvfty1djd7zt7nyhw4ld',
-                name: 'f5bp8ar45h9oforc7p96772v559vetsq48ez9nk1d488x9x81bp7t16f4cgi3wwekozgo2yi32bq99osv4pizkobqikwdekm0w7q57k0gbn0stfktv6vtenohy6s61q2qkxd9aq848n9qwrs6e51f1ledsjqcqegzaqddyfi2xl47xhw3k2g9yp7emngfnq99cc02nbis0pob8moy8l8xrf6ygi0cfukwykxjpl6ls29qqa3pip1yhnegc9d2ok',
-                surname: 'pyfyy3j1wdoij1x2evaj8m82ye2khkox10rlvjdzdnilhkwy7m7cr55bdkhzl5hk4axdlyqsfqcnri14unr0mofu4apmjly8im7y2psbry2lj0zk5ap2k64s2kx0xvoppexx1ofl81wcq9p2q6cofzq7lgtrf11qao3d7pkepubmwhnf5wdxu35w362ja8rdrhok6df0f5trho6xfpukc1y5pte1t6incyx7evbgjln91eziz18z2ee6wkkvjdd',
-                email: 's0qpa7prp3fzzmfze23w8eur7u9sr0t2hwsjny2znlfxs067gybhck5drt2g1xfombpmbas0k95gchy0y0wcb6k02aisfvrdjtcdttmjsfn6uht3ndwypr0m',
-                mobile: 'gucr26ihfk96s64osj722am5bm4dqsrg44uxbxazdbuh7lk0nt1q5bkervlk',
-                area: '9mgurae2awgr76aiz4u3b5c3sfob4l7cc96mfvxjymoqcv33uwkdzyl530dicr3u6yp5pixdxe03x4h51oswf6ynodslxkq100vnr2vlkeb4208ma88z0d3camtthkdzw2p6xswlkupapbzme911kne2dgo7czqcgvuruk2uty6npqu1uk7mwsm42acag4t9km4oe42cxumpfi8b81lkmvqjxrep7brwrll8l6z33wg57iwphw70cjzr4l16p0k',
-                hasConsentEmail: true,
+                tenantId: '60207afe-6221-43a1-926a-f18ae6a36705',
+                tenantCode: '8uhxabmb2kkat01pkvfimdm08dvuozga3biyxuvvvbp7xsvmht',
+                systemId: '3670fb25-5153-4c59-9b2b-70201083cef1',
+                systemName: 'flc3hg242iz1azns4n6z',
+                roleId: '7e6d1a4d-f49d-4a8c-8fe5-a300538ff241',
+                roleName: 'x7xt8ggr3tfq4d5e0b5hn7iy9wux8akbiw6659oflcb2z0qgndper3p0bpu3i8g2yld7flslvcffzvdu1avcrcwogpb01wwblm3d44j7l3coko6guhq0dqvk22g91c0w1879de6k1kgisrr947mlwvj3qcdshzd92s7h6dfd9ep1axt8gjqq4ldejgr3t7quxspvk7xn9uguzeq0t96uhjktgydilfyvu2yjd42qalh6senrljatws076xp77ej',
+                name: '5gn2hzc6cer7qkofyt0mkwflgydw1e3ftwf8nx4v67fsdhggjkk6pwxt656d9z1b8cyzkuwfy6le11066wr5rmmy9ot3lnqbx4z80cm64rre8hli4c7mu8xknm8uukm4vyzjxtv8aai4eecpndmngeonhpn2yppkll2jl7wwo517cjhvzg1y0gsbbsuh6xr9gqnazl30qpbi8daw1k2cwx6nc651fadlb10d7ttuq224xtbnhro8u5rj27hbs7c',
+                surname: '9k2xq9cfz1b7nheroq0ta6giw6t0hvla004r6z5on5coowbe9jjnbwgiitfaf784gsi6ej4v8way66dxb2goilh066jhjuq2sfk31b5qttpdzw4fwupzbdmwpqa7nlw1h8kgt6p7m8l14g2pd5hdnulpovo96c4qvcyrdac1rc33mhc730vpjynebcz6brw45b2lug4vidz5n9dky1tbviilfd7i3pahorapanfm0c8web3bcaeqjvo432sgo6c',
+                email: 'qspwew4aztyfuz5l6l328ytp0j6j5bbrue9g7pcjme8td0uivm2evm0vqu6il15ebbfb2am2rcphz0kik5zg3nlxdbcjiz5x5q38yiiu40cjfm9svj9skr3w',
+                mobile: 'gyc9ociaj95ryrbo5fwfixgyt65amc4q7g0b8wd7flqkvl2f9mymnlydh38n',
+                area: 'cg8touilvhoqoajs12mgdvue7yk9byhqbn3w3voc9fozfj9sktwalss64dvvohq60rsu7ko3wzkc36x5ijgfnwor1el987443dvffdeva13jygm2jrr1qq1kwzqv049v08a7wkw8nf9owjcv2m58mgtakddwj0yn48mm82fb0fy27nuqrd4i38hihjqq08w48xxqumaaw3yd7nwkbgnijc0y98wvxjebh5skhjorefb6tahea3kywpqy4kpei8y',
+                hasConsentEmail: false,
                 hasConsentMobile: true,
-                
+                isActive: true,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for ContactIsActive must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for ContactId must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '18vanpbd2l3gfhtrfftn8ajgrvluub1zgf1ey',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'q5f2b401bwi269kp236q0sqcg8n8bh58921b6uxoxygpxggw1r',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'ov01xd3xlve6qet1m42c',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'kkpt12h29si8xro09ybyukmcyi7jxiv1hnliu32zuuhqkuz8n4x3nwp1vtmv9neu0d7law0q9205mn24z9fw3xvxzloxv3u81y2q74oslp7cq7lfa38p9gf8eg73jlh09vnuz5m98mnduxgwx43qn41kovv9bdebjaztmkdvwo66dwxs8n8v7yhfhjjhn1b4p958bxxozdj8mzffqryfxkwrg7priypomp4mmkj61rbj8ci9ckg6cmehc28g8d0',
-                name: 'qn8uimocdo4r3pm3pxckoz4096hsgongp4p6iaboy14syxkzt7huvvgz4aggol4pwp9uxagzv0pvb5k9r8le3xkqdrfqyghm1z7ro70mly1et89oakgnj3jr798ibacwc18l73t6wax4rxatb23y2397jkeo3p2tr8x615lam05cb18v6r7g56qc366ghba73mkk27na69dh7t499a7egt8xe2vtbjdpr8r1yyprzvipiqzqd5eqrmd1rilubyl',
-                surname: 'l9sfsnz0lptziwut4s893zlkv0zpdi1dbvaab70d8nmvk4ej8v3is2j7cdp4ci2rx0qh5trlvwru8a57r5m9rwe9lspk566mn0f2lzwhnwa89x617pn9tt4sx4grej2b7ulyri00xpjwag82nr5zrg4ejzk99s0y2k1ge2ye7b2h4odwbifj5qa37e0ja8d9ywfm1ruwj3lhaguqbhoj54rydnuj7t9jw65xc8w8whkywiazz1f1h5n2z7alv92',
-                email: 'km4e8ipq9hhpmgrj8bkjsp92vdoxhr5x6did9qpck2gdocf4s7i6z3orad2k8wu8smj3u589f904537hgjt7u67nrzwgldr63yjt6wdfvc6ig6qdtbjclzm2',
-                mobile: '873nh6bczfwoda2cot8j13zo394raf00nlbn7cq9q0r8w5uyn7eqkolk56hb',
-                area: 'w7e7xycgeskc842pcf483rqvab6huhx71anmcvjmj2tj70cvforpu1nmebze4dq771sb71yerxacx5vye0ct240rvqfq3m0doaztfnna5hk4kxzidfr6dg2luqnbiv5jrbck1rkky3zi7vr6rmiljg505ysolamgagnnzbvhkn1eaiv7f5xjjayndwiu5ytzfovuo0ympx945tfv9rgos661cdgtlhmr2ec0dq9kzibbz4gfhc3qnd25y2101qc',
+                id: '8e6768ed-4fda-4c56-af9a-339f648f548f',
+                tenantCode: '95wu1nsihfrsy244j0phuz6gk6bsqhmv6rpp689417f0qxgbac',
+                systemId: '4d7041dd-725b-4fc0-9109-6d06132e2070',
+                systemName: 'yvihjgni9zfw5h36metj',
+                roleId: '271252ec-2e24-4903-98d2-eac6fc327c04',
+                roleName: 'ecwx01gzda0i6ant918a3t2dktdu6jxnf7frstyzphw6x3nq7syo8zqp4u719wvluidtlehvonmu6rscwtjwx186i8i7lsznb8puwdk3cdn90dkiqg3msdanyan30hd6ioqidh67grw2iyl5feghk0etp1fddjm69mz8yx9g6olbofvc8xmmec35qabn1c8ym7595vkrk4q4a3axsyol4jovopysy65nmfap9p79b6ihb8nzpjhkfg58f78pdqk',
+                name: '9wr2ttvad14hhltzec4859bw3fqd98zyytheujheyplyzbce072jo34qs1d1fm1g56nqq4dlbcp826t6stvcg5fv0j8ck0eojzjei0ietmxal1o0n6znpwlj4vthqc7rbov46i2ej3q8ppliimh42wb096yp8osgq9uiepmceii4h515cebuzvqi695o3chfetaqb90j3p63ift5v7wwfkkuwuq2lkavxuh2f3frlihi5qi0lavi4miqchaz7fq',
+                surname: '1myhpyk7kvh3f4be3kqqpae8ncqlcopagh1ak5j7qqu0u312gpmuf4ei6iy6i59dn7ax3s7qe7vkh0gttep7jrb1mo3too421mqqedd3v6zukz8xj1cjbfg7s05dcwzxyq7t35hudlpysxr28nzmiu4zr2wedm3aeeb69p13zqqw7aimpr3wmxz73p95nxvaz2wzd6shrinyay7z3n4bxphfpg816lw1k5b2mgie0m3w4pez3k8rf6s5w39b0wq',
+                email: '3t4ei8ep575uokvxu01z048uk65hx4ghndwfevw3n66l7909jbq4812rpmis2fdrfrq4gn28jj3bsr0fr71slwewv75f7pr5pix08visbg045j28v4j11oqy',
+                mobile: 'qzfpunuk0fulc4mp7yicfrxlos2c20akchiqefdpxsa3fr2dldwbenoldw4e',
+                area: '6os9s154sroc7k3v1vawq4faojjqkav8n3p3rts6n78kjjunznu114tld54abpvz548r2gi2rlffqsezlv1hbp3slw8a9d2atmihj7sxdz846yai2s4sg3g3xyjfcw7ruadgqh5pvnrtqyf5zkhry1sensg4mn21yhzinzc4q6n2klbrck04spreuescfjq338j8qzqkm2rhodg0nmos7mm2niybrzp7y3xk284kjpqtabxf076ospec0pysceo',
+                hasConsentEmail: true,
+                hasConsentMobile: true,
+                isActive: true,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactTenantId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantCode property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f7f345fa-5704-4be9-b560-bef422cd4224',
+                tenantId: 'eda7b90d-5983-4d93-8350-2ea057d98673',
+                systemId: '631414d9-78e5-428a-99b9-8e81cc2e8db8',
+                systemName: 'etmjhnplaozlcan07tet',
+                roleId: 'a53079d4-bd2c-4d1d-b240-9c868479a545',
+                roleName: 'ykugelqfpcuqul8jbo5tbr5v26jhmdssozy5zjlqpswvlrzinr4fp2qg9q0s7txkkc1rf9739y49ews117dkgk1rz55e67yntots63i0golp6txw30yhw7yhj1f07jcngz9o0l5b7gxh9le9uvf3afb7lgk0m03qk9w7m7r2a679fp0nhvnrj0f6fh88h9izvyx06c7dgyhkypp3pzze21dwyauaem8d7j7c5qvygoxd4mi4dnux7h9088rbll2',
+                name: 'zbizsvjeav0vkj1a9ynzlkwdp1wwn8woddd31oeviw15gdueiwan0o328o651l1z6k9816jlt4xt09pm2kxw7upeug8sjz9ryaszh7e94mp5uo4rtd6csg2huj7uj958hkpl6zuxawh714qke5qobtrn71xru2rr6vmle7m250wqdj14ka75ka4936dmk17wwfs1qe26f42evxswi5fmulaoxhs6fpqt9wsm07ujinwrbthczk3qerus6wz7acd',
+                surname: 'h35kyaywg9wshomhonf5xycc1om8dzuo8tjixcxqopvdff1trz0ng8fd05avdmgq0t07bte757ek8u6ec5w4ru6aut2ohdmclmw99eurovkdncxqowqefcwmakwg6u03khauwqkktnejogrtileq5bx518ocpo824kax0vba4ii2dng4gdcfif1fy4v33qxq400kolv26dg5r24gkuem0swo9tnzuidf67s2jhiyu27e06w81393p2xudvk24l5',
+                email: 'bmpobxtnmvcbdmvs0bwqm05wyfvul14133l7jhjg6zjedbp2xpdya9w0zzhb8mtm48iooptwc2o0vhxfsy7u2ae4lrqkecc0kqp1d8mdq6j5gox8w085tuee',
+                mobile: 'pi5lc0c3d3pacotu8s4kdbbx6ajb76fd1i2xr2g5fjl19vdy7aqd48u86m60',
+                area: '030l4j9kk56e5vygl589rql4zllg7gi5dp21ji3kj835lo9m5mduiion083jvid1cli5gtlncnawluhzad0f76pczrpmn7agbukyoapcobqsysfv6sdxoxeo5jsx4r24km12j90z4hyuehcktg2lz4mvjshz1bujsnj7xruzak1pj0aqptaaogc7ptiu3bs4hjuwm9rx98k3zxuocs46icp8iqqn4f932q3ok3v6co824s8h8810tgpmqfnmv4t',
+                hasConsentEmail: false,
+                hasConsentMobile: true,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactTenantCode must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '596565e2-fbdd-4cf9-8d08-c08cc220976d',
+                tenantId: '5b15584f-ec05-40cb-aec4-802786319f38',
+                tenantCode: 'i46humx0qvtibpnvxih5jo2d0b07lt9h1tu66fy4n2fztkt74k',
+                systemName: 'c3g9d0qm0tyqvw7jw407',
+                roleId: 'eb495380-ddeb-44d9-95b7-c4fb0394b8f1',
+                roleName: 'w0ujs6kde3pfk8f9t7cpd1hvvmaz2wdakcnh92hnr2ctn2yyr5vjpbqjb88a6bxjs403mlaa37fscv60tirjh6j1f30twgzkeyaha37uk0wss3zlv7tw8qql5ai56idudhtvm5dtu1yrl9czsrnzv4pqqonyg59gwknl5ss727f2ge5j24f72xksugno5s7y44c9ypc7mvrbaothkxiywxhgcez6hguve27cq0vm3in5mbgfawwcox76snlar0a',
+                name: '0le9t3o7o8x6gyezwrzyfgfdpnrytgp4mlovhbs8lfuutmn44iikjuwskjy7haovhvjhovjc3rkheh6jh4u19rbkcw8kp6jdamhrj0r87dz4lh2yyhd73gb4kpukcb86rj79motlj87rjhkc4ebu2mm9ba30japbumdpwofmvf05cugueydcfs1ojbppdp730c62m1i7to9r5r0g29995uf48d5wzyt2uk9ig3naju4os35v0uao1mcs82jfm7s',
+                surname: '4imsaxrkezxv86tzq1y2ldevpdbv0i90fnscqk7mabuyqirdbhaf0u5mz60dje9ew2yqrupzttkinpg0sdnrx6zdxh1epre35ro12gst5kplg0r5lpobxnwo6wjpsewiksa5s7nzy4wvns9bk6b7qh9qnlo5si450ntymd0j3noa1n9mxfl77f4qehddyo9t3cdh3qac4y4harm3lqlzt3b9xjdy6q8ffajjmagt3n42xcuz14wd4vezix13x78',
+                email: 'gwvgme49wlgn2izzecm61avboh7205zw6dr67jrvcjq7fkayfu4oy7h00vmokdh6u5qf3fa97b96ic487sf80tt4bjzyhs3t466x1d0exrr04pjvw03ub9tc',
+                mobile: 'j7w9etznk2hktvyew6a87mdclnvx19y84r4gofpam27ri3ve5475ly9behcc',
+                area: 'yrm0871425zqk3qvhg1ex71fd7jz9iamcd2bvk8ip6w1nu0bzhp50lu84pk537quzmt3azdcu8sdk82gn7s4d5dctyltavymu1wvzsituloj0iiqwfv539l97ztvp9obdysb4alxhdiri5lq4czwvo81y89awo10j4l0e4a7x6apwtl9ktm3ptm39zlihw2k043pgppzm0jget1frjt9x6i365186b7cb0hwven1rf9efz84tfv4p7fo6jdr0zu',
+                hasConsentEmail: false,
+                hasConsentMobile: true,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactSystemId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '05e15db5-1e4e-4dca-b37b-0da6d33fb8fa',
+                tenantId: '150b665d-b1a7-44d3-8932-6fde326b6798',
+                tenantCode: 'b3wdyyr6tin3h6fe8ipycbokfhw3224rsiw7yzcfzjloydjb69',
+                systemId: '0dbf38a3-8c93-4721-9829-dddd7a7d73b3',
+                roleId: 'd8d3e3e8-8c8d-4971-895a-0667fa1b4b20',
+                roleName: 'cqqvonzdhzzvmrrv4uyqsrpsn3r1ezi9f8em0xatzfsljoj1sa3dt6r2hy97ffirntsa5sl9bsz54k7korv5zlbwgyofusvviv7dum4jthf4quigbiis02w3thrvsagqkou8716c0v17zhpzirkvl8o2rsahpkf3587kb23cvdxhyyuxiwfgd5tdwknxs1sc55ayjl61guoss854lhebijhow8bcqsak7trk4u0xrcprw0unnkc8pbi0sbh2hcb',
+                name: 'fept2xzbiu7zdg1czld5ov36usx802oni8ekqpx9e0od4qjf1dqelyzjlbstqff9j7itamp6ydan1780qewraqsfhp3n2y7jtdtrrtlmqmbypzg4ssxyvbqbzmmnut2aum7lsr9l4dl5wze3axtp2k7mvs6x88s1elmk3vikua27lffa2yft78y8k4p1935min00suq6f5sbw0sdeuy1ywuk0gq4hewg0cfpe1qmsb1eri1rcbra0lvo1zpxz1u',
+                surname: 'vzdyewrrxr47kci24wa5pgedbkf0w0j5exztz5o53m5flk4wnfxcmqyyxuywdvr3s5bmaikcervmm1c5nwib6zlxx1bee9juf57tmsvj22y0ctv6zz8sisv01248pj7dnngxxuqrvp7z1nkkh42d4dlql0s6c3o1n6q645psccrlngphx7zr98ed5dxb7hhma63jxoqxno5im8dbjunuvwzmuzgb4x1sc8jnvee9awo2kbai1ngcpt0vx7fingy',
+                email: 'yy177m4hvff8sfoazksca30eoeg8dhc3wdt16flvju9xcj5c7x2llevn6znae3wl3m4esuncwmj8j7yiuyceruim42q821b8y3uc5vka9h155tf24wzaefol',
+                mobile: 'extyjj5i11h1c5ybz9cbulbihy36smu7ic15h5pw7g7xy7eq66p1t1vrjcpq',
+                area: 'h49t1fnkwnb6xqnaexib3uboqu0zul0sp1lfqryni3rwh35lkftmbqkrlykjmk99gpc3kly0xirbpz4h8ciwrbld47m0m8or72velayohfvk6kjj3l01fvpute07f685zzb37ezpzadorqynighwyvjpchfg92eh75ncxcc49dynqct5myt8r64852ausk9rdm0qas1hs7ukhxag27w8z98j28fg9z8gmnf3f0d1cv47tjn876s9nvaqu5d71xp',
+                hasConsentEmail: false,
+                hasConsentMobile: false,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactSystemName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '91ab3f1e-6fee-4017-965a-b2ff6af6a708',
+                tenantId: 'c05fd1e7-8cca-484d-bf22-42ade07369c3',
+                tenantCode: 'qa08ayooz5pgx1ju4ot2g1uu0xl9gg1im5aahbygz10yy8xyui',
+                systemId: '0f71e6ce-1b2a-466d-9ec2-1a16f9cc9a0d',
+                systemName: '1x1fav4yov19ju91bg4k',
+                roleId: '7adbaa32-f0e0-49c8-b42d-f817b35bda5b',
+                roleName: 'u85uizy2r70b2ntnlrfezyd9ipz7prlo3296j3fe3c309ml7910qegpbqdglzafh1nvt32i1s24e6cb6nyragnez3hf1p4lfvs7cxy552gdgyirnwl70nca01o8eka81gh15agknjgi2iprfz0zwhz7nlro0p4dqxzx05jaebapd3ato1avcuiiqd98p9oxnrcbqgti345vwx2gcl9747uwnm47bhvbsyf6n39wvgkfxc20sq423isaxpw0vsbw',
+                surname: '4g6odbq680hqi2gzvv1371yfphiul6ufr9nntlz4q2chzaxfgyw5ud9kojhv4fgbdsf9dq8ifrv9mnjcnnnmae56caw8y3rijm1tn9brji7zczx8bh9lctqqx9q2njelv7uy93x8qinp22ehhnrc5e81wlv7dh7gezork8gsnv60vkyzvg7szwjzz2xcro9hhir8yqjwq9p4u637jvdksam3425v6leyh8fviltop1vgbnjlj0j3g1dbarareir',
+                email: '4kiozszi84m7yay6j7r9mqzxfxk7ezh9n62x2ted3c71lgktss8kw28jlcos78oy0stf684falql89uvfc66p4cx8876lxae0ee0v45358fmlrh6h6thamgh',
+                mobile: 'ghkohbzffmboqz46yiie8soy5m4exrb7en0fc7q5n9bkvlz2opm0tof1swgf',
+                area: '23m30npai93d3wq5wvnoe3ff8d69jfnaoz70pmumx4z5kvkg3c5hpa12daewgyko7d0xh5t7auuo80bbgd52fxop96n1vspt0ddog3goia7ws1mc5c0s47w9p858ttdrntukn0axaqbhodq26e3izlspumea6peqejjvm5kmhe8orlr43q0qzyp0t4715hzl99dikx9y2qibh1ritfm6gk1pwo6xmh7tr2ft2uuu7s6vh5p36g7pxsyvs625cnp',
                 hasConsentEmail: false,
                 hasConsentMobile: false,
                 isActive: true,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for ContactId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for ContactName must be defined, can not be undefined');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactEmail property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: 'sp0y792gx6i24t7c556b8h2cthybkbgeep9lz',
-                tenantCode: 'atlzrv87njnr1qnf5ztatrns7ml2m9yb3ttdhih24qhltk6hc7',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'w3iyjphrigl3cgg8ges7',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '1oau0ri20l1vxprvw2cja5m3dpyo8hxiflfgjnyhq6kzgsoyxi273m4q1u6u9d50q7nflgjvvz8twbp3u4mb6h71ytyk2irl6z6b5e5xf43oz5joa5c3fbxpa96zhf0vrgw0k3xgefth1ullwk8zisc3he8keap77gpbiv7vz12k6h77wye7ueuw034ixq3wo0exsyjr7tpsk6m2n4usdotq2cplo5xy4piwpr8jl901cd5dowqt5avbcwyub81',
-                name: 'r0yov0wtuymcksfez0xbqgb15r3k186ue2cms739f4fkmudcs421xsiw6ijqib8wu48qrfjjss1aqz33mbl3u8i9d0u31s9meo0udh6mr5w373it326wr0ij18a8p8i7jd730wcrd4lixtap4aiq3jrz4zuxnd5ewnn6p3hz6po0nmz0sqiv1rv8d7zvakmn3cnbc6h5jzg0t0f30s8pwmg2s1atqpjuvuul35c7zcjbcyegm069dva5kscp2lc',
-                surname: 'fj33zpetksaanntlc6a9n33stv3073lyaypa1ufvb0rhh7vqez2ix4p25bfnl1e71ctcsnyzokmdi6kwp93n56pfd2cmgr29aaba97bmd8xyeztztels97bzh3qhytvumxw1sp1dwkpfeyzdi6r4c8df3ag4xsz0ezyh5rq33uh8jv1yn6cre5kxwrzp1f1ngtqo7vd8qs5wn1qd8b929xq35p785g5mbh3wuwcackb40savl8udfpjkxa4c4es',
-                email: 'x16t8ts2o7tw1vzg4ejwffc0xpa903b2iisgy8coidx1s0dcm9b4v91czig9osjsiap1k7zf6m1ybsqogzhcz0deel4ygib4yuadb815fn8fec82tlf59ah0',
-                mobile: 'eqklnbr9bj5vwbgalt7d8sgsvx98orrsg8b0bizla68wc3xhkidlgcxeefgs',
-                area: 'p17qy10rkxrwuvgd691s92oeksix4qq1knon4ekwdf7l6co3ytik7sn7o9srwwax8mn6154v9tvykrod2u2ket3td844cr9jdbki79utp4ym6go9hj4rl8vcfs5h3ssx2jw7r3dy8lomqqbvjzdd3f0e899jv8ob1izz0z7ph255h71zdt4u99hrgda84q8xfna3vzgokmbutipbqte1hci7pyy365qwtv31z8pjvnva73jwla8621ytp2sb23c',
+                id: '39ab432d-bbd9-4d2e-9f7b-30f3adbc11af',
+                tenantId: '2480b0ae-2980-4295-8c32-ef0a35190d9b',
+                tenantCode: '7tq148c64gtl590nn950abro20sg6fvt3srk73iczd7zuzc93p',
+                systemId: 'd7be18f7-6d7a-4be7-948d-f00d2384f8ee',
+                systemName: 'i1y0aaletnrbi4qm0pej',
+                roleId: 'bb564cb8-eca2-4536-8343-8b876e440991',
+                roleName: '0xqw8k04kyk04a084bjshvm3qf2sveatnl2dg05ahjmje6r5wf0j5g6b3koq5dzx5u6km2s0isf7evnvn5ev3023ippzqo2mgdtlh5d3z6ng1taydfh9fn5s4u6nom9syecbk4gqz7wco7v5a2zo0wbv0ewndkdprg9kuam3jn8ede60n9fz60e0pz5o8kysht30zq63lxuiiku55wh4s8jmen80e3x2m7r86guohfv8iui8juvg3k7donk0nb1',
+                name: '1dggs1mn8d0kanknrzvz2g6798r6vrprlnr0b6eeg8gq0481cxj3qturibs46lsn1qb3s674fj85iupwo1oxulw8w0mfzvwtf2lzs2bmymdoifuulp1jznf0c3qegm1zw43jhjybsnyn710pteic5g0wxlny4wvutu1pi6opwqxygrj58glt25leinpvzqked2f9t972zulexsryrqi8jbr40draurucpzumlhv4whd98h8fnl2m6b0grorgg75',
+                surname: 'ikm1v7oz7ld7qkc397myxkatqzoz0lfb0tyvckibeyh8bbtbbd0soyolt424ujcv3snz1zvly3a7jkv7sh54vw7lhln3iadd1e9770vxzcfifm6v6iofz9qf19caydukpkn77r4vulj5npd69rdxw5i8au32gvu6f3uify8iiirhmaf1081ettx2zqu4l8vw4o5yqn4z2hhx7z7mdwpdvfi61zfddzav8bb25bx2isayuj0juwwywz2rngxf6tb',
+                mobile: 'kb2eak5mmikc8einf8sp6z2y1yi72pt0o77kso240hzhs3l7k2iuu6rotlm6',
+                area: 'qnmkdh0sxaw1yzgkepdoxkvqhxnq3tfm0prgpiv8xi44n06dagq3h4v4zpxqevck3xodggyusagvb5oo33q8070w79tqmk2lnqvlrk2zq9fq5wv2browu5t4ly4sb4gu4uf3au7sqqhnb3y3n84c4mtfdfy7jz996wnc18qn64047tkexi09ilo38g6ttodgub66arb39mdv8rl6locnzp6jpzus2s6txtu7dwwm7yrdr520mhnjaivtnwrj7ty',
+                hasConsentEmail: true,
+                hasConsentMobile: true,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactEmail must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentEmail property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '2b358dd4-9f08-4930-ac89-29b167e8d4d3',
+                tenantId: 'b1656bec-8afa-4f9f-aec3-ca91e7e2610f',
+                tenantCode: 'u750mrch0weckcte3zg46fihudh00jqed3yq4gimffnjwca41p',
+                systemId: '61f5ba68-7333-426b-8931-724ce6a13328',
+                systemName: 'tqpyh5spkm2q1l5k37kv',
+                roleId: 'c8b016fe-e8d2-4676-9156-2dc378a20002',
+                roleName: 'y75ahj141hpmat1o440l4dkh1ovpc3yo1061144hcgcv892jx56q13vr0u8i9ue51eu2n8tus2bpr8v14qtp6yowc2oqjj0b32gk2vvqp2t82bt70w81kwkbb5p2m7swz7mibjivscaqeiqcthf6hlwnfux9k6f8owizt0vyesb1r6856dny7h0rs4udp5hzpcjag5hspx3lnn0b2zm931k8zspdelpjcg6nra999fvzccpusharcz6lo9erlil',
+                name: 'hu7t0kxfc8f43y9uvdt0wtwclv8l6js55qhnxyca79ifxcqxdb4ur669gu81zsv69uleqyqeh4u4stcsn829sgiux3xdual2afnotosxzvx71xl8801zcxid38b9rv4y7ro90xq1crxhmw5jp6pp8fmbb1lx5jwchk7uayzztwi89gi7evuymjrc1xvr0hrtc3as5qcpo3e7fj3xlxcvm3rqotn92s7j2oa5wawt0877h7ln6a4xlkxeihigk92',
+                surname: '4fjy9ydy3esmhwxh7ij2ppsvnfjtvdapi4po1pyaca9iin8g3ybqn8d8vhjgcwt4ppv3fuobxyk376gq62e0q73ss1ov6w5up2kr6aj80arzecq3sscyauzi7j9i89x3ycdat5lh53bho8qb04mbor98cyigxxchsdhvhq75j68hplmcwcs221uj8i7nu8gxjv48iebcm99rk4io268v90dq1furaldjmr05pax7ga12zkqw6irktu3iywrtv10',
+                email: 'dg5l4kww68snq93rj4q0u9m1xl45vv81ud142so7xtljwjuz6nowwaa3w9gpzy5hhz0cbl0idue9vxojl0cdga11kkvkwrkn9hnvnlyeejl1fmw74jg90vvh',
+                mobile: 'd0avly6hg86pk3rxk8e42lc60lp61q2l8me5ldyg7h85c72h9kmey9tmsxgl',
+                area: 'ird8uxdv1asgis90cnvekl0hebxiyznkq5dnv6t48040jva5ty6tavqrhxbk0e1ictwqi28vgp4btmtxp876p1hyoh2nxi9cax7kw2kdy6gq4iudbuioojee9ivhal6tac9uni1i4zv4jlu5stens3y2zki1d25j5vblijac96px8ataynri11kecmenu1whahmsvi0yz29evskw80widc13ngl6bi2dxdo5dqp5s5ev1istya6qea8o49vl0hj',
+                hasConsentMobile: true,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactHasConsentEmail must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentMobile property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'aa90611b-b051-4977-bb5f-f0b405f3a0d8',
+                tenantId: 'f184dd5f-4112-446e-9af7-d795ae30e577',
+                tenantCode: 'gxnxnmcfqs48jikua30sbt1sxe1ksbve7vc91z6oyo92sr7zh6',
+                systemId: 'cd589f20-2644-4b9a-8d8e-03d97eccc30c',
+                systemName: '04sc34j7ik9x6gj45q8i',
+                roleId: '2739e8ff-4677-4c9c-9e60-a3f496ce49c9',
+                roleName: 'nfhul68xne4p5qoqqchnt61apkn9onk9dkk60379b31tgn04b0kq6b6k2bqvfocind7bzkxdolqk6mwky9hxl3tnzornt70qzvfavq6bja1xeyrbnvy2qs4ci9rea0rqlz4v7n5szt4k7bxab11colbbrgsniudbuz1my1jsjk2u1p439bqouh7ua6wsixcbt8ezoekp38go105ddhygg3szjds2tcoo49p5bvdqynsckqmhj864t3rtjkel2m0',
+                name: 'pc3jj3osf2z7nraymiemphl7vuilf85uidsrlnywxx4j28o6lx53s1g366ebrj7htondi29zfehy2bnfr36o40vvfeiaqisyab06w51ubamrjhs2gqt9vdl4m9mitl5ob1gocw44ukbvml2rn2pil9tvoxh6rqd4d957z6eki5p38h02o9xybz9xzwn0m6wr4g6icimhwi6j1vhj8we94y1d7txybltzva1mswow5hgn8t4cnqc5vrgzjnkonyj',
+                surname: '2mik8y4pb4bz1vl2rmcocapjnce4krh7aktauwv9vrqngpxb75lunnokv83sskkpoevp1nw9hu44hxpsq8sxnggrmup7036ml6mc7iqhkzv9jpalaaeflc3vy786yr15d63vi1qwzxmaasqco8cs4azr3o8lfp97cwohjkqcjslwaha4xi7216mvhny75so1heylim0jixfoxt325n7rc169csa15gytb6mix2cnd4arma9m0oi3t4xewadvcql',
+                email: '6n1nnl2p1p4bmn48kckrnn8h1h5fox84cifs4oz4nhatm93v4jw9cog5xic560pyaupeil9agdqnfq5psfit0547auzw9mnixpm9u7okxo0h2eakp82pckap',
+                mobile: 'iscwpn10hqq2f5kbfyhmbjgviul5wlwchgqflem07n375qrl1j4w0pohkkgs',
+                area: 't3sn6kjcc4bd90p5iodxtvjr71wsr0pfp8u6ws2djt6mj9jsiuucb1ocxj1tej91wa2qlc3bjpnmvt0f93jk2kf5lvfkoy7u01n9myxphop27bzy0z6z7kxm7jmwvey5a74lvdykadj1z8vhn7lg0jnwanax6elmt39f676axu9yw5fj8mab4rqmi628h3mitwj1zumlhoj7470d37665xj66pfoi45rlgn7rmoasnay9jw39qz2raymrfu0hh1',
                 hasConsentEmail: false,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactHasConsentMobile must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactIsActive property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '35a169c6-3eee-485d-8bfe-42001be3ce81',
+                tenantId: '043cd071-42e4-4ea6-9af5-641ade6dc7a2',
+                tenantCode: 'ik0do32gr2y9izwf8t4h1svnqz3k1fhrala1dadifqcgpb3vin',
+                systemId: '526d4128-cad9-4e70-8d67-f30353ff77be',
+                systemName: 'beoh3z1cjv4rsk2o7r18',
+                roleId: '6314fe4e-5358-4347-adb9-c1021cc341c9',
+                roleName: '40xe7pkiiiqacrt7jf5dstkc8kfbhs62z17emyr7sdp1bvvg27f56cjd5bc1id5e42beor0443zglfopvgu6k0at9qcr33e5g7e5uylmics0p9lzsdnmhd4dp9kedjm1vrr5i5q2u7lzdo0fwj5l0jia991j1fn9e2jq5emcehvbz0bnn84eoa9dngs8fqwfpdez8l96jb3qjbq2zecmgmrwkaxpkdkwtmioaxzovs3yga7buc6ga18czsqwicv',
+                name: '1zjvxbdi8sue87asq0qg749z9aoz820qg10l469o83fzv1elb327esfk9bsnpcxgt92u9ovgasduz4p9kzwhwztasewagdzu9fk3igoda44gpmp3agj0h9vc2qip7msgy54o4fq4u85tiw6lcxjf1wx4agfnxemjqvy7ypmci8nkjyazuuz57sssctx501fevashdk1q21l35pi649d7ijm7tp2tzqxwhmgys227ge4xnpm5cdwzducnxskcvf4',
+                surname: 'clyrnmtiwhdyl3r1i1j4k2dcmy9hb7bl7w5cnybzvdhbs4jckd5en6gr97s41poy7q348w237897t04o3pr8bl55d3tom51kmn5wxqnaguwcubvqcyfffoj4azthrc3tcz5r42wzq2e8n5s26ec60h2o5dxeug72gn1j247kka80um2asmabbtq53lzbnsssrpui4753rulekidh9v4r3pf9ku0if09t1d3ywgf25xv19senfebko7kfiugngp4',
+                email: 'q6mowd4f97womt4e2glzk0a70cimra0p1h0t8mevwti1qtlex2r7m9akuhg1t46r9b59iwhqme4qzur9nyjra0iqiqhdng7e4hsgi1r9exxugcmj4sywudj1',
+                mobile: 'wfclgo8pxnt4zk3ecyo3szxizqidw7p49sj2ig8wceu3kzrk4tm475dkxypt',
+                area: '23qjjafw09x2ot1yek9p826jjlcvp0vsgisfat43hw36hfonhsgrktdspo4tm15u3lfn3m6ckko73x7alddlnk2hbrtvm7bylwaca7a8pu44amkhpoyvd1ni34hlvkh1mbka7nj3bjd0044hicfkng8z2bqoqpap0jl31g0xbvfy88r5ukq9hi5r2mchs3uzb86np34yd278uozr28yer7flmsz8tslmowb96eta8k8bsaixqy92vasz8seia94',
+                hasConsentEmail: true,
+                hasConsentMobile: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactIsActive must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactId is not allowed, must be a length of 36`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '5n4fubr3yn5qumz6ep4wv4djdwv7bagna6msu',
+                tenantId: 'c4d5be73-7692-4308-9377-9a4f019d100f',
+                tenantCode: 'v87e7khqautcea644ifc4l14xew0mq4pwy6d9rssg0fwhjhhsm',
+                systemId: '81f59983-f5f8-4f2e-b511-630485c72e32',
+                systemName: 'thfw5g72ljbbaj1jlh7t',
+                roleId: 'bb5dc78e-2fe4-4324-9c8d-ccf661865666',
+                roleName: 'eoh34eecryaevqxw0d0t90orpzwnhgcb8wpviv4bro8312t7phjz4ipyphgq7r9yj85jw9kq3m6x42sh4uld7xc802jr596xaeetkefyrsmwqrfkzceeh819gy4wkalhisohc19zsyxrg0eer5j1afg42s31gsdvfx2zrgyqc70957djpo38eerazfborospw87vme4shn0nfd8wguboro632s4bzepxysmqldrs85r2gvo0c0kvj64sqctrlaf',
+                name: '9vdz5a0tymegvoaawosmrdd5frwv23tovme7rpwuvb5kr64t5qnh6gza2wdwc769vlyldco5jb4hl3uv5lrxq7buu9l4lj9tu59zkoyw65chy66c3xe2k5oi00e9g5ainiqbgtd4xt6jczjic8ukdh3e23w0ik3tmpmdthkjit0thzrmb9ev0fumw2qq03ks1cq6291zt982gyaftienmh57e3u1nh0peppdxii59v6p3fup6etfz0025a1myvx',
+                surname: 'flbutjaf3mub3rs1d1v8d9mp8qz9natccvaxnrc0jw9xkydgo1sk925u25ucoxpagi78chi3aphyczzak6h9stltlnn5e7eeap8f600pxk6fpm5oe7rzzdnji3dojg3l8ppq58ax4cw6qlb5ei1efays3kjsw017pi20chlvwr7s3kkzdy0nico7848cixcqu49yi69rrin2gtypgbpnax87a9knoonssz77kcbw5hng7kb3tioazspebnsiv9r',
+                email: '4a5b1j4gr0b1r5jlloptor16qu8yr2idojwo2082ja9vyb35rzbgyngm53wpp2eqoysz8h9jce7nhrza4f8x81v16pemdljp0n19dmaysg13brvl1v5b53ul',
+                mobile: '2sd97xdqj3k7toun0lumrjhl6wovocw1ndjkay36ahl36ej0rn3ef2deukls',
+                area: 'yk7un8h1mrvvh37ui63nu8bqori6hiy22atw2aaafk63u029y777ng9g839hq1hooifw6vejwq3ry9abta3ut2a64x640iz0k0el5fsmxslis75298ghpf14rp5pdz72x3ihtvswilewgy0n0vn4294po9uqpq716hbrixb03m6rrs5g8zyq096ojw77xyiy9kpujg2oa4vr2a5nlrhw9rnrtuflph1c7vky9tv5tfvh4bn7w47bbq8f6jqc1qq',
+                hasConsentEmail: true,
+                hasConsentMobile: true,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactId is not allowed, must be a length of 36');
+            });
+    });
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantId is not allowed, must be a length of 36`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '3a9b2a04-d23d-43a2-9bec-7b1b2de591f3',
+                tenantId: 'v1eh2vp1q3rp29462olv6qemwinetic6avhds',
+                tenantCode: 'fj3iqz2f74869nft70qww0wcuw07929lcdg80abjjyug44uet5',
+                systemId: '2585dc5e-76be-417f-8e03-25ecc5f3ee04',
+                systemName: 's2w8yaylldc2fxsizeni',
+                roleId: '8d34d00e-2688-4580-a066-c4bbcf65ed31',
+                roleName: 'r6826smw0xi61k27muw3ir4gvpq7wnux5ihwxwr5hwvltmbe6jpf1ba3b9h800yb0gxvu2jnrjz2bytxreilq60gqprglb00yhdsf8gh4hpes4wgbig6asif5nkgknqur87j7b1qo3k0xsaqnao38u61nccncrwv45miubcacpfft43ucstqwpat9jih6qbqigjzomzlfqyjc606n9c0asi4o4ar4mspeab27t1vpkh6jbmzn3val7knrovbvvv',
+                name: '1qz13j75x9x3szvughsf2iwyqztca8l8av4pvgpwbc8okf6fm25d6555zn3iu487hp9plwcd3eywmvim0p51wn6q9o6f0hxkii3htd4s9jvjf7wuvz71uhuo0b14x2sa5tz3ws9baiv5j4umgs02tg8p73v7wstukbxrahnmxnla27qt8onjldal8p99pbj9plc1lo1j0bouh5eglrb5xk29td2bqsy4fi3mbb294vk8qpv76kqz8rmvyhb8149',
+                surname: 'o0uduwfgv7cow3kw7pr5xlpf69u8knwyjbhncdn0c2hx68ptjnd4vjnlfvt8rjagubireuwctfj49mn8jhgyid0s2h9wpdu3h396yfzitn1i6up5zae7ld00tontrhptruc10v8vkp5dc0iatn675346mmfc5d4c4lmljteortoqvdujq4jx7rjd60gll1v24eeleu11s4zqk9zf33p82bavduposx56dvs116s09d7bk7jl57qyd90ccev1kl0',
+                email: 'u4srwg3gg0ynz6nm4mua56buf8i7wx6tmj8bqurb7jit2azn2nro4v7shf9j2k3lu4iqanupyxwd4yn338jgtym0anmyfheip9z00ksev19chn2u2o6x6tsa',
+                mobile: 'c6yn07yc8cnik7vbzfadduq4acwtx3sfu32mz4rr4zeqbu3gtfnxapwslqjv',
+                area: 'mwbq6eawm7btp80yf6af3uwvzrofbvftbahasglavos62twnui6rlhb9tk834y81w9elsxyk40xlgk1t9ijtg1usqsskixle9leq2y1jb90aaxsg09a4cinqqtb9zi1rejiczwqoiw5jztfyiiljro8dtgk349fpuush7jlkws36a9ngpz6xf3h7a90797jut42jd1tvdcydbq0mdoxuc2fd4ur8wwu0lsvce2xfz1fywn3pu28vzel6128l280',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: true,
             })
@@ -670,27 +700,28 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactTenantId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'f1asalvurqh1qhf145tfxq3p8cyha7lvgvd46jnake0j1zczw0',
-                systemId: 'fioe3usazubczy53sm8gco4q3vy1smwe1fqgf',
-                systemName: 'v8wy28bpowwf59wk2r1a',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'crh5xrra87hfbs8gz61eaqbw1eypf3fezns89pdubv3x5kvuzzzfv42g3y1elb0b186fofg0cb9mpycojfxocj7894s8vmqtl2u4urz0j9yix64cm8cmgutkylgpq8mznokvna4lapi7jar6srb6rbzpns1pljx7jed3i6iszk3ny0tai6rpyoon53rr0qlegf034sopka9a489w6z1ip61wzkysmb68mjeja3cobxiywvpp8911kmvrrytu14s',
-                name: 'ny9f5bv8dax6t203pht6d3bty6mltduyyvqkci29wjqfj166qblm5q3pezty8hqegbiebfxyoa7csscj4kzvsbbvm4hk3pw1w4hz6x4kx1x635gq35l2rkwdsaw90cw96yuam02zikf4qu24flgs5pqa5nx6dxii4txoeq89mli7sud6mi54ea36qabyhhwjxv2a49n14sqyccbysvr4ra94egohecxjfusssmasgh99ykqowguil56krn1vldk',
-                surname: '8errlw0hmkeohigs699kbzidn98hu55fljtgz8pcf0h77nsnwqe9mewex3tzqlwqabme60mx3mw9u1lemfghhvihvrbv9fgp729w0cus8dgw11xqivjopjr9obu6jc8b8sqasmtveg12pbrdaw73b2addvx9fkna99c65yp0gktw7v94w7fdbjnylhwng253zfrp43be1dob5vredh9s8rpl2o5ztpce9eak35p9t8mqj86cg4x1r6cmfb3m346',
-                email: 'zl4crztkcibkc590fgjhhmvdzi8mwvqk3q5bzygiv3yhfll95o1c24e2ei661kqkq5ndzbf2jnuamsknzbc4kdj3agap6mlspngamvd42e0h3qpd6ur94x6q',
-                mobile: 'c3bt6gy854ijdj8anopgnkxq42edcbadqkhyvlpalb0ots5uzhh3zjypiuwy',
-                area: '4ory6gaq4ke5y8g8cszjo51oeef7pw7t05xadp0sxkuh1uo20lx25dhe1ffaqfr5m7t91poz02ugm5gj6thzolqbacnz4c1b1c7fbbdyjubmfdzbc0fpevxz048tnmjv1wtb6mefs4nz6kebbhvrxsne06t3legw84xwm82zqnckzvyvazxjt0fatyujca1afqmtuypnl4frjcpvszc9ycckwz7fnk1g81glf3jfgy9coy9upxa6zsx7d0efpck',
-                hasConsentEmail: true,
-                hasConsentMobile: true,
+                id: '60d30e94-3270-4b66-bf04-aabcaceeea7e',
+                tenantId: '14966486-14ba-46b5-bae7-345dbafbabc1',
+                tenantCode: 'atwrz0x33oqb0uv8fk95aw7if75hawforv83w79m6py3gnzcc1',
+                systemId: 'i37t24qcvyvdnpithborxhwtig40uvqfgl388',
+                systemName: '34387tcgjgsom1pjphry',
+                roleId: '4a1e7c1c-1ba5-4bcd-a957-af09bac8498e',
+                roleName: 'cotmtqfsgxsfy20of2vfb3mnowcsk1r052ct5ehjh75lpr14xvpq91hmnivmnrgyarr6i6t0vczityj3j5rmt7ydsvxozgjy7538mcce0ds9uxsxp1siccfqns7me01c8z775x1ioh8px2094tflmcmuaut5tdwr9l6ktto2e4xfqni7ze5oh2gj2762h87h1edtdwyctthgfrcvv1px0jwy8anjiore8t3ngprsw54pf11lgpdlm5zo6f74twa',
+                name: 'c0fz7vl9wkb5u3ms45fn4gtfy6g3w7fxrbhf802oewe69rqjq10iikgqwqachxl1468ujgrayk2oc2lhwfg7q05fcyg3oywhm3hyvcv1kgj5mvfzyrkzl9nazg4qvfxbnkyu4la218lce9wwdd6qoshmgosjkxpnx316m5xj0rbx6c1khmiwrsxf4kyh6nhr6toexn4ah7qikrggpaf9in44xmw3ulmqqy87qwzky3flunst11h1cfzmoson5yz',
+                surname: 'fjbzth6bfbdfbnas43xdohhjclztgxft1uj6qr6aechutfxyp0jhu548k6zaijdwcgktp9h7vlfwhlxd83s9m07mrzaea9le9dpxs95wtd35r4qhkb3v6e5g107hg8l6fbbc0251wbfhgxtqr2blgmdzm9yhdd1yrdbkrz9tdxihgqumcjfr63u237mwpga7kj4dw56fjpracdj2qayv1ppnco7mtggmmbpjcmdggjkp1wnlj7yq0bh5ctlrb4g',
+                email: 'qmp06hjj6s016c7qwwp6sgbtwozhgqt0zb3ieyege2npipfod3eaixjq976xyjx8qjmlzgk2evca20i3pi4ov91konn9faxt1fd2745doms8uowlet7r9b7q',
+                mobile: 'n4s0x66x4rm8iqzzs0l6dk55x1t8h9folnmg2z5mgl3eb54m51w5ghiv97pf',
+                area: '3agj0pve954xubhu9j3zleql6ygqzvnoei8bdaa4gz5ymkoi4gepgwsumes550jsp1b3vh046by84kuaix8idl43lojp6a72ro6vu0hxpnnv1zodppmir3l1qhsypy8jey2hu2t6z14eurt7ct0f8z9evssov5zw7a28nixhymsuwbkubk6aig457nf6piqoik2prshzf21xp2nxs4x92bfu1b3l01az0g8hq5hle43tgws5a93pmplhlhazxd4',
+                hasConsentEmail: false,
+                hasConsentMobile: false,
                 isActive: true,
             })
             .expect(400)
@@ -698,25 +729,26 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactSystemId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactRoleId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactRoleId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: '6bhrw3suit0oeu33jn25mzkihzkqogdratsg0ol4ulnjplefaj',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '8197d4hparmkxiyvb32i',
-                roleId: 'wgax0auok4mbcd19by4xi5azzjdol1j268s7e',
-                roleName: '0d9igrshxfp7g201j5pxmr03553m9qjq5pbh6r2u4cot63512lcawl9kbht9966z1ykc2pkrilbbdy3ymwxip6iql8gy5o48693nsuarsy3kh7a0g7iu86jww6ycqpt4gru7oomfnjo3sbgnrw8rqc5igy3k6nmt1ioftb4y15hwnqf5e2twg76t2fonykmezu8kjklk81yeatjcfn9f1eytqo7yhn19b6ji8go0z8x8yv8t309q3iiqoxftxuj',
-                name: 'cxiseuob36mzz8nykl6o7xb4rw3ushbm1c01qbdz1enkxv0d3fuq0lnrim5vzebgi98jhz3axritp4ib0r0mu9yvbfc85a8d496hv4mve6ev8h5obk30unqa50s8jcc3bu8mktuo1uigsg2wo75auj3zjwevq2tezoc4ss9mrkh3pj5tjk4n7gsrhy82hpdtljl1fjh2mdwt58lpmixclsfs7h6b7pze3fqdwfq0pxzgpq142jfhuafpml5lfgo',
-                surname: 'dpwkdcbsiocklfi2em4n2mpsyyva5vr7jqki9pob01ukstoiwep016vqw8m7ynco9jhmvf047t5ehui5qxd9wnhtdytid8okpkifvs3gs3780w3xfjnqd5rezm8cx1qf128hocq96jiiqyzedqwdjb1lezyfctayd70ta68tb27mmu7ehw5j41b83e2uxwwf8agnuwizaqper0x09mrdhenspzcjr1v9sm5whazxhm8p6p5y0m0mzjz2l7vnjss',
-                email: 'ka3y3fnq11up2ignsn7ity6nqdcqhjbn5jvq2ax8efv8cg9t60eiv6059nih54dni8mw7adrujvlmrjilc8xbty5ldo2da7yxtvfgo3ppvo5u9j45747bg9d',
-                mobile: 'cqvu7xxwmlvdhf3p9mfxlsxgu81dwn2b1x33oe9j1g0jgo9uadvgcie1eufd',
-                area: 'pylfwj432y0cmu5szesdeawbhddafd99qw7mmx4jmos5vpn8kekp2vmo51e8k9cb4donrgsu8kykovj931lwb9k9temy6e5nbc0s1u2mbs94co8rhlbblxdk3paqrdxcdwiiq5hrsda48srn2qmjausw3zl6merfszbe6skp2itb47wcx9o0o60hwljtldvq2uhfqga280tab7giwpw8lrjrzbg9js6ug318i64iuqo20tfo3vifmvl0csqyuti',
+                id: 'bfbf8500-a509-4630-a402-3307d207ffca',
+                tenantId: '9238c3c6-d396-4a84-a88e-4ad5cdd854df',
+                tenantCode: '9ueuwj8i7m69eal7s933iweo3ix9quxxl2f73cgvf7bzuchvvv',
+                systemId: '4e6d0fdd-38dc-4ee5-b275-9e858cafc975',
+                systemName: 'qu7f0sze9el6d1f9fohy',
+                roleId: 'euv1r0jhjimgvrtg6skf0hb11ncb79u9tgpsp',
+                roleName: '7hnbj549lg64724bm10sodp5j7rpr7uevkh3kcllk4c4xo583fbsco1fja8yclf6osnvqxexvmjtlvnp5zkc6y3ws5dpqx0kpj6o0e9gg4jme4jff6vmuw1h5igo3eiaarit3qztsut20rapj6y1ldq9cr280ag6yipbof1l6dqxwy0z223igfavkrxscjr9z1pdhiexcxx0oktucmhe6pwf9hxmmxh28zh8v05404vwy6exxi69d4nh1x2co4u',
+                name: 'a62lu77mp99bspryvhh27sxyg14kaj4now894q8s3l7674bock1zho3ar5qvl94nt1yd0q3n4boz9k3bfhgze1vxxct8szz7densde1s2ms3yuzutxq63r1e31xntgeor1l6bebk5w0o9p7dy87r07ldvrguii4ygpp0d2i1sa057okegi0lixk7qsh2qss8r3kv03au58p4o3btss41nr6mizg3y9il8f1mu6aiaf8z34da9odupjdc06bd8zc',
+                surname: 'tkd3ub869f5b13tsu4piwmoz8dnd3a3tyzdkk2pbtkt01qb2u6ifznp5t39y2vjucodh39bsjzklrz8dxqznkak5bg7j4wicm7fv26ydm3zhfqxm0t7ba8gmcx9eaivdygqdkm4obdui16uka7w2uyi805atnfl29dccnoqh8qlalfpjzs84lwyukisqjn21c3nte9vprnnhz9qm570tkkg2u6wwj2b6r09pae2ntgi54wytnwyiqtgqif7eay3',
+                email: 'lx6ybmh81tps464gsufi1evwmnhm9coslbx9cij8olb1gaflgvst0275igxg6d2fux4vkfzpr3qjzm8nbdywm1w083jzftsjmze0jm4yoxsasqod0ktoeqkk',
+                mobile: 't1h3tywkylkqbt5yqntolpss0ynufrngmqlygy1sssvlag0wwf0gp60kop39',
+                area: 'bcc4g66dgeyyl36tdtowbtm1k9z9pnrnzbzuz66ezi4pcbyypx0op57ywum1je1jqc21lctpu3k9hkuu26g3n6n28cg5uqkry9kz4kdu709y5jdjyc2jrpyyuccf8ymndq5as45nnj56mlk9ebpoi4tw56i4k86km10h2wulr3izqs3nc24w4lpftua3fw6jc2chrratwoef2l6h7r886qwoy9oug1n4mloecq3zt1ge6pxsdni4u05say3303h',
                 hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: false,
@@ -726,29 +758,28 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactRoleId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantCode is too large, has a maximum length of 50`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactTenantCode is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'liv3ajxehcby8d8uunnnfbhdd19qhrotfe690tjmva8uml21z58',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'bs9ahwbk6tcynzxs0v6d',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '5uu7cowmhh5z0vevbvyupxppft2iim1vtycmv460vz1u2jimjaz6c2vxgbeuk69290b6eccv7so4n6xcnd9gzd17nda9nyxkrba5ylktdct3guuzkazodgl1ajr8oey61yfao31y5s677c8xigskee0tjxmmg2bhmzrtdy15fwh6z3thsf6n808ysdcaf5u586ah2joa8471vuytexwftafxg2ke12txb13i1lxhonen8fn86jfyy26pvgj14fp',
-                name: 'bx2kee7huj93yy3kc16q9v5hzd19rx9i7xcrzgy11vrpt2ob96rfxnda33psj21sy6c6s0igz2om6b7zq3f4rmfnduph0eg0oc5633gcf02xzlsqydyycruvjh7f2ivzjbtunz8js87w15iwgqt2p71o2h4htnojfvjecieo02u4ohg2liy7qh4419f15h4u6a4pkcqm65hmgkl0dx9te295cm2hig73jxjrlrv4xj1odkkg4b52n19fov8k2rm',
-                surname: 'sawyyz66g29ww7hmk3d47qz462m4vljqq6ytf2fyc023z5kin5l6c48pcoafn5ulc74bwgc12mf5kyl4bxrft3dszgfjbcnfdm1oef95krhymehv98inm7rqa97g4u5v1wriphyd7b0n87tdfahr4fk9f2uodydw10wzhc69oojupyorgsgxn2ep3nbj1scg50dhmhhe3splhy0ypz3s4c8rf7ggf46b9k0fa56mxbvlwgg3o7e7rzheu3kvzcl',
-                email: '6tjhz9aqyo90kz78gjmqn1lugn163smkpw3veznu9gja5lqio98boxaohcmmc59wlihurc7ek5345bpf3gukxbjll34dudpmgezld9alrk1k3pm5pb2gnb8o',
-                mobile: '7v51ec3zm8u61pu9tjxuxouw37ljp2iymlc0xcw6legtpohfws69uzsls5ct',
-                area: '0slcx20t45bkwxu9l8e12ltximi2ey1ze5pgo15a4vjpqnqo2s7bvj5d25inorl0zz798zqlx1k24ea943gxsnb2q9ikfkrdjzs6yyxgn21xkgs1mtt90nfgru31wqkfb7hoqy5gyx5afebyr4omootvuz3mmw80v0ocnz5if2zfxwqyele5tovhbck5v0kibozinq37n0rclbon5xqeivq8m919zhwwagixueia37mbtomfwm5sglvf6hsq1aa',
-                hasConsentEmail: false,
-                hasConsentMobile: true,
+                id: '16d91299-3ab0-4a34-ab7a-27f167aeb6e8',
+                tenantId: '5065942f-7f5c-4533-ad8d-98d2fc9395c6',
+                tenantCode: '2gkb4i3u315zhv1caljeu0wds98s0ot2axmpetoyakh16d7km7e',
+                systemId: 'baabc424-650f-4938-ad5b-5a07816ed240',
+                systemName: 'sv83xszcsa7qvn4s4z1y',
+                roleId: '7c924b9e-b875-4771-ae33-54f4ac7aa73a',
+                roleName: '8qdtuo5jwggg2pkrnzcf04l78pdhk9t8iavbql3hx1j70ipx6d06vlwrlxdii7phv8i9xlon5bhdxbhrcu1jhw32xwo85unw4xbgvnvwb3f9g21y5s7ksaxg41v78m6mxtm3dd95pnyzo55m34uc250dk23c4i39f1ccsgpyy45o668k1k6vpwdmsqvtuteqkshfbqekpd6pufgytjzg9db24sfdnpnk3xvytqp8dyiab0ouzob5o116am06ph1',
+                name: 'obw4zyi90q6fce3nosag44y8bbs8cqdj67szqaeqrva3n02q7efkv61w6v3jducjoq363jy429jmc88x7xxd6e8ta0vsfjlrxowsp3dg2nhjhwjk7zsclg3j5hb67n9nfl10uao8mizy66lj1gx938h72gep72k9x468fvfhlzf06lywdmn2sr76qvc1ivwl6cl2eoso0hf1y85qzfustxdmjj47lhr0yucmekcznqn0mnsxb4grtaocp6f7mup',
+                surname: '0o10tj6pdaos3ssam1v9zkzow1ysz4io2bzsdcvbmqfe5y60tz92jdlmzpzkdickqfsajowsz512bdxrslf1g37iop62wz8lt9strrkw76rotkqqem6gr3ohcoi7ce0rvo5eqzqbzj755t5wy802wp5maooyzgppwwa6fomn9chl9r96qepezwy3ad6qbasar2qusqyb1idqhr8fur3xx80x5k13kgtitvg7j7fjmff2zi5xs9ec7wbziop4u0f',
+                email: '2n1ad6n5qibeuj83uygz8wkqeblgs5l2h8278is4gxv7nofcxi797fpp5xq2fvdkelihq2nu8m77trzp86z4bid0t6zegiihv6d89cb77nobtdq0da51cdpf',
+                mobile: '9yin498dojslmt916t4gn8ag867wqhdqw4qfydo10b3q0yugi4yhckuyb0s4',
+                area: 'rclryu3rbv9z4qga4z8kxgm7sn4du6raf9dci4kkuulra1urywiik4frcm8a166d5q69bnjkvhdy02edxymqotgtc0os17xel4lzfpmkkfofqtepm6bt5h5ichxg6jtbuwykifupf1jvsq9e69nrxpr14sx33lrfpa2eeuud5htc40363n7ervxujn1lbexmgecqvgmntvh43bd5ikuqcj8i8073afhytrtm099pre8hrwo3e0nocsd9eoj6ym6',
+                hasConsentEmail: true,
+                hasConsentMobile: false,
                 isActive: false,
             })
             .expect(400)
@@ -756,111 +787,115 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactTenantCode is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemName is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSystemName is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'x70vx46tkjqp6dv1gtqacoglhf17j0ibifvjc2vs4qudizd3dj',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'skn3i28naydc15w38zps3',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '7cj02nprmw2sdkssj6yesnrit7eb99a5xn6ffyiaun8bnx2qzo3yrp26allrs4xshk7oqz1ntbx6kw3peqtt79tld6lxf6jp2yz604uwql8ulf0r48k6e1ax8xacfcmmuvdo7v89k6nxvuq0rkqlc56pw885rgnlshjitpzhqfgd5v041iu79otovtgd18qke9obfwhe7t9i9oo10arngbvhn8fi5sb06u7crkr09zpnedljwe5v09eivp546oe',
-                name: 'efa5pzz9kzy16mydxdg6fbzf2uumkjrzwlo0zaiqxxlwvuiyckwhreiwn6ftv5ggfryui1p3j1ho6r0ugqm1wwammv2mdbp1b3afc0ncctu79u3zepguke8hw7d2mpx7i4hkd4dh6epn51oewebxx7yelhv44cgraxt57opzdaqcj5wtjw0o4whlt0r2ftu0n37flgzvqm9vn3rv5j6nioaj8l6e1msnf6n3u7slibzihzvi6sswd0yik8dnzjc',
-                surname: '00rnk34rpy3cn6e00n0mmffruwci7olnfv2z18mow5raflcoi3hqa0i6sqaywgicaz4b9b7qtokp96fe2r4fq3nqee9275vq9sbqyrtc6ax1fit9l17y70rws4xq7bgh8ff1ckmjf5cqqf0xjbh9q91gul4nr1mzgwdhzkpeaffvtuu9gjmyef0ypvbhft50rwodbyvjvhkt9g3m1oxcq822hu4u0bk4pkvlzusp97zjsdmt4osgrepato4l4op',
-                email: '3ovjcbofh16cylvmlhn5k2bp1abxead82qmu7mw5e6omlf3xaljq5ia61s8eop28il2vus88m98jsc96rmftg3qp33gk4wsn9cbg30ltsfuvvesvd1pbgicy',
-                mobile: '3o0xlikgibbd9p4ghttwst3p43y51ftara7p5lin3rv8fz971ielhi356vzz',
-                area: 'ye09mw0txfg34g5nhdzk8b0k47xel9g9nt8teeaampbnui3i3wzzat4nwbfrl8lihawzi0mav34vdt1voe74tyaori0cfqbvwasmwwe60txvq6f5597hhvtizuye9s27kuwphezhieq44d3g1o4ejuja07mosdwea0pbmf63c62ue07np8njluauehcou0hx6utq19zqy8c6ehwzm398o11gtbytori1i7d9uodqoo5nnnizfq34j4lvygfb0yi',
-                hasConsentEmail: true,
+                id: '14bd0d9f-fc52-45fd-951f-5f000cc46ee7',
+                tenantId: 'ec0db821-3970-406b-adc6-26db8c090640',
+                tenantCode: 'v8ne9vjyqmveae3yfaisde2z198zt0pezjcjc8j9htrfckvr4w',
+                systemId: '08706db5-16e4-471c-a107-cb047e7dd799',
+                systemName: 'wf7yjupdkg11ry06ytfl3',
+                roleId: 'fe3d8674-7876-4da6-8cdd-bb0695303089',
+                roleName: 'nnj47gjnl459rjaaameu684gfdrahzfui7nz5a7g5iksq17uskqkf52rjdru1re0iaf720dgviwinomirt3ghu003k630939icta0dsene4vepgv7q3s8cib3rygvrcb2i4igxefyunvwyk9rf5c2m701ovglqytp2j5z0zrlx6gbtj5y311rlccymmut2k0hkdnvz34pr4pr6v1db93n07qve656tk1c75h041qrsjviq9vwuo2hru5mk1d76h',
+                name: 'gzq72mrux3p4q6xb2syuhpx7z2u5386b2lqww5ur4z24n58k4rv1duzepmlmrzat8vr0ia67bcziaww5mk49zhqih5hcrhk9lxrvzo1s0tlklcyezfwzmvjt6ler3zm38wjy22fgg9jt2exot6ew0toix7emjf49xca7ha2vrw8u6kbwz85kvz3kdrxlncpxg5if4o458qr8ekx63ai6wpektilq7luobmbjuefsq2d21sruhr8kbctd4j4djg3',
+                surname: 'uiby9350ljns6bmo1y9ub6vm4k9re19w6pysqrdpma4tv0fuqu7vjs7e147uebp7x82gbp4wfqkfw7sfw2arwlo08ybpssx9i9pnnzvm6w81y2zs306ugt6d4ypdduwou5calqv6iku9cfnk6yfrsebadyzev1z0bwoyph3xvrjduahxnl17a11mfdivmel8pkbu2e9gqvx6dxzzgb8g4n4zvjmerqiro6ibadtfjuwk2ycz32d2g1vwb90p9ai',
+                email: 'bq5tpdvbuji81incjl0nokes7bv28g3vdno8ami8dnek2jlky6zyqdb7wvjfa7s0uvizd9akntfdj99niin9ircocvn7o52p0ja8or3v99y2r4cj3fhuvnz2',
+                mobile: 'h1kt2zz29kzbfh2giw47kzuab3vwmthw7he6xk5hiowro22gt2s1vztn6l9l',
+                area: 'qm1h1lp2o7re9p06fxtwa760e1jhwq8u81mn4atanuu14a3mwhqyxedcduqdfp4nn3fy9sk0znlvxt1mmbfik5wvok5oifqif93xtwox4bk0n3afj2fs85iz2newxsm2ibenjehlqx7yb7qcbm3quo93nj64adkewiraxmhnvp9bysvxshltxkgwab06vct2visgbfdqh7oy9pj8z6cad0lr69wmgr3bi4vdoda13sw3eegjdiua02v3w2v2a99',
+                hasConsentEmail: false,
                 hasConsentMobile: true,
-                isActive: false,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ContactSystemName is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactRoleName is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactRoleName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'ljeeo2o6qlkfbztnajldrdqcznpjahhm6vz45hoecpdth9lys4',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'usl0jelwacjyze3ia258',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'zav9osq2aojwxrxsup78wj8ztd7dquvq9ztigrmuuw82movg0895i3y1l9snxsmyl4tcacih62efht0vr83isi1hes6sv7a9hox1wpa5jwjw747srw7nnk0niokg9kkuhrh9z2zwhgs9xc97lilmwj6ya530z4kxukrte9i7hf99rsc2m8b8fp4k7ppp1d5kkvhjibd7e3qxj29qd724kd5g692p70wvmzglkvui2thpal5y622eaxt5vjvh205x',
-                name: 'h70s0yrl7ym233u83crt4ykis4y047t9ojgo0fz3s8nrcwpkx0pk7codjciv6y5aailmrehfq1o3xvcafspkxmd1qiomsgpmlqrgf4euomfo3cs5qb5xx163tcg5mxw38u8c3fbca4d78ychdlibxozw2eobtg95y5f63vr7rkjkzn6csm827z93zp2g7rlagrk0jsg54bz8hjnevnoyi2ms4d6f2gxpt4x8xsz0l1aj55df25ou682v6j81jhw',
-                surname: '8m5h182u5e1bpipo97ay7e3nq0evdpr97ejzyj22piqh5knd95l1g6qo8cd45rg7sa7lhste760xzmjhkvhatmj1l2fuxcdpddvp1p0fkubjfye71c1h1xsb8a5e7rdv3ls9g04schwfj2hnn7ytm6zwn7hchctjv644xh0bfj2l9qx8qnn5b6oy53egsbmnfbn4emum81zqjgxgkziwe50ngoyus3gvog2j2uftp2op2ll0vulv327vtofjfxr',
-                email: '6cjqvssrgj8t7i6pno1d8euy0zuz100043rgynif31gdpk0ygh8pjujbvxud56ieexr5p141m679hdju8cn3akt1dbiuiicz389y3fig7er7xyn2gmt7eht2',
-                mobile: '6xvhsjxfwfputfaut0avz5785cb50p4jgkcxu9kt6r4f30e3di1ln7g63oer',
-                area: 'jtvqkrc5po1q9ow8q4hzxks39bc48hs2bpuu9ven4q7run3sdg9imbdxqsfs1a47cm83ppl77f1x3lk04bj82xxapyq5sxx28rm8e86yy4totybxnj6hoy3qarvl8vhhj2bkodb60k4d2qe0nl1xrf0rp7uxoo3yonvjmrwwjwuzyt5lophowoieazyuj34nhw3eqp7y17bd7zcjntzt5v10d4s705s007gmdizbe1tm33d7t09nfwf7dwohp9t',
+                id: '7a9f6883-f293-4126-96db-ef4985841a86',
+                tenantId: '2313cb34-0335-4ccf-b30b-23addcb130a0',
+                tenantCode: 'v1iogk2g4s9ovq2g415upglkhaun13z6sq2znkct9r5x48rbkq',
+                systemId: 'd02f6c85-9e5c-4384-a85d-e1a4dbeb365a',
+                systemName: '0nj779wgvyjiytffeunp',
+                roleId: '40dc3c16-62aa-40c4-b812-fd95eac98e90',
+                roleName: '6pqgobwnsnf6eq6j03qxltqeit9bsawcgowq6fs0wc1er7pqskaz4lfdg5q702k8osg3hfsog9xd2w2ad8bhae2shp4czf2vqk6kiqy161z52gq0ifit2jgeqgn69b7e4d6cpqzfem16tyavyj98uzhpgcsjssk49u0qxuy35wx6jklro55bczi65dwzcm2xx91vc8cnpba74f4pmrru6lgkriljzsql3vuje8wcwytmqkzi99jxmxbocko9rpre',
+                name: '6stv47kelaexxjsdkzarjd2ufhgm84c0966ns0f3d8y68xo0nvxtgzcml4civ4f6n85bbid44i6rdkkl83xdtzp87zvk2sekgjzywlme0yp47ehay7tgaf9o5gpcji27osd4hy0s8ec4lkgfa5lazbxxl7w0q5n8yr69b246vzt87nk6mx28fmmprsrnvqkapi0583f0fhss8yygactm4hbtcry8rqt4zrvhj0jhwmag41tvkpx4p90c4tewcps',
+                surname: '0dhk8vtjh0o1d7urgay5fi2gz8omtlah1bzixj5f15vkyba9dc2j996ag8s6c0908jvqbmf6yxsqyhu8xkxy5wpecog16tmpmpfea5ldr11d9f2vzr0q18o4ikyq7pqx83bazri2t6494vxua4nkwr4uchzre96hut0pumbd52oalhmrhynea1djc00flppysdvu4rllsz53r1kgck5exisxdt27364qy4jijp02u8ufhlnir96p0kylz442tpy',
+                email: '9xrnfvr52lugvvssqlg5h8q56p92rxbmr155tfc6nb6lc4bbtttpb2ckhhtou76het3pzngbmrd9ybq27329vlnm4g0pisxkgsrna0psbkxmcq68rsdde77w',
+                mobile: 'mnob8f97p95m6z0r3vzzrhplwrokmvnizg61u4ajjvkjwxksgnypxuowoqdn',
+                area: 'u4tf6rtnyj3anyw7a5rm2gzfnh45vutdko5rln86gwc9cfd142b2k6coot6xdoglan2gvunzpr2t3quo9a709q2mrmwdjmztivxtwecro7seo01dfxom3x0snqex9ih4mh8h46q081nuc2e2p9du08mpf4j4zjalzbmf64bj4ffhu026marmk83qe051h42g78r9h86kx8cf9yqxr0h4xi4qv96ibh0c4j77ejgkbet9iezbmy3o8sd23g4pqf4',
                 hasConsentEmail: true,
                 hasConsentMobile: false,
-                isActive: false,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ContactRoleName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactName is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: '1632n0zbcrujdibnv8p6nelof352tntj7oq0sw80vpyb4kshup',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '6smbk2a08bkeqs5hjbvi',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '7fkojfyle656xih8t1zfmj3jm0lz9jz7q6icruia90zr55h0tw4pclq7v0qon32wgfmwo2brh1e8t267yzgsyojrb52nemynn9qe24r76vetv56s6f7rl5pg4jjkn3h4v92w9itxe41nvlkkq2fwzbfwe6clinqkvsjujujkuc9xd9zl5mc8s7kasurml1boeo3xba0akkncwr07h88qngq2aohs7krn7fsa7r6an2e94wwmibk6qhnitdgs3o9',
-                name: 'cx5j0fwqgb65ngw71dklutt3f80dvvmlo7d81n4zbiv3kmmt6r7x6rj01kp1uupkz1nqomfbqi5cx88zdxmibxi3gitcb8i2ngf5ip1rgqxmlj9znpzkwrigq0r5ku942ftsnfssha8qcpgw2xc22a9scyine0acuqs9koncqzg489hdu3bet28enq8g99vhzir2036sfgg3biszzsqm819wid4rbr2chdhkuqypv2j6n55qhehh6hg6csdpa2zm',
-                surname: 'lwwltwtzjb3azss5qx3rge5ctfrvthb0lejiyi29urweuccppss8niaxim2k144yqqgydcy89ce2aqg8i4ghn7c26xnfwneeedfc2ubrez42mnz3qsgxxn5g9ulp6a4gex3ta6a7fy2tez5fb6tthfq0u0tb1q44swchnqp1eo7b8jyo7p6yhzfpmyl82rds3sh1ydhef77gp1jlt8owmd8olgfz72s8ky11ysquskz5han0uupg5idp9jyozml',
-                email: '9lurm2jvuk1bi5q3vbxgzxclymisegx0wl1l5yogtk7pu70lydwzma7zd6a59395rm6gv1tvx00ql4axmfyknef8fjs1h4hov1xro3jjj2obmf5kh6chzywp',
-                mobile: 'gqdq81o5zmhlabfm3ilqz1slwk0tj8r8m2890q50o6odm9javia63g8bx4vm',
-                area: '8brwk6sdhcg471u519yzy7un73l7xixo2boano9igbjqilwiynorpv716ggn39pf4ttzztmcgys8dlt1bhtormi0kingfow4lg94aknv5nq9j1zbd05akpnhcpbh79m8jx5ac6gojmfo76vqifdnqgsqoaompits68kvdjjhq0m09h84q0pixvu7fxc0ipy8vzcx90rh0gqzrf1y6tqbgz4euyjvm72v4jjpoew7brond492f407j7mtflzxp89',
-                hasConsentEmail: false,
+                id: 'fb9a92f0-810c-4a1b-a619-764032c35d7f',
+                tenantId: '1b47c5c3-c330-4fab-8c15-dd7b90a50116',
+                tenantCode: '1njzg7o515ue9ui0hg2ydmv7jpy3qr59jmby3hkec81ht0cq3i',
+                systemId: 'de00dc5a-e3ff-4abe-becd-d501d891a32d',
+                systemName: 'ozcpakmv49kj613dlwl7',
+                roleId: 'c3b5abdd-cc28-45f3-90c8-795363e138f6',
+                roleName: '0advzoxuklsn2rs6a5asxrx2lyfjmq7j1ga54w2l6k0jzc78esuzu3aqj9gw46ejrfdai3udotog1bu7jnnjofwn2l7m0g4zflgnk8cvhsj8tbegd08r96xoa83knrzct94rcgg1zslxu41knj3jtmmzc086epnut2359xrfp2dg0hot8628t7qfwcq69icho52srcpugtmdgrjxfmb21ut3hd3z3a9hwlp8ljs8vyk0ja0vawfl8ecrus9tupl',
+                name: 'tdfyrmdaoc6c3fjtg88gq44qxb4judc5rkyecedtpkrtryjdkcjlu74l2oedrwwvtjenw8plxp16emvr8lwkd0fnlramset3lmugy3a37j7b572oqogfcd5mpb9hcknpm9k1976f69susnjh73uzim27aswr3l7phiuii6ckfz5yg1exq8o2v0i0aj5i30q7pvjumlyz16xgmjekoxsmu6j0njgucpxp86jxhpugc9d5s7wus4dh3pvqx6indwbb',
+                surname: 'ahcbxhe29deyxlfcfd4szwa6brirc7wk1yweux10bzn0oe35k2ih2swx9z0lvks98n5c4guz33d183wk62n1t0sljyrduxpk4kfsqeg7q7p6ki2uqmgsjjktud2lp93hjqh1gkdhyh0nrhks68lyd8s6j3bo7w8cpyo1oq2277xt8vpxmuxaehmgnyytcsgg823p6et3lo6wjhuhvs136zvbbapeokvqiq4n96hhn89h8b4ouhngfmv3fx8fgd9',
+                email: 'nka46ixr2c992d32h73wqze2yw01x4uyn2tla76g6wucq7m5wk79wuow2meceehb4pdfo1u70g2tdmzgun3h3arsrywm0tntq680zzid3e5y5k4z9c7gz1li',
+                mobile: '304auk9cgrzqlcf9pgy7cg0qfmvc1y05cskv301vytzs9677qzp2h5vge33m',
+                area: 'pa8kijrg5dh3taejixwio8h397r9tc846kqm49agbpo8fyvdmkwt0dwr5qv7hga4r92ihefcwjt3jeirr0ezqf2ma6wrj2wdwzdngc912zq7nbslr61ptmlb6xl2gm8i55l74ifo5tn4fp49tzqqdpa4gke6mwcjgdcfevirct2z1a1kjo7aeiaak7wkosh4lsmk743l2ggqecegu7mknmd9u289gj9gfyqnd5y1yuzd2bq0vej7pa1bepe0roz',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
-                isActive: false,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ContactName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSurname is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactSurname is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'lzpvr22tbyw78ap4meglprvas6ah5g5kr86cyinns7sk01t44n',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'dqhgnmz88iwtoy52tv0z',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'xc5yuj9xqss302ab0ctf8hgyvxuwatlwjlkrupeev41gyuen0oocja0v3x4y3jaj1plcp501jyzsm3s6nc6vxenw97a7ijiljv44o5eplgdmdxr09g9f4l5i8qagr284v2fboezkdunrgr349xo6nivxnncjen6gmcy5l3irrwxzykaieszpl8nldcy1pr39795msjmyypz774rnt3g49jtfd84q2spgdq42srdjugs3pstywcv7yjgwevvak8t',
-                name: 'sc81z7xsxv9ln67933vyj5uii3kxgr5t1l964j115ao1vhclm0au3nl77a60psmk94i4h33om1ahdmwqj1lq6nc1gqnsh2utdevknupa5u72dk6v96fosc875emwaly32oywfc0s3tybxjdgxs1ss4rr7s5acro5qhhttx9qaa76pw96r967irf3s62c4hjf44tevaomn648u23x3u02bnwhkpkfng9detos6gfdp992d4hs07104tfi8a4r0x4',
-                surname: 'fwp38msa6yxwa4jy7bceazhr5osq7u3yhrj4pan9c1jf1nuergw23lroq8b0vhyl11r67jb7sso1o2zvg8idp1ppujutld3bpjlsino48p3t77mf8rrreyx3caa8nt4ld0wnlzhpu51n6c5gbwydhqni1f57sd2w5gwm7scw8q1zj06yy9f5gk4h98nuw7209i595luij097wunyjd0sijen0o1yf92436fgv1xgt8epirs4ffln7z1ivnhr13dr',
-                email: 'pjvybbq7os0x31o3ep7z6mxeb2d8yg9zkrg5bv1eg8zbtiypbokydzma4um011ifvyu6q2jy9sn8lrzsbwvegropkvxjbwqcwughizchfwzbiucs6br1c2fq',
-                mobile: 'zof167yktcr63gj1lmxm382tyv201zpmqv8v7dgaj91fqy9najryiiew1hko',
-                area: 'v3dqvsh4k39ep6fq01anvagksm957m7kc3424ubrrxvrbkebq3kkrgiuakko0jbz3bsr6qu6w4wz2cao42l2pwcv0md55yiinxoqcox2mtitj7crghtnqc1k57lztqlw73edbx79324qie3venai5u7mszdn3sjm7cmp5b2vp5enl5rrm72pr2n9xbr6t3gn2ps3x8h7qnojzb8ecgxv1j5jv88yk90pdq94hgh0hp0qa6nfhs0s79uv1xr13jt',
-                hasConsentEmail: true,
-                hasConsentMobile: false,
+                id: '39060c54-2b03-4214-a76d-763389ab270d',
+                tenantId: '52e3aa94-f776-4d62-bc2a-1a50eec5fcd3',
+                tenantCode: '1ejq8ir9srprjgz5rj9mfgt86bj6dkkzp1z1g6i0eq77n7j35t',
+                systemId: 'b0722f07-da1f-4795-86cb-fdd96a4d5531',
+                systemName: 'w9prj459g53uukuily9x',
+                roleId: '0cce66f4-f4e9-41d9-bf31-b0d2cb0fb4e9',
+                roleName: '9t78n7t64zite0uzr1wwqi2veu0iubq494c7rwy4evv226wrq8xidospz6257bwqrxiabedixamiyf08funvwz9g6r782t5cjez1lnyjs7t8x2nr5nrwfganbkr5yxj9k8zr4q3pvxkgxmjjo30xikaad7kamx99h4xiipeddqjnfa4yf55jh6qwu65tsd5iuk5638tu33anxh28xedugicvvmklk7kawk4umkkkna4zxyxfqg2ie1up7oux3e9',
+                name: '01ow5fls07wnmun8wj5srxpc48j6vrlxx0om8pmlyy6ie9b9t3v42ty85t6jeptwyvhsi6mzebuefhx3lw2uw11v6ttdfb40owskbo6x2e3a2ri00eo12hidzc526b70ycun7j0ofo1ijz1hlvwoqoszy84sg059hhwcug073pkb5mg1259rr9x1hixar8ff3ovt28ckloa4lg0a8s58p0s3ltd5qtj2ee2nkf0npd9iruwh2i2254fkj2wh7j0',
+                surname: 'sf42dwjap2ifgqxobnecs6zyixgab9wkpedhrc9h6656h3sqz6e049igqv5etjjc6odwrh6jmk7aayxioy2axnq957f5wjvxnjs1mzot2dif1zsog9rqa4bz7g0xzn8pr76cfqsl4dhygahn1waaphkz1xagkz04tltrobdg4scncx2fmn7ky4um5o8i09okwgqesx1mlrmyrre7owqo0bk71iwe5ps6bynwxa9zoplab925huka1pn5xok03405',
+                email: 'ximdpkof01zpb0lm9a9uwh7egzhugq0emmey772gogrr3i2g1pq79upe4p2u0sfirqbhw2rnsintkkr3dpq2v1z95jxinpwemfeu8ryd9xfrggmb7d24h8aq',
+                mobile: 'm8qcxa731wo48hx9vwb5pvf0se6i8fxtm2yd4qg6ogfgizb2jpfchtkzadqi',
+                area: 'wplg4f39ofyansbe2lsvou49ruj01tfh2uoqqs315lenxec0fhwhv18brzwm9wc6s36ii48yv2i90hovqdsjs3fy08yy1cjgzcdij8wm79z7eul6dye3hjc2hnees56ez20s5mz8kfocv81rq5hxv1fdxz4y2eo8mgarajc6gx2cf2bicrrpqrgpyk514dvxrpmgqnjngy72w132dbz02f99q2z84wd8lslz0nnvsfczg5kyva6cmsv5wqtp49p',
+                hasConsentEmail: false,
+                hasConsentMobile: true,
                 isActive: true,
             })
             .expect(400)
@@ -868,54 +903,56 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactSurname is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactEmail is too large, has a maximum length of 120`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactEmail is too large, has a maximum length of 120`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'r8kq59mhgv15wo4idoaq3kmbvtbumk8awi7et51si3x7zvxdwu',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '4yfd8urqivfpi0tyr2hj',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'u1bn9kgw5jzn56q94dfnmuxaj07tlp57mltbeq6anh0fg15xxf5706n6lsay1l7018ddwnss8aqw3uhlrivyjt29einvjks0n8jq0fuhfbjgq8j7dy7aasonci0gfphfoqqmyx2r6aruzd2smnqb603oikois58uytpq4m35x4bi5aricj2jy1zphlzv6zhn4thoavw421mndrr6z6ebmjvhwjw1wyqcscz1bxh23cmxrxi7k6bij2dw5ti9cwe',
-                name: '5z4fjmqkx6jfhtdrfp4cudgc062ynq8ftw9o9o4nupl186x1sdm3gbwp780lboy3pjwxsmzl6zdq1y3058ce2zpvtaysrtp8vvhx6j86dkhwg2xsdoinzy949h0fpykrgeo1zr96c46ddvycntrroh0ccio5wizqft6w3e4twxm8a4ebv5949hr7k69l1y970up8wbntqrlh9nme2ery89j43828k0a8x83oqzz3n54xvhd1gvdj61bkx4zo95a',
-                surname: 'q5uua1yggokiarvy8spxqeywek8l8xbg8i6ycui5cd1vh4eckgaefec6zj7bm2cy48s0yr9fkbvg9ipxx934iieh7nozjq3pflfxkf5e5wdnqxjxo5trlh1glasnam7lqnwepantx2xo4u2gs8w3c3hjoj4ztaw87sgpjj8xviuhxfax0tkffbscqx187ezu55fmwt3bctzg80rkeurx2ah5e7atnqmq9g7aev0mr9pdobg4on1i3xx48hboea2',
-                email: '9qymwhcwv8e9phseuzxn8ainor8te06hqtbcng35ojpq4hnqjrd3csg3xd5ej1cus5pepurugwf00883r5qcw7zxp9ntff36n3nlc6cttwmzdj3b5gqp9mhlw',
-                mobile: '1zjvc44xh9y8ogqz4hs3ygn161g40ero6jp0w5e4taj8fijqt2m8bqzbr8r3',
-                area: '75zdcpic9q29eeemh31fblm36jr0tn4p8hug3cuzaohnf6zu9y0ex0f8u1sg6yfg0xlf8w0u9hvn7up1wksbo5cm24wnvdgrkgjwumnvg1vusyuyajwigem3vcvy1ax9nddsdczlxrnippo6gbnjflx5uz0odpx8gzhtmymcdjhr2j1h199kxi9vt69ocnus0uh609tipi8q8izs2r5kn9jbij6hbutaa4011jsfnep5gweou52uq2vioh49ly1',
+                id: 'ac627a59-04ba-48ca-808a-1ba515e69b9a',
+                tenantId: '7cb263b3-45c0-401d-887f-fd5699393c73',
+                tenantCode: '6fiahwypzjdosznik2bojd4brg0jj5tmrrir3p6pz14diat6vj',
+                systemId: 'cfb7d5e3-2be8-4b3c-acbc-9ed3d1ca6809',
+                systemName: '2hfs7tsaerrmt06avb1g',
+                roleId: 'cfc58010-8a88-445c-9aeb-35e09a6deaf9',
+                roleName: 'ow659m8zpohddbu1b1yhy79tzi4s32ee47o6ee34kis5954k4rff4gi5rw2vhi745qlsjvd6449209juji7z886jkq1a0gnqr7zxjkrr8hdobkpvnv7kp08qhsogj093jl6np14xaprryltymllhslmo3ye24dk9d9wmgjh6xlwbbrzn01c45y4y3k25yd4p5i041ys1keavuwc2ijzpc62t5dd34xsi8c435ktuxxran0yx9ewnlw7l86xpq6b',
+                name: 'g14o64d7ff62fpjaoqezsge7hrzve85mm29h73nzjwidvbfyp4yeb4wg3xz8yqbubhrsyepgcp5pcztf86i6xyen9ft32kmunbvf9mji1jpsms4x2f8f4wxgxyvxxazl61rqtmp4ctjpsvnsvr7wvrw4x1nyo0gym8vvs5twjv4iah9vndki50cozn0yfgqxexh7ayk26zlecfm2cm5jkz97eyeim2f51ey7gc12gu509rwlvn6z2z1jglhlgk7',
+                surname: 'i10bgvmp7m280gabo5h0odu0xfk7tr22g67igk1qbik6ro5i4w8dtzkmiv2h9kcjh3j9rtitxnmzwjl1rb2hzxy3asyyvtv4a920hea4r2zu1lm1cwrtzc39gv0o8tuw0597wxaufk2l0k91mxbrnq63i5wypoulrk5ayhbscz2owmph5f3ig0myy5eqoqmp0xfalnhxc9r7710mde1gehhlri7esaias0fugxh2d7xv3zfllugmuo46ui0ci80',
+                email: '09gtd2pvg61xfh8folvg9r4kgoag88ss6fb6x3p7yyryr1cs0ekszr3vkp4i3ekwgagecab4mdpasgfnql8i0pv8bpq1d4w8p4h8uoqqo00rfrj7vb6z8ktj3',
+                mobile: 'a8q85o01j99g6xnhuyl3mb6s41yyhs5scjyz61v244x4fydqjk9vfwpk8zwq',
+                area: 'ltwjf398o0bi0buh65v4cx2znjbs4ibu8v4ewbc8wuadocloaa8hfbzro8t3wwkq8dakgas4q7gxw04gap9rxa48pxujiiyboee376gp73e2r80vnw73zlpqib0ufbo2ure4r1r7s345z9czrsna7sjncukiwhysbxxcf4dubhrrbqg7s6gq59fc5u24rdmh261i9lneqn3yzopllz5t4xlrxkit3qu4ccc9rf3asl9ct7jx46dw3wf5wnlkvoo',
                 hasConsentEmail: true,
-                hasConsentMobile: true,
-                isActive: true,
+                hasConsentMobile: false,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ContactEmail is too large, has a maximum length of 120');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactMobile is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactMobile is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'efckbwx8am3hhwpbajfejdk8a7fi5jpzjsn2mrcb2nz4geg7yy',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'r8bk2u06ftj55idl4d2n',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'dklke907732mq2df68qqxfr63dq8or8wph2lxev58u7nyxs3mi3337xzicgx5h107e83fhfq6jk40lqsinmgwaannkd2ra8h6uo5i5h0a6osrcdx8v9xkffb154rysab7resb9sd7z72mzaxffjcud1tq1wh4jzmc4vy481txl6f3x37dlnuqs9z7u8lig4vdq1s9ygyecxh7lqe14yjoih3t0tbqabanzro439suanawcsdywhpennd12x28jy',
-                name: 'xft7lglgb3f526bejnfz1avkztwikwjgzp633luzqgt8gibcnxo1ypv11r94sxcyw8oxey5bdf739yhohus6botniokysa8ym8f6w6vxydl31aa3r8qaa9ucr027lvugfgaemqlknvps7k599q4uy22dg0sh10hdj51u6y3rups6ra6u6qgs3jtpywdjexvy3cip4ci0rxpkrblv3ao735lwjm62rradsj0xm3li269hjzuuu8t58gu1mf9mjoh',
-                surname: 'aglyh8iq3eyo9dz580tpoj9baqf1j07s0eznqr4avgj89oxxhojgvvneinirk73t875kgrpwwp7vr2in43hemzej31x2cu5r7gmui6okkdj9glmmdx2p1cfkjv61jhddohyc18dzx05didmfayf2vomrbpvpxsyglwndty11tyh1phu3mqx59o4yyryrp51zrgfm56fs6dfiwgf63uf30nwng0om95suglpinl9p1s4dsx397r7mwujjtxduqac',
-                email: 'qejzaivmfquvvllegp6v4l3cxh4t1drdfh1k3f730b0ck9gf45i0ezsuhsyiyotm0w1h297i94v0a6og96b22rmv1putwe0u01ev789mi864nrqzkngd4w1u',
-                mobile: '6cxpbjno5g05an62rfocgyrf2mslx028yizphredgetr4cfdg97h888px5fnq',
-                area: 'o0pr8a5mt0ai1o9vu08fe6ruo0u6yymncrxos4ab7gbirzy2ih5g6t3lw9iao34rnj4d7yytjupgm9gwszqtubf5l2cmz0xtdy32tidoikhpc94xgtci6adnzwk7b2cejm229227af1id7mjuf9r7wc8rv6ft47tjwvgz5l9e7tajira48ts3qjnd7zdwr9yvcr1mtewt2qhkc4od8qfp23xc7pmwtanxg6qlw279xm3pasyd3cynowv2qv0k5o',
-                hasConsentEmail: false,
+                id: 'd62856cd-b4d7-4d48-95a9-691959b755af',
+                tenantId: '66929207-c5f4-4eaa-b8ea-61ad15ac6d72',
+                tenantCode: 'o3ncj8oulop96alpxh4308xh4u0f5s72ix6rqqb2ttdtycncr1',
+                systemId: '5286adda-49fd-4729-8a90-c4c4014a9aac',
+                systemName: 'dvq531o484p4lgtdze52',
+                roleId: '1a04acc9-4292-4fbe-8152-6146df718fef',
+                roleName: 'fc7qxfaesxxw1a1t2i25h650litbudn1eqlbkiqe0v1rqds1tj0y3npq77ln7ldlcc8grxm4ygs22pf8thv6y3ukugvznwu65c6xfd5n588wq9igdsnxqr0p7pef0tz4qvuln42xbk4f4vyvuj5rcl0meprujz9yr6uvmuwpkp7ae9gwb7wv1tzzg3nxduj1o5s9otgoytf3gwom79g9szj005e6j6a1k9eufte7kqgbyabplavwtmuada996dz',
+                name: 'es6217lgm32e4q9o1c14jp4vbbs6h94659z80rpleh6979rr1f0sjcz4sqc1y9xt78w7slppkyf925l5wmqsdaw91pbnk0kgnn3ey3hpc5rj57lj78kuyw5tza8l1f84a570rk3msz74684bf5vzkmfpxmzjxo12zzphgwjiypsig75n8bo4wlhma786tdss96r4rzdl09am9x3g0sfujjn3iiukkjppw8t9tqjtp8cag3vd4uoom47tqgu031d',
+                surname: 'jgol9qn0jfyvel6pmtagxx4sdnoz9paeo4jznwfzoahk745ruo2pi5qilo23u49ze7c895rccm17rnznmtdip0qkeowazoc3l8g6oauxjg0g0ixtv4699ju38hftvs84i3b89xcop6wtg419i4qdltb7f4qvbvf3nzocg9r0sz5exf63k2p0cf5t5epniwv38cb2cgrtranawobk1mubsjkfwq8appvrjjqzb9x4i9nwkusrlv6tuylw9ij0oqt',
+                email: 'mhvb5758nsjeqvqnvvspzk2mroclte7sopu1da8uckkr4wh56w6rlezcv289hh9jkawcdltkykuvz71m2iimg9uiugi9p5p4npnht9k4sloeqwq6jfivaxr7',
+                mobile: 'ja5cwtzjv690p9j4um8yvmrvlvwwn4c53vcv3pqpyf2ift7r6u64rc5femoh8',
+                area: '289a44ayg41m589s4lddspyxj0l4lbr7todiorcurvbpkyee4xrjovcnju7p098hww87qxqk3tuu8sny1p267684u1ytsocv5yvnau2l4wq2le33sli9j6fw9a3t8bvhb5t5k4xqq9k1w5ghu3ldwhmzoz09kd23iypy6nvybxvme4rtk0qo589beof4k20ayueggk13ubul7odsa2ki6lqw05nylv9yzmf0xuy4ummihvwn6z66984559yuwrt',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: false,
             })
@@ -924,26 +961,27 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactMobile is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactArea is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactArea is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'b97r4yokquyafagciyi71imuna8ikvd0p2ggb7k9p9dj416vag',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'b3r2evbvoiijt3er8azl',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '3927w7jdlaqc3wofx4glj9jq01yqhez8o3q4036ovnsspla4csgs6m0t3zp6oceja3ntiy94z27eqvwwjws9mmfrliouj92er0tgu4d9sjp7uuz5hsxe9ldfcy321cj2vbige5l20mp7b1skv1lupbjpptetr6jf3jf97jye4bvuex0b5g5cbk4rl66k166lhgm0roavdmd3xn0d2kragpad4tcyo1gq6hqmfknsowzwlgm7kri0ogrndnoiwwa',
-                name: 'ydint76q1xmrhv1sm7gh8d18vv5fhyaqf94io0ni5e3mrqd5ke7muel0co5kjprnxihqivndv37mvkihbbrn76d3xzsiekw0p8oj82xug9xjsic1ms21d0ri7hngmwbzgaympd8vy2f0qzoprbhmwysa4wtxld5v0btl69bb5305rb06m6k4wfz8pckoflnglzihy3vxhinx1vwoghb81jwlwdox6nyyh4jym08ntny2o20e1hokzv6v0mqe5zs',
-                surname: '8vphh3if8im9vn37f4lbk8mhdfhsitke7fyi77wxofahgs3o7rh5epnfwjcy2ezh1jat2jig1lac6isl3l76pvgjdnh88isk7rbe69pcixv6vv4x2o4s2prwvzbz1rrw5y32xzw115045p0zkbg7q9t5piow38hh7d2rolbngpwwxwfodl0ecv1olq4nzj8xmjz75nrrzqd13wvuinme8ydmhfsk2f413kygn5b03m2kej7039x19gpnws46zi9',
-                email: '5n15n8d2nj6twubd4bl8t0fyldbfx4cfh759gpycpzt2vmldsmdpi4c04k14j70ul3682zqa9b9qesqpdi4j1ml686t3twy496qflbf4vr5heh5q2jdrqpd8',
-                mobile: 'tvo09c76yggminavad85twuepuj8p9t1dfbztp1fswpv7bev1wbhs00fethf',
-                area: 'nvakenu3ie3kb70h0innlwto0ypw20x2i4vde4i9zmxrh155iusj88fyudc15seqn0lro6mymhlpbf6k6xarwqirfb2qb2dv3mrj49sq5oczm62eagcwpg5vh2gkcpbb3210ra8kl6m9vll08xllku2k9was5g10o1y7gzrn4ranlr3j6rj7hutrhi2xko3vbe0r8hta4m011rfz3nbrayibgne0hs96msp9ejsqmpys2gzgcz9spx535gvse1mv',
-                hasConsentEmail: false,
+                id: 'f8f1c996-ffc8-45ec-9b15-d56c158b4a70',
+                tenantId: '9948c441-3adc-42f3-8405-b7be75b1413d',
+                tenantCode: '48onkhb3h7839dp43lar50d4cowpceb6i2pfirqy3ojjjcgz91',
+                systemId: '80c4f293-98d8-416b-aa92-db6a5bab5fc8',
+                systemName: 'rg9aqe213x8c1ug9xsmf',
+                roleId: 'c5630d0f-d2fc-406c-80dc-fe0283115fb5',
+                roleName: 'zkblplw5ytsox8odvdv7fi7hgo30oqnz6y60mw4s8qmfn79ea53tzr4831dth5ds1x3p4idkpuq6ddym5ebk4ll48o19vra1mnh4x41imlfj1zty0ievg83tve5kmnjexazzzrlp7hiu3lktjmggxqorjf8aap6kkgd69epkc92bdy0zirbzgdfzs9eycmv0b1b3okfqj5mqunadyjlgt8410p888bijjoztvqueg6pbw94va5odu3miy41ilgb',
+                name: 'wks3b62pzla1a2eikn0ttvlgb8lfy253rl2c7ixgjyqvcq2r4z0qhvdh79pmml5wzrpf6bhhsu55ukjagfyw8yzixmu7awysjl3zi2ohmhiubdn13qot6pyna1sd0fm62srq7b0emecwe0q6d1rzaoyjs0l1djhbzus0cf0dl4ll47fm7k707pfadvbc5lilmng0ivzf8t1p7fvk2tihe3wqegwkaffb5fp89aiw9pnsrv8bjbwmyt1o3rgb86z',
+                surname: 'n788z59d9xp89q2wk6q71b1tusqu6i1o49b5jatlmcenx55ofiucjzz9y4h0siagxoky9v5eaa9qum3rm3a7os4zrmub4r1m3zt419xqp8cqfxtrdcpq1uh6avns03ybmezsymlnnks2nntv2ux0hndnvcofhr10auqwepkbj5d6so1fe472q7rxgww6no8nv0c9bftiuoefy5x6bt0hk5zyaufrxlytf3t9eltu8ea35auh4qmb7y18xw1aiig',
+                email: '95f3nizvu9ivkyagc5nt0iwtfu8u6zvtf3e0kbfizeno33qw5yacd2glat9nrf80umnmpzvpboqx2fqicdbldem5udfyn8dsd526r5annosf7dj4n1cr4hvs',
+                mobile: 'nwc6ujsuqnn6k9mq3ucnadhcrj1i739llsv49zuo0z4ljd2hf3ori62r9q0l',
+                area: 'p8qv4v20y4c2p9k49gqa5oez49ejltxj8z5mqgtk7ruxue9nw3pfkmzyrmjomd0uask0cnc2p0oom5e4vcj4yghau8737iumiy77akf94ptpxskula9d10ib5m5o4k46ivi6fwijeg4y5jrf8luaw8u837ml34b4j5nurjjst4lap6ledfczfgsvfc0405md2hy3csyp0yyjb403tbfpqnp605c057ytsp0zed4tgouqcjxp3hq1kn3p73ns27kk',
+                hasConsentEmail: true,
                 hasConsentMobile: false,
                 isActive: true,
             })
@@ -952,35 +990,28 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactArea is too large, has a maximum length of 255');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentEmail has to be a boolean value`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentEmail has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'bc3x8x1uxwbh821ujw1645f4by16rluefj4fugcksesavzvzvf',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'wxoozbf4szrba6w52xc2',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'pvxsodi8xr9n7hrtr206rox3k01e80oatul9yhsg2jgw607hvyv68qqql7zmihgx374x2jx1902d8rc81gcitpxb7hqhoexjrj29kf6i6b7uis6q9659i9kq7w1xls5w23fcoy5y53n4jnczkzp56qlnwvgrosphmu2fnuw1xjqfz1f3n9s1c6yinilmanpjdfp0j2k24fnfky9rig9jm7hna5ft3cktnuc0nst1mbtq9zscdaup80tt3vtt7ap',
-                name: '8rbz2e1fts8emkirvow8k33ruyxqyyc0qexp2x5wx630o4unhaa3h65ehhjig6dkx8p2bgx8sg2tbcfjppp7xmps72sqnsasejnfew3eg6x8dbi43p7hshi39e7ltid8tajreyycx06vryazn4teibfxkh3wd086nc4wlmsl44yb4ickf77if2qui8rev0qwjf1l2ymviv7fkm98mqrtcu7pagrvl9u4uc927u0lyvgfzobnvvsmgz3guwi4ytx',
-                surname: '84i44bfg3jr7n3o6zmzrdq8fz58x6dt2x1kfm3t9ts8yxcg5xkwr94rvyhvyf4kw9etb1a592llp53iaa8mepuxv9jxxfnknjb4huq01zyaf1fcmpyit6sx3oeps80081lx7ka5k1876wa8eqdttxz4t8lsxmtiq8yjqt1n9ih3lnzz5ix7mlfvxsqyi6bvsjzmcqjnxctetxqw4vwms29f00p9s4745atf396lrceg8o8b3f9bdsuawuheaowb',
-                email: 'alk8c4jznuqq8m0e3fqsbkko2mzp9rfstjr9uu0b9k59szw3dnvajq7auxnt5ffk8l9smqurhxpillhg2sbgpi8bvx56segg7vl8njakt70h5h6y86uh1vem',
-                mobile: 'kx770kpk052kztenmi1kvtit04ye7ypnzbzzfy0o0dnhm2sr4o97kc2ary2a',
-                area: 'gs57nwvlouuy7g2rcu74jimicrfdo91boatm9huo9ngjotb5cy1d1sykudkh0joee0hxak0dfrzoj8yzkefvv74903liz9xablm47kz29nwqe6jfw3xyhkolfty32n4gaepxa2ed3oc89f6a735rymox9x7dxer938iz169xc8jls6dait09bha35uom38hfvxoa8v2mk87k9yiak39ul189p7rw4clk3kgjmlrvndehjs1u2kpi549yqa58nd4',
+                id: '50273bf0-12f6-4d50-b709-be4f970055b0',
+                tenantId: '64a42807-7b26-42e2-b82d-c16c03871200',
+                tenantCode: 'kidfzaqzb9h4hn8zcks6692ff99r8n8n2xbq54k5n2kbvy6peh',
+                systemId: '200f717b-9cab-4440-b5f7-dcc9333bd9da',
+                systemName: 'f0nd4se5a0uji7fiizw1',
+                roleId: '7af935cd-4df0-4038-8b3a-3c722fce3996',
+                roleName: 'h03o0ddcoycs69cg4nysfvq4o9dso49rk6kfxth8u8o882wa7h3xm7p9at3oc4lk57c52vu2dz828um1fegfmle6xkeltb2awbglevzl9a6mdiji48dh664jcu3ykbk7acp6g9s9ozy294o9eh7tiohpnc90dc8kjj1jhsvve1ythdq6x5y5yk5hnk16bs9qs23972zixtc49mqs7wejk4tnnu10awa7xykjiolmzr000jggmy1qzcb0jlca2x1',
+                name: '68twe7kxenbiatfvu7m7czhxsj0cs9eri6je63vzhaqilthv17jswapyqs3ktzegjmemsm8alwcvmy9pnlw4cp1so3s6cma6q15s6zml2gcd2cl7a0f6u2idxeb7jzky6ggnpj2geujkynk5w4t80ze5lk0yd3amtw2nixqc4o21ndgaugl97f0ci53fhbksmlpj21yha47lwere5p6shggq832na1xk981e0nh08olqii21ffkw8yxranfzs2h',
+                surname: 'e3qsq6s2t318jkj2garz61sx6v8x68ecrmz1weqg5oxp1eey1o361taudn4pigwc19umxs17lb292plt7kj8zbz964bq9sj39wng2253z5hy4kqczt8mlrjfqpx2xhj0dttfs487bloxvrogi4flg91ujlgtducsv2k2jzm0bmi6bqoqottt9cl34b5kmu6n6rbyi7rkb08xlmffdvcgh0gdh3268d18s562lyvgd7g7lb9i1wazz0ll1ieha83',
+                email: 'z3trf65vjslzhqad07n4rzdyyfpcstcp4rmckllszh7dux0s4382csadilq3etv6kykkgfoln0e7golhxr5zet4tk8kc8k8cl5aehamajlu9e2a1xjyves1v',
+                mobile: 'vbahbxckjm14fq7gn0tongp18nj4g5fxzsv00bo3drlv9vzphgepkjf39wkz',
+                area: '9ccul1iqbemh56o7loxmu5cjrs7bum8ro18iwkwxrwzfj5u0v3rm9ugt8v4axoaqc5xnk13jk46hztj8wbxsywtemmri5clvkbg7d2t4tddnmkj157a7nuoi5t0tftlp9no7475pz2n4ez96ho9x5l3cjfzvrytm0u6xkerclewq6598pd2n1cul0udcenj2260wham4apdwh1ejtj34rqsmbmidw4vmruuzbp5yyb2l3kyezcv0rks8btb9r42',
                 hasConsentEmail: 'true',
-                hasConsentMobile: true,
+                hasConsentMobile: false,
                 isActive: false,
             })
             .expect(400)
@@ -988,26 +1019,26 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactHasConsentEmail has to be a boolean value');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentMobile has to be a boolean value`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactHasConsentMobile has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: '7gjdr0hb2dtma5bzgrgrd3aed46a8npymviij2uqnhkydbgc50',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 'lydqk18g6pjrj767c6z9',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'x9g187t92f75n3p94lpwfh0y4mwrtwuxp6da84fgulxw0rj32xzruv1oh8lwnhohma3tu3rwb34xyezdntvuxsmrtwtr2f8rglumt7btjzdu5ec9e96rwdqemt7bmkzmbc8kjf9t90qpu2alcczys8iwnwpydovvifhx33o37cr2f6a05s5zmcj5sondr8p0bhbapi02nkxhk9dzu229ay22zdikjnvde1lgf5vd7or514jikz78r4c07farj7z',
-                name: 'v0mc3jto90unfj65ew167lr9c5wqwijjzghg3s6wmk6emln8753dshqq1wz5r4tmy91yxoybob7vsmwpoz4ysltb76trbjlplg36cxgcsf16tqhl8g569s5drdgvr0v0fmuqy3eaho2g1oy37m8ifa152vw8dan0vckiiix3opy5smo61xt8s2f1q1asnodq8hxk7l905ffhglm124o90dacinwd1dk318jdcln5w0crrk4fpxbw8m7dva2gdbx',
-                surname: 'mr7cqau450pkvixej4vdf8cfcijcg827146k2ozqo3aujjdof9f0uedpgf71b71kkbfskieigquey480vi3t8slzusocakx75yy2d45in56nxjg57fdrnph0rp9tdnbynggt3d3h944hlbjsghx054r00hj8xm3fkoxfexn8r9bcmcbjgq360000b5urwyii3q2abc64utah3j3kfyewjqfddz41w81kdzgvdaomt00ekockz9yc91m9yg3avyk',
-                email: 'p6dk8wnpfjp27pu7xyweij0xpgr95sexwh9by6u81yjly51o9i4nbhlnmoy3z5d2bxn0v1tyimzetf6q4zifrsntn2bmyug9lziaxfuzjaww3bhh9w03hhm4',
-                mobile: 'yvf0p66rqz9kktlz1hmv8qb9o7l5ghrstfy516r7g8iepuq0kd41qjyb4tb4',
-                area: 'pm85y7voi7bpacpg78ky7i7m5fvvz0zbfeyfand7x3ef2sdn6dpy2536snakeyni0hmr37sdd0dd9j56n3na5hhz6vn345jrnazc13scc4dtmzsi3tupwvv8szrdzsvvia9ej9aau0sh0ocgtjamavqtd93uci961beweve7lx1965rvnexevcjpl4n71hu3p3m7qiuj3s6ozr2pk4jkusf8wulxoz49txb6dlv5kfeagseuzbz3b1qlrya36al',
-                hasConsentEmail: false,
+                id: '41ee2adb-f8c3-4e56-a933-0751ab6e4c20',
+                tenantId: '07e894e4-c52c-4545-a5cc-a3c71099f265',
+                tenantCode: '8ohqko97nqca5c0u1hu9tvw6ko1rrqrrpso2f0v7yh7vyr0b8s',
+                systemId: 'd20027f5-8607-42bc-9d2b-46db91cfd59d',
+                systemName: 'ctak0ay9si1vrxnsl5w8',
+                roleId: '655bba2b-62ec-4373-935c-c19d5dce8278',
+                roleName: '85lklimkay5wm2m8p8jqkn0vlbppy9o9krso24gd3t490vvjnl10fe993pktpx2ppzi389z16m0kqn8utunecg38f1p36gvzsk1zng67jigz1vz8sxyd0euwossnguegil6keeu3jgxvd2rvw9ft2ttgzq4xgt9y6hk67xquclwj6gtiw9a8ynsloh089udnf7w2c2l9co8ycy0ju3lv60csoc12cr1ywmv3fmq1bla1rm9jf5pu8jc1pbizhul',
+                name: '73nugva75nez589xrfpxq8542x3dlr0vrn22kvokh80jz1zs4245x0d42bb8yjn0ry2bhu5x75i8yhwke8447xenb160yyao0hk88ya3d3mt15jlgt68mgohuc0qn17cfgw6rht48sx0f5fz0k12xobqccdt38t65hhgwpa7bjlzovugwdnymixuf78f1tojal830wnat8o74x51wxghsqax40m2gxglrx3m00es782bggxqv31mr28n5xgo6x3',
+                surname: 'gpqlhniakd0110buxnnteqfl2dk31mggk9qdo89byqotna5ycbhmzg2owkkhmgtsvs6wpdzhkrsdkgby72bawt4mcxch47evkg8s4l13fekqjbgit64mpnkb72f80pc53vv4y1fqo1ypklm01sqgt0l0vty03tntgyovgr5a8kmkucdlqugp5rnaqc5vu5ceq70h8hfkbmlwjw9kxeg0ikqpr5fnx02n7k8ezrdx23ssaala9kd0gkbjr66at2s',
+                email: 'd6kcaarv77awkk2oa53whybcx8jh8nvzp001fnp5tt5mial473ggifto0z5vgh54c8jfys2b0db43e99xg9m2eakq0s0sd17w6u1a5w25zmtl8iwt2qgpk8a',
+                mobile: 'ufud1vubrtf9lb1gdv0golwwy6iq8dit7m32r6hjmny4t0slcuu2bj47y5al',
+                area: 'mbvxiyver8wbqemmlunhgl6bvtwr81y81h8a3lm3ih18avhl0zbdkgc9v3ht25hurxljxgfeoi3hkm2fz8fxd1zp7ts5itp4rdnn6gtg95kyg9oru1gruzn2vgqbmeoa9kunipb72nkhhtgtj7q85p1pq7g19oe84tfm1h92402w5pl3a530mdwtry3ytof3iw24wiykv1bi4pt9k8xvsfiwepnsanssvpwpv1w4qp7ukoyomoxbbtbgdpop552',
+                hasConsentEmail: true,
                 hasConsentMobile: 'true',
                 isActive: false,
             })
@@ -1016,27 +1047,27 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactHasConsentMobile has to be a boolean value');
             });
     });
-    
-    test(`/REST:POST cci/contact - Got 400 Conflict, ContactIsActive has to be a boolean value`, () => 
+    test(`/REST:POST cci/contact - Got 400 Conflict, ContactIsActive has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'op0d5n7zzy0k5zp62ix9kn6be0zwi06nhi64x5kkky3omvbspd',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: 's6rt9ngaemrm0trqv06s',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'rloakaq64s7gvdmzlu4i2hugzlddo6ptvetuxqqo8xgqkgviyk5101zd3446tx3h7gs4mvphtbby3tuey3i00j3i1w7v8uydg2bhf23inenqzn6wkwk8l9scicn4eb2uxbhuvsc69p6lvwmmsbjlqga3nllzw4jnyjk88lcyxvys43upu8nkzwdm1uov3ef3tshwv8505yziixtjhfabdxdf8f6mnnsafmj2hz1t0w00koe45kfcm8gb4r0ouaa',
-                name: 'wmim4eq6p5wi3awbirxtnzbrgkiofngpb95t5dkekz3ew1uuglaloarp9s0eyx3woz0bc7dzci2nswu1sn58jrekwxmysfhl7kxrzxq0ck3svtat69fnxfleb90je73sjuvbkhhmhekpmkf1idfimzshjqb63f47b7fd0uhtdjbh9mxssyvhwryb1wvjgw1h0azs5wp9h6gcwfeu03ue4seeakwwsgjvwes9aom1oevb6l1h2y6p1uo7zbzoaoj',
-                surname: 'xvmpxzgyjkooeca92kij8znact6vt7dfb1gb11l9ihamc991nnz0tob5u7y80s2a2hdlvoy0qtxqxof63jsrvjks3y7jhmmdskdi2ysbgd1vde366e2434qb0fws14u8fo74rkjj1cqfzpkd8d0gyhjct444os405hxpkx7ytad1c49oy3czfek8jrf2mxx1jblkl2ccxl6jizlhmdohqzztbkguyn0zwiisv1js57qhomrhuj8hig68ds777qr',
-                email: 'x85cty56z5flw2p5isozkwrepivvi7ofthfbmguff88j9k3aq2sx9ld1cy313afvourr6jvvgemtalu1os4bkgdzjibokh5bq8ptrmt6yzpr3vtvfgxfw4n1',
-                mobile: 'fnraskhyn02scxdt46mqncvka91zrft560c13lxrdfllef7oldsd8zl107fi',
-                area: '97yucicmh1fsc09owjot292zr5jwb0cnpt8uqdapvba85i3agqnclfslp7p07dft5asvw6ss2kka1pxfxkua2vqrjrfvuotbzunl0sxqh51d8zmd8p8hjcb5dyurmmrszy8nitt89ihdbtn9jvom4me2jktghdhawgry2ym3john40l1lw6vd5lairt9pm3f8hxftv6se01t1m7jrvoqop2gkyzsdbl6ktz687upjwwhznfbc856dtaup0b93t6',
+                id: '08008761-0345-41bd-8da9-08e494a6a683',
+                tenantId: '36749e5c-574d-4673-a3e4-ab06f2848245',
+                tenantCode: 'z61crpoaawcckg76foj64ot31jiu78jzvzbjktoop25cn6lhfp',
+                systemId: 'b9e2d8e2-f073-44bf-9295-f97b69ba7d05',
+                systemName: 'chcwilkx8cado59upnh3',
+                roleId: '2f5d1278-c7b5-419a-be0d-a4f344d2ab41',
+                roleName: 'lkwiszxrvss2k206re4t8ww4079p1qykh9nij52oc9rsbqmcijjwrpywnet92z044dsn0k8hlol76apmb522kov79itq0lpkm92mdqu9786dy6eeromipwwe0sgurf8t0k8zl1amid3f3ijwjlvkbse05tpmwat07j1v558wq4lw44ocxpzkxnbtti9ecc7avoh6gmt69rb8aegfbsl76rtjtkdab8eozbmhbtxi8o5wqyf9o97bk1vud4qq36k',
+                name: 'pq0gsu4spoydlq7j6gwodu5figmwkn1yciss2r2putyvqs0i7p2uqm8rc0yjdh0h90k7f8kwghjt89lvh38nfsbbou69e8il7pf0bjljcs3ibplai0li4x5jaclqpq5ehcgh1m7m5qtukdqrm9ciitwntrm9m7dv77xnaq11o3zy9lkj5w3tkp8a41cdjabiior0a8pjt2nhx4x3rcm09f5krvjqhayj8cdw1xeah5lmv4rrqad4h7zs6oizxnq',
+                surname: 'e0vr1zi5mgtyhseud9ygkzcb1ofbgbitpqycsgkqf1c4n7sswga2q8zl2glmt9vrcz1usue86spexdg4v563d482ed9m5kjy3fjj6etdj2sx2a56kxolmt4dh7xl2miur188jhy1o0h6rn0yj1do19epw99wfn0uo4gkf7ztu57iysmphht7r4bkpfdh1fov58as46p9yty28abn79wsjx1cnha19fyvzg3yfjkgr57lg1c3v7ri45uiuwg7y71',
+                email: 'qlvr3kvirwv7jbpxif8uu2q5zblt39y42baaad72jaybfm3twve4992fmgn0drrweo0wrjny76qhb7lnlljwerfcvqs32lrkb69hz646md1mly340mdbgoav',
+                mobile: 'mqe3js5alpn2uuu2l864xegrwb3xgvft9vjq5a5jaam9q215wgf128vfoldz',
+                area: 'qk7h7lzmik0qujsxt6w1hbg1s2mrotlvg4amug3ez23mlsrdhq91yb17hoz7jwe0cej4iqq44rv7p8el9658j9bu72pyw4c5954iz5i7jm7a1oyn12s4dy70g3718x0y92l0bhj0nwjsdb3hq0r86xz16jal1oxjmfy1gqru6u3vgpjffuwccq32fubgfzgkb0gt88kaix1l0tij0g4rzdn2j51d6tgd0unjd9ifzdv4pmgrs8rbqlo1pp32ogg',
                 hasConsentEmail: true,
-                hasConsentMobile: false,
+                hasConsentMobile: true,
                 isActive: 'true',
             })
             .expect(400)
@@ -1044,198 +1075,219 @@ describe('contact', () =>
                 expect(res.body.message).toContain('Value for ContactIsActive has to be a boolean value');
             });
     });
-    
 
-    
-
-    
-
-    test(`/REST:POST cci/contact`, () => 
+    test(`/REST:POST cci/contact - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/contact')
             .set('Accept', 'application/json')
-            .send({
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'kokeaqvtp7r33o1i4zhoh6g2hyd2t07a9lyd4bi6vda5vw60mh',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '4sgvscfc39wkeplo5jot',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: 'ha5gmp99tyn8gt5vnamr72aspuqdv4j8a9ef6cegacj9qr3rpnajdfte1wrs2327g43bsbkk8jf8dv0tavl43290clmyooeejgcaa072catsdlz8u91omea9916nabc9ux840ktu5u2zei5jxjgykkk4vy09woiuzejanbm0zt1py603scnf3funce8tm20d2t8ykklim2e1whvc2f0fpxwc1l2vdacw5o27xxsnjnp67ula95hva4ca17sahlq',
-                name: 'opeu192gphrouxk50obp7fly3v2ezqr29kmcy2b145p2nfae0vxo48bcpdqxzdix12umlt0khmjsvzx5pnkwu2dw0y6a4ud8xu9b2ldr6fyvzqcazh33i91i2ev0m1fv5fj5lst7ul8vxw0c7a8bgvhlqu3uw1u53fpqkih6ofacliiz4kni5jrlf0s56xnr6wfly3p3jhl2gcaf7k998f2kfrnp4ig280r8b52plc68raqt63w4q9i21xmy8su',
-                surname: '9a6bizadbnuoh2heh3jswfyr43y16d6gtd3z740m127mno81n5h0netgu7z87jz1wbzw0x1e8ebxnh4m79ezldj91gzf1gg5gvhe1cz4mfiz4ccgtt1y9b5hdtv508et9eztz7n6t1opsgrb1i0k5crc317tem559x5eqw3zrnietsegcghb849eolghg5p1xgkdq3o1mjbegw5qrr74dbei88pxbcp330lqhx3658e3yxg6uu8lbr7391bzken',
-                email: 'aalqtx8zys4tokjmmoc2fuenby5wga2omq8ajch9nacbm4ulhl7d437x9studvd0lvgkfjj8lxfl3iq0ogoou82kc60pd02adp9cw6c4lu784x5kzlyrsyhy',
-                mobile: '6pfm3y3xh9g0cwnfvwjugwlz5nzthg5aolbv4io06oennto4o6k3gl61cwxi',
-                area: 'hsvesklwv9wq7iosm71g133qab7h51ss6fq1lpiqj7c8yudu7i14vty7amxz39okgxas7ooklvhnt9o30ks1yx432k6ugdguzbdn0fi22wg39re46hakee3fvvju8g5jn8gflf3n29kh8jcv1caq7v76vaifblify9xp3usyazjkz7vfy1r4mfx2ipgglmdipeckvpwb2oag5d6ndo8d73vrnkr5xf9camo4b36uopsbafa4wzpqnev6imyvngf',
-                hasConsentEmail: true,
-                hasConsentMobile: false,
-                isActive: false,
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET cci/contacts/paginate`, () => 
+    test(`/REST:GET cci/contacts/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/contacts/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET cci/contact - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '5d406909-3f50-481a-95a1-f848dc4cdda6'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/contact`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/contact')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c'));
-    });
-
-    test(`/REST:GET cci/contact/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/contact/2015ded1-a9a2-41df-bddf-32dec266f1ff')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/contact/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/contact/aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c'));
-    });
-
-    test(`/REST:GET cci/contacts`, () => 
+    test(`/REST:GET cci/contacts`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/contacts')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT cci/contact - Got 404 Not Found`, () => 
+    test(`/REST:GET cci/contact - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .put('/cci/contact')
+            .get('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'a216e7b9-ab5b-4d7b-9e88-654f40deb1a6',
-                tenantId: '9da2479f-644f-490a-bb7f-d90614902194',
-                tenantCode: '0ueksps3dim59y45f2l8145x0jnpx46rbncvxhvify09zfzmac',
-                systemId: '640d1a4c-9571-4249-852a-a115d8833801',
-                systemName: 'ouegywcozzvwnkvzinom',
-                roleId: '92e7a976-f22a-4c59-8b82-0e28af5cabf4',
-                roleName: 'xuc2iyy36k3b3m65cftzu0w30qrdgdop923p42jy7uzp1ra3ddgp7aep7iibfoe3xsbz58nrgfkdemohubv4yidi3a2i34fp4ouawlaa1w63wprhe12y528owrv6t78c5hlqinswh7sy1leh86vi4r5ez5ngzcyrnzys538hdui06m5axdxt5w1vjk05h2jx4nf554sng6eaqb79wemokv81ni8b22cdk13e5puy7vu0puuqvb8qxjxhtit0tws',
-                name: 'k915rq4dc07pcj16nxpvza2td5cftl5s14246uw303ziyrfk0d3ds29amkysoeddglgci4m0nqkdku0266zh6z44qh1hz063xa71n3757jwdcipazlsr6wjucuzchadkuwpwulyv355txd9cxff2a3y23c67okxmloqmac92ygrf7hjj994cyd7k0k4a8fxe9hoajb7d4nh5w28sbtzw7bhdijzrp2ywdd6ydlyup92drfw7sxfl5kn6cd0s0kr',
-                surname: 'pfrhnvv9orqec6m9fpjih209x43u4uopn8q3j1qq2j3hk6j7gnbp5jhq6ddjb7ty07p88r3g55hmldsnfq2n46mcwyollaylmqzh59zfsj8cxqrjp6lhni7xqz574nh0tgp1gmf1v9izita3574g2e47va63e3d8mz1rukqk4egxnxp1vxxyka0u0kkavr347h9e9rj90bh0vxepkxows9q1wt6r3lic6mp8lw6ara4w3oaz95xli8n4xz36i0e',
-                email: '5bg2k5l60ntv00wacuzfe1y8h9q2823epvgmda084dvxxqttlz8td3qnmf4r287wunkdvj1s6lenef3bpczjqc9kh5aib60pgiefkyuskzlphsg2umaujxyk',
-                mobile: 'mti6uh4iqp9ofdyq4dgwuxch1iuog0r0idz320zxg1dj01hgg9urwbuvgptc',
-                area: 'c3cqrg6rndqiu8msmbi5m7l0sf3swbpybxygo9q6j23pcnzmbnzrr0ggwe2w61c0e8049jvb93vals97t39sjjx3sg6wzw53k2nbjmjcgm9towliwhtvwfy47bb7mz2lri56gg53qd4bxw1mez0yt0t5ojv7gk0m2ckcq2drds7kvwib2pbn5mgj6l59038nwbnjwq90j518hl74t5mluw507fqry8o80d1wdvm3sw6ay4zzwdfdpw0gahsm81h',
-                hasConsentEmail: true,
-                hasConsentMobile: true,
-                isActive: false,
+                query:
+                {
+                    where:
+                    {
+                        id: '94bcce63-002c-4f42-9023-55a42639f50e'
+                    }
+                }
             })
             .expect(404);
     });
 
-    test(`/REST:PUT cci/contact`, () => 
+    test(`/REST:POST cci/contact`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                systemName: '4iyw9pwsdxcmgcu744j2',
+                roleId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                roleName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                email: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                area: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                hasConsentEmail: false,
+                hasConsentMobile: false,
+                isActive: false,
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET cci/contact`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET cci/contact/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/contact/3c2badfe-8ccb-4461-9130-a85271d50c15')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET cci/contact/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/contact/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT cci/contact - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/cci/contact')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                tenantCode: 'j2qfxovt8d8555ah4cod7qkmri7l01k1wr1kqcl4mvi069c6dy',
-                systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                systemName: '6b259cwo67ztnecv4pz2',
-                roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                roleName: '43d2zp68x93rcfl98j1oxialjp7ccqxe3bkx1j8pd4aw2164v0kfd62leggwrvqfd6gcgyedh2vzy310iydh5i7ifc72rtwvu5cpwzu0os2aardnwqtxteppvwrevotelzhg29af4up7157sb913bioemfei39hhrsbrao8y5c1ifkanqp6b9pwok5zng7y8pktq8w0h98t2xqa0g2vteb24saqip8i13vmpoy2fw7xdxhzfeopnlnc3ta9de8e',
-                name: '25vctuvrk3ybepskdfmf8v4akq0typ7h60bnr1yvizsnx2tye6w8vmwemxed08apyvxbvnua8e8tlseibremi690sm4be3l4se5oz2fe7npbuqo3obac7xnkdoupaodcqx8a384qh44ulq1u9topuqhox7ihl3ftavyrizg2e5u8mdrtb5ijlt1vld5dk77lq7t38uw254fmmjj7orix6w5nj3r2i7tf5zgdi266nq6ltf7rs9lhqgvxjh3e8a7',
-                surname: '7kky0qqza8p8y83kxf6ppepwyrbxhy7juwn9jnncigq7m0ym05kfwc7ah6iez4tyuggunn2evh21kjo5rxn51n292sqhfkgv93q1wl4c3jz22v5ziao8fpwqf22e53nn78cue0nc77wt1w60u6xzo16tfc2stzs9h1c2k1f2bj34o8d6wr8j986gpmczyzsyqvkthup6wiqa60vo1da3vsmcyapgz5g2cpc60o2esfhhhfe8jv89ccp33zdyyhv',
-                email: '62mfmm2b6clxvi73aytuglf54oq09ia28lxdgtjl2zacfmmsn40lhudu2qzornff4mcpqa8ribjbmkltpbu8y37s2045ofxh85ia49lawft0et9qzml5q9mw',
-                mobile: 't21mcd00ia4a2g1h5vvy270hkftf32uhgln0j0nf06bgtzzeiyhsx7izibym',
-                area: '0gb4raso8zhekai2xcgso5ks11p8l2zlm7h1j7fvepvkvog1j9g80yya2vjy6r95mbpt4e7vptg31llpib5eo3jwocwqdvdgx2nibttb7z1jijekh84w3v75s3t6t8jnd6ws6vp0eksxwd70fjo1k1pa14d27cg16g3oxzhnfawzz1drg7wrrkmo83iq0bj8d8gk8ewn9g1763ytmaeszyi5s4647ph0thz8fdd8nlp96ha3992iiyleed5jrpl',
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                tenantId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                tenantCode: 'scnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvto',
+                systemId: '9189c277-fd22-4a5a-a692-63a1c56085f6',
+                systemName: 'zwdlk281zptz1leq1e77',
+                roleId: 'afa030f9-065c-4353-b1eb-3e148b092012',
+                roleName: '0waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xs',
+                name: 'ql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rk',
+                surname: 'dhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegm',
+                email: 'olj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyo',
+                mobile: 'bcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5',
+                area: 'l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88',
                 hasConsentEmail: true,
+                hasConsentMobile: false,
+                isActive: true,
+            })
+            .expect(404);
+    });
+
+    test(`/REST:PUT cci/contact`, () =>
+    {
+        return request(app.getHttpServer())
+            .put('/cci/contact')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                systemName: '4iyw9pwsdxcmgcu744j2',
+                roleId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                roleName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                email: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                area: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                hasConsentEmail: false,
                 hasConsentMobile: false,
                 isActive: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE cci/contact/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/contact/16f9d82f-022e-4d92-bb1a-d04ad501435e')
+            .delete('/cci/contact/8845c20e-2482-45b6-8ddc-ced7849771b7')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE cci/contact/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/contact/aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c')
+            .delete('/cci/contact/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL cciCreateContact - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL cciCreateContact - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:CciCreateContactInput!)
                     {
                         cciCreateContact (payload:$payload)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -1248,14 +1300,12 @@ describe('contact', () =>
                             hasConsentEmail
                             hasConsentMobile
                             isActive
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -1266,80 +1316,27 @@ describe('contact', () =>
             });
     });
 
-    test(`/GraphQL cciCreateContact`, () => 
+    test(`/GraphQL cciPaginateContacts`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:CciCreateContactInput!)
-                    {
-                        cciCreateContact (payload:$payload)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            roleName
-                            name
-                            surname
-                            email
-                            mobile
-                            area
-                            hasConsentEmail
-                            hasConsentMobile
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '26a0e766-bd64-4ea2-abc7-856964292ffb',
-                        tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                        tenantCode: '4irsmq8fghmpnr5dcyulton05k0vj6766dlahnvfk07mcqh405',
-                        systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                        systemName: 'zeq7vez8jo3eqfck5vw6',
-                        roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                        roleName: 'sbmdcww354s6qe803ouqv1g7akadxrwxy1fav7tmmugljtsaprus9ixps29vfeiwglivccx5t1lusvg9adbbfh1pqoybmavkjiwrw9hdc2o5vc7ah315ubmgii4k2deejg4vtdyhnl0hu6dyny7r8abzu9tgj653rn9dq97d7w8ugcsjye2gk93rj22un2lzoaxabl30jtlkg1wgju17xvweylw4oc978ijyj4zggjkgn41bc53miofirjsh3as',
-                        name: 'gj2xtdf9g4edw5oq28wgafqwx346hj997hi6sguhzkzq0c3m2hhgbgxkx5wyy1kfhahr4ruf9o9dvwdq136p4c7y88npc95ozn6ubikobvrselc66aaa2rnqjgneucg4oezcbpc6rcmd138wmky7bhuohs1aujihsg9ggef58iw3z63fjaftxnuh8cq376mz20dm0ulzmd3d2roybwr3ya4s3kj4pc19bz7dvuyungao4ic8b3qo3092m6lmxjr',
-                        surname: 'grdeug39v3fjdi519l3i4scm5h6600exv91rhhs6zk8y68riclt585t96sdzlayvwvtuxcei0d7ehsopdnlpoje7i3iq2i3ksvy3xesgm6jvxg238kbaiy2rgnss5zysvqcshnrldy3sez9rjb82nin6b530c9jexpxppriutge9r6kdwdy7vtleb32m9lb8p2ch11gla93k8agkwvwnn8ct6togwvkqo7r0b2illdwknxcbqmvknykyvox8ieo',
-                        email: 'l8rcc5k38r886j6bza4tocxam4650wcn6r14k3xphtr6mk6543xc3mwyqtvokrt7q8lefzq79ez6j2vb95ko5s2993m0b9lvzq7k991m9ic03j6w5h1zdokn',
-                        mobile: 'wnvs206g15zdpwar4qu11e70y1zljkc9pjleu5v4scb00knspkstt5xyc2a2',
-                        area: '7ye9ltparbxd6adnawvbiouu7jy27aas5x8y50pdnxem8ymmpszregtqsy6op2hp6dweagp4gj5ff2fett9he260byf2i6o31bzcy39wm4zreb1k01cbv25vj7jzm751ruo9l9buy5mihhkpcahwildyrqlawi9si24dek1hcmwisdv3aq7lhvs9gv30k1uf237exltzb8ve1b6or756b2xk4f4cqfytq9vc52rhgf0zgqw3catfhbn1ukxtsp8',
-                        hasConsentEmail: true,
-                        hasConsentMobile: false,
-                        isActive: true,
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciCreateContact).toHaveProperty('id', '26a0e766-bd64-4ea2-abc7-856964292ffb');
-            });
-    });
-
-    test(`/GraphQL cciPaginateContacts`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         cciPaginateContacts (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -1348,193 +1345,24 @@ describe('contact', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciPaginateContacts.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateContacts.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateContacts.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.cciPaginateContacts.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateContacts.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateContacts.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL cciFindContact - Got 404 Not Found`, () => 
+    test(`/GraphQL cciGetContacts`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindContact (query:$query)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            roleName
-                            name
-                            surname
-                            email
-                            mobile
-                            area
-                            hasConsentEmail
-                            hasConsentMobile
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '9d2e1893-89c3-4885-9479-b02843ab3504'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindContact`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindContact (query:$query)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            roleName
-                            name
-                            surname
-                            email
-                            mobile
-                            area
-                            hasConsentEmail
-                            hasConsentMobile
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindContact.id).toStrictEqual('aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c');
-            });
-    });
-
-    test(`/GraphQL cciFindContactById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindContactById (id:$id)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            roleName
-                            name
-                            surname
-                            email
-                            mobile
-                            area
-                            hasConsentEmail
-                            hasConsentMobile
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '09cc1c1c-2ea9-45b8-af97-d2a2475dd2cd'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindContactById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindContactById (id:$id)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            roleName
-                            name
-                            surname
-                            email
-                            mobile
-                            area
-                            hasConsentEmail
-                            hasConsentMobile
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindContactById.id).toStrictEqual('aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c');
-            });
-    });
-
-    test(`/GraphQL cciGetContacts`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         cciGetContacts (query:$query)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -1558,22 +1386,250 @@ describe('contact', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.cciGetContacts.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL cciUpdateContact - Got 404 Not Found`, () => 
+    test(`/GraphQL cciCreateContact`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:CciCreateContactInput!)
+                    {
+                        cciCreateContact (payload:$payload)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            roleName
+                            name
+                            surname
+                            email
+                            mobile
+                            area
+                            hasConsentEmail
+                            hasConsentMobile
+                            isActive
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        systemName: '4iyw9pwsdxcmgcu744j2',
+                        roleId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        roleName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        email: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                        mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        area: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        hasConsentEmail: false,
+                        hasConsentMobile: false,
+                        isActive: false,
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciCreateContact).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciFindContact - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        cciFindContact (query:$query)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            roleName
+                            name
+                            surname
+                            email
+                            mobile
+                            area
+                            hasConsentEmail
+                            hasConsentMobile
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: 'def9b000-5a89-407f-9bdb-6f701fed0228'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciFindContact`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        cciFindContact (query:$query)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            roleName
+                            name
+                            surname
+                            email
+                            mobile
+                            area
+                            hasConsentEmail
+                            hasConsentMobile
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciFindContact.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciFindContactById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        cciFindContactById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            roleName
+                            name
+                            surname
+                            email
+                            mobile
+                            area
+                            hasConsentEmail
+                            hasConsentMobile
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '07606f70-a893-4007-ab6b-056bc2cb231c'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciFindContactById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        cciFindContactById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            roleName
+                            name
+                            surname
+                            email
+                            mobile
+                            area
+                            hasConsentEmail
+                            hasConsentMobile
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciFindContactById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciUpdateContact - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:CciUpdateContactInput!)
                     {
                         cciUpdateContact (payload:$payload)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -1593,20 +1649,19 @@ describe('contact', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'f296a39d-09bc-4d4d-9e1b-3c0d8077cbc5',
-                        tenantId: '72b9b9e7-7724-4332-ad3a-c43d2639f4e8',
-                        tenantCode: 'eazja1wqjba05cjssxthgoj7tpzczeb7uatxk1b8tr4rmtup4m',
-                        systemId: 'd8f48e5c-477c-4b32-9f01-ce63063b21b8',
-                        systemName: 's9957wxza08o7j7ptnxd',
-                        roleId: '7208398b-7cd6-4b05-9547-00663b2ea603',
-                        roleName: 'wpxk5wdlcaovqmzqgh4oh2dcirynz29ad24k8x9k1gowhn7y4kkc0i4sf6w25rj2eqya311grnqpcqkjspsgt11gblt4ls3vqtqza6htyixugwmt7e0dgfhp2p06f5iao2kxlts5k6itrvkptt976dup2ui5tmwirykis8rmd3hhqfb1qcnmrfh5jf9uv7eb27xj33tj251nxy6ancuj3w7ydy03kh4uc9u4w3mfi6r7rd5fzf6fmal3c0bai72',
-                        name: 'cefi1cp4x7u4e6lykjxyraxerr7pp959u4y6dxzde4d1jnnhjcihchv5h8sjdbagpl0rrq9fnr65binswep8qbuze5d3qdxrbafglmt0lttysvo87m89nxkzt9ehchirzplzjoip25v7jdlll7xeftwi8n476yp9c9k14snvwhecp7b1xd3ekffo1n7f45thegilwhap2jehm3md089htr1bk7xwry2bwcjz5i6j0yw51keu2mj2hjwv9jt5xlw',
-                        surname: 'j08cpcs45p33uclkojwox1o0nhrx23fx67m0jby6x73zlo6t0fkqnfg3i9yeix9u5mxlusq8m11l16sws1w6f6cox2n21noscb1uv982x7iuwaberp6117ac2y591962zkk4ajertswtniouqkpnzvusdkylntm3zfglm8k5zrm818kiyov86q1sok2texda83crvrbolgwnt0lx50ehb8m7bml9q2iofpz40svsy9ilex8vmnobsntu3e07kvh',
-                        email: 'xtvcpc38k8m2npvmphnolxrnenv1loqw4nqe0y4kxihksqm2f0fh86bmiuml5nicw5sn3umw6xqd51tlbdkqbijly48ingldmywsdxw5qv2entkkuuijv42n',
-                        mobile: '1leiwecxixt421m3f9qgm3a5g0kdnsk12qdynh3f2wvjtlqfksphklbcx4p6',
-                        area: 'u2by3q0qimn5spmr7m4qibo9y46q9i7zkvrodxl9koh4eg7b0qiweul9cy3yph47fgqk7e6lcddchdzi62qj9vk7hrpz1ddc16l0gobrkd6swjqolvb4hau03q3r2cb6g1g14vfaz9ezvo1ir62am2mib12bmgjv0d6cyyneqsnjj4qojy2bqoqfw00ui13v4nm28oph8c2k9y1c8zq9nm9yni81d150sgkhefx3228dqfc9pzo24f3mn69c8eo',
-                        hasConsentEmail: false,
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        tenantId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                        tenantCode: 'scnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvto',
+                        systemId: '9189c277-fd22-4a5a-a692-63a1c56085f6',
+                        systemName: 'zwdlk281zptz1leq1e77',
+                        roleId: 'afa030f9-065c-4353-b1eb-3e148b092012',
+                        roleName: '0waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xs',
+                        name: 'ql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rk',
+                        surname: 'dhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegm',
+                        email: 'olj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyo',
+                        mobile: 'bcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5',
+                        area: 'l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88',
+                        hasConsentEmail: true,
                         hasConsentMobile: false,
                         isActive: true,
                     }
@@ -1620,17 +1675,18 @@ describe('contact', () =>
             });
     });
 
-    test(`/GraphQL cciUpdateContact`, () => 
+    test(`/GraphQL cciUpdateContact`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:CciUpdateContactInput!)
                     {
                         cciUpdateContact (payload:$payload)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -1650,42 +1706,42 @@ describe('contact', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c',
-                        tenantId: '607caacc-193f-4d5e-a68c-ca6faf46817c',
-                        tenantCode: 'kzcxo9nwkcuwk49q7ysznodyxl52qhz956pujr6lnniq2ugrj6',
-                        systemId: '8e633d8c-758d-4486-8e67-7e08429bea1c',
-                        systemName: '9qhfcfzwj1g8ashxrhu8',
-                        roleId: '22cb7e22-3b18-47c9-9ece-7ffb79b3bef2',
-                        roleName: '03gpmac0tvu8r81t6jrr77fk8l8olxe6b8zpbn6d0xnuhnyteci9ndzwuuhratne7u2htujgp82krcmwu8mldpy0913g3g2jdx548q5banw8e85s1g6j7glmi0ay887w8uc43tigxbicvsfcafylp112nhe35ylhl6yyvoib6znhqcmqkupi5372v0u4kgeoklfuqks094ufxqxhdoxueuk3nd31z85ysu7cuhqm6bxr8y669txy62j3nnd6j5d',
-                        name: 'dlgc7pvajbwgbou6cua362d8gsv8rqavw1rn708ppenp6ialywpcafkhxn2ebpm75o8mv45qhdxp0i4mva1vn2jx873zt1rbibz4vu7mgkcrcyhxfwofs1dsp331fmh5qos45etxefo152lluoex4m15lbm8z603vgngo46q18e0s4k3ezscrg9o4ago0cb4322l0g6dtfvxxzonsftn7qmrd5kfim85yl1pj7ioer37a4o4gcguqozib7u83bv',
-                        surname: 'zx0qcrvx5ijy7i3jwp54s9xlo48ei5t4o14b1y0nesivocuzb1u0jaj2lwdrn1o10zphu2c0a1chsrynjzryumbwq7lnvjzrvna3utipjkubcfhetxw8zue4ekp74ysz0uxtbi02hvdsd69kdb98o2vpir8rnath6hizkacfi2svrdqxikpcjliwhbowckg9jm746h35zhpx2c5vh1q9vy55at7lb88hu9nufb51amzyb7mcum0egqgva6xr1lo',
-                        email: 'gib0l69qzgc3pgmkzuf9lfz2jznveuqp2f702c7cujwt40sq9ahqzl314tnzktsx000pwwtq7766e5j3ajyc5qdz1ky4qll9lmfd8l9h4pi3qbnc3ck8bkr0',
-                        mobile: 'qf0n7ls9fgfqyvx1ogqljrwz4qwzw0zn0eijn0qm8bx1pgvhqb8t9xdkfexr',
-                        area: '1tbtl7stqzb37mz0uwsirmhxi600j3dif8y2rv2fu2dxt38m5f50bhlqelet3u6cn5pdbq3dy5w6p1pv1yxuvgjxq1vkelxkr0r9rx734yosvvpm4m70svi5jrbxynxljp52hk2f6f7vugvis6ab4lklap4985naatbha1tlk417om20tu7ot5io38cmzptd9sx2rdtkhe27e938km8i06za2mwdtdielgxx4vgrzzunv9vy851fdxt30ka2yez',
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        systemName: '4iyw9pwsdxcmgcu744j2',
+                        roleId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        roleName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        email: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                        mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        area: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                         hasConsentEmail: false,
-                        hasConsentMobile: true,
+                        hasConsentMobile: false,
                         isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciUpdateContact.id).toStrictEqual('aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c');
+                expect(res.body.data.cciUpdateContact.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    test(`/GraphQL cciDeleteContactById - Got 404 Not Found`, () => 
+    test(`/GraphQL cciDeleteContactById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         cciDeleteContactById (id:$id)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -1704,7 +1760,7 @@ describe('contact', () =>
                     }
                 `,
                 variables: {
-                    id: '3e8fa935-4b1e-4766-9d9c-2bc88eb1e7bc'
+                    id: '305efa0f-c70e-4fcc-ad6a-19cb88b65e42'
                 }
             })
             .expect(200)
@@ -1715,17 +1771,18 @@ describe('contact', () =>
             });
     });
 
-    test(`/GraphQL cciDeleteContactById`, () => 
+    test(`/GraphQL cciDeleteContactById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         cciDeleteContactById (id:$id)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -1744,16 +1801,16 @@ describe('contact', () =>
                     }
                 `,
                 variables: {
-                    id: 'aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciDeleteContactById.id).toStrictEqual('aaa374d0-fb7a-4e0a-82b6-72fd04a60a4c');
+                expect(res.body.data.cciDeleteContactById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

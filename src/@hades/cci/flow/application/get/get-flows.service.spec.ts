@@ -6,13 +6,13 @@ import { GetFlowsService } from './get-flows.service';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
-describe('GetFlowsService', () => 
+describe('GetFlowsService', () =>
 {
     let service: GetFlowsService;
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetFlowsService', () =>
                 EventPublisher,
                 GetFlowsService,
                 MockFlowRepository,
-                { 
+                {
                     provide: IFlowRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetFlowsService', () =>
         mockRepository  = module.get(MockFlowRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetFlowsService should be defined', () => 
+        test('GetFlowsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get flows', async () => 
+        test('should get flows', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

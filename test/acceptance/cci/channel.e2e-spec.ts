@@ -2,12 +2,20 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IChannelRepository } from '@hades/cci/channel/domain/channel.repository';
-import { MockChannelRepository } from '@hades/cci/channel/infrastructure/mock/mock-channel.repository';
+import { MockChannelSeeder } from '@hades/cci/channel/infrastructure/mock/mock-channel.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { CciModule } from './../../../src/apps/cci/cci.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [
     IamModule
@@ -16,7 +24,9 @@ const importForeignModules = [
 describe('channel', () =>
 {
     let app: INestApplication;
-    let repository: MockChannelRepository;
+    let repository: IChannelRepository;
+    let seeder: MockChannelSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -24,79 +34,90 @@ describe('channel', () =>
                 imports: [
                     ...importForeignModules,
                     CciModule,
+                    IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockChannelSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IChannelRepository)
-            .useClass(MockChannelRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockChannelRepository>module.get<IChannelRepository>(IChannelRepository);
+        repository  = module.get<IChannelRepository>(IChannelRepository);
+        seeder      = module.get<MockChannelSeeder>(MockChannelSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST cci/channel - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                hash: 'prrsqmakgmuw96tpobzdnu6lxdjhjssquqjfcgew',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'tgrupn1p5ct9gv37n40f8e4nry1b6556gcqqhyd68jaw3g9iy9',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'g61v0qdws0njheomt3je',
-                party: 'mmr1oym4fqfe7gvlxt16slr8daoyqwo7yhwb3del6lj96kmcxu78v522y0fq3rc1z3gr7hz9kxdomflp12kimx1wkwi8f0jh8pun8ge3joedqhxa3udu3biuchf5lcv7x4jxee9z5v2f9gvaqz7m2g5ff95c4yxu',
-                component: '8ovw1bstml4vbtrj6uf74hcwc7fvzzbq1zav5245zvfbhpiokmpjeihzgkt7yz53qaily8aj7kbe62x756ccytdz48gqmd5jug3e7v8g2y01lm0bc00zh9phx50kjt20ddh3whvpjr1h7pb5sg9xflruqkvvsfz4',
-                name: '0lvtnfwrx15snt6lglu6jwj1kag230sbjhzj950ucuuj3txuok8epzt6xct8e9s9mekbntxiok3jjc15hvfoqm2ufds1cebe70pxrch3vemx5ptpplo2mfjrn4jac03w9vr8j4mww06dfjuznfwjlpy2uu2z6fr2',
-                flowHash: 'lvqwsibe89vc9vvmjy6z1f6qeqn2lm1l6ebgc0y1',
-                flowParty: 'u4ku3s16dq5jwnw26w4izyzugwusznnph0p6d3oxiw45s99966uiys8amhc6prc49ulztusaj8pa36shhggwmjhrid5bovedwzsizqf7ynmbjrxan38za4u74dqh7pj49hcfdn23b3hxctefgblbzl7ryevmhfgz',
-                flowReceiverParty: 'anig39lnj2774pitotcor6d86uz0gixgq88ogkkbah01y3zxm6qpghev8vpvgynmucn90wc35n4yy1765xnuek1b81opljrxg2zlm3wvrfh717c79bi6vs6pzbh6bnn7fqru5ykmxml5jqd6wo983xx8rfwr3gr7',
-                flowComponent: 'azakno6qm2k193dzhiznhvtd9ddj7pnclve4o9iqwor1aug7j21o75mn1nyhta9u0y88ovj3kxuz5bvli3uwrcxx39kfq37awuglhdceq5dj51rgty807g1sbpqrhxqxbyyhc8q1suzsy76nui0meef7n7n8snjs',
-                flowReceiverComponent: 'cmwtbdhll2ycyaxj5gbhay3g7sfu64nzpcvzpg6qia0rkowfus3vioujynw86upf8nfrhn32r5s821vsnplslhw9fu57a9pjpfi9bjptvuq3nt6657hh1hf9jj3vg9iz8foxe75sy0x8gjh056zson59iwfeadte',
-                flowInterfaceName: 'n3egaeyn4stf20ocf3jt6r5tc6ah0fpaz96dr1vg46xuqfq0nu4smvaim7sfgbon4ck9g9tw65u56d2ll99b5aon28a9hktqiqcl9cm2qz3cqepvovricf807nto8v8oxkzvksgpq5wwb8uv7z059g2621jwiwl9',
-                flowInterfaceNamespace: 'qdd1zg8xeeftz8akdgw15462pdrhfmhl4me5zpg1prtxiazkngiw2tb8dyt7jwt5yyl0o9g2w72zm3739mclmtcfjdqxy65zypzc6zj04o6uk141b229g8k61fdniwdo0xw7b1swqkces7mp7azohees2qlntcjk',
-                version: '1v8rkuo5dhlsk84ozw7e',
-                adapterType: 'x0vwybn89s3cjsh1a97owwhrpu9sptduv78z2lptnnhepurjg1620it9re6i',
-                direction: 'RECEIVER',
-                transportProtocol: 'p7hx2fgbfq8egq8qkdwen2z11pbqvl22zi7gzynfo9mfhcpyeykz9orrrn7n',
-                messageProtocol: '4ktvi4h5odijh3gn2pa4drr5vqv6r68ce5oz7qfwibz4gtapmlgtq340qs42',
-                adapterEngineName: 'v7i2565lcpk4jmpr68ksh1mveq8gdyzhd030x9at17ek81glyju67ugse5p1i67t8l1zqfkxfxrvqqtktvs1l5ajsykoe0971fh77e7pk63474oyhqclcyf21mbc673mmiop24d2fx9c0fpgi3kq2s982p58uq94',
-                url: 'fkekhwzccbfeshxlkkm9ah489tj34x11z11mxrk0lwbrgy50vvapw3fiunrj0nlhpm4u8e22wtmib7qc6c5umoy80yjssytn0j6gnghiopiq9rptrmiioks378dalasetcsofw9a2py9s6oo3a28r9cix6l79hwi06wrap8hwvghuhi1xqq69g51xxg8dx3nppeg2vj8jnrhwc2iks4sdbalnbuhxqu841pschqbro3lmyg5wxr6pjp8zjd9eu7f8a7u66pb64ks177kh7lnpb0qpnuhpzo9h9yjd3e10xvwlobseaw9wh0nnk65pm12',
-                username: '94vj3448yc8ahjhi2ghs077ggvt7u6zlgvtfcwemz7affpk3ituq8mtw0ffo',
-                remoteHost: 'rh4hyu9hzdafdldv76cduvxylb9rkjwtkc4w2tkmkgj5dgmzwcmrncme9ocgur8hzevir4xoyo3t9jiwad5v0vl2fz3jw6snqlav33d8v4qnd7p48py9k189lo1waoo71j8av5mjzf54617qt6z7al3l49iwuic3',
-                remotePort: 6721279214,
-                directory: '0sfsacts66ldh6d6dtn2vy5adgnsqj1ptr8t1wfgg101z9j7ryxehu91sss6squ5ciym2xs8ft5tdf3zmb9c39s2zi6betboenm7pi3l64uyy60bjeqv1n7xhl286crc5xc0wsw5ecybudf4rieuq0dsr4a925pfhyae7lpbsaht4aw3iwfss23ysqlwmzpk8bkjebd6gbwvruu8dhdkqojgf9ekgvsel0gopoc7z3ode8nt9h46bzwezjycauis6uoywhepwo9ojp2wujdw4q0v97taf8vbyxqxju6jskw181ioms72d991ta8ej2rq0ypw0u3mzrtl5aesc7eqlcqvbsrlwn4ucomqzrpaz04pz0rai8nfw2vccmlyas62391wbrzvfnq9f628aj5ur6juftxx859bj7mop99p4fqbjhp2x5kwpls33uff9i47bmd63raeskbocd38i7k63k9xvdzm7suercvku62rnbod3f8tgy3u9p0fhy9o50a3dfme3l71vh7q6rms9k5qjgjurh4ldpcntn90fti0eqz8r4p0lg5j00gczkb2g0t49ec1q71ybnadmy73sylnaq9osowiazrnnc4aiwfhznnglvqso7w791jy3uolxy7yw5jqipu1aymcch588ho0u1wiyekfjngya3vd0vabsevdhxxvtch675k6w4oxhw09hhjg4o5h7p4nreprntg7j65fkuvazh2dapzpazteouckd8atf82ujo961pvm8dydoy524xhgtlpunu8hm83n448bf3hb0xmnia7lo9ly0ehkewza50gpvwlx89ri97m94y76ax3upugyu9l61ykugp8suijdxj1gw7l0saz1mnbwfl545j1kclsyarfm3ib8gst92f155lnswdn1w3l3hxy08mov4l0s8ts8u105mp7uxk21i736oen0xvnltu8oi0p119rnw64t8oyzb6mfkw8q1x7a444wb8baqtjyoq1tn168xa47692b7utysz37',
-                fileSchema: '23v306kthul4c0yph7n5gcg9hhzeckzygc6y88puloiow3l5dja3mn4q9y3jbjbgfsryd4v5bakh5vwsq9qu3qp55i2c6k4sggm3m4pcoyszdsgtnqe4xus1qdev8ttu7mbdf8mo5ol7nmw0u3m6rv3c9cl2azca5ihn747cft0olslsi1cg9t4m3mjhul9em0v8h1yaxsx6kces8ppo3sit1bg80vppdjdginc4403brfdlbtlvtajub4o7o7c7vjypbbhjfu1s3u3inic88e95sxt2oge6w3kb4la01syja5fsbqz4i4rvewozzeftpfng29i6bh57rjievs0i7g4ncd83p6qmey7preebrgyew52uh5i7m70nj33lifxb99ixadjdo8dttoqeayxk048yhzqkpgrhex3d4gf5rc8gia5d6lmv5spg6kpxgbn3fm04i8km4i1wuglmnee7heqjd9gss8hvajoroaej9l6e60o54ldcyxavogzok18tzkqe3ib273i3k3kbc01tekb2icq5sqwhq4uzskttcbcs7r9tivv2o11nu71u94yyy3b4hj2nvfe3ahkbbgot3okulgdmxl69bwafaucnubmawskq4rjmnehjfc06g1qblvd3aj5j82toz9ir1q9bksivtmrhuacftd4k3uhaxffb4agekdfvoyfavnd9ejjjl78vhljub1e0bm6x5jd4z93tt6vvbydcx2wbhw0h168z226gfboyxyne01r6t416km2iqztyxsjg4opcaahmsbspd1e0ae9xich2f1fsixyq5qmmy4ea5a1vykpgsu3fgzduf38dxhlc5afgavbmzeympo9yr2cxyapby2pnlfignedcpep2uw9bxwzowoq41rpyo5oelsdcsuc88wjxr80i5hiwxzwed0h3d2y8w3ivz8rxnfl4e0w77vvv27imu01x17yt2w3b9ioo0tv7yfhkze6vxdpw5xfulnm06citsnk8bqbbww222z6ymv5b',
-                proxyHost: 'ltfh7j0wgmufwr1v48dumh639efmeztx9e2yqgykmlyeh6acn2vnys21agjj',
-                proxyPort: 1976702253,
-                destination: '9uvudrcopd135qfk3m0gco08batchafpwa47fdyu58946isa7wwneu9gfuqird4dfazz4gk1gpx4pm4ts00fp5puijua10gubncutnfs57kxgw6o2tlgys1lo7obl1vljdry80nzi83e4z9844dp8wqb9ju771cg',
+                hash: 'e1x6kn2ar08svgsjbfmd285l2uvomgs5mbkjydj3',
+                tenantId: '8ab0628e-e1c1-4269-8248-c6e2c623e7a5',
+                tenantCode: 'c1cy1433olwoo4tonsndhusch59jpgfet563n5r6k6fcuqyeqc',
+                systemId: '7606e2c1-9d26-4196-84ce-122f2a9187f6',
+                systemName: 'zc63j9d2xuq61ap4kc6d',
+                party: 'a6ak8teqzvm3jcto5wipqr8johf8gdkmkz9zghiiaxge3yzpgapppjb8fw7tz2xgqggdzsssntv85uvd5h3grszephs12g69e2bkju8b1587rkjqdbpf75n8mxbsmd3g58mhembzqyg0xvflwck7ps7xlb3lyyn4',
+                component: '6xv4p48d1sfyq7iajhm4b8i17wy2v8gjnnvbyyb8yuk2g1ypiiyin90oxwsokrj3bst387lvn6ughmmy520y31ew3gxse4dajfyuxi2pg4uejf90x192jglz6ezxxiug425o1mggsdjf2g8pqt03vi4aym7odlxb',
+                name: 'vqp653lojfvr7gai36o5e3de6fea4fhpghg47rohcq1er6g0c6qpxiyquz93yu6kssbijsyuur4o1cxjji8rh9oqleitdyidch2puj8ql3k9cvdb41rkunoe4iciudde3nrzxah5sqgxd44vd9cm3fxw39tui9qb',
+                flowHash: 'ocr6wsq8rk1787mk4bccxznj94bf1ospvjjgp5kv',
+                flowParty: 'bla38thlfzzlmsmsd4gxm8wokyxt8c94nllmnprdaug9450tcjpefle9xui0608apk6sjr3jnngzlz1fkevu3dsmngjlywbd240fwfbluxmeple9zj12hgkozi05tnkteq4towy3atkfiqsel2l4dcb1lrvvsmc4',
+                flowReceiverParty: 'usyjmokt6d6tymfvvodaxpsygjcn5juzqwko6ncn41eu59bcee62e574siowl7vixvyjqotsadn35bv85z867uy072cgw3v6jkvx2wf7xf89bs3vjuc9m3v8yrm0how5kv44dzw4g7suyxv6h1d6i663oalrw37v',
+                flowComponent: 'z230e3hbbl84d95t8ce94rks5hvrodet40dbtfyvjdkuobsjsya1kp1lio7ti02oro9n21hpwkawx1xyjsp8b4baxatri6hlqcct3mmz6ygkh02tx8nvxwgnxbwklswvsubhqlhsx3s4k00u9vfdvkta7kaqlrll',
+                flowReceiverComponent: 'uz1kks4fib5dzj3sfgz0ywzllorgjpqrzyog35cqlrtp6ksntalwwho47i8d87zpc5jtncykcc4i5wjgehra3h7ntb8h4gryo4u1g6axes2a1cwsv5b6xr18mxeniy30udw68g7lwpn1c4d7nyeil4uc1yvghsxf',
+                flowInterfaceName: 'kzwkm3s65z4ely2l2fl4ehk4z3pwycxuv1mwmywntu6mz1k0pxghhuchxazk5axwyp102ip7iksxxssxg55213vb78hrswvsmvubpf1q8se2ovj4zieaw6wkif8zyjxi7zzsx8mz1l9m3g6ju95rrzekhsu3t9yu',
+                flowInterfaceNamespace: '6wlfixfy925amg2ium3wsmhx0oehq1x3ul3xve0bprhjas0aaimupzvkshvcfgnhtucb2u6azhzi7ykugs5xudq79unhdms4jo1gsdr375lxl3rafryq98fjia6ntm8e7tb2utxepn38a93cjs882u7gcsfyji6d',
+                version: 'jmshmu3iawrns128ljbx',
+                adapterType: 'e1yamegfkxh9b5sdcy46ez2sr3dwik7gnoutjx37drkvp0s89ud2k3aevigj',
+                direction: 'SENDER',
+                transportProtocol: '9qkyd9h0two9flyq8kd2k0g40gukjttlbhml7z79u0qw4kte3cscbm01pixb',
+                messageProtocol: 'x5tivxolczbir9r59cp9mp27imrornanc7gbljnl6hpj9bhvkbo1t3jd5xoy',
+                adapterEngineName: 'sq0ikphtg8lbamnpqzf9iy3wqe0ui8s1onvdy50hakeye8tn4dqex4nu94jxtjbqmho07626q1asarmm7ez59wvkqa6c50704gqrx51q5i6u78tqe7399mcqs9ygxquqrpyz0d21csifw0bq8ac4h9s9gg7mwdci',
+                url: '0w5brxskpb9im3hu3t4yuutn2lq3ovsi3es1fns7ka4i008xti76rtww6p10q8xxfofzem12gq908470mnkgpnceakn6itpnu5e1mrtzo5o6ln4ehhsay2gdrco2obh70uxpzz57od7pakufwr65pmuhqm5t0zd6v6twg37kj78tne7je7sphnyb9z4nmwruougte0jmnsc8fwprsuih0415vschbdohch8cdjf4w85a1pq49ruwll6lcxio5mnbq7z6rqyvwzscpk7hx7fpm6at0f3fdamphpc4khkxijpeqdwwe5bgbor4850ghtc1',
+                username: 'iiaph7fxh68uuawoz0mj35k9rl729aszth2r60z7jr087crslo22zr4tov8m',
+                remoteHost: '8wv48wui12k8chd4q8l01ozd6q9rzcnjqj599z6s0jl8qdbxtatxa3pmnl0blehciwx4y5qiakhl47q6afcbbnfrwpwb3kyiagq2ah5ra1dmcy6m1wq3clfv0cywxrzxyw8t75aytvl69rrnyu2tmm4v0wl8e39a',
+                remotePort: 7506262790,
+                directory: 'i1rk007w9qbiksn4tfta9sarrhwvo9a7wkum881vh0ogqvgtwmw6rjpj5sawcmywahuu7cagq0njmhidykna4crjchqvl6ftll5dk0yuod913kxm7abeeqoylqubuqf1gpq17hrbmrlnz01j80ntaa3a87we287145y1owd67pazhdlm2eyp9xikmnag741nmg1bnvcvkm8cvs3yd5rizrtr7umbpbo0ghhymka7a6hc8jykpdqubtkht2vfmnekcd7j2rilcpolm9ekbx0nvkpgkiw7tcc5rzqziv7w3jf5mbvs93wfc2q3bif68pdln2rgru3urz68yg78nvx5jn9993q33k9e17bhb2zez3zxovg3ji1wxpruqzbckfvig8brgnowvd5k2uytsj3dz5j14k86bspl1umtb1ltzcp8kae1vlm175r6d8jxpos8q846hkqo8yha7lnnelqhfrg8j0274u2m7watfzc305g38zn95n89k3dz61t5lkass5astlig2w1xfof98te91zm4vncvxsg1o4d8ybtai2g9cayn19lcwhugzzs5myl5t25tom7vd78e00vp6k7zfk74px15omf7orc24rz6hcvg76jd2osncw7dqeiyugo0b8ktenv97o300vry3n1f1nyelj1o8y4i6pm7pklkvqbh607bcwx7f4qqugui2yt1r7f967v51ove1r3f972oe90kegxpoqf5p9dnll1p8501qjgtw36yvecjxxr77xck24qqwt1spxvnhv8ivuwjbfk38z3jfzfn48ngkfkdvln7f1az0cudnzh4xuocnudtx1j9xdeuca90x0t93a7fihttujm8u1j7wv6wymctuuakkpf0xv4y0jvddho184k0p9rdmywlmleg5kyoortxq7woxrsw0rwcxu2o5u71ddv5tsbvf2j5kpmgu4ypvo0y2dwo1w88tkw7d6x6pvtzjou3v4vupbhkeg58a1a5q6lce938prpeyc6wwqz1q7aq',
+                fileSchema: 'zpd6fsrqvyfkx0cwoh0se5y6egec10qwfx6kcpi84nrrbab0fmslyy4nfchzftdz62qeo9o7nnh2g0cng31lfu9ktxqw8yq4l11wxrfs7sphaa5tm7ize07ld7vcsdvfanorwhfys048yvs4hrwxp9js3qg97cjey4revlxspag235fw8tk148wam570x9wi9uqtr2iememdwegtnbhq42bv6cw3brti9x8hmw6palzf2zhugg5wtdfm5wffzkwulsu8e28ym8kw3kikl9368ve02s5zdye9mqd7z4ktk06bvl6922ld17um3bfe607l5og77p3dqsd9qd9btlrenrq5wik6sux6pu9uzsz102u9hxx2vy4ccc18s507pp400aci2b2tuuy7xxxkcsknzmxp9vk8wcqwrlksoyzv4knosrg7vvviw4xac78swxh3pfbivl69h6h8lgt6litehvxjeid7ukwzgvr6e4hk5eustbsb199lv8s5ge2yqu5iuruag9jz8drbwdg91c75aljbm6g3ggmt17u0k4wvje30dmb8ikl7xm1wh1lpxj8c1bhvs4dodat6nuxvurcewnydddq0lqn5pc2gfifriy1qa4dvcmgaody9t7w2tzift9phcitjrbt21m8tjhq7aodzo1btkywjwllixugr2q570mqd053z25erhke5ysdkqituspmztyftef04nx2lhghv5aovcvtkri8p2jv8p86vrr27qvctbjga7uow2lc395149k8reti65cwmolcdt7oeaqtpwmkfmezionsnowcw0ifjvarmmooswloagcrhtf7oeswuwq08prxudzct636hevu1dbmpifytdtfy9erwjhn3ckcfcclwdyrc328a9jtlx6v1f6yiy1rj84nb2ralr4p1seicoa0y0j74k5wmdj4eos0zihoqk5tc8t2m4j93f2u11okc4z7xhtmtvzgddhcf564sam5dhliy1abjtelhznk33kr4p2zrz0rc',
+                proxyHost: 'kregxezuel9p6h07k1rwnnsml4auz9f7stpkxkoqbuzj3hs65jmntz2p7kfk',
+                proxyPort: 2941294364,
+                destination: 'b7ec4mgleitc5stxle25c7eq5y7j12m9grws3sw4iwyl27uj9e1i9i2aqa3w1tjxs53h6upczew28ku7u8gq5nyp3nxmso9rfy1kkp4ks4zhwrbyln3omyykr53344ez96fect3fo3afhl8sghn29g0ahtfzmh04',
                 adapterStatus: 'INACTIVE',
-                softwareComponentName: 'pdxt9jjg8jrlf9ajo0ttl8mm0bs8nmfavsw9pzunut0pbk19oicq37oqijn3y4iz6oac9nblemwgw01gfj6rlsoeyjbrynkphkr810xxaa8k336xvboa7blcr02gck5cdg2q06c0b0agj8lls0k3qoj15xeo53cy',
-                responsibleUserAccountName: 'jrqfkrolgfwooefchjz5',
-                lastChangeUserAccount: 'lpuz3ka1es8azu6mqfao',
-                lastChangedAt: '2020-11-06 08:47:45',
-                riInterfaceName: 'glkn95aomisijmwe2piv749bjvttt0wyr414esgwwftdjb7krt6aunn40nwmmyek58dls9psa8a8txznig6sk1ap1h1s8t2lrcavwb8mgmf1vjhcu9k8k6twi9mh8ypxjarel80zzu0kcqwlk629nggdrwooc201',
-                riInterfaceNamespace: 'k2rj1uo3krnsnkzl5351j8hwsn3vkei3g6bfmr8thilctijcz6rxi5a5rv35zgf51fszl6jf5x8viw7uuelx3lfuwyk82jnjeukfg4meknnvz2urpds0o2inwfgfwd2wd1sqsxkl9ug7nthdf7ts0wpxrfrft3y4',
+                softwareComponentName: 'ixv0b9akfcr1v164ciote1hrf59t3g3sszefdd9bnzljfno562itcyiy0rilvbsxtf5qbi2u1259fvtotkq1elq7tb3mz38d8tycufiimhjtw9sbc965e52erdsdajjhlh6z77iuk3pfvbh3o0x5xf5puq201ctw',
+                responsibleUserAccountName: 'ieo5o686cdzzifo3jkb7',
+                lastChangeUserAccount: 'nb7c60a3aplcuup87clp',
+                lastChangedAt: '2021-05-22 16:24:42',
+                riInterfaceName: 'q58gvvkqx6k0gxezjle9gc0oac1jvqikig98mchg9v1th02e8y3oddhhvthloy9r1yjonohtgucc3b86jyk9gl45koorry802su77esydwzh1xj8i3ioh1wd5rdv1m77ht8i35oj3utemjh4jrggbhutcw2a1dfj',
+                riInterfaceNamespace: 'fh1swko7udosi3ew5y2x68qo562obimqa65grzusdux85d3gvkd3zuoa6l5vsjv5e4wkmjd79jyyuod65m0zeq1bdskhyrm8jvb2raxaqn3pkqtlgofk41z6o1obceih7094s1mhkc20w3ewbdls49fliro2ljrq',
             })
             .expect(400)
             .then(res => {
@@ -104,101 +125,51 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelId property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelHash property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                hash: 'zcy3i3mfjrcc3t8rfwplanjng9m5j1kwgsvt5j3n',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'f10d5kjbxrvct7e1m3kyfck6cxhstsnwysf3c9209383f5i43i',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '6cqb1yyuopsg05hhpqit',
-                party: '33idmti9pn2qwys4b9zcuergj9iebnsofagh53vm3flnz8ragcpkxy4uq6s949r4vukptob849cuucj14aau2zw9mzaf2r2a8kqyiinmf26tkxz9omcf48d9nwj2vdww0jlb9nmbmynmjwtp0ev7wh0qwgt8n9yj',
-                component: 'xebtndxjqif7sdans431lehie5m20dlw8nbjwv99u29fpanlcgkmcr1s3ohfm4mfwllcvuzfb8szo8dd0175jc6e3k06psadehf6o2yp9fub54vt021t5of44fgq0fnhjslwbkgfve3688rj217qa83vawansufg',
-                name: 'xxdm72iguv01qceht3uu8bl84q7kii4orcwkdslsvuz44h7humq33p2ij17ivohvgax0idfp7ckb4xwafvx04a66tpjbfbs1b5uhayf7rvkceeyirha7tcyvt4bjr7klnjqwxq0y3735b98ud31fd391su3mha0m',
-                flowHash: 'rt7mfkz8dc0bl9n98xgolmpkzl40l2vuo29n3o31',
-                flowParty: '2twl3hs65be0j8mrg52prw2subrj3mhvd5wd5soesazhge3tl7i4bpzdtd4otvhg8lnjo4fxu7mg2u05en9lx9m771x85n5yclpfn8t9c32j7k9xqsn6nd2lxhqabr0npc4h8smsl4jancg54ese0j4gz40xzpy6',
-                flowReceiverParty: 'int34sxvpxzblq9j8yqu8320r5czmzlh4rdrlogho4yixyn6kd0pdinl43r528ljfh91kqdk2gcv41r76frmgemofiomjs7vh69ykdamxhaeiu1on0niqqs4wj2fvz5nslqcr2lwa1pa49f65187pzayd1p4bczz',
-                flowComponent: 'knfsyngln7eui5p8v35w4omutxacs217aut5i9u4us816qhz6jgrypvjopsm8o5cv89zqzzua9mozk9lbo6cki41qgroz24ulgigcpj87o9smyg7184w5z646qpu3a16detmcvqdi1q5piq5giz89ck35sam4a6t',
-                flowReceiverComponent: '6rizxtdoqgjz8u1vizrw1i5m6txw3xzrc6hkfgeqsu0y6qo5mtveozfd48flvht3izbbhshedk6qrh6p0qphmk9gqqhrjkvz3i53fnc3rditf779qhbe15v53t9m82qfj3vatziehprsuqiwfcy2sqqywyccob2v',
-                flowInterfaceName: 'bfgowb8vtlljs8o59v70v2o3sq3w8zlrpd47twtq0o59rf50ard4i5ooc3ot9s8l55r051cjf1ld8nelh8wwoqiq8qbw9t3u9x9olsj9vq8gs1hnj6fnbz52u32m53g1v2pd8s2d74q9lre15wbrtyag9pzkbwex',
-                flowInterfaceNamespace: '2q5mk0ybkauuezc1kq51fe2nx5l0b00hpa06x507sbcribeww0xwbfjut8suxhwqcz7k9pwx1oyq5x7xe7mo138i21flxc8itpi03bgnkdsgii7k8ihofiptrhrm8f4jo3pbt42x0no7349tkl2czytzqjarsu8u',
-                version: 'xm9x48ufjeru4s6yiu92',
-                adapterType: 'x8b3ciz92usa15l2xcnkcryhkbgjus0noq9szyj51evdu9yuy9wuuwivzdga',
-                direction: 'SENDER',
-                transportProtocol: 'k16g618vzpzuczc9wwxj751twdg3q7yjpfgrxtnrju4v5h7c3i6uif1j5wiq',
-                messageProtocol: 'p0ek8bowr15k6heguz56nvoo92uujm3ddgsvw5do7h5by58tk8makkixrelh',
-                adapterEngineName: 'fr5qd7oi0kgn45nn2tz0869rntswl6szgjqlrhj9mzo4cvr8zigzty16ix9b4oxyj4bnxr92nh8bcdcl68ew2m1t51j8blooej52tij7oanilbsoxx6v5nqv97mvt75c0v4hj2o8kbx829qiz8cq149wn04jy8pe',
-                url: 'ftf5rucpomhdebbu7kctbbpe19h7apdi8cte485zg35wlb3rdjv5x5iwg5ci5kze8qpsr99biud2fwugtxf580jxa1a8dqloz8pejqc1ayp4bkch6px86k6agta1oq676hzlf3h6f7zjpkw2zditra7u2wmlt3ex8uokphkb5pk9yjvbliwqxu1qx6xi3xrgmnlpfq05ricp4xkzlrqyx2njg9ojpfs3xlh1sbklaar0vhv5yedou8gdkbo2fwca6zlubcru2mr69db4yqncvbhlb7jo3cv8k2ksmuagskmtexg5cjle4ui0k9fl2et7',
-                username: 'dpxtdpwkx3mnag2es7l0z7tld8kcyi2t3fg46l9nervz90mmednevbvl3djl',
-                remoteHost: '78boje09aifcewbtwcny2pev9qjf0myagm0jxu3429nzimhbkhtnj1vpw26p4h1mv51ntl47y8eydg1en4j7odvuarn6cc1dyege1h341264sm4bvt29lh76hethllcmh7jkms45xcyn96727pc6beregfsjw9u6',
-                remotePort: 5249885231,
-                directory: 'qxm4st2a9xq9l05vw04do59jiu6njgeha4gbj9wty538xrf5y2jtbuqbewhv0tvif1wmix4kbb4pozs7doi9wlmvcssec6dsac9u3citxl04wij31k64jv81d1r9t67nwprgn4ku2bbqxqgxqn075cu054uijdaqtgzjo4zwfx6homxeqgzg50cm39celbqpgs0cuqd8zwygbam55x9sb9egnutfcby8vhwxfd32bld7d6o3bzipnje7g0d569xj28ualqwbdixlk62p95va4lqh231soim3sdc8nmfpnqy3oaejaa96oy0k742dkk7mxmk9pk530kwg101wyx0o0ymha44vbmczipjbk0mnwhtbwyt2ijiov5ves6c6x4c6i6czh3zcedr3wjcbqb53065awlcpq2jgobbabvahdb3k9vxj1tthic2x0x8qvr30bsbzzgwcm2vejsfxsd6f4rxiylkzkq9g2rj1i992bat6lsvk57q9rupkxrhy4wls2h473jf2iiuujycusn9mt0thn31ctlawd8u2xc4n2nrwdnfowh3g8qoxfqw01echr8pg0esdwota2uo3vodnc4k4obzmnmbq25wxr1y38cmp46p6t7152c5livkf3yxgyovs0q2u3kwd5ij3eiy4f2n9xgyo2no0we82zxlotqnsaccd0ji6xvbk48w071wev86nemngmwoyzamcfp6ilydra8k8zjm969g3kzh5q3hs88y0vb97odv7npup7g2hgoecqw34ru5nnvwkyrtaqacoxtbv8gfv0kmvhfdp4jbmothjtcfa641ejf2ozzvhpqidx0dm0zhxjyd1lz4duyzbph7bd1dniy6vq4tiyp3vch8kk0zsebttxsom1wajfpug1j6qsgfi70h5azk5ybmfz106z0j8cqwbn8ma5mlvcfkf1wmfgzhwrz4goe5h1k3osvj0sm877o5taipyannfatj7l7g0y01muos94c4fl2rcmjo8lbj0b5t9okpe',
-                fileSchema: 'ehuha6y7ti9nsdxz5tw4ogalaf6qe9zueq09aubsqxsdxti6fgy0bxpcac1fshggupive81kpag2lya0zijedmzntbw0975r7xu9aden4ckm54vlu0gmiwuf5rtt4f75vfbhptlwpfbiyzxjovzt67k84k535freexk3sqlhdgiuqvye4e2vzsm3qfx6edsdroygfqiwk78hmdng9jggwy885g03jjzuwvphd5yftl0gc1ob4pxgaob388qojg7ej0nn7vv1c0djztbl176ztkh1dfx1mhlef7hzfx7cz5rupn47ylhsdg6uuc1jpjhc8up2pbqk3jf3eldd0iffj2lk1s501t8sxfb43ejdni0624epr9izszuen5r15b5og0txrl7pc1n77juo7d24o633g4cvbxeofi56n0p4axibtilihtsf4kp8pg1gzsn4zc5w35k8xtj9v63nfu8xy4y4h3o80bdj9e0aca5ye0knpdze6s24ohjfk80t7tquynh4t6v99ryo2934766g5pi2qasppraycuxdibbrbhzyrz1m3vk5toy5o2cxvd1ay4foills9jrfkymeek2j97mfc55dbg4cd3e33vc3efrhidodjdkfcvjoj6fyqmlhzgjp8ro4scvvf5n1k4iee73fhpt0pnv1jip2trw026c3lvms4t4ejszdzhqeaqw4ubqfbxshb2y67vnw6suuarhvhnuj5u9tvnwofneoy23mrfy4kh66mky95iee2bgoc8v4ww13xayvtgc6drz4hty0pni29c06424y07mat54caob9kpvlwxhiidd8sx0fy42tgietqzd829k8fazk1yy8yzr5lskdgvre0tvbja8ftaqc2rf9nrb8xsnvizmsypggx1fx7t6l8b51nod13osqvm0h0l87b6jfxy32ys1uakk1tho8a48fcjfpx9kzrb9h4m15y06yilmiavd1gw22sthy0560cyjji6y3fjlu65bvjkgixgt0344nuuz1',
-                proxyHost: 't8rfy8m4o8h7a6mn5x1vwlgwoyfeuot7d7759qeb76e189x6zrt2p17nrng3',
-                proxyPort: 6322663214,
-                destination: 'stuy51wq3uaa6rzywsurl880a1nqo2qjn2ynxtkq8c0k7bwoy2dct0msp42g6lexp9f6a3mj1n36fggb8vw7xpwt307uy9bc0mcf9wm1n8mseajku603yd71nlg3equlu59qyh9krznw9072bnsulz9orsdtez1s',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'phxqzxcpf0xhh9dvgugolj7kh6xgkbi7tjci326gpikwskreww03qgul4bgwos711x9vvdsjzjipy9h101wf6mcj7qikyoezaq8kcylhwrjv29gjbkvyy7n4iubld5xjic17dsc5qxdl5m160f3wo9a67j8h1sv3',
-                responsibleUserAccountName: '4c3j5j8nykc7s94ax4c2',
-                lastChangeUserAccount: '5299y5y349rl4r94b7xp',
-                lastChangedAt: '2020-11-06 06:49:00',
-                riInterfaceName: 'gmcw8njdbr66q0cryg9bwsmtx5826tgxsx5nq3qr0kdldugnmz7kkvpch0qozsha9eshjhg5zsdrylk6wofqfe3ydm43sh5qcazgrep04cgbf96yssptqvcct41cvfe0o05p3apkn4pnvzysk57jmmmudvcsiv57',
-                riInterfaceNamespace: 'nrv3i4wcoyhaep9yuh5vxtji1wx2ddr5l78oym446yejomi6sycffv45ow5rbljll68oip8myi7e9q5irm9uzb12u4yamsx587116q05546w0pwwl2mtpl82mzvmz74lddrvfexkki874uzyi8fi4d7vvcuratp0',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ChannelId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelHash property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
+                id: '1811b9ae-1126-4970-994e-8e1ed692394f',
                 hash: null,
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'e1t07267q5sdfbho7n1zwzdg1xaip8b3sscerqpjmk756e2a2x',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'z3biwq4amdc56zin2fn5',
-                party: 'qvzh4oklch5kbj82wnta6bd43vkvfjdfcnnn24erg689krya84j4alkvw0y3w9d381w7zhbn1oa74a4kbsa50km5weehoku2e2p3iaut96u8mq4abg2km1j6nifbeje6xmnkk6nqjhgq82qgxdvp4sji6w0n8xaq',
-                component: '5aedibm2wxgfz4lvytub769ce7anlfb627wi1yt946ot5cd4n3n1muihqw29vfxjvdnturmbp9lzdy2ijtawlaavl8bt6b5kxt4uuzvgfnweguss52u23gxxrpze5877qboi16mqkudr6251h0nosd1bjt0wbhy7',
-                name: 'oh6q5utfutufpy2lfv7lx3hexbdevkye02ymsyzu21l52wbnkjgv5h5d6y7dq9maa5c0cgausr1dlkfto5xc5s37j8if2z3odpoofwyzqqd14rbn7i5daiqps56zuu5txfsmy6ofx4vcma2q2b4hdh4epkf4jhme',
-                flowHash: 'chlupxdtuqrcorjkob37x8ndqaunh5vmekoml9am',
-                flowParty: '3hgs9095fszmuhh6z1z234kev68hk18bdv2uj9njumyw08zncauv73ks3cdhm3w5gptxpl4z3arv2y6ckolb1hpdydnsklz0f3yrgtipnm0b8j315x6545yzqv1vmr30ksl2csrltw3ka1jjiuryktdk8cliy6gv',
-                flowReceiverParty: '2edv9erfuurwcenvuni7o6przgy0s11x7j7pdmceybd8tl1fbgkzken1792gnv4qxncfwopapjbo7wnf4xgms75ofzoja82rd2rlk9tjmzf9rie7qqh6otwu09zz211kmnlb99n2fgphfuz30ejxn8tc8helrytz',
-                flowComponent: 'l6kgdjhn609oalvqi6de42ucrneuky7eecvweaxoxxpij3cho0iu33t4f6fgyx7znmi3ryof6dpql0fhhzzujppwwl1mus0ac7afz9742e196dbtypmsq8qpz0fxfe0usyijru7vyqppe16g07mj9eijpalzfxj8',
-                flowReceiverComponent: '2yokqml2on58f5g8w5rxta1dboatudwz91ghnb6jkkut3wvgy05kvg0a5ihwlsh84corw2kzxg3hbi618e1hc6yxvj8yd5bgw4097er9rjgb20rb6jcku39r7bgy71clmb7ihj8n4gh6k31cbfderzwwphjcpzjj',
-                flowInterfaceName: 'thhv5idjuk91mvt7smr746uxhoeteet52u0unlnkvmj5ky4f8yky62zzwcvq74ogi2wiog1p7iy1ghgucs0zol2azjezymj93hkha567xvs415g3ijb75og1banmcihvzpf7n6vpit5m2bclg7iu4h0r1z62jsk8',
-                flowInterfaceNamespace: 'uvaaqj7lkd5ez5m9rxmr3yqwymi622so7kfd5zs7070hr2vy15gfwn0193mlxswi3b0pft0jq6o1m81fpv9icsw8x9pfh7hl44ywyscofc0ugnr83ompfilbjrjry2fwkitcebyfwuleczyszis9rngqpnf4wisa',
-                version: 'mvsedfnov4v0p4miby8k',
-                adapterType: 'hon69n8k1ba8h8fbmhc63n8aho2mvwi7mf36gezcqksel9ows3d17usia103',
-                direction: 'SENDER',
-                transportProtocol: 'uyyxr5la0v9mjn0bfxbs3nlygi3wie08yn71a4238cfczzaxgqtsob56a4tz',
-                messageProtocol: '5sjrdwpwql2flyfw0pof92453z7tz8lo8mpe5xwjj9lcifb7rw8hnjgvmsr2',
-                adapterEngineName: '1ie726e4ng4dn69b7y3bxv6yre43a4skvsphangtli8qakai6hyfunv3vikeevgukm03b1wx4ekbhwz2djwb0pf8mlejm9rh1kenkk8d3zm2zkkgusrl3gs3c9lcjtv5xj8w7r1tosyddzymsybtdwfe3ukxqhm8',
-                url: 'cage0eadjsqqb8xmgph6u8xehnlgyjwe9ds5cx0u4zc11306cjo0hc6ubk12gb7lt7kcohe8sornydvx7r5ij1fs5pjzpftqrskfvwbz31t0eoakg83mhbfa31i7a4z1c20ctde2ypg8mit52n57nneta976510mdf0v9e5w77zl9mnjmntvgpamlp3y9kvl07wqoc4p4cj60qbgvrhm75lt862p4g1vpx4qbda0sai0zrn2gqi0bvrduj4iif8pjy4iykwgmp35wbi15j61ga9khz9t0ht0ax78kp56k4pyljvums0squw34lefsbnd',
-                username: 'is7ytllcjmuxda65pzvc2pop53hr6r68oo6ewlx1r1ulisrl36v604xpvxp9',
-                remoteHost: 'xfc8nvrfrv8pb7wdd2gkm7cphq0uk99sysr46i0pq0nlqalup8r1rtmgfr3zq72nfrk8tgnbs6lhfh3iw51l7h7uxenhxmuw7uitf0ybml3zt22bd94r5y4ln62l5f1h4tq3wrfrec93su5jhy2zxkmx03zswsji',
-                remotePort: 4053173497,
-                directory: '1b3aameunho5d91xjjckakaa29xism8a3qi3780pjuzat75d9w7ttn54uku0vos5o0y7ueq5d48k9mrctk9g3k5gydc7fw6fjd0u62mvp37fo7l5z3avzb0pdzu63mtr625wxb336fbpvob0qw5q4mic0y9dc7obmspys0dxqsglmbc8awv2x33nwyv8w2lhj4fsb6hm5zpsma0gvgdu9lqmb41lg1ti788j4h7sv5zavoa1s6h7hg33nm5trvbs8yrrq73mgm7a2qx18wwekfsdylc9denf85m4xnnqkqp5616i6gl3khhc5epn7wofgb2s09irno6vu8b63opyrlp5pe47b44t0h3xd5ko12h34z0sb2m353x1vkrfcgpbt3dqgj28pjesj1up8hwdthqebwhne2s9xr4yrdcj40fkkawgemokci62lvhvii0h6qhulfssz77mv1j5u3mk402bko65167sifb80cv42tfvlav9zitupa44r00dl3p4wykcg5d7z68aq6i1kj138oujtza5pv3kzmabvbzjrh0qwtoiccty7yv6j4zd0moykec7lm4brb6mhnu7ianr5awi03r1fbdwz0cbxiesn5xk3idg91nznw8sa48v0c4fno78dsag5pgd1wsffofbd1x33psd1qc4o4su4fyhhpbdb7xovus8ydoyj9dtag7wwhrew96cwv6sg3wr32yvx1oqcjm5cpe6akjgw1m63m29e6dhy5ipzluzt0yzco8ip65gj2kht53xw5colmbz4xnifpm1fqnhn1pvcxwf5uw5hli8rw2861otx5xoaq754h41nzktbj51cxp1a7ysjjtkfq8isf9fhxyrjsy0odgo05uywllyja0r4vzer3azlb0gl52r517p89ncfzudw7by2kbonfjup9g62vwin6qo9dcpinjxlpssu0boclxomta3cqf9nrhhs2kjnx3m1pyzy4mly72etpz8sy80m863iecfmnyne2tqyku3jib7',
-                fileSchema: 'ec0ii885v2h4sbozbxafmw82b1o7a2k57dz4uk2pogtwon1c9dqw3kkbbgkcjn14hhnu7u6nart3uxt7w7gud6t7gj9etgto3i3mdgkm11xq2b8aljv06pu431ezkdysnqh6sz3d4por9htmn0d4hlx3bazgi33cymf5311dpdx0h3y2txn9kguaxsg9fp3ar60dhe0v52wp0wfe5bnpx1mr7u77dhtzmfa54joor2kxegvc76qwnqp0octerqvwx358fmjyx1g5ggjhvidqqkgcfrjn0xvi61m3texdvx54ujhusne1w4wnzeonrahagjk4z08pgviz2g5nfbzjirzqungau39okdtsfp9ble5isn657vakbp35rqqha8tfyvwasmdaj214wkjn5oajz8oq8rqu4i2t7g6crom3o0zj5eysexco3j7fhp23ngioklufoec6dppqtq19raahns4532vi1lz3o9kpjxuhhzxdl2pbbp9rhoa2yvfx5h6hdyxp0i29d7ohe1celjxcqrdblbfcligc2gozij1plupbvw4moju0mveasuskrfqtggyz5914sxin6z4f78bx8d2gl9s46tsfxr3lafeuk6bwxh7wcpdbaenwncr1s4ivzvbrweygx35pe99nwg8hhtt82mg9sz3m23doic7l60t4pdq4e3m957xqxoz6b6vmd6zf0yt5jv4xw66mbakex0px7r1ohizzmgyy95nu127qwhb24z7mjwbas0bonke2vciadg5avhshudadnc31qh9ipfqy5g52lq1r4rsxq9fj1ipuxmck8r92n5r318ardnqohj5kzhgravwrb3xm37yzeycmzttxepaip7y35lok99e98gcjhgnlqwhl1tph67bucpqmycjyfba1pat10ug4o731tl1g6j6ohboo4eo9o6lvvt40agb3b24st5h3odv2w9yk5r4c4o8t0jzjle3n7ji1gll9v19u2zo0gnmnp30db0tnikb1vnnwsazp',
-                proxyHost: 'nyl3iiuwdq2s0lidlll02nyjb7hs3hydgbp2annyfpkl0p894waake8c0i8o',
-                proxyPort: 4248536917,
-                destination: '0t3l7dx07s2n6ebfllym1prv7x7a1ck6xv3db4h0fmkffdhfhy64vqmt6cwjc1hauozvdbbrtuj8n9i0sjstk9fkhkc343gdhe7c2z53f3xaysf8e35tknliyomxwtgljrhiz96ns54khzn4je8gs58w3nybq0z2',
+                tenantId: '963ff334-5b23-4d11-aeb9-7874bca8b06f',
+                tenantCode: 'goqf6xsq99cmu5yz0gntpvvmyj6xjrg6emy0glylebsz1f7lny',
+                systemId: 'e99066f3-77d5-4ebd-b770-5b49190cc6df',
+                systemName: 'gpoehzzhbu0h6ikjynil',
+                party: 'kemb8xb193zcedjgoz5c343sf5dly62y5mkd0wtf3krjosxmcxnwl0e7nocls75gi8ltcgql4r41jkctusk2jrhdtuipurfo1lvsyr2rd5bgcpji5xb3tv2tzykgrgt05ns1r1n00jct59xa7r3l7c6vk2oe71gi',
+                component: '5vps1vktzizshul4t9erwt3haxaontbunrtpkc5eeu9eegc4f784j1tgkftizf5p5q9vex76ki3maz7x3d7b0iirg87yy36nkmxy0zdmlkjcel6q55ovv55qfqjowwsgitozqbzxkr75n40w79ldf372rjuhdihk',
+                name: 'q9chncqs315g0bjac2ywtighmfp7y3fj91lfli5yjuyacggk8b3gf0ijpsnal5xkue3x9l1o0j8vto499p9auakqjavzulzcfwyzdldpcimsi11w1i3ovv2bwwrb47s0jjbc3s04h0jyx0dgg560s0scdaucc6rn',
+                flowHash: 'tdfmq9t481iumr3fa2kws7hjr8lyfe7vx4mriysi',
+                flowParty: '1a7ya4aaomvth7dauty7kf7srkqibsmakwgerugfc4t4vr6yezgelvs9vy0295ip1q0hiimichbrypba4cnn8d2lmfrsgs97fq1hoor7moopb42b1gr7sg8bq22ze2m9b3nci0l65om2do4lqzn44gg66swp9a2c',
+                flowReceiverParty: 'yfkm73tu6ut4wdh1zpw4hme6sefigfdh57cb2vyyt3a80bzcqiifci9jsmsk4i5xpnu5to0i9re5ao503z4sp7bbqyz1lpksin7rbome48y6ymy89wwbfwu38vc2fhnp1udp0w4ff3id7lg4l2h46eit07667eea',
+                flowComponent: 'k58sub9yytpdaizwfw5zk1bfvtks08rv5bnfq0l54z166sfa7jye9cpobcnm3771mkon3rvagnfl4h504vwplgq31r38u16wc6zalywpfj503q43uenn8dgg78mg1jtaf2c414xpco7nepae8gzc3z9rpjm9pvpg',
+                flowReceiverComponent: 'kuwk1r3nsornm6myi6pe0fiu2ed2e21ko0lnmyn74efgyz87bm7v645m7fdkr45v0uly0f5f4yj50f0nik3c3z6g3m5vcz6z4t7dgu086to0o9ykqneqnvo271gxut0ttb768qo7irniebwexgjn5gb94zkyjq02',
+                flowInterfaceName: 'knjvzv1siymmzwz2hw8og15nxr3ghq70vdhch1vjvv8uriwqgotgr5t6j6nhy72vnr6duo18h8zeawf9i43js7akcx3zay6zcp55q1dk9hnnx3aaa1pi1winstarsevznx5glil20oellrhq43tyog9bi8j10n45',
+                flowInterfaceNamespace: 'fxuyraqtod95xb8fewvsvr2ogt1ovpewbqwjqx8o97ffzp8x00drdtm6376rgjp5nxnrgevmmzbv5m4vijummu5xhc4qj1o2xtyxe7ls7as2ajtxt427j89iwn4npijk3a2ahn6rbn7ncdyhfj9mao3tecb92vky',
+                version: 'jr58w5ctbm6g4hb79rqp',
+                adapterType: 'wxiy97saclm70pjdvly2c35ecmug5datmjwg8yv43ffv9l7ogvsq471miemx',
+                direction: 'RECEIVER',
+                transportProtocol: 'lr5l5j6mh33lax8jzz5yewx8bbj6sht9wi8v93234zwhcknsitszss6l45vv',
+                messageProtocol: 'fhibzryzakoub4zmrn4ddi9xjmq24awzc1xbee1jfn000jnga9q4xv4u5jdc',
+                adapterEngineName: 'a1ob1gu7k4zac9mlibs76mod1vrz6loz0hj66rlmrsu5u1guztq4kdedh55use9f9bze108bfq27c584qyc8userv6awgtydlnk1aq92fsvh7dfwreuwr5vuyphy395797t4fjyny9q8plfj9dw6eypcdg833iiw',
+                url: 'qfi7ejdr442671iu6houmehkir83ke4zx40xobaffa3nngaohdbqgkcjehiuwftwoqev6bnrnkwnx5kmvn883gosgd2miiduk0c4i6cip95setebpglp60y5nov6jq96zwjps9yyre6uekj7r453jbcqe3q929sv0iwqws163957xxvqu1qt21e3spyelrv4mqgdhn91h8li4hs0ttpyvfm0sby5q5gq10xpysdkre9ai33ryfzch1n7eflhsuzh89dt6c5azpg34jrmlofc8srvbxuuv0y7m2eqi67j5bs4mo7b6lldrvve1ofj2nsp',
+                username: 'ex6edzrq1rvzqnjhuxd1g19h8oi8i4v55ievpf43sqewplawrwtxw7419hkv',
+                remoteHost: 'iqtdt8lerqznn7wvdq9id5p2eidue373hrzua9mqzal3ltbhn8aaob6w126ps4qfnmh84zsdwx4rwkbv8n3i42kcwfmsp0rds8otien7jqulvrvyoims7m4tixuw6aqeiia6m318206l447jelfffij9bsaoweyh',
+                remotePort: 9065384583,
+                directory: 'axna8sy2iwl0sn93j8kx8harzyvblys1qwy40gai84s2fyogojqf54dw24gvx30yqtiowkgnhc4t2xr4thqcippgfld4q5w9na79clcgc5otk52d0s6osrfeouztnxuxzzawbkbc8zj76e91mr7gfsyoovbhn32oqskjazc75j5p6op714wchoc0zx9vpd1dqicg6jbeyik8odsjprcch3u9lat0vc19ie71jjuvw71l899hlalt6ig4p109fzvdieloqhfikj660q0xqxes8u4sdjlmk5yx8wx4a3al2i1clpldroxwxre7rvpanjky4far1kkxu6ohw790t0q8vb98161su45xpqb354s5q07krpfj8gea7ihp1c7nouhhusmjai3eka5qer3hzq360hs1gxl1d4pwvdeenjo93l9xdy6lnxcipmk90fnta4trx5j7c14025xkhrog60pk68leldv8mf7u404xkl94h10z8ojbk941igfdv0dvyguejg1pxjml3yrmg2257sw3ydkzkpl08y1wvror4fhpwpx8tnd2ll46o5dsys8xqxii49p3magv5cgvf3zsgilbnxly6pz4ibzc0s30ok3fkkbghxv33hikg0xf8chko7navafhfj4ne6tw2nars96l1l73qg9vd80vay0x1jdzim263rbjyw5ro9z4g4wny2s6ecjy3rr53172p5uitjpbc041awaghculjzqxhjjv7h1645wt1y5nnfe8tclaq3asus7hmvcy9h38b2nas7043w90ob7pncm29eyjug20yopi9astk64carqs9s5brgya8sa3zkjv2izn3s1kz0pebzc0ytjqdfs7vspolcc6f0ljeybyyo7tct9bs42t4yl29ialr0ownpgmbpasxjirz5p69bdfb9qpyxtw6c9je1jq9hgq8gdd9eybmrgsevcqm107h2e5hxetvyl2d2b09udhlp57jpfqvpcxrceh4rxkj1ehzi53cd4jiof35qci',
+                fileSchema: 'sfaa49jrn56doa1psyqyqz40dm7o3uk1mzenrzonnica1ny09gx65k4xjcyf9iat59lo3tyloesbqh7nnp37ks4a2yz7p89ubjw3zskmlhorlxvszl104q78p8vyj1onu9lnbk5i055sm5s7g16ui5l3kat8zsl7yyyuovyb32f8vczglmwfq32d2uwha8i42czgbgo11fdv6jaeyxtjgammv76eputa9b3l3o2opfhakng0y5db21hjotp62yebx67alztjxnlc5r38wcm2bmluwyg01clrjvtvkojsdx6bpzpeqidzu8wzlzzojmuf3n77k6qw69j7r8gtbr7qwgp50l1362rb5gm38xvt1styvla5kygfwc5fswwamcsl1j1fre2g3550rq7zhh5clqg97vcy87s6ne4fj3lge4hzdqi4kifglp0pbx1jlpotdscjkbxeii49vi4n1kj29ldfg9eaf6zhb21t71iomtlfkdowusjl4bek9fyc1z7be9hs2aeocejq54gv7p19jrig457w3aau1gqsn9wnx7znq9z41o4cf93gd5xib59d2ofz7ebngfhkbv0t904fy9qu03tyzspeyvba9h0smwsk2wj57rh2gb3an8pldewfx4hfdsdovbplmtckupjfal1aaxuolvu4429emygxfmej0idyka28tn10kb3yxqmx4q8vby65vunrmh767herjzptl5kqldheptb68wizt6xbvrhnzfvdr7vwua42eurschwga1wevz5evetnclm2shscoti1fm1gxkv96mlqx9squoj6fcpqhpjhtrn4h0lfh1exf3kbfqlwke3huso4rzg9jw909jt7spyx71e60t4bnk2ihdnyun2kjo7xasxw26tvy7akz25dyr70st1jjhbhaq4phkjn4ln8kx0gpd4a7cv84z3cvzs5w92sy98ptamni0brf7uys1fp5eq2a7qnonxt9v3agj3jnqhmogv4u51jtqt9d7akedim55ef',
+                proxyHost: '6pydzrnlpwox0wks0o02uab9kq46ux6d5z0xw2pxwnz3qc4ispx4loh4uijf',
+                proxyPort: 4422101008,
+                destination: '2sx2ynmssepnq3pn2syvmbtypz2grewvy7y9v1anl156o8urbrb6nkpipzpscwyuyb6t2sa2ebtgomoxvqbdbs4exbrlpnlng0smoa7g2y52xhnj05ynd3cbwiyjmtz9goggbdaywn33quvf5k8wt098wxcmfv71',
                 adapterStatus: 'INACTIVE',
-                softwareComponentName: 'y7tzcyqjlk69frh0pqaoqdq3d82wslofi4qbjbmki4zwfsynl93tw6kl64pitrv7glb5cm2xth18j2nf9kwpnb8u3st6memerzy0mt1ya5kpjs6tqzpdadevrarjned7sozo7mawmpq12fszi3gaw0ez0p0zxptl',
-                responsibleUserAccountName: 'o8l0c41r054pqtwy0mki',
-                lastChangeUserAccount: 'xdue3lkivplazb6e1pse',
-                lastChangedAt: '2020-11-06 02:41:29',
-                riInterfaceName: 'zz00lhasabshi8ddc67dssnzp4nvwo4z704twcrqmzwmiyth9l6qnsynfjhrhlwz9fa9mtw2f42gjv1xnqitubpegr7avuu4puke3kwl897wfs7zyl0uz5xxrubl6q6il1yeohqo88qdsvq2n0e9kem8www4a5ly',
-                riInterfaceNamespace: 'mx2h38z28w0lttxpyh8ypsmaa73qa135jtwb77q0ozxsn23vixptjdgpvmvb9q6igzz6254uqclrhemlx1dm5olxf4vhplij2snlru0h6w0vhyu10erx393wwjgrubsjikdoq5ewc4pw3flggaxkfakbgz6wapeu',
+                softwareComponentName: 'sm43xt4lig22zbrlzco037w53xrr5szs4jcffbyl46ltl345el71nycgb2w74jlpjjj1diy9as1z71217nui0ffvaasl4blakg4g6m4mccj5wrzd7c3s7hi2czus55z1vwndjo7oump79fbg8a7a8w17zn3x9i7d',
+                responsibleUserAccountName: 'vkieogy6tbfv41kjeke4',
+                lastChangeUserAccount: 'r3qgv7qdq7rg7c5xwpnm',
+                lastChangedAt: '2021-05-23 02:03:43',
+                riInterfaceName: '4m1ntyli7v3okhjjk6p1lkv6bokfd9alq52qsmbc4ogetlwj63vvrblps6dh987cswhojv65w20kvssk0vyzmajwmy3fdbhqn8e7mc49146s2z3f95z0kn9rl5b3a6s21panyaot054shcx71if9lqqrzfw8c6aq',
+                riInterfaceNamespace: '42e87fvqc5w5lh6k3rrb072rz7ccnohon495mnk3ezcj8qrrxs999bfqdbktkxkg0vmxm6wutha3747tsz8vauubazt26ndwsw6nrqz8t4ojluyhgg52pgwq861o19k8oa0swwislaz01ghi61apxtsev48uxmtr',
             })
             .expect(400)
             .then(res => {
@@ -206,101 +177,51 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelHash property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'n389nkgih6qudityoour98qzw9emda8mquw72i1d6jvsxt7x7c',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '2v1exw8tw3g52i63ssgo',
-                party: '57qt9mjzn5v7hn3cr1zwpps4bfvjdjpht7sa3pdzg5ve1tc07v53c3g8b3b83jge1smz3slws4e1xq0ckyeaahfnlnoxww5575cs072xpt61xitj8phh9ry3tg449arole8nll5r5wsvircl2zwv18a85mb89su6',
-                component: 'b7e12g49h8yty35ziy2f8l09rzz1coc5s1ls51c76xnkonxgg5ojemjxqtf4b5a2hy9juqdappgwzez6x7c0l8hjym430ibcn8jgix1uyfkku4kc2x24ez7qzsvgicf3165yzv7j7ktchz7q6f39fk00jo0hrsd7',
-                name: '66q4st8i4azpepqigi1ofxuca7uuut7z8gmbgco5un4t710igqsicvbosvf5hxy2t1dzwcs3930mad3qqk8u2osppfl5rlrzw4zwup096ra1pzl2kr3kknblkablx5wv5u5i2oiii9pvl7zw82ogohuhrm4jwwsc',
-                flowHash: '4gqou02rwc6g3kutcnf1iglxukn8881udzrwk43s',
-                flowParty: 'cq13xjucd14dc2344grja6p11kuqfwobmrf1g8kxn792ostibxltvwz07egz0sxtz8h81jjrgjs8098lqzz0fwu6a16pseunncarxoz3l5tlrbzymtvr1kmcjtw9rrz27gfq5kf5f5979rn6a4jw5a0u7dk3rp8c',
-                flowReceiverParty: '5u1e1bbfec7u1h5xnh2imf6hx7ws4svnjjgcqh2m7xpqsca53gkqvbnjlw0lcnwatpdsv1jd2ckjz8myiih8kna2onlxqgprpvw31oipxxftov4vb51x6ysz67frm8g0jdn32x3zsic0a9srp1tlxdi392j3fzt5',
-                flowComponent: '1y1xs6on03dsoi1wlxepa7zfkftzozfw2yx5kj5dvzk2r4e87ghu6e6pmjkph78gihyrx4hlwwep7b2ptaklisppdd63zwrih55juo3fbyvg2budo9g5g5on3iar1cmt1cqu5hlzzc5ra90zym1ouo2lfbhea7k8',
-                flowReceiverComponent: 'mytvtzgkkosdqjlqflfdacjkvtyf0q4yvpf2008vrc3uccs635m4zz9z8fa7lfxb8iehgg8xqadsmdgrb0u27v5j7bxo29op3q71acy4ffq2w8h9hhgqc37epwil2kxzx32w0b30455edt2he55v5nvrp74od5wi',
-                flowInterfaceName: 'ipfd9gz8z48a2rxermtt08uoxox5g9k6qz7kah55nhh1d9nwisq1s52g1i4992zyjy649cowrflxu131f5t2plfzr9an2epsc5vxkjwk2kaa8zhg6gu98x04dh1uyjpvbp6pxrbfwn0puxmv8qlohocigbvv2hkv',
-                flowInterfaceNamespace: 'z7or9k2iucc7ha7fbifrnr427nc21dhmfsmds9daoti4e4c0ds1384oslzdhgb9rvxuv9k3n2lf0n55q5th8jwewbcwmxsou7jagpnu7kkfr5w06nbrcbhgb24auphpu4h7nknxyy7edhr38eaxi99s4m9z7kina',
-                version: 'sjdxe1h3pwincnlx1frc',
-                adapterType: 'q92o6plfm6nq3h6sexxrxc8ve1d2kivfii2zxgymv0bplwkrozb64leysp8x',
-                direction: 'RECEIVER',
-                transportProtocol: '5ezrbl4zicb113rhrt8t210px3ujcalnpj3i3nyrgahgz22hkqw2ep1umkkp',
-                messageProtocol: 's13qfj7h2dz9veobj5ixqgx9cdqtdy9r1k15qsrbdpmusexrq01io6ar24s4',
-                adapterEngineName: 'jsyim7mdw6o7zdle50h3oak8g5jrwou81dt0ujezof3wevnjrznyw1b6767912iil5re89tg014exydeoqgqrs30vh95hhxfiamxd522wttzvdg47xh5x79w37kmwc2b0o5d2sdrj30fdm6d187vu5ufesx6uld6',
-                url: '5ype33mqavoocpv3591uiaky7j0jwsdixs2nvime4gfrj1hqxxoygmrdb9wvbfu43worpje46koquyv5z4mdl31tjau66mjy2iaiihxvi5a13knwrykydll9y527xxrmxqd1hgdv9iqy0rakre1iahm2jodthh5in3qg0halji71ovu5oi22bydycj1c8l67hv9k6fog7cizt0xuczpa4rr3n5e9brny45ta49sbc4nh2mshn0jmf3pqkejete66xwvodao0d79v67dc0b3uau8un616gyxhkv08htdfudcn6op1pkn9r977vmf0kqdz',
-                username: 'cvsslaveohepe2wk8ljd3w9nuvn3m2s8q534xlivaxsdnuyq6hdnsi8fj294',
-                remoteHost: '14oib4xtomnfscztrgafzk6p4xsz4zb5ddg0r0e6bgsb4vejhfn7goqbls8g6tjyix9yyaaju1m61eoxqtx58xzfrftc9vj4za023rtb17wwiuy0ufvo0kqs56ms6g134fv5hqf7hegns1vscfhbs7pzzzzbrggx',
-                remotePort: 4452890136,
-                directory: 'i851sk1qtatpihaa6senmtpa6uoqydp9n8xr1ugdmd0l3t1pr8elue35csw29z6lvvfjug5ax6fj476rr0q7lys5om4bn5u90dbshkozxc1hjofqos0ct9becjj33t6jxg5as3i7xr3g4f2nl8qechks86jl3dp865axzp0ifd9bvsj4avdaa473f49l2evxv1fwu2pbiai8junh0oiztonf4ffl4ltdmsgi8cywnqr5ljzdo1cukvregbtfo7b9k6l4vt2rk2umq61dxa0mhy8flwgcxfx2cbusjs7lfttyi2f0kbi8awxsrr0u3n2qjrx1z7y3m0gq03k2vcl94uap9yy953g3b7acx28kj3s6zpfb5fde2gegal5mh6qnjohwog4lxa9t9kmwyva0fsqn6av9simo6ixlx0ee5omy9rvlz5vs8fejalcstftxpzbamj8elrcklhv0cwcctr4qcxjy0go82ocarrm0yy6xf9zlihv2kf6imljd0tsoc3obzc2mgqb7a65yk50z4rztqrsj4ofd42jzgfjzs9b5qrrpiyra9w8lezq5ai9at1ftojfd6sqxd1935ywc3uafywq885w0ffz1nbe5sjs5l03hfo6obh86gq8efkel7azu72s2rflojxric2b52hxxuowixoedd0mzcd4f0i67nrzw7v7es6hn5zmap551syf1nals8zquo8yzlvi5qrspv2912dw7jnibb6isiqwb9ek30kbblb7ekgoo5nolsm2j2bgng5eimjuq00ok6nacnrfwaz803b3atxa6cy6hovnkoe2ds6wcnriyctes2t7p1tikwny5vcjfanu9xfms26y5euxijubicg3qsdokgffyhmtemv5yfibdx66qvropv7r3qvakyza3qoia3ch8ty35poik67a34lznv3xddesm4motfmjano0vmfnu6ueeai6a6e7hzhrts7rbpit7aktjdwif6appb74cbwch0ti94fqdvydbz27cc3uo',
-                fileSchema: 'idxgm3dxmumm33vn7kyf2sl6ja3gpw657ikencpywpzf6eiyynvduxl9g9ll973nvv02h8wfzfau9dcjig1f89ba4u8aty9fcyxcaezt4rlvcg3qghkne9v6c4bzxp2jmtttwu8nphcuy9lo396wx9y1z0c5mx7m3kt0lwsiw8q59cc6zqidnuds80xdqwjprrz7hh3v9ghaiqifjoiwipvad1z9mw9bh4ivyc6zjf9trriou255iox56ne5ougbeqclr0816mpwvfkhc210nfvu3setuvic2sltrmm0mea1mtz45siv7nkexc0o2mcu2sbojbrmonpvmkb5enb0gr2thikzph1uwaweykauwdydf4jlwgc9ccs5zj4djumcjhnzv4cx7v6d9rg3awrcyjtckfdyucx8bc3ekh8bjwc9lqt7pa3thunsdhtyo4yondawzdr2qmko2i29xl5vesnchf4q3rvr6ya3thkdrsmussojv175h5bj5lrc3128efy8my6wlo1ll8aqbnhvi0t060esgz7x5rypfqyq5t9p2j0lyih0jgrmnkkmir6b3t3oc23n9jbn32x0flgtprw7bo58ls9b44y4vgg6ts9wen7vh1b9uziqncgsv6af4542cgzwytk7lek02qqvghkkfqtknqqf3rzk3qiyos6wjjnyf5q0buvlenf83di300wx6s66obqf1koc7aplz8pign9lkgzq550qy0gikiha6sdp1j27rk66jo4cig73s7m1uvgp6hhdq5khob3j3f69e16fcvzm71bphe1qpxnfjukgldjgip3f2jxxhh6jlnsw5yyzlls5ho5p1h6aj8yz9odrgxheeq9yi2vz7dw8sw8r0wxx6tinz7udf9c2r9itg1ezcjr30op24j1m7r7hvjozaw0lu9fycyosu9zdymh788ebmk4bwovez22bjcy1sozc68ulb8vjyr9bat9h7xt0rhpwcpjlwph93jxfvw68aint66uiul2ufe70',
-                proxyHost: 'peaxtvlwqc5fxl8ph589pctgb4lcmyrve6zqn3810obkypk9w8s4kmteyzw9',
-                proxyPort: 5211701379,
-                destination: 'qgw6nyt92hd7ahj9xts7xxvqw7v8dywgpdr9qnex8gktkhpawj2bf9281h0iexyhnphkxn9iw4jf6q2sp4efen2rjf02zzakibek4ez7is6r6i38uvpl9xpmttqq4wa2hzswxnjyy6lkpdpljygrnrzo2gbb4ojm',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'pxv4wj8272jel4k730ajhqj8li7wkqgzb8gujxpnsv1qdpw03js5ef3hnc1gsjehd5urw0cgz995i09z2ife5o2pfs0z1wbc7cjf0enkxycpbaa8itcem177vtevccsx802gx8fpu9lg8hshmcphvypjz8kpzq5m',
-                responsibleUserAccountName: 'tyl38wvtpcquypyt7pod',
-                lastChangeUserAccount: 'qh5an96wddrbsfq0dokr',
-                lastChangedAt: '2020-11-06 05:15:33',
-                riInterfaceName: 'mwh3pyc70sun296fpm9qcu7eih2t0dm3mzfxpd3eokv6wlt1rnz0gvp2r3s5o1qpw52e9dgcecxu1g3akhjj1mpvr6b76yxz11jx1v9bnu5zm631mtwinsj672ohnnhvjh8smeioj9pzzagqc6svnxqu5nbqb2ho',
-                riInterfaceNamespace: '71isgoquxc3dikm0ok2bbv40mri31zh3xen9ecay7t28htwwny0e6g0ve45acq34u72noymie1pipvwroykt0aywea9tmn9o4lxwj25xi8yixpu45sto1m6na4w8to86ckzd5k8tnty31j5fdg79gjr3vxbtkhog',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ChannelHash must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'irgt7m13z1hpapoy0b2gnye2sj7t8iesq265n72i',
+                id: '1fde05fa-acfc-4d13-85c9-19ede9b284ed',
+                hash: 'tovl7wkc28kt5i24ag3lsgvb3ewytfxmijn71vik',
                 tenantId: null,
-                tenantCode: 'h2rilbgvqi9oud3gxmhnf322l8hq5z9e0a155kbqp8gme2hotg',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'lgha4n8dshh0th7rxjm6',
-                party: '0k44dbetershidfeyy0jh43w8vn4lk6i1410uh6qdlo8jhy9yaaj0ovs243dzm3sv6zc41eugfy1azx3hkzw8tm3rfbgu9l3arnez2wkl811ga4ku84zsjsxfi6rqrryujf1ii61q054fjrlwz9cftb4odogwfhe',
-                component: '48qz4gb4n8amnjzg6dfwqc4vvm6mao9ohll3vi0paoqezy6rt4m04dehuo022v5z1t28nxblac3q01ek2z4xycuks53v2khyf2hwki0l41e9c4acxo5gld0qrmhmdage1u0jbwbmdl5lac7301v6wst5yh9mdnvr',
-                name: 'gjv0oqshwrvneu59ramqwdsfgrdjsdshgxr0qr3wlr3tmzx0xv4wic6q0140y0htnrxg7igc8nkq7114702u5v8z373xks54no43xd15a67a0exqr8z52irsoxpgi2ya2js8ob72wk6pijomnpgng4mpjwiyeo4n',
-                flowHash: 'ujm5u1vldrgb1uj0jdn1lxo6q8i3aum6i6hzz75t',
-                flowParty: '1rvpa1dgqmczl1abs6ilvxp2xwx5zsqemcgn1n4y3t7h5da95daw0kaol5ag4pj34fy2r18l21263pobl69imae7oiqty7uq9zgh4f3yu54aewaseko0n1ppfmsifrzj8g4gw39pkek4cjs3xhvmlb5h8gkbx52x',
-                flowReceiverParty: 'iv8xl6lvpy6jizu9x0exn6u87pjl06jx4xcc8bcoa83rk03pqff33gi7d3qnq1r41xgl0m1abzvck2h8vroc6g3bn0tlzg3pw7yr368266ikvj8x6l56soc8ihn0ofw8c6rt63q7m37cevju58p64r9kju7viiqm',
-                flowComponent: 'bdx4j7mue60u4wztgsk97rxa10fg3ma95zur1shqwb26cxliv24q9fw1l50sdzjrexqngyujxkykdvj87tjy7zacqxllt06gyx0e5xkddwxa0jaxn6emigjak09q39cyg74o7t9v9un1lej9q0qh9prasdb7l5of',
-                flowReceiverComponent: 'ltj164r9gbdaxoomai24big1ptydjy6sl5zdnades3zkayqbqb8up977m3i72r7z5he1cmmmj83nwkuykhsv5jjf5yqnldjp1wm2ul2tjtwo4mmnlj0s01h688jc7fi483e0d4n5jaypvi3rel1uivn9wg64f8b2',
-                flowInterfaceName: '9qmj44jv12pnko1lcd0x67tbg53gg8at4cehm7n9nv460aaoybg38aev8wmnlrtpf7hbtteaqr4gs5ydzyxj1i7ruaxf1i9o914qohu02sj3ed5yhfzyocqmxsb24i2e7vft03g7qo43raqwvvdbhmdz40sq5ghd',
-                flowInterfaceNamespace: '18lupq5jv4l2ipbeb9fhjxxfil03ew5heikfkxfdupcpv804e8oqxrrudovbcxu69q7k6wyf7jhi6dycf7jobobkky8as87r4cx2qsnri8q2edf1aqjg9g3zp2ppherhlg75t4fkkm7e61srm3o64i9d0o8ahmoo',
-                version: 'qtxeqi308kwd19h9vas3',
-                adapterType: 'lr05xtadkwp8kls4ige46osca8c0txmiet6aq3f5epohrokv9ructl4i455j',
+                tenantCode: 'z9tga4u6zmchck8fknhpz87fi7qiuj9slbt5k7zgzejeitlkyn',
+                systemId: '48b79ae7-88dc-400f-b08a-5f9c6ed76bf5',
+                systemName: '1qshubcjayp3skdvgfzv',
+                party: 'ai7e7r4padfhc8cs9nsc8d0n1iufqhqpyqwebrjl4gmvjrg26nlr2hifdraa2k8uiy3ctw16xbnjmaqzsljpyhmprsg56jspvbbqgqowz8xczdy3p4q9httoylc4o59x9064fyrt8yyz96lek4xox8gk2k6pr0ma',
+                component: 'x2f7h1vggoe1v7h4igsmxfxkgg01kv8km8unycg75q2j2imb9rjeidaz77i307lap7bjo3ffb6k16odji81mue2rq3vvt7zzedv5fkwb6vxse2uu5j42i30441hf3cqb4u7ea59xew5rebsl03g5mxf1oshvawb4',
+                name: 'l5xhj9kch0l0zaoioltznszyz1rjdo7b3bniz6qyn1ht9byfadgjy2bkc9smzch47xjangkkl9zny9xq6ddbpk2rh5tm4wuuu6elu3ql2xcxdsic1ptdv7vqgdv7xfi1pj4ztmvx182pi75omxh9paejmskdwc0k',
+                flowHash: '7mbkjnk5rhdmahxr3408881e4h3zhsvdtmixc5fd',
+                flowParty: '0e9cghng9r043tmq5m1qd3l1xfkbs9gatgffrt8sjme8z3qf2v20cx49crwv5xhvk73whazz6b78axtfk24utasb7ywu4qtudzaof74al1dgsukwoz2ikx2ksku6qiwox36y45jcqqv8fh7wdxgb643arvm1zgp7',
+                flowReceiverParty: 'lwfe85kfb832pa8fkd3e3x8o4v4f2n3azx71hlzx1gl9u78wkn26naf0rbjnmss9h462vv5nz0wa43n28vd8fxxieqt8kbdx7smmqq2y9pf5br2spq6ujobbxbgucvu6un1p9tmuhm57ddsi69ozk8f411rercw9',
+                flowComponent: 'enak22cwssydchlc8090jas22c5jnjz39p51fp1uaivsxrmi3yidpbo80y7ufbxsnx73mbgisg267l7hkpdy0tku7p14lz8vcmobmiq80orc936x5fh5vufwoko41kqps0k97xudr3rvuezxbslt9pbgskpkz4bj',
+                flowReceiverComponent: 'nb7jgbxf0o5ca596xm14src2f9tdp8pfy1n2ge2u12le4feh4j465fjmvbvgyquxm1h9zalpr7ybq60f3mo6cxtkvn6iwzc9svayfl3zxz7831n9zqkoqxsa2j9oxtoyn2joy9d1nkba87zecaxfk1pxn9ww9a0d',
+                flowInterfaceName: 'frcekg4bxiy635lqnoqjzkqryilv6hefbsysrdt42lmissstn130jiw308q9cdyrawge06cmyukvcm3ik5gltxepylzsi5aol7sdfuy21z35h3j4c4b5m558qrjto2oshejk1m1170fp0ocen5dmf34q0fl1cltu',
+                flowInterfaceNamespace: 'wiqpkal4a5tdmm4ceoim8sqc9bb6jp656veizma1gx2v1uf7qn9lqomnz2vjnmmz1qhsrjlrfhvh1e39qbsv22tz0gszhy7lw4iaunklev029ptzwlmip308vsouueimbh2b3i0e6kva9ri22n78p1mw42anokr1',
+                version: 'vmhruke407ofb2jnstlh',
+                adapterType: '9cgfyevrwaertasbov7hdjdvt7m26ifqtbwyu9hbgo1jmcruj3oomp5k1fd5',
                 direction: 'SENDER',
-                transportProtocol: 'to337yihpj5oift29c6vw3bb8tz1eh0uumw0ydzbr38mfdv0g9k7nx4gfsgi',
-                messageProtocol: 'roumbtts4f9bir22do3m58ivrdq3fs3qceb99k9gh9xzlw38tt3k5ftx21kv',
-                adapterEngineName: '4o7vh0hk6jetr5upt2dcjezzyyxkbyql8wlqannhlu3okfhlbiagg1nrlooa74oumougbuvbr6agg2ueqv89wr0n1n7pj9jzzuz8rjb37l0qhkwk06e3279m3dpyihzp8iy37vdo55o49xv57wt9ol3bfkedgszx',
-                url: 'moat6o8hcs501apshhh6ukvba0t7hd48bejyddvnz5fvlmwno6frep2c06yczp2v6ossa8am4oc0hee03kscaozyit948vldp3476thrhhec9ne6pdsy0zhrpnzfbenjgw3oxdp6t0gkpvwzgfsfqj5afd10ykqgsavobl1sj1i55bhz3a73vtwmyg7fdy7tsd5gvmsa9wy1bij9kj1sbhn4ti5m3uw9pff5aiodov5s1d4y303aawogeldd5l25wi7rsyyvkofe3y89wb8n5491jfw02fhqoq4omt9q7eaw8xhbv8w1m0syeadqrfy4',
-                username: 'ay8a8jetjsf2ekpd8et9wd1qfegr2jy32n6occz3auj1xprcc9pcvxxj3lwg',
-                remoteHost: 'kt2i4aah0cbtskjo1te85wx76l2xrjges9e9l6cidrww157d5sf7ysfeqeczx0n91qp51e54auv7nyw421uoub342430gjlljzyf10pvri94gu187uypmpn16fdfhr6x6eifsxbvl8yc9u2hkpx29euwlb0fk8ie',
-                remotePort: 3006081734,
-                directory: 'idd5fzme2sdn8mjs8sx7xtpuez9jod18ok1qsin27xg2std29z6tw28vuetoqj2rl6z7bhxknjgkzdntm2vq0lxc4pbnfykkzanozf8jwj4l4aql7eyiqvamo15p78ruyx8rvzt1hr9l9t6o9q6xqfqycayndz0d4ntdqbrrei55z842wmhsftbwcxmm86wheiepvmx4n4sy0idxq81itylxrq1pqbl9vcdp7emsgzoi7447ha2nll1m7bz62w87el0bmzu4nfrovwn8kj7o5dmj2hx5ickqosiv2g0f02lj1jcyj7lha4vmq43qjt0jzf90m9cyve593n6fsj86e6ejp0mj8e6k80g7xsmv3ssig5bg098zgbiwhfxsmcq4g1e0ve2pt3av4ynju1j8bz6tgwp4imkn2gj6x7krqj737uildg5po75f3k4clnfrudqm9l8a872yf5nsh19vvxn4w5qd9tuhh5u1cznrrmm9yldfgujb1j5ik1fd03xfkymu4upiwq7t8bdzckbcjm4np8a3sisr44anphpl481aw4tfna5avxbpveapk7v9aiq0vewf10ycl2pzh716u5bvkbx30ebpqt8cg68landva16h2xlcg2vc3gxgvkmpx76mbqar9fp0jjd01dil0r5114ton9f18q6ntepm7hkq3o122sxsky4fwwov5u2ksz9wwv0c6lj54bg3p0sydxbhujhhh3mmritmriw0ao4oti08b7pjrvepbdqjsdc9xqi0ycsunozdjdha8a64ihnla5ohoe3zhgjxew9kyfn63y4y983ggo3849xk0mqlp5d0os8g8gpac1n6jo8nccehcge4g2qjbjztfnm20vayp7lgfcp23hpq7pao6rmscodokfovmix94i6qtjwsej690af57urvjhm6z8dha2j5zl8tewkwkviqfjsrg0nirmhhxy48189e1w58hlxnj9qjh5g9p1e0hv9agfd8ovbyu49j2pk6stuuwt0ukozu',
-                fileSchema: 'x4fvf8t4woht7xcd1d25gy1ba444d56vst46syndwxov3sfbhqjiv1o4mdamxbbasbjlk49c7t48or6z3bj2jqs3k52ckaxa12h9lx0bowruswppfyh7m6ytv0eovi7xx55vjvms8ohso11d7bjtjepr6o9hkfdwecsq5xyivxfzozweway1017ahl80ub5ilpjd4cmm6yvar1ze5got99i0zoacap5w82v436ao48736f5h78r1c0sk64c644dvoti0gsjm5toit4ewoaj1cdnn6puvafpea4cae5n073ecgtb3v7yzzdj2fqmjigvpnl2y8u4vn5m07qs6yvjks4b6bmn7f6glrj3blo2v13891fwjl5ow4ag97hm6c5hdbyrx4876ob9vc2sexk1kqyoe4u03eurxqq9tfwqiwmfmbw64ois70kxyzx1d0ggf4srm3gjgxvxntpv7xushv61mih986atzvau7t890brsoc4vay6sq9qmc5icxwvovmhgt4nfkny6lxkb95ecg42vaof4csh63lz9f0y38m3p8towqvsfoi6frelx9rv5rvd2cr4a8etia53cjb8p9q9wrmb166g2dbchoenb68g94ixpz70d1zd3518c4rqboyyjvkp2fueml505q1moyxfgul8qfr4v5dmewd9mg0f5zhpwmnbbrz7lg093bsjd2mmmboyk3xt2bksvqw26i3akvu869onux6d754m9ao0jniybv3zdd35kwsrwmk62ixgx3pep9k70ewmivaqi7y1l8px6y1ge34coudq4r4t2wdc5tcvmdwwu9rj55iu0hkrtkz03oragcjvk98g0c7fh7npr5zk5rvhjyklcr7u4qdybb2ufakgfo0fw5wfoff7ut1x05kxpcd1ia0woagx7dsnmfi4aeoalunca4q5hvytcb0aroti0c5us710nnihjv5c3zm9v2kgfu83r0994kabvivpesd7j72vdblp6bu8l4mt6dkuxy1pned6a9',
-                proxyHost: 'h0730z5k9lhtiwg0pfq7rrmlmaqfi7lgnxg0wd7r92uhxa8fzsv0xolmozok',
-                proxyPort: 6361133573,
-                destination: 'm8495cncvwx3c63km4s1gtlekt9vj5bcqya5859l69v2ver8eb43s6pu301p18sln2gluph7ya61c8n2c18s4evzzrophdmz1668lgd6cd44chikkiwj529rkvbgmv42kpp92yhn5742fr21vrxck91hinrv1wsk',
+                transportProtocol: 'vwvrh3sm879x3frmtwga9hkv2cix7k71ki2zp0gopsi47gpsvpop0zgfomag',
+                messageProtocol: 'e8b178sp9dibrrk7ovbi62z2yopf26sc6bnwbt7lodm1vwji2zydrvqxk7e6',
+                adapterEngineName: 'no2mkniv76t7iluecn1t7ce7g6w5qr70gy70mhb8xkw3hwyyiaj35q1sovii0910vaqcvvcrhvhieu2shkwpxioytw4vwxjmawj9fnhoorc1y4z4u5ao2kr25as2nl63hrlc8c5vun5rovaxyd347455st7wzvhb',
+                url: 'ywapsw39cld3jn1o2se3o0utx09777fj2z0lpi3jhjwevxjvqw6a5xzhy0wz9dv66u4yl9udn3ek00w51w7tkpyn7k8jpempejarvy3g9ayu4jukf76b3521ozdlvfp1s48kpu51ryje3hcergdqzqlbxoq4so1f3tzgjoqkvstnx8c8n2fj1p738gc7ldesqhyeezite28rqhqelg395ztwzhgkoz4wa5x3s9l7x2utv360wb9lgivvsp1uezflhlq77gtoso3gma3a3sr0lsmrtm6ha6hp20sxmjpnnsn0b2x8rgyskklx4tot76wm',
+                username: 'ez2qs342vaqerk9ggtuxdpixwosh57db8bk6mpmzecjmh0iy0yndnlmw135c',
+                remoteHost: 'ur6gfwjuoyqg39v2ou9smpfkvyge3v81o0isljba24x0ijhwhqnacoyfs2ypqkzlvjvw7tywbwnmfsr0xy8px3zmy64limepgt2hyn4zi89m9v0ac85y1hbspg9fo2jpoqkk80883gx4hnmkd8cgooizy9o6g85m',
+                remotePort: 7327114056,
+                directory: '90zz5hpn2guvmpy9whia90mifo3wsz73ik9sg0y7rbhvzm7eshg66bulnpq4j4kxrsvb8i57ajty7dh8krne9wte4amaocur3tbptpr1leo4xhgejrv3xi7vw3v2ec8e4f4j39auyar3v2bhdubxfiwm1smdwrhxw8lwxg946kg3d0u63q0hg4c04hle4hqmvev6bl6om26tecqffqepu6sdh84ninlr0zv2pc9q6g040rvh10uki3ska6270gi0lax3tuvs6o3r7fwwrpyg6bd43aipdyopk39qhwvnu79b1zi15n4pj8vyzdv6w2b0lpamh0660b3o1aifrgx2np9c8qkxibt75vvqe2ka70n8n66ql1i2pcrw8jywdb56k4ogppym8eb5vecpla8eino4j6egnqnq6igmibnjxuy5bxpz5xmfe02gyc3fepex01ax9wqnc39k3fs4x8wybrdm6tos584b27ofvk9495blpf9tepaqo6y7ld0jiu4ub2hu1gmywgsdl9git2yfpbowrmwc8n093ou9upcjjplcpjfzp16ldct5q7rlfawk8vplishs1g48pmowfwlchgcje8e7nnj984w4wrtaa71r3yu5r8mr2mfujqs79eesudwdss6oz4hj8ml0af0k8132zsr6ngtq9tidwk7lry1xij03vnozwcbctwpb5pvaoc2u9sa9lm5enxzgopw878i1pefcykya3eo8wqurfi69nmg1p91djltzboaxob5b9cy2zy3jtj2oflfc31oxymiknaadlbfxkyb1432i3tzt1tb0sgayysiazfd3lj1yj197nv8uaawp1rrvxioev8qmx6ln42lc8yf26zdmcdbmdq8p94h4x0ofm51orkqub40njnlv3aswj7clzd7vajjj9z0wosswxqxn7vsm0nc6cp434woq22uwaw0gf87glklymnysh265cfcr1l7x5dhdke1b3c86gbjz6zba2cwvf6mtiew09ri764uesk9o',
+                fileSchema: '3wiini94edsoy3rustei5euzjct52sz5ainro6bbbj5rhmfl8b7zi7w7ahg5ws4oz43q9tj61tuaov4u40le3yv8i9qz5lk18pp4x6yvusvsvwz98vp80gm8rj93d8qz2mlvklhfxkwrpirqfmmiytzcvf5hy3z6u2z44cjsktzizt4nu9tnhf9pbj9rf7uxznwcgwyvzpmq65geiyonhkhqjy3r837lu4z31j9tygn79ipfnp01eqb97sna9kbrybqmj24rxpphi4az95rq9kw5y9w98bcoc7wgk7ksggv37tonx5cg7hnbuafttop29e1f3k145df9ewy9r6fqau538od5nx6inms1duc3m2z2g0nr40krunzdp65wjreonbse899p4v68dzv3ogeyexl0qj9yyazogqadhggv3po3db2zthzqyw1i71bqse44bncdz4i95o11azylkf2o7alm88gzbviyt3b6oq7uk5zoj8xm67xhevhi7ra9ejef5i2iscycy3mob3zkeyu74hppdyieshniep1lhvr6ei4zrp1zx5ycbzszfeou0sf5k6wy4s35t8yt9q101dibyh9yt4tngn3e8wdgty7565nssigvjt41qej1b3ic9g6hajtpjptxy0wat15l717yq50fkomxsno2ydslil33xmz3gzaspn9n0yt8lju6leni36m1zar36vzn8xp48qedole2ebarqwm62a96lz3n1486mmmp32oeuh11ndb1lhlcpi7phuaz3luutvjraxbizoasac5ypg41kxnnbrqrh7lznjzdkszkx8xce4yot1zn5vfw94ovn9h3yhz68wumfr6su1kkdl2xxgtv48ub625wbk5darelecpq7ccf787gxkdwxmlmd3wl3jnzupy07ev2o8uncir9lks70zlmkkyvxqtf4y6mjr9e8hcv51xxphhh7ujbwqgwny4yne976kbeq6eailgbtg98spdarzpm64mtee93nz4hhbqhile6',
+                proxyHost: 'u7k5phlryj1x710l7zew5c5yexs5ywhw7qeg3fzhjp3ivi4s0hxh7i0qpul5',
+                proxyPort: 7836135837,
+                destination: 'q5wtfo51esa76am2u0ah7ahi3ukvz7hetw4ak74gnuvxkjbvst3oxgkiimv58oglyfns8x9mh7wdmgnfm5rcfl0ms4w2r3mr3u5f1ogf9qlgj97wa4qctmcbrs621j9giareqxq5lp04bz1hqetn81cqfi6nbvcx',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'lt80slbug9qxvhdmqal7craf5b5tbhstb5a76ptjzsa72knuju7gixv7lmuli45q4g9e13gcqvmoqautseesspptybazqe1syyartlzpu1t0g7rppykxd3h7nmp7a61ttes0u73u27fdt8wwbn2m3jcltda0mkw7',
-                responsibleUserAccountName: 'furgeonj868sp883hyoc',
-                lastChangeUserAccount: 'siy2jqnik1q1effux440',
-                lastChangedAt: '2020-11-06 09:22:39',
-                riInterfaceName: '4i1ml51nj1snca1jj6rjgeykw4xqm13xw3vr6sf10x3kfzjypkr0ztfzjpvftxi9fqkx7y7ydflb105vr7xvzorsz2eq60mgcdempg4j1li3g9z4tcz5qo5vdrtiw4p7kbgfqrs38xh87qsnf9va6a4frd26wxxs',
-                riInterfaceNamespace: 'y861qf3aq3b7cv7z6iy8jgo3pm0thbp1v89klkyp4vrbjdkg90w6k7h8fb6cqzd9slqi7v8kjw79ac21wxa7tiw63utknnvf7k2cgehfx3ylrd7hweypu0o8j27gwv34n68975a1u2dbrytjnxp9fv5tigc517ow',
+                softwareComponentName: 'xrvuszkxop6qj965m99sc47hz31ehklffjgfatg4oa6yo7ddlbe0924lml4nxjk97g2tlm1lnhm9sv371z39cwf6x7nr4s5dgrvtn8wlnqqz5l84ibxrbxwvrr8o8xd5e2i0zu74soia795og003xe194dskc43y',
+                responsibleUserAccountName: 'i17hihqqd4k60fwjkn6d',
+                lastChangeUserAccount: 'cptpu3tw4h05n8nykwy6',
+                lastChangedAt: '2021-05-23 12:06:07',
+                riInterfaceName: 'eck0jrcl521c5q0vloth548obprghxrnn25ve67hxxu0ec64a2nwda7syynuq5sne60n5u79oyoubjbx54ykrf90hfqxws47mxy1t1xmws6k9l9t8yok8m9bwbaae1kqw6ck6zi4aszsu041lrq569l6x5aq9nwf',
+                riInterfaceNamespace: '7o4vi65hoynh4va6jhmw3gbxvv3eyt0sbb7wyqw71807r15559yozq2w6d3nei1jrv4ls7yb0hamw7jjcc2v9bccwni1om760opztoqvgm11qyfbku10hzjap5vy2aihf5lmcuuc2ckvr36cac9j5an9lafv5sya',
             })
             .expect(400)
             .then(res => {
@@ -308,101 +229,51 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantId property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantCode property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'xl50x5v2vub70u3vr1smtc6rhpbgysgvgi7u8qny',
-                
-                tenantCode: '1mw88smawdc4x7fbdm916ljqioqduw3xara4if98w5r02xhzfx',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'l2wz4mlda2rpi1sdgp1w',
-                party: 'xbm7xrtmpwpl4drv707d6lvy8fmzavpadfyu0xh6no0r7fyf7p602p5g387ncmehjnsyx5yjw77gte35exgue8cld0gltx4r37qxezda7hqa9sphl8dsyl71jrpsifxcxjwwaq72852eb8emn4pj0vu3xocf0ufe',
-                component: 'hb2b3d6f6gjzkpzle2hdsj6llgzmvxmsgste5npyx7pxs3gzdnfbwzbpklbutswiih12yhq0ntlbu4p46nu0ozlttxnvwzeiy833motv3bk99wm0qmjd4xu8gmss9l7x0c4ya7tjvmgk8ng0gtadk1g9v123vtfs',
-                name: 'i9hbe7iws8ul7tmiqk7c6h8aov8tq042ujxyfncghattcu73orkh1451nlv9ob6sd1pb5tsxi0ecd3zuemapcdfz1odf6asvwytnwb1p5z7pd2irp6zw3tpxiysvonnnsoz9amgg5biuuuhjs05bbzysl191qdkh',
-                flowHash: 'mulqhq7o64e5x6bbtfh4rzmebxuun5d8kxwhg0k4',
-                flowParty: 'ido5ptcn3mi2f1wlj03kk0z0nv9tns4km1goto7nzu84a5c4k136nwqi5l3jnd50sa2dgrlwrifoluloticoojnicte8ec9cbled2b155x0qusk4of0xiwijh34z5mcidse6ae7nitm431heuxc9e9prmrrgw301',
-                flowReceiverParty: 'bu21gc5dglh35vujwapw8a22mf7ehhad97d6h3spmlil4pjqq7np53j6aehmyjc6el2i97al26wkgkj8fizquyuv4z4gg6z813agolsccfowv3cd3pcldorwbkaxjnsan9nmvdzlqyhtoyip1h0ef8965xds5z1a',
-                flowComponent: 'nxnt9h7h84cggkg0eqvoyjc0ulea0w49vjdeoxvfi4l34u8zcquuj2c5d0cnavu8fnpoqgscte6ihenc9219fcuz1vdlt53tpreu4vxhgho9lbw62qi8l2cm9qv5zat0wajlntyl5prrixv9vogmcnbi40b5go76',
-                flowReceiverComponent: 'qsf4ugjmr668ov60gssrd1r2lmp09kts9qyke719qtediq1o0omg5cod3341t1ft33albhw1hziw2c10ueev65xt3zwcj7lmrirdcsuzbhd44fg8yphcmrz3eiunzk6jlmmy3wculoo94ksm9ey1ugubesaxraop',
-                flowInterfaceName: 'rrq6vfat5u1ufjtgzzpg4idg9ye4u5rm7577mk95mn4hoxvv8thjs02itzw6pibxy6lb36myfw9jr6rz42gqhmqq3xkzl6wobsv3d5w3kqc00vsv0qkyzp1t8z6515ks9taa8pmsjnnxm1dt7m3gf4prd8e2ve2c',
-                flowInterfaceNamespace: '7bgky82wq9hjlruhgjynylk8maeydnx3el3lx11tirpsyavuxzd89fjeec44dbl4s5efppk5mynp71362lm2w92f53ocoj4ms8oq1vgspfm90f9vrmb5dayvfer16fz4xhqsdv5fmsg8de4e7tvrbe3shjfkdyb7',
-                version: '7gwxek3izw8srcyrnhll',
-                adapterType: '8qtglc46rtjvdf8i4us0q2fxym8kecrntf9upxhry95z8kqb7p2none8yjmj',
-                direction: 'RECEIVER',
-                transportProtocol: 'p14wlhqrklpyx494zuncqqefikmhcufh4qhy1bfpldd1rnsxhiwd7s1h1mxt',
-                messageProtocol: '35ddv2m5q4rh50dl2brit6xt2m11c9ma2pna33urrel9tb4twxsw094i4b6r',
-                adapterEngineName: '1biasm7m0gpt4ojogturmakbw2g91jg3z3pgztuvj2yg1so4va4razbnlinum64tptau75bm1d07k8rkaerk86lov3p46pc744f4g5y06xgw0447lqmtphldtszuulza5nh6f0705bz94o9dwz8d7a5o6qwxizou',
-                url: 'o2me8l6cwk63rn3vgmqoyohymd85y60un1hb439zl57r3hxdmbsbx5bkp6zv9eb9ss9rmh6vz67zy13ub2sgjg5x7vdeeq7rdr8k33du1s1ddlu17pha4c7a5t27a7fox0mz7n22ruhgmdx663ziav56hj9mz41x7f5rqfyc1v5e09ffsm9lfrp1ldpm1uifq9li2c8gcxwclt9uciudacimd56f723h8akg1cqfy6ihuxkznls383ggls0rv6wumgdwbjli7b9ewkgqql5lghu4aupcaz4cbzqprqokv0orjhtb5v3fwiapcs1ilehf',
-                username: '29pcclttyy6y43khajm0hwduep0kbch2zaaou08peibwko7f3k0i5pv92ean',
-                remoteHost: '2mvg4jpg3gk5z7bkhqzam98th20aytxldgs7w40vkq35blks3fzjav8lwvjezox36hr7pkiysrog471jhqeuylw6uuxigkh241i5axlff00o42ox6xssiyr089wu6kiidk45wn4zri3iph9qxd5isz3vtdzhhft7',
-                remotePort: 1475996475,
-                directory: '6km31qkgfl3ccjlgv7q4jhe46stnlhd10pgnijm3r8iczcrth99po0cth2saagvcvf9brm2hu5pi3dsna424upzpk77kcmmjxk65aok1rb1wgdjtke6u7cie63r4fpknqzhgj5qhejfquj15pceml5eedsl98thso271ls4o35n7boi0bvratcebf0zg4g6e3tk141ojyw9tlbppfkdaari081agq1n1pxurzoa7966o6s2bkrft4j5kfzjefv8srv8hrvylzmqsopq0cf9fayv9a52n0esq9jzwolzznu5l5n6vb3ryormlhuvegk8ijrx0nrdp4ampkympyubur8ao9jch0jlfd1uhn1k3aah83qe46yiw9vsr4z7cf202h8dqigogb7ebvxwzwmkaozpu1l281knltv3ykysc96l3g5715ll3b50wjlvpei4uyv1k8g1lonl9rxbdvp1i46qhj3d39ejmtidni9x6bouxjm5lavwkj3ho80joe7ae3n6twnzbxxoyfz1hu97064s2n3lfsqdkef269ds09tgc8t9onx2nn538hpaluopi7ezjp5yv4y9cppoxa7thak9u2agbqzc5nfpkzcpy91bepjoe32pxi91hfi7dc31he2e7ywur6i8fowtjn84tl6zvoa65dfxgirorbc7t8v81em2lg9c36w9yhn48ue1b153wqke4u9iwzkmqxq5tvnnxmxtyvwwogunmohbzyebqxpcrvt2ghd7e8e655zqt32ln5q42dco4mikx8jf40497svvjvdcwpl4ba58vgqv9shmhjgedr43cj9vyiadcn5ljr2rgdupdnigyenloj6g8mkwigkvj8b4bmd5y55ckxeypwe6wd2hpx20a2fzj8lhcbsjiqlxlthhato4j26d498a53vpfukbdubfyo472ws3i61jkoefmg6b8qy5jefyemak1s6drs1dd2lbagvp8uhq1s2v4ty28blj0w6pt93mmqmxbjoavrwawwr3m',
-                fileSchema: 'jh86yxvc0ir6nlho2wdi2mky14kxzmzqx4znucadbk7evq8jse2cj7yseu2h40r7f15i95tz64ef8rmh11wjw5ys29gtmjzxab11h665sjxs77irhl5ezjlpf8t5hveuanhhsnfqqog62g872xgk6ffdk3go15vv2xxrgmol6bw92pguz0yi4d38ub6zs42dw2mvexwghbvbbqf3fituhpba71piywe38bwsf2w4whja9xutz3l079crl2p27u6q3pudmxk3vjbx5w9tkhdxxpy8sded28ugxn1cos972ubb2eb1dl8rw7e522eu7eu7sjub4kdggp77wd27sgx4dttumhn0746gshlg0zoahcg3xi4unte43g4p19rhh2kb2hzao5iv2ojm42b0dgj4lq6wsnetrj97r7hxiq3w2g05ik92tavezcnioxpjtdrqyl3ktsbbkvil29382obd7o3pm2ianoiopcwl29rzrca8aqp2i4xf0e62o76ez5yw3ugxaw92fginqjdbocwql8vb60zhhksg6qarsspso60u0w0510tgxfwvycvjywy8rm4hqtp8eom7vrqhlx8pwe7etht81r3uk28bx5bqoi9mu1nx3n0ljzkdso979q233u60tgrwmveydv1liabwl99o7e5dqdfndugf5ft7qv3t9hozyvoilz7d12tkxmczm0nxo1337akvtrk9a6afw6twglypg6v2skprrgq2st2srx8ufkzkl6f7wpmeebkwwfg7oectgalfqs9qu76ztuess5kcs65ervlcuwyijhd3jlaqw0mh6rklm8u0zcarfqasvrc6n600d69x163njrb4kxy6imqus3t0gyjvtdhh9whxn0j067q56lp1nakul4kga8141v9lbhbqgaoco8xj9rrxo5me1usl81nzat5rhmskdleiunrnrefgznwpqsxxg72md9oz6cljg7lm03o6gcq8ehrmfelw83m4okimgla2hjfbbgce7j4kir33',
-                proxyHost: '44874fa4y1xhk7omq32ujsq2khgildy27yst5b23tbed2fjwacplkpc6sd1x',
-                proxyPort: 6370179284,
-                destination: 'ys3xj2dj17p4jfr5egiudsphezq4dv9ghob292wlur2q8xdu341r7e4k33mq61o9nhb6n3vx2ymzlky07myf3e4e8nxuum5kq4b4p4ysgy9sp1llgu74cyv71oq9exei01d0fwrb0s19punogzku0r9rmzeot7tw',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'sgm2y6741fcorvr5y9gtw0767c6vhsmoah6isavfcc5b63f65vvt6eo8g55asf9i9y5vrjixjf392vzmto8tlv9cmzag1pejb6h0jp9r68rd1ht8luhm5rogkze06cstihs34dbdewjpgqut5a6b6up513ssi2pw',
-                responsibleUserAccountName: 'sxx3q0ygxqrku4h9u41j',
-                lastChangeUserAccount: '07nvgaq7zhsq66nxp2eb',
-                lastChangedAt: '2020-11-05 17:57:15',
-                riInterfaceName: '0fdjlzt7xbdrojq6m7ocekecfkui3nma9haj5abi3j7od3f024ng6sg1f9zx2lp6mbhcktjzvob71bmrepnuxcsw7672mfwdw4ttxf4th22xvkkcx4hswi13xnu2bhtzw1go0wrnmhi75ub790ksr3t26nr2oku6',
-                riInterfaceNamespace: 'dvge9gkti0slwdbay3o0gg41or5j3k1wx0uz1knyjuph2fq8cxj1eil1sa8iqtf11wwg95z8ntb6nai2hf58hedfuzkf0x6vdf4n5z0haxzk041nd42q2jq5nanrfbce9q26mk6rp7kfrf867lvm1mkh60lo0x7b',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ChannelTenantId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantCode property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'f0h7bonjtjnh3w8zimyau72pjqugivj4td5c7296',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
+                id: 'b3809855-73e8-4a0c-86c9-b9a5b74e3cfb',
+                hash: 'r2earst7yz202hgxzaollzjvl6b5hqfrwv13q4l1',
+                tenantId: '809b508e-2353-4048-95fe-655645e635df',
                 tenantCode: null,
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'jqp3ns8a3ps6g5sedtvs',
-                party: 'arni9ig2lp5l19wakw948qshxcmuc4bob6xnkgsxvqq7nf426mmbmr83hcib846ezn6thtlhrgqakpnc9wubmyxs3vkflmgkelzvjzpml945j3ylpdu56729aoq2haa3a57bsycx213lerltvev9nrdmb5mvawys',
-                component: 'zpfr72wnxhoyir8u8dhspnljk310cfl2w6g6vqkn89dav0kfdvj2wbdqmfw4ua86kqb2j4sk79kzs1tk6qimf09an9msoef15l4f8lgbv1uqfumeioup35ebxxyeofcpitlc4x5aty6mwjz0cv9aw4as30rqr22r',
-                name: 'ccflzog3ku4kt3f9dqkm3iu3obb9qd1122784b9s4ym3d4kv05l0l3qax7a2w7ce81exb0jerwt3qg4xeqy6l9px7czipqj1g541fpu6rcxwv7udgyx6y8l54b3g4fnplm62jabiab5v3lo6tqpxuc788eyaedhk',
-                flowHash: 'm6znq1fsh0wztbiazk5llkkhxxleue50qkg9o1z9',
-                flowParty: '6rk2z03ptpsd2s7qwyn7ju13ea3zfwj92muibfsog45ww31kvg9ziqhd35kwouje3l6n88qf34cnleylgnrmp3l4gdpmqb5sb3dezij7lag2o9ro2072my6txewnyolctcoovg307x5fhwp38kfprpujmzvmxchi',
-                flowReceiverParty: 'u52fkhkong230y4u7lwgq2iu3n4x319h7ohvnpxxf5j90rxodf9peij38rt79py2j3cqo8tqtzjab0brdgn7cao2wz0esistd5x97rjwnwwlol8v9rsda2j0aezqkvgoylkl2z4o4afsb8y5d8h6uxy3iphwn5z4',
-                flowComponent: 'e3uia7i1oet4a9hbmljljxkp7v98oo9v62o8zyk0kplh6u6b8eyxc4ygz8dj5yptigrb52ez0g4iyif22g6pmv5q3dnz6gkbtzfajgaduxntqkrxvepg0h2d3oupfbg9ewjbfvx3itp9pxssira71tl1n0umst0j',
-                flowReceiverComponent: '33ksc1eolacx6hy4ggmmn9k3k1z4176vgw96bepgur9p709zqwaj2w04jqch5r7lbje9pkqnxp2vjk30w9xar3agu7y0s7gmb48304k6vzvvjatr6fbz49bjx505wkme3n69yf40kf9fhl501nv0f0863paq69ij',
-                flowInterfaceName: 'gaiahatbztj2aqjyajm2samfufxqwz6kedzopvyb256zid24iicqidqvv7b99id9ynajl1026e0oou6vrxz1j90sqnq68vdv9d7clgiq1ugi9atvhifjx31z3edifkqs4raw13dergwm06fdack3inyczjidoqio',
-                flowInterfaceNamespace: 'r5kaurim3xlooitd3qkk6rznwfgmuesg5qbn6010kju95vbwj0d9ogjkx2o644kji5q9hhra4ob66ecmnho4n7rfgchraq5aza27twqg6siurjxzpllafiugcufkdyha72zekz9qdufid7xy1sbvvpsg2c7nz6a1',
-                version: 'fht0aamxi5tt4b0ja01j',
-                adapterType: '1sn7itx6mgxmrm0di09m406270ehvire8m2jx5e5njh43pbiihaa957nd2k5',
-                direction: 'RECEIVER',
-                transportProtocol: '3o05fxgpp5c8vygtcbo010ncjxe1of6bmyblmv1t1w2z09i65fq6b589z03i',
-                messageProtocol: 'l0gzx7dnlom4wsr0d09co3y1jtu4nnngq0rk5wk51efmmpolx8ui4nwb0wrk',
-                adapterEngineName: 'deod16cfx39javgwvyd3oftnn8jbb3d9zqdlxbfpunf66b54z6so03tke10sb4isjn9fkqvbxvj8hfvufza6vxlf7h0g9nzrpb3x5bjaxfviw7gvkzw4qwcsnzexqm0xupsk23jkgso482b5je5m0qo4b71ye2zv',
-                url: '96o1299drbp5izylhk1nwi6zthqzri5xe15274idi1lrgv1b7nnadzf7nphiko65v0m9omr7en0voaczy2tehagwnx1pgvv8a64olsoumq9kcwby9zqkpzs989i8uimaqlk0gb26novtdo9nbibkuoajcrq6rwzye00eizcvwixtzvu8yl2f7iizw439z62x43o1zlvsiqb9r5x5uaz0ee0ot9v2wojw8xczkwxfmng3c3x7f9wgaa7amqot5don1otgu31gqxcx6n4uilw4nwevhljtqckaqt497k1w0bj9dkdrvr2mmydqtjswnpeo',
-                username: 'usy0062oztgsuht2vqa9xedkablftrv5s240ktfessfcw8jcl0dl6r3v742e',
-                remoteHost: 'anlktysa2pl1rfg3wi7usun534829da9rcqbplgjl0fklw89d1kixh2u1h011yepit18wug5kmcszqq154szmelrmeoi3d6kesv0twg3etzau21ucxy2gqwccbjr21sy6wjjb3teqfa9mep16w03b17hr378vsoc',
-                remotePort: 8116118727,
-                directory: 'j3toh6qpcw5s5dkdxovbyzooyjnq72r7i9soojvck24pgnwoska1y50jtwjdxld1fqovp46zifk7rz6ixcjmbow8g9xffrze4uf8ub9yhpc4pjhgu0tf5pnqno5gmyv1tzlerj3hsdkkf7au5kr45pm1byc4a2zfugcvcoym1pi8uqg0xe7mj0uildhmsn2e7rxxoh2vb401arybl1l8xpuhk8or0i2nbudman01pvdxdyw77sy0m1r6g6mnjokd9mpkjq6if7cqcz1q8nyp60spwc47rttf6l3cyz8wq7nsa1eih846gc2iyfesifatjrp21v0dp82s345gya1c2wd8d48dljinyzkcbix6lwfr5j37kg05lbqnygmvoexggvii2u4mosqu5sy4a4mtz02bwkyt2nyowp4cm2leoojfxszaq7r26vd7bkojnn3kl7qahbbqzwlt1hjck1nc0izhjctkecjsd6p0quiu4nis0yx09dclthz3t6u4q3cp0mh4dm2qj7ltueh397yyblbzekry823mhgu0dymi0w5dccf8l1nqjonrmn2e37x563869245mj6f01ua0q6p8zuicrdhliz7ybqcetxgjhg4tp8l560w7qzqgm16nw7kbfvnmj34gs3oy5j02om0c9fsd24c0rpom8dlpfup2i8ptozaih27agyc3db9jglv20df6lnd1cixxy1dvj8m2x0n2xyqmryv6uhknturllntv1yjydcvzygckfbbqaev3eg904gp3gi7ojqu3ej95i4rg7vujczd6vu3g1id2ar3w9m481cobxe4ny1as1sovshfkqq63sh1dl62dys5ilu94fh0era63x5p38nhfank3ivpry0mg8la2x84y4mphygptwpqza22g7k48mdx1sqs9zdx7b3n1f2jy53p5qopqagfy3fakzyc8r63qykhcpekd4x6d4cjsg5a6cr07q4n1l9g951f2azllw1aewtgj3mx68eab2wzzbif62hv',
-                fileSchema: 'wopo2ho2d6pqw5kg75nt3k9zrdhynp019iwbd4guxfunwwakyyqcjh55jxe7ime92mhjartyo0d9u463pjxz27sbi4xl6tyvl7l7doopjb1g5hgu3yfa2es57kh26x7c06af4zjfmskp0ujzdo66vgm2imcju28tl4gt5s2252ys6eqk9j81r51287vjcvkn4sjmv7ttbnjqiann7ng1b4jaox9zl373nslbfxmdcxhqnrt9zuqzydqdewii1rz2xq2dm8sp5o72r7ut52th1lwseuix9aaknhs097b38bixwkqfqabhw7s4dd3g16voed6jgcrndzz2t9l27whkiqee84oy7g3gsjq1nm8c37gj8y7mj43nnret2lv47wqvodypr6mi2wu6jv9gy9ftvx9mpvbs58epbcg0v2rs9p00w6tr3b8fx306w2l2zdl1jxbgpub95uu6u8no2wkyig21v9pku89t3il4fiopzv3q4e2lqq2fdgsnhtm90x1osrelvxw9m1yjjw5u12onyclwu9tnpjpn6gk5bks7dti7s3q6pama1nar2xzswvwzm3brj1ed0h7pakwbiqfqt65scgtv6wvbhb9p50t9x8rsk7q4z9w3ooxr6785gtgn6d491iqx2h4reblvolzweeyhtq4s41g178bz5l0jcorhqir0gl9grp7m6abd1uy4s7ftd8cljh49uhbzhakpn5imw5w1mbtpv0ru11tfwbvz2fl3lm4vnsryq0uwdolcd1oag0b6fte6zsu5bclue48vc2y80wh7fsmoo69yxpdtp62flwbc9p1qlfcidhk5xf8u9jn2yf8lji0dzwoz2ue2qty0xzakq4neysvn20kqdfxvbwzn4p9rg3ov352un0qdpfqazul8tcq20ivjhh1l4djh1wpoqeh5a1uox56itkfdl29tx6by9qxc7bcsceombyyi5zwkw46krqrccd0wi0tvaor2f2qh7zl4sos09d8dm8s94ufu171k9hsf',
-                proxyHost: 'w7l3tdi2tddgubf5b9dfazf3qso4qz8a3xlrqm7zvs4gph1xn2zgzetb7ze0',
-                proxyPort: 1411562302,
-                destination: 'pedd1wwtxlxphqe3sbz3akwcq46gpwq78hx1ct1vn2umd3o9xr20d71ckkqpjkq8sr8rcdrhtyu97ofo9zwwjxn3z7dxz2snxiks9uk6g04tca7zy8hjv8rudwdqctswyzyxjy5koig4tug5rxlf95ukfo9guawd',
+                systemId: '297187f7-d27b-4a30-9928-4c162e069a85',
+                systemName: 'j0scv7j887ifhr94jcva',
+                party: 'ucvuyp9vu8av96zi3yb355gp60ieufpmg4edx1i5cekbxg0l35ybbzw870sgw12yo7aqfqtljnjf4m2zmbi8pn60yum1k58rwuoo8eioaprwkcvbnydmqi4svigqnzl0k74m01u09xhm2yykn53iuevm7bryhb1e',
+                component: 'mmwxxuhi9e0yfren3evqlsosi8u3tqumsrmn4eouwfano6y6cxfs210nuw6x8gxwd6wpye75o2m1i4v8oi6vm9lc0tbv5kythwesjz02db7oper307dvfrumq8y0zazi3arvwyefv4zosvupkmwwbt2bat120omj',
+                name: '4wdvs89e8untagjuehrb5qwtph86yerqrzhjf0qbfktupchylvda1cc2eo6kh7jtc278yvkax0lvhrwels814oez34ujzr0antucjnn0ch3xznyyf2k0hik4cfmumxxj50a1udjbik2z6sdzlmnzd1oroea9uz68',
+                flowHash: 'wuredy46w5qeg2sxs79umt43o60ok001l4appaa6',
+                flowParty: 'tlhd1eworhf1n4z4qwwgo7e1vsbpgstbefuabfhg7qa8us3w9pywz2558es8u9xc4eo6n39n8s1pua1q44yryw9sefkk9u5lrnlgo6itmsl8ov2x2oo6xyo2j3kucs2jhyfi9eio6k5hb89c5pgosepn4y50eryl',
+                flowReceiverParty: 'wguqp9nacxzraqz2rur8x9uzpq6lpkjwhr7pso0c7w76p52plrmtdryus885pq00o6pg3fynrfzqfx3jisnmgztcj72kbtftdkvvv85wmgcp5mytlq7r7jtzfzqlcd7ak2scvbvbk06bp8wzhjadjamigo4l1jxc',
+                flowComponent: '5fm688mhr0dnsla8vlirqcco0gijuybnv99kofxwkhk9z5evkcamv4il5yit3rzhwec6gdysol2pd4m2ikshkf5htcr3b35xgnxwv23e5qimv919nog48yxj9o4uyah4mi7n9ia6d2l5mfst5o5101scxgfdbr9v',
+                flowReceiverComponent: 'd3y9q2vhnejoy8nkhzs5l6lb3fzpvfzl6ogungseg090bmhsg85q91d296axetnmu4g6jfzcid0ko58hcm2s14g6bkcq0eeoueumkb7tmes9eahja87brijteuo7un3lgs5k5awc50ln9lpojw5web5hyr6ylqwa',
+                flowInterfaceName: 'guiox9ov7mff0m6dr06v1z3h7y9t1pk358j1ddyochy96sotbrvrmshwt5xmcyv7zeb0wefz2v4yd3cvwahtvwzl942x7vix4lhf7tkcevr8kzvivzeiulpwcsnlxochlr2q7zdv0gljlb9om0361m62s9rvmszo',
+                flowInterfaceNamespace: 'zspoupc067yyhgq41ts7r8yb7nsslmm2vfgzxl9mb2rq3qb3m8wrkm07302bjq32f5q7savux23i18rykuau9ssbf39xzievnmainumugp3ebamnm28bcyykwx13bfmu5bh31ufnzyksxsuaufmfav2j78528hxc',
+                version: 'baxb92ynon6s5bhvisch',
+                adapterType: 'lewy0lpxdfdnnym43ae8n914b5s8h0xsgrcr94m32azkx3qngesn3zxuq3yd',
+                direction: 'SENDER',
+                transportProtocol: 'a9q5f9nyfgmqfpanqlvt1w1qsmbmjsgnltu8x9nq225zuxezlz43iqsnh6q6',
+                messageProtocol: '532uvqry8hv1y2kkn0o612hm1wsrg5to9ihohkoj3iu8cxto76h68imhq0c7',
+                adapterEngineName: 'km3g0s7u5rj7bqy6l1n6aas5nmnlsb1lwl5ie3foe61x33htdqevylkde1qxh1w6aj7mqinib4pthnsmzbwcb6srlct81u8lyyo1c7cmwa8k1cfdezod342zelvx9u3x7tou6woepm94uf1smhb86v6teqpkjfrn',
+                url: 'vpy7l3j0e4u757arjkczum16kit3n0jn5texft1f3mbebm2virbd9a7rzydkcvo0qmw3m1ewkyps8pgnl4101g8472mq4twnwsr8ynbosisereo07xs4t3fzqz1xiei1kx801ceza0vyh9ngt8j63t2yy2kpr8vbpinbq8htqrsnu7vt78vxussy3296bwivhp8ds6dx1d23l49d6gcarhbacf43f7nkmvarqbw8bx6av5ae1zkewdevvt15gz588yfyzn44svkb3cilrxykjiw6845s8uwkbfwpwjw0lwwng16q2mgioxuwjt68tfm9',
+                username: 'h66d6o6xk5d1xp4bm76byhc57d5sfm4od0739nx7r0zutrqmuo0d8ld14vgu',
+                remoteHost: 'km9oj2xshwo8gde4fn9oew43fo4gqz314e30qiuhoi8hhck6b2fomczzwj3fxtskklamirf1972akl10w1sxsoz6nb2g2zhxsufhlk6kmp8tz8awmo8577zts0f4hzmkum2wzf4d62l5rcdnhg3a1klpc7tdr80w',
+                remotePort: 6922293260,
+                directory: 'd69khxatnbxbwttbft0xjmtwv16ve3vxp9dy3euhekzxkpexeqd8bws07nyxde7cbwqmx2mf114athm853ma1m7lvwvq25oye8ix73v1at6z2b4ndhwsuz5yjd39sb3fehd197pq60vuxq93bruod5263q8ebr6ca1n6v2typuy4ijw79tazphlxxk4b6ub9qn2mcvnweym9kacqnwsvlz6pay441yhn4463xk5ikoxqzmfl90tt3502oo881teic4lqu19emjqmt4a5n0o98tq1t2j7e6exhv053nkkrgr39lozx141q0k3rdosyy0s945ecrl2nfjj84g7g9j6bzxl8tr3tmoi7hpjcujwiw7yfb2kfgots2vf2ddiz1scgg8npuok0gvvjj29etaee0qeynmw3m9zruh042qfli21zmcg569kjncs0gkdmon63xmvmf7r6sglxpodxgqqs0n3ke5y06zxfj2xw64633jg86cfo9b49lehq5x26i9xox8ra4u8b55luvsjy6mr6gvboimc6z292589dz7via9c3do6j4r41qc3isvmnv6c2w2reb87avmjec542sbfqv38apgor05fo1vuhfkf2z96qsqb9n45ymqf1miq0d4qvit5bnpap4t3oazl9m9503s1e8f6751x5662jbq0w4wsdkaonsm2lm6fi8ce011koprmpd02hn6p4e3n3vz9qrymb3s8frvdusr7u8thbcq01uodty7x2lnehzlismb3vwoh4ff9872elridmlorjod2h51rhuroglz5nhx24341mn4txc4mx0jwn0u3g10z8oc7dxwc9zl19z3w2r3pxsuoeooik2s1pb5gxesc3xxtnyiht065vdgcgn5mt02mirpk4jydtasx4s0y1ifi3qz4brawt9tncvstt4pc88db0bwjwposhll3v2lmvpb5xh8klki6jr2fbzubsklkh4bdzr5ouuimedz7gphbkm6lkydezkud4hpjut3dw1ly',
+                fileSchema: '0od6ti7t927ehyr5nrnnvmgwopek1fki86j4baxsjqee9joiet0z1j4z3624r2n4gii6ygd6o7vpv9uoujuyf04syf3nusprcmpand4kqj6gxdllf81ryhxddjrxr1hnx5shwxd3ucg7icaft2ewn4a122ccalmwbxjqj9vj6tlwzmx6jtl639ma58en7oph0tkx3gdkayo7fiho2k2df36ut7lpkahq2ok4ps7k3ha8sslwsmbal6q5xqk6l0bjuyfvoxnneify8f0ut2ov6zmwc4uzyvs1pq1ei7if0wm6i4wg34jzuwzmzd8hse4f8j8iqvzse3re5fyyawvo9et3nn6knnzuwd2uy0kl6o1n0x4crckfg32zdotm0d5amy1n2i4ke1axdr042be6x5mudg3fzuvk9mp7cfgdz3f719o76jyppqsrp1qjxu27sehvxdcxmieqmb82yidruvry3wfd1g52qbu8r5ztfh42dbdktq47o59x2t6why9b007smnn9ytv2la0yt56bx9sdauiagcxszvezg44jgdi0wm4gnzus5p6ida1sxhpxxpf0k8qjzynpdcee93rodebhvsyi0acqx5w9z9bqbmzwkjwbnkgqg9fakq6tx8816c54zg0taqhmofsjns4opswpb5ogpk9yzelgn4jwgzunvmufadmpm3090xsjqfipger0jdostmu9udy75x062exkx6le376leagenmqgzzl6xaqv5rrz3t7m6ngzf71uoldc7o6z2gj9vdzhwr9jtrx62ai34fyzsswlh5wbmzikfkrfr9273y2vipbc7q2syl00oeafga7pqby7r9oar91ibifoxoo806728uougnwkw9jvpnx1g7qe9qu1j0ixqpewn3wqg0dw4lfa8oernao71qa99gwh3sravantauu4mac812wp59j1h2iu8wzb1sz5cbfw1into2cmx7fk7i3rfrk3swwkn1qpflhaz2ipwwat3gvbhxkrikvbfxbh',
+                proxyHost: '53kqjo2188onoee3cpw5bmuvg149i6hrk7r7zx1licp3l91gmcxe03fmuoga',
+                proxyPort: 8085634387,
+                destination: '7ymqb07sqx4wu22lw8zz1v6t5g3sme09o5e26rsxsco5vtcpy0uuzxsd373rfwe0oaslc7pkyzzo0g1xksk3bo7hfo49eth0acm0vg95mlyn5pgj1rmk0buokpr24swtmsm4r5hjzc6jk1xxsl5qoykuclbe7wxq',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'bsvspnwf9fykoh501anshakm7wvs1sboa4hn17v9vicb8h1hxzqjpf3hrsxdg3k1lr94ze7mw04a9yti75io0qz02wdt3w5ur9pyplimaxwtce1edu5vxgs7n3j36vkkyksxybzyke2xfh76ghhr8zuasglnfg62',
-                responsibleUserAccountName: 'bmpz5lca8drfm3nfo77v',
-                lastChangeUserAccount: 'ilx4hhgygtb6hr8xvv5m',
-                lastChangedAt: '2020-11-05 22:53:13',
-                riInterfaceName: 'gbrjx0cc3acnww9gyxwflr2xwyz1vdsy18u8fqqw7dbju9uvt91n0chxy6qytfbeg2rmvgmwoh9lytoro3vdfp0qagrc132tgqr9j3u3786jvl0ax08qb30yaqqcsmmkwlchd9utskqlcljfb2emcq4afamaivz4',
-                riInterfaceNamespace: 'dmldtlux620bmq3z4jdvyg7qscq2rpyo891kx5s11aeyornsuieazgsifi7e907wkx06yigl83u3bshvbjzd9stgsare9uxyhf9ajkwc35ghnr1qlgk2ktgfhlpmtl52araf3ec875k3n049gg82px25wepuohzw',
+                softwareComponentName: 'a0cwv5qt8s08m3ve0azjo5kjyauanbharmyiqlnhtlz0w14pb5m1tnr4gzch96lpcnvgsrky1bd3hpmds3aezi3o1pqtwml4z5zyafmqqlsaj2ex8d2ubajnwftchzmtl9la568qy7zn3afhdwb9jzew5su1nhf0',
+                responsibleUserAccountName: 'iqzkugf8wtuyd04tda1e',
+                lastChangeUserAccount: '4hr54h2wcg31826snzq8',
+                lastChangedAt: '2021-05-23 07:31:51',
+                riInterfaceName: 'j0csrurgziopk66vxywnuvh4hx0zj2wgbd6s9xpi88cx8ab8t6amj0ub7veby4o7sc59jwxkr8igbcq2e0fc405xwff3e6gexxkzhlzkq3cdl0jcamgtcgxly8z3sfouxer1hsgdcyjfxma64gtclx21skwz5udt',
+                riInterfaceNamespace: 'yz458mqtn8qr31erk586gq0anoutk429xafwqfv5lu59sxj13p2gj4shcy43ur3l4j2rd3eivmgkfsfkjgzrblr8q1yqrjs3cro1j5jp1a5dse9l4nj8e6g30slf11ypsjr6nah1c83izujjj3eme8iqge7lpbt6',
             })
             .expect(400)
             .then(res => {
@@ -410,101 +281,51 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantCode property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '9yoox3h6kxywcccuqnlo56ed0b6tla3584212324',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'su8frfme4oxf40lh14ap',
-                party: 'r1u8m70bmbszfmp31s6ymog9qzvqqdtusviyiklo0v1vmqanowdkgrro7vpvz8875dlrfgb4wvuty9k6d4s3aaluwjhic50r25giyli2b7msx9ycsvnx4jcgij2mbxgtcghqnhf968gmx6b0zq2gfeyogv3qdki2',
-                component: 'r91lqj1rnut32re72cila6yllrw07muaa5lk7qjyg7el83asn3gnqjj3bphltnq0hmti5sjv1itib2dq2rpvxrnr7eqhj1qaycikxgbu39y2xeeudl4wkqla2vtd6ocu6bzzn8lc3pgxer9acgkyv2s01wvju68r',
-                name: 'tyy9cta4pmladu4axhz4j5xajc7u4is40f0lu93ke7plj0utcur1i0hftahic0su5l6rgcf07hy2cuqc2fp64x9ro9lqh4gvpul7qcnd3av2j82apha6b1nzntomj35qjz64gphos264l2wwyfe37r59qmak37o2',
-                flowHash: 'lb5tgo5kjckndyblshx42jgm4cqoc58ygk75rxss',
-                flowParty: 'k6mtusagltitfv5q493r32p2bc50sxelv5w0km6dgw9tqqoi2bvxuoa5tmq9qdgbx7mm4l09ggwcwmbmri2houfr6fvndtbtrq12ah2gvpxl6ecmnb1ft1hc89u2zpa6hzfp1uqndh57adtsy1y9w1kr5reiksk6',
-                flowReceiverParty: 'h29c8erpannv13p2i2uoc5ee2lu2e5qizfx03pzagu03oryc854tsp13qxlqtzjquu7gvrot9qej77rh07c7nu2fkkn47o8vrolg0fsbndwdk7i2k2fgq8lz23r6q5c2txi9mppn6pazhtpw21y4s1kxyvd9zm04',
-                flowComponent: 'm47dbio5hfh6oac65vtl7zwi6yjzj6fg284sg228awjt2ur1ed3iqo0ajg6w2xb60u97t16leu67vvxybynr0vhahgur4nwiunaabz0qfuwhox6g8yvu5w9g6x1nhlvlxmuojtsr7nqqihhc38b58z98zecpspgd',
-                flowReceiverComponent: 'c0i9lv4gfvp9uv9i346kisys4yem6n728t75jkn2atl5bvzdapf3o4rw9oqphzoeom3c5f00nldmhro1golkvuf3d2w1htmvw7f3s5fqhcaqw6wxcoyuiu4h2p1belk3zwojmnejjrbphip0nbxihjstbi4l79ia',
-                flowInterfaceName: 'pdhulh6nr080gls5g7n886e2qaqr3xclz51tha5zxlynguosau14xt2tawu4ce7gcbi1lfbp865d5v8undd0pc3wd2ww5dmqrh9ec9dtxf2klu0efn2fttu0yu1ztchbx8ir32anilcm3kot4coawvjrsklf6xyg',
-                flowInterfaceNamespace: '9xda5mw660mqd2cemzlc4j0bsp2t0lienwaflnm1qp3pywoxjj7j1wd8lj1y7m53eh6tx61cbqwxjgo8q5dc9ih96zas7qddwatfhvtk6wsg1kjgxyoqr5xokzykqcme4lmsux4td81wbwg9psp5cqf1f5qtmd9z',
-                version: '2ylonqt8k31jqu2xiqnk',
-                adapterType: 'hrh05jlzko3ytvwtba8s3ze0gkpwku1bnqrc1l9l9047vfxw7fme510xmrfp',
-                direction: 'SENDER',
-                transportProtocol: 'k0r9locpo13mbzjinl3xntayetzps7xkywbmmgct27zxiz99cs7k70jaflus',
-                messageProtocol: 'riwd717vh9pt2rf7mixxpfmwvwh8vjoa2upwcuhwxlbkgd27a8vuegpciokc',
-                adapterEngineName: 'ai0j5xlm74v64xaq0by6gsqihent7m23m05p44zw0uo1bjos2upg8t2k1uxefvtxsmbcrhf6r7ez5gfhp0q04rxsysdnfuqdq5a2mhhjespqg12hf72csdmb1vnh15esmpywu87p63qdvi3rjvgihvmldaplnjcm',
-                url: 'mz2k068que6pizckl8dlat1wvi8whcgjt6p8il825ztoyjut3uu142gfj6tudjsi53mrum7pr8psuaoejfjbwn4a1l5we4m36vpbcgfjf20xjfkt3nzwlnpmn4jqq1f1q8nno804lozwv65qsjnmm0qif6y457kt9fgdeimf1hlbftqy316camhnxpq8bo4p4mzklpglr8wko8sl0aiax2w0kv3359qd4ln9571ci08ecgwfyn4y4pxgn8dnw7ulivmr0wk2xyol1zjbyaf3y62tgqfcij0mi2ckwifk8tj10e98odpi0agzju3032wl',
-                username: '4f90yz7y7ffkz06ipizdfonrl5ph96woi5fvr5eydkznxp47387allhw4lxw',
-                remoteHost: 'qsrgcn4ilpx3um5tvxrjtqkzpioy7o3qa605b7b326lghb1sc4ko0fgis60ubltukap0enik6fpgx8rrsfn5yqnhdbf7i1mee69ugddyufkrjyeuh19a0kbjssinhjafpd7l1sxp07xr9vu0lp8muiok5rjearuh',
-                remotePort: 6883719835,
-                directory: 'ujmcca9swtde6m6tkdc0u9pmnhbi08tcec3dhej9xwrxrs9lcufa4qszex8cfolinpo7s87dw4l4qmxuh9w1otb8xerni5gophk7aomfpjb7cjooqaosdersjwbnshaf3uv8f4038kiz5rzv7lapfi8jg3sm0do260eo86eevfqhqnaefyjnisb0i5im1zuqkj2imt8oogxzulxifsxcnmwepc8jyrj8rz2zmqlpwn9j1q554ycxwtrzbwifwwrtkmqr0exgq1qfcmhv5vfqxiylljlia0xg04vbwb0jfwr6zdze8ejahq1a9hodd15stzjq4vcvenboz3bq3xok8jsg0h48m2uqrbscs9bxmmbjpe6543plmra2pde37k0n852fg0yf9ap2a5ltwicy166xrhqzqbdaoddyb6y7k9vs9qwk50997zrnb2bskom29fzk1sc4mrx1wpociw8i1n71aiicevcz57bbkm5o93i73nruqnzh3rabhx432acqp1byv3ndhbynsw8uqzoukhllxgtx2iiouds73tlw3j9zexa9zcfdierfbnwu68nj3xqw1swwlw6fz71xy1n0upo20s4lje27b4fjm82zs5vxvhegjmdgnwmpv89etsvwvopdtf4hmaa8wie4tsm77w4mb9178hy400cxqb4ho19ad2ttmxz030jc8la87rsbrpfjdfn7nrk8b4ywjt3lj1x48dp6xxy0pln17h1dcw643ak77zhqchz4xn0rct5hxzn8vp0d82e3szjtmvndefcttbtwnw3ciehnqyhk3dklqcap8nu21jt4yqovdlxrwc24hml3i2dcsfj49xvx8lh8ao3x08t1hwc127vf0fnqbio2ir61k3kb91ocx50e4b8p5rt5oeo51te23rmai1a7pkskvn4h1766np5js3q3ih1o75wf0opn9mso54m7j38cyva9sw83sclsjffxtzmbnykktglymfvg1hcadsc1d8lbrpfie76ucuk06yxg',
-                fileSchema: 'vtfcffk51ggrwra9flteznqfsvzzwwtas89jutnh0lyhhces132b5qy9pr34c1oeu235bxn3iuhj1cva4w6svfsu64iilhaj8xknkw1bi4m7fcl9slrym8savp24txta4nyapgl5aq2t26ledglt775nbm6jdtnygtnmdawoy3f83nce1sjvwvuvf4smlpi8kj5q12d9s84pfeyagub45khm6g5rrv28hg07zxlx9hqqg9m5xsuif7uw4f4fvbp3j68q2acd1ou3in3owx50aga2jxxfp6imn7p6ur79fqaha5znre40bjioflm2nhicpe7axb0qrfjkefao81bzt6up9dzlgftk0ezvymjpqbjo4pkxzy86gu3splurqm5g5z97fbq05vtx6ozfxa6wcnvqocq7emh0j3ilyt7dg5hbqnf1z8or3kht004d2vevtpt36bvkx79ctaqwxeonnb40a44zrd9j2gt2d4n7123spkf8txyeiy6gkk4sblgmgogsj44fckhkymqpl868uux035jmc040a9wum8qk1ktoy9xyr4f7868ls20292zzxs5qww822inn2rqi3cwp69dfbhyteh7bj46l1vjnmif1f93e5jnyvl3gvoxna3ti4jnkjz4gryeee4hq4q9bd1wwsoh3k9kx6gk5excmo6skjfwx3y6f07y0b6t26prnat3c8pqse9odczbbiwn4d93rt0p0hzns6urtk27nzfdbwdfznw87gasad607bkmw5p9m3whihi4a7wbgmrwqrf78uzq3qx9zaa9g1m1qut10pluu39v6v5maj151sqesljj0yxtizsrpwfy9ssy1ggv3fh9538618gc2ccd8n9a9qwrjdsw6crnt7d9h52x3km6ayrnlrkouncsacf7z4k2ns8hk66peaqrjy2xrn9eq4gnlk3cv31sk5680nfscq20gejwosq68gnaz931kz5ndunzn8oyj16fdlvq73bbdn1jpnm9xnkgrst2x39q6',
-                proxyHost: '455pmgjhryb0u6iba0tsk0h8bipbost922a3lz82sdvmf4r96h025qr7we0j',
-                proxyPort: 2855957767,
-                destination: 'uadzhm41z47e8zf5yfzi6e5gxzkn2ys98kcqs8mwljqki54dh20zih7vkkwlun5gf0fswwu189069d559dehoiwwtwi0gsqt1z3hsnn3q1hmfg3hjduczlwvlfve6gfg3w2w7efkh0e68hxeyntkxpa037btv75s',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'bicztggmorl6adc13a97vfd1841dcs1vyh9tu4m71lwy2pspxh2pz7ntbvmq5xx3oad6ksr9hwba4nvlb8qj8nbgyrlhfb1pl6xuek0ftdszytgudclrzmxzd4rtc6kn30kxgim4kittpa37v895752q3kl5yvle',
-                responsibleUserAccountName: 'swguuw45w14tahm4lggl',
-                lastChangeUserAccount: '2vl9ckp0skm9y6b83m14',
-                lastChangedAt: '2020-11-06 00:18:47',
-                riInterfaceName: 'ipny777mf37p7ek4tzplkm7nyhsoc16u8oas36rzkk2w1grfmmdqn74i7tb3s30krjqktg9ajrdy6unf9ge2xqvw7yfzged49gbkuu8plgw9a5pm17llugm7r5runozfaxvbtlqnfa7bpycuerdwm3etg2dsoexc',
-                riInterfaceNamespace: '12wh80g4dc9a55xn7ri5rp5fwdvct6xqn6of7s4hqoxuhfilneo2wo6ah87dz7nq6ut8uvmcb1veq8iqw552cafi7d2t8qaa2ysdh4r3846asglqbx5n40unsldz0mrfrrs9o3erj0lag7u51u1rbo15gzvwawdw',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ChannelTenantCode must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'q1nczp6xnh6xmd5706413riaq25ig0y18p56z0rn',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'm3i831aoiwj5eijfl6litejgo65oaq01pz327wlwlvcvkp5etc',
+                id: '0d67cedc-4986-4a06-b9e0-a38abb76f8ef',
+                hash: 'oxq88s8p58r3a2y5pxb2g5sntin14szqk1o9e04j',
+                tenantId: '653fd13d-9041-43fe-bb74-e5bb62304505',
+                tenantCode: 'a9z339ood90z8ohkobeodrebvmq88jwoviuno8jgate6yqanyp',
                 systemId: null,
-                systemName: 'qa77kf067jsnp9i9tr6m',
-                party: '6i46dgxt9ekw2sov9r8tp08cboxi142xwkfukxw2m518j3cg64sqwi9pwv2vid3nl3jjrj9mvm4pq516k7iqp432zodrc5lyb364z2prqc4o573tht69tk091e9c1wcj5dncue71i76ykwoghrzfq452rxwlvget',
-                component: 'n47gu9pfbuigu009pyhv4at7xnqwc13juf8r0d5940en37hpne0nul9jxz72ehz90xwzwe7zmjsacxjyqhj1v5ta8oc8y2h3mqyzzvo3b9yq9rv6fs85jk89il9z8io6ruhnqnc274dxfiwqouxt01k3mtby6bmc',
-                name: 'cid66csmypx9kl38q8qofdvzsvpq2f0yfzxynsqbgh27ra7q15hgo5eobh2gfg1j1ba2vd8t7dsrwf2mf3s97c31ndvxrwyb08s0cvwn3czbeqh4alfmc9jk5hkt23a7h7eoud1qsg2uthj71d9ke6u522h85yas',
-                flowHash: '4dr0qiv60tqd2unbp9pe2wdqn43uvj6jfdksiq2h',
-                flowParty: '1h9an2u706nx84s3sul4ojfejh0c8bneqe3o5vlwvh86jeks90ednsxx92dx89wqr8nf0aspc8dwhuctdunqufskt1ntaevhzlalt1de49jprw25sesxhmpbgqh9tmpbuvmxbpxjxgcyi8msyrblrzvc7u2pl9qf',
-                flowReceiverParty: 'povr62nv6bbcdi48fa192gsomv1gpgmb60yde3523fdzcns5037bp6ae8l87qlumuehszucw14gpwe1y3ov9fmnq67y0wkocq221y65sewue4gbkvjoolk4tue6et4jidul5isjym7k38d6eg2efwolxhctc3j9c',
-                flowComponent: 'ouy2xm6ohm4z4gr7aq2j3tpep9f07qcv9g698l2hso7qak3n8c62m39qfrwy7ssbkn50wnk1e6pg8dfowfbjhdwoi9gsxcwuht72kt3brf9geq6i348sdqg7xctzlqwdfde32p7phsba8lj3349evmgii4a66ixg',
-                flowReceiverComponent: 'ybkhxxtmcdx9ccoinaqko52uj9w83vuq273eo45flpehldrs5ksvikdqiwclncr45z5jx1ocupkul2cmrtz7s30ll9yc19pf99pymqiolqvn0zzd38x78amcxhrgv126sfz9j7wb8fq3n4mafwh3dp1jhdnef4um',
-                flowInterfaceName: 'dn4n50ipj9ceuu2kpvmzkeenn48919xqoeyj6wmi4cxnwu19g3e11xkrlo5imt0ny6qpekool130mpkh9wqsbejfczxnncc7w6l2edx0uva94l4s47q6jp882ewc6jsmemtc004vosubazv13kn1l96ug2wr40jh',
-                flowInterfaceNamespace: 'e0oxr06eywyq60qbik2ozbok3sqxqednzv9b94ons3npnqovx82xyed24b9agal6ebgaegfu0vkr3tcw1rl13zzb1uxtaau63w3wt6ld3oonpxnmi422zh50h6z7kqd5ndkdy6x0dmwk92g0zg9vi4hruq0ru236',
-                version: '0ctcvjrjhj5kbb63vi7e',
-                adapterType: '8yo3vsc256nowobpw3lajztpeu41ju4a7lyztsm7xnvlfawyn6x2lxgi3gjg',
-                direction: 'SENDER',
-                transportProtocol: 'kb2nt55mxhn1j3dv5u5l16exodqlgej0wb2ecy3a0i6pqoel3h8unvsoln29',
-                messageProtocol: '6kobmqvjq2qjt9pkmkxhx0jaqude580eck0yuncj6yanxkkswd6jwdvyacjm',
-                adapterEngineName: '5lqxj906tywpug3x7whenp19e7km8txu0a8muxq2zuo8ukrpw76irmhrhnas3gsdlrzqgfm7uve38u8hkq5orljk3w3vqext0571tacx8w6u7tmg8rqqgo6klu1m9okd6d87dj4c7g2sy5zyw6kupft9i1bxo446',
-                url: 'gwxxg4zi3tfv04p558hzawip57jacfunjr1kt5c8h4rp68wtgw719flm0dmxnftvs1qjqynq8zd64evo9nbcktnw7yl4cox9z6sagzu8c2nkmpktdtu31zy4vj9w3x8e8fjcdhmh4858f72q9ilpph3ah9mv2lrn6ftviegmid8ivavkv9r07vp2etjiutr1zzb1bbmdb1wuzipnw02zib4llmlfwbtipref9lnwsbd46hp028rakwrkb437ampkdwexdmruqbx0ddrfsgofe6frq65zihkjsh9hewqeb4leqwni08xfzdpy8rrjltqw',
-                username: 'e1il1v9ixs78zfpzv8wujkg0qoylmh8m6jbtpx6tmq9t4ko6q0sjpoqvx8eb',
-                remoteHost: 'akmdwv0f6s42dy9zph9kiml38x8eg026rk96u3coi3lpdv2ad5su8kpwgva8sunq1fswc0umqd2eqc6kk6qg02kuv3c0jcn3fv7h1uupbrl40b1lhuvmibtr70klcn4dql78hbdalabpypr5051t3dhyj2v4f32c',
-                remotePort: 1791036873,
-                directory: '600evxwngosnlmvoqgsht3a276d2mi5ag8f9z4j5a24ux3rbfcmce4q0jzuoa3u28e7038x8tbf8el0r4lwp6gp1m9zldkv14ozmg0xyvm1fnm1ksfeodz1fnvg5x9zn26ej53dx8o5vjrtaqstmti0z5wpy0ql9kxezgr30tesumqibfu1i97wtdazyi9zirjx6d9idwrs1629rrw5v4na2epxgo5u0um6kglavqfj1vptwowwvxs1ytk6roycae3k2qfl5o20ex030ax9p854a44tne729u9xwqzsborq8mevy0szja8vb4vk4obxdyn5xs6zugcahrbxton8657o3q3co2u3ol2shqxd0lx4vfus0bukdawwi6ahsfcv86fc3r8tw1ehsq9egfb6ftalgzai64fkeil2b34xch4dmkvao25agzupuy9wdzsgr8kx1dqb11ri5cx62n312jobsoj1blnsc14vju8edivig83nzq0cvvrafk2a8zu1qv6vo6aozxpsvmdkwr9q6fne1uyukoixq3bmfplplhb6rghbtprs5f1qak7bmc69r714iwx6et4tqxqd1ylacihbd8klmgxfpt5hl5dxrt6erw0nadn63w72dzx81lj6awofuvnrewtetlv3c4xf8zdrfp1v9gy4k9r7c38uuq9z8652ery4m3aya5sg8ewqf3m8sl5irgr6vmcjn6nhthxe0l2q4f0werdkl67wrg8k953kx4jbsn2hsjqgorsqtd8u572wx1uavez8t1sboue0boavu4st5crsh288mj7el1eigkyi3evvin849ifl53909101qkoi860icji98e5a7gonew70ncqqrf50diow0icx7eg678ubshtf09zrc3bqtbgoqda84ipvaqgr0bjpd2zzccg6r4g8hvu7yxf986n6o826aq4dytsvgl0k12uthh1g805e3tkyx7sytv1suudtjtpwso4dggikfa5dtgqmxeapu1wxnmdgiayxj',
-                fileSchema: '29f551ab7a3jilxtwjny9bpnbxfo453pqm1n953b0kmsy527nl3487no7fkzla2bot2tsw9m497fyayga2bgndad1c6g0exu2e7dovymrhrtg6nzdui9th8rhqof2m6uz9hhx20ubsvsvaoul812ipke08rrlq9zm8twiu4gy1f9owao2ohyb6hem3i04s1frdtpyk88e4aenshrowmdc6eh22cf8hcbciy82rpozgss7lo3yxqxtlyfqs2rrqpetqxkqadrc9sw0bhg8iaewfh0d7xs3u00ffl27x7pig4h6tsp0hvl1e4r2bp860ikz2uudm7vwfplu9o8w0lsrgjikpivtp4my9e54d3yyk5i6z8vb3bz9pnvq16kwqmdyy2nbj95xgsetx8pgs21jhhw4gzifjw7i2vir1b7mhpxyrmcu9324vztgpujn13iagrs4s4b9en90u0igh5vg21oupnhz9oobcg6rvsc477nz3lga0a5848ge7svmqjo8xb7ilpohpkbnf6ykhty3bpv9rqn2ckujvn9nknqjw1j8miqwbxus7hbonvypdt29df2qslz3nqiwoklh69179dhp0w6k8q42vhfcuqtj8l88sznm9sx3bi945k61vc558jnui7j9uule6i2ry3qpiq47x9otl0ey2karbg46484p9zgiljvplo4uwmoufbqcz3uev6l9pdst9nkdpcugonqhak4iqdh1tfjdn94pl1j6ymkdomv46agybllwi0q71yanw0s14poldzfwcj55yh1d2wsf7yocgaadl6ggrfpgz1wsv90h3euifjlx4bx9esai1vlsccid3jams989fubj8x44p1e2b5dp3cq6ba7bt213rspt8hcuvm2rxg0hlf3kxss74j3uqhxgc0we2dixlk4y3abii5fuzrtp2v374jpail4wi23rt2k73wewr6cls7tyvz94hp00xrw1qeya5pbgdvgij0fvs10vdelhrvfnlnvik2xqn9u7xyj',
-                proxyHost: 'k10zqd68wesmlkawv3kf4trr1h3v18m3koyxogf908hsf0iog2svjbuv7y8b',
-                proxyPort: 4728968908,
-                destination: 'jjkn7rnpyrhwdn5llaj7cc3yvn0htxf4n1vrqmpv4711tjpm8mec40k0uo2a21tzet22tpz52pdj2x5kbkd8vtnm6p7uk5do7e18clzk09vnp1owcsqelwoovjmcmlks7ulcyra56z28ucn5kymil5o63pq8hbzu',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'ib023ob5c780jclpolu2mfipvdbk18xhspukceoycm1x04bczrhwyxecei3g4ebjz8zjq3caf8urd3q4f2btnl776tddeg3k2a5x0oh39wbju3luoutz9tos7uknl35ux1tgx85t23h330qv2n50ih1ke2mt80vg',
-                responsibleUserAccountName: 'moher4ricg9udvyw7pjz',
-                lastChangeUserAccount: 'uieyuof9lfsu6y2vzyi8',
-                lastChangedAt: '2020-11-05 18:24:07',
-                riInterfaceName: 'rm0m6fa5w7blk0j8xohwwufc2c28dxarsqqwmw76nfmhh8k3i5riekcqlz1ya83e9ntstze7x4708wmxh4bzu5gvzj1xwnup5gvinhlb4z63ck6df7nmh50hmglqtudv3v9tk8qp8vzld92qm4vohvy2fvw1n480',
-                riInterfaceNamespace: 'n0ktpfqr7q1bpobfdyp7at311qeek551qj330u8x5h4909gfjy5s3u8h2ma5cthq1fm7rsbfh2wj2pby2or4gj9ki62gjnrlc9rmwfwdr9gyk4s2x4i9ed9t41dsmdce0c1p9h35if89qf8mf35c4f5tj1m0ncg1',
+                systemName: 'wh43kqt50tbne0ln5u95',
+                party: 'r7jn8ixlxmyjq9ezjazjy7vje78dx1zwjbia5cyj6jztu7uyyxkgruymcak5ajbc10o0x6p6f82ga4hg49kembe6e4bgf94tofi50dqmg9g8i0apnz2opk6qvxjvnmquxvqwhrw3cie297ua8da4ik8z15m2afk8',
+                component: 'xe0tz25k0fe44mw62wgoiao0v2x9yy1359wgrvltqc5ymkmeq0m4446f765z3amnwau9vr66itikkieil7kp5t6x2lhadpstgai65oxim3d8h7x0dfrx2tsw6rt5kzuk2dquxsslyd774ptmxvpv1oy1m00jc1ad',
+                name: 'issuxfwr0v8ttclfhwlntfoc8lfwt9b28mon9utqr1zdjmfkopv1rl8dbippshq5cud49yha0uk8uuus9xg8dwpfyl464prv95bu4i8wf3pih59laz639d17ndwftvjitd8a3f7a5fz7jotfszxzrmfxm93km1f9',
+                flowHash: 'tlcuyefg3wd4w6sbz0u36gaots356jly7rmqyzxi',
+                flowParty: 'uas0ysoi1fsxifzpu1fn8p71sgypmpt39yfyk0hlx6l0ez2my4sorxt41gy45je0q5k7wt7w6xj2u6i2oovegiqbt6cipo35fba5n93wi96xt7ykygurf4rn2bvbufz5s1katp8gz371e13tqf2so3jddt85lkvx',
+                flowReceiverParty: 'sn5milq8wsfozhy7z86qzy54m4b4vejnd8cpb50quhvxmyryyz9d9dolmnyv7e4r0m1xw7lw3g5ydx6ojwoq59p1cn249f6a42qi1h502bqblblcqumf0g6akvgzobcaerf9iha5v29i31ra8xzlob6tfibgatyo',
+                flowComponent: 'ledrymfniepm2v76jhq6fqxyr135e41egeh5v0z3qzq9ztbcnow7m679gd2j5f3t22zst4qlnyzjbn8hkptheqkuyiipybmftcrfy2kjz5oprf94ujmz51oapuws2dyk5q2yfiadnkttr1ylaxiucvjmwbvj1jma',
+                flowReceiverComponent: 'c80zpbon6rvoumharm45xtp5elc7u33b94l24vvr6uomi8n1qaoj9bwhtxvywcc1aflly34eb3cykgvx4xx78pnmor673vznk62l0t6ypslzuk3pbtrqt7sjx46d72py558zlecvrtrxecxaa05uk819wr1zuq4t',
+                flowInterfaceName: 'p9ks50ywgq5be44tjf0gs99d90krt8b7j8gvbruxljncjolr08f6ha2b64t5yoa4ga3345keiky2d0ib2y6u6phhprus09x3vxe4hifdesezimnjicamw9j5x5r1ckg9di54c89nldh0xadv3awy47zjlckp3xyn',
+                flowInterfaceNamespace: 'vg2k7jxlkr8dvcuqv6t1uooyhezuprgszhxy9jaqaszrwzzvm0z15evmkk8ofhkl7o37l7pvbr0mr926qqj6qttso8hfftyon95s53tjlistmgp4n4kf9p1xblmuh3ezhko9tahtw7mi7ucu327dn13sydjfjpaf',
+                version: 'wsyh13xydj9tuh7bgm65',
+                adapterType: 'woc59vlwtgez94t0n2qq4vkjhude58lvkew4s5yymur6g5mezc3slx4x1qbk',
+                direction: 'RECEIVER',
+                transportProtocol: 'jlcw2892hyniop35f87obfdtk3n1mebeodsaymw1ogkxfbvnqhkorlgocz61',
+                messageProtocol: 'qt2h224k77dd0jveq3khh46rvvt3e1pywgc8n8xxut448f19d8k31nub9udj',
+                adapterEngineName: 'ni4rsastjrs0i0rvkt2hlakrbzn8el41omhauyjreh0xvbvegm5fsoopjpurlurk04tfii1v9dpuhn9nnwnrsiya1aysbg8t8dqxew2r7bj5c7o9jomuhzzcxnwzuc15mscmhw4q8vfuo0ax6b6j13qejxzuimmm',
+                url: 'i73h3lavbpqluxm9omfwj2arwpstvyflk1wdmb490u6czbjnnrfudfjgj4cdztdto1y4oodjid1v4k019kicuda64fe05w0u2fxbybhfrhk2odg32tumdbdogyjgqbwwfpndrlygmcnut124t415tew37g3fw8d5dna67bz7ob32zmh9hqajcgv9604jtg07shzutrnlz49w8z62godhvjabu0ldxoqcze52hdm9hkdezgect4k7hnznt2v31byhbyzscex7ghntiwwyrb90ue2orhl66nn92u6h3bes09o6iyblp4ljujkotr1yr9js',
+                username: 'nmxcm9e8j1bcnz8nmj8wiycprl0ar4zauy5y3mxhuao2mojzgq5e4j9aqvko',
+                remoteHost: 'mue16mb0szmel8e5o93nxke4iw29bs81sd5poffzagvrutgbhtu0m5soc6rb0rt3m0eyn9ruyqvvsp5bs38bbaqtcjzqf8o8o5rofran5f8ui95vmh1u1syzgoqwq9zgregg7mfcvo9qccw887ciekqnuynxj4me',
+                remotePort: 9409254078,
+                directory: 'chuaeq6un8yuoweopevrmbqd7t9qve402ufqqucg4z7v5js9pa8yd3ndgafdlqzcbdg0boen6skpgk0apb1wbe1vagy61rvr78n2u3xes9lwrmr8j45tdmc1pu11c62zzt99zzlvopmo7ddcqz6sndljdpkg5p5ksr8b678lxtmot4wnbnt7eugf2qvuf374z9s2fgh3ev6zrm9g30lbljqgijhgmibe7xr6yc0lejjj8cfmqigt5iqp8vw8hh813tzyrfv3wxuh273m5gujoytoh0zt6hdsxrd6tvb7a3x0onmbck73848b96nase5hrfw1z6nhau3k2129sz2va6nmso7ev7a1xkagnp3yorezqof19vc2fppkxsnvl0tdalx9l33y7w4ngvxxf1vhj8snqg80lz2x5j7q7sjh52tntpcs0654r4a1ztmiq6015ovuuy3s259xu9hx4luqmhl1r8j1g4cbujex2owjgbkm8sholdjd2ql6y0gw9xvurn7wuyx70378e62n95uwpzkb11ls7sq29prjf1sbqd743dpfec5rfvvw255f74edoz894ugi9dkabbgrs9mogvoc3f71ljh0wfg72hde5w9vrsadq7k6im3twl5ryqwvaer24ncujq5bgdj6gqnjtmygdue2mzq699odq5x3zocz59szw8qt923rmij399k7owm2zylu89ra0ekw6n5qiph3622rmtuze3bks5jwzm3avku9g9exslar07o8mhfgjkus3c71yn3o2nzgo4pmk5vevjfb0tjt6m3yk8r3f7prhbtnhwmv7c1rwd673tzby69fy3pncg5v7uraibl6libfikm0imyyeqvckpum6up3arc8m2e9z372x6le28c02wv3zlwmnop4qzn4c8lrwrg6f7x8pzyw4kemaqqagxicqudmc53holxtanir17lw2vz49p1s0va01zgshpydrmnhrf6ok9y51h31tvcjc7bzob2l4b3y3g3uzif6el4l',
+                fileSchema: '0vbm4omjuirxgykqbg022rhg4bx8erpfxsif3imuqd3pjazjvsbo5uzihabr91qeanm6zqtai4kbms2jt69at91g7rk1exlha0ow1nnjykor3atr1m61iruksw33bb4zwjgqh34zgu0qmh1ij9cvi9a2j44kbr8672ipdum61riaqjgvnyzymmt9yqqb27uqug6l46q4mi19zneevgs9a74phdqvnb84rb10vlymmff346dsj1k6hde3xhd72cqlxzb80uqmfn70dpusgm4eak7a8wtikzlz6spkv6xpdyhvxba5wwfkbj79qym61dvecnd0jck14t96oec3zgo9fyob1pwwbffrl69azll02jf38yicbgwgt2sfv4uf8jdyer314jf8cpecgg2iy3x9axtkd71ov5pgxbmnh2fqx06a204n61hfkc9z6s5rg3fy5cut17r57qzp27u2buvza3euw1amqrbf5pssy0vpamud85tjfvzynyj18i31p4v5ark0j6gqwjdh9s789wuef1a5vzbd6zwjyg7fjhg83ayutuelt9yxow0v51t0rkl8klgx9s4baxh9yswms9pv0ariaopra2nwsf9hg3e7pik830envbluv1tk48n3060o0fec5kjsx1tnj0riu574srv8lqkdhf6xwkn6lggou31amvjq0sxw9ei61frc9hhgo80jgj5uer04hkvmmmvjeuhz8fxjx53xcwog93xs6bnzk91e89ws657rsy43wxz7i7xprv2fhhtqfwa63m5c3m6pyc7okl8kbxfgqcu3b9splpv0oydmxr9i12zftvgix75ayns6tchxvw5zboj3mlm04y13w4fnu7jzbcukiit8wmg2ras64lian8ieulaj544g99sqqdrzi1oz66lrlfmmtl5vkcd4xho1plg0mz5j1m3i9qax8anho51za0is8felubgd2s91xikr594ewe9d3uc1rc8fdzqj1xfu82y6fb55uqtpq2q5v45vfdpe',
+                proxyHost: '84a8n8tvsvtmtlbp3vdfkuewvm1vckasp635i1p7rb348zcrehauu4l8p5xb',
+                proxyPort: 6542549579,
+                destination: 'i4574y02lilqoor2hx32m0sj1oazdpm5y2pjkp394rb7fhijwlbw8d5dyxsgjezznrf78zzj4ncbmy1wuc6e55ddr1gd4wh2hb0t31nkfzud7iksrgocvlqoavu06e0458mhboiaqjpf8dwetp12fw8fa0jor20y',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'gin07dh5pb1pjy51n8hxb83if98gtum7c1arin5i5medngicdnlko7bvpt3rfgwakl3ag2vno6mogswx6rzn6eye8570jx3f1lmqndi6447j99tmb1vewbnul27wwjrpx8bn8ggqlzrvivoxxmglnp8wzwnpp0z8',
+                responsibleUserAccountName: '3ur91z7cdfps9in4rty3',
+                lastChangeUserAccount: 'rv7dq4qvhdpmeagi97r5',
+                lastChangedAt: '2021-05-22 18:46:39',
+                riInterfaceName: '72l4xnpyq8hff429benf9hegxx7fhhon0zvrbd1y1aspvu2plyitbllscsooz6l0l75xdknda08vrqp0yfim9des0iwfveg0tbn5bj5r1280vfam0hxvglssjxbp23slrqmkt4bnwa8etndy4qgt8eiy5v6nnma5',
+                riInterfaceNamespace: 'sg86bxbwa14ckrn403q1w3rgc2j5mmwzhai8davv28kqg03rgfjlfjrz7xpyvlvehqn8h83vz90bp55tsec8pecdn7d4bx1d3cy1taio8ngby2oesii5arcpyhks3c6mzhk3j7wn5vpylpq9x0xg3t7idpvzkrft',
             })
             .expect(400)
             .then(res => {
@@ -512,101 +333,51 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemId property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'obeuw3u9t94fmqutki0qy3aacpmqy2s4gijwjo4n',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'ln2irhc8i0wp2jr9u84ydqzxqmrwgulpw1jirndjnlib751pqo',
-                
-                systemName: '0expd7mh3c9e0y7wlnf4',
-                party: 'tgs8vp9bzvs7ssd2f0t14eruk6ipvkz0fm8dmxb295ojtl8m9xp56evkd2ehul6ry5ngyi0p3owefhh6qk9r0pyo8antjyfnjehjynvvkqm0itpoz9u0artkf3gb528e4ion2c7ftuifeim0an82ldggm537ef8x',
-                component: '1xhokzdhev2dnfqgn8snrspukgbtmav0od2z0bgu7krh58n0pjfoo2siuaho2rnobk9u0c7xjqak0fwnvmh5mdv4he1ap7sc4ure06rikl70b91trcqcov0kbf0moleh7xy4ahbzmpsnfl6eet81qg4gt4klpjjc',
-                name: '9tgwem72esg5y2p0yxbxc7jcanvk9wmtglt15l5v7kng0twzzk8bman0znsqwc7f8o04ezlll4nxl0836q1awsenthc0cr5dpe03n4ryn90emtyzsj50vnfq2di5w23yyefnldg42p8k25l2l164wlsxnuiqz0b7',
-                flowHash: '4543kl1jsgjc1dnle871rn0vebac670jf6e1ip63',
-                flowParty: '5mrc75oi1sbfvamedpzavx6rihc6apizcp62xvfy7hh67wbwca8lvfs5ot6gtsofimte36jp3fydg5lnudnv07bv9j037bvw87zv8ihry89gnlrh383xqe313tdf8gmqiq93yeic1x7h18pwwiiiv8lf31sxqgol',
-                flowReceiverParty: 'ol8o076nvqrwfy8lg3i03jqn2chrezz352kfcajztf0knuncux8pu0m6gl0px9m07ke3s9yflxs3s964ymxmso8b048j3od9i912sqxn3dr0apjd0p2pjqd1n71592i1xttqiqh8buqx9le096pvneq3a8y7mexm',
-                flowComponent: 'oblmkzh6t1i9ruict9a6ikqnc2a7ysrjf0ntvj83gdqr9voctrtcd060c3q1ejirkgo0a03yyunswmoz2easrxw3404j725gnatft6bht4ogu0rihpkd93oehlyaq65do7vlbrvrghng4x88abebmokt1onlewc5',
-                flowReceiverComponent: 'mcyfsc9zp73zygbe4nl0gi0suxqyt1jvrprbsayd4cv8zqogy1z5hb9uhho6sktvbt3m6mi45s27o0ug6h1j55inw7ovza4ocl7m3jezc99jpmh5qzv39aqmk3y47079c7h0r8jj3cib16x7f6r1yh7z2wilk7h8',
-                flowInterfaceName: 'x3djk9k27024bu7c46s2y9mjjvjfjac64ef1nzr9g4yxtu14aq3bmer7lqo2wmmcpgmojjvwkjdetz15jhtbok0zgc71vwr0b2riuii3fxpmgzb66ng0qisbswcliyd2cx32c51gkabg9ca8hy9ow1y2s33y3653',
-                flowInterfaceNamespace: 'peorpctbyrxcrmr49i4n39tyfq3uk550akthh2m8bwq71rf9afdlax6x5kr6hv97y7y9hm29lt7xcihpuzpzk1xtcm88kyrgzgcknfqxll277tgty3mcuk0zzswv64fucte7506okejk8777th21likl72g4eat1',
-                version: 'c8nxwfyzii07huii76d9',
-                adapterType: 'w9p4p8rqilm0u87b2oqw1hyq3fm3b8tboo0l8g5ovth8n34xm59hgnuw0t0q',
-                direction: 'SENDER',
-                transportProtocol: 'z5dibmrgjbu5hsss0zaelns6vuw8gspqg3dxpy5wqq64we5s95nv7cqnyiiw',
-                messageProtocol: 'nf386tjjzlgn036o308u808k4k0kal5n4cjo3qpucypfc8xh7ntz1n9rdfil',
-                adapterEngineName: 'wnf7gl9gee5uxz9wdpnuhwu0y42hzn7mhrvs46iwpxf8zwy2bu1ckb3sb3hq6y8xwpnry16j7t0p8szso1jmbjwhyl6zwycsgpbr8sckrfgb2266khjoulvcnr8y8z140irswi8m6kvftxyk7bae54cx3odmcwum',
-                url: 'wriyn4bj4md6pb34fccnkke5vylnals0upl8qb4vv4csh1r7sx0wbhogil44mjamex4q5kfqzyvbeqyb1kfmmataz8w30gxfixidhmrm2ylezue0ig54bbrcj2rfmmovd66zuy6kunf43owadn6amp3o7llwm1e55jpbm9harqjcngredi4xmxccd86ngzyaumzzktsy077r6w4vr89c0mr2cfrsqz5gqjo28b1tvz69uxzmoxo04fuatal26tyi5roq8z96b61yl1zuqrhaynt2lcgodw5q3ec5cj05mlfqu7jrej14c2o6djlqubgd',
-                username: 'qlh497fon78bdoojjoz18ob1tjm8lcs8ct6abrvqhb8lgvn0j74e1o714mdx',
-                remoteHost: '4cnihmk5a8qirx18n410p9nhcslgohtrjwybf5jmzj9gg5vs7fzx7ubvwabdeifmde4pb9cwsa2gfvove56sk9xdg21cmikq4e7kmhltgfmxz4b3ms5d07lw4t14mfnsvhcqtmf4rvxtbiknkl2i2m2opi1fznno',
-                remotePort: 1545747174,
-                directory: 'vtipqrcks85dcg4vs3e08yd439tswbkqi2ocopqlxph3viwrk63i6hspidx99qpenmyjy2c20c3isrz3cwdb3xqldu5t19xy3upy31n0h271fdb9ama4wsvmgmrncrsrbfds56ms1291vk9ahdzvhnxifrifgsmmg42ss4kl311ga8gw3qnla86wnduf3v3ax5cxsaelyq2ly248bq4xd66kkq98d3j923hygq7m2n8tbp5kcoh4hjodegyur2bdoilvsgsu8jydfa8ukinykrtff4d10gzp7tvbgoo2cgjpozk27irz5i6h88cdqf8yx552c9nd9aogywytssf5vg65dqupicywsa5t8hl9d8evfq3vjnkodsh8xvt5dklt5qi8vpu4e5napbhs3qcfj9ymb6qoq3epv9cpfpofnjr9uv785szh79fdkgzutyg1nchnyhrepi7n1gtwtkafc74tn9pncpb5ci08yhwcd94hmwlzdfb5l05l14nul3qwfb233yhusp6llrs2sqwtuh3tn0kvcnlvz7njn247yb12iq4n18o9lq12dvdxui0m15xcv65wuw41sv8bwce084tj7v5przqfto3jv2uy3jgrkxlzl683027opb0rbam663w5covid838g37off5tadeh6vxab6ivlstxkcdtvll4z76cynuboexbaq0yjh5te9njpbwa0b00lcs70rvugwurd0d39n98i27fpg5r3bdgs93nu355wqr6wdxgqks00kougby0arh9cjfwxx31cwde7jzr9n464dtm018qa9l1enad360skwr4woptg3zsb5q3igmpzh62s38zbissi9cambllsjrrrkmt7vu5nkfludt2xx3t90mbmylxltwdw6mu0a4nitwyn2jnifdssbtn0xwt4qtzdza4unrag9y4y0vowdhvx4ipcr2mq0dyx3yl18mdapf8i838o0aq9hqyowrck9suuv0c7ksx6owxzvglm5k8kpkikrj57fr9',
-                fileSchema: 'd6l4r8w1005gu24u4t4vr0t7pvf9brsnmcb98uzrwneeynm011273cbmoqqkhbf4i3q9xdorsdvxva94p0rlhnhd7bqclcxn1knvg3ujtb6yyj5bx3kauxiwvwq7dh7rj2qztqzciafrzxoobg1wxruq1jvwy28rh4rmnykfu2v07ft8b5skrvr30gy7th5riuozbajmv3dy389lfxcjz8afr5926slpzzzmjze4dnosz52gca9m4jv73pitgxfazhbizzrla2vcl76gn8qol3nc7m7mx274kk8w0y07gfkdcz5xsp0bdt0csb7wro91b9ig7y7qb73nxscolu08hvudwsmkrwlypjq6lpazfluyjkc8s6m1jnhvw3rijnphl5ijzjbd2xptnk0kvtjdl40zmvr4kbvqftb7siau5qy3eb6fqi5b74msxqtwhiuxzf0xo8l6r4i7dp96d3f7jq9bne6y6bwq3y8jq4d07793l4kruzkqq87mxkbvmuqhpes73bfwdisak1mhhnostdafjnk7ltbmx0mdl9x9obwlad42arbjhkkq3nzx3hbmuqlc6zaf5dvh274t56knnl1j3nk3gcwe8t8cxnm3khqigzwp9bu42eyq9cefdbh245xhycwlc5hibjv2bef3uv2qs0rqgdb5xu8t8lecqo9gcnxfa6treiyccejwg2kxiwsz0x7h0qy99la1vzg8987ctldk9g5wo0b0x1out90fyga5yqe7hd1kiyloix1uxkt5w5wvuf2bkmteeax1a2k7ic971gehjryneddkbjryo1qaqg47vlo0i56ikr7vlebp6tn0dv6ovxu0gyennwsj5raiab9lqyuqjxzyblu3fz3rxyd9gxcx6h8f58qrcuee6dxasqnu47t2s4zuc05mmoyaivhlelra74m817wmah31td8snzvfh2hiu5yobdqgtzc5jgwiquxtqr33dvigwak97wonykm863repo7tj5wrbi5umpx3ni18vdcc',
-                proxyHost: 'aaywh6enfd8g7wvvts0e0hokgcpa77jqnsvlkbuau8gdew4mszkodx3pm9pz',
-                proxyPort: 5241349665,
-                destination: 'uog85ifwoa6xxl90g082sedwletgkqv69y3o5prn11p05gj67se31k3b7vdqd7tps4tyfgxy73zt2t507xsrveat3i1lqr0v3mtsla9iraduhb73wxtzs4xl1aljgd57334gtkjcq42k5xetoe0jo3teb6enuawb',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'c3okh95m3xw1u5c3bv7rpwodyxpykpx3vrsnjwj3gcoclmcwmlvrovsnmiy6aokos1x99hf4smkf1cgj4rizs6wqx8wdinb4o23ubdozv4bgzjwokecfgs4ffk83d7hg5ehbeu8oxkdbzr77e3iyie8n3jj6kn6a',
-                responsibleUserAccountName: 'qt2dsxtjsnlrr6x7fjsd',
-                lastChangeUserAccount: 'y8pak6qkofp7ed64ah94',
-                lastChangedAt: '2020-11-05 17:10:12',
-                riInterfaceName: 'l7ey6jk2rqsjcdmr10bux8qhn24y5rir0l049nlj90li33dcz0yk953ltmvy7dnetsircdyc5rzlcud68ctqs3tbwgur6sm86g66igz9pwxte9kyrpt3oqa1jp1tn0pt1h2m6fz861y8zj0pcq0m6sp6cfizlnma',
-                riInterfaceNamespace: 'iq0xalla3rzw0sue22nx8f9ambcz2j62li6i1meei0c01azbtolni4hx0y1p50btftovny4i4tnp1puhwksaifp9hyt3sq9er8dce71kjkxwyntwabl6t71ukaq36pgz26a1ksazcd0hhy0345pcp86m7xo8ewub',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ChannelSystemId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'sg3di05869eb0oxd882e5v5uiska5f5s78t0xobw',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'ih2z6mnjnfaez9civ2c655yk1c95caekfurdz0cq3iylxbqgpa',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
+                id: '9e284824-5564-4657-a598-c0d286f99416',
+                hash: '0ar6jrgyoro3503hscu321art6uj1n0n25rmb249',
+                tenantId: '2a15c0e9-cf44-4fe8-8271-c3ef1e93b146',
+                tenantCode: 'kmav34aw8tyhibqo6x3b9k85ck3tqzvgvnbp6ws70mrqocxuic',
+                systemId: '70798a0b-896d-43a9-8196-49b9caad3396',
                 systemName: null,
-                party: 'pwqqjw6a1j8h6jd9a9j3k1uxhykyu0bf9co3u99dyrrzkpam9091tz052tevgoks0uauoumgp7lo5pngkoioye4gkdh2zzyntq3qafvwryz7g2b1qy4azcb53jkrrtr7znsasqk53yzc5i02km0ngud7kqk2khvo',
-                component: 'b9p2elhcwne3gcrovyq1dg9n8pcdqahgfbq663axedz42x0gi93znxgd6cscmifmac7uwjdbmuwhbv2cnqwqo5ilk4omvnivmfz7tb7hvovhvmfphebj9qikiqazlp1bmv8boaa9zod3moir27yq62v3c2d9mz44',
-                name: 'vms3kvkazbtzrjhznlqpv7gv55djzzuloaq0rg489cvuduse93bs6t6uu5643nwcfdk02rr8bnvmbhy5vsxib39q6rkk9irzc9nv2jw2rkhtisk5uj2waapcvutsho6ab6bck1xq0wqs7hrjn73s9ahc88mkil77',
-                flowHash: '0u7ua5o7me7d7wg3cf4i9ywgu3t3rqhfs3a4uuz8',
-                flowParty: 'u2ocailexcehusb6tn73imy2y8utss28hh5wwfxn4jrlqseq4qd3jpzyo1trs2z3t7xcohjhhv096l77mm7booi062ciu3h7putpn0o9q6g4vbbmttujyqas159w9xgitvrpo4u4402y396ewrhe3ahh7cnif4i6',
-                flowReceiverParty: 'y5rb7kf8wvts1ooixloskyc67jvy7reqpl1stqlaxbh2yaxkulao0vpdoi6tyrii5xebkzwjzogna991i9x7z265sseq8pmh2b8n4jiy8hmr2otvx7nracldc9a0ujuh7nhz0h68wiv96ylln2g1by7qz3nsj0k8',
-                flowComponent: 'cl3dbl623iunpfsig9ll40yw4twieb92vurebebtuh572716hwspilsu1sgn8y3i8luox5jk9g77o39m1ucbrnwz3mlf0k3o7rlpbsofa3y5at19fj37n4pu3y19vtnslzzd1vhlgvy2vmdf2rfo50fafl61l3ou',
-                flowReceiverComponent: '8a4eudoyqp5uhujnioouftm464mtl3mx794y55c2nl6tojnlkxcdgm6btznekvcjot3tn6xkingb2kbjf8hbr6biezghv4zagdtdjbagz2z2mxwvyg2zu8sqp62xi6mf9kieqt1bq379su9rg150csfygqllphod',
-                flowInterfaceName: '4l3zxcw2g1993mvy1zx01nxmg4o0u5nut6x5g5915k4if4ybuqir3u4oe14rh4yvdclsrusysrhndztd43x7fwpqg65877jqcjthzek2nlqmfoheslw08udjnjdmi79d0k0jdpz38bao8tg4y76g55lqgi68vwqc',
-                flowInterfaceNamespace: 'iyr8t4um9vt8vda1dzh65jfjrj8euz1jg81ps5bhfxwe203vvwu11swp61gkwgbkocacbjay3ev87gi0menxqrb40uqg3k6qx4351kfu5xl1aetrmzbmha5rfoytwrjlb7fppmsgbj3f16c4z4pp2pwf07aipt4a',
-                version: 'fc7pss88npr8oroo1a7p',
-                adapterType: 'mu0qpyqa8n9vi2yf66ujcxscel4w1v2bvc9el8bm0m5gxise79jzxqnjld80',
-                direction: 'SENDER',
-                transportProtocol: 'x9vcvxne9xam22vygtuu7dirscggi0ttklfoofb488ifbaergw4do6aw3ofl',
-                messageProtocol: '6d61zxqzx23urwi4sktp7d58g1r9kix8kdcvo67bzqua6f2kp362kw3kzax9',
-                adapterEngineName: '4tiur09g6j3e3wehruytbqwgtf07cabq9gannxr5aiu2sr11lsh0zeluab6c8wh6qejgw2rnfp76wzu62bnc44ircy0fzkffv2hjhrf7546dpiute2uzq7gectw4crbk2ez34vh9s2sn3hnex2ri5rb1yhoi9ys7',
-                url: '9ljujs7a8k7len7cn4u2p17zbnovee34jw7srb3k5wjnsbi79t7xvcfg8bqw21w8kq0wmudaj38qaof6q69p8aaa4tri2kjqmdqg2qpvgtbq8uhuw5e64b8m6betk0kmc2mxx3fgq3snuof72ljo5lzdgom3thdlloee9h1p5d4wf0dzgcvmpwvb2r79xiwhynpdz834haoc8bn98fy4jyivi7lf0da05htpg7ma27yckgigq4242rfxci72m5n1islto351fsalcag1778l31i63qnxvqbv6ze5an18mbespp8pywvyyg6ulpydl365',
-                username: 'qdntyiz3nhnp0vs7j2i8hur14qi22f5uhvahbvx0kyk93cjxzu0c52scj0ri',
-                remoteHost: 'thluybtiimrgke3fk57f65ygv8vt7r6pnfpb2hvu5yl2h2s9txytqhmzzq2zmok82qyfk0462a4u58yulan5yo8jntvpbvlqm8mvtlqbfen6etc51n8dr14akrqk9hdgq02rwmy3d2ugb42rowaqb62c7osfkb83',
-                remotePort: 5880776728,
-                directory: 'pemegl2hb8b4x8p8dwnxfgfx17wiqdkmmi7fwww288laj10ap14seo01jorxo69qkoudjctxtb3scst9j01mfb8idcs62390y883c3cf5u0da0anxj3bglfs04izfkd7eh25sr9xb25i41m0kpqtgfvgken6f1bxnzxzkp6n1e0592gxfnfvtzgzvyx4y3vo9n35qt2id77h2iysat6e3d4n1mj1jtdplczlxjprm8huq8gsdqzzj2u5bxvmhcl1vr6i7kxgsbsf75wo0xf5r8df74975qsgjw970hxlzigqpd0n0sjhfg686oxjrjxetkatamfd6rglgk1whi02xtats7mdt32bvf0s9cwx0r4fdd977wbk4kl8ehvverbbczqto5iaxq3dpm1r5tk99k4o8nu81dvsl348ie3rncmxlmzs3d3fzyy87gxjx7p6gl8qynpd474u02v56wu9srdd7p2t6m3l0kctlypsrtxo5irm5iwtyme322an2k49hlrr478xgpft784u7d6zwi06xuxut2bmzc1c19o42jde97s1qnjp4pm93eo0068ozn825kyjpr297dmgh96jpb51e6saadn53iei944btct50jwuf5nsaqz8y4ukr3wqmc4c3zlf9qhtxv068y4aeyf64f8dwmxy5wadyjtm1qt7yxfw1c44hml9nbnvjzlybtscd9tp1mzjv80zwxorww5gpxkkgx8jbancen98d2zzev46kbip6vrcykuci9qemd416b3vegqpju2hrlkf5om00suoo3nhdbqfud4ghe5d9m953d4ynuvgesnp897ldxbrpxw8z56cagaamiayecv3b519mf5b2bksegzlnilefb1ctit3yjvj8bd1wtmib4v7gycz4agqls491d1wmewg5wd2d1xc19qbus9js2lwcdg00nekqyw8a79luuxly8dx922dkcr3y1zfh5exe2yyifehh32n8o832o9fmzekbsx4lhfz3ui1cwr3gjg7',
-                fileSchema: 'jvm2q6o51b3bbxbvbtpa4d6o0a8m8r7caj3yvk1d94mq4xrhe7qbmpajqc91xcsa1cf8h36q7a134cpl88sfm6jcpppzuoqdldk8wphvn9bbzcmusp2x7g8va6v6heg4yw3li9y3cewya5jw9avsczpbmv1zof27sguvsl8geb1jl0ysmpsvgcpf496do7ivdequmyf9bcr42cruuf3u8j89ew81z341l17eymecdboeu905bd6q7crq3ck8s36jsn7dpa5stv174uf7adfxjhdqxkbwcf7mid4ggjbnn3wzg7iaexmw45d2y3bcairuj9xfq7ifablckbh5p431n5c7rxq0kztk2vbgdmrjjes6a6zwzfmydfo48jxi5ovsk0sxkuydz7xvd0og68f3yut7b6l7opknhfgu1dm4swyveqwe6tcdq92fq3cey3z7tyw4hao9dcp5a7nixw07rbcttgvt3e9gcjyn1ve0gn64m68ftkmr4h673ct1r2qfzww4cfrv6fc9hpxalxlo1r9w5pojvzgsbur0fzlq49oc00iyysszfhrcvbgicb6y5evl1uh5viiah88uoonp51l243jxmrcb3k7gbgu36029wdpxlfojfxwbqpf4b2kmrykieh5h1084l2vuzhuabzf0pe0e6rz9ms9lg3qpelyj9h2ck7bqpc7uvjxl5hkugq4ubkdtjwod5rvoelmuk5xmt3hzqt053qoxn1y5zoiuqahlnkimon4k17pr409kp3y0fresermz7voiy0s3aama9bei2etrgf0vfhz613q850okw5g4jd555l84g5du97k8fx2zi3rogmju7wsvukw4id3c2csydh8z7yf01070m1i1529qcm7u4cl6mo88eel6zxs0atx4g36f10d42fdjhvcv448zg7sd6nmpshtb50nh6jdk0tb6fpqwu72z2qyp4rygyeu8pzl0mw8bcd6vcl9yuheb4j2geldtyr2cc4oerdg3pytghbuh9umm',
-                proxyHost: 'n3fn3z30z7aebrva3w9ed7da4rybs6ocxfco0gg43oz8ie05kqxk5jyvd1bf',
-                proxyPort: 2765704391,
-                destination: '6tosxiq94ahknemh2kst71tsumns2d0bhsnk8v1tig4sn9jxt8oogqub2xgp25uys7ig0cuyq51wst19tugz1xysoo53ms8st8z0dk4c4ycpxu8t5daowas9m7c22pgga6zo3b4uww0okoein5qm30qrj0vhbc8d',
+                party: 'bokqh0frq433mghk5fq0fbjevsf6tzw2jp4o01do6cz5xp5j91djz7ylb8deqo7p4om1tonsq5qpye4p8wumc4iregn7llx4gvd06jvjxcacs951odyodb1cnr1jdx8u2h4gs00i888lbl1bstae228sykzmnk5s',
+                component: 'ebmm2ma1o6hlauoeuidfdh60tzmzvjsdzro8cb62g44lzfb633qn7k7unb0jtqbr3roc7nzaaoojv5abw1skdaes9rlnbuqul9l4z4exo9jcih0ldkmjlhp7ndqy6qwiaq22vo3a55j78mwjcrolp5hg6jigok8l',
+                name: 'mvwx9qeufuxx13tyj0u8u05ricvo2i756c1mg5fgg2olclsrwg5s49ec8np4lka6ijopgwcq660aqvv4lrflqqmh0uw894yd3czv1iq2pjs8g7d56em8t4jyvw6nonaz0wvkoqd2ydj31rvuszibrvmxcc6kcy7h',
+                flowHash: 'xvvb7hyt7370htu4bgs2d2hrqj5r5r9pnnju5usd',
+                flowParty: '6rps2ey0wnx1xjionlmfe6vy3gpe01aos4du39i2yqqxj2wleiakoslwk2zlgjtmhdb6w3h8xufjmwrcjaipoepzl35moztit3ayce1gwkckyt2ijxi0lcl1qtkp2py6p2gjydmaxc1hdrajlao963ojevm7fcm5',
+                flowReceiverParty: 'ft5rmh911033uakcabltinfmn1zf1ophmarfqo1btesks7ui9r5chfkk7mmdp1978bgs8iff8j5c0fzy5kmjhljxck3irk8oexacyqcde883p0eseler8evmctild37lic3e92yd2lm7lnw33ai4hfux6bww7q2a',
+                flowComponent: 'tqd3zrtjxhmt2zu7wl2q7yrv7333cxueqnpbq6jjfzc5ckzt72h3bne64m3qywj67wliqvk6hfq4xib6jzd9znqxvnaavr7pnsm7sb45lqrgawtcjlf04hdzrtx8mj6rdrptk4eijiifqh3avukd4ewwhwrqgk4g',
+                flowReceiverComponent: 'dezm47aovb87rs410a39l6ujluw2kyokoehiov0rvljdaobpxusuicfeteeg96oo6ktad67nbjeqq8kifrcbtwl73k5122mna7vjm61sjmwbm3599iy6xgdvjjlf5lpfog92zibgedvcdl30wxrx2pqwpidaot0u',
+                flowInterfaceName: 'plnx9ryy9v9unmus5cmmnsiyfe9xjzn3zko3te5g0n98u0apn7dl6c6s4vemxwbdw7iwof1xtleg4ubueiswo1eu5nv14mls0x6an1ua8u155k7651r3sqew0y5gy428esieie20yj8swix4hx10pviebcpex2qu',
+                flowInterfaceNamespace: 'owbclvmz0ik8r824qoefhpvsfnp6ujizikn95v1ud60q1okul5xxca7c3d0i7np5o4thb44h58dizkt0m56u2v45om9fu15yypywjdw4my4imx540jtduxicafs0233n2itibwxqlyt183uwfvsof0eg2n0y2l81',
+                version: 'fa5fxp7ok85a5f6eif0c',
+                adapterType: 'x3k0ob8qcydwg70de1vnx6zb98bvce89h6ogvnlfay1mpcns9n14nd9wb0s1',
+                direction: 'RECEIVER',
+                transportProtocol: 'fjbbjuar8zsex52h3y2an5b969i06qjcpzmnq18vt0e2obsn4wjwpu4nd2dh',
+                messageProtocol: '8p9ayfsza2299v799q6hky8kaobwkx9paq3b05be49918g65po6tkkvhv0pt',
+                adapterEngineName: 'dqy6n8mlev6ko96gsiyr5biy6nrctg1m6xyv1lrka0z3o3dv2zm6e13ag2edak9ifgw4hr8e2y59va0x5094ebf2hr8ty5ykd7o83hustxvbr95z9skxw95t2a6hubl23ks8n695g501b9xi9vaj1pfy9ty2i2ns',
+                url: 'simtrwjmqy2bc66suw5951pdv55f8pk79m8maygmplq0ys9dvuxeji3d0lwym7gwxdwx2k7kqa9hb88rgtlqba2hqz66bb9sj2voe0ivxn5g57uxcd6b7sbw7d6qxat4lu49eqif4iac4bhfhw4ikumdmqd4flg66b1iqrrpx7cqtcqw4wv8hclmt1hvzwux8ep7jcgic4pnaxii60p8w1enmghsx4m73oont06g9gl9sr58jyos7r624fjo1smte6qdah3z8sicgilzz77llffzs6u6flpve6sce15irn9qxek7iefg3nxyrjn2pim8',
+                username: 'yqt64rzkvoqcpdifv4qo4ic1zgd19046td9nt696l3uu878jolfpn5d34odu',
+                remoteHost: 'lzd1aherptrlcmmdxetyvawn0c46gontfwt7fo64ancvnd9cqlx4mvcwkdizuvgn1u8g6xvsmnkf47nzdq0s399q5kgh3ot7fxj9nha4kkjkhhk3tm0ws0vqwi3cd73piy5ggfdugbykvny1izkgdri9niunyilz',
+                remotePort: 1699326800,
+                directory: 'f00rnz6ecggga2ybs2mlvfmck7j0gxssw49p4i48ifw3io01afoa8emqh6yiedvrr9d3a85bv14aajto74flwftr4v3sgollivvbdw6nng8rvrefksykd793xhavswiuq6h8gwb8jmi47a7medwo08gsnjnrh6jbx8x4ct9e8ojgl9mj78oxqyd0fdfpxyh93e8ifx69j183w8nqypsxrttjmxq3wwc4hwjq1sx157lphb2uydp3okjt2clo7bolqhbvgjk55x7zlis62tllj2b2f8n0gl1rotcqewjv3lsp9rgph7hv4yy4k8iqe7qsvzatx10h6gdpgiypjdj0x4y95uiah2utozy8qpk1rwdhbr65j18uk2i5tv674dsohe27qy3xom2fjvhyymuobxk25g50yi2b5pxn5nf4epmzfem5rbk20z9q6bwenok0nq1a9b6t9ugre7igls4n7alndqqo4jipugprhpd8mg24wn4a8ekgi6edkrp6ybnjbm99p1v2kpcd6ucp2hsb9kkmnqpeiw9y41syrlxospgqkoc9xbovvzsx6qhwhnz71j1g5d1094td23i1hyx2ngul4euhaoye3ow2tpucea8vyng8m534t7nibg7xy60lne9d9cpqgwtzou9xgui7d652lsrrwzj716by08u5zwkfbqb4byg6pu3ly4pau5j7qyjv0kof2xezbffv1frloxxom392704dzmvwr2d9foa3rgcyz9yuucizr1gbec9wx5fomhcln16q5zkmjf0diuerol34l3i44qx5b90mqaxrc0wdye6y9row1j3rkrgvtlh3ib3xqtk7vitipqw1de272wynuhgu3rtbe5dscjdsf6p8fw2c9h8s5c31r9u2fgs9w59c2612xd2o5ria6tse2f4s3nxnkxr8qof339o6i32jj9lk0umzzjknrnyhs2oz88hm8t18w9xvdi4mlii2u0ri2q3jtltx890e2tntiynbzb0rbehse0pzedgf',
+                fileSchema: 'dlyrdpo854bp2gsn82vobtrgxcjn18y4vdgbu15a7u9ircitiwdsdldfd54hggab66k1jzndu433l91og407pcmd0yptprig81mb0um2k43kqq31e8pz48av02lo23jrn4jcd3cluy3ww4s0q2vwxpdzcgfox5e1yxnw397t1xmia7rat4qh9pgzcvk9df624do75ub1rvw0mtqqb9mpb2fhf1thdcgn160vm4h7d5hg9eqsllbtxe4gxl7rkx1cp0i4g4pwoqnvcprqts2da9e6kmcvkk31y2d2wjoust1egje1pb67dfqtghkpbju8v1htolq9libhl014ssryk9anvrbm72u7urae3yr5qb0oowhujz7u1zfvctepbisd9y6ppkyt4oey04nu6hrd1jctgjyb3uizo61mzl4u4itr89zdtx5d9tps9x8graviczkrzd7ezbgcsd3sy8m40dl4ct38wyszls2ksc5jptthyai07viudb4tvqx9survyioheas1qjyqbofb7ggev91iqukllmyi1306uydedgck6q6w05xyupnbv6zehxniyowuvfojziye272oo8armo9514vy9zdltkmhkdvxqvivzns5j9r1udpz6viktb3hz52ac42yh6ixfqin1wklo3e3swpdohus1d689s1h1d78hork9o7l9ukbd55hz7o06hu7qrptl3r7muqj2r9ayl92e23230r749bh2nv4y0gi62520kyih5usmrruqs8g6lg96pokvh9bu2ujp3yqtglt75gt669cqb22n4yiwoz31wt40gta9h1h09768q6ab5eok7ok63gqhs4zg0qfy14eo3i6kp84i6fya77y3hlc8erqqter1bkzp9u98ya18ypjjy488dbzw2n9ldgewgf6y5d7ve26au76kco1ut6kxdwhfq87l9n1fv2cvhnnco9htwvruy6heohi4suchndx4l0muwkqxlr231kfbf71cd85way1uask3my6gu7o',
+                proxyHost: 'ixkv4ae8so6g7305e5ni42vqbk3i34jo78pvizmv60e11va9fsnppsgenc18',
+                proxyPort: 8329089970,
+                destination: '0z4dwce8g8gokj9xhhfms75h0wae39uuiho7gl32s647mg5inppgicr3un3dlv4kldx3qi3lv04emrab7cz2pdwz2drep6reh83ywdautqe1a59h7mw0jsc9hquq1no8g08y9aeiqvtkcnuzgfpnw0dg2hpum0nx',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: '5ckc5btynjsny35d9fijj33u3m2pk2s3s0xieqyqm6ffklmzncxqtuif6y93f62oem09n02pdlij1wl4eyf9l27cfw1x1z835m2uwmxq3nji50xh4tcv07dm5knv81kpujpg546xb9bao3hbbq13bdg8096eitqh',
-                responsibleUserAccountName: 'shviclmg49xqvwq3izwn',
-                lastChangeUserAccount: 'r5lxxpgbd7hp3zghupcm',
-                lastChangedAt: '2020-11-06 06:56:35',
-                riInterfaceName: 'wueg7whpcu8d39gj5a9jm7vk4ro3tn5iv4ej0xb0f68jk8tu1vkjwuhkzhy69wj3oorvpbawvovf6q8lx2g7gtfefrerhqd0r8ph1krkfq576f5c4ofq3zzfoqz56obctx9jb98e5280hjpgpsvbi1lzxzqp8u5x',
-                riInterfaceNamespace: 'ns2nsrgo12l50hv8fp5uu1vjqvri05cs0a4t2xp0oi1ynysq0an387r76mfy3su9vk5ot5a0s81yl24pymyxxucw129wp46dfqocnfsmk8yqe5th1j4zu8jnx02ll4m0xa41w2ck71l4kiq16bhzup3sknudthmw',
+                softwareComponentName: '0b2qx0jsjehgvvkr4q9aolmlvx83bds0mnia0j8i1kodn6bm60ecnyxn3uocl8lh50ygknmvpqo4gvxk13pdn7k3c6l1a81j3qgcg1ip56qxxre97yfqjeruvtqiamh6n064x3ed0aph8x8vm8toow4z9oesyzyn',
+                responsibleUserAccountName: 'blijn9tpwe0zv4qdb5xn',
+                lastChangeUserAccount: '85r3q4vsu9k801mwvne9',
+                lastChangedAt: '2021-05-23 03:16:42',
+                riInterfaceName: '5180xftqp92vlnfshgbvpyqrw5hck11yeagguzd2c8g9gieq9fm8jtxfymb09u6u2bq7vjg38if7vyvzqztwchyy3w03zxxo01z3j1515uo8i3jcicppzu1hk8no3sp1u0ztaav3uevh21qi9okjza7la2wkv9au',
+                riInterfaceNamespace: 've2evc33y39te04ry6e8u3orbjaxl2l15t26nyn9gwscxxn45ltxbl1kuabox70v2x7h31lz8362g52h54qnsgpp0oqwehigigqqampeinj8ygcu97ws4j97bdb5u875y65imj5fnjo5h1h0qwao154xm0asgzuk',
             })
             .expect(400)
             .then(res => {
@@ -614,101 +385,51 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemName property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelComponent property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'f1f1ea40k38btdb9a946guqhdyvgj1l850jg95lv',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'woa92lmeakh30fylnxt8qhr6t0h2zccqu8ztt1h8axe69q2vzf',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                
-                party: 'vn2hnytcyxs0fxve9d5j7ydq262ok9zxs4ag0h9643opjzkof38jqdlbspwk39hmtimo0fcu94e0us901z9y809cer77ygdgyc2jtcag1lmcfoskyn0q4gwzcn1nbid9dm7zlrnpfrsqfvf32v97ywhsmdrdad7l',
-                component: 'f40ycbr5f3kzsopsx9xm879tvz4lfqf4hn4vczf6az5m9mggnpovh1n5djo3e0qjz9ytlsmdno33e5vx84rz4gcyyx2uscc5j3dbkxlf1a5kh6cnajmojskjrroigc678cxoiefozxvpzsna435b0gipqxcdelg3',
-                name: 'jps00idmq53waucdbjhsyhpviq1mohjeba6aywzigauzqz5b4agi847e68qrm8cbe0clfxtfv29bc8cdc4r3qud0bfd2jzagpzvubrkvu34x2mk14oaamrrqbj5datki8alz82wr2ir3ivl0fcxp1ymzuf9sgjav',
-                flowHash: '3tygz5k2zc13r2dq89llfaybiy5ff5c7lak5mww2',
-                flowParty: '65jatgegokexdfg9sul9963kyek18szdfw8kbblcbq5m20cxd0iczu9ltccwupmrxy7whgxu1bg5bocthtgeoxp2nhba5qiid78eujj94pffpm8n5qn05pfn4mtf0yoxg33vyqmm4319ug6b1yzmevrgi4c71512',
-                flowReceiverParty: '659wo93t4xkffi517d4odzck7o9m80kcqrozl7v99t76jka69lun8jfjl1g7eibbt6l8s45ckclyvzdrmz9ruze7rv2t74wwyb6622fkdiywkx81rvkqu1ivb96ndl8iiukrxy92cu3jx58jfukzmn4elv1wnrfa',
-                flowComponent: 'ymjrp98ntlw6tnsmk1umtuoaajdkjccs00l4qy6kjpdx9blc98jx4a47b2v8fleh9p79iruqum5v51mr8epbstewc28b4e0w47xqiobt3g5j6t0bkh3fe5uckax1l9y9ko8qsvjs08lv4ac6uo6e005hy9xxz2ez',
-                flowReceiverComponent: 'a1qpccpfok7s90ty9w1motp482bntn39lu8key9eprjtke18t9qu59sg7eh3rm72porr42gg7kwxgl74hqjt34ubnido0phopgapo3fxye3nx4wmsh2ic0u1cmoik7n3b4pnos312y57knn7j9lptrgfptwzo2y0',
-                flowInterfaceName: 'vp8ea7qh7thgnqq65zyxappsltc78i4lir6vx8ouii935npa7hf00iyz77dpcvles3zed5inltnjl5wzpd57k2bv6gdiqeu79mb5zu6ozxfe20kp9en3kwqlb7rtooc1gfydh8ej7w2kcmxnd19zay6r380x8k7w',
-                flowInterfaceNamespace: 'k3ea1196uo5zn1oldw257m6qa60e2vlxpf78gmqmg1wo0o2j5eb7x6otsalwklv6hgo2n9ndvucrpxczavxuoxewl5q9lknlff8ei40w4c5fc8mieaa0noyib3f3xdmykwy2dm4vk4jq2dbjm0b7l089f8dluddz',
-                version: 'ur0pznhgnok2oh4jv0jz',
-                adapterType: 'kvt81lxrxrz7vfotm82hjb2knl38pa3n8znkaa1y9y4x2di6x2rqamhxus6b',
-                direction: 'SENDER',
-                transportProtocol: 'ucpwi8egtu39lkda1x024yrw99ex54ykn52mpxkgp965j4s80yypglx9gu0p',
-                messageProtocol: 'i2zeiwwvnjg0l3b98mu548xvf90rd56zxb6j255ktzrf8iegglx5hhvllvg8',
-                adapterEngineName: 'q40v3dv7bj64bgp0noyjqxeyhco42lrzakt2rc5i9981a4kl8bp0kgqnlqk5wocgtcuzym88t4vzh90ykwjpcgu5vfixsphgkjwh9mcndt8f9s88ka97rxm35imwegavs5omnjvz1ywn4ur56eeosawx8tx9txio',
-                url: 'oht9b824kj2l46sn9besm6rqbc9wlzbgb83pu2c2i2a0ug29d8ohc7kcyhyft0a2bvq60fktrybd55ssxqlk5f364k3polqzhwlg1vg7rnd00znx14vclbdj8jytb5thjlcs37xf9cnzp2pkyi4z3qtg84j05gqwsda7db6ur8b97enpflo06m8uf3zp5o408mvxjo0eppue2sdqh2pnsxb44wdzvg3nbxg7lc84skdano1ui58ci50w5nzmeyx0hdlk7e88pv8daufeki646p0hlyr9i3u2i346dysjuiy46ika3rizeajzu24ll8x3',
-                username: '8echzrsq6iz49yon8ea63sp5zvbsge49c26j7rwvcdczf5i8deimmny5tzkh',
-                remoteHost: 'j73lg04ftbkjobqnw040wofy2w6gjrnhe3ppycyziyhy7x8z73gxq4w35tf8p4l0qc0u6t8wvtglhdd674p49llayih5et29ncts8kgqyf2f8qh4hwnb4dr05p7wie6lcmy8adur5qx15cvz1fptkk6qq4tgalzh',
-                remotePort: 4758100812,
-                directory: 'u9hhulcz7550otoc70mzuofo6bacrwz9vaotyg2zsups5xpfna0o2a5j36g1k6k67lga9ss95crgx4360ejwwyuez8m00h7o6pt2eq86m8db97en7udyd83o3s1lhe2i18heyztep5bt6cq5ptgz9tif7qz1xda7z33ml40x9jfuu7xf9xgl4c98hiadf99jhgiksr8a4j4eei4q3z65galha8132ow6mvyr37yu17ncuaocjz919zufz2rppbwzbvmi8j0wdfg4mtegoacp6n1ghfk8pexpoplgmo9pri86223gups2gqgh6gu1ai56spqddu2unpgw0sh20ggnhmozbvk2x7otbvmt7z3y3qzxn5xizangog4pvwra5hn6ogr1rwru94ob3v89v4tn9kxat7qfyvj4ogytuyhx9hbob3rnzvrsqxee8jcfy9znh8ji6arszijr8nev6ncj3yf2d6kl07jovilh72ktapd3v5t2a1bgoqrb5ypalrma0zqnbyunf78vxbnw4fm24pw19b1he0p9qxc8vih53sbrhxbfu4fkh83r5sa54ojvczdzwqbu7ejrkrew0s4t5l752p100ijldy4w88fg527nsq6aos1qq08e5k4gfyh72vadp81dkazdzg38tl6nxdncu3qiqwizp5kh3gebnb46x4guw6mob0fiv77w9dwtp680xlyi0ibj8rqvdfruhixe8cn0hcfcrtb5q4n6tm1lq0bgqhr6b095skza1vvpx3dhld01h42dysiphh6kuzwjsu2mapxz9az230q50cg94worcaajv1sbef6b1w6dik2x2w0cc4m6cdcv9nty0obriyh7iot4ykgc1h360y59g07q1p3x2l6y85643qj840xrbetrn2e8uy2jd5w7rvqf98ry5yt4i6r1tv27uv3rr4sh3bt5fvpl393d2p96kyw17tatv66400xzocwypszujrd0nibp1we0nhg3eejcyk35pfs7e18p2sigutgs',
-                fileSchema: 'zhripqfe7nk3lgevsteiyv68r88binqxn7lipa9uq1orroyphmtpd3hr7b00dgbj072bc6l3ud9q4urttv6y31vtjj4awkac9czbqk1xkf3nrdzouefbcxsd4gk2mjao762ke3hcyv1fkybycpdi5eux6js9jnh7fvlrh7kaldzso8srz7uku830f9ch1u07su8xrzkaq5f4zlkjskvjoa6pmahvj8mawexmfp3vhxw1kkvm8dpxc0he8n59e9cq0jap4fj4w01smojjmoij9s9zdespa4t256vx41lb8d1c7irafxlpuvnurjeu5wtdjjxm3m0rk95mr1sbbruuedpml6yvv1ku8egisqiygs1njge3laaaculsllxmprjzof9mnk0cuf4sz0fr48x8fuprdidph5o8lrhogjeefvx2esa0gq7vxe6fqaxojgaae593kzyiihdx5nakdytbzkudcnivybi6us4whabjkyc22t8q2xccpu6rlz6fjo6wmhyvu4y4nydkot109hz3lsmlfe50vsyhiur5j346ezqrig1zk6g7wu2ds788vm0fixku7g2pl6jnv7c8aogvr9xvrue4ulimldi18mt3s6wyy2wcwmicjl56zoe7pf4q0ffrmgi1lfc8bvd4c9bjpxikwgnqrp5zol97haujswa6znwvf8bby77x8r7axdqftn2f0akwyujfj2h7rroppxkfmt9wbhi2y8qvl391yjxmbsmddi6bmyj5uwtjvthtj2z2lzi52d0j86bf9rr5g5sghx3ww5urfje0w21hejohem4u0evrevx1rvnm9zhkf1870s634xyx7ndz0wgnslxht7zzlathugu11lzxl8ccqrv1tpirv24jr3tr9g6flt9uq878knv86b2izl3i2myywmx8j7u0llk048lyyjkwslfegq74jjlj1t7lg65tcbjvau12cxmanhnrbgz93awunyy9m6g97zcdut507kwuy1q1sri1wz7j7mmo09g5',
-                proxyHost: 'rc1ko0s5hxhuk4hrnuwrx4w2mdife2worqm74ro540hf0kf933shonx48vq8',
-                proxyPort: 8274247900,
-                destination: '3brjkie4p9idgn6186grt0xqptk1d62cz4e5bpt4b3h5szfe1tcgz7alpy73h8pys7aqx7noz8tadyzphm716uhjh2p6bsdlw7h603pukxllt4f8ifin91973zksqddbkvg6fjadgamwh5od9ys4kmyzy3e7mhhs',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'j7falm14ch05s4l1km8605uilwwpo3m3a0c9klwvo2v5e7cwvs5wc5d0hlmbxa67ulnrymwt6vmt7lyxlg32k9sugq2necr73terwc9xs6x2x6gl4r0f9gnasv7zq7li3pp5j6odvvzledy37x76awll2xn95xew',
-                responsibleUserAccountName: 'r7xbcvj0pzx9zvxlki47',
-                lastChangeUserAccount: '9tu1ruladrrimpaeoxon',
-                lastChangedAt: '2020-11-06 11:37:19',
-                riInterfaceName: 'v2ux1stb1dprz5g603bqwork2skfsza4ze0fiwnyw63y1jbg5nuzecotnn4if75pjyw4znyufj48fdavmnsxnbmv7z62vz1vhzuobpmuwq3l20bz2cjiguq8z7lbv8fqfcxctb30dyfo7usk8jw6m1sg6i7jmfwd',
-                riInterfaceNamespace: 'netbmrakd4114dkz2sronpjf2gf4dg80yyhviott3brac0lyw1ot6eilww4p1i0d86zf1qdfk8m341bo3lqy714utir3psw9s2i2kbsksbfi6ibrff5qosto42aiubk23ti87r14v8dzkx1wnx1kiuxebqt0eej3',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ChannelSystemName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelComponent property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '1oqbzeablv8y6i3j9cmcsezxteqhf2gcm6g95f1y',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'dzi0pcd8ntrxn4dyu6h6kik0cgqlz298asllpciem6xhs70rrx',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'b4fy7lnlfjzxzgvztpxg',
-                party: '4pqal75qhhrn4sn8ffhx6n15fea1ncj87urfxny6fgnycmcxjxfkoc82ndkr8xpzlgzvvrmybzsnnhcdr00epc45b0tycvm4owys0vrp3m08g6wefldh3hp5gwsrxtjai1ptow1c668kszijpzuat9h217gvhjrn',
+                id: 'b73cbcdc-2fdb-4206-b93d-1ebfbdcbadf0',
+                hash: 'j9z67r6yr50b6i9hdd0sh5gmwckdtr67bpwu7azq',
+                tenantId: 'fbce90fd-1ae8-4270-b00a-8ca36d5e76ec',
+                tenantCode: '2pq804sdayx31mg1a1i992hun06zo9ysz25kkf9zlbc4nwx5jr',
+                systemId: '0a4c8f9c-0d4e-4ebf-a167-791e6cd07157',
+                systemName: 'pmlhrx6p0adieux0j35f',
+                party: '77ptah2adzye7g964yk5i73esngnvluqcq42mjfdoxgk8c38gtcislg1cer4md8mnt5hagrqpwo8mwuobiaqne0z0ktnz39dvo1ddrqq1o3nvezjdc0i075b30gv1cfej9kc5vqakn82c5qfgmdekdxck3gsk8hu',
                 component: null,
-                name: 'uozp76zaxz57fc1qhmaqnsx2xs95o5b6m0tnh6ukj9kxs1vntm2fhs1qthukxnp0mpufuupey9znc5irzmmz4zwzeeltcisf4eafgoog14tkksyxpz9ov5k1ub7coujqz2rulsq3hnqlxucn4ui9o45d1rmhk8f7',
-                flowHash: 'gqou6rnm903e8nkjou6oz6qkwtvfcic8kgb6262w',
-                flowParty: '6d48vpbrvbwwzuww68o6ojyvkjsh8520ah7llkee28v1pwv0scgrdqnf9knbd9qqame6fmmoowrsfpf0x45r7udmsfe80om2k32ldm2kg6azvzb8zg24fwmxv5dz6vasdbqif5j6vc415fanyuegq6ot0kjn7ijw',
-                flowReceiverParty: 't7bh1gymmlkbnrdutdm5ppxkt9l8ujhxu4jauta78aky2jo2k65qmhu205yelji7sk3rvl19uixy7yvxxkpcyd1pqb56q9qjnpsax8fz1cc64v7epgziuj4r3hjdyesqc96f1su5n6zd1bysc3xal7eby41v8lce',
-                flowComponent: 'n5eh9lfjwyosc1jdm6jmrc4i3hwa75obegxnnt9qloqbp7n13aqdgyule4ep81q75eicivmlpvosl91hh7hjmtv1f8odkqgfb0dzqgdqw7iqsc41zyykhrkqktxopthwnp3bxoty43zm43tcec4obd7wvyycv47g',
-                flowReceiverComponent: 'itolcp5go8fk2sxnhlaj4ssatzl8ok3j0wusw9wz79yajudup7fp9ltvxx3zp4tc2evdyjd631zh4nyoe7rt7unx15fe2u57p6soi7qt2x0n1p47g7jr6j094cpkj5ym1ld654ycfpddbh8mv5vfh7qloumptapw',
-                flowInterfaceName: 'ytl53dx7xhc7ijip2896ncj2xe7i6iotp6k7kzk3pqiud2k4ubc7df8cupfdou7snf9vmclgeraqd2obut6dtetvzmei08u55wyapld9zyrqrath3z145mcxvaif70u4c4omqvommclxmcqib6zr3cdih15yox1z',
-                flowInterfaceNamespace: 'hv58idyinnvlg6mq75ov2o6c11ki26b4efaz38ewradcn7sjrml4bub0xwt36r369119w5r7u4ei3czj3vo566hkk5f58mob5jrjfbw91o5sd76dk4o16n66ktld1tvawnr0fd1pn59wr57p7rs63piqgjyoaima',
-                version: 'wl8zszpxml3129b54j73',
-                adapterType: 'wyc4u0awhso20z9h1fdyg1l0iddzk1xi7gbf712rppjdsrbw2wrnvxkn6dkx',
-                direction: 'RECEIVER',
-                transportProtocol: 'kg7zaextm385z24jtxgh8wzujl3x4ra369z25rxcvv9bqe9pt8gl5x5a20ta',
-                messageProtocol: 'mkcvix0wcnrph820q1up5sbea7odh8hg1fabxa50n5leua0o3hcqm74g79vs',
-                adapterEngineName: 'q1xwjkb528lg0mnbjf7uhlnimwj4x6anpn8e95fo0adchl5p9w26m1ahmg9zer6u5q95sv3bxnb8qxw55aisjgwtow7ne52efmdgay43qspsbrxhr5fbscxfl39s9m7fjvzyrbrrgy6wbtsbam5zco6r25xe2y2e',
-                url: 'jznp7eugmyim9h8c9ddl7o1h1r5hwbaphxxhwgo7plkx628ih94fg6mscga6vsb619i9a9mlfu8qc0gdyznfhh75i5ertsqiapeyqinf3sefwqwe7b3bzb98ety4dk316dbwrht3lizamlve8akneaeq7za37pldxq6yt24fio56nzqeqsympeag2w34itzsps9fpt13nk1gvr5dqpjn8ruhxx0svz6xsnyyk93mmdt3ij27ysd2phi32sc10vyco5pdr3e2h337oftd78u7fgpiaquqvpzqohj3z3wo42yjon28e4qa8ruh620gm7mc',
-                username: '71c6ynedo7wvq9vge8sus6xa0tpnz99xkkt9zsuibrfxpecc5fbwqye6eer6',
-                remoteHost: 'ymyr706969f5s21b5zxolzg4yoa2p44m7gl6sew9eqas7mxvove8k1ultmg9feidwhnhu2nzpzqkdtbg8jxxjwe0h5ykfhwwe59fdqt166ls79wpl8t7o8nfre4ywyh8xaoz17851zfn7elqkheelkk08kf5jl9p',
-                remotePort: 2394286199,
-                directory: '0kjlgi38uxsbvym375k1r22839wflm8lw9phacznu5gusdga3p3ilh9x79yufjde56fwig39xzuav7f0oci3vvpvpo5wkq812h92d70852stfp3pf5h21zz01hmcmn8hjpnmoo4qsbfw3hvbzurjk0wai8kq0flj2btsyy7th9sesf9c1dsnp3rbnpoy40uujkntxu7ckjp4t2n7i06miekoize0olspwa2jjtmv7dqo56xqvhvqqam36zyyqcxciw0hi6kneoqkrjtjlx287hga9ajk0msbox4ztiah6x2k50hyq52pluex5tg0ar0d41jwz7fef7ik2gjcjwau0o2q75qqe66k3ysfblefs8mqy8168nl4nvtobvyfg919kpqgfi5prlglgzpbqym2e84gempbsqna7mz76xtly7aaupn6stqvsbrfprxqa2omowpdbzbarqij7rec8mnuh2ppmelluiwuzmw1gdrsqkv7ofoi5kqwb66a1ubalkdbk71gr66pg5cz3f213pa19k2m0zbpyd2xwikq9cmkvghb8ic4debdfg54frvdkcid9wpfugl5lzhm5lebqnah5b1trtvapq2yu4nat0y1kk6i3qztuff7o4f6r8zk476jz581tlvja9hmpr0mxdxfojr233n6j597lcvl94jlkh011pa9wogv6zy5ni0bfip0h24ws985q7251j8stuose0cqenw6obb5xng8hilzjl2u21o4dvobb0y1j1r0epnfhgolv7ouohjuaav6sdvgi6uoeh4stjg4c8leetie2z90b74awkc9wibyglajtse416j56yi9leq94t7n374oth8ybxu8y9fl0s1miy5gbl5doq4h73x5hzk6dnnmzrywk6lqh2kgnrgbsi04vafudmvghg82fc6y6p9r885f8exspypjivo2woxujvvt2xa3qqanwvpcuqqxzu9pjf0k9xv8uzdk6scua8asibig55hrdyqyk5wkfzp2sm350or7',
-                fileSchema: '4osdwsnis2kaa7aqhvkn7ptqobhg8c120p3ivfxoope54ugmvbl7z7t161cwekrgjgt0ln3lj701n0uo9ebmu8fle2ypdvlepvr3od7xo1go779m7ttrlxitzmbfq0tzp8225sm24cksqgz8senhis6dgvmqybtovg58gamb7zlm8r1mypjrhwu1ie04dcuy131v9atkvtcvh21yhuzf49ng6h9an58cubq3ol8t57jz4emb9la599vcwi7ggzhu5ve3rpzeum6ykuflwruj1l1zjogjnlt0ft4e5ox2um8g8ypjaz71sz4sluwrj40bqc47rgcvjza8yanliv2oj9cuffr4nuq6m0fhqm7i6m27phm5cpfd3n1uedl8ekmxicoav1zqjp3930gr3mlgwxzdjpyoc4gvntmrz0gycwij7mddxjus3mx4u2g9mozpzykljbqhm0go5jq8c4xftfsywa5r134pxzzd7rv6t9xnft1zdj39c8yemm7c7gstk02swbppohs1gfju9s60lk2n7blu71zz84hrx255d4oa0fd2qm8vkpj10x9alpw6n7oq5bthwv2xron3rlgh1g86lt5yvif0h1fq7cuz9wlq3e90rdbap623dnz9o04w9uiwhsve13xzm36qfowsvvcau1ea8kvovecukzmxtblu3cscpfma2mumw242p7ot9sevrt3jj1hpknibkc4bkv8s53qli25b7f0efzqgk2jemkhagg6n98d7qo57mzv2cmqx8b80wf2vzag7343fj181n0gr4pvvps444p5mdsqxtj7ntucgmj32mo04cenxn2b0zj4pfsbs674me6m6ggrfktuym6pr9j70i4cvd75bvf0i8p5popap4yagw2njx0kb9poods39qj3atb7k45vwczhltktwbxaaez0th396sh5ljh1n2975pmladj83v3s02m79nh8kwvbtkk3vil4ji6lyakw4jpj3zr9qm5do2tyiiq359vkqpbairywx',
-                proxyHost: '5o9t5koxzasykux1bx3k71vp1sh2m8cwhb85q1gc9ocecuw91w768rrh3d0v',
-                proxyPort: 1240489375,
-                destination: 'md1d5ylgeptw1pvhd6qb3cphszxf4ciez9fazy4xdvkbvo7l54uwk6a063xfz5d1t214g9zyuacyoo64avth7p8igmxjtae07h8mbyzlt22d14n35ojqgizf707uka82vmyqw3xr4i8qa8z2ps78palur3vyb45b',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'poac9g623myemswv342vytthpzbru21z3gmlcurxnwfdc22mll2ujxavy8z98h3bic5uso8l5n8mgb275z2ft4wkk8kz1jdsmroossbtpglc3adria9sp44o4zw9u2yv5h4v47454amwbg46z2u9r442j7uxi1uy',
-                responsibleUserAccountName: 'pzmqbcz0iob9cpegytnl',
-                lastChangeUserAccount: '0568hit8yf9oaw5b1jly',
-                lastChangedAt: '2020-11-06 09:29:17',
-                riInterfaceName: 'j1aveinw9h8d553twifb5da040ym00obctn4g2mmh71ymaxdroyanmnoi1wjvy846pqwrhqt1x5gacv78967pkr5ukymbnk217dv9y3joyytxm2ysjn6vnyx2jyinus8dcmgthucpyp6lvt7o02gm7wa5c302tq6',
-                riInterfaceNamespace: 'kjqv2cszgdv2x1040uetsitt5t6gq549cihbs2u3nqd8t12y20186te3bh5w27j84v0p0jshsaqbic3lcswftwwnh87ao7neje9wfi6tnvq1yruvdhr833l59rp2x88rn2lpsk7jyz3nm3ce891tpryedj1awlz2',
+                name: '07bpu9snm0ae7e6tsedio19oqdhq4o6ort2nd9uvnehcst6a221bzckp1puue7yjjigz2sxqpjqxifq63k4ne9g36nlz9dob5msc0nd3gie7rs0ebx19rqgehhs42de1qhxrmdmio9yb086qtwxnglf3167sf2ib',
+                flowHash: 'yh72ltntjmdg8jqmnfq83do1uhq6g3hxen9wmuq5',
+                flowParty: 'xylb77jgfxpf8b00qoilykmn7t1migekhg1h6nrhyrl2yt72ir83bsp5ngr57dsa1wwta30hnxwm594717idnuwfx95zaf1sf2l2t90ry1aek3x13br0m0cdz0lllsc3ha0wyj0yq00v1zpdd0dhm2wcxg6td8wx',
+                flowReceiverParty: 'ojidkws1w1mcpzijbet16p0n2e79x7gptx2p7d31u2tble3zv9qngw5x65422l8iiq4sivuitgpflst7n33rp9eqe2p6q5j9x712yw7go2i6kie4s0witnl5ymwqwcirmtxn4fxi9mbind7pub49bzxix284uyg1',
+                flowComponent: '58hrnnbdcgv5wjgvl9k2y4e6tovjiwrtm9jhpi68ydx5tmgwtdlj5tmdwcfkfejioai1yenep2m0ynwf8nrbd8of2asvub0eg35tay2bi10ybuz4umbrmq9k4hohz60q62cvgq726gth3mu6cfpvk2n27waymoc0',
+                flowReceiverComponent: '48zzo930l9ht5zmu1maavvallsg65saqr3nnz1j55eu5b994haoaoosnn36k86mbi4vwn8o9gzezn3j29egazmhw8pdiix1neao2nmi6yoj8zvhbuzslmfqbbjdo8w05ysb6elqxr1y3we1ygsoxts9vm8q6rxfw',
+                flowInterfaceName: '1sykxs606ltcx1m4zcvzerbzyjyp1soypmwdet497tf5wowof0tiyhhmloua030q6xkvwl34t1s2dhy8tsqa00g1wz7wxfn0nr42i2uvb0rjjf51lf20p83wd5k95cjhf5arvkoym4lng4ampizd5hg5yywycjc6',
+                flowInterfaceNamespace: 'dvzmw1mv5bima2p5n7trahr1q8im4fezzbj1adcucdce89zdzovultpv1hgnn3rfy48kzhuqufubr6uh741tbtl1hww9m169p2vw4738lykuz8kpoo4ubvvyid3dsr5frwogi9vrvx66kxfvaeensweosmf639hj',
+                version: 'p6z2wpfh2ah5gwj5495m',
+                adapterType: 'ca369qd88ztuf6lxbfv4lvv91vmnx3xlx3spq8itoc75ugepkufp5vf5fhjt',
+                direction: 'SENDER',
+                transportProtocol: 'vdqo38p3w5n4y3ca6cuzs45v7d01c82nn7bet2m2mjauuqhq4m4lpg3tpdov',
+                messageProtocol: 'u1wg0h6yy73s9f0g8hupmmv942w0h2ump2647jhi0vv6mkcvo3bmexp12oi0',
+                adapterEngineName: 'v5jd37k7np7l6x13ld4qs3c3rlix9mpy9dis9y5zpiq3bvzhr88xorlp5jz3w7bkrnfp60cdkwchc76j1vpb0f6a5jxhemsh92oph8bg93035m4omvy1rhea7la9iaa26kj7zdzetqfhiz1fdxd9y8nyv6hvwx4x',
+                url: 'q9jlt356cwxze0125g1sh70bow803q0m7t79bsim0g5sooyxr93qideksufo95duqxs6yg372wmftxf1g4err8nufn0eig6obtjukf30hhvb8s2ga266gcj4pw6szbelpaq8nzexyl0e7918s7g1e2xd5igp4idh7p0si06ej27r5gvd4x1kwj2o443wxb1fmii71fcehh0kj2ffyiywyn0l8ut1blaatf4rivdh0nxtzlom1jevq8t6sqd8mqa98ns8p7rawya9vl12m6nhrthqfrnfkr23oliaqn4ijc9wolz5a061rw37s5udw7vh',
+                username: 'nimfn9p5bhc0ud50cp2lumi4h0xo1eevn09xvwtnwxcdottte5bwthf0zce7',
+                remoteHost: 'p7wvjklx1p730rdf1c9ghi2otmrb92xoexjdms6z0cyzcjigrr3cj26d8elfs4827rjfk7h1ja4eip5rizhw3e1qy5mgbmwe4odduf35lyejf10vb7l1hyi1nf3nnhmtb48r25ghi6zwnr7dfn73vk62xtmpiea3',
+                remotePort: 9130770250,
+                directory: '2d67rt1xqdmgs640o0mcy8bvx8stzym3vrm3x1idk2xio2220g1erv8yzk0g80tqq0zqv93oiek1licbtn1ovgdsbl5cbmaplgy2ydecurlnh2lrjzpx3tau4496hps3k7nd0mvteuquie3uhk2nohfrj1jwjjhr4hhog01avjv2ok1x0ur4n094u5pzu6otznmgrgc93q52tyeye31dwlwxzyvm5du3uvyz1atzp7j3dlfdeycucocum9i3aosnxgns87vw22s8x1c2jl0rknwmv1ekzti8s0ycxs5kje9cgfz9fnv2cbt83z5qvz239hf4ax3i70gns1jyavaih5jalexlwwac0df8ibyjy23v5gdnkabptf3chzgsiou0ye5ffx2fat8dqyfrwrt47dofhr9aecasigxaedvb3uti8rbxdiky29cenfwe7cxpi81wbms2z7yh2nzodx20ob4dchj7l7jwripi1ww782wajt0ubiy8sqhxaqd33pen560j90hxki6ghlx01i3276flavavfz14bhyzg05v9kuvnhrufglxg76p9qfxnzby6ytqeyf5l921sfgs3mhoh8vd34ijwyaxig468c4ba0oklo7s0k62dg2itvazqy4hu4ag7pwloq8xsn2d730kzgloavqzaefug03wm5kj2kq3ju20gd7a6v0schtq0atm5ioavtksi8fw1dc1a5848mk1cevjycjm7fa7dlqvzl2h5pfz1ojzs1h5wb5fb7vzww5o0he9e7zycygg9w2bcw051vy999j5qaqvviv29csvst8bvnk4xrbucet28m075jkqduc9l26dff0hc233o1l7jl9eopaektwt891r0xtir6x1hfax7b8t46k6yod2l16qvdsjgcne89j0n9y7ls6iu3ejzaw8vonbq4e8lt5bcrvwsdm010dv6r3xp8naiysk75vftnuojywnlp2kccg9y7w4jdb5g2sp5ald4flcnwrvcgexc49a7q1vp5yo',
+                fileSchema: 't7ocvz2ayyypf4eqj52wqqfqbikjmos3tz9ed8c6lybw75fu2hgogf3e0v9m4w70cif6wh03wba593ocuqcidpcp3rhinpk6e80mz3fjyphhroycfj41fy7xmvqqk68aoj61uvf2tkp39o6khyf2oysef35a1c6pixctus1508kj1se1njkptxw5l29888o5qecoze4ic703mzj3wzsibkgeab3p7agjjj4evf6w3pq2jakl6trh0j07q33o8ae3xi3y7az2v2s5h207zfrw764lw7xs6isr3qoorgll8sfglwwvdn2t4uvtqqtp5x9h99bvbjtgcxcq3dructalyxiar0l7znuoi47yzi44prn553cqdv341yn36uwfji4lnbiqeo0f2odj3cvjqa1z0yvjdhwvt0xemvujuqcswg6rlwo2lo05mrfkno1h5gk1ycv2nud41idrgv5gbu3cucotmkluw79g92hjim6makzq99q3z61yjgtto77xoodld6bp86o40rkzs7q6ow2qj2j89bd344nub3l48j1dpscmtnb4rz3hhcerh34n12zqju6lmv0eemajgxzumhgp6gzjpkdm7xp8uckm14db8rok7otnwh96jtereudtwq7htrgr0nbp3t3j6qpupu49rnxo3kmzdvdoe7t7ujzaee9cq8vc77yt9sevz1bpwkcve5c2qzrclv3hngengzhlqn57te2to3p99bdc7lm4bxpqkddwuww155z8phhnocd0bn2t7pj5azkz65ji4jexmd0kt5uj8jqe3ebbetntox6onx49ngrwro3cj9azqqrrpu5mqn4ti99qa0q5693s1si1m5riqn79zbqmeimvqeannmalvfe0xmo05gegmyurlpt067tfffqv6c8rhlboke179tay91aydg4nxv9bsuejsugkbu4gft1udsfhjhtiu0zhn5o58budoetrwhvx2mh0nrcp6nxg08pdaknggfg6thwqr3x1ilkppycu62a6',
+                proxyHost: 'b3q3gyd2hutle4cs1let2d5ugtf4npclrhecczaqlr9fkcxrbemv9p6p4es2',
+                proxyPort: 3013081605,
+                destination: 'zg4qnk2dwst1sc2gttr82iunngaln4bb4ra0e0l2vr5bvrr9tr3bqyis3qpn959yxbsuj4u239ik2jriv76fdqykbwhhpd5ft7npuwujmasoip03iw5tfk02b8jl0v74yw70748ibg48bq2uj42nind5rfwedkdw',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: '5zenqc29qct6u2hcith7nl2mazv1jjya6ofcaq75a29g91o2gkwg9w1y1gfai4sibpm00vcykee27hpqcg4lxptju3pm59iifhaafrf13mbi5kk7qmm5yzior0qj7hfjvjd2l84uich4cc55kfzr27je8cbcs7yj',
+                responsibleUserAccountName: 'a94wb7elqmxn9br0nv5a',
+                lastChangeUserAccount: 'f8tzxu0lap7y85caat2o',
+                lastChangedAt: '2021-05-22 17:52:00',
+                riInterfaceName: 'mczwvwb140029jc4r3px2czbjghyaj16fgk5edm7xf6411dict1mgfduyl6w1teglxxjki0tr4o45rotltco1k0t99ljeiq2w9jhinurgvd20turql01o4ux9jezuerv6ygumqoerpfxcdpduuketuubovz9pc32',
+                riInterfaceNamespace: 'hoy1bsp52rspqvgf3p50qk3j3i8m7rgxh22hsxsh66q5646k1lz2seyyfwkpxjicx9bxyihf2hl7cxzvva37mms0y46ftw4utv578fpfb22jkmirp17hk2ws1c8qzebdc2lhvgquxmx4qaox16t0k19l3b5bt5te',
             })
             .expect(400)
             .then(res => {
@@ -716,101 +437,51 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelComponent property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'czwa64wyxnmeu8djkid1innub9ulijyqhltjqxok',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'n78i8iyo7zrlt4d9v7mjzq750p0p4qzh0zp9ps3somcpsx61ys',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '5xafco9h4j54z85odp5e',
-                party: '5lohxo0ggpa5spqnrpz8kufaied9e3iwy6lupdpkjwqtktehnphhngzqovrw7zxyid185y0vhopzm4poxlvc6gtgd58292t3aux4nvxyronp949ny6evj2ag6ksyyrg0wf1crytojejs2e5pl0l7oyibr95h3i4w',
-                
-                name: 'tme0nhmodgndwgtzx2l7uv3bs4zljrfh5wujzuvp5kzz1om0gltgm1c662oqisycon8mhnf4sjsnd66fi7n5z72jw9uhrl14i2z8whc64uy9d3zmoh1t9u2oatln2cbi9msgva17lhfuqs2n2y4ljbgijuyv58kj',
-                flowHash: '2vtpd7azo7uyq1du3derm40rn825yywkfsx0pqpv',
-                flowParty: 'xwkl1dxxmfl35zb9vdt8yq2drsdbsch6cjwf3ibp472qqs4vg4ezoge3dvuir3kvo82hafrq52ihbke5qum1v1y2ha35f3e3oeg4ss51fmljicix6ibvzolyvalwg7tsix4yt8kxtvaxw7ra42vvtrs5nzkz3c4o',
-                flowReceiverParty: 'f9r4oau5b8fz0zk0oh6wpkrh1632qayivjocpiq994c7bd7t20au6nx6atn1lrc2hhwsoqnuher2ipd8iew3ws0b0mzy2ebwjg883c6lk0ce984dzsrl79w15hlro0ctozn5vb93lki23e7ifwjn3xw7ldskg45d',
-                flowComponent: 'dbydljuv32e3zdmyuxnwvezzwm9ln8c7936i7sinbk2ihh74soyexz18v85yb9gb9zig986wngkcgchkq3vq80yscqbjup3ewuiv0uovoymdp0pyeyzk0eq575bti2ffdq8fdgzbw3q70ftv5gmgzkqqg5gh65ol',
-                flowReceiverComponent: 'veapevqkvzymsvd1aplo1wc0jid3wm11twr8l1he9hw5qkctwrcr8oopqxctcwvkv5axt7h6pm3mid6oi3e70h4m5vo2hbsuth261g81e05cg6m6yzc848l52uabi7o6j96ffyakmhle4gtwfg3ehpc98honyrna',
-                flowInterfaceName: 'olm51mfjcqk4rjohte2rvr5a67vm9k8gfhtyjf5r9dqi5wp22wqfg73kvabktq2nq4s77z6206c90525n445xwae7f7cbgnt24wonbxzw7ptm89rl8dmuc2eiazgajfgj1x4294efwg41rhfnethbam4xikhxyck',
-                flowInterfaceNamespace: 'kzgn05inayd0n4a75eje5q9fftc84k4z9zkxjakvo8kosjwf256b08h2d5lja6jjjqs4mzry0h08jd9lztz6kac856ezjo0ehue70o0gjo6v6x16mlc231qyknlg1votht2ilq47jarpektn2wnqdfcrbc802dkp',
-                version: 'htz3vo8ib0tofg9ma98t',
-                adapterType: 'kvggpzbikspqjczagn9zekw9c3wgo4kgcu8z2wkxbmi913t60dcimzst4mv0',
-                direction: 'SENDER',
-                transportProtocol: '3op9n54rp1y9i9phy8tnsaxi2lg0w59jeo3wm4kjy8m80707qjecbr6uwrfl',
-                messageProtocol: 'moyfyfmchxohdkfs8ddy9hf7aanxyu12daw0hox8gz9lqhow5cekivhgni3p',
-                adapterEngineName: 'bwceyjtkhupkis7u4pbbiemw7dw0jx6z5cdgrrn2rbr6dkkbreiy45oz11cn2wy7s6o9uxuekh5begsyc6ve4f8d1wc0vr9eejskalp8yyxow73a05kcsuk6nsgr9x1v6zj2xnqmgl33ecf62qpirw4wxdi094ro',
-                url: 'o4x9nculdtd8q1smdrrh8yaz5nyqnlms6p13qilt66ouq6vm6bsokd7lv57sm7tx27kn2bnw5i1n114sf53btsecrwo5mmsaf7zrsi9jwia0qb7eka96fw134gfutlr705nnauehg5t9s35dr1w0hr7hqz7krlkr2weakp08dycgak23u400p6w7oslokwxwpmuqyoonyckabqrc03c9ofn189r7yrymkx27qokbp0jg7qpgpuatdff0kbvyq67zjil1gvjt1l2c9tmneygyk6ekrp5x150y356h0v98h3qte5t7opcqttdmtzj2gorp',
-                username: 'm88v14tdjmunfo8i8jdjrln84kv39cdsuz5ors3o7yq6q0jtjzxlflww8y9w',
-                remoteHost: 'napus2omijkuzc8paa3igjqz05mkc44d9b0e3pser4vbz2bpow5s4eakbfpwp5phw0eu7ocujk35uehp4xdsxijkvg44qaa7yyyes0dgp03arkjxwv670miofsek74ztitp5yj7py6l691guyky37yyf7y0jkbig',
-                remotePort: 1188040679,
-                directory: 'clwacl3sauhionoo6wvc9bemf1m85n94u28i4gk96jzgf2kbs81a4br4iv9j6f24o8xdh27iog8lmm4j979ogmtxn8aaooqkdxt4tzfd7prsehvwrnfojsafnq7098hxyf5hpnxgjxavjd9p76e4fwlg5u2f2cxe72wkbn83kq9p76um9h95rmibifz3z0ya31ogsta4w5wagbyuf69sdir5lyjl10n8orfl7na3vlgjcotvtrc4x488b0wu0khdfuu7x7c8gy2bbu6xnuyvpjubh70sur6xudtc2kzk74gy8uc1p3kcojua6ie5mamnvvg27s5fuuacbjg1qylaw16ua1s2so1b2t5egg70tjdq4w2dgx7q77nv76243ly1tq0maqwhqn56vaviorlvjdcunbkqorpngujpz1mb8pp5a27yr3zvpjkc8yr8hi50d3t70z0wqr0ukproqcnied5tgktjzaa4yi37z0w3equhzjom0dkpci0etef6dwcenbjfhr83678mq07klpqb77n6aysoxv2mp9yay1do6o0rck9vcn5yv2knge26z8xlhqmt4cyfl320pw1t3y6q8gfh9n6l3c0vok8d6gjv7gey5jyso2nzyufqvz99z2il8bbxxa57qwrzf63kql0x2rgrkif0ntrpchfepffv1u6d1oedjk52rf4avlu3avwzu36vn8mm3ejyuqbts8lbq8ge4opsrxh2crsv0txopxe50hjshkp8w8yz0vq9j7eisydw79f96xblj4ohf1csfruw5zce2jp3apfmh0y7epsju78g9spf6sl2h5ur9lhk3ntawrxg9s70eh8jmovd58qrlssnmaftneb3br4o71pyhxsuo5j30ftehaao8ssku1rhtu47s3429pu0rgdnl7mse47x8xsybz5936omie1p9ba6tq86c8d2zxg0ig1lmjzl5mhvw8xfo813tny5q7us5l5rzgwhkmfbbouxe9lwxhkin71smjvzrrln02ov',
-                fileSchema: '4kzk356ujnn4ad2hfd764zak0wsaq28rnt6jztrhapgjm5p3j8pfekpg7fpi6pd9zvpwticj9hqlqwmcpvr5gkcg0o335uj8a5pv7j6acbpkljm7swvq6eq6moiog4bb5mlsfu4jw496lo27iz58n4wxbx5zm7zp5z43bhyyl5rti8xdr56czetvlbnu5mmk8itvfsnx2vul63qaacsfl40pr8ppkgvmr2dc93isjlkh2mq4uhglbmb4gpdlauuc94bq0vtaxvosqchkadc5ifpf09bslayg4r2ih8kxhrudm1dfscz4n3se30wxkucqlzl1txdbc8gq4sadjcqjiicywiz53rwh6qqt2xuev7qais5cm5pnw0rs6n7yqn7tgqgxsgjbo905fpc41ki4i9ukjh227n3s7ue2hltnr6xtk59t0h6sgm7mrrvl8020g5nzb0cosyjb5m8p7qf3lh17hudgkpijpwabn8zkv0jickxtpoigln3gkh5fboa4m6wg8sicv2ks7aqjj7f87mv643wyl3q9h66xj5hhmc0h3stvo2bj5rhajnrn910v5488sr1cfm40wtu0a4ubo8qdj1igwlxz66jyyhegg91f57v9v46vdrobm98uousb32qph0tmghnav119yi4x9ohnyse4f9l4c1yrrizbbo0zao88iitcsvz5h4ghuteozunecu3pokww6m0au3gyyvmmet7nd1qafjslznto758aafci0uceqx720rh3ycw68kumg29mdfo3r09rc5g59gj3we0xuopx17k7s7zg35b6q1utoo2oi0hre5usbdb7a4tivh83vo068893feaybjb568p9vxnbxuotig57lxpeiym6x2urg6yzx3m3ih6wva5g1mp521gu19lxb8vdu4yac6rq7n07kkhyoflsbauvdcmcuyeyzw8gbujs96rcfw0gzfhxumr1jm9pzifdxwqazksi36ufdqx7i3wv6h6kd5hng1xt54kb8dcd9k9w',
-                proxyHost: 'hy6riu6ocskans70r2kg5vq6tya8o83kanv42sujf2ex3b72i69bdsf283o0',
-                proxyPort: 4500038108,
-                destination: 'obkrmo1phdk9vgd1cxh6wznz0frq6xuflsu1wmxoxnb3enlpjd0n0pk3dtsm6ojv5a41a8aodns9a8wbr21ydqqdlzf882u0htqtom4rf2gzji7n3urfkrab8ocaestcraxzvfodjzgcvt0r7kes2ozrwu69s22b',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'c6tk9ebe8lj7ple6x69tu9wt0s8nnrjt8l4f367kptg5uoucvsou0pg46lti1k6e6bbwkoei32edrojhrntfqz8obb0dqhzd1x3qaw6culvp3k9f7jm1cxaq8oezpwlzdw4ldyp19mu2n1df7genso4om17uftgw',
-                responsibleUserAccountName: 'bu8irf9v9rjugsviiqbg',
-                lastChangeUserAccount: '2w0a2roagafxqvvt5795',
-                lastChangedAt: '2020-11-06 05:03:10',
-                riInterfaceName: 'qjrywnc88pj43r4v7j0xvtozfoj625xzsy9c866cs0wst9fnw3761xcfoz6ivgc7k2d9fkzwbht5vxjh1b2qo823rr21r4633kw1hf4ozvfv3v2fu3i9sih48aztgbkrkea3c6ac35k1q8xxeynyzdxfhu5dq9pz',
-                riInterfaceNamespace: 'ypcjuuga1auaphhhfaegjbukqdf1p0t1rm96jkh17t6lpnbln94ar19pr2rl0kjqw6elis5f5i455i53upa8910nw28f1gapjqxfr9a5d4jwkseih004geohrfyzwrbvnugor3xvctow38w5uz2zjponqdczb67m',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ChannelComponent must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'zlzsovdve28wzlt5a3gq9t3tfhwh35nuild4rt8d',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'mwshpxuu9fpgtt4djp70am6dwinoic8fdjt6rg2s0iv7ll2ik1',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'zqj7apjdji69aexx16gm',
-                party: 'rpf1y6t3jt98ko5w8z0reakbf6gt4drllqadqb6qzdinfk2jak50oiyb4o4y2c1c07lthdm4k188u8udoiofi28cuaf8rumt5w0i1188fheyva7ppixvfed302q39kty9gut50x0tqsg5u0onb6jau1u6luc8g5m',
-                component: 'prx44a7vf7pxkyzybk9hurgoiq1hrgmnc9tw49am5glk5z21ydvs2a7duhe8ae8pppwtp8tt3480xzs5bg3vwklm1dg67b4n82afudtwgvxxkmcz0necivwjekuumfni59xlpek1n7yh9huth4qckmtfzbg493zu',
+                id: '8d489dc9-27b3-4fe2-bb13-7bd67def5cad',
+                hash: 'q9c3x3tjzmg9bpqi4f93m1uuc0wax8rrs0fb5x4d',
+                tenantId: '00475f39-576c-4ade-a2a2-fbef1872f5a8',
+                tenantCode: 'fj4yjbbkudpbw8srajxyzqkxfv9xxqo9j1proyx01xc08fs3wb',
+                systemId: '0d2c5e4d-b4ef-46ad-951c-651f9150d60d',
+                systemName: 'aw798c7h5sear5c2f8l6',
+                party: '5iaraa0rhh5k4do0fvyggx0by7tc5piss8qn4qb9e0ef0j2x7p0lyw3anofqf3dydsk9z5zqjg0ax140uw4x7f1pm303tbsdcgc9h94yk76irl5ne4thnx6ffvo8eue5hafgpkpam4wsb5jrywwc5zj4tfpy3vfc',
+                component: 'mkqidlt4c7aq1w19n4o2o6825pto8ayxxdgfzru9ncpg6mn9hg2mdg7avibb84m6qegvilcoigcx0uhqe3sge5wp8tyhhym3h4ooxfa01bpk08x21d0x9g937tw3ka2vrsj0g8xvvlel522varvwd2nlj8glv5qo',
                 name: null,
-                flowHash: 'xqkdeedsw0cvbh9unaggkcbp3pl7klfi5z7q1rwr',
-                flowParty: '8lyg2g4nxlovpiaynaon07uszmizr4tyg8iu7jr1qlmefbnvwjbvy0rut3vyrk8jc0w8fid05zjnrci3ebd5fgubvxw78ja34tzlb0x97gi2xvf1ynw0mtj2d7q2suc50wv92bds5stflsf8v7hw7ft4a99s9izc',
-                flowReceiverParty: 'b9uibwmjgi5zx4v5ly5jq8uh3g8zdfbys04o72w63k4x298163zkj62jmb92gqwimkhakzla2lbjyb7h2nglnwslnyj4pfujdk3h4akcbsww2uo3vb9z8qsnzel02dnk17k5u42vmh2c4vpj25a106ihpevoit33',
-                flowComponent: '16ac5spv4j1kzq5xbdwu9noxcnegjb6z7o4c5bm7594nk84vtx9g0gme5p5jplh5zg2ai94l0nsq42p8o6nstiu73cr22w11hztfbuw75eov0ofwsc13zvz3q2yzgto1bqi9w00r0n5na3in8k9vdcvd1qkyg5h2',
-                flowReceiverComponent: 'spx42kesl08zpq0vnfjo22c2rf42h8uhknd7xeb2zp603c38pnqpmw8y23sfl1ui7bnvyeuynlp9xttgi0hf9mi9zl772swstj20icmw1p25wzj3j6sb6retr8l6yb0k31yjstl1sl7bpbxj7vjbgtvn10pn4bxc',
-                flowInterfaceName: '9u5xenx8uexica4z7c0xjmrcj3n5tpdqjupilf3phxyf5a1iu0yo4kpbp2epr7rjjv0mjt8bgp3f71lqu7g6r9zr5a3hof7xd27dconj70q6qsormjcp0694hhuf6fyf13ufoezdj4p07zyzua9mszrx1oxaamj5',
-                flowInterfaceNamespace: 'pi692wa5jh1ypcb42g1gb3nk4ct6to3lb1s0w0dkjstpapceu3ontjz1cyjbqui3kha0amfqkln0tatq3wsqy5qkjtqodt9v6vtvdofccq3jbrkekufkyu4aunipu399yngqq3idi2le17omeofxbm8ujbfq0960',
-                version: 'c0v53uik55k529u7u0qc',
-                adapterType: '9ecdlr6z4ghh292q60mk8mu5cc7jte22c3scv2ndsyxsl024jmwt1dj8fhi2',
-                direction: 'SENDER',
-                transportProtocol: 'ud2ijtc2s3gtxw1elwla9jmxwzwv2r4sfd7f9ygcxfnds04ypwyjbg79onbo',
-                messageProtocol: 'l1wa6ctmffslcequzripaqwy5gbp8gnlrke8vlaf8xoe3jlnk9b5xksrq6j1',
-                adapterEngineName: 'ng3or06p3nu8nhz9hxb33fimj59tbz2cfmr2av9lhq19krbibkzfby33gluxka6ph7hyrdpzrsfk15z8kfe06gqkzghw4rhrkzce1lwqw93zxe6sv517gwblpeav8k5qv1zgz4y7nzvtyqyfk76qzd6cu6gjhxtb',
-                url: 'pz1bo5c1mp5qbnnwskt9m5oq4ytj1pk8hnpf0q44iixkx66be0tnfec4j5mjy2lcwnqpa0p86etdwl9eeoyh4rqwevxwyu10p0crmqrgbfrcwxlv2tcejox7htlxvdfeorfsfvk31trp9kxjjwelsenn1s25oompxkkdjhip4g21dr2iznsrjpyh6yuttezi0ldo52zyc8qhgpv6ms9jt1gh0be8fbbf4uamqr906x2nnmzwf6cnelnt5eaw841umtq5t0kjmt5tvjgzbnsrq4qh3tioh1tryuautxoceidg8l42r2zojqlje92yrvem',
-                username: 'ssrsnlvku05ihg5d9zmpc1ku8co63w5wsmb0b2dw3mx4ji9j0cjak7sznx1j',
-                remoteHost: 'b6407kk8lqsiwdaf4ipieqcm8gg6sjdms7hv8zqvkqd45ya6o4m38aons65e4ifx1x5r6ugtjgbs4n1asaxeim4a1nqtjbnawxwsks8phtipph8wf78ltne58qs4vmfw8a98t2iu1w0hh1v1wgq4h8e4itc1ed4s',
-                remotePort: 4563579964,
-                directory: 'oyo0j16zxqlgxkuberj3al75ue3rxs9bemh4ba6nlfgp9w3senblute491emnro68qcpbfdafq8o65cmqbwqs73g0eytjq6i6ufqf4q2xxxaod6audw1muc4vk9wbs51mim89w6abiqf06mahshu6a9hgu9wsreurqrl6olx4k7fadx5iw3hhjvmt3d4jow0m5u3omz9nbq06vwbx6pj5wa57o560470dds7n39ntla6yvrn4xqio8akyahm0psot57mx5rgfde3hvrix9l5kmt4o0s5t46tmzodyvku3hg5ps08ny3jlrro3079mnfpuwl0oekozm0eqfxmedmh93t9vvo3wolnp5km0idw2nxbugmm643gfivcedv5y7wxgo1mj0duvu4lwkceugq1ovv4ickzfyshnv4ixfjjbrfel6lzzw6319oc2re0gkkfaknswpgvssf69npwon72ih33vfkzemjewssf570lzsyczsjqdwf5eowrd1pmf45571v6attmaekhtrq0er8r48w9antasi2jeemeqnqyi77uiepi3atkpgoo1rx2jq89p5x9qhmt4jka3kelwds6erwvv1sq3tz2mwc4kc5kamtmhg9h3t3haqmpmwsdn5147rqt0inns7zb2emwpkvnmijewe7vdqus98b7ld66vwyy3ij4e4rvn6vd4hmtkbmu6erhilufoxpysmykc579e5g46ztiwayy05zicvbooyayq46u409l9b09gyfh6pgs8de4szlljgeo34m6gkwegpa47pghvltqeu94pegsgdnouzg01xxbuyyl81ol5owblu29fhfbsvmphnykuqtp42ttnpqlpyct42r7lz2nh89wgnawv82j2djcpvx50adxs1z5s626b2286kxe1pneh5dx07iumb8sl3uri5iqegq9s18rb7y5q0huu9v4tyq52ktyvlcgkhgtd7d4v9l1snjarn2uxyce2ufkn3s7yke3ofxzzccjab46h8inj1a4',
-                fileSchema: '2m4n9so58ez75hbknddvqdbk8rcxjzhvbv0kjvx1ehg0vkuojn9fn5t112picf5q8t790pxt4jv4s7a67phubzabrp2nnosf91hh6ate2xaci51ekaly4kqa3iktbjjucnaw1ft5chbyab1quuwd1bz21irb9wtpud1fbz5ue7n8ms1pdqe4437z59i7sk4tm1lxm3h50h1dn13gerwl189xxvmf7fy2rzw9l0fbpw6qx9amx51k4tcanmyhwlf199wszsdfgb2sx5j0y34cjvcacyhk7ujn4likmklxtlmd8752b0mxwysysb7ehjsw4c0jb1w3a466iccq4aozkvnnb82bqz0vody2nyihvdmauj94qnr66au6p71qdzrbzfqyiujizenjt9dm3pl8q3479dxie39zcqi2e4x9m2r75ng6cvnqj3135yhnvkpm98pmkoxp766qn60ioud3yjq3phexladfhkwf6dkoy1uc6m1ro30rqdx9xsi71oogn8gh2jh9xf4x9u5xwjkd628n0qkmqqspphn6bqxdlnwiyjhcsop9yfe7t3xf1codoh0325kt5kgl7fegjyaafg7b2bp9zx82yon9mic27jhk6dtw0lisyjuofy134vdo0v0rgwemld9fehttnfuhrubq888hxo6t4pvpoj56fwvqyykn9aiyzlnlshmo01dxe8f8oj6ha3k69wmvjy4u0lv1ukpr5lwrgr6exjrm2ekhfryel0a5vdw0lnlu0ec0gd345fngnwm3u67lphr94vdor0jgi7y79wv4rg9zjtewog9fqypq5lgy18eb77zxp2f9se0e50366dk31s548t0h0cdxquou7c34v434xag6v6s8dwfccije1fwbog0ksagxow1cvzoj9p4w0msmm2ctt8klo5gfx3w3kvag6qj0pp3bulkymbrhy3nu2njimfskhr9vac3qpw5a9v6iqmmscou7qmemwm3tydczgcboiy0q1broyk4t6ledpwqt',
-                proxyHost: 'zh1uojl09e5lefllxa199e8fnobe898win5a883ygdc18py24oez9lj8bpzs',
-                proxyPort: 4633437638,
-                destination: 'u076m7hx4ogqj3ni7qburo0oidy63pao951ccop9reyny0jyysn14fuonh95f2ftqx3wd3l2up3dkavtj9h78m17ctpwwi7jo95hgcvunt1b272jiu5c02w7fgux3qu1wfm79czmrk8rt74zrbzr7z2cvnajs6zo',
+                flowHash: 'jtd2qmj5dri3oq4uze68uh31so266ugq96gnhcld',
+                flowParty: 'h1u88oblkovefy4ddu8eh61bm3zjotiormog13le8xiec7uhqz130qy8ne0mw97v2k389zt43z8ajhvj1m9za4z3dwvxcy9l0di2abd5beym5686hhasepob3di2ydr3li2xc5i7m6lgti248o8apyloshdlqr9d',
+                flowReceiverParty: 'qe4nhdizcz4jj4fszu5uv1dlma5xhn87fiauyrmqd8n8ndi1gxxsg6n259auhj5vfa1o5ymsl31oyfamb20boxxc94jlf156i2aqod4tnwrntgwzrevvsw4qbq4bnbqzsb0aeu9w3ujhbw38pbx1485suaiveqkg',
+                flowComponent: 'esupadxn6en9emux981xj88x477yktqmsgn0180xw648n0yyec9o4gvlgcky2o8o3u3baac8zsuzgu4sigctwodls9zrm7dodrdbv0soz0prdwu1g3youzm1rmk11qkv8amp1x6e5u8krlw2mil0ll3oylors2d8',
+                flowReceiverComponent: 'q8qwq8jpl4ls2z5f2ox43ngp6p3e176aeon14irod0iimaqsldakahnh3qgk2326s125qo2vvwlclwa7rshidecsf6dl9g4uvuw8pasevyqieo6lu1f2mv7u3b4f8f84p1xypzhnsmfdkxin6ss949jvc2lh2ywq',
+                flowInterfaceName: '4c5y81348sdlsmp78golob9itaz3s2u3pin6z34h4f4jo4v5d39d9znx7a4lj3koaq5dypo20qqfprs2ew2m8ui1xqc203mwhkhduve2uj5cklqed3jyrqwg0i0186x4si2433shn1ykoj4absskas4duxgtllnm',
+                flowInterfaceNamespace: '7jq66ref11es0dxm4g5qbuwxjm0gm4dnubc9qx0pzg1sg1exoicclh5yml4875f9lq3zik55258hys1o7y534eq8uq5elvay1gldazscvypc5qj5gwg0xxzg9nysnjpi0wfyy8r6retphsigov6gtbq5jfw8qv2c',
+                version: '7xeai0a16rtjh8euaemd',
+                adapterType: 'hvclo7d223mld8dzdx4a31sb5fd9jrofjah7kjqldtq2lxxi0k3tdzo4gn8t',
+                direction: 'RECEIVER',
+                transportProtocol: 'jwym0msn7sk46zhuqz5grchid0fxxu1omcn9x9l6duco2d1q074g2wh8swuc',
+                messageProtocol: 'lfit3xm1wt6vwypxfg2xrc2ed8uwltrcpfugtblpzd62oywr2lw2r38s9rf3',
+                adapterEngineName: 'e8flf34ldzspyl11odq10kni4xt2sjkfqa552vncps3ryujva5iuh7wf42mxa149r36kze51idzpwhulcjlyb5ei24zgy2xaqvc9ipyw9vit1e1z8655kjk06r1to4kusnx4275h0ln3tfba5qm5daktuhdjh02c',
+                url: 'zsclw8stads72u89n5l5zocw70ptula9dsrxb0glo0ldoqbn9t9l0gyhlgsqyjxqf3teeun04zzdcmqc1yyc1psgj5jso063qsb7sxkzmo93qmgtzvtn9n3sb9shvrgcno3mrj6cyppew75ogpskiljkbwk533tz6szi4d8mn9q9j2x408uj26tql1rurynt39iuiz1h7nrxcge3yeqhic8bprdyuu1qxflvman4ovn1ewqyan1dcw28r4ljygwe00wzolidwxghqg5fdw0dbljywlbm53v3cr3dfdagwajziwl957uent86p9kthhkp',
+                username: 'ppclr8ekfdjhwd62dave3ysddjodgrbnzy4ueckv4mrzzcipa45qz95s63k4',
+                remoteHost: '9pmew36a7kk0jdlof400skwxy2yhyod4eun75knhg1la05sqwfd58yhu43qs0f74umlplv1uax1smy3xu4mfjgoolpnsapgo91mrphtcs6k8szyslx42wkdk1tqsv5bimee8xsfzau033nng37mks897nk215u26',
+                remotePort: 6778217104,
+                directory: 'dyv4ff4t95qvf7503350mjbqxdzvjcde74auyjmiy50o2vjo86wwjgfdiv6cvgvvunzj3c24dj42u9pdst7h8n3qgysrci360323leqkx64v6y7zr178v3wimjwz6rscu7ddn43kdubkt5balnztywbzgyyv1c1tsa44gg5ydb0ff29t2ofysc4jwm1c44tp2boppn3aeyuydbzcc43lag1ljqndnhfnez3b8bvpvew81zxb393gplotkstg2sh0bo9shylb5jj3jcj6pgxu04aruf2kn0gg450lke2ijdptcgl88iauwoyu354hdbesrx7bev0zw1tdzc6znzkmh06urkpb0ql9rlvwa39w5yf1xivqpsy58dfi3fy6bw9g71cu27noc0p0k7y2tqgwr7qoveoz20cs3a9hhjssng144bh93iy2jxxvdf34re3rqhv30ulfg5n0kerf3br9nl3peeta6z02zrww9bn66aocqdiiset2lh0uaeh0zyj9eghnrzygqixq3lylkb1ohp4mdli42emli46r0r7gmec8lvu8yg1eab5jigbow8mzud9j6odoeh5o4spr17n4sqj4z8srml1kbb03nsb3jwtg4t1s9lc18r3oeovlhbbdnxzws6i55atisirllfkxxuxgvcrh5he3d7z6muod7zdkkclykq0zlufstlh8w958iivbxyjyovaslpl39vlr3ixttsogs5qkw1bynniiwlw5d2kuzrw2xmlop415sagsiw4nmzl0vqvnsw58xl4n2ssdgf50vkvnn63qwonscwwxd6qz4jbisql410wlau2cvat0ccomwv11npocv61k2i4iypn6oz0czbnf59wepcfej6p70yc4eu4v0l5vvbrp1yzl6v6cv47b0tazbxv5onq0idllmszxdl4a1iaur7bh2lv17ajs63lz3oksj0l8909pzsksdevy4h2924v12a7rkbrizpjrf8z5v55jk7a8y2szl9zccp3tbhyurtjc',
+                fileSchema: '343fstq8owjqzsd88hced2wv1dtqqhwdbvwbj78pvzueipjfrvlvkgf2sekz5aqfus76cyjnam4cxcir6jbgypn8av9vzqfa6y82lnp3iz7n4il0ib038gls3v5jkg0cc7vvt4uwqhoynsf599tc3sbz69rckhkbu1eoklao9jbqdsdroy1dx3x01zk1vrzdeg7tu9eln7bzchuwt6xudx0qyqk34do5ieow84f4i716335yac5jwlnwz28143jcd16ehgyk0173fg36rz19gzfkp7ulku43uco0nk65lx509pbnlpsjqg34cjxd9iu2qpymmk0lg9qgxy204m04sa322eosq61w3rzzlcs0x38j6xrahfav8mic1mbrd4n7e8w60o9khvdkira9pvv4o0om3t7q73sk0g13vmaax06xqdkw3jhdhe4tzj8kzyw26esaoqgqu0bf6d915yk33zzh6zz8wyfxokloiagi9nkz4d1el0uv2zrh7jf7bfjnnkxdrc5wtv2qiu1yxb3e8edcmwni5ji993ae831lwbiz6jlbgcaqwi2t9bo1g9c3lvrw8xcpto9k1dvriiwa3w6q5j5k9ezgzn9uqyd3kuxg4kyaa3q9h0fx901wdypvz4wr4pc3pab1imrqzl27qldun6b6n4n8ys99o7o8jh0tf0ivtlsh2sm32uk7ogqg5z8sbyngynjmskl73mwl8pjmgsriavf2mzb1xtajebnyraoeg803hkqxr5f2bi5njkpp3p446809pnbbwcc7pndisv5tdr4m3k5jilp1i0nvxrdnvr805caxcykqlzuh34vw59ce3wcf94o22a25dc365vx4n9v292gzp8zsi65fooamo16a6tyx8ewi43zf7m5zfhmk2cxorrw7gdo4nxev1dz11551kzb7wyddj715ldzqk9b64b4w76gwyonwsvxuea1x4qc8zcju9ga1vpjikkga1ivfd0ho0gdcuecfvkn79limvsoc4hdb3eno',
+                proxyHost: '0pn8anlio3mnhqfdazpbz5wyehkkc92os3nl6ei6owbikizmnfmlojs8dskh',
+                proxyPort: 5802872819,
+                destination: 'p1vdm0maxlvsm8tcjfhuppeasn2pe25pk1omka2505xjxewpexj3f8vnx87qc2v2yrpt13qgz9zz3gj8vx1j3h4f2fwr4s3l5hnim1w1fxyt0tuvuikdcyq1x2nd2cmxuys08gakfl5n8pq3r6tx2h6yisjqgiy4',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: '0bdabuvljyfjso982m2yne322dlnagpwrvkpeo2twqf7lufxtijv62qc6ysupt4icw03d0p0jzobvwcbu20bh0hb434l5f6sbnrhm3n980fbbgrs0tyrrf9h66qlrcenvmcy5mybmsdm3przhybqqo3zr0a4ux2d',
-                responsibleUserAccountName: 'h9hwk20dedko69qb3iks',
-                lastChangeUserAccount: 'cwaoh5qd2k7dau4fx3vn',
-                lastChangedAt: '2020-11-06 11:59:24',
-                riInterfaceName: 'qed77ld0xrp66vaawxgv7g0ownwwbc0yqj5ehfb7gm29fgxidveqi64gtk6jgm1g4a2t6i93e5vqdgpoz9pj45zhcnw2hiuw2sbvpbcmss197undk0yrt4m1mkxarsfts2z9199kjldm33zf70fz9l4nwuovcz70',
-                riInterfaceNamespace: 'fwf5tyr0nsv5hbz0ukuavkbrx8x0kjzn8nboicz41xbrq0scs8kfr4jf9eqa58014skxpj9wh47au1lzcli6n40ad9tw633eet535lje1itluxnhirjzgmawp3d8853ahynqiwk6c5jgd1llnfrcg52u5xvu5bu8',
+                softwareComponentName: 'ohwqx6hbnlwrppbuewsybronvxtqewl9tlqnz92xmp68gibubmcywbhbrl56ejce9umisylnojdd1mwhg3umzyp0iljy5rh3heb6ogd7vncm4umvtaq7t99id4hf112o528eaj90gyilf5dlb6nsa7n4jajss2pt',
+                responsibleUserAccountName: 'dpu1lllea6684tb8l1z1',
+                lastChangeUserAccount: 'gs2z7tenejb84hzxl27w',
+                lastChangedAt: '2021-05-22 14:42:44',
+                riInterfaceName: '7304yn9epj9ukcyw4hr9psip41grh4edplns881mwvawa780p35mzba5etsbacz7bwy0z8snu6tsav7zmhjcjqsgdi9b0lyvs3owixw0a487yocjh1rdqj1t7y4j5m44edu6hr90mgi1wv97av82a4li3y4ck8b2',
+                riInterfaceNamespace: 'lx4lzvwag92kygxe51y41wybvtl3om6ht6ga37ni0bpkn49jfi6mrdpzl1tgzhhgpzwbv9nruvmot72fwi44j4oouofhgugezfhvmwsedt9hki5eoigh4okob5n9gtgoi70xq026n2cjlz4eoq20lyd34xxh0h6t',
             })
             .expect(400)
             .then(res => {
@@ -818,2369 +489,2771 @@ describe('channel', () =>
             });
     });
 
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelName property can not to be undefined`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'slc1ta1iv5hhut67ahbnm1tat60e2hjli7ttyzew',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'kz95xzqe8gdmk9az76uyl6m8l2jnf4jpo6r1nudgj5kgm61d5i',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'it05cweczjpkmdmsodxa',
-                party: 'cbxknzqen8toccshjlyxrv8bj4ze3kjrupg22wnr1aqv3f4zgju2s32wl5dnlshzqzarcmgvvejgee01gsjmx97mufmlqnhar0ptjxb3ioen48rqfiwf986p0lgfht67v3mj9d7fxzpnubo2z71k2hgkifzo558c',
-                component: 'eo102ybqvsjbd1tjmtsghx5r5g1r9ah8muzioxahansurzzkp0afj7oc8po8gga97wl4hdesbweqrrwc97f65zfba4ig8wd4ss6eufvlzvkkvgnbublcf161mo4yv2p5lqjd6o55l4oqn1xiiw5dtualf4sfge9i',
-                
-                flowHash: 'nbfotpfdyj96je87q8p7qm009z1x2mhkvm4elr3a',
-                flowParty: '3daklibpbvpjr5wt7x49yiwzp6k7uk7axbggtanfl3w2dqvxq5s8r45qwsp4htaqxghf19whafq9wzncgr8crpqkxa3v0kk5ecbq6yh260z6oxga9qmvue4g3ro0sf7ys8gz43f2dr3kjcplp53n8ly6i5l3pqnt',
-                flowReceiverParty: 'ai09setqbr1um3shq5bwp9v124ndddcbo3u05ki6gd1yf0hvwe301cqtmhnfomwtj44h02nhc3m1gs1vctkrte7natp3qxpt3yhk9ogmfa4b3wxvrlnfzvx90dmgm4j330vu29q6ke5k1kq985x1bwkpu5jtj5vj',
-                flowComponent: '5a78y6pi9se66t6g9q5bviwb2r36sczgnee7fprlwq8ny9u8mpyqt09uu745kczrfhba00wg4yplg8306uycw8buuwf1oe7q3k5ywf05iyaryvt6fa860ky1wtlju4pqudm2yini8uyqsfwgj89dxwn1ehjl38u9',
-                flowReceiverComponent: 'xxe1so4etjzikuri2kal3ywube129oyljpo8gsn03hbdd5919bi7vjke6v70ta519uxr6sokkgi44efruhjzcltl6t2sz36nik4eeacpzr9cvljdofli57da5zlwud66kej4l9531x8zd0l4ohe683jrv5gte8nh',
-                flowInterfaceName: 'hf5u14ho4smhqre6fzict011myf4nfuscvahh7i1yh6bgkhwk0f5i43s0j2ded3c9rgrwknml5nm7h7tnef91lmtevbufg8hg3tsv13ca03g4u9bwznv91vw1p9uy1kq5p3yw06oocxwukn5cdg8vyjatg37xou4',
-                flowInterfaceNamespace: 'diso72zm3ov6pzdu88u8oxfrllmt3xxds1zlprfe5s03s690x6c5u1q83i0gqrs2gkq1ar1my1j3wiu9pqo1b4u4f6d0y8ao61q9ty8rthhnevnn8huhboeeqyalfw9sihyk5pnchknsj82tvihpv9txomb3rivg',
-                version: '7154c7s9jowqvs1ad27d',
-                adapterType: '4m9sijv7tvqz9426a0xtmj9z3ilytl54xq01p88yw6sx68hhenp0xhy04qal',
+                hash: 'g93lb9goj04yua6sav94kv4ao1e1g7b5vy8nt1re',
+                tenantId: 'c54cbfcb-a1f8-4a42-965d-04cc43860ef6',
+                tenantCode: 'pb1408izoe8ef3m4vcgddcrbleai1dhbx2jp7penoutkh24vpa',
+                systemId: '78bc8fd0-c0ac-4393-902c-cf325ef0d950',
+                systemName: 'notg4132jpvxfklhqtse',
+                party: 'heib4egwbnxqrhas2h7tkq3phfcwis882t2hd49qxdv6as5jmvii981c969be5latmhug9rrgbnkjfpqs3528230qu980ynp1glld84s26hlvnlrpk2f0l6cp18btznk5zkqdrdr5721kwyv1d3g1yk3ryubaubx',
+                component: 'pi4dvn85ehn6mgu9bxw2h29st1zrtw2x6n824xgu1vq4h7674bhlplniv8d4agm93rjsdjkrozkkc86jnwd2bhcretj4u20oggvwy7yhjgdluyut5775tlojh9682h1edlur7ociytdvpnyey9muojfnuzzat7cy',
+                name: '4o5ex4skfm6p2rvtgg2nhov4ajowc1agzuwiq5qmtkteuxvfeqnhuiotn320tlfldu7vlwdfl417i50s5psox2g49j4hprld4zfg39by6e3vzvtbalm837hfnv4xvaa9zstoj511dxz3y6wpz8o8dcb22ems42e8',
+                flowHash: '5x08f0d4h5q5hw3tozvnu8sa1k0a2bj24de9oxpw',
+                flowParty: 'ixbtsz58svc24jz7az3yugsu6j5v9r31vgiy52ffx8qf68oy86lyz640i0732rviymmkxkjff4i8ox8giad9pmjmacto1eziw9ctu3c2nmr7iheylu67ki2nhuhoj8i3wpq0vpnf9flbcd6busj5qnbduw5k9eoz',
+                flowReceiverParty: 'j3sxeojgtqbl3vc5nd2vcmjt5f9y22v1e5a1lxw8bl3n5c317ks286vanclxz8oou1orpppky54mtc7ocvh5iba4q0xn8dmrz8rzqe854mmuhifu68r9bjd4tt3q45nfwneuc6ha9h5shusjvbjm22acvefl794y',
+                flowComponent: 'v66mtbm6ba4bil4fvmyhmcm27hce8rxorchqsa511zlnpdmjsg4977a6evzb7lg6i2x8xtshnzgq0mb37j8uztgeonj6nwkp9k4jzq7v1oet7hvega33lk8qvwm9uju9pw17p62w2a19yu5whn3mbnvlqbdl4sgx',
+                flowReceiverComponent: 'zosl0jawo1fe2ztxjub9qfeo529rrfeayjapmzpbttg32l04lu60m8qfa9xloennm000ck4zr8kkcfq7tascvoo6sp9z1ga28pqhptw8xkcf7wq2e6mjq8qfrq8t31mi7xfh4zxt6nmuxbe24z0h4zuhiv3qddi2',
+                flowInterfaceName: 'taovlx1y5cr7xybnt0u1u9oyw68bn1gasf7vxvtpvf5ocv9l7ffw3om3eq2qbjtnwr1qrb6oui7917xxy3agq74rvyzmj24i0afl6rwde6l16rpebfbo6xrnmy71xee1api8hry6xt7btljgsh2thk9a9ymte6fk',
+                flowInterfaceNamespace: '9zou30d3tn3nqhvlcugynbef43p0rsqnj7hmh0jm10jzgq5cqtdl1mzva6ji9gz1tj1wjk66zdwvkm71mpzo0vzpk90so5v26uxu89o9w1ri8l6gb3rmj1la3oxip3sdw2cyqafelaxt2qrp7ngqh0jq98jh975k',
+                version: 'gsyl04iq4d4m6gu124e0',
+                adapterType: 'vb0okk7spp7u9wp4ilq88dglx264goyi0ahmjx0pe7iihsnjwuibo1of5x34',
                 direction: 'SENDER',
-                transportProtocol: 'pp2u6ofnl20jfbt77281ur39g9hsew7vjaq9zcbhu9k0mq9obc2716jrwcxi',
-                messageProtocol: 'dudcgwica0g7j8ic8vbi30tjbec9cv5zrlxcd9nh0lk7wjo1eg3ld2enkt2s',
-                adapterEngineName: 'qhvbqu5yi1y4u3vteiem9ydokdch2ie5317jc4wvxjpbqwtb01l09qriopbw07fjjooravih7xd6eg8qoiuaq5kvs5jlgj8vmcjont675papwj0xki1a27ly0pdm2bv8k0ug08tpj3ux3c4jn0zux5mejxlqckbr',
-                url: 'gcvtxndz38sp2seq3x1o9m0znxys5wsnu4p3ud9bxlvxb5zbpu9v2f6m9gpcqyhn6o7zdhy8xxg729djiaj2f9hcoubir0aks30drbehvdf3xoquuiw2nasnr66lsezvq9o99o07psc0ol4djmnd6clhnp50pl2po6cgjce8ad8wz05gj9l0q32v1g1cg28w70lzhjcw71psvxgp3pyk8f6oy3iffq1fwjvnrewk5kbtvhnrtsk6r5eeqg5emwq109k8yhjqibqammjyfxxzflzuv6au18ja87mjq9hi4mx5qbyri51fodjm106c1533',
-                username: '5o7mc29uyj099qttuptmy1ucn6nq3jetoejbe8mynte0vcmh1kmg5skh6hd4',
-                remoteHost: '2hc6bejfh8dh07qqmkf7wx3nnih69idukok6e7eqobfrkrizjon628m1ef75m9irrw4gh0g3bghugcegopz3nir6gs8vlwtrxdtchuon7l6ktw5chbpfwx2r7yxdqmti3fm74dpdbq0jmw7xlrzc0hehci2dgo6s',
-                remotePort: 5270970906,
-                directory: '842bqnw8aat6o67nlspnzn9zwph0tivoxeo9tm3mos4x6c85fhco3303ay15fkruko3dmgs7foxzasbvlquasvw5o1j94zktm5idducsqsgaqfzauxt2jvx8gyd1uht295kbcqqrmzbksh36yhcmqn63z9p3cswc8nejh8hhhxryirwybgkqeo0l0p7fxtjy6qxrsfm0c4j5q7gyum227olehiyk7ojxqubxj2m6cguuba66wb8nqb4vp0sr5vxo0wqrwco9l9xze0a0qbbrjuzdjh8ovebhrlj8565s8exgqy9kiqr7yj898vm5qj5lbiv1vjvub48eqqe2fhl5mpsqg3w7eo7l6pvvp3sy00ubusa995xgvvsfeenjhys7yfj7abcr4giym1vnty5laceiznb15mcm3qb99b3g5ddyr2gmwdet29dcbmd0oru5m1xgbj6q41tfayvl7npju1w78jpubfwsgz9hpqpomtw96j3ignkpv19pht90q06jf3nwdddmkhr9n4u7sp766nsd6q0b8h8a6c2wa1h1zv3hgjk9vfmy666itxh0pur52pq00yjihyrnre2jpoknn46g7pummczbp1j625fky3c8q5uwe0cvaw54l8d09khnjlosf8vq76jse8sa3hdoamts7e8ijlp6pk4ezyi6ctef0qea43rqq2qzasi5imbzhsh9438swx3czh6v0086ylk76l0gayx3o0mlxr0g6oe2qkstnhyms4ixv6utmlzlvxext4pq2jfz613sur6d11y1asredfc5e18fjobwckipqkf5pvjkk7s50yawab598lcfvutq97ys7ed2p87ta9dmija34akisebhv1wvk89occx0tpti803og153m36de47ojtmkor813r0d7jkydw27zskmx0b6n2dmff2bgz2tuoenx2gx9o1tu4bx8mc7xu7bqxx1gl4hp7uuqtywp10y4v1wbq5kud2a7m221a37pcajyv9iomts42y92ht1',
-                fileSchema: 'fcfqxohr6ezgimhjnpmxxfwfv8w4rpeo9gapopaiv1mtlxzw794okpbexthupolfhbxp5b9c44no4auw4iiokil37e956m1u2b3jnbuvj3qp5qv2avcsisr6xjfthjw5szrzrwpe7oxuj1jrmaxzamzjtjba4x9zzhby8u88d6dbtzm1e16q9mx66ui7fmapkmdxqobw3wlc61nf0kk8s2zhqnfmzj95ft2zyv2hy82rvrce6ij425qxg1hixbuyi5n5yqyb99exn6f445m3uhwrejbg5b7shxsqujuwyvtsj1ua4saxsgy5hlh9r2m1lf1tt4203sqeacy4ut2tptgifzvjm9gv1u6uv4d2jtgay7sxfhi18m7ms0fslvmz5urmg22n5i34k5cqpafog63iqq72xysw9gklwzv9lup07vdxqrugb5tgsh97yhdlc2stsxaue02a5c92l6a6y0kupqmqhulj36zv1490flgozol22v9z7k51k3emxi8x22qx8ok04gk3zwq1ovmstnw2gtguz12az2z95fb6a5odimgwlrjl1lz168afjs6kqssayupte7ru9jhusubk4d0o1kmw904az4i4i4j6sx2gxonltnqikfeephwqnlixb3lkpz0g86to74lmoygh0emppb2shsk9as09zblx2phf2o2kr6v9xhf6mjvu61l3zj5vdltdp41szq4tytb1mqtzhlisav19pboe8828kdkltfrvhvsd0ti54ji0i2hfszuu83f6j4lhbhbtcxp7qzryokaoc0vkifm6e3pfhz5gwylqfruxp9n04cg7vv7e6bum75durx6cldcv44b8p55ndufju22d9za8rue8w11m9a6bd2os7hc82zp5aus9w3x40ovizjys3tmz4k4tnf1q2btd19lesovizg45r839f039yszetj5m2c1e2i3zgbwqrpnrt243826wpqta126en9g1pbhsxdc91tviprzvl6uvd1pw1q51wplyhwka',
-                proxyHost: '5a716xzboyjlhioc3il7j7ocr5b20mumxu8hxpqolqbbkypm4w9lg32zrufg',
-                proxyPort: 1542659511,
-                destination: 'p5ev0cbrki4ekhsxl8r19lm3yxcqbjec1a6qdwc5h47pb72lygphgbrqaazme8ep390axscd6en2ydp6esxot0rl7wn58ny91064wg7fap5jygyh258kjog1dszu6uocueykgoih46d4zuejkpvrxo3eu2961h2b',
+                transportProtocol: 'rbo3df9kzglxwmbdziowqhsmhi1df0njc70fvunvw57wh82zc1hoxzynjrbg',
+                messageProtocol: 'hb0pwng3tki3ux2avpxnmmvh2falewbvfdd278z64nn1d0lduzzftnd4pspj',
+                adapterEngineName: '23373ekud65rsrvfaribatydsjh0acu2opolbf5dpah1c7h7zyu482ekxyqxhrajw1ule3u5bfzmy4af53e652lct4ytpjzptd64ufsbx55eao0405tlrrynv0lv2k2r7yrvv4txfzlihgdqcymoir5daluqvdlb',
+                url: '5r8olo2tnd12we3t5tnne4g5t996ydge8wr1feu3nt5owi4u51oyz59lulllmfkk58byurjcdicnryxpjphczwb5kqck6gpttef7u15vsw969gxqye0re7a5k9wcox7el2i09y3rt74y4i2ax7p8z8mukokajvobyqcfm31dtumfms2w5s28vsvguirrr4gd9496hbzen848jqnppj0zueyj5ki9j2an7mxf7vddpo55s1j93etr3krctrhwkuos47itf7frhwwyh2adoum3o6luttt3n4jwv6nsy59bwp196g6wpevhpg2wzvgtjvzj',
+                username: '668u5cz5cy05w0l0mro2s6rfxw920h7alu32gmqhqyewonwiyeeotb3ohka4',
+                remoteHost: '1qvsn2a4qeqvlb0ony71sxlnqw1rkcxpm2nmpgzya1bbnhyko5k56yl9j8zgx80uv1tlxpudik0bvi5zerrrzc08q89zv62deod5hnrhnp6pz212c6kf4sxdc4zupjka6uzh5v2uv6khfkh0a87lcjjsy95g55ao',
+                remotePort: 9254609197,
+                directory: 'lk03nw311jz2cinl4ht5iv8bsdvja485fi0zgv4wkdoi70qdeuqqggu0qe73oefg1o9ruh13cff9q3myvwkwe9rb9fkmvt9y5uydb857d32ujkq7w4x15ofbub4a6zmsex0i1u9owzqua5c3sjp7vb5d1zt6r5bqerl1gov8nn51v4l0bmknu0orwmonxj3nrq52vcasz6lg9de2nyrciz1sx1grwerx5xfbhvwnfzjd5zasur9pctwyio822gfknie5uajqvhs7w5j6dcz94zy9ho3lwtx9gcj6fm6vkl5aze51kbcfpeaxziw0z8jgk9uvree0clzv6scxu61djwq8qo6cas7ui54z1t9lr3txx71nlssbhctbrnr334s584rir9qzfpsj1afxh2fr9922gszorku55kntuehwe84h4qqs44d6n6dso5wz69iyv3rw3xbocbf723oethqftayrfctbls0u3ehgo5zqs2mbp3nne9sr6je9akean8ymhykjz2axeq7iywavou6bepy3zsa7qztedpdh2rvotlkm0sjshe4ipb8gh92inwrfhxjkpb6ma1pa3jqdkihbj0gttetu5u0ileh49keixai2gkgx7cw7zjd68zh2vczrnp3jqnjxopgin7xwnx526qkd35b494oc6uiod4phgj8ht1ygn6s1s1w9azwo8e4xhqtp5hg5jxy8jthmpu9pab1adsfbvf9fp810ttn2a30v2t5b7ngzewy51ed1w650pk87m3qkncvkeejfa515jjz9ze8grtnpm6i4qxoqlbtiatmtstp7ixaoibjsjq81iirwc2nnv8ukhxmmnbem2fq6f0en162r0oh4941qwen4azo2cvcxavqgni51ma4tqarzxewlr0tgwcdwp9dxrdaxevj7tv8mjq7xy28zk28rcaqgklhmaewez9542b3mbmhno4kwe7bju0htt084120sloycim2162pp7xqwnx7jnz1ub22wo94dv2dc3yem',
+                fileSchema: 'awgb6i3hqcmcdmhcsao3untq7tkzyz7ry3s30vzop4gy84lcb5iamk5yk434m3nq18b9ypoewr9pnorp59sif0knw847lxyhgx98eez4dgnrrpwfjv5iptwsopja6p3k3sjjolney2dzf8za4glikcyz1unfbrykwjk4xsmmmxpc5f9pqa8fd6jl83kqedm0l6d1g7hc7zp7xie0o59sjuvkd4xntrselhfutc2zvshywgr5sbwic0hgoiq5bunbh8z1q7c9bwpfbnrfv3chaavwrd8cyjlp52wc8uukrpwvt11bh2a7xcjvj5exienhu29fhho7l1tyffnvmof7eg2s6dmhpczhgue2hn2ta1wmnkiz2n826ndg0zsgnuqkj7jjvn87gkvqy49n7cot90zfhqvrc59oldm7a9g8qxa8nwq9jjs36knqmtdo3z8dfdfulyyd2qqor0m3eqwdasy44rwduaqdfn0rm0g7rdrpaxzew5r60s0ob91nmwoms4fbb05z7fqu3gyvtkz0tsz65u3xhzhuhvaxy16osm3pmscmiwnrq2cv8mldjn8xb21028b4fxu3ggyfbtlvmtw0t43i2nkq0aknxjn2g1uurz6shjxy0nchsahofbptks1v6qwxpfl5b7vtuq99pkkges6ef70zow3nb0hcb7vf2ijlxem2xca2ybi7ulnwknrgbsvu949gs23wzhebmqd3c65s1w9iwmpqw42n0hlaqpjnw7i1f3q6v7v19rmze9pqbe9c4t38yv8y2l7avg1r0lupntusjmzdcw7tou6676i8j3mp80etvyy825yrsgguoj0yre7x791twmw0s99zl1xo4hus7lnme7anxi4c8xn0d5jqvocgl1vy89wbefa2dhxz0eanea8wz9htwdsdjufzs2v1inqnl7byn8arccjz6y5059kzsg7kmrxnrpxxn0qahig4io6x9yovn6wyqw74w1s537lstzc7tbzei09w6meoa452xt3onna7',
+                proxyHost: 'fnagxncapq5l1vzb0gq2lwyr94v58gvo13dggthxfv9hy0fwyoklgvgavj4r',
+                proxyPort: 5296020552,
+                destination: '3ts82em417hakz5pjaq5ps3yzudaf0dsvnnz66xxdqogr62ybwftq9w6sa4p5oh5ufp0c6ydmkhw84ectxxhyp0rurhmvb8amqunskk6azskhleq1oiamuarg3z2etump3vef51edsy7lsvvid8gxhvgjlywdspb',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'nkyxlxy3mr6i3kwpnawfevxkqypy0b9zip8nnjr5d7o4mfq6jelz0bjnk0mffwyo3740manlndarnbj8m938cg0x0p4gjlodp3cdwyaguo5i13z2sndtpwrswjhfpl0mnmiiqo3iizqbk9vtu3vqcqqpt1djti3b',
-                responsibleUserAccountName: 'fh12lxr1x5mb4aenhiu9',
-                lastChangeUserAccount: 'lua1qbsuzz6a9hvvgqmf',
-                lastChangedAt: '2020-11-06 11:34:16',
-                riInterfaceName: '155t67fuhvrgertrmm3na3ogyrs2199xk7ozuks524q7skcpf3ze2vigh88kekyau0feh85hllii1l1pc6cwrt36qlvfllyf8q9tc5l1k2vrlp73gp5vqxy4aidgwq361rn74c9dzzwm9ln646uz3dhle4la294p',
-                riInterfaceNamespace: 'f5mj11t0tjge8rp12mvbe0mqp6u3p80srbnvrdi811lf73exerm54g8qih5c8nixcbih0avlzil5xqwqiw7esz18t7ci8xrhtlgnup8kb68n5ml5k01im21l1qiw6g7sf0a64n5gr205j4wm3tr7ttogebw9xlkf',
+                softwareComponentName: 't02aszku4b25i48oap2xrr99qgvx5ucz4fo2ltz7i0zhiaz58ljdyx7rx2oy5ugitojz4miehbxghfkzl8ew0prrokfani2c8bz5u5gr7va0w73xu2o1yrqge65vzwslve3tsrrrteiemkyoeebsw4xaja3exbhr',
+                responsibleUserAccountName: 'c8vxjedl8ozfh4v60qu6',
+                lastChangeUserAccount: 'irdlam24d23ydhwlspxp',
+                lastChangedAt: '2021-05-22 22:02:44',
+                riInterfaceName: 'tkiard048m2xkkc1tdrk8v6aeczh4b457yv3maxzip5r1py6or7d3p8wvfgqv3u6wa7ec4in6fxrk0a3dmy7d9pbe51fan67t3yt7ucyniwzqh67xu6f71n21tycqr4d1e76r0qeizzwpn0vxorqptheswaewqhg',
+                riInterfaceNamespace: 'p2gwwabvfct2ohkqu4vfxy4lmrngulyrluvs8absiu2sw9ir77f5updxvrkul5yg2xtex33njio83ninzs4jccj56pmbiar9n8tbig5g03gtl4aq91u3fge540rcw4sy76n6g847a0u2f6k9ju56p4tm4os3clv5',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ChannelId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelHash property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f66540cb-3800-40a8-b8ef-b05c4c24371c',
+                tenantId: 'aa825641-e328-44be-8013-610fd7860d2e',
+                tenantCode: 'ymypob49ow5eiiabo9jvjtfi0nh6xwplc8kfuhqao7weoilowg',
+                systemId: '34180a9a-1b7b-421b-8f22-ad179508e1ed',
+                systemName: '5fp9bifyb7vdsqe8if78',
+                party: '3x3g2hy1n7sn3994k0r8xv0wj2t8ezp0vpy46a7y5r08ywiyh9xst5igrvnrfkeo39pk1joa3o0b3tfoye5tt2zrvagi3kbis2zhi4g1b3tzfvvh9vbu2pr6w3vbvt8gtobdwd4qs1r4o89aolfx6wnqvhc0g81j',
+                component: 'nbv65mfe732ylwjk0mfgludqtnf3oi2872defqt2hf9ppj1bcicoyv64tti0kp4cjnsn8okcfeejwfqlbaewf6p7mw1ph9c2kz3031znxbfb9nxe0dv41kdbos95ca98nns1m7ytpog8bv6u5ko0s1pkz8hhzg2t',
+                name: 'xarzbtap186cdpn1g0fkbneko2h7wqe1k80mz0tlev5wqhqt96kmm87qm19d52o25zyxgmibb48wao2jxu27d878n2r8deh4vxl0wa66zzzpjzmphp6yow7qv8mnff1g05iy7bykfz5n6m69k1kyv0v4h34cs0pv',
+                flowHash: 'or93q1gsms13fv05mtxdpi3u7zog71s1npndedul',
+                flowParty: 'fhynqbtd637pacrtkaogbits7ujba8lu7kei8sj1uxdewa50of80go5pd0i9ye6yd8w9h18rmlntl78o0fahnicejvtqq3o0ssew3y5cy72w9flcseoo28w5yrgo85a4sfspjp3tad0ghjrhhidrek3plhtkos7w',
+                flowReceiverParty: 'ha254zu1ffegkh2be5efg2fr7l4ivndi5828oqnczx38xdgbqap453tx4hcwycmmt3qqrdgifnphp4syvza9sp0k6q3xnp5z2mzbldzird8up7cvyhr6rb8mh58qwmxwmi9zkgky45s25bs8oinh1cxvnmwlyiqa',
+                flowComponent: 'fuxk6nmcxavc635xtly6xahfv4h1a8qfyelrr8wzt1kv4vfs85r54nykhgkwpu1p9skku4ehbxlsebekhvi1auudvc0p0vmir3bicipqm9hsjk0t8k1uwdflg5zzxtsg7wzv7e5fih20dgpzqe85f9e71tsqg8x7',
+                flowReceiverComponent: 'xkjz5o3vpos1660mdt21qztumo70m3xg5nmwj7nyzt58zmplrwb8ogl234gi79kbkdre5tkiem3cnklln355cqp3perpq62uli0zjnbsey7jeydr73tgxgxxzuarhdxcucansta42vssq7y65qpmtxykmxxezpmp',
+                flowInterfaceName: 'qnpa6r0gdz02me9aoquhhayh246ku0ecpb3jq4z6x8i1se5z50rrd8pt5jthto2v5yy5pwo1spo3vxz5694x976baplw8hrd5j1whnuh8v2fzwy3lt5vb4gp0esstnoyg37sqj9nafmv74ntvokkfi6fqm0mf4xd',
+                flowInterfaceNamespace: 'catekhb8iyy3tp38kup05i0ktedy3h1y6663d4uluj3l14dtdq6bsldyu7fmn0cm8xbfygnszrth9j79ws4sliai9td5t38n5qqre7zs7solujcs65c8opu1d0ri6oibn1npuny7hmho4whl1aq26cblvvq9e5gi',
+                version: 'i78tr708xx2r2trnzuqs',
+                adapterType: 'j2fizl91tur9civ8wnxuw7hf5gvgriutfl3piwbac5zfhem11ugfsur5i8zk',
+                direction: 'SENDER',
+                transportProtocol: '0n6yhrn1c1iek38qefzr6dlqkkr1o68tl7o7nrnps958o4sa8gqffwp2238l',
+                messageProtocol: 'f62c4nhsekbztwgeyqdnti4l07ai7qfjit6bssoku4l450vmfyf0xukr7t7x',
+                adapterEngineName: '5l4jlzehkio3f8hkj73ljp8wbgrjz8b2c133husa2ycl7ixq52bd5s5fsys98jqy7xnwlc23i7t41t5od1p8zchgy765n89brngeaefyeqz2atdfci1uo2c7x63zwghqxhmrgxve2ne77khan2qxlvr0v6c6l5wp',
+                url: 'g6hdjmb1662qm38hhtyq9dfy58eha2qiw3f1fx51hu0b3yv12f1pwtafjkps30s9qzl4nisedq4fv06znu1icuzej7zp0ierf3b3jm9mlyq8ty9izeljkftixw7ei5zyz1n7qrbc3944f5s1ohb1hze141bhxxsir8cu0u7apniyurfaie1hkvnrliqbw0ziqflbvn9c08d89wwnwod2d22d7zixr4rw7unrimqdjae4719wbj3me7oj0rvn8ds0jinwn6c0wevucvpmheaowk2teertfzi454a0pyb0mtinmqap7v07982lz1mvyled',
+                username: 'yvgv54wrlfae4lvapjq8zwogd2awie4yx0hcdyyds3jttx0dmmjk95qbbqtf',
+                remoteHost: 'afdpzf34o276dws8ggugqt0a0lqzi52pzq84x3oe10ectrrd6d2ufpnjp0iifp0hjfoq2f04jjhnhcpdmbkties6xyppf4w3yhoe2dgedxzuzh011ju54qtf8tdb97e8w8iib5v4v2k193rdhyhnxu1ywtkx78g4',
+                remotePort: 2430391507,
+                directory: 'lq05dqfdv9ll88b4v7qvkv1l75br2fluuekc4zf8vjjhs8ry5a2nyl401gze335kr19jkw7cdb69u9vxizs256lsed1yn375r76r0ajg1qvh3fkd0b3y259hkiv7gj30xg4eecierve5h5rgujavjdshqtthkpaz0co7byzvy2sskrxecpjlrsfy4zweasvnrsh8z4uhztkropdkjkk0ey99rtmvt9mmfincnx8anfzyizjvxzdvnmqc7xu059qbngtahtv8sy6esmw272ps3yclx8vrc81kcdmsoi0sb60qz0u7xdd8nte4raksnc4kyvtj3xu2oqjdpm3y7m91o6ubz8se2ha9nue0esjlxlxosubtn12bb4lktijrxpnf4x3uwsw76ekvtdv1m9gz5te60qylhxpt3iaj095umle4zcup04mybgyi16hp4jowx6ip2kajhp7wynvnx5cncwbrq30fevdrzwkyplf0rka454l670127yqvpylbuugpjq0138ct3jiu55ka1yfewi7pq9k67npxw6g0u0a6saw3n9jlam3a2pv31zrjx4ca8ojx18otkghasideq6q26zbpzbum0qhc1263a7z4ikln61880si89fd8lonq8butnder7aeo0a77814vdqh9cg5esrpt6kyce6fqw8ayfcs7vyj8usljv5wuak0kxupi15lala4o83iofg4xrfn77ew8jop9z4h7lddt8esj8rs3f3nlfreen5repdsm4ehqwwsptpzerllqinmu0kgfhy2tkba5j7my1py04wxiwnbquisvgbzv2qewrvldtcgcb8a367w1wzw72cc08tfxuoaolx5tnbyw5yeb2fc2dthxrwvqr83lk2ny47g85ct616cat80b4g9xu5g52arlfyn9hn4wptfdj2ql6z9igqzzyp4n6u6yvcciy854r8da8aq7n6cfg9j6gonw0hw2jtplcspzyc4cr1mt8nucny1tvyrp5pbau4t3mosh3g3g',
+                fileSchema: 'u19mtfehxw5uk442ae5fgdkvnmoas427tvyh12g4nznv5hrk73d51oced9h1uziigse1ht9mk5p5dwyldyy6pbvnm14dpql6eegck18p4gq78vu3511yicwemotnce3s7bsf174ur537mlxo1y3rcb19j6gl6oyhqprm23e4b6d8ucdhpo58s5o422fscfhjap03ddnw1s8y4psbyy4p0ie46hif5x32scej9wqcrsyf178v7237tz861lo4k3g4nbmedgm3vchfk8gz8ojzx4jel6qd42x07tbi786m05447l3o7olhlxs1u81k67xz47q5mnxyvjimhr28ws4nkj0f8t1om09q4krkh77yq5bfs32o09r0jswok482lm3oqpbrb64dly8xtxqoidljsswqh67imw4pzbg9htwycqhc24qynxpbwjnqdn3yut5iypeyv5ziykcmalg4nd3ot782gyeo29769remyov1cz6sfhr6tdee2s0m0i7zp4tq63ykwm95hswm5cwe1gpus1gqyzj5z5nuvyaq3dz3auico15hkm9it2v9jw0xte9lncrzi2k7qnvy7aook9z7h4bu6qw6867wamh557j51v6oji0goxj0ds9za03wzaajrw6skew3417ugkvjgd95zolggzkxjnsb0we8xevyi8h49f09jr1p028i077m6u42qzempmxgzkah4zrkjodnhhf0t09dug55tu15l0a8wxu0lkn1vn661rs9djveepw4t3cscpm9wx3pecg2xwjcr02a37bzv4vhn4ljmzfx5tbm3lgly3c0i7pg5zsojxe9mu5rnnvacvrbbkho289rf9xzjud80zdl61v50ts31sgs09e65qy6mo4n4hnj7fo65dqtwce9lo6vcj0s1rb19nf70in3ibykxh4fmuqy0fr0jgtadklvz9cmbtqsgyhkrivojc5w4269f22yf8spr8y6bu35fce4zd14jommoedjqmbjgfum3nlukm9h1s2w',
+                proxyHost: 'bvivlkqme6ghzoqiggr67z3bidtg6l6wss1s2vy8lftqmqoiuonpqunb5srq',
+                proxyPort: 6401472545,
+                destination: '5yp4edbrjuudrqjv81bg1666lwdfd8mjexmzxaxuultaicb5tjsx8lnenhxl5yj7815kkicd4zlkc7osn74kjeodyvdj3rodhd7rianwh5imomz7bzovldu9wrl1z5jn594zttyi92wsu2sl6ly89n4r412e7j79',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '3tt60edo17b8za9rl4ajvrw9qfcwvei9d0r1bznhc9gtiez3ztpd3lt6cy93g7pl0uayce2g52cvze43yx0iymi00r43vk9ijkcyfbwgjho6ovty8gm9vmex6kfbjmhuqpviyfgnytfd0jlu8s8prjuepk6cli8o',
+                responsibleUserAccountName: 's394ysoojek2pt0ohlc7',
+                lastChangeUserAccount: '5jr35457f1op52crzsau',
+                lastChangedAt: '2021-05-22 23:14:14',
+                riInterfaceName: 'vgwsmlv059naaa438gj6i1db5peiv397nbcr98frq6bvjp4km20veldou14bkjmoanivu97nt59wvcgvatncrlb3pyau17x9hdkqw1kck21nfygnk1220yo7pvnpl968e53w1qlk0ofkj6wzhil2qaz6stytmon2',
+                riInterfaceNamespace: 'dm8e3f2a5iu8x26sxa999x8y8194p7o7ad5gkkyqc668pysl3ar4fg93e4zur7m4kr9vttkyegupuca2o75abu53wf7byk1ag8sb0fpj7vnsztv8yr2uzo4om0lxjm86s1hp40yhtaorlzk5he7bh9vdjkd23v69',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ChannelHash must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '0981fba3-2701-4f55-8d52-7f4051d1a156',
+                hash: '014jzgpg20lvccrvapp7vryhwve35xsvr6pu2n9p',
+                tenantCode: 'qmlgaivkcmvx1e2wbej0t0eunl0mh15rjom4uixshgh3lgtoe5',
+                systemId: '86fea8cb-6e44-4c2b-b482-396ff1c4bbae',
+                systemName: 'jgvs7gyvtaei6u5o84ux',
+                party: 'ylgpa4a5v4dtppsz5ffupazkv6i69i2u195kmi0e03yl2pddwjr2xmdgwlu6ifwwwwgiylov0ve4qrxuq4u824283erceun601xhk7goyayq3rxvqtpcj3bnowol1tngemnrjsiildprbsmqlz9v2r7pd2fakdic',
+                component: 'nuc42cawv8uut4xn36gro70qft4uoahoubldl23i7asz8snaem08ccs0my9b0hxy707gr00ngz0ujtoo2m1nxzd25s4cs70f6e1q3f209n8rnzmp4nh0162l9og0vi6gejynjs6d93zmragzwkp8ubacwz45f2el',
+                name: '5lhs21ux4heolqvqrv6479ev2yox8oq5pesbovjqfl71sd3m58497o6a97j5vi27lafp0946m2h3ilha0w9c4a0zvtrdz024bcn3u84dk6oyp3su3sritmodagr4qdqiqxax9x42hgzhhlvz4jw7bjk4tohimizy',
+                flowHash: 'wiifsho0irsbrtbdn1syyyum3op69wmchyhmc9vi',
+                flowParty: 'g2b4qwp3ud2xp2eiami851e59jmzfrmlgkb72xif7jgxti280l38zxejoalne3p09ytvp4huvvxzyxd4bddw0h5uh50p7kqgb4z8fd92upjamc5b5zf9l26nhry794u11nszx9tk470498cwwlsak875exwtoctw',
+                flowReceiverParty: 's25csyx4q5q3fr4u7p9hlmfu0n17fwiw2y1clvomaos96cgkw6cwm7zxgwal93kuc8e8mxjaci2cyhls4we32nclzk7cwybhkw1xnw2hwl3l95tcg4wnx54hx15seb4aa0bs1ty9ena84w0f140tafy2by40aa99',
+                flowComponent: '0xsynvcrmbo8rfz7y8cxdm4d2j9gbd4424xu3so7tl0wdydezkf6ospc63oquho10ndtdjltfql3gyrhhhaek5nrsaxhr4giyybi3cnj53jorx6gmfhxjqsjnzn23sus4jgcxcdmydyosyysxxl1bx9n809r3zeg',
+                flowReceiverComponent: 'ptw2twgrt911u2ukdny1blmci3sk01kr4py0z1rj0167616j6541oq2kuenkbfjnw2awq9bpjqt3phfi2himq15lptnkssxvejdhjdht6akedcmyi4sfeq7ug1jrnua8qw2lmond8he1jdovl0v4qo3s9b15uerm',
+                flowInterfaceName: 'lcdhvf73h58fntv05z1yi9rcxh17j61xj7vt2yfi0iy6ovi4157tb9n6ofgcbu7v5ml11lky6lc2pz230eg4v9vqau5peobzwphnp97l6gqheo7y123tpfgmluehoez19u0q48zcj9jxvv9jup25dub5ifbvlidu',
+                flowInterfaceNamespace: 'nh5r77z77fnex80z42mlr7t7b7jt9s6e6fal17kykcv02ui93zgs0qj4b0hpdtxwi49ltg8b46ksll53e0oxv66cdihkcneodrg5ttphe4nkbjd52vbu76ppqseotmlfnvydn8g28ar86q4z0zt3e3bxk48rkqym',
+                version: 'jqc7vpno3hlwrr50bah0',
+                adapterType: 'r0ad7qlzrl3a9v9vi7vnpjw2u1pjj6p1guh0o5dejc4zphstih63uanu3p0o',
+                direction: 'SENDER',
+                transportProtocol: 'qtdqe0b05w44rxe26laazz8zsyid54rtf1ui75fcrv6m316uli3dygi0ca4v',
+                messageProtocol: 'niajiypjlil0tx4cd7ro68uevkld3uqyai01xlszr4fj4lg0d06rkuhyfehd',
+                adapterEngineName: '8ppxgtb19t0frfrw0at0h1m1j8n2ty3fr4wvk95lznve4n5qbtiwkz8lxx0a1a0wnke07nt9x7nl3wbzq41nit6sx15njs4bs0hmw69n7s6ivsq5qm1okwvi3brr014o1lpqk7yo6whqgz5dzy8qpvr2islemyqr',
+                url: 'leu21yuffw7z3njgypt2dlaj54s8upr6dbqtzkjasjxi8mebhkxxgk7htufl4qkqkby1yxx6ex020ich2yhy4md0kkut0nx1bf6xunx2t286rs3fffvotxmx8qzdceuocp4z8mrohwedslypk24p7t9hknlgc0gj0g3stvawta4kb3nhgohy2fp1xrfasuqzbqqxq3ydlw0pn4j1nb8frnsiyekmab24e3ur59oaeffqdka96qda6wz3q7yijd1ve64rmwa406wlzuj37ug519uh6wy8tn7btvkq62tianhby5y3algydgkdpagll80o',
+                username: 'kebisif78yu6mvz4fl4zcxst7ji62i9egkhdrrr49h0fanj8vq3njre6bsl4',
+                remoteHost: 'lu66zw39tihs7o9mmv2p9imjkrbgrqe1mhaco4914tqn40fp6fcae4v8j9mlfak82ocxe6d861g8hzbkvtr2rqx10tzdx32a7u2p8veqzi9cc84e4udld7di1aqerfe35yc5mip8z99o7mgooz22nv1iqn3x52r9',
+                remotePort: 7418063999,
+                directory: 'uqljby1bj382xpz4x3ginhbyos33agndkczaaqolrh75elkmbqp6r7ys21plind8ayp1vhihf2mfrgxknx6fkvszzzcoizl8eajd02gk5bgd9sn2a0yhj8of5kdkw4dk565pdzhow14q9tt6sccjl3q5mb1uh38iql3vxu76q66350avgwx2h6j1i0e7t79q9axtw42ullxfjx2txxsiap79t3jz4tnmtde9b6qydl69jp50eoguurzrx3zneb3f4pm84w4x4aypbicd9emgingpoh9lzc7w8r0gpe7f11fb3rdsaa4muq6vdxgfh2b3wc3zrhdvgni2xungruwuscfj8v3dasybvi02zcz3yu69jbrvunc9qhvltfshrma6ywqm9br6zljn7mu4qf4fgqqdhkdop40g8bog3jgafowtcnj49s2z813h7wjpgwrmbd0j0okrta54tz7ehob3dyde5al4p3tiy0g1juzrj97hn8daknmi5ox011k6a1zcdijh43h5eitob2vwpyyyrf32nzumygw36jy3blx9g8axj7dt41zx2imw04n7x096qq0ojv9opt2e7cmxzeylf8bryxkttq9jo4apmc5443l069m2jt43bft4x7mdmdzngll5c0eehtebxp61lrbia5vx4a3sqjiqdql543t3jiq501qb6zsxvyqhk5k9667ndpbi7i0s00bs0d0m9alnkswc8i9kqp25ejbi3df2n4hegfxpcearykmh2gigid673jmfcl1lh6dcvv2kkcwlp5wcd28kzhatq99u2k4b8ln2peznnkt5hfjrvunmqg5z1ogjripucpzgyzg6774g5v025aibqfhdvvvkkcfzrg3s6tc4qimiq8bmh9za13egp82qytieim91jdoff07kg7coqk606m2textyxbzralchciwufamppbp9rlfqg8yy7ns8w960b88jz2xytadsi7d8oyvfvqnek0uvyzrst9mr8ghbp96nk2h0p3orqi4u',
+                fileSchema: '5w2gksc883pupnt5blcwmgnj2xnwmf7dmeqjmhsy9j2wgf641yqzi8z86rn18c3d3f0yrxm8jcm79ipfvlyt44vxjx79uyferiuu0e0i08oc02fsk6svcs5wldqhm3japoplfl0zyf0jlhhyrshedz8jbjsx53wojuj7qrrrgoiszl5fiwhnw4c37i3av0s1wwusdm8el8phq8x7ux5s8851vc5le8j2dus4si40y8uyn6iui7icpxqd7i67cb28k243l545vwysv2pevn6md7gut4fwvy0e987kyhfw4zhvqy5gfiqegrhx751y0wy25pu9ltvaaquw1m3430rum3r1q7tr4bh6e16fjmgttqpizomqltitkqkjcdwy3810ewd7bmlr1ny7frq3hgfzz87ujq2g84d5jfhdo24t7nb7wotnmk1lvv2owtfra5lq0ty1xgcu8mi5q1b17isxwod3hvt3920r3z0qkzn0scew9kjoj06bu3n0pnk1lyj6udxz12bqptq3nhgbvr1ai7vbab417wiaeal7s28qi7h91gvitg83m7doxser3zevusixi8ciabtcj8ci7z2ozniaujm2dgkacrefkdwlxdb4sqdw0u6kygg7nm59y90nqqyyo4bk9c8jfqbqgqo86jkjph97sri6ds7g41bjo91ej4kaan3vcjy5hggc7mmdwbgg44fpe4fvjoz2my07ghbzw0hkw0fycky8khm962odwqd57phudfkchdrcv5t8n44a0zbzstckkkdj29jy14cx5u5ijk19cjjpd8k6e4uv9wr8gj0nvuor241x4stqcqxkkvc1argbacg37wb75uhg4xigmpnmihh262b7w79543ve6pusdbtyhvy8pmnn7rxdocxef3xzzrypvfs6z1nks4ngmv7i7oyz4kfnlx85rcxhr32frs2z5k7wnm89oir3iyljuzttfp9nbe9b70t0bmlgxs2bwxogukvgdf39qeynt757sd2hlg6xudos',
+                proxyHost: 'bczqvsmflh3onk76zt0uq3cqjz8f39viffvxnn0xjw0wap0tdqckpk5aw6a6',
+                proxyPort: 4743210436,
+                destination: '0y2i13eugybz65ppupsldbn0lnh4yajkadphc7y0qg95i1rhj9vy1o86vt55gihvmi0yeopm8h4r7orfitkr3bfgjz44be8n0w6tri99kvxfd3o0bn6w1kj4m21lgm295zlqq77zjq11hqyewkzv3a44dfjauf2x',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'yy6skqril9bem5mt74lfczb3ps8v73g1co7eww971uk7t0lwi9orgny6cadyto8mqkk4z4wytud50w6npkrci1nsm6i7r0ewa45gp9cd7m009ygtfg00705jxebswnwasluw70fad46q396cp93p949zfl0prx03',
+                responsibleUserAccountName: 'tim7zpewf90zuegcs3gt',
+                lastChangeUserAccount: 's11p2inugspaim2uh9f7',
+                lastChangedAt: '2021-05-23 10:30:25',
+                riInterfaceName: 'i6b526zmk6mklc5fuxtu618r6ccrejw02tjujbwolankvomqn47s89e7eqxxy1jaghr4ux2n7kc0l9ce3460jmxajst9ro2reqeadx7q78q3js78ncyv2b61b7lh73d22bc6di7htwsiljfx5eia2io85a3wjiy2',
+                riInterfaceNamespace: '7x8t5des9de9yho7d8ifmghmvpka2ax1bzr87eg349e3xze2xuvzto21ymmsdl6edf7qu8ix15cx5yymgh6lbmq40ymdm4z5fhd4f4xv4tmzlpt9ln9sgprcp6n7jp178k57gbtp6klsgi6e6tahs5ymra574e1y',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ChannelTenantId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantCode property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '45503934-e3fb-4a22-ad8c-845aa855b464',
+                hash: '0b2oq5r75vno1ysa2rddzph3il3w6jgqn2kqtzqe',
+                tenantId: '465b2957-9d8b-43fc-9ddf-4c02989ea05f',
+                systemId: '086649b1-1d0a-49c1-8942-77b046fa1ea0',
+                systemName: 'lujsq14v3871yas1jvz4',
+                party: 'dnjkyhjtzxe3lfvlf2mggr30bnd4sa7y8vux30blf7xz1aifc4yxu848gq92go2n8otlqcbxzcm221w39t3jhwzb3noqpbovv2mco7k0ng7tzuzmqz8sexvkod4fgtpiu1k634tu6i1qx4x9sozdmntu6zl6v557',
+                component: '45c59i9ast486ke2icvi134x8kh65ggrhqfdsl4qme23cz3s2zbq691jyrzalq4b2w70dqmmsoc14ynta3mrney6ylhtqkwsc9tgmxsz2mjw2fvgke8f66so0spo22a0gc4exx15jsjinlvodva16yfawxff0dqd',
+                name: 'u77t4he62wc3ej9wub564lqe2tuqvdw33709xcaaimsluxfc9ewwutze1mzq4cayphzpa5xwl8ajj6856k7zi3vh1y5n0jwtintx23hgvh5zkfzrjriha8feq9xnvd6chu9jhjqlnkvdb9bj4sujpgoct1sqdg4w',
+                flowHash: 'riqnm649fns5c8qwl1vjn03tczmsjhfdt4rcwleo',
+                flowParty: 'u0vv1z1sa6fo903f7px3nykhg8yaved2pf7njsmzezlsn6xnuwqc4ajo4j8236ub3azyga03hdwdrg0e0e3qniqcrwfi561bp6a8osi41h3xh457g9iady3mvmp1cw8jio46qxeokpobo3upv559f7aa67c1qwnr',
+                flowReceiverParty: 'ehx5q0o7xms11aobb28prcqc9ns2fcl0p23mqbyarbnpp1bl5lzg3rnt8imn1oallb8fqcbkjcmpad52idmwd8qc9srd0g9lqjlul8sadvhghsmfus5rvxjqmjoi54kpbgepz3omdhh3fr2kr1makmmyd0meckeg',
+                flowComponent: '2apsjnbx5u20xppdp716n5bj13ei3uzwtz1jlsjg3y403i52wni74zdkqh1d5nvdpvs6fhfuozvtqlmhku5mepjz2f3ysvvkk4q473y05hx5d5ntrzjdry39obdzjlkmncoijtkbrd170y10v0rbbd6gez3x2p32',
+                flowReceiverComponent: '6kq7m9hd82qzfc65y8u99m1l0ktbp1e1wgb2xjwjqsad8vzl7r9b0web18cex9staques8im25yzcd530nkaxoyhq3tsyu5q57et7hjlxptnyzjv9lqnzevgqf4keznpqinyievfacqug451w57hl65zjpfapevk',
+                flowInterfaceName: '9k4ohy90emetuaj2g3ffsxbv8cledtjxbgsswyp90c75yti3442sx9kn3078sye5ttxxj4wjav5ywcsy2goho90tajfxws613wdap3m5a65oike29zvtkc32n06bhduelcl462mwbshkc6vmzfko92cdzume6uiq',
+                flowInterfaceNamespace: '252xt3p4vo3uckqk4imciawo0f1n5jo2cqizfgjr5gjzk9xq9gjl4uv3oh832wykooi01l943pkhbdm2iaf4z0tap2ra5fbu0mgqn7x1a9w0zxwqkru2xkbrucsdzjtjmq8hgvoao6ncr9al9abjaswdic8fzggo',
+                version: 'hh3xtkahidnecxjb3a9q',
+                adapterType: 'b52iitadiptqc2t4o41kego6jl483ehxhcag1as87nv10rn7r9tm2iwc8st3',
+                direction: 'SENDER',
+                transportProtocol: 'a64z2ko50usdclthxb3geg45iu3cf5sqneikn75rfm7sofjjpruxw07uebrh',
+                messageProtocol: 'w7huv462xx9i7jf2dwy6kmq41vv7ruetppqv3n906vk1w31we1uyapwwso1y',
+                adapterEngineName: '0trh1gmhb24f7arddjatccuqq021lem1851ux566mwq9pffpyqb1gi3cbnd01yu3s767mcx1hz4ubo7gzk5fhehunwpvfpf1cv6kobfkopxetbnewclsfhjsezs7utmz1hgytjxez5s4evgbrr7m4a8vi4yjcirz',
+                url: 'i3xc049uqfzun2jt9aswfaf3o6vzi1e55g3m4vx5b13ft67u74fryxcgv2johllj8kyqq4q24fuu70orlbkg0uiu3ta0m1i0voslfmfbtb57ezf79vcpxr3frn1z60yjz1zd7vbgel7ugmkey2wt5squgsn2q3yu42udsfti5lw9h9xdy4sjw1vbjkgtst4309qq0wvmz6fdhi8nkpuwh13my9agvdd22xyw51mohtkn1wz6ro7jqysy4cx4t3dclixc7r4jpluas5lp5ubkq7ycqv420djjq8el4p8zqib3ilpf2eig8nmqf1veg0fr',
+                username: '6fmpevu6mzg45ikw9xe33x6fwls55qfd0de215ov5laquf50l1y2bvldhvzj',
+                remoteHost: 'gj4tmlxzmuatsznjy5alod00swyok6wnszojyt7q13u7ywcj0i4m94crlh3bb0oltuo5gxsu8920nvrtmt6hfr67t1l0k4xxbrf6emzfxqkiuolusn371dqhpm3v4ivnjw7vuubzvrdfu908g6hc21rhkqfeidcy',
+                remotePort: 7237613038,
+                directory: 't2fhcrm1lz5wz8seelxghzcu9mhno5yitlw1s35fw77inzam18gmwqr7dbgtzl1jzlcey6oeoynfd8rw1tnkllzb08f55t184nftpfuyyw5k1scb2yitjxazbf1ocuil4i11akbydwsq5pj4cpfnlwlwg6x3mxhysx65s7xarewjcabkwbxcb3cbdaw27qbg2lneq0f3ps2vadcamodgzdu87ted326737h9bjqgilxohee4r8lm0q19be2841rrecx6rv9vor2kfeq7rn5rb1tlyqo30q0bzzxs4jp65lvxmth06e7augnyhltu491lo5r8otkut8hbb9ul3rml8ewyeljjwubx0wtlwq3s1ze1trmetsys7gz01x0hw8i6brs250wg0fe8hornpbg91it3gl62o27wkgwszt2bjgaafod582nof5chdvo0w3658zrd92mkybismnyvtg61zt2hznca5wc9isqb6db50r70badc1r7q3fxzc3n7csj06yng09zqu4xkpemmfcw37tk195er2aytvve4dzc0l3l9kvcwy698apvjt4axwp08y97v8t2h3tywncxqx9jt1q824cq7o6yrgugscjuwte5d1aj8tpti1zkxnw4pn3vtm05xucsk3h5rha397w69v5ke7m116uhot6ydoc7sjhk0he0tmcnoobzfal66rhn6w4aqigzm83ztxt2f9b7cqhslmr00a95rv8kazgecir5tjarx6puzhkcmh60m1jzbrk88epe4z856aa1k6v18vxv8niv92c7z8x5ov32njr7pzp91gaqmh1f5bvm07ebokq93n8aa73tlpnxfyilg111qsqq6chv0fb4zuzx6uytd5phfah41i7zvzq9mi7jc58201o14kq5u00xje7ebrsy3adglp7umxwuaf30wncbc8hui7zupa2nfu03z32sbmlbwkycbhs9eo40p7lavwyjtfffts4rbqtflxizegacv9yr9hz6ndva1j1stdif6',
+                fileSchema: '2i632dpl9izs4kg96l7vw398hq6t23tiaa82oqmiweriq1jx21vhlgxdq9hz1139y09eglimftdh5uft2rpqmhypubly109vfh06e3fji7x2cmynpaupimizu8lpudg1qmyqi02urcj2pel00kcomu57r3jwim5i4luvua06yei8e21khiupaptgpgqlqjgw9oh2honzijbalgcs80t3o576i897j0dvkuzq8xwlh9orkqxndogtv86cz7w00hlc8umjug15luit2s98peq5yd0s5i3onuit94dcgoc8m1je76jjn5576jvtxhjhy18jx9odb0fov826vtctkm6chca1wafxsfb53zxqs5485catt6ajn0qku4cenvomhv9u68getg3n47xbzpaafxdwq04g4jacsby3wo068mazx2ag3u7ntqagouc0oswyi5kyf6g7pf17sag0w71mdj8x6fde2l3h6zpaiv1b6xgfpm7ck4gymhvqzm8x1gpy594f08nzv98di5sxgvtxc4zql75vo96exxu3t7it2e4wweqmxncs5srye4jfnabmnt6b3i1ih57o2iv43kvg4jsmlon3qw8wi9jycc5tji4t5235d1awg9uztg111szo2txoyd9pnc2h5dral9fshpduysmlx8g68yuw93u0d7mczaas4tfbz7ifmm0vcaraqk3goimb0sylv0y1fr35h59v9iulqwgruxgflwt0uhgjdavz86920z2947socqbdqk7vw2raopd52i0kuex537ydzr7klt4ds47iu9m5tut393kmincl7mfg12pxbpd18nswqzey8rob0svvng9j49ipmgiaueajdd88upmu6bh5it9frz2wjj21sajqozwura4jzrp25tk5xtc34s4innx642pcgl3qepdggm70csdplxvmevxz1r2zyy1dnq0ypf7gh2pxj217vtarpostplux7wy9v7x9u5rjmq8ub3q93ngskf5umoxccm9t4tn7v0ut',
+                proxyHost: 'r2nd7xyu6p4377ur7ceu20jenhvmpwhg6dz0wcy35uedhius5pt2zi85cs8z',
+                proxyPort: 2688529461,
+                destination: '3bay2lygmultzxa2iqceu0u7ty5rptug41bj2kkh5jjq791j859x60o37czev32hizn8szv0xangim75m12pppa2cp7x5kk9ananv17kr3xyf4nev0kegwcm1fvb1bixx656m147xnzzfvj8u6u05wem5wrnnfp8',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'goqg9anyp5zpnr5xc02z8nm5kqhmntdgptmwghlnprdsixma07989zzgzym2cfju24pfg5uomqylaoyc5v7l5td30hxfke5f9iz4k8ljrvmjznwx8voj0do8brlhzebfvoei9waxlg5ij7ap6nogoqmhl3i2lkhb',
+                responsibleUserAccountName: '0rg7ex1gic1o219h3w66',
+                lastChangeUserAccount: 'wbwbhmozwvh39750wj7b',
+                lastChangedAt: '2021-05-23 06:17:25',
+                riInterfaceName: 'ci245puzktmsam6p7ja14tqtrvblxhank4cvert9jtzflpzemifb0tcn1j36t5y3bimcp1mih4ow6bc9i1y193ajvx5x0nncbot8d00dwqaqnsaopdr1cp7c3qpk0cz748fyo0zfo2h59bk42dco4wllne4y2dk6',
+                riInterfaceNamespace: 'ppf5szcfmnb6plx3vqoc37pmrqpovc4r0lsvgagn7ltyr2dje5yjsumkvogxsbsfss5qq4dni4m77h9q0vfhuf1ne9jekkb61z0zc8w3qoq6x03gjob6wqg7wbk862r4uf8vx3gqyhyl5ga11ev29ijfzog60w94',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ChannelTenantCode must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '3c6ead37-dc2f-4368-b2bd-53c20b72584c',
+                hash: 'ey1gehkxvqbhxacw5nwhrsk2rkzkjxj8km4ql7jd',
+                tenantId: '100b425a-110d-4dc7-beda-fc88a6e8b8a6',
+                tenantCode: 'sgazqywa30dptsto6u3sp9mgcgxrky7abi69n7hpy4n4gacc2q',
+                systemName: 'lzl7wbdwm1z5di7zr9nh',
+                party: '5nxu96el1fsv57eu6pa622mmczx0684riyxn3aqe37nir1our1u3p1ulrq5ll4092fxe2r596hwtnw4uios0bwr8kriwwlaxdei1iq8yqdrkzma9regou0v3tltml8p5ql8sd62rqscztwuygioxswhw6odaa369',
+                component: 'upcbbaw6hpbsd0pequk2v7hi1anio1x8m5slz5g81j7npozn5qcd6jssq3phfzsy6llxtnnxvrmug086ivjrat5pq8chkx70lug3k0i2ap2r3ejrm6kgrgepvbam3sbuu1g2r03g3m8gkcf2vhkib8p56vbjxwf0',
+                name: 'qx6vd6c036o7136wa3pkzpd75g7ncg4h0vifcoghxmhz1xngwbg28t1qzoxp5zkmce41uzzhpwsatwk0xgp4ynp6rh5i1fij3aqq4lne4zfrfbvmrxqm2gutktria5m8xw5gvxz9bwly882gd8ofwwie6me0srak',
+                flowHash: 'tjwcfypnpf148860popsdfun5p0fzzekndwl4zzf',
+                flowParty: '0wxlgfqzgfmgzztkk6g4oo3bbmtnfqpnpfmfq9i927w8te2u79zjgu7dlc0oly3isqpzdk2x97tjwin9c45psly83tqgua83grsc1bqe7ip8i1o1ib22gkajg9opkcbqv9tpzjko8eoi79rd9sbvzgc9y4kdmxqx',
+                flowReceiverParty: 'ebmj1b5fkc0j3cw95t0j8gtor5pr8fuqz9xbfcxuffhgigf3cu2fhb2ob7rc6s9vd2klp3rstuvodqxpqzt8hzqrra9ulnfmfejyzlzeull1wbdqs52af5suly3n2j12jbrpxj43vb0otvotzajibu0g9ulvdk97',
+                flowComponent: '1nsnsp22ghzcaj3ivvib95ae81mn1kdtpm4434f1jhszvecrcg4zbaf1qxhj65bxbawcwdpznl5duvg5qi4ffbcwn9yqrnkqxewbhuvxzekj91783poyg6u9pbvfhwvzbr6wbdf4q2agk4s1pargxh6sj19a07y0',
+                flowReceiverComponent: 'a4048fareqen3c1nukp4b6fv8wis2cynr1uv1qn2blgx0xsk49uzqfqqnevz80wg1h9g51wha2d0sehev7ahofup9nmlye9ru6j1yp5w27mcdzaea6sbk710dx9bmp475bpva54btsqbe7zd0m0as65gvfcdc70s',
+                flowInterfaceName: 'ivkham75y3k887d4uhh9oeolvd01qc96kfpxk4qzlth36ga44raraoyixu7e119uw242uzihmcao0yne6ytyn97k9vaswiuqjahmxdqfpu5m111gc0ax3ksqugenzyei5dnpppl9ckfrhofsf6qkrbatwd4qyxrn',
+                flowInterfaceNamespace: '6q92h3evx7glrve05nx1skmb83vgo9k30qpwcsjw2xiswl0l51es7fp9uqht4qxpa83v8gggdpd9uaocl6lx71iua08wvzlz2qnr8sgt897r3krigryt1n1fbwoke1sxwyougi6nmbo66shf8qrw9nakiyf41kr4',
+                version: '0ldo5lmas3kg3fuv4bxu',
+                adapterType: 'ukgtcc8czirxekzfk8iej7mwomyw5igxpi9nq5by1qtfqlnes1y70pal6c4r',
+                direction: 'SENDER',
+                transportProtocol: 'iq3pucea9c9a5bm2vi3eq16w5evc4huq74olg7xdazt6j0qh8400yr5iwlwq',
+                messageProtocol: 'do2py1rrho2frkhebirapdz0uoih74la0b1a1ru7ww3fsbgnvh8b6ajh2xcl',
+                adapterEngineName: 'ijd18n9q15jfma68t25dk1zh9bexb5kf1yk946ohuzaaz2qxdvr64w9oh508vppj9z0ueb6s3tp9sfugppbwtznpcq9eig4zf60crgotf73ekgyfmexyl3z7vnypo1wj57ftikey9pqpkelvddsr6qqzb24rvcbq',
+                url: '2qnqmfp7vmzdwmmszby2k9xyl1zwio6kpbcfx1ddrk8nrxwhw5cykink4k2lwaq4dlelhe8hzuxn1vzd2ycxj2lw3pv69xjrb2sw3zcin0pczidb7ym92j8yimhlc8s5fnwp024ik46chnwzlqj4x20n2436ecel1x6yygtslb5ra62zqxisth3cpiacinpyrf68l8d4ma39h8008rm90dc23jxp48dduibbffswwpdq202fc6hx8lf2qeo4a68f4q6flx9yi6mp8k3tn8r8wpx0123k0zocrh63utaq0y0f09ciyy0tc8pizwv5hxa7',
+                username: 'trbw305nfbhqnmrftqx62hgb050nmlcd1ny2hnz1k4pfqp56vjp7d6h2e6yu',
+                remoteHost: '6rmhwe6nindky8x3ivldyvgwrntq1c6pwdo6cxcfmjwzdyomfie21odjcs4mi4twudvstqb1vp3hfzbvy7qbf6q8thrltfv9787bs7pv3fum2eimngvhwi9ge3onpk3w25wwpzp2t49jvjmspbzc9dm5mm8k4dgb',
+                remotePort: 1736278598,
+                directory: 'k22dkcqdqj6homb7j697nroizpqrwkfbu21xeh7d5mpskhjyi2wkqfdyyxepbtc0s7f1ij8h98o4c79n694dlbjjbt7qvd8v2mgb12qby09iilso8h6bhunsf0harn28vuhsnxghsst1q6u9ro8wwpgwjbqnq7xsd5o522hakcsfw9jwfth2gl6s5c5ju9gg5j5cy2boe7ic2bgm1aknm6y4g7v67nnxhpyb74z07tlh82w5jgsirqglcfhdziq9l47maxhwycpywgyd7r9g1k9iwwa9a52ckr292wpjwx26u5gapa7etzpperavkvi3g02dgsps6asghvzk023r49399z08k59imtljitryp4jxt65umi9qzw0rz86876w536zz8cqp5s9nnyizpajghpjcwh67j56pdtblpx2pc7jfyj6mnk27amripa1wii9vdtbpt9bot4pe86l884iuv4117552xmrgfy4v6lht7izeogth7l7hcha267l2quvgjv86dpkja493t8bcrn6r4oweavwh9t9qb4zp9n6l3o9mds8yynlxdt8d8bwl5p2dgeuht7mtbvc4ohn6k2qd6hs2pfk75ii0l1xl005gthaeynxtuqvc08onpf78e8kkzpvu3fv161elvy5ypeu09y94qd520ipc8upugmjbu398ic4m3q72qit7jvcd83hlb6puzgfv9zcbnas68ockejxl3fr24f3hi4w7kvvq7ifswnttnovuatyju09tnfzoy8obt8kjerenzujeodqtba6haci9312rmjjdpvin3f7x5fxichwb9l9b9ld6qdrtwrppk7lpe7br6rao2lzjfwo0gb73h4dnyppldn8jbydz01r4xancwavp8v0eoz7ddjxr1n6da2sfkoqmun1o8ylo1fak0r7bm3lym1sq0enczly05jn9w99l2j35lzsmex24joavghaaa7ck4utqoon9c9hw5sxoqrf8jexko1pxxxlgjzo672362m2jkqsv',
+                fileSchema: 'mbyhpuboevlk49aearwxhhs2xqi283a1h509qyc8l0cftx2pba3jxng6vo42f69im2ryoof9vhi2phdu4w36v73rzvvsfsen59klqniklpjt5wja9ji5xyjr6pv3ezam8vjs5w2pvbga77rou18yy745u8qm4gch2lszfad9zl3hgwyv1rabifcgg0g8u01g0v44owwh0gzdjjzrv2y9oviyfqayvrtwbmqvdwwhe2r4e41u8guj8db9yinaotco3svvdd6hftijbg995qdbcyantg63kmxf7ftigohhaq7tj4jcpllcgc0dkaq4ypm6bec646bn0ipjqgixqnk783gdb25dmc21uezynpbjtx6utn8vcjok27imc9z2mmldza5v2o9l0c74gplcy08qk0kmwi1e6qo0ckqyc3ixi5hibugrxbk8ym2y2497vze0cvwjkqdf2s8l1coc3dct13nimx1gem9ufkoiz4plq33pmscul53y3i9oz6vec3moy1mvrs7bhi9h89olvy0cgcpyw216cwc0lm86prtalqmoe483eajjr2yut1dyx059w3w36sks6480wknwv2makwyg2ksld2g0c35x6ks4h0eu3rd8xv3yp5qhfizniil2d60hd0ahr3bvkmvag24ddotwwre2se4bp93zduhoqwjjo4ys4qctae3dipzkfef8m83fal9hic2vxfv77e0wwjgcktz0b2g8ippl275vxw2fg4n9w8quhqynfv5l113ya12cbu8gt054h5hvoj2qpll4w2yryxiacy7kfhxqq08h0a1n1z8cpfocmvf4rj39nxvn5s2ne5efnf3mkcn7o2pt68b6ewtu6rgyo8fpy1lm8qpjesuke6cr2aqnco22lmiu23bpmfgpurgyo1omal8dmcb2lmuq0fqmm71qb4444odgwsn2oojiqntnvn8whkrqgexgoy8dgplc7tkrgehdnr3sn0qdaj7iir3b7agrvgka4wm65gc8vafv8u0v',
+                proxyHost: 'o2ikmumcyj112tj4cm6wf7b95debbz6kkj6v3yrc18yjc9b8j5gkjrapntw8',
+                proxyPort: 2544902330,
+                destination: 'stjvcdc5ui71tjx80o8k1p4vot225amfr9lguopgqbilxy67ypwrulvopuigc379asyt1jjty4bv1jbhnh1oi13lxrr9bl7edp8y4si5e5qbscnqb4emdufubvopupv18xv7cil577xs2nv2ykfn49xw1z2eewcb',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'z5jolo610x20b13x41usmdpurnnadgnqi3k47vdcx2vz2myecvwniomkbw5dacue91cqrkv07m3vhjuiy4jh4nkh0qocww12mnxg96sye0qoi0qwgfibxqywqix5wzn6a8me5uqenx9pju5lk0rp6713ekfk2smo',
+                responsibleUserAccountName: 'i6zflor9rzy97nw66nad',
+                lastChangeUserAccount: '8e5pzdh7owhcr7ulqfjk',
+                lastChangedAt: '2021-05-23 08:43:03',
+                riInterfaceName: 'qa6e8zi3ou3oygmijitdkgh1ghxqc35v13xsz2d8xugjkw1k38cokrhuh5ah8fwshq95meri3hj73gtdav6kzlm60qvl8yo5p0ysa8y9zwlm2c5ot6y0okxv1mtx3f4lde61jaugw1crafjoman2hoz8ksswkpnq',
+                riInterfaceNamespace: '22x667ty4a1h1utfphb5028zwl6ojaa5jrzwrzy9yjpoj4fry36wfqxn1pjeotve4bzvcarfj89598ydk4319ml0ysrcjd13449lqcc64tv765mdpwv2c57zhq9udbywt4crzdbeb3h7bv76kd826qcsjt1e9mrr',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ChannelSystemId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'e6b143f5-90bc-4707-8374-cc199741c847',
+                hash: '9mkud0k243athfknaij3y4ek6y0b0xm7i8dn9min',
+                tenantId: 'c4b7e534-0937-4141-9987-a19718d40f83',
+                tenantCode: 'lws74f2b5pny1du7c370egw0af6irhenzcr2ty97rlbph8ovtr',
+                systemId: '081bc91f-1f11-491e-b9cd-eea7d451085a',
+                party: 'znltfigb5485k7lsjh6ow45sekogf1hl7h0wlax66ghy6yejemowmbvba42krlb3owmvl3u26qqq50eidyp4w8v8ogc7mpwsdexe40fahcn3a5ebseogt3kq1z1nfxbnns67z2pa7hda4js5vy4zp1a1pw3rnbyt',
+                component: 'dtbzcr24jzx2p59ryf3lmvhtzkrfcgjnr64qizklee3b4y79m6iqszy12ef57ndchmlz4p886xhs1wzblr5mqacagnewrfihq00bffqvy7xngd8ortyqpy8nxwo8jdfh58woo3cl8j25il78z1yrpifbbdju3pa6',
+                name: 'p79mo9dcous6rsguu167kuzob7acmk6hezqvlx9ey1baq55jkvc85850poryyhrp2nnmuvl2qepcezkd05xxgldtq7p58d6tjligywjf44aacb3fjzy3n60nbro4obbqf8fwnleis8dk7esh714ynj3rrzagyyx5',
+                flowHash: '9ckfaufvk04xozcv1o9vf4z41a81n0dbmugnxueb',
+                flowParty: '5mvke9mx15vvbpo8cswc84lwdl2775syjljcf4gbxqplmlu2uk7pfn16nmxuvgi1c14c20ejgxjid98an0ie7ngxw26adw8bzlknquotr24pyyrjyr8zoqrqa258frcu7y8tvzq2ouxzmcgepxsfcdqh26ty0w6w',
+                flowReceiverParty: 'encdg90m3d6awk2jak2cqgi4kl3476buo6xbcrhxtle5twgttlgjg9nv9humalxksjm8rikydc1em6a4it7hqrhtqlr4s4nmsuwcoyb4gw0eoxuf6lekiq4vfzirjtso15m0c3wpykwrxcikpv4a5cw4p4akc8za',
+                flowComponent: 'ke2sg7y96as0v8p3865s6bs2gfxywivsyt6lmkfq6v6nz04gr4ugo115vppaybfs579ankt62mvwyumf3tl4bqxuduzqxbx9ty9zp5rl5a4xkwt5pswu8s9xczugy373xf1ehldh8n8yvfpd3spy1i2a78jcpvnv',
+                flowReceiverComponent: 'rzl76005rv222odi7xb1i1wicsjv0n75tqrofi0qemsgo3y3ya4qm90uo79b10a5m7eon8dsq7a1w3cahhne9jzcw9474xy13iwnw3by945swsqor6041y5m0ivubdle8340nssg4xgamzrupb0s1ykmmowfsmvn',
+                flowInterfaceName: '4pm61zh51li1s50eg3mvaamxn0ivbglhquduypczap7og8vmjdbh6ok8w3iv7hxznrk5jyp074n37tn8b954oe0pyi20qrkwqmuxy8sjj0ohpmi003v550t6gflfrqpkvmj1i4wiba5w3o74nl1jv474o9tllvj0',
+                flowInterfaceNamespace: 'jp35yahivvad3fhm038s3qcglhcche7dp6khv9v5tmo2g7xxz8l0mz224csbrx0qldvwn8b0h99a6tkkz99phyg0747qi8o5c79940sytqs4xhpzr5vsuhy6gw1eqb8mssf4x8z6iw2qyfonmy6wprojm2x1q1eo',
+                version: 'j4iw5fcin7thpthe4ww6',
+                adapterType: '3jz6c2vjiqqr0q8168ogzrz1vt97v2g0t9yrlcxnc0py6gedsyn6exmco8zb',
+                direction: 'RECEIVER',
+                transportProtocol: 'micjyw1a3pfj5zktec0qfamj3d1le3zxzhd4soznkj4ol9oksn7iwm5w017h',
+                messageProtocol: 'w1py86rcvfjtldxa2yrkztt5ig87i0s092150x41op75n9vmnze3qqviqe21',
+                adapterEngineName: 'fg1gjdw02ryrsvadi1z7vdrpvvoib3uimyliz74iwhwtb1c629vi99nm5ar51q1gv0vraql4mg36bhc84e4o91m1arkxiaztic2gsxw2l8bgpdj2im8bd1npj7e62z8htl9vu1koogbikc069btladogk021blja',
+                url: 'cbm2to6u1xprqqzbk8smgvoesun4l45e572t208n6970872viocdjfzu6tnfmf9oabtdeh0br3eleyk3zj6ukvwkolfg4qhe542ucrh4wjinx2ejif210ucklr9kzsd2vyyeljurn56ozpjl1q8xttdqsufp5ifrbhqdklilfazktu0uq6xqqlxtqbh23dyokqcur6nb6syz9f9mk3tn3f3kejyuyda30zofzgjsksirc9t4znlmeduypxnx9aq4s09ieeth3lbo9di29t6c6bakkd0x2w3tyoidwx26fgyc82fs2iei23l59hw1k6e0',
+                username: 'hwrgzc29j8ijqxeb3mkvdg733ojkw7xybrhnyufwlnq6pd52mktkht0pymfb',
+                remoteHost: 'jd0gcpettc4dpgwyli627u5umpf8aq9as58qnjj1ir222h2fp9x3ienrt4yx7zwu10nybitqytfeei31ajcx4jhh7ybmmjikwq9z8bdoziii43yvznqmnegnvlt2759se5n7n1tupsn0lgb0ugg86z38u4qyhnbi',
+                remotePort: 6054226899,
+                directory: 'dfuvffz5eakef37no2qx27m1sacenx1v311v1zl2pb5v6kpe6z1gpw1ezk7e38hmbwfpegrdfkgjconhvmzgio9h1vaweikv2cg7mn3wm2vnfvodswp8xxln8wo1inv5le30eiocjibn8e4x8ahgr8t8hdkm9yal7xnbnovgpuqizk0fkwxvwnfkwgvop1cxkq9z5htk2ca2dd8fu0zc3uzyv0wde98w4aurxuyu908rvvtfc5c674ckmfbib0ziayrgff61mxlwxv4sp2wo5etq3k3yqjxou2d5fxwez9817ws1bhwjkhpdbet925ty48xxh9l069ty0qyvkr3sq1soqr1asa0k0di4foqbj0s96pmiottyfaucc4hrch5hkmqo4sn2lhng6xbk3993zq8ht0tktg6rz4l8q1l389ax85ij5awb8d0l3c152uu60wfd4z2e6mnbuh06dpsmfupe9dlaiyce84n9fz3qyto0ppbwd08r1ez58v6neqqvb76ndgi2ril2zxq9sjggbu6wvwevuh2vsajpvz68yr5jdlddzluh9x2r16c00n2dte3r20gjlmtu8b8j8zie8bjzxm9bwlap4r30chp9b6wdjhgscft9ulli6mdiylgvqgmc5euz1v0qdl3p6sw7bd035ynb9w2u2rhd9s3ufoijxxl7ll4pqqy391atwchlpr2vdnwkqwd42ebjodes0nkccutjmct73obx3dxbu6lw8mrotswpu242f2t73dqou8t98qqiu7puzp5oxnaafu2sohoyuo9p886z4yd9tsnawpurkhicrb44etq8b6dv7r7dqndlowli5lt5b2h6f179fgr4omzsnc5tcmuf3dn59yeuhg34pzwrzxknsp1u2ax5pqkfvsykhgg22gs01li6lgecz1bmc82h2x5j923uv2pb6p3d0edh27w975dtm7v3ysy9nzfo49642g9tem6ty5ugx2c7zrgfz9roxbcp6rrkv39r2t28vfmzylr9',
+                fileSchema: '0htocwjb6ylqfaucacdiypso1wikzaepzy7ck9ammif7rgubmj0bht9yh5ntj6fvkz18j2kcsf6jdj2u85wytlis6knaajtfcyqk1l7os1ja6h621xvtp84swbfi1t3gwcs15y5w77027uk4fuqoqoofe0hwqesp4oc3xqic4yi1er3opw7t25d3drjo6sdxocg5gd0i7bhq5y2tkgdt5wx8zjfuca36daw9sm1h00hmx37ueo6zi7jxr4x6qfd3ju43wqpd4o1wbj3a10j4ng6opz8ay0jm2mxj3ehpj75kb2s4xrjr2rj6rdk51wmwlyn0ulc8emzgt54oh0qeyetflgxmnkkd0x12yhjtj9lixfwl3zdcp87rkymaowcbg9xhp9gm8e0112z9f2kugua1jhss0jfzja13rh3i0jmwqil4as6ce4fvxwyqpre92dkrl49yy0hczrj5ssi40n8e7qcrw516sxifost0aykznk8n9lvi31ks4mic5fwh3yjit1u12yr58uamhp7n9m92rqlgueyurthfhofzibjt5riv5266si9hi90rgn3lrodzvvyrnsc52572qz2dlh51e3mrffqo1aa6l5bi1veyy74j3mgwrjkcbih9ftt2s8n37822fqkahx81p9dauhi5wvqtkrkd9dipp3k7n6y4r4by3xvhy443xmddxk2u0e19x1bh6l5l39yb1lr7o596vffk5xayhg8296f2mos9zp7rpd26mf4fvzwffcqhikjllfpqd3f5aorl63nvol4n9ix62sqhet0t4uaz8rxxqrhjtsrvdkrid98b111q2x8wos4en7xvd7juq9bc0n05zbjyhrm6fxef9lww12jygf7bkf3xhhu2eaamupl858x6h9uqfuqtuxlk0of1pbc8k0ee8ul6k0iyqmsq6egjw1651he1b74ns4o8wdru5t264t1e7w3wh9r2e8q4847gf0w1pv57g3s2k00meicgd08l42jqwndblvfphkik',
+                proxyHost: '4aeifm8u687m7hfm6tw51fdfu4q11tm6aqhskaa309590ig1qx90xwr2w6nr',
+                proxyPort: 9299885171,
+                destination: 'v6qvcx8tgmn1ulkpul5yhrexn7o5ye9fvdbhxyunovge1kaj4xmchzxf3l9hdyu9inr3t7l9mcl7ijbh7b45un0vspymtrvw3ioc5v19mbhr4fkgbrcop1d61k9rnwb8gyxpls8mzjltolb1ugewqjpid7o4fj9b',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: '9re71c6xoq8wyy4dbhk6qbo0ctf6km5ngmiu5u9uqqmddpengmgl2a3hh9ab3szvj4iw20kc1dfd5bexa59rxl7szaiuep93tcg048nivqvwlz0nen7acf2i42pmzijvy2vx2t904barg6n5vyi9mlcdgz2qjlp5',
+                responsibleUserAccountName: 'n525oe1mrteudmojxu1t',
+                lastChangeUserAccount: 'ayq54bwrp9pm7z9awqvp',
+                lastChangedAt: '2021-05-23 05:44:32',
+                riInterfaceName: '8g8dta123r4ied4lobw4oo4g29gd11c0fg7cbyd4ubl6hswxlrx0nexmks327jun4iacji583kvna3lonri8ifmzr6b35pdb3xd48gk90rok0962z6fs9hm3b24ghcubg5fjwhc54xjg2cxpz03tnrchpksb43ny',
+                riInterfaceNamespace: 'cigxcfsfyciuc4dm3gythmw42r5966eqv3w1lin19lk7xxmx2me2ls58bkz6bflf0a9vdw68gsifnb1iswld9wq7zhzro9znuynhvo87vrremtujmz7hagroa43vqyh5t93a4x9xblcwl1y0mhwzragpchbm3bge',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ChannelSystemName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelComponent property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '1a4375ce-0184-4f7f-b6c9-5f002f5d9879',
+                hash: 'pe6mwx71lhvrczn219d83bpmbzvm4idms0cr0pki',
+                tenantId: '60d4182e-8b05-4b9a-bd1d-4dc87dcbffdd',
+                tenantCode: 'bk2t6br40cp8sqwr7k19l8sqhulkqwebakcik9r09x02x5znt1',
+                systemId: 'c392ba5f-e630-409f-a18b-16272c200393',
+                systemName: '4bkqknju3h8pc12rvbu8',
+                party: 'dsvff1v7y6b6tmo0sfa2yajwkag4n9prqz5omugl2m0saq8lrj84kjqo0maiditwlnpunamucuxz6d74qcmx6fqa3wzemu4vnvyyv4s9uf2ubg2v2p20qsty49vt527scatkeil75kkarclw1i0pf8p5s5bavr0r',
+                name: 'lhj1inozh18wph8evshu0eo7lxxz85wfwaeemp2r08a3og8s6dlcg698xisvkd7u75hcvcbslxrtscogyeq16ht3ah0iojh5ztmwlxh33xd451x4oar5cbfuepk97ovmdvigi441lysfvapkj2ueyvllevmlak9k',
+                flowHash: 'gurpfdoai0ew2jnn9u6l44y4kzx12xv6mu3mxi4i',
+                flowParty: 'm3i0sanlfevuhrpmtzx7fj4yc8nw0px8eg15jok7ludz9tsr620dfdjo1oa6hh54cn42nbuvgekry1vr2y5rx4yb9unzq8lhd3lhd9nd78il6dxv2nlz4mhoca0oymaj1dy2mrh7srn35kc5ry5awc9leh3r1pb2',
+                flowReceiverParty: 'gc42il7h0mq8q4fk1xtisgl8k6mni39ykcvo12gsx8qathfka5wex0e8atipno1f32gjiwzmkhk1jxj4jwahmt1g0frybb2c00bshfdj5e4dia2ck8w5k417ojxsonvv391x9323ppj89n3bqkcw0qkxz9sucx4w',
+                flowComponent: '46je5ep5qmzp1061b45bhyfftxcx8yfxlfw9tgjjixcyhtzi0cbvg2z609435v1hpezuv5scz5qx55twzdvb2njjnegey7jg842ht4gghfw3ku2qbqnggk9dn3nkbb71ztp746r9zfrpv12vm3913xt6iujxluvh',
+                flowReceiverComponent: 'jnuztvtik43yraze6nyab6k0h2vg0jgb1xqanmnj7c7hi86dd3gup6sulwle27fsgxe3py3x6zoesi6vrwur7bth3p7ew7lxmxgi958moi1xrp8w6y6rs677rf7389ni6m57qx14xfb8a04nyxmrbjcw4i5nyqqz',
+                flowInterfaceName: 'sflcluvyaa6v2xxditqvdauv9r6jujp41nkkt7mvqmx2ap19sd8ymhnpqi4ofpnzx5dzjz59f2oq27t1id71jeb7wk8sygel11pxy6vu71um6ludu0k2puonb1eaoiqa3rikvfwnvly3ztqbszujw0qo8uudpkek',
+                flowInterfaceNamespace: 'dgyrw7jkesbg64eci0etnxmbb2z3ote19eknxyat3rprfri83x20l9ho0elpybwkzi9v7lfbrziz430x8v1jzwm6qdn4eizgouf191rhlpdsvicl6f9qlgnyz9gr2xenyvzn70kdfgngi7nrict5py0t9zgreq4c',
+                version: 'pcw0pb3497h9q9fq4gom',
+                adapterType: 'w5cywwfm86l10rizzvrmqp5au6r39pi2kh228g1r5g3o4xo6iaxixd9f8tj3',
+                direction: 'RECEIVER',
+                transportProtocol: 'ov05nikcxrm3d5n2vpvnuxdyuye9nxhs15rx642t2uinsarebjf3nnv5a707',
+                messageProtocol: 'bc3ov1ktbyr33e3hu0uw42xo0hq9o8klfqffn4wfmgxcajtr6jhm543b6xv8',
+                adapterEngineName: '8du3xj60jo7nct2zj8jipdomxn08r1p6o93urnn8lrq8dvqujs5rmj7hph35zdwb83tbns0icbqd6wrldtxy2u7vcwr55i45765fpuhcvjffveaqg0654gc2rfwf47loica3ghziqeywvuoiiiekpai74e75rtrk',
+                url: '82ou2qj513ru1kobkt44bl80tle3is5puxl7siri28qgu6xylg2m29yqrx0a2btv5iulth1bo6e4gerkbg3uyx8581m6pvottk0h5uz5ypchp5dbgbi008if2thozfy7l3hb9pin1tin75j8emzzef79icw3ts8dvhg4z2bxax6wpxaennhodr62nziraihef5vtcam8h9vuow67rb3qgpo88dxyuxm0u31vb38ko73dsi18aqj9uskk7gbvjtap539wk7gz5taukcolmv6xiz6b1ix82w0suwfsh1xkzqgt35ln1xba42w99tmfcxl9',
+                username: 'zujaekih62h7s7ak4y8yesk9jat03t4sammg810kbkzdnachmiyoip0t7vwo',
+                remoteHost: 'iuxec9teqmuvjmp8v356k4al53z24h1ossu7p5mtrk5wbwvfvyjurxsvhr0akzfs9xljby1bg9bdpk5vxted24o1oybqbl5o1xh0foom0nuan49c0430cm2w1qtdjto59o8m7vsvjri0kgx02uttdbqvbetlg106',
+                remotePort: 3857291510,
+                directory: 'c621kxfe58p52u67t67u90ehc1kvgoj86kzp55lpboxwa980rssitc44rf7yj2xblrk15ypw5jxnc1364sbukqz26w902kuysgfmmwwob0ceuv4xsj0xcoic46avcwz6ez0xccws6opmbesvkmimwo83qeqenwxiq1ruo97ur0mcx56ev9cklpxujewj71blyjxv7k5fjjipfa13ubks2502p5oiy1v2ovmgbjyzxp07xwnu5er3a6mh166omi91i8v1e9mrt43dcu82uvgld9xe6eyy8px9k9f3kpep7aofdc55ddh85f04vha5rlh2s6gho4yiicxt9q4cim55f6b1z8rdr33ekauxsongilwicjhza8slbcjyugzcpbynpeqj26sdg5df0ocbi51x4zk7qajci2i2xpij2nyof49detpqh7rv6v4p8gzk0cvtp81f0nbv18k1zfjczcoejq6u98hqh065v3r15nky5mmer1iehcrfveqnqtwfoxtkuhomfel4su315ywbtq825n1qyun4fahlgdh6t5g7atmhgkgxnzp3fwwmj9vpkmdstiqhlebmn2b02ww0oda6z88wv28ch871a0791r5o36jwthp467bg9vedvwj26oqo8bme6eksn2kt15n7vqm5qb7yz7xehw9p2nkse39u5a896pnqiqa2rfeibni1co7i2yf7igwqpt34x7w3qrcfcomuvmzdr98tqo4ar8qcz0x7ck9j1gq2zqaycus1usjwsv6mae290eu7x2pfictwilwls0mvnvubnlhjh83xp8d7kukrevfrasqtx7eaaxihvkmelm5svb2i1a3loezvu3rbxjj2popccuwp6pqfx15p2vl7jzsir80z962qpegnobczn374xjq2ruynm1dpsjfzv1969zml739kwmyiam551syjv0rd6usk0d33idf50bmpjy2m5yb1x3n1f8h3xw6ggxb0ntc5p1os869rrbg20vpg6l4ncpp5bev5a1q4',
+                fileSchema: 'vkv975yqqxbcssi4rnvrtyksjc4sl9wsy8pw0vrcouc55qhken4ppo2gixk8i7zb038o0g1q1fj71nxpu5ih5qmdudvf8ww2i63yhfftg1v6x4h2e5xrdkjaqaobn2aiagun68euappnl75q3crpytzlc5hneplxcklnkvxn8l3w167zndplkttu7456xgpin0mj5o4xb4g0ym4vamjxsyeq6r24ce44jibui86kjtpoki2wv5t6dzs28mr4fj1ec3fq3zv1xw6j0j3lz5c3jfzqhp8pgb8ppn9oc4en07ouohmfso5k7g0sle4xdn89q08w1yee5ov6torwarunmnhh7z0wviadhzk31talt85x02p0gi0jxfptuuq6qarv5b3ad72lsv7ws41otkv1etzrt4el3coy512zert1f3mzy6vlzivx2fgfngpyo4dzf4jiku3pu6lu48cuulzu4zkraplokysfeno7ihwpmxgxt2omiafno32z49tjnv01fgtw28pkxnei61rna5kcp0gy504vcajgy0fwlenhhgs44ciffefz7nwokw9ei3hppe22oyao7njgdpgz95c1wkqotso8d6sr65wdui6kh3swwo8cnw5f58wl7tq5ovroraqp0hkkgw03ypgokjr4i2rnfdr36wjcx607q06znhpp0m85iaaj1gzw7hfverfwwfaktsb0mra38o6q1gvraymurmi97hvshdz8gpxxkrb7hdy35bm4lltqkgxrdgk79zk7iiwt165omlzwnkocfbdcp3udbbot5vi0wzme85203weopa7244lzcxi4lrvj7vqmcgncuffnvam1jpbkrnui4gq80v8gl5rbz12prekdn5xqk7l40d2wrzzfjb4fid86jcaxo3s5xwffevvo8cssx74rfbs9ckguno75zzo4fjv0y6drt2fveiv2ourj9rq230xj9t7voveabu95oedsj0ymvwl4krdc333f1rxz4k41ssc5zar7hmjdaez6',
+                proxyHost: '70n4ewxb2bzlwlxv8tuafe8apx0o093toy5cwkb8nn2x8kfdqvg8vv2r4q5i',
+                proxyPort: 6845897068,
+                destination: 'iycmqx2titbl0r6r93bzfqds0gxxspk2hbydhjrscs9qjzdonr2znrjq6ftxqodike5iayqf8w1tp39yxquotbn8f4gkxs08ikc53wnst3d5fsa6ftxkz2eopfpvk6tww9nd96zlp3bv9xh06efrskl0rgbjvo00',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'hp5x7yen662xksfwsq3mw5lotul7yrp3lj59dnk8yqb2spoeg0i574fgbqnkzdoue5l99qzta7nn5fwmi1h3r9vq62s1th5qpqhsbqy1gpeo8a6k8wj3r2tz4dvmekb0g41tlcwo2fspnjuqxo14enui0q0voub3',
+                responsibleUserAccountName: 'a2ty2m80uj7yskm3w7yb',
+                lastChangeUserAccount: 'qbmpbf2j46rpox17jp0p',
+                lastChangedAt: '2021-05-23 04:48:33',
+                riInterfaceName: '5twcm3q476ob3h93jeahg9oank68hqnv3x3njv2rw7i0kpet7ihevp40uheuexr61xtmiywu1tng4rcor50zwuxo1xk6m635qin1k9afzej2tbjts746lyw5fd2w6km6rq5t2hogckfny9kcif2w413ciggofxuo',
+                riInterfaceNamespace: 'vstup9sut185l0ikol1ea8fmfha6xgpfjlahgxw6vac5o5u0f24xh6glj0gdg0dlcsok7ykdxepnsiy34qut6egf0i23bigf9h5j8kwcie7god8du44a2v5o7srr2dra03mzpxhsgsbutsyblkcj8kerwg6yuhf5',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ChannelComponent must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '5f7dad5f-d9a3-4274-80e0-7f9a8b94a62a',
+                hash: 'uxke7ighni5y0gxsefx082e4955qz2ntcur56oiz',
+                tenantId: '7bb54014-85fc-4c0e-b84a-4c961f8e4913',
+                tenantCode: 'lbu1ub7hwsg4lde2uvsuyb3dth6wx1s68u302mud1uaitagss3',
+                systemId: '618bbf00-39b1-4b56-a629-daf10795b89d',
+                systemName: 'ffwfr0idrhrazym4j6lr',
+                party: 'rivdro3uue4k0w0y5e0is48l16k13lzmxwkq5oyps7yldtp4vownhoj91r5ataz6s0hsibpzz5axsw2ef6nwlod4j96t3ugudutjyyqnf1mnj8nfzxz9o5ev7w9ssesolgglq1c1fx23rpgvblnytakgqwftoasj',
+                component: '4pcbqw2w5h7u7yxy02kszus184656rjvgh7f82mijc4hf1qi6duqh9fkxzkn3br0pzrymfzk4xb3lqzwtth3w95rlv42vasbylw1i6cqdspjfjq17mghs8mrkmhpw31rtcakhp9rg09nt2cgxy32ja7e2dhj5w6j',
+                flowHash: 'iagecx8l7xg4ne0z3uqolk2x9qokmrdxnrgiw295',
+                flowParty: '9p2hm1ddtfcvh5zitfuxblyqz0no67zxpsmpn0ksc1449rkt5ouxsdfaxnf0lgg45vf40a6b3u8tnt3bcyk49yma0fox6eil2aleax9wu1i45keq6bxmf7hoz37c566smrciq591wdkx608wkrhx750c24jbfis9',
+                flowReceiverParty: '180n2k5q2ab97dx7ifh1xlcbatw81rj03w4ewhfzji5to1daf20ppipjzfiu7it839ypo3axxf0eii4ba4305g7mautv1samddn2fykclq6x6uiacurkg2li65zo01x703edm8gb97gbhorj407n3lnhx1zs5ydi',
+                flowComponent: 'vl0syp15eo45fjricc6l9ai8sio0zdi659x4p3mlgpjfgqsgqaxuzpiygzvy7ye1wrfzhdjj1p1edrekvsr0km3tgyivvsrqirzif5iqjwuqsq7069p28ecnajmrr59525d7a4b047h7oisdpy0vpqcshy2pwsvo',
+                flowReceiverComponent: '3wunp6waq1loxw32gaa1sbrvuc9qgvhsbo47ckxgo1ycghkhemj48bwu21kt5783f7hn5yq0toqys671o721s7nnl3iercud91bwmy8kf8ija8sqx5rf9vhdikralkknps8q005il4yhhsc81avy5z18iv7wbbhx',
+                flowInterfaceName: 'cpzcvkjpnkyk8wprj5iu6a55a6vhxq1v41ewq1kjyuix1y343y9exortxuy1fii1a8jnvh225bxdifvqie9zx17wwusnw81ztb0ubvhrxatb04x4986m1sicaid9zld60f73kvqk2uu9fmgocer9nz6tclitycq8',
+                flowInterfaceNamespace: 'w3yss89v3wqdbn30bpg5o26nvzl18f26o6s9e9bwjkf5ccfwa1zb15ytsr4py8cunu5p4f6z46nx7am5puclhy170muo5o7445eznbo1vtow6xebdis9ju0mfdyxg3ae1qwhuaof0wamon2lt0vg4bzqlqa2gyya',
+                version: 'muuz4ocdlfjmidc34o6f',
+                adapterType: 'xx71jbbv8lclqwbldprevpw68v2eb7mye0qdat3koexitmtx3hrli74i6coq',
+                direction: 'RECEIVER',
+                transportProtocol: '4ampqgb8rfivs50qeeexzptzh7dqp6z9dmg45hz1ms04kl6qij1qzysampaa',
+                messageProtocol: 'efx0r50je6x3uhcee8k9unmcnap35kp1l0uw4aa7r2j6bjbzem29rivkszqv',
+                adapterEngineName: '3zevbk0eiqkuqfg427ryca7n4x0d4yu8g1rwrc34132owe8yy6v2gvvpa908jxqy1ubgiccuw6tme8zzeiqzc7x54mkbif4hi44ylybtf83upkp6ep1tbobh4orqw0mmjpuha1s1mol9yi5xmx8anpud9lx0ms01',
+                url: 'xd8uof61wi2pihuudywsphj6xjo3aljs7cq7jxc9fjd89rydnirmzx0vqsqrhj3jhbqyiqft067iipd05nlf33upp93ltpf4s1qqa3mm9x4glh5c5yoiocp3dzlz9h0w09yt6maxoonc2f1fkf2800teteke5zkhpdeweirxkpl00s1kt4bonkwdr2ud9bgnr19ud10vb29bf87lji74yxtr2xibtc7ivk8btsgdy5ecrq8aw57s1w6qt2zwet2sw4of0ip4sfw1hd5fmiz5sll78ewxbo112n4zisv9mk1ra5j128dlhz8dnua6p3kc',
+                username: '49zsjjq861vnx1252usgdvg474lcd1j41j49ha2ax8r8njdz5etf0iyl6kej',
+                remoteHost: '0hsooqoz36q4nk4pg01o75f5po60277bt9vkm1mdtkx8iur7l7msdf3b1lknaorbtgr7o92emvd8o96e1xveohrmc92zzs8m3peqyck7rgg6kmrd1c4mbrjs1s72xd7sp888esipdj47jwpcs94c5xxj2dn1ry2r',
+                remotePort: 7693232819,
+                directory: 'y9e5fgncq71hb33evupatj75wt7qjecn5bn062m6h6pln3f85eqfsqonrt9pp8z6r3ldx9d2ad0ek3bg95umfn54m59pd77fejgf1jgkxrsfab40utw9j83qkp2ndz5xhs8pb5uhlcuwmb3hvhfsrs9z4dxwbqci1ee8ql49144bws8tyz9bl3qvj51uqd3z953hma5t1fad2ugz0zskum5cgofuxw9t66q5iml3uafhbk88k6qxzvsbobk9crljaf1g176602md22c82xmcm4i8rpuk0gsy33ijxjd40lp8le1xz7m9maozgo56of6vwqof0benvzy8gr2n1mt2n0hnc18ag03rjetyt2bjfd4m30v1o6tmz7pfmn5r9lwl1berkg6y5ernsdngl23i8lgtb5qynwlolo8s4zms00myug4qz7j0givd3v8l2lcckjztxpjnvjcfp0uvudlv3ghjqjri3t4b891auy6hvvht8svcqcmaafy9cshyvvnashfs9bs9cc1pa7e9k14r1ny7gh3l9rl4r87swkheom3rexkgmt1az1vjtzm2ukuca5gtcra0r6om9fiour4tdu67hbdj3mgv874su0mivsw32lac07ax7q8ns5cjn5ytjsl126dq3bgwx69qh7vaomu7tmy4qf5boe6hcbhyfl91nenou3443bzb9p7hn6ws7kv4bqg1opgp0mvmkxaovzxbc3eva1vmq0sva8dksxhi0x23za7kylgjouchig26j4zqvw59rmp0yuj47a7rkjm213fnc0vne1eg12p5lgkdhsw1h501ax6zxgkvzu64sokscqkw6qo1tl6f25hbhq83w92fvhlmd09uiqlnz8kpheoxyhh04l0sotjkdvz08rb9t8mgc3mdvjg0onl8jusk78rk9v8hm9h6t97n4con8prk54bcb9m5ykzx24taedlawkahtndz13pcg3duez6dhfptby5dh3dcdgeiwn878uij2voog85tpsokctv9',
+                fileSchema: 'ahqlp1dy6qkwmhwnjkvb6t0dyl95laowjy1c0ith9mu2robr7prmv5rzzuhdz4l09cd8l41m3vqrmc7ds16qvkepxo8swcp3lchtyzy68gb22z1taqe56ntiwn2leu2omup0z9hcwk7usn6au992eetnrqwfyi11n4ekvgxvr252qih4q2z943vt7ei23thlmi42t1e03hny4gdm1jhbr1g9yczaisubu1zeohqn5z6p74lg8iigh112uazu3ga438cbo44hc07ji2fe2kwk385dfdo9mkkbgaavud28lhqmri99xfu7wtafwsckqd3qy1pd7wscez1uv9v4lix67t4pa8iicgan5n73uiuekuzp68t6rcbp6j0r5lmgio7qmkdarj2ervvmkt24fcg0rld5y2j7fa8lr8n7hi1ocy3mwmoo8isadckx8gijj15swdp5zw8mniacfohn9rd6obpvd5jytrn9fcgnqx6t6zbzu2csiplv5tpw5ul9kgxlkgczy1gmzj2yg1z6dx0eh85gs9x38pa2w2dh1zgsdn5ij4o7gek0hvqktht1cyji09z99h2dg5kt1rmc344bbjs50olfwgbyqlvjyaj37ub8w6ggefkbedz52jyi1kmq2xk2y9ssaf009xmq1r730b3kna2poi8j85r6la0xdyhwri0vlxbtv4xohc6k2ldk3xpax8isrda7v2ws2kit2g73cn384a52wqc5df10xdjh5eacgzd8qnln8wavq7c7gfce6sbyxqplr40xunuugztsxj08mfhtsdhkeedkfr7gvvec43bqezhekmzux0nd224k7qxvx26m3wwklklpoxhz2n5vb39dvnj51gb3c82lgx1qf7x36yhmj90r5wmegmr7s7bcp1nr3x9z8ce0c3fqbs15uiq17pkcsdmru8f0ex7fepkd66ycp7qs6m2ppw9ga2v5nwqv1jn7btfp7g347irrdfvl8y1677ne5kkirr5yq8f2bppb9gxdco0f',
+                proxyHost: '9flhv106f7lsmslem4zdxwywalrufmca89xd77x18gre67pusp1j90yuzwo9',
+                proxyPort: 3212618299,
+                destination: '9zq9lstskghevlxybv0w36dc86gmaykth6yrnfhd1qf7kqp5jzuvg1u1ytuoccta2620d87gngm0ok8xjh4l0xesroyzj7fdpnh0vrtx48d1n2qvxmawki02dcmrgm8ur4hvmb0fp22cry3ukc84cyhgupd6gudc',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '7ts6z9c1bcodekie53ilk5wcc9cecdkghdzs8f2aevvuspy9dlrln64k695ovlt4w0egn3w80lemjpqr9djgi62wl62pqag1r69gd2i3th0pqcq0drvl2piowztl2jzx4iofhmbr8hr250n8m2tu04cma2bfhm7k',
+                responsibleUserAccountName: 'gfbvn2fv27e4tcy6u1i4',
+                lastChangeUserAccount: '8m5825g33jtmgv5r8taa',
+                lastChangedAt: '2021-05-22 20:06:26',
+                riInterfaceName: '66xz51atoowb1c5z0t5n46227mndljgnj62h9sjc3fxlzpngxnu7cj7anlh5v4q92xqzyyey6snocgvg4ml2r0v6whndi8aah5y5r2dfvkvrhhxbvq7vkl3mcbjig47ku546dcbqhqp47d931yhjl41mqigpev9b',
+                riInterfaceNamespace: 'w7036738iibkjrdd09jny16hby5y6as4ora1mmcq41dw5fjvl21ebxq72v1edn0uyx1weoifpufs5cffiugbh5m5gb0qtofccaob35vmhb4hw9dlkil2z284il3rgjg7aghg5h21ghkenp59lu8s9eovn4cuvwt6',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelName must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '6dljdedcm2253chkv9il3o9u9wsgugy992g0v',
-                hash: 'v2ylldv9ilks2e5hqbugiehnalelbngrx43qxiv4',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'i851hngzud2jju4717uopio44so9284kggxcl2yevtgw9yt25a',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'rao3fpxmev65shr3n31x',
-                party: 'odtrwt7fvhafdurtf6t3w38uc6id8iqh6p7be0dvqthaeshl19z56v5caz0hyfkuh7b7w1nf69w7efk5xf0hwl5iyoxvprbyeozc3gsozbqjgd9sbj1te0xcg2kk89copsws8obf66eav8rozhgy3r6uwls0u58g',
-                component: 'yx556c4ud6ebgfv776vscbn5wxefq3hbwpjpeb28q0tceoat1rdm4ifbkphjr626jrqtsqlryrezep23a4syi7fr2gatynr96ur1q8n13h6k05gvw1o7ce7haiac8gtka85q2hkpggn0gulw6zn4p6912lnq2yf7',
-                name: '8ii6ym5c9lu8071fnnt083fqfwt694gr1jr58zqxmy0anq3b6y9gvw701xqmm90gfu8hlcxh78g0hsmlvdrtmdwbpdsnskwyshlxxgg0x1f49svzvqk3tfd8bnsqnfvfwqccr2pchwy6hw1ibsacr93hm9ojngx9',
-                flowHash: 'tu44wgkl6tl5t22a7knlupu2ltmc7fdkuvc81wkv',
-                flowParty: 'ko8cpg26jzoyi9zh2idp3qbg9mcszq5mf4awqxb0ypknldyh6k3e85daog3nhrivx1inohwsx76ec4qukzy82ar1asf4s5jnfjib3895wstaflcoio6akfnx3kn7gbq0g762cec75bpwxt4g2e7yavyqbdsaamai',
-                flowReceiverParty: 'aoq6rh9dt0vw9x3l7qtx7xjbd41ahhwlpqjkjxkh8sqjx6og87hegs6dfu6qxg2ut6npwn6x4vw0g7zikee3sah1g8iojl24gry96emb2qnwyzacs4phfnky5r62liyeucs80b3ichsodjol9ahjq4kyli9c1gz3',
-                flowComponent: 'msm48r69ejfngbssiadtym8mmozqcrm4mdnzyk6cpu11ul0r8lfwvbjk4nzicm92765pni6ue2huv7ko4l7su16g9yve4wz0kdliob4xyggwc1cs92hsu8s8yptgq9nwytj8j5u1fzt0musdp3xqhtijn9cbnt5k',
-                flowReceiverComponent: '0dgvf8rqmzjrhuo8s6kqxga5zd4jdheluuwppfb0itdlto12wvnzqwerfcstap5dfuj567re7lqosgaif4g23mxhuqr06umhgko2k4ixb6o8nyy3i96bnpu8px91q4ptguc4cuxc3a6qhcvemzn6h4o6i3lkjdja',
-                flowInterfaceName: 'drnmtcxseewwfk9ycpwc1ycglw3bbdpg3bv1zra5iwp4xsttpd0jdcdqon8zw6rjluo5bhjriigq1z8qqlz0tn4olcgds3ugcxttenomgxduvhe03ayeq92x2hs3xqu9qksvotcvypwkouqkv8savi5sayud69kx',
-                flowInterfaceNamespace: 'g1hhjz5e788lj13xhlsh01l1a5zmv38ubz2nxacnkbazanuqs09acn1f52q7xtu3vznwwnbsmq5hbru37d23btwqtgc16dd9ceq0wo1sflzcq1vn3i32vdv2p0br9oj5myitgawqhow7xbbw29sea869yxxlr9kp',
-                version: 'n1lze1f54xwfbdwqkwdz',
-                adapterType: 't9kl52qztpnov1zp19l5qodd8ttzbyiebyy2coek65hvzqcya8fq63skqg5w',
+                id: 'mpv7mmrsnqthustc6gfp2sefstt9osrkri6z1',
+                hash: '4nfn8jt9frskc67f135ynzirhiyu09oyq5uoa51c',
+                tenantId: '0e1ad020-f745-4b3b-9fd9-dc968e0bdc12',
+                tenantCode: 'auhuxi5ot883j48b7q8bof26dxbr7r0eiovu3ft4uim12b23ye',
+                systemId: 'e06fbf9f-6108-40c8-ae95-5ef45018a971',
+                systemName: 'cz2rsbtt3ng4pv4clzcn',
+                party: 'g64006g3fwhqwlx3uyvleppxzqz8t3qqa9pk4lresareuiy151syrzs8eec7nr6b7bhocpl2vm30ru05rp0pvsi9ikv34xp72j42m7yqtbeo3vkhyi2eo8sghxh707mvxpd5hqcmho6m1zc504uc5ukghewf5d69',
+                component: '3hok99huik4gkg9u7xgev2vmrwgn5xvggh4jwpx5aevsxt36a3aauqej08wm4ck59z5x0dkq1fak3h492g3e1o8dxq9h5mpbrwesuskklo4nkjmx7hi6770o4n96kf3ywts5cln17bqeiyynph5vuojxch2jtfn3',
+                name: '2wbti0bh3h8yaxr1radzns8whfdnttcge4ccrppgkxkvh971dk2lp52kx0kdpvkl2mlx3p8e3oboqjrnfminyebkq3vrgfsjch9q4t7csc42ottj4omx19bf00u63swrk0cjneb7do70yyktt73mxor3xdernm92',
+                flowHash: 'cqhywlhhg6evk7ztxhm7d5alf4r09sr9d0bhevo9',
+                flowParty: '90dhbk9673mi3n4luejjphvjbt784ivuzvtd0x3f2dnec1mlkar5bkxoe3dr6jugg4pu7zsrf3raakaim11tc72cpovfoi7d6x61qwj3xhbsg1m2amvdvatf1j8vg1sxjzeo7u1e17lucfm0olqszborq1dyeobi',
+                flowReceiverParty: 'rizy2md3hi2so1ihkmhbmdtrdjrbywj67sbyk7vcei0fldy7tlv9vnkz1p2yd4km4lhobizr6vmapydmfqej3wzx6ue11fna4tx46f8ygr7gwa5d8c3c9m8ei0rpg3sddicj08a4a9iuu7r4zmarw9yh09s484xu',
+                flowComponent: 'xhz1541o9c272gwwytfnni54tt9yge6e7anmbyxa34f59n2amrtdudsn4qvecnat4b04jc4ts0sye2cihuis5ypgyv5b330b9xb0rgnmp28n1mmv43l7krhrx2sbg41s2it93tg2wmp8emeteiegzoxxla0vdrqp',
+                flowReceiverComponent: '899yaq8bya427ykqhx0lw3rb3bpvnpqihx563ib4ced3wzdlnpelk2pnr5r6ren19ox1alrypmdi5d318n6zzguwdoegst3gfwtje0cwzyymjj87s493osfwmxfgwejzehlow17ovsx1jr4uiruffypsco5nff62',
+                flowInterfaceName: '05mfz1gflwkgz0b0ww1ycffw2dp4hvhir64b5tuu9y2449o0t3m0c0ucoxoregw8p7con5phaxrvacy0oyjhgp0cbjq5boeuy9mn497qxi4uotfw4tokw4dj0ikh7nidl3yckk9sgatuershljijo98sx2imxy20',
+                flowInterfaceNamespace: '8w5sl8ep09jzokowaq4086vsg452kzeu6fk34aoc0akmx1qodcbmw42gedjothovtqbesxubdyy9145g8kob89mphrd2r7kvpb7zp6yfhq6cn50a9nlmi2zheo9g365wkm29qjj2o1mnh5r7c1u9drrc6nj33p5y',
+                version: '7kojlhu11sj765318jld',
+                adapterType: 'imbyk9cndffcpjj6gbolra4yw48bhd9y9hf01z46jkyipg0nguz04obo3xax',
                 direction: 'RECEIVER',
-                transportProtocol: 'z1nkff12i8hmahlv1upzupbcx53jq3b519bxg59meo6y2cv6udso1y1hn8zy',
-                messageProtocol: 'wno9ur5wvuqob2xqt5oxoksdy8x7jgzn479rr3d0ojmacp4oy277dpvzkqvo',
-                adapterEngineName: '48cct1sjzwuehaw1808ewyicrdnh225q89al3uhipu9o9oom5geyzlc58v0r1e72wmq0rlztgturb2npwbpdrxa5d2m6j61jzk7i83jvh1tw70kqzo8ec9e11at0b6sz53dceow6adzh3r272d64dzi5nwdao6pb',
-                url: 'jlr160w1usua3985xq0rylh9mwa9idew2iqndcxawntgnd3k7p0z6uj5fnbewjbohz9cncncne6wchvwcqv6al5t3ehr1fs2b8c4ej3jr3pu88p546jr5wmn7fewxc6d5psgsogdmktf5bgusnj1l9ou3tcugq72eonu2770jldiz0boj7o2xsjfx4g2w5p1mzln42r9p6zjvum3qgscfeex9xekohabr6407zq1rksc5nz6eb8nvhg9p5h8maxagxwssqoetwic1i02xl9tgcl22w0tguruwa2rp0tlw97815xr1muz14atr6zq79g2',
-                username: 'bww4waevsry77r50uvsnp5vu42gbdcr5qpoyroye3czij4jx1o4qe4n65c6x',
-                remoteHost: 'sr1pxe0xcfpr3wjc8q7qpl5ib1y75sn24a1cmpwfdnp060t9pfv7n1j8crjfozdu2qa8ronjuylvtch4txx7dwon0ar1kfygdbvgmbg2rq4a8p6hbr6hrurzjfw15dtx955qf8srxxyr1axsrm56h3u527ohad1s',
-                remotePort: 3489693933,
-                directory: 'q162ui3ihheajgiakydcnr4d408o8rtwfuch0rjuyu77jzpwzdipolp7ort1fyp6tlexpir1vhdb67bjwh7ow8xuzmbd5ym9ahf3kip3k728ykgxz9ra8vz5p13tllxz7lkfrb6dfdva3xraha2qpeedesqtlce6oc7erc1rzz0e47bxj55dhspjyrvhhnrjbatybihcxf4abu76qgv09nn7qc44lyujadk6yp1de94cigxtou2nn2q0gwofuwuee5ddpcj85g8nqt66lsgw7gbbr0h96rkl5rtz5fnkey8w9fxe5xhejr4itm0vn2pfcrlmdazynkxbiguwpuxv6ukgly2o4gycx0s8lnlaj17hlxy6re0ejhljhrklmm8op0nvzevrl23aip7ahy6wppy2b7ejhcjcse9oupkyap4ztjq16bhr9dnslpvwl0jr2r4zngwpad9obzvy2ssopi5i6uijar7luzsnl2zm51kgsziqm63g1c343sn2vz8zwqoqy8lpzer26jtwa20mk1e59d8c7e2d91fxkvf4voqbqwzv75eekxhyh72j2s2vg380ph5p42hjxndex5u72mfbgk71qiu1swwr4jil24dq37g4q6hdpt81v3qm8gq43qi47uuerhkixnw23y8ftn4vym9wbr2qkdg2szh01whc5socysjoz5w7k9szjq0vz26efbwvfe60fh083d52cz88qxxcjpve7ezecwk0jqzm778jy0y2vczbn70erdtj791w80va7pd0yka24tobztus3g02w6u2e3vvp0bqfcn47v7tsc3sve7hrd4mgzt62r2ljs3qm0b2c1fak12tiwrg705cjz1eid3q6uhm6d61yj218s5jq9p2ojx4qz8avws8rajdjvnndin6ts7rkjipv01beyxvs7antqjd8mc5nqok5auw40jjujwdexg28kpltiup52vva8a8e4h1eouwgdkr1b4pkin7s1u2c2i762qyldql1johaq5ik7c5',
-                fileSchema: '5qv13eib4c692uf3rrpd3xgwfbnd3ab227rxju8q5qu5d701t70fdw8rsrsk4ur1pmeag308oae1fjugj4cwgver64ary2gajjl4vsbak4g6dvrtuk95oi2xvt1eutyxkiblljy69rxstcsjvdqu8jmo61nk5o03s8bt59tnub4b5vzve6tzqzvtsxeo08d0kqdqc1g763ja76q1k8i9vani72jeqa18kzhjg067r5qt9ttx76kkt0kke0d9ejirikld9k5x3s8up61xantng87vosjekpfrseeyxijjiud9og74z1y6fgfzepllaadw6h4qvzjgkyvxsjmu8semrq66l0nb3akrvlnd7pg7c0vldeu10d7rvynwnq1np1ol0f8g7oka3slkwmylngxlu7ckn0a2ei201o4afxvukp2jph8j7hddy4b29dfhjyyu4ndgdsww7525whcy1v364udh7mb1vac1owfhtaxwgsokwi7pdyj73wa1vqg6pxcuhunqai0sep2mnpe0f8imuwvu4od9rrup8wkssu2pxg743l0u0nmac5go99u9yfelzeccayyrqd9ko6x2x9ukstd19h0wda2y1hbac0vx5b2vn72zqesw5apchbx0vfojtaa5qq86c4dsdpav4naowy85u0z71wafmirgoqq3q0gvm68yl9docezsy7a6968avo9eek05fhcgwgqovaxdswrov9vizpeqwn5vn454jz1xr2bthhdzd6alzigtb3a2kforsua1634uzuac1byfyk1afjac4w3warn2j13nr90hjur2nywp01ptj50ykhuyd4wz7mzfp2wzoj08j90ivimvy27yfjvx1u4kdb3xbdcabpxnk8dtjwarra3r00ocps02ij61a9n8p1c1fbjnyoz6fyfzurcncvxwxetlhqs7jzl11avk172mk4rlq8tiaxze2y9f042oxgezxs2kpv88ppr165hzpmexey2nusoda1wkbqnzds3j05fm3xip',
-                proxyHost: 'irleucbapcjlrxouz6a6y2mt37nzabs3pc7m1mwotmc74lelay5017ng965e',
-                proxyPort: 1642022623,
-                destination: 'kdmnuyzo0il80u757h6lkxezn9f7cnsav2yi0190zg0bd47rvq1e7vwyxyk4ae75ywlsl0e4mowh97jsi5q8fh6rdwgul54djvqe7vpg9hvh8ahmplh20nbt2nz7ok38jortx0ohge7veu64vttdzrxxqh3yn6i1',
+                transportProtocol: 'lqq8zm5mpq82rcxknppgwcnpv77or74s2hskul360iuiks5cgq4bb94dc395',
+                messageProtocol: 'rbtvo89j8vwnr02i9n9y19ifzflbguv09oi8433rk2q769odj9gdg3zoirpt',
+                adapterEngineName: '9yfbhbl6286f0watkyfxl5gdlydvb7hmrs1yx58vdg006zs8ea8f278hunnaqppnb9y38cbcllwjefoyglozv7zz3pzjuf1gn867r18ropy4bf2b1s1qmu0u66uaews874ckvf81qnmzoe3kl23fmzmlnyod585r',
+                url: 'xk7gz9o1o554egondpoxaz7mwbznwogjolglbcn0i8wiolqdgidgd3wgq5n5rw8p40pr5wf1kxnrfb3gd7g2b9amdjrkqva86fcz7p8emf73qqcdu8irggv9auir044ecih1u3vhs9jy48nhroa4rut87u1e3y1iut3s3tepqdbi877aw36grsg62d6pwi5q1gouwzar5mppw9uv8yss86qb5htcx1t4efhrxal2db37qmcz3qprzztds6fqvjceg229g3odtdtsshv6xvugp6yzhfrhuwxgghuv4ekw1dpsekagt13layoxzjcpavsn',
+                username: 'ph4wpmtkb77yzycie3z3holmw442sc24hso5gr2vhhj7p1wkd4ol87cpit75',
+                remoteHost: 't3gjf52cdxv9hvotpdccez1n8vql975dgyw8ktehafhahsjbboyg68aieuz46esinywvm3ofzi1m9p549a3orcqrai2e996yyzxdlbxo92n5vi28l08geoo60nvqs6qau8g89tf80ssy2xfb8ioweb2sajwgjnvc',
+                remotePort: 9766815603,
+                directory: '9g20rmgmnsihfn8kj4gb3flfv41mhhd820n3lzv52h0s91ntpkx17stwgb8aq51oh6q3dcebbqi6334z0imfed4cp12sfwlai2nc8hcbr44xjwz8i5od3kb5q6nh6r0jqvvf42yz9bg15x8144i1d9m5jd0i2juwi62i6cw0wcssfz38er1h6i21er807drdywhb1js0to78kz1q66fzwvnxor5ecogm8vebjjpjm7d8jqfnysimyosp2yk6mehivi559qs81zs96f1gb8dxa6s1dzvpfwi3ybj8occbxt9fn48v8ehuiyshv4ig2w7xby46thhcyipqh2fpc9xbhngwobzs240fbsuvwxkr7pzsq5rhsdj6kndlu4yxs40rona51wbew9ichnm2ozg7nd8ecm1hs5g1lizaxaod6tv525kkp3djf8y3gs4i14z0scsvwdgrob62cr7hccdz3um47mlzwvfgcr4au177y2a75tdgui2zsn0an1ejupq74ah56vfa02wzou5racwp6njck672wuam7s7qhxxmily3cj5qedgv24ckl4irc42wwj8tb4h3wm4blr5cbhv8mcs7qs5lhlmdpjfxwveeh3soa35nk56zy8pji6h2exoq4dh0aptv3nvsr0xc8i36qj4esijsmlr9676tt78vchowj7z9y13y8rkjhlzpbmsfllcp3132yk9db3sq6nhjbcpeulgc5ctjryr4q7ln1008oykjjf5g69t588x7l8mcof4l25dhyj1wvtxaujmls4q1dmzdfyq09svb02bhmo7wcp7pmtpd1bnmjzrfa2zt2s0jdj3dhwyf824b0f7n9jj0tuodwqfycmj3ehkpo5zka6libl12om2y2be5w9gqpve743h5p1wacm7dq5ff6q5aqestok7ikp3h2fu3tj33ybigsb01xoybtvg8462oleeyd65atvt0wd0astvdqj8htwvbfd0tom023e602entzu03prz7ldn5pl08jto0',
+                fileSchema: 'cuphxrjxvhzm4d0qd5jn1isbs1c3q5wflbkfu9tpiwhsnrfmdd6n26pp87mh1ox4r9tobdewwf4w1qaem60t7s1qng3xvhxk18r30h7q1q5bhgn8n9r9hl10b5yw11gans7tf8r7b37dc6gg551ym1f55ul1fz1msn0c02emu8v51hxoule4swxinzxl6g0jiydwnbbdced7q3mbyyr6o4qjjq4wk6zhdvavxmia0fd4pmm1ux7q4c35vvecb3yxpuxmml8nlqyb48b8lz4z9qb5al1cr9ges5dqrjfrqrvfymcgtruzxjh8h28qfk5zt083iggwl10rmmsmtqt6grahwoa0lvixnsp97lquhshdaz10njowzhnhz4rp1zbjn27mbo2jdd9o9viie47bx6l66v8sy5s50fy5vs8auzz7wueql9o76nxdoi3kvhxh8sxsj8j5wpst81em0xtphilav5qg7ropl48cwo4kydqre31arr925cf4135bugmm1zv9nnacxrvmrowbd7menx2oqtf88w5qygg1ny6b0iohuy29zjkz55rexlfksfwuoy2im2krsixoixubp7zcnfkdd2csn7pee2nlh0dig796wfe5e7uek6qk44hw12olqjbxux7je9kb5yrykuuoxfkwfw6e1xyl1yivjayliilbs16iql0883pmjfrd2tvqz6ly00z20cgtmnotw8ljkepneblwe00ugpcurazwe0k76ub6tw515zgp6q7j4tr3tlazpr7z85xbysznkxywsbmyf1e9oc6kbqd6bkjykmulizoyzapuld6xp679q9a2vbc1rnpbvsk7nnrpj3uiarnkp0ukag6f7xrqmgyowwpz2n9tf4cjvtf11zdfjzujpnsfgpl0lovlen33wjxhg1z8frtibvgh3we4tfemvuyziawz1brqlzoq078q3gixas13i10yshix702j0dru4zgk0n804hiup86sxgehuqmqpcr6jvrae84qnx63b5b4',
+                proxyHost: 'lts2tw0vk3ji8jzyo3plalwrc8e8hnr2y0ojh4xsp0no75sxn9xfo09bmpvm',
+                proxyPort: 7336110522,
+                destination: 't6boztrqb2kr1bbi117gxbma6ati9uop61h3ufodwyhjaifmqj5jevojw0hk1xzcwvmzdyz49c2wgp0i2dfzqmhodji5prsz44i03yysri1dwzyrkpar8grh3hi9tcndvdf0nv04bqgq6yz4eitcwba19nwrj0au',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'm0cywjgn8vahb2gy4kztsiwsywzhz40gpvra95blpdcywm1jcxrhaq29dm50jxl9a4x720ty7tottiyx0wxv9g44arkfv8n6sbzjnqnchm0399oqh7nzhsftml06nfgum1wyzwfw9pulkv0exkdn0i1pi46afl38',
-                responsibleUserAccountName: 'a4mf78g7uvh53tz81mww',
-                lastChangeUserAccount: 'v3gc74ssz99kitylvgd3',
-                lastChangedAt: '2020-11-06 04:54:38',
-                riInterfaceName: 'i0udgl6bvl5zolm61rtokgb4jiv18gjd7gc6ws2ygoa724vrqk3kkxqbc3zxzg2gtyaaawcaguxjlnzb8yqtmnvde4ghmlvvau4jhwxde4efberaqxmgts16k9s2cyq5nomtfmp5rhypiigbpre9n9b1js3zm94d',
-                riInterfaceNamespace: 'zn81ky44bq8nnye00sh80ge4xcwwhlkek2eiu07kispnkm57ubadte3megy3sjhe3nvnvdkn7qem7s32bskj3hferxvvcco4gvca820ma21qeoimtwj5vv7umq5ubz4ug9yrkspncu3u67wnspzh3jsbxg6bz3ld',
+                softwareComponentName: 'vujjhrn59qe5mdaxflp04ymltcfyeuda6h17p703kixtfjp13aok3tztrqv6q9dvtdzw5a8gej6itjltupdb8w57fuod3fmsec3x2c4ppqfgwejp2k1e1uhhru71475uwxmqkry9czqyugix5nyi34703m6tsogx',
+                responsibleUserAccountName: 'i5zqurmmnu9r01yxaaan',
+                lastChangeUserAccount: '09oam769zwvtbs5g97zf',
+                lastChangedAt: '2021-05-23 13:53:40',
+                riInterfaceName: '7z4sbcjq3l3ib2jgd55z1oiq2dnqiqqqwtkqg2n2sp60uy3nyvyoujs6ufe6tdkytdzayqwpg6nv4qxjzleh7afw0qo4foy8guyysk2mwbuic9rrmfv1npmxmk1yjak2v1h7d92vafb4xejdrq6c9jng3pfuqfqq',
+                riInterfaceNamespace: '0he0v6soyedz8w1pca5ri6fprbaykwubbemiwonxomlsx0bjsejwdlc66d74pzo2k3l0360g2xiyzbmzozwq3q2anbkqjau35eifhhcc4v1v2b4hbg5jmasmro1okyuul4tvk80m3ymsd0oxd3nosz4tck513jxy',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelHash is not allowed, must be a length of 40`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelHash is not allowed, must be a length of 40`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '31ao7d1ofs0ow01dout2v2zpxmattta2fw1dkfv48',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'tqfifcn9p2o8t8fioy32kvdi7qj5qdijb1wqn1trvvxd7ud55e',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'ux04dqb5s7n2kmwl0dmo',
-                party: '14bjc8eglbs9rqjedm8kgq18smdfqi1vne0k12qzv4hlcu6o3xwcmjmcr3jlxtjacdbvjj7z2ztsnzmqmmeeyhypjp9virdd6ma9c1dojmewxcu2x05hwcaikscndzgz1yx1o9t0p47jew00nibjec1lgzgbiarn',
-                component: '2clyzgqrlhz28nmly9bsjcwzkt8mtpwzokf10z3fy9izq469li8wgdr2sfqtu3r37x9pufz80x95b7wpe6027li1xat4x5qgttgpmnighf354oi6d70mdcivq52a1fm2b6k6tvy0pnbkr0f7sx7qrj9wlou8uisn',
-                name: 'idp53fizs00r3jiy9m75c191gx81z08gi66nzi6gq7xhjaez7atmii9bzzxqoi97aetg2sup6tf6mw84wkc75ngvtjfp7qx7x4pk17n7kj0vgm35yzo4i6qjg8wkjcy63c1g81s0913kmqga9cbiz0bvupm0z8vc',
-                flowHash: 'g2hov4gb5431jxthznflj0zdftupuhjqzwfqlnmd',
-                flowParty: '0499ztaea584m36h0gh1f46zwuypvn69i90xl52mbhdmtcybib5ifcdbchnrnld57okb1gnqb7thylp74camcmzp0fuwe3h84e179wb071o3z4a9f8342i9h7cywdeiiww8rejlibpyel9pv8u95c3wo7qmoyfwv',
-                flowReceiverParty: 'xhag6j8ouai71u1tz85zssssvcitid3zfhrqi3sg4djlrvz6gq8wgdfc089l0asyjmff8ncty2mv11uzi9n8gywdt6j70qik4ynxn96giw2mmmbz2a57bjlcfw03i92l7jtyo5vziqh3yyaa4vknhjb1ec4mtzt6',
-                flowComponent: '3n09odpalmkacc3zb0monyagnbvd24it4ddk69alo1jb0ogvakylejfyb08ov9pwfv6g2ryt5pi4nvbkmrae23wko28cmd3bfrmexi0khu4jxpvaww86cux94pn1r1587c95db6238qa759r2dt258mx4lm8lrfy',
-                flowReceiverComponent: '6onyrijbaa4ug090z0qq1oyd2z5bwpqupmbwhi6p4sqk10v3mbuyl3elumrp250pa2of5ij8dmhf4k36f8uqkpw8cjkfkgdml8zzm29c84vmckjhlqbxou20cgcqpef05xplkiqciqicqr3oq6cwrv6wsl58kr6m',
-                flowInterfaceName: 'narfgu9bfkurlqbo5ai7e3t8svjw8hte3knibd9lh9jwlpqbryuctbxnb737j1ow57otizhos5u4z839od3ppux0n2pu00a2v171fd9fxy2t0dpcumotyohbeuonpwc7axeswgyaomjrtdkex06f16gesqrqx87e',
-                flowInterfaceNamespace: '4fby31cqatp7z278lgp30qwpc3n7ol1xb2jncky52hkj1yjdms4lee0dlmffd1qo6fdkcvhmjip9sre8vi6fg71vq60vr8d5ttk57w6ptp814m9nlihen8olioxi3cp2t1lbt2hctv6hxqxlk2udae1z4dok06it',
-                version: '305qoxxyswhhpb3l9113',
-                adapterType: 'nkr5ghibizkf2b8dl7fk8d9c0zedy2914p4ai1f3h9bgxb4reuv5b6r8ks5f',
-                direction: 'RECEIVER',
-                transportProtocol: 'tnko1qgttj6v1mrhvl9zlc0laim3rtyvwbmrwzkscuq3kenc0ehgqtd5yes8',
-                messageProtocol: 'o5sjrt5gmv1ugujvdj6dwkozdfg096rpj65eg7k2klhcadfkid1o746ep87t',
-                adapterEngineName: '2redoitqil2129qiq4c4fikhqy4ouzqz59wmnlp3cmtvsdwlawbyv40palykn4v2ngk9um3996sf3krlavn30vwbgkgp7estvrw6ziaocl6ytqwsi164zrgkz23k50lkjusnkj75ux40r045gw7x45d7j45kgw8w',
-                url: 'mg9370n6upedb53bi1a8fzq5qhz47q3p00gijznrfc4n1sudgtjnmq1v6dj2ktmm3hanrq80dqfj69abmh1plszdrkg52t6vnpl40nza5xvuu4nby9fgjcpeybw8ucnii0u1xp940qcs705mvca2w47i7gyup0maj3uiwuvewsxa99tgh0k3li7vnx15bja6hu2pt5rdey6awnlezj04hrb34z8l63eg7ycrq8pb7203e364rp0e39u7nbp8rpcoiz6smug2kem3yceb57pazvc4ljpsfmgkprtdm7vii8be6i993mrcfj88r40hdxm9',
-                username: 'dyvowwki70qjoxttytig1htyfbo3of0mfjoxt3c5vxm1fomwb24x9255x6s4',
-                remoteHost: 'ade8h1xzxsxenkm9n9m8qmvmik785kqszkpsn6b2pvljrmr861l7yqd11mxhn5yr1n2uhelu5pxzmiwh8c7zg3o399gjl1khh5hxys909vj7gq7f6vsdpfekimxpse76m7xizumwi35g3pfn2c4otpbkyge43bzd',
-                remotePort: 4449071728,
-                directory: 'z504g4j2glrdypr7y2oycsfayppd2a5c9vtycmru02vj487vawpld24b77zzo65k42bhd0cqa8u66rpxnyxf7kfbgtybfhpx183qzxfwvk36fwmqkd89e2wn29hrbcio4ygp0tb05dxryjt8w8c8tgypyz3uh028rginiy121ks03zpke8mj3lc5ux7d01l6ocsaq72cgfmin3t22rqm6af2m4trcc201fb9fka5palqhdq0xblybtamqjju4ofo5lzd4jyc6wj93s2qstlyerci6mc6bpw01g5h4cmlr0izqvnrme3aj7sa4sg0kyb9wv9wl0mps7g822h03tuvotgnre0bx8fd5kdlp2ulw1evoc2zkkuun83gf9kd91wja15h7kguqskasy93jzv5d41qoa7sii8zb28g1yxd1xom4sw69827099q1twwjxcqd15sc0axqejkvywux0ccgnqufbfr05ucowmrudglc8l76hx7ujqfpppg7oddd69f0ushlw7s5bwlmpq8568vkcdzj2jh0xxormwqdpw1dp9bzqcia0zvbr537wg281syzaqp6l2xlwo9ky29amckv7yta9k6zztireduqcrpgnskm7ghxb2rwwab4qxlpv75mhbfg5y1i7k6mnfbpgbpycp9wjtph0s6fxbk5ufw08jqa3joucp1ox5l2cbtt0400vqgpoj7lvmyacz26y15ubibqd0r8u4bqv29th1run5m7vn5cmzdc40dhi6w44yxzsihrmjyrrsa4ov8lj9448ovzeqm31funm7h88uq67dyn1qdb03abfe1kf8oj40z8dae1xutrwlj69bgfx7nsd3g6tfzeumplonxvhukh899bl0ylk2w0nmhm8k6uthjjknmngkznl6ajseuoh1hs183rjk24ujux1u8vkz20amwfruo3zwgw6o7jix51f4tk6jtdwhsg7cw2dxpl1icte8nkpiqa476l7l4n54d0dudcao6lgqnf3yog16uexgn',
-                fileSchema: 'ajxr9kn3ez1dvib1hx3qrx16xx49wz2ne0yiihse24xekinj653tyeootjr095snfldg545j1ncorlacxere64etl9gv32attv3hrnifg4ub75xm0esqz6by1afbcsksxk95cea9dyir1r80m36xgbdzh1k57fz03tj0e68mbbzm4gcaadm9s435blm6te18x1wc6253j7u9qajqaumy4hfu9x9lz02f2vmtngyftpuhntt79mha0y8uionddr3c7rywvbrtmgph0um7g2ov0u1pqwmvkzew09oxh8xxgnjzjk9h3z91v9dil2f4ex7d216vtltm7czdf5ilp4segnwzpkritn9800vcv0n80rkearhzgsrocysxsdwywc1r0czqkzus1dne0o1v9pqmnhv08y424x8nhlz69e4uwbwryim3iwslrh86nkw7idac7eoy96gzz4bd14rh9c37cja1vhe7vsedheep72kslxwz7gzsc9u5mhykmxdbvcuyrnrpswsovy8jkjgtqh5cjea0z0te2agxl3bwbo7gu8ewehs73v0ga994mipujq0q0isiqepko0w18weosac8lw20xqzpxztxqfnfn8ppqr2856pcr56p8gzhw28ydlbahwhzwxyrgckgiddgidsbnyb76zik99sc5sfbyn0chuje0z5bvtw5uad40la46154jats6w2ux7fmo3k958w5ock3v1sblh06zyhjx4chnw13hqfzqn6kg7mja36yq9y9hckumjojh0l4pzxrvgta787hso2jkqss214uko59cqc1qq61ukefqxbbg1lpztroruui8avkm0s4joh8qe6t4xxhygfcxmh1u02r0mfrchl2rj6nkcxj8a3gdusdcu1gre04unhhxl3ecvn4dmw50wzlsrsw81t74o65vsm41l3c6qt6bfc8eft8cr5s6q1zl2az8opeqhzrquty7lzye4om06cg629o5l7li0ttu9g4drpt1bjdy8f9hfuwvizd',
-                proxyHost: 'abfs22wn6vs4l5i2anz8ozh9vn5lxyh6vzww69rs8fcqoqy4kt1kxpbd11yx',
-                proxyPort: 9372370546,
-                destination: '8fkzwoqc7ng1z3jrvcp55vy3k5p1mj6lhxdeukqx35rn8dzz478b46tozluch5jkp8af1x4ipx8udq0y9vp1tp1l86s3fts29tjch0f0yn7yg9x1rwwo2a93eqk7h682v0408c2fl0e8bkt30cnuxz7up0iqvrst',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: '684xwzr3olxy9ao742ewlnz8jjilni0kz4pn0j8olm44oi1zop3q9htjhmmenz99sxqmbzzpyzwkjel5kt8sqll1731nw038vvwutd5okrgf2nuc2kqss4zkns3idsddvfuof74my4hn0kmifyw1nncpo40vnatb',
-                responsibleUserAccountName: '974kdkbylvvjabu46ipl',
-                lastChangeUserAccount: 'per0603xzpqm020sindg',
-                lastChangedAt: '2020-11-05 22:28:13',
-                riInterfaceName: '8j5uqm9lqbnjopy6omhvt91u1st20phf0cllw9zri7ne9iba564mtw1i8leql43e40dvpg6wzb887bro1k9w5lnhlyzx5wve21zk6mndgdh5vtofc5z01fckra0v93n59yqjxs6u0gpnydc58mr2bbgvluwwqlzf',
-                riInterfaceNamespace: 'dfalwufjaskyv0s1kjshsnw8494qk200ootcd13jzkve4ec27r9npvp51lr3zabdm8d6yf1nvgloxann65l44vge8qodnr6omnylsi7k5xa20jzep1ttx6r0aio3shuqbe5cawforzlqtele8yb93v1i8uqfuylo',
+                id: 'b3711b61-c961-4ec3-be3d-47698934e89d',
+                hash: 'qahaxy0leru7nyjnm5i7sqmd4h890uw1mkrb7s6en',
+                tenantId: '5a6a3d72-ba18-471b-8979-49492f846362',
+                tenantCode: 'j281j9nwdrc5yh7tqkqt28byh40r80ikl2tx5pz5ubp16n8x7i',
+                systemId: 'a7923963-40b8-4ebd-a9d3-0bb9eeb1cb33',
+                systemName: 'pv5suqnxey4jq56rpq3m',
+                party: 'm25tjncu75evexrmk0vrohpd3i5kxhohbwo1wrri2atllp9a1zags09irgr2hrvzz0p3r5t09yureylto4xnz7yh88e3qq6w83e63vzyveucfo3t69jyk4ithntri7zxadhblrk6tv3dmfl7g23uu5govxob2pqs',
+                component: 'xhcr46n3tbgrfehtz9q21iti7urv0fm1vruypq7py1qripv4wutg0n34ajiyh1gaim00ltoloceyr5kzz8ouyte99yi3hprvgbiiu12aftw4dzc9gw00plomkswtr7lu6ch5y2l4j5u54mxknze8ybnz22wvnyqy',
+                name: 'nxdftyx2gm38cbqsookz0erfpb6l67hd7r5piwsmes2g526dhyq51b24cu2lgyepoyvqffit4u65z6cevff6gyysc6toqf7wszdh1pdjkwkswp11eyd1oo7ksihgexpdtwq2shtbtqgczr7lhkrjycr1r630hxen',
+                flowHash: 'q554kf0l38h1guuk4q6a460558td467ub8qjdxb5',
+                flowParty: 'afq58bvcgkcmfijoy4grcya89j1up4ckcerqhqcnq6wjlld78qavvuq1m0ob5kzuvdvxx3soda1o2axmk9edwh6bakw5j3ovjyinfage6kmmzeh552l78s7dr43shs64sv8kml001fi5i7qw8qs2dumpntsp5tlg',
+                flowReceiverParty: 'l59wwosppk5d6i1qcgv6xe5vs7k5ci35y8accj92h01qlnflvmgurpeq6j31elula1xmcbk6b84orzd8xbbnjv9ffnh7qkf673i083ga946vc905hesiahzj8jc0gmqqknnm6gjrw1d8arr8ofvws3nifj85wt20',
+                flowComponent: 'n32qged71xgoa7gbyroen06ct03h6go84bxyr7d8277qtgzspl9856wj5b6uyamlvxobrn9nere7pjo4k2avx0zrgadk87xj25zl2i3hm72upl885ri43taxrqurf0adkqm19w7saeappunysc26o4gtm0bpjjjy',
+                flowReceiverComponent: 'v8qbuwdwy5wnlhf25s261i7ieel396vmnmltajlijk0r75fg58p1m3f9bvpqm395smwm1qu6zp37hv84seprwarv58ncw88fzi3veetwetx1dt1xsc30cpxgcfrzi5e1596ywzggq3gnc10rj5sflfit8nlle376',
+                flowInterfaceName: '5mqa8ntnnrho7e4ihopifc1ffxl900vcro6v92k0wb9h8bnmvge4im7cjkc7gcixzs1opnlgg4sbcczha2ll4w91gg1994hykttehciggh4395xk6ro8hnhidzonzn4n0urydmt9omhyzuye4bzpxexgwl6vi39x',
+                flowInterfaceNamespace: 'qu2t6k5oqc07vof99igno8o4g3ei2m59pbkzul1gu1hdtgqejjl3i83k49xihbqx5k5044q7jsbkmny61xwfqw41g2gjh6o5friy4tbu5k6bx99k6xqooh29b4b3fwnss5qvzth3tmfvr7bvoy4etn3cvfecc8cf',
+                version: 'q47mxb7ror2dgukundm0',
+                adapterType: 'xbn82remfwq3yd7cwy1n5ba39g4gj2e0cuz5lsjx7n956pdz7veq3s9ou9ez',
+                direction: 'SENDER',
+                transportProtocol: 'bribcbvbmuep4xoawhoqa2munlxnrmosd4tdwfi34xz04oljy09rmpgofqbu',
+                messageProtocol: 'emeag6hylzf4n3gqgnca2akb59ritovnibr8k74k8x1uw6aqzi9h70xxtp0m',
+                adapterEngineName: 'yw1n0wb9vfhhtmfk8lkxmzmmtrgyg50f9whpvb32hqbulib0zp6c2n0zymaiu65exjen1svf2i3rmhoz53oxc9xpo1klb1r81isxxu11zq4mn33zrf6st1ko6k467tnrcjuvilpf8jwpwbywy0y9anpulzsx6ljt',
+                url: '3evgl1jhqrls1zw1e7ej7v8xl4wu8stlp1k9bljr2fpkd9lvqfpywavwikipo1a1jj21y4h6j0504ps8llfg29jvl79wxskbc2fpqitdwbhr3jyzqf6rxrjsx6u7c6g15bjkb9njqtz0usmevmwct1de74i6i7jzhjz5ssn0yc9dk1p6a7mztnlvoqmnq4jcbr5ome4it674odmfr94yay0g1f5xscgkuun6n3izl8svwm24ep69iwe9jk69z23yh5m5btk8t49q3st6r98o2cjuqml7k3f9fpb4thao4f1b1kfgt65zj4agmzd84wy0',
+                username: 'ha34vcebpoiuelidrpdrlbkn7mh6uikc4zmjkwtfzuc2ley038sp6u0wyof7',
+                remoteHost: 'ne8hvphybcqaiohbvt148i1b8h4bebskary4sva6vlt175c7gbwi40fw16p2dx8o9hns5q2l7v7d01aq0xlolhh4292184ze80plu9c3x31t20xb7ij22el2q6tqqyzm5uvvxgkscyjyf7f5qjcc24jw3m3cx8kq',
+                remotePort: 7238404929,
+                directory: 'or1kjnc9tlyclqjtrzoupk96genhnperzrzkwjbw6p4bk5jmiuhj275u5b1uab9n73a774dg17oqgeyas1aiu98okvqofjc2ngpipnh7l3c03w5ej32ftuegaoii8h6fcm0pflu9h88v0528gm6uqx3ti90fy61tmnmijc39ir2upw1w78dklp7nxjejdssvkwqfou9ktv1gqzdggj7f73iqx70h8l9aul9f9svn54xh73feh4v1yh09t6x803tzcgqq47ukinfeychcui2xojmtfkfy5y9hys3zyxaaxif3eekbkhg7355yf51vv3xasl5fnvedog810wzziorhuoydfjfpugujbp9zbnje61x893c06si0id038o4e3juqu9ldujvb1dfoh2t4u16bk2fzqtx3b7lu0t0hmfcwogxsoqwugrqijg1cbe7kz7in5singcgwadxz61dvy8x2aq1zk8qol0wsm6beqb5qzanl3bok0csyx9xdcixb0feqg3y12t5hci6y20vb2wsjhzvikrcn4hnzivkabhtpfhenqafwsnzxjfrlgt8azqzulcd0vd7lmxlmjntebtgvnpnnbcsty1wkygizsym4fsnwnfrjuww7jb3nt78uh49mvboxkr7d0w7uyl67xzdrzle9rucppbv81rm0ftybwa076pwxzjjx8ezvs2jn0hkxm8ipts0p4ucg0sek0pk4vqrsvib5ue3qohlwf6ohpo6u8oujbzvtnk9zvrmfda3mkzs51c3217ux2uzwbsaktt2pppk1are8akzcd7qrcgkjlzprg97t7wn601me4gek8jmaavy5n8r9bbj2udv95yn3kyb2gkskevl9ugx9p74vlbtvb9ko1i8o2u1fjz47umgenuoqkvxqn4avd0nk8beqinxo08hfvq70vcxh2hp307wwdwjcbdzhkego1z2azkyzjyize54dy9qdy23rtwjljwgww2bmad5cbqfdib8ufzkywh21ukfm1z8ivw5d',
+                fileSchema: 'u69izwsya20pumjsl1cgysqac78nejt7scxvj44r6aj2um5kn9z32i4rx0wcfpfsg4e98nse2hkmni4k6suggoymrd6hr4ec98uq76vr9xdfayteuf7zrncvfrtlwt6du532bakx82e7ifk0bekzwosipsfr64tlylbtz0cussdsgig2ztuy7oa1uhctz9ur4hx1ay2686n0wsedsqp5m1k47u4gha51lvwj5agjdsvjmvz06ztplp27xfbu9pdrlbg309tpbhj3tvlgdz3d6kmuvc0ly2z7qeb570xpbc8yb4r58sqsyvtbdpn0w4dc09d4xj41ayhejxh3mbkdyscq428mtttxid4j00xvlijngy0zjnsv1fn96ni0436a0cdqkremx53klc0eo55gwlxnkzx7qmw7brl7tmf2zlkyghvxs0nqvhf0oh9amsrzwms9rcmj35xlf3gd7dioo9u5ireuigprleyc538ju5tu9rybcy5kasu026t6pi3rlp2zkmgjqgou8gbusbbffwx9pljwlwk45w1p0a4e716fgko8t0o4hl4qmgxjpyvwmokpk8h9fifbnty80h09oyi4783thud5z1bphbnulxac35vywpyge7jj4osov8hmny4hyxkko11mk4x8m927cv6nas1g2jlc2mbstigfo7w2fqcsv78fd9xkjj7evspybo5joblyj2ojcetcat6gqu5l44y0osovxhdzwdw77ri2xsrja19sehjbzgx1hjoz3ao0o630xnydwunip050yvmygzsnovx7817ljdbw3id3663alchdovzr8axktmx13fbclppwy181lbakm6ap86xggeqc7qdfofh3wsa7onvy8devpp2zwit0zm1dpssewtnh1q4bug29n8mr687al320qvtkkzhsucwgj4o1ruhswv7ktnpcwib9fmmejnm62uiux9z0mmzqhwczo49hx1rl6xynnhw09jd6d60ehtq6mqx22vtfwotek574ums9',
+                proxyHost: 'o26w558nwqwuabniwp0hldnakyo3s82qvjkg8wdeybie09flcrahao7zmcyc',
+                proxyPort: 4231085491,
+                destination: '00ub7b565fleocac8kegtv7b7l3d42gn0cxt58t96sizchx36mp1caouf404vf309yr7wuu51izek2onvwd10ntzanh2fzma1ac4opm5vrpocolg1hnqiyinuer7rd2xi8c7een6ehl4y64utcwgiog6a6ejm8oz',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '6ej807lmuw3a8kggw5yilv20sz1czbhluxkdlxl64vuo244mubi9c0un3jdmajlnts2xm0obw1omjvruq89e22l20x9ws9zupji9z8ugoljuwt4trdlq0r6jv4njr89vjf6ygcsy5jktym8dmxmif8l618rpwrbo',
+                responsibleUserAccountName: 'gxliasulb2u7vi5bmmx1',
+                lastChangeUserAccount: 'zoku019xyxjgebvfrkyo',
+                lastChangedAt: '2021-05-23 14:14:31',
+                riInterfaceName: 'gst0kgu4zi3vr4356rlt3qqg7qkfzvq4e9i9ddwoi5uzewbhwrdz2cyx0awgdppdbgvt530wwfy1ilfuc4pmbk89kdu8xhwvs6eivsvwu6aavgzy5yxuju30jlfsp6mw19qfcyqp4l0rntyaggx11aak8pwp0j93',
+                riInterfaceNamespace: 'vu7dc1v28ivea85xrlwdp2b7rlo0kpxbx0an3emuuscta1q015gyaae9y2lzfn3slld3gul90d0jwgopbtu2udssus52le5t5qox9w9ow41j0pd3xya7fs412l898d20g2ql0dz9ojxys9wksqe8rdycazs9pt5g',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelHash is not allowed, must be a length of 40');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'sn1vozfzq69xtlfp4lu98wpzasefdlzujacp5va1',
-                tenantId: 'rsz0ertq35r7pbk7127qbco38aw4yf3b6f0id',
-                tenantCode: 'tarl41w57pdykuhpd3yj31tf4arbosqb7n105x9r5hjwbtfuty',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '7es57ntfxjywq3b14pxu',
-                party: '1qf5965i2ub0pe96ckgqfs9ue5l359hn3lsgrp8hf0kew56ci68o6cve01qp5vqcu9ny2eypeho892uig5nb811pmcq8tdmvpujlealugauml3s1ky8f05gtmw4f7igc453ccyxps6rnl0oqb8ugroiswt7bx557',
-                component: 'rzgbu0l4kzl5d5a93qqmgslo9fk6lgv8cftleoxzf5nzm5hysossc11s2a5z8dvxtuyo0ytf93ngeghccl4hmssxp5btxyfjra3bkrkc9f0pb4ssxpu20l0hlioh6qqaj603vthr9itw9x2k1dksoef51duk8r0z',
-                name: 'csdlo1flp4juk60wc9roiohptw0uidbc5crjiae77r0yb80hnpxda15vp56qxozgdnjnzk18myg5niawxajvgvjm20y62o9a9i7ch52ipelgwiz2zpvifyjs8cdts38dpadgt5cf57j5kcah82s76xdfjvh87uk5',
-                flowHash: 'ctunm10t9fq2ajpabkbzq7ozkveoa7tysrpxnmjg',
-                flowParty: '852ssxuxf45u4bs0jvd5owabhp7w0mozv8vnobemxwleln97fci1o6xdceqw6wab05hs3vfx68vf1p0clieqwsmwj2s7revl3u1u17eak4e1f124pvd6w1jyy4f0a5ekv6g5f2g163ttunecwsd31mh1mnlykffa',
-                flowReceiverParty: 'ddv304839y8tgtkll7u8t5totilo81zyswof7kf89f8asey4xgf1am905rera26y0or2hs5l3xe0yj3mmrp12x9ru6oub60wl8nox3vb9vihoca1ar9k94wvdlb7abwojth6m223clfpyg6eckrfpes0ve7ddjk9',
-                flowComponent: 'z34y5o1b2r5btifbrq04lccmplz4yfr0scetuhy1kzx2l9khdcv394uolt1zf9qjlr9ifnb534f0f5dypmk5wqpr0fa1rw5xji1rsqdewqwk8gtp5jaleyynvkcusaypzptxd66bdoyu0uadyqjxuq4hobroegqv',
-                flowReceiverComponent: 'bro98k3br6jmct3t7j5r4vvhet046n6a8ld918fe3bzvcvwyegt9za7akrv3h6o7q4f6agloriab7uj52vxij2voa8qvseofjh8h66niqwzqwmonry2lzbj8qda1kgh7tutovuy8ge4geli8aij9opu78kyr0voe',
-                flowInterfaceName: 'yei124o968piy5hh52rbdsv8qolvcma53yj2ym6trewift7f7p4skf3q0ng5cw70mba5cugprm146owcj42qpb6wsls2spvuw7wfbdmu7ojklq6lqyuwry71fgtsgm6z3ke0sokoemxx6timybnj2itc5b14wf1m',
-                flowInterfaceNamespace: 'ix5bsklgmur5tss39c4ghl1cv2mnfswbw73jva72t5omeih83nvx11f179rtjkyiocpejrzu68pfgu4eds3zgw9wb8jwnzswoajmo5hy4xzv68vla6esgpxga47hdoy26d5ki7h7m2cle63snl9ye2p0pf3l62cm',
-                version: 'tw4p7kwba0lpkc42ydm1',
-                adapterType: 'klj0dxfrbgf6l157106keqa253rrryt4aa7jfoovvxdixpscyq9jvfa444fu',
+                id: 'cb7e9d2d-3653-4227-87d8-aa0531b8d9e0',
+                hash: '0desp464ladwjfnfbarq5dvis3zi2igf5k3a74uq',
+                tenantId: '31qd10mo2l03p7hdv4eyhg459pfqoevznkjl5',
+                tenantCode: 'w9hs8hf0l10zgz9kwelgq94auj6dphho6j0dqi8ry1t4iuwrrp',
+                systemId: '7ca07c8c-3810-42d2-a294-6b31a2be7c11',
+                systemName: 'ksblgtyrlyn06t5j6auc',
+                party: 'pbj1g7w1drblay2cmevpofev7trueq67ku3povp859p76l3mjbpzagx3u2tecb2d5n0sd6nycz5lhypx0iib1k4sjoier7quzfgdyhpkxcg0sauutmjrcos6g9us6lzwp8x736wp02zle43kop4h01dhttqbvhu8',
+                component: '541u2b5ajn774xwes89d3tiu4813qznum84u1wh1jyr74tazbwdsyynlwa838gmzzb8uocffv2dl8jx78c3gx3jrgtdzeruezn0kfn6da863ysgwvej1e8y04a3i0gfde408nw6odr0feu9svtl9k3p5i05ctr12',
+                name: 'n0wn0oqeboqdx1fcmo63f332stq8s9335bbj2yoy5wslxxn11cc4to2hrmuq2lgm12u91sddexv98d0c2ydu298uqoamkcpua4outs6qcfmimwxpg3jrk0xq1szthe2nhuoizs28jwl9bbvktpjzipgk40syga5t',
+                flowHash: 'm2kdjtyqwyxw974vf8uqfytam7cznne46leezbcl',
+                flowParty: 'mm1l11xq0i1t5mr6u3qde561vupcmnpfk7a4o6wvpzyn2yenk9k9p07jlficr9xp1d0kqeprumuatrflyl7qlmq0bqc5ix3lvfeacpn2iw86fkxluabl60zdh5dvbwxd9r74k6w8oi3evj7c4ga0uiy6bx0se9i5',
+                flowReceiverParty: '7wj1yddhfnqhpqutj2ko6n1sfkcdbgpaaw24opb2v2aqu7g9z3hnqiep47rseqkms673di96dpoqccmo71iyimn1anfszf6dxjzzukjh237fqtzu14sk0gnm6v9qpgco9gestucur4gmp18kwomkhngzefymqzqo',
+                flowComponent: '4f9ibsxzcn1u8p1ilp4o5b074wqij3dcfdgnlp5bg1rpq5qdmohmr3681j42h02tav2z7yxznxn85f68r0cyb8kid84ny50yci9pm4vglizmt466jjm8nn1gvhxmp4xxi5ysiva6cjghxlxgxg8u1tuajwqv2ju9',
+                flowReceiverComponent: '7jiy86tv3ov5270vsbknji96lnddsd6msxuqlle2epvue01kcf38lb4rvf86pz4hbmuelwcr1xq31oqdof5ka3podobkh9ruxrdsb6y8loojnrr329g1vvxdtpboaqrca6lownd31mnla3ibpmzjnuvwafhbxrqy',
+                flowInterfaceName: 'u3svp0ctojw8mx52uuiluodqgpwsw62ail377by8pxnq456a93i6avm4nwg1wypr6bao4vwv6x69qukxikx4cm30sfqqxstclr4tvtwetzp5o9oxa9ir1u0jdlvwjwoxp2yzbeyqd7qrzu6ala3pbnp1kou28cjm',
+                flowInterfaceNamespace: '9qppnxt3q7ukavxerepybqletr0iig6f1hfrmxt06dvk700s63k9yrwtap8t09ql3zszqpov5a33ax3f8qgdssoiawbzmtc34ow69kvknnsogoh0gg8oste8407frtf0uv7xy17graykrn2anxv03kupochptcws',
+                version: 'z58o257jicu7uyjlxqa0',
+                adapterType: 'ki3jqw957xyx0ucuo84ams14ffuaw1nwrjjta83xvkhprvoexu2tks4dr8r4',
                 direction: 'SENDER',
-                transportProtocol: '3c4idrutxm85kb2u1592ru4hhioeu2y3559tfyzixs75b79hkis404pn5wdi',
-                messageProtocol: '52p7knnenglqikroox4t7lkuomrtc4sdfptgby42ko783800lnmq7egph9uy',
-                adapterEngineName: 'xgpt8kri0waz4tpc2icqyo51si5ed45cxmwamis46l1b79x60gyg3p0iswso3f6m5a2eo7kedcxhoeqaoahuflalhcsigvl4oer8f1no53haiepsza48t6nw7jg9qi9syvbfc3sd4qw0h3fseyx63kqar8ennhig',
-                url: 'ft6jxytt0kau60yq6fujme0afx5f03x8s8w3fslcwrswhuvo76onw73di96vq5mja0dk6q4h16r96fa00o84s706iwwtutmva29vo957slkik9yc0ublh2jdu300amxazn3a55yltgp9ntaml8fzhrmmh24p7qpluf8rsihsrdhcu4hqgwf7jx9eqfe06hjca8b25yvp1pa32l44s8tkjprla2o58e701kquzx377gn8me6luhr6k7ct2g98j2babwub4v1nxgjys526kifsk0rmhe2qjsf2xb7ftezdy2m4fqg50vu6w0n5amqmzynj',
-                username: '5y0yhx5kdlk52254pcqeuzblk12setffy12i4yi18ch26hc0psrgkuua5kse',
-                remoteHost: '9meir6wlx9djsfinajac8qfulu4jj66lp2v6t2hgtqmvsylbq6iiymlbk54vuailsra0vstnn9qatbvip62zuawjk1g3nz5tli78zyawt1rlau51hdtzvk1isatyu6io6q8oo5ewftgh8jn6foveuczxiyozvzmj',
-                remotePort: 3643221068,
-                directory: '1wzf6j3zx0mac4fpf8150smw6vvvglzqu5frrwykmkqbgku8i1ga0z7d6uekk5i06hjg564y8jtqk1vwzzrl8druffque8wb1j1nqt5zc3syvjgdask174w5nugp9z7051lc48cf98a4ifsyo7uobxj7bvw7qf09w940g67tvm4l7f0ctqo9emaw6ra44t208aunjpopadla340mmp29s9xql79eyi42cr44ir4h6h5mrgsupbq1dzxdyo4394ktvqz5wlka6oqrej1nd9l97kr9ghmwoqwi0cxxzrff56pdc8nl5kyq1z0yrh0sc7h6c3m91e7vw2yhbm9ry9rcrcej2avx9kxb01q6qj8ij0h502nozf10nywujaq5gkvkj475ejay85pf8ul8c6akts1oycnw8vkhkkotmy3abkuvs3nbd9220bl7ms5slv3qg3m1mjjl9yblzxugg8oeabkxqzqpjcdkx8lbaijjzvd18p7jkft7adu9gktgws8zo7f5cqhz4qnapogvqpxevrzihaj2xz2kcmeer7dejxenqw52w0gkcac3kh53e5lqdvj9xb63fvva5qvyto5rg801hz2btc0fusvekbk9jcf04nfoxqf3f6bmasvf8jicibkni32929thwhl76nrr9vc5323rm8nq13egk0r0591zg6dr47ymnbtai3lbcagf6k5d97y7b76xo0jip9ah27i6xgzksdkndkxctv2acnzp3tb6cc7j7knkagl31i8gdx73vop8l5gpkm9031whoke1mu2zoogbaqmef0lai60xonf28to25xhd1fsdq1iw668u7a27ktcbv74s8553abzolw84g969jb2019s7yrgmnujzkr2nza8nx7aq0y70jh7pmkcsv6b8b8gbnc5zi9qvdbpb42fjws5e1qxgyry87aecdbm1yol63u2vxdo7uettqf2cn53iai1z7df0gl8gspzwx1ktqgj5d1mthlhz8kleaztgx3ppmak5zgrr',
-                fileSchema: 'mmg7ls2wvdvvis42h1yry4irywakdz1mpuht1b9rflw3dryr4f69vxmzq2qp2cmnk117lrvu1291aba55sfvpxg1jdwnejko8tpc13iwxazzq6shljlwxiyoj460h5iohic088m75427lvjake1gwe7bufe95srl4hjq5foofbpyy20qot2opo3oj5znox7beccdkifvxikwcaw2yblgrz1vyxuy4265qtw2f5y8yqz5nfg7x1z20fva896qgqy0cv4xzvuebx3v8sjr46ai3qi4xk2idhe6imagvsj1n10ao9zp5311ma99jl8588f6al0yabhya66xq91aj7rs1qektjzebcfnojqm6fv1ucpspuhzv9fxj6u6lpzqk02pfpwi9mm2avi959p3ic958xsy60lls3psrb16krdq3y9dfcesq19aiuhg2lh60ob8m6fshhhanr35zfyced79kq9w1w4wpmuk7ko6f0ujpvxzy8aocbwcjfrq9gdorsjgog68a0t5qqh0m0zm3ka2lb3qgd968py8ay39a033idjn1a7qh0ei0rxupfklzxp0etm8uehedlsawlnitqu0v0me7sg14odmn18s7ak2fh5awfhk231lxq9jpdasarrburwha35ggdbvcypqaab3s9540j7vr50offcrymkbtm7y33q0w2iehyefjiqtl42qwcnwtdializd2dwo36yi3ynhxz4icfy5t34teputwauzn1z4b08j0e4ysl0i9nfsv6m1j9p8zkr6c72svccn54ahzhbwksmeelsarz9h4kvyeazi5t7y3md2du2hp1hbsthksvqug0cd2dlkwypbdzvuhy2su0rlq0u7j72oibau2g55x9zcs1kz2f2wbss6bl9umpbtp5ep7ipd6orbmyu79hbk36f4t4hn26k9nxi7vksuxrubw12yecofqwfyqc7m60sv19pwslhdkl9qmu8m2wvjm5hgmlordf44rz3mrb4nwy94upyz2hjpg191',
-                proxyHost: 'w4o0betrnk9oq3jjowrhijmdkqpq9lgurz5c2hp9g8w6nmrwsslufhff5736',
-                proxyPort: 4639663906,
-                destination: 'roorjmqsbvapq6r5qr56fzqrkj9ha1wbvn7bdp2lt1e9qhm2612h1tck8y2hxxqg0m7qnu6ttux5c1cjv9jw06km1ntovcora3x6dvr6sk4pv4vzo5zhq720n9tld4fhcshekuya0puut66b13psze1jeixtemz6',
+                transportProtocol: '3rcv4yn3pblzg91uvmwdy2hlify2kofdmualykcf9y2drit11wmph5xsbzjf',
+                messageProtocol: 'ljc9r0t59p56m2rq6anwirl8cdp211d8v96n1fviejj43n35iv7fayk0nc8u',
+                adapterEngineName: 'vqfbqknxwxbf7fi6qydlcyp2c31d3hou1gvgz46raec5ndjv9yfrx3kp4z4538p1jdhvr0ky3v1lm0r3eb0hphk3mt81ykthzsgqfxbcknlgeyxdcqvvvj655268fqt2ta2ycgm4s6ne4hiq3lfsl3d236kc4af3',
+                url: 'qoagqhig9gtaqulkj1652ci9qjxmfrn8uf2sr5w1rno8r8a92xhxrbc96exa0tpx1pxvbyjvqid8lvpnlrcrukl75v4cov1c7b9me9r9kc49nc4ifdm6grwjbbh98u45t0xepppy504rxkfsjx6sqky5l3e15qjxf5t4u00quwn5io3pv0qopw1696s0jvjcuesb5gdhag4r1hx9g4phpdwooz7tueyibkmkett3fc1dgl9zce2smwzf1t6zv684moe5f3nzdtggrqxzjfped00mngcp45b28w4u4bahztl4k89k5q1nuenog143sxe7',
+                username: 'kzjib7yn2un1osidc146cy5y0wu2lrvy40fx586yv88tf5hzj2qfgklaq0bg',
+                remoteHost: '76dmii3l97wtsqluelb08m4q39ushmru58q8oe7io3vjod472wlrwco9u5qp0r72oj5zmnarjs4smc4g42qub2dgfsf2v11csjp51h9kz705db1xhh4u4ncl4qgwf3bnvbwpcksnm1j1cjxsvnzrnz8rnz1gpze8',
+                remotePort: 5049999942,
+                directory: 'nhvqhqn6nw75iaa1a5rjcr4tmpf2c2uivr9enp5g9cp81akgzvqg4u7y79exwl795rnl5ncnb4fc8fkspgrgybg669yy78j95vg6xayx1ppqpkym45ufnu5gtwc2v4vn7rwfoko425k5im5oc5wn7s8y3tx8j23jz78jv2t1kq381v2nx5di6t29wm5jsbyirhviwwclimy4mqmb14cwdyq2xy1yw67pop3fqph7k9g91do3rhxg1gqgo0uuyyexdpdnmnqvepjftem9r022wuuzjtr7ey3zhtcwwmw19k4wrsumqgutd72ylygi2j6xmh29mwfk0vvkxv3g8a87nn49s2gaq77ntcvdrdhwibtfekhn7ecl8w0d9atgafb9twfce2chifa42jpydo6bf4vhm0ixrk4lrmmyeo4q6hgvsay6w4dgecflmb9n2l4t3pnnc8c2ne5zlisej5ilcc96pr893p4wdges2u3dyo7v80ifiatvecd9djk2ohfobdedtz4x9pzgkvmgqjn7t9300pfhjgponu2e9cw4rikbwwpkua4v3t8s7glhcgc9qx14eemhy2g83fdqur215uxr9ju1cu86w89cs9hoz88dk51y0kelf4vgsqylf4pn28rgko9cqku2t15uk3nrhbz72na2ex8jcj3a3p22gcqfo3ulu1j95opaf62c54xd86vo7yv32e8gf71drzywdwxvpuiqsli8prlutrhlnah6oyby2k8f3z4a1sl866xjj3yxm6szwsic1mzjpd3dgfwcy937ft1stfv2ic0wnwhvvwpibprvp0rhr5nle89sg1w99llkurja4637lwjd2lvdakfcyvlnjnplfmvt6psbyh5g5ut4haarbbd47cgy716nzrnnvkajv8wykv8wvwf6upjqrn2v92grxbaq75giuen6g5aedouwg48tk4mm23qs71qozmtq03mtoe62xxr08cdymgrm460t1ywdf48j9om02jg43nv13n0e7aun',
+                fileSchema: 'ujjhhvbgcxu6vxqp0mgg1kpoozyy062c0mouf5p3vjm6z1l1m91zuurp8cmtp883yqcj8ulltm2ohx4oos5hmu7vkbgap2kalyu8v9dn8k4fpk5j116x1aem4vc9ednpyb5nvh82n8v023kyqp8wvxwf8o55nmmbk7ypqkdcjidrp1n8n79ay32lzn1recoww47noevtqik0r7qwe535wqa8ez9xapzlldl671mhthbrnm7y0gu6jqe9yhpfyab68e5tvfu5mco24tzt5wxpxtgq11mp5qxuwsic5xx1638yz57tzs9ovmrrcokl98jzwzpaf2ztf0e4uy4j5foa6wrl6t60lnnwwubv7bbuv98bphihccuyestn3ge8axbz4rohp5ivccna4hb0mowwafk0ih2tdyq3bmg6cn0gdjnjjoc9el6r6btojojuojbzvk017xnn3c06fns8hgvp8iezynvqyhrrsrogcyp1j9eu0em4v5huf6crzcdvxtov39xsbeojhse3zirxr0409b0svryp9w15ilu6l0lbmq3te3ufdeev55odvec10cy6e3zmw9xmbk7wnlpvfzx8z4dcmx70vc79mwqb4l6wnh58lth7ckfl4hluewb2wu142hhozely345qkl7y6r9ocg83zuj6hwkqkhn3s65fkfg5hfob0emb3y4k5wvdves8ke7ldamykko8a8nlyks7v2i9vpa1ltux4g3xy22g92d6q2iz6rvyirol8kqjm59au56vfltftopv1d8e2waxr72jb9oc1y0p5vezyekkhdjhx3nfdkz8d098k2615l0843874trki9h07e1r9tq23paotftkeupn6r724jmi03ba0tjk9uvz78gqsx97qbec1x4lfp40x8bra05gr38x2nbiml83ag73lev1nmkxc5chucorckr5rn5pywv970kkfv1l44bttninvm8ddpborfngr0gdi0t2o8xgrauigzvpsnga5a4v3yhxxme39w4d',
+                proxyHost: 'ody4udfjet4pqt6jkyf07oa4tk4yvpqs5vs1sia82kjhybb0zwv5eok43rlm',
+                proxyPort: 7130725318,
+                destination: '30qmpcgnvlaxmx3nlzwviz1ivjfnkl4u1vu51kqg3z1axt6r5tiawrp5h4fze4sopur25nwczodx14q52gcq1kq0iir7aktl9i6k10f8e9nh03mu58sdw4o9aq2cyk1gsle2sjln9e4pc8coqppapd808h0srjg7',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'ilouh7ijgknsxkf0lt2i9b0wxhlktnio8tep13amr8mbd2ewa9fm33vsacb997kzprzbky8a1a4k3vameveziuvi64ewhrb82pdou3ugb5dl5be333bfx8yfqfg1ecm0spjl4m7v5wyie5jn524q46m9e6zznlqs',
-                responsibleUserAccountName: 'jb1rcxg6o1vrn75di7eg',
-                lastChangeUserAccount: '4q9gnya2y8hvxrxd1gyn',
-                lastChangedAt: '2020-11-06 01:31:11',
-                riInterfaceName: 'x160zvpkelg5bpfztzs9lyw3g8hncru6r3phh72lajwfacduvmbsjnovkdu1a1asob8jp63nxs3h6txrlbadqndh9y2kcttutynfbrz6omcvqr9lz6muyhluf977bzwq25a7mj1lyqlsmq6bu1ttg2icc57w8bxd',
-                riInterfaceNamespace: '4lndi9vwesrgeiqodytozul6yfwouubzza1ouf9smvv0mjil18buvd7jrmofdxhb35uv7z4lw5xpvefa7wy2t4nnhlpssnk37ca65zykp3owjefvfk50rvrl1gcwxkdvi1qkii02qkzha7huq0nt6sn9x9fms49w',
+                softwareComponentName: 'gglnnj5shbig11tynu59hpil4sgit6ed59sz80ch5tcq5a404t5wrjjzfs2l6hwngbob5t44mt5qwqsyptqqfuioeteou3gxbba7856xuh687v7o6vbxzenabi7yagrib8rnmupf43ro20ftwio8g1fn16qi93ua',
+                responsibleUserAccountName: '72w33rhe9u2qp21140n9',
+                lastChangeUserAccount: '8k0cb1vdd1fjb482jr1v',
+                lastChangedAt: '2021-05-23 13:21:15',
+                riInterfaceName: 'ohrlg279gmzdb7kdluledisb4iqb48gkq3wkvxcznxhqx1wl37h8sj44aj5b0zzpzxfnl7b2pcws2sfx0otof1ji4od00i01noiyxq4vys5i2j77ihgatibf6quvdcu017cktevcp76pundwbbjdvkpdteyp5ud0',
+                riInterfaceNamespace: 'qyt3qpe4gumzpfqjfisfluj3x0uodwuj9j2dcqg0trfcc3cfxxtfjykr8uhi137zw4wq9j3bafe2djvxnmovjj7e6kugqcbxo5ri1bwugb3sd4cs80w85f4y8netxyw675nnqttpd87zin4i5v8nfzmr6ozzzihr',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelTenantId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'a0lm3agkpq8rnfbt9efdbtc39ebs5btaglgxn04t',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'e1gemg6f6rxo15trovuu0a2wt7npixkwnrhicvkd1tfefgs7ac',
-                systemId: 'arpxxrpkzvt5pukmhiu3ucvo6ejjdhejeaa5c',
-                systemName: 'vej4xtgkoezh1gkjp2zd',
-                party: 'yt5txavfpfvh3dcwexz455ga37a2gqzphm1lpitciq8sl5wqrma00dfntpzk78q5lnjyc3n1qtwylxmc7es40synmpwaoctqvzqfcxshjcduwymn96di3nj750d5wp5kurz1lztthak6snzwcp1jof0vfk9sah4o',
-                component: 'azszh7f2qk2a9lzy3xnd34hf8cf7smmpmar7ltm6ijxekvabg81qxh57zx3q5486os46ychkrjomw852kearpaw3xy0m4qs2xfi1ncuga9h7sihoalxdowl0yml5g6vt9sq8le7rzdee3volkjw3bccq45c85ukz',
-                name: 'vzigbqpaui8apk916iadgzjruxx3b0n94qfd9h3mv3x6d44f3uosfrjrsas554plvabi4sy4mqufnmw12jkxsxw3kwk3q9scfvqh7ibhrkhbtrtrz183ek9ni8xc75ecn19jlgnvf7zz8o0sliwflghcgu6z7a76',
-                flowHash: '62gu2a9z97c8tkiblqsmv9jyxhdiqsqi9thdv046',
-                flowParty: 'd9n9xj6fplzpbsvthoeipwhtor80b3p4bjt8a6hgot6ob1j5om72avmbxkgxkk27yvr7l3o1j0umcri6pamo6ngthq9y0ydp2buymz4sizbc2nlq5wsa0mxtsryjr6dkcoz567cc504i0fb3faw4o9eupn96i8r9',
-                flowReceiverParty: '76blkulrggeg6v43vrgrwv5vfv8kjmy0or9kb8zawxmx5yqs2ipq1wr1l39k7l0s5c2pmoglr0oa951k1edgdz7gccd4h24s403p01alii7j2tulea7h5v5206azuk9rkjctss7d3bkbw0pm9kb0mmm7j4meayx9',
-                flowComponent: '0ke4cyvzs8ax5hbfyrlvrmnq82fmuftb5gfqp66mx48u8zj3voxylefp7hltoe08sqaty0wbsxzrzh0r15zewnr4rnvgvfh4v2yyakqs9flu50ffifal69neq64iaepc6yznmr21mt0u9r0vkfvypsc5d2089c0w',
-                flowReceiverComponent: 'tx04tce51zt6j6rlbgm879bld7fei3xzkz5guwsr2nvjf5n0dv72y2x8x7q7c1chhswsybi12iw4fndlofx78oqfvwx8iswhmyobare4pr895vuwuvvo8nkg5jvcgv4sd58caihgid4f98x6upgbz04z887samj5',
-                flowInterfaceName: 'hnw7axl2dpca4agl9je0ff49qmi6z3jvzdpry47ab1fnb5qutybavtt1fn53hh169o2ayjx5d9t9zov2eok7143gretyw32fxpbqxtc83flon8ancmhqyx35ellazq535tnusyv7ry2fihot6ghrpsj14gz8s5le',
-                flowInterfaceNamespace: 'ij39dk0e60rwk9hxbuuy6rt1epse3sbz7f9djktrz5crqttx3su0xzrtpjtyxod3w27easqqj7lqv6xb3bli98kgmt61xkncmz8i4tzobnoqcdyjh1v9i521ccz3e06ef8clxk1ujxd4eagpofpzckvqo4ei2pr6',
-                version: 'rd7kie0uao180s1i0nt9',
-                adapterType: 'fyn0465y0x3v254rvibe48hsqr2d8n9hq7j6zrvv1nfm4kb3b8npp2k1thyh',
-                direction: 'RECEIVER',
-                transportProtocol: 'oeqitiprakgmn4qn3njsuqet8ek7g8qoayhdyc9vxyki8oooqp6d80knxnod',
-                messageProtocol: 'u4ugdvomn70ly92lp3hnw21y65nuzevurp5ov03w9aujr767tsazqo7le5gx',
-                adapterEngineName: '16ncp61rjl31q17u5otzcba2i814h1ovdojytmpueqxj7chnkn1beutqfk8okyvo85kube7j3a0nyxcbp7eshrhgah1zwmh23ru7ejtuomq1o8rwww8w01tgcfatfw2efdipqnpcvw8n1ohuj2cg27mmkr68zyny',
-                url: 'u2vx5m2g8yhmgohlhw8gu21vy9nlca1vre9gqa73hnr1dvsy2458o92n60fpyo3miji0wbutf61ow6q063lc99kq1b3hz766kokw8wm6486s0vypc3ukgz0h25qw6i930n4bzuf5cuiqwy19azfp4d703kgd3xzqd57yt2u6eza7s9q3avv4zk6kuknmiq1rcscmuzwlrbv4egaxv66ov9u9sdmams47275mhv1hbnzrvvrl4m6k7oryzjh1hq632exrswfa9ahq16tpjzqnwxduazuu3bu4zlbex6jhlmen0ntw4upgatv42g8voju9',
-                username: 't3ryctdnyi3v56kg117vkwk7qz6a2gp9zsl8ag7fue3rf34n7m36ad33iwx2',
-                remoteHost: 'k3ryzeo8a591nfsgt8durcta3asqn36xbe806ppmrtoepvol892jpns1q88on9yfbka0abwdz5z67sfb5bnkunny9ncchnf9o8r1jwggt2vzwwzqo05dcsss0srcdjsac126o6pe9yjnzg755cvooch8qtr7e9i3',
-                remotePort: 9001418782,
-                directory: 'fh90ed738a7r00e5oyrz9cm4cy14lmf2nlkovzmxrb9iaqhmr76t1gaz2i8ihy5jy8x922t1rcnekukk8ahl6p37tk3qe6yy9jdj4xvjfh9imnnwya5gvuoep7ungg9caiv5q46e0ihfn9f3tehbn84lb8ftxqsb7xxruarvmobwxw6psg9blnr6gqa2ig413op4txfuq39pae8wytwe5eo225wpmugw2at6bohzjvqudse44sx4i4ed9ui0ri8aatg8k48fkz93co83b1lfkmfgv4uil5wwoqggmorlx2j1dv7t9irwjj45bmrl5xc4r6o7p6kga18f5ff1tjomtssc4xd6mx2jt17uqa8ada6gmtc2tvxoaslvl5flp7zy9aua4gptd6z7zgm58ektlau9s45l3cwm6g5x4fz0g4psfro6tocyxxvpp2wqek1a1orz9c5vdzqwncuxa2t4hn4oo6rteyqrc4htq089kg2l3btatq7j64awuktdslnvcsmr3zlxkz3g05oa8ghokt65fl22ngv6vek02yfbaho6mtaon2u42unilp1v8oi81uxqlpty2pg9i863hglrdqyq0jrfwe240rguhr3xpmbxx61abrvff7he6ey0fpzp7f6kwwv3upupzaxobjf8r49m3n63xydoc9ytsmjhjac962nrcydft2o6rmd3rag1fn9higx38sezbtpyckjkrt8yn4paz4e1117fbyui1jlx9hz9zfphhwp7m8imh406wl7mqvfyxfavg3vpedbilcciv69ufq9bpfxlfa4bmwddy098wz0uz8o5b4y99k657drsku85i1s6wkkwpucols3e17ngfoeyony1zzpzvoflyezhbouk5pa7gzt1gf0nnw34i754vm4ao4cv80f3zyxv4820kcvfm8icnpi6fsz9n9fmln6gm26xzcq18q71otwi7o26xp7gw9bjaa1jhcg9kcktm6vf3k9h3ghc8knnvjidcnoepqj3blja7rwo',
-                fileSchema: 'ehl85d6er1rrhuuezbg2pnc2v5potmha9yjgpg22g7x2bkjuycolvvdov8ih51j8wrzo6x7dv1xreqdgjd064r0g7wq3z8w235x63wgimzc24d7ykcn94nbf3a27rtbydb8tf8byhmh0yeknt5nvbu3mfwivndbnn571ukh7kc3nnuqyu9qepib0ws6ldqae4frtyteu9hhxu1r7oykg9jq2n3ogind308i86vthqarykvood58tio22opccob5vprg3kw7t67xj2vzxe6ui5pcztu6gdnw9ja52ev3lsbe5yw0wkynl2u0y4fnzhgh18bk2lgk7x6h37u5reiamofgxitnfo8kjjjx02tdowwj0h1r4ger2puih9boxknd80fl5sjpxt6sv3rvqh2kcabd0gfg079g9ut6nat3qj0bzun5nspejoqpmx0nign0hlsrmf565kchykp5jjdknhc8flm6wgugudvomun5ln6t77yjd60il2y9as3ucf0m6nbb9vjwyhu9izkkgk86zedqlviuiwhpps2giv0d3owaczfsvtgvurxjlstbs588u2yzsxn0p278k5orpr3q5t9q5xfih8l1rjktzxugbomfczburzf1jdb6fcvo9rl5mtnjw4fnknhxs1kaegxfyuha9uugb8jbswhwmq6jku43mevajez3f2ck4yvou9jnfxiaftcb7xxpd32j1e516145fmrp8w53c7gvbxope1fpp3k2z81pk14n2o6nxn9cpbq6dyhzqe0hmra1j2rvqnpt93q3rajtfr3x00bb95zdo74cvdjp3tfebgpmxjx47ugmlt76u6zkp8gug5xndrut2gvtso64ubup7n1vvz8xlvug6xftuy7oqksq71g583euperr20sidksekv4rwsm4zly3l4kyt9b1xamqu5uad5n3cyf1l56ebuzoq8e4b2togvrkm4pm6h0y6pfu5z9xqc8cqhki90lu7cdzx4epd4xa1hz5eb2crv1j9sdg2',
-                proxyHost: 'mcwjhlriwbp4ccmoskkzvfw9xo674ciu7e0aevbvky2cad4a7k8ics57jpbi',
-                proxyPort: 2886175816,
-                destination: 'gkmzuh5bfciuktlhyv9p4tqfbkkfbjhpnucs5ngtp0p6589kfnfvfttk7yd80kxyvziuaplhwpsz8lgymbfipx3cl2epo1r1rtmenf62qh3vi404ukxgfkfl197bn9yzeitx0o3i4clgjghtkvo55cx4eg42w63v',
+                id: '1c6748f2-3405-4351-8115-0b448afdd4c1',
+                hash: 'vusek9jhwtdm5epvaujk2a3wyrct2nf8ml8nbllb',
+                tenantId: '9dd9bcfa-20a8-4a77-a465-172e04d40910',
+                tenantCode: 'haj13ket90emcdonbojbzv4ovszh6kxsdiofcgusbniec78ht2',
+                systemId: '9ooosjjqnlhf7s0yvvzbzc4mqe4fzjiyzb9tu',
+                systemName: 'k30xcfznqzem2abxk3xp',
+                party: 'b780ubdp6pj1psz7s6quv8w9wkmm8tpq20mhgtxy77xrhecd9xf4200rzqw2txodyqcwbmbg79beak4zfr2ubj9wlg7p3kcrmh89qesxbznjczsh6p2l6ze5xaiwxdounlfey3kzu9cz0pmf1umqj81n5u24jn12',
+                component: 'g5poxfzq3eo0t69qaq4tya1aowlj93u4bkfhfqn5e2hlvwz2th12doa69nzfphm8r9fvgqpklh0jfsd91ah8re5cnu15gqts5fmq1dpywo6nhid9ro0oo1uyqmbrd0xm1ma2jpwm99drb4d2bo40ahupr2ys10e6',
+                name: '45z4p8bwwinilc2m84kkx8wxf6q78rd133h26noybfez9elh18eyt5govsm69eqozxmyzoo1dsznnu4pjktrfsqtb6q3nqtdlk2xu2ten17fq9c5g5qgkl66kerxjufgi2zcdije7k3fv74rxwtrln960chj25b7',
+                flowHash: '5grdl4yqkefcje2mtx9gq1wis4n4dyclqupfmug8',
+                flowParty: 'h42ah58z5daddjv9bs9nu2l4arsibepjd7llnoh627lq0zp584zas1nf29y651qf2o0lf4xy435k5nvrkyvptuvm8w9ba2xy0ny8pj2d54yp54veiuo50jpgsuuh817wge9cx5f56s6m3cwlap581dhw9vqk9r08',
+                flowReceiverParty: 'vdu4reydbkyia6qsp6u94iduvkb1jzgup0mpsneebvpdspe7mkzu9z336rv875kter438tpx0jcqzx55s7ihu98l19ccs1kw4250o61b16p38yu50chrk0afrdq8dt0cbosr9fhajfcxonnt8sc96s6bax72hmq5',
+                flowComponent: 'bbmpjhd6vhwgnjxcqxp1d25sse6sm0b0c9e73w5p7z69s5pbj3fia5icy292sks8c9enb3xq2331yj4s8hvkp4t5tkylwsm94x0z8vcm63t7uj06eohs42rpl0rsp1aw98ziq69b7xdjls2c652o6zf3ljanfq6f',
+                flowReceiverComponent: 'og1roerqw69ssd039vfjec3wwcwplutus40uo3m37qbrshwsbbkw6jcghnau41fvvzyp0xyntn82p7d2rct1kg73sl2ymisiy7tapz90u0ornsh41irufkwj9msjzzp2j8j259pq2bsc9zoapdqocbwv6eychnkv',
+                flowInterfaceName: '8z8jjc52dw3xiu3l6lxczfve79omfxp4xoqtkgpqzgf99v7pdhyoxoakbbpd5d2m930m2bw68se8v7mrh38lze44lcczlijng7ny21rj0zu37yyq1cc0te9exffu3wiwgrg2egepm37l3v5rupgnbhv716qa4b6h',
+                flowInterfaceNamespace: 'ye91kxapqjcphbd3xa4jt5kb8jx793y5geascpb68blo662nonm7b9pq9mboa4fazfbbisu7adibjqj07hwdonp9egeayjbguqaseyhbe9zqzsnm9qhh79qku0t178gp0jwqabitmcv71s6xhi7p38paw5no1y1u',
+                version: '2eg5b05ihwtthgsm43e8',
+                adapterType: 'h117vst70avs0sqj9qgogscn4uqjklbxp0j4mq0e37ifklidop21lc7g8e5v',
+                direction: 'SENDER',
+                transportProtocol: 'y46rtax2vuq25e4ljebb93adc0x7wmtb8d7ozrqkog3mt53cpzqc0692sr2z',
+                messageProtocol: '890r2kifkdqa33c8gsddkfyssrmt5927bf7wl9bpxbt04bkfvpzsfvn0j6ae',
+                adapterEngineName: 'yenksulfedag8nt03czv1cdtjlrrb2xuamfesfovipym2o6rcii7b11t9cxppktdlujo1kwb85x6x9j3jj6lmfs3btwnfcawdgp90wv96czoltm8il56m9uaauz4h3b5arxcdsp6k2x6bt11w5t5i3ar5lxjxuvq',
+                url: '9hnef7u0ja9f8ydxn404ep0gdulsbz8rfcvl49cmtk6d7jtbsx33n0q53cptz1e9ip2quw5fb40cw3ui9fqhd2pd3ukxh54gbo2j3918vcv3mvfjoy04p4wv308cjr4zi17j7t1394189alyb7cj67bkh7fhdabg1e1z5kn9xk0rhw7wv5g4ihzj87kwjwecaf214s1jcpxs0cfyc3jud4d6egsk7ifzf6fmbrrmn9oy5ool519xltycku47rhi17u80ps3q5kwk0rlcdsxv539zaflw8oapuvg1gpavbv6zbv9vsy4zkh0o0xpd0v65',
+                username: '1zsz26mj0bk8eqts3kz319hs5r5kgouamx8emo2omb35nkbn5ugo64ii3kxg',
+                remoteHost: 'o8465zp4cyes3gkc1gzo10lam6svti06l3q3fxw6ffw7tfimcfzysrheyfb9a4msokb6um9jva2vfraf21tixrsi9uml8rpikaymccl0o9c9a8ncv146ja4kaqtihbps2ul8n188qlxppsm4jqrlzr5ve1xobfqd',
+                remotePort: 8248661754,
+                directory: '3z5td8i1n54cblb980l58p3qpnmpos0dhivqzy14ia9x5unm7tzuy1f3iwh8rrwcttqdrpdohtg9r36dblt7clhi8xge8arv222f4mapw6x1s375qta4e60046ujg7ivzkyyr8s6kjudkgrgz7v1n9gu95vnjip6hnw2400qcid5pgfil0lt933592po96b2b2xm3guvvqazusgh2sqh0541j850wu3xbg1w2evc8s6q2qirmwkgbop7o34tz0a0v07bmwv0qr8knr808conn2kjrb5uw6xt45ic3di59pt6f74khqwcmp8mkq2bvwgcua8c2vlrrcx4htbankot5h29u0icb975crbjhwbt22ftbjz130ls5rt4zey8642rm3sh9c7dj9t540v0gp19vpnslgp7x2uez7a0sdrz163wgshmnsv1hsvs3gow20kjo5igx5pu8pq6xezpngubcvu1bfa86fvk9va5eb1chzcokepfouu80y9jmqmk1ctsnt0mzzfe1e8o2fwfmadqx44vjqlcl2k04rs6gwj2wjlwbhju5e6c7409uls64kpwerdq46kbt9pi7kzn2e5c8ijqz7z77gdpikg25c1c3m4ml7fclcqv9imah13qlb4jzsbguoidiii4nrzkdi73da26xo8oj4i3xobrz2bkpb50ebymvph5a2302m6533sy8mmf0fkm3okl58efr3coc1pfg7clznplg37ge37s4jzqe14ag3mex1cww557sl2ffa3r9joo6pgge42xcc0hw0zebiagrzzm29js544a7tespdo4wgoe5itt7qdgzoxtzl94uh7zai5vrza3b85ut5hnfcer0ufy7oz7f9cy99xuc69l0zrsde91qcs8ufs7nhxw5j8xxu8oqc6u5fnod4vwd4ftcwcj2l52up6lhg9sxgoy9xfi3b30bi4q86cxerghk391vpi85px1263gokfqvid3ys3m4uym5k28yoisox09v6cu6xy3kaapj0rs',
+                fileSchema: 'tioyddhqip5i9vft8i0ygoyriz10wm3da1xic0i6u34dibi9uo6d1fpuv9lt3hariawyki2wd6uas0dz01iik1w1fowilrb66n2m3xg3ou4al29ulw8routa247c92ala96nzt1i5l1vuh2w6hp8btkkcljom8b7o7atb0oj4tk3n9ehtr2c86mr8fsp69w7eu44xt70kvn0qu1ql78t2jzmunkyx1apeoedzlmtw0utz2a4kv1nxxx9mkfr2z6z6vqg0033724h5uw9n94irjbbxrpwzdwo16dzwahif8oo67dk665rid7k0hkz8f2xd8hq1cjefvom7qwp11zn2u4s9iylpvitllqr2rrwccetniqhv4a9fh5atwppblxj7p4mlcaw5xwrwsj3szo0im35kqqclaw2wr2ytpiiuhjy1kql84va35tyusaxzv8k49mszm860blw9w9swrng24tlvdggd1w4nkpi1ckx19wvmcd4piyqy6uhmislb5b06uyhwcpkihp2z59cv1ru9xon7v5cerd0c2yrfn2hxrw1wng10756qpikgrvi67ckz0k38fasaiuxox9w8yg6dt18x1n1sj7l7zcd2tog0a72l1jd3iz2rocob0h2c3zjnsockwtsrkjexsvu2xqpok26k75smwpflno61xwwmapa1atswqipm1w2uqj3gqsrpk1dayauqnw9dxiq7lmjc8c8je9qpnmwp6gaj5rvkwtsnhtb67wveugitm3bd3eh72qterezldge5ehgnxkmsraydftmmqqa5ylljn86f9zdr3n4dvpc7dclrqcgg3jax4uceh195zpo9zrom2uozpmbpty7a2ukj3enw8oumae0r3v1wgkdxul3fj18unflad0g2az3le5tv9cve6e8woike4a054vpyyhmu5lf1hlpz2drq9m2x6u760o4bxkn4vr2crra2wozzckjx6jurjt2l0j7iv4ptee8h7hcbi6lm2xtbu7l8vse03d0pfrw',
+                proxyHost: 'wlpwud3js4qjzurrae8xwcvnr7uy67t02x39pf541unv1zgy9h9x5bvkqaww',
+                proxyPort: 6297508264,
+                destination: 'fbnh39svlq0r0su6ecrswg2hx6kyuw44g3t8248dtwzruhqwjpx03bxhsavn7tymvsdt5j7qiuqr0k6o8ltqlbc0jeqa9ubmgpoef9oxea2axwruuvy45xjoaxnanay3h0nw5lg3wh88bbcgnyse4hfewwl0y4mp',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: '6e17qg813vf0oizrvxtnfpz4jyqw86xhjjtygvd6e7vwryemswq1iizh6f7tf58c2lz8rcmq7fztqi66ckk1aif5wy4opkpuymyp42n83fc0z6ib0ws17e52l76pq4zpjz9eltv8q8n4n65n0lp8gc4iwnal95ph',
-                responsibleUserAccountName: 'rjwcl5hu3j991n0k21fs',
-                lastChangeUserAccount: '3fnbclsanwmb6ouhzm7m',
-                lastChangedAt: '2020-11-06 03:05:36',
-                riInterfaceName: '2ny596yvujbw8ej1i1kgj7hp05pgbd7rqvudxkafc11qjtkr0n62i5p1182qabg7ol5z4gu2gaqyu4va07a9tnpugk51u2vdf6fxm6d3az7vcnlyg67thfk0pflfqwbdefbor70ju6hmq4rfbfx2n7b6haexkza4',
-                riInterfaceNamespace: 'gmbe86u850xxipzmohjblyukiofnpvajhppmkad5vh2is9xhupsvqmkdba4gvh4ee9al4beqm869x95ozerpdlbu1xgcu0nz4dmr4r33tmn9oxakj10wqln6dvuhme6nldlv8xta0q196xdy8egzf7fmf2ihpsx0',
+                softwareComponentName: 'd8ptndzv4cn2vrhtlbgbo2jw99wgseeh8bgsejq3fd1kr9gzx5jywkv5i4bo14ycxq6fkqwfgkh343u00vn24qu43zp0b43yin44chwmvq7r3c9k1i4tm7vq3vbpp87itu45m4vfx47ngvdagn0zyue7uxzxfanm',
+                responsibleUserAccountName: 'wi7k0ndeu8amvt7c9e4j',
+                lastChangeUserAccount: 'cl7rhcdhkakgy1a8kfp0',
+                lastChangedAt: '2021-05-22 14:55:14',
+                riInterfaceName: '1ctujqj77zmkizyqqrp5ovtpghv27zpyqow3tjufmlfw44s3iusc0cyfdmu5l0rjo9o2raz6fbwubulcx62g5zir2w64e21ouodeyo2pz8h999rb5ebzb4d772quy8iu49l8xs8v5rtduqay7g7j4wioo5zt3e2v',
+                riInterfaceNamespace: 'ebimoffs0ywxxkajn3idh7a86o9z3yg149etvibpe9b0ytvh8ebh7eiljiswigu6kyvcpydsfctd4w74e6934703t86ywrjfq7lma56ch3xq6v8ecbg03t5iimik4ppagg7nvc0nc28s8wsvrro00zmrcp8j71f3',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelSystemId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowHash is not allowed, must be a length of 40`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowHash is not allowed, must be a length of 40`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'pod3jhv31j2hujaj0mcoqzhaccrduivexccd32u0',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'gw5ll81i321tn95rypc6uzz9fxdannb7m8voodv7wqxob05swy',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '1tqovbih42l4mfwzdnqb',
-                party: 'dc8jffcpaugn59uky5yhsbtj7b42sqa5guawo0b7cyz7w651hxuyzicqf1miq3t232camgco514ur4ts0l2ztw7u8sujj2iwr7xaqmhqw2qpd9oc7f21tpjyn02qylws5er50uqbcmv27oqibhjfi14p7zb2wd0x',
-                component: 'vbaw9numzy7i6www0a7rbihfdlq2u48au3t6dyv399dncd8ilj8bv8pq0z0wmz9xc3d7o6hv3uzj6qtpf50d99c2srbukp42kg13qjtkhgiiyos659kxztke73z3ko4cnihfkfpvm1aw033dzdi9d699d1l05l80',
-                name: 'hwj1sdkn1t4ebgqvbsxexpw9wj9ile18wx2g9h4eobljqn0y662mi6diqln51eit3ro9vosv271o5bjudzpulquv3kxu2zcz3sba2bapfgoym4o6uupknvdv30rczygmpfaxwrm2sbkx8dk2654n5pi0rb7ns21k',
-                flowHash: 'uvrt4s6oatgvyeh90lrdg1m8i1fkq8nkkc37v45j7',
-                flowParty: 'y33naimf2p0xkc6u5rujssgij2fx43muxoazqsnihbnqdax0zdiceotn6xp0wbq9ki8kj8pcpp9put51uje7m2a6qeq5v6nqphyqbl97ooei1qrdd1b73b6xb0d6so2buiuai8bscqbnle6kpbat55jfujl84rcj',
-                flowReceiverParty: 'esptimylnhvp1tvrzwd79oog68orf1yeibx47otqn3xlhfq5lhcqlbc1y4glm1pfcd0lhetl20ftaj1uwjhc7084ncmdgwlnxgjto9ubhv4el2oog920l3bwz770efqov9fa590lbhong6j948zx2oh8q35xq6r7',
-                flowComponent: 'ud9jexozduty0qshscu7xox61resg6rdigpfa83e6vlzxovux4jjdp0ut1h6zv46fp0txyqghh8chu3m5oe67qjryucjinj6cq8z0s7h6182swiq20gwqtorq4poe1lc82y4lsskts5red1jcswht8nv34wcm3q6',
-                flowReceiverComponent: 'cetht1opc7wu7uag8fibfh05lkj6g99akziffrnz61tql1448lrqmnqse6t2fnfnl44br5emr59faa3mv6dlf9ns9l8juwrhfdoydrm2suk6sfzbg24whsehpyt9fdptwmjzgx5lpue4v6cvz0ttyjz3wuijlotu',
-                flowInterfaceName: '3xgvynkng7k3yd03yucj8s5dq6x3xl92g8695888jg6sraggmobe31tv28t0z6s5fng0vwntuzyjqte3ncnyb1x72m7a1kon6dshrsiq203zp4ql2rryec3hxxjvdwhco3y7nk09cmreb2o4s6u9qxrn6dk7j2ws',
-                flowInterfaceNamespace: 'rckotfvekdkjziaqxot5a8x15bxposm0dgxtfqxnx3nm4yu5o3fq69dppdqme5qph3xci9jwkd8bdev2jp1jroitimdrkiec3g06qydv4l16go5d85gwqwqmw77rnyz503tbty5fnzjpq488spqaon3ism07wo8w',
-                version: 'm6c6e9vif6layo5ueqdu',
-                adapterType: 'n03o5qpys6mpq4b0wewdjbq4np4ec88orb64qy92j9xe9q4a4wkyol67mrnc',
-                direction: 'SENDER',
-                transportProtocol: 'w1xy6hjw1ls7q46jljbula3fecekya73kzqzvwasr4g7xho88u23s112udkb',
-                messageProtocol: 'f9lsy5ji7zi0cve49641phlnmi5ckglkqxthrle7nyf4mknu87chqjy0adn4',
-                adapterEngineName: 'zb1xhm9f9hkrf6xucrms45l6wz5a4sh5qzhi1n2sgfzrg7xl6uk6udu66pthwf7ms5qs1h3o922ft1wbfxjjc679oysolstag9utcf51afgk70gvtf0c7g6bukt699ohoqax76x18e8t4tu3yc4uh4yqwclsm4f1',
-                url: 'p6rhlorbqxhgxet6e8hna77r2nkkpi67rnfgwuww958dn9ld24r2eyrjx95n2ui8nna7ksum0oqiujylb8ivc3hnl3aqv87ahefdwfk6czfom8i7wnjlhnn597ffw9gmutxd0vobfze01dnmfdqvex2amimp4bepzpgmpqns321y4ygxnujr7g101bixp5izr31gybcr3nwqbgu3r7xssrnnwtpltxjb9jyiaxz57kpbr5dc2w320qlu58c66sooggfq1ni8a1bnffiwds2q7shajugpj82evj25z3u8ptpij0jkjw7ktpu17ijkalsz',
-                username: 'psvhgbl7018e4np4ymh6yo1m6ygcje410l9v6kikl4uk688cw56ny1wthhqt',
-                remoteHost: 'jm6u1rrup5onng4mzl46s0ao1jsmd8yo79x06bu8imjicw7polhv4wtv3xyhdhioq3e43v0kac4nheqzbjyjbic68rbsxlatsn0f5sdujg1r5hww7zu1rtosgaw3vqmt07uq0s5ji6krydnqq4tb8lettpu3vcan',
-                remotePort: 2565387430,
-                directory: 'qg2d4d64ajgm42gliujhhxhlht1ryyegiqjwlyh90e46h8akn7ntshmjh5gubih7vc8bvwvenwys9n9z2iuoe7wuw2el74x02w881bxvst1cq4aepx6vz6jixieh3021zw7a1blqbmg81lp0o2xe2az860ssc6usit9twjajvk4vbqomhqngtafdevp6noojzxhcdbkx4gskcevwlmvclg62i0fxr9jmzwy69clna5cftgwuxhalx6737xurdwev34qgdorv3kq8or9w606nd8lggrofmcgm51b7ov7wr9qozhhejzsguxpo4mxvcwwyxwy9ovv0mhmdrz7xox07adyho23c6hmac2g1995v9lo5a9tl0155yvwkaf0g1rma4w0munvt4k3smlatf85zn7fthumdw7vmmtl6lh117lje9hgyl67sr5efnkstg2xcb5r3gjq0hmzjmazk6jxsnhagf2qe34goatgxbzgsxb2w78atfeqlk5c0744hcij2k138leckc0l5gt969auqpffhg9xcmesjmu24mrmc1497j66z1pwq5qm0bz2vv0p0qyawjn1htw73mizo7f93x7djh2g1344uk3e50i7nl5pf307j9n5883z5vcmvqir9a6j0iqj3q450efv5r6m0eqcye2o0x5tdind7diqf5f418izo50sb7gosyrlkf41in760xyagtpz5f3z591hkqqwy072k0vvf3rul06l37t1z9k69cgw8wmciz0rb5w3n6qxr5ch0rl10153r982v2q12r6q97h6d9m10ow4vxugiud3h0ta6t5mpvtlrmnc7oeyxcop9z4993gcbbvd71xw96yr1zrgcyuin1yktxchsqokoh50areb4dhx2bnvea1xq24y8gf7d5akt8mvgikwce0wrwv77lvkuq69r8axo86u2z83170d3pgkkj2dgwhl4ui4d7qk105ztzwwqp6wppqil8jjow036n36wt18i2oyc76qdavco4iumo6wp',
-                fileSchema: '9zfb62w75b90syiqipxi8y3eoyghzkqybw0svjgng183shdax7cdgys2brk916kvtkjxuqhjcblh61vcwdj40m19jr291q44ln29saq8n12sfdkpjbzf7zfj0f88szt8e4fpzq1prh8ccf97n2xa6151guju4ve0prjso395aljzvg9kohmu17agof86ok3f8u8whaf3xdf56u1j7xygc1zzbeomeg17om6pwqs4uny4jbi3m0ju7kx5p3u13vm0l9r5kbxwkrbtid9luos5p35xmau0m119tnxatnyzlvm0ax5bqgvz0f4uuhtoy79w43bj1coqr3bi3pzobg2c0r6ty7dqmo4sizrkwi3342e0qkjbym1lrjghjh32dftqqzl2a06c2ejbtiqb17i9j00jau9m1qq6nzxbngjonhjuj7yiroq08hz2pafbry4prkzrxngg4ytd8qi8bl904t46mtlblu0zbgjo9o3pzswxtif6aqfz1h3fzexr6ffzuprr2t1im0eukbxyy46i0jxkvfmrqkha08m0u8xlqmmutmw0vk4y7dxlry0h1dvee4y1nm5irfb322ymmlw6gq8d2nygnl56syjhxg92ixcft2qw3ts5eqgtxwp1755sq8pggiy4oidx9f9nlvf8ee80t9khe625jzhsg7by4ibep52ks7az4g6g3lszmcogsp0iho7cr5h1z4kk02c6u7r819xr233ohrebfjfk0zj6j2u09vkhpm00x9gk2oi1jmrym2r0fcn4820c5m18vq58f4r9kz893joz45v4fquifcq9f0cbr8akqm8xfaus34tmd10kav8bbmkftj94e00smfd5uy1kjm553zqba5wof1ye42d3xsxrxne4yx30iyamp7qq6fy3r4of7g3rt3d4xtuvhco66q7vh3o7jufvkbowxe9yim3p8pxaczyb50tfntrjjcqx7arbpujutc5is229ohbkkbus511kmvfaxcs01213jmjwdmg0dgpe',
-                proxyHost: 'l5qv18o472h5m6ji1qq5j6ky769fmulb7ose7iy7ztsksl489qk9pnn20hxf',
-                proxyPort: 3166680890,
-                destination: 'w2b92vjit66682z2cqo10af2bk6l8ur6bo7xi45i1a3qdykre25p6h7txwlb5pgpi99ycf764dbekgt0i90cg3ubdjjbscro967xwdvt9p39nvke0a01p2m5ch1s47intygv66n577bvbt3l3vx3ghl4cpfkqkot',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'p5is8qj773qxvgmapxo6r81k8azaocm0ja1zuj46tjg1sjnvf9r1t61nw8is6h84ot5rw4bp0fpjjo3izxiowf0uk0l661fnfieuhv1scpejc22rllgy7wrsoxuz0vuks0pqa84rjgzt60cxgmqy2pqo8n5uvfod',
-                responsibleUserAccountName: 'tbw9hfqcb6fcq1psea6m',
-                lastChangeUserAccount: '9afha3e1e1s1w97l4294',
-                lastChangedAt: '2020-11-06 08:53:47',
-                riInterfaceName: '9wv8e3rdg838j882ktg05n610mobw9wkstmcb1ufjord6y4grevwcgq1rxg25qri13lg7z2rbtpfn4xr8qs0owfv3kppqjpl8timep8bs93fefqgvojn7us8c0dia99fhypazt09nzvoyz8yaxwio6ulwyjg7qvh',
-                riInterfaceNamespace: '7267y1ep7ds4s3hvlpdtojuiuqf2qnurbg5tmaxnt4fixfbdwh4vn7xisy6kfvf2b0gnugw5h01y5z453ofds5e5ae1gze5p3mhpolmbz29n826iqadzwq8neuxlbd97zxj1v6i4v3n7jmyg2jkeu1w2g4u1mlq1',
+                id: 'a2aa9f27-053e-40e7-ac7b-4558ea1d2f07',
+                hash: '6jhxf0cz481niasqip8qat31acixy28yoi65h5wn',
+                tenantId: '1e9e010c-5aa6-43b4-a3ca-4c872f9bf86d',
+                tenantCode: '4qqdvbx2fo5iwnujkynyy9ud2a2nfk57kx81uadu84azflircz',
+                systemId: 'd459d869-b6fb-4e54-bc20-ab75599fe6d1',
+                systemName: '59j7vuuob3rrbd7eh262',
+                party: 'wi6umwe451hth6t497d0oeg25r1185zv2ju26d4duf2w0cjtcuqbetr8te5llplis0rz0lfxb2lparp6vynephhdzklxg7otcmswmlkzxe9o6vj005ke57yae0j6vn6oalb14z5uclnwbv8ypzif3r3lp92asml5',
+                component: '2oub3aytjbyr5errojjrcqkw55f63qjgrdbq8zdxzk8g887wm5ftt63k0rqed9lq9rxai69aeng08ja03xep943kozhtw3j5fifjl63t1d5k0oefw63u2vpc2cw29ge25cdox9qa7pa1oeowf9tvzqbzwpn1az1q',
+                name: 'rzoxtxh9kvcij4vfzt9b0nvpv6wjh0n4x6d6ifgmsdlbcb31v5znnyfuffid0bqh0iazlr8fli9o4333f53b3k0qj01azul1s3l50nmjnsx0ho9b86f6lmza58sp28nmbrz0hys7rd2fgi1iiitc2fpbz8bv1u9g',
+                flowHash: 'wtge09eabjeg3jeag0mpzsibrxtm6bkcv9zalvkk3',
+                flowParty: 'k505eg0scdcclwvu8lurcvn2aj2xr6ewpvql8je4i901ia1takvxbo5pa77cr0z77vsn55ezzu873vb2qergxjoperjpbddr36swqnxgdes8vkz186yhdhpfj0j4foh2v95sjsgilu1qvr18l57mqsvx8jjos4dq',
+                flowReceiverParty: 'u14vj7rvll16s8208py6js8hc79m4fggccj5m07akruvt8nqgdt3k7cqs470f2hy1ibp78c3a21mfhxs40fpos11ccflfvf6xgqwfbft9s12p86tjiewif4mfecnmzyuh0irlislug15vepvf9skqpbo2xratkmk',
+                flowComponent: 'usqgad5t6549gd8xjk8n2tgual3bitxp97l92oda8viidlbj9qsrfdg1huwwvodu951mm2kewp07yxih8mz34vagmrh78e3tb0311htuvuuk4qhhe7c02blccgb0dtns5iils7fhci5jzjhk2v8c8j2tn11a094f',
+                flowReceiverComponent: '213org940xkmxknd5ewz2h2jnum64y3sr3m34dfm8kmci48xys4eouyi87gufr0e0cjvy8c77ok15kk95lu3nm5y8c092o58z6q82vgn5mw5v5vgkn0j0dw4l7jlcm0wmwb9c9b4544vmpmsutzxpybn2iggpb9y',
+                flowInterfaceName: '87nlj7nm2uove4z8q5oqpi72bsfkv1nl039xugclaj08jo4sybul71t6g992j109zh98pcd2xe82y50v729e15fm4ifulkth6wn5nxpxbzzrmhmimnmujdib9d60p5emjj85j16dmiix8jm4g8vckszee0p2pux1',
+                flowInterfaceNamespace: 'khwoosg9ve619ba0za6c56qe77jrsx96xt1kelrneiiszbyqylimlwpn3fd25hg4jx013ziojamigwmo8bc6b5u2w3wb2dukexcu768acas2jy5yd0wxvpausc7o4cg32gdpgny8bsvl52cnxnfgdu4hhjumq613',
+                version: '73a50yvwjivgbvgrd64y',
+                adapterType: 'v08422k14x9phf1l86jjqr5h41jgzxpl37u05reu108cxar9olhbwn5eem2a',
+                direction: 'RECEIVER',
+                transportProtocol: '97dphpy859hqhifg009k6o73fcba773guqsyshpzswlfrcih6vjay3ie1h2q',
+                messageProtocol: 'el2qcij4j9ctrf0q1qn09pzio0p28fctp05vwnle5075opvy25bpqsyltfpi',
+                adapterEngineName: 'p06mcoyoe8luazaec2mu7ruggzao3nuprvowa5y6t8w70by6x8shi4lqo53sn30wwdaawpnqyurf79vxctikzwdf402whavye1i8pat32hrj7p3u216iom26h4801sxvj0ga8a5bx32zwe5g3te8ki0c2s02m115',
+                url: 'tfnklvzwvwzu3ru0zgc7ptcmjavb9tjy845saps5ztzr63s1ige8v0x03qri2iaybt3e7u5wqxm6vuhjlc5i9taie2k9r2aa3jronafkhoujwegaqcmiwn7184q2xrh65scec384vs3t0so7nltfg28j3lhj4vvz0duc20h25l2w4g48lh1a45349hfspvq31i6n0lv8kpc1cjazhktv8tnaagku4miapnwa0no6w7ehd2sw0ykopjw174t8unb6jgkk6yjphn6e8adfz28i1lz48lk96jjyn7qw4s8dqta72w0h7iys92s6a0zir54f',
+                username: '981c6mp2upnr8fisgsffunorgbdf63ov81ybonlefxwy95exo8yprv7vzakd',
+                remoteHost: '2tslmlwi7a5denrm8fc3x15invb3gg6y1lknymoc88a7vf4gmgcojy67phj0p35whv6ivpm4eni84q2w2wu1vjj8gd7x4lsls0gdxs2v8raae3y7nelz6ve38j5d1z9id8dng9c0549wegvmxk6yq14qhb30ov60',
+                remotePort: 6525175698,
+                directory: 'dhytjs9kxbz6podke9484gg8eu3sgckhhfwa7xpivakn7iykjutqsa0q1kh9sm9abtov3x5dteikucern6kw9huam699el2zak3o5ip0jt25ls19e7nip45det9ntgthx458awhbw38brpbssohj4ouy3h7nppqebc2r50ekpf8ui38k3naeve5g9muu6q01n3xhxhccpimcdzenpjcxt1flqkyp6nul05z22q6xrs26zg4gw5hwpxbqmhljqb9zfg22vpj08kuix9pmjf3dqad32qvvfnow4kl5a0ulupgfnwvbil9e030zoa4wj1v3wu36lg7pq98wa0s1mb1c88aitf07ash9og6mjnrd7hrh2imqh2t2b0koutrnrqjfao2tkmp5h6ulcas59creahw1b50kcflko7pwbytlsnelwnzj06zrv3j0cj0ce1nkox7coz1z3my0i1h5ltxdhrze1r4lxxnwb7uiaki3zgng53lqgwvstlerdu9g9qn7765k1uvmr0hnbsdi8vv0xj7pg9oulnxiydo2scx811wq1fd2wjof3k9rsgtjouxkcjcidosa6yp9eqlnesstcnceqixl73uadn03gc7bm6bd1nx2wwvaax4arcwy6351bcnh3s1a8ib7t90xscwv3v7n3df57cuv3n212hublo0pu2xz6qa8vd8bi5pjwmwv5qyf31f15s07ls44xqif4p6unfrzstne6wub0kxq9yl0a9xbu849jseairofhlv5sactytcpmz29hubrqd4rrcdacpscu3spavzlomswbv6rukfs55p0fiwu2fc4weeb6maoxcedqprcjvq0xznjw6upat9ag8ozh0opkiz637v10nx1fi5mgxw0zsy56fsmpmueb346n5e4f7lh6uwyqgkho1wv0zadv7ygvpm7r903injm66bpf79i2z7fsj4cknryb96a5689kdn5qb6dksqs0jsrldtby7yhmjrrk2fd3qcsce41xs1xrsbeo4s1',
+                fileSchema: 'ss65wt5jnosdhmhhjj461civw6e64e1yrgmytw2fbq7gayhwhe0cl31cvtyuxxq68pua2i3ll2fc6xwwxwbs133ntcj9fv20t4o000syeidwtnwdmpcmb9jkda7jslt493g12kgzt7yk4769fqt62j4fy73wl23ksh3nb36idsnafgfmag0ui9x5mhl33at5jwhjsce58i1brtucykx8r1i3lecce6fwn4k2td4wazsxni3le5ovd6hj9amfiyt55wajtmyce9l41blq360ik2w60q9kkhucpcilj7nb1gtsazus68i6gs2heb32hthhtcbkqvuoiliigvs0qr9bpcc9iow8rg311x8d8eo0231nrqvzx5uj5b6hkp4tmt7uxbo8xydacfl2lkhio9ophdzf44g1d2ihlijov2i06pajnkol8antby48ohsju9x9qa333vniwp6nu3bj0t59z48a2tp8w6v091jtmp74f2kcf5ym26tr6qb05b41htgq2ehuuihuj3jrwb67t383vv9myrgrwp8h92rep30kbcp20ipmlzw5l4ei6lf5csyrf9int7hf7ctad7ip17jva6dj0qt1tqifnveah8h4j5i1gscdkwx3zr7k0hmmb72circepyhqusv9nfdkehzbmt8zb35zatn0z92fwr8jx8ym6xj5zir4rvpuw3amtxy26ibzlwey8re4z366adyxd3ukkpk78zgw1scavq5g5kzm8vrjqb4v3zb942yxaqcidw5s6dhsj9wueytml8jmof7enf3pgmxiy05v6c8gn66ncfm1u70plgsbc0w2n82xq9kunpkp5xkr91kuj6dbnwe7h93tex6o4std1lrzfixfxqma7k3au2m47w6v8hcobs5u3elnrwlqcp3u1fh72i35y5hanw77wpaoebynesbkn7fx92ob69ny08jig7380c8nfqwqee0dp98cozh6iod0gn5x1dcpg75x8l963oisczbmxh537hpbtkphqahe',
+                proxyHost: 'qyp5f640fa1stolmfmrzrwfdkjrz0x78on1ygiwr5shvu1ncsqklo0ar4pc8',
+                proxyPort: 7334209627,
+                destination: 'zlrwf04a97mryeab43qg6lvcgsqvmsizcecq7q5zyhixhyd6gcu9wf9gnf7o9gp84aeu7p4veoiih2hrvrz6ozk2tnaycxg2j7nqi0mojrbqs0daqhnlgje523k897jfzwl2q3s84uyjqz8ga2eug9uxhl7y07p1',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'ldp67emmt1uwhbu6yt6a3gvx45om679x5ahycw7k1zrrdviko9ujriv8y5dtb1nh5ca6cj8hkcdjog4ab1wxkp3nxg6n5j1c99xgzy079kx2zvg4wfalibwns6tn5yt762tt3x5hbej8tnx51rb4q9n1kx6eyvso',
+                responsibleUserAccountName: 'ttdhkego45rj2hc3tp5c',
+                lastChangeUserAccount: 'vpym1uocli0g040jshea',
+                lastChangedAt: '2021-05-22 20:33:12',
+                riInterfaceName: 'aast6s8oeo1559vile4oa2kjjag9fsh8ammlq8eix2xiznvei2xbmm7jppgpl7mnr4wveog25x26ej8ce8iefzpvcqwr9inm1rrjn2wc6q4dcp54248fumnoxiva0wd7i4gyhdsk70j8eni7pdi2w7s4oujfvkww',
+                riInterfaceNamespace: '6vcub132x807tazmof03cwkiz98r90v2ylux5ct9im711xg6rg8sjy3upuvjdw4i2ya4p13hi95bi7549pf1yi4o1kkwbg9ydb71j5ca6mr6rgrcjgfdq4y18j63z7aws628ggoaz5ewkgiwnsqk2ig1xz0x8seo',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFlowHash is not allowed, must be a length of 40');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantCode is too large, has a maximum length of 50`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTenantCode is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'jnxax7kfgbru2brag2cc6y33dj8jemwr6oex79gy',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'q5a2847itys6fvhp5bmezwo5tcv4xmutic761b1ujeym6ykx0y0',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'x9oi251y57zppanzdxct',
-                party: '8ajab0bbdl553k8m65myhqwqorn4f65mg9c2us90xgix5pcxn25r3tju192oew0dvs7n7wpg1g2mx0ju5ul97b5eevzrkyzphq1f3xblurpzv9o93lprknbvt3upe8xc3l5n9sztmowx13b8m01ms004qx0ueepk',
-                component: 'xqtlfp8lgdr34efu7xgkxftsqmq9st05nqifet68uyhd0wt9i8hto1c47n3k6te53a08wu2hrlp5ero8h833ddjzgdvap3a7dzk9xskm5yfhkcgneoz458o6zhixh15g8j93hetpxkczackakotafa1jy8tz9ca5',
-                name: 'b9lj95ulqcwibn4i5e5zglixkftxysx1a3z4xkiv5kta0xczbt9vm9eqj5e09dkjampybm9fv5l7alvqash35tyupo4eav4us35rb0rzysbvtcm6v0ng22om68lb716oe5sweuf719ubokleqg5jwhnwnpnt89bn',
-                flowHash: 'vok0f63p27sxweggxfc7pirpu6cwzxgenxomyj0s',
-                flowParty: '7itzb4bq5mogz2jlqgrapshvub67c5lvtjdn9eetadparn6vnub7bo3yyzpho2yntaqyyl70v2vlbpvm1zo5790ly0x5kvxfyah7f4qboa6co6niuc5c0r65b1kh53oo4wfbgswz74fkfkix7av5e7qbn78t5hds',
-                flowReceiverParty: '7phsnwt63nrzhti8i3np3y3put8hwiuz7cr1iktdh62h5i5bdn8b1xjf1brnix0a0nat1n6wm0wwho4uxj50w36ac46opgu9icqg39bvlotz4h67guej36qsb3ftjz8iazanorwpcay9r6qf3tu4aduzr9q6j881',
-                flowComponent: 'm6brynozizd94ici23i8w5zgcx64fel78mpcsb687xuxzwp1sa3dl4370mjdapyp2jlpw066flbn4stnc7v13uzc56tz6wxm99uhh6pjedxom1tlklmsk7koepvwnhq9q9c7hf0tp41vbjbq17toj0gpy010q70k',
-                flowReceiverComponent: 'sm232fgjbu3n7p0omerp9j2qtrrwmollifdiy5hj037bkxb5d508segpkrdns5a9z0ok3m3vhkffi2g6yj27gg76h9obxv7f4eu4pp8kdfockopnj2p2xuvvnenzkvpmty7u7seba37kkp1c7lf171x85161iiye',
-                flowInterfaceName: 'dlgtj5qa4r9oi6aextvdpvzwprhbzto7rzj8p8ty9pn3sg1iqnty2jpv7aes9fx8bo0ki2vn3tk9bpinlilv2faa4vclgvppcvrzi0ka7jvkj5q6pdm6wzbmva2rvtfdovrybuwqjb90abh6dzcomi9160mm27f2',
-                flowInterfaceNamespace: '0z31f24m27925we8v9jucas8b2vg7n4okoiar2cl02semu87mxwgxbn7f2jtms92sn36q4cpkgf3ckpg2znni1ph5jmjsw6er1r3536xwu94n4i4cnegpjy98ag02mr2rmkofs65b731y2drz3kue2sm9nsuu54s',
-                version: 'pgosut50npxdneotakad',
-                adapterType: 'y3i1nnjnh4k4w7sy4mawbc5umlbux3qhyvesvygzi43mdbz5cbbvw1jlfebd',
+                id: 'a1418669-f235-48a0-9742-89d4cbfdb29d',
+                hash: 'e3kuwbjtgrbof5ml72665eax9hmsvp7cgk71ys82',
+                tenantId: 'd9046b62-944d-4320-bd07-fd312f173d2c',
+                tenantCode: 'cxunf5wn4r1haya54toxcmrn5djjom0agfykqne11eyteb4jcft',
+                systemId: '2edb1098-8f8e-42e9-bd3f-328da918db0f',
+                systemName: 'mre6t9ypk6805pm9x6xr',
+                party: 'y1egge8xdv9yt7l2toovscqpj2kdes16q75pn54zzy7u9wivuhy780ade99x9g31da5i71l3930vnkv9npfx12lpe5eg6xg4g4w58eebqdnymaz9dnp0bxrjni2tsmul6q4igxh1uut1rwoqe4i08dd6k68bwqqh',
+                component: 'fz74yrnm3djaplu2nrnq3reoqvavb4n6okckm2qq3apkgg009q5mbd3t6wix2tfjgk4m0qqy9nwm56d2v48a1nmndgjkcmhyeza3yhhqjsydvwiu4ehp4l28i4fn1xlnffvtz2ech4oambwkafs004pdygmvw6gf',
+                name: 'jd3dxok8ng52ib34nl1icz933bgfxvij2mu2bz058ix6cyqy4gggxetniyoys6qoo55misqz02dx9fe3a2ritksyu9ld02ezfd9vpdq7cff45ntin9vtyen8tnn4swv59i9bt0azke1icnest9aco6wyih3p7y77',
+                flowHash: 'kdfywgjmtt5ftq9xyqfz1sqa9m9sp2rlcdwg6he6',
+                flowParty: 'i1s8tzkylxun0b90phz4ycmy30zkf52wjndz94uaa2nokbtwie7qdkhr7x621a8v3671gu70cr1iq7rrb1225b2uzlhwpan8g6w3ad2huqvo5kl2z2in5qyirnrrbzh8s1eq38j3jsop55q3moz9vqdq7qz0lqnj',
+                flowReceiverParty: '0s4bkos07dhymbfv9kb0o4242vl6v4qsim247un4w8ewl7ddfbzpu9dr0ptkrpbhvmlmz3j956b8crsbn87mrsem7quw6kh1yt5fl4du0qt9twqt16ul450l9xv317xsv12u11mnzfg22xhwlqso0q4j4mnzibqb',
+                flowComponent: 'y23xfd262thh3gskhg2sodw67mayo5jabor74nqf54wzs79nr7ez6oh66jw8rfgdz1lgaxuhwl33fvsp39a96zjtqg8qzy9jv6ad0fw4sgao3utv9ks2fqeapu84xbgkpyg43bxc6jjch3xzzjgvwibcg1av9z6y',
+                flowReceiverComponent: 'p967elw98d0a210qo9cict0xhnndhlguhqntpm9uzcq1cmz1ikfd24ozoxzu8ao153cfdfkg9zobdkn3nqyvkiih8u5lunrik2xk8zdizagya0r73taavk9f24tu4oizwc1fl2ocrca6je4pfhs55lyj2g9crxqb',
+                flowInterfaceName: 'sg739900albe3jkbt2q1cj972s8rjwujznwpcgp45jnqk4eul56ur8jft510bpt06waep60a55a6u022romqvzzc6zhbl21lyfa4g8fb2d4n8w4f6ro20hyqehjuftle0nx1r8v1akv247kytlsl0f3hvn5iu3wb',
+                flowInterfaceNamespace: '87e7kigq9s9pa13rprwm98ejq5wph52wd4whs5fc4as7ay0baqyb5bfmczi6izbppm9y4z0mxgs4zdk5dqcn36ins6myrkoyf092uegf8zc11puxx6diqd614ij63sa3qlj4f21rzowzm3jxvpdigow1ciplnqnr',
+                version: 'kooenhd9xj8dj6e2uf38',
+                adapterType: 'm55o713gb3u0g2xdzvwkvi9jys87m0goyl1qnzcp3vd1rbgptp9piw79ui8j',
                 direction: 'SENDER',
-                transportProtocol: '659u1bklxhji02usd3q20dll5p4dherrn667cj1wsz69wktfqv5dm43gcog1',
-                messageProtocol: 'sklftxa7xxy0hf2n8nuu83kms4wymua6q7n4iwmblcssb7m0g1wk1m0l2kdc',
-                adapterEngineName: '3g8dp6bz8fughaqx2boiikqy61cughp9fa18ymgifmzex7h7xgi0rr3kwj31gddk4qa6c3zm6ike0rem254l6n4d1nozdulc2kxsalz470egp4tctbqhfsf9iykag4rcn1d2xvtoo0mawatrvkcr7d5dbx35z93e',
-                url: 'vqilcfq7kiwumd0h3n2r5z2gesei2fn5s7p0tqlzipvlsau1ettfe5uddk7bb5j6k4azamcvdtyk4h7tepi6zvsxmn87ltd6dq0if65hfknz2pyx7r76lwsuzjhr1rumbjd5a6rgu23uhiex39gehgshis1dh9ztya13d3o5otpswpgmqjue2rzb9manypnyy0ovga9hnhk8av636hqjxez1qm11fylzly2x81qgnvk271tq0nxvhcjf3ca8vdqjmly9i3ulid5yleev812zho7eyv7rbe3txzspyvxulbm5clcj3ydg11i2ixafd6qj',
-                username: 'n9mgbxsy26h30ect2k59uve8k2yf65k5s9uoduwkp3fcw69738k1kb02rm4j',
-                remoteHost: 'qwn3kd9lioo8z04b560q809whxaiq3nwayk1unbtx34z49g2ksjtgcu85lv44esyzr5cin7xp5heefag8gjnib8v794sice60xurgdconsz2xi0seq9lcabvqxgshw3ru0f1zu8576wt6nhed0nibxvf2pboxftd',
-                remotePort: 2986103374,
-                directory: '2yvqvwxp6d6aiscak3yi1p8wa6n1pys13sluumy0b8rb980hww7pip8domnqoa5kshxhaj8eshsv7g3md9akwr9mzi8kmpns6fe8ddjaqimk1l4tra58kxd80vez5abuv37u1xp0uys8ekxkiw03ckrg4u76demnzy6ca9gkj1ojo0wrn6zdiiffaadsxz0evyp062lzql5bqw78jfzvblo3kmvmyvihjc0forw10n524e9vrn0wfh5ybbzxvc8wtjgfbquh07e8mj1iv35iqvj6rm5u5tg01wdlzmv7j178ufdwqg7ursn95adwnf35yf2v89rwg8zflqtapm0zbprwdzjtplvvx3hmt7q2djtcv6udl8rzbfanx4j6e572gsa2pr49ha2fsua5su76t5qeayeea2llse2jsg31dpg53ayonng02i74ckatwzoxqsejkoie3m0hikkva5l6vpbbcivw5b7wx5ioe40pmm3iwr857wn9ln9el7o34q2lwip1o68td56wjr5wcbauze7s1nblhnri6numtrov3pmoq72eixdercs72f6v587sznrbw7z15ny6lssztcnjcwme0pkmviu0hh7r0va7sbozivqcgvh0ivogmmk1plxlapq6czsdtfqrgeucyuqloq8rfw1388yv94c7134c83wl6dcrb3vn9kdkezm3uh4ifhrt0yhdrepq7a9fa3f5yohleqjsak4v16nn440uaj2hcy1i3gbs3lwcj0wcs20lna924q8222guh2npj08o71w0w2aopa8bm0g8c0q58bfyswmolfd1zknqa3p2pqzh4h25215iuw12oiq47eevv6eg4143lp60ieser9v75v6r5533fmx9pbf83jo0qxkj9qu58d5b63t3zmaoved60posa1jbup4lbc6x17xo18qqgclxecszch2j6s7y93lyeceahx65uwlc5uc87zsnqym7xap0iklswn0gkefel1sxfaho0a5aqhtdaa9h49qr',
-                fileSchema: 'at8xhi74cxtqsk7srtsfi0uhd5yttb4isncwj3bc4aw94xm8zp32k7ts33n6rv6rbry0zyz18isj79org9q00bcuurow7ba2o558hlsrjicbdizcbi5ax52cxbeo1gfw7jhhapuzbfcqik6gsdybh3ohz2uympn5vtg0ondd37wilm5tokr4vjiw3euwduwaosouspjav84wf95di9gi5ei8g10ib5vc42el3ukwjz88omuezhct5j1ezxpvg76ye9jdlewn6jl7i9n7o8pktqwro36gcuiikqy39jm5dk07j8uk16vf7zs0s64umn5owswtpqwkjj3lft0nkawun6vf73x3kiaviklw91w7din4iaysvtfo8wdlrki1w7pn80l3zt9b0vvb5w8t54ba6koz0jfbtka7r2ib3g6ap01c8ssm02tr7t8i4dijhm6wrz1fuqzmqbi2p2pqktw78zvava1n0zmsn95aqv0tajw8to4agfxqwe0jb1z51x0enzhsz1k2lk8s1jo8e6tuu8dp2u4jx2rlqotcr2wpop5cwyojw1h4lpfiayqufko1hxatlqzg2cmscywnyk1ew06ke1a77vsbjnbritnwqd9n8yba07odylbn7vp78oydpe1d96sdigrf83cdjftau7uv9nxea6fgjge92q2a2e5yvddxxt4s041jhnvwdufqukq185ddqqc5nbx4buci8xpv4cerpwld6uqvrlug259vbgpg0u0cn0qaotukqp4xmp88d2jqr847die1yicsprcfigjoa5xkxqi8he79k140tic28rodjvvhsutzdnpx8w9s8lj82zdpddxg999nisdoqq8qbc9z1oyh7oj0vrmegwtrmt0ig5o7za2lm0nmw2p5nppwcqwjv81ev8pbs5byk42o4opmce93su5f2veb6htbh3rfnkjgkvlaa77vs7fs7o5hp24kv24jrka6d9dw5b6dzrnqyepvntw8ldhe9px1te6pvgm112hlf6l5',
-                proxyHost: 'pt1n3pu0tweaq9fzk7sp9h4ubhenflzr1tvsgoz0vun8zzn6xvrwnwqx2i31',
-                proxyPort: 5380443062,
-                destination: 'be4l98fj32uq6qx5pz9q475td5kpod2bpmcg1tjt3lmvoa5s9qiwzl9z71ur8op46xqdagvhs8qaoo4fpn87h4krwv9s6je7acvc46q65ku44tlz9pgvkzujxm9tfkeikkf5vau2yucfhmdeadm3097smsssnexx',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'i4ugjuji7dm69vmga4ooesfsccdfoisrossig6b048qptaupj5tyewrptvwdvncza6zwhq4y8zmxt88pk3cp51txfbwf5x6d6smr1x3s9hczooypyr0xdtmcg01qr8kn37xlz1s3lwb2qs67aohm2ero2oy1ojoa',
-                responsibleUserAccountName: 'yiiz2gq3kejftdm9oo0c',
-                lastChangeUserAccount: 'xfzqc9z9enebgv2df9s4',
-                lastChangedAt: '2020-11-05 14:11:20',
-                riInterfaceName: 'd4nhi7ckg1ey026shwc4jepif0jcgfxeb42ia7xcgklj16cnvdh9f5x6zxk219tc2b6nt957fpohirx4cnxa485fyaf0ggf90jv6m9yktbcjtsttdt9a6gtiyc22lhvm4o36bj5i7ocrbxo90oitc9956smrt4r6',
-                riInterfaceNamespace: '053ktjwiqiofgz1uvd4x2cxf4apva4ndxg8l24mtaal8scga4dcmmf2q5ryqe903lpjm0qda9c08vo50hvucqzac4m9l83me12z9tvygpcsdpwqb07dxs8opkfn0izj3dvtsm7s6dwv5fe677y9xtahmpjlqq8bx',
+                transportProtocol: 'lxe97v64zwafc674s28smz56x0a6lj0nepn1qlxi9e306cbsracf41g45tj0',
+                messageProtocol: 'jshmb9xnieb4499ib9id3t53f32nguqbsjyysj07fxw3svi2vgvbr1ojqet8',
+                adapterEngineName: 'vtf1ufiv47vc8ro5qo67ca7kwnxzxn5bzbxtqvkwbm4lb3uhubad8069tae68bb1t8pp4tnt7x4nvlhc56mxlnilo2lncymewx8e66xb15vty2go9qoiizk1yviabx9ph53zfou8wwpc4yp7v150s7igvyb71a0x',
+                url: 'wmcaix0wgcmbkvz2lho442l8kquy1s19dnnqa9kl9iianwbdifh29l0jlkhf1tnys9ro1dvpldb98a9o4mv6m23k72lt06oaof1avzyiastifhtef21lhohv4lhf0c33vxz4sn1eli7hvll6czoeziugvp1j34ot5e907ixsfd5uzmtodaajovmda70jcmux1s0ybtulyjftytzc4ed6mmr0ywr8rjkl7gfidqidczimgsbsh4p824qjhbopqeu4h3bwd82w7vl95y8xndtnnpql8blvhm7p9o2wb41z7s6qapf77j44l8g1iirj3mty',
+                username: 'qb5zw94mc3y96a65udcjr6b36dx4raf3jo96rnus7p8ojbje5yrtwtwalrlk',
+                remoteHost: '40k8jzg234wpoqyk05c4lgzmyf8gmqz0c6nu86e12lo573nu8chomworuo2l6wh4rj5htc8jydgvcv401nyirzwdu3z753z431bd7zr7lnj206c77jj832oxgh74gizejsqsulv375d33h9w90cdguqcv8wk9rtq',
+                remotePort: 5057168688,
+                directory: 'renlq2mujrqktvw81xxf7smsjfwnndk2ybmjo9174pyup0xct94nau7bte52i9nlzyxa60pgjy4dit7b1gl7i5w1bga5jpj7rjp63wp6ajrr9t1hyzc3y0dx1msk6htbrrhy0emrcw81ds9xcofyt7kjlicqxtpmykrf5ke6dl07ig5dy9b28j4vwg4e7vvn8vbp946y4rwdtchq7ekboxwqmac32xleruy91ufgk6yblkn74z5nqzzwvsw4d99cqqgj4rq1r76nf1omjo7zb1n3q8rornj02cf9tifd1kw2vqx5lhhmk9torsno58fq3g59fbyjivpmk1rovjowcbaj137hsz0vhjo9rq1bbpjdkdy64gb0rqpkqfnutz8ngfmwnz547oildmmfchwy6ougd5j5wi4qlnhhj8y1nnxixy7zwb98yz6ht2voxv35u4hmnl7qhxzxjgdm02izp77qdjshxpd21qmvwi9cymdt38qzy8rplxyead671q4zm1aygurgpaop9t93odcscdhenzbh9t4qczmbrq0goh4djkfze1ohshpfeaauh4wfay04hlthieei61alpsn9nvgurifha34h3k442cvlg8f1m33km7i6ptu956vrr51oonvnyykw0flq7oi1he8tco7lif2vtvbzcrmdilkgtfasng41o69elv95afwicmko8g6gw7v5mbsy5j6yn44w32zcdpznnrkliqhn70uln4xi2qvr51qdg08ylxjate4hf33ko0ijd5qoc3zvd9u91n1gduhjyrud6teqfmj4zfo01qysbaqwde4i8x30m2dyu202yhqs3kreatoy1j09ueai1crux3kfoz9pav9bqp5tp1pecv5t43vgbe9i8b0owp8ywpua80te1wiqgeoo8qi2xihxtcrtk0rrvd5hl2rb2188lnpx66j14dp5ky7d4jt0ss3pvf0ocipepyu8wijrbrjtb3sh5w8ffa0h3jwntqzvzlqv8ldgffq57ovi',
+                fileSchema: 'qbsn6h3grddoje4uijje6mtrb0y2qf9j3kqsymm3slwr9qb0s65cfxaw1lylh95bkktcqet60ygwefyays7dwe78ss3c0u9tur1oxp4vov8iyj356p3t4szhks9sqp04zj37r46bcw58h4kxie29tid0mswan6117d9w7atltkm2ifz717klnvncy12rgs6o13fcqak90qyrzbaj48v5eavp1c4z4g6apfytu98z8nwfxryr7kw4ozojqd634igke2wxy821sys8btez2cfnc7u9g502dvoszm0xv2usrxhtnfj502j76v8xlkphxmq0mcrfpp09g6fo9jydlwfsvjg83gaf79c8wh7yrjquv8mblff8kswztje5bev4qh8kili9l5s62phf53h7ergui51lga9m89n1aidq2hr3f5j3e3eumol2qzs8xjyhimg0dxsds5yq1amiha38i0d0wiayahr88rwltghigesqgykrc9vqzogw4z9d865bd16tgandidpzbylpp5pns8fk6z9y09fwui5na1qvhlxvknxfoi9qbxzbgn46wxq5kgjk7e2a2kadkaowxvrmfni9ckvrjrmcr0c8x18lz090v8vvav3f9i27mggye0beodl0fyrbd5csx0lgl1kbyp1vb4tl0pk909phl90yvqmyvd09c8jgal3a96mqlv5e4puxxbhz0csu871vivtgtn2dcmj088yigjljccdu3l45xbzts9r8ddipkxinrrgjwc73vjjro1bz8e5sc601tnlzi17fdsmy2fy1u3hmvp5m0x6kt9td6x5fkg94zdfqcnnrbsfagz8s76ngbi2thv6uf7hz0ztbv64k3lmo0m2keceynslihpjqqaebwmt097p2zzn9src2pp1l9ftow0re4v74jofgb9ahzmkxi3gjc9wnht40brwvoinzylvw0bxcqwrp2152p1r2r4lftgfd453ohgphm8kck16k3sq6uqzsk0am0zcnvlk7baprab32',
+                proxyHost: 'qfo3w5ntiq4gq3h1zns1nhr8u9hzh29gp6h88haimthxb2ssucekuu0c2dmk',
+                proxyPort: 7141698151,
+                destination: 'silgbfhq2wb0qzjzsq0nsbmast0zet51arl6uew1ivdm940tx0h27v3lt0izq76zwnpsx4sx4kb7jelguavi2atv06sn6d7d6ehba3dm36im7tl1fvz9funoptycrh35lhcmbge76vd6vmjku5vsjgrop8jvogpm',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'rr5lshni95866b4j3xjb1annc09ubwjxij73q5g7fgpb1pr9olxptfhatle1cljsewlpkzseyw5nq020qzuw4xq3ccefesr1ylpopp3gsbq5at4x9i8nul4pb0kcrndx2mp1lywtb2uslwotducrp4fc5eh48tp8',
+                responsibleUserAccountName: 'h2oduwg9y3nmlcsv0biw',
+                lastChangeUserAccount: 'imt89kzmw82aodgyvpxn',
+                lastChangedAt: '2021-05-22 20:44:44',
+                riInterfaceName: 'j9xzcsdez70la64r2ekc7nd92tbkoepryk9xri2j0vli43eoy2r9jwpghq8enx6lkd7xosyup2s6g2jqdlg4zgl0crc41hpkyeuqwz0whxyfaccsa2v686qtmmcy75yetp5v666g077gxdce4uzvvyfncbt40kt5',
+                riInterfaceNamespace: 'b9rvvalrh0x2aeil9ikzgi099vllu8orubw1pj572w0tgvmep12ym6l084ueq2mm56nohc547xs76d9pyxh4zsrlkggbk2rf4g9aah8zmwxfrqbb0wb69t96v1jjo3nyznqnbsxjjyrjavk0aziov9glhigd06hg',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelTenantCode is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemName is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSystemName is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'qdoaqf8r9meic1qt7qxspjowbj3lk8402wccyl4v',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'jl7et4xihxoi5uzjvmf3r5ve93ozkpefpmlxz12ikuc7hvx6ky',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '97tlgl1mus9j3b1v03eb5',
-                party: 'lpfyinxk06soygv5pmtni46kysucefajmyvieo01ued7sa9hw37n1w49v8znfi2v17g51wyo385ye1zzwj3lc5ltvaelo3msarritf87aazz7askfti2lwswyyj12i204yx34tt3ysyp23k65vy8ni9fgbe9r29e',
-                component: 'cetm8kbbwifstgwmsnf65hkapp9areo58msa2ubaaray0tgsuo68d7y2tnd5dizuc28o9w0y7fdvzejyazw0yrgqxy9lrtglhh8etgd15e0smtlfkeekkh59v4evitsubdpn3ng8v6s2dnow6q8542v3vqa9t87y',
-                name: '0vvrcr7mg5pgyflqmncth5qjuhpkiyb6z8zd9l5yw5apz9ytejx9jzvy1o3arpd36pmyeiryzevow8u0r3cvmbqc2k8466ctscvor2klkqi4ian2yufjw5x88k6hqwtz98nfegqixahyee6m7jctkh8jokrenhah',
-                flowHash: 'xocz3ls4tr20y291sdna0jx8zmze643iomozfku0',
-                flowParty: 'm8ic2zr9trkfp3bneoiql56kvomt4c4a19iq25xv2o541rizz63v9176iuxrh3ly3f8hui8aals43wi0qp8uv42kgvgwatu3b3l3726pwxf973m4lekgf08csdz4ejhr7mika5abk4wdyh7xxrrw5vdjn7uu0715',
-                flowReceiverParty: '4zwrwof5916fji6btf03vnk6kwpqme00i0inksbrajks1o93idc0wenk6ylfgigevxkcpvb8yk6yjxeef9oey6l8iu4sk8xsh2sgj37e5unxd5j7l0whomfiwrbhbic7yay0siwxwtt0f3vkj9phbt38baqgwfcd',
-                flowComponent: '1yhu9o1spegcu2g2q0ox97hhbft3a7jlscf037jkonc9m3a3fgs49osjag6n7ermjbw1gpe5tzounmtvmvmkqjsjvfuvup79svu27eo5z97ane00k7iyx7fgqwwtxzku2rwkcvtshrzlxqnk0wmcp4x87fs1i67o',
-                flowReceiverComponent: 'vw1wqbo6pmxxnjodps868cf9a8yw3wtxdoz9x5c33j5sz9z5zgu6b94mpettcs1sgoqzbuf3nq1070v2c7hjetcx1ugl31hvfxdw7ktd3ddz9lb8n3527qex0x1dbmjokkcv41ydsdz8ii31ttym6x68pl05jxn6',
-                flowInterfaceName: '62ylhllgl3m9t8dbcy9fkgmn7brjhsciun2guzdcidd044b54bkvy4fts1q0kdrxgnruuv3p7560zfqn8fxf5u2psmfw15iqcer9ai7iuzdzjmvfrfzqxdp97silq9wy1v01itl32c427d1mi0jfm3nrn3a7ec9n',
-                flowInterfaceNamespace: 'ck4y5x4iwjmj9dm5strmviwwab8wmw70fwuym33h4oc8liu9syjzwsa8n09az9nqyc6csx15yalola9hfh79azhny28gw7htgesfx7strab6wf0qmjcc7volhiw1t6zxaiow8164wzkn0067imc53d5vabl365ur',
-                version: '68k5dx7ns69z94fe4svl',
-                adapterType: 'v5yhqqu3emm4h2dncnx9bb4cmyyqhz7zlmsfibcpa2t6jztc95avn0ulo8s3',
-                direction: 'RECEIVER',
-                transportProtocol: '302b4sj6bf7ofnvoxmpx0iid0tczwc1c1qr9wryt4i68gt62etzt98sshb18',
-                messageProtocol: 'qnpm0yh5jzkcpk4v234kvdzz8jbua3nrklcfazq2ks151cadscs0739lexv1',
-                adapterEngineName: 'qbcd09c5j9t80qf29iohmsy0s7qjpmll2ug952xb0n1u4kexhtm3a8a463n57fv15fv7oag8ln08uz3284iv7c90mhp9tqtwjfdgtf2phitr4s4z36baw1wjv79dv3e22qnp2w9fnhulnn1rpf6mgqs2qqbc10sd',
-                url: 'g2xsdtcr41amoziuuxxpcl6xx2vw14icr6w51w9nvmily8k8q56af1yddqdsrexo27jjp2y6usy84h145m60efozctqskg0o1nf5c7oh8p38kc6c3nl66ijp0lweff8zgvibi7btgqggmuj28brqgztlrwvy7qjboanwwfjn31003ce23il2jzy80aholo7w2veplw18e5lbzkxen3c3eta3p5g7onm6ntdu6nk0lcnrom67o9n3o2ffan6ozsltqiiqpnbutbocwyes2kovjxqwatcptgibdgowhnupejb9jifehyleo7ngzs565dhb',
-                username: '8fmp9h4c0m46ryqyll2pccupe43q9l11p51zj8ko4w7mb38oxytjimj3hwbx',
-                remoteHost: 'f5a9zd7ct5z661mmhxaytb4wisuxt52gf86e2e8dtuktt92fa59f6dm5iwi7iw12s1o6uu97nmhb46qcxlhzwuoiv0683v7jk89e53z7o0upc2vvuqdjjfdlqz8t3it68qx2q98psspe776fcm1164e33cheiq26',
-                remotePort: 5301936121,
-                directory: 'iosdr8o682hzsh3lti7ibbxtunxxyjsugbdeba2bqakwpdhbv2c521i07hxnjh0ape429k5pjze6hqvyi5alymyk810t7q7dl1ce01k5qeisokb7de5e37dsktxrmijxsvv4wo80cu09hzmypl1j70oiaofjgi32678oumm89t98ism4u509iy59izjdmg7isy4idgfyiw8u529bgvo0x9h7uzpe1wqw6cpxg6pf3ahayrf6syircg8qeazd087kpnn1jctk54u89f93jrjuwqzy9fdpncqoovnahypo7z41rqlge6q7qhch7rj3rq6xoa6c5k25chdg5uledo9m8zxeunpqxq6pn9q8tkkpm1hsc5uu7sdmr56ca73hfi1xi22u2614f1alah1uzhklt1jpnrhmwt5eihb4o342rq65tqu9ynq5wx4545q1m4nx6b5ryvauv83i7ex2bwi08vcimiho64ve5md2k3shhets1ulwezzbt6h5nxeaur1o1cth7imhbnhjrsgliarx4hevlu8bpg0ulrgxyurqocmt18cn82umenzeh5lzuirkf7jyljii9kvdcme52ka6kd95poy1ct7tmyf8a8p4pnhyzyrmt8p69fhqmmhcn9a8nnlnmgi07qr6th75bylsh1x3wg6s1yxk6eexvfnw6xdi731oe0mkrtvqhrp4tzodeuhyu1jhsac5g8n47eelmukwytkw4rxc5sgfx7b8zxt404fyc665anvdzrvmsbztwk7sc279wl88ppguhwmnfud04x7jycjhxgqzwmpvhcy8jws2c2pzd9vp1n7gqjtqw1fp39bw17e41d94qf07qptrdpe3xf3o3jvq7qu2e8k5xhqvlfpyg86k97u6zg3tu0r257073xgonl0iia38rnmjfa65wevfgjisubpc7tyhla1hi3gtle2pfcqfqrjrq7jnivx4l67lau1a2ou3xk2uqz42thj3yjwx8j8mepri1f412w9mbov1pk7d6dwg',
-                fileSchema: '61jdk1vqco1t6wgvqsox8gq1zld1k92cxb5j4n8max3wxt87p8tnsjjaqat793lbjl4rxk5583igkavxwqrh07esusuq2o5sj3mh86tl73ucwaplt8bwd9bnhrrexyhge2s0qhlrjj8cb8h8c9l1fn2cwbl7nbaugixbsn6u1an47eswlqxhc0ac7b0t7nasmv4ctoe3grivfnereq2i1ze4tybk97myxicn528e5ql2twymi7agx2n0d4k09rtg0g2ovo3ksgyqxsuuayetj0cjk91b98n6kwbqa6gqrusvb5590grk79z72tznkrsrdanan3b1q10qi8zwsd5pmces31uh510ucxvcox10r4vplasks0mmi02p1jds7zkkpcdy2wjxzdc99r1b7pwwvfq12wxgp8buh3tmhld7ub3pckl605xapo7m9vqjfpycgtenhkd47xhmjlg9cq0darz93mjb87kkyggxccbpa6bufdhcypooiq39q0goy9xpgpk63iq1svqyn7r4szhi0pixvt3xb3mc00jtr67lq94xlkzorf3kvimwxzu9oatwul36wqjndivqbw66x4qcg0wrwmu3jkej068msov4yfwcp0ibtmjpz5uh57gfsa64u5el6w8m5fona13tw5zjowxp5pq9qcj02basq6dg6pavve339prdoudhquuucx8lznt9z2l0u2vhdtewugn60za3cyl4baadizsmjnq4u9cvnauto9g4uobcguod15ivr306t2ssezc8kf6rlljsjmtpfwot7q0v8mansgfdxnp1d67ro6j4adnprcwnv5cr1y865ssslj9h2c76m4gbhiephm5oiq8ojz6r6l00g9wh2wy991vgkmb6gu46yi75bbxio8ctuu25lqfky36smhbyfr2rad7vwmqw8h2idwmotro8gobe81nosbeyc4purqv5k1ekhrdc3qrjsib5743ruv0o2rrncb4yatssni5929d3815pbx6m8q7jz530',
-                proxyHost: 'io21gxbwf3fu8vwl6n2ejetiq039rpahp5420w7qe9yj90x2v8lo6mjz1czu',
-                proxyPort: 1165995004,
-                destination: 'chwfpv8miz5rnkwwahxw7x42ewr7nu6dsxguqov5m6xyaa50w6cf0d77c1h4lbeho9uru0qytr6pzb7noni89aye3d0m34e3ztg4qphro8p9ufge0l8qqdkn908e8rtam3vfex7k9bdqh9bc09e3xyhijac0obyz',
+                id: '7e24058b-185c-40ba-acea-c184b796b345',
+                hash: 'tz9vj0vsccwwu01ohlzc8fcw1ax5jjpbm3vlf8ir',
+                tenantId: '5ac55deb-b6fb-439b-893b-b8be8ce0eb92',
+                tenantCode: 'kwp394i3zznhyd0fh9x6wkdlon9ofjeh58s6c6cnwefzsi3fix',
+                systemId: 'eb960a09-8c52-4436-9828-09e9e20a8cbd',
+                systemName: '3xdke6koko5w736xfl9x8',
+                party: 'bn9h0qyxgk24a9xpo2ioicdkm3dfwxabyvpxfunelirorp9p72lf1abvyh7tmynhqic5a9v011ss42r50y4ucxomw1id0oo0sz0woql6zurus9eqr6ei2rfuxuubw2i1rt44u7cg952pd1vc5qsrztfeyanh7m0t',
+                component: 'eo56ycmdxo6vvyi1tessdp8fysppe0mthy4b26a0cuj4j3yp58od20kv6kjy4sdjcyr9od11yeduu0z9t4ttt5lvrlassrt9fpmjj6ox08fskvfpwj737amfdfukwmru4kof4en1xse5vqqea1qmkd9mp4n2mjbd',
+                name: 'ktzuq2tj2yisep1reoxa4uyzfijvukf98gvuq0phgnjmkbs3ihwigmc555vfujn4yxajllhktg6jjnk5u9cu80vb40avpavgqfx8dh7tkffhv3famwefz84ubzldrvuq2znx6hk5rxs0nd1qm3azvsl86itsus2a',
+                flowHash: 'umeet6xz0xmqvko098v0o5th7asvxrctuqgernmc',
+                flowParty: 'udhdwigh4edbod2pgldtbfd40rs3z0orila22hifm5kt8ab4mgsjw5z3ub1gqelebsjy5pdw73lbd6q1dlrlblzm4o3gps9xociakomucfnbd9lefu7vi3qph6o02mcqcsjcvzeisz2m4cu3fzjiek1n2lk0yydx',
+                flowReceiverParty: 't76its20cql9f42sjwj161tv7g4ghzn9jsazbi0v1g6pegzuf6df4eaa1y2ebtdqanx4d3yn3odyz0kxiajoll4bdvtkyg092uqrld8859mcqzztb7zglcnr6ehem2je8fjlzuk7l9v2dkd83w5def3gz3cj7vd1',
+                flowComponent: 'mg8g166izuo5rxraxzos5i285tekq0fcbxysi0lfitana1vw95o8flika0bzp813fp5uf5f5ipfomd948vl4tzgu2ze0r5nrim68gg06jcwbvwtfjih36qg2ctxhrai4yw2uva8fnne0mi55r8eqk0rbnoodz479',
+                flowReceiverComponent: 'ibijh6be730o9lby9m3obr3nz876iuxouwwd4psqx993yg55o43c0invi625iaj45d53oijj282vs7x3eahkwt0ps73s3bkg5qlr8i49quri22pcv5lgjscz7dc7ak89uutoegyaim2k0qnpp5w2tygwucyqg3ql',
+                flowInterfaceName: 'g8pwb03ousirubk9t6wwcv39667qs2j2ggvzokatcqqua15rfmos00zu7mfgwihc4dv8jv1yymdfbn0lg2y8bz1skyo2ym04y0fpdp9r1a5p5o03q0jdb1v7n7ky73c6et9ckxfcd3uphdldpqcprp50ubj39tdd',
+                flowInterfaceNamespace: 'ijkdz3zgeihagtu00re8nh4auzhr5rsw2r5couoc8dao37b2jez7z6p9cqvywjdjy8tvizb4qjn4guim0nm8g7v4hvfxno19lpvyknunbh6ud5fb66l8eupccpmegz8mpngay4b359mf2zmzs8mkquhfnf9psogr',
+                version: 'uthx54ltm74uai90xv9g',
+                adapterType: 'a73kz7gnsykyoxbb6370ekkbh0fmotnhuh4kwlx6f4ukkxtet9sdn8eiz9ms',
+                direction: 'SENDER',
+                transportProtocol: 'if9ktv636dq3649ueq8rny2ks5ypga6jh4z2i32lrmqvjjyiikeoyfizcyl6',
+                messageProtocol: '5rzgquzdmiycxzvap3ec6xq6xuc0biducmpw9al2u4hvkoi407g68zdeu5xu',
+                adapterEngineName: 'lcl2s7gqg4is28asqwnaxellx7jpumr0x2glxt9iu6fqzvfkcqt8kqu9ge6kdx9asy0o9m6iwzx0vnawaaq5l48lgt5k5niuaz5b2mjioc1fae4j82eyj1c5vdn4cl0eapwq7aw0tluy9b0anlqs0f3kb4mdhkxy',
+                url: '07mawvgeh0o7z5f308ibdkp4j4em948wk20ufvim12vnj44kdmadpen47abyuejzbhhcu8gjadhwm8mtevd26i12f6qag90zhknossmx8axzc3wx9kof3kxgqf1rxlfwu7t7ah2uoemx0izrrrx1xqydb57un7pxq4trjqq4hflyfod28c84arcnf4bwz1spcckkphdegk212ppoi1z4hfk5h9b0dwkckfpp29civ83wia50lg1ljmmob0a5qn7a1xrhxagsjifvdzvf41u4uy9830wfixwb22x3fvrphtplkzfct98it4llfh5laa49',
+                username: 'zstjd3q15wli5kc9jpayi6x0bzap0qwvlfj2mcfoavshqgfdi0ia8x395ink',
+                remoteHost: 'd1a8o8f409osy17xusnm3oyz4g703zv3cjaws429m9n7svw8hpi5fbxa26c71ae7g9ea8z09wmrb4t6skfqg6wrtn7xfw1y6s5mof5f7nkp8he5bwkhov3y3tfu3yqqi4qqemulydz0vmx7dadnz37pbbz5aupgo',
+                remotePort: 5224656242,
+                directory: 'c26hz729wlkmzpbk9naaoe8l8vgs1nrpk6w14zlk8ls94pvgykfx1dim28vcmjv0nz29ek20gdxaw58hisq3z9n1qqqmnxiyos9ncip57zp0posjkccu64kcjg9qf8mdr2l07ce825l1nuzltkj4lh5cfag0systtacvbrb6v80ye2roa1ucgxmvpffzrxvjx3dw1xkmrs0gf50hhvvkodbnaop772ckfbhr04eturu0ah8b00n4tk07k3r3wx7ny2c8iill11dlajfox9j9432b2h02if9m2xpo3wwxzyvcqlbh6tgdlarf4kdganoqycla5zy2y9gc3duyfme4vw2wfykz6i2wl7xjv83xlv0uizw4y04zb9w7vzrpb4rtq7tbdbiqlibnaf4lklor3l36lttzkd4sj69rhni1uyg0hugphnbmc2i47xfnnuprr0vurb3wexjam56oikbcl7p9ph3kdouw5zwl0xbc59i7o90ex9tzfiz9l4hdiwqd8m4je5dd0f3jhnn852qu20an54c38c556jfvi4pxxfvywzpyz8n15ng0osrs9ti8v6c9q1ib3nqj842768wg6cn6kgazs5uev1odc57duhvsag2no4kpe74abnix49xv7c9og7rzbzxsoy769x4gsb3hisxi2yijzktajhfcs8ms7z22hvcjp5nq4pki24lhhhy0kf3x6m50autuaf95khm0dnmxjl454kian0nss5nu5uxt5a39wmm8rxeijnqxckoajcjnt0bjf6gykz05j5oy1me2emje2knycaglw36u13gtfnh4t71qha67tfgvmv38xamykoyrj0z3fl9k00kzkzjju4z031ga52sa0bw6awt1rdwi4jbe20bwhurptw8zak831uzmb9y3a3b70d63sp30788hsee3gl5tefonb2oocbs6rtx48zb3ki85c02bdlm71vdv64wk7gfhbp21jvg03xmfgpysbvzn50gjokqak8rtphplgisnhh9b',
+                fileSchema: 'ajq789rypg8zwzv5tsh5yxh3nfzekakw91umaa8cajjyj3hnujvywt7wy9vfp9ad2ds3va35kd8j2e6hglkazk8aw3oekvkl11lt2nmaw426uhdy8k0pvvfkat02owif7dyz5bsfd7y6906dtzz63h108fpws30l2s2d0fr6dvjwa4aw9h7wt1j32w8dwuasguxbgji1ccokbgu1adn8ibzzavvqochpfxg1ino8geuag932k0ghwdjqiiccj8gqxyhyb7l2jabrh8lluvgr4d00am9w4hcfg1nlnt1md63bbluklqu1aizak3x3esyxkwffxdkswb9f32p0hudadozxl68qpk4bik7wc45qgyrb8z8wc06n146r6oaxmbmzbspr42eaorxr5mnhu5ydbst6lw69lgzf7ya1kf1w5yt67vv0rz85kl5ghu68ieokdukcwuwxc1qti5bdzvv4ivuyqa52y9d9afz7748538gjn99v1s1jut5llltoq3jxtjbqkb8clcndpno8pgi022omsjmbqtcpsjhpjj8befcknvd4rfvmkilqb8xwkiqel53whayqswbg47l4dl71znvvzdgsnaf02btg0zkfjzc064pjonkkxanx5mgr8yoq3jvjtarlvpi5vcws5n5m7e41v8c6g411c8awqyyfl4su1voy6abw1dcjkmsqom1o0w0at43tkpmk59v4mm9k3svgko926lw7kcp41t75n93t3lrkzl3rzgm1f1kgo4mtavzrcj36el7y08af8sws1574bvlfl8q8yb9y1s6d3yilfja2ceycztw7b29z4m5vju6nqhlod2iqom43kvm04t9jwtj8f37l50mi7yxjuwqlg7witx7qn14rrksrk1xqd1s2od1k6tyx0petkyz4cxa171pt0gqjvy042p3mdal8kyarlr62s7l58kw6aji692k2kntnfglvx2z0myxnr0aw5evqs1zu8aumfbxd8b1srk5ti01jmt9mj4jwhnfe',
+                proxyHost: 'ofy962fyrprenuafp9kvfykhxcsxlwqbgns79c6xhknvt8unzdx1u7dys3x5',
+                proxyPort: 5658966896,
+                destination: 'x13vgyhf3ns2r444berzoxfqfzi6kbknazupstvbzukqgf1eobw2ksemvsdwvzs0idq16ddljx0jb4gaomzdd5luvam69ffqu30no95y33h1wn4w3d66mr3rydpof8dor6iliufk871v2m8v1y9escswdcx6ewxq',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'yf1bv7frwt2ecuxe00h5ugizp2bz8kam9ffqnf2ee4yfi2qg6k4snhlfb4v5vkn6avmfqtoddlr8e0ro4z8jn4i6aex668c9qby067739whnb3d7dn9cqb3h86bpnvc3ed77eaote0o4kd7z6p2oc7zlqu7y4i5p',
-                responsibleUserAccountName: 'vxrq8m0l1wmhi6bor177',
-                lastChangeUserAccount: 'bkqgibh4mfz7on0as7et',
-                lastChangedAt: '2020-11-05 23:56:15',
-                riInterfaceName: 'e03pxqcrmoxlyiokdemf7a2mk0mfdfo9ix68eysxycxn6lvqpx40ss4wvq99guk06g17oksl3zkhlzqgfupp33d8wklhi9t6efef18jdegb5fsseu9ft8ctph26wagm4go7vshhm5vbntp1a74b694lkok6kwtsy',
-                riInterfaceNamespace: '6zpytqxegwfltq4k2hyr03o9pryvfr31axbcpg63dk2dr0dh2kspsf0oom97w6vni3xyfpe7uaje7sj6tobazpa7qxb6zm64i3ta42nqbhkrx3jfyeguw2j1jqub3ij93nt0fhmgz5q9tuy95vb8w1qb6jy3242n',
+                softwareComponentName: 'kdyd30rpaa8gjhneygfo9439pbmzy5s8fas3d17tmzeku0ayu8nyf1af225r9eyujzkbikvibh30edh44v5qbpauan1f8407c79ezc0p96u2f3e1bt1fqdf7aehx4e1brmkya3ikep9qwbfl5ebuoe84xxpz5cui',
+                responsibleUserAccountName: 'kdt10ywdzx68ibdxogql',
+                lastChangeUserAccount: 'yz8b9ax5zvs5alqx826z',
+                lastChangedAt: '2021-05-23 03:38:46',
+                riInterfaceName: 'zzzx4ks5ugey9wl4uyzdkb2o1najjzrbi6fqrvdheefn3jobgee6l9ba8arlc12jo9oxpwfw8i7d93ddyxh5rlnaof87fo8cnqwnblag7xxfg2m6uz5f6bi33coaruvullbxcibgewl9nifjy3h8p1mh4vndz4si',
+                riInterfaceNamespace: 'z1th3xoyq2n31jnk53g0imwozyafmh50g9nyq96ptxh95zw865g1uyt1nfazhlnxdz2pfina18okqectnl4iini39p0zngir9pmmanc3nf10scfjoaag7e17qnyr5jtdbpxiy1psk7hiqyg7g2z02cv7ligh52dp',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelSystemName is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelParty is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelParty is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'm608693rqmvfygtdyetlltoep9ybuo1hio1lw0ju',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'zl1wa24cemvzq75r4nhu7n1hkhni7upf93pgajn6pqimayjjcs',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'e8umqg4fusrwb1vw9qj8',
-                party: 'v52luyuoqwnagvdtr5ajjmk0q0uhh3rwk7c3cm1uacuq8mircizkutpldmdp2qexvg6b60um0km51arg5mwjtg5t1w2fe6uzwafkeugpuj4n21nqcln2s14kfkdguzi3oxlxnhg5byry3szgzcfkpzujl30hud36p',
-                component: 's9ak60o962cyev9105tef1n1p8gf06evn9r1mdd7hhg2vt8hlqq4ijt3y7wbai3m21sq26b7r5go3edne6xddnra6l2i4vh9pifkkhjfwj6g4bsaxibdvvmqpg7f3vctnvhc5zznm3xclqj0b4d3icaswmo67wft',
-                name: '0mgluy7xj79fuxcyjq1uj2rs08zdkjyhnx63ztxna6hl7p52s5yq8f5ts3a6n7a64nyht0wrx2ucu7gtguvkgogmo1ffxiwahdui6f1zpyxodkop0ct7154rukcoy7b8i2sfm0l65ii2et3w7sndy9revhw2isiq',
-                flowHash: '59nql36d4e9oatpr48zry7sfqbhmle2ctbamjry5',
-                flowParty: 'shkcw9eo0hh812qyxshwdnzhou38vcee3biiwi4gsgc7kabu1f4hhm5nlcw4c4e28aybk8dr2on150d9d79g0nsbca94ar8dat4fakcdoqqj9zk8k1qi8o5c3e6bgxl2b0cxbq0rk5594nmrxbogmg7qhb9njhqj',
-                flowReceiverParty: 'zy9fslx9riaat13u6gdhx5e9ii3qblf8ue7s0eb3f807cifocrt0oo4rrguk8nr7lrdy8dbcz7msz2sx8ov36bwxk6hdbak9re35nozx755zro68wt05kb0xrv7krh0fgghrurdlen3t19wh9ul2mz05xs5wwno4',
-                flowComponent: 'mdd5acw560n3wbulbpvptelcs3l83eae1hzev9t6cm2jy25alil5kksm4pc7gbixzct5bu0c27p9w6rxrnfjcdkq6ze1rgv9uzs7x5mmmsbopmq5xyq6raqx5aohbbakjk3d9kuc32o1gy8guk0w55j9htzkgqxw',
-                flowReceiverComponent: 'x7yxcozornh0wo9e8kwlc4b0tc127pvruseo3vvon99wdxusc2wzpns2pkf4oxg5nyfdl2zh66ih5xs1oi3g0nbk0dohu7ph3gkr7267iyq6e42vqve327mzz2b7dablh3vhyfmv6oes6zcfcumww5onvbl8257a',
-                flowInterfaceName: 'kbsn7fo5c78bt2kovfgdbpnpwx7goeoz46qdqs3zw1plp24y21dh8pzdnw9whdgh466yd4yw1bs0sorb7hyuijnit09ptvq1kvh25ekqe9mw3imskgk0rccqx6tg0nd76zx4znr05ak14sr9yiu71i4xuo6qt7mf',
-                flowInterfaceNamespace: 'l9ufiurwd05gd2x72xfjvl8hc97tnavv6s4vitdvz2ts5sf0qn5qtzzl4j4wh14cozeay6dc2x04a3mko8l00qlz3071z5jsonprtlxg7rlaoccl3hmnyg2g88at6heh7lrxx7pt9tj8th33nliffzi20j3n9ipm',
-                version: 'nx1n2sfzkw3g78feqmzm',
-                adapterType: '3ykv9d5eow47vrkpegnt78d5dbbfvceoqn5f4qmoppyoqg47il1jg96hs43k',
-                direction: 'SENDER',
-                transportProtocol: 'paz8eys7sp6lyek9pr0hnx825xpy67yfn3ss82wscqxatkllohjwietvf3nh',
-                messageProtocol: 'sf03e074z9va4ojg170m5aficus7524rom90gnbfywvqr6mbdxk536waqqq3',
-                adapterEngineName: 'nls4ybr4ageszc0k2b7jf40gv71f8t90abbc9jdmt3663om2i1xx3cyplqwp3p6ijmozz82zsw0z7ec6s3nubj7lzal5t1bh7chdd43972651fskygx9f0vv1v5b2h3zg48e4w9ffwco2h2ayd1ekv1cuo3hpmbc',
-                url: 'i4l58awmtwpvjiv12uz08n9apzkczdrc5tehveik3zedyu9hbq5oexi00h62okfk52yfunzfobvs7vr5vaxwj6w5qrbtpsmob7mmnlgmccj6sdhfvnaytcxkys34fa05zmaanarn04pazn59cxcy0lvgl2v25hc3ov18h663zt7jjvf4jvvksf1i5bffluwh0eqnzaac25h6ysxh7pc9l8swrxwl1lovafxf1mh03r53w5dkdubju0a0yrpwqe6fkgj4ayi87snt225518buubhechu7mrh8g1flzn2d2aklw3e5oy6vcobc0nneejqc',
-                username: 'akio319rbadll47d67382egiq24ek3wn747wezyrbnv6hb95eqdgel52d0of',
-                remoteHost: '53jnb4esdgdabk3i59ji614hjj8gyoz84whqonl08c2n0n23f6yypq1g3dr8hl8q738x61wsw260x7sn0cunpncjzvmxt4awtwzh3zwqnnra53oc28h0rlkd3fb9tuj4l2itaad7yawktks0j15atu4ds473ljnx',
-                remotePort: 6000220109,
-                directory: 'bdkaogle4s79eo0x3vymkek2zlbw2gpak8gvf2gqxefy2rc81vq2w1wi71ttnc3rtom1bkvaa4uaomizg4xhp80kgxclmkuww3oonbmgda1b0ihvnfvzj1nz8tohz9dkviju72yykgai9gwvpe6hexck9x76is7huqy7fjd8o47k58zi1bix7tjtcn42ap47hoxirffw2qhwg6dx0u6p0zc8h18a8i8z5e712yxopxlxp2pmgnou1gj265yglek7eazedcgy7ey5ghid9isjsnp2oqxhp39pb2d764pydxh6rhbhw08ijjvw179g4nnk0d6b8mrax7gbbghhynqxj2s5uy59harl45isehvc384uvx3nmfxy54f52kfr51d6kxac08x41bgagyufat70zk1ej10hjuf3c50ysbh1kibd2xwp1l46xfa2i4d9dfbjxk5znrj2fpkgih6jjeqjmfqg5x8cr67ovfm2wntvzc0z6nnsibu4gdmyfq01fwkcco7lzbciq2rp8c4djyz7ke5mkt805l4tb6kmybhte0ksvqg4363584i0cqigrt81ahl8o7r9k16n8jz21c3ggfdp61xgv8p4pliw0i8l1odrbskby8t563la2dr85es337jnjpuavjktqhmnnj5mncvte0biuz334lhywmgx8e1y52opkuz9nhtmp58pvsmr0okdyptcbijxso7mu1eef38lh1df86a5trzvbl5k62km66suiyscm6m9d5gaz66c66i591d3ay1680th750n3epqutb5bt5pgeh284yhgw0h0ysfw8xkeoff5dyuk0iv2pcpx5z8pp6dv21vr1air7esq57alsbhb2vb3l1rsazjp2tvtsvn5jnbtbdt6ij5tohd1nn22u4i5va6pht70hx5yovst2rv0h3zn4f8mare3oyyhcecpr0qp1vjqq6l1ys35726k6trzegfq4ma7y5ivu9xvkxh86pgmz8axo1r6b5oack73z3r9r4jm7eu',
-                fileSchema: 'vubo9awc3y8cx1uy1i3kgproknpz399i621fv5hed21x0ph0sam7arhdb9lfcv6i1xyjghi30x1dk22fdy095nkdzo62i5y4qvv5of3380r72xhsk8fz3s1fmmtq4fu3btia092t65p52q54r1s9i43bk0q99it3os500z1g7zu6kc55uv7ghdvsw654h9ror8qhz81tt3nslx7m7uk02p938xwejy0d82n7aywspvfvohkj0yl7hr1y4cacj9yru2n8uslshcmwgjv1s2iqahpeq2dil9upniht0d9oe25cxpeb9w1eq48sucqbkvcyidyjvtd8c7pd4p15rl8bsx638h0wip27i70ziw6uwwnxsthhnhapdy60x3jpgzbp5mo1zft9d4i17hiy0iwh2p9y04exrijm597xb26xtmcariloikq98qwpi6l96qjsneihrxkndbzsdcufixa70b8681jg042rcbn0mwmij877k4rn38g4lk00dddx1vieu7y1kz4shczti7r9xl5y3xow2gw78xdrzi63cykqj7velk7sbwyulo0uxfo90z7muntn6uzzxjywxnlkr3fsx5xp6c0p44r5o8n32v26jis4icf4skxpob4x3wz5wy5wgohyf0jvlt75255ahxh7uv6wpfap33wx52yjx66kc2yr8ususz7mufwm4xzxdompu3y2x4po9p44xyq5tskq37kyy2hzr0bq3rsphjpgc0smniec0chzoep20t3tv8ec4dg25rkeg70mcvq2ppb2ojx845s472ftg3ajijxzz6pd64v6igsparv51zx8hqnhqqc79rqvdi5lf8etsamg8mhn3px18kv3wxvarygc7i06ak3e0neaofa5awzdi8l3dhpwwe0su01w3z4ygdylg7lvjm2x2ykwrmc2mx4s6mpusafuf7se4gwe1zmv0z4fmrmfvxjpdbfujp0xyheail595jy2n3rhks5nu29pnrkn4c6042lgrxfn2ncsmsuv',
-                proxyHost: 'ae0dxmeuhfqfs4k4jdlj5oliz28mwrtblym69f92jgdqeihjr6ditx6udw6j',
-                proxyPort: 4979836610,
-                destination: 'p3dd9lfdtdr7917vxxb8nzbhcblbnqm0ztyx0g2w2p2qn0ac4occnjf21ms1pqtih3zxg35qkk8rr1teodojk6d3renh2vwcci3tf7oyx600b3vnf9sdkfxqjxahfrf21n80g61tghe8cmrlgjwmu5cjqzqr70ve',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'uttv3lftvmeiuny7i70r3bmm8o9za41gv8pszmvk3gi8jesobtaxiwn5evk6mbnc4lb86dre1fqtyotef02jf0vhw45bn5sz14yd1o5qnygg6xq0e6qv5ovue9dob2i7k4gy1wokxviueotm61lxy5yrbzmj8tnv',
-                responsibleUserAccountName: 'mippicdofqtphr5ngkti',
-                lastChangeUserAccount: '90odggj63fcx3qihe9nz',
-                lastChangedAt: '2020-11-06 08:27:17',
-                riInterfaceName: 'yavs40sxi6vg19fetyv7g2tpnxz6i9xx9mgh6ln33ls4ruph638gn33ysiz1srozxqxr8fclzz1hgu0teku39hsu0offcfiimcjeemjlwju0c0hblln4tzzjnfofkm826ea0ix1v5zb2bnn1fdmwxkoy65i3fs0e',
-                riInterfaceNamespace: '4ewprt1ljvoea8l4wbnjsxifd0d2b1ainvryq235ibf7fw36i2nf0gby381j8auh0iuu9cptahle58lomrk2ynjyhha1fidbd7hjrnmlylemj9eo5pzunwkmu2j2gaqtggs7gcudfk4nf62mbvtf1kd227vgz5wd',
+                id: '061f7f68-8b8c-4051-a433-9667898c2c7e',
+                hash: 'z9xt9vk0bni048x1ivnmvm29hrlvyatxzja5p0vr',
+                tenantId: 'fe2b7108-4745-448d-bd43-a8579b2bd69c',
+                tenantCode: 'hytvqd16nr5chgp82ia15rjklm1bm8i4lewcf1pbondp9qmq71',
+                systemId: '7c9eb42c-cdf9-4ac4-8db1-260a6fa74e48',
+                systemName: 'hkcxlv0pynnyarz8zvow',
+                party: 'tw9xwdxkdo194ao6qwj6hxn2y3ecc5agmtpaxhwdj1ydh5bm1fn6qg5im1c0p2gb33maq7z5oadss1zlk4orurhhlv64771g0o36lwf3cph87el1o7h2jdj7dgea9t8l9topt46albc7dfsp6ew4d0xwykx2o3ikj',
+                component: 't9sem7ynu9peyj552qalt3iplp5nt7m7af37c1d27wtzqe1s0boefgcs8h2e4yjsfx8cm910y0co18x1352u7bbzagbaekpnm00m78mzcic2kqe29vffv056q8vol2pau8259xu1401iuslsmaxhvw3al1gzkmap',
+                name: '09uohvsd0wanbpfsmpbz5l1t3dv85u1d5tdbu45h2ljz88psst1o91oc2xbccy3cmaed4loql8tf2dhezqqu81rujdn58y0inlpsy4bn9nethyfgp8qjfedzsb37xs4olczuhev1q3e9uiyu2l80rjzp9mxbafxg',
+                flowHash: 'n1rtsivfhfszrhe88m6iqj8ms2m39vw1pi5rxjme',
+                flowParty: 'mfyt6e8ej5h1h836m0edeu1tp5tecjvze12deh2nbmayvu0wt14w4pms477q1iol7tdaqu7y1rerwqf0d9g0vn1crfwj4uc3gbqjs0326oymmfmrzt07f1ja49hk0w4l8dv1ikslaqs6fgfwcqkr6j1xa03qjbls',
+                flowReceiverParty: 'nrqf8q5yli3hu9ml53r8rnqxz2u4lru8qf6zsf7wpbjjnaq9jnp0wyohf1k8ikz1hwykow99zbmm5m6ox1fym2e4nbyqyvjrmgsiebj52nqhxkg2jfb8l35fdzggxklt84twla7xoekugfdvv4pnj9teuhpsgcnu',
+                flowComponent: 'goi3h8zfgubrrf1fjjp1do6oay9p24jc5a7tehmuo7vx0407sd0mfytoq0010zks1q4a6hrho0czid1a944obd9hiz0j8t2r8bv5liefq2y9mxzfzg0lwho95eabvfv6if6nm0dcrn3ssclkrdwwumfw09adxmxz',
+                flowReceiverComponent: 'znpsv1xkw8zsq3kqxz3xdg6a32o8v7j0vhtgih6s39xhpneb5kmehyxgyprl7evmkjun1ceq2clwenye22agc66yg867w7gq10rjb13qtvabd6srtkz28l9461qzb3s4uladx8wlrg39otke0fjwn7b1wj70iuxv',
+                flowInterfaceName: '8k2rfk3i1bdghlh79lly0q5q40ylbmmwb2atj6e0e2mev4lyjddc534pgfnhg9kb8azkvtk9nc4euc4h85z0oh7ghucz557sa1f6f1xuwhxxqv2bead3imefeitr9z8kyfpef69gdr6seorxidvt2ln84f1dojke',
+                flowInterfaceNamespace: '4eg18v25lvcq81cmiupeandr5oa4uwj2umudj68aqt2dwp2u4eolvsxextvwbxh43gvmsv5xfe2j6dx3u2addqa588lvdfqm83w1hfvjjku2gbndx1l120susnud1y2cu8wi949tz9gjjp5dgf0hqhabzl3xc1ps',
+                version: 'v3tfqtjay4omm316shc0',
+                adapterType: 'xt3ad5rebybu5xy1s283plnw5v92rxkzkubwskrcjn992yv7uaa91cjx6nkg',
+                direction: 'RECEIVER',
+                transportProtocol: 'waw67mc4lyn1qrun78cbnlfv5i2amxlrqtbt7iv8jezeqfjclyhj91g8589b',
+                messageProtocol: 'zhiw4fg4qsxzzhkvuy7m30lza1ooech1aucu10om1qzk5utkdiu49oh4knql',
+                adapterEngineName: 'rplladc0e4299cncbg9fvsw3h4h7wpicfkb3e5hxh4sg0chstq1e2czd9lel69bal4n7bbrnwhyf80vbnsbut0v2jh80mldcqm9wf1norbr0ykftoyqtg2zhqls5dlz4sf7h06koo7q5bglj4l1sakmr3vplfr94',
+                url: '0j6twxyzbf5jawp1k1c9dryt6mqza11hkhztjojm8m4lmx6nzmg6v096ticvm569f9lp0def0k5qkdfyr9wts7ovx9xnrrb030ifq48jp4c1hc4o3pep2v2bjnq4rb13omaa8qx0kbt906tr4a3cf6bf2vaf2bn1iyl0v89h7ad3wahspb1z25qih22cwof7fz9tnwyvkllzlgf4lrldutwlx1ptbpmqy9onsoqudg9vupe5r71nxhqtw8h6jrge36h4t4a8bwmlogkqfxisekntht0lykyluahkc4jvfgoo33sf1s7yjzqxtclfu9qr',
+                username: 'b6meh5dsndukbcssmm6fcoj2leh35thdhxsqz3qzokfzse1q169qieph0mpx',
+                remoteHost: 'u4hifktqrcx4bxjrs1w4opgu3euehdfkfdjonuz3a2a77cyhvax31ce9iama1a1k04sahn5qyhoh6nmzeswadbg1jxhrwhgv2eevozp3j68ekn153lyn1ig9lckitadlbyex5unnlwbog2meye5tzo2x69488hfu',
+                remotePort: 9222252295,
+                directory: 'raot4ejv2wh2lct56usakieqgbcmmfgymfcsuuqvzp2shi5n6dvedq0t3iu0imvhol4ls5wnvv867xdexyfsp8tf9qpk349bk94q7edpg4wkejtrs02ef8dco3l1943j695x4nxz0mru7y8ub2y7a1lf0i0fb08isuejw462ds7or6fige7xqbvdkm2us1su6v5a2upma2pkng0bpew484n90j2t77yxk1o59h0hga35vp0h1zyjm99x1q2gien7vkh6wl2px4cpczspjwnw037oo7se1ehpm4873ert15yzc1xrrtuqn8q7m6y37pmt5yy17t6pfbqu2sa9jxenhck2kp9z5odntpvn6utbq946fzex4kb9rkywbhxscspf5fmou35ednbi9ud3njniia3x0f7x5jnfgf4wsm0xsycvg5lp5lzhhqyhen4gniyc77dcnunt75em7bnrgwozqpjaizzcww8zn8sxbukyc8h5t328zii7ij8mnij40ydl8pvpheu7slbhr9y7m7wz7k6w53hwu1hzisfxea450r35i4zki56o8yxo363fxqg2f90gkav3d0mrs6otuu16217vxlc4m5mi5nklafswmlwult1hbi2arq7bw1xecdqh1oixbj6ooj5bx0m1ktjzyopgz72f3g8ktqngnt1um2firr3j4o3jfw0z098inoi8u4jzcxc1a0y2hi4aagjz6mpjeuh1mhklpo199opwtn42t1520qks3crep09ultbpxlchnnm5ji3s9q60kfsbyvyklsy487ymsy7kgmam9shrmvsq62ytdyi8o86w9fk3wz7u1vhorkv7zzlecd84nbdfxqnvvsna8i79tbom776087hsn0q8jp5bajj5avk1ryxyw0h6ux6t8avjsak83giodsqftfxsyrctf6h5pcszcmp1t2gh7m3ps9lhlmrnkmv0mpb41u770m49pt1q9qy82bjuohcgpbp2ki3dqj2d0h9gfrwt35ton4mzowjt',
+                fileSchema: 'a49rt8w5s8qcnisic5f9i9jn598rmd04guurmpekoej7d7rjxptdo3mjai07s7shfy5mrk5oej54mh6bvmwspkm6rzuaednlix41u3pewpgll1l3xhnjqq79jffojpjimdnj0c978f4urj4ylwqlhbx5j3veb7w9xnvfhuzk94dhawbioa95hsrkufo08238ibjc7f62vr764anrzaimb1z11x1ket5y106bhp9n688cf4ghrafp6msbalajy8trn3mubbzjd75alr993646mh81wyxj5okl14pq0r6tae4g1r7hgzem05gmmiz11m2lyov5mhp21k7y5lvzf7q1oe4lumrb1seb26081ejx58hvuqdjhmv6p3tjcxdfrhpe6uewq7clgfs1ik87daihpz9hmjnma4f18jfrysrokx5ydk96kj5hys74j67jsy0ktqpp1reww6oopov5iaz086jjc7kvqcz1qnhsh2dtoows89soaupngli0jao1ggchv72sv0dt727y42amiubult3ix81ze1k4hz2xwx6wwe6t5alpittj9e11q7l541k90bw2issj0f9mgir4svfr3mydh7pc5pz524exavfli9z6s55lbdbdy5clvlxopofgt8gmfz7bjegcc4i1oftsqvpioyfme4cxnih5ci2jwholg7u1w4gqh42srn2jy950nfbl5d3g9em9mo00j8ipeoqu3370i60ofiit60d9cy3aq1aw4tg3pilq8crdz6bvxwumrqk59ss3y9bis3ow8m0k6hsb59281pqsozmi1hjxd7jyltowhfxut521q3eom7o4lpfgmdzisjivuxm9y8rel7k6235cr2akfp1x142l8n8za439vxprnb0lomwajgv0qb1sufgdyfo4iaxsfkpes3v49xk3jxi498m68bumvb397k0863gk1aa2hprslu6b5v99f6kt0lcpvvh2m73vrkkml5afs3no1ooqmup37sc0cvk5wxe97laxwn90',
+                proxyHost: 't1127gkqghxhyd9g43st8fd3abi6463wcuw6brg9yb8r18q983qljhz6ke9a',
+                proxyPort: 7414018821,
+                destination: 'izkkpjb3t1ojc6tg5it92s2dvks2z7olal1ytq181ps22jz9h88skffvhigp6d42g4g5ot3qwr8ofest13pr5f0il3m7u2t76n02tlzxangrkcm9b11pelr1s43t5ugn22shv0r4iwg1ldrfkpff8en50pphwokk',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '7y3xmlf8557k9f2o4j36o9lyp6qikkbkrion19lj361f5o1k997swi9l5dbaq6f8dr3shzs9v8guxjkgr1ayvzzs0xkduva5vjhdvv4wwo778yl0a9mo5gaoarqkd3og5hbtf4bhng9mc01wgybs8gyczm1793dt',
+                responsibleUserAccountName: '3uvk4iz6t8suiiuzwdqo',
+                lastChangeUserAccount: 'ithxhyayx21buhs8zs38',
+                lastChangedAt: '2021-05-22 23:13:56',
+                riInterfaceName: '0syxgcxvf4la5xt3vmw7oa6bwxb7eerwnzwrslqou9b5di2h4xioiw2mkcoq9s6lgc7whm1yvs8g89hw3047yge2k8k7uhy2s739bvlqevwmdbxy4iq678htj0f4vbjdp76rqr5vd44yjiajrhq0ionf951qdam4',
+                riInterfaceNamespace: 'w48jvkoskaim2lexfld1egnb3yuqsycx3eqpv4c07pc9twa5365v36n0duq6d5f5itvvu1etgxq31ub78xkdfwl7voeiwja0lzh5lgkueqyrmor5clg35bs9ti62z1zppoqwuyryiq9esoznl9y07xnglz1q6sfu',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelParty is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelComponent is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelComponent is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '2fx8zgplxkhtd6o9v6lfycuzqf0lbyoq6ejhqx1s',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'wjk03vtn3kap0ofiqrm84m9dckeb2k11x8jd1xmmpm0sw4gptn',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '9g3yo977i4rvy4n6w352',
-                party: 'g0kvyr32vf9f9obzcwe3eqhwvxynh1el8nwgp2c0zjba2e2yf0dgmvkheh9tqp6onz6p2ausigtv0qmp8yl86kykb3qitcjl9nkbtrj6dn4fz1w9uitoeo44rp4ee7lad4vhbnzsvb61bjjg53kbtjz84062keh4',
-                component: 's05n8igp9ydtzge2q3hw8dv9voq14umcjlgpvfcvn9l1dakvuc5s8oastpjoo7jfbbhx33ar8ntind552jlymbq6e2fhl22i9udsst8bdumnlehloq6ocjlxsax5z3o3gaszzcv0xn4mbdd165nbc57v75h0gkjl5',
-                name: 'km04dkn9p7d5hfd8hs6rd0j4ukqjddiqjz8t97gbdq0mqdfyuo62t5admvm0rtq2s2nwgfjhjuxzfftzuthen2s0icfefdyo29bn81jo32k3z1ed95078sgg8odn75f0swzzmoxhl0eomj2hkcwgbbe1jqlzo4ug',
-                flowHash: 'hektpjfkzt8fnhiur4k45lq4zp8yhawpiq38za07',
-                flowParty: '9wdagez54sqv6dp3ezx72qp9oocgfeihwipof0jxmwyv1pxk2c255mxwrmc1frccqy5r8ddlx0ox5it85eb6u380xyrwsxggii5ahnrmccknt69focje0yb3gydl7gu0mmfxvcgkzxla4hcgnkejetczj77ju8al',
-                flowReceiverParty: 'tvf9f2i3kihj4h4v2ah56przp09q2x26b2qx49l4mxneuu5epbgpx70zcxb4bkez2i1lq5t7mksxh4imk609wh6yzcuifkmj7yypmh561in1po78gdlc0mibi1616njytr8vz6dxhwrzxyqr5a778p2hgojqe1i6',
-                flowComponent: '0t0y7l944oez5epqpibmfsphchy9amtdgimvnhj9hrat23z7yk353aroem20k9c37ambece5v1vr1oyhie8xd43jrj2fvuo11fjc3jxm5sfom3jxi1r8qjs7kvz0tznl70luej9r75tmlntl685ul6n4e916u659',
-                flowReceiverComponent: 'ejecoop9pt5h24oypoh67jeq9ksv65ry36chlnkes1lz7v5ep0byw6yfebbiylml6wz3xt8eef7avccqspkmx1f3d0b87knnct26hi3ez0asp3hkr1707qzknt6135xhwpcs45rpkeibatxoec0lxu3ffg3jq82n',
-                flowInterfaceName: 'qv5jxb3h68rw4g6f8hqdhmcpzueax651sx2d2p3khs23j7l8ercsj8ihkvwmtuqhndayzs6ugwravl1a6i24qyfsa111vryw5bsnso4e8ktrevhx16qbjc7u48bwrgog1t3jod7uygz0c3st0uo2trexo84eg3sm',
-                flowInterfaceNamespace: '1rwjdwvo54c6zrsqf4zejtovrkyx49nmon1rf4bt3o5bh8eojb5eh0eckrgskpq4ubb5fv6jicnp9r63dldf2zdbwkmsq5ldhib3sffnzk4l0vgoq9q4dhb8o3v40j1dscspu050dfpqs1rrbssrr5dyvvsgohis',
-                version: 'wbfekv6vpc5qqam5anqv',
-                adapterType: 'okoomb7zyg3593f5x34maco4cqeyxae5pfrgdhzpj0isdup66fl1n91kuayc',
-                direction: 'RECEIVER',
-                transportProtocol: 'amtpzi8pllvt6ypyrx2er0qu2sc6whdjl9u64r6dbasvpadfafdtu9f9f6jz',
-                messageProtocol: '2rjrimhp9x8crkcnv21vw0k2ost5q820bf7wsdk6sq56oaf4xah6qpkchzp9',
-                adapterEngineName: 'vm7bf5gxacujjow53ofiumxjb311j6sbhbaefkiv7yl6h3f8xo4fqhtkkukn5l7lrjmja2gzcrn5wfuld4q0xwv32m0ulyn4412adekg1uu7va5h2k8t7bfzbvlxhp1n1rimwuh97o9q7rsz9lsqdx12wpzh1j3i',
-                url: 'fxrn29d7z0bud5v8lbqn2lig7mf811h6zk512jiyzhrwni7wqcbsqq3svb5say4gboqbukkobcumv8epvhiypcl3jlw0i3ibyf1xkaaro0tdikinxasa7wr3bigjcm3auujasptq63erdentewkojva141at1ipj50dr7avrphzjtd96xoe9xsghq9gl0nom23cur7p8l5khptte164r1ujy98b29okp49y9ere237pab5dbwi4brfwzxmszeyzxcv496dcab2douezwze4eabc00s507rdrt112crl633kp4h12fo6aqmsgjh0qlu1t',
-                username: 'di044d8kyl94uouz78q6z7784e6xi2lp04v5pnu8w5fv460p0w6u7lnbiop7',
-                remoteHost: 'k4rzlw5i1ivloyu8zz1yezzz06m6ovvr3bv9dj8xrpyhyro2ncxaqrd9z7xvt70lvsksbcvu2lmz0cahh0ntda1g5vha6cm76s8ytmmli5hmzvtmg5s002lyl4qtkq2tg1tlkmf6qz353gq00p33rts88uvl7v0h',
-                remotePort: 2081875427,
-                directory: 'g4r6exljodk9s4gn3r8ehwqgg76zbsgitlg9lmntsepf2o93f6c1aj5mrbsxlruxzbmnuuzktb9bvqy6mlxtilhlq3pxhusgsh103edwwovvuh2ysyqs66ehqs10xkfot16j09q4s7rq8ic2dpn0kdfinxiyriy2i174tp4g2w92xardrgp6bdsanxq2h5z1fmshlvu7bmlxm1qj24ps10bqs076zckw7ojb9e6rpx5wn7hous353zdd3v6jheoi3bv7eub67l9a7qt5v5o9qdfd3qfw6rnqq9fq3z2w8ed05uvch2w73r7skemo48isdjsj3plmrwdemvpummriyl6eb26ancpz8mpfyb9zqkajmue1ihkxp53ds0v5lpqck7fwolmkn8nh0lq98cj9e9utraygr6xsrlxb7c78a2vkglgsecfj1sbidx8mlhjpqf2kcy1qu8frgd5emrls1hrska3x4vrvxyg3wamht9hpdjcv4jukg39gcuyi5czqog2pvgmpiwt25uy6q78vq5rfbp1qsif4rao82r8z7fu3d60m3kby6ajp0e3afk0nryikvz0w8lxkjd5nrk6x0yvznl8oyef661i05j6m6nvc5v00x7j8dg6075h2shv82au9fziyxx1uunhp3lujo1p6trzdhw4a5ygfajkoxbw7tsbu687ep4oa5skrlb9zrqpccocjtwedzakpafdhq1w8g3dc6o8dghmc23tvd0ygpoa837y3ikpaqpw8qmosm82xqjfbfvcdgrdtuy2hpyjxambxo4yveg6cdn16z0rkzfalbhefdfw6p3n6g66fuimoivm8tvwz1chlztdpk7ij4k0m1ym970juow3wp24zc30grtsgj6ydwg7r0jt2yj7ligfe46mtml33cue5xn0ovkvxax7ytgt5x1t8evd25oo4maprn26fluz6ji7u1wdy06x2eumji23loafne3modqjemrshh60jv21wh55172ufog85oku7tfamwawe',
-                fileSchema: '21nl2qr9nh5xxvqc4qrhn51pw9e5yss99ip72gw8pky0ss5t1awjmwr56l1x2csf2hympyjc8tszkj9mru7wt7h8f1kplxbi2wrmwxqif7shz4f607x7szio6x2xj1157d0bhrb9tgh3r6xnc4n94dt48jepq6vg09d887qjpraqkbruic7r6vvqntmg43veizymrog62x5q20gzmdaudl7rap5o547f4ssdln9sgie2jrqimstbtm2t806ow7jl92vh9hvr2oh703altxst3ritjj8sqd3erpeczwxzn0t2u1ptzyl9knlty9e3hf0jemty5c8b7k039vp5qhwoajf7038oey49bgsiczjcutom31bcxfh3mbl2h2wmeoiij0vtioeydtrz32l4ygw4td119qe6p4x9votl1465xzxli8sf9n4256rf86u91r3h8hpe4zhg4tjktak7nyzz40xzts9jyeba315xueak7sscnpmk8xbg7mkq24y6bl9v13anm4mgw08fprrjrrmliwbt469pbtku2tog5i6xu99xi41m3qmjstheidsyrwfxr7otkzn5kn4qjnr56ugz8lr0vfx0j01dxsbo7pxns8wfufcniocczbqfs5azfe2f901xtplp3v2h6hlu7vlsl7djzo45h0cke49wqa9mecm2nxgd4ufozpggvput5yltdb5uig2bbzk3f110lm79i5t1n0m767z2nlsgj4ht04vhvj42rxs4uove9onrm5uurrknafk8qq3g01j91xvxmg0ywizvdec9vq30vpux2r67hc815qtej7h0kviybizbegmqnge90rsecui31r7ivnhzpyjn8uw4q6pd42hkzxyw71tp9hl43zkr9vooh4ujyq1jou26hkeulwg22teyy5l9qo7dgds53fjaxmgxzujamou6eu1twkunv30ptmjoxumrefbsfvt4pas5tvgqekb0mxpj8juqn0dfarx67sxhydzez1hn95v97iu53o6b',
-                proxyHost: 'ndutm28tfyr4baim20d5nl7q12t9gmvegmt6ns61tbs6eua7mkvvdwdi2gin',
-                proxyPort: 4865803637,
-                destination: 'twox8q7iio080g1kf8egbry259qzaa8229u0cy1rv149jibyv8z88vfqwq37756q42bm6yemt098vze06osguo1g2aiqsjc75xfec4dccntvj7lbilfl9a4mjzbnk6hymxg98b4e2yz32kqmafz1k51ct0jg714w',
+                id: '230ede3e-f591-4814-aab5-9b4106e31cd8',
+                hash: 'mbwtnwvfr7tp1vmexmfokbnph59s5emm5mtkifm0',
+                tenantId: '86ffedae-fc55-4526-a8cf-899e4c9e273d',
+                tenantCode: 'othzjqq22x211jd29fli4ty7b0infqa9jr09e3loccs54pn1or',
+                systemId: '8cad396c-eca0-487f-8400-9282623f01b7',
+                systemName: 'lrloui95l3ap023b0ngp',
+                party: '3oykjqa1dswtuhm08t3b58mrgi02xrhx8jkzvkut2xoq53mzqgmo602kf6xcoku2dx934imbshsg5tpqbo275c075dgos1u7810fujpqbbeupl3cp5baeweom99e99rba3tfw4dz4ar3hljkisx0aa93w8zrspiq',
+                component: 'hszl6r4hbsoj9in5bg7amkgjdyq33tak0lksnkmah10pbpi1stpfommslx4mk6pzpmjrw72azzc7xxq1p7iyslfj66sduvallpfhfvgo4kg8bs15pzql9mtf6yxnzxj5mju97s7nmuvvej0ym106dvek5np9y6l69',
+                name: '6d7kektssuajhkmurr8kgz41hm12i1hzo7jjjmgcsdz0tzcmbfd0spcpcreonvcosi91otadm7yy5hyqfi0va5bnkueco84d57rkftn08yy3eiq943hbi1pq0wchi30lgrveduv7jc0sxkcqq2vxvwpaklpq3shh',
+                flowHash: '3uxg3cn50oty84xeco7c27mbcxvmd90vv6jg9mlm',
+                flowParty: 'qamk235allm7k0he8zabykkyinrapbf7ihasz5budz6kkwrzbfkwi4xlfok2pl8pk7sifma264kxgwf1a07oiq5s6y2gw3ecgh5zw7516o7cyuijkvw4lyectidn1o4ep3rdbv6mju460qmfi1d4kijf6mpnoyu3',
+                flowReceiverParty: '77ms2vzzrf5ou7ujplnmil6dkfrr8n94py96hcwlephg3l7935v13szop8zlpd4mve09tcf9a5sgvg54en35lrzo4psbyhl3stiognso99qwpndarbl167131x11347pki664kdwn0t9ddvc9pu8dnief01g0b49',
+                flowComponent: 'pm6oyqlnh56rvq6cf02i8rswr1036c8eu5phlsuew3mcl0z9qlrcj7q2lk04b6osk2geclr1vfzvol5weg3xthmz1oukodaey9hy6keb487pb59cgy4osdmm8ivq9oo1ohv6hkg57fcrjp98jtr92ugn35nkh3k0',
+                flowReceiverComponent: '85byyept77t5tnf6kxx5736l4pnx4ot6e4iv6nmo91smxdlfx8ibl71zbkjnseg7ppt5lzj2x4oyez2689n36ncuhf9uydw0pnf61fh522d780wqevqbt07xdpp19unypswwdts1atzfah9fd4v0hecjavu0xyxw',
+                flowInterfaceName: 'bjf44kbe9eim6yeqo79xg7mnme155u57yglzrtai4bjweb6ni4nh2fn6c5fm31h9lc03m3da36mh7wzqd8zwgmlxcz6v0nknzttztn0dd9b1ewwfrlk8nibkc6sgg6k54itpxeb7430awk4e9x5077n7e7lpc4eh',
+                flowInterfaceNamespace: '9rvk0d0js59onkxizzmpn3j092b5q32ue6kr9fiy8o6idyheq0d3m8atmmwdlxdapbd1fzdyst4c0z61dp185pps4lddyvnkowywcrwm46iwof05nensw7q58hb89yew577bz6kwgndgsltr9f617ynp7ozfoify',
+                version: 'lyjp13xmog085w4i4kto',
+                adapterType: 'dvohcoxhn9sjjdcpgljnpx69dlrn8tvbg4vlahgiock1uv856re2u56f8r0h',
+                direction: 'SENDER',
+                transportProtocol: 'ozxp7ze1isfnzovydj7ysdzni9f9x2vm5oir3de085ozc8vm2w2oran3jui3',
+                messageProtocol: 'lgef8w5dia884lw9dlgwgi8zuxm867qmv1tmrkcunyjv5leons8zw7bp68vy',
+                adapterEngineName: '089v7jg79j19oz4bpqi75gh3a1brs3a0nsbbil5tvpssb70m07244y3n2wu0257gcmdr5umtdh3jce64n576gwgf5i5r1v4pdkr3bcve0kpot3lzfdsopnbb9779th83064kn8ouqck6t4z0lj9qq8vytqeegu3j',
+                url: 'h1rqn3awnn0bflax7ndxexdsrk5uwsygctff92qmlmcl11jb9fa7i7wsgqj0i5c7jsbr8a0hfnnqzhz9xrjp6228dsghs6rdp48z110b4v8po54qanu38jaer9eyb1nmy8ly7fet9vfuur6zkscdmcj0sizd79zdfvejotxifmwutt5yis8e6upv5jkgc1jnlfcpi4gh9xf59loypomtqipm2r60fj0zrbggjref5qxpacao1bx9tyjvqnsh0ct5pf56j5o9oo4ibcr6wtn3d4tsek8bwgxxqs3wk51vnl4eoza52r3wltc32tni88lk',
+                username: 'w1625vr7jck3lx9ouofsnnm4y8bquwfa8m1fr0ykzemvua1uieo5s8d0semx',
+                remoteHost: 'm3o3l5sd2qp4vgn8637l0kpwgy2hm3zgieym7t2fe6eglslb2b2nph0fhk738d1rf8ij0mcqxxgpys4lqkb1j60zy5mjc3beucc359h91c60rssxz2ik9s8wbtkqfp4vz2lqdafpaqhsexpr26ydutzyul6la9vh',
+                remotePort: 3177662447,
+                directory: 'qs1hlx49dzvqb6ejeljf7uiic77qmhmqiqk1frul6ha7wksk17mg8xjkzheho820mu8fmxjygdsjulk8mgqquj8g72b880hexis5hrcnvc2tvlssx92wrfbhoi674011hu1mpy1plg21sncgm586pnzanqdlxe7qxbvzmdg0le8ewxfm6b4f5fjqm6njtihn5dwe55xugvgqsmilrfx6ken794bbykgpe84otrk5y03tzsrrbnlx0j6ojqqq0ui5g06uy9i89xnpzdgvelfppbtvrczw41czbv8ttfdg2x4pcf4s5euep1nr9vz8kmcsxif148q92xg459iepjnats9f91ro7pjubqyhw531st1axn3xdfuryx336fsoviz4wswrmfzuamqeskzaz4ifmu4wffxzwj9ws04mq0apnza67l7i964vpe39l15rhv3g9tkw21b34xngww61659rydzuqos6g5v2x88up7fwv2jckib20myiq91o4l3uleze5kit7ljde88jdkbho4adtkwkuui7sjakqye0s4wqdqxbyvi5x4r5dz5952oz1nmauvoo4wyddpd566zt8t6gern00s7h638u9tctr50j4oga4dzw4goj5b3f3bhx9kfplkt8p9qn5uz7wpo4kx7pijupsndlykkm81r88bekx2r521qu4fyppcoznrhy6ycy3vm4jy0h77lqezmchgqewj0f5nmyvlmqqjfku0sy1x1uk0l1160bmhjmedpkbwgkw8llcbn1tf001ubx2ltbgnwkatufyrct8nsqzvbaqgfmt24m7ueus2nsauqbtapy4p3y28tnppmde2yf64wcynfkx2ixkgl6j0w8xdgr8v1z750ueg7n8i7m2v9q1j49634vc2gtk4na45ho7acjzd70kswskckd8pjeejpu9azma89xqlv7fvindtiu4nb49pmcv8ui72ku0w1mukhord8mi2bkj2s7xia1qx6ir7v6b3ghcte2n3n706a5yi3g',
+                fileSchema: 'rkgor05yxnnhmvby22anp63ggarces684hsl9h7xt1n4msm18ay42wz2aasbznctzfec7d0qjbzupb1owsv1q4v3alwjdwf85by2w1j1i1vazlj0unsqtcltf0hvavffufyqenck4njf86tcx68oka0y7809ygdj95f3euf3e9ezi8xqm64m8jz18v02o9lg9bhc454z66sfc6emi9hwpu8rd6ojpff43jqyhcdcwdut460xf1wwl1w8aupy66vk56qgep35gufn73mknb30nq8oy234wrus12og2pavu9vmlcdhkc4ol0ljzlpetqo7nn3r1smemo8e8u837epcu5jc2om4yc7369v988ty6dk05pqeahakgz53k9o74q6c2wi4o6is1i9ii2huzn28fbneb7zd7niwtq5lk3s8m3g86s9tgs6i8sstucn11v452jnlpdkpihgfhu12a08ypi4omvseuknpzqg6vntcoi11iprl93ktkc14jcnfynhgsw5gabaw0pqpf18qmwvbap9qmx8j2jsmdhkba84bn327b16ttf9mvgoh9okzoh2zua63yxwpcbrk7ulovyngzywc3ql0m58ud1u7en4ddl5wbr2umrgj7n43vs4gacpdnv5dh5lhnlbsjroyv97shwcxaapkeqs23me7zs81o6y9ntg18lstllc4a7e969zxe8bhirrifup9ucr6136pctm1gwfnjuo6qc51sg1mcksco5hibgomsdrci6z6y1t7zil5chvs2kzrod67bd3q1jv6cunai3rjd0aqtektyy3liaowtg5hzoz4qmej9r0w6jdic5ovag8242tcezk33tqj4r9lpm9u7ejtoksk1th7cix5ss5xgwmpihz1e6mzex8nl70eb4i5kjmasvqijqnpn90hz6roh89q20hfkb5cvu7kovfttzg3d44s9s0ndzmmtnc20w1x0uclgkrtmlfdxfjrnsnmidq3v3wsxilv2j9tqavhcynzfjqmh3p9',
+                proxyHost: 'ex1jkkh8n99emv1h4q1ofzhf3ysm52iu2qipep4a7jm9apfperdis7ch2reu',
+                proxyPort: 2634768753,
+                destination: 'e6j9erq2p0mqwlqqe0b0mb4hbcbk9aiwyilgpe7dazclzi361z5nmkliwt7wx01hgyt4n67k7meec77ml9d6jmubxb92rwzv8qhqu5n9xfml6yiowg1ga70r7gcpoi6n869091fzo6imyib0uray8r5qxvuu3qpt',
                 adapterStatus: 'INACTIVE',
-                softwareComponentName: '7c4v73hsxzztxtywryzj6ejhsms5txziaaefrshdpzg33neaqmm2m7eq1r5mdvvrmy5n6kgrxr9j9mpxc2pmlukdtrp8qa22pmw0c1ltskzeovdynfu3x2j1079ow6t57u3cfyx0790so0lz2nivn1tzwj5p1ynx',
-                responsibleUserAccountName: 'trexmima4kcmuacs6k0r',
-                lastChangeUserAccount: '47frzc20ojuuan7gicv3',
-                lastChangedAt: '2020-11-06 09:11:51',
-                riInterfaceName: 'b6t7u9pvuzmnoytkeym1v5bmyb10msukrnppp9kb8kn1gxu39sis55otmgp5935o0wlulcqs5jg0zz8i9g61ehxk0a5kp3amsycxrdyvgqvxjx9sg931ehnxg2aljpkx5qbmx9lu14lcp883cabos72qk21qiqyt',
-                riInterfaceNamespace: '2admp5d1chksmi1sidal78x8cndlsko16ebs5ot6wco82enp000yfaysizl3m5jls09c18ksesrox46m8olqypzc6jp0m6l93j7wj4gfw03iwqdfx8zq6k3o8idf274y0mgtz0tiucld3u5qv4fbtr70jlmukji6',
+                softwareComponentName: 'gguohqobvg2twdm3anfplq1wfhg8a0jjn3wwqlor2lyp3u3ls5rz3bhbzl6njuhk8jstpw6erkk9w0uvhki0z7ibrejeyo7xormr5kr5mnx3q51f8sagi0civs0owsnxp8uzv18xgg4b95i7lsbtykifxua6c9x8',
+                responsibleUserAccountName: 'tz8dqg76b96wd6l569kb',
+                lastChangeUserAccount: '77u9ytzaiy19oy8jeetu',
+                lastChangedAt: '2021-05-22 18:13:01',
+                riInterfaceName: '6kbrftz09up8qmfpoocz0s0dqoxpzus506ys2uwbkoqw5ieipzi6kyxru1ckrzkaofc610ekjpfg80axzjy0s1exaz1z6m1ifmwlbl7eitjzeez83u8u4afcmzxl4dnhlpk7evhnnhq7xy7ad9kiu22bzvttj97e',
+                riInterfaceNamespace: 'ia1lip3aqkoulqz5c2toysx1x7h8ukmtkk8pbckgf3m5nv4wp1kre9urlsvebwj23ophrqn8ah1ejump1p2u5s8jmia3nhgwezp8oh8szcuj7rug8huybpy18tqbio0846s0ys7tsyvou7swkwwdvhjk1ss20cqt',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelComponent is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelName is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelName is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '1pfunbjk6tq4ufn37wyhtjztavdn2kjkftabm2db',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'k9yne8zs2wofyncduoszbxxjakshhahuabzbtern517z9ab897',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '2qo700gudwg39huhgmix',
-                party: 'r61505mznt5lusnuplps0yxl2qhsnzelsgha3foiaunppwda5j1hqc75hso61qzxcssqgs1g7mb3gru7r9j2jy297tlqxgj8av685yjbuj27wy9qe59ubwx1uob5q3neopf5g4zwmr8dldgboaa5nmux9vezs87i',
-                component: 'du5wxssxwpkfm1vgnnekfx6t1qks4ke0zzjry8fyykqc8md824omindjstnc073jymmijwc0dgeh3fwoefzpn2osfq9pou8djgt9th8zjw781qkcsfxvcup8o63bwho737b7qrtoth8u4mhrbxoca92p6bal24n4',
-                name: '9ch8o0g1a3wvlb0ubduqz5c1yobai0wcqcqpzwvppozapj3n1mbq8hl072akks52nudj216vpw8ra69zyh76zaezfchu5yykvkljyi9v1fxn3r2zff83kr8vjz4pdwumhqqm0z7r7bv4g98nxe60yx9o178cqfk0s',
-                flowHash: '7wahbumljz60lgkuj9r8pdxaf5h3b1ahld9n1lxu',
-                flowParty: '54jtl3uztyrdyhz7asfa0upu9xkthrbckfz5m35dkcizihhn6rb76znn4dedkhlgh5kdts36kn1nwukrfcpn9600qsw2fc20hj87oym5h19bc7ib586eeoahf2bjord2cii782nybvibxleimmrpqlkho6onsy31',
-                flowReceiverParty: 'mv876l8rqi3a9f6is5v55udcg5fjt7eykddiw9b4d5qs78qst6bvuh2wvtvpuiujx7ogy0gt733uv2e46k413lszy7pndts9ekchtmsailoci3xwcqde62oqixfi6h8z60okj1kgdsn606l81k79igwhafjl8bri',
-                flowComponent: 'qtvqk09mhys3fuage1714u063weyyrg38xi7uw1460u22d8s931vwbwrkw6uxc9hoxl4uevjuhv36akukuj0l8h7x9ian98tllrpbe6x5d9jvv1gruzbzjijc997aaoqn5quhq7yl7gizl1b0dtxhjxwpoplnvd2',
-                flowReceiverComponent: 'ryvt1j5rc3znhtsng9k5az8ok8rpoy7cjdg1ol00tmefkmeyar11apttv3994h223abtwaqy6nb1qofxmrh3olzvpqmr8so047vv39z2a6x9yorv996ufm0yp0e3z4ct3fohzycxrsy8akhdp0g86c0l3ar97jhh',
-                flowInterfaceName: 'lizis8e0yug2kk9ts7ionr3up8pm32gbk2pw4s2ovbucm6gd7sceff7ksurszf7qruemh5mkjcd7ozkuhlfy6ey2ghrerfbiak5e6cpkcfxb6dz06vbpjri1q0iwnsfjbh0x1htcxg6pe0plvula0g2ycuf4z7rh',
-                flowInterfaceNamespace: 'em5r3l652r18xf11ta82jhvkaamttrm39b8s5wvjvh79sos755zdu6iguzfb6vpmnfm8vs96qlsec3dmajmrwctzedf0ugng9jdc3pq4al8vojuzzqr83rsutfdt7gxgxba9fj4h065r25ornh38p84l9y6v0r5l',
-                version: 'l00jnu7393r0quskw6fs',
-                adapterType: '34khkv7m62p54t0sasdj5cqkrd6ixe77qzs5vp0kt1ggw1j476gigyhf0uy1',
+                id: '334eec66-e61e-42f2-8014-8a46b49e6f40',
+                hash: '37wwygrxwq93mw0w2o2byprmhx91nvvo8g93s4vi',
+                tenantId: '3ed4826a-ce24-4f86-bd5c-8d74b543acf6',
+                tenantCode: 'd8z8hdwxsck3ejs1wea87dgjimtiqz380px3wikl7xkmiaprjz',
+                systemId: 'f29fa1c7-9cbe-4150-9a60-d1e6a7c6dfd2',
+                systemName: 'fkq61oedic336sawfl85',
+                party: '4tzqha46camcuc0607ywivdp9xokog0unpckj8a78hejpyezr0ai6fa77su06cxxatit412uvaozkhii2rnn2glwbbbuype8bdgo3qo8s6mtkp5jp4tmo4s387htyh40sf29por3us4wg7xu90gbt8ab1puxctyg',
+                component: 'v277vulvt4j74u6498cq1eklshrgp6u3dvhuug5y6q830j7jhamyro2l4gpfw55djjuxxnxv5z476k4x86ls34oqxmtx0gwhef27hhc4gpcm7lxocgvudj7y9afdngkcomh9a9gku5b2wj84t3rxyloj9q16rp9p',
+                name: '3zd4nf6eong2vxshocl7mwscvcwn2ba4ltln1nxn36lzufijlbp625bfpq398er77bieqluwz9o9jnwnyymlnt195cklw2wv2ez89ya91rofpuldfuk5f1juz93qnnb0df9m4n0vemfi74ujak6j2o7uicgz99g2i',
+                flowHash: '3t31t74kgvenfou0elqe96p03mxy3ih85cussarn',
+                flowParty: 't1mrgd1m9ju3lrv4wog8fna6blof67o8e6gus6smjoqlhqfcdougi99pkh47mm1zrbtx482lqkjkpc065l7l7okv5wvq5npgfe6jhlecyk3dehmhz06ihettz34cm732cu1bhdkrnv48b1gwvp78qsnnrl8ims0l',
+                flowReceiverParty: 'p2yjr5mo8f5v9gxup6goo5l7djs3x7peeih5wr36cq6of95lepm59qzbjfvkvamfs8f3m3cgq1i3liuh4bozko4ndzyfcpnlh0l3ym5pye64ymn2ze2tinyhn0hh4vbq02gw2t1drofanfty8ap4yoh7fvdlwc5z',
+                flowComponent: '4rz1a3h5iho8nam2qeb65ykdg84pn4gudfdgrzejb1dpztnny1qa8g62xm9mhqx246jjo5c0s9630da32l1m6nnurg775uypcdu8ggkdd1uf20fonjajynlrf41ek8zh8gl9rgydsqhim3mx6je5p572om5cpvyc',
+                flowReceiverComponent: 'x5i2reo86mr1lzwawbpwgwrkjsheydj0jimb2gi61fnvn3jxajxcr12w88muoet9yiq26ll6cmrrfzyb965srrjvvk5lmxr0dxjyhh657epd71g5f36uakc7ye1ob5ol9g8mv704bpvgrdq1q0bbr3u6ovgscdhh',
+                flowInterfaceName: 'w98sckdcpnfkcahr9b2eeaul2z313ubdq8bk2d4r6vcizgf72bdy1lt6skqdydx6uw231wobhfxfwly2d7m65i7mlg70i78nvkzqgrfnytq4ba9yo4962ohhuvaz5yickwdtzelpzvg0rres7e6s025jvsco8qn7',
+                flowInterfaceNamespace: 'q7ikljyng6zw4fnujo1dm75zecjxxiq0hobp0u45t5k1zakwp0g3uxumazvj7buarq27n2i4mlkb1ov92pjvy9bqx2w2whn97qw9vf2n94bs94chqpcvhbncxqlb6k4wz36b0mcnrbk1g9rl08yjxge4wd5ln36p',
+                version: 'q36fpdl2l4hiu2pot65f',
+                adapterType: 'jqq5drx5w74w7ckoqbmnalo7g2yefcsfavwha7ly37xssdg3s04t9j26ptu4',
                 direction: 'RECEIVER',
-                transportProtocol: 'irws3759g98hbnlo3mxuf3csri2k4jq8qvox9pvs9lerd1rbpebw4efumgli',
-                messageProtocol: 'h63aoqlohy4mubrtxbomj2h8ysyxeomden0mwjjt3wcn9f73zqr0fzd287ld',
-                adapterEngineName: '9jiggvkxo43ximqb3tqu2o9go7r4tzrl8lf5hphu18bdcqx5g9grt280wvo2psom77t2zcpsyxj5x5nzy12hscv0he1ndgm0m6k1p3h34cuzaory1isy6hiourhrbl3lbu7djah6px3gs2movdg5nu6jmrwkx28f',
-                url: 'otw3x6ne398foutxrfzz7u8b05opqjh1jy4cb29911ry42hb0kf0hatj6c220avrahs7ltx5fco71hc3pn6q117b7j78pv2l3scnyzavwh1eo8mbp9r2itdlmi34crsew4t5oxoy63ayngvpxgyw1vj878elfw6futdbrocm79hl61pl6kku1rgok9ui4vww7ei7l6ygjyhtw63vtpj6irzlpcgx7ny9r5w0xuidynhy3zacroshw6kkfl4f26joltoj68g0ag5z2if4lstq79rouo9m8sxyk149m4c6n2qi197rkz27h3clm4nxk3qq',
-                username: 'htwtn9dpdmadg3vqrujvrbj1q0almuppac6rdz5ee71044uwr0tfiml36xwv',
-                remoteHost: 'pbgd2e1xj68opapchwt4bgwe0irl0zlkzz888hhh9ldfnmif5ildg6oawpta2yfjc9tg5m8ghadx13zejhktwo5njao4q44m7bw53vshh46so6dm85t8ettfr4snw7p3zi383u5oas0qngbtjqqdq1c0zukisw8x',
-                remotePort: 5532233380,
-                directory: 'wbtfkwuytoohprmn4fn2mo1tru2hfr8xb41cbh86bznzbtjp5nma2p01zv6vfam2ueoxguvx4zgv1nlsw7fsaq0ewpavlwl5mpghn9sfr874za6dkzo0v812zm0f6twsticod0n335l26066w5nitwnmp63nheninkttw481mps0470zqlw4ngrtpecy93ro5pfus9xohkl7rxppf9va3m8x3esqaf2ulzdi062p4ac546qxcpcm21wdmzse6ttv82a0qhae9di8ao0xuhb1b2jv6c90rm9l1cey2noh3pjntqfjxrlcvbbx8wy1rx8lb3ymfwdpjgivb37ytjxdj59sa0g2euz63l7ssil8dyxj4004dm1p5yin2mu8g1ystwq3a7rm3s7jj9z0ojai7oi6npn8c2subyvchv28hq5qmhmms2v4d4rr7ap6hskw341v6hzsrph71yuj9uh0oefgilhq1ciqona9nf8nhpss9ifjqkrjofrelanbxksgesd29r29r98ex90ducar9epuhl7gk2y5lg5jaatnomkz1vv1z0rsnw1bpl4qvezbs6t4j10snkq6tf3ym93pcncajytwvo472fa75teznwcuy6jbbliltphheo12i2en2zsx96pzm9ssv00bpjrhmiyhzb8qmr12xtfsyv6r7idfeejxnfodmk1jz7f8k0ar3brex62ttlhaoyoptmq20z79s11vwd03l58mlya8m8n1fu5s6vxee0wkinuubt90lsld5v4ghv4zkzh59hh36bc4x4n1di2nxvehju4ai1ln54asu1b8ojyge2124drwm7bdih3dx8r15o8vw0qsczcqsv62c14voe40eyi67c97rsqnkuirvqao7tkmuk940tl8br74ccbhhwsysi86bmv0n5jc5o4bm4fwmly3bchamz4kpr6d08b6zwwk08q3e9skx012jpkkyt1mw4bisw20yuf8s9ynsu1c1kzpaheg6jw1mfml5qwniwsj7bo6',
-                fileSchema: '2b0vssmfgni4aa1xpbc711kjixf7an7l6diycr8ymy09xfh5h00ko8aoowl0ksfb1awr2k6cni8i2nhvmy1qp7upzf75h9mlzx0hw83uf7vmyhn960axd1mzayzq3ppfkof539bzobwn33r6mplpr2t5248wqn9i3py0uryc4ws5e8gnzb8ci9jlrp0lmj6h2yjab6uk6x04cfnh1wz45gxm9nuhc0s6w2rtmlkhd8yh9q46xys4t6g66nucvrmzxsy1a46gi01qi4fs1w2xu6a0vc8hgr8mparrxecyzgpq2khu8ghckdtecfc8bt57gdrjhdjd8govk2xmmg0a1bko02w5dxi4dpy07r9g0hggda3rth2ko72g106igeuxpv3wemmm6knzujpbi0qmd2j6z4bcqx51qz9ujh4ls7of2n82vgs9qzn96sw08df7ukbllrjj060fzorme99gxpx1u2g5rzdyag8l0clkl2fzorlxignw3dsedit8704029dsd6i9ytl8jl7yf8wbs8oue8mate4ldteatga312ldghp5bey7q7x1jcl9x5yrnr341ijrrq0y4nyfs433ptpfzbivmwug35p11pghyonvyucmwjn5fuqg522veb6oor3jbmncdijbs88o4ok99jlxx9l28oa3fd5a56v0jb5nxdhjc3908895ql2h1h164ss41ppm3g4yhfb5ry7frw6ioxdzt8zy4ms0bm8btt98x76d3jsczcjlwzqe63ta9egg38ifpam5ipim6hxdchupgujno1tid73hs4diksdwqe0325kusof2ktw2i9y2iilr5ojxbn5g33gfsxxqo50gkdu7wl24nolxm1o5k38dtxh47frnmpwedv867z8lcav2zr38v2sxeqlsjulqyococ7ecs4ycmer6q7poztmmer56g4r09s1ftxh5r7zsxnwsboi7h4mn5kbjq0c730nt74m6yv12vl51b0rd4yaoqie2i2t0lhkv9v3ecxik',
-                proxyHost: 'jofhth13c2wea0vh1hrye7ixknkl78nbkq2k93mdbrltzyjimzcn826ry8jq',
-                proxyPort: 1988313272,
-                destination: '68o61p5rgvj7k0uy43lwdt2x7je3yox5ik08hlmmef1wmqmz11bif4469p7dhwiuf9v9u6frffw6ae1s3dxrwsg2swwe4386gmvizbbcchr3ropd7h6cjhwhcohu08keusrl76gzit1szc5mt7c7yf4mwgg8i2op',
+                transportProtocol: '82af7uzb8ncnbw5jlmlz5fbrt3en7u1ol3am8iikduya788jgjw19iptv7qa',
+                messageProtocol: 'luam1qaz5q2k8r2gy21ddv5w1octx5a2u8qmdk81lqfriv2d13dmbulj5gex',
+                adapterEngineName: 'rdtiqmh8t6kr6tnzbcj9az7to7zmkjn543i3wm66ax0xdi8kjioc419inzuh6aay56fjlfiufu6yo6c21jqtuhdisr8hlzy0s2hi9zz8wjn9s51p692fq6vvi96gx24d1qb4eg6uuum6u91cgv1e611s7hwdef84',
+                url: '0o48lvi3espo8n2u2kekdrc8pjloq8xy7243hbw9ukez6v2by5ucs9y15bnxgupmhgzzwnodhgicculynzrfpq1cwfpbef4usohwl5oej05a9msb7y7dz1vtnulr48og0kiz8ji32gc21ea0530eye8tw0va2jr3rlbhdyizeh3pbjknngjqmsz493v1doe5priquy5z1jzg7dfra65z92o8mx1bih2bwfhl2r3us8gl3od0dp5zu0v7goh121midgxwpz66jcnlc4ty0tse3t1hcjjsr4v9t4qy8jmk1piwlj5urqsnv3d764l8n4b5',
+                username: 'jowd3lprcnt2ebwkqbsadn86fggkbbk3hl66lgb4zjvk2rho8sfwy9p7ws51',
+                remoteHost: 'c0p0nbuj81ikpfvch6s27kd9rwciy1u96lnqy23b5ns9c61wl5vokqfbv3nq8szsfcm48ho2jzw8y1lh5k1qcomckapbz5j21tbgxpbrr3pi0g7ocrjymmcl0x3kumiote4acbpa1cz9lhkyvhukfp893aiyiac4',
+                remotePort: 6167269809,
+                directory: '5hz3f96mdqn6kzhw39huk6nio6j7o0pj4smuw8xl25m11trx8vtu8m3d1c1i170t10qkyaqbskpn8wo068qfsp7yfk0nnn2n2n3rqqntwgdvm2lgghhjsd53yallaoxtz5gqdpfx6cthsmrhpgybesgoz0mrwugkxyjbhhx18vwz40u430g54v4l0s60qfkbydz7r3pzbapguxovs2gb8l0jrl98jl90vx9nmmvbnfvvkzlpxkpyw7czkhth7vb77uiejai1b6c7qknd34vcpyw8i884ft153s6srng5gviy2ihj53zcd55w20zj7fwvkx0jjfkshgtr11ncyawgo3762veuxbybppths3hvi68ou56dr0oyc0bhkpxl87mg5j6ts6uw5kubpgihq6j38vjcws5msskco9e087472eg1wsdi42x2uq1x4z9f3tw4blb4oei9ym5o7i4mafznf50eq8cfijwhuhxx97rek7yske3da5lvmh1kzckik6nb1k4ozru38z624z6yotwdx1t0w9rgtoflj1097jp3hn1tpciuxi1e68sbss22rgypvrafz6dl4oqarglu9egsaw6lrw54zy81bsxxo46fb11re9bf39jncr5yudpjqw51v5ze6u5icx4p173j3m6nbtodsg1i8ad2fs69fd2j347m3uuzrbfip8f9rnpiwzsm23cu6wz54cwtv0f2qzsh6c0aakor29kn465gnfo52h7s9ww8ehzxlzszawg8zh0xgfdx19j5vuthgcchqbhxs8tx9iwyrvg1rpmlx9rkxyf67sjt6hx1awirnbvrhzp51glyeqc4s6f1o6bw3729f6vvsa1ek947vnq4i8kpchs117sbq98c9j852tqxzlcu1crnn2cwfs3h7qtdg19t1yfsitbnau4bng6w1xk14gsduy1eh3t53vjttp4gj87p0bxkir3c02aav60qku110mop6ypbl48s31smszr292h8qjz5qojeb17d8el21h90',
+                fileSchema: 'fcdb1y9wcqefdrgqv0mc06jzfm9hp8gz9wuev8pwba1xape7kw4no1dksbc17mo8kypf84cqgbkm1tno1nbmzeawmlx2veiqdmc5w0ofwppjtuh3lz1x89qf3eflh84oi8fpfpu9adr33screg0qzcqg6x1y4y58c3xwn0uvyf5z7qxw1btnpialr8pswduwj8pyxyz4hq8rav442f8dv5fqhs2ft25jsuftlb80ir8qdm2jbr5q6gd72livx4196nmywp7t5wfqjn2oxv8ligvy4pt1sdjrksvu19xe0xrf0ndes45i73tf9ekgvld2zlwxv5b5gvf2xs3ead0kiwqfrltl802x4zpsi1szd6wxt94fp73ewcr9zwu3la90r0iemsk9utg1cw0oycrpfeht6zrnz67gf0t7npipo6br0if87rysu0b7tiiwkvhfb9fsf3mz81vrl5mxymxt7b5re6l3oqoq52gbywcx9bq2um93y1v2bdhpar7ayr2p3omyvfsr1ocy7k3savu0ryovcsfnf1pxb7ew167903s258sanl52ijkj65fgpfpdl5knik1r709ys0dzq5xpfqt65mk9s7jdea9gnyusz8qapbxhbwzgcdyjyh1t1om21x42teph67r7iulrtbrjnbn0vuhzz781pqb5jabrnrtwlo1cc3m9dj0xjg56uh3rwfulhbgdl1giq7jso0q19cjafbud997jmch5fkc2c870izw2uctbll187vhyy7s61lrgsvadfnyp4ve7er75i3yesquov3xqluha163x8l1jgpsfgpoc3ruuhmigdclvk8irzk784adtds10tomtgs1p32fjqbhlzwczcofp6ulay0qi6v9bk68m60j8qqtnl364efiwpu7o6k7crip2hpvlzdlqfuw7vv56inguvukckx7628oasurgz7lzrcwbmbwwqxbilx5oo4tbkxcl9px1anpxp63qutchkqit5kvc4pczb4y0tskw8fooup68',
+                proxyHost: '9acg46cqh4zr0upfdcqphjcysbp6f2xmy3r20as38zuacoig6vkpqn7k1v8w',
+                proxyPort: 1040499570,
+                destination: 'jsbr3qbpkw4bezmaaj8aehdduzzwp3huougumovirdg9ruugd2wxgmnu0tc3shrk5u789xmig4uxvzk813k61nlit2ornspbfuke6rgrzt4c2a89aitzk3unme036ushtmqkycl5ic6pv66c2duzm1b0f9okijyu',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'xpyybwrktyptzhlq3732wmack9tcofrr3fvnqfd6duqct6cnrb9ljxhf0hto0zvnyfvlgfasogxos2jwneha2jgarx81f2zktvrbyok4kixaft2ilhnnyuiqoxzancrwwpcp71sourvdcjvvos1x9xq4qzhqyvkd',
-                responsibleUserAccountName: 'ipu5fjuf4f8sw24o5xpq',
-                lastChangeUserAccount: '2rjwxhfj7femyl92msgm',
-                lastChangedAt: '2020-11-05 17:16:01',
-                riInterfaceName: '5p7v1mujjbnq2durggi8t9c5pfjdksy0atam1ml68f4emkdnr7u2wlsktlw68ed0wolsma10whgfm1f2dzin8qrj7cwnmsoewmb85e2ce6rf8u6bmpa7l7d68qdr4vop61i7hgs8i71wa3syk4x44d8wmd4hpmc3',
-                riInterfaceNamespace: 'pvvnpsxtgupd2b8pfmg8jsav2c43x8241ruuoj09wd7v3umyigwcm2oyku6916dgotewivfxc1mssza4q3gv47s34zld9g9miqtv1onb7h8gp69yt2s1e332lejy0cesvs1rx0hm4uhaw2targk2pdz2xlaldp6x',
+                softwareComponentName: 'a2psk5tnh69kkcztcrrar57s6hz6afu4m4bk3sk34h5ewixm72gl0rj2z9p4tw3an0yeoeizd2ueebbttyp5uu83ry71ry4z5jzvwmofogjolnlko4ko9gbq99n1ikznixhgxqasw6yvdpiz7g7sy954tv8uqb1p',
+                responsibleUserAccountName: 'ztqc7c6untycqh3a4mgw',
+                lastChangeUserAccount: 'pwnpigwzhdgjysod0ol2',
+                lastChangedAt: '2021-05-22 15:50:07',
+                riInterfaceName: 'n1l8lg2z5cze0pjekwd43ludvw8wqe0hih2nvlyun5m4ytkcz16sa3veb90cti62uh5s9toupz24vsoy2lz5j40qkszccy4mkcoozfsw4n3n07zjbfb1chq7uurzwbc3ugawu6dfbkiw2x470nh1ol89r1oxngw3',
+                riInterfaceNamespace: '62kssdv7rjf8qir3d2cdvkcm9d2v0jnkevl2mrcsnpe81xck7asnw0t8l3jgy1f9wr07f2urx7q2rt5pxy97gn9rspbk8pwcgcigppt57jwlzep6xezvr2nurlow5fsfxu3dqcdoroc4t6l6kwyzw12sfb1wjkwl',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelName is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowParty is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowParty is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'wo0iu99bvilg6hmwrp0vm20uqz8mqtm4atutrauz',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'gwua1foge3y2pq6p8lbhmt3qdmfiegpdw4cip1n94mikqzvjqq',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'gmo1nglf1a8j5d7ewibw',
-                party: 'ha2ou4tkvgmyrt5o2cj703qa9v6uysx3keur6jpxdocv1iidk0ak9uklfmjkfen38t7wswq21x0467o3jlbz89bc33doczbm1odawi2pyvk79n10ll8p3tija4ry1xs3rsyr2x8w3dq4cpd15abn181q7euhb7bf',
-                component: '5ws0wi9daqs5a11wnspqwapyzimrv4ff57ifrmsoqdvxsr9dbu63z4d39naenf24msiobq8l04k8e0co0da5u12e0qns3pts2dpuah2upjlpkqglow7q0gje9u00ymk6wj0xs60lsq2pa1y3ol2ls9jxj78czkza',
-                name: 'al0x2mjov69q11fich0zvvqnsqfj7rl4v6pkaw45fboz7rm6fnsol43m06kxruaw505gk82iv9k03saq6lg99vb9o9l8cinehglr0nkhz3slk2mq656vup874jkhfalz42eicacnc2bhnstiwgedzdhxfxj5o567',
-                flowHash: 'xgrs3n77b5dpvnlr5wmf6ugp6z7s8a7bmaiug4ei',
-                flowParty: 'fxxu97950v41bgalhhzr6adzxxzpz1rgkcue8u1xb4o1a83g8wwupb7a0g1tb417zcktvivlh8l080gb7gzp8ytd60hibtftw2gcito57fh3detqyalm4z9dycvjut4ept0tfwxfpoucag6ar5xphbwrgt42afgh3',
-                flowReceiverParty: '4l1dmli3d59tg95ejrlhhibjq6wqd8mqdn5welzysrcs936lra3ap613fz1msxx0x1ald302707ju8ek0p3vt2j9yravhswkjl1plh2fk5dpw3pclhr19xx1y1dp4es9mnkpwybv6gke6gv8chzbxqhwyrx0dwcq',
-                flowComponent: 'y1vu9sjjjnnkh6oxc1yl9bmivnc01jo00ug6wbx2a5r17u23bhaan85d9rjxuqrv27n8mzmjtb6v04taf7y0n080m4x6iiexgrhm6fbuhecs777g3ybdn1pzasba6dyhdmckzj4s7lyvsldrt0y4xgy21d6hfh6w',
-                flowReceiverComponent: '66asisktiik42kq49c2ywni0gm36mlnibf0i1mej36d6s5j2z3ml9r4penf8qjhmmfsb010ofjj63es747k5j54un678t9yg798daiescdsy10qblm8ax9ynzhfvb2dnriudj3v6wtr8536b87gt77udwgigog6s',
-                flowInterfaceName: 'inuog7y1kl1qwuatwgcebot7p19nm3db04zrkrr53nt6oyp500dje5eovr3ldobyeir54h2jux1a5a7989h9niohnlxxiwppz8t5787x2joope4fttwjtkgjrqht7y8jfzl9jaxndde5am13cshzgi358tzmcnfo',
-                flowInterfaceNamespace: 'rlend9v20hkn2ti95tqxl1n0qkci4ey8yjikcpex718fxz6rhzdm4z53p1xpkcywiiikt98q6ngpr8i8o9brahfy99s4ze716jdtr0r5ljwaihzp4ato7s6fj1oei91e0jzd3hg6fl7zuxb3a0kbn04iv9knoqlv',
-                version: 'i5wpzyl9he1ln7hc2tvh',
-                adapterType: 'u07ael6nda9k1d2qfsu1he6gu588dpgfcgqbj3flfep5t6dnfrhshzc0wt4s',
+                id: '1c3517fd-1e71-43d5-aa86-b8918e4801fb',
+                hash: 'ekbvbgk0cyv571mk8ajjbmmj90xbflv2o5kniar1',
+                tenantId: 'c91851f9-3b2b-4f80-a8cd-e6ff2d1e98d5',
+                tenantCode: '57t6im7io4g0xgodd435afdahlb7ed3nq56zvx59t1wrgnkwvu',
+                systemId: 'ba8b08b9-9f3b-4008-93f3-dedbba9195eb',
+                systemName: 'ihkmgwhqndh2ybtaxm7b',
+                party: '5nf25izknp02t64dwjhdbd7ijwcfvkp87w5k10d21mkia99ht73w728g6mi8cp94f0c87tow553yb0qybjmnobnkgzdvnb6kcdg28l0cxb35gk4mw46str58qb9qjr6rylasnph8n63h0qorbvmx888pwuyc0fev',
+                component: 'ecenvfcla7mhlvbxf886ru10ya7arh11c4d5tbs5422gjtyyj32qsdipucmevtb2swf4hsqdxzzxncr91uj7k60l3yk1zjwkuwptcvofx05lp80twz8rhrf5xfnq8vuk4swunvvk4iu6ekiiidxa32ew4ywf0pq7',
+                name: '67wekwbv406bgjspokozxyygr2ll1cn08av8ushzwotgzkw2dv08vndcqpelde31h9gq1snmwgytqj2rmxwmfgejyholkagfz647bf7vtfs9p58q956hbypd6a37i4s45kz3ijfhqeyn5nmu2krug0r3f6v62e8m',
+                flowHash: '94vuw32gmodz9mh2bqefbahja3e1joqg0yijfpmf',
+                flowParty: '5bvzqjtg87w2lks27wzzmn3gm4jxdu06q9s77knwzch1f1j4clsttrtsok6ol4i6n3e1ah95bxst7ajkg3cyrbg9k153zix8r8bec1heiaatphio5ryzcdlu46o5ulrik12s3s5xbccb3n9yc7z32kkwggqgzx7m0',
+                flowReceiverParty: '68gtpypjub2hquu5n4tvohvj6hdqte62owjkndjn3lmgu7ghd90ebw5nrwiygbo7xi6lpfef51m15e2wp0llt1mhun9ia28iho5lkulv9t7c71zj28emjqnub54nys2ko17tlk15kuuxy4li7xl0cskh522kl326',
+                flowComponent: 'ouu4wcgi9q9qwjqkn5rtnlwc9gflpjy8ox59blz7ac7qk11iuhmil0o5dmfuy582w597eb7wpdd6l73zn0k2kqi1rt05tzkv6wjszkm5kb0kdzfnm0e7xjwnq1euucgmszg9i6urzx7cp1ad0gokmgr969lof6ic',
+                flowReceiverComponent: 'wei6rsobu43u8js71x2v4yhnfiwaepywkp23beiqlszx8jmzyzuqsumuestnt75qt3nu8fmnow04mgsrltzu4gl8xde37kip3waa2f79bwvhnq2cxssaactv8r30kvf29o79e9z7drv8yig108og915hcopl3nag',
+                flowInterfaceName: 'e7oqr3v0ot1w6tlwft3fq8859dgfchqcf6hichqgtrz1qa8g5ccmrriq215s4c9ri4osissq3l996j8gfrho88n3pm0azuu61pfpgxxa8ye0zftzeey59tl2rllygg1n6zof6j8pr6zi5ckrxzlm2i546cqfuh4a',
+                flowInterfaceNamespace: 'o8xbze962ejige858h5gdozmcneyefeud1iubh8b6ul0ttbnmsq6cj8127bisgy2j2aw38f9qlu4cgwnwdf9l4184hsbcn0xb782r1wqmnbe2uwaz40bbipnmybr1ct1cizwvdb7g1illhxzuyz31edo4sodqcia',
+                version: 'of545kzq1rudxgipakfp',
+                adapterType: 'q0irzlhfj8bh6qtu0a3ufgxl86bo57j3j7uui0wl2cnq9iuchc87h2ndibcd',
                 direction: 'SENDER',
-                transportProtocol: 'rrx9bqawgtnnwtbx7dyv8gsi3g42d6y7an7qepq13rtlhjr1vv1g8wty5bdi',
-                messageProtocol: 'zcx04dkbvk7gbt7xaos5g30m7emohq9i0h4aaqlxn7evoy7zsp1gg1xwi55b',
-                adapterEngineName: 'gzjga26d0ajllqmetkbspq1do6ojk1dqv0429kypro2iegunyu9e5iit0m7v9ydsmdffeaoejo0ksneak7dia2bbzrg2j3ko3vljzka98g2shz837fwdo42vz38it3dmsi7t6fkisiawk689j0toctopjjkc9eei',
-                url: 'w2zxhqhopdbd12frlvnw7okao93mdf87yevd57n3xr93vj26kmxx5t2n85f0skzvdr9louzp0xc01atzidsgznah8fpsprkifl6eih16u73snavihnlzbflrsdenfbgk4iq4sb9ag50wkcpa58ahzxstc64m41j5he6kvwp530zbvitnxicegaz7sii0fkvqinq2r1sdxfve1lijornfnf3af14fwemio1tril3nts4wy3j2n2dqd946hlm442uvdhxrnph50si5fzb6jclenn1byr2hmzqm9i1b1knw3t0skipigxv46p6ed4gpnrym',
-                username: 'nbbywd3dzf5sosi0w1dbh5toe6ovpu39lk711apv32tljj68lax76fipf667',
-                remoteHost: 'jms5gjqcdef94g8u0tincgkiwuxuo7vq2zfx3e08kog3xh30wq2f2ogxei8e8z77m996c8f6dw3af1u3nw5pa7y8o59z1bqf8wtbw02y6mhiwb841lde7d7aazdzb7fzvjur1mlk5smmghsyxqj4ikmyk0sbz047',
-                remotePort: 6142449386,
-                directory: '4yaw1txe6iilptwwnir4z56dk974jz3tyb5hmhzxf91b5lg5rtouylkf4c490oboxcjoxklus3o3tfho4uy7s0hive4v53wlyewk88a0rc1sqsoqqnc1fvczn2o7ggw1j52zol8p0pxsyw5pckbb4oem9humspph6mhykmh2o7xj1umnfxg5333qhgtkats6h9eht8niyk4y2qqb1bbgnetffjzfczv9mzfyj6x5jcn8xroy8nda22x7l4cehohi4mijsa1z0xyxateb1f96jo0f4i2x6yyd94y4c7mk6onnmccugagouuggiqb59zyq1igcot879hts5k6q7jdc2ggy3wjq0oq3dbznv4hv454ww0ldk9pu6nj2buof3utrjqfjnxcyiwfwzlaaw0hmkiqlp4s92q7g7hzp23dc3cra24pk3iyit89g9rhf70h29k6wkhiubg1umz6f2hl0jjg5vhe7n3z8sj3rymccovvljagulawil123logmjjtyezpzlhxvcuomxaiefwfquw9kx04lcm0i9vasdupwl1vbespvix7rgzuy7lg5eoyhcfhi2zrsubfqe6tkgqaecatpzvj2vko02o53yjwzt9e0hphy37joof0ik8thj161m6rmyrycmgj3lh84dg25ijhqpxt4ihkqgk6zcg79146vcghfjdkqu07agj4kcwgqn71vguyxq1o9u73x3fuuw9rrr2m9gkxu81mlllksuainrloianpchej77sjnzr3qnkn0834zdsxdjx9lhy061l8cxom75ux5r7680pcaaenk7hiolksgia2tdhnhqu260x9y8b8ergbthqb05lfysomup5hd83pd480jcmrn234bmn2lqmeahdsaxhctbh98a8mx20lx6nrrrovx9b0dtl50o1fs4svxm31d9rdqfoy2ohsek1do5wov8bhl30i7myt5rt4r4j11klvpfhbwk6tjbc1e2ie1ilbnbyjksr35vaer9gsjlgkiedjn8vqb',
-                fileSchema: 'i3u0hvvgk2wz113eqclumeevo5zn62wshimk0ssduzye55ozxuycbkljay0al0hfrv4qt0hympg4rc05mv7quke2du5a5ip99a1hqouf8ote3phxli3fipvf24pou718rx93ftlt4yy4dkxm38pzcbgaqr0zs5ycj5qjfnfsnikq7qrpe6gz7qrfltkfu38eqbihqqn6vhgb1ywlv14vheof9yf91i7xykom2klrg02vff0boaylqy6delsduhskns0i6ia4l2bdkj9ib34zijvp6f84baezq4bod8l8z1qxqqtw4hxgrqg25t28iaov1pddbzvylqixjbrh6gbf0a197y659hbxvesug2vf2l2jxaf1xxowvqg3xylcufvj2cqfpe3o2zrb3gxuxuuznf91x45xw37js3d4w175q8vzt2w75mdviz6y0qninxa5wy9pkl6ian0liy48m7hvobvw2ir0xbyw6h35fovdvpjz314s72p8dstv9hun2v2w79ti986eeuly82y2oulih0vypfh7kb6gun6xdmmowq51abo2m4lmwlnx2b37obtaz84sthw17jz6wc10ywoo1cncfslt1ogx27sbracnsywevjgmzyok01iboecpuy8qxttc7l9i2dpu95gamttzoro43flyi4y64amstm2f34rlv0crxm0zfp8n9jzw39d3zrlsx52mkudkwbrptpsdr5um3dz3scbmpmipjny808k432ddun35tgltfu7inikixfkcwzc6wj3ube5oy6oq8t0eb6lx7dcj97gwvnxyybsqfgx0sm2oftl5q9ou1vomic34uvmsceawwu5oegfxokjnwvk71fmzkq8uykd5fkgliltzxock6utdsah857gbwpkqsaub5hibczggas1ol8hpsf8tccnublnqhwgo6axcqymvtpnd0cfzggy5068sdkax61cnpsgyo5cidrtz35s6yk35f41wdv77ledq66oniyzvhty4n3oswizoab3x',
-                proxyHost: 'w3hm4bml1wkubths0mn9h0dpdfrv1zkqg5pjxpg7gix12sg7yz0d7hfusl5m',
-                proxyPort: 8855891577,
-                destination: '5aur182jpx86cnwzk5jw40kb17z9sbdgt4bqwxyf2wjmx0m9dax7luuh9zhbj5o22nyvgoq9pbp2r80z1ib6ek2wr6t8r79ogr4uc9i11i6ewl7g6oxs85emd4lwrghqcsknvtl4x8w37m0az15yx6z65pe99aku',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'ucrdbi9etezxw18y7exd678ug9lpckcn9qvyf2iakgwqzqbhnupojdnykzcgl5wfthon1gef6fkayvxtz5tij0dly2gf5kx3yexrc9ravv2ytceh273rp76mhyyvd44aehfxtfr57ca8z2f40ac1dsewxm91qas0',
-                responsibleUserAccountName: '9rf2h4b0rcw3ln0qwj4p',
-                lastChangeUserAccount: '92r4tn47nf1qcjri33lx',
-                lastChangedAt: '2020-11-06 08:59:36',
-                riInterfaceName: '3ffof9946swte7bnsxaler013sh9upcu3a3pahenz2ga8acr3imvkz422watf885008abvx0nmavmumkepwmgd1by5pklp863iwyu99qr2mlro3rxwpnf5rc238e2ut8txa518uue13g1je5liod6m7lbrusn35r',
-                riInterfaceNamespace: 't7q5fqdlf9l95jaerc4ofz31006l73nr6x3jrjnd5l2d77gbmcu7mmp77l12wslwqgwp3ebsrfxayzfa3nhlulokgez88yrm5u40avv0yw4e4evk1506v0j4g1db2zthqc9v6jddzo80byks00w7rlj68rx9wqpk',
+                transportProtocol: 'fo3w0rk1csadeltto6bv926gbg346cwdnmdim8re9ujyf29i49lkvvf5v7sw',
+                messageProtocol: 'jqtcixcg01a5dgixc716z9egaqg3wy8f6ro43e3frnavr4ik770asa4916us',
+                adapterEngineName: 'drdk1wvyraz9w44obvc07qinnumulsikebva0x1r8e2f7r0zv668szfklxxr952ayclb7c96wz9au3hkua7cyz6hiuni2e1rqq1wd3pf2jym8ce9s82gti7vqrmoe9ndisg860xbvwweatl0p0zutyi5evomltt2',
+                url: '7w98e81om2k8neft95txcsqmnlq0jdkoiw0861x6wxjoo3gj6or1hyszudmhh8fljig4sq3ihfjpv9n0h4efyusk0g4n5w7tm79zxxetdrglkbpvg1hivy8nhm5cfnsqoio0jn0owpjrj8ihig6k5jx8r03g5hmxmlm1rx8wchk5dk0ebi2pf1tp4d7gpatu7ibtz5fop7kvh01byvq2z6nfvgsudtcld36xr2rumjq6auweelo8csprdsn4wvk35yj13gs2iyt9xw9utba616xtu7h71ey0el4oxrdjbmy3c7rlomjxjde0i31oeipv',
+                username: 'm1p3hoofss92ynlxs6y0hjm0tdfdix26wd2f102j22akf3o54xdh9ytdfz3k',
+                remoteHost: 'w9rrpkdizf2zfrbs6wwnd1b5j2gso3wkdsmofet14c4hpcw3o0iotepxgv3me8lwmmqhfy1gkfwgclog8ohnnzdxzsq5pfdgy01xn67ycju61clml7md8b14wdpexlwk8r4dbpup4nh83m69garpxfakq1lnvrhk',
+                remotePort: 7310789506,
+                directory: '2lqzoi4cdl32p2v9n4q8f8bn17e3bvn3ljwse46knr9tto9dngypygsvgdaewfasw4up14hnnzoulnuy45lqv1c7e9kwj151l7307eit5ggfipm8b5delpzietlix0ewfvbn8vmldj6pdfa26t4f4l3z9pjrhf5zsfmpu5ad4hrq737tk85suxty3uhv8ymm2qaifgczh3lbn4um7k7m5fnctsack9q474bggn4yulrs14krs95xk5qcg6l2dtqnmxq52x1iygb1eb5n0t5r9fctupg35fnpbg3uqbt6yrvil95cayso6btejvftigem7r7letbpc5uacy9cpjhof7kbwvspqqvzp5384whio98wsu20kowy1kwmhf1dcopgdwu123htfhwwnd6u8u1hk5248dnt72g156i3uldja90oo4bin63xtyc3i5bmw7yqauygwpchat3bsarah0a7vbj0a958nwix4s1avie134hw0bvmf9cov38mq6iedm2hkw6wn16gmzgziadhuonsno0jtkgcinius5rgn9p2637kcibn3e1m942a8ohl0je81act8x8rp8jgr2nxhbefsrgl5kgjia7n6pzj5un99alz53zfu8ybt6pq46sf6h2088wdvfi3ss71z0kjwwl6srmx73216k7f9js2flnqsc4l6snyzfl0gqc4nlh96zl4e8gi5ivtgvwxy6vrci9lepvx8rf90nlhxu2zrkw8twc7dger9735ju5kcyqt7ii2rtzlr327vczh7iscvtvcxtj56jppzs08mbelbnexbpxf5j9ysqlm397fw6nglsipaf07kyni4d1pndxosflzea24g9r8h3cslk7gmcs9l6rigg18523q2zb5rsv2uem00d6c33r3wmfzt4t89mzxvu5n7e7xxtvn6ryv5gut53boej3hqdd5hcw7chnx6iv1txjhnak91cp29guy1fbphbqyyi8diemtusq730uaaeaeesus1zdsk1rz7h3w1me8',
+                fileSchema: 'sml16wk8h92j54xa2d5fd9ipcl6wvjeggcd5wd1bjv3csvc224ny71ajruvcy0fhwsuv1rdfk31zzd6iczqh6abbuqq75gzopd37ikci477dbpib2ow5mmcdlup93la52c90drvaig6e4c6gbf1dug4np23mmtkp19sffac8rarh9r51mxubqxulrfcdmknih2fudq7q26wzc8ftrlocrhhjn6625vz09iy5p2wt5ceo8rjwrw03m4vl2otiyz5rej8e75j3hy847uwdsvs3k5ieoga9rkyakutj0auf4nwrbk3gl1nnu1u14xbbsow8c5gph86e0i5av6ttq3rq2kztoeer6oq6n5hw24s7f1qjf9oejyrggy9nuud1jukx7dblmk1cgfsangp3a9mic2c1ab0gnstv0ej8uhxsxbam6svytzsh3rom7z2sflj4ju7r7ds82uq9honej016i2hfktv6j2r0dupuir2wk93svww5oohhduw2e5jsqz4tmau0evgvpjjxm4jv9qiqs7cvfuc8vu3n6sqzer5ddjqjlvj4st8yije5d23hlfj2nu4nwae1nlvx0ympmhor35ky8fmm6n1ckq94yksqvm0gj6yjixdyicmxxi7vmbsk7pn500n2ianay3d79wtq1rub9lpj75bobytaeyk6pukwsr1mkptfp0ftgqh3hpl8a2v0yzubltxkt4n5y1oqlpj11qlr48h2w7bi2t9ah0l49mkvosifz1lfizlfqksyxcgasq7m064p579k6tk41v99g1tffi20me5874ys2hsi81tps9kn4i1hfj8bk9bsj8cv9mkwy2tn2ee46ig879rk6sksvrncwxknu8jwxsfi98kqa2c049zjudne9eushxkroasl6eon1rezhxf6fa7c9kgzgbyvcu52nsmtrx562hy3gcdqtu99rp0l01tqc5ql2fgtpjizger852jkzte8c26lw7t8pty18lv0lhltv819gyje0aafj07vx9k4',
+                proxyHost: 'qk2e6tiesuhxkuo1vnhrkmf392ejsxxu8r2u3dbbv8mgu0v1in8vc72skkvy',
+                proxyPort: 7648384765,
+                destination: 'japzu2x66mqt8ewbh7pforxo1oguqszak63kn3r5fh0ywfa2kwe48cf0y52gxl1a8j60ze1kj9lic9j5bc8j1w9x5l2peh8w9lj7cypzgfcx92tpkmw7i2clxu7usiaevzl98d85oun2xxp63qqxg19pla6mn8lf',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'vf6wx6nb3v5vkj7vsvrw7q8sm5l9zumhyun55z287afrxcciu24mtf7oa70ttjzgoq0pr7nqpqex6uaqiif0v9r7m8k2v4e6cj3hu0sdqhanw996z01l3fl3851f0ob5cs32xoyc84l3zbsu1p50d9stncb8yynl',
+                responsibleUserAccountName: 'jqxfoxrdwjciumqp6grq',
+                lastChangeUserAccount: 'xqn0auoobcdhkcam6pqt',
+                lastChangedAt: '2021-05-22 19:56:58',
+                riInterfaceName: 'gh5g5fwu2vm23a8ldi2itjfcohi48oyam2ghqenuwuifx805b9c80rk9v109mn1au0elwkygc364yot45opspd98lybo3c2gdowqmt79yr7krco3z7ckoj0ooqxu3k98bw7wa03m2uj1pwsddbsjzkhu0xiznzo6',
+                riInterfaceNamespace: 'lzmqrwvmo79uvtv532z6fzgev26urdornwp2sssrrcc6ulw0b3alampnygzlpy5zhjn0elidmdcajy39wk9hxgcbjppbyfkcfog93yozb231kb33d8yfrwhsgpg6upfv3852aa37u7dyek6zui5ybvkois4nqhjr',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFlowParty is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowReceiverParty is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowReceiverParty is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'wqkmek650w0wz994hn80c781ns9ue2sbjs04t2yx',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '1jx40ir3pgzlsm19aie259y1qa7bgcxyl56e96fih6s21znp07',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'uq93ig6lekp9t0tq9bn3',
-                party: '0p83eialqb48ufyckf6jcspnh6nx4hc3rko7op3uzix09hzflehfk9bbqe9paptblpbf30c8ea1lt0aaokmoxoor8qu9wnaxb8gpgebbz6xyqlzcfnfrqj9s47ij1sg2dtc2v6r58y4qbm7t4f8vvqnldnez3n8y',
-                component: 'a1vhrx5mrrwknncvo1vee3ptzl2rdyuw3km7gisbna74jwbg4268xj2ep0stuepznlrpepb6owjb9eb4n7iczx5x4k8rzsxh0n6g98jswlcvrp168scx0mnb3qekvf9omn24298nhrcjrrhqc9bjmv26y5dim8xo',
-                name: '6e42gz6w7m6c35e36ie0c6so4wu6whuezz1r1wgylgark0c6oafivx8d8gwsjsklbn04q813o1svrp9fe6hgk6pltlxt5iaqqfb5nmej9ifwy6mgo8z14gt9bjw1ysgu6g9obafx5zi101x1sdtiv0rmibnlxrl6',
-                flowHash: 'sgrheg5ka23pqtb1zwqblxzit5s3uwp7hmpfo2bu',
-                flowParty: '5u2bkvg9rwyvrmu06yw4ydd800ijx5ygo1op4ngha06v4kxhqa1tk5n5s1jusyvejgerurike2nxrt17jfcudqcbc93as1buulrr68aseztb22ltfig69mnz1jyl6bbqjx43394zwlw243qb0knwtxtqapybgw03',
-                flowReceiverParty: 'ht1a1x0haausjfq33xku5lr6uaiw88y2yr0hqdl7me15jmr6pc9fl9jp92ugc9c0n69w0xpucsnokn1ym5x16qntqw9mh47xy9frf365excdjo2aswjs1s639er4xl4s67gj0ghwhgz3melfcg2jbm75r892sr429',
-                flowComponent: 'zrxvt0sebjgm0du0du0y493jdkahuse56utak7vf2zrso0z8541jruf9883jnizsojx2o9zvisaew183i8bqrc33iik5eu3cuz5bgdng9y9dsl6antavr0cu2phdqso6e6jpmqo1jlmuhfhc2qowlm720q2vb2ud',
-                flowReceiverComponent: '554oxsd2ywgjkwkwambgmf3xqkk86czltoxd4xprwkyxqsi0h6ftz9ad9csp68ttxe4bp3dvl2ut9wy8mmr6h9381ydxpp4bybumkemk3in4efau3yx99lbhznr2dnbpisigcmte6sv5vcdgehq784viiityoylq',
-                flowInterfaceName: 'exw9ec0dr6eqi9fov6s856luktqzenij3el42i34lauuhl5zz02xvm1l14ii3msq9nhw6vsizxp36jsetolbyzh0u0a2epa4vmd7uub3lg4pf14cnza0jsx13q0wx2e5jmordnp0kyl5ha43f7ic8uaww9s7cly9',
-                flowInterfaceNamespace: 'xa0em40amvohggev0tiqs9nr9mhzj2qeh8klu8qf20d5dkwx7bvg2jlbb0hwv5tdrzp4ryqp6teugx7tjae8v63re26zvce74md3liv2g87yo7ze0hhev5wti9ge9c9paifulfsyl65fm3krnku9gl7gnuo0vip6',
-                version: 'kefdyq8t6wf41tx402bc',
-                adapterType: 'nerr11axta5kh9fffvrwdt5ntjp6x28wog9dx7mvqbagzyaf8hqu6kkpzknk',
-                direction: 'SENDER',
-                transportProtocol: 'z1bd6wkajf3uowa5at9vtx95oun5e3edhkmd22mih5i2ixw4t4sgap9ewjyz',
-                messageProtocol: '6ff4wfxhg0ag2c28ghdo381i9gb94qpwtz9i7h073pezk0o0xqnc80vlx4wl',
-                adapterEngineName: '7pbv8yw41zfiqsy7zv9y24dq0evoqjrvvgtmemtriu799zoieuq601xfrodyj7fayc1om2wa0wiskyeek8kmo64wrhopy8kl984hs3t5gh7leuf4y13q7md1cm4wo520ohoeis67rcwu15b8a5puhwweycxjf28s',
-                url: 's7uzselt83o8otc9x99lh0qqucq2v46m1aq8kfumgjiu2asgq87i20g8e3thpqfsq62ios6kmwjbrk7j59syr734d1bq87dpc5jl751adjfthx97r5nuaxgrk8nmqfpprlbrj2vp7brusbulrr17y2hhwm6uiuxg48yi9taeaonjch8mgg87aufw6xkkcmhv0bu9yj6pdcjkhpg8ffsur4yjlwphkxj14d5aza4si3l7zr9fyo66rydjdmvextijntjsaqmb1ydazazlda27ez7zswopvlti2ji283pn5qgd86bdhwgzej8u8sla47l1',
-                username: '2pf3wxm3hfk3yucyluylo1wsue8df3suj2emkhv4m3h484lfq31bmovwqvfy',
-                remoteHost: 'r8q7xe6cekgobepnqlwvosn3chfenosoigw1p4d4n9xavf6v2ltbrrykf10sef5rg900wa6m5h9dcc8bhxr4xt62y778hgo8wb5o0ru7dfri1sm8ih4bikjtojrryl3fkwp3yurqktkc6z36wccg2mf6qqhkmi41',
-                remotePort: 9415338364,
-                directory: 'ts1k9kssz097eperr81nob31y3dbeerfowoiw6ol3onvastz5yak6f2ftnlucrlbv5ywqu9zbpj4syoigmfy1wegfffvbus82usv1f8ygdiqqshl050bbbc4gf3lxmxhu6al1l312ocj03pg2suu3jp9me8w699rbg8cxoajpf2qj9qj9htfaotq533ljlsr2u7ap8auuiz5l4xgeh1twmxi2lrrul42xvc9fdvqneypq0ip062ge6hqr2ju661sd8o6gesxz9gofj9gq5kki4vttyd8dc21mdqyxwvm8i16hqkuk679thhy0zibsg0tefp5salqfpj87v66oha407jxjbub627niuqqrw8h8vlnf2qo2i71oz7zqfxau72xsltmp9r3k8817tztx0unzoo0nlq7d349kbjxucn138rjlor1ewq8kfa7ou8yaqr0368u4lf07e28i4bfzvler4pxwtb3unadotjrokk5rsaylwwd1sditeabo5da2nalkzl0l01tpns64eqn5qp5k9uzmo8rks9c9o577y98ko2gzzh4mqhcyftchr9kzmh5j6phxk98xote335ge812a13jla1vqi956d45yscbrcoku1h27qqxc63o1mj185h48aqa0xkgndqbrcgpljqw87xdixd2kqrhy7j97w8shmwtpp6w4pfcqihzc49597x0txc3dyhki1q61q6is3nztty4u8qz35zurmem3kskzgvxlu909ojro9sqlypmzncssp2os52x4az0sqwqivnvervt62h7g1dixsi2ce4mgnmauvnj1v783kzwie0xxan88um5v95035835m6f3zxdob477zvrb80gtl9wb62xsmcnwwggzhbosqmmlllqbflzod9ghcprvu9rjbpjnzhwlup24y1624xdaq5m7giopynuhwlzai7b7yoauc9d97fxjk5es2wjiw4quqcf7tu2phzvhpargo3guf9l4ayuj1l4iueo892q1aqp7861er7b',
-                fileSchema: '11fx0ozd7qqatjzkffp2ymjd9ewedkphk9l1ppzkw7elpuizcazbs67kh98y2s4bu3b6ts6g6sk2x1hnvcidpc47cng01nwrke4b7j20x3eqfzdo6w4n7168iz1xsgqy1svwfp0kjtg6e76n879rki8zv0najsfh00tbpebk9agycjzzwzqyaby4mjo3fazqff3a25g2x4k1m5mec22mfwka99memyat4eynoy5q56cqjkvnxghpfv71c0uk7ot0m9k71qg9d1mhhp6ymtgmonyoyciuctclfiuovld37oz9j6gwjqkmyh6k2ovjurwf5w56ii0zm4pc61fq2fua466jmo5zfjakvwc4swjc3afzagok2xysik7at69p2v4xu0yyva9hmrl3gum9izzzphjy8xjtkgwjxxkge4n334ybu1h9xqwil6kdo7i2qsvb0qnflfk30ifs9n87x66y215b6631yqgxvpygo39uw39cgqb8wlew99fqg4182scvwqglswnc0f8s22xuq3ck7bscj0611zn0i56xl50zs5ant2r5cpmknurivk3bdi390ha6eklnoyfrfgn879d13eqnh3zv2dfid2y2vgv8rzjphqwn43m0haq5lamj4ah8o2lqmulh3jf7fi6cdl87k89k9fbq9rfjmw5aiuo5cs7dnm6zr06k57itatf8a7az2trnggjhli43ttt2v12oegokdzbsh5vykbj31kr5ybfipdan3ch0rbpvmp8ezrtbl5psjfq8ld1uv8dt9mjcf9p1dhjgpl784h1hcxdsa70qouxx0va8cv0jiyow6cusvd6gcu34bo2n0pdhkxg90qe00k2dss0wet6upzbczt9x1xatx0hiwrpzpssfjfdqxpemz4z8n0xjkad7ipjp53xf5dbx0puzcpooyytshlx2xq6fmadh0uqpac6ou3odwvrhmmh9vgp8z211dlmjy9a3b4j2yz6lg4x74seg5p1p5vchi3wq1vg7y9rz3uu7',
-                proxyHost: 'b33b6he9rsg5zyu4blj2g8irs0uh8cubpy4x3go9pgo5f7xe31sapk7y4h8f',
-                proxyPort: 8033455067,
-                destination: '42g583edozavq7gnt33ev3pyu6b7ss31ofkcmmf0wifu3do5hrpcebbxutgvs73ex78hmo5x54h9wfw3ojv6v7jbc85t6ye405uia3v3sezh4xtqru7p7twayb7oh9bb6m61bseepql2lbsq065qt08jhra9oohm',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: '3gi96p427wnze92dfidem8eh5py17wqxrra2nocz8m2r0k8dcrle443phjbqnied3vj1wshcqaq1lda8o4vi2tec0o4umvl744u9upml5rsvh3t83dagx892jh19qyuj75pk2liu4a1hwnsg9k9aerdm1krycnn8',
-                responsibleUserAccountName: 'fuerzua28bnvegqiqktb',
-                lastChangeUserAccount: 'g5lfgq414srezmm7hvw1',
-                lastChangedAt: '2020-11-06 09:43:20',
-                riInterfaceName: 'emrfpovoz8k1k1lxm1yzj6ypmsoavdz69vy06b23399f8oadcmzlgdq19upufcra4dcxvk81328f5hhs6l1rssiml409lk3xziw1vw29owgo61hwgzme0jch54bw3au9n4u5cwctuqw7rb11evj28uw6bh7hdinf',
-                riInterfaceNamespace: 'bfwoq9vnp6qdp65bnv52gyti5ld1syafi9iyk8mmt65nren5luqf67xro3yti7ivi56819ef6du6rnfktkq04csmwx2bntxyoo7afwyiq7nxdenl8fr0ot5bjce5gjp6h8ztk563hp1ptyiy0xwu7c4hfd0h5ud2',
+                id: '14bdeb46-6704-44c9-a132-73a77fa63805',
+                hash: 'g1jt5ow2bpku9naf70oku2cvnqf9at5vrcrf07ky',
+                tenantId: '4924becd-2e77-4bff-8f1e-255f819ba488',
+                tenantCode: 'knxg20n2b76z7kxs2ccse74kz3l8fjvouq5u6iqrx5k7dhowpa',
+                systemId: '63d8f545-6862-44e1-9f92-3374cff854bf',
+                systemName: '05im3axudpqm1dhp5s11',
+                party: 'dvo9ju3mcjfs56xq9u3vr8idccmqipt0dxxlz05po3ycqkz9szcr71qh3gvh7hmosnwjn3mfgictfdavjpd0tihtz147ansav4midj5lw0m5htjvq7ab94zk0aw3j8ri89padrgjnnn14d5gyy85lvx1qmi85t3z',
+                component: '285xmwgocpvwyp5u7e8o2cur2jgxn6g312c4huqe7o7fjqzzahtmay00p2dam1j673o857zwbagbdqxbnmobuo05rsy8uh4uk8rh9bohk4as8pnfs89myu46gaja1o0fe2890jo0neqvvzzhbx9xz41vh5stdql5',
+                name: 'udyhmyb8hm78d3smfcef3a3rbcg7igftdghlgfs4v4nej9bxo76v61r996gg713vhxpthyab47x5r9uw5wzef3vm0p59ypezq2ymfuqpicw6kfmv3rf9sw96fg14h8avr3u16e6kq80eexwj8oou2ytzvyqo34zf',
+                flowHash: 'tprdzsmqal4ykasnv06yvxitnugdhslvw6ria5du',
+                flowParty: 'uj4lfwz5y6ieoa7j12ug7ms678kxt6jw9xn96ye2wiiqxcki19qmcqvqrfj2uf1agpkxqrya58seckty1hsvrotaxb6g7aehu9myqpwlemkh1mnwgp1zg5vdjcnha01u4mnumi063kbf8lb4yf3rtqct50lhpnei',
+                flowReceiverParty: 'imnd2r6fv8cxzhljyrll5eob34kcjfwtmbg9t5hl33vy8bbd2dx79hjh9s4ff2rba00rlu3xwlcf6i9vqs53csec87y7oe2bb1ichiqgtbx3llaq289palhsrz3doyyrac3nznqgtqdic73u1kpt2mybjzvvte3zk',
+                flowComponent: 'vmc8guhdjks5ahrityzrlrr9i8zqr7k286q7iaicmmsn4kah9c8hne1xtyjz713olsm4dqv6arkpzdc4zqzyjyvmf1xi2ygsjdfvnn2y8sler3upizp70nqnnsd45vaiskr9oubdd9jamwvw8bghgkxr32d6hq6e',
+                flowReceiverComponent: 'soydsgefg13g2ba0efmcqdu900nfdj3bw6dm9jlk3oay0ew99tffud99aoxi1xlttgmq2klxvkewpembw1n6m6t0kf6ixof38coa3nalu5o43rakme3etuwp48wm9l0btty9gopar6w5mez45wdajdv92agcxx3b',
+                flowInterfaceName: 'hmzh3efvxcz2sqyha9098b4m101wglncws18r7bs0rdetfttqunpn0tygoi20h9pv5x1c2l6nqt1mkkmqbglkmqddg55io5j4ixzbksfqgi5n59gl7ve5eob1pa6yp21k0tyihrfnh5gq3njej3df2b5s170tpby',
+                flowInterfaceNamespace: 'eubf25wdhnr60ye6jr5f1b5axh4ql35sg4w2v00qq4zlfdph2j1w4108zi1sgoo39e20lsf51diis6zijrcbsg0m6foz3mca3lvc3gdq2umohtovov37kasymcl1dxu2qfu4bcazgyirm0o40gszi8kx3uw5lg02',
+                version: 'lf9j66cfeip6go9t8c3z',
+                adapterType: 'ormrg13s0xw1uvz9xckij9c6mwmcqww5zes06yuls5vvhii3boy8bmda2krg',
+                direction: 'RECEIVER',
+                transportProtocol: 'h8jif15ktidve0h5zhzp7kz7b5kwutnnul6l54spbab3np1ozxmgiggzgw21',
+                messageProtocol: '86wltok6pzy82n96zlrbvmlpwkl825hgcnzg5qwqm3v9wuxv2kl6s5skgq10',
+                adapterEngineName: 'o6ij39b00grd8hpwnyo2zl0lf11yt4627ir48ut3u2385qonbk5aenkcyjl8rbc7gdgigmgki0gpslda15jubgpg3mcbpxlok6s624skqv6lry6ywblu35n9qcn6ho0r693jt3iam0fuscre77ktypi0wnb615bx',
+                url: 'xtr661crrw46s4ud87127kcpopektdsn3kez192f1ixu4hoq1fg93v0041362dj8cd4suegtfd8r10xj82nuf20fy2joi22254un2lmj5oxxjimavr8xvq150nneurkl6145pci9w5m9u32rn90h6qgiv3tga88ae6eqkdghxdufod97j33a19e1y8mc9wpwj5ugh4ngk88cleot5n02q59sae5tznh0jl1jiad22e6pz0njwu1zxvp0migfv6evijfoatwj3cs2tx12plu4mgd6p9w59ixj77t5w1d4zglvegbosy67jm0bkvdl7ox1',
+                username: '9z0zs019i7ho3t2u9hz1hxiab01sbbus5v5m14kg5vrlqmv1ytsqf7l6o2nj',
+                remoteHost: 'kdxanfjxiam94xounqblf927912ff4v3cb0z0tp8af8fz58nacln57au2zvs264xuqiq3c28t0yaaa65t07amctjgu8tf8zj2prksmhju3xbyujdfmxhc4df4ypbsk3rnbyn7gy7wxa5zxrdbk2b3b5ghjkr4nvu',
+                remotePort: 5347538644,
+                directory: '677hc39ab4l9nsozm3l8j8qbuyfyxonczn6b1xnhm53j2jsdo5j5ocnv4l08wrzac0fknwuqtnolxols0lwooqj5z33ywjayhpu0ybdqkloz34cdwajs2p1ek36mid8x9w1btfv7nf9tl5jesahw9wc064rln3h438q104vyui73rljpf58kmo3tr4p31sh0pafo6qfagwba7ww3qvf46zq1bssciv5l5xp10pal7e1be0i344orlnh5imk3a33kbqffa297v4knf4av2657cjxzqx32e6tlmqp0f7qczciaxjgsawxza7it8veg7959uek6f5ktfnrj2uyyjibvesrc0f7gqyb8vxtxoxe4mkgobwbu50pr7kq0yt3t4ij2zwzv0qoqd6ghd5fv5rp0yij4wzzxlyc8a503lhys8s8i4nfdnjoeehlts8u74m9zw593ouxp36ru34x8riicg3n2q2j6mcvor3iq6tmpi41uv8449hcna5794jxcnmd48grult8iykayreqkz3tk940qd3bp4l8l6e9oiihy1rrttjyidkjpi7d08npdplm8qlrknhzz163w4vqrprv5ziwt9r8vj80uo7kf1qqyp49y7zcfb1esxa7ilsshv0es5gtlnuowvyq4us04icecipto56gqvhdkct96t1kum5j2030dga47uq50yrbb05cv9ceab85zp590euclwsjvftn0afgraqy8di11ixpc9j4422nk41uwa5fnu5vp7t9ubsgwcxpetn9qedhmi7ynx61lii6honyyeijr0lz9ze1ufhwzdn2n9tkw1dcmzn57wnc615yuw0gbkc1ii3mlozks17veso0rc2uxvl5zmljjnnw3ex6tidxpep6xd4mrdfnja98yxnn3izkhgnqne7m67yqvdkkmoasdk2hwx0sllzn73voz931y9jifmr2m4r4ll7b2be5ct6nqr8u7r0ap5yvm7g902lskyc4wihtu374hvht6txjt7mdehuob',
+                fileSchema: '9m8ai2izazw6epmbb0sydilne2uiiup6gm9ort4prak0b8n4iwxvvuhe6s9eaq22mymio8v5nklb9iq9by7co5tu25xdcbpme83ed6eqygzl8oex9qsz6ym3eo5izo3rccu2u51kfj7s2nkcvguwbp8ceu2ybxc61h6efdjqzjn2uby4fhep2cwy7n02gqafursjme413cu9meydipz82trfngfffaolxpntidfqfspiiqfyj6cdgkd9c6wps3hkgr4l7k3j3u6w3u70qsqswy0xb1hsiz1yybeiycby9c95ufdfkwk2lnnuday8vqyek6a2m1jvwkb5nyj0snhiovfpz4yhfa7vooftlghebx5a1ftvlz71oou926ipnd5hh1uqnens7zkt6eoj1hr6e4jewgzlw4hcag26tjmanuc6y6wd3mreq298l9qajourch8ds878gzehqy0c90j4o9kuxt7mg0d02xcl5804rmzgmoc3hu94mnqdruo46ess79rcianugpvvgyklp381ajiaaszd3f18ze2qh1x7w7jbk3zuor7iqir6326ngmhlw32cdzz1ot054fl5g38yivzmhhzfb062xjox9r3ii2klrpp6a90o1vhd9zqkvnv5ok3sf9hkphve93mf4mzdmi04oej6lnwogr7r6ojuj7m3s3fr5703htee9ox66zmyocofnvys7lyyani90dns1hllr293i7gc3j3p69ocxigmmpcgu99xgkvjg39dw98jvv7uiu9b66e4rs9g29dzje46bkw6p8he9uqpfjq0c6aiyfyu6s7u2rxvmdf6j5fo9mfjunfsjaawdvyj280l3c5t2l7rn8duftybooy3prc05w5g14wwiwxrkpycoiyk1podu06xjwa489bt1wxlf1g5tzpklu9eg1q0j5l5yqwlkbkakbw27saz9e3dwc2nfuksgzkd4t47nmty40a04ep6f0jorhuy0166pbxu6te2k82jb1ljtygt9hl59tdg',
+                proxyHost: 'abxpv627aq20q3i5gjaepstw2yhzb4q68h2cb66ss4q14rvqrp13t4wleb35',
+                proxyPort: 5506605672,
+                destination: 'flqtxago5dlt8blzq321z5og9br9lccvavrumwa7bbyzvzop3nr388bs9o29y0poxk39lad99l1kl0z4wy8mednpoecnkrdrw0eb7fdv05cfuywyhu5c5pf9972rzypsyx2nbxf6qtiasckujfgd5j4aje9dfc8p',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '42vkelvuopumo5lq0zmcixeoqv06h24s33s87oj8r2msqyv3vnm4y27ye3fut63gfypszleqg398zn3s3dc3esuneklb0tti8thtc8fqnm9m7ppvbbmpt79tzu01vwpv3aeusf5s47cg2d0lvge69k4uvlypmz84',
+                responsibleUserAccountName: 'zxsgyn5wangxwkaonjim',
+                lastChangeUserAccount: 'iu037jtahd3peiuparkv',
+                lastChangedAt: '2021-05-23 10:08:17',
+                riInterfaceName: 'xt8845gw8b8095sco8pdkj8gzmzaswc1qehmoctg5jmgc431ursfadxyq7cq831bgbnnk3k2w8zo4tj43d110o58brywh24howvyw5xz2loqawc6sj74jh2jl3g7meav2knio63wjeehhivui2vah3l3gskxu1v4',
+                riInterfaceNamespace: 'wbe75j76x6zd6gxykrc92oes1kl1g4umnw54jt4kgo0g4vlwgzl652u5i89zd1vxcb52keemvtkvsyy1uf3z7yq0d5prvhy804xoyd8jm0zp9mf1sh2xn5foaf3qe37zjk7vsulpyyxn5gjn7mupyn6zqul80niy',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFlowReceiverParty is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowComponent is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowComponent is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'h9rlxt5oyakx8dlhri8vevzu8fq4c93l0paqzi8d',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'rwn299rvajrivatuf48gyms3xg1mng9ytbs3dwjuvf12hzists',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'lkfw4n6q4wo6r41o03l4',
-                party: 'iky6xey8ulr9wjr9on4ctw31qenrl9qw42lxwot09nps7999yd9njbfkxsenywnsmmqkxy3qik8xen3j6ti3ynzjhxve7j5kaww7a10iognukn4pi90b7ndbmqw2awl319xzaantnctnxjw2w0d6a1i1a7j8xltl',
-                component: 've06h2mvlqw0kjndb9d873dasxs04oqs578m99h4g92fx78z3gq9oot6l7cc177tqsyf796tceemoccxrzd6wgel7mmrl66bmenu3y76ofmg31b3cozvmtpbwm0c7llga58jfnw7vzo24tb24h8gij6qdciqux4s',
-                name: 'wiu9tnikr7tkgt69dfy0wux81hfaobhjipsfebnwr8utl12cvskftc447y43wp4w4bapeowg9bnzlf2562zqw16r4wzhvnbzpyj9jju81wwqjhfxbxl3a1vnjxdd9xlon2nydevw7pvrpab4ygrjrr32v3nh23ab',
-                flowHash: 'ujkvlxio06gfeovkc7ed7k00ju15d4spe96wq37d',
-                flowParty: '2rlg3mc6y5feakniqilrrraosx9zf8sgrl8l6avxjocxwmuozt6lm65lanqfo5g0h3bgkn115fti4lcw8vyr7rllmb0dclfvx90nct6oetf51f1pka5cqboqdesva19slfl6mql4vggzcbk104q0m4gghcha18d7',
-                flowReceiverParty: 'xwo8jne303p5es3x0gr5g9d0wtxt5k7q6la3wv4d5xfoh33e4mxg0bhz2ddex8pded98f4f9zm2prfhn4dpftfbbt45cjaaqu71znqhfluuuugjfel7lyzunemtyi7u2h04wv65q0ilyze32bq0h139glzsw2572',
-                flowComponent: 'xvwspzhyyzy09hidx6htp12dapzbraqf6cig4qy1ppapt2ced2pxu1qalb6a2xe7elrtomxrfc5gk6vogny8mloitg7bx78d0nu29ocnydjs3spynps0hul1ykfj2hxg5m3u1t0v22voq61844ruruznhmyyh4uy7',
-                flowReceiverComponent: 'y0k7npn87outlpt0kel01sjbq5pvtms91u3c4hmpbuam7jmkrqk5lgkmn2nl8m4t2kqwol315x2cvlwb4lhnsff1zziwc17r410i7wjjbkpr0zams88uiyn8kn410scgyfxwudmy4deub0q8t8kzove6wum2rpts',
-                flowInterfaceName: '1mf15dpxvqvq6y5s8bic13u0q9bsy8pyhovu6houob0h18e3tbax3jy69dyrzol9bfqq8tr8422cdsawf6dzuhhgqznkucv6c8ah4714qj66pnb92dwehwcb58odkuyl6uxh1wst29pwsc96km0ilkf1qxqfts84',
-                flowInterfaceNamespace: '4qwi0uk9pas9lxdzdm4iirk7wrb2y09t4sto1jmf15wctvkouq0hf3kvvnqxyr65msa2l2o2xlc8a1ztugqtcobjwuq6y7cd5k44qke7vuleg1euug9wuwam74wz7mwrq16doklk5grehngtvovivnpi9yfr97ey',
-                version: 'lij69ru7ooziao5jmi33',
-                adapterType: '0y6985g4m689fuah6ub6rjb6gaslbel8tfh0s9ruayt7bmihim444zevljp0',
-                direction: 'SENDER',
-                transportProtocol: 'jr1pc0th9dvyso30r63eyuur5ju82ci632x25wechd5oe8dsy43ldlx8c6rc',
-                messageProtocol: 'pfjbb1plknknxy4e0qfa177ryc8ahtezxtq27pjcbr4q8lw5rebyar92tj1h',
-                adapterEngineName: 'z3u27esxa9qvl1e1j5sb6stmmvlclobvisqcen1b8pzbvssp7rve1mrm0uzruj9mc1pxpqy5vkmr38ci6rfjd9n2b47g45pu5yo2v2zql1wc67sc3n8aw3n5votp2yadk6dks5pk16y1jpciwjxufnoftw4sx5dt',
-                url: 'ckxgjskr9jmxmuu3pmvludc1qm7v8g45bsfy1t955rsa1clhw1r4p5tobisyilgcrfc1h2illz8dsgluwhbu93si20wo9b4rou6yki4626wd1gltm6u332ij4qt9qfq93fc66z9ef3pz1ky75cf189sjycf5ozfbd0zty795ki0ij20rcbl7rhlhhfepbbd9yetiurtgr7nstk8g6g0gaxksovdjigcbzt85f07hqnt4hj0o6x0d3q9dqita1j3akw1219tmj5hk2nfxt7pzx61d9nvxrccbcuwa75nqodm3akmkkl3dii88bom74741',
-                username: '96bm265jcty5ls88azjhmbrx4cy4ndupivi50q8ycg0vc9l83t746fw96g1i',
-                remoteHost: 'v85rwfnrucz8wxr4651v8p1at2m0urvqnhsl8sj1y9kqyu6hfk6jd0mjlme99uc0zrxkkn39123ba0trvxbcwd2j5ccarzfijuh4iyjf1crrj0dkubhub27y866nsgzbwpzq93lrnz51mgb3j4v8hqycbeijg4ih',
-                remotePort: 8518999814,
-                directory: 'cz6ej4xc6f7qx8av1qmaocrydgux0dlicflw9qfnm78pax36exnzckptazpfw1jirdpoufhb5qwwm62ia53orduhnylh4xes1onopz2u1248xi7p3r5mhfr8pncwojyazcl4rqpwwn59qvytog8bao3rkrpq7en2nt1zt9z7lo9rd90hipa5t8qh12vc8fuanqwbye1h41usgzaimbf5f25z54mwk02i5x5v8ctuuf31623lm32vp4si2u6xzwkaevgkcyqya5gf9yciq45241hf9lgjf9i9xtmdxc8i4y7tnzvbrvtqvor5v22hzomzs2q2ocfnzyfmafeablqiwgluh56ur78la2kvmyqow4h6aboqgrdqtjl5lj8jczggc38mc0i6n1y8110r3oevb4xrf867ebc56om9ev5o7xnma8ahvr7btcegwruc3e68xd6s16aj56jv694lvryh08ldrxg7r79w1v1yk44r8wjihrirj4h2dyq4cyu5b6hqzu7ncl164u19aqiaa34fzseosbgeipn3e1neg966fp712o6pnq59fbbqs9262gyi1woieuwgnz9um22amtd5gc9usna291qprt29fz0vgb10fyule7e8oupzkmyriq7dkf65xy72mnqsnp5rxqvg0dqpm5y0n5c65v001m0esp7tex8z8vzt60928nkhb9s5rnrjazv865etk4vqa55fhm02gcu3bob9tc8y5kv31tv96zppnrwzy73tzepqwhl4nvwat9rar2y6i2i1xdkwyicrf2zrjnin1wir2tllv210b6o25u637ih24f8fduozcqvu9orgwomog7s1stalerpe4mdaniyuqb6bcxh5sscvxby204u1vdjzp58aam0xdj155h2pb12zsfva04ntncrj7e3qdkubt29bzou7fnz52f2l6i17a8vb7g31z5t9o1rp7741vgvfthri4098fijmsyxcmos20dmljpqso3440fuqb7p97gslzeqcy9cp',
-                fileSchema: '0ynxr98bh6gou2max9xfw8zx9yt9zshqt97e3of2be10vq91vmayzpye0qjo5at1oro6r1jxmuasku9saot6o5t0vs2efg8e68ipm8n753wp6u5ltcro2urkl5lwsr72apf9zvofxoarpup2596tq3rxxdczdtjguafaytl5emeoz3fjy8z8m2vco6r9ctdf5n83obnh19rlz5m8dxc34mb5gvdr6l8yf9pct5jw0xws6jmc5qckfa7idk98bx4f7991yga7i0sowgawht79d8lf68tkyam8dnav97wjey5obc02t5vandt47cdb2eqmwubzmg35l7f4u1u3ghatu73uenoqnotew7ak56jh03zduu0amfqr3vj46nrjp89vtakpf2skm5in8ei7g6l6wcwu7vngy4n61gt7c3q6etlu10tubxej2igt5qzqhia33qv95sbxaiwey2kub3wje7co4ggph1vht2pe6civct0uc5r7nmughspamphkpiouie2jdssqpit74w53zwp0v4uug6h2k9kjvwkrmfm3cmw9wfqxb4m8cf6kfl32p4rl8wfp14lf784a8fnki6i3nngsqneiyfcv5zj7dcxrp2g5dz7mm5p2t3zqn1byylsrma75xw1mr44fzesvgpdwgrcv47cf26un13onckper270i00zm4ii6b03mex30a5q27n5c8d10d0m24eq8a5k3a2jbdm20dnkw81nf5wm2t3yehgos2lwfjrscn4ut5fntr9me5qf1nvxepxg989kwrcmmw750m5iiymb4noxtahnb25mqermfcod1kvvvq0i7p8kg4lqf5cwz2itqgesciu2u8blmbtl4clvzpyl5zfggrcw4j4uiz1biq1dnoyrgp47jgrpi4n8ylkvg70skk8iyo6phhjhp4h8lfy7lvq0vufqa1y1xapi70qwchk5b34imvxhjdx8f2d634t628e9do7cr36pcn6rqihzwlnht1jixeijqkk6y7w9vft2',
-                proxyHost: 'xwvscj3p3n87y78oh1xxnghu4rrqghljvwt0a02zr0hog95lb6dzitbgs19u',
-                proxyPort: 7907979249,
-                destination: 'emovufeg5c3ngtdedi6y6vh1ydnp7sn9fyidd8rl63b1unqw1cwyf8w73zxa1cz1ofvbn7lmhht24sefbmzzw2iq3m2nigxqk3k5f4rrdghyotm533bwvsfnysuwnt2lmb12ho8vu01o48q1v72ka1969bo7cdmt',
+                id: '1690ac12-b2e2-471e-acf3-e158e7a3c821',
+                hash: 'd8jt8fp915haoo1cetip731gls13dr7o383fdzza',
+                tenantId: '854d8a92-3102-41ca-8e57-80da828fe3aa',
+                tenantCode: 'mn6mzibd79qhdy31aoxbfli4pgcj2c47kfrvdwmvi2l4iqt55k',
+                systemId: 'd00a027a-f0a2-49b5-8cf2-087661a12a70',
+                systemName: '20kak9003j7ohdd74rws',
+                party: 'i58i9c4o6u680mnwaqobvavsr9sgc570eiuzshgx85fjfyndjs8r0oalbrs6q168eh7her87nyaiebqs5fvcw7sm7rwm7gvno1h9wvx47ruucj9plgilz93lq7496c6v5lp2q880c8ix9c22faihtip3sxrespud',
+                component: 'g5gkdo914dbaluk0bxf80xzqu8ui8kqknnxa65n85ctihxle7oxg6wcei0mdv1benbw8i1wlf3iz18dvuid3ynd2ayaaumrkc41htwe9r6kzxcmxffao4cvtgbqa11xmjjkbovtezmi1cxcqg0wfibebp1zpv7fh',
+                name: 'ooshhfn65vi31rgp032gcy5zcenfvrzg9xua28mdd3kb2ohk9csdgx6kx5x9qabqyxll0hlylz29scxxmg8oqb0ft94iy0xyt8v5c6g2ajfi63t50539qsa1w2hks98aicp7ry5a1uqf3bte0bs54z8o7e8sxzei',
+                flowHash: 'cx0jc9q7g2p2pqpmcbu5vz722c5frddrsb3xldgi',
+                flowParty: 'id22ovy8g33utrv07tlo58vjmy22ef4eaja4u8gn0j5bfr5eenkj590vj16cqpy3o0gjfqf59kahj657wbsl0vn6606pfnh8gk0othnii2qo8bio7afbw6qt5jqdwmituho3wix3klxffotk7bo2e1deh37tc9sr',
+                flowReceiverParty: '67li0caguivkruhea7qulm6gkfgydezh7xzhmwaipvsbqtg692ciq5ku7ujsvv3tkl92778zhx93k5qayrc08shw3vbmfha16ufw197ssxfp4wj7qo8vuxvpmicr6ti7oqyuq7aqmqf9f0cq0tcobv845ubywgt2',
+                flowComponent: 'gowj3q6we1rq1nf1mkw15k6a9fe1u5virbk9hruuu2jmixkft5muwcp06h8i7j1b35vvjiycumgqrns9n4k5gve6og00e3jpxbvnzwyxq5rxzkrqwqh5jn5sn9o1bz6zbxhiov3by3267xzxzy3gz1dsmn6pzdj8x',
+                flowReceiverComponent: 'fra4lqf58wqimlf4mzr7q37kpt3dndchdfkb72icgmsrtuimkwmrjequpze4aawugl3ox0ihzm5rdb6re65u8jguq9jd4uz4chzi5gxzwqt8vnkz69o2w8atp3pebk6ejknm9q3v5kr87vfe2njj0urse8mokvqm',
+                flowInterfaceName: 'wet2b53vpz72zfujfa0rmet1h1oc4s2bjpy7p85qgb51eh9gcvxqef9xhfhln9vrn8c2obbflb4yqcnoohyo2irurh4ss7p557mvged2wtghf8gd2vkbnxvhotvjy84zpm0025ml9jf5h1er51iejl5t3tbqjxgp',
+                flowInterfaceNamespace: 'bhfkrhwf7svq4bswh1bbe60bst4ujo0nzqc33rf2m8msk6k4ybi80x2f2qw9ee4rkctp9pe58rteaygwq0n3shi300qt7bbcv1au2k8yx1psrh6mfv0w53xpcbw1vo79haub63k39p9b1ga2ox86d8ypyn5zt23s',
+                version: 'pvgn6c8c7chcbri9wqnu',
+                adapterType: '2y8wstoznewkgufajuby4i289v2rwzpo0vz1tjsvw8wqq25128ueoaudbq02',
+                direction: 'RECEIVER',
+                transportProtocol: 'x2jup6fplbon3qvdc8q87nvfvo49lefyjqoanwog6p0jghwrwf5ijb687j2k',
+                messageProtocol: 'u59b10ox4vyqzs93bu4wwvc5t6gk0yie78uao97dle0en2upmq92ykm0072y',
+                adapterEngineName: '5q24ha39xrvnoyhyjz44x4nlq2y74z4qob73odtd63ul2mg8d0jnc6u8be1v3b1jurp2hrpjyydil6j8e6el4bjxf2z92awq2dl45tac34mujlexqsjltvlkb8tvmjsyvwkw3jtpn009ykeyjtufvnf9o2nhjk93',
+                url: 'mpsoxa4aa3vpvrg710c6sfqs3bjny8pclfgddoutzq95yl5tsolivlqnai1bguck834t7s4fx0djy2vf68gv5t682jaltp35kxo69wn4cqybsj2rbut5d28ar0h72fsv8r9rs7puukd0mhe3adh07tgtrqtr01y3es4x1h6fnb1h81oizqbnm6666c9b1qq6t6ah5p12bhalht1etdijj35fl2waxsaicviheuwpmma9re0lha4c40tv4ogkjjrf9wv3num5l6s82xwwxthrwzlpcjlskgs3lv29b1cxk27jbl5iejptyegwxy0s5u59',
+                username: 'k30gyh4mk9yydjjqgd2j2fqhm42gxhobzrn019ipsj0ohwhzue2exkuz83nc',
+                remoteHost: '6926ypnl3za5c9ov3f52zfj17mnc2wrqee1nsr8nfb27hyerdn4auplbx8w4x9c9hzh08br1ui31gugbahfhu7acp8kfdjbnfol9tcxb1r7rej7m537brdi3c1abye5n3lo0nku0kttkymxdmzc3cyzswoibkn3g',
+                remotePort: 3047167206,
+                directory: 'kb3gnfn8to2sgvopwe625aij733fhotgzlkjmj1hrds88u8b781hw5a8be788gxeha6hoe67pnlj0vdi688e16cfcmxzic7kia5nlhvfchyp1ilx1ewbla4nqapqdd0naeonyy6o3289xovek7icnxdsuljnf7gg5tk6s8n16fww5y2jcbm5jyunomb7kqih0y7t0d8ntkuqvu014jqducn7mymopvx6khwyhzsaz7x9tp427vvuxs0idufzb6q74c5bxzv5whyt8e5u9phq8fpeqop1hg49u1pgl8z49fu2uj9gzv9ulp8pihwd06ay7mlwxn3ici3bgnt153o1zijrc4fplf7drvyolaqpkmmbkjmi7b64e1njw9wdlj8af85iosple1b96ib5i4h2u6bwqbhnjuxnmmfuqun64ljj4l1y9do7c1an98djyvfpmpn8yugzy4q4qxvruwml8p7l1de2l6v1ibb1f1zwhji6xs8ptgszq0b27e0bb7jo1g54oapuuz62yf78q5t1g873kduuvbm1d4e6qy7nz3nq3joucwc3qimmrjfwp1zvvxjpxscj1uxwpe2t9xng2u8x0qr0cugu9jwm3gfkn92cr25bv3arhofcw2vzqe3k893ginavijdgq3sc7vkl3ykj9foyaxd8mba6hxmpdozdwb1jwdipoa1gywjd9c97vx6ap79h24shvlbkowx4nlln423m3yuqoai99uaeh6eppw6p4tsx755qoi21ljih7xwdkhy7cwpelz20ux2txxmcj9wzxll7pp36vjnteoodxz2dgzebla1e5zgo6suxrrb26777j9irv30q24108urlm2z7wvvj9mzmb42uxtin64lnmexti6web1z1kvij7svb14y57n1adyc0lj1mttstzaj93mmxwozz402wbwa6uedgz2cax43b5hr0kcauafhth57fum3dm6qfumeeae6lq5pexuqnrmwglzda126dzyfir9ginicqjaro4nbs',
+                fileSchema: 'djyfrmo1vdz75jw9p82wdjjrpxwmkkann0okjpt6djpgjjupc41kymla0jg3123zr76d6h1g3uytx461u9tbv1by30xn0j1vvi0dboodew8izm1i4qongl943432eh301tu57vnjivhfku0i0tkbhb2sy18kim2ukn7sdhc58un2hbmdxi2i8bdn71r6v5cy8jpw8cqitecc82sqnepc61r1lo4bsi8l8qhkewns54vd60iahziaa5txzdrp96kmmyg44vo22jjnkaa7k2wmdo4mgzou5rmly4mil7n4wmrpzrfjarcp4r4eopry7d87ke92o57gqry5r7v8aw0airtmkckwstg1c62ubckexfchxur1ehbwcc09mgfhn2g5pmn5fydg3kuqc28y5aryhyizcw3fo58slthnaz8f7ovk2n9vbamjubwmgqhr0k2jm5kevrd7yil9uzk0lykoqqlb5hojdfvxz9z70046je5jg29q9wca2npo85batso1qsytd2ktc7iw19llgi4f7omxbgtwpp8b98o5tmf2mt3z1l6armzffwazmgorxsr1acl20x94ezsvqibe0wj2b0tsclw4pnm2o4qnwgqmm162f32w21o4ty1gnwwjjj6gqn3lleks15lakkg8pxur89u4sdc03ge3eypel4anh3oryhtf0n3swym4p930shqb054ftnnqehgksg35n2eeclir3sfamow0qn52i0cqyt0gn7qfp5reqnufb6fyrg2p3t7cy4zupkmn03thk51vexkzz2t1ddam743fqv0ywqazngq4qip3au0202ebkn29ejkedhy3j6e71xc1qi99w2top5oyrroe99u5py9dnojbnr3by7fs4albvy62rlrwr0tezl47g238k5mfohtegqbx3x05divrm4ezghw6xb9haqbpsi3l8w0eobifw84wwzkndcxruj6kt0khgqt8arrw6atimvlyjjftujyeapnv9zxisqdp9yu5la9etlu3',
+                proxyHost: 'bmdfwonkhl7hxahbetntn4egemu9rbl7bsi1dg75jbi2q79ytclwma2ndv13',
+                proxyPort: 1546044813,
+                destination: 'ukpjr7qwwalt98ndbjb3xuuz9cyhntkt6w4q9huhvjtmkucum1795dcoa7wjnrdu8cv23j6bo5hqo2ubrleloy9biawwyn8nz6badlci5qhk75xtf7wphit6zwaixxlgsz7yn3n6tbupebz0zdquw61yv22svoo5',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'f11l1c4o63wwhrlsrscyh1a86iishd6w009tc06ssw8t6bzp4occbmntpnfo0kes2xkewbi3i475tjmohxa4zvs04m9n1382bb9n2gh3bckwudkq9nrwr60bmp3hzka5cvv9p4q6cvws6uss9f7fldln3z7sfrmo',
-                responsibleUserAccountName: 'mykue0xlpb6x3fzlowef',
-                lastChangeUserAccount: 'n0be6vn72uklsvtfa3kb',
-                lastChangedAt: '2020-11-05 20:07:13',
-                riInterfaceName: 'fiwo23ha84dkpkxv1y4mocsjxehiy688w970gkrte573lowfd2bgix5inckkhehzdtpdo3o50fz67tikxgnr3tz7h9v6bdpm6zv8c6cygbr8cky9k09yj2uo5mt0ngq71kufi39h9p48su0rfmkxtrcd17dpatkt',
-                riInterfaceNamespace: 'bdsx6242vh7bp4dzogdq4hs37bslxby1xpg32is59o1y7xrftouwkmqrs3a2r1no51ctqkcl53jmx54duet1yblydzfoumpsjcq7b0fhbazsb3jl2osv70i7sxqmwff95zyg58xaj7rx1gp2c6wj1kk6nelgdfqc',
+                softwareComponentName: 'h1ocn6eo1j5sntlbb1orxhs2arzzkwdfqpbpun4wxbubmzshcdi2m7nw0wnw3sipj5k6luyegt9rm57k7wle1qb2zl78rz4ixn0syll6jvptkjssuq69ack8pi5zjc52ufnvhsn1xp4px4rj5539e5m7jwmy1bna',
+                responsibleUserAccountName: 'x7x4k9qqebc7e8at2dvu',
+                lastChangeUserAccount: '92hnxx6scklrjojqvojs',
+                lastChangedAt: '2021-05-23 12:28:30',
+                riInterfaceName: '6gmp1n874mxn831uk084bvfqjjt4e03z9cfs2sywq8mznrtqj5n65l243mz4u9tljaakdeffnzz7lqeyilka8tle7z8xiudu06j6e3zysf6lzznny8awcvb0r1o62gz54dfc5neufi2oslbf6xyarg83u4olj0b8',
+                riInterfaceNamespace: 'ykj1gh3tu5lc2bhupv8hr9kniqopb1tbqeek1jj6ej6izigxuhpjcbv2u44s1cg07bwyojd65nldmphzcx8tnlmq2ihadtwkqzqtq5w655jccsdiiuek0ikfp3v89r3yuhx6w6djanpgn629r49e8qypndcr7riz',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFlowComponent is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowReceiverComponent is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowReceiverComponent is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'bnrzuhdocxxmfjmb887yjgckblus1r0q24faeiam',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'ddy0zfti3m2oej93jae4tdrsv26ytfyin1i3pnabit4em50byp',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '5xgh0jfm8a6odes5f5f1',
-                party: '6y3p7m0pnjm20vi9hxkcapyduae37fc50wwz5ymdo0hyayibafp3mfllut4w7x66jdym2pqmn2poh2yfuaeiwoagl53ryew43jhurto5v24z9vj8773zxjou047arv2subhi54cko2crpjggw3h1cg63ggl6114x',
-                component: 'q5eb8bg678a3k3jkrq94bg42d02alfhc57uvbwmf1fpc8hb85oo0gdavjgxlnusfvr863bsofcfc3oob9tcwwf0nbm7z3f09npekqbhq5e7pdnc0fu4j7wvoq5k8swrbwzo815cuc2z25ym6xte6qak7u36menzo',
-                name: 'pe71untaey9evr17uuwjjnmdgsqho34gk850yrvq9ahexw2jw1ziwwoeduyyp4epvn8y11d3wcsli29a5ees5ru5e5gqlrpl7x1to9oq6869digb8hr661o1qdmjpel0kebx03o1uyoq3z5u1df502yqh8bb1ig3',
-                flowHash: 'mespwsarouj6wow5sc0wb6yn3opgq0mu3f0vo453',
-                flowParty: '9s0442rsoiibvy0sphtrb6i6or8di24qqurk6qh4vf70zfsiywy2mmrejtew55gpidt8lpgo4vxhbhcbx973dseph344y1t29gion1l0hhkrp0q53zje58havqx899ifq0c6ktwu7jasas6uazoywopvh2ach6vc',
-                flowReceiverParty: 'f17ktue1xj4zr9wxst13tprh0u7g5zkepvre07kwjtr5sips4grketmvz15ffsu8ha5l679l1lxtjtlmsvkdp1mf26povzmkugmgfspihd80l0dbfi50ek01cqs2psdsocdkwji6kwttc564d4ew45jdlxvb0dg9',
-                flowComponent: '01trfhumeoummhm9hso8d0vhldi8di3u8s6vl45f6a4xm2u0sxagb9bwztstmw5eru12vjhwcw9rae2afbvnn4rwvevsx73cpxm3fakyhigodam8bjd7rl7zrneza4no0w6rl1abvzlonw52rvthtst65494mngo',
-                flowReceiverComponent: 'evlp2fd4s0jvfruqrosdntwkifjbh1y1exgj8050gk06i5nqjt6o57ggoykn69l39jg73xmsg7nwhmgj8deoyrox4u1jceb4iyfmcf9xx6ne78o5kywxunolobsr8yaq1fwf7st2lobhlex6pq0iv27v68e1rlgr0',
-                flowInterfaceName: '1hps9l371g6rh9eeo468w6y5vzyti0t91c8fs3wcto3xmt5ui5aereucgsfa25fwgusoo2v062wssiqvrukble20vixyg00l10t9a7s0xu3x3hlhlt55wh2xtzh5wx2g9h3yes11qjseegtos1p1ugmthc6bjina',
-                flowInterfaceNamespace: '5o0fregglqzm4kufk1xilwl8t52yd3o3d8y9u5qlhz44ns8xzns3c3xakb8enwo6koqc4sw04aanlhks8miedbcyu0atgwlf3tuxnir54o90izmc2qrpjvfjaqm9ln2n92i20ly8g28v3i5iesllysn614nmr3p0',
-                version: 'eqvej3pj7oztm2bztrso',
-                adapterType: 'cz581s0bfhips4nsydh5qbuoa7hxzuddwukakddd99pwcrg6eq9x8vlblwu9',
-                direction: 'RECEIVER',
-                transportProtocol: 'di7asct1ikwh8k2efa6t1tz3i54r9z6tk3li50yiele2tslvurgu1of1jfb4',
-                messageProtocol: '5d96crsnwgbufwobvrqr8ehyngv17kzvxom6zely28bzvoixobuvj0jhftax',
-                adapterEngineName: '891zzobjy6b03gn41umyakgputnhk2rmygnzlacy55te7zi17k3hch55v008l4dytkk42sb0lx5bpvhzfrles1usrs7j6rxz8d6jfo84hprft342p70sm4zri3c4jz4bq0jeq7da9uoi5sylba8647jomhtvnmoi',
-                url: 'rygng5r3mokd08xm1l25zkfu9ep72klx01ulxj5sl9cadf07wx2dwow6kef9dplmkfii0fq8xohf9m55ag6kgd4ebuqbda929awvjj7ocwviz2m7x1avqaog6zv65mbouaa3livuaj7kc6edhsbmesu3mlsuskwurr214mz4wrpa4inodoh4d4qwvvn8rpcdvl96jrndr0xk4nluhak44ail3kdhuqn2gtwfe9h4gzsk2176hmtrv8nootoks8hokhiswdjegtsg7hu67fwkv72zkbfzx1yazp147xocbdqyoq7mhlvcve2fvycg3yd7',
-                username: 'lxgx6pv0e0dxhtfnv6z2qz3ruu5kgmwludj5tgive8b65bgm94810d9uyxkq',
-                remoteHost: '7kc3aywa8rjcz36e1xdnnfof18fpkx8b6lrv0fywhb5hnv8dcl6u4m8m93rdffsbyc0zf3cor03bzniefi6cqtob6mw46254k9nsjouvsgp55o7cocrntlcfe9152n28l7n8zej9vhdf2b38t01tz6h2nunbdp5y',
-                remotePort: 3409342810,
-                directory: 'eea8ii59m4gp5jihp6zxbghw53xpjylium57km1fgxidk3wc5p5war7zxgc21rgurjhsdnm7lobm9ctlonlkakjxh1utlvlcs1ishb8zvam0b537cypyq68mtuyjpcnofd6e5crlf2ljvrecqug53jzh91wh4jqas4r5c4mw4cksbqqpijuayr050s3rsl6kqn6rcap70dva0mdsjab4xww1dam1nz3dke1bbhlz0hpa2r4pqy1q6yz5hkpjv7p85xnd0bk7veyq0vs7g395ceqxtgsrlcj3j3frxfulnfq8kcf5f6wnfoqky94icb986lkjj1uvz4qbf23167oirjc392zgptrqtt8s4aokphzfg1h5yd8ziup8cqiya6pk14iyqwq5bve0p8o5tn8r0q74ony3wsf3zwr9j1p42xzyzeyoe80whfoghfyk21105xlkxhnwzt59e9ltco01tnjh63xps9osz4dhcznorykkkbsx7k42y6gvzkc6i5m8z3wyups8sputcfusi6a8wsd96ma2h04k47d5sanbztom6ipv3xlt60wya2pr7ie5842vv6l939a9jwl3579iqd13nwzwp9oagvjiu1tqcu3ye4kx1i1afsdzb0e9fr1ebfai22uqma817jyx4s7odi4ynk81e0nroln2d8tt9cplbx7nzevedvvnulfgnzyyt9axt9xr37eq68c1oax78yz8rd2sih3ic11lqxkb3x8p9dil94nny3nru79kjzt5z6o2kmcdfmil1k72fi7voy7fg1apm1nao1uuod174iuz22q77447ty300safoqwhn6euwln5wi5xyhkidwy6vt9re52g4wg0lszlqd5w6nnq3ydlj8l5xhj6z0ppsihsbgei434g7tqucne0esvrdf9ls5axh1r6zhq8p9wca8h49etc1f40f3do4dwiz4lxiglv0l0k6lsnie5hj715fkdamhu4ar6l44y1cu6at380j2n25j2su2artwxr5pz0',
-                fileSchema: 'lrrzqvpndyzc7dgyt9dnazexj4dpjowt6cbpvc8xarva2zfzroyma7ux9kjunobp8f1qwfst5uhmlpuilno2tlek0u2l1yjgvr668y7t9mcw35k2b1t4kjmlh2sc26fmlchrw8ryhpao7es4fghfzgoxvyhgd0fwev7jrmuwfmwo5crv7u5tcdp17eke56c1w4lk23wmy641u3nofh538u79qejmpd2c5hsxd32igxjwvb4hqlirtk1vsci404mj067665r5buf4lwuf1u1o28t6dsved9q4howy2jbe5ef9xyphbofcl0mbxvei4e2weaakkdrkg01dz5kpl7t72nnbtuzhf98f4fewrxridctazh513rdv1fsg2qnm2h1vmq502gtkhrqi42p81wf9jkes6tj81gn51el1su46xsuvedyn3r01jbc1eov4tr2umuwno753uvho9rrvvn0a9c554hwqrh9xqbygeim049ecimebnfxrt5vnf1e22j6bbxb2vcy45ajj9hat1y6e2capmt9uyt2bxqlzzq2bcft76vsi33eabm0msb1hqgdhmfr47zj9iw9r44swvgwug5vgyafc4bdgg7wo4a6u3rwol4zsujuhzjbskzgu1gtl7aple7plh1jl2uovyvzeatmsy3msndx93b1f6v0sjza3bw2ah5f8cwun3i4i6m2pr9laes7y02s0khsh785zx2fm0ro9angmpyoozkmscije7l2krzkeky1pyrwnf7om92ed80psun3ee65s68ntyzvk62cpzda67qwmy1h8vraggrlbkk6msn0kqa68nvvjxwk5vyp5v2ubzoyxf5fo3d0v2vvkndmti98puhw7wrswzfg91934xwt4vh9o9iuw0knm2fnb4kwfkstj2ihpjyfg4n3fq2l6uzqla3syq7an5nkvpt4a4b2onlxyzttpuubmo2bpmwsmeaek28mlami6oe0sbg2ny2tsqccx21s17d81pqims3eh5vxuwjss',
-                proxyHost: 'yhtfs55odjn1zakfwjtadpwpztlkjdhtb6sou38hvpyjakv2f3k1hxy5ugmp',
-                proxyPort: 6739487822,
-                destination: '6pulonjs1yods0chyonm4ubrusqurjssoq3i3a97a61kg1qavlyrobgyp348maal1u97k0z2qkmky876zdl5g9gw3ff4wqvtjkjtt9lbcl3x6hrwgjfg2012lel5pjjjry1hxxfuvnntrtgwy3qmh0lo4m5o1sl2',
+                id: '3d98905d-6693-4d92-8977-2a86a07cf2fc',
+                hash: 'ce38chmf6gll8rkawwjm16jjqnvtwnktyls9tfcc',
+                tenantId: '2b73042b-6d28-4b8e-9e8a-66a9e108f10f',
+                tenantCode: 'xxg8n7qs5noml5es8z4jv99o6y4ryyzls6wgtvxullapgtrn5h',
+                systemId: 'fcce9228-5e6e-4304-85c9-33f9c1945a9f',
+                systemName: 'y2cetxpp4t8e455oih1c',
+                party: 'xu4zyoag2no49hk8liywj943ghdas5nq19sy7b41zn4og2qy0qhhr5bhhm4pj6obf8cs01n8isxob64y4hgmguzpbzgcv4vx69uotut4925lb8t23fpn2n4l7383xqtsbt7nuxo7hut6cpt8ytax66ugnhw04jrj',
+                component: 'dcc5jnily1xyt4icgy15aaow988ta6n3j9f4id6o307d2b0i380twq5vstsw8jw150qz7tfuiavzasevqeix4qsi4xf8qqgpbkfz6mk44n20on44hqzda7h43gr9d4yny2htwkk89mbn708uakb7gkt1tgnm6y9z',
+                name: 'ejw21t82fjxz9605b6t43phglmoi5birgfrwluqqt5ckhnv0xgb9g3ctr2hswq6axzrarff88zu4438wlstgp3rexb3bxp2oa770qv6nuylv9npsunulszm8a4sme3hdua411fh67w2lzuvpv47k025kjvdre5pi',
+                flowHash: '4e691ig8aq8dq5271li9oxax6mcp9fb6ar19ik1j',
+                flowParty: 'rcot6y1719ijl67hdj0lu2twb142ju7zitjsp2mo70chuv9povgd20ji70lcn0g0nlsqabpqm8fx5z1k2wsruhcj4et06fk8xo3km9rxgnmowh7dvohhbklt0jolza3m6smprecwsh9y4s01nqfr9a03xd888uwn',
+                flowReceiverParty: '5vfgf50v2x7j4oh96dp2rj90rji8x0ee0xaqpuz8gzgl8p8xbmohviaphqin9jt0s0mnr5ffourgotygas48qteom5dems0sok8updwyz3hd9iwkeonuzzenjdato1cdeo7oo602ayjrek9dbyhnbhszskkvf2fb',
+                flowComponent: 'hs763untehusdyg2y6e6ggiszkql03kjsmigjll2ln2e0pozmnvg6k1l3ig1c0t5khh6ivthf5irehgpubj7x96rg2m4f6ukev3czd1xeo4pnc0r23oxihwyjvyl5elz9m2mvgch3m59xfsouxx2fbth51thre6u',
+                flowReceiverComponent: '2hxbvrl199oaqr4rt3sgdfhwbfb8cw6gh9uevsw8ih6g398zmrdpuew9skbie4waq2tnw9nqcucki61vo1xpx0eh4jxmoj1h9kookveggyh1pms1ag84xnotqgpnnubjldiftth2c11kxyzwa5lzki8vqzbls9yuv',
+                flowInterfaceName: '9szeso7o5v2usb3wo95698l2d38s7oxcih5swavalz24qxoni7v0de40osoqje9r029zkiram1rlpp1dzlul4susbhm1be5k374inhp0vo9j00t1wb44lbfmo6ai8fcafvigzum7zdi7a07x5qzp2me8bln08jba',
+                flowInterfaceNamespace: '0qd7wgg7g5bu2ayu3ewaj1f8p83hrm8ttewfxcuphmbh6uw26fdshi3p7hzbxt83bbu2wxn2lrx325ga3bwsyn87p3v684u6v6gsja4gxpdj5wt2vl5cx8h3tpd6qfszcogd6edgxtbfdsykcjbnvzk6ailvxods',
+                version: 'kyu260ad3ksxexawd6qm',
+                adapterType: '9qa1g9y2kkstrpwcq4gn4tg8lcqtc2m3frdm3ppeimlj4fmflwyllmj0ypse',
+                direction: 'SENDER',
+                transportProtocol: 'n9zakqmvlgjy67zcckebvw3bflsn6rscwo1vombuv18xb682dlqyz2zqy1yu',
+                messageProtocol: '6gv1mswqf1uxrorwjbooik9taeksfj9lroy97a7wylqcebs7q53nsjh8ryk9',
+                adapterEngineName: 'kdfpm5asnqc6o5xd5yk72jb5xbs4yzuopkg8cnhzzq5hlhzfcbdhlgr7myjbpjlvr3k8jl2iaa2liwqipm1t4c2685yx1mdl9ql0hkywy3alfgznph4c5xru5sklxiacqn8novgtqsr6dkg6k3oecht61n5jhjes',
+                url: 'g635uu6i0mw0hxp1k52mz9yx25s4oi1b0g3p9hr0vherdp9un7ylw0fkew6voww7c32qa2m1us459b36cg4xycic878nqg8t2dno1sft6178h5c0xsfz2bdc1dwsd0goz2p7yk4kw0ozeqmzmbbayv6ejqixojewwqy5qmj7elzeb4elialc93ybenfp888j1i7axafbj0b96cbfg7rb0s8uib03b4dptj16w4ykht1nrzytfqxz956qabq7x2oz6fa605upllnabk2n1oxpt8py4f3oqtz15ixmygfr4efn0cug44emvmp13y0azx1y',
+                username: 'rw5v22ox22ptmav6k8mek521jm0nzhqak9d0dkavdtur8njewycn1fhylw9j',
+                remoteHost: '266a99uz5con47g2byx50l4qq71mqxkid874boeqple9n8pit6azutsojtrpkr2ovn2stciwzctl3hlfoi2b4kfmzmc3lmhby12crfcbv05k7wjxobn4k0gd5pqzpzzwoshg407cfllkmxwhhjt689t242i8u4fm',
+                remotePort: 2454553621,
+                directory: '8u6lc3drs1di21mzvhs6nxfbxukn4n7lar42skov8cn4m1s91hsjh1xpj6wskfsfmeyka3srmx9hd1frry17cnvlo2mnakaifj1p8rnainh3ahz97ajsf1rl48e5nbxoikqhlw8w5gr1wdnpu15mghltkvokck14a2df7p28mm77ataz7lhtze7al34t5v5nspbrlpv8n1hdzwowtlvt7pc9kem82wtdjmez990o69h631pgvkv64whwshh6ndfwbkkxq7boaky86p3w1ntysachcebvbbvar47s4z1p4pqzj3749ds5z52xqui8gnfvuu2l9e8oc7fthk82xzo5fn579w9hxsc7xemv9ke4en8m0qofs250b4jf7jqmzuz4cv4yn0ii5pf79oho3zlpznjxgzum3nnv8277kys4t3q9cjaq22o8bged1pzjndlcw55t0fmhba0wro6sbzxbibgmwc43tmph17c0vthul6cap304311enwn7ottvtwuav8wfv75gnuv2lly9yodtuls1adgml39f7230834w83c20hze83efia43kchphq8t2n0vu9bilq0nhbm5pz1gaaqfmzp2fektsr05buhm0aj4m3v54ki7lyg3t2ssdz9vw32z8moy689fbtaa6z58c5si4ygyvb88d1gvhqekaosbtuxud4hcyfpur2u88h3gmwmx5urz960tu4zw222se49o435h3k7v8c69hv6j5gdlv7znjrb60gfrq30948g2uy6cy4uw7l9n0yllerlcfvo41jwrvatint2l0g13p9sd6vw10ie20auc8ki37p1jvz7lb439qj6c0nlfz566mrgztit1cqsufgb0kxyc19cwhyo6f3t1cnbpnetiegpafdwotw9m1p3ib2h7tgxgtzpkjcijnu61s2o4wm95ud07j2yj9v722oxhvxp2yz6xky6pejgb0r568framk2f5tj0lcwokobop91dz645e5sjn8616stmivng41rc3hlp',
+                fileSchema: 'ewbw2e08qemoz9g1x3f7uqcuax5ao4g16rcu3rgpsaiwgrm9u5mgxggn4kni4d5qolk21ovt4g1rvy723h4xfm2l77ugz58efz777du5ximmn0pr1escq8h3ew6fdp64bvgjf88cl6ekf7k5qkxg6zxc9p3fj2abbflqitatz8uuqukpx01fxiaghw0smf4dxfkwaqcr9mjdx6q662oyowitnni58wvs40iba096rt7kg0z4egqnxkty2t8ia5cnjm6u1m7nx3e7q0mta3b99dq6hpugxhsdd7h7oawrwo5b999x2yaztmprcn3fdl8s0n4wkp3suzxsr8jrcr7unh5q809mudyf2z26shcc130340tlfqilyu22eo1mac00er2w2mlglwphp3bp8zf0fotq48osb324digb8urokj47ms0c74s4r2u8p8rmaum9wi9ukaqatbqrm1vg0rlqwobvjhd0eavzyqopwa899rmhcr9rmc4su868uogkycd1n9eytqrqnoz9266sxdpfor3wyme8q9ksde9304atma1fym6tccv6iycxzfdjxytedoeh1ywfchgottp8fqdj30n1criwxwcdvvuz3r18s4jjyoisfmku5s58d11s9fdchmi6vu4f244enfj612tosruunoo83ajd5pdciux5aq4m4eerjjy6lk36cjiowuaodkrudoogyp61pm1q5xpkkntw36776fkvxmlxmdw4qufl3kszsw1gcy5k4e29pzptdk71qxndf9rvvlgcr3acx09kz4u8lvvfyfbycwydzons7u3xvwj3d4ibfoewfnt9qz7mmos7gp1qw06vunl2py5v9ct7ya76q4qrpwmja3uweei09saky92gi2z100bkarp5y3trwgvoy7g6imhszl5yicvprhumqdwv95manc3hxl8msw5da3oixh7osve67gagt1qfmrtgyktk1s3swawt8fbokbaxouijmwn717wt5fa5lg2k4pt2stgpc8wx',
+                proxyHost: '9k16sz4oa7y8y5st8rhn0harbnvyllwvosgq76knj69x39cuj88kejf1798f',
+                proxyPort: 6988840241,
+                destination: 'q8u78c9vedspaqdgjizt7vqxeo5tekx458pz4hcug6a35yk5173txyd0vapqaj45pn4oy259rmo00ct7xm8ceseuretjvbpktbe7kjk98eoi1kl6yhb6jeqgoe06zydiuzpysv5sw07j5sy88dol3vhw066qiviw',
                 adapterStatus: 'INACTIVE',
-                softwareComponentName: 'outkwidhedxvgd5y7ya6x2bjmrqj6ym1he2nv1bknkyq6obj1s2qlt0eflraohqn3arwlkhftsptavs0doa3nyjbbygyqg6nb024rej2uefw3kd5inyspy6kes85piqs5t6o0cl06r7ckpcy98027tmherse2gzt',
-                responsibleUserAccountName: 'swuv45cfht5smryvnm76',
-                lastChangeUserAccount: 'epyhusxn2qjstzk9gmed',
-                lastChangedAt: '2020-11-05 15:35:01',
-                riInterfaceName: 'k6ovl1jhksj2yz06hrx7o874q2vjwfnbce9a3soipoc81haqpmr8702nigskjxu9cbl157v73dfwha2n7vq5nhi7qj75uz5n5xrzc84ns84w9sxe9row4zcecf2swuy1q1pwqu6dgw385yqajj9rvuqh8orccyc7',
-                riInterfaceNamespace: 'ggj6miwj5dpqlwsc9r7bti1tyc00bz6ryh5svk3l48mem1ax5s1g56oxmz0e73k5s63bkedhvam0csqystasmbczefvs2y6f490nbwii2itms23of56jq5c3r1j3d88tpatnatobxlf08ahzb5xcxllpixjs4p85',
+                softwareComponentName: 'ha38n4y3vr3azr5o8fmobw9v92id82mj2resw9okalk47ui8wklk4ii8q9vnr8yabeyonog38nd8rp53d1v2trjs6vcum5m6r4engtr3vxajkd0w9f44t0h7c9n4ih0ztub5fu2xalqxghywutfsx9urfq1dr3af',
+                responsibleUserAccountName: '87ie55xzu0dxedb2k18j',
+                lastChangeUserAccount: 'diobv3y4pzhbb2arkczw',
+                lastChangedAt: '2021-05-22 17:40:29',
+                riInterfaceName: 'qq6shfp8zpi3hy8pn1ifjl3w7l0o11fe633nwl5xsyg23nyavfi1ar6ofzm9qz06dmh0tmtb8cm7cut7dvbqkykglmg9w5w3efeo1gvdzvz6vekehhj7jl9gu1ddjzpvt3f9002y8z6r0ncdhszvzterfezq0ia0',
+                riInterfaceNamespace: 'fdhtxh2qsw16xsbw3vmv645b5be0rndi0ikx09qvc7ry9q67r4bvld05hmaxg26m7ouz7al76avg90i4cchhjfwy2iqypxnisiada42h8kqyafppkn5fikyuepb9no29l350r7q0m29ht5f9hfh50uno2zuepqc2',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFlowReceiverComponent is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowInterfaceName is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowInterfaceName is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'ox4wziya52x9vchsvbe5ehcugvx6kei30gtnrugo',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '7scka9g9hpvfv5lihzn8yzwa1d548ia9g4h4css0iprhrd3p6i',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '42kcva91e54id3ojnhid',
-                party: 'srvq708fzqvpnat5isbbs0wxy5jzaq08xnshk4j6p1btntv4rn8f5y7nl2y555b9a9ibo9hjfjqkj5uh0mwb96ygu9wdjo6kcyjtfqxa9ipp146ld90ic62wpz5un9j55b0rxcs8mhcpof8l18yz30yahbi0g4ui',
-                component: 'gkttweubl1stnr6g1lpgrbg63prktzaga0es4lzxrmhzr0s6r7utmhmy9bj8ap6qg0a6y61dpcu6keiriaih1souurwg71z2z17h1cd92824spr1lza9334l4f0oc5yd10o8vumxq93g2mc3aha1h3nsxuipml0d',
-                name: 'phjlj7l0i0617xp31gqb0fsjhld2gu6urhnu1at86fxb6sl1r86vupk6ytw2v94dewshnrssmggjtl7u8362u4qauip4v4adwv0dwukrmm7ot52qothd170zwe485dm4zce5omn0y2icu4n0x9erw3dl0vejrdk4',
-                flowHash: '3jfgmmvc6738eyc4ccgqraocx4kbe0ifmy9piueh',
-                flowParty: 'vgj3f9466ywaqhbqzejcb0ckh53msbjo7a4esny5fyykzavh06odpc3k6tfbtj98j2h85fg5o4yd2xvl29o8o6swr0cqsqghkx5x128w73vudq4xttm5dea20ubexmpvaenav4wboikhfzhb3kcsrp2hcixi68uw',
-                flowReceiverParty: '7qjqfkpjdikvg5wlfmxgyyeivqwdeh2gl185pullgmrw4ccwze2ndokrhg0lusglebszqqzrpnih0ez4s84b8jq5p0iak8gd9cebia39dnt82nfyly7ad8xf464p9t50de02akeeakx0afkbl1w8h4s2x94yx8oi',
-                flowComponent: '1caeqe8vyh8lws15u68kworp2eakh148853fxtcq0bv97pocgff2hc6u8qrueqtzm7t7w6lygc57vu1w2lahgne63a8l7ccg3xqdssvto9ljn91wr1ige88aqw86ieghi96ewvpt7xkx0v5hld7f45c4oepbsien',
-                flowReceiverComponent: '9oy23gegsb72lcqie3bwn1keco38z5nfrvx9lv3brdtz9i5l74z7fimqw671xzm0ognhb6rtsohgvpt25m8n69tpuro42kolbmkpzsjo03vpd54vyov3yb3pyki7f9vjjck70v688m0952ejaz0705pekp0bnl4e',
-                flowInterfaceName: 'dg85ie1ks5hvs7u7lo332rjqmr3tdcpysr5rfkpcccaxe1whamwynqhfub340gj2mna1jl0iqzmh1w1lsqqnlz5plaqylrul37385amzqopywqp087wa7xp7ocmu44ai9ier02bmkkbqalyowj1xsuczxss14ux8n',
-                flowInterfaceNamespace: 'l45cgqr8caspm872u2l3agn00yodo9mcive7goa83eir51h3u8ppe7d8hwdl3imwf7wyl6blmkuskjlhq2nrstsdkpoesrlh9zk8ebls94n76sku5nujf5me56ukj3xlrx0vp0qiy3ogwf3r8d4t8ritirm3f63c',
-                version: 'ym613p68uu3fcplatwxi',
-                adapterType: 'z189x19bhmxasbq7n0hrrd37e1kbsb4d17i2cz661i6hnai05dkqbf41rg6g',
+                id: 'c2892028-1216-4868-8900-07fbb3051ef7',
+                hash: '8266tjgftlfdb4v7qbmm28zk6fx3ax70qzgyfkkq',
+                tenantId: 'eeb72d0a-37fa-41fe-95e1-fb5870ddd297',
+                tenantCode: '6cguydza8t3ci9m3zlpbtdq8ie5lwws290anwm9goxb48n6o19',
+                systemId: 'e5ddca7d-5475-49e6-a88c-5f13459f0a23',
+                systemName: 'll23unmphtu4ag7qegvs',
+                party: 'vgmzw1lvtta1kgzyv2nvxxt2xbgzlwikrl4zu8s514rem6gro8z81tlsceol20yefrazwl6sqlgn2crmzqhbjzy7i1gz2vswdnughpi6o4sx7m388hqyr9ipe7zjkq248zhrg3b2e38m9poajh0zo3xhyy8a2dga',
+                component: '8glvvv78f0al43n3rd6soyw9mllmf7li3g25wk35182ygl76mbzevx6yhlcb3m133ze1gom4ojapm22l9s3q1x4yg28voxmps02uvbhtyl5jn4krjg0xx3craz83geqyyxt7go7cl4dv309mlm5c4bncbsv5i19s',
+                name: 'ehsc3v8uts6i46bwh314dzohbr03pfjxnik6rtgz930i86na2eptggngt8lxjdxlacw3l7thon338xtchwjllb9x15qix3p4tn0oq3hf4dj1k7x6ytu5twlb7m8ucwbq8tev42cec8odshghqpny99ee6e9e75dv',
+                flowHash: '2usjxofofld1yjv9mli4ef80zprxyyq115u67ful',
+                flowParty: 'n1tu977lpqzja4ab5s9lw1awb1ip9ipmthoevfadgnm0plegb9ltrbaf20dx3806io0cnjgmnvl5su6u9xkiuvh2jfs1tizoe8g8cc77xje37uu2kjkgx4tqdvl5uun0dltlc9gz9qwc4h5goo336ec73nohhxwu',
+                flowReceiverParty: 'q3ezxo391zqvhef052fozwe5427o2t5foy4iowfm7dg1c8uhxabmb2kkat01pkvfimdm08dvuozga3biyxuvvvbp7xsvmht8fg0xp5bb3c7sdkvp4qh15141i7rxz2flc3hg242iz1azns4n6zgxev2mbtzaktoi',
+                flowComponent: 'stzvco811b7izy6a3x7xt8ggr3tfq4d5e0b5hn7iy9wux8akbiw6659oflcb2z0qgndper3p0bpu3i8g2yld7flslvcffzvdu1avcrcwogpb01wwblm3d44j7l3coko6guhq0dqvk22g91c0w1879de6k1kgisrr',
+                flowReceiverComponent: '947mlwvj3qcdshzd92s7h6dfd9ep1axt8gjqq4ldejgr3t7quxspvk7xn9uguzeq0t96uhjktgydilfyvu2yjd42qalh6senrljatws076xp77ej5gn2hzc6cer7qkofyt0mkwflgydw1e3ftwf8nx4v67fsdhgg',
+                flowInterfaceName: 'jkk6pwxt656d9z1b8cyzkuwfy6le11066wr5rmmy9ot3lnqbx4z80cm64rre8hli4c7mu8xknm8uukm4vyzjxtv8aai4eecpndmngeonhpn2yppkll2jl7wwo517cjhvzg1y0gsbbsuh6xr9gqnazl30qpbi8daw1',
+                flowInterfaceNamespace: 'k2cwx6nc651fadlb10d7ttuq224xtbnhro8u5rj27hbs7c9k2xq9cfz1b7nheroq0ta6giw6t0hvla004r6z5on5coowbe9jjnbwgiitfaf784gsi6ej4v8way66dxb2goilh066jhjuq2sfk31b5qttpdzw4fwu',
+                version: 'pzbdmwpqa7nlw1h8kgt6',
+                adapterType: 'p7m8l14g2pd5hdnulpovo96c4qvcyrdac1rc33mhc730vpjynebcz6brw45b',
                 direction: 'RECEIVER',
-                transportProtocol: '69isf6lfsvr9xn8mwlvuumgorcw5tv3q36bqs5e8n6d3r8pengus6rs3vxqd',
-                messageProtocol: '4khiued503x3oo551thjuviln8qagzzdhztjp4gqfhkzbxs8ndcu5t9b5l6a',
-                adapterEngineName: 'y1cb3r9l0jwnhfyplaaijql78o2vcyfedjd5wxls11xhygu6533ibb3tiwmv3sb25qw8ifbkg1d1l3rchj0rvuqjx9w6vhmrhucblvmguncbk9j6neszezydvkhh9niwm47wvk2bhxv575cnl0ucgiir1371fv7p',
-                url: 'hv91ekbbji085h8o239pcsekqvwigneeyk8hyzowjjf7xuer6pa05dmoh74e7h7ob0tnf6u1928klyob82lopqiciffsnfs3otub8obgcem5e737a74etfmvqnl9de2od96c6kdcuji5nxcafaj3me3egp0kjs36do8t4a276b2ve1dxlaok68reynnyesr0v5dkmhgr0lt6acw3uk4wyky7ejk7m5ei5w5lchvycbdvom9glix145eozg1cjomusxfemde794ahtugxlv68c9n51a5rodya2ansj1u0o2dcmbbse2jbm1xm8hzgxvvd',
-                username: '9o7279xcd41kgdp0ita4c456cxezh27i4sdrhxy0itkt51h3kbukmy82ea6t',
-                remoteHost: 'm4qtm1svf4y1uouq0dhb4vhq17fcxak0b4rvyfkmtmi29kjk16rlru8uos3u5i05wenspym7mg94sh1ign2ecuow2y6o41kvaiujjoh8vdo1nebsfty4zz45fb3hv6ji87w8ega0ruyon1hy74dnd71c88gdvak5',
-                remotePort: 6222279965,
-                directory: '4bwobh0v45fr7b5tan89zbgpneijmst6by2omcf1xvu73qzqmtbn4b3dh761qy4zn8mtc88ebj4wb4mpvntk920mab47072ghes5dc7mwmcck1xzoox4arprfu3un92ijkrgcjrn6dz1p7azetnci18fmw203utiu5xxlg2as0jqhln6bgny0eopgsy84d9e9mvkme74wsowpe19tjemfsk58ewoviyfk4z8cbhfdb0etlxcwfjrugsv9km0bo6osy2dsuvjlp33fc5cuzarmzn2zhpt72m6ea7dwv1cgy5gnxoa1f5di9sibvs3zsjj0t79v1h8azhvktrl5slpk6g2zef6uhzs4c5flah1vjnny6eyzwcsgdgv2lcz93wbagyunids353pk4at3nsfhy7zbvzhaaeqqg8gi3zehh1khdra6ruytf0okjlv9k34po1yp8lfvwsfwtyos1dvv0tj8sq1tscxnoj5v1j22u1xvm280xsjynrd8s5q4xzb4bl2bggxi8lrbczwflv9u8j81aqpqfzt466awytfdsqfgbhpjyghqj3wydtgnbvbmyht9y2ala9vt9lzj4on7kdia5g7139sodl95frdomxt2nomd2r9x4h9yz6vh98awod8wy9pyhrxw6ox6qeg79m6v9d6np4gs9wnyo1i6qjwctdcjght6ziz2ip4a5t8y8z4kijplns2gmwxlie9ci8g7hgz079bae8nbjlpyjo3gw7p5w2hn8xng74ke6usnc9vnrtgjxhs0e62ofqpdt43pz5dni3wzcj390rpl0ruj7ydg5a3g35bum2rk9v0s66nshaeeya29b07o9y1w3erklkia7jdnlayjw4sbb5mjt0d34sciyg5vd4eaonbn70475qolzz25efpu4b4tca8ixtpvtgn8bb13tvk0p645z7kqth974itph1ad4autx6ke6q50bzke8di9si2js4q3vofmle9r4t4c37jvy4kk1s760crbivjm5twgoxh',
-                fileSchema: 'x3bx4eh2ykurqjpkbz5nlmkptinsoxo6fohhxfzt22pn7jftmcb7avwejc0qjblokfq1wo47erkpu1bdociw3f2oif48dbagb4kumy1img5jx9sngk19wejml0uw8pwwd5f5xprnjm4gekk5jy1g5zpxp47ktfyondupl9afnq8qnyhin2s36zpfi675cgkatshwzd1x3uiu711b5tpz6azcsgfh40j253ftt9btar86gzblwkgxcp00x9jj6pji5zqjqx0b50zw2bf9tretrbfns4zy4a8w3covjxm1t27ytzb4ei7uq2ifbbqplwqo22w7fjpon26eomphevos5oq4wy8k6n7u3mcdx94m54z0prrsf80zew2gwc3i1gem7m2bvqx6mramgz9ic2r42c8unfcd5errx9taj390niubjqap0g4mvc1zxrvu7mbserkgkhzdstcvoijhrcrjionb99iipxbd2jrz74e1esbpuid6mf5cjuxso81pbpi97jkfpx19bmb8rd2xh161x9pyqgxelubeam8k9zkg269npajat2y7m69xjj3v1b17ih4yoez4v4aa3u8wfrkhcuumhn90ae9c47wa15ozyapnc6tsvrc1blhx95xoi628ejo6ngn164ss9hrfxjtbcua5a6b45o773tnleubpr03y9153m643oakxmrkxgr9tm3ru622altsw19tarp8x8tx7xjy6o7zywq9chdc3o8yrt6rxqc0u1kucov6ajg9ooeh0yrshck2ogsor99711dt5f1sef8k1488xoz6ydlmmmtkllmj8829g1nvkpw4wc5e3pzf953p56qm061iv8e9e2x9ggizuze6dq2eboh1rwk3aoitl3s7542g7ip7pd0odvgppk4yh9vz9xokphmjroyhahsdsv1g7sh3ejkm10jl01stk5bey2z6r7tozaixh6g46eontqe96sn2rz6t6spzsf1xpm55wi16cbeww25i4i3x5mgbwral0g1ju',
-                proxyHost: 'orw5d01il93911594d3dhecd5x7xb09qpugee3tewmoxv4d3k7lymqvs6hl8',
-                proxyPort: 9266047323,
-                destination: 'laied43l8fbgb5mq39dckti9hmpning7rq1v4io0v9cza1mhfy10yz96zafs8qfvohun4brg4iak1gl0in1rycav760hvh2elko6fmodaboqh03hly0jvb3npy2m20rdph27dleo4wx7x18jz4vvmkw2l40reh1d',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'fwfcoi4ihw54d9ihz5j1gwdlbowx7t6o4xaw1txopxfn9obk6u37f95466dqsfm0lbu13vo10mg4i4yuccpecsig48ou5s51vzsmkakkpchx91btem59upjqo811guzkzs675sffygthno10ntbhr9al74g1v4qh',
-                responsibleUserAccountName: '0e5pst4aiz9ijw88ygbp',
-                lastChangeUserAccount: '1dzmc7ilc1dmfpq9fput',
-                lastChangedAt: '2020-11-05 16:18:25',
-                riInterfaceName: 'e5fu5bmgtwig5nj63zujzjolwefvb7r2cjjl6ieerj5v1z7my7sv81ssqh6hjmxw6ts6q7la1vndqa2wc9z3hu37vdgevec9uq6rlyxhjrq2e8znntkens9g8xcymmrbsvm48m22wzaiy5gb0pug56zhcvhj5qq3',
-                riInterfaceNamespace: 'c8v151z3k3ogg187k27gwm63skrbu2ix044yl1djzdtltpin9j0gf7zyzn4ccrcr5j3a6xpofnfay97w8pfpv6s1xlxoo5s4htll442d04kgs95jm3a691ltfw7qo2uhf4jd3jwxzc99h420byc6pxn4s7atf8n2',
+                transportProtocol: '2lug4vidz5n9dky1tbviilfd7i3pahorapanfm0c8web3bcaeqjvo432sgo6',
+                messageProtocol: 'cqspwew4aztyfuz5l6l328ytp0j6j5bbrue9g7pcjme8td0uivm2evm0vqu6',
+                adapterEngineName: 'il15ebbfb2am2rcphz0kik5zg3nlxdbcjiz5x5q38yiiu40cjfm9svj9skr3wgyc9ociaj95ryrbo5fwfixgyt65amc4q7g0b8wd7flqkvl2f9mymnlydh38ncg8touilvhoqoajs12mgdvue7yk9byhqbn3w3vo',
+                url: 'c9fozfj9sktwalss64dvvohq60rsu7ko3wzkc36x5ijgfnwor1el987443dvffdeva13jygm2jrr1qq1kwzqv049v08a7wkw8nf9owjcv2m58mgtakddwj0yn48mm82fb0fy27nuqrd4i38hihjqq08w48xxqumaaw3yd7nwkbgnijc0y98wvxjebh5skhjorefb6tahea3kywpqy4kpei8ygsojwehekvt9ytmrcenxlm67kyd9izcaix95wu1nsihfrsy244j0phuz6gk6bsqhmv6rpp689417f0qxgbacaug1a4tth6coxs0t40ke',
+                username: 'u0d375w40h1yvihjgni9zfw5h36metj6g46d5xs6x5ak08tju4wosfys84fs',
+                remoteHost: '0becwx01gzda0i6ant918a3t2dktdu6jxnf7frstyzphw6x3nq7syo8zqp4u719wvluidtlehvonmu6rscwtjwx186i8i7lsznb8puwdk3cdn90dkiqg3msdanyan30hd6ioqidh67grw2iyl5feghk0etp1fddj',
+                remotePort: 3912099561,
+                directory: 'm69mz8yx9g6olbofvc8xmmec35qabn1c8ym7595vkrk4q4a3axsyol4jovopysy65nmfap9p79b6ihb8nzpjhkfg58f78pdqk9wr2ttvad14hhltzec4859bw3fqd98zyytheujheyplyzbce072jo34qs1d1fm1g56nqq4dlbcp826t6stvcg5fv0j8ck0eojzjei0ietmxal1o0n6znpwlj4vthqc7rbov46i2ej3q8ppliimh42wb096yp8osgq9uiepmceii4h515cebuzvqi695o3chfetaqb90j3p63ift5v7wwfkkuwuq2lkavxuh2f3frlihi5qi0lavi4miqchaz7fq1myhpyk7kvh3f4be3kqqpae8ncqlcopagh1ak5j7qqu0u312gpmuf4ei6iy6i59dn7ax3s7qe7vkh0gttep7jrb1mo3too421mqqedd3v6zukz8xj1cjbfg7s05dcwzxyq7t35hudlpysxr28nzmiu4zr2wedm3aeeb69p13zqqw7aimpr3wmxz73p95nxvaz2wzd6shrinyay7z3n4bxphfpg816lw1k5b2mgie0m3w4pez3k8rf6s5w39b0wq3t4ei8ep575uokvxu01z048uk65hx4ghndwfevw3n66l7909jbq4812rpmis2fdrfrq4gn28jj3bsr0fr71slwewv75f7pr5pix08visbg045j28v4j11oqyqzfpunuk0fulc4mp7yicfrxlos2c20akchiqefdpxsa3fr2dldwbenoldw4e6os9s154sroc7k3v1vawq4faojjqkav8n3p3rts6n78kjjunznu114tld54abpvz548r2gi2rlffqsezlv1hbp3slw8a9d2atmihj7sxdz846yai2s4sg3g3xyjfcw7ruadgqh5pvnrtqyf5zkhry1sensg4mn21yhzinzc4q6n2klbrck04spreuescfjq338j8qzqkm2rhodg0nmos7mm2niybrzp7y3xk284kjpqta',
+                fileSchema: 'bxf076ospec0pysceomsyyhz8adyncg29pxlhde1qwy946sua64awunhql2vcli7vl8s7b15vm1cgulieg8f6393bvmgjwb5iokkqlivi2tr6xjuqjetmjhnplaozlcan07tetmc62gkv9qv5tu3v86a1ksjejahknbadykugelqfpcuqul8jbo5tbr5v26jhmdssozy5zjlqpswvlrzinr4fp2qg9q0s7txkkc1rf9739y49ews117dkgk1rz55e67yntots63i0golp6txw30yhw7yhj1f07jcngz9o0l5b7gxh9le9uvf3afb7lgk0m03qk9w7m7r2a679fp0nhvnrj0f6fh88h9izvyx06c7dgyhkypp3pzze21dwyauaem8d7j7c5qvygoxd4mi4dnux7h9088rbll2zbizsvjeav0vkj1a9ynzlkwdp1wwn8woddd31oeviw15gdueiwan0o328o651l1z6k9816jlt4xt09pm2kxw7upeug8sjz9ryaszh7e94mp5uo4rtd6csg2huj7uj958hkpl6zuxawh714qke5qobtrn71xru2rr6vmle7m250wqdj14ka75ka4936dmk17wwfs1qe26f42evxswi5fmulaoxhs6fpqt9wsm07ujinwrbthczk3qerus6wz7acdh35kyaywg9wshomhonf5xycc1om8dzuo8tjixcxqopvdff1trz0ng8fd05avdmgq0t07bte757ek8u6ec5w4ru6aut2ohdmclmw99eurovkdncxqowqefcwmakwg6u03khauwqkktnejogrtileq5bx518ocpo824kax0vba4ii2dng4gdcfif1fy4v33qxq400kolv26dg5r24gkuem0swo9tnzuidf67s2jhiyu27e06w81393p2xudvk24l5bmpobxtnmvcbdmvs0bwqm05wyfvul14133l7jhjg6zjedbp2xpdya9w0zzhb8mtm48iooptwc2o0vhxfsy7u2ae4lrqkec',
+                proxyHost: 'c0kqp1d8mdq6j5gox8w085tueepi5lc0c3d3pacotu8s4kdbbx6ajb76fd1i',
+                proxyPort: 3238843116,
+                destination: '2xr2g5fjl19vdy7aqd48u86m60030l4j9kk56e5vygl589rql4zllg7gi5dp21ji3kj835lo9m5mduiion083jvid1cli5gtlncnawluhzad0f76pczrpmn7agbukyoapcobqsysfv6sdxoxeo5jsx4r24km12j9',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: '0z4hyuehcktg2lz4mvjshz1bujsnj7xruzak1pj0aqptaaogc7ptiu3bs4hjuwm9rx98k3zxuocs46icp8iqqn4f932q3ok3v6co824s8h8810tgpmqfnmv4taohbkedfdw6xpvusykau1js0jst441kgfucp2cb',
+                responsibleUserAccountName: 'jbyxt1c1sqnvr9k04gje',
+                lastChangeUserAccount: '74kz8ii46humx0qvtibp',
+                lastChangedAt: '2021-05-22 22:24:30',
+                riInterfaceName: 'vxih5jo2d0b07lt9h1tu66fy4n2fztkt74kc3g9d0qm0tyqvw7jw407vp9ld7j2vuxq9vludqfs9yp18l9piy2w0ujs6kde3pfk8f9t7cpd1hvvmaz2wdakcnh92hnr2ctn2yyr5vjpbqjb88a6bxjs403mlaa37',
+                riInterfaceNamespace: 'fscv60tirjh6j1f30twgzkeyaha37uk0wss3zlv7tw8qql5ai56idudhtvm5dtu1yrl9czsrnzv4pqqonyg59gwknl5ss727f2ge5j24f72xksugno5s7y44c9ypc7mvrbaothkxiywxhgcez6hguve27cq0vm3i',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFlowInterfaceName is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowInterfaceNamespace is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFlowInterfaceNamespace is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'o9wkwnq3bbi20ume4a6kux02g1sz9ulmwb9f70eq',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '44y633lmqj9fp9eq9u2jq255deapxn5y2faac6ncxgl3xp0zlw',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '8upo13jym91dgd6p76sx',
-                party: 'j77vrz5e5x9k895jsj0de4kf16s03t5c4a61rocbheml0mgkihononqxt74pppfss1dg3kh8zbbvty19nz8xa0vigehcg33h0fysecytfandt1omhmcdk8vg6xew4ng709yft9kp331zguw58fbsonmbckxaujsb',
-                component: '7hb725tuoi070qwgbrkzpsakh8j8l4mbslnap2z607ba01wa78ha0bxaip9j6zie7u5yx2srauoq5gi81hgx2ekdt8zh2zf84yw2wf74fkqvrkqvv6xj9iyx0fh08kmohg1gxr385uspgv7pfq4j2adcusd36x20',
-                name: '24my1l8zn81w9h00hvniel75lx384ktjtq70ygp90wk8bph9uw9gahro531z65i2a5ixdo87kp8vk8i397w3cl88f9f5ak57cq5rf4d0escezjlob99iruws7juamcsge1vijzygit4563cb5islplpb8s0iwup0',
-                flowHash: '70ldf383jxfkryowqxdoj0nv061724eml3arhi1r',
-                flowParty: 'xkw8ur4te4bqbxv35uwttazwcaer8fyiqt9dri9d9j2lrkxg8gkfcbvd3m8q8qcy614nrvmqfens47s8wo04unjydujjlf29ye6z1veutxgqbaznhe0wj3dcqshzq9exh7nr8k2l4eci0o1m596gpq1tsqbafx3c',
-                flowReceiverParty: 'n5h5il5x9a64gbgz2047cnkuoap9ljzu8zx26ueuzacsasiotrotv0vovezf3vpkit87ad90bqt21kd5xuyyhz86b6gi4d4i6yq9aftnyszenu84r5a8p92ezq7jtql1lcaag0xms57tp22kaqhdqgaefun7ea8h',
-                flowComponent: '0qk6ro98gbi0mphwmuzwro2t4hn1uhgj7omopyrd6veyx4x4jh9apsxo4tw7gi7nnacq049a8xpzusnhppubkxl99vgv4kdzkzopqbymkmq5x8ln0200gv5smc2pfrsjbq8gockv3uwe7pjxv3kknw7po938i9at',
-                flowReceiverComponent: 'lidwik9lbz53s078qzc6fib75xzmpvwidle0ciss1x17qsh4t89czysw3zgmon0xoqz62oaqe2x1ozvhe6jcz3gpzoyv8gy8jnsrkb2pat34hbvobl5j3hi4keye37p34jth6r22phehwku37ung0584mz38jcb9',
-                flowInterfaceName: 'i5y5804iczpfudj4djaccxo583gsy1v7ml77zclbeoo1ohtfhwg0n1y00oiq95o3fuwxttonxlefupjksg4jttmac6o4xplfa31wik31yz7rtgomy191j2fgtyw4z9ngarh6q3ti8dui0jo3tpooo0tdmiyn70z4',
-                flowInterfaceNamespace: 'iewfyn1uuwcpupchpdc9txdpegr6mi56abeukps0egvqhupy8hv2ru7sgw17ydnbfuu97i8requja0112wqka90bz784jmpzg3z59xg2zupqbvfy030srfqa2rhfm6zmtfc5nrkngydsa48734ydykhr42w9g9rmu',
-                version: 'yl3e42ahgbs9ld4vj1hz',
-                adapterType: 'bw8uoa17jqg0gbz5r5e9aocw9742pqx17apixw87nrsztrthm0o4eqcwuw0c',
+                id: 'a2a4764e-e5be-432c-a94c-040964c1b3b3',
+                hash: 'x6gyezwrzyfgfdpnrytgp4mlovhbs8lfuutmn44i',
+                tenantId: '898dec98-f374-4ad7-a87a-d851c9767287',
+                tenantCode: '4u19rbkcw8kp6jdamhrj0r87dz4lh2yyhd73gb4kpukcb86rj7',
+                systemId: '4abd9833-c879-4526-9d1a-a4541084b5da',
+                systemName: 'dpwofmvf05cugueydcfs',
+                party: '1ojbppdp730c62m1i7to9r5r0g29995uf48d5wzyt2uk9ig3naju4os35v0uao1mcs82jfm7s4imsaxrkezxv86tzq1y2ldevpdbv0i90fnscqk7mabuyqirdbhaf0u5mz60dje9ew2yqrupzttkinpg0sdnrx6z',
+                component: 'dxh1epre35ro12gst5kplg0r5lpobxnwo6wjpsewiksa5s7nzy4wvns9bk6b7qh9qnlo5si450ntymd0j3noa1n9mxfl77f4qehddyo9t3cdh3qac4y4harm3lqlzt3b9xjdy6q8ffajjmagt3n42xcuz14wd4ve',
+                name: 'zix13x78gwvgme49wlgn2izzecm61avboh7205zw6dr67jrvcjq7fkayfu4oy7h00vmokdh6u5qf3fa97b96ic487sf80tt4bjzyhs3t466x1d0exrr04pjvw03ub9tcj7w9etznk2hktvyew6a87mdclnvx19y8',
+                flowHash: '4r4gofpam27ri3ve5475ly9behccyrm0871425zq',
+                flowParty: 'k3qvhg1ex71fd7jz9iamcd2bvk8ip6w1nu0bzhp50lu84pk537quzmt3azdcu8sdk82gn7s4d5dctyltavymu1wvzsituloj0iiqwfv539l97ztvp9obdysb4alxhdiri5lq4czwvo81y89awo10j4l0e4a7x6ap',
+                flowReceiverParty: 'wtl9ktm3ptm39zlihw2k043pgppzm0jget1frjt9x6i365186b7cb0hwven1rf9efz84tfv4p7fo6jdr0zu7t61cw4duqb3v9wtrmz6hp0umeu68yqkxo4d1peeduq2ng9v8jl75fytw76eodhlib3wdyyr6tin3',
+                flowComponent: 'h6fe8ipycbokfhw3224rsiw7yzcfzjloydjb692voz8im7isk7g64ui5ltuvvgngtg7p8tjt8v8xjisjulh2tkbm1edhyn3oaq40cqqvonzdhzzvmrrv4uyqsrpsn3r1ezi9f8em0xatzfsljoj1sa3dt6r2hy97',
+                flowReceiverComponent: 'ffirntsa5sl9bsz54k7korv5zlbwgyofusvviv7dum4jthf4quigbiis02w3thrvsagqkou8716c0v17zhpzirkvl8o2rsahpkf3587kb23cvdxhyyuxiwfgd5tdwknxs1sc55ayjl61guoss854lhebijhow8bc',
+                flowInterfaceName: 'qsak7trk4u0xrcprw0unnkc8pbi0sbh2hcbfept2xzbiu7zdg1czld5ov36usx802oni8ekqpx9e0od4qjf1dqelyzjlbstqff9j7itamp6ydan1780qewraqsfhp3n2y7jtdtrrtlmqmbypzg4ssxyvbqbzmmnu',
+                flowInterfaceNamespace: 't2aum7lsr9l4dl5wze3axtp2k7mvs6x88s1elmk3vikua27lffa2yft78y8k4p1935min00suq6f5sbw0sdeuy1ywuk0gq4hewg0cfpe1qmsb1eri1rcbra0lvo1zpxz1uvzdyewrrxr47kci24wa5pgedbkf0w0j',
+                version: '5exztz5o53m5flk4wnfx',
+                adapterType: 'cmqyyxuywdvr3s5bmaikcervmm1c5nwib6zlxx1bee9juf57tmsvj22y0ctv',
                 direction: 'SENDER',
-                transportProtocol: 'ff93lykb68m97tayilixt2eygrfz1leogrpsx1t44otrnaqda0prvg0mcorz',
-                messageProtocol: 'nvurf6sdmuhf25gh9n4f158tj3v2w3s3fj9de7hq50g9f9v4062jpv3aw5w0',
-                adapterEngineName: 'cmiw3olx1jkk4ormetiouyqwgr3j49igx5do2mhi1xqzf6nd1tss9njfbo4g5bftrfygvh8xk7ahlvebd5t5ql0gjwaw0u4hm1eyy28lca7ljfeji0xokoyqkqn4t44x3qf7cmcb3h1p0rvgfz3a5hgv4hphnscu',
-                url: 'yvdjk16w2tatvsp3hgcdb0evdcv7gq49dghg5qet06lkrmsq909y5ubd8hq3uohek9ao0tmefa9nanb3eie6bc1k8xnt5mgsjgyqg98kaufoq7op66o88alict7ykc1v8uhrsce5lq1qc748493pu7f0h4ahpdhb8h2qiyl1z4ze0flm00mhvz7mdbze56g1j20z7i7trqz8f3vfg81co6ulkfq1yhky6a1wrg4savmm1dktkp3z38xf0d8g11q4b3l3k43dx66evk0z2suz7lh6cy4s3de2oabewuk7gempw5hdahi4q9fzwpngieoc',
-                username: '20vh32ai6a3g7olru1jjwi8dc9bt1k72brhpn6j480pmxobz9cfy8kbj3dme',
-                remoteHost: 'jp7rz7vgenuy88t5vzzo2whaxzk3wqtt4z547s09vrezpt8l5spdcez73ryvudciqd5jmr9osxqhtvkpkgp1jutuc3nk6z8g7t8ywmd888x030p33o92d5lmqwpp393m4xvxjm8a3bs4t2swoxrips0q00yiy5qi',
-                remotePort: 6271678377,
-                directory: 'mgi0htpwmxqanfpu6bmn9dh39q8h0ms1iyqrioil1u8iegjjxfoiwemjcnlre592fn55gy7xcummf6tad5tw7p17taa7u7apojf1wzvintblm4tbfptb2dpi3p258d7lc04zxlxkl4ueng7skqfl6eo9qusc0xyg3xqoz8upq6mo7wpbwx531ugdbe27gvrnux22r27em2knpyk8hk9dhyttargvu6nq2y40fzw0rd7yzziukeg3g112v9rhx1ti0211hyij1wsulcjqdh5yvz92had3gpfzoniiydnze2i6qx47fxc3vjqvvuhs8zbtar2ewvyw8ue367bjeqjpflgngtehccv02jjn2v65ll9fk7nojee4g0rxlnf0lx07w31r3a67s41usc08evtvlkwmzi2b7u22xzta38eil5vi0y77uge6psdrrzkh85l1rlpzg0at5vrkjs0zq9p0b1ven5etiyo81dsafbkn6zguceoo8z46fs8lfoc7rx4wi17mwrgcq2sjra3syau61lrvhzcma7j5me6qafdi6yrt73522ju7toh2y0lzl3gbykznasdgntv3vhnz6auf0po9uq9lpzuwocrhqyhxs8jy4wm58b86skv38mfdzmimhmpu2svio2kawl4cp3iqhpqzvtpw7fqo4gkrdamkgmfphh1qdgf9nk8n6pn8zyrjcckn4gkv3avrm2rhrmbtd4yjfv6fbh1s5069402d5k3p7um3ml4xvv1hz65eevcho6fz694aoz4j6lwsmure8bcs91yt74mg46sdpz7st2ch01ve9e8mhtlwm2t7ciu9fh58x7p1crieh0u2vm5wlulpaik498bux0iaj5nz1tz9o28qx1xp2zwfku7w0ujl99jcawubl1kf3azxngna62nqatr1bbz3ll0kqnx8bocwchk45fr1i376cjemxeeci9t4gzfd4nxtg18s9u1fd12j5tsahorinda7tb8y9o8od7k7mgmidglqu6yfwfmh',
-                fileSchema: '7l75jzxfmusv71ras1al8h7cwxe9h38ldyba4p1k75rbh4lhxa6ea88q9lscz8774e6ckrqj7cf0kzop6mnuoar509lgurhyxtujafi7hyx7o4o9a2gvl5zfjh4rro1eekcpvo1b8d56lv28ugsupw0c86jemhq2s6jvjw8bcjepgmqfdv6154n9impmjgaqek1trpu4or6eiyitabnil6mq5q0ki5bve0ap9g2u28udnb26ouk849llkuwbowsl34nyy6tya96c3t0ll5txl7g370158t9thoy2xwuuxvrne04blvsht612ubns54jzkz3nzv8w3qijtkzy55l1sgu7cp83hltwwlo4yo7y3hw6hq1klcscdvbgwmftdfhka0nlyh76vz0pmnt9d83osckn8phg7wj15asawpwcwum55dkszc0dnw13vox2mkqwpogbyaqovj6g9f6pg3p6dk1tm8qjl6ww5v7y16f91ypwwcivxrvpspcjk59tlcsoqkztsoz4ryv19xa8u8jxyq5o83cunrvbhofa3hh2q3sa3zrwooqrlz4d3kbbhsmeaax8qphwmwlqtq4prfpvf4mkwa55vlm0qyobwq4fgfbvnto74piqpkkli4rof6l85azl0tmug6c6ub7vpp10tanwbi1r7il0o1riuks29abedtin7wbb9ugugsy6ntaag64wdk7cwylke0dffhnjw7ktf68yk3uu3ghxj0g6hh785tol4xolqluj4ntcp9lojod4t9mrek03dhp8pqwa7kif69o1n88fpjo9enkcr9fn9ijdaczu1f9ljann3f5f6rsdbxmww13514oyq1u04u8g6fq99a5gr83i0227fda2gmbddwot3zyb76tv7paandcxh14hfipsx0i1qhpulzqkrqltzn88qw0hprlv6mvssu24lhgtzrnlvgd50nl8lo51uuhrgn9a4xm5ez40d15ky494xicrw79i0gsazhabe8qvg1ef5pf4hqghunvt',
-                proxyHost: 'hmojh6ho1gjfhyqpu7dfplckz9zwl7mpzfww2zugmsbch7fbm4epj0i5wme2',
-                proxyPort: 4225212032,
-                destination: 'ayxavwzebjqqqtdn3vj7dlf5vvmifr6x9f8se96pdf62qwpxfp2jxmo9xcps50am17oplxc03m7tlvr62a1h5ocgrrahy7myhc04l5kv3vgmm55jey8niovol8chvyxs6v7m6vfkce4um5m3hdbrihsjkyyje0g1',
+                transportProtocol: '6zz8sisv01248pj7dnngxxuqrvp7z1nkkh42d4dlql0s6c3o1n6q645psccr',
+                messageProtocol: 'lngphx7zr98ed5dxb7hhma63jxoqxno5im8dbjunuvwzmuzgb4x1sc8jnvee',
+                adapterEngineName: '9awo2kbai1ngcpt0vx7fingyyy177m4hvff8sfoazksca30eoeg8dhc3wdt16flvju9xcj5c7x2llevn6znae3wl3m4esuncwmj8j7yiuyceruim42q821b8y3uc5vka9h155tf24wzaefolextyjj5i11h1c5yb',
+                url: 'z9cbulbihy36smu7ic15h5pw7g7xy7eq66p1t1vrjcpqh49t1fnkwnb6xqnaexib3uboqu0zul0sp1lfqryni3rwh35lkftmbqkrlykjmk99gpc3kly0xirbpz4h8ciwrbld47m0m8or72velayohfvk6kjj3l01fvpute07f685zzb37ezpzadorqynighwyvjpchfg92eh75ncxcc49dynqct5myt8r64852ausk9rdm0qas1hs7ukhxag27w8z98j28fg9z8gmnf3f0d1cv47tjn876s9nvaqu5d71xp8b4l4np8z3vdywv13g4eb',
+                username: 'op6yydnzeog0jr0czv2xfisroiatxy56b5nux1h8dkr8qa08ayooz5pgx1ju',
+                remoteHost: '4ot2g1uu0xl9gg1im5aahbygz10yy8xyui0zf2wfrw4q5ndeucwr62m3fylsrln2v1x1fav4yov19ju91bg4khnupno84z0v1lsjpa4uxi2gp8cpuncpu85uizy2r70b2ntnlrfezyd9ipz7prlo3296j3fe3c30',
+                remotePort: 3433388088,
+                directory: '9ml7910qegpbqdglzafh1nvt32i1s24e6cb6nyragnez3hf1p4lfvs7cxy552gdgyirnwl70nca01o8eka81gh15agknjgi2iprfz0zwhz7nlro0p4dqxzx05jaebapd3ato1avcuiiqd98p9oxnrcbqgti345vwx2gcl9747uwnm47bhvbsyf6n39wvgkfxc20sq423isaxpw0vsbw4g6odbq680hqi2gzvv1371yfphiul6ufr9nntlz4q2chzaxfgyw5ud9kojhv4fgbdsf9dq8ifrv9mnjcnnnmae56caw8y3rijm1tn9brji7zczx8bh9lctqqx9q2njelv7uy93x8qinp22ehhnrc5e81wlv7dh7gezork8gsnv60vkyzvg7szwjzz2xcro9hhir8yqjwq9p4u637jvdksam3425v6leyh8fviltop1vgbnjlj0j3g1dbarareir4kiozszi84m7yay6j7r9mqzxfxk7ezh9n62x2ted3c71lgktss8kw28jlcos78oy0stf684falql89uvfc66p4cx8876lxae0ee0v45358fmlrh6h6thamghghkohbzffmboqz46yiie8soy5m4exrb7en0fc7q5n9bkvlz2opm0tof1swgf23m30npai93d3wq5wvnoe3ff8d69jfnaoz70pmumx4z5kvkg3c5hpa12daewgyko7d0xh5t7auuo80bbgd52fxop96n1vspt0ddog3goia7ws1mc5c0s47w9p858ttdrntukn0axaqbhodq26e3izlspumea6peqejjvm5kmhe8orlr43q0qzyp0t4715hzl99dikx9y2qibh1ritfm6gk1pwo6xmh7tr2ft2uuu7s6vh5p36g7pxsyvs625cnpgci8mnq986vpqumt6w3ygq71z7ouqr43ny59i0q1mx4ki16mb0s86wy0o8c2l0ukq7tq148c64gtl590nn950abro20sg6fvt3srk73iczd7zuzc93pvhqw2jzf',
+                fileSchema: 'eugnowgtajuy00u58i9yiwwi1y0aaletnrbi4qm0pejqpcfatoiwsn6c8es798kpihewaa1lk20xqw8k04kyk04a084bjshvm3qf2sveatnl2dg05ahjmje6r5wf0j5g6b3koq5dzx5u6km2s0isf7evnvn5ev3023ippzqo2mgdtlh5d3z6ng1taydfh9fn5s4u6nom9syecbk4gqz7wco7v5a2zo0wbv0ewndkdprg9kuam3jn8ede60n9fz60e0pz5o8kysht30zq63lxuiiku55wh4s8jmen80e3x2m7r86guohfv8iui8juvg3k7donk0nb11dggs1mn8d0kanknrzvz2g6798r6vrprlnr0b6eeg8gq0481cxj3qturibs46lsn1qb3s674fj85iupwo1oxulw8w0mfzvwtf2lzs2bmymdoifuulp1jznf0c3qegm1zw43jhjybsnyn710pteic5g0wxlny4wvutu1pi6opwqxygrj58glt25leinpvzqked2f9t972zulexsryrqi8jbr40draurucpzumlhv4whd98h8fnl2m6b0grorgg75ikm1v7oz7ld7qkc397myxkatqzoz0lfb0tyvckibeyh8bbtbbd0soyolt424ujcv3snz1zvly3a7jkv7sh54vw7lhln3iadd1e9770vxzcfifm6v6iofz9qf19caydukpkn77r4vulj5npd69rdxw5i8au32gvu6f3uify8iiirhmaf1081ettx2zqu4l8vw4o5yqn4z2hhx7z7mdwpdvfi61zfddzav8bb25bx2isayuj0juwwywz2rngxf6tbkb2eak5mmikc8einf8sp6z2y1yi72pt0o77kso240hzhs3l7k2iuu6rotlm6qnmkdh0sxaw1yzgkepdoxkvqhxnq3tfm0prgpiv8xi44n06dagq3h4v4zpxqevck3xodggyusagvb5oo33q8070w79tqmk2lnqvlrk2zq9fq5wv2browu5t4ly4sb',
+                proxyHost: '4gu4uf3au7sqqhnb3y3n84c4mtfdfy7jz996wnc18qn64047tkexi09ilo38',
+                proxyPort: 4306394881,
+                destination: 'g6ttodgub66arb39mdv8rl6locnzp6jpzus2s6txtu7dwwm7yrdr520mhnjaivtnwrj7tyvy35q8bjvu9my1jk716rjk5kq3fhxiuau8p2dcfqvrimzozmyfxs8snm2whw5d21yu750mrch0weckcte3zg46fihu',
                 adapterStatus: 'INACTIVE',
-                softwareComponentName: '5przzp852qbbe1skncchnigwufry7dhj8lkx3mqrpheveya86bgt3etajwbx730k1rhjcz973voru38c3vjx2pmg8te7859xhxtmas2hao7z3wn9086z80kjqfhrb2uv7itg6oekuqe4hoe4kht36177g965eqjc',
-                responsibleUserAccountName: 'tbl57qhs2u2z49uf5wo3',
-                lastChangeUserAccount: '68y31yiwacuqj65lprmu',
-                lastChangedAt: '2020-11-05 14:09:23',
-                riInterfaceName: 'dogabnelvpsj1zs2gpp5e8misa0ozsner3a7att6qk6h03wpz7pxf5gof94bacq5dot7ocwardnqb92mcbl7bsxb15kmmmlr294emf0u9rndvlhm5cpzwb3o0j0w742vlufqsllfzo3fcel9smr6pfzqsuom0yeu',
-                riInterfaceNamespace: 'gd54kqbdflvgo83tzcansi67i8ui54ie52m7lmfxmumoq2p7kqvaqd8kbrwn4sl0rhvbkko86uo4rr7y3jp28iaf2u088hjmr0h20h7gi1aouhqkcm0duir8hmpy3376ws4elh4xnofco7iv6ehq9x0yomlx7xm3',
+                softwareComponentName: 'dh00jqed3yq4gimffnjwca41pd2ybqodif8884eqtm63h59txen4775jtqpyh5spkm2q1l5k37kvrjq03fywvit5ege44df5us8hin62106y75ahj141hpmat1o440l4dkh1ovpc3yo1061144hcgcv892jx56q1',
+                responsibleUserAccountName: '3vr0u8i9ue51eu2n8tus',
+                lastChangeUserAccount: '2bpr8v14qtp6yowc2oqj',
+                lastChangedAt: '2021-05-23 01:20:18',
+                riInterfaceName: '0b32gk2vvqp2t82bt70w81kwkbb5p2m7swz7mibjivscaqeiqcthf6hlwnfux9k6f8owizt0vyesb1r6856dny7h0rs4udp5hzpcjag5hspx3lnn0b2zm931k8zspdelpjcg6nra999fvzccpusharcz6lo9erli',
+                riInterfaceNamespace: 'lhu7t0kxfc8f43y9uvdt0wtwclv8l6js55qhnxyca79ifxcqxdb4ur669gu81zsv69uleqyqeh4u4stcsn829sgiux3xdual2afnotosxzvx71xl8801zcxid38b9rv4y7ro90xq1crxhmw5jp6pp8fmbb1lx5jw',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFlowInterfaceNamespace is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelVersion is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelVersion is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'y5pe3onn1hyt6grjo5tdnms1zjniagce4bgdyhxg',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'wua9hhir2ys6k4kfn7xu2sgk5jjsxc88sd2fp5ksfpngd1vyla',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'sf2bccuk2xf7gm44gja9',
-                party: 'pl8umblvc56r99f2lueea7hxjr5nwv9gmvemeukm5kmhjkjyjvzbkfb8juj0ccmbtjtfs1ys2iabn6byl5xewhs0l3wgcgkeet14h86uti3wvoh0uj5tzeguxz93oeo3w0mc2oeb7j6jbqm632ndjg6yd12nawod',
-                component: '7cjwzu9wjhgbcfnpgd3dbf0axjr6912on1pzvigrvbs5gbt13rtcvw76r0mzsf6w0k227movn5xfpetyyp0bl5zj3ptwr7wj1divfm4mn4dwar2dzr7xm2iclnkw3km5w24s9m4vjq1kh58cezbg8cub7qt3ihze',
-                name: 'r8wsm0dovy16n4ihw60dx073w5wvqdaqs8flc30w61gn6igul77vmybaa7dtugwz4bx81ts1q0w2c452e4gmmhp8d21vzkabcuguv3am72y6smms2j6lzz9083a5zvwqun1f3hk2wpc8dcd29klsz1vle2nglb48',
-                flowHash: 'epsg1ktrr7cxufkm17wmglo0u1jsod3zerjfgqso',
-                flowParty: 'zjfixdfy26n1fgds3h12zmm5ptawgbzwggifslpdu5w8ltdy3kwhfytb9apo1tkbggmm01sm2a5080ach9ubk7492i0xyaek3bogotaorizjcu7kk6wdwabblww4m31n3xsyv7vtc5zc09bmzrtboszy3z38dl3n',
-                flowReceiverParty: 'nrqil4oik7mp330xfq9vf1avzr8lzfbbgdhddvq5fg9jmflp17j090i42ded43xfsqtrwpow981tjj5ttzqimq6xklzoqeaz75k60wufybgbtfvwcone660ni919uwr99v6npfco0k12txi9oth3d322kf238yos',
-                flowComponent: '5nqtaagy8d6np51k3pz6ooe46k3ax9scjk352kvvtymrvlvvzmfthxj67g29hs9u38rn62hu45e864u623qhk0uqv924ywucj34voqqamtr0lxmvvnpehcx4dzee0ktn7bjlag97alxqy2qevfbwfymlc4ldd5g3',
-                flowReceiverComponent: 'kks0cjnqyi4ynimvoyj9ug1oeqe6zcvnbqpcciga4vuo3enuwbbbh5g10958j18e4t2e04qslh7w3gjbdgel5798uu9td2gyet3s3och7wfw1qui513x6715jcf6pthjd3dscwdtqrwsuxgkowp24jnvg4p37u48',
-                flowInterfaceName: 'vcnn1x5pdc92uxf4j07anv5bohhm53c5uns7gxpotie9hzrvqcljva5hctpd9ynsvfmzh62fehbxsb10xvn1jsxvp78sxupibhixixesofq31b0b3bj15c51d2jmxfqy2p0hc5p1srq001ttolfez34owig2teh3',
-                flowInterfaceNamespace: 'lmrzzq0dzxxhsvboh0jypbtj2jpbguosbb03iyk6oromktar0hkfoy7zojpkh5j3aewzrqljfekhbbsm539yxpodtkk9u7v0be5t4krar9cy7gsu7lxwktyc4hpit73tkvi9mhrq0vhz4gpzcqrho5ciisuhnp9d',
-                version: '0gdg88z0k09raexrf2rra',
-                adapterType: 'axqwz8y1tc7wj4cnre5vlw790t5ac1w2izbitedzdiez9fiz6mudtucrecyr',
+                id: '5793d4ff-fde8-4347-836e-df98c50fdc07',
+                hash: 'rtc3as5qcpo3e7fj3xlxcvm3rqotn92s7j2oa5wa',
+                tenantId: 'ec033373-9a24-41e9-9f68-787940168f4f',
+                tenantCode: 'dy3esmhwxh7ij2ppsvnfjtvdapi4po1pyaca9iin8g3ybqn8d8',
+                systemId: 'e7875ed2-bbd1-46da-9ef8-1327b3060b31',
+                systemName: 'ss1ov6w5up2kr6aj80ar',
+                party: 'zecq3sscyauzi7j9i89x3ycdat5lh53bho8qb04mbor98cyigxxchsdhvhq75j68hplmcwcs221uj8i7nu8gxjv48iebcm99rk4io268v90dq1furaldjmr05pax7ga12zkqw6irktu3iywrtv10dg5l4kww68sn',
+                component: 'q93rj4q0u9m1xl45vv81ud142so7xtljwjuz6nowwaa3w9gpzy5hhz0cbl0idue9vxojl0cdga11kkvkwrkn9hnvnlyeejl1fmw74jg90vvhd0avly6hg86pk3rxk8e42lc60lp61q2l8me5ldyg7h85c72h9kme',
+                name: 'y9tmsxglird8uxdv1asgis90cnvekl0hebxiyznkq5dnv6t48040jva5ty6tavqrhxbk0e1ictwqi28vgp4btmtxp876p1hyoh2nxi9cax7kw2kdy6gq4iudbuioojee9ivhal6tac9uni1i4zv4jlu5stens3y2',
+                flowHash: 'zki1d25j5vblijac96px8ataynri11kecmenu1wh',
+                flowParty: 'ahmsvi0yz29evskw80widc13ngl6bi2dxdo5dqp5s5ev1istya6qea8o49vl0hjnhmol1e34op0c2mhgpqcyz1qa1cz8n0ujz3jattbza435aextnxgtfkbox70vdghgxnxnmcfqs48jikua30sbt1sxe1ksbve7',
+                flowReceiverParty: 'vc91z6oyo92sr7zh6tudjkx525eaaplostix17vkhwtrs61s04sc34j7ik9x6gj45q8i5h8lwjyz9dhgrlsbwe0m7xaldswblrlnfhul68xne4p5qoqqchnt61apkn9onk9dkk60379b31tgn04b0kq6b6k2bqvf',
+                flowComponent: 'ocind7bzkxdolqk6mwky9hxl3tnzornt70qzvfavq6bja1xeyrbnvy2qs4ci9rea0rqlz4v7n5szt4k7bxab11colbbrgsniudbuz1my1jsjk2u1p439bqouh7ua6wsixcbt8ezoekp38go105ddhygg3szjds2t',
+                flowReceiverComponent: 'coo49p5bvdqynsckqmhj864t3rtjkel2m0pc3jj3osf2z7nraymiemphl7vuilf85uidsrlnywxx4j28o6lx53s1g366ebrj7htondi29zfehy2bnfr36o40vvfeiaqisyab06w51ubamrjhs2gqt9vdl4m9mitl',
+                flowInterfaceName: '5ob1gocw44ukbvml2rn2pil9tvoxh6rqd4d957z6eki5p38h02o9xybz9xzwn0m6wr4g6icimhwi6j1vhj8we94y1d7txybltzva1mswow5hgn8t4cnqc5vrgzjnkonyj2mik8y4pb4bz1vl2rmcocapjnce4krh',
+                flowInterfaceNamespace: '7aktauwv9vrqngpxb75lunnokv83sskkpoevp1nw9hu44hxpsq8sxnggrmup7036ml6mc7iqhkzv9jpalaaeflc3vy786yr15d63vi1qwzxmaasqco8cs4azr3o8lfp97cwohjkqcjslwaha4xi7216mvhny75so',
+                version: '1heylim0jixfoxt325n7r',
+                adapterType: 'c169csa15gytb6mix2cnd4arma9m0oi3t4xewadvcql6n1nnl2p1p4bmn48k',
                 direction: 'RECEIVER',
-                transportProtocol: 'pwpi9ss5uvjndmpdebk34um3xsnjg7i6yif2jeilvdmkzu2k87mylnnn9kt0',
-                messageProtocol: '9ohd2mgfp2iv0rr5clakxixep56tbyhxwt3vlzu7lv9ge6a3n7vavcd7a0wz',
-                adapterEngineName: 'hr2ee6b76qrrey7nahk5xytukjmo25pkf5k5j2oalerrs7tnm5uk6os2djjzffil3lkl8flsyhmyshl81jq9rew90uwb16rbaetob7hmtnr09i4ycp4almvasc3snktc3cmlai3s5uyx9o1qp0hiz841ladvj5gc',
-                url: 'ud7g2rcc0tocuxp7754bp9x8c3p69bgi1ow94sdf4jg4xwhwihid57y42io8cq27lj8k5fjdg1g3yc49oczjlnpo2y8qvc8znfsybbu5njoe6dxh3d1mxl140nal6i9k8u1l64mv78w1u24x058uhu1m88hrh6etcogwsbhnwrg8qodbbxvgvq2dmq6av3nd4udz8v9fzfg3qkyb6ercktg4ptaprzudaugxw034zqjcu5i660d8oy0wjzuoc5fqb2c7wqqbv8ovq59l4m1fo7hp05aanmhtmbp8lakzp0rd7pgzclxxsh4h2neph6m1',
-                username: 't5dutcvfickn5i8usqfyncrd8jggpvcr2p0d3pnz3plku9x26t32qu6khhzg',
-                remoteHost: 'tlwbfbi071dz12jyp633sukbc9a74jg9t9utmxy0pb61goz8e0jqegt5g2s0vquot1wvqu9e4kvyahg0yi7etlwre3kk432nimktxfmxikckuua6zt1q37bxw0v76vnptym201ks5v01dxej8bbqcg8i0ox9s3q9',
-                remotePort: 2355415994,
-                directory: '7r009vze6ql8pveodku30u0k7xua99y09she3uyzhj1rfzyfeos172tzrtbv61jnb83dri218ynmdunulvo8r2yexi6b1ufph2zjv90wke8jv4fl56rplr935lycw9v8c22dagruwhdo5dup22s73zqcpa1s3im5ctsecdxyjfkx2ey38al813dmhz2z767tcwtc6tmbp5ve9vber787qa76ar3ieg4069o5otgeclt77ncs29c5xxb7cur1rn1ttd97gox1kumsjoz1malprj8hdtpfns40iy1ebjbmqrsdgo3xytl60z3ea23vc51bwuuhq0i1w9vgyo5br84pwa7fgwpmd2ks10glb70chgick6gbb0f9lupz3etannp5o2tztl3dnk2imcot2j8wjpqx2a42bquc6eot9ivqn9ih6la4r9fqtzdndddgxgpoawjdkh63qygs2kktyebxzpx1u2iqlte3pi7oewin7q76n6hispfa52nffopdi2g4ryotq96wshngf2av0qld30a882b4im9301fbkiculoupdtz31n5zir15cdeepisva2m5obbobki0gpwcjo9ffg68alwbt4o02yo0yp2zjsnd3um8fjzjd6mcdlfxrrptu4g834tcxeuiginy283duw6un4p3aylwubm8s7ark92rvcsq7e4x3zhe2hi9zh5qz9b5uj8laci47upfn59zekgnn2de1jd57v3vxxd3yoc5jzguemy0k0q80fwm03u0iu8ujlejcxg5yhfxlr7d7uv2fc9py0lqmmo12x6tkzsplhbk269bwdpgp7f4gqfmnrl73pipl7g3ks4f8qdj4nmger1jk85omgwvchsr0wo7d4bjnflj40phgt6piy6m8ckwof7sivobn22xvgeb8xl977mca6cgowkil1tqqju50w7h2yxem8pis8nu8bza8wta64enzqynbp6z6ri1rjogb3m7l9yewm7z8yhi2ybxg73hnbziza4jg7j5920h',
-                fileSchema: 'adpoysd8sw9y0p06l81zcu6yc45vfeumf533c4d402vdiqwvd3j97l46h4l5c7ku2q0dlqs4kci7gakyrb5rd72wmojttl4obdviitqy55f8bq0g3h5gor3h98l4gy3zkov4nm36hmvj28rg8qw7zkhvw2ul4zq8e4vz9zmmkyjd2hkuqfv02bhia9flk4eunn6rs8dqqit6ldu4yayfvy6zi9k4670kzr2531kvwoq458s1gd85ewtb1sqydku87lo0nj2q638b3pwadrt5ee8rm0sze1j65wu6hzih6tgxjlii9w2s9f7tyavj2mv7bopoobybqxd56qax5xm0rqh45w19qfzqkrxom0hz2yrm3t6rp7qrpbrw8wl522e67a07us05e51y8b6umtsg4gttnz0a888z3doohawlbw4ru3krclf5mp5omagfxh4r5iya91j224n0kb12npd454zjkepbf4yb5mk4iya4kn2ec4qclk6oegmkpkhx1lp7c1a8t13gchkwks0r75v10b0y5z03r1e07484q9793beyvqgfjlrr0baouovjulkcag5y3j3vqtc976yqmnomh9n5nc1p91gtvpir7vs8hyz1v54b00xhivcazslqhfuhnexcnxd6hosimq5154qf7o30l8kcg7kcrad7llls81f5sy6qobd8d6yay5yrr2moyw9jmh9q4ow0btt5bgh427age6kc02bgzqbz5g3pawudoxpkzwu11dlsc6ueeun9jz8anrgi3xkoxi9tkd5rsugia7pbbvyflfwfhb4wsxojl0wfunc78iglign8pxttacft8jc6zsuecbpihlr4ez66hcp011870ar53dqs4zgst944574v2qh23nw5xvkskdni9gzshwwr4yp5fcy7el5h9s04yp1gdaf7jcva76e6ykrwhartaishhgl2thos0rh57kxhemjbjejqyyqis98ddf261l5rxaxnpor7u4vbd9e53zdncxgj4qkrfycy',
-                proxyHost: '5v8rpuw5dnhq3o8pfali8ie39ciph7xtpqh3oix30c85daflox4zdukkyewq',
-                proxyPort: 2250122724,
-                destination: 'ztg1bs91lq9r1e3jxlimkkqphzbmkqdv5xheujbizodgx7ocx4ylbm4bn6q3gecitmlqkcs8y2h2owmvmtdfeo8zilg1g03rrbcqndgpkfm0x9x49gm6lx3uxe4fy9m9ze9084i9hgh490vuxrpumvcfsfs7vsh1',
+                transportProtocol: 'ckrnn8h1h5fox84cifs4oz4nhatm93v4jw9cog5xic560pyaupeil9agdqnf',
+                messageProtocol: 'q5psfit0547auzw9mnixpm9u7okxo0h2eakp82pckapiscwpn10hqq2f5kbf',
+                adapterEngineName: 'yhmbjgviul5wlwchgqflem07n375qrl1j4w0pohkkgst3sn6kjcc4bd90p5iodxtvjr71wsr0pfp8u6ws2djt6mj9jsiuucb1ocxj1tej91wa2qlc3bjpnmvt0f93jk2kf5lvfkoy7u01n9myxphop27bzy0z6z7',
+                url: 'kxm7jmwvey5a74lvdykadj1z8vhn7lg0jnwanax6elmt39f676axu9yw5fj8mab4rqmi628h3mitwj1zumlhoj7470d37665xj66pfoi45rlgn7rmoasnay9jw39qz2raymrfu0hh16h7cm3else7xwwibv0pzva4103px8sxi3097rt0h3a5vaxne3ozcea3ntweushm6ik0do32gr2y9izwf8t4h1svnqz3k1fhrala1dadifqcgpb3vinc4dt945jrmumvg00vfgz708d7zyggpxbeoh3z1cjv4rsk2o7r18d829zxawc7dj89hwv',
+                username: 'plr3042sr794tl40xe7pkiiiqacrt7jf5dstkc8kfbhs62z17emyr7sdp1bv',
+                remoteHost: 'vg27f56cjd5bc1id5e42beor0443zglfopvgu6k0at9qcr33e5g7e5uylmics0p9lzsdnmhd4dp9kedjm1vrr5i5q2u7lzdo0fwj5l0jia991j1fn9e2jq5emcehvbz0bnn84eoa9dngs8fqwfpdez8l96jb3qjb',
+                remotePort: 8914839945,
+                directory: 'q2zecmgmrwkaxpkdkwtmioaxzovs3yga7buc6ga18czsqwicv1zjvxbdi8sue87asq0qg749z9aoz820qg10l469o83fzv1elb327esfk9bsnpcxgt92u9ovgasduz4p9kzwhwztasewagdzu9fk3igoda44gpmp3agj0h9vc2qip7msgy54o4fq4u85tiw6lcxjf1wx4agfnxemjqvy7ypmci8nkjyazuuz57sssctx501fevashdk1q21l35pi649d7ijm7tp2tzqxwhmgys227ge4xnpm5cdwzducnxskcvf4clyrnmtiwhdyl3r1i1j4k2dcmy9hb7bl7w5cnybzvdhbs4jckd5en6gr97s41poy7q348w237897t04o3pr8bl55d3tom51kmn5wxqnaguwcubvqcyfffoj4azthrc3tcz5r42wzq2e8n5s26ec60h2o5dxeug72gn1j247kka80um2asmabbtq53lzbnsssrpui4753rulekidh9v4r3pf9ku0if09t1d3ywgf25xv19senfebko7kfiugngp4q6mowd4f97womt4e2glzk0a70cimra0p1h0t8mevwti1qtlex2r7m9akuhg1t46r9b59iwhqme4qzur9nyjra0iqiqhdng7e4hsgi1r9exxugcmj4sywudj1wfclgo8pxnt4zk3ecyo3szxizqidw7p49sj2ig8wceu3kzrk4tm475dkxypt23qjjafw09x2ot1yek9p826jjlcvp0vsgisfat43hw36hfonhsgrktdspo4tm15u3lfn3m6ckko73x7alddlnk2hbrtvm7bylwaca7a8pu44amkhpoyvd1ni34hlvkh1mbka7nj3bjd0044hicfkng8z2bqoqpap0jl31g0xbvfy88r5ukq9hi5r2mchs3uzb86np34yd278uozr28yer7flmsz8tslmowb96eta8k8bsaixqy92vasz8seia94ma5n4fubr3yn5qumz6ep4wv4djdwv7',
+                fileSchema: 'bagna6msusaudqxg7hfm670jb8ffmn9z12lu411zv87e7khqautcea644ifc4l14xew0mq4pwy6d9rssg0fwhjhhsmi3zckki7ycxiz6wqd32e719icsh4x74thfw5g72ljbbaj1jlh7topcurhjw5zwa859dsiursyef2jeceddeoh34eecryaevqxw0d0t90orpzwnhgcb8wpviv4bro8312t7phjz4ipyphgq7r9yj85jw9kq3m6x42sh4uld7xc802jr596xaeetkefyrsmwqrfkzceeh819gy4wkalhisohc19zsyxrg0eer5j1afg42s31gsdvfx2zrgyqc70957djpo38eerazfborospw87vme4shn0nfd8wguboro632s4bzepxysmqldrs85r2gvo0c0kvj64sqctrlaf9vdz5a0tymegvoaawosmrdd5frwv23tovme7rpwuvb5kr64t5qnh6gza2wdwc769vlyldco5jb4hl3uv5lrxq7buu9l4lj9tu59zkoyw65chy66c3xe2k5oi00e9g5ainiqbgtd4xt6jczjic8ukdh3e23w0ik3tmpmdthkjit0thzrmb9ev0fumw2qq03ks1cq6291zt982gyaftienmh57e3u1nh0peppdxii59v6p3fup6etfz0025a1myvxflbutjaf3mub3rs1d1v8d9mp8qz9natccvaxnrc0jw9xkydgo1sk925u25ucoxpagi78chi3aphyczzak6h9stltlnn5e7eeap8f600pxk6fpm5oe7rzzdnji3dojg3l8ppq58ax4cw6qlb5ei1efays3kjsw017pi20chlvwr7s3kkzdy0nico7848cixcqu49yi69rrin2gtypgbpnax87a9knoonssz77kcbw5hng7kb3tioazspebnsiv9r4a5b1j4gr0b1r5jlloptor16qu8yr2idojwo2082ja9vyb35rzbgyngm53wpp2eqoysz8h9jce7nhrza4f8x81v',
+                proxyHost: '16pemdljp0n19dmaysg13brvl1v5b53ul2sd97xdqj3k7toun0lumrjhl6wo',
+                proxyPort: 1691034058,
+                destination: 'vocw1ndjkay36ahl36ej0rn3ef2deuklsyk7un8h1mrvvh37ui63nu8bqori6hiy22atw2aaafk63u029y777ng9g839hq1hooifw6vejwq3ry9abta3ut2a64x640iz0k0el5fsmxslis75298ghpf14rp5pdz7',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 's8m945g7xgv7zy4mkm04ijawq6f836njgmjlzv41v7ihg3cimlk8hlbzbi5gxnl1clmkn9nkg4h6ah9x5lx9v5gu98v3h0w78y5u8m356bvgp90n6nqy917n4qmkph3k2n5kb2oi2o20jjvb5we85831j09d8ncz',
-                responsibleUserAccountName: 'p55kej7ityje9o8w1gza',
-                lastChangeUserAccount: '31lwvndoy5s7ud0id8d1',
-                lastChangedAt: '2020-11-05 15:28:13',
-                riInterfaceName: 'dbhb2fvkxkylita8x6jniu8xlffemfa8wx07z97cj6w9g4fbdn9ymrewmenifz43j0paeois0ga06prydq77t1r6b0mfdos0vw7jlf1w3hnom6l2mdufxx7uk2gzaujgghjzjsshlm6s7zktwvzpstz4yjczq7pu',
-                riInterfaceNamespace: 'r1uezc3bvlvq345afy5c7yrauibl6d09u39mo4h9t457uml3c5u1t2op0tu6jaiisre9yhqawlzfv0xbam4lzv5wmup63l8qgxqexpl81f8erarp0khfzoljond7ysnac2b4h4hzzp4n4ujpc6ps9ijda2fxvbzo',
+                softwareComponentName: '2x3ihtvswilewgy0n0vn4294po9uqpq716hbrixb03m6rrs5g8zyq096ojw77xyiy9kpujg2oa4vr2a5nlrhw9rnrtuflph1c7vky9tv5tfvh4bn7w47bbq8f6jqc1qqtu08nkq4n1bt58t6o53qxrgp3q5twck3',
+                responsibleUserAccountName: 'z8v1eh2vp1q3rp29462o',
+                lastChangeUserAccount: 'lv6qemwinetic6avhdsf',
+                lastChangedAt: '2021-05-23 01:25:27',
+                riInterfaceName: '3iqz2f74869nft70qww0wcuw07929lcdg80abjjyug44uet55didurbwhdqx2hziw184cwstcy7ww09s2w8yaylldc2fxsizeniiu8av21w5ejjbk0v1fds9pptzecvu74r6826smw0xi61k27muw3ir4gvpq7wn',
+                riInterfaceNamespace: 'ux5ihwxwr5hwvltmbe6jpf1ba3b9h800yb0gxvu2jnrjz2bytxreilq60gqprglb00yhdsf8gh4hpes4wgbig6asif5nkgknqur87j7b1qo3k0xsaqnao38u61nccncrwv45miubcacpfft43ucstqwpat9jih6q',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelVersion is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelAdapterType is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelAdapterType is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '75ayljayrgeaqomt35bnhc8mflmlz63o4qhgj8c8',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'b5ce10aktapy7uyrvf9rpil7jaxiktm7l6dpczmbcl572oiys8',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'mrny3wi64oepys2hl6va',
-                party: 'ge0nzpvdjx6gi067bmoxttzxmnbg7uif9mlr8wbk84e3l7nplxeqazf8ajdprfus8kux8hz3v4zjum4ao9l3ybme2zxa80vfel4vj58l0j4481gl7g686tcp7n0psp7wih1y48hw7owbuuex5opbutk3v85iltcu',
-                component: 'p7cn2a9cstwc8egj9ldkc38n5q64uh8ndhozyfvuyjonc71szx5uun2gvr3sywi0vnjpm0hkx0kx84cl9dswsx4locsz0etfiyw01jpj1v1jckuf0cgdxfmgtsml1j3pg363prukrrvwo3fa33knprqypxaesy87',
-                name: '2ivc4kb5zc5myltgpgd45wxh78q0udzubnqjrwfcjwcl6h0xiglblpa1tw0x5cjhgk4rphruw0v31mgojrw516isjetl5u90jtrr5tj0004ltzqvhidh5dv1u5rw2e94xm67yxgx8dbv2glh30qxcx8r01tjq40d',
-                flowHash: 'uyfzsihj6mlcx1t49r1ey3e7qg9iaefr1ww1j2o6',
-                flowParty: 'y1nvo59c5gsu5y9uuou2ju0bycbmj3wc6licaoja7cr86pnd1ojsp383hi2a7en8pxpp4qvu6qif8a732idiw31qoljilwmakd4zqb5szjedeqx0pxvm8xhvyafvyq4fn1ujbjki94u2630evtufwioe1ivoz5v9',
-                flowReceiverParty: '6y76bgc7u6696g8igmvf75wb0tew5cvkpcdhilevxrjlk6804kcts0d42fyc0nq71oid1ivn2rx60b7u3jvf67lj11tbytqcunr9nke51nfonpqbe8n1oniaywanq9gvxy8ck6jml1tczrkn7qvz8j163h9z81zr',
-                flowComponent: 'ysygerhu6sc7e86lzlj3qqdsywpqo5lvxg81tnb18nmh1upu6hh6kq8826oww6wsg4u5eicwyzjskfkasyr9eqyxqp13snks4c9598swbng6dw5qjlw6lj51p52ckqkhah6wge544noyfkrp7ik1s3tsyhtkkqbv',
-                flowReceiverComponent: 'csrvzbt4nz8nbnet6ug4c9jbvptmkcn5sru3k40ju9q8w3cmhefl0ndth7vr6mrjfxj7heeqn9flr5jnegkyw22c4jvpy8l6h1vovir7d0ifq0p5t5ga0si4fxt8efbzpf9daz74iadujbch8ouyrolx9299rgat',
-                flowInterfaceName: 'ce61bfjlm836bmuzbs9799iae2xyt306l92xizjmz7agwbj6tjgw2ifsmcoz20gph5ms40b5i9vgo8jclez4c0igf6oyo5n1ot355u93j8qmekhledw8klzn0cvyblv2ujfx83rsh1snjtirgzwhjrvrepe7wd4s',
-                flowInterfaceNamespace: 'edgxp5lp8xb2j7xin2514v4qxwhcd1skrlx0oxkx4qd59t6aomqnctkrp1oahgs27nvvoxxdeo3g3nw0szh3wlf7xmv79esdrx23raz8vocw0orwx2cwso08q0l6176923ofnjkild9ncbzbbwvh4kvsb8y38ywb',
-                version: 'gcqrzo8x5cvbicfff3qv',
-                adapterType: 't6cs69gt3to42bsyrd7kmhvbwwv5axdohkd9nr93a7sk0zzx4uzt824ingo67',
-                direction: 'RECEIVER',
-                transportProtocol: 'bb1gd6ck7io4zuf9hwa8cgc7r0a13c0obko7k1gnrzkkofwyw98veli8bvmc',
-                messageProtocol: 'q6sl2vs8mqcwrfdxyk2gwk5m3ge9bhwzd6zu39ikpdl01u6nmfhnmlkteba4',
-                adapterEngineName: 'wm56gr0d2hxdvc2rox5stpbiqgbs6gti52pu2v7jbk8szf76t1dx70k27kpjnrhua66uoet92mrcmpd6a0xcc7unb0nvkuecrbigrcebwj73vu6mczmeikd9jf2ut4smft3d5j47pqojy1dxnnxe4wdv2upvix8l',
-                url: 'oeowozojqot9i34bx19wgxq2jq8aw9i498r1yfkdqb5fy33fzl5ok4p3ll1sz18f16lmizagzjo88p5wtlo6ues7s6oxn3iww2n97m21v382nophhb84kdnqpb8f3mio02az3q31388pj178dzscinp71szktsg2jst8vt1vfwfvtj8faml31pztrjbj6ii1ftarpzakr1hjixif0n5wyqsclp7mnuhyce3iar4el0sshiibv2tykmmpnuxewvbiv8zh4ix88tz74ktppk69mkegabj42mvwiiplawpyegzokisprrm10vdj5jg8wtm2',
-                username: 'gvtxs5jqb6yox6j3cmor3wlga2g3stxurk0r4ysz0xwfzsvmlrf6qdmoxeco',
-                remoteHost: 'jwugws7anpm5tc433djo1c2cpczz1ft58yqpfv2xcwegpevtk7h4a2xpio3gkj9kb1k3vwz9rsbzozq8usflc3dmitnumgvkmooy8qow4jslne4jmy1kub5zwpfuy19mkv3reu5brsbomk6vx6p7wqzmgdsum5n3',
-                remotePort: 3128879733,
-                directory: '3tbwjki4tm2lpq6npwyke1vl0ss8ne3c14xodxfgfb4xyk5g96v3g7xakwbrkkujwjiiw9alyin9md1yicmx3mn7ybsqbgq4jsu9f99f2ahgpr6pc1qy7c4tgm1frqma05ftd6l5kxz2tlf81afoych76dalgla84uv6xh52kdl0m020wl2ufs6o1fxdew53chdpuja95d7ili8bxe309s6ufrx2lvr75gu17tryj1farmkgp6fv4xk7mlts3l248uefhzcndjyn7vwcqi3l51agagbqpci6av4yzjf1gn1czk0v2tv4fpxjjkj32d0h2q440d04watj6ubjqgu8qf9ai0j4tv22iytx944am3th66hqg1rvke2uechuockedit7g7bi60wy62rtfm98z8aio55nk45c8f08jclbecchntw3lftdtmpred0vxzdupkkfylmmex9ogdt1mor0h6rb8vfhucemp73qh7xm44vw4fxnr2738t84tb300fbuchhhxepif9ki73vg6lqepa94h06usidls1iihm4ibv8ipcf2ogri5orts2svotfhx1xf7unwx83m68uykyk4mopuj8582tbdjzinv7ysyulfgnyq3s8z84551qobha90quzjp3hqflqy075gc5g0vetcuxgj37hdp1mtcmuazsytpbvttcubbpfdiqz9u9a1ue3yloegme0drxkr8pd4h38nlxkd94urhm5odcrlmuwriz1dbjjyoy1punnwjio01plrz7ds92tf73cpsadim6u8drg8b77pvcyl9x44i774461px7l9n9xt6vxh6vkh8pc6ta05wdkmasbi5exzf4ysi5dzko6xokoqde4otcm3mgkawh0htqnbno9hxpfxb1ucw5lbtahdla3t5waz5r48in4rlnojlyu34s9ctpkvfzec5g9boheq9adu802wcoqavn6tebdnv2ekqbbgzaalv6ar72hkkl2m2zennuf9vr0d3f6xsn1qj6sbwnlx',
-                fileSchema: 'jkyi1bblyrgy8nziyt6ifmvz7ivcqixqyu25nnamn8klegdz2fix1w7unjaqt9ufho1wpcwly3wc3klo1xmm3i7zri0fbt893e75nhl28z31mz50ac6e5i48eqk7mprx8p6ua8c3oeuywvyxci4yvcugq2ed6kn6cgd9w9y5pmbk42z9cu5mk7livwun3d7zj0y8nls94b71rbc7lcm66rh3x9iiwkgrnte64hrmbdtwr8bfruhux7s47rniy42megj93jfodg1ywlz7lk120tmat6ensg0uq1r8m136rug63bmvewns4bdi7iabnhw35wk55q8ulhqzs76yl5fmv6kf73ykgcfs06cl5do1ctlciipinuua5sd0pd1rx54b47yzz2rv265yekido2z4v7qvvhupyow9cxrpxp3xpsjgjn07i32kbcv0bgpgof4k1ej9kqew64szbn7urx5d2gzo0044af5wpjmcb4iy03bsx0uac793unb40ab1hhpvw8xastfkl0c3d0dcb24unz1zin788n5adp9k03fhmqm8xy0aqfhk3ju6co46n92c2fietg0mnl9x0l600kgddlcvr71buddhmu6jg966icqndsup91ieq4gwouahkj0zm4ldy6vxyr43m047qb3v8rjucc7utpucc0gsqu6gq8foxi0k0zlq3qcceqpl583xcg28nxr1gfruabe2478ftf71olqxxf7nbamiqsah92yd0xsj7m8c3u67rqmpd25z6repufee9u7o7ptbou713eipeh6az5jl371id9ral61kblvmz0zgxomwlo4pqbdpqte0vdvovn3y2tap8msbdgnw9oyba4igh5j6hffu0m7a7gmsyzwo6b8nrhm067ff64om13kx745fn4xd69oo4w7847tqtlqv4mjva6ap0882ebeyhrn84034d7bbnnf3pkw1f8vw776lx036weceaxzm1ccyrjqk52s3wesqfwdhe2tu809lnuccss38rxf6',
-                proxyHost: 'ol06r2y5wjbdp5vv949t6vplnv3d67o2lxog3uen6yukz7o8fu4d85ih0pwe',
-                proxyPort: 8661753595,
-                destination: 'andz2j5q7ho3kl7o4faadcc96nb4kbz9jfuw5q7rlxxpkhn752buikhnejklujs4tvmsi6xt6d62gtmv4jmehktwkr4vr6midxexwz9lc487hxrrzc4ykkry09cm0o5pi6iidm6k77j3nxfro7mutq7ht72jj6w2',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'pdxonihde3bbkv0uq68eh2v94cdt3ogss560fddncnbbvhv6l4hwfq18r5lhkymw0oc47b2ms29t3w7ubu3b1z9zbzkuxwxm0yg8yzc4swtzk227ndaam2uh22jvsuh2dyry60hkr46pbvht9rf2wr4hzxvbn0zj',
-                responsibleUserAccountName: 'itdlcyrt7i2bcye10f30',
-                lastChangeUserAccount: 'mfu1vgp3f2vmvci2qsg5',
-                lastChangedAt: '2020-11-05 12:44:45',
-                riInterfaceName: 'n7l2piclgfxi75pnibuscm6bup1xbvzns35btposs26wvyhpd0iedp1vlg9ybrijwtan0i4l6f9b47158dmnruqsxhbarpcvbmm0dc2h26sux3voijs0q7algssnhzngp8fakx4jtz5n8gr04b8bomd6z6kz7kkf',
-                riInterfaceNamespace: 'lltutl9nm8hbp4i51qd95g4ct7575rdykc1b7y4kv3u8h5i8o0h2bmbfxnao1c4m8tlo8hzkx7un6d9h1jic98jx4pnit7fgcltnmh1jkjpamsxmd1zhkcworqrua1bqvspzemmndjz0kpepmyl9dcssui0soxin',
+                id: '5b878fa9-f97b-4f85-a02a-4504c82a14c1',
+                hash: 'mspeab27t1vpkh6jbmzn3val7knrovbvvv1qz13j',
+                tenantId: '32e4f1cf-ed77-4c61-8efb-fd543934e1bd',
+                tenantCode: 'gpwbc8okf6fm25d6555zn3iu487hp9plwcd3eywmvim0p51wn6',
+                systemId: 'b4a2607f-9881-47d6-ac48-e863eddf30d7',
+                systemName: 'uo0b14x2sa5tz3ws9bai',
+                party: 'v5j4umgs02tg8p73v7wstukbxrahnmxnla27qt8onjldal8p99pbj9plc1lo1j0bouh5eglrb5xk29td2bqsy4fi3mbb294vk8qpv76kqz8rmvyhb8149o0uduwfgv7cow3kw7pr5xlpf69u8knwyjbhncdn0c2h',
+                component: 'x68ptjnd4vjnlfvt8rjagubireuwctfj49mn8jhgyid0s2h9wpdu3h396yfzitn1i6up5zae7ld00tontrhptruc10v8vkp5dc0iatn675346mmfc5d4c4lmljteortoqvdujq4jx7rjd60gll1v24eeleu11s4z',
+                name: 'qk9zf33p82bavduposx56dvs116s09d7bk7jl57qyd90ccev1kl0u4srwg3gg0ynz6nm4mua56buf8i7wx6tmj8bqurb7jit2azn2nro4v7shf9j2k3lu4iqanupyxwd4yn338jgtym0anmyfheip9z00ksev19c',
+                flowHash: 'hn2u2o6x6tsac6yn07yc8cnik7vbzfadduq4acwt',
+                flowParty: 'x3sfu32mz4rr4zeqbu3gtfnxapwslqjvmwbq6eawm7btp80yf6af3uwvzrofbvftbahasglavos62twnui6rlhb9tk834y81w9elsxyk40xlgk1t9ijtg1usqsskixle9leq2y1jb90aaxsg09a4cinqqtb9zi1r',
+                flowReceiverParty: 'ejiczwqoiw5jztfyiiljro8dtgk349fpuush7jlkws36a9ngpz6xf3h7a90797jut42jd1tvdcydbq0mdoxuc2fd4ur8wwu0lsvce2xfz1fywn3pu28vzel6128l280zmre1t70wkb85h1pfdgy1anoptntvvwng',
+                flowComponent: 'w29led9jf39qnfqcynxg79cvpoyqmqr4atwrz0x33oqb0uv8fk95aw7if75hawforv83w79m6py3gnzcc1i37t24qcvyvdnpithborxhwtig40uvqfgl38834387tcgjgsom1pjphry9o2xhs3r4pobpsv5lbhnz',
+                flowReceiverComponent: '0kqoriakixcotmtqfsgxsfy20of2vfb3mnowcsk1r052ct5ehjh75lpr14xvpq91hmnivmnrgyarr6i6t0vczityj3j5rmt7ydsvxozgjy7538mcce0ds9uxsxp1siccfqns7me01c8z775x1ioh8px2094tflmc',
+                flowInterfaceName: 'muaut5tdwr9l6ktto2e4xfqni7ze5oh2gj2762h87h1edtdwyctthgfrcvv1px0jwy8anjiore8t3ngprsw54pf11lgpdlm5zo6f74twac0fz7vl9wkb5u3ms45fn4gtfy6g3w7fxrbhf802oewe69rqjq10iikg',
+                flowInterfaceNamespace: 'qwqachxl1468ujgrayk2oc2lhwfg7q05fcyg3oywhm3hyvcv1kgj5mvfzyrkzl9nazg4qvfxbnkyu4la218lce9wwdd6qoshmgosjkxpnx316m5xj0rbx6c1khmiwrsxf4kyh6nhr6toexn4ah7qikrggpaf9in4',
+                version: '4xmw3ulmqqy87qwzky3f',
+                adapterType: 'lunst11h1cfzmoson5yzfjbzth6bfbdfbnas43xdohhjclztgxft1uj6qr6ae',
+                direction: 'SENDER',
+                transportProtocol: 'chutfxyp0jhu548k6zaijdwcgktp9h7vlfwhlxd83s9m07mrzaea9le9dpxs',
+                messageProtocol: '95wtd35r4qhkb3v6e5g107hg8l6fbbc0251wbfhgxtqr2blgmdzm9yhdd1yr',
+                adapterEngineName: 'dbkrz9tdxihgqumcjfr63u237mwpga7kj4dw56fjpracdj2qayv1ppnco7mtggmmbpjcmdggjkp1wnlj7yq0bh5ctlrb4gqmp06hjj6s016c7qwwp6sgbtwozhgqt0zb3ieyege2npipfod3eaixjq976xyjx8qj',
+                url: 'mlzgk2evca20i3pi4ov91konn9faxt1fd2745doms8uowlet7r9b7qn4s0x66x4rm8iqzzs0l6dk55x1t8h9folnmg2z5mgl3eb54m51w5ghiv97pf3agj0pve954xubhu9j3zleql6ygqzvnoei8bdaa4gz5ymkoi4gepgwsumes550jsp1b3vh046by84kuaix8idl43lojp6a72ro6vu0hxpnnv1zodppmir3l1qhsypy8jey2hu2t6z14eurt7ct0f8z9evssov5zw7a28nixhymsuwbkubk6aig457nf6piqoik2prshzf21xp2',
+                username: 'nxs4x92bfu1b3l01az0g8hq5hle43tgws5a93pmplhlhazxd436ppxqzjb00',
+                remoteHost: 'oc1lf71x905671gu50gyysnk57js8rdt8meojbnijxaoucrtticavz9ueuwj8i7m69eal7s933iweo3ix9quxxl2f73cgvf7bzuchvvvaveu0ztt7jutwwcg5gclxicismzsmhbqu7f0sze9el6d1f9fohyeuv1r',
+                remotePort: 2936338616,
+                directory: '0jhjimgvrtg6skf0hb11ncb79u9tgpsp7hnbj549lg64724bm10sodp5j7rpr7uevkh3kcllk4c4xo583fbsco1fja8yclf6osnvqxexvmjtlvnp5zkc6y3ws5dpqx0kpj6o0e9gg4jme4jff6vmuw1h5igo3eiaarit3qztsut20rapj6y1ldq9cr280ag6yipbof1l6dqxwy0z223igfavkrxscjr9z1pdhiexcxx0oktucmhe6pwf9hxmmxh28zh8v05404vwy6exxi69d4nh1x2co4ua62lu77mp99bspryvhh27sxyg14kaj4now894q8s3l7674bock1zho3ar5qvl94nt1yd0q3n4boz9k3bfhgze1vxxct8szz7densde1s2ms3yuzutxq63r1e31xntgeor1l6bebk5w0o9p7dy87r07ldvrguii4ygpp0d2i1sa057okegi0lixk7qsh2qss8r3kv03au58p4o3btss41nr6mizg3y9il8f1mu6aiaf8z34da9odupjdc06bd8zctkd3ub869f5b13tsu4piwmoz8dnd3a3tyzdkk2pbtkt01qb2u6ifznp5t39y2vjucodh39bsjzklrz8dxqznkak5bg7j4wicm7fv26ydm3zhfqxm0t7ba8gmcx9eaivdygqdkm4obdui16uka7w2uyi805atnfl29dccnoqh8qlalfpjzs84lwyukisqjn21c3nte9vprnnhz9qm570tkkg2u6wwj2b6r09pae2ntgi54wytnwyiqtgqif7eay3lx6ybmh81tps464gsufi1evwmnhm9coslbx9cij8olb1gaflgvst0275igxg6d2fux4vkfzpr3qjzm8nbdywm1w083jzftsjmze0jm4yoxsasqod0ktoeqkkt1h3tywkylkqbt5yqntolpss0ynufrngmqlygy1sssvlag0wwf0gp60kop39bcc4g66dgeyyl36tdtowbtm1k9z9pnrnzbzuz66ezi4pcby',
+                fileSchema: 'ypx0op57ywum1je1jqc21lctpu3k9hkuu26g3n6n28cg5uqkry9kz4kdu709y5jdjyc2jrpyyuccf8ymndq5as45nnj56mlk9ebpoi4tw56i4k86km10h2wulr3izqs3nc24w4lpftua3fw6jc2chrratwoef2l6h7r886qwoy9oug1n4mloecq3zt1ge6pxsdni4u05say3303hqj62ful25lm8op0o8axqhn5gz3fhnvqexjc1fbk95zhzcrb77ouitmju6zsl8kdre2gkb4i3u315zhv1caljeu0wds98s0ot2axmpetoyakh16d7km7eqnnpr959fb0ym7i5ubqbn0gj3evt5a1sv83xszcsa7qvn4s4z1yhtl69plwpjgdhh2nw66bbz9oshnnh7m8qdtuo5jwggg2pkrnzcf04l78pdhk9t8iavbql3hx1j70ipx6d06vlwrlxdii7phv8i9xlon5bhdxbhrcu1jhw32xwo85unw4xbgvnvwb3f9g21y5s7ksaxg41v78m6mxtm3dd95pnyzo55m34uc250dk23c4i39f1ccsgpyy45o668k1k6vpwdmsqvtuteqkshfbqekpd6pufgytjzg9db24sfdnpnk3xvytqp8dyiab0ouzob5o116am06ph1obw4zyi90q6fce3nosag44y8bbs8cqdj67szqaeqrva3n02q7efkv61w6v3jducjoq363jy429jmc88x7xxd6e8ta0vsfjlrxowsp3dg2nhjhwjk7zsclg3j5hb67n9nfl10uao8mizy66lj1gx938h72gep72k9x468fvfhlzf06lywdmn2sr76qvc1ivwl6cl2eoso0hf1y85qzfustxdmjj47lhr0yucmekcznqn0mnsxb4grtaocp6f7mup0o10tj6pdaos3ssam1v9zkzow1ysz4io2bzsdcvbmqfe5y60tz92jdlmzpzkdickqfsajowsz512bdxrslf1g37iop62wz8lt9strrkw76ro',
+                proxyHost: 'tkqqem6gr3ohcoi7ce0rvo5eqzqbzj755t5wy802wp5maooyzgppwwa6fomn',
+                proxyPort: 1787107074,
+                destination: '9chl9r96qepezwy3ad6qbasar2qusqyb1idqhr8fur3xx80x5k13kgtitvg7j7fjmff2zi5xs9ec7wbziop4u0f2n1ad6n5qibeuj83uygz8wkqeblgs5l2h8278is4gxv7nofcxi797fpp5xq2fvdkelihq2nu8',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'm77trzp86z4bid0t6zegiihv6d89cb77nobtdq0da51cdpf9yin498dojslmt916t4gn8ag867wqhdqw4qfydo10b3q0yugi4yhckuyb0s4rclryu3rbv9z4qga4z8kxgm7sn4du6raf9dci4kkuulra1urywiik',
+                responsibleUserAccountName: '4frcm8a166d5q69bnjkv',
+                lastChangeUserAccount: 'hdy02edxymqotgtc0os1',
+                lastChangedAt: '2021-05-23 09:24:51',
+                riInterfaceName: 'xel4lzfpmkkfofqtepm6bt5h5ichxg6jtbuwykifupf1jvsq9e69nrxpr14sx33lrfpa2eeuud5htc40363n7ervxujn1lbexmgecqvgmntvh43bd5ikuqcj8i8073afhytrtm099pre8hrwo3e0nocsd9eoj6ym',
+                riInterfaceNamespace: '6p0c4apt0vmxzrb5bztbb3ycy110tsafxwgwr2upj527mh11eqetsf5euqjs0l1d91v8ne9vjyqmveae3yfaisde2z198zt0pezjcjc8j9htrfckvr4w0jg1eupb3ex9h4sx21hro1ahvgutgmlwf7yjupdkg11r',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelAdapterType is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTransportProtocol is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelTransportProtocol is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '4npy9o4qcb6jd7c11pwcrta974ks0j298g1f0qrp',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '5mgz68okhma5ih0lteciwnq0h4au9ibd1pypvmk8dlh6kvarmo',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'okt44mxh4ds9dbs26kk7',
-                party: 'if9cypftpjzgcasbtodzd0axt6jwr7n12b6ethfrwghfeyweqpf0qvk2v0b5emmnvyq5ojjzmec6qwd7mrma5hosksauie7gk3q2lqhyuq7kr7rb0q4y4p5y0016lpc3mo04btewib6b7ev6uhzd3tkbdob93dtj',
-                component: 'lyh92fuftv79cjdtk6h4ikcy1qp4el78c6yozrq3fo94a88cevxyvi5q7cuhf9n08vijrlhpjm9x2ez7z3j43f7s200t8873axzeu7uvjyz425c5vv20ykqxvzx91gvd9d4qfkigh2rhjg11lu3etue7glehmpnq',
-                name: '6aanbndrq8ghxn5dy55j26ixorgwlg1ldccrl6qk6nk8icqsyeku1nh94rnmc6lrvcro1v1glvj6y8vcrszlh6hgtx7y4iw73ackw7na3xfies9pkikirzposj17aoz62hw0ybunvexvjhqfoisirqxcqyu08n3p',
-                flowHash: '88qrlc873wfj73v1w3nh7ypiojjw25atrsqgsvbh',
-                flowParty: 'dwpx0wohfddd5ixmd4tehfai1p93jzrbdj9dkp4vfi2kcnyy1jxb040yak6l6glq9f0hsdjn0rv5mentj0qx99o0qkq4o5jktfvf4busmxdh3pcu4wmjl1o8u5vnr2030tfbu23l47u5vg2vw04chjx75zm3oefr',
-                flowReceiverParty: '9o0wehef1fth10imgkkl3104v5p29utgnx66n6acgs4h3vuay9jtef0w9oe9wrlysssq1rksgk3e21db26pmsb23gi6j10vf19kllq4kem68tucz4vwkm699lsyb01v1lb7hlrseobh5vp28ozl6t01ul5h21ieq',
-                flowComponent: 'frr6t5o3vinnfr9elhavhmtwys6jow8ncpjssx9u28mb081tc50w7sgo886vyjh5ddi9a183gj6xvpk8l8slk18manj86rno9izo6zke0ww8vonr7m5nhid9gfrjf1yfcisohhpj2liaft52hq0vzacpz39w3oj3',
-                flowReceiverComponent: 'b9f9bn20y3xx1cw7jlnz7q9c6medguni271tlr59zx97tugm0l98yg2zxf7caejkk4ry7a23l1nxeozm6r16hcfel4vnkjjxg2v56bisj9zfnhbjrmtvc0fyf6sfxzg5rvtohnzmhnf69nxoqm8bq17uiz41i3i5',
-                flowInterfaceName: 'qhc9q9xd1v70eyulne758g6fxqaj5v3ve2x4qqnypq2wymak24yj9hgq942zk5846womva1kgebqvgec3jvd9l80de09it545plnkpdws8hpu6nsvlivcpdo56ahe5mz4kvgpa37njb7e4zn73wf346xcc9o0q6v',
-                flowInterfaceNamespace: 'znmrv12q6hnxukkjlotnwt0d33kn9w8pwwfrzth8f3yacrxmoc3x9wu3ztdcfklmz7qnogkhj01l2jqz20h7cgx197htq93i3zy5wppbeh6exi1bl5vtu70h0b43y47vj6z93nc2quilszpr9up9j4vur7jj4znt',
-                version: 'p7k18fpkc9e1fucy5tco',
-                adapterType: '0kxe237pq6e2zv0ux6e91h03sz3su2oetlnhw3pts37zygg4cxjrhnmcrzan',
-                direction: 'RECEIVER',
-                transportProtocol: 'yyj1300t6326ve3nqc1fke17mjrua9ulcs27349s0htufwiytfob9fm3bkc49',
-                messageProtocol: 'ruq9o8nkru6cb8sq2ajygupbwfwal1w81vrypon8r3zpf0gno5vpeo65ufqm',
-                adapterEngineName: 'zqa70eew8sqpgvsugt4i7k7zerk71o4vomhbjmbi5wehrwoj4v1ucyhqxfvtcexle0titq8xkj1i8hyyztswcuqvh2ongggqacdfl39f3sh04op5a7qtivoniy5bz7iqsnvj7d6sc77qyq871s3dwulwnrk5vi6n',
-                url: 'jffk3u1u1gmz7vzxo504yl7seo2bbohxpnwqnhfuy0xfju5m4olde19gco6d31ydymcynr99s48co5wrnig98fmnr6aw5zhhqscb4ca3gn0mzfpdp2xgk42zoe9186dexzvmr7bg6pmuj1ombiehu57iuy70t10enwtlnznummgctjw68iysxxq6p3rhbxmbpg2xhdfogamy7ih2jt251v2b8gopri8qtoihpj86cuqix8ck5errjvnt2tfdqp6qb0jel8naxd4dpv7boyfnelmhlffc2mhxggourm0xtn4pwzse9kogknmccoxo69i3',
-                username: '2b7k1vcqq1pnkems6cekn2ex5xpcms3bn80aj2gv7zpqh0q1tavmcsphkalv',
-                remoteHost: 'r5s2gfhxpuweybfd78b9bfyfpe1d3cbg2x01vh6ra0xwy52yi62w09qcaog60jnlr57bqzsic2cml4qjz95v0ue33eu6hrit6vmim4kmz5fdsq8ru2sqbmox1lcvm0ahdzm9f3qmcd5ruas7dbhxl324r572tz8e',
-                remotePort: 5609369525,
-                directory: 'eihpfg5kqxrkm9xpmhnac7hx837e510kupcp3wyg40l377unljyto5zlc1ycxv1iq1m66oz4rclbqpgt8nfkxiil5u2oyy9losm9t3y7owyqrdgd59fvj8ga7jocyz7e9zywue7tfeewkmh6kwkmooc90jjo3c3d0sssf1p3nu8bpiks36ccsyo19rn9o8j2vi0zdhbnjtknlqpmliw5cvfc1nn0hoa3yrbnfnkc5pwzdbd6h5kuvm97je5la1d2z5yjvqp7nyqlch1a0m129pwiez5e1p0tbyf4zkczs1z666fvgsiaz1mlupi9nsp7wqpbqwcnaw6skv01wjwkn3uieo1t0wrcur10gbrxgnqhwwhpyh7xj9jjsywhir1x5f47cocru6tl3ai2pvcwupilltx0ygttfmdr2zmfnd0n1tndhrk88ce1quhxxsaxdat9o0mjhahuczxy2vinejvvtwtu05wy2xbteayw1y7qspdv4zh7mb82w75dugpj4z1p05hnharp2g9zeqs12k7i492z403g12otmtdm19mvwgwcs8g2cph6xjrcyhj3b3zx4vm3ahr26ojalezqmzms8dugbgxcucxszzw5slo8uxee5druy8z7hu9t2o0gu4yv6t93am75ta7oqg788kovwvmlaj56eucvf050wd0vtl700jor15j5dx1ybjywpwv5cvae4v4sefjyj2t6z6r5mjk6ne8yltmiwt34wxr20x0i2btsunj4ysl86rx8c8p3f9irbfaymzsrn1y82b04ycqctpibr6jbnvouldmj3judiv77req0d80vma5a3x0ji4h38mntwacx82fp9r9jzcrz2okotxbohnj9kxdq8b8gv4e0zsbsh3xq4mu597bgwb6d8u4gibdxk1lejuxx1iwxapen5tr400k2602x2gghyva498z8lft706fco0qv6ej79jiegj5r3obriqfxkcd1lathy3u4kn2oxuwl9gxhz462hi2q6k252oxs',
-                fileSchema: '8magnketeyr34fytpevjxz8ztgbeb7an3b6l6eqj8249dgnjqtqus7u5s8h3d1onlbcep1ezv0wt6f4uscfov3ij0opz62sniothpfszin9uwoew059koxrmal7dnd30eo3x7771nwbm7t27qvp2obt8gxf2z8njq24mhjtupjm3ahquvghakmiiqad1g0hlfhi72lggd2fjzxp0gcrlar7tnsje280qe746tg0xte332g354q70yb16oa368o5g42cwfz3h5bfzskxns6ezxej0khdqavolq0gju0nzwvf32conzu8szzwzq6dmjvfk9kcxyenjtwv2ar0rt7z78l70dk0fbbck6rdyc4e0x8w20mc470yhoxigdwv9r51ex9w9jc2cspbp9hi14ducearihhm4p7bni1hbc22hzdaojlgt6qfxk3erel02o6lcs4nl5cqgi18dwjoz7wu2faxxqng64ispyyo62fo2l4yhyajg2x58xd37i3fpeedyn2zs4n7hfpakosfdak5dykyna2dcx00nu29wasziua0k9xw8zauk9zuvqcd24r59tqry6nt3gkl42u53s8aw60u99unxeneynipyw6vk8g9qbqh8cwnol47hdmcezgcguk0ie5vbiddgtokhfm8p4ajyabl9ssrnh41s00ivi3qgzh8yfwwur7fojyg5stoiiq6qrna4ivjge60s43g67de8xsrg08svm2fxftwx1mj72oucr6qoye6te1frpv8bqfwoswwua5x8njlfwfssjf1eo8u9svxuz6epxjnb22ficcsa9hae5vqgkt3qe5bk0vbuu9wlo8eiaz0txgcgxf8m8xe1ft56d96jlhg6qfr75mda0uzr9wm3wgvwflr41crobmul780pa1t56kibzzds5mm5tqo3vaw0m2o5pcfopq4ttx9vmg0ugdz5wekx0s9oxfauflhlqgy5fcpo25dbid5ykukp998v65zed6hkgwnmjx02eocwwuy9l3p5',
-                proxyHost: 'q6rzp7x9cckn5ucseg6rpq8gr1vc2j3fdg167nhsq6q9lgivv6v43o46948i',
-                proxyPort: 8568536836,
-                destination: 'xawxmj8vtt0x7p5glhorljp5mhp2bdfan93wsb57abxhfjo92p5d22kop4wtj2k68765f6h5s9sm1wlgp3mxochcn8j4pmmtjfycgu0czbiaokp7jskifxqqbl002ba7yvbeo169kera1dqsclv3y2ddew0vem6b',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'rlu3y1q5gzfa7n3jzhzkcrrpvkzjcr2fu5c60ekktqgozigog7l2azaixnkeg1bcc5ao0wzr7ph4ik0g9qhcvnaawrgv2uhhsf5sm7iyaplh62sfi32i8bl8o4lh0glsjf8g9sssz36x4x99n7g0y38ffk59i5v8',
-                responsibleUserAccountName: '9yjgmqlh9r74kk0ykrm6',
-                lastChangeUserAccount: 'lagulrxa89umwz2lge44',
-                lastChangedAt: '2020-11-05 20:18:03',
-                riInterfaceName: 'yofk2sb5t0yuaerf98gh8pr8fxgnuyodatc5u1dbff68wxzyr52373dkhmyprzv0ad4cm5kkswc5rwyux6pudeljk1pf2vnwqpkrmqqs5yvtqfm6r5a1cqbvg0zhbpl8pmkl1d40vyfkjoea25tqdd471ar29n8n',
-                riInterfaceNamespace: '13e7jcb4e6pw9j1lgchz0r48h1d0wsyr7afobh2pn29cyaysgzuoizp2picgn4emlj4xkhap830cu7oaemuhkfska4ezmk4skuz5bme2n9zoasn1ch9s59yc5cg2vg1l2ofoxj24mefnecc10cifhrnot840w8dy',
+                id: 'f03fd691-fe3d-4867-8787-6da64cddbb06',
+                hash: 'kb8172ilnnj47gjnl459rjaaameu684gfdrahzfu',
+                tenantId: '83af2437-288c-4b03-9c9b-9721c85cd0c6',
+                tenantCode: '0iaf720dgviwinomirt3ghu003k630939icta0dsene4vepgv7',
+                systemId: 'b1c35851-cf7d-4c55-9818-7e66fdaeef94',
+                systemName: 'rf5c2m701ovglqytp2j5',
+                party: 'z0zrlx6gbtj5y311rlccymmut2k0hkdnvz34pr4pr6v1db93n07qve656tk1c75h041qrsjviq9vwuo2hru5mk1d76hgzq72mrux3p4q6xb2syuhpx7z2u5386b2lqww5ur4z24n58k4rv1duzepmlmrzat8vr0i',
+                component: 'a67bcziaww5mk49zhqih5hcrhk9lxrvzo1s0tlklcyezfwzmvjt6ler3zm38wjy22fgg9jt2exot6ew0toix7emjf49xca7ha2vrw8u6kbwz85kvz3kdrxlncpxg5if4o458qr8ekx63ai6wpektilq7luobmbju',
+                name: 'efsq2d21sruhr8kbctd4j4djg3uiby9350ljns6bmo1y9ub6vm4k9re19w6pysqrdpma4tv0fuqu7vjs7e147uebp7x82gbp4wfqkfw7sfw2arwlo08ybpssx9i9pnnzvm6w81y2zs306ugt6d4ypdduwou5calq',
+                flowHash: 'v6iku9cfnk6yfrsebadyzev1z0bwoyph3xvrjdua',
+                flowParty: 'hxnl17a11mfdivmel8pkbu2e9gqvx6dxzzgb8g4n4zvjmerqiro6ibadtfjuwk2ycz32d2g1vwb90p9aibq5tpdvbuji81incjl0nokes7bv28g3vdno8ami8dnek2jlky6zyqdb7wvjfa7s0uvizd9akntfdj99',
+                flowReceiverParty: 'niin9ircocvn7o52p0ja8or3v99y2r4cj3fhuvnz2h1kt2zz29kzbfh2giw47kzuab3vwmthw7he6xk5hiowro22gt2s1vztn6l9lqm1h1lp2o7re9p06fxtwa760e1jhwq8u81mn4atanuu14a3mwhqyxedcduq',
+                flowComponent: 'dfp4nn3fy9sk0znlvxt1mmbfik5wvok5oifqif93xtwox4bk0n3afj2fs85iz2newxsm2ibenjehlqx7yb7qcbm3quo93nj64adkewiraxmhnvp9bysvxshltxkgwab06vct2visgbfdqh7oy9pj8z6cad0lr69w',
+                flowReceiverComponent: 'mgr3bi4vdoda13sw3eegjdiua02v3w2v2a99ezxhnmxdii7z4m836ecfuqvyakjcib2njd5837sq89087csszy70q47mturp272n1v1iogk2g4s9ovq2g415upglkhaun13z6sq2znkct9r5x48rbkqu05yesjbm',
+                flowInterfaceName: 'vbr8i9nidtv3oaupwq6fco0nj779wgvyjiytffeunp90us6s4ed5no0razj34ytlcxnslkvl16pqgobwnsnf6eq6j03qxltqeit9bsawcgowq6fs0wc1er7pqskaz4lfdg5q702k8osg3hfsog9xd2w2ad8bhae2',
+                flowInterfaceNamespace: 'shp4czf2vqk6kiqy161z52gq0ifit2jgeqgn69b7e4d6cpqzfem16tyavyj98uzhpgcsjssk49u0qxuy35wx6jklro55bczi65dwzcm2xx91vc8cnpba74f4pmrru6lgkriljzsql3vuje8wcwytmqkzi99jxmxb',
+                version: 'ocko9rpre6stv47kelae',
+                adapterType: 'xxjsdkzarjd2ufhgm84c0966ns0f3d8y68xo0nvxtgzcml4civ4f6n85bbid',
+                direction: 'SENDER',
+                transportProtocol: '44i6rdkkl83xdtzp87zvk2sekgjzywlme0yp47ehay7tgaf9o5gpcji27osd4',
+                messageProtocol: 'hy0s8ec4lkgfa5lazbxxl7w0q5n8yr69b246vzt87nk6mx28fmmprsrnvqka',
+                adapterEngineName: 'pi0583f0fhss8yygactm4hbtcry8rqt4zrvhj0jhwmag41tvkpx4p90c4tewcps0dhk8vtjh0o1d7urgay5fi2gz8omtlah1bzixj5f15vkyba9dc2j996ag8s6c0908jvqbmf6yxsqyhu8xkxy5wpecog16tmpm',
+                url: 'pfea5ldr11d9f2vzr0q18o4ikyq7pqx83bazri2t6494vxua4nkwr4uchzre96hut0pumbd52oalhmrhynea1djc00flppysdvu4rllsz53r1kgck5exisxdt27364qy4jijp02u8ufhlnir96p0kylz442tpy9xrnfvr52lugvvssqlg5h8q56p92rxbmr155tfc6nb6lc4bbtttpb2ckhhtou76het3pzngbmrd9ybq27329vlnm4g0pisxkgsrna0psbkxmcq68rsdde77wmnob8f97p95m6z0r3vzzrhplwrokmvnizg61u4ajjv',
+                username: 'kjwxksgnypxuowoqdnu4tf6rtnyj3anyw7a5rm2gzfnh45vutdko5rln86gw',
+                remoteHost: 'c9cfd142b2k6coot6xdoglan2gvunzpr2t3quo9a709q2mrmwdjmztivxtwecro7seo01dfxom3x0snqex9ih4mh8h46q081nuc2e2p9du08mpf4j4zjalzbmf64bj4ffhu026marmk83qe051h42g78r9h86kx8',
+                remotePort: 8949306095,
+                directory: 'cf9yqxr0h4xi4qv96ibh0c4j77ejgkbet9iezbmy3o8sd23g4pqf4i3qzpmnl5z0j20rm2qee4lhe9075s8bugz3q9hrbt6r880ynp9r3buuhok0oc133e1njzg7o515ue9ui0hg2ydmv7jpy3qr59jmby3hkec81ht0cq3iux10trcnx8xzoqx6wrtuc04tjk3m85tozcpakmv49kj613dlwl7r8odnpuusr5jcy7l1sjgmc7e7w26izf0advzoxuklsn2rs6a5asxrx2lyfjmq7j1ga54w2l6k0jzc78esuzu3aqj9gw46ejrfdai3udotog1bu7jnnjofwn2l7m0g4zflgnk8cvhsj8tbegd08r96xoa83knrzct94rcgg1zslxu41knj3jtmmzc086epnut2359xrfp2dg0hot8628t7qfwcq69icho52srcpugtmdgrjxfmb21ut3hd3z3a9hwlp8ljs8vyk0ja0vawfl8ecrus9tupltdfyrmdaoc6c3fjtg88gq44qxb4judc5rkyecedtpkrtryjdkcjlu74l2oedrwwvtjenw8plxp16emvr8lwkd0fnlramset3lmugy3a37j7b572oqogfcd5mpb9hcknpm9k1976f69susnjh73uzim27aswr3l7phiuii6ckfz5yg1exq8o2v0i0aj5i30q7pvjumlyz16xgmjekoxsmu6j0njgucpxp86jxhpugc9d5s7wus4dh3pvqx6indwbbahcbxhe29deyxlfcfd4szwa6brirc7wk1yweux10bzn0oe35k2ih2swx9z0lvks98n5c4guz33d183wk62n1t0sljyrduxpk4kfsqeg7q7p6ki2uqmgsjjktud2lp93hjqh1gkdhyh0nrhks68lyd8s6j3bo7w8cpyo1oq2277xt8vpxmuxaehmgnyytcsgg823p6et3lo6wjhuhvs136zvbbapeokvqiq4n96hhn89h8b4ouhngfmv3fx8fgd9nka46ixr',
+                fileSchema: '2c992d32h73wqze2yw01x4uyn2tla76g6wucq7m5wk79wuow2meceehb4pdfo1u70g2tdmzgun3h3arsrywm0tntq680zzid3e5y5k4z9c7gz1li304auk9cgrzqlcf9pgy7cg0qfmvc1y05cskv301vytzs9677qzp2h5vge33mpa8kijrg5dh3taejixwio8h397r9tc846kqm49agbpo8fyvdmkwt0dwr5qv7hga4r92ihefcwjt3jeirr0ezqf2ma6wrj2wdwzdngc912zq7nbslr61ptmlb6xl2gm8i55l74ifo5tn4fp49tzqqdpa4gke6mwcjgdcfevirct2z1a1kjo7aeiaak7wkosh4lsmk743l2ggqecegu7mknmd9u289gj9gfyqnd5y1yuzd2bq0vej7pa1bepe0rozvno8k1f0rb95o0754angfthd78jloq5g1ub6w7nnm9yhgevf5gs5n3nb0wwsczru81ejq8ir9srprjgz5rj9mfgt86bj6dkkzp1z1g6i0eq77n7j35tp2h66y2ftn3ygkbsetozutkdm9tcc72w9prj459g53uukuily9x1rrweezaz9wl2umyx74q0v5rp0ypavk9t78n7t64zite0uzr1wwqi2veu0iubq494c7rwy4evv226wrq8xidospz6257bwqrxiabedixamiyf08funvwz9g6r782t5cjez1lnyjs7t8x2nr5nrwfganbkr5yxj9k8zr4q3pvxkgxmjjo30xikaad7kamx99h4xiipeddqjnfa4yf55jh6qwu65tsd5iuk5638tu33anxh28xedugicvvmklk7kawk4umkkkna4zxyxfqg2ie1up7oux3e901ow5fls07wnmun8wj5srxpc48j6vrlxx0om8pmlyy6ie9b9t3v42ty85t6jeptwyvhsi6mzebuefhx3lw2uw11v6ttdfb40owskbo6x2e3a2ri00eo12hidzc526b70ycun7j0ofo1ijz1hl',
+                proxyHost: 'vwoqoszy84sg059hhwcug073pkb5mg1259rr9x1hixar8ff3ovt28ckloa4l',
+                proxyPort: 1026424109,
+                destination: 'g0a8s58p0s3ltd5qtj2ee2nkf0npd9iruwh2i2254fkj2wh7j0sf42dwjap2ifgqxobnecs6zyixgab9wkpedhrc9h6656h3sqz6e049igqv5etjjc6odwrh6jmk7aayxioy2axnq957f5wjvxnjs1mzot2dif1z',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'sog9rqa4bz7g0xzn8pr76cfqsl4dhygahn1waaphkz1xagkz04tltrobdg4scncx2fmn7ky4um5o8i09okwgqesx1mlrmyrre7owqo0bk71iwe5ps6bynwxa9zoplab925huka1pn5xok03405ximdpkof01zpb0',
+                responsibleUserAccountName: 'lm9a9uwh7egzhugq0emm',
+                lastChangeUserAccount: 'ey772gogrr3i2g1pq79u',
+                lastChangedAt: '2021-05-22 21:12:30',
+                riInterfaceName: 'e4p2u0sfirqbhw2rnsintkkr3dpq2v1z95jxinpwemfeu8ryd9xfrggmb7d24h8aqm8qcxa731wo48hx9vwb5pvf0se6i8fxtm2yd4qg6ogfgizb2jpfchtkzadqiwplg4f39ofyansbe2lsvou49ruj01tfh2uo',
+                riInterfaceNamespace: 'qqs315lenxec0fhwhv18brzwm9wc6s36ii48yv2i90hovqdsjs3fy08yy1cjgzcdij8wm79z7eul6dye3hjc2hnees56ez20s5mz8kfocv81rq5hxv1fdxz4y2eo8mgarajc6gx2cf2bicrrpqrgpyk514dvxrpm',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelTransportProtocol is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelMessageProtocol is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelMessageProtocol is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'mg07a8zq8uncl17fnlljl9cq9ji1fjvu5cihwia1',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'gp4k3jl8m6ulxxf46lswdb5y20ojythmfue63rtgnfby9tdai3',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'i3umuf5d4bqrc11g00er',
-                party: '6ol5p1simugdvx81wr4y3tidrnjwhlt1gmdmojyxeqjes1zesywlsiza8hg65qihvfetch4tj9x89udpm8i8ao7bmu2ruf4notj4dz4lr7ven4br6ixhzay1dz9cfuqpt74hoz7eoog6zxg42b50iyx4o9jsl3vg',
-                component: 'd57jgo06dqldugt67nqdgebcv827i3aibq8e659dis5u4usgi8m0pc9yuq4dr43o6p0xc6d7rr560bg19vpbulaqj0qsmp8wmcott11ay8qy35vi0rzw77kigyon5iowqs7y6k0yz4qgcfssbmfw0mlpck2k1j11',
-                name: '7g1rcb3mj438slyrkc1b5jo8gf3j8qsuo3nx4a9510rq0w4qvmdsb7hgcg3x0elryxxe3ekp3tkssxcw61raofyii44idzhfzngfxjudc21dsi4or9yeckgny910oobxk1ogifqncykgg8i144r9c923eispznvl',
-                flowHash: 's1ngkdlmsx1mwahhbtsu5s9ns8xr2sskrf5uth3f',
-                flowParty: 'mg1uy1qzq6v70mfzbuvsomnp9a3j3x9meoj9939jtb26w8lehmpcccf0vgtqfwg8z1625cjex6p1kn2s9b8djhd2dpo9c7d23rufqmcrua0fxksd368rm75xuypnjh7ww7uchubz3aeglelsk53yqb3881cyd81n',
-                flowReceiverParty: 'csuf1gu4j18rusg5fzzafvwglrbayx91auj2w3aepgdry9auasf5p2rm4n92k6ada47x5oq7kb5jb2vcflg0mzl967phrifpv5pv5363lhqf4i3a7y19vr0j3zdqc7wb8y5fqvquyxep3zjrkz4vtfogxkqkf43y',
-                flowComponent: '3ng9le81ncn2falthyemfz5pcg33v1rmjhws0m74y2b769venzv6tnr0ymylrp6i2xif1itq3rcbqw5zsq7fjcre13r8njw54vtniaznsyw7axwsztjfq56kzeerodcnmalszagu7e44kbbuuf30oliw1oc5qn9c',
-                flowReceiverComponent: 'r2ih64uruzqfl18duu12jxocvcetwbyrlcabmcf4zrnx4prayzmbc0h4xyikpbap5evymji9zb3id8a5ye70ihs6k6gezuy4bezki09z7oycrcdxaw4xmpeykdsjez1v0nh1d6d6i9xvrjtwdnyzdf6you62s5pu',
-                flowInterfaceName: '6ue3t372cexmu0scfza8noqyd9vy1x7ai1uddp8159t7lwftiflhd05c6t4a4a2d33su6wkj9m7613tpg4nfha5s3vxibamzsj1v43009ro48vzvmfenxd4fhech73sb8630ih9yphl4hc44x72kts7werq7d517',
-                flowInterfaceNamespace: 'jm5li0srlok4y1vy6kwqn745n1oa014t6n3gabadb8gar10gov569sqohcwr5awu2xttttz016rnu7mu5cy8f82rdydbntz5cwc95ob10u17iiickgalgunugzmwvpd48gicw0ysgq4kowy6fspqcmxzp9iyieuu',
-                version: 'rh9obbmz7d897hzns3jl',
-                adapterType: 'qnwy94tr1adz51ufju09penyaiiv3xgzcv1afwy8vai6lvmrxlha0tffu304',
+                id: '7ba8a7f3-0e01-4165-b016-44b1f32e539c',
+                hash: 'lz0nnvsfczg5kyva6cmsv5wqtp49p8kyore5gmbk',
+                tenantId: '04ba8cac-08a1-4ba5-95e6-9b9a7cb263b3',
+                tenantCode: 'act004urjgyyvbelk8k8th86fiahwypzjdosznik2bojd4brg0',
+                systemId: '882cacc8-c1b2-4bf0-a584-c2d8cfb7d5e3',
+                systemName: '5qwjp6swsprlvu8v2rnf',
+                party: 'i0k2hfs7tsaerrmt06avb1gsytci031injkbbs2nwq7dv0mmetwmylow659m8zpohddbu1b1yhy79tzi4s32ee47o6ee34kis5954k4rff4gi5rw2vhi745qlsjvd6449209juji7z886jkq1a0gnqr7zxjkrr8h',
+                component: 'dobkpvnv7kp08qhsogj093jl6np14xaprryltymllhslmo3ye24dk9d9wmgjh6xlwbbrzn01c45y4y3k25yd4p5i041ys1keavuwc2ijzpc62t5dd34xsi8c435ktuxxran0yx9ewnlw7l86xpq6bg14o64d7ff6',
+                name: '2fpjaoqezsge7hrzve85mm29h73nzjwidvbfyp4yeb4wg3xz8yqbubhrsyepgcp5pcztf86i6xyen9ft32kmunbvf9mji1jpsms4x2f8f4wxgxyvxxazl61rqtmp4ctjpsvnsvr7wvrw4x1nyo0gym8vvs5twjv4',
+                flowHash: 'iah9vndki50cozn0yfgqxexh7ayk26zlecfm2cm5',
+                flowParty: 'jkz97eyeim2f51ey7gc12gu509rwlvn6z2z1jglhlgk7i10bgvmp7m280gabo5h0odu0xfk7tr22g67igk1qbik6ro5i4w8dtzkmiv2h9kcjh3j9rtitxnmzwjl1rb2hzxy3asyyvtv4a920hea4r2zu1lm1cwrt',
+                flowReceiverParty: 'zc39gv0o8tuw0597wxaufk2l0k91mxbrnq63i5wypoulrk5ayhbscz2owmph5f3ig0myy5eqoqmp0xfalnhxc9r7710mde1gehhlri7esaias0fugxh2d7xv3zfllugmuo46ui0ci8009gtd2pvg61xfh8folvg9',
+                flowComponent: 'r4kgoag88ss6fb6x3p7yyryr1cs0ekszr3vkp4i3ekwgagecab4mdpasgfnql8i0pv8bpq1d4w8p4h8uoqqo00rfrj7vb6z8ktj3a8q85o01j99g6xnhuyl3mb6s41yyhs5scjyz61v244x4fydqjk9vfwpk8zwq',
+                flowReceiverComponent: 'ltwjf398o0bi0buh65v4cx2znjbs4ibu8v4ewbc8wuadocloaa8hfbzro8t3wwkq8dakgas4q7gxw04gap9rxa48pxujiiyboee376gp73e2r80vnw73zlpqib0ufbo2ure4r1r7s345z9czrsna7sjncukiwhys',
+                flowInterfaceName: 'bxxcf4dubhrrbqg7s6gq59fc5u24rdmh261i9lneqn3yzopllz5t4xlrxkit3qu4ccc9rf3asl9ct7jx46dw3wf5wnlkvool50te5jbetvq9tgu9j3dnlem3lclpgccmxefl5k62hrcybwoopjwnd2nu2cmsevg5',
+                flowInterfaceNamespace: 'o3ncj8oulop96alpxh4308xh4u0f5s72ix6rqqb2ttdtycncr1d6kdouuo9kztg5ktnl0rbra029nlnmsdvq531o484p4lgtdze523n19nstk95l4zqwt4d4f2adtyh3jyxyfc7qxfaesxxw1a1t2i25h650litb',
+                version: 'udn1eqlbkiqe0v1rqds1',
+                adapterType: 'tj0y3npq77ln7ldlcc8grxm4ygs22pf8thv6y3ukugvznwu65c6xfd5n588w',
                 direction: 'SENDER',
-                transportProtocol: 'hpa1rwgvz9ciplhs6y1p6ip72ysuk0v8qfw1zv6fe7eprfm9ubmmpr7xwvp2',
-                messageProtocol: 'l42tsq3l5pz5hsrmktpks8m93qbp7cxej404ysuaswtm593d9rkw73hadx8ur',
-                adapterEngineName: 'd46cwzdfh17tcykphyouansbe49ictgcbckvstpgjxms8homp3omme63nlrzjqlyglunsxx8it9auiw97w2i1sglfqcksrlr80jd2nr1f1mzgfghbdltglmg4y3ykt948ixhhqm8t35mbt7at5z2cmoym13qvtzx',
-                url: 'adsdc7mv8xvueecw1wdeghss3avhb48b0g5lpbmf4hmubg5mqty8ekfyshhru979tw85uqvzjti17ivjnxxchcjlepmsgyuqg634ec4phwiek3r7ajj0f3qy2uyv5bhheqp6usekoyeitb8xqdu002stwcusjbhc4jr4sp20n5wg0v6abaxe2g5cgkz4x0p7pf0l1iolrnzsog1hook7trps5ogzgdcsh9nhu3vuhz9semr3mktp6rv5xre5bylkpjhcutviqz59iwpaze48livwvxn8kvive4yah05a9eldan2u7i95cfkxwpur0swg',
-                username: 'shfryowj4o0qdaggapuni5ggebel4x8q32lhi5gh0ran9e0e3r7i6yigyp7t',
-                remoteHost: '2ofioley3pxj19y3fwg2zux2v5keb3w4qto0jv4m88o4hk9yw48s6iviinc52aqglq4dzkeuu8ha59gjyb5jtywbucjph4gsjzhzmn571qfzp8yes3cuf1lk9a8dvdea9c8sjaydfugzdzisat4jt7xhtrl1h6ca',
-                remotePort: 5737928643,
-                directory: 'jrh8rrsewj9ts2leo7dt93fazp86ap1v68mr0v7gxbzh8qxbduysb78qfvs9b7ow791vhkvmohw6nqs7vgl9jjacj27ow5rzraxxckgywfqd23q3oyu1684kurrtl077rqhla9x6pp6hpymc64mrz9nxwkptp3f9ku3yybln64uibscbl2oycmvuyyuws9184arx8q6fkms2jt15aas5rikev14ab9u1x133hvo2t5qql575ygq3i0qxjww5i12rfuso2qbjedc8a2py1hmbme1im3c20r38sftvvpsv79h6cd9p9skqtslmngtrwi4b08qy2z4tka20ojb9hcz6iribc1r5bt0xp1fqk0dgcwyieihkppehgn1rivpl7r9g9vr1a1xsk022wmzrtl5cxcrpsg67tm5u1tou08r8w1o7jg1xqvp7d30ekpt8ke8rtd0k7ararq40lslgx33dpr0zjs121xx6s1n8txwpa2a9spqh3xyy623sv4eq43vxyl9e883qahawpl93e1hivsxxxsfhxu1vwk73ztyj0qc5xjmxtebnrr8o8e7ynt2bp9fbs5aq4n9cmd56qjnv4e3klei1x63tbhq3808dm313f34d8gcbwavoujd25bsnflfjspuvp9ka2o8k7ompv3s6uiua5965qvimzlh1eagaxg76vwfwv2iayelse4xc8plezew8ag1n9kk2ipur15o3n501jd6udd23iv5ku2arla2jg9ginrj4ja9vp2zhrt7epidhd0ydc70omz0jpozkenqbt1r3uiizkhbwavimy5dqcnqcnldzx9q2u3l1p5t7k6ohhnq2m1qaxb1pngz7ind2hft4ha72eoaxvwegha3bnclxed6bts3l8oh7vzrkvncoh3t9jma8qw6lgt2h7l8ucu1sm1pu3kpjveqmyb2u7a7l2b447ytfqw0uu3zi09pk7bj5i973zv6hckr6k284hxsh4cpqu6p0ubpzj4jgdxnzfq9kv5xrf7gx',
-                fileSchema: '9nfecy6k1x73wk6xpb453dla0j5f3y69ovo8zwf1481f2xmvfrfekr7l4h8kw4lgj1cs46px9b1jaz3f2pkhvp5cnyw90dje8px7texzs8x81iv4bw5ddhwlss8nxbyulxkspkqkfqpy4rmk9d0sjuhba58ydonuyvi3m6hpnksdqj1adm9qnv1g1t59kea603v1tmmevj8ztiewgbi4ccygopikkethun0usm808u0jyhb8mxpvo1k9qlr9fqxbe9wprkhnrmorqzcaobt570ze4othkojxets2qqzvvzfsjvlqt0fteusxywe0fuibsnc1euoaubzn11ttwgrfcq1241c6otmawluboyjpp6g385u678gbhlpvwl5pnt0db1cqiyewygihu69mgju8kg81crxjlg61x6jbuoiqjgglr6pqxh4jegmfqtuxpeg6exyhf7tmzgun2lq5odzabbcm42utfunijxhkuviz5zlinwj1b0j9n4ql0ulzwlseixawmd5j6e7m1k4l880hi0j31j4o8hsspamjhe84waabj6uor8xxkgbfhdjv0tb7nnhk4skcymf69wk0k76hrk6h3k6x2bx8z2tbyjyzjkf44xcpukkf1f9di6j7tzii0dalfmjv21opcw34m35t4qgr43106z3k9x1mk2hgpqxy40802t16xq1langxxel62szdr85y5xl7euw5o9pyk3nnkxtmlbnk3psoo4epq4eupria4g8mms4r2gg81rtgnb01fqld2q6mp9f99nox93enodqsk2cibhi1l81mqfdipo14a610x2z6izsee9se0k4btzauqm32r557bk27dsvizt02abv2ainqi0lumphqihey0m7aih9kbvfvcjyr4se2f7k51bidyjq7kk0yb75gtprzidpdz5h0ybq2fododzj1hsxg3cj50idsi7u2gn0zu07uqaqsb8tzyh0m4ef59q7z9fhkv6a945oxeckltmwe947n6viwor8oa99i',
-                proxyHost: '497qzkw8phqwupwq1bu9m325ccbg2x6irhu6hwi8zk6e7y7iraw7pqij9sie',
-                proxyPort: 9948194171,
-                destination: 'fdrul00l586q7nj89j51lu7k8bxga70xidm60789mrm49mbzhobren1lo73icdw87sz3rbrd3crttnlhjh7tqkyb505pusxyzp5hgntrajrhaxsb9m6vu9oquz47muwrv3e3wrkyjgrkmowezvbycurblrhsq4pe',
+                transportProtocol: 'q9igdsnxqr0p7pef0tz4qvuln42xbk4f4vyvuj5rcl0meprujz9yr6uvmuwp',
+                messageProtocol: 'kp7ae9gwb7wv1tzzg3nxduj1o5s9otgoytf3gwom79g9szj005e6j6a1k9euf',
+                adapterEngineName: 'te7kqgbyabplavwtmuada996dzes6217lgm32e4q9o1c14jp4vbbs6h94659z80rpleh6979rr1f0sjcz4sqc1y9xt78w7slppkyf925l5wmqsdaw91pbnk0kgnn3ey3hpc5rj57lj78kuyw5tza8l1f84a570rk',
+                url: '3msz74684bf5vzkmfpxmzjxo12zzphgwjiypsig75n8bo4wlhma786tdss96r4rzdl09am9x3g0sfujjn3iiukkjppw8t9tqjtp8cag3vd4uoom47tqgu031djgol9qn0jfyvel6pmtagxx4sdnoz9paeo4jznwfzoahk745ruo2pi5qilo23u49ze7c895rccm17rnznmtdip0qkeowazoc3l8g6oauxjg0g0ixtv4699ju38hftvs84i3b89xcop6wtg419i4qdltb7f4qvbvf3nzocg9r0sz5exf63k2p0cf5t5epniwv38cb2cgr',
+                username: 'tranawobk1mubsjkfwq8appvrjjqzb9x4i9nwkusrlv6tuylw9ij0oqtmhvb',
+                remoteHost: '5758nsjeqvqnvvspzk2mroclte7sopu1da8uckkr4wh56w6rlezcv289hh9jkawcdltkykuvz71m2iimg9uiugi9p5p4npnht9k4sloeqwq6jfivaxr7ja5cwtzjv690p9j4um8yvmrvlvwwn4c53vcv3pqpyf2i',
+                remotePort: 6361006422,
+                directory: 'ft7r6u64rc5femoh8289a44ayg41m589s4lddspyxj0l4lbr7todiorcurvbpkyee4xrjovcnju7p098hww87qxqk3tuu8sny1p267684u1ytsocv5yvnau2l4wq2le33sli9j6fw9a3t8bvhb5t5k4xqq9k1w5ghu3ldwhmzoz09kd23iypy6nvybxvme4rtk0qo589beof4k20ayueggk13ubul7odsa2ki6lqw05nylv9yzmf0xuy4ummihvwn6z66984559yuwrtkrczjz4rlldyzsjdwslq2ctces3bjpang0lk9ir9928mur4y60b1dqhqwfdp2a47u48onkhb3h7839dp43lar50d4cowpceb6i2pfirqy3ojjjcgz91j1t9z6l8ljuj4eq6ml5vqfmdqnqbztirg9aqe213x8c1ug9xsmfsde72u1zu6zr0erk1usyx05i724bypbzkblplw5ytsox8odvdv7fi7hgo30oqnz6y60mw4s8qmfn79ea53tzr4831dth5ds1x3p4idkpuq6ddym5ebk4ll48o19vra1mnh4x41imlfj1zty0ievg83tve5kmnjexazzzrlp7hiu3lktjmggxqorjf8aap6kkgd69epkc92bdy0zirbzgdfzs9eycmv0b1b3okfqj5mqunadyjlgt8410p888bijjoztvqueg6pbw94va5odu3miy41ilgbwks3b62pzla1a2eikn0ttvlgb8lfy253rl2c7ixgjyqvcq2r4z0qhvdh79pmml5wzrpf6bhhsu55ukjagfyw8yzixmu7awysjl3zi2ohmhiubdn13qot6pyna1sd0fm62srq7b0emecwe0q6d1rzaoyjs0l1djhbzus0cf0dl4ll47fm7k707pfadvbc5lilmng0ivzf8t1p7fvk2tihe3wqegwkaffb5fp89aiw9pnsrv8bjbwmyt1o3rgb86zn788z59d9xp89q2wk6q71b1tusqu6i1o49b5jatlmcenx',
+                fileSchema: '55ofiucjzz9y4h0siagxoky9v5eaa9qum3rm3a7os4zrmub4r1m3zt419xqp8cqfxtrdcpq1uh6avns03ybmezsymlnnks2nntv2ux0hndnvcofhr10auqwepkbj5d6so1fe472q7rxgww6no8nv0c9bftiuoefy5x6bt0hk5zyaufrxlytf3t9eltu8ea35auh4qmb7y18xw1aiig95f3nizvu9ivkyagc5nt0iwtfu8u6zvtf3e0kbfizeno33qw5yacd2glat9nrf80umnmpzvpboqx2fqicdbldem5udfyn8dsd526r5annosf7dj4n1cr4hvsnwc6ujsuqnn6k9mq3ucnadhcrj1i739llsv49zuo0z4ljd2hf3ori62r9q0lp8qv4v20y4c2p9k49gqa5oez49ejltxj8z5mqgtk7ruxue9nw3pfkmzyrmjomd0uask0cnc2p0oom5e4vcj4yghau8737iumiy77akf94ptpxskula9d10ib5m5o4k46ivi6fwijeg4y5jrf8luaw8u837ml34b4j5nurjjst4lap6ledfczfgsvfc0405md2hy3csyp0yyjb403tbfpqnp605c057ytsp0zed4tgouqcjxp3hq1kn3p73ns27kkvesb14g6qy024zetb18g0mqwbykg01ccp1e9o95k0fho6e4w5fj6tr3dr18ig4621kidfzaqzb9h4hn8zcks6692ff99r8n8n2xbq54k5n2kbvy6peh500yg4gqkrop9b2qcyftssl888qtmtmf0nd4se5a0uji7fiizw1goyl7dst9uy016ijp8n8sf54xrx6lkfh03o0ddcoycs69cg4nysfvq4o9dso49rk6kfxth8u8o882wa7h3xm7p9at3oc4lk57c52vu2dz828um1fegfmle6xkeltb2awbglevzl9a6mdiji48dh664jcu3ykbk7acp6g9s9ozy294o9eh7tiohpnc90dc8kjj1jhsvve1ythdq6x5y5y',
+                proxyHost: 'k5hnk16bs9qs23972zixtc49mqs7wejk4tnnu10awa7xykjiolmzr000jggm',
+                proxyPort: 6475812861,
+                destination: 'y1qzcb0jlca2x168twe7kxenbiatfvu7m7czhxsj0cs9eri6je63vzhaqilthv17jswapyqs3ktzegjmemsm8alwcvmy9pnlw4cp1so3s6cma6q15s6zml2gcd2cl7a0f6u2idxeb7jzky6ggnpj2geujkynk5w4',
                 adapterStatus: 'INACTIVE',
-                softwareComponentName: 'qo5rr2atqen7a1gffhkt0f53dfvcy906u30d723f1hkwacrbc1a3jac1edus4lispxc7yqfweekshepk3pemsumna1kgx74xhcmzppqt4c283w973xaofblf78vm3iw86w38vwtksb5zqrngtxhoszkucg9lgpiy',
-                responsibleUserAccountName: 'e9v4xyucu0isdlfzj8vs',
-                lastChangeUserAccount: 's0zd9mlatup0uhkurusu',
-                lastChangedAt: '2020-11-06 03:40:35',
-                riInterfaceName: 'xd3sdvwojuxbc5au1tw7s1wnb7sjfiji19hj7yzjah6rtlznt53bbnbwdega2cenaq7bni6e433f9pmnsxz53uic48gl8nepdm8nmvdpdhy918fjvebvuevfiuhfgz8d0dabjt63nzqxt3kwt00m1s4wyxu4d1uw',
-                riInterfaceNamespace: 'g2lnxhijwkffe19gbl1nzywzf4ul0soh7052h1ulru2721lc7hleeshw1i4bw2c1yav6trwadf6yvrclmjackju5g3f5uzazdu4ht25y8heak9ovqd20zasokmkygng4jsb42lzicp0ienpaez2iue5o3ys3l1jv',
+                softwareComponentName: 't80ze5lk0yd3amtw2nixqc4o21ndgaugl97f0ci53fhbksmlpj21yha47lwere5p6shggq832na1xk981e0nh08olqii21ffkw8yxranfzs2he3qsq6s2t318jkj2garz61sx6v8x68ecrmz1weqg5oxp1eey1o3',
+                responsibleUserAccountName: '61taudn4pigwc19umxs1',
+                lastChangeUserAccount: '7lb292plt7kj8zbz964b',
+                lastChangedAt: '2021-05-22 20:43:20',
+                riInterfaceName: '9sj39wng2253z5hy4kqczt8mlrjfqpx2xhj0dttfs487bloxvrogi4flg91ujlgtducsv2k2jzm0bmi6bqoqottt9cl34b5kmu6n6rbyi7rkb08xlmffdvcgh0gdh3268d18s562lyvgd7g7lb9i1wazz0ll1ieh',
+                riInterfaceNamespace: 'a83z3trf65vjslzhqad07n4rzdyyfpcstcp4rmckllszh7dux0s4382csadilq3etv6kykkgfoln0e7golhxr5zet4tk8kc8k8cl5aehamajlu9e2a1xjyves1vvbahbxckjm14fq7gn0tongp18nj4g5fxzsv00',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelMessageProtocol is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelAdapterEngineName is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelAdapterEngineName is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'y7hbnyymgwrrr770osbqsn61yii21286vazuav2b',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '5wobm2j16f2n81hax6kxrsn2aa932m2lw0flkahae98uu7xwhz',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '7vhlvmeirh4dee6swx85',
-                party: '2cophucwp69jjwa5hwni2ep9wl18qj8orvl38w5li29h14cu4mt6pkml67y2xvq7fkacs2gkxjsyvp58jb7hbk8tndhc3h4ez9y7m5jw9784fnupu5ziyhnhrwcrlgbtqckczriia5vhqdmk3kfaslph4davctfi',
-                component: 'q7feg243fxbomh6290b3rcqoiugxg5kmqntweh8hl6yihkakynibr4w2628vjx7468hkrj6go6i4efkwpia4k9q6ogihvfqbatuta6gbegr8ib2rq485stl5r2pby8ojiunua2b2q3jgmpnj4a07ydkfnykfz1x7',
-                name: 'nwlwwy2omtdivoolue6qw4xbsfst5qy7d9ohteo20zuaysvwfzwfhiw0hx8p9h9js0dk16xyxtwquhpunqyuq1wbbn7fjvr7pozjl99h71abf7cvuj9u0xceiaxdmkkm4vc9ci8xwxuaf9qfuu055qcirtp6iu1c',
-                flowHash: 'xfmwui3olu1xmje4t504pr8mqi44zke5duuly7yw',
-                flowParty: 'akrbni9r6iop3580i8x3mug7kdhj6heef4qq7b2zng34j9senyyo2a0d5jxc5opr4ef1egpi7sk0c79bq85va21ox0xmhjfeytmc1tfcloh2zqo6ib6ami8ggyhi2fj6c5a255sjuybez7p06mein9m8uvoep93e',
-                flowReceiverParty: '4oqe0oibe3box2izs1fspho1lhsi7328fri9oxp7mn1001vxzu88a5pw2dw8nyh4qg4l9sw49u6g9zavtqp70oz2r7fp738a9fp35ov5ln0q5f7b8njolpyx540kws1iskpgum2uky9rctpu5ev0ctxbm2q0pz4y',
-                flowComponent: '0exzdrisdi1a273t7xknrsdq8qdlkorgt9rco8qn0ewxfffjdf9qy5va5396dt2qzh1goxmxsdf3ozs2ylot9tajpzcyahosjazii5dgbraatuudpfdda4mv2hqpcj3eiq59ru2sgqfbf7g9il2c8i6l4jhql2gy',
-                flowReceiverComponent: '6twuqx9va4c6iowpnktpf7qwnki4bhpkfw979bdeji92g5o8nbusd7ge09pi9ym2sf9tui5wzhif1ec3xu1y9tbg2i9795345l67dvefklwe5u4jvduzvtwdk5098r2ifm5zqr0ooety6yxw0fkvzkk033khfbna',
-                flowInterfaceName: 'scp36sv5zof6ac1ewwr4k9h2wbr1tomg1o6sjp35lhe3m2m74l46lm1vc3hggu0ycyfo5sbnnlgyfgdh7jhb5rrvzox78ddtynfc9ubfcu3xhp2j5c4feod4h2h1wa51qkrpleg86fxp71x79gvjj526b344hfv2',
-                flowInterfaceNamespace: '9hkjl5yhrhohtb7312qykdfunfdqp7e2suiyzjkv2hvkpi699gaapmnfqrpiyvne89rpwzc3q541oyyrudfvvxla9odvspe50p1exf2h5eemssefsn2b1zqkltq9p3zfgsgug8g1uh3xsaqo0k0i07v4xsdvd8px',
-                version: '9rfldk9h88tvtm3iyuhp',
-                adapterType: 'cnc2qju26aa0ax3mwf1xeei8lv0gc74trynrdvq6gswjpzdr3ghv3853qgf8',
-                direction: 'RECEIVER',
-                transportProtocol: 'mejed8kesl23180a6jrsyvyd595p3cb8rl8ukxjcfubxcomz1pvjli7xicai',
-                messageProtocol: '2pfok86vhrdpd6uzkjlomv2qs17dhtboofa1wttopwbbvhlnrhukgddp7v0m',
-                adapterEngineName: 'h2u2r0eftczdfyuot3zaoqak4tivjvtbm1q9bidhp2i3u2mqcqyty9gq08dpcmqqcnba679tub8ika1dog72gj314dgf2q5p1h4i9zyqzgg18effk2rwztq27ypcvwq5kkhbh7lf64v5hahioddcekmu9utrr8n8m',
-                url: 'aznp3tnzlz2r90zbh4dqzt0nqoc7c0jp0zmou9ylr1f67tw3pfx7205iwqzlm2zf6exlbkxeupbbkgscezxutepkxi908zvwocf3tm31tj53yjj25nhydehari4ip2lgfyie6f33tmezn3howrx4rqwaga9ruj3mn37n7kuithicavefodgerd8tgn6vd57hjwkrv6kym0ibmferwh3x8ee0inopi75pfb3mvfbrh5ehvq43molcwip1om9qx8znnm8e9pk77uwz2lain5oq6v106leegjst76oqf5qom6nk5qh8e1al93cnw5ewn6xx',
-                username: 'ratz4ae54a9t2ds18l1aovieogc8end8o5vy1nbwcm7p492hxqnirwp8urbp',
-                remoteHost: 'oad1kla6t1rt12n05srtc2q8azuvm8tq1pvl68uegxayxur295e3t4jfbtmphn8t53fjbzkgezucw5ksdh110oy1pnvlbtza04zdfdrpaosvjh68j9gx6e2oon4boeqfvtevq48xtfeoyv43e0iumobgiy1s5u8z',
-                remotePort: 9697107165,
-                directory: '4zyte7tds7gbiuidh9bbspzez8dz2azr865odq4jcmvmbhd6pt2w6ityevq00nk84r76k572739vna7d5qaycxw6sfx72r656wrixklcbdnndaqzpfbxjyb1n1j1m3z4cki5ddeshha70d1tbii1f4szdbyv76y3rlr29xxumk7x4b74n65ojqr6df8g1j1ae01wzb53rkwd2s8b037oo1wgo8mtdhu9im6lzxc3pwwiqdx5ef7jisc9na7pjuyl504gu9kb7o1igsls4kfx5lbng2y6rre49w3h18tyouve9m59fejll8m0kh353ra6f15f734fzvjlgrk3h4z88o1gkrnoiefa7qxslchfkh5vnmcw4skle13zhj1yurk8zvp0tnkpzkq2l61rg06v62jj52017eg94ureim5trxkai6uzwm1d5p4k8n8c8gr3x3bm8unizj97tjk9f4r1a11qum7pjr36uu1nel5kh2p2iq96lvhzq52iv8fgjad52xp5dyj940q4bdxlkuuzcf19cosz6pvhsg1hm3rwsmomhvtdl7e3sh721ty28yung0or6kdt9zn2j81lf626c5vnvpvh2qp1dxhco7vd6h0gnaj2kwyp2ik1s1m5zqflfsydptun1cxg4admkcvdckmlhz37j83txbdx4e7qufqekavwm7ecflwz2d0i0hraxiktltvmm000syd73b65d0s03qogtablq612cbort57fbkaddcc7dqoccsfewzk8dyd0krg81szl86okhrraflrxdpnoeof80ws4elc5vmvcuw4r9xfaoya9hw7r7c4gqgubvfcumlxrcobgmvmiu0j5ie8ug0yoqmzmdjffehq0wd6domh17rk9g66nigx5qi7lywouj3c0jglhgu5q5kjde9b28s4f23m620fhalxftfh74z7hds7dpkyj4r2hjyno7ewlwwa85zd9y24c629ex4ry08o2jjbpnwn07n30xnq146jm33y7gkox47g1',
-                fileSchema: 'lltmu1e1xgfqwk07itn60u0c295vtxnt65pa5pjrzkosq6gwjt1aag0ujwq775hxhdxmh6c3m6axl6y2ckayn30lzevpvfsbsblzm34oqaohmsxhsz09r6upt9y75tfoe7v1ve3didrrfcju96vngjvs96u5yaoqupl9xkcqftjmvtvsp93de5etifkiupghbc5hztxpbi08rx8kg5it6rbqkjck3e2ld7hxgfm5lzy5f7mzq42yv0a4tnpqkrtqfl6zgy7hgdu0f96am3y7y4e6eqkzi1r71y40unastu8relnm4xf3c28gmn69tvvc9jnki7tothc8wzu87hxrpbpb1a3x1gi3cuwq70k4zn900wn7bpp2zhenm8f5utep1itv3yu6v8pws2sr540nparvg9h51ok1x66g5wyr2kdp4xjrxx0dvxv8jo82cih7gsjnmcpozo6n7178exdefswbxnjonzianly51vubeybuhl7ipby3zcjnfjoc7slu76ar4tjeb1s75v2p3gsa49mvdqqnf7hei2b260oq6nq1hknma9clv6b578kx81a796bxop503u7pwqq641cbuw8iexchluq9gp9l69ck8ube88qukjx6xfyucidhwjdd8ycjehobvm4asremktzlioed40gbk0974qmlu0my260xn0ie7ne9cfbguf7by89r8i1tms537ogxfhhpkq2zolhq859366cv657mopss2gsrj0orr57gkp10i8ebv9nuidisvguny1ab8bz3233nicxdart6zgdav24ychsmeym47p6qijqwo7u95h4g4tr12g73bwculg9k3chfyv9opvafzgr0hy4bh0krenti0vjim6h68y2oegu07z7pcfp3k25a16zmb4mte7zp9phfdcaiy1ivnvc4vowepawb318r9qweiy365hu9ci74qzwkusk6f6csbzxzj9ht8odd3f0w805vpcfc2wo63yd2hs4cd7owi1rhvbm9tkauu0ks',
-                proxyHost: 'a6z8getw53iwwnw66l2epr32xfo1vpwcro18kw4tptwxl3aaqvdoxgoshgk2',
-                proxyPort: 3281494139,
-                destination: 'gga6ntbdghpnfd72jcd2dpvhgxjiahhw3p33ytamfn0zas7a8j2qnswr5l84h9w16wokkq2wnnv8foirl7vqv13c0pu7epyxflkpckr41feovqrle4abjch3of6rm5q88v6q4j1tng9v32iv9jkk4g3fsyuhu1wu',
+                id: '5a15c9e4-efb7-476b-9861-4e9f455d908b',
+                hash: 'bemh56o7loxmu5cjrs7bum8ro18iwkwxrwzfj5u0',
+                tenantId: 'e1c94d7d-3d14-4eb4-b52e-a90189127fd8',
+                tenantCode: '8wbxsywtemmri5clvkbg7d2t4tddnmkj157a7nuoi5t0tftlp9',
+                systemId: 'aa3132bf-1a16-4f42-bb4e-291587fecfd9',
+                systemName: '0u6xkerclewq6598pd2n',
+                party: '1cul0udcenj2260wham4apdwh1ejtj34rqsmbmidw4vmruuzbp5yyb2l3kyezcv0rks8btb9r42aeb3ww5ouqyir8wbfxl780hb3oqfw9s610hxjlax9sb4tbadncrsn8rg32lmy5ed8ohqko97nqca5c0u1hu9t',
+                component: 'vw6ko1rrqrrpso2f0v7yh7vyr0b8su4005gycjd1g5prlt6p9evqk2sztcktctak0ay9si1vrxnsl5w8ebdqpn6qe6vr8g7b7drr2mvbtrvj5hj85lklimkay5wm2m8p8jqkn0vlbppy9o9krso24gd3t490vvjn',
+                name: 'l10fe993pktpx2ppzi389z16m0kqn8utunecg38f1p36gvzsk1zng67jigz1vz8sxyd0euwossnguegil6keeu3jgxvd2rvw9ft2ttgzq4xgt9y6hk67xquclwj6gtiw9a8ynsloh089udnf7w2c2l9co8ycy0ju',
+                flowHash: '3lv60csoc12cr1ywmv3fmq1bla1rm9jf5pu8jc1p',
+                flowParty: 'bizhul73nugva75nez589xrfpxq8542x3dlr0vrn22kvokh80jz1zs4245x0d42bb8yjn0ry2bhu5x75i8yhwke8447xenb160yyao0hk88ya3d3mt15jlgt68mgohuc0qn17cfgw6rht48sx0f5fz0k12xobqcc',
+                flowReceiverParty: 'dt38t65hhgwpa7bjlzovugwdnymixuf78f1tojal830wnat8o74x51wxghsqax40m2gxglrx3m00es782bggxqv31mr28n5xgo6x3gpqlhniakd0110buxnnteqfl2dk31mggk9qdo89byqotna5ycbhmzg2owkk',
+                flowComponent: 'hmgtsvs6wpdzhkrsdkgby72bawt4mcxch47evkg8s4l13fekqjbgit64mpnkb72f80pc53vv4y1fqo1ypklm01sqgt0l0vty03tntgyovgr5a8kmkucdlqugp5rnaqc5vu5ceq70h8hfkbmlwjw9kxeg0ikqpr5f',
+                flowReceiverComponent: 'nx02n7k8ezrdx23ssaala9kd0gkbjr66at2sd6kcaarv77awkk2oa53whybcx8jh8nvzp001fnp5tt5mial473ggifto0z5vgh54c8jfys2b0db43e99xg9m2eakq0s0sd17w6u1a5w25zmtl8iwt2qgpk8aufud',
+                flowInterfaceName: '1vubrtf9lb1gdv0golwwy6iq8dit7m32r6hjmny4t0slcuu2bj47y5almbvxiyver8wbqemmlunhgl6bvtwr81y81h8a3lm3ih18avhl0zbdkgc9v3ht25hurxljxgfeoi3hkm2fz8fxd1zp7ts5itp4rdnn6gtg',
+                flowInterfaceNamespace: '95kyg9oru1gruzn2vgqbmeoa9kunipb72nkhhtgtj7q85p1pq7g19oe84tfm1h92402w5pl3a530mdwtry3ytof3iw24wiykv1bi4pt9k8xvsfiwepnsanssvpwpv1w4qp7ukoyomoxbbtbgdpop552vh1j10ife',
+                version: '427ac3qtrtnk0ix9l9nd',
+                adapterType: 'oej87eg9lwcsbf9vdh7f6w9mq0ey5iai59dz61crpoaawcckg76foj64ot31',
+                direction: 'SENDER',
+                transportProtocol: 'jiu78jzvzbjktoop25cn6lhfpplv4tiw6x1h7aqzu5kcymgpdmpoht2cchcw',
+                messageProtocol: 'ilkx8cado59upnh36ycu45hjrhpc2lo8w0to9y69au4npa4lkwiszxrvss2k',
+                adapterEngineName: '206re4t8ww4079p1qykh9nij52oc9rsbqmcijjwrpywnet92z044dsn0k8hlol76apmb522kov79itq0lpkm92mdqu9786dy6eeromipwwe0sgurf8t0k8zl1amid3f3ijwjlvkbse05tpmwat07j1v558wq4lw44',
+                url: 'ocxpzkxnbtti9ecc7avoh6gmt69rb8aegfbsl76rtjtkdab8eozbmhbtxi8o5wqyf9o97bk1vud4qq36kpq0gsu4spoydlq7j6gwodu5figmwkn1yciss2r2putyvqs0i7p2uqm8rc0yjdh0h90k7f8kwghjt89lvh38nfsbbou69e8il7pf0bjljcs3ibplai0li4x5jaclqpq5ehcgh1m7m5qtukdqrm9ciitwntrm9m7dv77xnaq11o3zy9lkj5w3tkp8a41cdjabiior0a8pjt2nhx4x3rcm09f5krvjqhayj8cdw1xeah5lmv4r',
+                username: 'rqad4h7zs6oizxnqe0vr1zi5mgtyhseud9ygkzcb1ofbgbitpqycsgkqf1c4',
+                remoteHost: 'n7sswga2q8zl2glmt9vrcz1usue86spexdg4v563d482ed9m5kjy3fjj6etdj2sx2a56kxolmt4dh7xl2miur188jhy1o0h6rn0yj1do19epw99wfn0uo4gkf7ztu57iysmphht7r4bkpfdh1fov58as46p9yty2',
+                remotePort: 5004435745,
+                directory: '8abn79wsjx1cnha19fyvzg3yfjkgr57lg1c3v7ri45uiuwg7y71qlvr3kvirwv7jbpxif8uu2q5zblt39y42baaad72jaybfm3twve4992fmgn0drrweo0wrjny76qhb7lnlljwerfcvqs32lrkb69hz646md1mly340mdbgoavmqe3js5alpn2uuu2l864xegrwb3xgvft9vjq5a5jaam9q215wgf128vfoldzqk7h7lzmik0qujsxt6w1hbg1s2mrotlvg4amug3ez23mlsrdhq91yb17hoz7jwe0cej4iqq44rv7p8el9658j9bu72pyw4c5954iz5i7jm7a1oyn12s4dy70g3718x0y92l0bhj0nwjsdb3hq0r86xz16jal1oxjmfy1gqru6u3vgpjffuwccq32fubgfzgkb0gt88kaix1l0tij0g4rzdn2j51d6tgd0unjd9ifzdv4pmgrs8rbqlo1pp32oggjt6e6q9wukgex2r98kfocki58znn0m86ghu29whoyl5na2unu0mmf7g41y249016ua5j0mnxcfs0sk0w468aqz4gftkabsvy1urt67tubati3gx56t8dx4zcknvjp620os4d3au84kotu8yv87qs01lt9zo19auogp48i2rcyv66pxl316agtlnzefuxvlaykam9ldlediigoernkf7girii7bj18kpnzhfslkwzvaxcagm2b18srmyguyjrirscxji7ao4zf3y9x1ijdan96l29ext1nalcjc6enb3hi5qwewgs8xmvtsagcp8s14r0tsvol8rrl10r8zu6fh5910eleeh8tmi0d8nre15kp6c0ucufwuloc29swgwzf1ugiwo4kwqjjw89aw7cs0pmo3os473o6ltt60mbxzfrv9438lffxzvvhrlj5rfsekuc9wa1cr9xsjr5vly9cnj0vp35j45lw3dqffv8u2u0dv5f0s2x8ck8m2fb64kpnjux63s68pb7qusrxoiui4qlzuxjrh',
+                fileSchema: 'wxjluyxchgriehcupfqery557obb8px74k1p38w9v6k8t6k48bhnfz3c8lk1y61i16cmzs5b82g3ewb9mxt2m5er5oy9306ojd5s8h8g0c7i8ga7wog78hoeom48wdl2vhob154bl7quiyus8skvp4j26afzu4izs2uy8almg175cwz6bmjatf02dgv5v4wtokdkmn09ssgb4445osz5mxlyhm7t5vadxctnuxaitl16ck2tabxmlftmuezld5n4ifpv6jd1916lzh7klhvluuvcfodj4b0evq0zbmzrmpsb8va12nghltix8fe2nw7ksvxv44d5xwa9ke3y98gfczv2kv83oe8qryquk2wswkripwi72urpkyw7l7fkes5guthxt6ly4kxesxo52j0ye18qf1ydlmaywr1km4cbhguwztbpnbkug70bhnu9ss36lo3gysoskqcsnl84k1hbjrljhnqbn4t6140h58tyjp2kc8uxdedxzbkrev3fp7p1dviw5gz632w62dla1x4b60mdtb06drukyotxp4eqt1qjuodaqb5ean8b8xp8wxz8seb0i97pm6jjz4nmbig1zx36u599nznaxyeioff0x7xg3siv7214jf2tuqwdmingvomgauvma1s41bp2d3uihii10kiqyonsgd4x2oj3mfnjxlenk48kiwx84nwaz9vv94nwbawix3blbmhqft1nbznhcvx4r0ewktjkgnea93w9h3werl5cbbqcuix3nudpp9x9yhufwjirxsza8kk4rudzzfcjriv00jx8eshuudzk7rdzc7u2z1ruppn5a9sjpebsp0sjurszbvbepratvtkre6474prnz7ywaohxjex4dpadeuo4kk33wxz0lk4r9wtd7v6mdnw2xkwc5tb7atnzv62xrdq6ktidr08buj52vvnxlledyooo71ij630bnctg01mg0x1qvyepodfpqwbt3ab1y8hq8icfnbbeqjymuy26me84842q2i2fj5ok',
+                proxyHost: 'dhq8q99axfrs0latu07p05iaj9gcy5en77lbtlk90imwo00eyxhvojp76cqs',
+                proxyPort: 2789063283,
+                destination: '365eb24bubr2vk0pgkduz3uz3ttzjlad3gvkypjmzom086nbncmlqqcnhmcqm5lugxcchkygpcswioengqiampk0sygvqro641ogzxo1mkbg9qw1hgcvjtgvwon03n981o473smsf0vg57q3vo1f8g77hhf85z78',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'lp66rpkklai8e5g1h1lgzebdi41utdmd1ql4vruel5kycr22g8zr6mcqynb7hjaj3pkck9nio6cow4q7txca98uwbm4pqa8jdul0lngyx27ay3dl3w9cubppxb30ywymdp2lbuy69f8c7utpt4lwqfgqsy7uio8h',
-                responsibleUserAccountName: 'qj6gwjs9k5mfcw7cuqlt',
-                lastChangeUserAccount: 'yj5xjfhi8kupgy2m3nqw',
-                lastChangedAt: '2020-11-06 07:19:18',
-                riInterfaceName: '9cfdo9m61kl30xa0d62fy036q58wik0lvdrumwztp8co9d0t21upo3cs5i3qiypifcm4q5kz310a6rz6gc5gptqg3p4ehbz16hcjjcwxpakk7k4pdvqmyykr2d7hi029c6tohn0rab6np94wfp8qlmexr581mkfv',
-                riInterfaceNamespace: 'laguhvhln9wpe6r1er3j4o4rynt9ngmonh4u2v0xgi0mtl3mafi4cvhz5bmxy5phljyc1d9vr4xhjf1lb9ab1xb4tkvw7zs889yrlb0vf2wfszct2miq6xlqoi6g76qw7lqjnarog9iwd2o8afpc9us8v1s68xz2',
+                softwareComponentName: 'p4uopwd0to2gd5y88pxmke8mmj2jyj87s9geynvq0rkgpqjq8rvjw6oj6d0d9cyku9kyfdx5bbjws1h3wp3130dz2xmdqz03ydybyrk1d1cxyd0t60m4gk45ct90h6ixm8rmmw3qotxgu377veqgklgzx90bl6m3',
+                responsibleUserAccountName: 'ssxq0s191vnngj92bxjr',
+                lastChangeUserAccount: 'mlgiiwy0gxkd0n72fggj',
+                lastChangedAt: '2021-05-22 21:09:41',
+                riInterfaceName: '7ng567imz2eryrnytycsm8nc4cxa3y7fm9hofw2b1isv658rh391k4m3g2qgjdfn1btn8szqx7yoblcy55h2x3cszhcgs5p5ub6xbfrnen65enz723plgurzygs0p6co8ds5uei8jpxob0rs8e9e3u74873sq4j0',
+                riInterfaceNamespace: 'lzzh8qi9n5n66oxmsy83xwh8dctxwr0fuedf08g2upuvvvvwqftusife6yesq5w0szl7d88qj46cc0ybmwt03d7adu8bakfm9hr9eejdap8unxjcuceoem75hpl0pq01mo84227dgwyivl4n2npkjycv4cbhgxyf',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelAdapterEngineName is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelUrl is too large, has a maximum length of 320`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelUrl is too large, has a maximum length of 320`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'q3ngafuvrpii27b0gvaz3i4tbxeipemu6zhmgb3c',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'fvyqsf6v2e48t1gfdaexyyhmgfax4hev7fytl6n7iqxlbizle5',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '2ztilte416e3qz556cz1',
-                party: '9im8b455tr0kcqd89ok9fmlunq5jqmb0a3sdnsebulfcuampqaycqgogccnye853viyo7l1wymscna81jyy896fzlytpj5r1m14kz17fucisftth25w6wb65oyuxo2pm7l4lovfn2lmjr6uqpx5lhiwwkhf89yvh',
-                component: 'shs7dyql1yus9jo8s09og32cyf2i45capqnx9apjz29s08lqkkl958mf2si1d8c32zl747blshvk94c9ppzvr94pusdf632qo8jhjdv7ida0jec8hqs1hc43s54amd8b2l4vg5ge4qhge4xjvm4w70uf1ps7gzq7',
-                name: '826b1gcr79v7nfqp8lgfgdiq4gteqrejzrpgad4rrenj6th34lptmrb7rhbn1mojisdkplh93276lhwhh5a2s0zaaksng6zr7uk0c0liahgvny6vx73fibm973yo43jr46zv9x4csxs41m70kocehankuzark066',
-                flowHash: 'u00mjxaukhlxep2d4b69sk9sxtsxwma18mjkdjr0',
-                flowParty: 'pbht89p1oykh3hja7ut4uqvzdnzi42253vko5fq0usukib9oqwp5wef06iqfpuzk0x1p3p9poklupny4stviutozv0fcxmlks5cmvvflgnprat4ldoj72vpb3htdzqkdguncnwnpdhoovi2023o3z45w99q49y33',
-                flowReceiverParty: '8h1nbqp749l8hzwklayhv3pih4qyk2rfzqw0tqbnv97uolhprgcb1i76jyd9bld589efo9ft6qelecm3qmi7lo8d3s2s0jmfjdv3m9tp6s0meo4wa01xhfph5mpp66a27r4x45xm46bdi5xlvq77xd3a2rjstnhe',
-                flowComponent: 'p8x1e27uj1lr5zvrb6vppsqb5y9vjl3jx2dwu20lbjs1c2mkdtnc2j4dmu94i15bgt58kn2rms45te6yiwmdcwqs5tt57xjjyguominurzeifms86dv2l5elvixrvn6t07icxkexihmqawmhngtl7y7cyyl2fvyf',
-                flowReceiverComponent: 'zktyms8ocw36pek9jskcdn0ci5bc7mz2sq6mrb8hkt3yxltz9yjv8xszljde005yqwk6287af54h9drk66tzgxmzpr39qfnndoma4nawkdci13zituzerwlgf4go237caawdvbatu8zzaaslslrwtgqua6p3puo0',
-                flowInterfaceName: 'nwyc01ub7fqku3zithjorsaji3wl8ttwbdwf8dr6qrtp30gkk20oqkxjhmvmj06dajspq8m3fo1cgr9xdo6loo56zzh7112ljvohmiogdbrie4nrrqysnzaa52nrijhsrb4lcw8064vevxvcw5i14qgytw7xh194',
-                flowInterfaceNamespace: 'plqvy6ch1psrfz42j5tm9a195esxnjy71wqf2yr9x8ged09i7g4n21shrjs06girfkuq7n7inry21kp80gbo9jfzfcjxl0zfdxzfybkubof9w280onuou9862hni2hegghjzeky5riromj0vxxcz3ymypz74k6uo',
-                version: 'sm1s4wk9txe15btxnyhm',
-                adapterType: 'ata3g4vo6cljnwc3ur26r5d9j6ungn137c42ikmcksrsze8l62jvb4ytk843',
-                direction: 'SENDER',
-                transportProtocol: 'ts4d949nflhsf6egd2983ym2lr1ohmulrobicbwvctmpr5na49a3eeigu3vu',
-                messageProtocol: 'bqgp2z7ugzqpjj013mhcg8bsrccvz5a58a1h1ncagsevberp1iqspvtqlv5k',
-                adapterEngineName: '9h3ommsf65k9jmt89fb9xdstenxi9nrswjcug9yizn9b4b46h89reypar91j2m6yi85oigyxhs51zdo4i8iwyo3t32k4kdq3ymfvdnnbl0sg9i1ab3abs7sbbywl95aev7vs6uxb7i349g6653rtk1nak9144xsy',
-                url: 'pa83ownnoplydhjbusp0valtynm13f1n2c9z6w4hzxnnb232b2h6qczwn0jbfhrpxbm8wizisjo9tv7jhtka1q8nk23bj8ehthyuhup2wph633296rz90dsjtw0gmrz1ecu8v9s8k6gz3v5ek9l8hs8ylj3bu8h7egknz1wnld76nlg73uh7kcfulvqrxr84dk6fkelkgc9ewpv9eb3q0f418iz5mtjr9185yshehyngtdsgwbp44ptjjmn74zygcd7kt3lvejhhwe47ycrv3ll24fgb2t4b67q8e39t92i5ajg7jbv138gofx646cmyy',
-                username: 'a8oeu110sp9bhzs65we4efeqzhukityox68f5hi5b02k86w1fgqtj13jg5mf',
-                remoteHost: 'kyc0d2nlvtx1c8vdh1n91b6bu9ejc7n37y0i87nllz2rdfvxb4txn9k3kh0z146yaxkunghdggpl15du5z64ztok52sc0zisygu0vk0sb7saqjci5cmc4hvla86aoerepsnpt3hf3ev1ss92w5oau84q50lg6t4e',
-                remotePort: 7607878754,
-                directory: 'ip1hmhfw20rvwt3x9mhx9546levju4t8xsmo0t4s8zc236bftfonjd3rpdurszw4ljgvcvcky0ltmv6x5roivrn76q59y4avyhc4l1snxjkgkdtpnxmaxw3k29ukqj0szszmw22jrmqasqlms47h1ko37hmek09lg42m86zbil9qcuef5xpcv1hbc9nickdqn8nqnw1aorsl4y7efp532mhfit8w4jd30i0zs1kokbaiqg2nw5wmqqe4rjtrhwi254r7oahuybbelmwdze3e40n06i7ihbe0az7etgrzfurkiqj5p18jtgqduz1w2mynrtta0as4azu3hfpfyidj937l759pzrs34i68ydyvxwm0q1chbafzuwu200m0ir9bf84o8vw76fcepd66ne0i9em8l2f2bjgeb3psrdeglig6xy7ab7qlyb2k0oenfsmtkewjc5lnk1cj9og8lcpn5k660h0rf04khx1ujjblc9l1i3w738en1jqigbfudgmam0y30u6n1y5i8mnp7c4kolp6kpswlurvcsnaml5n6rypcvqlnt98yxmnsujech8okl5tqn63v52bxpsfndcg8m6tq3ek4mvrw6z875e0yfthrimmxj33v3v5861ru5l96wuud9mq9jjwblqr9uu98ysrnl1ll4a6fw9ajb9je2z18gzmag4021h0p86jnkrfpcpeohihfabuabms6hymu17ltmayzb9z5b72f9yzedbdte13dub3iu7zuuvl4h4cdo2ffku8m4eyuzlw54yvxiqhjm22qzrc4fsw8hibgx5vcg8nzm3gfpkdx18t2vuz6t07lggds8yg6w1jnqr54nde5t8ljfokvh8n3m6o5mk25rdwebtscvgddbvxohghpye2s5eeuxd30n0wim2pnebtk2d2kp6ws51zbrqbmsp7rx0a5nzn36a77939c6yxndtx5ku29u8nf8tf6e2nav988ucwfp1cbxjuprt2s9uduvuhan16qis3iwkz1l83',
-                fileSchema: 'sqlj8qv9tu4jca4wvge75w4jcn9ehg7e8w8bo14scfhgg654fwh120emjcw8t5dtubqcpnyfasieojprpcmvag5uk9ldiu53i2rdo0gulguxpszqcn7fbv3d0zx2boxoigg07gsmjira0hahqv35r1k31w5zjbzs6cns59joi7ry0i3p6exinzgewq6470mtffuo34ep7bvs0wighwvj5fsxgvqb10dzkjq8pky7f0r6r691evr6yj5n6dqly87tbxqpe7t7jx2fz61nfalndl1ahcl589zzyc54lnzex18sz0wp2oxm7q95zhm9za0afp4k7kuqqlt2vv49gp929at7fz95322cmb1gmdl70c732oqiejw6ipsttu1z8fk6ze11psdx4chh4ro8oc8anah2quaj0d6awbzn34bzisp6dik99b4hlb8zs1py7kszzg8ixtek1stbicyttnpj070l1qd71jiegqn7710bvgxt3q0h2io3nr3i3wni3gwuf0c7wjp2c8kyc1s57lrec63rzzigvg78lrlysqmrwtf776i9mrgcbcs0nnxxeh67nptl8awxof7q3xuvm7vycsx5si8fp07ka5tz7gpuatcuzf4jpq1ybiftvlj0szuf93v4d7kx7eedu94s10acxhql4zpdxqch2rrkkvj8hqbyju4ic2ba8xqcy2d48abrzip408sbzx556g9e0r0tpe6bm90ykqdxcqn29mz93ta4xfn174zewv7iw7ba6645pdmnqpex9gpk74rojlwdi7fkjgm0gazbb424x8qm78yho6ttprm62cnj0kyxdnfkt5u2965q8cr5cpcudi6fq8q88t75cgy4b4k75qralzk3dfc6rifgkahxamf28le3aifla7f92ozd8sgnd54fjmi2czbbl9gog0gled1tv9nhuf3qtj3zi9k4v2a3rhii1pthsron4k0e355i2hz2oivvhhhhidblhlr68hgsqsqzdzg0glkknql498su1ew6',
-                proxyHost: '8zdb6okxm9uaktofpq9daabhxbol5h33dqbogghyf2e268k92kgqnbqf1nil',
-                proxyPort: 2064448889,
-                destination: '5yqbkw8ytnqrrahdd3wb3j2bt90y4gtkwt9o909bu2jgosw7assrzi6k9twilz3r9xyl13ng8kpf70musyx5fhobiofylbotcigv5mm37pvyclo1m9lr5rpzuf7zhpk4m7pqpf1fiid8bd0qt0varyqn53h9ntrp',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'pnjafjr3hpbtsb307kxfnwavqqrmozquuuuc1fnbvd4izirsp1e7ymblou1u4q5it163bhgxaka2k7g5x3g4stneml4ib8656aqr7u8ooook9v4c5pis1i1q4i365ftv2hrmx98cek194wy3efmdz8gztrpy3o1r',
-                responsibleUserAccountName: '2wh3nnvinoj3ojw433aw',
-                lastChangeUserAccount: 'm4ous1lksrve5bppjoi9',
-                lastChangedAt: '2020-11-05 15:35:43',
-                riInterfaceName: 'drjluh8kwfb1eud2pfs5m95g20kx67iomd421oan6wnet4n6ffg319qcqu41rxijhdtfro0v5jqjgsekal46iujwuib2bgrx5acfsx5e6eg3cjyb7p8u37wog4o546tu5lijfuiczhtkgfq8snejrsl6w5q79ols',
-                riInterfaceNamespace: 'm8st4eq7d7kbytsymcgp579rm8mlmvagpeqfdgnv9hbaoahgxu38i2d8z2ddjl4moj3e3w2qtck85u7n9655o7codsvy5wz7nuszdnhne96q04zsceyspitmdsw6v7pj8vjglb8hca5p7gi8tdpn9ddzvs3p2d84',
+                id: 'acc77792-c420-43d7-a766-c6f7afdbe1f0',
+                hash: 'e8sf024r0kppp0v9f8vn9ogoqriqo2553dzjsrtl',
+                tenantId: 'f6eb60a3-150a-4488-a4ab-bd236e9dd7aa',
+                tenantCode: 'znn5a4frsr3cvg3mlduhvyd5c057ev8dlvx4eohs4g23yqgicj',
+                systemId: '73c56014-4b43-4a71-942c-abfba41279d9',
+                systemName: 'gzy7useirkijknar82q3',
+                party: 'xxydyx1i3u8kb54xj3xsavp6hxllxkser9aeuqbbl8r9mij5vhpqxe4t2qa5dlhmlhqv2wd8a0c3v0tr6yezm05lpqs0tx90gab52beeyxicoljd8x8rynhjqvwnj5dvs7evzoleuv4tveozotybsxkcj8angdx4',
+                component: 'jglmnoqo07l71j6ayvkc4wyl0ua77ptdv4i4t8w354q6fkbijdn6icuns3jamr5mc84xb1yma4hbc671hmn98xxpnhvrfec52emfln5id6jgqf7z6ejd0130em96l0rbw93xm8mdb6doo8droo0l4iivfpzun0f7',
+                name: '6lcco95t5ha41ns0wwo7xa8jka3hcs7wns3stn2eqhvtjwwnnyp421xk567zobzu1zogjkhj4517h4x2y6guoy9erj6umwzu0r8gytd24m1ebhurbp1zwsb3csms2rwu8c1be8g9jv28mphyb8iv8j4qbj7h9a90',
+                flowHash: 'mou9y1v0lpx8ahkz8od89c74t4qa1y0e71bm6t91',
+                flowParty: 'n7kad4yfwaf9xmo8sxnyo9atgg4mejjwjv04in78qcqyvoz83169w3u3eev2s3lf8y9sa74x8g1l349ei43ylp3duqgtp80x884tdud1u6ufn3vg3wkb15rex7y6i7ajagaugc1g7u1y32exc47mg62fixugc6ix',
+                flowReceiverParty: '0xxctbv0ve48wnmvx6k9vx5qsa8i3v4kaxwmiaql0942vrzj0nanl0pdu8pzimwccjo6247b9ok78vqzq9gdzgsmm21uly22eaviazrt9r1q8jhkoh95w8787hwdphcr4yjd0iufl466xcx7847jrnv97scuh9ti',
+                flowComponent: 'qx8y6omp3xc8ng7fnfn05hhffxrqbi56qq0kjfwskmegvdbsofvyghajs1eqn16l86uvrswt7amrtwtgooe6gstayaywjyph5us6cl0zrdjhy7sagcaq8l5y9wg2irhxvynbanfypbn9wof7b6dcy4r1g9178m01',
+                flowReceiverComponent: '83q3rjfxkukegsfv4rse4x1yi0qdpo7xy3wsrleldrcnaafgjjljekxu4nnvgfv4ln4gvmwdt57v5mjlzbsxkov85ofj91hvsicuhzocawbil213pbaxb4pcuim5gbqoekaq85jk3ws90932jcym4ot2qcr8e6vg',
+                flowInterfaceName: 'v28kteixf3uy0t19kjlc44gu547tmyqo7ahcfbfr5rlktau1m2n1bm71btf4jn236kpu5dqw42y1ehu2clrck6yka5wssvzptgyf1xer60ro7x60z7zvct8o9lziqikvthd9iabtxvmmn47kdbps3audhfibb02v',
+                flowInterfaceNamespace: 'lvkwnk231lxi42maqorgd2u278xijltwy7h0rkegrkcmdhauruitt0dyulfvdt0nbv0930g5x574pdbo557qjlhe5dvd3byx7k0gvfmcfn1n4u3y7w0n392q6vck0vug2ee4ufgutc65sg8q5k5nzjrrsh64qt5j',
+                version: 'ko56vegqcgcm6p8y82mx',
+                adapterType: 'yr9l0ug4o8g1cw04f1um20ls5suyzw70sdazk7qyki9s9rh8b2ha2ni0udkj',
+                direction: 'RECEIVER',
+                transportProtocol: 'ocb2dz3400a10hlm6v1rjsydf0cyw4rvrhywgag9gu2996nsdq9eh2mujp0p',
+                messageProtocol: '1v7gyo8gikmaof8ua34ghhzd1fnxffdkldhisyqelsuaw8xgqegyph7s9owz',
+                adapterEngineName: 'km7rao5cy8jl138isyvicjs6immuhm7lrzumj6hmyrsjejxoxumdlyqoqocbosjqu7539xogspjtehyiflufey5key6cv6d6mwqkcs7qroqe5f9fxgojt3o3329hdtsf1yh0jq71muw4lglekfh9b5es0itctofl',
+                url: '8kl07j8kpwtyh2ik8tpp6w3g3ruh5hk2ka5cngb41emndcctwlalivb5h7d6wxbbc71cjzu6l1ry79e5goe55lctyxeshwk9hquauqypcrvjs22qgc50dfugoiw903qn6zngwyqf09d4hfqtdysurusvlbbvdm6tgofvld4vjtd2tky8xq3gwkyv26d69swj5i1nux7ra6kdidv322vcy0ppmrplyhck9wj6t747bkztfv6voqv2jrz9olytti9l262u93iqsruk0e68z1to2v56jwyv3vabmc7rq9d42dqkco0omj020498gwu1gajxn',
+                username: 'glugveosossbsnuetwgv2e2klxhq1mp2dk1f1zv6530f5vejdbr0ku6avcpa',
+                remoteHost: 'krli8bwvhddtm9kd0agadfpix1cgirey150y8ww0yq4kzx5x2w007opiogcrpq0mmxnjrhk2r4r34dqckm0gkhdi3ofecdmctkdidpuvy33fjqnixgt0ir4dupfeyxsn4umli7wxroroje9vbiho3m34bgu656v0',
+                remotePort: 2478623177,
+                directory: 'qozzv7vid4ht95051n7jwmmjhuey9tcmeoxbb6qv4r3gc5x69ks5a6ial1b0hgohcrqj4y5szmxuukji28xd1b8uyvy39gqp77k5ofykbkpzlq0gt2szax8yxzrxms2h7zithhg01bmwcv3leklzsxa0ybem441p7kweea51sg1gb34m6xduwdd5c0n17moeirgcxrnvd48gq8ycztlsg7xryq6uvqwkn7rgt2j2ihb7g5vh7jg7v2uibjgg0zoifb48jit29ximstlog83rl15ex9hkq7n766ez5h6ntyvtstgq56gb3iygm07sg20nfrzu2o2b3adz9xgmcwiakrykviu5gg5x9sa00fojyjdd9fa1ayvu2coz2hl88dsupiamwy1pmqrxmk4t0wef58ucsjepq4q87x5ak7b5ekxbsrtg12m8v40jk490inpfudycpjadcbsve9suk6qr0drw55jj63lmv250j3u8z6agnjy2jqj54xn5u0gic44vt0alpj7miherfc8030bon7p54rn3559kbazxc816g9gttdm5hfxlm61n5nvcz0q6hyrbzt50u3xsdh6eazufsrquatpv5974zql7rrosv6o4cctcpqoz07ppagnht6gcrlviy4tg09slfjlcr57wwtpodor660bz5ptfcye6p62y2asiid12p3339f48a9mq12m2j59ykot9p4xlzbm9c0jdfnv8r3agqj85pthnrpvqzfm9u8t905h3nukaiak6b2h55zy6ye6cwda0uqtultyzfb0wvvv6t64x7fk99hfaqsqdb5nm0gh5qawjvrpt6qoqidi9ygtn4byjl0oiw2skzup7icnurag8x1nbh1aglb4l4vv5uv0lgcn6dm2m97q2a6qk7vrgz2t9t1xom1cooxyn8xtru6p4jt07ln6ye0e03qdc0lnk2krqq5w4etxa0wwnf6chmw3iojur9vvu4887lgolqvtsdab1mqtq2bnt6tnpg75jstuawpju',
+                fileSchema: '3064b4ya5eajd2bar1znxxsclxogq7g9qn637pif718dq6v8xqthbn36ftjd57mq13yfuanmxvh3vkbds9bpem7q7l4aey1vpodw15ik9andwmldaxpq45njuh09em1lgdfnv9o9hoam0mjpfweei5kxjz3gren0xfzvds875k4xwidfmvd6qqk1oggy1bcdzwiy12etxhd7v7dozj6tjq33jzam7h62m0pf6hd6vrblbhmclmssrbhrvz7i4pki9mtcn3fgj58fifuq1utsdv4hbgwjnrq83encdw1ajesgqa3usu0lvltvpwjh0z2y57pamro7rcsdmv5bfh757eag2hwuvdeeenaxdrvie6tr6zm3n9aeebe3pi8puw9n4jmiininbbbipzy3zotzclfw6i2ru7wm89w5bxr6fms20npz8pikoa7o58lbxy85prpob6589tcfoeo9dnyrj0j7za9hpk87j2pqj783fe9guqty9phqdc7nhqvjoroamx499quh5a5day0g2ar02b7yyzqtum4xc2ap5rog820t1ciuw6hxctf55jrg3h9lhemi3ujko6ybtj7cyzxf88qv18mdxxxq9m6tjt20fl2957g4fxo8zp7tb1xy487m7lmicj3ximqfdxb0olwjdj96o5ww0dax1m8kmrq7qduxhln84ya3aydwr0rc0isp6h44r9smxigng3vta59nrjk5jpw8zvz73o4syjvm7hiipl0e276dln9gddopnc8a7b13d1jw4a8ufeyprur3glrxkpsgdw922b20ac41opm3doud9tetgcv059dpc46r4yybomypa3w0t8k1ta51jqcbijdx7d3lqz8689aq6c3m09ej3e6qvi5j28q49vb1to48k1l36aree4enp3b4lif6lqmzs7kh4zsyifyij32k1teht6w17h90qrpnvq5xc386bhw4vkb0xudmjyo2axhkg8qp3zp80qjximiw00imifusc3fuaw3ev45pw61g',
+                proxyHost: '59tps820qykh8bq3mhv1ya3e0kxna69neatnau2kopeea7hxe2cpx9p2msqm',
+                proxyPort: 9594336220,
+                destination: '783sx5t8y70ixifcsse67lvyg3nu4vvn6wtswyqk8ieu7i2243tr95u3rwwjkxv507o9m0pqng79jru3xrp44hmnjg0oe1724kffweh4lxp95c4j9tf0nugtj5fzkvgt2323sbhst7c22nohep6aafer23vg73p3',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'kym54g5wrtfhced3syflxs2gjg1ytm3t8a5sdd90vojijanrmvd9h4l0jidwjotxd4eqzb0wqaugvr1c9tuxdon47g3oksg7geuhud0cfia6ft4gikujj3dw50x8sxbhpmzq8j95knqyzh95jruj6zwg1fyu5qoj',
+                responsibleUserAccountName: 'olvx8lxf4qxqtrgo6yrx',
+                lastChangeUserAccount: 'xzspwviarwk2t0g90aaq',
+                lastChangedAt: '2021-05-23 00:08:33',
+                riInterfaceName: 'tjmkgtkq1xcp2qbgdlouur8nrr3k7o492zbq1r3i6073kll3cpxyf8gch14zyywcjau9hgfpsmvyfty0ngibzwgp2npgdcnztv19cxpvreaitkhjdvl77x2zycd8ou30or236rbsxatkj7ceaf9jmx516k55fzvn',
+                riInterfaceNamespace: '90ftml2hp4b6qjuq7y40nvg2djyv8ivh6l9ncsxkab4mqf5l563hk3j1ppfp3gccbovxdxxfv53ykrvxjv71osbjrgjw2cep3fhvq675wpulaitrsf3l1qzbd5u80u1444p3i45p0u7ka6mh3qmki4xw2hnwraqa',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelUrl is too large, has a maximum length of 320');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelUsername is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelUsername is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'onk79ln6jpsk266zhf1erlumclwkr8ny0qdum7ys',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '5ak5g9yfj5ig1lxoffsg8fp82t5f9gl9ps7qz3rssonrzsyk5t',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '3e78pufo9ik47wpas41c',
-                party: 'fwb9wzwn5thcvap39auyyggfa46benp9b6jzo2zlwzjrhpsarabs0axiov1n8x72zhkcf0z10px7bt00c9sehu3bhy9bfrivey3jeah9t9kkt8jj062uspagpkmw5tfdftzypi2ck78w290z3wgk2ysrx83dkvm8',
-                component: 'kbjcolygado1gvbotav8yeqt0q4gqntctfgm6n98w56gyinyuwicjb3jew1xwam2ms1oae8ykzwpgrn2ftakaqudd11fv16q8v7vbz8khmwr3tihlptsie2oy9s8yecyvcmrhwt76a2l48ur60c02gtvh3jmutix',
-                name: '6but59aaaecrcd81fvntf7crt16x6tx4pj46ah0y68ot6ehqaom8gzzy4hwky1a1gkz2bf3tj5tj09y9uolhz9ec8orz6akr6p6y0sawhl6p0yxmlau5yzgqxffqnx7ijf4slmiwoeyjx5hlbsjt4x4m0bsj9luh',
-                flowHash: '9kgad8hbbe8pd23kwrpjlq7lpvc8ku55fcwsscpb',
-                flowParty: 'esabc7xwabpge9h1v67jc8ztbnop2omhdzpx02hr0txn09axrtckbecebl5pbhs0ly41fkvphxhyza3gollxatk6h1z71rby1tsqii4pn48mag6ancbzowkhp0z471kd2yxkea5c1v0dxcgn3kri6f0rw6hgh0uq',
-                flowReceiverParty: '4e3h27y6bhu7d0sb8q4wxhyufb8fmosf66y7mehtp7niwoooihal28pus3ffnneabvxv7ucsg2lkasujezewsvf52lqozj17yhdwormsbu35k14m963h66pxhvx9pq8sdoyinz83plzl26umwkcovnjukyrthje1',
-                flowComponent: '290285gy5octbicbhihyobkp2fi9vq27gjk4i5pja5153tf4z3hwwbu5e7d6tl917oaw43qjbs3phtx9ydpncfux5rbwmhxhfplfzobt3mtekgyl75u3bwckqrpkdd9webam8ilzhj1gxljz0o8cr3a3f7l1hcg8',
-                flowReceiverComponent: '3ba2jdnfggqad0dsicyrf5x7zymq70e26wjb5lip1ith6df6p61hautp7v7jryc2yg3euv2n564mggv2fq96negsvpmccg2gkj73fmfag84j1rujnn409l66o6fi8wxk5opin7xsfq9cd8z7sbpp6zy54fcdigij',
-                flowInterfaceName: 'bovdw50gpbubr1g85ifu1sn6buwhvu9da786sstlz82tsytwwn0uh8eiytsfns6sxqu2f0e8ri4zd14pegs30w5ngpxjp5fxevgjvrduch1tgcash1pooadxob3v9tyg8w9h9k0tytnoo1fvnsir8ca3awxlvo2x',
-                flowInterfaceNamespace: '953eiaynjec8exln5q80a1s6pnbthwiquympm0ac7s67idsbz0al82u80w8bx79awu02ai84t272d7i35qpedp9dzzcrz3o9odbxd47fch182n43j3qjsrejdtn9tdwqlvrlp0kkcppomhd9m21de4bul6ct8pg3',
-                version: 'ub6wivzni4kew521coio',
-                adapterType: '2a0c7kb3gu24yc1fgell4g2vqg8fd364lfeeg5f4sp8c41j6t6w4cxg8g3m0',
+                id: '514522b9-d5af-47be-a103-4c95498eb262',
+                hash: 'j3hhpe96hip7i0q0pf9e32jr3pi729nu8rk7hvt3',
+                tenantId: '21079a9d-182f-47f7-adf3-b0548af00764',
+                tenantCode: '0azwdyzhnbe6vk3chmwunronx0tscoceu2hyutczh37toxtm9i',
+                systemId: '6c575587-5efd-4ecd-8504-6725a528719a',
+                systemName: '851iybjk77ij7hfkcngs',
+                party: 'ik8bespvzrk5kc66w1j2buavrbus7a3wsbfba1vbxtgyx0tmk9ztdm3xck543xghtug5i8wxihqrj93msvpybfkzaqr2jswvgtl83c0omdxwdc52v270of2qzwo8ido7vpl56bqlyssugmcqj5q1cnm7ei6puhoe',
+                component: 'd2y1fpk31j7f2oemk9ko40vwxul5u3p5e86lye29322jzs8ax91oqb253t995yu1vbrg8jlah7hlfjcjnbogu1ap6vmzmtxq9r2wq6r3vxad3swe2bb87m527jkv0wcjl1kworvsjatt9o5rll0j6vm4i5tro4ik',
+                name: 'yi304fyc7mvcdyb8wdzxygyp2sq008eff0noyju87dnt11uen25pedqzuiszpx8vh6t4rf8nboyjqj2x9qsku0jvczde8xpar7guf5qwlv8vll5uar48zc4swavq4xayvcss7q7qqv7w6oo5ik5cy04o661pb5cj',
+                flowHash: 'uta1tfrcs3dkoegxb0c9e2efmhinh7iohforl7hu',
+                flowParty: '1t5sw6y5r7nq2v7e961nidnc3l3611srvk635pj4a8zbqt2t5km3hfw38j5o7458east8yy105pa5ldrbhh0t3hq2gf9yypgqvf7ro7otrtiuf0ck0zjktrcym388pf06nd30duayb4ofoqt7xuil3ans0764aoa',
+                flowReceiverParty: 'wd9ksdrb96lrbhhkk5s6d5rpm8ae03xwhukpw34ccf4ctsft9e5h5j10zame07vr3r1d6hscz9wt3aooxyxdi83xwfvm9gd1fcakewta09ekiv7inzfqbfk5x6vwe8wt160x0horvzu6gcc36y596h2usdp15y5g',
+                flowComponent: 'q52f3molys2syyzw2wu0memt00h9yu3pmzhqnrqz2qauxq2xr6nwu3e9fsrm3igki3c7lnch2zcgajl0p9j7d6qagmc4kfrgy33fwrnqbay23vr7tfbl1vp1o1dkajsnzqi2t7b0dapvypo3r5jbpml2yiou2ju0',
+                flowReceiverComponent: '6ucumfvg4na8tsi69dkjdujvp2skp1xjslke7gaoh8lsksvulgxsoylq939f2czje39dmpfduo7l6tsbz7463xcp1grq1jysiui8z8ahc238qt6364vr1jaummgq8tszfyudbn2o53haxfk9bh9awxc1atbusray',
+                flowInterfaceName: 'ti2x5cfxxrfbjrfuy401fh59q478111mc09lpei3na4rowzio0tz470pfsxszecee6qs421turs7q41gvk8fu4757gvdpiyiphhiilo6fnwju85p51vj9zueftykg1akxdbxp2fi3fvbl3vgvsdie124a1itio4j',
+                flowInterfaceNamespace: '7olmib175nwn05k244q56epxiw43htugwcg6tv84oz32vhyoak7ng595pz4dpf7hoy9f2d6k04mazzg1av6um0w8tlcfjarzg96ocd4ruwwrx171olirwj4x1yqv9wmxbqwrsawfdrenvrmyg2nuf1msbrfk4od9',
+                version: 'bu5s5ab4rmq33vmwwga1',
+                adapterType: '7o1kr3iro4iyzpkc2bf2xxo9qaqcw96bdjt9l3rz7md8rufxvxehldffqtkm',
                 direction: 'SENDER',
-                transportProtocol: 'lw8hj2x42mgx0p52eskqqu54yojftzj4m9tcifsyqama9tmmz2cazh70cr8k',
-                messageProtocol: '1dop0peg4owj74j17r7tlx8lbf7biypw57ieo285nb2vmzcecu3c4sspp6ve',
-                adapterEngineName: 'fgls7lapgm5mbe8aiwnultnhqpu4jhxrh79f6dkzmufea8ed0gkk0w2rktpzo3reszn32nh6fntoz6haudtdacwqafe6qsgvorgc3lk1i6r020d51is6zdb7zlt32sdgpckvd8d9yj72ooknlsvuld1o624rivl2',
-                url: '2j0jb26n69r1tmflrek9oscouof5udmdczwn6pkn4ftc2y20sbkonwchwpqf9193v90qlnsxvhamggx7d3ar2rvpzlmwsmxv82i9cl41xxs2fpjibl4bc7y4ybfxwr28fge78ir9fybtpuyromfrkem2lrymjpy5lt37dhrngjqdtyxopln0x4m155i3czlwglugrvv1zwk3kdvy5h34k9e2166af4qw6uodhzm11gxsmbr9nxedoppi7mwzfkou8ytmu6xixgt8v4oejelg3udv8b7odel4mnb1jswxtzxn9qbtkz481bu86zsnwiou',
-                username: '2lzdwjdtw1s9www9laxp5trsm80ll17wubiybbe0dmrfttspo2x0zm2xmds0g',
-                remoteHost: 'gpcwpg0jme026n8rhkb17ebpcvrpt3nomzdog0225nczmshxtoh6xyrphljjiopsis0uzpknzy4x6800uicarxxwn2nvzum2zbnaajq8fzke4ovadbny57324tifdvf733jd1ae9lcq30r6jti1zs0s5vylabj5i',
-                remotePort: 3418476291,
-                directory: 'nop4pt7vwc1264arh2plr5yvaaueglvlb3tn1xxrzyp062zwkfbk9j0gg75vmpxwkdecq69p0g4cpldl1q6y5z5783ej8f90hrsqzdvlnra4oi3trp029zpuyhl9ufof0j3xppzbkddsqqgf54x0f09xkk0grft2do7vtpj6djtqxbctva0ejf1cyif8v934uayx9y84bz0hgc9mmn0j9fedkzxddzk8xidnpy3t7o2j4gzd8o7j8ugb05gqbm7wfj75u1avrk9dksdy1ahe97kz91vgp7bh4fozw57ajnwzhx1j57y34cp65jm0sxmfyd7bo0se88jj5n6a47vycaj3x82tw934i1wz6z4guyai8umtjmlrblvnbr1hxxetecuagmy5ea4rlu12mt3eilvgi5jv9g36lyjntlo5bib2e8ei7am4voefkm0i96ymys9p3knsmizd4h37popsmhpat5vn9s9g42uv3g7fktf564b5kmpaqpz5onu1s7qv0tjetwo0dh385ffow3h30hf8wgr1cq6thicrlj0od7433uqxzb8oc28qjg0wmhkogakajcv3adheqc14jnjdfe2rh1dd2maavu053bpmomxyjy2q9n912269xh3bllg84ktqy5y4oqkayatx3ols7slwnya2y6k39hryo6uoexf3j09m6ky4goyajhhoviagkk27jppdor9m18cur1qwucgmk41bahi05t646axv5df04qjjhmc2yjuxvcl08zba5pn0nb2mhjiywmhsn7e1tb2oh2e9ac505yfc4o3bbrcijo5idpmiqd8s04ceglg8jhrz1f44gb7updm1esezh1g1njnpxkmzg34x4su15ckmyu3w433x52mdcavm8mtw1p0xj1dq934e815sfcqf4sxbcu8exmv9vjccgirpnoy916748bulvtum8aeotvwav3oiwi3kvp9asndzmm0zsbcflmtljnp9w34kw4r5g4pq2xwpssr6myn77i87ci31',
-                fileSchema: 'ytafnt1pfao8wqn62q1jxroz10sv5o7bhbs3fjj1liyqei0bhckhjcwje9bi65iez3cdvnh7txn7c71pah4tl7wbqghbm47bqshgvt7of49btsl3tn0zp1j7w1fwp8bvinhv8gdthcryupa24lxe6jrq47dy1c1lx4femxawwcdg79y0ihvi8i31bvkasllo3wl0xr4cgnx1qh84rda0fdgxr1zobnn79mzsikcalqy21nu396rb312nl1pghtv5t2iefewg2sadtt8voq36emjseom6b0lw9vnhxhx0o8rfnu5w9mty03ycaqpnimoqed7dqv0h01ogvlfvsinib9xe2s3c89pnpi19zjqbnu03fg3c7xltaioa4joy7wy452smnepziplcpaok5czenuejubd9rqj6omyxt1mziyfl1xveda9fif3vg44hlx70uj3249nkeej34ih4i1l6k3oou6ceor50aqses63md8nxxvm4i8eec1x4470o65tnr0stact8atmamirdclh2su816hltxa4gee1z5kkuvsjlcw859wqt4vrqsooybajd3j5prvkn51fwbr9p2nr75vtfxolfbj5ztsef8arnkg8d4cen9jo5jdvmcvo8jmx3mu8rhlq9gohd1hzrdncmbz5qcy743z36rdjnf2bu5yb5hp7h31f2izjpcjvs55ho5cpnxap27d98ew3obfoqqtj1rejtap2tplpsypiplqqn6182nn2a6surjgfws8lnn6p6ysd1uqskav83rbqwijlbz75tw6hw2mpa6zpnvssms5hrfnfymb7827cwg36lshsgyd0kegyvm6lt10pq4ybgun14lqv3qskfhi67myzodwcvn4h06rfja104vh7zfwozaejvx82vvln568o4y9cjx3k68xlo5txapvxkxll9x0463p32akkrwab0bp094ofv3h1p4jhm35nup3sxl2ih8y1vaj0i42o0ysnibw63qogogezhfrt6gn4nb4en',
-                proxyHost: 'm6gfpy69a1sucmcv2p2ktv7sq4rf28uxo5je6gdny9jg6pmegx98eowim0nn',
-                proxyPort: 8971809421,
-                destination: 'nnxvlydla6dtr59qlev5jbga1k2o95dnfiq1slkz84khbayik473hjo12ekeoopebs8ii8y3yenyyrtjumwz5xy6a45dssyggi5jws3uqk842zypqg5a4vwrxrylzs0h0n6oedimign4lfo7pfscl7371gxf5vnu',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: '2wc46zq8qa54osw99vqsgh4c3jdttf2wmv8gco4l0soljf9tpaj4qlmzsfa1nc1pstarziwt1arcvawn3sm05ofvq0vtdgwcu1sy7o9vb79oozudbs147ag48hwf98k6tdb2z1ixfkha38j46le1ixte1rpfdck1',
-                responsibleUserAccountName: 'paubqushyevxr1sm1vh7',
-                lastChangeUserAccount: 'a3y3j2aobxdwpqdoj6cb',
-                lastChangedAt: '2020-11-06 07:11:04',
-                riInterfaceName: 'liufsnx72l3rsk578k8lrvr51fbz7uwh6gtx5fzamy324d9lr9nt1ed6je73a2scvgg39wp3maj300ya9mhw5ro7wl3xjoljz8mvoz8dngos1rzvq6o94av0ry63vp0f005hqpjnxp7g8fadrafklqdzkud74cpt',
-                riInterfaceNamespace: 'qp2jyzcswqohqwsumbzce22zh2waiocthmgtc2d00epvu2kaa7w06jikern0lftt970lk0hqbpm41cx2csh07asr7qrypwtejt50tpxskyzez3iq33sbhpzp5ve9u54yeqzvpl6td2mian2ei6nlur60vp1lvxdl',
+                transportProtocol: '0lt88inas1vhj599v966e4g8j8z6gi0jkp9ino8e73en6t51x9e4f5yiz3vb',
+                messageProtocol: 'e7sc6c8pldmwbgn28c7k5as69h2w9qwnwtce1w9adpj1ynno248ifhxz8wqb',
+                adapterEngineName: '7e3qlaqhl9fjltowy0afcn4jba4le9q14i6nn048eqstsywwbxefr8df74yhwuz8pi3p8jcoais3xdo003hypbhegq4l35ct2i5cfcq834m28jdwkekv0u9496d9qylod8qzom8018ofuf1874tpou855dbhzzab',
+                url: 'in348ygvk942ipkdrcxb1wrqp4aeey63dz90fsr7beqt4kllwq9fgwnbpt4rue4rdw0vf9g2j4s06pbrtliqav0im4rtdgbypz7byfpom97kqbajl869gt6z2mbeo2ag02ko4yz3eey961zvyjsyr7ufklb2gvtzg0js8oor0rl80qd2rpshwezb1cdr9xnpgdvaytfkfizkw4t6zp6873qqkpjg0gxfnopuamv1dzy8maba17d65e65zvf78ymcja737ntuj29u480o6s4izrc74eqoiwxpphybqbcrpnap9g1bo4zx4bza2k7ip3lx',
+                username: 'x2r72961ea8v98wv0fu54oupsmtezayduw8prpe118xph6jboeuuqb5tu6ni6',
+                remoteHost: 'ckzua73dsyix4dnrsy0k7lt5k9n2n7etecrpn2wfovdf4z10a1mzybxl6smdzwnqdstpw5dqt31e2dtm8g3h1pe1u07jpaei229g5duwf56ys46eha8yavio2p2dd125awfixqrxw8tfumfwq9xa0q3lkyuwe2vb',
+                remotePort: 4917102664,
+                directory: 'lgdlag8jo4m77upo332lskkq76hyflit81cilmwfj33huzkai3j0iat1gd01r4eklbem6h4gmd5iovb3y9vf0lzq13kw1mvchrzrwfxrpze86gcheg9rtlcxlvjtzjo11afw09fubkjp55rqtnxd11j15zkj7pdp6tn3wsh5x9xixuwzof5gnn9bn12njqsvj7qsmlkyelfq4upg8glnj9st8ps5x08mrc8qu9mol18rcx0er6kwpgb563pln66v8565x63cocxjqd609lmrki0gfcfy7zdezlr9elf7wwscy2zuap2hs8smwqlbgr9pttha2udb4iq9r5enemaumpv1vrk8y6ajjw9fmzqrrrxojzuoow9588x9gp3tv8svovacc8c4ebzeci1brcdplcotbh4g8d5xdgtjhsjucrox6dhmtglqivoe6zypvr9lwxy2v81tff5t4za3whri0wccji19y8siz9vdywsd3xoe1tgen4l219c7wqf5blenq506c0oh1idjqk30qupw50myu26d55p49q2n5l923k7oanqrvhxxvxgf2sgg22rd45t36g6ar5v935fwc7lipwzdcm2d33sdmyfntjwrvozj3jg650s02g7fri9cf0ojjzd33jesiuaay4zn8f9rngntew6w84sdvhnbbvam0lrakhhbxhwb34y7ujbdz4l9xjqy1qp0roz6up1eb0qvtg4qbg6a9yi6h0mwbbdjtk3r2hen24pbv52kftu2mpuikizhek6wlhmv7r64yg0qc7hv7gdkv8ovs47xq6np9tsu4wnp8mo8peveawvrlzto9t3t2186xozrnf92jk1murcrv5mp7eb2y2aokjr309q6u0rddrnlx1pxd7kh651r9ior0x5rvba4djde2s4v9wsouea4z4zxu4z68uk1d5v9814bwnzoezj7qfhisd61src6fr0rhjny12lak3oq571z35xv90xu3a5d1lv0ykj66fef06rjmeuxgi1uksty',
+                fileSchema: 'vjtpefmirsuc0ujm3p892uqbyea1tjz7rchnpoz4ga8ckjket7p04jhhoir879y4ppd2aonjtt3j9ytqt7wviflheoufabq5ong4ydpumeudpa3ts9sff6rel7t6lsh46vub4os0pbyniercu3m7xamupdzbqrwhndjn24uktgb4u8bcweyzs53l52uvjq2wv7htndhm0jhba2vwn4rxphea141hlp00lj2naytxbwo66jonnfx2nncaz504rubmlscn6q7fg2fg336xqrheuo0adwvwn0x12jex4q5h1ge2rjpt4qb7weov48js3j4jas4bgpbwsc1kysxk2s5jynw2xsf98100lkkkxu3e5grpbpmz7vgebcmh45077lmv5tqitlhjjj9yjerxbxmhx6r5d5bxbxf65sc0fvd79wqqb4qzodcgino3q757ok15446mumulk19wclnhtlt4ss22m0fhoukudr8fyvx1vt387apsxpn37fch40phwapbvdqknx4d994sby2njsjt7thpqwz4xl1kn6w6l6nsv68q5ox8ofvdycoyyhli0l8t2bpatbhgmxzvim7rmqezi1xcycdj6i1ahind2qdfq2b72hd5jlfi9qzqclmbvvwi47yg4f1m4jxplxg146q03csh16nw4j4nmb5d5twcouiizecyu05n33c6z2h5741kw399snxawpcabxq24da7h509di8lmit90ts4euzg3zq8ezj9ws2ck7kltdm1b696wcusuh1l4uh8k8o05uj430l0he7cf52yzig9um1fj6spfa21ighc2gfk9zjv62lg8j6k9tmnuc6m9us2fj5kt8cuchhhy2i7k26nm26qc9nm2on7w94iz01q7rc9ujvodcpbzcwrs8fd8wb9fa0n1f0s3kgr0xbcmyetzv8rq6q2drb0l6yeny20og3j6vivlb43npo86ho82g2bdqq655s4cq9qdu2e2kif86to0qiuukckq3kva9tcip3xw5ay',
+                proxyHost: 'a7be84plbs77p6p2j4913fvhygqbuwi0bfc6p71mwi7vpjj837f88v7umz4s',
+                proxyPort: 4917653113,
+                destination: 'b49zdinlk103ra5roujqzb0jspz4euyj33ewnbffpc0utg3xu5eprxxi3sscmec2ca6x0ml54ftpzulnzd1g3a7yqancrjo8mqn4ujih5nz7hjphgkijnwqhrqflyfhrricxg8umks746xgmxbjr01tgsmxuumtu',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'ezakxbuzegau8kvqbsnywnsaa1f5z0usm8ee8oopx689mvo4dz0mzpadv21v3z98qhf1adqgxtzxogeoa6um6catxuqn18bmwv9n9j2hd95l3fvzr9b33p9sbx64e047r5uu3whkmzh3css5vltd56btc0symejz',
+                responsibleUserAccountName: 'tdnm5ocsxnushkbj5pou',
+                lastChangeUserAccount: '7kgdomj7w3wlhdn0abu0',
+                lastChangedAt: '2021-05-23 07:14:05',
+                riInterfaceName: 'rum8hny9yxsmetjpzc1ur54ns6rmc8ait5byujh2pc8dikaglcfsi8ut28jgns2yld60k32egp5sfyzu3n8jkhjmzyz192qaj3izc2dhfs6n9hivyh4lg6mvbxbz2pmd83tduho8ow0jd087bu0vevek56xs111d',
+                riInterfaceNamespace: '77esj90fkoi7e2co1p7pxukxtyvuwgsviv6ji9efpm7nc5jb6ez3aqedbtuk0ighr8wx9kw0axi48rf88ibx9pwovgh9zc1d62m9acem2yalscdcs5vcxzf0rhujjlkfn3n9t7vc14jbcx48khbn2pvrmucru1ih',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelUsername is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRemoteHost is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRemoteHost is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'pvnl0jnkqot697u2divonhnkhtrq3ln6jblfh6fy',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'jtkicd0s8ok85lg6uarjy0sfvpe53oki8cod5i2ggdwhvzepu4',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'omvgk68tzv67z0a5d1fk',
-                party: 't1v16yy7zmrew02dh2qkjzv8pvf4qxv8tgk6yunxa3ap1m1rz88c94w2eovhz8fiywwg35hkm4d06r69b27oy6273y7n97kqvciqut6z8b4bm5au5orq97dc0azkgwbwuueeqpmcqowtuiiviwimqjtj1fatdkcb',
-                component: '52tq3taem4tuaqg4zqjklojdoo9fgpy4bnn0ap412bneytatcq1hjlxwm8a46af8hzouab52cduddky7dmc4zy08b9mzk6pq64gbfd1ppjb172rlz1o1zs391eg73v2fg005zbsrfgy6q3yawk5qidsfyeg92p5z',
-                name: 'kygwh5fh020jxrh86r1hvsbglevql9w39tlt0cbvzprhvnruzqmf7l8bfxph3vnzdierj456sbxj8s2ui0wilnin521pzl6cl2krm0t6fkivblqvcgoh431ty2q6yxaflz9jxwi8cu9sqdqcsx01n4tmqvmonqcy',
-                flowHash: 'cipghaahy6ep42iuw3gw4t5si1uknk88z5c069uf',
-                flowParty: 'u2wopggarbs6beqgv54srtzux9wyvkdy06kzu2fazo982g7f2oqcv6kll5nl0lpceyt9m3uvq905jo2bzkob4p9ctu8t0r58msmrud2whv7ugj8gow6d3s6jo6qxidm1dw15zfewv8ug8mwz6cdid7mxdq8pbnse',
-                flowReceiverParty: 'ld32tqeom4714yenyzxqhl7ziq7ejr3kchtc5rqiaigi3obs1bdpjwr2n2tl2i7g2l5azaok5rfwhplomci60644s5sqbex2a2cu4dk8ykuigk6hw4630f1td90odlwsvk97b2bgp6q9gpznqbjc9jp2w16p6ma8',
-                flowComponent: 'rvidymllmpms9ya5iiwh5kcrowb6wept0nhi0x1rez168fk6irmzhqfqrx2yjzwd3uip0kad7aos8pos5yk4ax12bxmwnjwgvi1qgji4w6tj9fhqj446z7zzo8v0pa9y3b1329yq5oejtppq41j7cio6rd93x8pz',
-                flowReceiverComponent: '6wvgdn7qdsdxajjj1ubmb86diu1pw5onwhgcygaig6ppbb8dmerklvop7ke5cql5ej0fzkvfi0d9uhv7lx2claultbqm6p1pqewam4y4lq0nyl1mo7x5m07b0jxzyhpht5bvy9bfhotfziic71gal7d7k3f9jf1w',
-                flowInterfaceName: 'jh4d572914x6mxxza6i3vzo2znf2mfotbdvrvnt3xwets3qjtqfv0eztutl7urzv64cf18yjkwbn3g0qv51lr54vttihglz70xqyts824dkujt0z0nwms5p5k617uqs6mtf1pq1s62u2q3htws5u40x4k3eieugc',
-                flowInterfaceNamespace: '4rp0rzyhh9uv3emw4gixu9o0u640vym0j3985owlqtlay2smid789kikvavrfgw11gnqyvfer37n3ugj6xapbjra094671cvv26zs9axrq15279vvcmlspyvngl2zrel9wccifxuepgfw0hy5vmgmj7bsj303qke',
-                version: 'cbs8jnsyd0o12159aqxk',
-                adapterType: 'mx1y9i3j0norii470v1t2p2wq4uhazvhlclbhxreu341msm1f93ayatwp7ph',
+                id: 'cd81d23d-9e02-4db1-902f-f6d7d2c528ef',
+                hash: 'xt63jg3s9kje1kswc0azvnc8h4kxiuu5m8vz4hg2',
+                tenantId: '7cc7992f-295a-48d2-865a-915d0207355d',
+                tenantCode: '8jucqckcj1w6kvufos5l5myj6e8kf0s6rtbekf7xlqmcko2dxp',
+                systemId: '04023368-4699-46ba-b734-233945ba2eff',
+                systemName: 'iynpexerlh7cx5z3eohe',
+                party: 'zvwy0sz12jxbc9y9rhfb8vlxe33ngkmwmkqu82ct0qd3nax5gh2pvelb0ct7g6wgz5nm9s6sy6w8zw13uuo0ie5tv9vvn9c4ymbedekac3ch2i0wcv5x5usc14nadgxzg4kllg1z76vy0nblv25jmqgkk6ykrf9b',
+                component: 'jv09p90wwc666vgmrloy4xvwo7cqa9nv889vshb6l7y23z21oh5jmwxpo20jl7l41h3tnu2qy2qmovoj3ye1w536109etq28cdf44983xcekov3m1oubeon056d3o15180d1g07h2u9j7rx47662o3ixdjcvodmb',
+                name: 'u2q0nio0auxzm5rl9xb80ljoirdk7c40tx5kljzk6yv2meirdqlrte4dk83tjkfem1c0whhn8g5x6xpi8hqxt34amrcyvkm96m0ncbo2ooufju5qvv66j7mee6dz4u9q8mb2w7fveq6bn61k3cqdf0xtlebqi8vm',
+                flowHash: 'ihs6rd8dotwd6ybpe40frf975bs69dusegxmrbls',
+                flowParty: 'xgjahea27k94xxyxq8ah4glwsah5lg3uqcdezj0ydtyallrort8xhwfgt5963a46yguziv5pxnf2kjohczkzmj8lznkkyc26htgnzzvufptvdt60ks25xpqpu1ko5f9vtc106t9nyp537g1wyxj0zfaryateqljn',
+                flowReceiverParty: 'slctbmwvgltct3e68i2s6po5s7tiqv3ujac5fddfn8umlkappptftnb6xnem2u3g7dta2f283ymkoljecy161ti7xncr4wsbb1tja0j8ryi6ssw4ik9ncxhesnq067v3lrs13a8ejjew7h0pg0unirriichkvfv6',
+                flowComponent: 'imh9lyb36iksw6rm99ufuq848aedddjxqjmie8ja0g3gfqnvqznve9fwwufi4mxalc8gs0cufz09i6w89w1vpd98p3r2uyqabyd08ym5x2gbjlxu67hhu2tji1ubuiovsef0g96bfb7pykz6csey1rezeq98i921',
+                flowReceiverComponent: 'voff375cmacv3lk6be3m31vzrcb62bprbmg43lv7jmqn4yaf6zz5328te8zltyswtomt18prc6zxa5ap3gazrwyppmgocxt10pfeir9e4mpo734jb76c7rd2b613tlm3diifwzlxe13ht8cnujxp72r1jebpnriv',
+                flowInterfaceName: 'svlqqoxk41pf6vyndsq8h9qnbrlxo4dzb53gr09whe64rqymxcm51qmsfuf5u6y7i21ruw5shz5lfeqna4iaqev9kddrj3zqkwkh1xf2wl0ru18wdeizbqu1skceicqw6o5syvi0hgqqrk1v2qfv8ezql84qg43r',
+                flowInterfaceNamespace: 'uzzd850cj3chazngym27azgjuxniutmzth082a0dtvk2kppa1iqh0w9nc4m9pdkj01fi9an960aulxwrafp02xyfvmno8fo42zzj6v8wo11addwznvofnlckfngu8nrcdiyo0tlpzuxuxc1dsaim7xa7yn5caxkq',
+                version: 'zgxe6l7ylpbxxc36vt97',
+                adapterType: '3qp9gsy88iieqvpiy6kazlb8myv9z5es75ewejg9hz6b29blhrql6g9ad3ng',
                 direction: 'SENDER',
-                transportProtocol: 'lrxmobcy9psbx9ruu0ntvhlzqagx3lcb80quuaaklr1hd8mqc2lnflp37cp7',
-                messageProtocol: 'zir4y2orlp5hffbgn6embrf219bj9s4ynkyh20verblwjgk5i4z0mfh07ur0',
-                adapterEngineName: 'xqdfgitpzzhsoep6rssfg4b514f3hk83vh4izpuowd2kzwc0fqcyplg8koid1c5inaihx8kqfz22qdwv1i8f2wcc7kuc6oresq7q9yo4famht1mi6jb2e8qmydew2t5jevmt9dec6ik9se541l1utaah03ufatwa',
-                url: 'n7g0otkonfr4f224eonr1vss2y4caulr0bk3yhnj71bya4t34aiugk59ocevfhjgg86innr2xd00b5e32b277qm5hg5w54axtyvc5xmikaumb2daidpnw1yoqdzv0kie5175p83onjrncno2d3wymxstv4cgw0pnj0tergiw7m6ofd8dyfz4afznvw5x5490wvtb9l601am8u9dgbjy414thg2ibjnynmcdu0wrubirt0etfrtwtwzr802hiukpqh2nlt74qm8sj7mx6tmm2i5tjcyayrkgkn4gtfkcwlw1v94ykjwhnwjss3lokwbsp',
-                username: '0rdslx5rxektxps6a8279l07v86dqoh34sm7idz6w5ojavlhu1tg0e8ef82c',
-                remoteHost: '6x9qvp1brx9bmfxi81zw22jjks4s40sb3vrzbtfnvtn91ou2ky5u4y3vqdmh7ww5goqj7b67xwt3k3gvdl4qirv9l9vl3w1l0ikvzyx8422kwec3oq3aeeb0n17c7h8vbflifoy4x7zxlt959ke4mgfopqj0460v0',
-                remotePort: 9524892053,
-                directory: 'uy5vxmgidri5uxgt6wr63ta6lk3vm7tydmr8zc4gqx891slwltmqcbgssbac0zi24wg39h6id1vr4llbz4io8a78691fqlmsvkbg630tnwtnnbn4s25nod2tsyw45fdb8tymdc60y98eunn7mhybzzmv0zy9u1g7auhe646dw23ub0bkanotujyh784szl1m3gk7tv3sx1035wypbzxvldbpo5vje98u6rhgf3ivj1nlcddhl0uy9os3m16js6gd6flvkzen3zwazyu0bia0vksbtalayn9uog5h2z5sz67shr9s0p6pr5745l8r0lvrw4tmo1w1sd8cm6gyfbre34m0pkpmhizbf0vlnm1uzu70xozr15mpeudxjhafsrxcx80fjw7fvbnzxyuiks5bzvmpo2vpqvdhk0fcr47nj78nm6hldf312boempbkqxoy2vz817cl2dkd31cmlzl0fzc2j2qgmyixslekglmr89xh7cnuy1a14fj11wa8trdawx2rjdi3isakdysfu7arwz6dv86elgum2io4kurg9dh5p3ibdasduc31jmiu7u5oqvd6hy9lbrjoxbizw650smaqo4b2z0a0uglrbtojtqaog6konv6a43jbxxmk5jfp21n6hpp1iz235nb43l9gy83iczs41snv68eip6ylpnr0bkj8m3vq22pr3d6bhk7cmd3gt9doenjc1xxbz54r140lhqt9iqn0tqjxxz2qb7xh7fz9knkjw9tew04xhdyo1hjgpdg6rpptmt7jj4l68955l0n5w5lllxtqdhuhk4omifvuvsawpor9wyi43824zzjh1wt9e5x2rr91uinpu6a64ouybvs95p1ja69ntzmt0kiqja591pruop08ldr32cdein8t1hm0b5e0694m3ou9rco4gt2rgmm0sdxxijhvd556wg4kxzkdys9mnp3lqn5ijl7n54d676fno8kcmiol2koidiyag8tk2vletxhna36drqynq275xymq3lu8',
-                fileSchema: '5wnztcn3u32xhdqpvpoj7i9ok1u0jk5ykxc2z6chotkrmg3ynanrpszbcrngfqqw721q2dm9o381l0i2k7dyjk7pw526qiswz48l788nrzaxp25yrtts8wme3m7l1i8uv40ue8sshmkhyxznmalm2geamhda0ynty9t5rng7j04sg1z0kxp8kcxqyp1ea6di5bt3iti9pxuw0g7703rs8tn62sgstu58n4ii4konw3a36kekddthiffxhp74ejymyuxqgpbhklrs29la0kcxh2swkloiajzmzizjiejehoxxdneclyp9b4ouphr2yco0ol7byokem70ljglnil1omysa98gj2mplmbjr3h10vvpfc1d9bd39hu09q2663r6m9kqd5w3tgd6fl10xtd9s5xyprnze3ye55631oaxvn252vfxaa8n0xyzkii3b1qc6y8hr1nf52sh1nqo8j7s1fns3s2g9029xti5xiryo8ltam1yiiv58d5ejapq2mei493cacrqjy10q6rgteru870pas4aa0f4kpl0w3f4eksf5smqqxzkrwh8sueh5gdzvn3lcyq10xw6uqycwdvpj3g8y13ebhsjk922x4g1ox22wlzg1e8ok8xwus0rtbdj8zy7kgoa6es43spqtxh5ocm5ta43iv4cbb68f290diht19j2u6yhrsrl7v26ml5flaujn8wvdihshyooo3mmjumtrpw8myfcb61kvzdhuedv55onauf8m0xf49dxqka2vwxlmkq5ojp5ry612ss5r8vsf3iuj0eekisvfec2szrb4et0nbjvo4cg0hpkuv7lucbdkg907u01jy47lilpsnabsyzcbbuopks7c8zfk98nws5z4fvn5l06g8uswyt7e0oxdmcd2661xelecb4rh62wxcjx0lonzrmlsz5mee89b4yico4fpnzvchypft4gdx2ae14nqwe1cxy000k1gyck5afb8tdfv8k7o9n2x9k58xtcvdicv6cludbiy2hsc',
-                proxyHost: 'q9u6ilp542zm8le6357suthfr6ol80lztlbw0xavtuk8u95f3cbu788f4msl',
-                proxyPort: 1479136053,
-                destination: 'u679fqi1xuitn2pqs0uu5i92raq9ot1ud3df77vk6jxf0dllycwqrx5ln4nz2soqfmc0myu7sv2ckqo2pjglv7jbujuzdvd8j2s1kyn45npb819h5mqzkbtoqh00nohvy0ej3ix8djfi97phj54me374wedch28a',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'vz566l9ruuzvkjukylx9gb3prhd71hskc2i8x5a3zwvmmxlixoefz7evznwvkm0qbef9vlitvlyol2ufbmfjd3q1lrwovnsllpp3q3qwlmrxwoudbzkp2hdcj4vr5bcs66yrtwit7ozwe0xojoeejil9pdy2mfc7',
-                responsibleUserAccountName: 'amloecvx4epvf2v3dwsz',
-                lastChangeUserAccount: 'w1lkuobcix20pcrs7ao4',
-                lastChangedAt: '2020-11-05 13:37:40',
-                riInterfaceName: 'mgilrecxtyj0edbwf7fsp69mojlse4ppcjij986teowbfkkzrhuccgyybt79qo3q4caahr4gfkfi2i6p41nthbvh08pt7rws7xppwadj8g5z24c7ftif3fhmu2g2xzimgfg5bx005mabr9zkftp3n84qjerniqs2',
-                riInterfaceNamespace: 'kvwlgjnrksburymoo1ce9cy7be99jxzuasqlnddw16a3jhvdbk2m0zrfif48ikwrkwxrr1irc7qqykq3qeulputys0j3q7rdpgjqmb3ed06f4mq2exy9m1vvg7p7y5pg3mtdk7eom48za33sv9q8e4pgdb5v46wv',
+                transportProtocol: 'ynqizf17gensulgdwqy6vo5qefdzxjel56dee1m3wx32wifsq5lzh1rn718t',
+                messageProtocol: 'oy7h3oftipk0s7xvfhug6x7jm21s67twg7meaaal1nmm2elygvrhuzoqt1uc',
+                adapterEngineName: '93zvll82trfqonwzwyl9aimuocfllo0mevjcjowx0jhb4vgawaaoq4ngwpwboaflwr6ildb4kflkm38xzgkx5v6jfby4h9gbqe8ozfwi84srfyiei6gwc0aum132vluy6az0f879v2z07i9w1wcq4olww17zuas8',
+                url: 'li0nprrem0np51l734u5q07bdmx8nn8pn3yes7cupd9gzme6y6f4ojxtbcemqfk1u09rnm5v7k2my9c5jkx2lafputrmjscqc0u2fnkienq6xxwdck7n7ofglkwsizwsypot5pju6yk1h7q4j85o4c11cmbtzsji81gnxtvi4x6v0ui4sd5itj6ppuu6hqvm5d3wwf6j3h8tjgud586zzu98aicv8f8liq0v9qii9gyf2gydvkg9vs4yy1hndf6ybmkun0chva6ywebhb7g9a17rfj0di8xftodoh4rggmkxr8abalgfqhta85pajgyu',
+                username: 'uvtbwhpsm8xkt78jmwyklbsv5a69cw75rp4p0c9pkd7i8o4lmgm9w6u5n7lf',
+                remoteHost: 'img3xfvsl5w7j3ro2ya7p3esv01v7dcdfn02gal21nn561vthrft486w4yvbv1th3fgg6zayf4qqsru7om7m3hu34tz8yxrqslvamcl3man9zrxjgmwxgjktqii3cdegggy8emnl9fml9mxf0r2y9kwhwdj233yem',
+                remotePort: 6225571503,
+                directory: 'cjre7skw18v68o384tbthas5ml63xlwwgp4xwkd4q6u7778ra06dh4txxd6x07td5dnxrzi69y8ry4vaudhfffjraf96in7a9w6fehq6mx6545j9sjr791rze02mymvdqdklcr8jckurxopwklgm3yswhxeumrj7zmw6b7aoek9vlgvjnlbuonvf83qxf3y4x9wb6ioksn8balzf1l7ytdjqz5g6ehhq4hrdoasp2y4rz8m0swwestk16g5aana5aqb6x9ddvubjdck628jfllv39lemzkap5vv1i46w9svycc3tmhuvcnw2ytyyxc5e49sh2x9yfxm46q8j7ny1t09hep9s1c0c7c26hqody56fcc40b2b2dtnyh0fi3hchp43uue71zvfoejqo30jb3j703wfd0vmkaeuuw8hogsxzwfznqtah8joctv4rz9wpmk9rzzkt5dvgug193l8ck9apebgeiq8q2oeo28xsukjp3tyhthy84ea9ejtogyjf496ajbzg0xvz4658zfwfp5vi2q7bt9mhljjje4zpow204ju25asmtuv475eccmct2oluwdyjsagaidnztl7kov3qrjl67tglm3h7lae4vj9vt77vqbkun1hafup75nknx3048onfoix49ik1qdwippgo535qicklvl6w609x229hhg0zcmtm2c3svfiyal97s56pp3vycpez3a04evzykseto5rflbo25qzue3lhz7ryytkv2ubfevqx3lc8tofxhpcmbpljnt034vzqmctx1h2f7jlfvaovk25fjdqnm6jh5ikw8ar7skiig2ya3mhip4a34w4cbendl76zr5g3zga9exegodvdfdk6ukcvph3mk6d0ut3s2t75zb6mirebic7q7iv362o23ua41m1qtquklztuydhi9vnrknd8sddcwfou2fh9covj8tjm4ok9d68o9upnuqoy2etaab00rhdnfjgjya7ltkx0qu9omqch29x6xp2pj3y8ds9psg9i',
+                fileSchema: '6zsk7djw7sxxzemlff84605rien0pxpky1q09jxoci8x36nnnsxgtfn7ty0mbv8g4k7ikzyq9rdt2cy3ovo7wyhx7p1lowhjorr2pagdgr75rqcumgth5nz6e91os26sq2k0ool7a1lfxpwnuyzg01uldawcpblbb6lfebszuii4rkr647mnl0jlx59grpuxwzsndu94w37gkq5i9a9ovkq3u5sg1dveod91gc0aiw1vlmcs3bjj9s9papbyju3fao66izk7ar5y2yo4v626omf3g7qj72fx4j80mzc9dr857664zndshvdheig5qz1r1ens21h5htglojap5ugych5noucvzz47qmipj2hr5w73e7gbulljyb4pzrympugmmv38wex50etm3ynjiah1y6nhr75rpy2bm4fsebfpeq000lnilykplpgwo0xs4y4dv1728zck20z0x4hbtxawyybppcckrjwwqqzvi03gflamvq4ltn97rixdrigoc2iqagxyof5dydh7l8q0vwefv3dl54w27f2uleiy64w76a4yuw929cfrts28xmqayns6revuz2wm2dspqms8mzdi4ld6q76kuyctxb73t1qytra4v8qgrv92cpfyry328hxcdm271nysumjs4ntsth8nr2wq1mqd9eewqfegqygiph3zti5veqhz7wg1z0fiivg08tjw8ykmwoz177c3hdcl9343y47dh2pdu0zeah2ytf0kidyx90b1uagipv2q7zem4flvbaexb5sbliydpt7vrw704zjd5qdbecqqk1ms1vjf14j2934qjid65tb3um92qtpqr2dzxo9dxuwxif5hcqefk4ere1a5xhix1vihkg4fulttdirqfzzppgfxl099xa6emr2xm32ald90zzudzbgugk2123f6oei694s0bge2o6hxink2m9u8l04xfoxupzqljlc9vbnbh54d3ush72e0pntlff1k5qgz79lts3jpdqr8p16iecvzfiq9be31',
+                proxyHost: 'b4wufkycepbj2hfm7x9dvbyou0q26n7frh30flxgucq513jshvoo6q4nj2u9',
+                proxyPort: 9780621323,
+                destination: '8krmtyfhiz7r68aiyvej5fwfls7myvyoyvlvgfybzqs8n81bys46fdmpno5yrhtxwsntt3gkx57b5c9dn7ivt9xqf0xue255d4z7iywu8u4keuleksyevytia0vqhf7yncoqi9z34tfrrkwadvl3czisrcg3gssj',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '9cj6ql3nlkh7x7uo7e1ic71wmjnc7p6y6nqjgmexlnxmtcb99vmmtg4tesq90z2lp3x4kxmjzu6ev2jxn2iwiq1vgql1sjuvyzat2lcxhr4kaqb7xa2n9ddn4at1dn6oa84ev3aog7fm4g6rywiuvg4828rnxat0',
+                responsibleUserAccountName: 'reczr9ef1nymyqwqifyk',
+                lastChangeUserAccount: 'jjrxznin6hqndx22djag',
+                lastChangedAt: '2021-05-22 22:35:23',
+                riInterfaceName: 't85yyfwyam7b5nfz1qhl6p4urp8ntp20uun1dikicrw5maeoj4wp4304148ztpwmlv2yhziqu1acigbhgfl68ewjtt44kftpg59jszkg2n0pokwtladzgi95apbsk8qb8axsuzv9lntswhn0ptxhadnmti3tw309',
+                riInterfaceNamespace: 'tin8d7lbqlf78m27g2propeahju3dhws6n3aw8neayql6egs6w1dqp2tjj8n3bhghnd0zx2qcgafgvuv2tz7tcfsk2xvi9jfcde3y9r2pxuugq2z4tr0xra191bzmdie89pkn3ijw9rl4fk68jgupakq4ec6mui2',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelRemoteHost is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRemotePort is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRemotePort is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'vr2vuzjxh34ovd5nysad23s4kleuwj9yed3cnk8o',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'z0kbfuwal7a9n1z59cnbmlz8zxw7j28tpupl9stdfvau72lu74',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '0jwx36u325hr2o16n12w',
-                party: 'x49u8gqn9nuoz4meyuonvo8mhmgsf1xjpxgjwr4he79k4eiodea7m1jgv7v4da5fk2ks8jktl4kfpcnrdmvu3ox052owxq5glir060buefabd87d7rm48gbh0gps4wntz1xrca0go5hf9lajmtut3dwuoox7l6cw',
-                component: '41vud6697ka5u6l7gkojy51hvh7ha4l5dni58j4fiyt5jnrdkzdtjy1brwa8bettcs5601tsrr9qqsucw3j75xbtp5a9kl8rojjo4l4za1geweohte5vhcphprh0u8krnd8tl7a9dxtmybkis5icowlupplc6fxl',
-                name: 'tu0qzwxx999q9oac5ymnza32p9uaj9662ctcikx0ptfi2tthok3hq3w7kc608kldc2fvbg4hhmow3am8lagacal8qkuad26nn1yogrd1vln2174kuenl3udi7cjdy7wih50lwj0n1w9nt61oj4nm9ti95kv0jkj7',
-                flowHash: 'cmgcg2twmrppga1nhbjxld5zvd5m9xf2z2q82xy8',
-                flowParty: '0gsie1i1grw1dxzb6hiwthp1mdgsahyqqq5dfz3bh3gs686p1ahhcwqni2wyxl3ocrtpemv9lj943gap1uraj18wv5bephbk90ezyr137wld7s5cvna28sebmqlz89b8eyhb6eykt2ixx7gq57pe3zihp8kjvr7n',
-                flowReceiverParty: 'oaq2xqxbj2ku1w9h5vmij5lm5g5r2g5scv6r8xrnrgtxm4li416pncpgzq0u7jhcxwm9x1olthwbl4hv5ek7fixr9uqvtc3s2o58bfipp24zqji2qmaija1u5qej8qqtgu3pj8c4mff3xadjrfqfm5xbcrprbrs2',
-                flowComponent: 'q4wj05p2p93dvdi1ucd3lii9mbcmcbdinu05kgr37ja5irxjboiuvjcsscpptnqm8isdll6c6f29ik0877lzf0gzr76ajx3znyvpwtlbavre6hbk7m4ro361zozqvr0vaoaxf9d98z5q7md3f8ouz3hg5e394ocg',
-                flowReceiverComponent: 'i0bgrbwraqcf4zmv5o5sfm0ep0zfvvyz3e8eod71s4mno7qju9bcu0j4v1a9uaso01hlm4no97hnemeg6j78xebyq7924ce6qx6b1jggowlxffq5bfp8eb18yv82erjrglc2svg6alurlgm80z3dbqfisil0ks1m',
-                flowInterfaceName: 'tpqz8bvbbcez1ob6x6jz9kdnbkcm4g7ftew04bmrbqaq1ers019jhpcj3pydg378bg9rsk4y8zbhac4fdt7fiacxb9o23pi6dngb0b70ktxcjwfhwkddspsxc90trp8rqdcsmmcvr28m4hwzuzcbobzqjrz2iqge',
-                flowInterfaceNamespace: '6ex7xtqlgkbonlcjmuxx3p7eie1delc2c4nb42pfr7lh29j92wie5zxic730ddj2oq07r805gdvtn9te0p58z2s4lw8npse4k5zq42lxfadk8o11w6thvo87rbbphfkfjihxz7musraco5sbo0vq4rlc8j9f2r0r',
-                version: 'da9bm1dt2uhljdi3zk1i',
-                adapterType: 'ldqi0nsk3xm60jadqst47zzbqk9m58sqlbklfdnlsyicgv9c70fp73q0yl4d',
+                id: '8c5ad35e-8083-40d8-a9a1-c7c1a434465d',
+                hash: 'cloqurvrq8bb3qvwi1vzt97b5bo1lnwb5f80ii2g',
+                tenantId: 'ae016345-7afe-4935-828c-abeba8a22e19',
+                tenantCode: 'l1knk3m230e7jhvtp9t865wysj3secxz5cf6y9tv0s4ksy0lqe',
+                systemId: 'f4e1ecc8-a801-4b41-8d86-b4c4363e09a4',
+                systemName: 'v97zkrdwwazcira3n0qq',
+                party: '7xzu0rkctriis8vsweeb8c9brp6ie2qs7gr71qj54hva81h0p4ny4wclzp9cnb5o38os2up3mc4rjavt4431uvfz2p5kjicc92gri411cc19cj5mswn8yrbx1p23vqp9mtrl8usfegkzuwz26cshgm6eetyxqu02',
+                component: '50f5kugmcgdvef9uh3ak1rtqfbupf6frwe10l7z6l5ct8duklomml5oxxjbypacf2xgkdtwxqeo8ik7u0go7e0fspjejeqkk3wcvdhodb17ydvg3hakx77j44k8vkvadgx7gqw31go2tb14aldb5oz0pccmekxe6',
+                name: 'vs0ri5eg86m1kgjz8pnawtdibglldfxwoyjj7khljg5bijdxij5vq0tpekq295iosc21ftnodjidxqhq1k3jeaevaixnhomqxp9z0gm6ahs7u07gww4tgk0nmjscpa2p999p0udhfph42oh6a7rkfkrzc7svt4ht',
+                flowHash: '289ee6911fv7zz5mstkkz39glw8rie3pvfhfpql4',
+                flowParty: 'ie0phvmpksr2o6zdzasppc8thhfz8zj2vy7zz26a0a0n7xyq213jcj7hxfsdo72phrie0bnbr10vowss60z67dpxvk5n9ce175uk0a3m6yyzud70l4p0j8gj7nxa8799by06wbug28unhgcfygb1emb9z3j3oh6v',
+                flowReceiverParty: '4ek5eay4e74webgi1icp5l60vio32xlm5mehztt4r02pkf3tt9maohxwmozzsp8fwyuob2qoeozszqa31odanfbqb5grepfomtl1jmix2ogqrgdehhts7pf2ephfsfa1b1a5vro3cazt0ew9lvmq0kserph2sbt5',
+                flowComponent: 'qj77f15up64o4i7et34kooblhnlnpm7rt89qbpjw5xxbvb79ovxmgf2xk0hcdh50notrejmeyfhmh6bktncoiazikq3gy294n32yey1q3l650ef3vca86iywb5ignndbdftc56u23evstw6hj6kn16uvf4xn21hb',
+                flowReceiverComponent: 'or6sfvy8cdxwjky2cxj55qyno7nsh5psimdqexqfn7p6oiicme248300xq36yeg03mdcxx1f1ut6k15jesxno3ybl1dlkhnzfgj4j4f6j7dpkjj5aekvobu2uvh3z4qik49ke2a6jwsfbfiijulpjydu5qo1q2ex',
+                flowInterfaceName: 'o4o762z9n2dr4b3pm5cj06c1e66us1h8pg3csi9xcuignmm2dn296dozqf646bizhvzotdrdlkpc667pj5wo72vlr405abgrw9kon0ajhntl839d1buc3072nhh03mfsdn2sti72dz2osi232bmk01vd7mkxmm4s',
+                flowInterfaceNamespace: '78kkkq0tp22tg92z6m52lxovexzjfxw9q2izi9u2umpnt8plt7ys784w3jg2pkcs8bi12p9i113ks2cm63ywwaccqglt455i8yq7krgy9uy4a1vr51w0xxdwco13bgo6eyye6in5hqbusokis4wecfnndw73rgjp',
+                version: 'w6svvjemdfzmmxg5nmn8',
+                adapterType: '5wfj6gjx29fsogvt43ip7841u3vkpjjb35gckcclxwllf4amjyi6gxj3k2gy',
                 direction: 'SENDER',
-                transportProtocol: '11t3fnyboy1y5id06dk1zmizhhl8gv7p5dazumva5lbio9up6atfwzgcse3k',
-                messageProtocol: '0g2qyj342ktyb4ck5ddgr41vujym5of4jg90coc4iy4x3b0u1ruv65elm1sy',
-                adapterEngineName: '6j5jhod8s8xhtvzli8pf4dg0ko4bdo60w411fz9rvq17ulcd98oktkz8yh13f3dj27ut9849f3hsa1yfpqhyb9hukmaxvsf9ggg13m392znb8jb5ejl1v4mvjdpp39t8q43zymvva49h956cocruiewfx4wurfbs',
-                url: 'sj8dc0e325wm4vcbr5qehcozn1bk2662g5ramtxa1tepesnf9j49aw3furllfsireyma1m0rct60cjovatda7p3lg5mo9cwk4i4zw191dkhjk2eyhb5dcez4kzrtoi6b7yyjk0ew7lspg47a9mkvsuc7sb5noygmjggklnmazreltvos46z50cw3dskqyuaukh4oyp8fk3rpdploujn6tuqnixu56tirvn0rc5gjerwvnwebe8lxjt131c1j7j41z6fzzdjlx012oc478ujm2o8p39f1k5dbqbnivc2ymqvjb40s8gh455sxemep981r',
-                username: '9pweycyws7aws3qnxdyitj11l3mx89yi6pm6c9j9pxvih1ox87itknv20bgy',
-                remoteHost: 'l7pnxnmvww7z0me8u4maataie2upbt50yj9t4hts41a28b57c2ktma113n5cdwzhydo8enb5bz53zaqh3x59x2cv4qowkcdlve6cml8h7305j4qymbrq6x4htf6oy6xlhnzalhiqdd25yg7dd35sdfprh8bqzsl3',
-                remotePort: 99323305395,
-                directory: 'gchzu5pj2tog5p6c444nk8n4yd4d57594zqcggpjwam0nvv4z88vkcww7635o5f4pumbccmuq2hvb5uw8ajj3lomov4thwxu1j9sy9s48fsoj9ww3lvfaa2ghepjvfycp28eo4cp0n3u7qhhpeal2ofzunq77twcsem7rokl0j9vxd0kjkmxpkcgmx91epb3bb78ymxgm8y9m12n135y9886b40x5h5955nph7n41fjigfimpxhrqil5p5s4z9dq9bjsdenfh3l1wf5k9qkeyeuogkdc31d9un28b0bho3ke3apzd65nh08dmed8wcbphb831dfun6fecxgtpj66v06yyu190o3mx64osblfpvaplhatlekwlqfsri0a9o6ihv77aejaaah5v2p9bd7o7nw7lncu3uad995zescy4gz7xmp1ldxmpz890o28p3un1f32afa0zjacm1anhhinxafvh44ynif9svrqlc33ahzk60qmtblqj4ffs180sbctvl5olhgjbhz1997wu6fw0gpeyt8kf7cr8uj8u104g9g6o90grf0cjbp3kl9awxtb1rddgyh6tez4lwtvjry6oaxttaybyox9mld7qlx1gnirlz8e22dccxko0fgctrw239c9g92vh5b2153r48xei3gs602wftvrgu09zcoyzobi6s4ee2s52dowz0dmd0h5s6hjpqmiai6r2ui3a138wl343hsbpaah7bec1856gg96xb78zey60iec6p7nhm9r61qrfy1mq6vx9fmi497qbv12az4tn9swhesjkhyueetlvssvwzprdkn37e0uq0toc8w8no5j23e5nc3wn8pubnayteyb19xgeuop6ypyhbdkszr2rk0tnbzyzqwcntsojjotfy4yrz76yhhng7wr2k7rlb76lniqivm5mjymb1cfm36tcyfeq4ayihl6eqe4haf8izi7mjw0sm6f3vmlk0xetqxwjndhg1w5q62g0wnyhmxodcts4rvupbyesigg',
-                fileSchema: '8abmfv0j2cpc0marq6kko79re8v4pzlv9zx25ll2tpwoa5rja5cyvzg3h49eo9zg6oxlr6eruemneg6aktr42c2wfi05q7xivp6invev7t4bcv4rhwqy8fnmz56npr3ol6kej8rfhgeu6dfhrr0rw0mrztbqlcvxtocf7lrddxtk4sat1kzpg26derbyuipfxxx9p9eomov5l475gueqeromc6ev9na8q7hzjga643pen91r2sr2ppt6iarzbb8qn54lipkpc4ebr47g505sryjzbgau2cajhqr4ybaqcve47phjn5ca36pinu8itlypte9ymv54ddi1prsjgb81ll15exebelhckunpjcef45z9l4ztrqugy5tgpbi3roffupnj2tbjs28rjkbt5l2qvpj2oqe7k6cuc1tut7hcfnr7qts4lyp0ne4ef741q19irxo7tbuuyhzqoipw3vqculkkqv1fpwe0g66prgle6cj8aei8mblsrk8s2hdc26jm3tdkv7v6uobrkboyry2x0prhm3ueconq3eg9s00g2vli2n6t6op8fuved0a617tb6kc4yi1rxi8ac33j40z25atccbuo40wk5vx3l7bg0mrg5gwyoo3o3clau7nz49vcyokwk4bmsnmmy2zgl99bx9pgns4739vy6jo4cpmfexzao8trh7ijnfqjzsap5pkmym0ydpu64cmxqtg3drzfg4z0jumpn6omk5pxud5ay2wl8saicauhz3mpqt444gnwbuunqeeoupf7s6dxzqoxj2sijnru4hs80yfke9zkry8uxzvg0pmnfyu4eyaeok91d9x12lkwv4iyrv5dlbvaauy2ujwxrw9ojbfqv07o5v4mtmg1xoo7ky5ijz3vvtz4y1dnf6tckmp3x00iovbasdkvb4begmwqhluvl6yla38aa001yuzoock9jccpnu13hx4ddd3tx24bbnybk53x4wg548k4zfpkuqjcmja784vfjscllehnkg92qs42s1ht',
-                proxyHost: 'dvxwfth3oztzute8dkfvmirzi4u5brqmxjjnmd6thp41f07a3tuwgewhybwg',
-                proxyPort: 3526927779,
-                destination: 'sveyo6a5q0cm3wvta4do60al2x71s97qvf6g74dn9qpi75md81ums70wsotahkh0la11gipgpjy6nolyeqbdz27533ju26ophdzvg97pb7161mgle9yhxd43mudhnrhip2h7hwtagu6e3lmhd9x623jthdfqqgo8',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'i0us3y8dg4c49xnrw06gvi4p54v4ol0gv1ex7wl0zoiyvigj5aile7alwdjrtbqusz78gibr49s4ms0gx65w9iibrkievck434itdxt1l9ucq55ua3lgsgu7c3g4iv46brfby2zm41geh51zsiai9jhwsfyb5it4',
-                responsibleUserAccountName: 'clraa94b58b6dtoc2hmj',
-                lastChangeUserAccount: 'zm0in8nz4li3x1b07z28',
-                lastChangedAt: '2020-11-05 21:37:23',
-                riInterfaceName: '4jmba3zafhu79z224ljkybre5md2o4088ryi5elgckwglknf06vhffx61tk5po60q1oeecn75282h1g05f81f66dbzji2akiunqucsurvb7fya7ym9mxd27syobaska8s9617utbrfyph8oeq2lv4cw2tkndp10y',
-                riInterfaceNamespace: 'yxv30xpkw0h9ilc81pil5ju0u2oirffi9ezycorqwzvkwpwwi4vixgaedu2vmsws6vdq494e28cb0sep6unzn3ny1zwi625ampi0hjcyvzah2ou3oq4u0eryp4n2xzwnkogkjl9igkdpaod1df2kqfypfa5t3b4e',
+                transportProtocol: 'aj6l0448xehgjs8jiwuua5pktvzo3o87yv5rdfqs3btfedgl3nt111ka1lvp',
+                messageProtocol: 'n2xp720rvcd8y3j1fc7m4ghinyop8b6jgdlcnqc9su6qfaqsj3uanum9dk2s',
+                adapterEngineName: 't84v91zy5yodw1qdmrvopx8s0g0ywm0lna49nmo7acygl5tycgft6e7b8rj20cdwguc3el610mn1h5vsn378147smu9nhebhncw62fcqmkh03m9nfog3222jq8lni6vcjyhtf1hbpwjgrxzatu84ua5cx24jqha6',
+                url: 'ei7x6rr868izajknd83y4fro9m2lgo8u215u2fr7vpskpu601atrwc90erz0jypok5h74z6dt1red3xgfzxc82vxu6v5n8ko9pxabhsshhmvoqkasmkbwky08krazflne5qxgegfa3t1bl63bzzg03q333th2eoiqfk4wbwpc98qfu6z36ncacqblhtv9grv051klxvcebzq95ig9on8ktt06ohxndp85smkr1s9pwoyd1ijx6pq7rk7k7ei2v7ukm3n0ryq73ahbcvdai9s626ofc4w4ah08cpmg2uop5fp92wxcdj3cxc0z0u5trnr',
+                username: '3ylh8c4ldk4t9gwrjhemnbcwn0oes9xwkb4ghnvz7yjx9o1hx57ten0pa994',
+                remoteHost: 'ewtqx8on8wgd0p363u2dy46kzyu4owdp0bf1s1mmc90in7e56ym8s0dsdbyr4akwybe0wm6rbv0i1zcysm3u45vmqay53gufzop5acxilrqvtiihvcza84rt2yn2bniq908xdt3wopesa5cz2wnq7ynkou4wo13i',
+                remotePort: 61229750711,
+                directory: 'tlilac02jy97vfoulztgegjmcbzmscdtnjyb6xyb3youvfzyr14aihwfhtav6jvcwm23f6885h57vz5m8wbhsn6r0ni3qimrng0hxlwep54dz3q40efo0wsw75hxgukt9f9aoe81nxsej084efg2ll5ok5mte2xy8xuifl7tivhde4ly40nr0602bd3t20zyf2hnb3a2bc8lvloq0yifdes1chuk0dg8hfvevvwxyf6gcvvht9g4y2btgtrod0729iedayor3qo1aq6c9i6a4ts6uws1cxuxtz99ivob29cm4sdxa3v576d8kze0r7k74jv0qpbcdq04frr8p9dbqu12ikw8vv1o65cgyuhbne6vefj138frl2tq5qsyumcnb626dexn836khozizjxs6088y5ouxub8svrbg7e1n0vjfdmuglxnzqrtbeyyy0arlosiyav9na82lb75dppdjdbrm6f9cgoutgjk3qynd9rgbck8ze8o58zu0c9giujwt05b18lsrq2remx1j4fi34hmfq3xx6rfqhqeknrglttt15npvhg4ofl10xx6wky84ugmveis92arss1iij5frpci83zsbvn2ff31o2uybfyua6mg562flyayfjtct2rkl00zwk99ahlwporxavfddrno10ae1dhd09to5ntw169rl2ghuwlzrqgbn6qztaf88oxytysrpwa0tfj455wrhd3l462ww3xpm3i9q5fyozrk6ls8p07nmfpc3mphtaikfsmvxrbjcd62oy8dxo1fbbov6odil1scgkrou8nkg8scl7zsdinot1ish9u2hvr1gmxivvgdo6zcmsiprc46yyjhnoorkttdftb5ojvfuqu23t78e9bt5hyivevpb3a56ypih1xu39zdz5g91oxd2wsi179u2xyudj55fbzo0ganojlu003epg3o2fa513gnnx4o7reomlqiujbklks4tj17fr4chihq959pmm5kxdwqomcmo6eu5lpvvi4zktgm',
+                fileSchema: '309mttk8znik9v8ngqu1xs078l4hfeynkynp6c2kd75wnvs5yj2w326pi4sl0xg47lmss5f83ho1ajh6qoe9bt667v4refgcrcp37f99zf82qd4yik0tsf18y9vag4b5op608a6uz0nyayugd8arwhak2ed6ryw3469ojxxdsrnhrdhvndq21seeaxtbbgwjdtmt0fac1i0lb8ffv9najpczq2mzcbokwfod64065m3cq7jboitogffjlzxsee45ug2slhj6jyxysd9nljfy47x6hiydqb6evyhuykty6m0ur1x0p84eq0jtqyixq61n0w5fbtfkk8ubzh4u2t9p0hgbxqfifymjljvznc33a1iaohqkps24kk900dyjpnpizg2d9qmxkjmetxw3xmslqca5z4wustzbipwgb926c9izosq2tsdrrgicqx80q4v8f63wjelgwifgnt9z41v9aj3nv5kvac5sj33vqq4o2skiw1991hj2nxky6j60inhzmhc6ars7g91jwup74fq3371gbsyrbe5jbhesvh82ch3n6qapczfa7k8cl7re304cjzwpjdry4sa5j0ycapyr3vnigkfj437zas16mqksnby5yhqmnsvg1vhlep52325af3zuc1hl494eawsxvlao2c8v69q018f4xbg5sgkdrc9yxvlhs0sezrf8llgxjfz6pno5ytq2b7bbdyyzwtynh9vgmf42nrpp2ty8g1zbjmwk9rfp78sa7nljj4ak9ocsvxsdprgyemvmohk71j06fcre44qmra1m9zrejy2kn1pcnmog76fkg4yqe6yajux1wg17vbec8kohfh8z9qyawy3y9ymb22n0xac2a8quez68qg5h5rsmuqjtyjkm4rv7nnpsbitnodjdc2gasj55fqnf4ix653vwkpluj5n1k02908vi8v5qstf0nw1a7ap0m1mqv846krjdmxxcba1z3jmrvm7gfxewtidcq6wfojv4lmwp75rnwafehjxcsqey',
+                proxyHost: '24fwlytpci1hgxbxfr890vthuv7gkh4zr1euk71to1kfq2kj98pgng1ru0yz',
+                proxyPort: 7278122482,
+                destination: 'ic8dfup4uh6zh8fobhc8hns1nv535nhj6w2hd8tnukzcyt8byj3hewsnrw3701n74doo2834ru5n50d3h4ad32aexby9s7q18zoiyjatblt6hoe82lafozjkag79yled5jivp1cyx1am0cn7vke2ujuhoxta2pjm',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'sny4tyjvpycgf75tu5bl2nhe97wg9odtem8zgf1tr668i41717dpoi0q68ibxdhl93rf7o91502d41y9nu9fxo2wyif1ot1vvrvlosh95oswghayfj3sg5gk08ucp9r5t90tyvx6ck585gpil78trelmkxjyi5co',
+                responsibleUserAccountName: '3qonrpi2lok1ygl851ed',
+                lastChangeUserAccount: '5ma0ckgu0j6ts04gram6',
+                lastChangedAt: '2021-05-22 18:43:14',
+                riInterfaceName: '70qdbe3iendw8j6uf5ue5c6yhxyvby8n4s0mrqiyesaq986uu7btfqdhp0nebv96b35pe9i1jul3s36cm3yyopzlat53nwmm2j3scqxh6uxmbkrz5wucj5ipdiq3b22x2roobfyn9rklmlitg93ay7s5o294au00',
+                riInterfaceNamespace: 'w1dvqfzd82f0z8iu8miqlen8vppvnfa9f415thki4grd3l59kpgcqe7hg47qcsdr8bb7q6b4adr918r7gmsat4sgvo7tufkp9qecfvkuvgknvwhulk7jdpbzghbkfgo974m3b424okfdiab3ob0flqji5tjfmp3i',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelRemotePort is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelDirectory is too large, has a maximum length of 1024`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelDirectory is too large, has a maximum length of 1024`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'mwr3ou96joisy6umcfo0tkkf24x209z9xug10lnk',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'gzlw325en523fise13gve9cntlyead5glrpe5xbm052p80xt2g',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'k2punfr46uubte7hjiiv',
-                party: '3460syn7m9enmg7i46obw9dlphso6e519ht4zptr1gjulfg69nssiw2xwfvueo179nhwaf1jq27dxmizutgidpsqsvs5xfpgyq2nyc7heam1vwzrpzhj3ksznsgik3a45k90ejyw80qliletxo1qcrelnus63gdm',
-                component: 'pds14xf6y1unhbckdb2kgitt0gw01wnu8ugq9lc3ijsqe2107nnjoc75fo8t138995gwg60apqxpm4hbx5ruhbbal0wu1f7f72q0ujoununinxe290xbn344umo4o9xmymm83hdn8lol9opph1iyr6yrbtqjrcl9',
-                name: '46m3vpr50000d63gp1yrlvowq2vdeu7bk5j53rc9tx1ga0y8q7df4xtpwh9tfkhvopkra28sv0qsucbte82lxdhaj7ccpatc7yy8ccd52xh7yfowhq7pguff7t8g4c0xuy3fwazaf63bshbvbe5qfnq1mrbxfmnn',
-                flowHash: 'c55m6ln2rkqeiypoql3u6ck4wj45iact18run5z4',
-                flowParty: 'xh2wfaacne5at9iueo5uxrve3n6zlwv4fblohjcgauk7qxvfajodifzuhh2vidrjc8hem65rrws8p05z4sil33i8qgpr5apvhum5mgpyer38dngfva9mw4r07wl5uuqibyw434q9076vcxuhxon7ldxi05jdvxn5',
-                flowReceiverParty: 'a1oads0d0u70jhucy4p8r74yiobcm68px2vuf0veh4xv8vsghf9snh3l9iqzsszfzo7a7b1ou1d20i8s08hld4e1zh1u62ftsz2dcvog1pzlhcvwbdmdx490nrrezplmft58yachxvpb2d34gvv304myyhachkp9',
-                flowComponent: 'wmt6m1scn3kofhx1znhfu81gunffncpqr2fumz2bbttehelk7p4cf7tt6u6w7k929adgnl2d3vb4n985lbdo9eazguvzirn6q7ddxzzwbafi6rs1j60zen52p3uwspfxbg4ehyc90h7ctmk7xnyhnmj6n0n6nth2',
-                flowReceiverComponent: 'm89ssxk4hhryup06biknjfmxocvs1xo8fw1ua2x64hz3xypqddllpesizogez35jbhrhsmg5v24p2dbc4f7quug9cluus415i9esg7er22pi3cghioztsugu3fovtuyqnyf7m2oj0ayieeyyehkcg4540ddyjh42',
-                flowInterfaceName: 'ua1g8akfbmsoktgpw4oh242nok2vczk7c6jwo2rjf4k9lqqo0uydzp4qua98kqbwcw87xlyfdy78dbeprfnle7kpejcf93e2ri2shb44adjwiadasksg2qr542lec6fd1t8oudncp64ve4oevljnhky9k7796qgb',
-                flowInterfaceNamespace: 'j5y2e72bv5y7mr7sco1t65wryv7sb6wq64y200nc4b0s47h279e8eilzt4uaxscor13v72edemapsa822i1oae5tku4zqcglj8uywo1qa2onex770o0zo331h12cjazx2p9av1zpjr4hgbw2jc6baztnle5o3mlw',
-                version: 'h3fvvydc054oylhnz79d',
-                adapterType: 's85uraqbeyb7que29od5v5eh88lckejh1qkt6b2cpuinzng95udyjggcrh2r',
+                id: '4049d521-712d-4e56-b498-f847f2266cec',
+                hash: 'o7ugi5dgm0g5txef99yi2sn43pv05ablbthgsl2i',
+                tenantId: '35331b73-99bd-4f17-94c5-51e831720fd8',
+                tenantCode: 'ok2omz73l9gjpw7xm2igc11ri9rrpkrnbf3ue8wdv7b269ep3y',
+                systemId: '7f6b8781-dda4-4824-a99c-f911aec1ed35',
+                systemName: '9y96vr8xolh584vks2p0',
+                party: '2qwtrp6prfykrotunxaghl0nz3f72behco9asdeg0sizeucu39ku6gm0cgo7e1v4jpl3nd6gw55ldkrlbtwlc6qj4vxdvkc8i8pqrdrt6j01va1eoza9m48czezrcqdmd7puwkkisqtsdtrray8qt6ekz6iu8jvu',
+                component: 'jabcb40yryjk7pd7gx8r943pt2xm02m0h6060kk8tc0ivvdxtuwtx912xsbv96zk7gwlidbjs8ju42z31dkiwc8muzmfzcohl3crgsojneul4z6cgqesbjwz891dnvj86ms35jv3hvzhktusz4ac50xv793gpr2n',
+                name: '5l5k7141euw0msp37toxlkc8w53uvznd2mg5ys7rvkijwtyi41xs5c80ua1695w7uj41r6r24t47zn1griwc3uydydjk3n8q6hsct39uol3mu82k4q9cbx4xjhv7o3jkjocpsifkat3cklp8skvjrrcbf4px2z64',
+                flowHash: 's5pwxfyx00ypmeugp8leaevil8thawhiilx1m7hn',
+                flowParty: '2a3ux6jtv0z9bccf8ko7dthwwf8jean4obrzuqiikd6uifvk2x9zqayuxxyiadzxsxvvpmtyf73smv0riy5qklo5agy8d5tutkszzosbp3411zlz9c970exd4yd9r21oacqyoi5hr9ph8mmek7hjc3re4so6zv26',
+                flowReceiverParty: 'pvjbymfoihv8ryqt4fz5ec4adjo7153ea30l1eynqcgga6eirm1en09nmy10l5us68i47aonbpznq7csyea6eypuoh2yek58cwaa1704coppr7syi5jzekpmh89anmfywkpyni0cfnrbtkc116kbw9eua1xq21wg',
+                flowComponent: 'rhu0lt6xmitjcgst23oodxib5mnomy94gmdb9oqiwidmr3dhhl6sdfwyujwfgkg8ipjjlgy4ye22qjg8ucfchfr9sqvaf2fvr8d5lxa85k7n61zu5k3w6vtzvevw2mq6l9hvs7b71ogogttfjsc0gdkljpidmqj4',
+                flowReceiverComponent: '93jdzb0hv7fvnid4hndnmfd400sv4kzoy3iokzzh5765n7pnu8sbsm2ecwhn9plvmjq4wb22ksc5fikf2vz7z9h4o66zatmsgnd0qrkzsh62a5jy0omg8goz4a8w6l5ompleuzmvkx5ufam4ufpqsn5rmujd7pp3',
+                flowInterfaceName: 'w8u7jy7ns1m4ihmni13jphkm615e6hzqhjua5ld4tka1a7xpahlw83aswr94nshoczv29gjf2vlnd0j2jtk8y2j7fitpkrcn4wsb9hg1878qufapibueg1q5ro7dtscehjxgxf0swy4wndt1984uoom8iulvc4i5',
+                flowInterfaceNamespace: '1gxeztaljtmnurwy9reb0h7dt7kca4vk5fyxwom5wvpieacsl4yu0anh8uaxad9vho6yfz7ji634l0es433slmguacfhqvaorzxuoygcom0ssf9rgxacfsz33c5gwbyxkz81quzl2m2hubsujdsnsj34cxzyk451',
+                version: 'oy89c3ijds829lczv024',
+                adapterType: '7cgqfoozvxh2m9fjohmtqey9021vpxuihahoo8mccsvlw0p2shp68jj6xyay',
                 direction: 'SENDER',
-                transportProtocol: '42ewlzzpuw63huu0x6uho8r2gah3ce9eklxxoq49o1yj2yk7njb2cl9tql6s',
-                messageProtocol: 'oqem6i6cu8bu8d7uxgaui480wr6e6kydxle2lpnwjbt48r2rfnkb4bovgpqu',
-                adapterEngineName: 'cyr180fl7a3n0nfu7thtzp004xmy35ch275ezy8a95pbw86dxsb4dep09jxp7kkjyjvuur6o6fyifz1mryfc9g091o2da88hmh5a5rpuoyrb8uo61mi9npep57ooge5hq5nc1dqbldgvgm6vqj844rm0bnscmpwl',
-                url: '7fymqsl4rucytj7qn83ish2922a9wpybdzw61d20stut63no60p2gllyyb8zg3h6bxd9hufx3q1yx3hl2pp12dcm4nsouzvjo7fskeg76eku4euhh77s6khbknj2q99tyexhwi8pyz47lkno1cmbskl0aw7c0llhurfpliu6alh69yciurqf07fxczowyp3ev3m8nfvzumegz30m0f82at0bwqhlqpwq6sg5h9xddtkui61vh483lvyrgmocduhtmwe0l5xoww3z928y0f6ot7vo6yya56rkepqqt3norlypdld4k4sx6pirybjgivpr',
-                username: 'np6vbi32mtv2t29q4rt7gn5x1e46n4kxa1e8bbwb5w421z44nr42blsd8jg2',
-                remoteHost: 'zkenncle2lws56evg8ug0qefqirjglsx4ae81txz2nn9v9dy8shyrjpwymgcuw5vlz28uobxgr3zoivf7b6ycj60hb2nyay7c2yg3u4wdcf7tfybs7gqgi35biliwnprzq6a2mqn2ptfntamxy36pa1ffbxlyuf5',
-                remotePort: 4191938678,
-                directory: 't6d73n7ep7keilj72ntxglk4z166q43kfvmvs60bvvpe2st6ytebf7be08nb7htco0q76ajx9rlesruasdf2p1qzungypz0n6jhyw43suqzuibvwf8w8g9rpxvfbxtkjhglndcg9ufqll9usue79v1nk54wm9o8x5k5m4k217mi5uy0e7h9vicv8ph2qphgwo4acowvgprt638c7z4x724tsofpp9u7rlrje7j6a8gymrar7rom8g5nir17o5r7wqjal6xrhq979214fzrqp5jxvlsazggzol1ur916m3h1ypl4nfbq7fs3meds5z016nrz9cfk9pcoy4bblb4kxsu0k70altowl30ju0qjmapvoxd74s13d1d8u4uj6jya6btzhv8zsgu36cj6b3etlbov06rikywkokfb3wc7v1baghl2rpx0b63zfai3hgpklp3ympbwmsbvvr90c6vo0kbzz4es7dwwtqfjf5h3otnaeyod0uxfiw5sknkyecun06ghog54tdkad3mc9qc7uab7fr4jtde904c7r7evguzobari58xib12i49uwcqyx5fe0czirdzorp94mejiq98p8rhda3ys3rrntqbno8gop9bobzcu0x0axsn3yry3ty6m1vasb0xi1tkolwd4cp5udkuayif6e0pxrrgxrk990f9ilaeu52y4itdykc4gifd754k9c33swz5lnuboxonqcx01ycb3s2cy21zm0w9d7nsp5c547w0fh5b4qalpr4xvahwk79gxkbpjvd059w72foxasx8keqekot5r1tvsnqz0274fkyrzf9mnnflb5zprlb13gq10w056rpvofpfijel08qyljn6d0966bp4y9ap3sfmkznhahbl9bsmwn8z13szl20v7e7n90r0o27lpg1kmfkt5skgv7eo4xegvwa2iivw2ilpxg36r2hczgkjegsix5qjirqa0dnkuooz14g5ocu9hnvmfeipmhuydb3qmrlbte1f50m1drhznrrr',
-                fileSchema: 'gtvoc2h60kcmafky1856cher13ngsxk9tv615inugmn3kjp2xljrkppkd8p46e7bnpyyidngj0jefg9k6kogl0gmd99xw6cazg6skq90wz42dx7dynrf60mys9vjmedyae99xc3u30vk19ioi3f2ilxhgxe5e24itm0yk9sdtnnks6jszt2j4egeqlb2nt6qvb5qv47wejg8s879ci0d2597h6wqa7i8tw9m2rerrgj7uogtm40gpkdic24uzmd4ap742qgxrmbkcck66lfjtyqztnxc48t5qnis3yi2h354mo405imd3j706r9emii1d1q1meb2v9f3mu6kbk3d1qw0ltqtqmptiaoxhjoytkridzfly0dt15mpr2g7un6fdplwahbhvw08kn85uhdn85kf6wifotqzt68xf3hhqry0k0lamq5c8j5g1kwscqzh11ec05juuipat9uhk6hhsasf2p1dbjho3htgmyitecczj65x0krc0rv94wv1jongao49vhaya3ot5pqacx08hsa7xzkrvyxgdyew1tw1qrqu4qhb85136w2pvgjmwp516kdyhea0ent0xenikshsoo6uy0g7pj0wq6camp43y6g8t4zq9ez2ahup8bcdipejsfdqtekc2rwa12frj6a3n9topamyev57pd8iakfcee8q49nuxrrarqushaueyseiqvsivc09l7lcw50vulipl2wjnc57gtz95pd6dv27bwlq2g1d8fdbilfr6vwemun03vpk9pairohu8r9xke3p3k3y92oegrmsv2pbu8zt919ig0yghvtxgakjnm9lcan2crgwd1d9bvslmdtjb89kgvn18r2jkiof525sfmfqn7ne8jypz78rkvzil40k7aaq7ifyfgs3aclv1wmq3nmi3og8n1zw7uf3h5vracwnzdm90evqnb8ibqmwuxhofzesipgodjjijzjkgq08b9qc9noqnf44d3qwmctwz9i2yqign3n35ibrde9vjgpto18u',
-                proxyHost: 'zx6zqppcqrse7tkux1f5s04mx71chqs8nqofvf5illly0g8vleyui7tdkpjn',
-                proxyPort: 8302981278,
-                destination: '4mh4o5us76dm2jesqje6rfz47kaez9smmrf8x3069m9hpxbgi5jtjvjtmhsjm7wy3t5lw2icf34r0ncr878aq0s2hnd7c814u74dpz29i908uitnp7uekqkna9w5e679vww8irz7jh6ayg6mieu003givazb74cx',
+                transportProtocol: 'a00kgu4q0w40ee69ytrwm89cat44ljd1ut1y4f50p1qylbdfi5ctzk9q3p49',
+                messageProtocol: 'vf93azdemd0vp4m2vxbdbwvwp1ul2bnlzq08jvmqigbavf993dfhlj83nslw',
+                adapterEngineName: '67v9nuag4ieuo6sd9iwhu7w487udgag779m90gvfej5yhc8j458fb5y0l2h4i420ejiwb8sv4a3vw5of796fyy0motylk9s1296x2l5tcccfuubwdf82mo6qkd2ilso8f6273xzmb9jze5bkdjyk3dxl9klz5e6l',
+                url: '3x6g3qr2o856o7spz6d383l240vltt0tqpcm1n4an43t0ujgr34g1e96fkh8hp7952p7hi93u4dymy0e90k1cjvghtxm8tt5w7e4iynp7qxb3f8q7n9ofxz6kcsolobz60kei28sb5metcksw5aa3rn816ca5xq6h398uyu9ai77bxle5cr935tzsexftm554g36qc53huvpulr7f3q278snl1m7mkjg8908tgqi4oz894b69gv70ynm5ly9mxq5ozbnug1xz4mpmbqcij2qb5xecp6g50n5eigdaxxbpmww6brrz4ci26xqmfchixmb',
+                username: 'id3bl24chvl2e8yp3hccwx79gb97blxktucym6vda5r1c7qccllbqp7y1x79',
+                remoteHost: 'k591hfinstrh0jerbbf98z18gmtfvzisd1hf3f0j35aeacj5xmef1552txe0vcpt26p3j77ufeh02seompwc4dnwpek6di77gnrihaqda6py58svbnfwlqrdj96gtsiziz1ggequq69ng91lhe0h6418lwwy3nu9',
+                remotePort: 6345196447,
+                directory: 'j2ogn2gdian49z51eare3guf3wdqbj849s84fxabv7p61npg5jbkwbusanvgh9562ckx90fq2u2cy2c3lf15vhhvpifb2d3v38fck765tphthe33ru264t9m0098l705egqnuduzrous83m4t8myuhfw8hmhj9imn2nqa2491irbhmch8bhp0u1vegtjhx6w0okp4wz75ht3ia5zspre8vmugwp6h5nl2espbckq3fimbz9prtgeskg8mo9eqpzr1v7sg63w240rff1o1ck6fxqkfunxx6ialuh86vzls2gxhkqbd3c546j4bq7cuyuk4bjsqnvi3jpk8stprymb43uvpdtg7qufepw641b8llket4zm9omxt7g1giaoh2obulbefd37tz4yila6hx4rduormzdle8wh8ek3qor80nb5b0rt7w3ciwedejwl6vvs5ra8fuuguall94x50o8gt11n8hg7ud8w86xowcuxo49jq3e568oxhlyvx98oumpwbdyj74bdhd7agrnwslrdo3bxcfj7gvzu6kzr5lj36l2jbh38xupm0zmudsddzunak2q7s2h33d3ltdk02f8hhy0fnemja7d9ne4h02t9lpfxm53gfk5kpizrp1krderni5o8mmhqis31dm3qwwof2d4hrzkd65ccpbnns69rmi0qgeldx7ts2vods22huljwpwekt2zummgcuj64smyljglbk9o2ux1uz0ad8pqy8ff826n353qgtul0jjmsdc826sq49j9iuy4w1h1x04aqziq3ytzman5qf2efk82sbiuv5z10zyr9hvgkjlc164619v8sikw67j3rufd7qyvn50gb0a3t1s0gq2gxbdagf3tbgr8ecdm8zbokcljwv1tyxryrekwn3fohrtv7pgerza6sjz1lf11cynofocd22s3mgg6i8t3n42txutdzvfes11jwe85887v42l5mcctn80xl5xdh8nfw43swrsevwgbrypdk9qh8abhmr97huvg00',
+                fileSchema: 'jjwtj4ug89qjzju4yqk51n7eda8qp9k7bfwov463h07y4569ps5m5h2e1wdh024oca01kxjg1r8vukqnz13zl7ryehd1q2mni10q9zav0ylzfz2y8u92unk6l31unrz2cn0abkn2facsn2k4ynm1wgi4wma7l26tsb6wzqgs4s7haojvtdzptwe03dgc3c7573ynudew6wxewowlxml6d1fpc8wiivjibugagzmm0lu78vp0dye72d0fzy8pvabzy9xp0ts0jq34ztbtosvztoyxkk6i259dhda6iyieqs32auda71tghsghjqc468oebml7z4yeggm78zxtr79v5havgcsfhf8qyf7cq2tgvluce67xdgc2erm2fn6ks1hyk71dv24pmdk1k0zz3pduxkzr2id1c0o3cp030ff7ws0wojr1s73wix7l6mqeotb03tp1em8kf1rpzkv6h2kis53mmg2tpiltdtejfain3xsvnimv16gl4do8p3dztoxoye0sppb516gzwve2p2z6n4xpo4l85ohzh281kp5xz9uwch4rgzkdvmdzbr6w7ht413gi3cbyif7o1runx1pwu5734m1lqtikcruw1fvxjscksjo65qecahkf6akev0fqgykcbetdgpvt2jf0036by4z0ak6nhxdbyjyadh35e6nps8k9xgcbnc7azoyyaelsscswaht50t9ovg7bfph6247wqevgsmw33t2g5z0rcmkjh311kvcc2bel0xn3jynpk5tpqlahuii16pp1i6sn9pk4drd7ycecyyiwt1rkjt4bthg9cebnolagmoqwyei6r0mlu3o28xxn00vw594oi1sxgxql9ou3anoozmc7gzpm8imt8u93i32tg4ltc2uywss6b7trl6cyc6880rvcrwca059hgg5vba8k8xqo55yxanvdxrd48x33ty3slcp20207pl3sblqhwq9ypk26oy1q0f107e5t6fnjlz6gfmvo8712ydl3sw4noqesr3wk',
+                proxyHost: '8ocaidlgw4hzp4z89h95uhxru436l903tsrne9zi7vjp6xghy0hk30ueqknl',
+                proxyPort: 1253497065,
+                destination: '65wxob51a4tli7fbnhw639flpndeyg2fpavgr4kgsxlwelzuwbcayrruf41q8nxfp4tkct20zrw3r5oyw48xqr50xpjgq776blw0zj45yc7kx4p6yha9zz4fquumsgxca3fbwrde7s3g7xw82eekwzz761fgvsrs',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'z9da9cuu2dcudkuz0hojbqwk7q7dzwoqwn9gfa4ijl0rxbcd9tuh7ucghffsbalck485hml7k9ms44g3d3goikq8pof97cv7fzyj95xrx2zycrq7vxajdd8ti2e0odqapulchbgocpao81nzf5hqilq84qg0t9dr',
-                responsibleUserAccountName: 'mp6w4742qtlzcnu330e6',
-                lastChangeUserAccount: 'inpybq019vtd1kjr61cq',
-                lastChangedAt: '2020-11-05 23:21:07',
-                riInterfaceName: 'x6ill1w1plg5hm9mkg23ellfre7wbjwe5o0bpncnnsg6rdgjkz7tuszdt7ruswnpcm1n3d91eoifk3s4puoqgctzmu1zikrpn33ii6cb21ba1xwmdapsqb9zpckuqzhrcaarpzj3n2ikeah6hdcb3nyrgxnvhdv0',
-                riInterfaceNamespace: 'k4wh9bvxogvl98zb9igc54rxg6yvtlzqxwrxbsz125eqd0ycbf02wsynpnuzl9qqlmsd6m6ywb46fwoniuap3ut6dtmhmlyl043y1eaamlailendj5rvksb856ctsj9wns5193gerdp2w8sbl67e7drmlbwzdmkg',
+                softwareComponentName: 'yp7lr491gohyjltvikt3kicwx6984mol40hhxs0atl7z54rk5f506kpkk8ylghim90k4gpj6wuzaj0xo7phr51hufhwrq0n969ibibhdgrktak7c3p23xgw80j88znvx4b2y95pqpnadwr9mcd426ul6fftmtht6',
+                responsibleUserAccountName: 'l4me6zd04tb9oh0qth6n',
+                lastChangeUserAccount: 'vfqvzwygh0q58pd03qk1',
+                lastChangedAt: '2021-05-22 23:59:21',
+                riInterfaceName: 'jtnvydxaw6grcihy17csf5m3fikj2tcxztn1loo5zo0ogf2m3f41p4c41y7zwozvobtpuwid1l51ux0b0igjdiyvjczdeqgocs1j12yoh7hbtsyx8rbtj28m69wstdp9q8iemvg6tc7pvhsl9zx8krxly6idyplt',
+                riInterfaceNamespace: 'iquwet0ybubu866pny7g97asn63on2q7bn3o1iqn89cymx0qzg4wbhvg9821xybdb4j077h9v1mj79pvw56mkaao2ruuivnhxv2snojew5t9ff1i27sxbs2gr5ngkhsi1ktqlrjowz96kjvbkceostfan3ein79c',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelDirectory is too large, has a maximum length of 1024');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFileSchema is too large, has a maximum length of 1024`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelFileSchema is too large, has a maximum length of 1024`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'ocgmvzwkmi5mt9u9wtzf39mt3d2yz64kir1w7320',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'x3m03xt6u2m517oaj2tbdtiur0pqq8cklouyxkdfenkd1p4yto',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '00l0jh40ivxyu94jxptf',
-                party: '0e241i9835ugmte6hqh32tbtd9w0jylkr84iu1s5np05ntkuut8u6hjxn8qswh2a261ubfng106gml99t97htpk6nccgcl6zya8l3ma62mbyxx9c3kpx1feno042ryshuv3n3ngkkjb2hg621x7gnuk4y4en6axt',
-                component: 'i1108xqqgayj0330irrd6ixetbjr7rgt7m1ff1afk85ic4z66oafdng9cqzzdz6mj8zwbrn27si0eoobwbmgcjvud4sju217dq8joxvojuprigjak4qk2hjgbn6ux0ytzpufmu4b2sx5k4wi1kkw3hze304ad9ni',
-                name: 'fmenau6ai7709dchfvimicv1psdotkbuerrs8bl2lmact3eeffqkykg9pziofotq4wnncrb7ycpu3syu8mv5w4t6y4o3m8vt4m442lt4ik2va411b0zsw3rc8hdtlx4kyr8tf5eze5lrv55814et79hn0yhkwfro',
-                flowHash: '2zcf1lhs4q2d0hswiz4wtraszcyqo1aga2flptif',
-                flowParty: 'mpi1n9mn6slec1lmblt3hhn1ji25qfi9ptm2gvd2bgeuwtuwjlcg5wwmxeijqzti4n8s7su9xebwjaxu6eda330t8jujeigonjfadry3wbqilaygq8rt0fb8m8zuu01wilgeabgezf5jd3s58u9gwcvciqh6f8dq',
-                flowReceiverParty: 'fxnss6b6tox842w79twavyizibxiz7hn2h0h4bcimtr4nh5z29pc7kmo13b6mkxxrezyx4v0da7x8tq9et49gf3eigih3l0v3xgmjhdbyorkn0aibhneueodsm7gn5c8easf07tdq7cqdiwv7vp387torgfqdda1',
-                flowComponent: 'smkfajx6hbsa6gjt0ml3b6c5vstp83wnrhm0fh51z966plonwerwf5h1yy68qv6ogm64wsbjnqw1sdrlynpri4894qf1ucrdup42si9mk47egq52i9s06epow9g8g340l1gumkcy4z8k66pnkquaviteilnkyurx',
-                flowReceiverComponent: '73ifdunqnc1t4mmwnxq6b0rokr76ho6g27r8mre20xoja5ar4grapdrpnko1nu6zzdja0z0qg4pm693c1gjjzsarrfllqhwb3knp1nmeaunyfuejnosflcoxs6sbqau7d6sthwjwcswusoctx5zva0wg0l7bkig1',
-                flowInterfaceName: '2j7otcj3w7ijbuex1cabx4rwph321zm6bc4ns85zhf3x917klu48z7b66no58ks4mi3c9uhei8kccljyv9972zy6wa0040f73j9n2gk4bule3hh7arph61ggctg0a2btrignbns03y3k4m4d51jrrfjgr7juuvor',
-                flowInterfaceNamespace: '98s6jnaty0gth6ihnzgxyrzfy9nuf0f8qavec70742ldqg4qsdpt4c0nxeqwwid7llkw0d6oz2hptgq9gt5v8paaylw2si07kw3cc8oygmvu2xeq0buqir0ytb9g6riox5wmccfngdvqjdd18m3eqidk3hc2dfhn',
-                version: '3itz2rb08i0qi0oi2kb8',
-                adapterType: 'm2z1jflnlp32viqhhlf90kg1e0bxloyhdkodvrqq9gn62sdxttahejb68n5o',
+                id: '7d230df8-2e58-44cf-9726-88303c89c7f6',
+                hash: 'ocahsm2r9sqai2o3qlajzb30uf3f7ixt4cu08qo4',
+                tenantId: '28b47c96-0126-4d94-8350-f9b0afe1bb66',
+                tenantCode: 's5g7xkgoouwpswsuq6rs8m33xutq42a0913zbkq6m5qexn58g2',
+                systemId: '4d136076-e6e4-4260-94b5-73b290c69df3',
+                systemName: 'a3c73fsyivwmmcb8ccmp',
+                party: '0ssfje6qf7j0dbfke0mr8lnmy1suwwnzegmcob3yj2weul715btevnf7il8tncilyjkov4wnyqlicn0bj2qxvr3vvu2q470mexmifh0clcvsiflusc0ugwzuzps4db9b7pb84alfwk8pl9mwehnktqiquybrx8af',
+                component: 'c50ylkpfwgfd2asfks00qutnq83wl2e6vd52q7uyohyoppp7lqkrezuxmfod6848lxqydtpcq394ujhmstsrfizi8c5hsvwlhv0qhms20186dd7plva4wuekqrnnmpoukzj9v7ljclbi4ly904zzc9mnavxj1g91',
+                name: 'ddp01p4hjaa3s6ptuwre9jyplw74anxy490knnnbkplto9gh31iuoyuo4y1pgio2u4clvxlxbur34fpys5g7uyd7x0b4usrfgdm9r374g92w7tu249nm77eqwflxu64jcq9y6pnldnjyrgu7hr9xu1rx2la740xa',
+                flowHash: 'ssu1wu10a4g48gsmq9ueg9zffr3i3pg4rat7jcdo',
+                flowParty: 'f507ymasulepjr03a6wuqgqldzxxau6yqctr0avmgzq5v09z47zinr335806tdytn2bbb1wqsa6yn91m8rys5kgsflsi2shju6pf7lb35iy032k5bpslz2rofwyprbnzeoaglxig5q4e9f4k7pzk5645aalt8nn7',
+                flowReceiverParty: 'e41ua2pnzgifb2vxffxqffokic51vc7id4flbqc33kbhtxnyvdd56ao6tyx2zetanuhwu8oklcysuwwrir40uxaerdtbfq8ne6c729xmywi95n3a4huuto4zdm5xv3l2ot6vcmk1m57kaoq30o4waoz0y4lpnrdz',
+                flowComponent: 'dmrq438o8wt7lepxz5ralveru915me2vcvytpe7lj8kswzt6tq5ef86yhtaxeyopzp4690ppcwn558c3fjnxr2kagfwtc9n3kjqac9xyn8ch2dy1x9dymui3rteadnlv7z4zzz1q23ttmjwqrgy0fug74hnv9zso',
+                flowReceiverComponent: '656kx0w4cmhs38wzx7srkcrap306qhjqkdtyfgukyvu8augkfn30dacdff4oph52274kyzpcysh9oj6eys3186zymxrngl1xh2ysamurzn4r1cbyw5isnfz24v85d8vng46vxupdwv7ev4pzb6mb4gm0q31t5trg',
+                flowInterfaceName: 'a9no41ddgx93r9d7qfg6ruumrhao2danzxfnhp5gmhbfhkcdfoq154h0vfjylh15mm1uqegxuglhicnc2lxns0odn95n8xqbg89r8vjz6tmrf63d4sccyl6wz01srxtbg3jj75j7fh93e2lcvjgy4ysri6epimpr',
+                flowInterfaceNamespace: 'hm6i1kobrfcbqxye8j5b2d7z3yvhmvmqe0n7otllzf02zhkeph5x63kveu4l2udvy3l1bzsxwy5rifrttlfoo961pojifb1v4rb4u6xf62as6r8bhixywzvrtx3r03wy4bl0fev1976hc0ljqg2laej3x0rs6m3y',
+                version: '2na533abk08qsdazdzrx',
+                adapterType: 'z1unpye3mvh3a2o5du46mwwxb4syosqqt0j00xw1bhifd3fgbpr8204k7sdf',
                 direction: 'RECEIVER',
-                transportProtocol: 'bidlee2xi08ftdw7ipwqx3yq209kwlcdapxjrb5hsuypnu6awpfn6fip1z1l',
-                messageProtocol: 'rpgztx8omp230x50rawrftewmssoe2ur8qu8jxre46ozbcar4w7jt0ent50d',
-                adapterEngineName: 'au552ike3s0u5rwymotp8kple2ixi8hwdj8ohtper3hm35p0g5tefoga0erxo6ogazym3o2q645fexitls76hg21ef7mzietwcbjpt5e5kgy7b3cvn76b5x1wqjm0dcztu92ij56o83j4kwl1c83enovorxueuco',
-                url: '167xqrhsmxur7f1r2rwyds48gfpfocusllbpvz67b0kex8ov3674z5hjgjh00wgcv2vg3lne66mww7qslfgbvvkqx9i5yfuf6ebbetk0kz8zv6eiocx1w5vbx8pukf9qrgca7ov88arrkxv0o58kfyr8zi8j8ik8dbwkkvul9h87yyhrvb2bs7eqwdhrv5nmlyq3a7cjovx2t8xrknqk9on9mrb51w488wjq23upmlam4fnql3wri7b1u20nlymrx7qq6qwkfcu1qwecyvsnlk2kc6uj2721deutlcpgr7y2qo8avf4b82ro3onkse98',
-                username: '8g6mi75az7clt3lj8dr6f2gktzjuqua7sfb6fqctszyvzuf0lz0i68vit89w',
-                remoteHost: '9gcxzvigcjcekzjcvegi7o292ez8dkihtoy2ool4bzlk3pr2e8615bhyylek8jwk7pcdmqsvcx3hpxy5x9mewp1538wn49rub1ls4ahx8o74o00hy6y5hcx42gjiz53yjnrtayrml3eevt2wz9aufa5uyekp3ywi',
-                remotePort: 1241067831,
-                directory: 'qi8s4p59fqu9kupe3l2jzrucq05rkzsgbs2hys5dg6ufl4twstys223t4e1m78639nlm3loa6yqhrhn779sr3auzfu925v6chfiggbvczka69eampg642gi0lgki8gn83zx4wn3m26tpjgtxtq474mzfomtgrh0vuy4mwolsusc8py5uzp295xrtxgxas0mcq8kepfqfg452ef2s9uf7e60llar4wozpp1b5vunw7y2wasfulrb97vvqxpi4l6xaf6d0z2982ddh31p8zuwpxj5lk9ydlr02y7mrg4xvzthxygtn661wkth7iih5221419vnh4iypdz8kfxlrzhizcxz8703fpd58jrreknedttfq8qmipzc9pntelf1a9rwoiq8fsct7kaq2ebg8jvp8lpt7q9fkcms4s8h4ev82n82ee7frciipasvnciz35fv2038gbqydwkvk6k4elete5shlxchr4lq5usyoeuozqajzgpm0z82eqsqpzwwjo6ywou1lses5msa6l8juip66zqyfy88detknbn0envm3avxz5p8hf94v573wklqryephq28xxm9k6nr4pxb5wroaucu68w0pq8n60nt4z7h407664mrao2k9kdgm7is4ajs7qz1hsrl961gg7ka9mlrls8jwk8unrvnlyqc739654an8tg6em1ybqxy8keyqe6yds4e7z8v07u9a3dakl3m3iedakaf8wtke8knw8ap4mk0paw9jmf2w363386wuna4f6872ou1h7ypm4r90btxum7ddnjhpmfo8z3q09ft2kzlj0for2j8qx2q4cxni6gdskzpn2tynbqlwmevi4nk7aang9bxhlifilpsk7g390q8pov5vgxx6416vahpcrsbp333q66m5ezsfs6s0fw0h2j43xlh49j37afs4yed98efb95dkhzfx5di6spt6lypo77zf5xojovjdtp8g9r4dlwmrflz0psbgu6eksxfalm7inein8bt7k5nd3v5gucn',
-                fileSchema: '9cwiw8xfw2t2qjndfseejbper7yvq52nkww1xgdfypuixpvhe4mlnhef12wve8ln09gd1qfct03s2vbt7a2t2a2b169w97667uxr719aiel1zb5pj45tthquneh1d4eqsw3poheafkjbzpxwvacw3jr1mo5rzqvuxylkibw2uw7549281zl4zgicu2gc4d74iaidq2lbshcxy7f9idtdhz620716kc70n73ay3ge7ufjiv9ccfaxajx19kwj8i0wiatxv8ze83jj49bmsrohw4e2lkei9wh3qo6qjon5ev4rou81y63hm5rrvgumbthj5jkowf4qb8yocvg9ngo49hg7jydadu5bm5oomcdoerjsx2abp2oq125d7rlpag5uppet7hao7sn4gxu2bqblchlmdezwmtcao1rgpkvc7x0yufq26zk39hlujwgdbgnqry1n7uwofnntlx1rjv42zu43ho6e6mkcb8hc7vepvmmg05vo1td3n1091g3gbp5536gvs4iapnf2hznh68edvabtfji7t2c205xna55yanmgfryog369jktltt0y3s6357zbwd05lbc1yxiy41qdv2az8dnc7xs91r8f7iif4iw57utlbt5gxgbyqn03cadgeyola3ldw3n6bh5bwukl149ak53gmgnrl34brot9nk6drunik9e3d8c342jo2h3nz58ifwu8166y8r5dmj8uxeye91dfb5xz0w51zo78ufdqxx546tkqo2l186vja0tpgnmzud3vhnk301gkubdb426kfoggfcknzrvvz1tqd1056a97os7uw532vomx59r0fs4xnvb2ihhukhh5ifjsjdjpsx0ck9ky8mjd5bg9wzvzexrv6w4as5i0ef7642t99zn04dn9acdrrzdakero7ri0kkof9n2tlxuqmf0ypr5ynuc91deezw5plinqrjeuxfwxdb38m480tcsmdgg466v9lz1dmv0z33fwiv3zh5it7uawsj78digqsukpv9dq9',
-                proxyHost: '4rue3ov9r8yevoscptvm1uylvpcvz7h32e73bidrzyvah7hwpm51qubb36pm',
-                proxyPort: 7542472762,
-                destination: 'd0rpwtn48g9dr8cpm4fs1zj6p4bttts4lgjfwg6ukwwfmubwo62q7iklr67s3uxxdclma26edzp32w58c4hpnfe32wjcx2e9p8fwq1xy9nvf81r7kra57rx65utfgaq5h7wergm84jglkhobny7svg9nqs4gri9s',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'ffg4j0k8vhcjaw6opj3u7s1xuy6vv8l04ms8zj2qut8okpoc5wm7t4mhe9yj0v2otbi814hfubthupe8q65ew8ekebcxqzfb4bclki0iofbbwgq9xtd5g72x4sxwfaxagl6qs7mxrwzcucqht1lnbvmyzn2m5o87',
-                responsibleUserAccountName: 'xbx04gegcwo1567mb961',
-                lastChangeUserAccount: 'bo0extf72niofey0xrct',
-                lastChangedAt: '2020-11-05 19:37:57',
-                riInterfaceName: '5mxcyxascsrplwg7b6kvy9uhyenoqyhhmh5s3cyq78kj8g1wstyahzj0gzeyluxgp1bo3vd6lw7ablbm8rt9kbkifbvuuq0gj53llydtaz5solve0icms3235xvudzaf0zvs4z37mibs79rx2kun13ktsm8t9c3d',
-                riInterfaceNamespace: '4q5wpauggdooe8gboutxkm0deyurre1yyjmt1vsd5h407hzx5awg3ksw64yf0spldk06c36k5uzn2po7um21pxa9jhsi0iiaffehq0os07z4gt16040m4xqir8sumgeenq7z3g6q5n49q935a95pvdytbgmt6yhz',
+                transportProtocol: 'lredkt43xwyilddjdfo5k58a464t4hv3jf0waoi8ziadptwak08qw5qo60q0',
+                messageProtocol: 'gd8c3jlo2rxsfmadasakzrtnztid98fhm0bnfb3fz7io46jo0zl8imtaaxjj',
+                adapterEngineName: 'ty6a3iwk6lafy80dtlc2h5t263cyglhjs9jsy3jmwxie7bbk7wks96syfnjr80400mythlwrrs473h0fshvo4cxi1scd530t9z650zube2ubacqw7t8gp6q208bnzsg7bwwogimkvj103wt48lie4dk4u0seye7h',
+                url: 'm13yn3en3t93gj372m84q1fhxy8ji2jpt5aek3mzqr6yhzky1nw0e4p3g744thu9wvqsd5vlnexce9o0pzsh812b9nqzix8dz3efg2l8zugoh3umdtklku8rnf4e0zpd199ieholwyey2il1f2dae9onfa8ssadrtgg9w5pmrhyjjmoimpjbfpqy0rxmbvdpwutm319ti1vy423rvq9pwfqggx0mpe83dys12oe5ofhy6pb76fww4cezhrhywyv0ec20usprnrwr8t2re83c2la7l66baz5g71y3vf0x4z8qi2thr2tx1jflsf7yzu1g',
+                username: '4tatec9ckwv88onofrd7rjm92bg4az7ptscrmq3jio9nyqx6kh6qrs2yxm41',
+                remoteHost: 'p5dp0kdv28lpbed9jssqlvo4xd632yrbdur0q701qx6wqe7e5x9zbzxmm4lt110wcqwtz2ti3c4u2bizsrp5ssa6492o7i8l4va2cmoa9arw3m2rzip8o8q2t31tk1czpy7gpxjjmj40s1rkkmctuqn6157r9nih',
+                remotePort: 9730058996,
+                directory: 'z48dlzi90z7f7ra38mvmre3vbd7i3hkyhmd8or8tqerv4l39u1wa90p91on3sl6s27nyov3tmgymdmd0piunh4533cyqne8y41tiesibg1ma5oiz2rdnf1h92otjoahphtvadth1b2gkglzl7u5o2f1lw98yq4oq8it0bu68w7zgu13lrfpktwm6fwzcsekwa5ng8v955apm43qecwzrdiwm71abrod1zd0gxvv6500zui83pdtnt8zy3sl6kcdudpbklahswfugv74fpzh4usfgjbdfm431aligktk1df9oldy2llqzlxqutjbu47bxpjl03pl75s13j8ruvosn92dq0b29jsfzqmwprpvig6oytzf1m9lx6h3jnmh89i8jqya5ij9lzg4dmb8sytpzfg8xchvk5t7r9cqsxd22np14xl8y86jyi67ynhizfrhm50tw31eljjg92xcv8zhusbznca3iwkavprsm3szr7ggrkf0oogpgvvedgk2lbhcc2jz6jgtsk1d73g2zfkmlqmmnryxk8dpskx07rh37icuneod8r8350n3kssl67ysifeakkd9bwojgp95k2fqu9ixixh7yxnoypvoun8iy9vhw3tbr9nyg1y2yuawvp9v941c0igt192rsj196991iwffdnmk06843yg5tdux5ihq0jrd5rrfhyf1p026cnceps81clwajcyzpa0g395djrdlpdykpyw10sm4kay6hocym8sutp2iux5fqqomq01fid0np645kbqd4xy4i8ykba4yu9av1dlvg0hhtaetwak504ruhfp24nawap0c33h08u1p2jylok3x0s2hrcxntx8uwwilxistp2m435ncv4n0e3noc1dmajywdx3ty3pjiloe9j3s3zbg9fyt7pvcs0ch2xviqq1t6vdrb5a00nw6frdt05zfdse8c08mqka4n201ecoa0gktpyq9yvbhb7tpol7kw6euqewakdcte7yvu7bbk47pj6hg5s0y98pnb',
+                fileSchema: 'xkv38ognvstmnqjobeoo8098cysl18jqydo33mqyyhs2z76nj9gdfryk3x4ipa5obag61u5tdbhlef9mcidofrlk639l1so82pfz0b98plii1wifeypxbq21ensad1enxys5n80gcxpmxrojlab30er2dvs0ecu7bwnfzla3mqrowxuknrm6s4k437thty5j09rqvopp2m9au8rsr2w9jkw63lovuj4e9zm7p2s171t9liy72s8sxiiltxbekpy50mwh1x1407xtsfuza7u2u75w6rnb0xk1jpj8n7073pbykhn00ypeph4lfpap14b27zmw89re7ys2edg3303v6up1bwogyo9e5gt618uyi0n5ahifuqk2h3udx3prk9og7y56y0scf5tozg79co6tsf8kk8jvydaa6kx7jnn0a0lzncu809vevxrr80c9ns3m7p0dh2tybmchgomdon514ztmotq4z0hldyqrdoiprednrb5u878ptjg7y3c9nlw1ztvpwj9nr96eps3wdgrjrz75vur0yw66xl55es72yrc97308c7x5pcwbe08zskf9zxsvg8r5998cgmkjlw76tldjw2c85x1xphcm1ay08rz31stgygd8fw5oi347d6leuxlzvboxgeho3t9jufu3rjaqutyjujdl6s96pl1oso7az09y4bedk7ywi4yxhb5oewj05tmuqo9sjhwu5x329ki8c95mqk8u9quf522tz4n2nbjkwilzc2ugzasxj0oezfa0mx9eh1tj20vx67m6cmrfbrdmvpxkxj6zxpyhevoduyb9ytx5i2i5n0b2zhbdj2q0zv06p7bz1gy5r6g7wxvcsp9gmyhyhj4phg5yxpygn1pvs47f7a6s2ng9mnqxxfhrmvq1ryxrlikrsur6jvie18p2mjoxrek52cyqok501kzecmisbkiclfad8eugn0vnjadzvouxw99jszr8d6ifetdi7sp1506hidtvuzr470dkg4tezpfst6g5qolf5',
+                proxyHost: 'hbjnvoelssdg7s7m8npk3q4meinse6jlfxq985ldbhyz928nks9te0ot7lc7',
+                proxyPort: 7166502211,
+                destination: '4d6i9vwy696pp77g61q70r3z6scf29y15hawvpec4rchplzyby5beh1zqh47mxuegp47cyv6d5yzn0we5fhoqozrn67w0uxnsi3g5xc7ulrzojejho0wv61s7lvjq2oheakioilyuygemmta9t8tnmppvrwya6s5',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'vzx1ho8v9mia2wvu4t1yvuycosn7zr4j0fpz3n7xp31way8v0jq7kdswk429ylc8df70q9j9bu7jqo1pmuc91vf9fwr4y508rg22soo6wu4ftl33ezih7s1o5wxaludwdjuchltw5svg078xn4nlq7mf2ltwirg4',
+                responsibleUserAccountName: 'u0tuyripb752n1uq7mve',
+                lastChangeUserAccount: 'e67dhn62vl1dnu6w6zn2',
+                lastChangedAt: '2021-05-23 06:51:29',
+                riInterfaceName: 'utv3y77cbhcsxry9ee7bdiizug965323iy2n5ilu2fyn3bvkpj4ge1wjsgtzyd3k13lrcldec9u23tzca65ef06cncn4jo2cx3qpiz1cft1mdqbzren9270y2usbd2twyd36tg71hfx2gauzclsmzbk9lwp62mqk',
+                riInterfaceNamespace: 'n569u3069ihdl5xn74a07y613vq9432mcuqpcrf2c8r84zzm9ju51z05xbmb4kvitpmcgwx3vmmnkqoioy2h27plnun6i80plmc7913hvjoexnkqr1xpe00s5yyhoe6iv4a3l081oiu0nxwrnejfnvb2ajfojr2c',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelFileSchema is too large, has a maximum length of 1024');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelProxyHost is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelProxyHost is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '5udr9ncevo1mmiu9zkaacgcmzlp3zbn7ebr18llv',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'a9auzps5gh4a2tf43vcf61ixp1g6f6gd1b243y00yxby498cg5',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'rj4z0huq1lqlfdzfvczw',
-                party: 'yovrzz2xrr9l32gjv90sgeapj9sw40p67hdcyoil69vxi6pcl10cssn5epi33yczqqqmtceenwu6hg468w3k1kyznmnhs1cavwbz5smgz4awt4lak1xvv9qrfkinxxgcewgse61ro9jkm1e92jp9wxj8kv6sm3jy',
-                component: 'xzvmrvg2ggem0p4ivrvmr27pq94i0brqq0w3j1e8e5bzjl29czkmvjtbubmfycj2292xb3efhvufeshibnvbimysy57l0jjya6mohv6up6hypmaokefghrtd4a8tseu7sukoakz2w4gbw00cepix18ezzsvgxt45',
-                name: 'ur57s3o162uv8lvyossbluexflcbh0tzx226ofrjxdzq06nutyblzrbhj72b7j0qtsr5dhyhljxnm4lxcpdcslgkbakhiewnzydy0uxhhro5x5msbxmluq4elu1o8pbxrxz7fn1hp7871bdu77c5ek2b0wcx6bez',
-                flowHash: 'srhz9awrdgz07109wqx6dcs6dzx5o72jeb9xglsu',
-                flowParty: '16ukflomi5aaoviz7z5yyfuv9m99qatxjxs5ltsdxi5g376fh75i7jpmrxsun3b0g846ykrjynjsbh4vi5xoqve4368wdwx30eib4n9s30n9l1ay3t3hmwv4tcinr5bhwzvynxj0ueoqe8db9f5dqx09mf544x8k',
-                flowReceiverParty: 'tg6az2wipe2b6uzytybpymt1ubotgw826j1guikkivykn8s1q1tdk671fezgq6y1eh229ybnya8v8zj9mlih21fl4f27mc3xoz0sg8ww0ofn9iz5kzxflvyrwau3yibt1c8guj24r6po5qiu2v5qc3ycscv5mxuh',
-                flowComponent: 'a6to9m4p1onob4mg6loyn18kt3iyjju1t2rp1ajbxivjgsp3cperpgdcp9tbzf7l65koyhxgqaed6fiuz2w0uqddp0cajwid7rrt6n70n3uz9eq0tioxfr1bjocbqtijsbuvt2yz1zmn5at5se021ufx9ln9uaxg',
-                flowReceiverComponent: 'z0dz8glv6bb915qh1zioewmxf1vp41yv4ykmldi98on3784z490j000a034rz90yopnto7phg3qcy8to36b80wijyyhgse6wexjgnok63bpspyer2e2v3k0mov1rkmt91fwqn20h5g76dh11ezhpdtsnhjuvg9g2',
-                flowInterfaceName: 'ytp1zg6tjc9o43wdeoiifcv70irj4wilvcryapxpvlh5i8gi8xnwrrimkkq4x39dly7nveesa75xllcny1sfhgao1y3c59y9bh4mfi4vkk3exsecmftahhl17gbo0qlz9hbsjhwjlpi01ry0j0ss7srl11fhcyjt',
-                flowInterfaceNamespace: 'ee2c4d775tjx77lb7ydbarq2queoue9r49d7qq1eoig6meske6aaezrkw91x73j83gulkurzr6veubcub92k47hpp84phbcwh8mqhh9n5u9zu5hq8p2s5kkkyndzmfajatee9xpmvipu1g7u9p8zwi3w1vb0x39z',
-                version: 'q41jd1r7b0oi4b9ntbq0',
-                adapterType: 'wev3046ezp0ho1oqwypra48781p9bofk3k1fljbrgjhartjfem0nps4lxqsp',
-                direction: 'RECEIVER',
-                transportProtocol: 'fbtg2c4umff3l4g58yf7ym63vyjy83qudrdyv6fdrvt3i83abkw00m302w64',
-                messageProtocol: '0ahcrciwqkwlf424tbf6g7ftevjpulqm7j2pdvipq2iuexogs4ajb2q8fp93',
-                adapterEngineName: 'bmovuwz2y73ll477r7jf8al2qcvhhy4w7qughs1cdfvxo5fjctxb9pkxp02vt9wpi474i2zktc1h10xw4grlpp1yryyiswaqg7qd51j290zyb03jgb0nevj06xytt8sngbkf0cid61dhfj6hk6bdmnc6bw5nji9r',
-                url: 'a3obicqiilz168lh332pro6p2oz7zmxxadk4jydsnlxsqsd18oy44crtg5zoi1fge8g9j5i81gereg9k5wcac33okd30xd7eo63cji24odt462c3z862sykgkjfjuowopg5gs6imy3ih9sbyywmvrw7zrg7ns8iktr3nil7jooybxqxd4o906fcsxf8gjanrwrijgojtq14pfl5fia5r789aubmv5hknskh5z9u3orfmfv0ek4e2578nccxgnip839gk1h11tys2k7repebfe7jyxtno4yhgfr5p6gowqyoati7ftzxo0x2a34znkebs',
-                username: 'zm1mg4n7tfh3l720yjga095v7vn995ne2gqxzy8il82ghjaag11iza5heysg',
-                remoteHost: 't1xxa93y44nqmx455zzwxrnc1jkv8ksonznowagq33b0g85c8oc5l8bqeiluagt1m5u6fu4xt127wegw3sydrrrv4keas6g9ti904cai3tuudvw8wqf0g7b56ln5phkvz6t900mqgdduu21wdqoyl7r0fo7j6uc1',
-                remotePort: 6493369300,
-                directory: 'x7c46pnwjh0w6fiasium9if8h3dhy7p7710ab2bt3yi36625i15cdmmkemaxki5a718jxmdrrldph2tsj1es0h8wru204jqi104f2855n21xh6v3zfonevvgsbknb74aid7rawx31iwlor6ckkvule33djurodk5xfrm1g2olhqlflllhdukd2f9d828b244jp1fdj3wxuyc4pkknb3o6fsm22300ubqd80vxzdsg3jjmkrsr6xrjh3tjplp9aolc57gp41yeswj8jk1p9baizerr4ptobptenuwwtr0oxtp0yns9pdoqlgchq1f2bj597b37ikhen01jr6015hye6p5wb3cp20c77y858vmfc0lbrlnv5759zd0b2pqjl3phjemkej6ip34b0x5ynv4d4dcv3idw399l6z9b3f5quuq7si8v4hyd76vkaekp8a76vcrg2ce56d29hs9ucntexsrhcdgxashzbxq5ihb26qo2f04j3w5vbi9vxsz8rxqeuv1gi4ff1en9ebd28z5o4sf64l0hktb51hd0mygoupgjv9pltnb8k39v5g9kenf6cgp50ev5whb2wrum9m6iolw6mlstcko4wieac6u82no34w3ku77h3ai8o9ceofkx3aufh3flrr9a7hmqqw5rouwum4bisbkcwvvlvdwul19su798aks8bf6da9aoa42x8kqr2acewpwulmx08ftcg85s2ilvtm4nyc65f79wdmwj3gfex6eiw2qpffenpxz687bwo1eefl33qoaiiwkimpmbpmhb0hi6u30tlzjfl7tu9tdg1hh6eempshg9wpzog8f4s8kdxkzohga5zy6yqt5m17ee153lkgr9wi7oqv8djbqrzccp5zezhajlh3xoeflv620rmmbbw22xffv2zoee4gb3lqsqvwer2uswx015i8ylfy7nkimsikuly7cq5cdfndtp1v4nbif3pjpln5lc6mox2pe81ywohzdt5xbp7dl17j70lyfgpsmqbqr',
-                fileSchema: 'du47bpv7fwdxt9k7ebzzivy6egylb2piu7h3a68izb7ynb2p31p3a5s73l80khd1mk6yh2ty0oc6tdx7rf47p9qb30e41kv2ey2ggsypd7p9xcomjlubu7wa1epv01s1ry5lz17vinhu2gu6llz674fjw04a25z4tbbwdya1fb04meq1zq248xoutmrbgy7gb85u23x902ogj8d4w5u7prksjwctsiz1rg1rgrzkdams6s731yn3l9w6719i9l8p6amxe90g1ewmju8n114cgplrt4fo4unfd24jvl4ladsly5dhhwekyqwj6ggukef5k8u4rqk0dxh60kltzd9dq6s5ngvqzgkj5cqqg60ksc8irmdw3asotfjxkmclhv0hgr8e25umwmadbic1aot4ustrjmga26x91xnmg91y85pi59ccgx2ts700m25or42cn0ogck4rr07hyxnpbj3m0dhfkcnh1pnqzv5nirmnygw8vhmrbbb2mc1smy8rmju3aznw3mucvizuw9cjehmj7dlb1d8v5ec9egykuunx7g8g7kvc95p17egaatuxtucvq9esxohgzgrdajxgnqkvuagdu5gp3mra2ox1ai0h8wbsmwmx8ngqr0u4oaeuwzcmpe63919afa22fobxrh6mji4sqoycmxru6r14msoowtfihuvhsjoxc81pcsi5tyg82eulobib925g9n6fs8c6eo85ksgg4uow8dp160t8vtujw5n6xvrlt8qx27wu0pzon3g00gh8dpda9xzydckgylazkeneernbqan8e9pbyrikdz7rhpvhutcjojcxtk9xag5awrq2640jugoyb3j2iuxxwtbnuungc2ii0muq33hz4hgqhq0nq2r21tkgm1t7iv7vltq5wxbdhez41u30zzayr46sxbjtjr145kxerqc2emah1gj1n59yyua4r97rf17tw9tb4vumakimumwxw3gsosagfnmh6dy63yc6fmtkcqldxlqymzns2f38wie0',
-                proxyHost: 'zek44aau938fo7yi6tcq9iuc4jtkuvmxzwp1ksgujtctr8qbdmt6w4qjl9ca0',
-                proxyPort: 5011049297,
-                destination: '2yvcdeyfj45rg0cdlncqpk35uuna6r3hxzy43c3hmk4n4c2ztqa4nqbh2bbmp04neasby8huf8t1fbkk9jd3jb6mekohpyospkfbnkscjbyzh6g4yzlg4ik0x846c8rgvamb54riw41c5hts11n0oz0rf3lu7acw',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'omvzo84a3inye410j27mjq6vc3tp6rzos5bzqk67jkkrv3hfyzxmqbons2cgtokiuhusiktymz60vcnnx8yb559y3zgsu43t1no2q2f5vvdik7lgypbp5qotxmk65stiehxg8hwbf6bkd1yokbhjnq03hmmbrpbz',
-                responsibleUserAccountName: '4f7oqwwc3sx0hv0f9io1',
-                lastChangeUserAccount: 'vx5xaqxnxg4a5ma97f4y',
-                lastChangedAt: '2020-11-05 16:43:43',
-                riInterfaceName: 'zesiv47sodu5r2eqblfksggn6qxw6yd3lsk4d277xjzoeuuyd7kpgxet04iqwttygeakjr36jay24fp2cz402q9tyjxjxtpnkjcrmxbkjlvqe0s952bj17boxambbyjw01w467mmly6v6wt80hb227o3m252qxix',
-                riInterfaceNamespace: '4ddjm8554bqpktj9ia7t198bj6c61nfn15vu7k42ekqrzx1qn3wdplf14lvzlweu0nhfre2cnr8t078yypor4m5o1vl6ve3qdp1ua7k08q0why4zy4zwlwll5mcs7p55c3jntt33l69znhd4vobyehlehvxa8ekw',
+                id: 'b9e74b20-c276-4869-84a2-d64d90e0a0e9',
+                hash: 'asyv441v2385nbesbml1lwvg10eoddkkapb07srh',
+                tenantId: '0df62727-ba9c-4202-b5fa-d4ee745187b2',
+                tenantCode: 'zcowlxgvcxp3vmgy2m8adcxtxghjb42qkdctmnp639cvavv3um',
+                systemId: 'f608a11c-d949-4051-b0f8-57d071722396',
+                systemName: 'zxx5tcpnkdok43wk4ard',
+                party: '1h6t6s54rayzv2xfsdh6g73ysk4yz9u12m737r2of12a5n98xg134cknwrmhvcjvvbuspf83pofbnfyc72r8amk4b1ne3mosvnwn4lyh9bew9zjwheg64rvblrp2k78ynawmus1xlli7wtvp6slou4mbejwxkcjk',
+                component: '0ezq022keekea2gok1bhqetbsmdk9j5i0vb6mnvvwnwtscwsbde4ombjmrh0e951r97ww6sqrjcb28l855tpk7trrtc29hcw03y7t9ppox51no3mi8abxhaunx9ctlo4wc98flhscf9jlul9b83en41fsem0uhvx',
+                name: 'u7zt1kbvfgrorha16gpx6u7ei85xcyx9msnzoywjyrk8rdxa0g44iwatpxs99yw960gj0hark9fgo9i8m2lx5g4q4iat26o8r46k3avdjgga49vxy3sxl3owq8yjlhiw0sdwb9dnqhm6y95fmgoh9lnnyuxx8l26',
+                flowHash: 'optsk74mhyje5rrb24brx4v85xbk38grpt5zfr01',
+                flowParty: 'h58m3v1mgnk6ncsimz77qx354co6kvz5h51dg2o9o9tnsg3gtswxhv2pp1gojfwgurhkj2247hvetyccxwjhlcizv8yf6n46bwtm2wtvem3ojlkm20d8x55yklwtcmd149fswk78pleuu92joh4eb8re92xnmpma',
+                flowReceiverParty: '8967xdpxlmq6y9z1ordrlxl3iknebvz39kk8k96op3nz41otqbwmr9amyc5aitt9ozau3tu9euhgcbg1ijmh0gp5322t7ed1ehphhl0m810beqqu2dbq3jiagf09erbx7wejylhty8fywto29y55lth8wdg0pzoi',
+                flowComponent: 'bdi2e2upfcimrfgtw6codcuys2zk4jugsvc9r3otzoasghxq5nmmplrkzifl8ofi0z8i8w535za9x9hjxrash1zrkw382aielgds639qxg4id1gary6dulquhw4hfy078oqrkitmqczkkvmc6mlk048rn3xoidy3',
+                flowReceiverComponent: 'wn3bbeckdmw1xvuv92aldmnmy2inb1i5vj4mwifbkkibfkqztpwajvvz1zvtj115k3pdgcd9ok3mpcq1vyepsxh53dr73v3m2l30dq1yvdcbe6izj50fajmxmtz8xl9bmstrafcj98lhqts3hgwqtsnbgllq7b08',
+                flowInterfaceName: '48jzhh69x6m67wweklpoeals41wx3xazbb1fiupwob11hvqcqzz2agac9n9itcrlsvugwi0bhb07gnvayuqrw3t8k26lr6oyi7q75628qfkusnqgehq935kso8cln8cc4ekef435bag3gqxuz5axjbmr0znqjfaa',
+                flowInterfaceNamespace: 't8h2jz9dd0qwea0sjbmfmqfwa670p2qh9cni3t39ljwpqp01g6g3p01fc6cw4x4cr8dtxathbxh82gcrlkhgvis0xlqcny9edgxz67gkh7vrcnxx0yckk0un4w6w1n8ijjmf975qif3y6adltvr4993rpyyhxg40',
+                version: 't1r5zzn2ytyj6micn6we',
+                adapterType: 'vnizw18nd1kc7bzjfze1d5kf8mll10wwhbbcmrbaykio9sw6m3gc237sd4bc',
+                direction: 'SENDER',
+                transportProtocol: '7d3fwfg9ljexj6kizbe5dsthhsktyp6bsy0drur1sexshpjq0rb1w8g355q5',
+                messageProtocol: '0za7jq67eomotbwbdqq5nf1hzobgsviuoscdn2vcw8zvijjw3c6j34p65yc3',
+                adapterEngineName: 'ryapn310hq1grd6nakx3nm3r6bn2v30ddqrsnlmq30n0hq19fhb3us6y40ov2wfu2won6huq86eh8azbh54zxmuqyxk8yjivg765eu4cn2q4teiwa0hmmwwcgyycrj76rkanp1ubug5f7c2r83f3avpjbvvf4bo1',
+                url: 'hhc39mujbi7jic2y7a796umfdzk6g3xfu09w7q2gs6v2luqo9v168trlhjqr34pg9e6ea5lpild5qw73aayekaxsp01y7x7rljiuees9bxaiudhpk288c57xeqitcv2k2nygjluopuub22phms1d2dhakcu8pyoxeb7gbywqwf0fztfa7r4rf2d8yhemh5wzj7k38p261e3x8jk2e60tc37iytcwapnbyu2bifqo6yjqg5f8vxyi7skuschyqoiq7ti89m7dtarlxhmri6jlrojf78ex3ylz0vykq361aqxy4kc0q3nfzkli7900niei',
+                username: '97oiqddz7sqdlwqyof33youkrrk1n1ub4miwmc451cyk53w1c7hl72am5uk8',
+                remoteHost: '3rffx97xmhk67bd4cnwv35bf0dpcfyrbnsyjtjx1n9t0napm17zj876h9wo4e7e9fffmdak555ea2o434es4mqbjp06aqhh004cmxag1u36dgly583lj1a3em7hkhzhsai8d15p7uursr3aot7kiv72oah2h5hgw',
+                remotePort: 1059707484,
+                directory: 'why3vsq0f2w80a6w2z5csulv3jzsijr9853cesgqf6ea3jgmllt244cmpmqa1i6g6xvwa4jln6353pk5uc7spq2h5nd8mlhrrsoeckoekuo4auf758dctfuxh28xx1uknwgxvnn71id5qesitjtxj88o6kmsprq2gm8kty1nm390jitvsqcmkpc1s7sbs1no26tcjo61cffw173jiu4jahzikc3un03siph1r374j4s1nclrs63mkjytsw074xlcj4jaw0f9tcobk1fop9lyhipn6po8msyxajshnxtwrkdi104es26vi6mg0dx46rb3xpjk7f3ghcpwwyh7ddpk8gtfneqo2wnkxb5b9g4e1bzfxe3mgtll3knbeshob9w6xcf9inh6dom5b4ofoexa59rlyo7ze61x2fk9k0e4n8wi466moxyrici8w20pxjj43j8t61amu93a9prq69ptq8xgnwrktymr5i6a696iqatt9l87d8dhp6w2n2l7yknyqx7106duoifj28x1s4b6ka7nyhrj6hlglca03xi14j06jk6oabh6rjj1dewmx8lu80ry7ce9svn1747rxqwy5yy05ikg9dyqfpd7e8y4q12o6yp4ea6xkq5xbs79iij0hof1xz36u7sf7vasvuw27z4mc7eaqvy18xu2s462jm0so4qigipxof7fnj5oik9y0xlvm3adp4zdhn3eakcpzze0yoxib1idipfvdwcbjkvvpiujpf45p5azttzihq3avewtnlrq15amzkc29b5d79pbhdr4ajhhr2wo786ewjig8maqxq89jy9jx21lg1scve9ftck8207perv0wcpvl0quish278v6h6j3j6d8ztu7rzf273j951o86f00uc1hw1i4hvcgt1z53tq47l0mthcwkihnplr85o9y39r16q1h2p67mqhq0z571jngfrgdexz89kgjujuviveiodba1qlmunf9n5u2smpz3ylt9m40g2909xbu74oti3hdug9y',
+                fileSchema: 'nxacyb7quzsfkmk5kvbstxj2fn53a4yxi3ehjsvnsuasxn0md6rcgpuhue49gm02tsjc1hwelmshh1md59uwas4aanr4nsihac9wvs4jg2dqk5u3bnq6vtxvgq69hwduvilswphx08tvy2w6hm0nnkpjt48pcr51of19iyz2465dzl42r2tnivd6hf7x0y5sxjd88btr8dbwodam6llag8nktaihrwyt35i6lrhj52c7nnprrncvy2jkmbtdujesnsnsff8ujdrxk1757zj91xwpbtf3q2w1ff87wh9ulpk84ck3y028tmys4msnu0a639cykqxyj3zirvuhl5kzkwyt9f6lawclds8v8s0mw986w2qfgjjqmes1su739zb6o1bwjehjm4tcc6ryyiyqo0tb7mb2huzylpf3xliamxtuil9fzezyfywh4vv5m2ni4j9hh25g9suhyjgardipp5aogwe6vwqzjzxbci95kw5jm99ym77exr1ni9eb2oqp12dpyo1shsy0wy50jtxoetiloj310gkz4if0hjbluce419m2xnw5qfdxcai2pgp4cqw4ujc0gxwmxlclw5np2uaoiy0hnk57d7xx9dcnz4j7wer0xe2krytlpjy0e2eklxo5gvlcdltxxb0ego666x1rb08g7zywbmmrmlk0kc1su40fv7k9ci0ddlpl5vetnj0ku3kqi8mbympk4tcj7rk3gg2axwb5vdpzrbyxe3h0xcxtabc9r20q2ruktko7zn3sm85c6g1p6dj2yskcarw8k84zc53d1fcm5eir7z1v7i57zileorkpy91082imtl5oyegkcspl5ga680m58fcqxe6by0kl8vleblu5ecotu70q4vzvdr5mbb833luekty30g384lbfnwylw9gppyfjh8syo2icjugpy1pllyfkpy3sm0bwerisc3nbhit8m5q7l1lu8nwi2t3x4wp37nib8nn0q19kk1zm20p0eoeapgeqmj6jnk6n5audakgi',
+                proxyHost: '5pesn787w2dzllkinc9s3hbkey7qbps5ln5qw1r2e1zu0j3xne4t8nudklu3z',
+                proxyPort: 7130068218,
+                destination: 'tm791irnbqup09s1u436dgj9w2zvvijklzpt5ech7ofeyum7tlrumq00sb5aba01a3yuihzevl66s2y43ipfybv3fu9oks5ypyg5l0rlnd46z2qjw4xvi8jz0oejhiuhetohzpfivhva8m58flxm23ppntm8q9mh',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '9iguj2nj6qvnr4druq0h0pzbr017nugqbg0ut09a6qh0gf9t5dtjdewjro2hsc7b6kn14emwk1bytv5wzb069g0q0qsysyq4pyejlvut2e9rvsgzyitfe38mf050w61io40oa742tea6mn9044cya93qezww342e',
+                responsibleUserAccountName: 'e03rujyqen386s1k139n',
+                lastChangeUserAccount: 'citu5j2lij7zago1yetw',
+                lastChangedAt: '2021-05-22 16:02:27',
+                riInterfaceName: '9qap9xk80ti2r6oikb0rp3mzvgbkom2us3vjb56em2qum0c75t499r3c80dfpttp2yneyaom7cthg3wjyykcompzf4y3kgblvbs9x8hdeagso35c3k89iap5rpc0554kpbx8pe6kcf690m8wuzefnlbnuht36clg',
+                riInterfaceNamespace: 'a7khkb7y2td9wxn72vknlc9eetv6mcabvhl5wzfrkz8w8jfd1riwybxi22rer0on8bm9xsvgl6jer4gmbbtsatuz55lhi05s8gtt920mfwtgh8xogx89whghtzpzn8tp002aejepd6kxddymwmavzwhc3v2a7ezw',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelProxyHost is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelProxyPort is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelProxyPort is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'vnf78pqdzn5s54f3bmplnge7j8iar84a9o8uvdh3',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'x8cjxvpig8bd35wkofx5zsrwk30vqnzbpoqgjla1plrdbvq7xb',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'imf9rfolhz00z1e9tdlm',
-                party: 'ail1zfu05jrgx5iroa02ax2jlw9m1xh8cds27tjy29y1a37xspiujotvnb0a4p0768wj13sgazlljdtuu3180flkr232ev9ska4mw4u86dplsyeoppaxzqixbv8tbqsg1gvy6g55l7scdvyn1tv3ydy1rjzbj9et',
-                component: 'w1tm71ds4n9m7y7fourbp3q9k163hm2w7qn9nai6bsyfyh7lgi14vg17pt2kvd72o7rtzn5g44z4q8nzbo20ud69q61u5v1utadhvxm2qza2p1sxwra78q5ixxxs12wt4tn41k9z2hi5rct6bv7mls5p26u4vypg',
-                name: 'mh4pwmjwf7md4o1osgytwsmtyewxqfngi8t1gua6szx8znl8bkdo2gxjtaeaaqyit0gxvfpppw9u9kv9zxrgi2yfj5gs783zj6h3kxn701lrnwtn3ilo91q86g6f13zv845qj1k4jiycb7258cv0c4tp97d21zbl',
-                flowHash: 'cyctbu3dao26537fsd1k96rhn9r7mdga8qlrvzn8',
-                flowParty: '8v8jwik9dd9pfyrxcti2c2avzmtlydocn8jk5gb6a5b0z15qsss4lhs6qe3li1j4llrdn9vcmky534zqd6zgn1ksktia8ypxr850fluupa2fi5q9udheqcmzp38qn6k136v5hkbvu8nma8505074mvv0o5b0fpvj',
-                flowReceiverParty: 'uv55h3wortque0ao58abzbnnci0xin1xk9rhbxzhjeu1qodwiiq2ccy6ihhb9wk25jep1tgd2fo3owoxvd94e873czpuma94vn9mb06az9l7580057vaaqgn8qqlqoio26k67uzfsx7avg2zbhcaf9e21s10bf8k',
-                flowComponent: 'qffinx8lbggscyz0wem6k05iw796mf9c6j06zczu237k3324y2uhsxgsi32qx94w4kmwitb5ecaqhcpr5nx64c8v1516kzrtzug6oqz03p3t9ngywn0u570j721hltlfyfdsnhea9rd32vh4jh5csuvbrngxnrjr',
-                flowReceiverComponent: 'lznbo2vwafwcz1tbm7yqbb123xjl2vln0ra7yc16907lymu7dc574g0fd07wvo1elcy118rfmfbb3bdqwlaxeauuia82ay53j09ooyelirwmhh2h33675ae1w9hbwqa0euoaquv0v395ed3xqddtvr1i8kwulc7x',
-                flowInterfaceName: '1hffb58dhjekni1rxm592vyi0nhoddie692gvt6qeng8pwlf1gx6apxe6ms72hnq1uq46v3gwwaxjpnds1mdic9sqmut07493k1b1qfazl21abrqv9f33gg300jnm61piq3vz23d0eus6mtk8ojnofkjhm4gse7k',
-                flowInterfaceNamespace: '7u0nv8brkom0276peie7slq9odaai9eb82jzwjtbip6jahbyj4gv9vla4i5g98xt9cjv3ugljgowvhtfe1jub62302bra8ytao6unbashei607vdi8uduywwwgc760qaa2z0z327aa9pinnto8ubrtjw7zw8ct3e',
-                version: 'c8yi1e3l0j1rp7r8fhry',
-                adapterType: 'otm2rofz0wufosevuoabsorrs0h2z1bth2uqlghbrr2p76bmz1mpv7gl0bq7',
-                direction: 'SENDER',
-                transportProtocol: '94vgpr3cli5rxwttkjttmnn6frkf8hefqqdg8xdixqz765ur490lkb2bu3uq',
-                messageProtocol: 's88k6ks8iaj6ts44u8k164k90xdsom7nazj3q32rp52076yq3b7413u0e62p',
-                adapterEngineName: 'b8gghj8efcbin2n6jkfielew2glgkrnxqiquqcatmf5ag4aljd1nfkbdczvt60yd2tngondwj7t4fks62ba0gdx62nkkjdngk7sy4hfkeov25tv33dbxjxqqroxxlre6bqyvz5br5sy9zrs5bk45nmsz8g27sejm',
-                url: 'o08nv18xb671bdiklb6pj9vcbcr9zch9o8dva3apuwx9pzuoj0ks0b3itmew1iedcjbsw2l61lnxiju8reelrupcaqhyve2divueui68gnyobpk0ewmpjoh3oqtjeyxy6zedlf47jh84079ccviqvv9e6312jy8u741mm6qjqej63pu78rz9su5mdxuc9sgsu2vvlebg4o93ysrs8yubpqwc9tn6dst33t1omvtollnk443k5anfl9crml9lxzvat1vg4881ht8bb03yssifbh8rp1y9ie8fjd95gkgaxv4g1c9qu64reip1pokzsrlp',
-                username: 'awbanhvj0rtjhtprflvmvezq9yd4168h6raagylhui8jmno1n6gg16pzd24n',
-                remoteHost: 'z0cts2l1t3fak96wgrlfgn642i3vohl3vna83mn6qwb9beh3v5hsd8qm7hqj384vucqfm6k14q47yxnyalgnk1zfllbk4s8v1uek0iejkikag4xitscgaj4t8a7ojkhhb8pv5x07a11wki60ajzcwkmx819gzh5y',
-                remotePort: 1818224651,
-                directory: 'nts8jc3gofvwewehyj8ql5lyzxi0ti0lxvmuwrsc7z0b4aogxw5h98g7vjwvlvt1hl6ms0s1adsu2i3i358vizpi4o8ez93jzfnakio92et8s35386q4hur7ngh5rxoghpuc47xmr846ioa8fvoglw4h9wvdjs2bq623j7ygv1met7g6n1z8k4901tl51ewy86z9o8ngz7xk5u3s9kzjx61x8cbh8uc8gvduddzbubxd7xtwn11rrlm03citprddbg2cekaw0954cs1huh4wy8rlwv3jyov3obai0jolgihlqbp6uq9pbdoksv2q7qeyhrxv4b8rl3ky2im9whxlzzmad4b5x7kmq113lr6gy7znwbtxa95uyin6wdqfrtd1wokhs5ltlg6cucieav3glz2uzuzrferxpr0rxaqa5mbchcjkjc68c4qb41sermd9f86nvehjkwyobevprardi6heq41p6o26ehshb1dwplunuv7kfrklum2is29p7z33z5mhs47rbijzp7s7pif90h3b2qet8wesjek7ec7euz8mzsruobhf4pagkwc58e3yixe0dv3f3ki3wf5654t3tjewpnjxshjwai29243436vr4e8iihyltb5yokliyr3slxiiqq2bx29cmej8gvv2il8exdsyie1dxwpgiojeoqghfjxiwtmez3zusis1fkvhbpddbybjomv73sa4vbfe5ny0ukx2p7b2pm4qg6k0i1a0yekle0qxt8jzcce706lm4h8zsxg6srmg9dhmo0zoyoyvozt672w44jv3jja6bxf9ojzocp08hlwrumoywhp5u0pua2o7aztj2t89nmyr84by3k90xc4zz38ajo17ehu67tzyelpwymnkeov5fb7vddmk6nv2aem1i89ow7hrhwwdcacp82odk5dd3wdl7f5ilix341wx0i7pzqaw8cp0tchtcs82233lm4p3m2pttm8a3o6i689yds4aw52w6f7ulppz2rw1909zz3s8ulhv',
-                fileSchema: '8533nyxhfkwy0pd19fsjz45uzqzsa3q85hnu1fk23rt0q6p90ysrgkhv7mp5e2qv6v4kdb6xu6bv5u9kdajjfuth8kitievhoq67sdejzilkf670mytaaurzyaljyxzfxbja7vuuhn20nh3q0wfeoh9fzbjn6yp7uyfh2yrdhkx0un83p1qi8a2f0nymt8qhp2c4xpw8jhddzpcbsr85catzsbxcxevqwolw98dwfjh34yzov1pr46w227fjrpryw7yflyveydsjqnylr2e8lv2pq3tbeir8478jdkxslvgofskj6o23id2mz1g59airlxesudeeq11ivbf3j7htljurfgoid1fyin8rpevjgvjhng3d3g009jlxamncr496ggj0nehogxsaf3v0044mwgo1zohegurdc8s1st6lmi63ihmt15irc50lbz33zg4bfhypb4bh31jf36fj9gaqyqtr1nh2nwfvgfnav61si0uuqe4sy53m3fuvnkgt69fbbf46ymnzwnf0exafdwl8wzew3a1ghijy9b50da6bmo8vn3dtr9fc9ru3pd155r3y3npa026k2lbegx8eq0aqkpuz6t9vgp5waeyid56xl8flxgcz5wvr0yzfyux1xmj5qoykv6nodlfz231pn2jh8xi3xkoq6hyi8y35dfk2vbyi5s6zept4alzamrblku5qsxe5d3ushfpe4kflxkkrpczpdnjrivrgm6wnl23002w9sok0j7gylawemd96pfnd7sorhoy5iepr7fede6y2dq667jlccxpoxdnhowg0txcb74kaw3era0erx0913xkeri3sanwfzh0b5ju1awqrnikwmihkmcdg6r99tnikf8d1kepsilhtjatmtc1ng57ppjxfu0035zkmpjzvulgx2ste0ues29db203kpt3eyp3bdxo00ihyo5vmm9hfjofq0nhk4d0pghkvlurp0b9qepbv2kmi9w8gpulfarf3uobp720tts1we2gp8nhtkg8z',
-                proxyHost: '8iik59uc9ukddjljscdjz5ygwujphskgor4gbnc5onrjzbx1fl7ecwodjzqs',
-                proxyPort: 35071957570,
-                destination: 'dkzlfptl2jsjhymzxds02mep4cjf4obre8k0tvh23hoez0ch0gqiiigl0gzdlcittqb15o57hv3l6hh31laqk37d4eprn2mvtm4d5smjwrezafgyx5lqyfjfydd7fhxvtnonbco0ao523w4by5oyfownipe3arsc',
+                id: 'f7a8ea64-1dc7-49a8-8e7f-04ac8173cfad',
+                hash: 'vygiwn0wytusiacfddzfher17ssxkeaouoi0psgy',
+                tenantId: '573425c8-4364-4e0b-858c-0f42773b3629',
+                tenantCode: 'mwbhy6m74q4qc481vyx1gjl9b85brywm17jt1p8gcwyr69pbef',
+                systemId: 'aa59d386-104f-4f2c-9411-71df0701f9e4',
+                systemName: 'emy04477e01uwrpp9q7o',
+                party: 'dtnkx7mrfuttm47vilqql1zg2g35o94uca8tmkcthx8kynwgy7tu55x2vdzu1m20wco51hzsxwu0vngh4jnv8b7xzuap805zujdfdcpld5w5a8d3hh40smqwsaniqg8j9q8uwmz2ald6924wkufvbmr4vxv71p61',
+                component: 'xq9qiacnblnv2a3oc1y80my5u48reyuqmxdmcsp1y5qk04cv2xnvzgyt4yq4igoqcart1v2jisbvqwvy4zzxf8gb7jgmsgzc9ql8d821v48z8sb89lipn0ved986fur1uo9ontdn0z3upm2c8xcjg75tn4mqea9t',
+                name: '8crn32fkcu5fx03da5kr27moiijwmygpneo8ptj8zspjr1fdgxad368jymam59r0qtaj28jf9twdlldsw0as9vb0zqb7ctju48c6brbjs9xw2eerset37aggkc8be6n9dhcjpd9wqi3wqj5rtu2pcvfkzhq082yv',
+                flowHash: 'j8q889nbg09f608bktx594jz6v1kmylli2ircw0s',
+                flowParty: 'cpjv1q88a052ueoqay8rp41s3mpeaowh5p7p82zljndxzvwyqvjkxn7scsinx53l51h5qymzkz37hqwfmtqusv5yb1gvu2xuxibaid3e4zwn8thyimn49i9157o8kmko7gvsmw039apwsj912pqh87p8nnqsw6za',
+                flowReceiverParty: 'd1e1f4cz6vn48izm8fkbyvwjz47lrrzt1zthasygz9a1tgnz4qc4ld8eqr3gpmjhvynok81rgv0u7t43afpdu1v7g0ij9bx6k11bgto5kvawx5zwxoti6lgzuen4ipp77tg454n0k4rmma84japhvvmc6ofwfb0v',
+                flowComponent: 'lupv28csxuxgacnnl3gb3587me5lvfvqr68hynoeeazowynelv46c5fd5r8upa5y8cpwvp3dphe0ekd12lb6kt2wy56zy4lfdhz3gwt2tq8fgcruc7xfmtpap16xsj3y3bmov2z2o3vmnorg23w8w42srbvs5otg',
+                flowReceiverComponent: 'aznnucpg6h8ma1j4iyrg6awfty5bttyf3f6fxfey7d4st79ukz6xrkogvo1fv8zr4j4vmj75kvcbxpltpytqr1qdsxnx7y5m7xy4azkffwgb56i7q8te02zdi46i1z0naby0ivscvrw9fskoxiyz0icjdiqwgbo8',
+                flowInterfaceName: 'tk338jzhqdwjs0n9altjmn0b4t9p68k321oe9jq0bq252lrq1vsz9f4x5w277j0ede1138r82ijjy0kojap33d6heuhzq1lx4p1dtvokrpcbruko1q5t6dab9wgnzh8mr8x9dhvgnm9kj9bbj471pg90t6tdqlzh',
+                flowInterfaceNamespace: '3pbfz3lrk1y4zci34zf5czj5gzi9w42poa7xkczyymywc3qmuwd3woglrljo9ug8nbr43wp999filcfb152ezxshkffetiea5rze4xotr3peajp7gf5l796q2xf6m7khluddymv8jlwfzef54r3wbvepkffbshme',
+                version: 'le97oe03bsbvdv8yblhs',
+                adapterType: 'p5wl7mg3mkrc9d7j7pc3ibobs4i2radr16om3x7y2yd4ix5yuor9rjkonlrq',
+                direction: 'RECEIVER',
+                transportProtocol: 'uu793ncshx35xqpik0aay8mb62uya2nf7qatwybscylw939dn8pnfw2lybp9',
+                messageProtocol: '0pyjit0h33p70vk4d1rzmqkiyejt6921hy04ghql6bpzaf7p4boaftvr3rbv',
+                adapterEngineName: 'sr17vwspyrjp4jhz2alm8cqfhrr8hafzouscz2fpbo3f97u2624qbov4x39v5hzmcdpkteqwnkczyc63sm20zyq7eu0jcziuqinkndh0xylxdmj6d8e71x26l4kyvw0c6hu16jaz53soa2rmfprw0dd92vm8auy9',
+                url: 'l3l1i0scv3z7yg4ftwxeav8xtasg12adm6w0fjf0udrt03lc49o3u94byt9ww8tdxvllh2bv1oagbk9ysta65yblsmxym5z4ol3fip4egptmp7w2glu7y2cjp3ku8k7ddzpf50npu36teox97reh10wa9fehta2tewyvb3zjx9eaxgyu38e8qd2aqkh19x8j7qnpj0az0j5dqxtd5y8e6xtfdbdtpspqs9688drrqtk1a9zjpukjjnkcfu1wv7m1r2v2zeay0cqwogju0rdctqu2brw9ngsqvxbc89gwbggis0zt3ninn24g1713ffnr',
+                username: 'sbcvj3mus234to8d3bagfj3he0un90av0xcnxwmtdjjhd0epapjocan4yy0z',
+                remoteHost: 'hsjnc058389f6awjt0hx8snb1ef6f3ditywfvjby8fl5q214uj86r6lzjq76p8ea32h4liyar9am8pxgvqy8lr09onzg9af1mhq1kkvlva6bi7cq08gw1ke214qdywxmyklg4pqbp4yun8087ecmj6l9n08bk5of',
+                remotePort: 6973954160,
+                directory: 'b2hglj9skkpd9aubigbhfqkk938ro86ojw1stji21km7r1yqqaa4pm2zghtfuz7hpgd3rrdekbevpixhjtnforuf0qi32v8nc5xn0ohjqrtyyx54f06a3wabtcz10emnlcx78u86cyxxf9uh9qvf30r4cvnfccnrj2wwujrnqu9inf5tnjm7onjc24iuhrhxbwev7f33ds41p59ej07vg9nadj6xqjxx63yz1hak12pd46qiyoy8uq20gvpficyu0lquruyj4hmall1vmhmrloce8fdlfnvsmakm1m81lhlbga35bbypd34nxe2nrptwm3uwgj9esga6nj85jpl90hqfgiphgr2ul8g9e9lmysl3ukldl68zt2goeqsaq1gnuhm7v5uqeujrayotjjg8susdotfojuj6lfx12k6dg4vspzhx0xph793qmwa5rwqm97fzpptjztqiwb48l0rgmmwnsg5rxjkjd94r4mm1coqpw08nrn9o9gntdxmslvhg4h6jq7ujl9xucncgr0z3n6nkrladtp8ma8umoakl0gr7z6pon1nft7jyfxtr7k1aiwp07i7mgql63n4ystwagqxvaz1wk1zouarsqab5rgo7xiz4rocqddvvpb6guvu3mvqn1wp6elfkf6c936tgmys8dx348pxtlzk7xskqj4b4pg5w0nik347lko9b7doc8c255l4y8u9fxwndbgrhy4sls9t0yaebm9ogijvpbii5ddz7turem7u0chg8ydtoriwk7krk1w7v2gbc439lvcwzoee621fsggefo8geqrkitkr707ocuuagk2dnaafy9v09rpns18rccuv3eg7mh6d533k4sczdznk0aw4slprwmeymr63klb68iz5vo34970hzdj5bs9ezahzxoo7boq86plf80v888ux6ruh7fqg2h75hevl48jcbo94r610j92d4z7jjeapd3gk4z4azxb31ymx3kbk1edwsjyzndytujvwul3weg1ik6ab1ne3s',
+                fileSchema: 'jbu9v85x12k0mbdzo6k1mbq565dy5cw9yk061qvl8i0b0cns1a0aodk2cki0y4y4i44dguq9cc8v3z5uqcyu1es915gsqymoi7pv8l4v4q43qjlaw3nhkaw706k81g58yo2tj5dwrgswtqnbb140dc3v9e2tlsoy99n0y3rshwfrpr8t20ut5jw9dwq5mc3d6g9qelwaoh8fe9jjpvsonldww7rsc7218b8tvinhqlirclugs8jq5gwelta6k3c5cgm4q6b5slhb6m17r67nleobzhlpmre9uq1df5q8dfds6fvctbjdcwblner82d1dlqnd0wdhcaalq35uv0a6tfb1puvr70gaufzxh2h17ujdko2gemdel3nwffba9tk169okclp5yxi32rksapeiqvtj8pf16b1ajwm1gh8ci6kts1g0oi1g190crpj3u9obg9k0f1duomrg29q52i8zxpcge0vaglh3k02whzph7bvyzdht435wl5upg0oysust4b6ilimtrtn43iyt392rkq17c8r9th4s2fo5c1a0iu4lnafi9clb64x6vj4mj2b7l5ye9byi61uuuwyf0b33b7ax2qv626z6j3ji0hx9cxtv6sif77c2sd4xbcjazxsskwkfe32mutvk7156j0lwxf6fvoy9w14spdqji7hxnx6powkcrh7xtakdwk3r9df3mhgkbroa5k1kkwojtbcf8a8ya1988gfa9czakgvu33c4x9tb50ybmoksdjh6rzfqi13zdmc5lyup44bc4psw776vtxm4dxlwjrgfsfdhmtzcyclmb0l9d6kgvpe1f1nd39rtfh96eazvih5y6npf548z2yumdx75msqmpje1azp983zgzjsi8jnsnr7fgzeska1otiwglyqqrecnfc22iliar0chcekridi4qihwegoeoz2j39n72c0lluutxvvn2ecchs24dgyz2cq20r82dv8t0eox1niookwrzku32pecav6xcb19glj7mk2snymh',
+                proxyHost: 'hh0morojimaysw4dqz75nbzgr1dsyiw381kr39csfg8fkvla5hnwn2vvlqxg',
+                proxyPort: 26791221451,
+                destination: 'jxymad370qoaclkxlomzhckkmojn34kbxvxllbjdzeg2usz01705qt9gg8o6nih1wobagtfdpte9e33axooa2q23xjlrlp6no3bijopu92msprfriv8tx38ls1ev4zuvxts1fobjt4ff00g9ii4jhfyl32hzt7zm',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: 'js6129wg7wlr2i4t49if0qnoi46p6w7lyc4mlyh32qflzvd011rnd4zdoznzuz5vioposbqqfe75jl12i7e786c1rwyolbfdnr2q0l069lncdof78u514hrygcanlfjclqmss1kn5hqhgm0zd0qle7t41v8q25rz',
-                responsibleUserAccountName: 'cj5goq54mbtgp14nfjt2',
-                lastChangeUserAccount: 's5h3a74qpabv4ngnjb37',
-                lastChangedAt: '2020-11-05 13:49:17',
-                riInterfaceName: 'xjnxw8mt2lhvcxxd8a2fgmsvaug26kc34dacba3u7t6yunajdoqpv23uqr1jz2sgoqrror9f3n9okqu3y3evnitmql3g6lx2sz7m1xhebldlyxnyc4ff9ywlnf9gq5v7g2tw6bmgfiw5shb90315g4klcypng13b',
-                riInterfaceNamespace: 'ti2d6vjxkrpg5hjk8hkxkujs2mebwoq2p235w1jjht3igfn50kj8n3nqt1rocworf5ex6ej8hc8edd3cqvb574g1hidaqwb6ae9hv36pb5zoriwcsd2h8n0j2l9nhwjxlc07r1lr5nw4awwzjalxmtbv6xudiegl',
+                softwareComponentName: 'nfepg7yuok53aoi68wpsua0nt1dlp48xss3o7dbz2ovjxke2sgqquoglh16a4vlupgw2btw5ptv1t30ugma2apuooj3ldmcyd7vapv22ls9ezvmd9er7310url4a7he1m4ck4m0zwr7y2s0isqctysw1jnlarsin',
+                responsibleUserAccountName: 'x4kwddb2i8jtsjhcwj6o',
+                lastChangeUserAccount: '2tqxtswr2cv3jv3e20g9',
+                lastChangedAt: '2021-05-23 11:21:55',
+                riInterfaceName: '0gvl1fmvbltciljzgik979bw8u2nmi0ejt24xjy0jls4wvrd9jdiwz2pv6mfrxbvidpma3v26pmj6ky466obf4yuxv04cwfqw0tms0xenxt036r9u2qa7kcexh4x3opldki812ixr9vzltftjgpkaiiwewgakofw',
+                riInterfaceNamespace: 'kpecr6pab5cigwnabiqqjweni0j5u3trktlbemy2amybglof4tmg9d28hrqmmwktx3kbdqlwn0tqlea61mz2at24x1qq1sw4jhiv2vvzust7kdrlatbsp6iavyg48qwpnoypfrsygdwj2q56tnrm4lran3k3ry8e',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelProxyPort is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelDestination is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelDestination is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'ux7wha0c7piwfwj7f7sy8q6t2ikngwgfkdpumlyh',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'ozb9jtiugqq9hj0ix8ln8tvcnz1gibx90peqfyazbe6t2v552v',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'r9xlgwrrthosj04wprq0',
-                party: 'fefomz68rx4hmzl7tmjds1i8e69grrwljqg4srs4g42t7fe31wjdoapz1p9l6sasqnfsjo1zqsx2ghge50kura0jjy9s40moncfc8ozdulm0rg4rlaxcd1z1gzsgt9udre8ypz9xjk1bunhoau80urs4qx9nh24e',
-                component: 'ssdcvofd87lu16im1mw0j24qopxdo29hmawjvovudz7iu22oja7mj2kvi8leqznvuislv9312p27m0b90ztau0vs4emns69uvfwhd5cszhdq0v1lf54ymuqm2s2uzp2s8tq7s49j7dcuabmnpto8xkr0208g25y1',
-                name: 'zuemta1sjrxwjx8zs9rp94ejd3okap6e35rnosxvjfe2va6ghb1pbsvv9dxidd3lolyb0r8hbnteiplpim8aehoz5hbkfi9qu6kc73ukmms6t3v2rk210vwttxkightoyzf3cn7nncjokyf0uwrac74run157ryt',
-                flowHash: 'b0av4mwds2hp6sdj61xh6vt5te490v0oozuhs09p',
-                flowParty: 'vblhvmlvngox3ydjslf2fz151dfcd0vzypge18lx9rjh1h4hqtm26n4k9gr4y5k39rf7r48a6hidyl43gs641d1bbmwje62jj0s1u4zqwq8oubrechwnzih0637osfxljwforujfjmw44wdag1vjb55146lq4c5f',
-                flowReceiverParty: 'pjhbhhbb1kkva6ts1j19d7j8tv8z6phlp04wx8p6vo9qhy8djou2ykpssuq11rz3ea08962tv4ddvnn5gn8d5a47dlrw6ap4gsw9n0v2y67bfvm178uiifqzv9vv6td6q7dmji4efinal57xeao3nkckuulqvjjd',
-                flowComponent: 'pf9lvo4l8wto0u0uh3dxx1pxmlwek9ufu9mbobd1lvd3e5wwowmgftphn90porjbgd9x9v6w5ytfehk03yodryxf7b2nwwwg3koqaqtaiswldx7yoicwt86bc3v3hrhl5oinsbneelhs54a8nesujo0zywzknrrm',
-                flowReceiverComponent: 'r4k24cat8206ztonn3qts73kq7qz8a4pdcigut5h0hap7uypl8w1gawc7iv9webvp3k4dr68u13d1ud36gpi06xz1f7r3153uwq1b76qq74z3k3n1a9mbfo2orctbwsayk37vkbyu5wj45iov3qqyipm7o76gjg2',
-                flowInterfaceName: '8j1cdxy6znz5sy89ijrb5gn589yn147udcp1p84zv5pt92z706k63y2aqohkxnmqha55se9evbdb9l47m6r18rpb9z14th0iv2lemji78enbdoyetmeabxzkfxdif53xnzv1vl94dkwltgs822jb3gtnnr7ub8nn',
-                flowInterfaceNamespace: 'ddab8gt7w7keg7ndn1higizctbhwxk4yzsxd6r5fjp8310ug92bcbesm7mdpyitj5dbdkllylk3ystox80v5j17oqduy1s7nuwfiifn121mysxldet49lafa1t88c4rcgkd9jqglx0557cggnu3cp20c5tw0qx2t',
-                version: 'v8dttbzb3pcpxxs2yexb',
-                adapterType: 'da64rxzth8folg6f8khm357443mn5vv0fa748nmtcx3dyrznpcw1w1tdms81',
+                id: '9b54c625-d60e-45f5-b6da-a17cf51141c2',
+                hash: '5dppmdf1j9940wodmpo9za2xzjpq1qxajvjl98j7',
+                tenantId: '100f3555-286d-4cd7-bf6c-0953275c6979',
+                tenantCode: 'uz6qye4p9ouisuma8bfhj1c53e86w08gd7naspj1ys3drj24nx',
+                systemId: '6041bdcb-f0b8-4305-a3b8-a96a0d24f211',
+                systemName: 'wichw6pviir5ty1k42lc',
+                party: 'xwfsyzlqz3w5gskzt9oyqcx3h8h64ckj9klzpa4z5yph9bdbipuueksy1qr2goxj27b6nhaxskj7ct97xe4dkub9cr5bhuwblm9ws9eu8c5ym9ys64eflneyzamzw8zrq7lc6t04ktomc8ihfpr0kpqk4p82bn25',
+                component: '4adbxy5o2w6oqua0hfrzh9hv9415aw10v6d2krii0qvwpb3n9kb4ucgd2m8w4s5i9y8lvnz9tq15rxsm5zdtam7yr714i92jhtsjewxkxnb0q1nh5kpybon5paot3hzyqswdzop46m7urztrxicev6pr0sxuu6nz',
+                name: 'xsc5o8125y5xjwar5ojk3ecklmwj4o7skt5oqsn78i55a11ce22bsug4ky568tq77jsgc7jyqfqh5tdeehs2m905yvxh3939up09rrww5apur1xdfd1zc5bb5pvc50ticw5czg2yfdjre8yb64czin0y4qewsev2',
+                flowHash: '0s31pf3tu8sbs9rruva73sm0w1l5prf4jah78jmr',
+                flowParty: '9fwu0ig4us7jtmeminv9rycn4i4f9m73rjhwxkk74w9s1ti9lrgcdm8x70uw8zazb8f0lu4dyyze3wg4tggaiafbxsxyrf7yr77apegwc7phv6p84pci7s5y22dmhq27jlj6ne0vw1ng433a36mu5vgv8t5wpen8',
+                flowReceiverParty: 'l721y4rjuaixey7ns5wx4x46x93p8oiv1nfytau06l8ij2qt14sclqhllj3ewfoj9galvyuxg5v9eyfk537ogxxbnrl1ze02tp8yhc2568oopqsqx6dwbdkx1bqlacg5ygaap2ikk5tbn9munjs6k1q67e40am6a',
+                flowComponent: 'tsuogtwu6j4tidyeyubedk4p5vfjmm7sn17oos5j5tdl6o945s5y0mtgsz7taboylicuozj8z2sxox92pvgciu1l2xm86zj6fw87pdffu6r9pdhf5b3lrmty6klq88lg6guqlk8boydtqjzm3xoec9sphxf5hizm',
+                flowReceiverComponent: 'zxoomahi4wicl6qydnghn5vaf1mh65juzkyhe82zn1udlpsmcg5qkt53ekrfn328h7iyq4dxg7hu64dpht24o6g6ddonc2plbe4wsq8o1wtln62qd2x6rj6qbit3dgh3l2yshdbt0uxa0ynosd8i8zeopuzv7t80',
+                flowInterfaceName: 'nkt3sgq41jyetgzq40h5qpak67xh2drq7zbrtj1gp1ly9ehunxo6ff27evbfi25amui0tutq1b9ya4q1oaklmou3vut8g6g67ik5ah2zuoro3o98ltqkwgmjhmc9awnmgl6qrzuaqlrozar4xyzdjgzw3j52uk6z',
+                flowInterfaceNamespace: 'huzpm32mwm08tp9cmbp5u32bmdfofcflzltf470v1d6o1739cmvw3uvzee4uo5o555l4qvret0s1147d6ajexcwykvf7b70sjxjamnveddfzk877xgvecmvx15g3tis7p7k9cpa9hip99wmik4p937rnmk244190',
+                version: 'xgocd5cwpmh7kfwhs6ob',
+                adapterType: '04qvnf5rwdkb5rpw0nwd4unnh2eb63nwpotj4m4txwzxsd7qkwvlvbx23z9c',
                 direction: 'RECEIVER',
-                transportProtocol: 'qqfwedc0t165eu6yi3vr5cs8kul0orydtllpnh4s9lh778pvkylq8zcveutn',
-                messageProtocol: 'u01no5ad8cw3cdfsi8bch27bnl1p1jc50sn2ktcf83e08at62yo8tiypzk2g',
-                adapterEngineName: '21dghzrnronz642b3ntzqwcaqasutzgjcapar8fzhppj7zcsguyude34i00na0mag7br3b52sdxebg1s1ug0q2w6jjqaakvjqs85dc65iigzjyh7deydcioc96ov5akl0v7c6s80h8xjv0xpaamvwj70ej5dd0ck',
-                url: 'w9xprlb4bkowtdhyurcqxy1kcz0d9qe0hql3mw1j60yts15ja39myofr4lylvndncupe3ziazgnh27ie1dkbjivso1lcvyojxiox2yi67c859mcfvyl4tfsynohfv4muzedji4b8wseiqui8nq1wgi17enjljldwv9a5ohfcbokfwwc9aakdolz5w74dqco880gbre4cf0jni4f539nuz0zvh56ywc2x6mdbakxzrwmqyzdm5oic6p38dr5h986qntsi9pofkadx3zsjljt23a045tq1dr8h7beq1dl9p3sbu5htv2dlwdyg8dr8x1xl',
-                username: 'iyv1vntpeu9fm6i62kjutmel1txsurg775izxtbn0q9inve8tav8eavz9mo2',
-                remoteHost: '4cwxwt9vby48c8ivlp2pj5srppacpwhdmfhtdjslhsxsvk874nwpvssm8mjp4zmhdjd9e0bxjdk2kz65pilyexm8gtqy85yo4uj60swm8k84k8gkg3a5jwvzpqku3t0ar2iog83xg7tt79lu5s2kx34avhw5po3m',
-                remotePort: 1271475776,
-                directory: 'sm8laapy8o0ynsli9ft35h95h2883db2u0tyebf93oslgtnz3xf5x7jk04rw4ftxqoqkcplro5f700s6q49x437gktttaw4vg1bgvio55iwozebarfze35jo7uiqujn0mbld6eqsapcba957f4bhcdw07vrnhgzy8qstd3dm45tz7owfoj0q4op8p3r5s9twct7exci85ur1punnrh142a615gkoa6vexwv9x2g7tx0b4rquzz49ldleaw6wl0a47qzlmo777n8w0z4atcx89oipq15tmwkqj4msazmpdhbv3ihre7afgyin6e2c15rdp1m81olsr128og2tepirphaxmtu9xnmsq7lotosgioptiht09lnm7wngpt9wj5m2ofqp33liyod1x5nemwb6jkxe6dtc84h3sfd1qvcb8g9xsnx2dk5k7tkbf0f8q6u3hgscs9osk1bc0hgouy9mt9eovq21nkbkiwdvlhm8ayjxslf3qoe8s06w7nwbbqg2iy8ne14nrwe3qgqga8fig3wivgjyhjcgikwdey7l1ftv1oijozqqqzz3dmj54m10ul8wul3t0i0tjinw9dmb3dx2gmxv46sri3mq1p4o9m1afon2h0ltur063tun1ffgz9bl30r22vkfq37510l3j6jr7uovz8b9bie39iqhxwnln5f37v9szpyl78gr3h78q0x1ys5o8ia6bnzh4m792i2v7ywvpol2ge0b42g7cta4byn4azaq4e5g1xsrl9av5grthm5suq25oawecgym4cylizzt5xb0gcj98jdxd5fiqg6h90no9zay0d07y56h97k6kgcd56s7560jbd2wga3uasuram7g6tjubzjsirsiufoy1pgih6uijpg8t0afj9gd0zpsx6252k1l521crpso7jm53ypys1q1o251w7ooykmj2jy5gr4mlxs6e5ptajtpilaouv39u6hg94fzdcq3dynjtnti0timdxjvmcdw281pvw4oc2yzofjt58bo',
-                fileSchema: 'ec6fikg8eu1hr21zro22hp5ely5n5oghp7z7nxnba27h671pz8uhx1h7vcg12g4165leh7cku9wnv6ff74muudunpm41ufnysk7s6zlzpickntubblnyjvwhnxcyzuwassr8ktu7c5ruz2zv3966616ueduxs2l5hj9t71n0qy7bd9z6s57hwfibvx0etsckjerrc46xgxtilavzkegxdbqyhqfffphj8fa9mcn5u59649mygdlx5ymv5zao3sprlq739i8ce0v8qrx3k0hpq3jwnmneh4h4658dew4jt639y1qv0my2vcxl6c5r3k009ppk3cj29xeah33pd75l3v9u1wbw7siiaip9bxxxep09cth9g4enmclvx8bd5wzju0nwqa9rng9rlp0pgjdenjwpxsb8io2f7prxcr0robfeaets5kwdd4h86pjj327707wisd8np9xp78gicei5pneozj18r1wtdv4kt2ecs7nexlw2jw8sm42738ugvh8ae96w2hwpip0h8391q7rbs37kkwyd6x8xuw92i282hnw6dm4osncyvj7r2avuxndypoe3rrhds4v60rdatl1iivgfha443od9qiidl7c0vrmcot931ch1bpq0q4gxzoiyju55litpo6f5melqe581pwkd8hz5veqay19s8s7cmdnipxybg4iyi33wn2oo1m8l03jy2qnell4zykspj86r4g535qk44ew0qc2mnuy7j2xori3sb13sfthf1ad2rbynxdxk5cpgnvhpvt4z8tkfk7yjbb0yad0nks4tb570qpgoux9tm481owd4nnebjwu2qc80yyd0xdvw3l5wdfj4dsmusx8yazeyodqhhgfg6igtcjvup9rzgxs4lkeqn8veteko4poifjs0n69h3q7krqjt3ug6cmg22hts7sfjjnvi3wlj3d3zswufil2t5nzi70wwvslv5miw4b14c8nsh5ffkfp0duw44icu22cqrp3v5onwckpxwy2e2vv8wszi',
-                proxyHost: 'vb0vlbou4xyg005zffjrk1sk174kwlqukfeqw9qj0i729qa9ep0hnal4f66s',
-                proxyPort: 8023482991,
-                destination: 'btmt6n8l5vq52q8vcbwobblqgwt1hmtes8kdpctdcomwxhln8gtvcnylo8mrd57d6aefum8ri5b9v4n5wskq2zqtdkc188zhcmve3x1qcnfa04wl4b4p6pzrwpv5a1i6u9j0yy87nnlfv6bw0rb3v2c1dycy3636l',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: '06gfwmpq4b5zel42n863a361wuiejmmn9r4fqwh9jm90e7oa1phfqnlfinmd7916bd7zh0trd6pxisr4oovdtap0xjefg6seegavqu56jt6yxyewzd8de5hy5xbdqr7g6tovx53pscoavupuz3pi6fqxsyy3gnzo',
-                responsibleUserAccountName: '6ssdnomkop997wio7lhz',
-                lastChangeUserAccount: '3cnc9tcrnax0w6908l7p',
-                lastChangedAt: '2020-11-05 16:54:15',
-                riInterfaceName: 'oeci1378jw7spvt7zm8fpcvkp3jp4ql1e1gua6ojanvkmhog5t4pk26b1umw23rvjj7oqv43w9yvuljwzit80ezvfis8jsl05zf0dhwr4ln8e7z2595sugwux5j42mbm8d81buvit5c52cedhxds7hx1gfh6z68u',
-                riInterfaceNamespace: 'uep0uzedceiulzz0px6gd04g13c5m6mdgev9jjbyolm8mqu908zkyk0zol6wff69bknnke28vvzvyror0ho8gky73s7fdemij938qnhhqb7dc00grz7taq6rwp5fd26cv4mt2tm5ht9bey4goigcwv28lznt5p8g',
+                transportProtocol: '4wtsuvdnmhz20gohcr17cprnrdlh00sqm2tywn6cfwy2rwucjzs68y9mh5ti',
+                messageProtocol: 'kg5ic3r6a3vym0x0u0yjxqu6qex0blvvgjmtnmfxcg3t1gjz1mg0oesmo672',
+                adapterEngineName: 'svcnnp9ewxvdhafmdjwq4hzgdii0ivt0vtvusgut8hi0kd7sboa4a4w9x7glkspdjz3gf6rhuca66echtl6x57w7m1uu4kpswra9uj9wxuxz5rro7yi25hzdhjmhz79gqst2chsu9yq7vzhpzlmi3vp7y45k20sx',
+                url: '30yjiu0c28dorq157oeu276091nmrgolx7zd4j5akwqzv5867jnj5fkwa53yyoerqw5q1vmpoooy8eaftnf9t4vetymgvp6620rd6zkduzg4cnt512md614t5ov5bdhdhfiu9pfq6ozsphrqkk3m7xh3h2witikksgrqs2at3f92krsegh8qtfqpdla69bkyt09hzshgb7t068kq2zohnyt24a2ah5ly8mugcu267mgbi9eyt81x3g6wumw6s5pv99juk2h7szhk6tbf2h14p9oi1qb0grfvgy66xkjykdnibmsdi5x3yjowmpg3snld',
+                username: '8pacdvvfdxobhaucmwzyebfn0x7vibbnddbtq94osa9yjnbi2fnsxtp0gmv2',
+                remoteHost: 'tfdh96xkm0m87t0txyf3v2cm5upmd1clmoijxfk23g93sgev43f3bhfr3eaj5wfoq456q6ka65no0n1flwgf578mesi3ia446orz4mnvlz3o8psu280kqctvg3hi2xe6y661uy1mdsek064i5nkaqxozhevhxioa',
+                remotePort: 2226490776,
+                directory: 'q0iyjivretzqe5exyuhen1mn8pilabevvjs5gsl4ljlsvm68b05uwv5s6yryeszudm8ru5c7jlp2cxja9xrfwr2io8mga6kr57qcq4nvhfseyc5t3bn523nj40ied9gx8q39s7pn9ldz9o035s1imsvzwlpyrfiet4g19j6v145cmvl9rav8dsi5ne022fk6w2thot95o18rta24x8qxdjibwhwtdpm3fh95xq0stu88zyi2x48ap1dz1yzdm2q4p0d8nxgz44jdvgdc8ipsbo6n7sxu7zi7splx94s4k6l7ca6ncfv1dhu7pct2ec8m2hs4qghvp844ev6fkgzbdfo2owzkqdy4uf8aqmol3l8bgkiqzfsovdrc120mqhpfu1zg4ep1bbxrzxtpmx47og2vnq2rjd6c07jw830lmopoy6ocki5e7hgl2xzz5ap4wn891072ggulgnk2n7xphfvtat7avl165lavzm4lvxllgafsulq8r1mbzps9l6lgeacuwtt22g1x0b3ie57khomhy4lwra9q1xgpncsxwbpirg21afyh0gfk5nudk0fzzsrrv1n575veqgitlqgpzptr03gxfxmlpq5ox9x6j3mvjqtqwds9nu7plnfeyorz4fdz76ucn5k1e3yt4vifm4v65yibfbdbw2dbc8ldgc8jp43079g3ccmfladv1ha8ztbq5lmi65fdl7k0g1w3ekd26zzgc4g4ly6qj4ofyj17oujcqf9umd18jmi7x6bhrv4dsb1h5g02nh9g7zls5nzvbef1jubetn3j0rktqpmgq5up534osa4xjaqvet17i5ewevp2zsy2uovrcsft9yrp9qlvs8yig3zaowg4gjxboxx0ote2yrr30bsbwf2mwuuihnxk718izdg769lqsia2ap5qqujlagyh18cnh72hl11hew83hvthc5t6vafph1gu8f9na7ca00mx3gxqt1f5a6kfcksrd42meawiisdpqmi3qptvnclp8bk1eadh',
+                fileSchema: 'qrxqvtswkgixq2iqweq85shr3rrx7so41asp69car6aefgujccpr52vukwk024ep8j3onuzpwhyzfoirvu2vhm0p8t6qzsmz3mgolcpve79q1f5zel1hqpgqas87t5apt8b6u05fizax1h2js8nge4tmzvshthymz8vnmklame5afy8ymprg65u6wncpf6avmgky5yzxogm93ejiungqb217e811lkkqrevc1jkhci22ku2uowxs330sasnb3juru0i8q4g1hfqon4smpbvyljkpy9yt1zuxhsn4fhsimmypik44m8m4qzur85wjmj03xx5a8sbjcs6beqkgyfmypwbxz62imqv72vf7kd6mqd0a6eo732lp0g5h35rcioivquwitskg5dh5my3rqbk0r4xmjmxf33am1hoiyjk82d0flikwbil4v4ehqteqgi3cq3bpsysr7d9c66h0glytfoefgx5vzy5lvdhz5wx4lctzm7hep6bg36xesc93qiijuzjejhpymjixi3jjeavjyz6znejhikqxqjmlq1f4ns3gcfe6xtmu1uqjacdf1klh9fl6jhjaj140kssfh6tz15mmlp2bqm0spbxtsogpxr00apu6kyjwlswq8xmiya99pub4rpwmzcrh8a872qv0ghqwm1nnaxwb2cq195scyv2r9p6pai8len3pltaaiudr1dy5xgqg5jme3z3ckwt36hc4gus60mc123lxfyyx6isk4tbe9fhw8938fcra4kbjcvz5wf2h6vvu66g1gbri7c4rhwtoi4dbc9krcs5uhpeim2ecwa4ui8k0fp0tdau6k3r8ygr4bqomjqoxj9gnit1n4bz3t91po4li1g823fvgts6zugjn3u7413hw84bxsg90x07wh719dv2ug8k3kz0jv6xav9dgdtvei52h7s7b29safb23qvvznaobqe2w9u5hsg7brmbldnc54pbcm36qiai11b2ttzvg37ey01ag1fm3dpq2h7jzj831h69e',
+                proxyHost: 'rh56wpm3hrgzpck18js65pu4fotuovz7faodybpul600xh31osyozsoh5frd',
+                proxyPort: 4405630551,
+                destination: 's7az6un5e0mf7tzatjgids5r65akz8znxul8a4sklubsok7bi7sk39d3bpbuua18xjk67qbrx9wpf464zl97lg962julsbquwggsoyvk71zxnc0zw1uhmhnnyrd68sjfx7xlzbm6pwaabzy94xkae672q4ilou4kz',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'zocgvj3bx26yne61pkiluyhskb6mdlcqrvlvt1tnlvmvjn27qtvn4gj7l8bgdvncoxwu1qkqq3v7v83evcy27wl1ov2mwmz2qdcr0vzgu00j55rqnw22p2x8l0st0biu94f4b1ussuidrstii5sd44b1f043rx6x',
+                responsibleUserAccountName: 'jsidwlgfdmb9ta7g0zdx',
+                lastChangeUserAccount: 'mlcnvps5bd7lpexl85xc',
+                lastChangedAt: '2021-05-22 22:38:01',
+                riInterfaceName: 'n7maesrm0colyt5f2hqtc3jlejq858whawk37ogi0x3uvx34v2uky25fb3wvhdfcdowjtj62wv96y9w3w8cr76nwazfjut7a61i1kn16kbha2gdkq11q97zly6oite3f5q4w9drvqu4a0vuki48u05nlxor4rsi2',
+                riInterfaceNamespace: 'wg9822qlzak8buq8s2rekbzdex7lj2z3w9oix7ex7f0wscy3n3sxco98w1esky1io2r79bk6ezgiqymbd67t9688w6pe5m22jh8b9g0khmkejac53i8asbng0c3345drnsvvvavnt1po86dizlyswrqfyhlc705h',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelDestination is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSoftwareComponentName is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelSoftwareComponentName is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '71bgl0nhtvqqvnjzw46y65vd2teydniw9eamdbq3',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '4lgevdux3pah95g3wwazjls3n1utcrvpxj9ovmba60ei3tyhyt',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '9z8dfaagrktpuko1g2s0',
-                party: 'r6nmv1f5cvvwdi00g7n95e7ce8iadz3t3eo12mpipsp95n3apexscjxx3vca39bjx5qo1awarsekzjzc52ok2x7ib136h8msm9yjfbg0bfoa3g5dwmm0sszoy9tfhj7230vmod2uyk86d4fz1dmw8zlgfh19p9ph',
-                component: 'n3ms1i40001xsg1moqinjxp5hc77vdfvadxbpi4c09sglchkyu5ofsrjrtt0h9l0o5cgr8tr5hd1xn7bqejgf4t23opsribv7xa21735s2jyqoudmc0y7wjfwx3fvdgznoypicoedxzmenvr8x1wxd2sfkwveqah',
-                name: 'mfskkmpepk5exd9ythf817ydnifoyk2asi9wyee7ekpz7bs7qvoj0qtfzqco4y4z16ftz9rf65mi1p3lyegpmeyco0qx3qpqqp6gfnb409b0hn5rk56fxvrjmxxvnc1699d97631jbws06c237hrnk1yoovnch7a',
-                flowHash: '7ux1feyxdva5mtd62x6dih3bs41sswav1esojwex',
-                flowParty: 'f5slxf8runw3pli0lj83g7gu8jvb2becqxvqbjp8hej3d5ulr7piupecda27o0vl3pebv6c9wpknqrey2fzjzca0sxc9lvxbbwnzmb3w8a8xf0gk908og6vtpq9q4hvb1iy28gcy5xyb1sc9s20ajpn8r5iooeaw',
-                flowReceiverParty: 'tiorg5kvhrap0veke61a14vo3rki81d699ljkn7k71v2ij7tfg8dty5hqj9rkk6h88lbzjwyuvemocdu17g2wygswzzmpspt0gu2ddqrzxsmruw9j6tlfc1lpggvhzfn93ncv97yv8ogt4tl8n4uvkqucegcgi28',
-                flowComponent: 'tnkpjged9irx8km2sqm7gs717teav6blle6a12xoj9i35j3mx9ylbfw2tf67jz8o56lxkk86zfccbcjrskt9jmqwylty2ykau69brq521zvf40obbddw4d2ynr7buu82o9eco9u5qjdpqmox1qwgjh5cqp0aajtw',
-                flowReceiverComponent: 'lhbsb3rnq8vqtq9m1tacy0j65in5cecuc3x0uoh18qd445osu9zgcm70djmw1skjp6kdkwuv4631gco11xm84w9w2n31a1e874udf44jhfnkrh7ffzidl2meybnipd2fq0s0dntv89mci1bi088yyyo62m8zf3so',
-                flowInterfaceName: 'l4qlsr1se9yohalyvvdy35qkcma372u1k5er7w22g83pgreo3xq3mbqg3z86rfmkw1zpzvw1lib51yvpffptsv798k1f7jywigcukep5barr1r6rrbctw7lvnni9bv7r23m48l2bf30z74u0h45e8ftl5jyrtxge',
-                flowInterfaceNamespace: '3e2smcffyrppmdo71km20pgxzncrgrncod8kbykgtxocmazd9ivryrh4r9oepmmmezljnnnko4yzkt1s45jpp76yja8czb1j6meblw761mx2ibi9lce4sbpewzfou44md9svi599ybnuz0lmto82rkq7uofz2e33',
-                version: 'vimpmgm4lsz94mvt6adg',
-                adapterType: 'riq2eetck82jw8qq8qhlpdlmepyh7qjv5allrnt04tqthmnvlswx1tpft54o',
+                id: '5e6f1047-5cc8-40dc-9d21-b0a6b1f33103',
+                hash: 'tbt103rdh899q4tlzmk8tgwuukewtazuxmlmj2dp',
+                tenantId: '1f0ffd41-6e36-40cd-a2d4-45f2cc634e1c',
+                tenantCode: 'rli1tf70livtfi2v7003twm2aapw0t978btqn7or9v4updrc2m',
+                systemId: '2579df38-b96c-4037-84f7-171ae178ccbe',
+                systemName: 'x9awhyhj51tw69kcnsqa',
+                party: 'dmw5k4t6e1v1myztzim6rpy97rg919cz84wsvgyk8vet3w6leboaexu1i7wnukirlm0v4df9zzj33rn0kxdv1sr3ojwhlj761cs0tqmoy8qp86tc5fv1s63cbin698itdqbg8jplj0ch9qryib28e4jbqi8e3pu3',
+                component: '35f69hosysjmlyj15uz00ifnsgb1zylz6mfh5vxf3oxq95iqbavujkj96anih6crpuhfmqc915m9dxpf6a3l9er3lj7gkekv0k8xll5zeyfqttdzamuyqzvcjbkdlt7vibjba2zli784ilv26q7qrnak7xrltvta',
+                name: 'gwyl8nd5pf45jgtaknyrw5njxhywfm392ce5cjr747qybucuhbe4kyd241oye04aim0u87dgmscsqx1aalljg7x7bxy8lzpro2778mc7wc9hj3ivh4yb88vm8b7why8yt1mopo8j60zr5qmgvm5d3r70f8490d3o',
+                flowHash: '4ij8yaj5gy91hdm7ownz8jf35933rety60yx0dc0',
+                flowParty: '5v79t8vmkl1dybyx6xp3ua67qz4sxgu5rcymw149rww3rxqusf3im79biczl77suwbqfy4esacaivpvt2zbinlax83pul8nmwo8ckd8fl5inftp4am3sggdjj0cek2vpvu8uu7rkspoook063qcpj3fxvjd7gmxe',
+                flowReceiverParty: 'dxxrvpdaqs0qf6id9phv3sqt70zr6v6k2mwhlfmc3lyg6vclejrjgpvf1xvmnkdvmve6u0pdqqlhoyewx78krgv8onufq5t8r6ojiaqcq7j2q2anisxpuwce3es15m0qzbj6llov93pgos3lg32jwrikknu8zgc6',
+                flowComponent: 'i162a6dxmjh4i3qri0xbup58ese4qm6t7vgfxlxtvnfl663giwv1l0511fb8l497vv1p7l7hd0wpxly2rv6j47sllxnpv82bmjr6mg4z1eh3jxto35rki75tvsa3z6w4xyer57ybfjb6i9axohw252rki72f3bfu',
+                flowReceiverComponent: '50m7tj2a7t8pw9erasxz4inrvxi1e2wlm466e8e1lf0yd1b6u577i2fb3bzfjqypzpwwtvfzg9f2n33niqu04gmr27522feqk6inu77cjzbwbsupb0f06mhdaun3xt2hypdscudkpwctftw5qdehfrz370ztwywr',
+                flowInterfaceName: '2fy12i5jjbjaproq5w6rw9xtk7p0d4nwllz2hav3fc2td5t2xnvmh6s3zako3rkeqa0qxe8jgaxh2nv8oqurhx1qfftz7xsfv8mj96kxskey9v8rlbbuoreyv8psylj7xss4et2xda3u535mr3772t0jhzx6xgky',
+                flowInterfaceNamespace: '6heo4gfu4mall062baed14r3gh08l6e317ubigennjql92n7m8m4agvqo3nvrg7296t2dsk6om2f0lm5uoyjaiv2mp70tzalc8tajvo75qyk3ohpunauthpzcu3te16gnrcd072ei8mfyh4iy2mke41sslv1a27m',
+                version: 'pozel9o5dm05aabivsu7',
+                adapterType: 's7dc76ib9ogcdbtmepszq5kyhxjm0d3kpv8qka3imdvfsfe84d1tpn7jxe3r',
                 direction: 'RECEIVER',
-                transportProtocol: '2ox2d9lf1pra3yipeu46r30zvpat59nrgd9az5vea1gmz1qho5d3ryebuxir',
-                messageProtocol: 'sblslakj77g5pdpahe4q3o8z7jyjnf3bt0trai4dq4cugez17cbmhtjvb368',
-                adapterEngineName: 'roaugr4j6nfsgnkf29njjsokvdzvv20dg4eypnf0mec70qfnjwx4jqo9sul86walt994jmtv9ea4dkz3qwk5uu82qnd1zkfwnhwrxph0i7i4ugk9h0yoy03m1jj482dnob9atrymo39qdcldcnvcjhpebh5uu6s0',
-                url: 'o5x4ok6umy52xo7vz4oncle5fsjhkqf855eh3tvz60zci36xl66opxzquftz0m200e9488qkg30pdnm5eivkldu328srcfw7308mm48acdmgfoclwufqhfc0k8ez2ck3ikcwlwgbzr6jwa33rd08wkewo9rjp97q5oujb5j091ifmxmi57ed9s6y2bqbqa7xp6oa5j2nzkjqyko4a4hq5tts2o091q6f9ej0jel9llvr0kzlzps6shob5uysp77l9bm8dbp1ld4536s0q5fdwu4n2lvjuoyfxwp3320rdhb130v8sk7iswfohurn08tj',
-                username: 'fd1z79weathahkvnzg4xcufsmykfvfs02pcmtuib15jqg2zmbxuqot3nrrnx',
-                remoteHost: 'ogtafc028p9lxhvwwbynadr8wt5qit4ghelk68u992e1lxc8lhtoa25tmobltafgct3ud284q6hh141h5fakax654xibvrs1f21upt3lq1qb1hwbcdo5vn62q3fzq1phn7eikofwfrp4guoiewwxtqo6xvqa541y',
-                remotePort: 4875912619,
-                directory: 'oyqbhzc0u6fstwt4n0mr7gmogjuqar9jjwr65i3cxikboinla0vdyybanoz4uazjzswnax9p18r8cfp1x750ymgt3hyprjp1j0ub9agospamhlvs126wsuj3hursnd7j10xu5w8oxpfk2fvqa02vzxlqld65hxo43gey45awwvx053wjsr6pemswxi0a6tjv0dwlg3227iu2wecu7uduqr1lgbmonvvqvzge9ii106zwbprxqxogcejkkjhdrrmgmkdh7fil4fnedrczdbsetizs6z6qbilyf3xm42hewo0fifl6kehv4ixnbph8p4hmmjqdjqavdme4us690h26gek06e79cqr0itjm317r571sfetsgbxgf6bip8lteqmqzwsp95fwkdcxd31zfgq6psmgy5j93x2wln7dk0ta0c3gwzw8s2580r21of7ewbcfs0v6s8v5c3e350otsr1a69kvwu931m4lhyx09n94hf60whevl7r8ynqi13ogb5xacqut2ms7xtxmaj9osfqdowlrsb44cw569t1uixwrbyeynopqdkyfzbsuqw8ps502ngl6g1tflxy3t7q06rgofp42g7z0xtyzgr9p9iwxsg8rxudf8i6dtpqm3vovyr85glqrxn2tat28cn9phxthj26pmbwng7kb0cragfp4oljud33mzzwi1zc2efqbvd4bkf70ham9b4amudzxcd3gbbw0kx2m4fvmy4wtokj1wf2tf65q2nmsh6hbzt0bhgmcomdbcugkyirgkwb90stfci62eycld8glvytuk6xt5jf7jzm9eiuuyjzcytt429p2frn04s98h757jlr7cn60x7cmpw7hweeov46s23dkh5d7im1rtzvet8h9ti7uwq2x508jmqbem0sdt8v3zlagyb0ztghttg848gj43g4q33yiojw1gulzf0ckz41wworhaq5ktr7frjcw146wmivx031aacltgwun4hzleqwyixaa0zba4wnm6kykz1yv5jah',
-                fileSchema: 'e7a2kkgbhytnp11owxh7jkx2p8p1vymtqv4ethfb85v8yjtfqgycylzwd9en6d1uswe2udh3zuy0smqford6u2ud69xd1yxtnvz7ak4vuyucxr8azzxyts8dxc7fubpp8kchneen0idn02suz9kjfstt7qdd13zrx85ot8bbc12c2w9rkigdxafrzl9yqryhzjxug37w09j7vcleik268xbzxzlgz86ddyeh93extpqzj4mdix0n8zu3a4i2qnt1xct1y3z8dwfdt8i7aul9hz7pq5l6oypafgzrzo6tdvi7dacj47534skfiw0bui0flowbakdlfjcwao0104ymbdh1j3fborzmaaaxkh3pigaa4xr1h7d1b93uxlcx8a0hpgxknt08v29n439a50jd5smcf46ake5eooyxclh85vlpc77bmycv3uw2md7qdl8zq1orb9aqg16hyitdmkzv217dl7oi2p50zl2efg7waifmgwtl8q1vlqa135s1wibz7awvukv64ityd0s3gibvguvr0tkw4j0gsnhl0t19pht6942g6j3djwg9ceyb3ubr5oxbn8k35vyrmcekf8gi1tpfq5zzye3fz0is7obnhq4472wvq67jiw05bbi2awnd9fwt3xmevnksro4lsmaksd2vz3pkb8ppbnar8ryk2e13402f6fnqp1gsv1nm82ju4txpn2y8nrqblvzmyf7il1pn3yzve5prp9egeuih42i67fvv3ahahid1lo31klzbo71vf0nikbtpej6jkbmzco8pzzsp46xyrgrak4v35462vea73a2r10p5v9womp762f9soo9900xwym3xpc40iy9rt5gn68vwmzumky4uxp5dea5brd7mu83y9wc46qlkdjp5xznet1dg36ncrp7vtfrf44wsrtn1684h6tsbkl84iib7g3199tbsi148l8dccgb3qnpham57iivv982wqoai67w6rvxzrsddx7g1308cpo7hvkzymkpry1ywgr8o',
-                proxyHost: 'f82t44xm95ysa7qa63rtyazvuzinwrwhbqjku6rtrivnqoc24mwjzgr8dmok',
-                proxyPort: 4404656465,
-                destination: '2wyzegx37zkvpbzes1bx045tz592cpc1xriny9yexbl3l5xqi1853y6hnyz7vxnaff05e7jte6wc1qqtuvxc2xuyszdsvdvalnh1mtif0stzer6r2d3lj6xlbvb0i8a4nyp1b12b3ia2fzy4soorrzx8s9fuu68i',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: '7wvi0djpg4cds7lminkhfcsddk0jim9bwg2i5qgoseolqu2punzeab47e3a44s44ibut32h4embrrzcnjv3zzboi69e494u9w4kfx75yyu9dxmt3q5ijqzkxj78q4ocqgrmr07wnnjngy1svh6u44b1u8midz5yys',
-                responsibleUserAccountName: 'l2ry1k7jeighndaqjsen',
-                lastChangeUserAccount: '5mccpujwddt6su658be3',
-                lastChangedAt: '2020-11-05 21:26:30',
-                riInterfaceName: '614lfer8nibp4ccremeu0s48pq25pggr21jh3f1ixu2ah4pszr00gk582qgqks8i9hsf0muiz3wle4g7yfemgrgg4g0mpvtw8tyksuf6dfooetqwumxnrs5cmge6pd8iy69m2qno75kafl0ni025g5wmfqieedsi',
-                riInterfaceNamespace: 'zz9z2pxq73b81v96iye2ovyqndp0c1xodfo2ekvayx23y0q2j00unguu5buzy5gxr226ev7cfmj75k18k3ks1wxc2x32s1lsjz0j83pi0is5slg6xeyrbtw433ynwg9oti1fpgbzutei5dmdcgtnkhjhhg2amvhw',
+                transportProtocol: 'm5i2tdijwbsld50zkw69f3kie0gxbok3dudzpce0t40k2sip1t1kgkenwyb1',
+                messageProtocol: 'obn1zztxon6qy30rb2ce3espm94phzcj2gh0xfho93pkj56laavezetj0th4',
+                adapterEngineName: 'mxvl9hu83enqk0p33neqa83bzi49rcyv0ywm42bh6ps0znvtq7e3pl1czy6960tmpyebe1aoc5qsw39p0sj9qva33hh6op233a55cou1ivi5mbh8lsw7bd72zjrrb9xyo312p5qfm2bba5n3qgvk625me69vg8iz',
+                url: 'ff8nmfpfmldkniglxob4je7ciijivye52emp595b0ov15wa4hu10ye3og173kv9az638f8rp7mntlqxkew9vt3f5tmv1bmr4w6qj93kj08s1wsyp37n24u172yvtpjbprqtzcf9qnra2ljma9zdviqyuw1un944wbb9ho259f3a0gpobsti6zfqz9fz2rqldv841xhw8x5hnfbhp087iqymba0bbjr55s1rvnoaxb1w6q067kdg8rta4ci5d091tq6kv9rwysw7im6px634b83edyj3pgnoyg5l4usq8dfw2ri4x8euwzlymx282t8ge',
+                username: 'nsajpm8azyiahgu5wg9f4zdor5alzv915oes6xwvd5paot0siwk0nir4fihw',
+                remoteHost: 'reou13cac2h7dl0rial1dj1zfr024clq0zy44bw9sg1ntpxt34jdvn1f7jh8dsb4zrecjhcxwdydaxx743eqnwyvshp37q9xxajhc01sr0h6yqpaf27s4cugjj3urriugj9nl5m64k3k21b0fhijf67hn7x6zx3x',
+                remotePort: 1329289287,
+                directory: '53et73y0i4qa6j4s0fw3sq2hfszydn6pbnlyfgu94eq5sf9943llj9qe6rtlcg6jca7lmakmwuupqq4i1984q5j1s4cndmus6f5iarqq32kb4qtewmbtqmlbck3378cdftbiy9qitk22e3avi0c3fnogy9yhli72960ap8m0c12b9wm7q7e6zj10yzx7qt1ei8vsfda0nl54gi34kwucrcvtxns0mlxkgidbmyaejdjuhy8zosi0svl6htgpk0kuke2z0o6f14stct5ucncaxawi930zugw1rm0b9lpau3a73evayd0aff8stwq5b2lhcqy6ph4vxzgra7ycigicgkp3yp3w8czk7w6kwz1ujxj7h8vie31n4gefxjgb5e0a6eoevy0nvtx7j08xqe7ebi0qc42sxt11ls0c2ficaopobxvt8p77c7x32k3qwobqsgdedr58e1k2oq9qb22xlnrm8no53g14nkyddlfnt3fk8fcro4wdh0cfvgc3nglz5e05ln85w2fretjju8cl754uckav8qxuvxga2dn2hlnhni7mzm12rse4x9c143n06jesbup3lbkgvk62apkrwogpaaixcvvnh4rkohqhc9s6vb2brd9cucs1szzysdjfictoykuby22cbtrrye0fbela30jdbig07stddo3iawiyks5wy0h0lvmer28al7onfcyqg1efdtckdqy0u99277xuqkqwjgrs06hul1zzu30q857iva4q8wrdardvgwjght19cpf25hmdgljfugqne69iv63hi2yipv4kbsojsq3droiaxnnus46oj60sx7n8p5o0tuvvv4vlnroff66jhwz5y17fcbbyw49rgq6mcxlbzqxj8dmqxd7v8e42mqwzpdbf2ryuy9hntpgngs445h3oqtbxj455gxzg4nnhydto97ekxgfn5yl307uh39vhl7vzt1f76qlbyg3i1b81w8ntqjssnxned1d62500dpmwhr98h4e3ztidkc5rj016',
+                fileSchema: 'k074hdnu6da6ngp6ph9dehngsoji2i3ytubm9ewrs29wmmh55gx779n4crur6cxixlu14qxqfd7pwyhaqtp92zem78rkefefmit9wgrw7wr8rnyx10s6ko0vaefey4j0i0uv6zp52249y3xo2zdyykmalhaui13l459sphspnzj9dxyinea020j2bqtknx8tocf3umvq8igslhbl9fnax26r2nls3mo32e3j2silhgwc2huq2pvkegq16869bku5ld1tv696cy4tws63q6vumw0ms6bm64bk150zil5r0t6ml5yav06aw03asmbj83kl9xwf5bt0e516xf73dxjq8l8qtq8ompbnwh7m4tlk9nq4pewm314aw1egnkz2ifn4b3ecjytbgc3nratfaoc3gf4agufgwwkht4bz2mgz5duaqoa3x36511at0aia0ak7jd4ldz24ki4xf90eybts339tf4vytrd88chnhpglyua5dxryadf3kewvt30v7xwzz2a2elw3qt07pv15dtwzpncp9hcmrof6q8x6bva1cgg4gt5eck6r0gy7ckkn5ljdfkpzsnvol6debr8050bw9b7lbgz5iy9ocy1zrlgi088mfkr22d885tx2z8wrcb4ku9p1xfm2cmpvaqymo30uo8skrbx04onqmal7pc3pne8ysqebucb9qinjubxgbg0kio9x4g6figc145n1fdrrxx8jigipasx88lyoamsflvxix9qoktgslrvef6e6y5mgun9lk8y5h4inkoe5v3z214v8ysjfeg5sijgnpxmz3myoje6wf9wm93i2gjvdclaipn86zeffiy8vwikzhnv01m9gmjzqy2ioh902npudr2lc3xe29wloakg7su36bm0a1y4ma9kzf7d0cphyvwp2lxps8v4kcod89y94r4jzc251oirs0p9mkju96zrkvrxq5mal48968nkik28n71jerk98a8ckcbnim88twna2pmx09vxn4no4dk42fyn82pn0',
+                proxyHost: '3ptufu3mfutoartu4iiqq48yl37vopa0nipcdb8bu9w2oyy09lzt97ra79is',
+                proxyPort: 7677831107,
+                destination: 'i0ipdy8zgipok2oozg8fbm4hutx7yx03lqkwbyrydm1o5dfnhqs15dxgb0b8wwqxq6plm2ipbbymzh4otjhy4z9fuvkov2jp9k8o1aptoqtuefd6mj2eyxo5frsr4p823n25qsaz083ahc7nqzy6nl1zp1g7utvz',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'u7wdi6e8fy7ldszp70nl394pdplowqqif62d31tind3c843qy88xz7ru6far0k92hxjlt96bwuv0z610lfv7cni457p5dlzwpp3jr49bng3wh90lp7vw4fvn7c8egrdo7ip0e6pz0rzxjg6yykshi540vuvrronl1',
+                responsibleUserAccountName: 'kbyjs8a7veibxq5srk4a',
+                lastChangeUserAccount: '0gw77b8xhto5yimstdtm',
+                lastChangedAt: '2021-05-23 07:50:33',
+                riInterfaceName: 'ck5e7xh4fh4iw4pzrlbi84n33adldc0cihx8aj36nbjvztekdjcg5elvpreln0h03aujqrdz4ucxlro7d8h8mqjjam78fsxh1w7l4adrayjr8lqv90td67d5i28ivame1c2b7v280ulfa1i9zrgfmi35cygu6q1y',
+                riInterfaceNamespace: 'l72ytpexlnv31mxn3u6cbxejh7jnlqqqleggxzk2sepf6mk7h0wl9se111rn8sg7mowdkoy3t001ekd6ftxdk1dl3jstg9wjtanp30vknteyhoo966g5y5b35rf6y1epwnqsrw4oixsawe16z1q7ktc8oyqeo6g1',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelSoftwareComponentName is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelResponsibleUserAccountName is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelResponsibleUserAccountName is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '3djv862jjvpf7zkvps5trob1wzt7t9f3gupcwcz1',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'oludb5evur110lnq0wbbl8mwgbiiddboecj0zabtaaejffuqi4',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'jkyd133he7q6bnqp7jwj',
-                party: 'sqrl4td76gui0pzvdnb9jhi09ojiqwjb2aos029jyd0d9g0k8vl73q773h6ncutbfloex0mbnley98rwo3i8iqfpbeczm0cxkaizxcntiobbm1ga2tu2pqjlned34fb4s7txk8u0i441rlezhsjkicv9tctt92ks',
-                component: 'g9ywgpku4cuhiw7mjnarwmy9qzvvjf2mdhknq66kg0n5wkdocxvp7bj2x5x64hozrgmgk00k1j0cdf10ca5owniwnwizdy6h6t3nj7tbwxo9weqs94ejx5oqhy9mecjg9g3n41v3hcn8s0zmyubp03auvc5m7qxz',
-                name: 'njcoxgcl9zht2x4jxuqyl9wsthqx3njm8b7e2exhk17l8dot6lv5lbb5q4idufuky50ycaau92lmwea5zt47v6pjb0ibgaaixfkvd88tq4cn6fxac7hwbjlsm0n48s8reu29beow1ovbjdfnw56f6bej1q3d78xd',
-                flowHash: 'p7or0lgtt2zw59ragkh090w6uqo9i7baak4ey7rv',
-                flowParty: 'ihuxiidkf0woo9v3s1wz0cz8nysrqhqlqnl3vlunbpzkea4a0t2eye9k16pxu3g37yrmhuonnds1v7kkiyluxs1lpkzbeqnzjc7whlkkw6uewlbi0d875mgd27kxv4rb9egxoncsb1d64k6gmmudwpganpuu5koi',
-                flowReceiverParty: 'qstsokf8bxco071uqy9nc629dyj4q5hjjef6kxg3uu0tg9nshakjntcjpr29q8f5xyvxhy8l1bk6ovjuv3s5mbmt13f03hhmwlr1ib49507f6tn6wv1berddf5kk3kbuts4bjr9d4g7wz1rfyfuqdyby57w0o5yu',
-                flowComponent: 'cm1kuuf2749w2dp1qo396kwgwr8rg6u3nyfjdxohhjts7ef2xjgg8bz89l7bvh83vawp2zmi0h6bzqvbixpn7okw0g95xocqgm6opebe3erk7ql6iw4t670zbbllr84jc7gagf548d5jsd7196tthrlkcsapvnuc',
-                flowReceiverComponent: 'ex2io6yp51xbf18hzusgezqqz6xi0fjruq5stzg9sje9j33az9xnjawtz23luh4lfrhbk5cg0m9rtzfq15fwkg7wmavc5c5pm0f5ecqm7jpsd9qispu3wm9cxytr8by8e3x396turra1myx0stcdenfsza0hv1gs',
-                flowInterfaceName: 'bb46ece913in1fa9dj7abeuo5zw4d3vq5legl0m0esatutoiqpx9679xqzix73z3qrbb90m5dif3d7mk502ex468xc4fojb9s4o2136ojjrz0k5whf3sadfr2enmoo3txseqsejwx5lsi9tdez12c1e3d2tuh63g',
-                flowInterfaceNamespace: 'yiequgg3t1ltj30e9wgxr7jufm47tncr28c8cnb495iufv8bg2mf5x6gsrhebbrxs8hgmlaf6qxn8s16cyg3tg20kdwwe7p9wrxzgaxbtg5zicdxehfr1q455yxsiq2uy3m7b56q6jut9wpb0nn1kxfeirbxwrju',
-                version: 'bx1curlyc7sc9gmxcxbi',
-                adapterType: 'vkg29xk2ydkl3233rgirquwtcp7bknnpvoj57jknfm60l99i08x2jih9d5k6',
+                id: '8f748b54-e01d-4679-a693-cd32e182f898',
+                hash: '6n5fc3aqyrfkiu9avulz78npjal5ltl5votsi3yz',
+                tenantId: '03fea616-5c24-4897-a9da-1bedf9bb7ba8',
+                tenantCode: 'vra5bq73tsxdd0i3cikm37zp6gmrnnuh5loqdfc1agxifsrzzj',
+                systemId: '58251a91-106e-411f-b580-522f3ae62ba3',
+                systemName: 'x2ogyc38smpc0n88z4vy',
+                party: '6wpjr00s86d5xlmxw1dlqtr2uutqspj2jwjm7ghtl2pj2asb721pazyt5q25htvjnz0yarq771zo2dmmpsqmkatg2s2ybn8e2h8q1uw47pmgquexxa6mqeka7pxor1kyabb376cuipuo34bi9s20jqqf7s7648zd',
+                component: 'wq7jpop8pig5i47j928tja6vo68rf5x9b57ny7pmsqtc5cyw9d9tcmkdiodqy713c28oyscuoiwcn4h03yzesp6ahogcyl1ijqs1mikvtz9hnc1getlqbvfqhktih2ftylhznsn60joz7ph8167wdh2rk1s3rp3p',
+                name: 'nxzlfvurs1ywu48pzxbqas4w58ts73pgunzhw8v47oomenul9zgwio0peq8rtg5lnes5bk1ix22fzrudx0ztl7pze2pzn3rbdqke5aicwhk15ws9cisi4wrugvnmkqs0hpf3wmse9skz8xfvxhlqkjq7wo4cfn32',
+                flowHash: 'ajce08b3io7vfjjssba0ocsanu66uxhl9kbi7agx',
+                flowParty: 'z3tzdwjxgyvul9ozxk42o3i0cm917cebbj03419tzmk0xl9f3orgpp7wu6cgrpggac7mfi0yt93xunuc566g31e4se4a0h669ik86nb6ze2dfuo4y8v67xklw2ow2tti59mvxa8st7uthe8uio9i1csyl38lam5n',
+                flowReceiverParty: 'xrgtjayvkp6qf5rtx7vzml9y8czskzntlrdzbnk2yvhylth0jcotrj7ph0hr9ayoxntqe5lhzl5ihbids25zc44yzk5phdlr44ci7zodb4nbc4yydn6exv36pmtoyfgjdfgsr04gap8khixq7z27q65wzcmlt4cw',
+                flowComponent: 'fjwq3oxrywxma59azbrm5sbs93rwble0cfs8i4fawx2q5upexl3vcil74270rvlto9m7awb1u3arbv0h5fan4nezjrs10p6pdw6fpbyeld2rttryp7npkvussg9888trfclhqrbtbo9duw0xkj4jgsh773m8dpfh',
+                flowReceiverComponent: 'e9pwje0avw5npvwvw0lttj66rkogy7jp1jumgh2eivc9xqg8dm4s7gqf0qy3mywl6g3noyqnw5uremd7u6i3atvbsepr06ta7dqums3hkz3p05ya69gbr4cpgovi0yt2pqugsmxyw9i0o4tkh78undn3bt5b8l3e',
+                flowInterfaceName: 'v79qxccdbhp5wm9wf65d6qwvv0i2kgr0ops7sghy88l248z59d6nua78jcwrsc2ruz9npxwikpg64d5adqmclljxvk9ydf3cdfg16mu4h51svilf07yoo9wjj9m51hy8na6gliusxh9bgua99l9blm7mos5cuy4c',
+                flowInterfaceNamespace: 'wwagptidnwawqhoikxui4fazhtbruk6c2a3gxbon3mrr1btq8z6txl3g3dvvn67ufh1achihga0lj0rr5yd1it51q0ia7idf0ekqzyzm53u6flakai77ol8p9y5k4y237neu7tbmrdc91f8w0mw1qwgmfp70ql9m',
+                version: '42x8diz3gi2z68fyx6f6',
+                adapterType: 'jn6b4leuhzwuf84vitvk6g53cn5f8cytiprpup9bcy8j9mda4lhbyvtlc09b',
                 direction: 'RECEIVER',
-                transportProtocol: '34z8lt4q98bazcbcgxgfk3hgcthvwtts72hsm881rze6sg3ynfly86jd7be2',
-                messageProtocol: 'wulgg28eux3ta62wpnnqxwk900r1c3emeqbudu4viccjeaep8qdcsexwszjl',
-                adapterEngineName: '7kyfei1rxd8dkkrn1s7u7w90fu6h7vggjtt9jrpqcqgt4gehs8ncyvowq4ui9a9gxx80kpznm4uu9iao3mmulrd8ojcbpovxr1fye8nggttmyzrf7vkz4re7d8x0zus27i89wy66ef1d7e18oe63oznpldtbh4cx',
-                url: 'nahkpumpkutc5wdqa3vjpgevmb79e6ojn6hxkhsb9ko6mf9d4n1f4oozqbq6zqx4rtkijuva7jt699asy8568jcr7xkuej3f7wxt481o6lie11fb3g08dhegqa7t8o0le62vb5rl4sz1boru1rrc1pplkb29dha9lew56xfe457dhid19zoyzq3ssop0p697oaua8no8cjenzc6wii8gerfr960tfvb6xcu94fx8bhoq7uv1ldme6m72gyn4bei8rp7u287vpubyxmcw6luwrymocm2txpgc58aq2c41sx1edr1ne3n7xqtx9v8zscv5',
-                username: '4q5thsajctzq4spqtwfxku4amrsct3fdxs2e168bnyrrfz8jolua26gzpdqf',
-                remoteHost: 'x64lj91d7cot97mktkeaf7809jfyo1b28d1vxcrcxhippk2spq2a9k671v0l9htotg38xcj8otvdtyejhtfx56clvqkfyhrap20z71vj8handa3az53kmjogq2k3h7doxgx4yy4vgmmj7kj00p0vg8z49gzuvtue',
-                remotePort: 8920433780,
-                directory: 'sro59swzpmmsq9uk332pu28kdahsfsef7cvl0fs150i3ra777k3983h96zgjbidewbo56hhwppawzsailemue1y1ifan6huivguoy1a6iyie9xw0j1ez2f60gevxix7isudgwmh6shrzbphysleivz295o1f4u96zq0kibzhfsqdc9yeq6197m0os6g2yt3tm1euvd3n0tb059wfwt1j2in1memhyiqkszdhyaup1dw6glp23fc53pxwhle4f3mb7x7bnmhi9vkhq15cw6mv9qx2xrr2a040xh32qp39ao2v8gdgco3wouy0zyw8yu1r5buzay2qxu7zxabou6hv21bb7k7tmd35hury5n7ul9xb7n7gb6f6ksdinnt0ldp2t4ymwodnwprn376q2g4nvwx9yves8ee2vr3io4xnxvwaxbogl9rd7sdtt4fuew4wn8cciwl0anag21o0hlwm2gomrt5a05bk97f0iiku77jpsnyoa1ji9ou4tqhnix5p6t7i3xmjqp3kxw4dqsoy40pt1j6tgsszb7awzgx1gobclkpegxux6pceozre5pv20mo4d2q0yzc2bsq9w1hzsfpp0in33jj5s8h7z1yqwutonxk7mp57bf2tkov5gtprd556kk2lxowkb03vefbxmrf3il13f4vxjp1pblngynu73z96s7f9vm6p089a9bgmdr53zym7rf0i361b78vk63o7iwlggx77aq2optddhbsxnlg6dzuj365nnlwpvpbo21f7ealqxyrx8nnvvydnn3olmzcacg2fql7w8jm3yr316bnfl9pvnv9mqhuuz0rxqj9ua7xei5hxzb28huajplmr8sbtkj5inasja05hmxbwmxwryz2nvkosgrnwrr5jk4nz9b39b9tipr1c64794z65lcdluy6kvc436uai8ag6f7lo72m3bsjego5dwsd6osda6m02ilgwppa99g1iteaka6mgqkov7dgtbx1uqo40yphui2oitsmnylmcfb0v',
-                fileSchema: 'o7b380jrsae59z4hcxieo0tdoe1jfv9w2r04uujuubigrsdplt4kxdlarrd5trh6vim8icglwg85s8zn5tz5mfzmzap0b48m67p2w3crdqpjo6skvsl67h282s0ufuhmhhkb8n0q1r6a3p5tjk1bvlfc4hro96krnhkplnioaadcdq1grehmjogs9ukgnq9l83e6vtio5e6gtow8986eimxkokt12jnixrianz6g3bugg61yo2m8pvhpf45msi7z8bihrdzxwqv6nttcmgcn7li9ms7ze3c54gwxo1l3tug26fm9281dl9mzc1pstahro0gp8bwdf9ajynux509t2zp8eklgpgxz1yq9ewe53n5lj0uheziisycb3hdl16yc10c5uzt6gpo4j2zmh95vgip4xgjqma78j6002gxfruf6hkawydniyi5x0tyfa3vqcrlnajd7bwqfnfr414b1a995oy92ngun2u3snsop7ef99yj2p97lnx3j5pdq109h0bel48wmk10orlskkxa4kdur30rm4vch32gh9gx4bfihy868b8uubi52d0x2ovmjivry0nz6jnw5eik0wmo58z1h23gup0p81s2918690kjpoo55yebagn8kd52chyst5ysaj59os6iwwl88l3jglgsw2yqzo3vwhfwq65d3egtgghwpjp4qbm51bf1ilw1ghdv06438wvlohezp639q342lvk7kjg3y21m6e8abvxm5x9n43vksijguuwrxi2p5h7w2lf7d8mbadlppf28p9fpq083ox8v4in9pnkzdwekuzikpvucofvkfo4gj0z4p6itnw8n0hw3kqheg1gkxp6tgyy96phu3uu8siwg4rvl6u996ptqr2on2uvxcctbilm6d975xwm74a5zez5p5xbygv8z3hr9yumbwu0cd0f39y9xy9hl7etyofv2e5anu5li9z8v36zbowomhdh20yoxcyuoimjehtgnppdu5ilo2om6wg8xfbvn1pe9rhzov',
-                proxyHost: 'nej7xelrbrk6pduz3pulbbc0fviqn6bcycuzea8vegfesqi4g6e33by5ol4k',
-                proxyPort: 8266990537,
-                destination: 'ssc8v1l318vyj4d9692637o31ekx75332k5tw916hrmm4xqro9qlk5g3r4neqxr14n8bcyepxuublt8cnb5yvatqtj8o89r1h592a12esxre5cuh94akb1eno46esmkb06naifoj8auyigz26cw1l0gz79wgtqg2',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'pbqzkvmdj3ej8vfshmswabud10r6af331od27df8d4qks50rhj2v0pdbd51mux5src54ww16xjh5w79xj7f37alzrf4cy8e76qsmhxvtaz8v7l4u4qbwdrj3eya8x90wlc9c1cbiu5bhlcv6kqdoz88y2zxc2lp5',
-                responsibleUserAccountName: 'tf5a7trxjtcpulb1er3xs',
-                lastChangeUserAccount: 'e2ryawlmvby2jjnm36vk',
-                lastChangedAt: '2020-11-05 15:14:44',
-                riInterfaceName: 'dvmkoxezin30l0kqec0v0lb9fbyrfsqwlgpev6zs1ouw6b0s4163av2lcemoytp97qx43lcqiki0n304q74nohquizui52v07sqxwbm89971v60uqirorwdqdkbbx5zwznyf395piywhdh1seg911r034fpvae0w',
-                riInterfaceNamespace: '9bz8wx05daogdphop0dgxcozcmo6clz03nqsbn1rc021zcw2ip3trtyrzgbmjs77gb6zk0ymbqss9v4yt34crdr8cuajh98qfo1f8y3f0xi41q59dfsswaqla8jfcjnph4hiqyq0dkpsatt36115qt5dawszyf36',
+                transportProtocol: 't5gii63ykgp71wdt6q71yzi0q61sj0my2djhnp5k00vh2n6puwgq3kzpvkm4',
+                messageProtocol: '300unsvpp51lkyrqbu4xd7fhgsttuiocwjr4tiftqhd8ogfxjlfi60yflhde',
+                adapterEngineName: '31zv3v7n79dy3joou7hob11hiogynsg5cfecoviq0y7tkx3tmioquyu5zfggytojjc7nt0alo6rcsbqe0meqkcq6935ty2mnu4pymr9n9zpey4z5qh2dbe1g3z3vil6cbkyuo8f8811oaorta6l526js4r9t7ate',
+                url: 'zc9ht02cc7rdc8eyrrqibtjpcw1x3yttz3xvu8csv2eeq0h2uitywuvjv4c1j7n0tlb5cxhhtrlwcyjydqdklgcn5xpm5j21acvd373rggy1vhgclietnihwjnx2ua4idoy8yfcnu8rb49u510jrcqj0m8yogd080qy4xukn67af6dx92cabhxx2f27ui1xzopgxhcjf130qtwowc25c6k7lcx4a18zqdqmu1va093k7eruqd4y6phoi78smcv3q9rxamee64sseruq15uk125r6jmw3tjil80tmd9nxpnq5rmnkth2z1xb5nkj0yfu7',
+                username: 'rpz3wlf11j31fbrjj7t01qeo8pmxoceskwz1n0sz0e28yxhh5v0lygrgcweb',
+                remoteHost: 'u1bkifs0pfid1rgq79rgxn4imtj2w19nbempf372p16jnfeee740j62krqg77sy67f6zi835x2iepq7ncf1lxv1xroi43rn9gvqxvcutymm60roknzm1981w3bi7affyyqie9uq4usgbjbtbmombh0ot81rjtrtp',
+                remotePort: 3212248823,
+                directory: 'xqp4wnywa86pev5d37bjfr2el1yrd831m92hhrfejvh2sco01l52p1m68mfskaji9tyjr28vh83flytg02hiw4ot3g4a0p28bs42fqxw0d9yc9l9ady0d7o1mi37ii8sxu1o39w84aqrshyd9npq5bj2s3qeuoh0tcduzopmpc285z53nmpa5j9fr4edals13s9tgw7lrs05rxbgneirpmjggoffjfgph9gncfpu6iw4vwagon1hxwdrlzuuqtebgdj9nm95fejwqzq50a3g6ug00yfxafmg87baoj3txng76pjb8erip1uvspp6l8j14ne53mubeqly1lpikgo5c9cx7b3h28tdvqjivh3feipxstj43vlgy8v4tgvao6y8r1a9ip7zpim2wt91rnhp29mvuj7iigc34y8wkw7e8lwjj656vjxzrtngtn1mjaqtr28x4h8iy6i2u8wspv227jt39xd3dxlr3r2xxz4cl54m2zqyo6m2wgeoj37pj6x94q1jh95utayvc6n7x4szlxwela0nb8np0jacjbkn98pqid44y460j6idmpk6gqcoxo6x2lk7m76ti0aqc1pqg64g90kahdyxsjxrusgxqs6tvjrjthu207y8iqkvjux86kyzdymkj11s0izp1lar9pfwtghw3wl63417xh8fr9lw528tthqrwj0xqnzmwkcc950b24v1vblt2hv77lhtf6yac21m7s0v0tcm08fk67b91mzgpzh3h2mmhdqj73p61dqxulrzckuvysir71j85ixrfws4spvqibpsu0mn0fiv9olfczgew4tqx9gh25munjh417p8jfu8d7d6kt7pu8kf7r4r8um3smd99pwqnkkomess4g8b40rpdgm4bu76zo02gsm1fvmw9axjzl49ne6yhkb7lxz022towazeg6svaaqnfrtik77ytndmtzvpmlodhpku7ermqq1qu8w2swpc5qzfw8i97gpwv7ecmxqfkxy0l0420c5e5ag5fdd6',
+                fileSchema: 'l4vylo36gvaf0gfocwstpnb6saic1kwv7nz61edyrocenbj6cv6txwuzaw8v8cnanjmt0v0mbtczgieufjyu1lgbiz0gxznmfxveuplbj0kb68dwr2u5lcf6at9gc6vvi1m4g46fyriy75jatwa62tl093vndef5brjk4rfix2hnfqkxxrio10rt6ufv62ch1e78eew4e0wvpa5z0hgqvytxo9rgxyy5odbstun94bzgzwq61391p970f2bkvrydyzd55d1a4q5y2wr14iai7oe9d8zakbmj5k5tze7o8mlmcedmikerodstaugbucbk1ft6v1tuys97ep3m6s1da5rrjf08p31qpiulmfjt6ydbs8jyiynfe47rnpq7fsw5y3lcxihjau49em7orh8pumy8qa3tbh79g1inlpcm30jc7d8vus9fq97ke55xd1u5j1nywh7msuwz6zh3xgzl2qwbwxf84i6e0ayax8dyna5eviha3gi8xmhd0bp8z6wghx9darrafhf2xl2nw1rh1sq8raqfj3s9wf6bsf7dd16l95dftpgmjrk2ytaojhcv5blaf9w9odihy40d731r6xj6zce8go7clx0ajxo1efegbgxgeydkwqkay7abpn5ygklxjmu46y9ai75q45irtz3yvwenoz2omb4d9fixzyffskx1emb6zoxdoxl8avm8u158ujrlppbt8b4h37aquxkw4b9hjeoajluh0xhvbm6as1k8o58jnjpgkbxldibud14a1mp8h98mda9viwcde3c19sz8tknq25fltzsw0w1a3wbl040uv0ccf49r9vrxpsn0uuc7iujr1gmly6lfa8he9os180zdkllge62zekibdgvvyhal8ma6urkbtuklye2w0pxk6xnlju6d7u0tbjcjwy0o65t3hc1hyurkz9kxpevaq5xhobm2csjbisonnuhcz5cluo426rvp5gbyabk1y0y2qk9fpesva1fqzngbhwi9mswfeai8eqo9kzye',
+                proxyHost: 'if2pvqu0v547c3m6ur5hpa6ltp4tp8ykaxkgrbj1livecwm8hlt4i0hypddq',
+                proxyPort: 4860746803,
+                destination: 'gy57ss45numx13w3nuwb41mw9yzm9imjgv2l3sqw0zyd4meoc25i1aor6qpc047atea6xel3xxou57mzeibjfp7xald8ndc41fpvx9cgnj1bnuy5twn9k8ucd4w64qrz8e16bg8bp15s1ets7p5pvk227lgrahvh',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: '7jokzk02bqtw5ycxlo5mu5ingjp25ovwlxh419qb1f4hxqfpjs9gael0ldsd3wghq2pmc2dfw71tvvxpa6boadhcfjdrr8znsnn9kzxsv3rwhw8ve0x4yw5j21n4lq2lht11y5vg86kev73nmj88hj3ksbv6ozv2',
+                responsibleUserAccountName: 'unxm13youh11g8t8x7wqq',
+                lastChangeUserAccount: 'y9o34k6w9v6l4xll85m3',
+                lastChangedAt: '2021-05-22 18:50:37',
+                riInterfaceName: '9if8lrsh91ylaf4gjc2hpims6wc56k8d0vjtodgnxi8182linj4zdijlqnnbrrdqhpn05bgblbfhfrjzgup3ia9lpkhfg4fyws8379415zrgsncyf3pf6qzohzpzeeh50exyrndfqjontw2zqq06gyr5no9oh14n',
+                riInterfaceNamespace: '65309a2mh4v3skvb0ddcdv2r378htj6cf40ewxxwanjj0j7n339hklo53ulksiw3y41ltr4vu61yb9isktw3fhwbfablufmsjbswmpr1le3ys9dfjctlev82495f2f883rrny00x725rrnoxjn9g3wbvksbkdijz',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelResponsibleUserAccountName is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelLastChangeUserAccount is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelLastChangeUserAccount is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '73v38z93ky3m8xfwe68r0re9zbhgxzry7gj0h3rs',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'wenvy00v3th4fdi5i7ve4nswnlp2fgezwqtip3hvz5dg8ueg2u',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '3uanru1oeci0gxvng3d0',
-                party: 'doq489ombbca0ay31ylcx64z94b8kuodl6qd3dr5fg8w600j62jf8yms419zvvq4min618puftu3tj1l9m04j0tuuxkq02si6ce45a9z6ash6tpqo1mfjbnm86js45b94cp2wdzad8lcrhem5xpga796wzkgibc7',
-                component: 'ad60au4jbdlnm9p0n6no174b1zrl7l1bkc0br19gy53dteaqrsv3tdpjtwhp18kyvaurgr3gh6c52cbpzm0guuipn2b3itj391y8w71235wnr3wj7jzm9p04mj2pog3clc6ke7z3vjxt7dzdt8awpqi022s5cl84',
-                name: 'uo152r8306kd0jbxt9n3f4ezcdl71ep36g8sckrvuns0gwpal2g37o19c3unyfuk4zlfigo68q8520nffpilj7j99krr7c2xx29bsq8vsv0umcxi6ink69s0ts3ain8e0hcrz3zo5pkgx1d585fo1o2xiipcnj5x',
-                flowHash: 'eaac8b0ks9yrl52v9dtgxtejipfu2oia9msr5lh5',
-                flowParty: '453cj6wzj6vajadj3urhr8pk8itwcd94akos2hq8vst8kj15idbqq0xpkrrs5npvircjsuvzvmbby83l2h2psaem5h7yhqr18697gx0gckd5yybqk09k3c60a0ee1setky0e2fd9e5ekau3e8snnrqwh2nrplgbi',
-                flowReceiverParty: '6b4bgf7v89b3shvn6ke4u3j4p9gy309op7wjax3d7uwhv1mn3mnc0o7482haj3vr09n84dn475j42frpv43vu572peejd1be8c2x2nm3596x2j2yonitwk28qjnw153zpfi2fryjmifyd9524nyn87p0s3iw04o9',
-                flowComponent: 'bb8lhcmrlphzk8vl799o8htj2yw6zsk7akhu3ozk9s2j59o8a67dthlcj8ecn6amxllkjkiust3960by3wubgqnpvm43jp7t40k1pxodjp3fxqt4m4ws2gq9hz9yb2iz3a2b92qyvib561xmaurqatp87vd6htq0',
-                flowReceiverComponent: 'wexvbqbh8htwnyq5py7j7qxr1ux2emkpr7tvfhzxibzaji5dn1zluykiypmgu1cwpzq61ey8qy90u7iycuoikumsgbkosw9cnvhbeu7h6m16htmkqghwbeapj5lbbuy53gjczou3ncjx3ffq4t62q2vx9uh2njb6',
-                flowInterfaceName: 'qsrb8anctss9x05houq56hs25i29ed4xxjlu7fko8xssh2ze3mu7pluu6iti7o8d3tj43qogijxey5bthsb3gbymjqk1znn18o26dhtp2e5ui2aajrgvh06pp3try2u8jxeelxqow840mq1yvqfnh9bzueoenf2p',
-                flowInterfaceNamespace: '5fcespkmhozpdwysbykk3a1tracemte9g0dd61we5ejbd3nmgdk4gsbc8irq41c3rbntqxz43d62f2a63woaul5hoq4kzxb9wcwebdq5k85eb27g7b7i3km9kh88qfqz3mfcevdjxpv7agc9gxmott3e88w5dbca',
-                version: 'syvn09hpl54hzax94i33',
-                adapterType: 'rkxdz4rvrfj8c2a8fpjzgrahnmq7e6tcpcl71kiuzjp180h4ct3e1kaazf8k',
-                direction: 'RECEIVER',
-                transportProtocol: '5n49f666y7e5mvusc59jpdrd6y54s23g2lnsxoi7og4hkrlv6jt6rg76ayiy',
-                messageProtocol: '5jk2tgb1gzwjmatphs73iv9ju8wwrtqwjzvkzr1mmygd6jg9mgoj2eua1vx3',
-                adapterEngineName: 'iqdho3qfhn222kz4njeb3bcmgzr4epngcwldtya5ttzyg18oro5rrtdcgk4wbwevfactkz7h2dccp8h2o74htw4adx4rc6qgajqm224wpjxf5ert9a3rfk6d18t9w77v0m3bparh69frm71i96s4tc1jrqonp8xj',
-                url: 'jlbnbi51gzmvpydy8aq59pe1u6auuvlm54wo84f9a8sghg8ylr3pmsq446066l9az8nexvwipie2jewhifichbnwnv4p9085w7gqrst3gda82bn16ho6fp2xu0hx4d4065p0cfsamnogdvaucr2xadmykvtu3vfbweiudgts880i3yevobsluwzk5ba66kolwwlbb29gts1q4s7qsspuqglt8nupbknm57mspquj9j8235e9vpf8137pnxsl9zew8y2p9eoduh1j5nyhrswm555xn4225l5stl7et4disp0ejmv8xhca27ferdt2yfjt',
-                username: '0nfpih7n43vvgsdjl1udjqw4oriqxh0uvxhd2pr8ehd8g8s1pqxtj75dh125',
-                remoteHost: 'rtwtcligkjjjpnvlpxxelql2qq9e0hweoesrhheztmcwnou3ucqop6wxv9vqgt2hoe67x69zqpvg8n7rcxtpg2mfhwyk9910z2llgzd8iyuq6uvfzj5477qck59iqsm7m9zk4x0lvfjcjx6c2w1w6golcin3o8ci',
-                remotePort: 9049559441,
-                directory: '4hz7710j0qalyr21hg9t4gsm8t4vp34nbxnmoql6nabmq51t3b69a48ue45rfkwca5k2wb3pmvj2c3p64nzllseqx17lbcx6hqnt6rqg06g12tj0y5oi0mpf75ljehwalgjqwghid5i3f0cym99ox3hglwqd7lxpplc8nrzi7prvir6832yaz9w57x2c81n79asqsj44zpm8w5m68xcnkw8vjdp3d7s7wr37by0z3dj18wf7ba98lf9uws26myanyyfzlzezhk8416f09dy0f416cwlhdev37fup3f4aernobdpnw2ji3ewotsai6bqg04njzmj119x6gkg23b6233d67y4ovoutgx3m07ry35ii4go4cy5b6r32glaydobakahi3hn960plmarpscmo9eq4o5n7b51i3sa7yrs85uysu2a8uvo276yrrpb6141rp5om9t0fi1lu1ohldlsygrfn980kz31eo3ijh3y8h7d96ywbncq7ykejjiqomqgcn8a1ajc1vz3okpnjpjnwa8x6udi7n65470tfqyxf00ar97j74snwtcvrz8x655fmj8nu4cy0ibsuw081t67429ugurthyz3cel1qg3cw3lgotgo5t7wp000t4fcox00pev1jay4mb8dn0al106slwyru46rfxtn0qfjcmn1l4ekfr9rr9y8s0m6xc0d5sae63cxqqfkve6mmrg5bjqf70np1whs4ez6uq8fnvdb6jlt1dgbtgiiv7moyklkn83w08r4zld6n341wwgmpk3gimkau0ozva38ymchynqg0vgg6b1tdo1svmvkkp4y27pxizwb73498mhf0ownzbllknw2op948v3tn786sph7wlnqqxb8vfzcjaclzh3k1imwo2po5y3yc7e03heqd7x8xr2r1x7sbd3jnggilf3920h4zcb08o2shg9sibvsrlbrrae18rxgo15fcx394ruypt9ser8d5dnf9xt75tjdktvqsfz2jjzi56kw3pnq9yyao',
-                fileSchema: 'ts9p1avihoasmyve1eyj7rsj1ssea8e67s5tcpdxlzbwml7j1rapohl4vxhq8jqvostar7gqzs2zfwc3zerui8lbii87uees85hvmvx28lu0kjdee72pzeyiwcpkweausc86ipbkvwbjhjjtxpgs65dgyus9qkw14haxuk8cn2kez2k0y2zyi0fxxaosnnnx4zmco245wjcrso175m0bj32b0nk0vpt0z4zlh4hnce688giwkw4yf0jo09h58s9om7vkdxx2nlo11oudtzkmcufxwkuvk10xt0nkarench9hubmw9245gurntp4n71vns6d4kis1iowl8993qfgya81t5h9kfossfyu13ba63od0ct6x37ezulfgrgazs8as677sn8hxb5xuwtegddb1ap6o0l76biyl1rycer8spshoy0auaf9dt9yzcjr29gochkabnorhcs74mogr6i8ej4b618mwvq1164lfmst2xi3whyp2e8p7h9ttew2unrydlb8mji2kkwz1kdnp3mumjv6m24ugzcvd1232dtydvnjegsz26q70swaoruvi0v917xnb14nr6qq4oj6mebybpj9lfak6s77yl4wb20s217nyk8u4b9r6aoqvhayely0ov6x9nzr9ve2am0vdh6fr7h3oqu60br4mvu2teh9d6a7f9e6s0eewtxbyrper655jvkvgnhdfiod11viylsqyodgrjy5ra1zighgqu57dpe71gxspu3cjy9yfzwnq403gk576vxn4wqlhp638huij9osa63nob08txftdez8lc6020seo0a8onia47qnrk4oaxf1ar0x56hg3rsruc3gsq2j06l39oz4cwze6fvfitus4k0aoq5pfea04o54zhipixlao4809fuzqo7m9cs2akamxqf784i76hmhh2etkh7awl9ayfi4mswe10qz97x3rohewql96p8473x6tzmg1lf36nmek78cgry6adrtm5m3o5n9t3c85p00859xo32ov',
-                proxyHost: 'ozmafu2tj1cm41nidgl5don4r8uni3q1iyabs3ktb4zcbfp31cahf174j3lu',
-                proxyPort: 9225337332,
-                destination: 'ut751phxp1zv611p6fblquii79d5y6rvk59bhhj92g8e47gsiggw3cdcgyn9yhv0zpth63wrowev2iyzle3sapywkzgtgculkze94xb27ke4sppj0fic3cya4m7nzign644ta910pnuj6jc4knm31wd1vzzagw2i',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'qtlqqns3ojsqaqm8cdy02pb9dwt783q70jvpjns1mfxus1i6hf376d30j7ws8kisxb2yagb0jltmnk02z3xhzfysqcxqezqeco7rx1xml7t65y7gwaxjnahre60yt445awe6cuyk2h2mug2ww8fga9diorp35qi3',
-                responsibleUserAccountName: 'izy7fycfs7p065230dnm',
-                lastChangeUserAccount: 'lomg2cgvsqah0qtvonxcs',
-                lastChangedAt: '2020-11-06 11:30:57',
-                riInterfaceName: 'rxvu117sk53if19il4pdlc0n9szchxnhd5m5xd21msgt5l5kfv2lb50oemq7dha85992a2letkpo7bmft2zkwhqb0zr274pmf29pizqcqy5jx759twe2a01pcs6z2u57xc5usafcopc6hr0taefr5afz6m9laba2',
-                riInterfaceNamespace: 'nmhh24on1kn1cpw1cdz2ajefdx8extapu0o18bewb5qqj72qylwr2d268g307zite77bnhpmucci6ansh2t7q161h9p8vm7apfmy3tn4dlb5vczstmam12j54ivl0mejuvwg7yz4arkgcmho31obld03yfooypri',
+                id: '599436d2-b044-497b-8af3-8e02116e60a6',
+                hash: 'd2hhu9hy7hzoi3kv6o6m689kh7926hwor9h9riyc',
+                tenantId: '1ae4cb84-9af8-4fcf-8034-1717601cbf66',
+                tenantCode: 'j6dbz0iheb1mgnhee5581wiphg8w7qtlh3nwjtqi7epy51eq4m',
+                systemId: 'd867d20c-ceec-4538-8aae-a372ed837330',
+                systemName: 'p5ecchecv4obnixfxett',
+                party: '6omur9sqakayw9snas45suz0w9povfhn0rkvwaaifjsg79l5mmw152liyoou88k11ddpqmi5bdnik4zqurb6bzcwn8tf2exakip5ynknqv6t9n5ru19s73jtw6ym5p4hsxnfm4njr21y2v31bn9n661hk4fu26o1',
+                component: 're61hvxhw3ju3u66dlnk9s1nff4srm54wvdi7yde83wokhkntam4cewmfk0xg5wbqj1jqduxg5zgqfac27sx02vqttg3dng8ifv5dlkkaw49jtxtnm76vht3p60l083zt2gqbh3645lkix2bvbt7wxtf3kxu6wlx',
+                name: 'yv45foc1cbps8zkrr1d9ostauixwlc167w4u4firmrhv48o9j5lsb8zvzdnnd11t21gjb25gezj4czrji61uqdnj8088ix7f7cg3xcid30g111work1exs3mhweauy525vgevqo2o44y461w2ewxhmri4coqob0t',
+                flowHash: 'xk4af0xb4q5153sqqxhn32vqkrmed5fvtqzcp9ht',
+                flowParty: 'aov9smqmo31g7ahlk29aynx8f4khkxzrdedvhty1de7lo9vshqc0r36cjlnl215x8u14fcd16rubaqd2a1iffru5yrxr0e0w5jtnbnsda23wy4owt0n1x3ru9xnsfn7y5wm12xsfr1bmjodh0ze8kdwqqk9r39ck',
+                flowReceiverParty: 'guxwt7r2e4exg934phm7s5l4fqizykeusq2kxl2cemyn425f0m9p8w9v6rcl33z9y9jovo734qjhj10chisvqh0ysv81p9xuxttqglo61u8im3hy42u6gmynx3espz1rbx1pfe5tyot8szpdxz9kgs8cgunzhwqq',
+                flowComponent: 'gzhzivpbwoyoawn6wwhj1syywchzhm2dk0ziem3gn7r2ejedll5lf40qnnbz10g0sx9h6mhztyzax8vcsuwf28z5w4hvzpymuvgpp28ujhk8kjrd4vnpmt1i5wotxbjoustwp85rbfmiij25qa1oexyytgo0i9tc',
+                flowReceiverComponent: '0q8sftpasatx754etgbamrd8bvb9tolo3vmgsiq8r5d14oge0s7mogwvyh1ttldcx1im6hdkrc7mhohzuz4sx94ls4znu3jipraobypkext7eoop68txdmfxvulo40gzwx8u54xhh9shzmath3vfdxarycmrgdxx',
+                flowInterfaceName: 'toq5k4jlqued1cmut0fps0z37q2d9kum3zllw3w8qf67oik4idb905nazpx6nm9oo03v8123csabt9ws4qrcxgklroke5vxdoejjt7erz5dvamriuhnqvpz25g7y06ljnd81tndf3fcjne7shy82lq9dp5jyxnmd',
+                flowInterfaceNamespace: 'ue29zqn4egqob02q9kmjyokeeqzz4x8w50inct2kmlc431219xlut9xa91gjs15z3flkn7447nv5bgohn1r7w4r7gxmi1o35jsh6mzp5rwh2su7cxnq8sy4bxqy7ywk03f17w0nvt1b7h1q72f5vradhrk2saktb',
+                version: 'ploio5z27js7k2p7u0or',
+                adapterType: '3v4z9dehw2rrao4jneg1oo16vwua3xzs4l6s2ejlqmbgyf2aa7t68h4qzex8',
+                direction: 'SENDER',
+                transportProtocol: 'gc6x4bvo5514xrwyc7be96j6kva7sz20awkz0eutmkdc5npdhe62d1yli0ky',
+                messageProtocol: 'eh4rdr85t9unkxgpcrnkma3xygmauunpuqbf3n6s6c5nme2k2vhev8gszmrh',
+                adapterEngineName: 's7snqfrij3aqjsu7ajx4lj5lbmeuztydbmu7jqn8furdnjrjyidmi7rb0eduojsx532gldwzyg2duxinylh862y8ex4agwec56d81c8bhmxcop0jj55lnrvy3d006y64a8hur88tvnge72zb6y6k7h1lrqh8tl03',
+                url: 'fn802yi9r1fk81lsutbgyqxqr6wjqge6l2mzlx3p7gw6z96a2g9n77qawyy70m1ht0zwczj4j87qrzlv3ld8k8wvvoha1st2dudgbngobqitmuicts5iz3bk7s4sw9mpktwsbwsts4tejhucyrzblktew6q5oc4ytwm42f89ct1qe6sdkby79xqje0b6ppduqyolyw9a3o2r78sd1kmof6k3s10jwfxf28q97a9dcx50euaug991pcvre8bl9ua7rawtfxqluxmogxgt20vw59m9spc1dbibsubfeuwwmx6e6utww6l2nvunlgwscjy3',
+                username: 'qm49suglu0fsx484a8nhcz4tfvskv0x91dq5u9qxcmwibhvhfqnane9rhtof',
+                remoteHost: 'whnb735ztg7b5bwbef44dxte6si0k1ki5m0h4pg48spowclkdknd1j9ojan8m5f4oq607xcz2savnrnnfi6h3depd7zf1i3ebuujxyk692xh999mwluovxml34a691ol57uod9xyvlytg4ceeo61584n14iyhclt',
+                remotePort: 7818810952,
+                directory: 'yiw0ctn16inb55oel554aae051xo441j6vn6i7cq0zwzz3ix5crj6kcnemoye0hdqax2u04h1c9ihgp1pale9w5cd2582k3guf4pkswhjfvjx3d1jnqhm1ds7gt4r4qpvt2p1g4fpg7ilpnsvowu3jntab9bjivbm7o1zv402wknnhgsw4vout4xiu7u7xl9irx7pda6b0cryzw7e2v1szchc98sxdk02vl2ltizugs4gzspbf262mpkb1ffcxrbxijlbz4d7koo0xreei7xt2rpdo3hqx5yt6r2fvbws9t2somatf8o0pbbh56z00tq4z6z644vb9btd8xpmhqxb7hgitjz3sg2vffny8a18zfwa6iy7f3yy8n6p3k44nmqebs2jr7uxh3gnc7xs7j1hpvnmk6r31iuxu706mhxxwbsu9y24hynncj39qtxz11vzd2vehs50c29chwwxqd7v330wjf3d1n81g8tk0gxr3k1sqjnib2lxxkvmt0pwqumoqqjajz1kx86mzfa60hlgesde10ny5nxvs9u8kosxs44wn5n1uv8oizrcpcdgyezgggbk3rt1nh64eg1dlzvc6vqda4njsh886murmceqbzzaitr8eofo541jfqfy8wpp3t1prgml6ofehg7sve2d5vt07scg68l7apxkfidvr6dztcny2yplcgsisxmnf6ntuuzka18eki1edusu50hksyzzfeekrjvcjtdn4cyae67c16vwlns4lm60vv41hk0c3xfxhh1ezr8yh4hlq9elggw7sir6xokehte9coqzl5hcmepmty4nqdoexshi9yc7aox2rbq98iqutw3kmuwmrvm5u84fv1yj548vt6m6iu5ceeiaiijrvpcyhrv0l1z8r31rcf2oyju51sggpiqnh9zniexcntvk4v4pdyhdjo51i8sg7r3vg8velasfkgxmw1m5exeragfugwxicf88v5fk82hl0sw8sj5vovdi050z8hq4sgujcldkm21m355',
+                fileSchema: '9rogqy701bc9a0t7ei0ppveiryzthnxsgo7x34p6x12qarb718l104wbx442bz1qhyzny83i0bjgrs268b0o2rcne34c6cud6sda24iqxpkv86w2th8wp2b9ehencpi19cr6ji6h5oh73o3mnkcocoanpxv0rlqcguf9udmz25f6v9jjcgyl721rt8bwxehb0s5y2fl9zmk4eetqvwnyqf6am4bmbvuftvynu8koajlo7r8q5i75021m5ihlck4h14jji0407t3k5rj584hlff3sm6b919fc05y610y3z3g813xchsdk4kl1etbtfn8hrzhyqfx206v560flkpjzbrr1e8ghg05id4og1j0oe5n8h7wo90qti42fj1t7k3zfynzexffww476cjjwezbzvuwymoisk1i3vskvfm2f6bwi9iuiybt8h467a4l4w5avts0hu9bzm6bg8pzshyg7b6px38l5ipyzp67fx9si5tbkyuh0pedjj3u14r0dmiynik7mhzoood7k4sg0aswspfoi5p0qwmn99h0l6nw4z307syderuy15tm24z1y3xhxja66ufvmjqud4f0e3weg0qrujj0lxmebd8dyvygewjfmi2aesv2j06vx26pk9gta8a05is7ru8hl12ip08rvpt3s8ayp8qfe0tuvy3wpq4u3f9oa6y2ekywcrotueer9i0b5lw7xq5qn83ye1yelqe5uii9yvjjoienknczxeoga9o0b1j35yqhznwdi5151ygyzdmomtg85o9l6gapydr24oaqhj99nvxa4o4juy3449du28azziq3ccgsdk26fqdrlb07tz63ayb0xfc48bzcuurzrapheeahkzlh2f3d021e1zusylfzgv66z9xnu3h2i0v6faqqts2mwf7rt3vi5iny5tcxebman9q7paqbvxklh3xcgc7uaatjv23mccel5u34vfjfrkn0dulhe5mg36o4rnc0mpnv7i5aqxpf3uckcqmatf3dwx3rz32i6',
+                proxyHost: '9jh7dmjwvxajlrqh7gdlbqdal1lmbd3bkxishegzyjgxmq17km549yzvtjm0',
+                proxyPort: 6362821560,
+                destination: '60vbusyoo33a4ywpq40nls3193g8pdu65n11q3h0w33pn6le4y2qnnrmmg7k8p2p5eiy0q9rymptx3p1dint60of4c4lmisy6lqywsdar5sb55dfcvjflz2axk1rk4z77g1cvrzw240gou7g0bwoacdue03mrw0m',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'hzr1m3pd8pxyvbqo8k667eb1vfe6l8361yf9xav5c071qysb5jf168ru60w7vng1ld2yitjd4sesfk9ll8a4hib4nuuy8svqyweeu9py0mhm0c1um15fiu264aifb7v1trpxyxesa4lkizeavvm12xq9v371kv10',
+                responsibleUserAccountName: 'quzb597ccx0aw0854fj2',
+                lastChangeUserAccount: 'diofyluf59zfmvpsif50n',
+                lastChangedAt: '2021-05-23 10:26:22',
+                riInterfaceName: 'nw70d8oalsnio65kyrn45zc98s96xby6ge4kcltcjgjvqfb9b1y072qauake9vj8ry2j6sktcp7lk1e74o7kslo56xdne31k47rwiv4pt8fg53gc9s7tehljmbcq1zslv3jtegt52aulkucfpwru64fl4rk6cfck',
+                riInterfaceNamespace: '6dgybdt7fwyax6ct8vl0xi0rm4felkuwrxxxpag3o9wym3w6dhoxn2lmgwgv7nkttnwty5ckm47ey6fhni8jz5ohmynwmqe9h0c0spnsknp051o6rz1503vr2ibic4510wba8caed65e6745sdvln3nqb4zuhsz3',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelLastChangeUserAccount is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRiInterfaceName is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRiInterfaceName is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'ln0cc4vone6dwatgacbq34smd4004r0qgifd4de9',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'l7yl0k6jzbfpxjdzcndj0dx2b8ljo3mu9belsc0citjchop9ez',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'od697jxrt6hmp16av6p3',
-                party: 'l547c9yt0rmo0d7yjz40ktxnho4od4mgnxver8ur7w5w1dwdv38too84kdmv4d8vmuk0w62l036fwv4ifdcoqirfjcqrng9a47lf8buow1e8al28n8ltid1n3608wgx5ug8v5h43o89yhdi6154ef5ftrd9pcw60',
-                component: 'guzye0r8jgmmas54noahk1vpgms2hjrpo8eovucvjbmkecsk9fm8u19o0ivdepp6fer3j5me8jxy7mky0rs8g6pybezf6hw0e908kn0u4u85p21m5g69v9pcjpdrmhq1p90flq4r3stvlnki700mw82dm12yj6lu',
-                name: 'm60gh7t0pcqyz48tfqowsl6m9esu4xwl98zn0rkhb8x3leknfxr7rly5a260nhqf4jwbvvxm9wdrupk6mp2zd599wajemmwfqbqe0ilsy1mprcas1cfwto7xbu1ofm7emidl6yqafm7igehsmg1kpk7pme2mclvg',
-                flowHash: 'qz6d8rp3el6prnf0hnam0nnypzj6pihulqekhgpe',
-                flowParty: 'o8axkn6imnbxs0riqocrqqfggif1yzp47eijiuq5l2rcad5a41b3zoiztzqk0eo8d6fsbos4x7vnj5bu8kg0je712ofe4231ihf8brousvu5kqg30wwrej9d4mzv6vaxava0rmxqau7s2vy9bndyhgd8yq2ajhcw',
-                flowReceiverParty: 'ead9hb1dcecua2f172sp8k1wu912x35zr7yfnoh4fybanoq2dmax1bi0pv0qy3i7iy9d1fv9qt364ln4h5pep72qwgmrgxceb80x1o5bx1f6ci1vacul9zjkxtbjug6wfde9igz8z618v6ip4nmu9wtfhddgp146',
-                flowComponent: 'o7ts3rhso1ri6g28pfxrwq5nofp5dxyzoec96v42rfve445awkbc82lgbpnxj1eq9jekzlpp71oewq1tnqrp25o4w4018hf62y9dyua5yhp49ho4pharfjm1l92vlu3sb59ua7jbhqzzm6oe0x5ti0yt4pugm03o',
-                flowReceiverComponent: 'wyihovazz8fekj85oe9qht20kadd8pozu3msuogzt0y44n8d087t6xu5doc1z1fjcgrs48bljiaotjmf8e444bltw03tfpaiap4kp4b1eko4qnflr3y9v720yxuyy4p47tjaftyz1k72sk78xfekfwnnltvwqzd1',
-                flowInterfaceName: 'naqtb70mnoeqnxfzzs6fz90hzev2yd1sbprkx8llw2ibemiikw5ukxiuekj7cp7raghjlvx4icdglctgv1xamh1styff1h7pp51m3hm7qda99moibutn41yfwju51jzvfk5yyvvpqo5zyefdbsg5fpt6qvj2gtad',
-                flowInterfaceNamespace: '0l9qe7wq71qqrnsp3r843jw93hs02s3gtrt5rz7q7e1yxi6dafpe15a1ytczchg1mk66fdb9e8yhznnpx4rsz2isdoy3nv0ptej70ejrzlh7ruyku4zr70wxdklgbw3ns9mc5ub8j71hjovnasiov1mlhxw39xak',
-                version: 'jo467ivhqlffxvg9vg9c',
-                adapterType: 'fhz9am9rng4h0xbyk9pbt8cfgali03hgzwri3ajdc94d9ag1wllelr9xhnij',
+                id: 'd1b2dd95-dd83-400c-a557-680ad2d45db0',
+                hash: 't2azqpi3b6powll1iit0ncftu7xxhxxhrb9jhnub',
+                tenantId: '9cd87250-f722-45c2-bcf0-2cd382544745',
+                tenantCode: 'i2m17mujwuaz8aqt725swnfib3dofnq8b1ufuculzwmuhg3n9n',
+                systemId: '8babd832-8d0e-49af-8a4e-5bef1ed52e96',
+                systemName: 'lv3ztif9svspksp0460r',
+                party: '1un8hi0jbpycm3x92l1ubpzqcn7u01uurc29g9llgmm4y3hj8397nnnk8yh1nn90a2fnwby0lb7rtvue5lyzxcupyisa4v7ne8yyrb9pxsabvxokohqbs8gx9ihwin7srx8k9vy1fr589pxgj4ejevunx1rxgbgf',
+                component: 'kmi5a1tn4jhxp3t5s0rtxu51g0t9bjlt12bmo9oz6i6dwkez5ks8w2vm7k5nr72qojifehitk6e09nbhkwj27llje670ehgiv838qu5scpcmskd08vlepfb0j0jxje64ro2xrtoxnni6fgynbyk69jjw57x11u70',
+                name: '00njvzhecbk75jmrkuk2ks2dru1op37rcrfyg3vvg39tswj0ysur0pp40dbpzmkxq86pah7e3jtss6eo3kfq636xdfnm91ycc3v1umbkh6g9xahcix54vwarkdt5ryqp1ccvzj0hgxzog1stloc5e6msq41sikjr',
+                flowHash: 'l69034uxp5sy22bex9gdjajvkedmljxxazj4qw1q',
+                flowParty: '1jv4ob2aji8kirrpx9znrx5nwc1jrxyrrpq38kg4srogsk6wzlulmehvaodbh2ahjjrnkl4078un0xz6lk4wk9oewy0ikbj4y3f7ou61968tvu8y7y96o31krqm2xh1cjwt73visboen9klgc5n2l3q83qer76wb',
+                flowReceiverParty: '0eh9xibjrbqwhhyph3pbrswq6ekyv9meovf7sbkj40jkd9we0lia82ho7nw7ontidt1mroif1gkb3xjb31hycdz6esgyhfw0k3ail82jqajfpqjgmi06s9zx2vwn3cdbc47uxx0fvjdesihsjjaa8u83kdiqnbpc',
+                flowComponent: '8wxy61zyw3c79ma3a06pgecmaxhwxz0oaq2qvc1j1mbr94uh77jbbm63gidkgsq3vfbjastljvcdk1i1zmrg5zhyr4ogh9jdgx4a3o9o7t9hekn1pw405svehqdnpbbrizayfmg3xzlmwrf6kgi3u2ertfc8cspy',
+                flowReceiverComponent: '4cmshdxrp9xti69xowxt4znerrhcupro0vswz3tkkiyk71fksyelajprdgcc8mepl3mmbue5o5zi1n3j3bqrqa6gid7obylny3nli7i87j6vmt0hxyabq7acpqau58oaksq4k5i2ed5vo1g91gr840wbvm06w5uy',
+                flowInterfaceName: 'kql8pu8xsxhmzf0mry12j6xtf7r0m1xhk5wx64hyspnz9iqdvfl59c0wfjcxnq3ilgu6717zdk8jndzf79nxpcugkpcxtx9pke7cpuxwj8qz3pbjxp00gz0w47sh5zjp8j0ifjw3uj0jdfvwrpmg2fa7y4wk6wza',
+                flowInterfaceNamespace: 'js9a5u3et32oqocjwjtz6529ti0t5pzcn3h88ekqkwi5bzp7w47ukgwbx9s4raaai2picspyxmax8mo6707bd1vq753frk3rzzumpts32c4w6jhprozgqgyc49urv46ekzr8pfzs85ono2qm8jxyfyd22lvdbebm',
+                version: '3jhp9ti0etrdpa4cdm40',
+                adapterType: 'v0vazlhmdbsp3nzpt18s6g0cwk56d5hllndi3m9xwhf0fm25ibzonn0yf28o',
                 direction: 'RECEIVER',
-                transportProtocol: 'qds9lqmc8n55pisbmwl327yv1mk12uuvkpbha31plc9eu3uzfn8adgcoliu1',
-                messageProtocol: '4xx5zkfeae841h9s25y4lssij4gsh31bc0w29w4m30pvy3j4aersz5fmzhq6',
-                adapterEngineName: 'wnisn03n98b0ys5hw3hj95uwxhc7st0ribo1kqaooih6ha25f7z7w90okuc5365pcjyuatsmf6g9yipfouuinynlhojv1dexxjiw5ocen1dkb7162s3349x14f4memni4na6waadko5jg1ofvsarfvflryxdbkkt',
-                url: 'u1tea8ktic4liq0gvznwjfqrczsl63djx9q0njly2rshmhzzqr6uxv79akdrxsj2ehy8mq5hoj6r0tnmoxt9e8dhwyyy7p3jegig5gnp0ob98u38oyfa3b2c1avy84jy32mexbur1xa5yvlcdmvd3yk2f56sha36dy3v7voiaoukez60s9iwbmyxncb4a4mgorigammygn83db1u6nq122h21gf4pqwfkv4thsddkhuyez9zakxma7qka5mikc7v6pochkn9vocn6jrav6c67468qhdnv02866s308jp370lp8x6uv2t2j8v0sfn76k3',
-                username: 'cq84gnn32jwx9oi1xsajvfkz3m1x7vosu1y7uoz0w97ja17t3lugkj2uxk1o',
-                remoteHost: 'doo5hyh59r8a5qn5he4pygtk0kbx8394a8xq90lvkyzgcnf20uzfzxt8388qfdl1vs91kkcrwtrovjh6mpv5m715ls2jrd9jlnq5t7qlpqhcb937vruv1nyewoojn750dt20h693rati26zu5gy8f6r2ymtz7ved',
-                remotePort: 1799350116,
-                directory: '83a7laj3it3c8lvq5gxgt9chnf9lgxk4kap1hm4b93e6ynw5a45tb5b836i90n99y5asxa5ef5bw9k0y0ypftus6360g6h7hs7l2lgx7p60myrwlubyvx4956ll2zsx9rhheas6f8vtboc3xh1sdlus28yexqyrnhxljzlsq83bpf61b7p01z49365gdwc23k6gzo82em7z02elm9nrouy3nrstdkta9o1y85ho8k54k4hd8n59gzw3uf44qdwssryivx9fljty8qx407a1rh8a49hrv40q3smlwnhcr5gasvot0yaon8gldoio975orrc0gqmaibsdpgr4ela14dmhjii4ctpsqjin1rnuigagom7uv48f7pumd2f4d8r8lcrzlmhgsy85hiyxepgkjbi737digsp8m1ahajn9wxtwvwb8xizds9o9bye7ordtrkpgcpgfu08oh0q362msjq5c8p00f2rfj3055v59xtxrjjlutpixv8uzt22hqfucmljm2zd6038vfnj40098cg8uehczxyav331rqagr8nbt0cxt3h256g6n6xo5418w2hwdsgdyjs2n6ik2hye94isbsrls6kvbc7pzd8fuws5fnyvxzrm3i5jbrgv7ofaljhk3nepzherwiadyq1wha9v1fiknnecfrooqudjimmkcel1dbcqlfsaq720vbaizmxcjg5cy9in3th72ryxy2f5ghscggmrsvaxare9d32rad4jab8dgt9113x9f40bmz25u1xwezrkrbtbp0ggrpw4x5sjh8gi5v3jnb07kkpiosbni4q4xttm35dglmaqhh2b2sllq6chsequk9deenf4yh1rqwhb5f9y0jf75nrirlvbnf05zdn4y9nhwl24kxa20z0k61sal5rgpkd8dhd1pcz7b3flwhpw9i5y4x0p413whv69ak87s8z14gng8t1g0intmkpu37ld7ioxv5x1qp7pwy2chntmqihe13rvzlobjimron49mjcfo364oc',
-                fileSchema: 'clsn3aqlxxcrvd30g90tcg1dybbbf3vvbaqk8e9246xdwt15q2v92n9unpbilj4renm36y6yfmyzo4qx55bx8y9ngrxw6yfq2kv3f1a95kvawm8qa0j8ufomcuklftxztxzbmix4rwgqvjq1u789kgnavel3sddescjc9p33t5swifa5kn8y61y1xk4w3v9e17whog6ij05cfucfkkr4654thd3fdf913ukdee6yd5iu6eco28hin1ox5fyouclrup08b7xfr45ap0fe276ware9dvkc6shmmdwse4tie7nf25ku32zkxq8nhlbzi4b8qwb5ag9inb627v50pml2thwv2fh8b70nu7f0uagzlo6hxgph436vvqkzut9izanj790uucnheqow4gexsrs08qo0wm4m5wh5liswohaf6w59gxpny9e9xu3p3hkefhicu0j2o7l321h0s3o8zzraa14hmnofd7n1a3wb6xk0a3ol002sgzyiwb3swavacaynthgu1rkcl10ztukmge3424ml7gzg0nozane5sy2koxcjqmt0st01u2ep45222aa0d4fdw48n0213224h1olblhgmfh8dmvtvcksz1vzwa8iz1lai2vflb3dmmw2828kbhtpgggltnkfiwc94vmjvugwg92985yoc4i5fzkv0eaqxdtybh9x0amu2p8wezfeyflbdivmolt70va9eph2de8pz90uii248su6e1g15h9mjpt46ssf018w1104ma1n8u3j5eqv0nu5pkq54n7796pjpd3rdqalzsuaz2597w3olb0d1wp41oljoxjmhp5z2jhs6vxwlbc5dstg6mmmhep95wm1wvlknus8m0qhhvjf185rzzah1tdbn2rkz8dnpm64o9iiokcit6n7pt2kdbg86c8uk6ldy0yjq433qy3ufs0vuuzzkw49grdejczibotwdr92uf1c03xsloapnyh6gxzozy4zz5hrdpepvemu3k6bnqohguleyzjhg1cxx',
-                proxyHost: '5ywlnpdljd99r1njx5sj8vxu3rg6b2o72877k39ob9c7h9jflpjq0zsd1ydo',
-                proxyPort: 2440150564,
-                destination: 'tuhi8tzkd2sz6wtjn2fepg157onprmddbqr9aiuyupuwccmr285drbqqhiyhfvj3w74w5984i51kuu75dgib54qp68n8nilcipd92l28p8alvxtqmkm7ab8g90tizyyliyebz4j81of9j3t3qz6kdg22p7qzpyoq',
+                transportProtocol: 'c65zfbph30lkbot7ti8mh0q2lkkfavvswmahzyhebca92tum5lij3xe7ba5i',
+                messageProtocol: 'jeabh6ctqhzhjpprok9i34q2kfpqbz84y9phfh8ulmyocwixwjyu2f5l6aeh',
+                adapterEngineName: 'vcw2r4tvrclgkt1m9q309wje60sa8ruuvucwmjzeqo3vk5wxs9k005f36xe4k8f3dwnfy1e4ohybwfhw3wp0q8lcbl36fh1ae6izwywa6t7rcjexkh27jk6n4m064bz138ysp83lsna1lep1ikra5igricxea37j',
+                url: 'pojelcavz19zo1mjni323i63u9fq8q5l35971dth28k962ivx1r1nc9d296e1exlhr0c4rkgictdasuk5iudhpnaeg0a5mfdkokiu2z2y8nejkf9dfwc7nn4vmrmn5o15vehmiqtapp6u8cy8pnl799ju57h3vsgpiuhcec4j7lq8gdli0cmsnesirmfver7g5xmcizfzlgxa0f5ezi4xcv0oh241jmrozo3j31kk4sw4g4zk2h9ceoi5atf8w4v0pygpe4i4x48hkvbz1iyz14kef0p6g056g9talz602xy41x6ysqgul438s7sy9a2',
+                username: 'bip42vyrg4puyszhe6psveofqf8xnljgntsfce4g08qyuqejxtvxrzl6iai8',
+                remoteHost: 'inqlm1bch8614c4q462t2si5mu5nnlplazpyzyrl8uqmnxj6ayebb6n7o4t5m1z52g61n4rhl55oiu49fmc6hyxqehtzgsafhc5njjl3m7gpkknnjrshai9uosw69uxq8i1epsviqt5jw7cra7ycz6swm6lqtr9x',
+                remotePort: 3941049968,
+                directory: 'fxube3fpvhtb8124dz4bc8me6ocoihazq3am3ltmpya47fbq8jlefar2e6bk2u3uv33l59l9g292o9oqca5zih7amo7gxjv3gme7kdyot34ldwj85emwk7rrbtpl9yhpypvlqkojgv3co0yfh0ojj9oww8l7go12irs3muwqdk1wpx68llh8b2d7xhj81cstsdfx439bjmwf04px9zl1wxtnehzvnxfuizfegtsg7l44z3dc4y87smbxsbmsgadgnwnwcazxe70hzhgo0m8w6wzft2sg31tekw82pfhztox5ovrqqv5q9iwj9atxl0vs5c4kxt8h0kfn1vo4chuoy37ak146yejcfkskzxxzmeh05q2to1dsb9qzwg8td7sonrgjsbingh5ayupg1cckzvwi70gzo8fsfclfy1ll8mrbu6kx1la7qcu8ihspvn5nrwfd0ans393mb7zey7nabmtq2kzdu748sorvnnxqgc0ldzpef58l3cpf46chtbzhgfaeo5ig3h1ktkn8obqk0jefpswi403i5qzpsd3sro8qr5kfte43i31x4jtoe1yz8pypx7tjh2ri3zkybm2zhylocov6hvbj27lvjbgxgk3m751lg46em9j2tdeuhkil0xfdxwhbbu64qlls0iuxq4ppvp7l2hbkjfbabawh72p5w2jgj9t766mictyzs3818qwi3azozf2c818hvdufmiimeo69wkcjsntszpqkg6qfusdutftv85h74kdbnxd49ucibuwad26po8eq0ym24tcq9ab7hpv6d9hpinqx1yfg1b4tu1itvxwkzioa43z2agb3q7fstr700aobpuvbuz9sb2dtzjffmr1rjijy59tjy0w765v6hlihazm970k0fwi5hgqaik6v343yxxxuc0t7qjrhpxhixtsi1miivuh6rbka5z4acvi0df355n5qc7sa30s6v391s4cymkwuqhka4x1kwfgvas8nnmijscjpgml1x2xiu8usp29x4iua',
+                fileSchema: 'p2u2hv0setop1glcxypv4ibr03bba0d4rg8o89fllx8ioflydyc1cis0ltq0vtezkodg3gpb8qcyt3zro13zm6jegw8f9wvhyadhe3nl40dfberz2pa1l7ya33hxu9aykhm9gvo53ygxi1vat6ks60p2n28ido9fo8ayxr6s16g7esg6fzeswfy3yiim224gzhyj24lzrmarmw0y4soq4wmptug5ykqutfg6cv1qofz5z0v7coulav8v3okrae0jb6vz6xikb7bf85hnuscmenir55hr7wgsb41x5v7ht4iqaftz5mexoe4gi23k4bzhpj82cxapl9rji8ybj5uxyt2eprevg45d0std7vegauf4vdi00hm196sibz9pme8d4dlolvnrdwsrxq6r2orw5ucg68ra514xvzt8lbb32lvpycdjtycpdd5fs9olms0gt6mwedu0gveamdtzwjxjzalvpqtkcg1g9ro9n185ycp4jzztmjl7v1vxhbn2m9v4apgqpxo6kg8gkyo13gctld61fn97mdsp161h07ibypmvv24ho8g5bzniwetkcop2kqovzs2fkzkrsy4ji8br7uai8tw5o8b73thqe5rz5ywbhltefltd27g3s2brqkngavwked4b0n0jyppv29mvanwkoit6yl8ys2tmkmo851f3syaq7mw9oejvqk928deu7mqeumwvzqjjhk2l7m4d51xtllqrf1kt4h4og38639ybpwynj89t62m17ig2xstg1a8xdlvnfgtaebzqnwmhcfn14gifkvmco7g11kzmwtmhfeqfrr4w7go4c5w1s387ydypczvwihohcgofovzv29c82sfg5katnnbafjys7486x5q2utqhysemg8iqsjjamjkzow1v6s6k8mwc8nzxuyeyi6ulmoramrf1px69wxtfb27zddc01mjh9s5dintvc76j6v0z8a7x6ytronc23jtbnzouvactyrxinghvvjodpxh5ewjhkdtql9wscup2',
+                proxyHost: 'c38wtnpx7pam6pjyibfluj1jd1ozdy72dpb05heljcqb3cf976lykvj01l6e',
+                proxyPort: 9747976458,
+                destination: 'px4l7bk28z4hu4g7hg1vbfo6dfl6sr6w8xgl2xl37huz8wpck4k5alm0xaz7vva91cbxnhhdol3hmb43svollzgzxhlnib0ox3z3hv29dq3w901f00ras7x8kx6w8zmngichzpzgde4p50ya0qarvjbgb6szcsd6',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: '0y5cxfrwb2s2eoyxs1vbyfstkwradptol3pddbhxavjr4r0kwdotecrfimsoou7ldy4tyolpmorrf2qg39vlu5ckbrelg3eyr7n9keu2hjyjetmwhy9zhjontmekdnpsau69rkiwbof3z05ikhfhafnbbv3evb10',
-                responsibleUserAccountName: '5s1d0bqqsyzdkhrq22pu',
-                lastChangeUserAccount: 'vrkonz17s1ggfbwv55xg',
-                lastChangedAt: '2020-11-06 05:04:40',
-                riInterfaceName: '8xduamribilv1myeeperqh9z1b1ypvo6e71x8tkdhmtqd3fu28yv4vmn68atpnuacqyljr10mt54lxjo4hulnm2w65vsynmtmy5fjdjwtxf1mnmxse21szoa6f2rb6iu9mvv7on3qu8xif2er1cinil3g1w0ha3ui',
-                riInterfaceNamespace: 'e6iuiwswrrz6v9zep2oiu5ajp88kamm2oh6x3wj325ywn3wkyc7jb7s4ded9y9rn4ku39amvp6rt05iv6ytwsekrkcl98jpmtwfceiaxfh718zcnydn8v3an56o46wzgd67m5sn4ncqewjep433ku8pt8r3qdj5w',
+                softwareComponentName: 'uvzvl54gs3xhf7hyqa2rt4rlmhzeoiog94xgruems0w4d2qir4rk9jh1l843eft325yk9y0znpq4qc4g4xof1y3bu20d7hk8nn1uw6fcpkewnw2w349o919c1uol2u0nyq37g4vl52478g2ykz3catn4mfyrn6nr',
+                responsibleUserAccountName: '1dljv9gie7xkgz9nwmto',
+                lastChangeUserAccount: 'tez3hvc9gtgzrg744kzk',
+                lastChangedAt: '2021-05-22 20:05:33',
+                riInterfaceName: 'xnplbmirz8n7y31r0jstuq29w2r39sltteij242d8n3c8mw4hrbfxzvfbc6iflqa20mw52x306me4rosicb7sf57pb5854j1b4w91prihw2pgjax39vmys7125k5dtfem0ryc3155o10vtykyf7l59i22l5348rn1',
+                riInterfaceNamespace: 'my4qa8wyvuwdbvgu1hq7m9xvfcxg5d8h5r5y07zqexq560lwnayxxovzohpgdj3r32419nnfytows70akopl2uuchkfu3b6saoala1u6oy7hpa0c73f6xz2ae6owyvlh0c5m37a1qpv53ok2p4tzgi3om4b40mbc',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelRiInterfaceName is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRiInterfaceNamespace is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRiInterfaceNamespace is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'lzdltq8w5lhv8zza1q54mglquc27x9fnm9akntd2',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'c5xvx5r7huboceqbjl0tdd0yu0z7ph8t32mk9qdkniim816385',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'fdbdut1i4slg0lzmrt6r',
-                party: '8hi6cb6xj6uikrttjgnhaepnowltsf4ahfli8bja5s14z3yisone5yw204hlq1yllni0yjeq8fbsfe44f5l52u9ipuwa2k3gk3xw1d7k1volltgy29l5wknsuj28u3k1ubg9rjx7746zydmol3692qfsq5jyweg2',
-                component: 'vo63cm9f6ww21a32klal6yotl8o83pihlc8reb162q18z9mginay3pxep4k9dxdkug5hlsfllf9y6913bj4cpp05mig1et3xiljttttspx4j86m9ygg0mhrwsyu23bmd16lvair8z4yqxagdrcoywttwki0sxw7o',
-                name: '5et7kkb3xwfvtsaq4oaq6y3hq51r08ygm5vd2gprm7exjex49eagx9i9dnxafr44qca0ytndxzm0cbq4wlhkg123ux9hxei8mhsn3k7ibtmto042fqbpw0r8mxjc6gmb93vdg00izuen1vx51o6grpkz932u55bt',
-                flowHash: 'lzls5xrliyf3bj2rkwhfim8bjxf6r3j0aq19e96k',
-                flowParty: 's0sbjvocda11z8zllavlnypshj74miwrfe7a7ys4o7v1wbkdvxis2q5sd8c1d4j8ohwc1tgolag3ebl1c2upxmcvjcervt830v9sc7bi1dgkcurbclm1v9dumive7ryuvwlmvmo96wykbc5cjkpfd5xw314om4yo',
-                flowReceiverParty: 'f44md5iu135b1vgp91wcw9pcdjnvfy1fgrxm9hwr0ddaqakwi9hsu33budqladtu7nneteqoilmbzfy0a8cdg0u4e3j3uiwtep2zwzsevpzwgrdqnz8rp0yg125anqhgzvrvkmuk8abewscyx290wgutoao7jgac',
-                flowComponent: 'nto96qg4h4d14x1n1w8a86miypuazk1yo43zctstdgbq0m2gwn5cfr23q4ukhlo2tilsmjvlfs2jgoq6328ggauds2pfg8qlfhqp2sb2jgc4n5sxuy9mvqgn3pknftxh3qhfe249q54r2sp3b0unfyqlh3y33sc9',
-                flowReceiverComponent: 'x4463u2m42vq48e64aaqm9gpb7sfo4gk88tr3l4jsg34gz3f70hq7os2lkyx3l9p0u37424mldd3m3ck27r12skutufc02ni7bon2r09dtyykxigrb0g505sptx7ctie0n34t2xzpozdyypnngoej5nv7q632v0v',
-                flowInterfaceName: 'nseug2ls3t7h021ksfo3qptbm5wjx3xyhy3lyq5xou58rtzorf7e0i6ulc1io2ditailgtwbnjj75int2d5jjv30yfk0sexyna5p4njcnog2zv2yz5mfm55dyufwqx0fgnsjwd2on9jy6le685qg2fe6fbuognum',
-                flowInterfaceNamespace: 'lg0wpbftrnzrn3n5cr7rpngxzr89z2vipkbaz3n53i2bxqln1lsvugivm1f2lhxpd4a8ff4aojlytacmlf7ermr6bsa77y9jftt1teypspfrh95bt9g44sdbjhwxdq92yi5dzd2z3sn1bfnaya2yxbl5vrhq5msx',
-                version: 'l3puqqq8a511jzrnz3gt',
-                adapterType: 's7hf1gafmc4b5gky4vsoxvji7w6g8vnid4bpi2u7k39w20gvq5ginh2jcow7',
+                id: '875eeb44-76f3-4a71-8180-81f031c9dbce',
+                hash: 'm1tk0pk1nzulrcdk9ma9zu4ut185ptlhzjgkyhky',
+                tenantId: 'e6d06178-a8eb-43ff-b71b-c6f8d541c6ef',
+                tenantCode: '3k4vfeskn35pt685wjhr6bw7eikxk8nx5zd45wxku8aciwkksx',
+                systemId: 'd1698774-c57a-4a7e-8da4-10c9e43d36d2',
+                systemName: 'qwx9ngyabqfc0dx8taxo',
+                party: 'ff1rxph7gbdb8tob3vgq3b6ne0vsl3nw6n75xmr8p6nqbtervgqkq0be7hst8tzyvb5sa3lqj53zbdbljsvredwjs9jjjydnylxsd6hw76rp6selkhzidcmkwf3pphaug6cnbn6ihaxct9wgj08o98ytdd27qdqi',
+                component: '8y3u1pkkr3xvxien7xsmdaijiy14rpl50wbkvk1luhfuy00nssf7cz9lgekcj2cu9tf589kcfn89wixa5uuddkuf9adhv8ymbqkyv98yn5j1rfgjfy28jdvspd0ivxbmgd482j6sqkdymzwz74yuhtrk1tvhr3z2',
+                name: 'ixg2w331i1gaqmo02gwlly98cfusgnce2kb0si6yc50umuswlszfw9pdlzm1w3tz4xz4cekl8x4vamefnuczc0ld66z2pmtgtz7zslhrjjhymi37gfx48lmvoqkm5uszh4c975r4t17do5ummzy7942kspg5dqxu',
+                flowHash: '47sjbu8gg62vuu4c9fgkyw1u3qot5npyehwojohb',
+                flowParty: 'v54cwmcd0y00azglymdj29ok5vtnvmxaedg6z6fsykco1xhqc3x20ecsfgz3romoh3apcy9huvblpwlcbs0zrgzxbkr7n0ewno0p2fy3l1ffxadivl53sreko2fyuqrrzrodnsiyf32zzvbe99s6ff0kgted08oq',
+                flowReceiverParty: 'livtn7359rmpwebd178ckmj82qr690pw7bqs9duvnplt61ylquq8iyo55dy1swf75a1fc4gr24z16fw8o85ckg11chefc9u94hu8le1z91hzt7huipuxtvyfrozwotuuwcaatth3t3kl2wslgite1kmtnc9sqj14',
+                flowComponent: '6hz9xt2w7j1pjoa5kiemd4y881xaqgn4haz5dc0bgl93fq10p3pg0wyvz0txlq6id2k7gu9ivzo23eakh12mlq3v8cy403zpj28z3scj0s46tipc8rhln780577z43dh5tnyaatc2fv4xgdvihsiish3t31zeewl',
+                flowReceiverComponent: 'cxrjqvy5638riy0r0uqtthu49fecvq818bfgllnrqrf8h633erv18l2r4diaw7jf9ffpmcnkwiob7vv3fw5s4wlherues899kzru1pcksdmvla09sv0rvd53lbj98836tm61py3zqxadzwu9581zbnfb2nw4n5wo',
+                flowInterfaceName: 'l6vg8slz1p1dfe2dobq6n0xeuboiqlb00cg55x2u2ea5g73v062mqa6ebuhhipt6xdaia590b3q6efmeg8c3xlw8bh4gq6uzree44hjziluciexfms5ql5n1cuel4dv3vrz86272zfckj7d32mss9r12q4gitu33',
+                flowInterfaceNamespace: 'vmdbjzjbf2wntwglj6l3bhq7nnkyiejpy62p6gag06wjp6pw04djxdcv63ru3v53hh6drur1hkrlwjlf64ix3mv3zwgtue8ht6nqo5b3slmc85jsol31rk7ain2epw1fggedoqjnt7gnlvzq6zngc7gf6nhspfd0',
+                version: '2jeizd16mspjzklzarni',
+                adapterType: '80g6ufwk01kkw1osdvxoaq3r2xc950xr8va61mdw8iye6wtjz6sg72jnu9w3',
                 direction: 'RECEIVER',
-                transportProtocol: 'pp11ozc13nz06vci0u3tz6whln8mwg0lvkqbchz993tm6cpmraez5ap96u95',
-                messageProtocol: 'y1zieffcramal6az1094laeg2jiqpq1l2eixe7q0ag192886zg5y09vx8ho5',
-                adapterEngineName: 'ojc4u70vpny27ufht748ialg5636xzi0zur0vhzjhui3g9nf77efbwlldomfoi7mx29wk9p8e0cti4egbuss3wzva9frh2z33ncya8r76eqjtvx2a6od1npf8s69ei8p74mm28ljog2aadd5w63ozqoizhxi354z',
-                url: '1a8qoe5faeug58famdlr8cde6pbw7h3szo5et9yxng2xcw5uwo3xoqbicyyxf3phhllry5wp3kh7txc6wxdzs6snuhph045fhg7nqlw3cadiqyxwh0b3f9ivdebrzu7p4ab6vyfmivsroo1qt6tf5wucsoxkc24f7ueulcf4jejanwy8156w9hzdseg5vsa6uiiuetr3kvaw5koqj453l1bttz0jlcvrbao6bvk2143jrudnj37q2w9p76at6v1ihmqspluohrdd88n45bp4zrbv91csetf0mt2g3jweea65iizvstlipwdcjcstxhj4',
-                username: 'np6ks8ypbynn5b2y9c4d9ljghr45u8tq6ot7j4cql4fch7o4dnw6jy20w77f',
-                remoteHost: 'jc6zptr0br44yhhhlqa945ljc3ol9qt6146oj0zpa2qs5zryml0gd7vks0haczhee99cqhb6dlqqk90q1wmk93oxi2auellgepcqny97ui2tu7xguwftdrozoh6tkptzvj4eqjdsiexv82ckel4oysigko3wi3sh',
-                remotePort: 2219321502,
-                directory: '2xkk8og5m8v723loansideukig7ef7bsjtw1yxbxzy5jsx323u9yslsex3f97shud6n2gezzdqhv9a01peu35rqtp40jt06mybiqpim2zcqrnesld6nkyies4bth6xn7vo1siz9ireclsh9mx0k67d6qnd80yytqmsfa6lm0q16ujkm1v1fevpwplcs6po0kgrlnmt88c7gmcjris5wfvpof2ge9t55lb1xtnm2821m6hz8qkssugddmbsxts6qzz1ezx05v8uet98svgo5yqu6a619nffi4gfurbj0vi1smgzkyufud8u7v8saelvo7g5zn6juuxv9ajgh1mgxa8sz4x5xm5ktko8x0i2ll5xh3gv6r0jzjbn7sybzg5l4oc59aflz172gukzdismc42xrrd2lzn0uoz45rh59o5l81hpi0flsxhdxnrmrctunqb62kjqppclh3q73ja68dupit93xf6289e82eo0s6g5c9gxa25nkalx3satobrnefxc61i732fgoo0i3p0cg669221dwfq3byej3i2zi7ialuota29fk91r0dj441sylztoppuuq6emd899rp70b7qfiqc5wrvg7t9y6tp7dx3hv39q7dopwx6uof1z8zsbff0mrfqo8rtkms7ik1nhdos6zer450jehyumxdr73a84hgv4ib8yhusqc0xqdaedtdlw19a9f4dihl34a8bv6we0ss8z7f77m1kukuxuhgtfa6lcsbc6rybeqe7f6p5upsznpiw1yrlsh95utjjsr2gr7js49u9z3hdrt4dp62rqmrucnkqcn6jmk6jhj3j8aw27r69mlgvjw72up9hrfonhqsxe2d2fc05k35swuu93qeju66v0r7fw1w4xzpwa9j9hvmr71k500xdscxq0i46qba2yhukvbu206uhmo8etun7rjlyug4k8v1q2i8s73admmvdbxyci5v8z2mc97uxyrqjdni92ydsxiek6m09c61sz90g7lehiy2pik1rrn5',
-                fileSchema: 'l2wym6o2i3u0es2npsapl98sluv4ac04xetf1kj4q1ks05jmieso7f6l6nfg094fm7ecim8ph0vkc206s4gjihmmtoulgobxnppu108njl653aee3ukfcrb0g7jb9s1lwy9df7x4jbe5xuyqdrbm6c0tqx31i94h1bgupoxaxzmvufa3m1jaf6pww7etw3tqmbb30vuey88q4qygnz2cq5dlvyvbfojuuzrh4gnaqxrae8lfxb1c4n7pvp31r7y88jlz8jqbfz93wqdlgxzbhhbcm7tij9ev8jx3pdtf1iafrs1d9m7dpmkzukkuam1okg67ea8dwq73trwm6bh1xmeow387rtvc9nhdyhummcpt4lgc7ipq3qr1bmhprlji358tzub6wbq7sukf259jkhcrrc1bccfsbdc9hw5c5qjhyc5edkuofsxuwtwlxnxtwq9glkktcrvoc1tpyya1hw6ut4jv0k5fzptbwupnzn1i0qxxt4q63e0w04ln8surp2s8s90vixr4mg47wqrng1wugk46x351bsmo32f5o11g2djfn7ibf0nbdx04co5azbcjcobfzbdmwk7oyrh06l5cc8mpuv2swnhw93slk4jeofvev5omm7dadekdig34lcfjvhjxo9ufvi5errocplpmwgssbr7axqvrf9tas546s0us8vjtpmjk3ojy5m9w6ltwqzhhxilp23n03r4b7pocktbrs4i0oeu1pfd4e0plm5g204hawtfkkre7pn7okzpergd05lw4jw0hqjnph4ele2gevmu86eq1fg8w1a3zvtukm56h8ndpcy10wvnbkc1jgpbp5e06wb9n2nn5m52fd5nx8cev8s5ha1nrnuau9komo4bwf2yzsiycp4iij51fzhu1nd9yuu7hmdw0dbsdevnz6332yygfk65es7g5akiu3qkvyupqyr8onegdcxlqxcgso2oeq9m7kh3ip5qxs5m2dyrc33gzf85uiovlizq3qtdjy4tgnb6xnx21',
-                proxyHost: 'koafboivqjsguccs1pvwf3zwakalrmwxkk1wj2ycfrp4ix4mtckot6k932yg',
-                proxyPort: 7253130805,
-                destination: 'ioas8dpftbkbdj50x7i5a2dpcspxkp158peyoihk2h222e94n2sniuzs23c3mc5r87i4q9w44q4bmxcon2au3ww5qffwxxkqzkzfcl5ac6axfhobmoo6mtua6s8b3jsc872w9mxt9428wu3ipljhcr4b1av60ehe',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'y1qyz7gllfdilq5e9i6qsrvhat4e04vixzwd3nyjbj7m0cf9ryvofk45vvye27xucmhps1mxc3kfbim0e4o3upeppmet38j1wnzdp7ciofzd33f3ilmrfztox1ubo45vok8zxc3i8vjlrics18krpmpr96xxgwva',
-                responsibleUserAccountName: 'yziet77w2ylqm0u2ybtj',
-                lastChangeUserAccount: 'h90gt5s0nv7hyhpknd6u',
-                lastChangedAt: '2020-11-05 21:41:18',
-                riInterfaceName: 'ubyn6mvxbj114sipe9hcpmjiazloavjfcpc0cwnjsnnxerneamk3dwdth4tfrkc1pljyiflbm43gwmhr162l9ui530awvi3gysuzwv9yjhdi18r6rrlaq0am0gmcrbmrpyrfvna9jl4q9hjktddnoox5k23dd0yn',
-                riInterfaceNamespace: 'zi2sacaq9oa0413a81fzfz0egs7bjbc96pr6lk8jc06gqgfw9u553bc5lhd8x1t9brhyiksqjs76pa2der3c77vsdzo4msz5z0m82dk5vnpj99zr3nls6axcrd3qj5m4ior04fte4cmn85q6p0tbq6ifgp3x7v72u',
+                transportProtocol: 'a5hth1g6bep6m0gdvlo18c02ucm3uc8go81bkbbnd71u45skys6ri537h3kd',
+                messageProtocol: 'yqty8ehpwuxvjqtkzj5hdku9aqwck390qw5ld5awc2tq1kq1wo1f4etd8zp2',
+                adapterEngineName: '76ilkszt3t0bthxrpeuj36dip9zzbzp83qozimi62264cqvtts76qcjfj5f48mrxqrdt3rlhwlv37dr24vetlhc7v5fxa50wou7192rn6mb7ic31kvk8x9sba0xv7j717m64fail8zstba8wpsqzqshs6mtsjcnr',
+                url: 'fqvrfpjgtrnnc7u3lzr97nts1l3fbjhe4zpbsfk5rwpts79e8nvtyqzkq5papzsf6i36nfk2p28zepaim46alx99i4126te74t7s17zm7c1au9nnmr0uw1svikx1tn1ilym67ontovi5i2dx9c32cf5mxqo4wxbo4x3ikyzu3lejitji01z2olkux52dosi531fk735vfbtshiizcyzqfcggsqq0tewuxspern20v5r6ofe94eb7hfqve9brp0zy8xmh6xsjd6yhalsyo38e7hxk59darestk6qw1mwph1fz53x4rsfmspwrflfh33zh',
+                username: 'rcanh0v8y98h9z1eox3652babmm0tokeqnnfousu6tflt9pyuyyl4rgzr73b',
+                remoteHost: '91wy49uxuyw6l54k8y78bbnrw5xngmgn2yx87apteup0pi0tmthnmn0pe9uq3gx9iumlllxh35howzmoh31i6gvas19b1gvbthtd2mdbwmnwjes5dswh92l89g0eaf7u6rlkxlqgusrjpjksf0dr55uaih7iq15o',
+                remotePort: 6673014063,
+                directory: 'kio152musil5472n88mmts5jhze4u2zaa7irf0alvekgybc6y5wcu58kpe34lt97izxir8t01qaih89qg5gheq4jgysotm45h4h75hnseqi3mu8qv5e4ki53dd5p255gb0qgr62wepvtmjk5b93jf094qmdkhwwelc0sf11sexve21feqt52hrimbzbih7m6um93kscidrl1f5ocriloyhuvqbdjhnl22nb2p06pchkpv6v0tsubreu2l57k189w3o586mpp63qymcjkk34zb80jyw861tdstn398a2cdwg7c56v7zktea4b5ahkc18vu1ymrt76tze3cpwmgw1htfve220q7o4rc2fjiez1ektgxr6a9d8ypf8cn9vzzhrw8bwb3dwjyp7swl62iatf9l8vod7tdve1y8nirlnwgcjxpe35tlahavkwr9db60ufmni6zjh0bl75t9afvaf99vdkmog84v1oppzgx85f96g8h8gqbirujv8heac4is760q772q6wak3mpcv3wb9946xv6s0uydhech0sydtsp4cbg36gm2bidrrfjravt06n3p618u9fb9c4krhhhv7kq8d48q8j4xsodyah3ryfza79xbyw4dvtxeqgq7nkkztnssp7b9s7b4cihpixvtde577ltuecjtye70cxdx6n5vrassfswzojazl8p5ndkpv5foy5ho2m6cukd5ssha9am9yzz6mzs2fn9klm23g3izkhymmq5pu1c0ecnurbljqjqmt8yps8yontrjg9v10agtcy7s14hx58ma8z1j8958ip1n6iiik7u4nxly5qktk1p7f9vhpqk18vfqitfxf69yx50g8u16c9srbkossyxg3x0al1somugvv86zwa8dawoyb26co2zwfx2kwfgapayrbuhg9nf60ox6ioh0k05wq67j2x6gj7h760ogk0w5km085anjr642xmwf2sz697r7bq3y8vajm96yo6bxwt2vm6lggpb9nd7q5o6ptxpwpp',
+                fileSchema: 'jr5exawxz1oyuj56fvnyj51ahajxo4dpsgrz20kaph2b1wv5l19ec8smb56b9d1j19buo24kj890tlemx6rux6gixrr4g01lny7szele5uwtdppb00u1r33hmyfxfbgp1nqqp3bph78tfqgxol72v9l8w340yof0mrilg82fk2i1s7hxvoms3tqzphfe9c0vhtlpapu3lfmltfp7nggja8m0s1rllkncnyp7zdwwfpihu8gnwgafpf39wlte2zr2fk5tb2t3benj5nn3ehv4ocqwlxgig2q7r82hf4j6tyd3zdwhbn3ekzi6qt71ogygtoovmmt7uqokgjrvr12d7pkt2ib26si81nqv0h4ndvbbsegqqgmm0n44vfwj7vlzaj0ei94cd0w08da242lknhm3m7a1lzlr31tcghyxqzkt4ns5eggvyb6nj1uvrcbipc32lgogg5dnb05ycjxpsgki13brqk20tq0jamrhjose5k9r9h6b8k3ua0ldxtkvpo1xg07bdajt2s0o8oz4xjf4w2pffsu3a72wum700kwpmw09xsdbj78nu43woi13tzd20nm7tfj63wktbfzght360z4wwu641br9vbdaxs8bljj747w44f8fqs6bhwgegqojyd8a1gem1o0k0wlbv9yei7b25yaxqv4sdaztx7r4fshfn8bga5ngsk6wxyeksfmsk13qxy2irvr8o754ussqwpx7qhwmskmjrwieikw21jim28gjs76yp1s6i2sqk7ui2i6pmuoz23c6arxmflhirs3v566ciczb88ekzd3r43va9iktmnfbka75ydkc8ev64i95dlk0uwjxmlliod3akzsts00re72ji31lyjstctwc5arfoqbsoj2c9w8jqauewwg2luw8bhh9jp0rfz0kkeircis7x6i7weuxzz8gkj4ijgvkih9nvb33qdc6sk5g7s8zzop1tza7dxt1pxs59dxvfwyqmrop8vmrdygvbjkzr2a3fy25zm1jcwhd',
+                proxyHost: 'o6gh0rfvx8rwj656s3gdekim1b4o3f1xd835mnzqtu0227v1tx8aks3sfgoo',
+                proxyPort: 7678617019,
+                destination: 'j57vxsckrt08s6182zvns64xu6kvhb0o4q9mvp4fkeyhlgb3370sbnkkhdzlqdlgoxjfero8hj8mtq892z1aru7vqcguzcshwchlyong9k6ikolrhhlo7lten5qjuplvpit302xtvvalwocvmujpvdr8cs43jwa6',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: 'odxwicnryljjxvonsow7912c75jo2j4s0v9w0suivdxk3widde6y89gmv68ipvay7brz9uu3o1xpvn0be2ndwe9k6d4vomtoaqkvswywdwpxz1gsmxzzh7azkts9mdldp5lc5rf4epz5recyxhyeoahgpatjtdfv',
+                responsibleUserAccountName: 'iv8zxn8xqzzvj3aulk6u',
+                lastChangeUserAccount: 'od7ozt046oycuusg43dq',
+                lastChangedAt: '2021-05-22 16:08:49',
+                riInterfaceName: '0krp7csjukeazwdrm5mdwy7n1uw8ytmvm7l3cvrwtmfa4teeyqkiytn5q8xifgjhvod6255b2qjf17zdc565bnteugudjrmbmqrf2udo1t3tl2kgzg0jsa15oxxeksphwp5cfinl8dde8si3s60fja6n7ouyk1qw',
+                riInterfaceNamespace: 'v0dg8t26g2qxvmzlefc58m0189dgcxzwfqpymzq315v4ajy5k3wijy12ejwbh88rh0oy1oehdk4g9pfjynxfjiodsj2vp6rscn7cw4r0ps3r2qtkqkvxzs6ivvolzsbn3jmnohhwcx7pjyzpyod4udi8wwkz0y64m',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelRiInterfaceNamespace is too large, has a maximum length of 160');
             });
     });
-    
 
-    
-
-    
-
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRemotePort must have a positive sign`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelRemotePort must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'f3mng46004s8re2c2dv2tgs50by2tr47mop4y2cf',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'id3194s2s83ou1be019z17y0k1d5wz8fw3rqgvnpkyq0kia2hi',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'ca8c2isp6vf1b3z06d15',
-                party: '26qo19cbdqwmgww0ufy9hehjwkiv6q5ehd65ea985nriboflu3hqyff4p1vhsqul6jogm7zsck77izmr4haf1x99ncszqoxy5ypk0z1nbmizsamiwuco1mtaee1z536rhqgh8rdctbshsgegfyj8xy1hdn2iosw4',
-                component: 'krhalxmktschp191hhbzcw3dqefoasr58zp98j4x58546j8w5yu55afsdj4r0tbjeq8dp0dfrzg9z2nipjdvcut6lpayt4o9iqqrudao4ztmaugotha5xjlxhp0rqr30nj645xf0u5qv63kh6m17ipy37pv8zzlm',
-                name: 'u58m5k1hw0yhfu1u3o2ex0ito2gfvzg4z6mrf5l8cyv25k9yz9hw0dnwebqhfa6m26dixvk5hgmr06vylufqcwzazks1pme7xikgy3mv0ka3kjp63rnqijqtl0xbna1mno6bkuknpxtn5jc7k7jeys449j052ir3',
-                flowHash: 'x8lofjyltgcdw2xu7jftzgs046x3zwcu5y2stsjp',
-                flowParty: '7tw1aszwjpwjb6ihheflmj8hi6n80uh6i8ihzm33trjhj45wb18innp693zjuedso1myrqfwjs7bjp2zgqw99vhqafr7xgq53q5coqtheia6n8ptfw8nc4pbstxmpy3nj9lx2p7i9csnhi4v4vijo4lyfeskag63',
-                flowReceiverParty: 'wyrpqe86qj7w32xz8mq8u7jp6rq3lf2ilpqon15qa5kxflbfafzvk9jl0uzu7fcs5s5s396pk6uniwp550jb1vkuvyhfqxb95lfwc8b2lssi0recw3edr6x8w0o9dtt2cgkywklzrctt3avfaxz8tdq08ywdr38p',
-                flowComponent: 'x9ig5tcwf950yyulb9rw0uk1pah3cxn6hecdc4zx4chsbutatw8nkd2a8s2ufw6n4a7dwp0nyx6ffghjuoirv3olq2v5kmpp0bzcq2arz0egdl9imzmq1d43l0h21h8o5cj5cpsuqilsbpar2ds7t2ezmfo42iw6',
-                flowReceiverComponent: 'n8ipoy6cwdjlyaljl3bvdw5f9hqezp635ocyj42dw59ix6a99oa3iucgfql5cckq8p93w6g8vjc4mvxw1q2nb0lg3m5o5mlc66jw5qnn7kqt5unfwwfujmfezv54rrg3ojb095q4qwbd2ttk9ylxu13wnujqut08',
-                flowInterfaceName: 'jdyuj02b9d8r8xlud4l5b79m40enqi8y6kfce1qpyoqgx3wp4uz2vin0v2912sueskrzlio14rt393xoyfok6jcct0lxbf16t7tgeb0xgjefr35td2xwhpek0govt3zbdxobcrrwgbphyta2qwxlte6pvfu8cnpl',
-                flowInterfaceNamespace: 'y60r8xs4mm3awkp3ub7v52qh0ye73p38vrtau93zgb2ohjignvj4d4ct40mbcy3fxc5thmjohkw05wwkavwqkziu31zbkgx9szriikiud6bmv67djemagavsy29fxxoykucttv9kprbxlevfxc24xwt9gzai3per',
-                version: 'a0316idhkoskrn7ytz3i',
-                adapterType: '7ff6ro09qjlfao9qstmdxszt7z964vvskkk2ur8ehi8k6175orztjh54eyyb',
+                id: '7248c114-fbcc-4d89-83de-f6d1784ad5cb',
+                hash: 'dfsrv4upnqfgaowkggjl0y1o4btttt3t70ej8994',
+                tenantId: 'd8842769-a013-4955-9905-87184f84b15e',
+                tenantCode: 'vx1818tqqxhas7opxv0oxqki5vg4a9f93dbiay991ezvreckev',
+                systemId: '2f380a9e-0d2f-4d22-8718-1cd32ceca4c4',
+                systemName: 'g0fhson67kmhtel49xg5',
+                party: '48crli7ygxymox15tj4mslspzvx4p2z4d7gvibtvelnu7mx5kivi7baovoe4w5aw8c27dyvln8h5s6tc02bloteg0k2byioz3zzvr2zoxp5xp2k2yf96qthrlnbz7l0eehd5flqd396x8k8innu4tm035ehjkzwv',
+                component: 'n0erk0jypjfzsdd7k3hudexohv1shwccczm33okrvpixxxztzm0210nf1oa5omchf69tt0pa2azka4sw70hg2ajhxa0vhrmgf9dre737r6te1josnhxleor3q94sid8p2jqan8spoeqevmgalwal7vtssi68xgr3',
+                name: 'f4obsle26frg5k6fzx43k6n27i337nubrscuwm625ri4clcriu54gx9t56jhuu218tft7qupy8spzbgv5mpq73sytxc49sca9uvfxzknxaqkpaiyzkpre0k3dn69y8t3fhz37u38trwp3a7ltp126l55c7bt7jij',
+                flowHash: 'iy83gjzujqj2xlel4iiiurfn4cg9455oxkg98nrp',
+                flowParty: '7jf56hp8fvwcgxdmzmdvbt4tkbdifmlb9hwc7qucuevuqjbm2msqv1yxlwkgoh7es1g70dekw7dypf8x9g9l4pr6v0cjn34xdv61bvljt4oc4949lvv4x7yt9nc2957f80pvgmvicgd2wrifw6s3bn0pystrkpf2',
+                flowReceiverParty: 'rgxbdu5s8c3ts445rtps8ep9520tkw7cm4kmwy56nne1g9llvrsp2ax6z9teit3a45a6d0vq3q5uq88jaf46sgxkj9j7fzrw5n26ph3kpo4wws77s1ej2kkltubmwqthmgi0thp7g80iron13z9whddu22kfni1m',
+                flowComponent: 'k7kq47rhmoq42th5c0gt4ti8cqsnsopbfh1j9bfha9y18uz1xi7r2j6wexptosnljz5e12irlxhro6baxxntpd6fwttoh3sx1dhocyjudlhkkvv3aefbwngrnw47og1r4d5f6l77i3bznmnjbfccytmp56pj2row',
+                flowReceiverComponent: 'ipxdmou62fp2hrcymkglq3fqbx202okkocfldnqaass0ph3847j0j66ee0cnu1sq3pckurn9y1m24om06wktp4xh501mvpuefh0ow7b868dwfaemz9ubqit5g5k47ehy6fru4avd7fkc9gluvguncmsubduxk131',
+                flowInterfaceName: 'rfoguhhjtelqdtn4t0chts8c8233c78m0ghhioj6ynruzab8rkwuae75keud2j7p5billopgbs3qlyqnd39sjjppdzjwnx7qydfr64rmiwjhrg1pppt692colq5wx33ju06qfqq4d7bhoi3aedo96203d3udxaht',
+                flowInterfaceNamespace: 'thxbjspp0mchg6lqx1j71id1u6t70xp285hp99ky8ta6ks3wnhikrad6x448cocxcwei9lvm35n8rzsoaub524m1eek2ey3p2nf9pcf4byk4buf7eme9q0eduv9jk26cmls31zrxtzl7dcxbxcqem93g37r5jf87',
+                version: '3rs1c6xpdv2561hnw4zn',
+                adapterType: 'likx0pd9owhagial8mk9psj2g7ms9oqozbiv207ctbtgnffw1wvxcs16d5nm',
                 direction: 'SENDER',
-                transportProtocol: '5sqmqs6dtzi750z8nvl6ihe14z0hxs1ga8rt9wbxailx1mdefuxvg4qs31is',
-                messageProtocol: 'mrrzfeuydf5wd1oyrrcdi34shg39ca0baehwnjynkrzpkbjh0ri9m7atrde9',
-                adapterEngineName: 'w0j4njcokgspljvefle92inlvt4znfcsoyh8969flw38gxwj91r77x6qyhj3xvf8s37os8ale66jvrr2iyoqalojwrm6ds9r01m41aercwxqvxd8eml0pfthrnjdb2mjqiu04y0uno3qid8rnl6v649xkc3wi5j3',
-                url: 'o6bi3dyxlcq9uyh38prp6wx7gqxebmnbhr0qqbtcbvyd94037wj1eqz9iqlr679if43adgk1skinqcmxr173vo819xvh8n18c12033nne2uf7p06s6fkoe4qr3i3o5o0q5cdxcujr4i5flqy7xm68e99zu2cscxiwe6c60p3nfzju76mazntrins2szpmdinl9d42k1ru0jcw4sjwboj3e2z5p8vgyiajlu8qzs7e8bnimmqpjee8ndjk2dcwdx0ey9cng93pzav02dz09jna1qvd7nvrak2kowes2n6zhjo0frl3dkn2zguzo9z3v07',
-                username: 'd40c8bte3va8mvxvtt1zryeqqr6aj84p6aixiqjzqe42gwnxu15ldabq47q9',
-                remoteHost: 'qvnz01fvar5qjnbbohnhcvu6f3o59eglcpg177c1pvp7jsqjswvm83x20ug3lcpp926bd3cvc67lg76b9dw4mmqdz291p5ihbwx56549ho2kl6oac1blq1tzs63vzo4p1kqk142xqv9j9p7bk78glc5shp3oc8ey',
+                transportProtocol: 'cfexvt2hnc0dz8a878ydjgw7p3k3sl8hiqf4o6y619v08qunmus3h49q44qy',
+                messageProtocol: 'f0knk13hcf3908rpvvgqh1yj69l5a1kltkl6z8w6d2fnmlz6ivwr28eshode',
+                adapterEngineName: 'l8gjew3efcqmw7eew4vkaylcpkbysj5g0lcq70s3d20pv8tnwejfe4w6k0j3dnwef1q4miyyc1i65nykh0mxxiwnluf2grub1db9tid9uhxyg43wbiau2tmbdosl582713zdos587t0zpzktdbht16wzaiqgn65e',
+                url: 'r9qfw8bepvla3jxmm50cm5hvt1wf7y5avypztazepv0cf4t0yr09gsb947iptzqsre09d5pl3attjdy2vw5u6b31utokp376ywggctjjawpbfeytf6jqim7c998mhaa0698w5rlozzhy43d12mwabp51ygko22elb5pqpocw061sqhgcvxky9opxtzim0ocso6kp4ok5k7hi5ork8j63aupenba3qp38ctadc5gn55z9dunyrrjhbdztxsnf6vt0jke0go3ebzla0motiguadiq5h2bg47miukms0n63h0g50q4nbu4ioh9tvirv2ufv',
+                username: 'pelc8cd004qbjh2n28mkvtspf7qhjryeij11x7xr26j1n4xxp0yo3yjdjvk7',
+                remoteHost: 'm4id7fmnq3qwtrt61ezuj677996b64ugh1vgt57cjk7612pejkn858u6hcopbsmod4cy6uoawjs5wpsph96iajh5b0wr0e456gbpxf8cpyktbqkvla4qcvzzvl1l39i5ub9egyzj59kiz5dasc17wvdikf6qya0j',
                 remotePort: -9,
-                directory: '2wc4x2oai2q4z530n1fly6t66kiqbfoeoi432w1hqioogngviwd6x8rdmarw7ojx4mynsula5cr3plgw8bc7nwhhol3nanaq2pud20cjfpsmjiy4sbfhr764y32tw9suzdko4evly4jt6sg5eqcrj7pczecmxt35waus9oghkc4pnpoxp37ibl4mmledu2dcx8jnuvo7uc6r5ygp30xusnpbf6h213eedqflcmurb2oy2z1352sexgzrv8432tdkptsjxcbucx4umjpage2xt0md67uehkl9wwgln1pjs47sk7ykxs1jvxr3rq94kn2rjogz8rr1yzou7c2nltcgc797w9x2gbqeb6kh76u7vyzklkey4sfwy0an4afaz4pz0hqcz8a7h3slaf166u8iuw3x4zwwaddtkhb6i42vmffyt48svpfwe758m9eym02s95x08zyuipww36cxy5ocf0w0fef62mlt8i0dbdffaceo1zkv1iifbac3zvykq5l5mq7lkwbyktmswcq4my53kwykk8hq192wb4i2l44t4mlo5gjg69ubvfscv2xlhvpb1mftmn1eehnm6j104oawqpyciu5glzk9fsfp4eh495n9n8ys75ijnvuo2uhre3thpyzndkdz1040p0rnenxtq9w3yxgmul57mp5cjx5tqoa93zqspmkjgalg2nti03eo1ntzeh8c2aptf7xqf0682xnfvfp4t1k4vk9fo0nkc0a2r27qlgo9qdwo8i6rh3zveeyf9r6e1lwr6p0zge86ujdt81bq8vxdtptudx3wupxc9uwpswuuhpgiaovsm7umrrhry94frn1wujvjjp3wfcj3ikifilneiaomnn3fjiikx7mpm66vr4jo9vr29nf2v492bdlny07uka69kzw82aafm30hkg5xjxqzdclrwjggdk3g5zy7blzsy8vhcpezik24hj5lou1sn2onjs4usc18rdpe0vajx7c8a4i86sqyrb0eqwyg6siqpr80v42e',
-                fileSchema: 'jxn6j4e02wcy99d04jwraaswiegbknh45tegiysfq3w8gtjowxgge5v2gszc1ei58ng06r53fjcht434pd2qeofv0ag2l6yjra3l9m313lfdr96bt259pw7cfsswmoubytopjmh5ebabdw7ki9x3yxc4cmtjnqeqd32wkngkatcn66umid5dmm637yro8f4cb0e0f73kuxsoutsviooozwm04s4qgfi37zagm53wm5jlpy6mx2h9v78vka1mz451q9jlsjxg97axoqvril6f1o3nihjpg2pzrmyev21etyy5ai4x9pwz16bynin1lpejkqgr79z3aa6s0t0w0rzh4cxcctr2chiry30aos0q2hf766rvwfwxnjclty2jar61jubbogcybv2eqzkph08n2tud0hoz9t3guvwjezpls1pnowj9xhccgosfhdgn7qermrmqfrtfwy0ck0e6ejtzajt4n5fgnswkdz5qy3g6jhtns22hi0zd6f3dybx4h24f9am75nzpwv9z06hlhb8sr4rxwt6gi0zuaj5bwsi6q0ueej7pocattjop6jcmsv5ls419y4f81go60sdixz7wo9g2riatbrs79r2v53w0y0arcf79cd7btcp28xdecdbtc96feyxxpn6vvnu41vmnprsomqat3822cw9elbkovgwod9asqnly5ixyb1x6wohk7qhsmhp95081i5o532bqq7feg836uh2hn00h5za5nfxjgxidfop4yht5xw6bz6b80x29b6u6m6djsna6fnlrtahv87mduntdbgn4x9z1fbtiq3po1i7jy6zqjdl2wtk13b15jmei8flmcw1jymtmoijojobyiognoq7hd10zt3a9lf88zn8yqbayqkgo747cxkxfkogqnxzue51xsiw7c0nfk9umtatcogxzhjivq8f8m3gxqofjn59zpyq28psxlkz18lvyidje23qqij01b17fdww93zhsuuggi2qsknvca6i2twdhgj3gx6qoil65',
-                proxyHost: '22a0gh6rifi0bs6llba93pdnckx2ndk2b2ucruolgq38512qzbmen3s74zrt',
-                proxyPort: 3500550025,
-                destination: 'k1sg8pnf7t1kyyg19zqxgltc7ju7sd7adxuy60ybj91pq4ym78v1rlhh1b3whlkjrtfujnum0g58ut4gvz041fq8182p0k4exxwdz7h3phnu998jbc9k5d6g87qejjd3aq637vmyttovgtdpcsb0yyqn64g8jxxv',
+                directory: '0vbfo4zwy0n514b10x2wnfdyfnu08leeyn6606th1s02oku4aaqo6q8h54rwatcn0g0i4d7ynh6l7pzy846c40mtv3vayyrrj2rerw1hqpofauim49i7hqnxvcuypcatwnamuza4mbsfl5zvac56xnt5wz2rwttxhfchzxo9ptz138qlvhbjpzv688jli9vv6wrvsgznv2uwqrvxrx2jxsco84j11xqnc7m3krr8ajqaj6mgc1z2z73ig2uf5l5tcdrtr1p7ylmkjazzv9b5kpenqb4n8mk72z7fd8omv0zwmgc6evxbgn451gashf6jwr458zjmmhynmbpqw03oc5yl50u7ydc9ig5c94rluvmyz8zsaq9oc4wshtyq2c2ao2ojuv9ngjpr2unp4nqhl7v9nmm77twhhgrjutu6x63s9c16z89u0qit8eb51l1f00x1fyplv1wzcp667ik013yjkdkkk8icrp6es7tu6axqn8fz5ag6vo9ngd3vvudrho869ru5yodxtcp8pv8sfl76s0e6zz2eglfbcaaa55oolsisn4fsnin68p2b0iqtgl6lolr28xghjtbr1mnh2gr2qya5zoz54tzrv6ydcg0xzkaoq1iacjt5rvv0tscj9achreroyj3j169urnzarpm92lfugqy1jzs81w62blybxuoi0wvxzjdblr8bkomylp9e1oar4r5y66rhv3ryeykutoz5kg7fb8s9p93c7vha7hbn9glezpf82hsmqyvlsqp4x7e3drmg12u3vd2n74wbnqwoe339g7u27chvzlq2mr0p7dq9ylg9sdcct70fixrjs2oovzinmrm93hgvowrubwctazrayni1ygoga359hkh6fp03tqxrppbhadveiozkcvp05s8p7whzvvw72uc2iiaoysm5xb3ok3n1lqkhgff71dddfdnv9h1sdrq9kyec8n162qkmso3krp17hp15eceuubiow7qfaswtziuhz3nyqf4g5ob84nhutxd2',
+                fileSchema: 'qzijw2wnjvucs6iadzq507ky4t0vmwvrnqx2kpvnim1s4csuudmeicu8zo7tdf4gtsci0iv38vhxtbi60a6w3gwmwebu8deni1c8sdyfqhajugot54mrerdalj8pohnjckggjqqiws454h5dzrdsku98mlxx5gjq7c7pfvtxicypex4d86safc0fzkmr096gg6rw03ebok2axyd98ljpibl9gphlnm8360a3mcvezycsdpqdjl647oriosm5wf8yzavhdbyxpcmg6aiz7xwcfc3tonltkuce1wmmpjggg6phgntjv5arm840n579ybaus91o9wylrz8du6bxcyu1z5ny4300sf5g810b5r3vjladztlc1v84tj00w83icfgex7h35rbxxbsk2jrmnx7ibko4j5mi98ti74nll79i64q0psdcn7qphuoj7f1d4165ipeqdh554x41hgekpl1ao3uhd3yt0ih9w2rxqov6n52cw1lhllypy9a5tt7p3hz9h4506g3hs7dfwgssvjeymmk3w7bag682623qi6604uoc64uz4h78phj7wce9a8asi19q3cmh27mx2xrys3zjad97titu1y1jemdui9eknz1w55mhe64gt1r4o8uza1cl33g5imxregvdt9wjd40van185ziivo7cg83yxcyrjgk6misjrrrltrzy15cpf9x5u0d582r67e9rybsm412lmh0vf4y0h7oxkk7tsg2enu5o6he7fsoyuwoymltfwzewuquzr014qswv4e44luoy2uporj1ob4fxf5qqrzdkj34r4cuz9tg4h9ya5janfmzsv8kyu5m2cssabeuni0jmhs5zjr6m26qdl5f2yqc5hlk5bcgegl2jugg02fobd5sz8dmlymshtvt3pky0guvadds0tek47zqrp58k2bvaedobpgn4ljj9a23u8zli07z0nyi0d285hgk069yojr4jkafa6ete6ltz52na3j4m7g5ijrtqww77g7w8chxj594o',
+                proxyHost: '4z013mai244sdwyl2j88ia8k6rcgg56n7v15b3wyw3dlxvjagw9qkmkdtl6k',
+                proxyPort: 4320609664,
+                destination: 'l3bwfc8q0ub6jua32u77gkldn9s2wwke33uhw9wog4yubkxft0ekkewcuw2iu4z7r1nhx5ctdj1zmr8tzia19ccpixe7ptb1hwf30d8mjjarhgix8y78u19lilqa8t7yemyanqf8fxrgqd5frruwrf49h5zh9d00',
                 adapterStatus: 'ACTIVE',
-                softwareComponentName: '72wlb87khkw758vrvcfe6jo6z82rfvfhalnpds2szq8hk1cm5t1f7cxy5hl15i1y2tkacmko5pb2si5ba8px7nmqortbpg6ffvffzxliujkb7ccjkbhl8kbw9mbwipuhpbv3phvjvhz6bgbpda1k24tgiad7dewj',
-                responsibleUserAccountName: 'posr1mv0zgd2wdyy5al5',
-                lastChangeUserAccount: '6xx2ikj9dnxaggbbbo5l',
-                lastChangedAt: '2020-11-05 20:21:59',
-                riInterfaceName: '93qk7u6qwrkpudshuuryqrko9oz4bbunwj8zcthzx5cq1ai9j9e4bjy50crufue13j7m5xianrvky4ptil8un7eao8gkb0rxv86mvvtgc7wpuprm5raul52nhjtrw8o7qy73dpkehkjz4vova4hqkr3k3nnt43un',
-                riInterfaceNamespace: 'hvusm54aao6ejrjzkx0igy53p1ai10itz0imkqnsylioob2cjv54mlghuynaod5f82l52axn52sc9bxg0jnf7fc0cm9d6kj83slatsbzqttdafjxs9akpleowzqa6uvl7uhrnjevaedu8soma4efuwp0loui33ki',
+                softwareComponentName: 'dvksh0pebw4b8fq4g7wqwuwm7sry7fkn794j4w97tlfuobodb3i92nhy9017jgoysju6wgwe20tea32c1ezap6wbay3d1rbmuu32mtmforii4bxj03ziqdp92ex5bsi9dj7adhgzkki2i3rp68vkj8jr5tv6gy6f',
+                responsibleUserAccountName: '6s46gy1vrang4592190j',
+                lastChangeUserAccount: 'vvapyw0nvpv21jaig5y5',
+                lastChangedAt: '2021-05-22 19:14:50',
+                riInterfaceName: 'mlbfubhm2nl7ny7etdnieth5bqyau7949o0b6q521ch06astkvio9z1s4pocjablc85thrwfjlblesfzsk9wdc1yvnzrews7jldgvt6aa5kilfhfjnzoclxye6uxsshbph6pz0j7m7ihzs04frsv79wyb9sqenhq',
+                riInterfaceNamespace: 'uxpngl2792yis5mzkwxvy5o1xjkm9iu5dqp226hjtd9hqxk7poyzkqzjhx0rohqlh0bwksnvtjm6jopmx192opcfomd3gbh93w9y2tn9gfrxecd9qp22sp5j7cw7kg7udv4cgb5z45sb62wkud1xh371lmyqno6t',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for ChannelRemotePort must have a positive sign, this field does not accept negative values');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelProxyPort must have a positive sign`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelProxyPort must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'he7o507fpvjb192k2wkfall9b8k60h4u3dx9i2zr',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 's8h6hpb4dnq1q8m3x2rv9hgpbpv4vyxg0t2rffj3yr2rm39z6b',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '8haw0rc4xgh1yxszr4nj',
-                party: '7gv62403ohpymbbzdv21z9tpv7pzmuge6ibqsd9wjfvo13mktob1i4q0gmnnkypmbxiv4b2auwvfqngqk95kl2jiid9qoxaz4kvmhh1wwx6zy3iwwiss63ve2nm00t64b65ensuejgkkdsud7jo3p7mnrepamlzv',
-                component: '2v78lgsp5kmic06d1qtkxllvmy9472evl5d3kd8tjywusw9vd9x81n5hgaskqy8zxggbd7t43qns08lr6804bncoi08pzqzanc378mxf74m7td7iu6mnc23arkyq2ycb62y66w1dmobfpbvbc99neeokyzfow88b',
-                name: 'vu9ygffvcg372dvow5ya2b5tf9f91nf6wttlxhpkoyvcd0v71qiipg0oz512s420twctbb2zwuvcnialokvcxw0q9fc0kn85wlsh4cy82u0705lltev6hgtsq8y1to6x1nqn449y01l8tc9fkcenv053dxwkw251',
-                flowHash: 'wlgbk59vr812xio9e9swaok9doo8t1fi1jhhp1og',
-                flowParty: 't5la71ygrh4zhgfu9bzji1a88vix8ext85y8avfv1v7154b0i7jchlg55vr1ztzi2l2r2z2jzr00d0y3t2b0coeh9bghm4wd0hb06sx26wgyq156mgeoxkzx61jtu2ye4a6xr6xwdp4ziinnd7brptiqggthsuhq',
-                flowReceiverParty: '43w5x4z2xruteomszv30pm9xuf7n4yecnpecs6f0gropwnss1s7e70fx04be4jb7c2gbn3e3lmwtq3ln7q0h433qdlzt5kax827opcytk1p5fp4aea5xuyaq7rp6pxhdr00t4fm2yba2hs6y5jon5jo2kqrpis0h',
-                flowComponent: '6o1jh7wui55h7gfs8vi23j7xloveon1sk7kpiyz7y6sv4n3qa5n6xunxx0j4y21d4v26uyix6rxsz9mgc9okehd8j2g8t2ltlk6td30k41nheexvsng7moe6xxu61g3gf2pg6jkekl64jvsorg1r5i30k6zkqwql',
-                flowReceiverComponent: 'k2zn5bsjpdzej5cjrv3qko0x7vbwkn5y8e322a7z2myzpr296h6kpjsavv6hvabcg6ewr1ql5x1qqhnj39z35nw62u44cm0jo4w5k3vhx5kltuns7qfiizd7wrw5130toi9abks1cl0p2yjmkl60lfcdn9wlcn9c',
-                flowInterfaceName: '1ewkx46ki3i7h82qug67yulekiz091tcgkxcz15s4wl9nzldan9gjlf69ef13fsa57tj61e3lruqv8wiz5qu25gtec4qq5eyf60u9ua6sebfc7hwd5zccz0rediiwf2xhkcm2c5todw5my9w4276an57eybgdiu0',
-                flowInterfaceNamespace: '0exv03qlnajlcvnlek9i9ubbgd5p791g2tst2zet9lbn23ajqx6rdjvmm3da8ke3xtnlij2lovpkw6n8q4lv59ykwtm8oajh6culnzzr6x5h839gdwfzxztwvenpg0xgthuezt49531gb0x8ntcnweyjxvjxmar5',
-                version: 'gp527qyuv878t8ma9o1l',
-                adapterType: 'mi1aabbbldlumgoqpyia72blleoniirfd9q594xi4f49l9xmf83468v011ei',
-                direction: 'RECEIVER',
-                transportProtocol: 'svqhbwi8giyozq7qjeyl5ox9f7brmkd20sqwn71sxikfy90njlunpw1suqov',
-                messageProtocol: 'csxw13afzf0cuw064o3j09abvzbxidnkpvrle539e5w95ml7q18skjo7g7bb',
-                adapterEngineName: 'b4vs32u9vfbfd1aq2wpkz6476ahjnonhtd45wsyzt9w2ujn1e1u55impinyjcy8s2osv5xs3tgxjk3epf4d9pgta8aze1nown6qcuck8kgsked0pikl3onlgqb5cxcxa9b74jer9p3en0mjebnzr9jhh1kh8kton',
-                url: 'g0n2bq2c1507l5rq6vscdl6e1hib1xhbyp6n7gj0y83ojz6jztns172uylm2o783ja0okk8r8fm82h9wkx60o1tdzvr9ohoxp6rj3tw2ky9wdlornexnuqf3vhda0rh2fu00lfowdrd6bylesz0k76n8rm5yka9wlad48s0kxltqucyjo3jl9c8n17aoqye8uofvi2ktdj1246v8no5yi9bszjx9hepywiy3nale1m5772v28vkcz8icrmu3j928km1hv4qmhrsoz0wrhl2upd6b1xbew19rh9mqbe1n2ybbc0rw42q8xe8avk9o46wy',
-                username: 'x8jvt8ptiuyvgdtgeaekcqtsgk8anz02ukcgd2ae7so3u6nj98qqbuuasgm7',
-                remoteHost: 'zvoqaj8dxcmh33j2cb1386wrh7egkwannub6i5s10rrehfn7u65pti4jq9vqtfz5uc8p6ks30w78wyhkshlnmor68ojq17ea82vpd4ed7vgpgq9ykmhacpq42jaflh9lhr4mf8uah5bbb2cnkopz13els0f2au8l',
-                remotePort: 3641830188,
-                directory: 'nykup7bekxcs5wv25g25sqnnqxl9t4m8wp2izim4yaw1oa9x6lvy5a2lo8efobpq793ir4vvo190gf3a50p7o9c5o93tzx4y1tatw0accgldswq66jsud9sj3cklzgrul9b9s6qhwii70sb6w9j3vxkovtc1xdkelzy74f2w925lgtuj6fkt5lrz608tch8vnf6es59n3hklqwtjb14lowpi8jf5l9bjs38pcniyxz59i8qbnnicgh2ocroq5rlfr7sd5rr9g2l57maab6bd1kzx3cazxiou52slvgw7u6r538o3oppq6m8m7c2h59s3omg52ftz5pig9362ukm51j7tv76oedblbrade3rhupfacgtdpyiw2tnzwm4qj0t7u1avqel7sjd0vhlexjb3zzcmdr58ox8ymx48wzdtjzp9mp2pdvub6wqarkmbw7e7kx317bz0dpe93m9o36bf6ydvf6z1hlkyjsv8cw275cozspb8u0m5lq699d7t6zl0renr69bayeigmw9l447g6xb1pdlz4518go56so3pp5p9xpds7bzya25h7iulw460fmr5x1o2ewhapvw6p4502wcc8nu90dqpkaafco6267ir6gcm1botpnpwa3ahhovmu6f5p8o083llwllalieaech8m7g8zb6crd6a98xoibwtsl08s0as2b8zne25otev2x04x5nw3arm4kyq9a7pt963y4so5cteqsm7zhblolumaxdvdbayeozxqo7xehdaxe17vr5j6wg60qi9nt5ukbr3ue37yhd2b4whzc9quxg7508vdjpk6gzowvztek7azkr5inz1emgj0ee7c74iu3vmhhpn28zz91vx8dcvgx18haqz7rwok81vz50083jugdyxys7xykxw4qxil4hilr7qasu3xj7tpcmy199ci8pxse3536jl1xl345o86nz1gm8vdthpuz83ib4wrq8sntmrhufjjl4giv8phlqwawj6160y9p2y4l5guzpoae5x',
-                fileSchema: 'ivxwyn1odxwih6kdl03z9icez7joqh9po5hhmqi92q6as2zdzmwx4lkfm0zzxhb06f1610iy660d2p23q1z8hlsupvgm5zakfus5if8zcjgq6r935b2yjl1zehzheqs6f3dgs7fcv5g3epg6tcjg64gebrw449j475h53lz1zd447pn7ymb1ccw1at6zb80ybjk7jgpul6wet4cpc43032fx7eg9wjb4osgjbdpgnt0s4p7z8ow1yq99hpi2fpizxorc6f6ugnzlfngrdm1jenjo3ukb5442h7zzczb1vozkgx7qfxrbub6k2aqiqn0vfuxzobwrjssaf8wlnxs8uldbtii733npxwvb6z8o2az710oqsf3qf8m4uelx16tiu7dbbxlo1ncrwf4qcwehpfqgttr90gsesf5a9lvjyqj5gf9go3d610uqd86reomhat6teqmnrqgjmi48wkmwlsqkhv8i72b9zlmin4ria92ymawbx8dzbnzuy2vbclikj9rzprati5t5zm82pplhcj2urohk0zxzcvy7yf60iyi6c8v50ma3f53ugvywymr05wb0hz5e6f7lj5nbrmv0q7vqcxnx4tj7pymo8dzix34vretajohh3jdvtpi2ue4hly1cudfe8pmb0wkij5lgogmv0xu8h9wvoxte9sujnwgosdbydb6xzkdfrsk4lwu9k3b62yksextu84sh77p2kglmbdtyd66idcfapvwqty8oigwqgnbci37ycf4arh56q0eyqxnu7v4yafznme6xsv4x10kb2jxcieyme7iyzjp2igv8ufq6udylxakffwevjr9iy2rtmdf71qzr4jqgveq60rtifdvahuvafl8uuvvmp7glabw2vtoyu80g6hl06uta1x8s9b3my7wmkvjc9abvu6mlj3933e7wm3ff9ectub8xffy7ehlaoc8rgb4k3sq04ysv4nx6c6jroo77img0cf2fmdypjxlhhg8izws3ug4b1i3g0bmmmzypxjwe',
-                proxyHost: 'pfmfivf0t1k7fv8hezn1671gcd4ez4iwyueg5257j2b8sf6uvtro9sx5d99b',
+                id: '2cf19f9c-1001-49e8-928c-d03fdcd593d0',
+                hash: 'f790hzwb6kwlr012kbyi2pnr41i2o69z21d9fjfw',
+                tenantId: '1727ca27-2710-4ce7-8d5a-5f27a8eedb9f',
+                tenantCode: '9di3zte0nal1qb3rvk93wd6gc72owz48716evq47a4it75b87i',
+                systemId: '14c23a30-007f-4efa-a6f2-13010540e3fa',
+                systemName: 't6kex607333gqzetrtqy',
+                party: 'v7rc6tkn1gvq8k5b8yvyvnvwplunzg9n5ts1t10bmc0pogxg8ctd818zusacflrilni2lo1tlbmusp5spp9farzo5cqo74tfnbymt81qpcsge2y52zdo2ej8ayabddqy86css1q872h2u9ya96alz4q6xd2mwlxk',
+                component: 'wnnuvph081o5u0humfakkdv85yykcp2h7ieyo6nmlb51yg2xzdc5ujrpp8xz45j8xkxnuq9w01xq7zlnj8hotbs543hmwx4yq6y1dw97fxdcm9k6n6eqj65ru3kgput6n4ch1z9jhgxylq7e4ebcg76m46i1f1oq',
+                name: '44az9n9w5u2h96h420dskhryup3kpth59r8elu381u1sjxtwbzd69p1rgmbtwkq002exm5tuolq1eu8d7y29p4ibz1n4n83yccli29s8ym6afppb6bw07ovxxddc9noxd6w7cb90be33nr6vlvr7231mumt1f3zx',
+                flowHash: 'gi094vgf0ebidzeggpdph8lqud0rsxyl6jdwzj3x',
+                flowParty: 'mbne32b58v4yf2h3ttcfvc9eb73e3y03m2iag80pnjman3t4hh5vel59tdj8o1k79ybh5w64hhu4e6s55i3zmicye7z9sbl32do8k2jqg4t121ptsvr4fp0ryn0f3qmzqtskwptay6olynjrt30tazleh0zr4moe',
+                flowReceiverParty: 'bm1bkm2x64ig65xy33niloldy0q46ahw4youxzng6la03kaj2uitmrm602lvcsmlq8zf3y2fz6txkdkjemc5134y5d0y0nju994sfqhni5l4afzkgez26sh2a26av768dujworb92osrui7c64dfynjdi9en9q22',
+                flowComponent: 'mc6ikfzc7y21l5v13et6kh58qm9cql2woz0o6r8rpbncj7e4syhv38sp3fb4ijszkfoiylvy3ph0hofr93ve1mj5xjuewlhjw4lw9bzghhs0y0ci5bk0rciag9y4wyth3u2dty8e07p7mzqi7p2ujq8nbb43wc2z',
+                flowReceiverComponent: '9vvnti9he2glc5r5fczjmi0sv8bsbpz97hlbsmf2uyn6921krjtdapiadupqmwzy7ugeuo52s2duu5zh76nvdwr8qmu12h9aqd5722gwy8dr4gb8i8mlp5a4vkvabxacb49s4ynodvk10r0xgxj77d3pv3mzsgmp',
+                flowInterfaceName: '0lhrc8n5261bzyw1zmjcpuyv8ndswxxvzo120uh4zybnkkpxrwkitjaz1ozaje4hjcucymsaicznvt3hw8b2kt3u7jnky8918ls2yos4ozuc685yddc34nbsau0vvf2bvhuli5bzdk8f9ay9tnx34otg7jcn2ohe',
+                flowInterfaceNamespace: '0x1kcjp9nam6klm0ktgx1j7qoezc22gvik489vbxsvqjwj8bdvh5dszrffdrvfeia99mdov9ggfihm5i8hab0ny03hd4c3jfkvnnd7cfcd79jy0saiclx9ycqhkbig9hf0wxk1ksv9ulxns2o08kunse52qg7hvh',
+                version: 'duiz0ugvlsfregm1mdpd',
+                adapterType: 'kh8xkigddtku2vn2z0nh1rm94k0ngnfo9x4ch0cqv4wh82rvpmera4biqld2',
+                direction: 'SENDER',
+                transportProtocol: '5yw4hxx995p01r0tz1q1vsbizzif5by8au1b9pconp9ewehpqtq7y3vo4frw',
+                messageProtocol: 'pidc9qr4dg7k1ojq2a620vs0mirz6jd70fv5psj2v5r7tp7j65onkwdjd9d7',
+                adapterEngineName: '4anug2fmvggwl4re5gtt4vnuy92lfylsrsgq0yxz5dnsjxluih9uzlzuvunk0zx7mr7qj9cduzd2zrffa63lyjcokhoes24n09m8z1yi7qoa5sqhwi1u8ehr39dnx0xe7mns8j17u0o34fg8t141a3f92fl1uv39',
+                url: 'xacxlgb9yjv5ee8rmsl1grmiau72lrkxezojw9pb6n94772s2t2750u706hfcl119718ktwgw5luyzpus5i0k36cuz2xspvv3iniproxgjofknq3hbrqo1ykc84gibfjq3dncdg3higmg54zxd4jdk6oizu5d70y2epgy98h3hc0ch88ainz3hu9jopdmr2h14potgb638bbh6ombznqxh58xm3h4q5dkwd4mw4xuwynz3ntnd0qk4t8x5gcaqs7mp9udcd3rlq4tv8blhx26qez6kcd8r9kz9y4fyb9fmq0appuh8kvttmdqk5vsdxj',
+                username: '5u21jqpyvrkrp68u7x3m6y5duvb820csaeyi8s72nu9lx9mhgdyqmbav5xa5',
+                remoteHost: 'l7plwhri7wpp6lyhkp3ycwtj7pi6cguykcj2iwvhloyne012ycpemfhu41vjinnkev05zt2l585uazi1zzrqd24fhuq3t2420gksi31hd0h0d24b7zsu1n7yqez0nxhiiik8kntuho6sr7m9vfs6upbswdxo6s64',
+                remotePort: 2723706149,
+                directory: 'z95hoqvgoe1pf3978dvfedwrk177qw4nngul95re4f2d66kry2214hqxltvyumbftee5quwqh5m9a97ypsl5u5aghm5c7o1asofb8bph8neha4ese1gglot2ekwwpent3cu840w6qt4ukqmk3qshckvlgzcpyewm980t2fbgcuf8ew8v4iz9w7nuk5xt6po15m1jjna48znlp5dihqkypmbcbendjxh663tp48xok0js01nm3c0md42w8f6p0h9x9qkn5de1a9ql88x0w04cvzontu9l2rq7nxg6hbifoho243rkyk9j3sefz93k8dh36tzcikr5vii8ff9czsz6h1eacm1upm741pn3zh29c9fedkycrpyk5ssqptsma8g95mwssvwvolck3u6eulddaxwcveggmnun11vcxl3733ifcs3o2cz246z864twkg7cl8dks6sv9sfiye8nmgb4od40arq62b0pp7tenlt5un5zr9zvzhv2vpqe1apblmj1irjj4zo9wkm2eqb525mzopxb6h4r2hgntya2ywy966qjeilg7mkfeixaf1q2ecz3bc7emg72qf4sqjwzuzzjexu25r0sv9rfk2cifx0uuvuz8fy05pd72t3ds3axs9fuknuqm24xr1p5kkhazm8o2n88gfvvmpl6fins5dsiomz0hwkdpcwmk787v32nv1719xi1tbty1cloxrv0af4v57nvos85h3kjj6gsv139jbfm0u975a0e9uwrpek7plqjezw64mbtbqa7ajzas2apurp8qwdclyol0njcydexkqto837b1mqc4lndvurrgolio8m27hjddx3mks3df135vykkg078icmus36bc4dqjvj79uzyoqj4111d38e7hwwrc95s5618lam2fjlu44480iryfz5z8no80h4c8lbfv7m88w112ogi637w7zftmo1qzy1wyklt3ment0ehulz3n67sgofmeiybjjjjeikspsz3cdb1c2ww4tlrgyd9unqu',
+                fileSchema: 'udohkg9k4aikxjo6iiax9l3it52v8q0gfnyf3h3mxdmh0unr4k3161oyyn19ya3vu1bnni1kgy9etthudr4f9lm8kfg7k8exyukfh72be5dbta2ueij8fp5bvwu9lsmc6mmlw2j0as8hyvs2wxrwk7tr0dlqaq1psurq95vhsdnp2trthaxodo15uvrrip5al96bf11zbef0plcqqy3i3rwk0b68il616cgoie0kqjftaznlqmy8uq49fz8kjlq7960lmyex9zfm5dk32ze4qhgc4a5z3b0nchkmjpi2zm65ar4ugikj6qiwtor0shj4c3l4i4ryiayfkimzo5kjo9nxlym4upf5f3iq71n214xjo4ius0hg1xii7htequbijyk9sixvuj0dbmi9gwgcjfaz2j7wzgqaoskwptlsbgkd1vuvbreq4ozfbaf0x5i64xx9g07qex12l8u679sovzmk7rs77evi7j2y277ktlm9o6bj6wplqh0lhn2yl5tbpw8x9fvntdi36qk188ew7s7b7v783rdxlqxjb0jj2sssui8cnr1lt2r7cbf1r956t3itwlhpuffsg2dn8lmgq5k2op8n4vaz03my2rdnqxyi3ny6m88bp3l6s9593g6wdqkv204vfem6c859db59chr64zh0yilreryzxq88pbkoykwyja1r192wz9myutofokg3nqdhp0w8y02h842con2lkgey2y2dmkkfkkr3jwzxdeyoyk4hsworyyll05uqixc6l8duw35uqpjxpiwvdxzu4tavfaw65hx51dylmrdywvh04fn6u69w5t3s8t2p380n473jczj2ip1yqv4i02i8ssmof6q76qd67nckkibtb4r0wnkmkcx2ojggon5zsngxwv90inu9zpzwk0kr7lhk28h1rer14u6xzys3ky5tx2d5qy8if0rbkisokpipayp7tls9ca98jwfb6rdgj14vskeh0ay8bfct7uder2lekncabi97pocletj2da16',
+                proxyHost: '7879hbv5vw9lmoysosudi442mmd4ou8te3aw41wwquo8rkfvmc298bv4h1fa',
                 proxyPort: -9,
-                destination: 'ij8153awzfkj2fi96qztnafazu4jarmmr1swnpstst9xqsy8xzrnv66dr77i7oo2fu5no2krxo1vp61gmebtls0cz6qrggwjfdjadg877z8s0cqg0yj4mb2pdfdvilkie695hi7375hedw23u5zlogha11g1jm1c',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: '18vu947jjgggim2a8dgec4wzd36rgr0l8m9rnibqw8ecca1gkzvxw0qt71bwcycwff2k07pglj7u8n6k682dx9h32ck8yhq27e0xr0gcw6nvv7xc8v8nt0z33sh5beut0u8thq4i36rf2zra6ksfee7aa7o3118e',
-                responsibleUserAccountName: 'ke2gy2c2zmtxjlzs1rv2',
-                lastChangeUserAccount: 'eh5mwv5yk0v2z0r4biuh',
-                lastChangedAt: '2020-11-05 21:02:20',
-                riInterfaceName: 'yk00mzoit8wneul6o2otd7r98dpc3p8zl35v6lty0douispy7mxtquzhvzkok1wdgetesf40w6cxpcaoc61mm379zy91w1sgqa48sdxmo7kxi7s9po6z07hshyk2ic4iv7j2phr0c7795f6prh7l09kxf5p9rkpc',
-                riInterfaceNamespace: 'tbv7r77h0d4e5ljnfm8xztimaxf7u7dho3jsrf4mdrsvu5rw5gn1awkel2kyxk0mx45suw43o8fpstkxzpw7g5satvcgra6ekadeo8s20whc8ek81ttr1wmkafkw7479bnynrha9vfsax28i8dudwgbtloodw6fh',
+                destination: 'srjzn1ks69ckypjxauxx17q1zxxda43embl33flsa0j0sa59zc14lf1hdcnhzsiy6kp85ocf89j6u30dlnnv8hm1sepkpt1feb6zvyfkvkdv9vxvkrnc9a15yh4mfz0gkta28dn6r4s75c3bxp8edtn7f6tc7pcx',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: 'op4863r1j7zzvzyh7bhaj3f7tkdwym898trnj189tiv7ax9oyqvvf8njv5c4u7wotp3lop0tqgg7rr4fsn202zfs0mwsk06il2wgmkmi15c5nim2eq23rp7mavcg7gce22g3ukc4zyi0k57bjg5pqrdcovvrlmn1',
+                responsibleUserAccountName: 'oi2lf3yebf4n9oe30reg',
+                lastChangeUserAccount: 'n9lf5mh8snh9c1su2nh2',
+                lastChangedAt: '2021-05-23 02:30:57',
+                riInterfaceName: '2deguwaqx12gxc16i8axa09r1polugzjpo5psi0xevcrq6xkbbhlbhn5n39h7bxej7x8t1j7f7hqyoz9fixhls3pypdo6ks16j6o3oq57xqe2ke73yqkv8dhaahb4ogzpucpyjej3uiiallg2dwyza8t8xh7kpk1',
+                riInterfaceNamespace: 'pow7x0upjpra0vea22tx97i4451mk0ooqhkv9qylvlfwvllbjjvj66vsqzxt3ma38ksjg2a6khtvexoythizrnjw22qpm9v6c3n8x4550hd0l3imrda9ksh89asaujd52z22un7sz3ujwa8qqvmgx3e20ge1y2ho',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for ChannelProxyPort must have a positive sign, this field does not accept negative values');
             });
     });
-    
-
-    
-
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelDirection has to be a enum option of SENDER, RECEIVER`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelDirection has to be a enum option of SENDER, RECEIVER`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'oxgewn6dp1meit7my8o2vfw9qg0j6lpb1idtos54',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'cx4nzwo4qijelqnx09ffknheps5vejkrjy4ln8r3r5ciegv90a',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'zlncyuko6ecg2d0llruy',
-                party: '455sg7esyp29w4vzwq7ejl6modek1q8nml6l24slex4jw5f7rovvkf6kzq1usss4kl3ujqfyk5r7702s519qwvn36liypadlj7tl75nqlr3eam9m49mfcapahya5pu0798dfmqy0fbyc3o5pr3zpyogxi1mkz0vi',
-                component: 'w07chs6i3uo1qv8g7qmxkcwr24h54vkl0vwmz0hagcbd91xwx02ewk5p4duylryd183jv5wfk10bzxtud7aj3c9ns2c6u2dhl2f1uoo9ymf8prn4881hjfx390f58acejo2r6vio85scrnxthoro5uey11zfwmcr',
-                name: 'beblqrw0x5sigcd9clesun9ccvl0fuo8p90ordh06gumjt47wkq6m12icd7zp72p81e7b1oxq0a4jmc7v810cokzjlo1ha57ts70nfy2424gsqir70h23e6640vu38kpu469vo70ku3aafmlrmri2hjfev78tkqd',
-                flowHash: 'j115y0oojw27riyqbvyg7ng757mq7gd2cylbzyit',
-                flowParty: 'jgi1rihhzqs9e3hpfcv1l14uuelqszovofndf8e49cn888v6ff1ul8c5wslhqixdhvfgfwsbemz1ae2hlntcb5uymm32pro76pnpbg6x2nocc4lf9fg1vg33nfapwy0ju3jz6iix6u7lsvz18btrybljl85gpj16',
-                flowReceiverParty: 'x29wj18etdyphaxlryu6daqyc4dma4h3svfjcznbzq9c68p2xwmxlcxn8tc9cdxecng9drd25g41khqehbn1jwgtt9vfr2x75qe38ol2vpjw8z0p6cryuhaho3mn4k16rkllzhtsyk8jiyz4pzp1bt331ctiyxfo',
-                flowComponent: 'sj5uu3ubiehlfvff6emb2bx39cfbirgafuhi1684kpsjjl1uus4qrn50y52tov0wvz9rp1y1aafgontnglqjj2932excx1s4r6t26t78nfe1bfdj03qahxdk3rh9o0p7iii1m2kexsztomagzdlqbh811i6fpzs6',
-                flowReceiverComponent: '2bmfka37j5twsnkv2qi0ss9jassb49upuzeavgjxpairv2h3zhllqok7ewpwmdnft3cpy8qzsu4b2uko84p5ox7gkozo2v3tlxk7ydjimge83xmh7rbnds4tcj2brse1dfuzft7zoraqdgapezulbw8yvwfrct0f',
-                flowInterfaceName: '90n17ft9mziravzvweblsvj4hzkexeflfgfh9u5k9kflfj2czzjglqe1dxolmfzgixpk0sbbhgstx8j7xqs7y0e75rb2a3bgu3cgssj71d6bys5ikq5290ujq487e6bpwn2kno69dxguyj9f8xj3dtcpbl79eedh',
-                flowInterfaceNamespace: '585sho7x9j351ohfrqq7h6pew5se8dabha3xjwkl586z67n009nw2ud5za9ee3hyrbcrmhu6fbt2dqsr60kf3ldja2ao9aij6jpymvfxto0ht0uim1v6fm0qwtohgs2v1j0iyc1a58f72bs53kzfm4mjihvgrawh',
-                version: 'tn3xb01m31aw6gxm3r1s',
-                adapterType: 'anc9bqqmdmg96zyseg4agm7e91tav2o1hfvlnhm5oog0ccekj2mtfeoape84',
+                id: '036887c6-d411-42e7-84e3-e6e91b4d79e5',
+                hash: 's5ehhkmfe02sz1cv2js4oc6o6r6zokpllbzvx54c',
+                tenantId: '99f32fac-118d-481f-896f-2fca4dbc7890',
+                tenantCode: 'vv84o7qetpcaw5t9jbeo6tqhrxcqne6ammm4j0yk5rw5fy7gp1',
+                systemId: '2a6a25b7-fd03-4e85-a68c-d085188b9209',
+                systemName: 'cksy1csp9ihc7bi5xn9i',
+                party: '5recpa5bx19kt1y6qrhndi7zn4yy923d4hhayz2oj0ncssh9mn2cyrxsew69hdc8abz2217wf3shbe65pes9gj8250ocupozel3rt6czx8m1juq06kng5soy1d4xl58m84dnp185728fjat57fmed84r844k7er0',
+                component: 'rh3xh28y92887yxuzpqopalb8t27hahvjfjaaykrqoinid0efxapnvbz4mez77jl99hyx73djc5lcgn2k87n7lbte8hwdg9apl1dm7shfyskxnkjezbwl3rck6thf4v857hlph5fkjc6gr85dfhkst3o9d9qi0pm',
+                name: '4rlu58rekptse3pll16zf861ptqxu6npn2ul6s5j362ytb1azk31zcoj9fbn3r7t61pvkoubi5un1g3vqkxffuaoau9sbjz5ysqwrq77ecbi3yrrabzzhrzzm6ji74wg5aloy0q92fs3js972l8cmeooybdinvob',
+                flowHash: 'gh9p49mnp9ea8obhlx7qx0u72pdcm27jec8475lw',
+                flowParty: 'b5w7498fv332agadfxsyi2yifuwrd0n2is3y1uun00nm3pts95lhvojwly4hdj5a75afwt6f722nkm89lpnw18fgcfvlfbxivsja4tgk7d06tya4hx3rk4prexpp9ztc3d75sw0su478sgc4voop600n8bnxxozl',
+                flowReceiverParty: '7jd4j9gjt4o0tbuk5pjxzv39rc1jiqef4lmn48qrwwe0qk1sfw83nmurgk9vuhfqbvqfsr7ohybrc7gomrqxqh8z2czt1eacof3z36daods3xpyimxucql1zezmkjz5r09jouhpyiasvmbczxyay1hkl2wcp9ab0',
+                flowComponent: '314w5pi0hm2jhxc8s67bjb4jn8ec831mb7cotbh37yh1k2zwoouch89xcb4zissz11hblf7rh1nh5osnix6m0sjgdxkogntvlpmxz7wryc4x1abrh494l6bh17bea5ltuf09o5tstx4p7izhdh3ekzrktgopd6j0',
+                flowReceiverComponent: 'etfviqkyjif11tom3zf2yahit6e7rdmtedkbvx4gwbu5kfjsdfhhohbkcpsqgj9i8z8np263ia2lm301xibs9kw5iv1ggvipcab5v5184t0ahoiwoki97hi24fv3eyuwq9n35ws1o4v9w2wt28upaqqceru4fk6y',
+                flowInterfaceName: '2yyjwil0t7swd1lww7dgvu09ed38xrwin5tjknfyzln6mczeovq2eey0we9svgvlghzlsia71s3kkjuk1wqx8fixrfh7h342xzx0watll770xfy3qk6y47lcozeavqrsbn1ouw2ot7sap3a60ncjxgrnvqfdw4ti',
+                flowInterfaceNamespace: '8ghcogsui368gttzauxd13hx7uajtq0xxeb1by9s5ln4615qd0p4cbnjoexuhbh96syoulbfjwi3a6nzs7frsx502rp6zqo6tcjrewhdsquf3co2yw8qlp6pxrxrr75si515iiiad1zcukwu9ogc671mexysoxd7',
+                version: 'xp6572o6o538tohxpteg',
+                adapterType: 'nuos00on91pbpd5bws6ykprqabxscaslpkvr7mlazbb02wznmwg3gajzrpqy',
                 direction: 'XXXX',
-                transportProtocol: 'dj3puvh78ngkbqo4spfxzn2vu4655q8k9jgxkc3hy40p9umlt6vo9ibfcztq',
-                messageProtocol: '3omidnh57ulmmhtqf34q543kv9hg4b4l5shfog0k3dyuom4e06giik21btjq',
-                adapterEngineName: '71oyonrxugi7vmgiy4osfpc5jx1lmw1wes2vjqv2b9udnuuiwxljehm3jlzc01vv2d5f4vbb7gmw257i62q7vu0gcgwmyobmuq32urxj3tpa7fknnxjj8uoh29l0musp56no8h4bmjfzq6b8dgdurivwgm74hl59',
-                url: 'jl2byonc1fsx5l92qko61wkgl21j9i2wj6cvbc85ov7bjjhupsimg2e2qxbxhp837b2cc9iq20nh6xgb5jy5rfcpode2w0g2wh2iogdaujmsyzz1lxgw6h8j5pghk9ve6bu0bjcygpxotiyrd0lnqkniyyo2cwoh0dlfny9jxpajbyaqvu1wmqxacy6zu2fpazc6fcbthdddyjq9jz2hxo94e2rfnurhzmkgthqttk3x4kc9kern180uck50m333wcsnkasr5ghyojrdbo2b6httxoxshebn0vczsdqcv4qouyaifgdiha2fgew5d871',
-                username: 'mv5ekg36iza2sbkifky582sv2gimnyh0mzf975ozl5rrkj99d36pvbsckjf1',
-                remoteHost: 'a1u75b9p7wh36tin4p22bkl2em7ytap369r1bymagty71wavl6kkmkz6ictweua4ltet671h2f9wh89oi9wmfh8kyrz3irpxkj2yi7sbgzhw7j3ofci45ogxfw3o7skn0exrokcbrwo22g9odoh26vwi26ua57k8',
-                remotePort: 9855865050,
-                directory: 'vjmriv5m2ph23l4g9tgz4ratn1iup62w7hatt14nbbxfrpzgj0rrp6k6f8bno5gj4qgtswapsf3jd4zyfwdbxvo065c4s7e19awacjhn12i8yohmc3apaidwn4mh3ibmsaebz0k4njuz368go3ou2ovijpb9h8z7l6wg7j34yqqcf1epvwrzq7r6ct8fgpa1rg9zf1mi92iv36znazyxz7gwovy19mxeubv1em0q329edb6abtjxezmbyzuthrxmyzcpigit308by77stvm4ik1d3fwdxns7ufwmkegg5aowysw1uvb6tsi7eehzr74qem9iyxnz2wsywms3nx9v1zbswk487ryx6qmzecjgwwu4ls2rlixgh0uco177gr32i0qwmcfodb2radys8r18y1ozb2gi3xtft9e5xb3l3v7bhxea35kdhke7lp63vdy57ytmliwky2jk0c93lhyfdivw4bj1lx6zxtb3b28dhhr35aa9gr1i9jh7mj82bygap4z1qenqahbiba57zjgfk79rafpjy9dsfw2qykhyw37umel3rpvdxnjuz591odrb8ilnlm9v7verujvx9ykjot629864nowd580rx89g1gb9w67gnk68fjedikh0z6fkfma60i4lznleadvg4rjkfe67pudn39eun94pd0iz20ifo0l8p4lofix27bnverdtkha3wws061ud7xjkap4qgz9ztl1hoj6pjbaxos7k0594uud7s5o3imgh13euel50ucv7wqs7r04qimnya1s9678xdzejwyghkz4y80yq7zb63feb06375n5uhemu8u75bgv1qgfuz0dyab25hi9vty5g4777aj5xs6om7yyf8ilq8q9mu13ldbwlk9guy1zpd82lduxvmha6qcr8q7qdo3xlhqy8tvzxhtjbe1s3h7aqvrjzvbfizettgazmw7djwcut17c4xkizbzjec7lv9bmne0zf1lijke09yee5sy10o3nwu17xxc9rhab99rpq',
-                fileSchema: '6elfn2ed8iqfn3lei9ijn1so9qkgdkle84hb9xro3hvktx8dnhyww18ab8s13tcbs643n1kr3om96igqbs8x84y1pg7cl23hbhpygo36zpmqqbvqq2b0xz11e9094kdpzx5qncrntubwmqb8y7pp3n64nf6dh9oqankqxjquarv9tk9p1y20grykxe50c635yslt48bx7nirza0ak7nkwhc22nlgpx9fi1ezcjywo8236jmntougtwqmtedmpzh6n3sgtmmt6u5hdshwkaibq9cmupsprq9kbni0f6v3eet4bk3u41uaz7wy7v9f7kcuofqijou44pgq6oui6tbyhvotkfracs1rgltseyp8rprdfmtccyk319qvkkr0dzl6qshg43c1vwnikfu68cq2l35dro729lyiemvgehayyp4rluerkgcel3v19rwropnr08bgpig6gaz27u424dkjgbpss8547ybs22ast9t7eo9xxf9v041gkxcv3reeawyotk0ruhhlym5xuf4rue292khozeu1zrenvo6hi3n2pu5sb8zocezbxle0l3sioq98kiuclnbxtidwa9ug3uvxglja8ddajnpan3ag4fx6ycoa3gupdqla2v0owu7ssuhbw4rtkvbbzssb6pbvbanrz4fb5to822m4vrdhlj2c4d4pnbejwqdbz0k7q6k6gw3alj2voy8i91tplherpo7e3ryzaliyyv2n46h38pifow8bzgzbg1ukea95aova6eqpjg8t04qnr63hvhbf3xaagtgzhsj858qcxqsdi9211943fpe91el77oinv6bufo5ivys0pm7gri3pdcjd5qlbny670zm4jz1mchlgnij9luc7yjl64dy9ooi3cmojssyageutvn7gb5dc0ox79z2wp04cl4vmuj1g18hu4p54mlz0cshuuofboveulw2p0dtel254r1m112fdbhdun9rdtnvh3fa93rsbymjylce4i48hnck71fbcln4imapsivfy',
-                proxyHost: 'i4phlkuvcg0t7ce4rjbecrletqulflt09gykmqet44rwz9xxp46i68e90srg',
-                proxyPort: 3910678905,
-                destination: '6xavbz0h2mml1yule79vs35u6lff6pb83hk6rxdbinha13nx8zb2ifbwj4j4phqf7r4rtev3on4lvcv4furub7gy0dbh9ht3z1elkkx2bpu8kcte04bejcaja6ptbqcc0kjh7o6ndpx9lcso9hwiklavesljkvdw',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'q0y152a8fenafl5bf4ut4md0ssg9mtg8zpv9ow86s9ecum9vnzynllzj2bbazjt52ztyexu1o7qtl6fns3iibwa8m1gqd0j8e982ncl35p28c831chjp4dldps5tfrw91a69le9pvy1ub4ra2p45dxxl5w4wmtwx',
-                responsibleUserAccountName: 'irhlc04p5wuxw41r3ur9',
-                lastChangeUserAccount: '3qpkn7wdxrttopmkhkyj',
-                lastChangedAt: '2020-11-05 15:09:14',
-                riInterfaceName: 'ph8a3o9roemxwk2nzxvp3f4yrvazmisvlfe3pfim66p1njyg47o3t8zxkkezzcgbu5wktx51wunzv0ekd2qqbz8fsphdksgq7jfu50cguprzz6ir2hfryb2u1o3qwn0upmxt69rmv9nq6x2do2e6zd488fo99n3m',
-                riInterfaceNamespace: 'm1j5wmhqfdq9tvx3v47q20bi9yjpml0csgxyquv6avrm6q15ggbmx20s26l0re5bvabixm9qgu4hgxyuya10swvdbt2jc0qpqbtq9e5u05a7xnjhxp22tnaiqvsy6t1zfc83z6ga8ltf5qgdoitlzbx68pumkx3p',
+                transportProtocol: '8g5s6mgyjdikk4wi27vy4of8r8o1dbyht0gncijs5jn4oku19idf4mwgnz3n',
+                messageProtocol: 'dbbfm92iezq5lht16gg0o465bcta82v85jdu6ydctrhuw5qlpbvxqdli2ph1',
+                adapterEngineName: 'gab98wl5cqf0ju3kkmfqgrlsgf7fs8adqqlb62lcepxsucrxr5gnudv3dxuw294agusq7t4u0i8xotfyquwfwnksr7ocu18o4ui5y4k4yl0enzps5jr0n1gj8r8ld786niyvprjrq75v5ayc6nlyy2oukhl9vjce',
+                url: 'p57zfl7pf1v9oe4j17u4ybliudh8995n4oz2adg5exw08mi31x0y4naniu6jgv49tlukmkfmy8pyi86nsucs9zq6bq8961bfrwoxiygo395hlylm3d7j8b6gwmo6s8p6qljt97urs65fpkomrwn4aykcufc8i3wobqwweirulmdspe5igxn29hkn2iqf8j1sslqrgowhhs1j73b49hd5vxus5nnxe9dtdz181am19zg2vtqejkdv35htrdzeugxy8670yngimt6c4uepieks4fsls4spqapzm1i91o68kvj5xpgopmt5kkvxpex5liy7',
+                username: 'udfurbvf0sx0lr5smqdvhrqb77a1bxvwypk1mk1dngln8lvog7jsui42qv9u',
+                remoteHost: '3gyse8129dc0w6z01ph6glfhpe5n0hen8hq7yhi477x8bj7nul99vh66cfnjwhufvxc1fwdq47evu3lc542xj51w1rofhsq086vvn1s6l5pfsgxmn03fzbn7l1uhhgbpt4tqfpplpqmak7guobdg65crcu5ky6jl',
+                remotePort: 1494398810,
+                directory: 'yiu3onhtcessf4sjdg42omaar9cijq9piafvkpnfd3prsf6i869gehcgu4t31pmbglp3adr7le3d7c4ykvw6n9cb3fbu9qsbd1tgiqw966iw17hf16p513a1hws2bf3vqyvq2lv58dj1bmoo8nw7kndzs3ya9g585wumy85mjs90b6sawf7ru1u40dg8bru3gvg9pcvnkakvupix7qmwyw660h14kzqe5fea1jxiw2gh22wwqgo342dxyh14for4onpisyfn3uakrubik22w6q3hlefw63kbtofnhfkbfuqszfcx74o5go3n62iajfedofwx1d6alswkunlqawztxdulrh1l6tot77eojtgzy94jtje8sj3nzc7v4l40s7oweutgsrzj6n1jvfcc048xh2q2947cqen7odg5dmu5iu2rll8sfa86plhkw1t3ch3z80mboh74rvcfd3pkim84bndly4q28otydivyxc05nyq0r4kt3huebqdobd2xbmn8q2dxfgbvpq55vx8zeoppfsj7fwcce7n6tdc66ry9am0pjmdtt6lc18ds0i6xpmqq9hfd8d7xqwk182pboropzz08xvrej90hkr8flkp62qe9yn1qefkmpw35q0715ej4l50y7i3wcbj14jhhu4ugql2b5x5leyunhilmi3jot2f0krvpve7h5koi5dyhw93kmokuzp6dkm2qe49suzjd4k3j6ngcraltw1vxghw4c8x1v205ncpdrgj55hzagajipub98x58s10lr3glrqskfujpsuw2c9wkl7ronwqpfhv4nr0lx7xp4m79qy8207dbwkepr6tymwhrmpfbwi4f5l0uijn581rdcst7x65at0zc7l3doezopnsqg4gs4k9rv9bg4ix2q2ftckndw3pi0lw8kilcuehubol4qz8ow7e15xsxzc1n5q9jwnkvnsje24np8htuw8k1w6lls8wf4d1avrldz9sskxnyi0du1svuhkwr5qwfo30gg2h5jo5j',
+                fileSchema: 'bfn4yh0orfulw0fk8iqfosm2h6a1u4f35s2x4vcyvh95bkbtttk90srv887dnw66r4qbjwutm5bqua91um2ofyzfw874pec73o7rpu1adocvauh156oqjf3v4bg9k25by04myhq2fcujfij2qn7kqky4npm3o262ikkk2d3o1zmw34eblafhjom14de6yj8uznz0030bu8cvgg39bepokhp47i5x5rtarrze94wrwkjday1xdqnxcjk66b8ibjzhfnplnx4tud8haw0lz09a97re5q158bk6qbivnngs2mwf92td4onlt99e295lxsdyd1ypsk0l6fftnyxfjgswrvl9lxcsoj3rceqonbwuo2glokxsrmpyl5xa1nvq7abdu3k88fax6mwo85v0x4r89fb4v4h8viv8wv1mrvnu1ov0slwopt3mz7jblzbmh796imd1djubfxxxl0i7tztpbnboh886t018jhs3og83h2t9ynmamr0wghjelmtjxtrkgjkrqmjc3kdy7jo9ym3ni4qr3arb2427xsolidpoxwhj8viyrgpabuxm81tqhazbgyc7sci42cw9iw1ob46iozlvpk2ykk66jjsg0be7htelnu02boekz7bmvubripdlkxa9lw9gis73mdj6s3g3xb6its9prngibiz2onex21nabdr887d0c8mhkl2b9jcvypr1smgdhoe9aqbynt8fslz19abxnp9ibfoy7w9a5bep9nm98511og4mf2h6vfrqy6u78javty6ufjpzs49hxbjvalidgjahhcaoc1zd51rl4tiohz1n046nbpjrk9yo7dzoeo2hp98sfzmzzh9a7ujq0ix4i7vwuzz4sig67uhpgjtz0hwnxuo84bz642qf3r9x3ojsmpgofbcrlc4z9e5zj4cikm3g8hf41aczmng08rq26u4aow4mbuvhp5i2gacdx006afcu1z9blxptyi0rpmtnramrq53shyaza3kq5gqwdl6xw1g6c62sp6nv',
+                proxyHost: '9ton1wy0c7neta781qz0cl0qt09bapfv781sqcuuth0l3n6iiaav3ryqlcao',
+                proxyPort: 9246168431,
+                destination: '69j5qfmwf3zz9zv0yki1tof7gho8i3ec8rcuo6yyobe0j2cuuqp6awvnjrsmm2hjz7rfxe6mkukma601jzxwbed6bf7l2xcku7gqh3hf3yi7hn0ys72mv768xf9bh3jx844u9i3imhlz9qb4b54w20qm3k3ajriw',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: '5elku01wogecqcw8h7i1p4gu5mdlim091iilxxv22pookbpf1z4youer2s77533emxpn0cc5zq6sewejm9y72bwp099bse5s8nepvlsddounn0yvn0geokdnyhk6ydcsfo6hryaplyvpwh8r9m7oxpuwtzlpmqwn',
+                responsibleUserAccountName: 'ev3cv61ua12lzvch369b',
+                lastChangeUserAccount: 'oyaobtzhtntgvps0izlw',
+                lastChangedAt: '2021-05-23 02:45:16',
+                riInterfaceName: '7gvxv1fckky9mkrd87jpva786bkw3x5aly2d5xljcqlm5ouifamg4ei925qouglzok8jb8ipmagv89ilfabgcm2kblwrlj6udpp2mki1pm84oz31vsles398mncdlaki14ftxyqfms4b3iofa83maued6d1u2cz1',
+                riInterfaceNamespace: 'jefpteds9evi236955qfcz4i026irl96r27ye7t348cf2m60upt4ep9wkusbohpum8ibdcfwg2chczs85qmf3xlkqh0w1oijc53rhiz5c7vlp6csuco2iavyy5zh8mkb7kixm7e9u9j5lzm5wfbste5m77ye6j7p',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelDirection has to be any of this options: SENDER, RECEIVER');
             });
     });
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelAdapterStatus has to be a enum option of ACTIVE, INACTIVE`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelAdapterStatus has to be a enum option of ACTIVE, INACTIVE`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'w4d74p7xoqmasdiscwaydy45ew24f277hh1xo4y8',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '5z16xhbtzag5q6mywy93pmmogpnsak4tcoziwudz5jhjg5mohy',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '7r8rk3wtjbtxie05vuof',
-                party: 'aauda316odzc5xju2hwgdyfpy0zodbphnakcnuz7mq5jx9qm8k1yo3rg7aprdlutngiqyhhsb16he6fziries6ypqn4bxxawdax6bj92geq00lh764e32r8u3yfwzg6bgr7iuskzvlcmj2seuyte5s3yyr8zqj7b',
-                component: '6zfyvntx213awygus4d7eah62zjrkog0jrq06hsuk1a7dmqo4sypismq270yc16ll2kngehavh6ei3b06pi2q6lwbp33kqoj409yzihl95p1gir126gkdcouyibmcem6f80u5lxiefflh0z5czbis3cskki7x4nu',
-                name: '9rl2shmtebjqnezt15x7voam72vdg3uwtuezui69znru9wg1rexcwb6j1gtndd1o21zhf716mzlr8x3i213vrx12njswctz473hhenokooltt9b8ivh0ge28wh4git6045lg5as2tb700k42vrl3c5yx5tgw87ku',
-                flowHash: 'fw7nrgnx99v7dhexxeux2zu6p37ul08nttccxknn',
-                flowParty: '8ru9mv5ftqow3xeno3rucn9fvbq6wbq0y3xpmxs5canbruf5ynvcheysg5dgm5odualfi7tnxco5a3ixwrdbtwg1jdv11juiyorl8iebn8pmoeu5tskmf3zv98u1x4pjh76iw0sfu2l7uvjwrr02a8qn3s350f64',
-                flowReceiverParty: 'k17fvpn9kdk3gzp7eitjdlhngqzu4062nyo55uos8gy6urvmf58rirh5z6xd007t4c4n1cqm5ccoybpn7lzo67hbnm3c5q301xytva4ckv3lsosx6w6egkh93cwy2c0hwzqx6pwowp5vsqzavee637aqhfrxoz9k',
-                flowComponent: 'kdqye2tyi32natmxi0asviavaqrjb5btkaode7dd3d5vomsbmw0qy2o0otmf1i8a5sivv5z5au4n2eokmbvyfd4bsb9ve6e9ww7d4pinwv5enzjanmu1kvevyefha7ygvbj456in5ds2qp9bh6oignh2iut709tt',
-                flowReceiverComponent: 'j1h9img02h77ge9fy5olhut03i6v8vqhmxhi3j03hqt183rhf751rmjgx8znnf11v3nfb4ve601fbe9pi8ndwjl2qof6bncms427hpvdjchofw61g3bhfpdvlpyk86ypxl7an9d9zhktsqgunzbhcewufvyqlosu',
-                flowInterfaceName: 'x3w7l22w4av1inqfafvvy24o5n4ibfvx6upi3swuxxzj1w2frvufjdz1905r0or48u3ym9fgxq57sqdgggtbipzylmxfgvtjbc6rop18usqpeljtq9oghyaby8tczew4y4rbr07dghqfx0xffl5j0cm8ipf9cnb9',
-                flowInterfaceNamespace: '00b1ispfj51s7fr3otte1dfmekc238plzxvih7uwj65tkjy9qyxy9im0o374zq026p7rfwdjqt2uewch2y7h8eu71yjdd2j87f7f4o7x0im1nrzuz0jdrlfnixia7nwgua8m10vn9zfbpllviu0jkvsbxsqdrski',
-                version: 'csy59h38e1gfhj58qr5x',
-                adapterType: 'm06m4vtxfqte447oa2jhzps0icdovka3drzqps074ij2u7aqsog95bmmtrkg',
-                direction: 'RECEIVER',
-                transportProtocol: 'p7rq11b2j9ommllslo6zoy0fw8d2rcs9ii6pdi4qf68ljnt23q7r8edsk2cd',
-                messageProtocol: 'srgmx1eslxjcrvr7oyb1w3m9nvaucsnfik3l56w261pi63a6x96a77s8cry1',
-                adapterEngineName: 'gy4649m1jzyutryb1xaxko9e4u9ht1fs7ts7jynk4c28iq8ts80db61fsod0x36iwh5iev3kfw9u3hzypnywg6hfxxhzds8aqcltfdzocxbttoh9lk6an4ji8zw00ye2f8k9vlk4zbuw1q6l9xhgge60efsquml8',
-                url: 'b1yogbxg7wzox599ln1qihwq4v90rke2qmi8t1y3mz7elcu06g1dxf5mnwmqt91kowtwsyzzvu6s7ptzpr1lps6jwr8nz87xj9s1eha4xue41phhj1ornol06dm50fbluikurvpc6uv8o2rmb1yussah5kfg3shvad7gkgb9wjoxx0nef3w55rcq26ptmjj8vmtwfpnqhi62mdml25ru7nyn9hwyhfvsvwgujbvumzs2o8knxv2zwwtf7kmsd671oy5gmvo6dl1igxvb4ql4pkhiwtn92r8zq0eng9if28t2pokgpm9owp8s19fpfqfu',
-                username: '5zaxp0w2v5y4e0edp9mzq6xf0h7fg8piwl4udgbqaevtmi8sqjnoxvl3jgfj',
-                remoteHost: '8ufksqq10f8lco020ob2pkxafucmk7q2suuf6xae1hd0busqi7btr8hje8od7kr4uc9nwbu77mwzq10wgvqxiygj5mekjafaydtc0mvll0umbbh3o100tww16bs3hcc0d6vzgqglt9wfynuotlgsppzox3r9cly8',
-                remotePort: 2167503410,
-                directory: 'xn216bm4k4shg3keqw1ydeuzrq6q4kpg26bt9d0893k6456e2kuncv5xb45yczkhqphmd146vyqdqlw161f7kv15fz7zpplfz0kgh1v9gwaav1mvysviutbxmfosui1acguz6tfx172ullxmvgoe35dft3hjplul72n0a2jumbokdcs4zf4sfqiy6mqpysextbyqt6h11rrn3fb2mfhvoylbndoav61sfekxj28gpukiivgo5qvlhsh3v5llemvtxyhsoczf3y3bka95gf7c2l6io9idug20wqasa3lvnsyzo3htrfurorvriort8d9pj7br94a74r7lfw9dcv1aky1j2iwodgfp2z2is42qqrc3fcc8gntdqn4b7x4leazjjqa51q5g626tix0hpwixtmlcvertir45o4fdntyv6cfr1m3yv2qt2wfj9gef2viozx7nbroe0gcbtfeironeqgfo1gk4jyq7tup3rnyq5h12x4xo9cmkp1erhhwn41r6rijcqug9otyebnkqqzp8fnirthnuxtr22qyncefpsnf9avzgpapcw1ag183sbxcq32050d79wjihczen6yrjwxekprhjb4jw57a4f7jtvfoomum4vxjstdjs29060nynql4tht85wg8nxzjbu70qb194kia3csehqa13or1njuxf5fqlpa9gw56q84enay08s0myzg5stpf1ufqyqaqh4sulqo0hkihsqrg4z2ok3ml32197k2oc3m6fx0newqd7511hnat5vqol1piz4nit4h1sqjg8vjou6nksjbkmkc5jytyo3w8flt6kg1jqkcsnx5y16pc6qm3dgknrhrj1z04okellimigc766cc6zupchux1ins1nsmze9kmvs5cp7cc5vnoy7x6m68x4k011k1ctpxy4fgtge8j95oxjng5ntnzks9bpu6bn9gktih9rfvphwsyq9rgq7j6h2ta6yuhxuxqzd3os40hf858qwersvx2xpas8fy23y2b7exm0',
-                fileSchema: 'vnb43imzq0ffe1tnlpyxv740k3j8a7hvwdd848davmbmm347wko9ubie20m7hnckz4fh3qvhfqy8ych4eu7o3zhvyako3i6faxv0voktlfqf2qcdvefu4nc2qcbr2bqumgq9m2fstxn18wyuhu84scgheq5dxultbboupqp97spueh79ny4eb9g7jv26r03ie6wonky6lah86t9228y7wpy86ddaouktb3zifvxflwflwl2cufck4ui4rv4wupunq3kwc21d8489ze54yy7z5kt981weuwbwf1m4i1fju2q0d5g30cj4ek4ejyhg8vexlv1ou9pe76t4psjw01htnzk49lfbib6krt1dleafns7sgr8ug0k8oqx4sdtengvay35s644xiccbjtvuvd4s5wfywu70sbt745w29ka3dl4fxmri1oer2mikgiyipexi27804xb358h5trlw7g3ogqw6btxssm5sgydpvb70h7giys790bp08c1i5916yx593gzac0fv3w6nlao9qk9x9fsl0ui1sooiwnjvk7gjn7lhymffosmlh95es93cupde4d6er81i8rvrhcfm0e5rj9t0i2kagclafy6d2ml4br0awb5pridnwheizz614rkm57iasj91cq9gd8xsec4vrczqh0lz4yj7eq44yioan8bna4lta16qt4ojk235fz3tadwx5xu3z3h1qn2fj1f011llqdmjnlxomdcapky893qdr4lg0tz1wygh5u3g3s226264m1n1gl4ere0a2zqfplka9yrysvtyog2gpedanj07uat3ktjfjip64t6vzcnjqkgwlcn8bjykxrlm1aroktfrpfpkwrewitwxhul0x70vjm45vgr11l0irfzuv2xrdcmgyohnzmxwndidibkveaco8012t2d8vig3xfdvk2nt5f7t1bcng7uyt80s2y3eszi4z9fmcmtz40nsks2e4td1fxpo4njygcz6mn93zftqgpuskphiwwmyrdy3psrt',
-                proxyHost: 'vjhc0ddt2lk6khgvq1ofo2s3ec901fn2gm2gxr58g6zbs1dq28u3ivkmtzz6',
-                proxyPort: 8181731944,
-                destination: 'l08w6l6yrbg5hk1ic5bzuxusup31typvb3acnc8zpfoj6j08q78izriezoeghg63lcmvyylg6h9e3ox1yegu4w4iccurbzm09ylm9s3fuyn89jzk8bv5z9etf7igggnj1d9tihm2biciikxuhp870ql6qrzqbvbm',
+                id: 'f84166bb-b064-4fae-8fc0-ffe6e47c835f',
+                hash: 'u83aes45o2hy31giy8aucw84b0t4gq4vt5bfqie6',
+                tenantId: '1ea8bbf6-a471-45fb-ab7e-0d5a69a400aa',
+                tenantCode: 'kvfwtw3uzaysni6h7kr7iyzp03s7t0za0esmoplbx5danj9ete',
+                systemId: '948d4b7a-d04e-4cd2-b136-2e5c6fb68c2e',
+                systemName: '0grcsg2pzdj3vgthodi8',
+                party: 'h0isqj71ton5rf7gazafxuq1slccvnh5j03g894n9oo6p76dxb1d46pjo9eqnxrz8dudyh2h66v8phw3b4rzj167f5x6du7if9vz4nu9hhq9m20vyfi0hqnpmlnbym1heta33x1xp8kjwiywk62xbiepo7xmv57d',
+                component: 't60i95hmpx4neu34ew3suvkzzq4rogdkpbkvxy4vded8ypqnq234dca370lwsshpeo17eso3q816b5u4cu78dvf4rhpzsl6226t1kl97p4hvd8mxtn611iwxasla0pe1kw49wor4s9ji4antcraidxtl8pjrjnsx',
+                name: 'jjvops6cmf0cg04b424zjy3f3r0em180keongayqpxw6i2srwzpfw6xso80zb7nujsorizauvlvt0sxg0inkf46dfm8jrwaeumwwbspdlya3yl8r7bgpll9n9zafd38losgy1rek7dhyi4ss9dkqgljam7xq20cu',
+                flowHash: 'ezbja4vi6h2ucm2a9iyym59nzuj3f6xatgr73wve',
+                flowParty: '0sr7xizq26fwhcbnxdkdjo7zai0pi0pur9fyfvdq6p376t5foh7ruvtqk3jwxxouafhptrt8dtbl7uv1d6zxty55xn9f2fal77093o9moc9mi3e4diio5nx3gem19s7sa7904y5805wf2cqlqlnibct0pr093u2m',
+                flowReceiverParty: 'dittzabshq0xowd95newt36racq3fdd5mf5i78aubjjzuoulzhekyp7wrkbktv98r36r31z8rk1vwn640d8vbr0nll1320fvw8mlks8hicnp20gjb4c9gnqy3f00fklxkd0r8ihtwmpfdhpnu4stgswpj0k4h6rm',
+                flowComponent: 'j4gwu1saql1dam2cn1i8fxgk0dxi333aaqmep36gl8doyag81jxdd3cmgqpyd23pa8bnz8znori8tyacmtv19hqzifv3zkngkv5ha49x7xgqq33x8l81dkvhxbldl7mgn2zmufztsnk3svf3whq159gech0yy6uk',
+                flowReceiverComponent: '4ydr21cyet3q12ykaxa2orom0nkmr2ytch707vu9gnezk2kc9kvi20m17o0arhzxw0ungdcp3c8nmgcqtelb2xlvkppaslg0g5kzpz9ygiafdpvz7zu4rggaahh9svgqqy89cta0k5ggqnrnzybwvimspzuriaws',
+                flowInterfaceName: 'yp0qjq33k7daldjnn9ox0mk1kvrfde64r7qh2rppt3etcmddkmn1vmq7durnqhglq4xxpo9u6zrpteqia9azs9hhy032c85wz8w0wkrgf7ov7iqre2umsqzzgnq5jkjbp8a95rva4dqhbb5zo00lnky95b55404c',
+                flowInterfaceNamespace: '2jjd2ja4xgpy45s62hheuz6nj5i1rfrxlhxyml0c51j5ejcrgx9qw6n502lnfwnfygkmoqdsy3pi5a4xib7w47kr9ygy6kfm758a4ia0gir9iu2axt1b10lm6q9crjtb39z1dc5tui8q3c77xepbbzior60mhpye',
+                version: '5wz925319zv5tkdauvt3',
+                adapterType: 'nj3onl3tdbmjdvnyldr46y9n4mxxolosnw3zamrljc69r2zuct87qs5jhhpf',
+                direction: 'SENDER',
+                transportProtocol: '41jk1lv6rdmkdmukpd4vf4o8daa94207gzbils54jjgypi77dmcxalok8oov',
+                messageProtocol: 'hf61eowpkujgvgomtgqvluhesvv1lph0qr885gs52zs1d5gq05sqfcujagkk',
+                adapterEngineName: 'iyo5yloqkmigazfhd8d02gqy16aytmh24c53vhutj7igwg9oongc376bqej0rh47jcjgiw36l1imfwywea6bgy3xqp4db9zwfij3wa1xu1mdaywbr16s3zxgsz7c1gr007c1i4b0shzxspgzrua5036ohvchipa6',
+                url: 'pnewd23q8gczvpcugcvmj9k58jhd43x5ya4unikdgm72qvt1r1jsknafx6ldkho8f7dyqgl6b0iaz1nrjtuh0298kyzqdwgop7ao6018ifwib9f0b2dzy3l7slowousqrdgftirm4x1n0pt2mgv5v4ujckxu1rb0aewnfjp3spdueshyn95idax78p9dimwk9y9tzknj3wn3gwewbuftfasvhvix2vymt6dfz02vcm920yp44518661l0yaldc7wq3iky7qtd0769t52oit3bf8nip7vevkkathm277jy5li4xt8ccrwmzuu4tg9uaz6',
+                username: 'rjxonaeugxgx47hijfzdgpw9jqahn7wa4q89tyaqlffrlf108h35xmfgrcjk',
+                remoteHost: 'whywt6slcrxua9kegjw9p6v2q5usylyx2h0sbl4swua17z1750q79yi6x4gpx8z1yzflxciwcoudcpj3dn81dgawyqt9xapeq5j572w8uz591nu9iewi17e4pz47m15zifgaxd89ktdu06heghox1jap0toalyph',
+                remotePort: 7566221294,
+                directory: 'kfjigt0wnxor9hbs919acsksdsevlj5c9hf2pfjm9x91dpf9qss50kqkuojt0yf6x2ji17s8xrxck0eoj6f3nm9q8ucf480tg59cmrgy5drpolnsk2sf3c5wea7mmnwn6eimk8gox0v881wisl1lpdkrzxh1hd90g69x1crmkrp5rd3qug5czk4y4mn34t86rqrkd11fwqghpntbfdgx5a3u7jszgi2ra3j18oahmj6l5c70tvoqmelr3r8bkmc20w4appqbm71ydb7nzdi50hrktu1aj7ick0s519nxmrkfhi93km136giixxfxsa0alda7anhdw5ua3vluahb8xpm0wv59ua6nin5y1kksyozvrd02ifw6lpt2an91tu9gizvdj5rd3bt554rg3odn7naecso3m79qyk3cjsc1k1y4zb7cofnzw2mtgdz6uo8d38ok79q85rf3k2wtsp3xky6a8trl6c0h63vvxh9oy7cxy0bz6b1bc1jj5gtm7doeescusbh30gvms4rnbu17vh64jxfd8gb4oegthxwj87w6tcemrlk7lzza86bnp9ufzqym3m1vot7bacfxmmm5iyx5xk9yy9k7b5rbw50k0w0eqdbr7zjy59xhx73ed2qv6ee0i3eeynhjhrwmj2gbh8h4jvxzu24lje7r66msb5cju57u9kbryewghrzxv0njurhc8ixarb6too7wkdc01kaybun41609yvwe6xt1zvtpdlck7e9nkx7mrjh9w37bx0itfr5383di2qo41w1p9s4lcwhfbuj0jtd2xse6l9448l0rku4p4g25bsrzotjd0g68j4l6r8c6sk9nmdebwc29c384e0wtc6n3bkny72febqboasqz0dq7r9oslms0to1ya8wh0extzzyrnx0nafg623cn7a0gdv48p0gn6vspst3ys7x8wd4zb8eqvhb731i461pj11phtiys9kfvd4bqe7orjry2kowno7ucmqr6ln6ujz28zbdzg2opal0l',
+                fileSchema: '3b3pf1hcj1r491kn5e6ljaq7ylqawtcww7eixs6nslobtle0p3k6fqoiio5sowl64qhlezi2jocaiop5ct91qhs7r4enric233d38uk2a9y0kiop967qesu70as65jg90xwwhq6f1xlf0pepwzd1uwkohly23jysmr59k6z0kqzfieli45jrbs7z17r9zomyakbg1qd49nqjrf9fsx2xpwit9ckp9ohgifibmhqpql431lfswsg7b69z7ctbdpztpsew9g8wvwppnl97z9ds87u5o5j2cgdy6x976nn0r1ttcbnmg9gpefkf0z79xgy0lu7xwiglaepnyb6qj1bd2s1dnpyhodtsv24r8w6b2ejh9428jabuyes9fezufrehr26md2o2yyohp6wlff6vkl2jpdo0dfvcneqg9i3wr49lbljkhufs14iifacn7el22mlrr9g36lc9c0pppwkik0o36juey6cp3y1uo2kwvfhejd3q8etfnvt75xlaob0gpxoh93t86i12nhop3jmbgx8n48ryc2jm4l6wzvptmks20cazzoryj2w03czb3o90wgw3cgl8l4bhgsmvs3oxbbgs28rjjkkrexft7vqkap32pd7nwoo13qtry8thkykejs3dcwoq6l3ccceeblz3zcezrr057lp8jb0fuya8qxoqtw0yp3yne1i3m1rswqy6g5cpa10da3s0jrni9pl757cn2r48hz54pgzfhu0jhc6tqt8qiahir6bh9s2oapw2if7cunenbpcp1cvnwx1vtbjrw9a7tu472ynzaz2nozemx7on3ag2h5k2w5senlrg5yottnp7nxdu8daxwaxgb0cvo9sgrwt802g3mb7iuzaeqfsvbq9jkj49fbawwov90l0v9m8xpflg3m4w8zkm7ju2421xxqmswt9ybbuhgh69v0x595vzlejxwdlsry7h3v4yjezan6m0ygem55y77cpn1l21xo1h2x00ehvr56o72rwjd550b76i9tz0g9v9',
+                proxyHost: 'wpb5nozl2gulac67c6bz47rrqxe6rh1xa65hf0l3lee0mjo5upjbsjcdayoa',
+                proxyPort: 4720590513,
+                destination: 'wij33lg03yd8wihjfp9miuxqtgrd1um0ffc4b7o9s4p6k1zdi2h4g9xcwig136x3rlfvku47667y2q404rhvjxj5mqrpi6xna06f38p0h6qf54yqrhnfduuscztl4645un8qfqlq07yxtaaiavk43jl9zu23z486',
                 adapterStatus: 'XXXX',
-                softwareComponentName: '2qdi4829lb2yr1rajhidorfb2w16lw0o0329dfrkxh1jy7i3efv7t6ud48h55f0ooj7arnsjq31dvatr0moqa1rx76qls19obc6tht0boi716325zyj6ypb8jwibk4ybprx3typz6lc0yxk0e3kc9r4ifcx2bbvo',
-                responsibleUserAccountName: '4dz4b96x0r5lcqd89p7t',
-                lastChangeUserAccount: 'u937sb4409znorpj64mi',
-                lastChangedAt: '2020-11-05 19:00:53',
-                riInterfaceName: '1hox05kxfcyzk91urlqgn344by1z64dshj0l436jvrnl0ian59u525ufnhc5dwte4a0zt6j2wve8gg78l05vdvj8rfkhjk617lygq6i85bo1mpa6a61qsm9zd7di1jpiizwdf1lu93aohk7lp4r8oh9gw0l24539',
-                riInterfaceNamespace: 'd8jewgbang9jazhdce1zxn7xvas606oxxx4wvn9v3xbg122i0ngjtoutnpshicrbjz2licldzp7zf9b9c9c43jtiii3twojpm647cnqtj0vgscvlark0as7ofqjem52gjcqaz02buiwn1sjtg2yurysfk640np7f',
+                softwareComponentName: 'syrfhu2157g5pbvujo9s7lizppldp472d8mlruwesgjf3p36dtniipg8heerou4ajy6e1ccatl4qyrts83trl60j6sqhp71ph7cg9xsg9hzlpdpm0ekwmgpnbs8fvcqcd7ziewww8ul0ta47fpd286uu6vpjbx6s',
+                responsibleUserAccountName: 'e0wwrktm3o854s7e4cre',
+                lastChangeUserAccount: 'qyu2vpbx5ktkplupsv4f',
+                lastChangedAt: '2021-05-23 03:40:05',
+                riInterfaceName: 'pk07960fclu0rjvfqb5xjyt29c6dtiosfz3y2hiot1h1ayn7nsphxuncweliz36gonj9t22hq2wmo5q88ven2iufmi0uq3gucmcezdjgz9fvxy6d42qre97ep8dous97d05umjq7pym6ikeys5gf0stasitoaua6',
+                riInterfaceNamespace: 'k1350n7eaeghfswsjwq4jn812joua5hm6mvxq1iuqw2ff3vmlzuv94nkokvbj37z19k5649yxj73f40rhsuf4kxg81x7tr71pystxlgjl2ifg9i2k6a3sq517obidlocfbx36qg6phur73p291jmsurrx2kd84ih',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelAdapterStatus has to be any of this options: ACTIVE, INACTIVE');
             });
     });
-    
-
-    
-    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelLastChangedAt has to be a timestamp value`, () => 
+    test(`/REST:POST cci/channel - Got 400 Conflict, ChannelLastChangedAt has to be a timestamp value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: '6pchbbt8napt1ifitd3b30lgfijr0kj1bzvbxhx4',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'bmngbklot1x7gkhpbsx9wihy6aqqxl1urqtr46ffppiv7poycy',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: '6dn0cb0xk2l8wl1cw24a',
-                party: '9oz8h7x9grvhxi6u6md4djxenaqae8tqyslot8qmp2kpfed5wz9nw4g1dazafcuhvdlaxcpbx0kivs9w5um4kp1euchxcdnabpsjmp0nreuz8kpr47gstw836blv27wz7vq6mr4kre8ie5izz4db7d58npfbh2go',
-                component: 'ed6a1vdenefakpgxa8s25jz4o48dj9d3wdvzd0u17pbsnd2tzjks8h5rbhgxpr2l4gkim6j05jcaeshdpncjbj6uw539aduknksp8433jn8pxjlbfi1a5qwnnow78u9hn97f58i0dsv5oxxf0w3ms2r1r45vpq1n',
-                name: 'nw5h3zglex0eepox27vvuw7tbzyecy6pe2zmc9qk1p5ujk8vo1hmvr9hnba31hw0pgnsfsp6tgap12nkug3a42gin10yx6v9smkk1l5uuae03nc0x2y74souk5hw5z69s34tur50n3bzhp5f4namxmldhyrcime0',
-                flowHash: 'z1xqnbuikl4nve89kbvl2shtaqsifxixlaf8l1xc',
-                flowParty: '99csy887cj9dvpz7sh6ipryxxx7ur0qbnuxi6ihjspygsk081l3jsqxgtdctjjfyabtiha0nfk31m3a7hwlo76kikd6g9fqatv5bhlpe1vjoem2n3oraw9eojc7ersjfqvh03e3m1fnitrqjcun6wf2zvw62s10y',
-                flowReceiverParty: 'm047zgh3o6lm5hux6beoubl9buzcekcv3vl9qiw1jtvtb0931qrtnzvq0t7duggo422ktti2q8zh3njg2adx8qoufwbv60lybs2r0h2wfxxi9qj2vm5r0c1jvnpblixqhj6efocqr8zg8j7jn2s92wco9z00ws6o',
-                flowComponent: 'v9bnxjq1r9oupzphag5xbejdw2y0l1nq1mo95pp66w579i4xrzdb8c57x8w2p8u12b91qsxczhm1bqf9gs23fshuckcamnimbepxmjf3i28b9oili6icatu5akm78vjojg9qadqjt4fctwd84jvzqso3uvbb4wls',
-                flowReceiverComponent: 'izeim63ptyrt5g48jbaliubb01hr5unfqjjngurtos8b8hhds0vji0rt7rt2p21t515ypi9xao59hsmoby8fcvbprwiimjk0o0rfwl8rkvhpipp8y0khp3443egjmc6is7jmf6ymzragai9onlme60g2fnvorens',
-                flowInterfaceName: 'vxqx8vge32qiui6f87devrgnv4xcqultpvzif7gzb1rugt1etwlzevft6xnsnmqngssfghv0lyyckjaie9axmgj3cd3m0j8pxuhykwhw5i7hf1hutf1zqsel0cr5br1ywiv0k8r7uv1o1dm9himoyh3b2yjcr3yo',
-                flowInterfaceNamespace: 'w3bu5g6hbzozicoh8na9pl966pq8j5zemwdgie03yo7cgrd6cbtts89z52zam9d3q8q2c12aj360t2zc99ilitw1gwz3zjssulhz1rmnzraw8ivjj3sh7fs0f0x8cdcwaxa9d2nv72hd4uia79t0ogient7ufbnp',
-                version: 'phfxoa02vanv32bn6iyh',
-                adapterType: 'yb3ja1wri5q9edyys5cprxwtrmkuctcx2ul733xivlwlt5qbcq7i6zmdv089',
+                id: 'c4206230-597d-42dd-9b69-c89638f47019',
+                hash: 'h3skoy3gz0jlvtummopwi2wr9ltrgcx2obzfuyvl',
+                tenantId: '87334e41-1322-4ff2-9f63-a488f71eeaed',
+                tenantCode: 'zp4a0eh2ne0bkcbpnc09rbhkydoavvpuh7881vrqg491y1fz5j',
+                systemId: 'ea348ab1-e0d2-4411-9695-54d5cc35673d',
+                systemName: 'rcmf6vp2v0e4mlgblqgt',
+                party: 'vsqosv4kc708dyhioa6ql70yu1fvekjiedq19mf85kdsv27mvkmlwljkxuatmo1cf3zr279sfz03ucrd9c710yv0n28cwyog1oa891su8emfbbqj5h46xngp0o5w8zuk1cca9ajqe4x9q4uetrulf2m3ef8ifojx',
+                component: 'a8w0ikqq1zr785704nyeyvumzljidr8cews3imyr4m9urji32cfc8kaw557ek5evzwbqqhufm3q1zasvhuv9tqpny7b0rfeofkvz3yu0pqv04r45vhshxls4jj4uuzo5arpi68c15boqdyosh76lj2vb0zd8bsn9',
+                name: 'wipjs3za0a9ra0kbqr2o6yn9d3jv09i3wlsufrqkjiurummncir5qrrx0xi6rlr8gqa00oooue9p3s4jqlxj07ovmzlfskfzk0v9wxpfrf0r8hpabpih9yagf3wrl90a9bdtn3brj6m97e03rnndrlzlwybg71hd',
+                flowHash: 'pl8i8htgm19ex85qdjsi489fwo51r008u5x5zkcc',
+                flowParty: 'oq6mp736psq8bnrhrlhclqwjoljh94onlso8m9cf4837gz4vd3tn7lu6068ieum4rsk8wkc9o4n5pimc75me7vq9lm1v95knxgo5arnv71yam0uybytlyjrna3on7z24e39qv6kki7qk5kmufhodwwduegldw3yz',
+                flowReceiverParty: 'x0a9pklaqu801e7upeuftswcmcsr2605r9t707u4ednxm0w8xt8qscwwzroa192g5len5be5c367t78po359pgjd1a94wgr9yp3jbnxpo3lsn6l91x7ybu8pteo0ffrnpyh3c3pz70929gjld00eguyzrmr1whlf',
+                flowComponent: 'jinpxwi1g1br0wo20pcfj73tixnkhgp1ahvf1oh76icnotcvqobnmkz04qc1yqebhgfgnu3ia1qeyz23smuccebxnmtzbz0wljpegnuvtb2yaxofdlx73jgp27bidf5p5odovpsaz6s7fv2s3mq70ymmu86e39qt',
+                flowReceiverComponent: '9drxgk7bxbkxmfdgpbzs7p3ya6mila66r2b5oxxnrt51t4ketq106r2txgzdh2xqcf2jvxlcxasfxu21zhprxwul24cmh9jiwr16ybtyix0pfuoe4a0dmlywqdzy4lyn6zzh7kjle3phy302kpexxi7k47wl1d8t',
+                flowInterfaceName: '61fpi37zzf9v7sqagovwa2314k15duajm0p93vjgb56irga9nx53qadhrzpk9qs2qqcw8y1lqlzyhdtsdutjdoag2hyxvsgv9cbrsjuqqpagylbhvfqeuf04kcbn429lcs8p3yxomqhfozho5lqno6p3ew3jvi8z',
+                flowInterfaceNamespace: 'kwhohgryflxw48hzs9fpggtq6ebx1ald6nbpez7ccmashjh2z85f0gojyhv9tik4rqhuko00g66t253v4f776id0bpxdlfbo0w7wq2fywumqzab4n0c1ydnhpyllg0ztd96s3pq437ox05oykq0c2883exi35c0n',
+                version: 'b5air9eavj14nz4njz5x',
+                adapterType: 'wm01wenaxclrx4usrvf8m919hci6j9ew74m7g0blx49rcix89j41q9kificc',
                 direction: 'SENDER',
-                transportProtocol: 'uxjxw06k17d6inc6v8e83ny5b4klh8oq6sjutehhsgfrm8ftxxgnub0593p2',
-                messageProtocol: '2r4w2bfkp3ckwx2f003t0c8elts5y6dpcw1yvub2c8qg7iebt4dulgxz1w8u',
-                adapterEngineName: 'pnsv5w8pwc4yijqk57eboagsibqow7pv4g4iu563kc844wkvowtmjqp4i00a7q7lca6evd4cbamafmacvhqx8xf1u91neg2lit7ns9l9c6qmgb8rx2vm5its17meevvy7b5bwkeb7zoenh751j11bpvn3jk4lr41',
-                url: '1rd697f74ouoxoogzoh02e1xqlr01mcu3wo3qnkfqwyocjtgkoonee97lkmh0w3kheqboic75g0d71jp38is870wkj8rt5vxfj6dt8ti71ewb1ay5kcgd6xyv7wt8023l6eggwmwf9qv6g9uq114mfz8izj3e7yeqi50hh83klprlgivisvdnt6mlc6dek5ld614eg41mrj31cabritx0vb5lt0wruve3jeemlq7phsah348x5mxjyijrk9dwn6sbm1sclmauh3yktukmtfzqj3cmvrxms6u1h40moa9rihvpdi1jqh55mikrz0uq8rr',
-                username: '0w8tffn7yi57med2z7dhu8a2lwrlr655on0rlkwd35bet9yaun1vw3p4qwg0',
-                remoteHost: 'hbqbz9a1wpwoqq348me57llxzauhi3aiaabdkpu1sx8wnkpnosuk0dn1ujuzzojehaop61ct8rwy4gxtwjnrcfx88y33xc070kormlmvjmtpleejxc5ygonntmqs5okk010ieyu1ey4vfzlb70c5a2scb8er8lr7',
-                remotePort: 6272025724,
-                directory: 'klogk4wla17c4nnh7g8tweol3pwi7c4a0ikj98gti6zf3rhhxdf2csipjfa2x278ve3s5laphpgzear4u9xyehzdb0r2367tdv1pe3125lev7cnevlykr6hfjrbwfo86rhyvwx88xnzquz3oe952kry0h1bjqplr14dlfqpgvl2wmzjes511n0146vf7gmh7gismdy1quf9j8gho00thz9uocxi6hilf90emqg3q7feimbmzbpzfexp0qv60gtllbu3yr7axkflbctym20aogn9vphb8z289sltgxtg5anfi474ujkgvml6dyem2p47vxzxukg2rotjivq087qvs6fdvm9dxa4jmi4s0dx01qg0hrk6cs42lwa28tur0apb4x8qcw1isg0qo3q1iwfszwaek07c9h9wldevao4mprpk08dji88a0hu6cyrnijzglgtrgs68bugaq6pqa95139swmu1w5dqck61hrx2lkcw6eaqt5iercyjbhf1jzt3qhi6t2ajw1bhjtbrl2qa525dd2keqkan9imgdycw2lpgz4714wx3na01jaf8r42lqcnwml3gvaz2nbfsczawb01imhohb7q2ll8kotmj8cw7lgn97tue2ygdwi2o3gq0k3sa7cy6zalexq5z5dk61dxtnfktj3fu0rm7ccvwcw6eyytulz14uxzdj59kwnjsscvby8ephjdrvdxrpm1h22jdfp232ey6s14j9d2mb6rpkcq8rp2ohskex1d735l97x1f3iz64yo5n8dxhbovvovmlatmb33l8xlmzhtio2ezqg1t5thjofwa0tvqab5z8sg3f0zlkrzxg6cmy1k9idgkdsl5p4oe8se203aaxq17d4k51hzbrw1v7ssfs7hpxgusvedmc1r6lxigi52ak271catneggou9nn22sehaia8gulhwvc7j5grsjuyhebpjms20hl65xeta1kcprufrqlab53jiqx612oanff1riwefzljhzozi0bj8cdsmlj7w',
-                fileSchema: 'ihkb3a4oxuihbgnh3j81h6nr6qaw8btkr6wqdc2h8ylsm6mpfz9v18kggtl2a6ak9qf8na2pnhwlrkyg9053cdjdcvx7lu2j7i85e9yumpkj2njpzfu0vus77ob3un0vlhq2586bqlz1e1lz6p4mebpnm9t7zzyt8xlp5uyzemb51jf34rxjn7vwjf8gugvro19trplksnzq9rd7sejsftwrrowjye59m1sik7dk3pjutd60zy0cjiheycguq82r4hqyf8y9qbcdo3o0exmdzbkxjsxuf70jlduv066g7xlibww4ya1h1532zhe4l6874d0d4aljrgyzv5htjn79idsk2fzhooclj37p8lo718dufavvr9bci7wjvyf1ggynu3wb5ibsmr1ambpdx5rbd9vewgi3negk05c6mjaspa1jw3rln9xwnuw6cnstr26z8hx981jjz78rboid4ygcf6yi07opefhbrofatdgeq8det7sb22fohipu5vcpk95o4ein7y5h7ym22iydnsrakybmfa33taeehi667lbhwa1tzkfecwbstak14naluxg7ioyxlrvbdosspmq3gqnhmpqtoxxb97ydw5zyot8bbzk86edz1lzqo916f7lp48b7acktc0s9whqrdzm1u3utvjc7un9gq7y4a37ac3hz6rqt9ke0z8fgcneeikburau3twx85gjtjfgam1cqfuofbnqk2y84ckmht8uaiexig5u1nxzbavqr7pz8axg9g33llogr8bxbolt20gi8js8nis0p8kdx4j8joyq9k0mu3huv7myb0a3dzwn4xllx0he4co445hldz8r1ok7xi50swzgewkr5mf9orznvcc7cw0zx4jxry7ipvnligw6cyqh4umi4e0qraj59wunoc26zjt8t60e8gco8kv4jxslktc8uy1ppv7dhgyxrvzr0y3o09ats87m51ng9iq9bdix5my7gylc1rewdci12guy42rvbyqwiijiakq2nhz7s7hk8',
-                proxyHost: 'ff3r0a72kx2skzweydrxr67zpegmrobazblftnpfki3m8ur17b6mlb61raiy',
-                proxyPort: 6101606458,
-                destination: 'ouyzyivvhke5f74t41x01kwoqnbi25gfwohq7gf3coebfgywdqbivgmfyglf56hpe0tblsc0nzhmvm4jmr273mhilb2air4fvdu8567gfpy68nd0wfczl9tqxeu9rccpe5kq4jpaodaht5o85ulvdlyepypsa9d1',
+                transportProtocol: '2itxcduo7htff63hpto8eerg8lk6b0shrcu3l42ya5weyu699a836cjpc93c',
+                messageProtocol: 'revlso8a07gdcfynm8elfr56p9j50jx1wb61bzj5bby4wh9q8h3z7umoi08l',
+                adapterEngineName: 'swrfjevdjdatnuszmoe2ty7m6k9jkzp6vp0qrywky970t9x5ma9r8fl70vna6mc6x41k98kyabr1lup0gr3h42uaqjw25gwmgue6wlhqssd8qvwkobbyoconpmnkoj0561fodq68ahmdtimcsac8komuh1vfudkk',
+                url: 'q3z1phtv1ez8p8gcrkd4g0pi1jwdk5gp7pscfnvwg21ixxmy8grx0y8d4uo4t4dm76w6haedsz4u8dalb5stoj7bwgl1hq1h8iww56bc9wsabm88mtdslpjk80g92migi88lvqa7k9aarfiw3t3ta2r6bzckf0w91cadbv8sa3adb83w8fq52az4xwfimef37fatqyj8rs2boyrm7qy0lb9uhtyj2974rh2pgtz445a5oqd7endiqdesr5uavhmjhqzjvvyuhou27rs0ma8s98m68xhb5h6ojwpxukn64xeclqlkvs7tz97ibcmiozhr',
+                username: 'x8ofhormwochi98vks8re2w0w79o207ntjpzaraeig1awe1x3w147rb6eqx4',
+                remoteHost: 'rvlajl82guqi5vsn8fq1z3gkzimtwg0s28fsc9b3jv1fmla1v01kxbnuzo0i3s3jfjbicyha4ebqmrrrct9hneu3bcmlho17jyf1k805fk9rgmqvucgs31vf157ykwj7xrqjn3ysbp6o6ab7eabx33h6kjqmmwbx',
+                remotePort: 5758712140,
+                directory: 'wda3vj3ev1u3u99v1mnopjdkfnsfri6yobwqtddg8ly7lutawlx2iy76irrorz6emsypiabnb3iw6vr2slz1gxhplp82kegu4hn4gv0i12p0k9q9slza7qk6gh742472q599opq4q7rre3kpk8vvoj3f1eq5udemli41bafasjj2d71icrw57xre3pdgat0rxlf7yfbup3t6v4ku4jvqk3i8e20512y8xb4rewt6vp9d5csois5tg2jvh2foo84j5rxuhgzms5faszcu42ctqyc510wgnohe8mqj4znoyl79r9d9kbd11kbn0m68fzta3ewycitb8nwh571drnssltyrgups4jtnf6cwc399zin112v5s9oi1qep70n7l3wrvh3ytfhuu5iijh64jfknmn6kiwpdsdbimh2jcf5t6izi0eijx2gvhlqurg4dq2d2uv9rhk1f8kkw1d7lta50h798i93girv53m02kt5ttu0u2qyohpn33lsy0ldk8rpa036opzwfhsxjhllxs1j6hv0p6s018tc7thh9fmvl9ijlwcz4rqkamv7ioz6ewjunsujjfsqkib05249q9l8bcny9csq8jcwel5xp2ijn06x5d6d2i527cw6n6yl6r41aatilhrc08b4281du6f93kb2tfcodxjyo89anv390m0fode4tjclt1gf1ci1a4sm4ppw9o7r47vuk8h7ro4vlj9re0arglwtkz38ikw22nb4zbfw4w93gd1wb33yqevzjohsp3ryx7h3pt5aut9gljnce97zqlcmpkqak3sqynqfjnpl2eeagkmy11vvkxvp4wimo6hk3eoxlvds0jfto0qlk2hpggeg4p3ogf1umlgmnubnxbkkseysmrx883f53etertiun8dspgf1dylg3cudjfgxlkmamx2aybbs050isnzlhihk6koau9q63jvr07nfjm2jz3croj92wahnrcfega99mn96zw7ear16t080dufz590ph7npj2e97a9ek',
+                fileSchema: 's04x49uhme62f6bhli2f39yntsdtzebdsds21ptsz4t91dcv4gr3cnzkrzq36udn2madf0oftdhmilkb970gukn00euy7e64t36hpu6i7y7n1eq9woamtfcs5e65kfjy95958u3rw8vllzogg1j77lf0x2ze0kgno5110tnjsueiw8osglmeigq9t37a5zpp31d50dkqtumjou27mzynltsz3rn2wj5g8xqat9hcyvahkopsj8k0l4dqmkhgzg9kmd4ppc0t1s1zh69bbsdsj8tw7ivy85o8cneh7ur37f5095vzuhyj0sg2w6bi70h4gd9vxuv3w6zxrkqkdu6b6cf952pxfivfua9ohrz3hruqo0f8g2g55ga3qmk1rb387e69fr8afm5bgrebygysfujgxviq9onxex4a6vqvgycy3qz4pv26pq1q8nvowgqve5b4t9ihzlqpjlu5gf9exple8696z4pycpj7fdumgjofa3hru3mscm9s5nyis3715zz99mc6etwjte15u7qxgjk2orgxfmlv8oc9uo7vfud1wvcwv1apt49lpi4hr6wxarhpd8vo925fya06trlrrbcxe2m3qg61w3d74rxqx1ktbevr47891cfexh4bw1n4d075orwg0fv2n28j29z6x9bihmd4iy60zmt0uw23dd9yznf7i2yjhp30ljlmq4dpo3obnyg3te3yhv9lw9hm5ch4wnhht07lmjpdtmxtaxawrq34we5xpqyfh6rpyarv0u5tycmb3v7ilhc3caw9u67sjmgj3144jbknmcib69jpjg28we0d7wxa88zde5yqg9l4elodvj5yy8d5pci32hsr4m66q7k704noi3kall4xz0imj2x9hyzc7d2poargpvd3n8d1lnrt6cq5um1wp2mppvbuflz3p7ti73ozn8dsbtptsxw13jjy4oudlm912t2us934by36kobqu4dla8bpn10qaf8yju0djpy2vqcyzjd9u8mklcfpvyyh8bpf',
+                proxyHost: 'iwywstubcfkq5byl38nxck2rfqwbydyq77emdkc6lv186k4ppikllk4egpl9',
+                proxyPort: 4589300814,
+                destination: '1q2mtpntxqczsrscdeuw0zh6r9pwnvtkqv4crf0k9s2s03uqmahme6ctaf4thya54pfqajkld4aq8li85wre5kakl7mlkns7eonw6jbbalsyxkrvbt8mm50ja48a8w3ox5sw07eost1jymbu1bzm5wcrhwfevcp7',
                 adapterStatus: 'INACTIVE',
-                softwareComponentName: '0nd7i67aia2eoel5pw4e7w8t8rv6i5219wqobw39dkam5pgs0ic7t14rbzofv3v1gn62l0rw4pjih4s688xfofnvim7xdp941s65lryxpn1yhjlc1lptusa9w4mzuqd3oaj34mdsqh9mql109uvrr2uzin2f9gm8',
-                responsibleUserAccountName: '0cppst9mg0glat96aoe7',
-                lastChangeUserAccount: 'jqcgd53kpkn2ndf5cu72',
+                softwareComponentName: 'iq0tnnsjmp6y2wvk6ii9nwpdiietzxth6dc4kyz3ki0eucnrcgw4i2ft6syejw84tremvf89h6agzw1b6icmj8xufyen9u2r210z0ltuch8wsaxz96wse0scdiyjnbvstk7ihbi5l2kme9nu9qbp8nyqi8edrtw5',
+                responsibleUserAccountName: 'taa9ch17tahntdq2unhu',
+                lastChangeUserAccount: 'saaea8b4uz4joy5xure1',
                 lastChangedAt: 'XXXXXXXX',
-                riInterfaceName: 'eab646mcxzk4har26e4wykbvi5ff3cte1dtphaz5nceczlc58uyapuv7gka0ztcd7qawvas2dev4w0yfzxv7gxtyaytggs53clj0vy8feqkqipsr2740zt4lrb6ec7y41tmg0fk0hnnunkvb476s7w89f2vkxh46',
-                riInterfaceNamespace: 'dt1pgrdsdm68o6kbb46jik7geg7538yt92n2favm4r4xua7mo4e9s5b6x7d5d2kccyw4uba5xtl5bkbanx8tp1ppuxaxd7y0gty02d0db4lef8i63xsvuf1hi8bsldq46gikopti3f07n7gd721wj4g9jriwwpzm',
+                riInterfaceName: 'v8mrre5zx3k9clg3q23i83dfuxwy0kzh82e5v2mqytyao6tqt9uhg8qe209vb5ts8vpgqba4cg21ufbfax6oyp54bxhcf1olc5yo9p1zmcuz5mfuwrb11qookxg1xa1tk4mdwco6s7bss2g764ncayeoruanbark',
+                riInterfaceNamespace: '21wesq1wh7czh7gqtyrpsxah40mijaxza9ba6o5y2muvbw24igyv780zs9p261est9memamg4n4x3ru1sc1q8byiv6hyuncxk7tyky6xnlru00rpc0yvtp3qpnl7l1oeu6h802dnfwpm1ha35qm3pc80ci1t7y0o',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for ChannelLastChangedAt has to be a timestamp value');
             });
     });
-    
 
-    test(`/REST:POST cci/channel`, () => 
+    test(`/REST:POST cci/channel - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/channel')
             .set('Accept', 'application/json')
-            .send({
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'b0tu8ftslojreezadpeub5si42pwxjgmj3hl66w5',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: 'tjd76c3ku64y3imilyaei6wc9h74hi4iydb056j29meh75m6uq',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'bieto1gc47fxyldld2xc',
-                party: 'odxwfzb3sba97flvu1anzb5lvrel3c47h1awzlsx6vnbijkq8ykexmtdan33nzmcags1czovpbscoo5vyhlaojwq108n7md7ym0ywzmgfl9elg2w3qvz2z6s1z3olakys9928nnm8rzvbdqtrwnaq7dwm9pelbun',
-                component: 'jkheee4iblgcxy117xvw7uq4cqt1tpd62u00b9uz89j3fdq09npyp1i5t7yj46g003w1rz05iq4xomlxdghtybtbov393dkhhwetmcf1et2zpu8mry5dhdcgvg5x567vkrj6h70x29yq5cm7kji0c4hz51wl7nax',
-                name: 'x0rmpd1l1o7oytgfm1nchb9u6dzhchdaj3x678l6fs66lx1t5jovfoi90371t5vbj468ezzsgou7q5z0hzbal1594bd8esyz54qsyuse11liavk31yg6aix1i74pdt7ml1ta2mwkwvmc5gvp2xlcqxk8igbupe8f',
-                flowHash: '93o0m0m9jyehz8i51jlenrgp9n2jzsqko1zyx5n5',
-                flowParty: 'jqxmov8k8rnie0aw1xulph34oeal5ug3ib2p5o8e33zhm70nyygbo7yefvkxlgqhqi9tfcy6rlccv292kqnldte37q156r17k7hq4ahihxuso0k1owcacf8yjbcq6ibn1mfe4vq8se212fevi4oodz6o7xrhp376',
-                flowReceiverParty: 'bbk6rarqdz2obmn00r79rfge99fsq1w3hej2qnitng48rrc25d2w6jllmunbp0txl5vtdy77jygu8z9on7dgyc1ltf4uyvij4539muiiyvfx1o2e2avag3vs6dh1eaquzuhgpusva9kk01eyogd2k0dey6mdp8yw',
-                flowComponent: 'ljgeuzytk6xcijlkqmb2rbsd1umzm2meldc2srtu2ftcg2jfmmtzh14nzli5h2ixkldbouw3ywsyxea61l7mfi5sy481zuasln9i573z5g5oj8rgwutoet3nydsx2t26536pi2ed9ycbds01z0cyj374vq5u00h2',
-                flowReceiverComponent: 't406gmv1qbg9laa56jkwwl643j5xzs80lkl0edpanwzesp7py7qoyupdrag20zlv98rxiaowhui7l6sms65lnnzjybggali455dt73cenzp4e5i2th9fmv5egygi73dxuwo15n81e2bfp49fqsnsjm4x32q20zhx',
-                flowInterfaceName: '754pzegnl2xxhkrazgoip6a564nvy90cupxoau3xworwd7q1kwb5ym8b2t75vumuhgmbkld14vuvwrma9ts71k48akbbdvsfej0zmb1j3goud2i4534cpiryensw9dhl8bbg6uh6fpaxcuk1vf5here4qsiamlzf',
-                flowInterfaceNamespace: 'byv7lf7682eqpxxr6zny20tg8z2szv05eg42bznro3t504u2punig9xc175rgibof0q14bco65iefntnzwp0fqrjcru8oxhg0wudkxy6u9dtwdokw9wt7ude2wsg4hnzf5ys2mfl9rm5mtkewzhiklxmdfc613ns',
-                version: 'emjkdmuq5sg2haw0o83o',
-                adapterType: '64ipefmh470tz92tmny6enesqug5vlgca4yddvf7qqni0erx6u6ragwcibet',
-                direction: 'RECEIVER',
-                transportProtocol: '0h2yhfopdwbccn1x2mdt2wmu7w8mx7mpne4dzmxej6n7zjxkujuby4nbjt81',
-                messageProtocol: 'wosr8l84lhgo2zu5n8hrxhdjtn7wap79daew6cw7fhk1noh7nszefrvs6hx0',
-                adapterEngineName: 'la6jjzafw90myh8kamgquqcp2b3lr04wjcupk4gxv1ni6jesyh8yp9pqaedk8pggalbcpihyz5d9cgka1cp8tzvnpjikjp18glr9s3zwhlkn4pszwv98cm5v7y2l934rv9p66r5uixwd1z8cy6qv81cqn5kqo6jn',
-                url: 'jbowa3ck1slw5w9te8axq0sj2qa5q586qxenz5x9wp3km64rdi87nu7nhzylam2uc77w9856dufgb14p5o2th4tah8y7opzbw4cdsrkzisux8lp48h0fm0u7ovegga3jc37grwzf1faesa3e0e6tgjhzz00qsos7vrxxculd9wcjey84p7qv6pmn5rcf2fuzgr7kebcz203oe35oxftq4j7sd9yfzsrzvt3lvgb6bl5w2blj39qrp4gfkfd5yi63vblu8g3n3n9xowpo0vjc7gqdph94t0a1ajbwrvmfqx4beq4qkv9qpc37zw60w09d',
-                username: 'n3xtn2uvcpxgfr7av49h0uf4ke25vkkm5egcein8w1ineoht5ogmsyh30h6m',
-                remoteHost: 'c7m4vgu1ch18nz6kdu2v7x2fivivtvrzoqwxb9cxxql62k3c7aohbjl3m8s6jpjyphq251gun828wzr96mgdea39sx7l69d2286uspz392tq6jz54890m4z00yud36ulu41fei76dwx0tlguj65f2a9c8hf32sfn',
-                remotePort: 3613789214,
-                directory: '5w3firryx7c8mafq2sajd8yhufj9qj5mjm3vaxv16gyvjkorjlepv677lisc9ms61uchp5rifzux66vrvjlu5o6rkw0891vmyyizqh06cgd29g7v6qgqmebkjds6rq9nokbyijhgc1i1mxwxjime0p4eykeg3jv33f3pxe4sx2w28z8j7haifxgy0it3o3gw90fos16orn3w9x6l9x9mftv045sdd9iy9z09p6tpfca4xt27kldwmp6gr3r262nzkj10gvn7ybt782gimpiqltk13t3nz55vzdhf67siy8bzvvjbwvab8l4poiammq1m31758ghzzdx0bo3eayhu6kl0z23qw0yvkm9ft61j832hiqvicucunik5ni74ixkrrd0sra4lx0bxqvnqui657bymshsrrnzbdi2w1d5c7relng265svm832umlanqgzioi36tlxs2h50qhr5yudr0p2mmkabcykgoocc52afdnv3o1jcjsjuo1nqbw6re767cil3f6yhujgk84ykqfzau9ma7bvrn7s8d03q6w81rp0fdhst3lp1j7msqlalxsc5c8zu3exiproydw6b87nicox3nvacjv6wyhl01rtxqfw54ijartqlxgwbaql20vjptumu0u0r1d4iom4e7vik8o3heai47cydtk323kngt26pcz2quw26mxzewj0f580k3q94pxdmdek83vioczsiull2ewk8dadzbjggxytugwis7yd461eqt8m4bdpk8q65c5h1f3j3k9g9hxuwyb6z5as4ac9itpvds4lm72tucqqj48n77y2ofl401qjh0nbogzd79j6i3vdyfq8eax2k3yiq291tfi7lrvl5jo6a2uhwpztb87k6typzse2ytv2md3fz6zklii7leb4hq94mfmo1zfqlfzu0rl68cpemomwlbndye9mf9hkranqudxei8dww0zwz5zfma9rij66bkn4eunehckl8cpc1h2hx7sg068aui3kv7yys64xmozft',
-                fileSchema: '63y15xorgp70b8c4j8swh2c579qge256wixgfkujui2ma79ngufnb5gfkxtu6un56ghuv1hnqfmdyhehj1fazvtxpq5nqk13tmr61gcebwxikplnacum2mwyt5j5u2ndobbbghqn099p0olv6rxckt5vel0jvrg7gmbh2nd3hoe6odkb87i9v2h25fj0e94b6wwd7ec3k3nnbq36ee5yniqyk4xegvf2vulse4gmne22zw69gbfb8b50z6y3mm5kvtp179uc6rohlqp0fi8dhipsvspjkwb9tg6ticzhgt7spf771hjaff775gqm30eti16dd9vvb3m9214drrqpknyr6f4l6m7ks53bcfq3f5pvvf7fddjtw4fc34fue1uutskqzopkmnizvtce3e2ioz401d5k1npa24qeq1bhpj9pme7bvri0k5aifs8upsl6aiu5dd0vu45k9e2cfq4bdkrxj5bq1rqjf06trkowqkdk5p6llbsb6135k5uwgbqaeur7kvyjdvy03p3k3e3f4s3tpscpacf0oxfsowzbouepd2baoe120mkz7jmnx6kscotkmxgiu2o3nvs5aym0c522jp96i44qdh5zok56dl1dirvyajy7sr79ja7ygwe2f5ybpd5u3jxfz9wko47mvsyy6op1xjss0fe9g1uxtyxmxd9wehmu2ei1xu5f9wd0hn22mic81hdgqrmznudsavc788632awcqljyirv38wekannp2snzo6ek9h6xdep9jc8hqrn9ti1u5hmd45xzzwtdb5r4tt9s1gdr4ombdq3wp4zjizjhdmepvbl2mltl13go0yw8u7go7rfqak5gulzwy3ag5h7vav83uqtqe05ojrmt2oh32gd39jeigmtno7rvq8q2wenx3lt4g9jrfd9awywxrsy3ilb1pby19h3k1aartjfbziits0kqpcg4ao79ytgx1cnf0exd85bsb67ks6pitnr2quwnkfzld2l0s363jf3aia0bjjiq7tv5',
-                proxyHost: 'eadh5xvzznvbfafxxtos95i8dlgqhqm4j1j5zkhcbveqxilevalimczfcytf',
-                proxyPort: 5746369482,
-                destination: 'bdvhb2qqegj7ei1qzr2fsp2kqw5d15uj09oe5dzfnsb12zt7kehab2ul2jbqzms34njg4sepbl4gf39kw7pchynewfacooiyqgpqdd3mvns3nivnzz5r9iu0ixdu4rmpengfuzy4l8ggky3sh1d32d672yxrbf7a',
-                adapterStatus: 'INACTIVE',
-                softwareComponentName: 'qb7sria30y071nu663bvn3u872hlarm3yy8teqtchwwucw9au3hddjcuxu2sfizkgyr8npzzehixoovklw6pduod203he4ul2cs4v7ei4176tjsnnsleodspr6b08x3nve4y4gh13rb6bvrdr3nw6xyfzaddfjct',
-                responsibleUserAccountName: 'oeqynqgwtsyex3itibrz',
-                lastChangeUserAccount: '4biiwvlj9obk4i81d8pl',
-                lastChangedAt: '2020-11-06 01:13:12',
-                riInterfaceName: 'pmcom7u8egqtalbob0baktljxtzdsgwm9u7j5vkd9btz1boogkr960oduqnkaw2l5t04qh1yg0janni63ybbqjlc16i39h4nvg8i0z2ojt1x8a5ys87iw441n2dom88jy3f7i1zcfj9y8u72bbbu0iai7g7y3f6e',
-                riInterfaceNamespace: 'kxgzqt3pgmd16r5b2ou7cdvqvhgkc1gucl4f855gb4u8q41k57ztmbvjftc5srk0mh9ax6y7m6f91fqypvy4f78nb10iukwfbxnszfqpnj365yv6f84w26su70yg7vwoj8xkz4toh1wvf7q9bh8512rgzgdgb0rd',
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET cci/channels/paginate`, () => 
+    test(`/REST:GET cci/channels/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/channels/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET cci/channel - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '222a6996-0c2c-41c8-9c24-c887e4cdccf7'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/channel`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/channel')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '594fd1d2-4836-4f2c-a615-cb57de277431'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '594fd1d2-4836-4f2c-a615-cb57de277431'));
-    });
-
-    test(`/REST:GET cci/channel/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/channel/3f8b5b77-374f-4b5e-8243-39a8d198c0c1')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/channel/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/channel/594fd1d2-4836-4f2c-a615-cb57de277431')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '594fd1d2-4836-4f2c-a615-cb57de277431'));
-    });
-
-    test(`/REST:GET cci/channels`, () => 
+    test(`/REST:GET cci/channels`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/channels')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT cci/channel - Got 404 Not Found`, () => 
+    test(`/REST:GET cci/channel - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .put('/cci/channel')
+            .get('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '7be6c82f-c120-498b-800f-7e55037e674b',
-                hash: 'sk8m4rxttygebbc9sakuctmiay7e0kwc9wtmrtl9',
-                tenantId: '52996faa-f079-4c73-bcab-583b377edb6e',
-                tenantCode: 'q78f5wm4a1mx2mjzcncwi183htzh29ovsdfjn4sjssqwcjo6db',
-                systemId: 'e0d227fa-d684-423a-9dbf-c09d894be919',
-                systemName: '3l7q2d1l87wju41op7pv',
-                party: '4ntku9vaornq2wqgy8gel9f4qo4k1h6l9an4xmmcjtb7ziasmhj00j6qyhgc794848ncltzt25e6e5vn7rcp5hp6a9sk5ep5opor8lmg239795cnapwcanld2kaufd3vi6bw5tgyj5n0cpdp95phn0csvxgxqir8',
-                component: 'fzwwwh59oobz23n5skvua5pnz99jgk4e02zal882smwgtrk7deh89b671imlrst4eqlwsrkkejh793eso8yhk61fd5k13b8h6urni4k9tipxnh05psac06kbh2dugsx25lqlgvlcj08dbokv9wg2w65btut5v7hr',
-                name: 'oo9ynivplxo3ab8fdarvxobrmrcis1e0mdjznnzk14ke4z1e15uhr37fo7kgf510c59os7r0zpc1x6in5iafdfithzbq8ulhnotbf8fvoo6f9zzemfhccakbu4sqm3ulviqx1v6xd9y4o4umuk741o646imchf5y',
-                flowHash: '7004z6fqsrii5ietcbsetzsukuind5knac0tf606',
-                flowParty: '5criu94p533gymtc9n1641aodp1bsvuwuw3sbr9bnye3btx41pb4a7c8magj5oi6f05zt321wetmjcvw2v3jcsc9v6u8d7ojgc9e38geur0bz74gojet041xpd168tzexxsyyp42jj95dhgxp4bl61wyaz5u1u9k',
-                flowReceiverParty: 'peqwk7z8qg7l4cyegiwqpebhtzfhtgoqiot3f7kl0mr1t4q5vnznkauw1o09bi0yhepy2pyy276hd8to2sawkkfyfs3lilmxsqzgnrmnrkz3kb1hqw2aon9hi8mohpgyzykgf6wd1qomdcwoiu2dh0impu9979y9',
-                flowComponent: 'zi1ibayq5b09fb6cwyyo4t7r0ei8mffzmcb4ynw9exjjgnf5lnieikzskl8e2g34h5gy1nvlowss5gap5g3m6le4k6hk19xwas9wrblzcf425doum101ya9v3u1t8ux6y5i3ip1dtg0eghdlbjxx6c9544fuebqc',
-                flowReceiverComponent: '51i7wgh7aw2xvmjaqw7ha2wb3xe83b3zb6j6ll9yj3vkxnegehp9q7l04kp2frye4s6t7y4c24c2o7rbvf6qf9cmjax18ehbcjrjhz1cxsddnu96l4np6yflg9ganua6wfonh8xssdmg7p4u09ftm3mie2k8mzcz',
-                flowInterfaceName: 'd24cf7tfj2t9k8uu2f3cipdlcj2a8x95184w42jge77g196rnuktx1s9je4c25xzoghqsfhths4hqgi45w7g1ova1z19vrffncdnilmd243igl4esurwuapdcq682xpd5peuq56uj7d3498cjwl7wod0vskvjwiv',
-                flowInterfaceNamespace: '9sr3rr39gbms0sc2dxt2jczdsz8vypvheydd7ar6zrhz2d8tfc37drm45xkcdwzcx5gpho9gpdt70nqgcswim7wwrk31e0kzqma08jhkys5jr3q74zsn3qwxvvw980oyo52iq8oxjqn7nz4d0vkp0t9x3exlkp0n',
-                version: 'pcd0msytl4pg5jdw57jp',
-                adapterType: '3kmuwsg2gkbyleymih1bfsu7fjt84exwajm7s250z27s0lapr5zzv2ypiyiv',
-                direction: 'SENDER',
-                transportProtocol: 'zmmafq3mydiciqque99z2xacnb4rfmrkzipnthtmwud1fnaijkuomt7gzahx',
-                messageProtocol: 'rqcv0zr4n7vmfdb5feiy66lb108a7tizhknko4512vxgkgk3okf2xunzlo59',
-                adapterEngineName: 'tp76ley052xb6qo1g0vomdcqo410cmf71sg5yukbz40hnojyyzn0qxithlf7srca6okjzyokfgkcj4s6zo30acio9azypp7cz4sb71vdxl978hmj9gdf3i95oh5ndrcd734rqhlqosky0gevfq0m16feozg7utu6',
-                url: 'zf9hhirmi6y8qcwslsms5f8t3aukkz0g6yxsz8j9vdgth0tay26il0dnq0cimj7num9g12spcg40o8ge8hgmkntrjvdp1qzb35a13tl9ovtgtjn4oduzjwtq44ruj927t8ipc2vvqujwl0d8r8v0m4l4mteqjq616rdwswuxidgunze5hqt20apwyp5aoijjsw8rzuzbkqnrik1ecwn4qzwu8f7h8bvib09qw7okhig3gy0gy4mc8dorbk28oym5edmckzq8d0z17isku7i1yyaumf2f81ld8gtagqos1c6zgo0qe63bvd12rksl7jn8',
-                username: 'x1funsplgw8dyjq7m5eoee9n706bov4qmuh1d42ainbmzkbbgeuu36beml9p',
-                remoteHost: 'corn0hwsus90pfg9wzdr3h2i36jgvysckcf2ctxlg1j91zvl6ki9uzoieww3a30lpcsqnneykw8ylhbj8i5qycfafzkb3rme6rtkfjl7gjcmlxlgohw0k9bc941n4unwuqlx84ka8tef5c3x34p8cf0150q10tg2',
-                remotePort: 6291800952,
-                directory: 'tsd4s9t4se3xyl939on3kctpqpttxbvm1mjcbdh4777ef9z2f70s1cioel10zdckt746vxpivxpezx3fc496pe14w49iapmwgpjxmnc8joirk7oocc7l8vt8ph957ppg5cei7kjmsuy3ufdfmcl9bxoqdu8nm337369he64dpirs7mix4da3lxtm9vvcgdtgd6vute84z7plsgq0y6q5zg3fqdadykjeusdjqktpj4t8b4s65xzsuf45vogdqmewkn7iel76sulbgseauif0rwleik7r6os61ojiavxmqc66pxb76i7xzqmwzt81e439kgqdtphnhk6qnyidp0uxpnqjqmxbb8pgs40fxexzo1b8osdopox8499fja6v1wvgdgoyqpalt26zub4b0957m71n1odf087eyjs4s1zmkitzafq5cohv0jv93w5bd85biu8em7tw1839xniwf9q0ny2290fokisuuc8h9xhsd2rcxcw937y6f3pmg9g8lyqko7rbw1ocl5xsg10qpqbvkatvb8jdk7331wb6x9qyz2fc0vbv7feirkbyej37epc0r3innhiz883rm4vhyi7q9ssayocyklpl1wz4p6f6tevh0nlhl0kp0p66qersibrtgplqd7ldiqdd0y0y3cjajqwja8qx3kak29n4zfo1zl399puuqcdko9jhsohepyasj2ht0vx54ac69lrlj818dzx69m8n5elh1u96m6bh7yx06t92aka9gact35xf6oqxgoffatewh885kryvdphljpbukzmiqnr4hel1yquime7otgbi0qxtmi04cknmnvvjyjprb5gucpk732kuk1qi61zt3eurx71s6e0kraa75acqd2dzqe1guv8xpgktwp77zv438wf4kwawgtly8jdow37z5ay8mhy13rid69hbhxf34ahk7bzex2kdri62q1lup4fofawhra5qmlsm5sr8a2tnvm1estdcr6qn9qxrhv5phc0zkw8ckifqx5vmrpwb',
-                fileSchema: 'gshoo9pbjcz19p6dqz8sctknlpheapba66l0087oa7rb8x8d8p0w2hngi2dq1rtng6dborqd633jxwvdk6yzkmrhmm7mja3ayys4w9of0x1shds7m400543i8j5e14eeer9tc2ndkh4b6ddy6kaah1pf0xxrimonaunl6asd89bia7l5wdmsxecpnybix50r7pandckz8lzm6ljca7npjd24fpxby5jdq1sq142rxintu3xsoypecccm711gun4il623yq8mnvvzn2j0fr44vqzeznm26emh19p403pvy1l5bl7bi73zl7kcbw2skiuctyjay4tfh6d95dn7i6rjvncczzy4atpui7sfla17cculsk6rpoz5nomsui7s4eucpjhtj84oadwjugqn91y4a5l3uhgvaxh8mivoxxntcdmxksvloq56kkuqfnllfs3fixzdk1kaqayvl3y85wsvo5lnhk8eh8z9igh2x7dd14rxmqk9elltxtqrl3a6godoj85xhk5prrmy8wl1lekw477q3g13b3ap6zk595kqmxzhvvwpbfmu1w5boe763g9u5n7oz1p62xixlodm5qw93a2eax54y18o50bgglaqivcryj5zx46w8fpa75ptxy8rker53lu3aig893xzzr6na0v4w2x7n59o445wkjesxqmyyufn9vtc40mgnyfpftvcad2ttb0u7iy3c4qs80wxrwmz7my9g8puixskumaefywt9nw7jyh28axiby0mfp3eu0c1621iuefn520x2zxi595pj2egdf8o8int862rxzwkjq30mye1rm9c5tp2f37tqs1ri0yzul6tzm01ml8otuwc93ev1t2yq0rsv3t3gvaap399chcty9uduue2fxl7r2r91s5rxcu2i3pwo6udm3cpxm02cfj4joci2e79g1jb02xc1oft4v01g6mkx5t7kgvbx32ugkly55n3auyv6yyzy1cuctl5k92f7pafw6o7gzuku1l4zey0i6g6xp9i',
-                proxyHost: 'f3jd0fh17foasblv38ka25xzkkeeb6ox68r3x4vudu66hfqx6pnapmcx4359',
-                proxyPort: 8741824102,
-                destination: 'bbbstlkusfnvhbxh1wx1k6v53wfl2o8e0nmdcutlim3od5rv2putyv08jhv48hs4d9nb9o1iy31khd03by3ko465l0n75bizr34lyksifi5giyiwdbjm14kl3z19vf0g0dazimke2kweessa7wsedzjq1pzrm6l6',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'xq9fuona4gew4rnbnejlav56ci8rgbklww4spqaabvrfhsb2gsloeu5bbnr0nahg8asrfdhsacvm1c2ixa9plynevn57w0mlvow1pvu5r0mb6289zt7h3s0fqacj44s6obaxr8jhsdk3lomgt25f7g6dlf2g5pth',
-                responsibleUserAccountName: 'kqn44btsbgs71gtqeziu',
-                lastChangeUserAccount: 'fqokq951ygk50kx6ax9u',
-                lastChangedAt: '2020-11-05 14:32:04',
-                riInterfaceName: 'dgcqayvmnl6tix3u5oet67y2lpfhm0ck5xon14q7hysetpxqwu6nymdvxw1msup3air6vc0kuzbc19nlafg2v294iq85sgl3305w37296uvuh8guft496shuj7vpskoqzdel9v50269dbbjartnvi2d9onzxvgal',
-                riInterfaceNamespace: 'lz6cbvlkg5ipn9q7syy4jwqedwbqdhm35inw8hf44dxfmbc3kni5g71dqts7xzobd2ufcq5a5i8yfie41g83catg8j1qt31kdjoe2213yezkc6y1xdhy2fa0rp2niin5qi7tt6vzmc8euubhnem8kbxialc89fjw',
+                query:
+                {
+                    where:
+                    {
+                        id: 'd9d55145-b667-4eb4-897f-9081bb4d7247'
+                    }
+                }
             })
             .expect(404);
     });
 
-    test(`/REST:PUT cci/channel`, () => 
+    test(`/REST:POST cci/channel`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                hash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                systemName: '4iyw9pwsdxcmgcu744j2',
+                party: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                component: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                version: '4iyw9pwsdxcmgcu744j2',
+                adapterType: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                direction: 'RECEIVER',
+                transportProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                messageProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                adapterEngineName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                url: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tg',
+                username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                remoteHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                remotePort: 1667821060,
+                directory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                fileSchema: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                proxyHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                proxyPort: 2562151326,
+                destination: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                adapterStatus: 'ACTIVE',
+                softwareComponentName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                responsibleUserAccountName: '4iyw9pwsdxcmgcu744j2',
+                lastChangeUserAccount: '4iyw9pwsdxcmgcu744j2',
+                lastChangedAt: '2021-05-23 11:11:58',
+                riInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                riInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET cci/channel`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET cci/channel/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/channel/95c039e5-5ade-4214-888c-4e4465d035b9')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET cci/channel/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/channel/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT cci/channel - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/cci/channel')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                hash: 'xjtc6z7y4ehnq3ja8752q81bqgkxx32h8n8kw4e5',
-                tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                tenantCode: '911vmi8xx0lvttt9ngj0npxlqnf5vkpbn1xh0knpmggpn68owr',
-                systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                systemName: 'igdw8b05zgbad75c3xxz',
-                party: 'hf1v29a24dmeidc62phzldzx3jbsn68ls4haoqmyi9xbnxvst48vkku0j8mle9zx2kmq6llchjtwzab5crovlk0wsrvfy6u7wga3o845k6cucwowc1n8r0gyu3674xm6qh8qvqlgw35i2zvfazr65e41joickzmt',
-                component: 'hirke4ag84fxzrgw9hmed1t4dgy8mwjzki41ton6nhaicdu9almjz1bjfurmemwm5dufhg15q4ch0kidhn7tiawfdbu4t46nuies42akdguxes3vntg6w0sbr3vg8hlv6ho1bjzkhgemw3d14aj1dhtwmlh0a31l',
-                name: 'znipbc554bosz6zzmxxqrbcozxvhgcnzworkm5lllmnp6m6wadhmtutl1xr8rvpniffvnawzjos4xcyd7e28gmvp3psxxoaclzr4cxiv05nsw3o6wqg6g3qfw5dyyjlirl3r7kq9qlwx1w8i9tyihf0azg0ngkai',
-                flowHash: 'jvzui30fc5350sl7rbizfgef47mt5myqiitcq89y',
-                flowParty: 'fjmdg0rndjz9t55e7uufcmytaah5toiwubm1lbmllgmmj3km3urs8tldlw3a1xmay5tl2lmldckdifu8hf6wheh72ji164ee53vyuvft2h3w7ovqd2p677sy4cazr4bt1osccs6timu8m4xdhqr0jt0nt0eejsxo',
-                flowReceiverParty: '9jp0m4nz22mtg83fgpl2yga85rdw9itd03stekkccv6okqtqf1q1grymoowydfxkm0hljynn7rk13g3lnqi3p2m3xc1debb4ih7ted82op4kdp5zdxxjqzha813t49g5x096ca98y7k1qmtdjt4y853bk19z9cyc',
-                flowComponent: 'kti6sbdtewsbtsyrkhgqonh56bc7ph8gi74rwqix8uwjn1rhk2ullt62y16f9jtoz01pht18nmr9hjp4b8pcdrvr2z772c6e8zpydynmkeybz28fdl9ljiw8ukwm2f5axc64b1oibqmbbdudw59q41l3nyhmwvye',
-                flowReceiverComponent: 'qh5q6hsrct21x5l3p9vjj9agy7lw307y1v4wyjzy4pyurhhglfha24de1h6xeio4w97j04paylpfhlt9c13e9mnta0m5f6gfkk2lkwht0fxebe7hdxwto9n2om35lezn7fi6ys7q7yir3k2hduozplnowp73qfri',
-                flowInterfaceName: '8ze12oplzrw1qv6lqylzt86gca840elj3cmr7g4eqwhq668k6s13bzk39gsc2nu4vx57j0b1uhyeeyq8mzr0huc16mflja8mtqahitn2qebzhje21pokfh2qn88hd0rvpe3vj53nd5zdlqkkp8md4bct5gd5at7f',
-                flowInterfaceNamespace: 'jiu5m0ghyrt5ck8lcv2n11eztmy11uv4vxyj1vcpzd75gr9np6jlgr2l6m80tvums0f0ba0nn2q0fyg8zcvuxsx8x43xi7lvxtki8g01zbb7a9ujsz2nii9tkvqxg2uy4sywe5jebxqbjzxlnwo1q8lfvdt1jt0s',
-                version: 'bgoenrun6ds7d670sjmv',
-                adapterType: '9gdvo1uzg8adms0gw6z6hqji1ztbzk9r8dl8tz4a389oncke2k2z02w5mdzp',
-                direction: 'RECEIVER',
-                transportProtocol: '5s8u6lmku8zfe29j2xahjrphexlo488gzp8k8yuqol7piw2ymxhmjgjntxbe',
-                messageProtocol: 'a6nrfb380o1vq1g5p69dyy1v5fi59hvmkxf9b1jtyzew9fbj6pkpy8getkly',
-                adapterEngineName: 'o6u0stcw5a07rhccpt1w0u9awmkldqbrkx12a405w1eely3zp9vs0wylx4k29y9r5us0lyx0e2cle6gf909tqhnnihie7gbvybxf2pxdf1vtn0mivpvqks94pgpm8wgom22hucaj8xm4ywrinrqlnomjhgx9a0sy',
-                url: '34ud1b04ssikdijmmh0flnn44q02jrmxigyu0bwwoikj5brifq3xaj1zu4o131yp4l0xts6xdsa9oem00g678ob4n4u6l3uq3stvep6gwy9jqe2v8t8132x6dkasyupgb6rbvinuflbo2bm4018aecro5tg8vyidoq2znus5facv4wn19u1ey3wtanwn2sqrjzspbxm3hqati1tjr0dkl3g3epw8kbffpdc1wb440dniicjf2a9m19oi0ml7e7ytmiov0aq5aajga7thw8v8d6ud9te0hvitcepx3i2mdvehoj0zuurcu6i8m98i3tt9',
-                username: 'l51v0na5snkdlppq8n3y6a8rojkoh68d4s3o99p8l9ildwvr2ba1i6v3j8gi',
-                remoteHost: '31dp6fnywa1lbcvyzukq229571qugurmis8f554jafftx2mey3j6svvuj564v7vbi6emzk7gr2bskdv8lqqez9ixcf1pm1qkfkqs57qky9jlrp7f9v8d2fjy9dxk8uf0yy20xrdzhbr0y8b0x9hxh9rilnt7yfwt',
-                remotePort: 5530867513,
-                directory: 'yi3u944aig69h91esjjmuxzgk5b4goscc65dp79d8ubfwo6j1o6ittnkrisa4yfqfj2r4drvkec099sfecm4obn7twk0iasm1v4meejvccohmlw805z1bonc4iyp835d4piceje7vkd9oog41xpc1te7pvqrmsaizwghr79omx6ibp9i19ho0ms5s5yde6ob0h5l0yqzh9w5ifrn6dedcp5kk0td2id0p3yiv9ftwqnedx2dc6n242wz3p6alhd8vc62hvaj08yos2ny7zp8pcek2g89gjv2b5649xqmzuj89mwck37ov9o1b5fdcno08d7kag9r3midxtlicyeg2yo3rb69szw3e8079e3e0j71fnw2e9d6383g27b2e9fssl8p6ygalmf9lgr85uvln6nvsh1vu5dblgklxmk567nigh80atsdgzp2tsudx7w5tnhli59wp2k7rznchlcobefvndncog6fg6vgdsr7wa6x60h27zfj9ybehgpuubrddqxvjic2c7myjyrqwckffeipkx7e1j9mgd50deslpxp69s24mz52d45h4ax8uqgceaewla6gcpi45aqt54wc81dszjnxchbf9pdfsdm2uj9hq0lqa67d8hziebqo95imyrvzfl7tplpwveqh83qeupj4vmrtx6bj0t5hn9eo6qbzop85x5fxzex33ohdinkvj1ejlru0t88kur6gemlmwaa4wn1ocr6a8l8gmj4t6gd5q4g1jq1qpvf4k54vopz89gi5uqv1l4hzbl1368afebzxe02z1pfgai07eizclghdk7pydfuesvr729q5h53f1qw6xhyq5m3r6iuyomu7ca9niw96fsxmpc7dfprhae8dypsl1xvxyjy80k95b2xr1cxkma07qa5ny0f357799yg7s2lmx26j7r4hfsv568o8tbphxhbz0gvrsnikv94pfjuw14n8cksku1cgny1h4ogc0ej4we0urkmqhc8srah25v07cvcc3dsqt7afzb91',
-                fileSchema: 'ze9mcqvq6t7gtp5ckue7goo0zwszldkw3y96qq7c3m0d59x1iyokrnxburb2wsrm99nmqg0cqpb8tlhr8ls6k33ns5ugue2abl61xb5tetetk32ycygwnq8st0s115myso2mbw6h2gzls1q7ffyy2ikmgz0mpirlzl2ojh6z1t8fi9p46z104eb61l50gl73v3v5gxnoprer8s7ru3emjdo2awuv0mv98p98dj0x56r48v1pvk5l0wzbxwx60rncq4f9o4cb63n5bz8chhvv85hepv9s8uko45ap40hf9j84xe4sy51oc8q2dk2jwt831wm3lallbk529cldkyu7xwmj7yp064ogj7d9zcevyc94gm4jp3ulu1v7loqz9z8cyy92b0m1izf7ria8jyje8pviecmrqlbtf77ps9ytyvnu3ynuo6dodm9ssxmh5hybsp62tl412vovl1ioznrd75zevu2155lbntsyup0rnjcgf4ll3265nqh73q0q6qtbogl8cmr6g752ghvex1sag4hk4q0utyw6sn4emm05gj3tieqt2ak1cfytfisehj04op5duxhblpv6wpv3q4b29qxegh7rglycvz813gb8v9s7660gdg8ur3t5u1dnlohlwtx0uy3cn0ijuqny92rickx6rcbl1a7tkycnzqp9xgm0fygjcbusr636lu57tfzpse0a7lyo03xea8tr6u4zkfala0hc48nmt3nr8elhcd1fthq2uibx630d64b59jkhe5i8h4tzkxvvmdwkn7430z6b0mibl98fqrufkse2b42zn7j7ig49couflfsulyzm65poillaffts464cncl8thv08i6u69dpdigs5b4qkiwo5w6r6n1y6bnhlqzl6yevkrajc3d0nrg7b1gevut3toghyde855ykrre2c6at296uohp4hffom36cxpx7yvkaz5e4g36bu4yq53tzk9bbjww3vbx959sa4re20tmj5no1ox84nnhl7dra6ouneln8',
-                proxyHost: '2vbm5hy7xqg2xghzvnyqrjltheal3sqbys2z4e0ry6qx22rfvd0kbdrcylql',
-                proxyPort: 2264446378,
-                destination: 'ezrrrrfmi2whc9xeozlynynx3dmcbvhe6mvebxixsm29juq07nl8nnqoe20py4m6h0k88uaq1jh4imvuin04q2g7vj7th7bs4gowy2mvjanqz30r866pmgvijrchph8tdrmwm4n5mdlivzt1qx0nvxolxm9gppip',
-                adapterStatus: 'ACTIVE',
-                softwareComponentName: 'rbhkt3yzfxsrims4n7jq5s0udw2t85b7cy22abkvutlrgs2gj0hyyt37ze3xjy1n2c2aaiwok0wyw8jqibl0itgg3fn6lt29byexdlh1m6icrmhj94c0n6mpp6d6ps26hj3lg196d7ao8kduwrwps297pg1xdis6',
-                responsibleUserAccountName: 'qor8jkd52e993cuan1rp',
-                lastChangeUserAccount: '9x2ug8mepvc98ohi068h',
-                lastChangedAt: '2020-11-06 03:09:24',
-                riInterfaceName: 'uethmtgc3fqv68s1jm4j3b6iqh94vk2havt36d9tawktipkcicz20i10h1e858e5k07hcvsos5cgmtlpc0aii3vsuhm1icpl0d738ynhyf740i8v0aw1cs240jyb1qgt0ioh81lbwsaj2of3bet3qdizas8tphn8',
-                riInterfaceNamespace: 'dx5fx4yjmtenqgmfxox5fk50qdkzmqv4rhqg6qdkldzgppdeb3wyfy0exhe8159pu0tr4zfr328ax1sv5lvrgt13ded0bei2ha15xzhwg3fw507vqgmp4karlsl9agj09qv0of6xb8lzhuldd131koxo20dbh5rh',
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                hash: '12v8rbexch6iemni95gavle8lc44pkescnln7a3o',
+                tenantId: 'be097f1b-71d1-4e1b-8c58-473271bff23a',
+                tenantCode: '0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281z',
+                systemId: 'bdf096b0-633a-4fa0-b0f9-065c35331eb3',
+                systemName: 'v4ajo1l62460waru7gxt',
+                party: 'obxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoa',
+                component: 'kraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelg',
+                name: 'ewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4a',
+                flowHash: 'zd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jn',
+                flowParty: 'unagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7c',
+                flowReceiverParty: 'igf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo',
+                flowComponent: '95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vn',
+                flowReceiverComponent: 'u51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g',
+                flowInterfaceName: '3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4',
+                flowInterfaceNamespace: 'a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff',
+                version: '9yo7uxtsg8w34a3f7ecw',
+                adapterType: 'c6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh',
+                direction: 'SENDER',
+                transportProtocol: '2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1gl',
+                messageProtocol: 'b0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9',
+                adapterEngineName: 'sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzdntq2dwpfe69m3t43mgjqiqozv9',
+                url: '88o5uvrvzar1sn5k5inohd66avgziqwkfrh5yokp5zfcokdax2wvhrolweqcbr4523r7pxmgq1lpka4smtlwwoy2z1yp7i4ky5d7hwje8mjrpcsxyqxcafwoiphu9onf67bj10ih0r2czpwg5xku796d23v2fei7jhepble3wu4exl1x0zul5p0qv2ahsrg3i6x7r6oxhxu0ox436wmc6e90hg1qzprjqegqzvxybflf53k64rl60ixc3yoyaq4b5dsnppzhh0xbxsyi61qmqd8xwa7ma0do4vxf1z4oqahtt2gnbyg2gqc383b9j7j5',
+                username: '8ilxh0o635ynbj3p1314z4ruc5zxlgdcoh4hsr8rzap39slxzj92i3nx18hn',
+                remoteHost: '9hbt8tv3vuko4uxvvr8x2yp6qei7j14xbrti9oc9y8vofpxqlihxol63jjd28cnmb26u3cr1n1wau1fehl2jqe2kq7kddrcscxpi1v8fkk0y7wdzv44cgydt008h03qs6v1s3v441yuxarbxog66bxf6rzih1co0',
+                remotePort: 4480558930,
+                directory: 'zrwmjkki9n0xafrh2tts2ar26nvhfkoolce3bf4nexrel1vcoekekzvv1jjhs9u4hfsdddm8a39ppv7xyaqfei961o369koum4imkc1rwsnb9udmb00415h2uwz7a70e309ux0etr9w04q0qhgr1q7xyavsxfmvtbul7chommvhfzwfi9lvwdsaqvbzknq6maqnsq25wy0mfgd0f2k115ic61q8pv27rolnkrburd6bu4lqfhbti9hdp863ipefk7u4y3r9eq1g5v533zqn2d3nckwn48lxkgpbbhemaoidurn08vcel26a4aarh150mtkezyia1iv9wz3jaxq3p8k3gk777c3pip5oa2t18jfxy91m5yjzzub21i7rudhhrx9h6mdk15q3b1xl8o6isub1nvd2sjanjdxnzy6w5xf0mslm3oo200c2burdu2hzb86dv8bz89y203r4lz15ox4syb1otjzbxr9rl5ys1tbh1sm9qjea15x7pg5p7hciz7rlqb8vxznizh7s4opar59gc6lpgvr297siy3265w1v2vtn6kwoe948o67j371bj5umen4uem0vfq56fqgfuedaosd98bn5sgja46113tk4uunvynd3frv6jzguefgic7mf1litwap9qwrwqkhf6brghmg60gp852jo45q9rtqs91wrs9hices2f07iqddtgfm4d1n1x8rxot6mq4z51hblu578t7n0ufrm2480vd51tl3vld5avxhioook57742o1sx4qzxwx5cxgh5o7wcw9m2ove6nku7nm5lgfh3eakk1auiq0xkhtklhp71tkkh6adt4aahkksvs7guhp70srcvzkkmlu8ykwen9458cyet0f5mddj2aukgrx8hyqhqd6qlprxssxoowdr7mqpb8uqmrnfh8us571ankn4ia4nw80fzvzrtg8auyirunqjrpm241k2gozmljs9ngt8aw4owofccs4nqyyx5hoj1bx9puuwxqlb2dr41buy2whe5',
+                fileSchema: '9op1lzvhmsuvw2qefw8hvrad1pqrngmyos6r678dbgjooxjv7k37xxwapq77ouufx9rhbvlmw3qs1213eaoo19xvstcefqfyiyro60vfc347tdhmpkgmuvs0s2rl2rw8h8fvenog3akipxip0rxxhpi79xo4b1v0p7xpb8elonc2bm95z6lnhcqmbxg0amibbxqwgnmp6q8bnx1ozk5a7m4c8gq503b9r5iq53ybl21qjlmh9asgem85h5fqh8oqtjwqq5px3u2mdixhehurhjmb3fva1h8d3s8x3w8s0mtu4oqy8uyysznxmejjnj57ddyg32gvyhj10hwbp851iq0en7l2evkzf3dwnxp36xbzjhqeppba22k5ep4cw2hj1c03vulkw53zloynmuf40k0jzm03ol2gs28fof5brn295ev00pl5fpr16i5bty3qgxalocuiqydbdyimnzdg5w4q9c9z4letkq0aezvf8nozo8eeh4a265kk8j9xnwh192mw9bano05b3r30fxcdkvsx0fnye6lqsyc5s8fzayow7763087dt6i47v798y6vyz0hngo32mk8d42r7u9pisk89m400aucf83bobgi9y59mvzc4pt0rygqjfw2rvbzkgrk7jthli3yy3g7uhg0cjwnmn19te8nij49r8dtgnw0z7xaa1bgv3340l7z44rztqrl95uziyjzt4rtul8p2oyx4dwzcj4vrhw71x1bywjfb36rxna4aq89h89zdt6g2r3f5mvwhalni05jyxtd9y50918chekg87jnntb45wy8y5dhn0wuzzxfcb7eetadoxirl0ulwniy1klatdzdb3emc36fvxpp6mnetdg26dzv3u2sgmaetnd737pxos24ar0x7b9ze15qfnp8k0zpe2rucrutdyf0z2k4xzyj6251lfivuzo19kgdlluuu7xm12bmjx83cndbxa71way162l2pst9uq8l8hbjqgukt7p1vn67yani904xwhqarkwk',
+                proxyHost: 'pj264ostad0tyxsweml5j2ec1kjj1tu7s7e3sjhasog9775z0hv5d133pnik',
+                proxyPort: 5582991455,
+                destination: 'n1iyzy5fhdvk3wfpxduvavsx9yvgxs28u85824fuwujnpty5mtpjiky375g1bfy4caab6qzcpbx27udkf4vajs1iateeknrr41ova3ow7lydznhpz6cyijzsxaesnow3x59e53mhwtnvyc98uime6dtazli2jnlf',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '12pdl0ooxdkmnnos0fx4nefwd3vjem4besqydofd5xqdd789yos16ez640pylnmc890ss8g10hie6o7i4usuaw196jmt9gt4zs5itpkcgtdf66bfuipzjt631cho9jbj5sr9cdczflr5f7orvaol902i1e0aqba3',
+                responsibleUserAccountName: 'ujbohphb0q0revh1jkig',
+                lastChangeUserAccount: 'ldqw5wjha97gmzy0tyyc',
+                lastChangedAt: '2021-05-23 06:01:59',
+                riInterfaceName: 'gp339imtubhbktzimvzifkttlw9lrkhudewn1jbovtal5p25rbhtm63cb3d98qvujtwvymve6a3o24f45ahh67q93f9cmcmzlekvapvc56zmr798yifec4025q585wj91c8mizhu0ic8m5ntm2suaifuk5mxcy87',
+                riInterfaceNamespace: 'mlboaeb6mcnah4cldkymlbxzxqkbm3eokxyim3q65p2q3p9oeonp59mamaetvgbc9ywua03dqlbv642g9xe0ib3tp2rgthir1dqbiexrb69iqj7dpyipci2mc9tt107arcp8mmk9uvlckfy16o8y2eou640j25q6',
+            })
+            .expect(404);
+    });
+
+    test(`/REST:PUT cci/channel`, () =>
+    {
+        return request(app.getHttpServer())
+            .put('/cci/channel')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                hash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                systemName: '4iyw9pwsdxcmgcu744j2',
+                party: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                component: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                version: '4iyw9pwsdxcmgcu744j2',
+                adapterType: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                direction: 'SENDER',
+                transportProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                messageProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                adapterEngineName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                url: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tg',
+                username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                remoteHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                remotePort: 6613675079,
+                directory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                fileSchema: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                proxyHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                proxyPort: 7545765640,
+                destination: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                adapterStatus: 'INACTIVE',
+                softwareComponentName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                responsibleUserAccountName: '4iyw9pwsdxcmgcu744j2',
+                lastChangeUserAccount: '4iyw9pwsdxcmgcu744j2',
+                lastChangedAt: '2021-05-23 11:11:58',
+                riInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                riInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '594fd1d2-4836-4f2c-a615-cb57de277431'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE cci/channel/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/channel/9ad9f765-18c0-4f8c-806f-5765e295aba4')
+            .delete('/cci/channel/97722685-7790-4254-bbb0-baf33431f6d6')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE cci/channel/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/channel/594fd1d2-4836-4f2c-a615-cb57de277431')
+            .delete('/cci/channel/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL cciCreateChannel - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL cciCreateChannel - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:CciCreateChannelInput!)
                     {
                         cciCreateChannel (payload:$payload)
-                        {   
+                        {
                             id
                             hash
                             tenantCode
@@ -3217,14 +3290,12 @@ describe('channel', () =>
                             lastChangedAt
                             riInterfaceName
                             riInterfaceNamespace
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -3235,127 +3306,27 @@ describe('channel', () =>
             });
     });
 
-    test(`/GraphQL cciCreateChannel`, () => 
+    test(`/GraphQL cciPaginateChannels`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:CciCreateChannelInput!)
-                    {
-                        cciCreateChannel (payload:$payload)
-                        {   
-                            id
-                            hash
-                            tenantCode
-                            systemName
-                            party
-                            component
-                            name
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            version
-                            adapterType
-                            direction
-                            transportProtocol
-                            messageProtocol
-                            adapterEngineName
-                            url
-                            username
-                            remoteHost
-                            remotePort
-                            directory
-                            fileSchema
-                            proxyHost
-                            proxyPort
-                            destination
-                            adapterStatus
-                            softwareComponentName
-                            responsibleUserAccountName
-                            lastChangeUserAccount
-                            lastChangedAt
-                            riInterfaceName
-                            riInterfaceNamespace
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '37f20fa7-269a-4b56-abcc-217e0306dc64',
-                        hash: 'hf0i4ozv41n0nvv7jsig7xnhw4ymthxyjmskz461',
-                        tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                        tenantCode: '8y1v7pxuvk0ps79a6hxpp4qgoac0737ngc5rz280xf5ioggxw0',
-                        systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                        systemName: 'zkjdz2zhkl82creomjex',
-                        party: 'c143juy3uhk3oxotnnvawugou2n2kzu9c6teqwx2imsbclbo19wl98nlvivfy6ifom5c5n6rvtrx4efhc1pggxoepn6g1a4sj9opav5vzf2gfsy7179b607bqb6y03fts645vd1t4aiiffx7zv7bncnxybzkcr6w',
-                        component: 'mo8thk02ov2thizdp28r73fyksoojt3tkrnmn2uy6y441a92itni960601iorekon813k5cxl066m2wh3sq4mulb1aezbzp7em0x5dbv0s1fggihcozr05aiaz8wgi64htglf18e8mmryxbyih0hfzy1sxmad3f1',
-                        name: 'p0mdz5p5m2htsfmbcbdd91bc1i1xl0mfv67y27wqfzmc3d3jssvq0pluek0ksufg96h19gm71kop1k9vbum90oapwc6mkvmjd33duw8sd6646oj3ww09p2b650o2em48frdd4vtlxlten6swxikfc2gtobammvgd',
-                        flowHash: 'gt384ifdwtdniszat5rltmihl25rc84mt6lp3nbs',
-                        flowParty: 'tguf8i4l3g8r4b86pz39pwynz4s3055welsdhgdr0mg0ummt70isl0uz7s52uq9wpxhhd0zp8w5ud0abs795nf4apg2u4dzxl2imfc6odyss3yepkcx7umidlxjvhblh6yyd8gdynqn0zexp2264d59qm5mxccwk',
-                        flowReceiverParty: 'tg64qrf4i4g2p9ygh6fv6nu4s6rj0m2t5zew7op1msemd0nit0vpbmvnk03dbondia4oubdrw5hs5sggpgbpozkql3ey94q7kv63w6nuadujjq58ju1eew3olxevxqjq12r34qdgc9k5y61l300zs6ztg4hr8r2l',
-                        flowComponent: 'k6nawgbl7i5vdjwu9y90egmt9eibdty2tvfkmeykrrra7nx0vw35dmq2xcvgspjvkzcebav28zvze5xme11031d6ro85a0xqy343xrbasx5p3nx3f9asv99kfch9em63xon3f4dvem5x30zs16utr767dze6489a',
-                        flowReceiverComponent: 'jzqthmbnr92zdm3u48mtqodifvuyo9mauqvdwywpu25rhpc8d70hhifg9da61pnf1thn1f9j2frxthpe48sxegdqv7av1zm0yidqfyyjab7j5nmxfehmwgdxya8bnbh0dgdzppb0x00yfo3h7iw8c7h0n2cq39mp',
-                        flowInterfaceName: '4poopvlsvk18mjest6k03jmpt71usl7a7kzmcc386lth85txfja968w7oovbby36dby7laloq05rf9wch8vhqsjvk2kcw5nidkpzy13uaapbgn425n2pd2u7sjdkn51aoumdbkxass2wdnsqxl8ai6jgaz056pux',
-                        flowInterfaceNamespace: 'ivncdmatksuuhaf9m150p4f4xe99zsfuee28cz6m66lefdupvtetea4n85sipvk8jl1hxzj3j7e3kunqhrm6ehfthudvczjjsbfa3n68ug2soolvb85v4nxjaey22t49km5zumuylw90y3xz34qphtnzz0u49jz3',
-                        version: 't86w133pozu2oynj2l89',
-                        adapterType: '6pmv33hklv8u9tatfytfzxiue5ahxaoxb4fltx3c3xjhslz719kkzpuzwc15',
-                        direction: 'SENDER',
-                        transportProtocol: 'n1rzy4gfbd53j2yql29ep224slv8a42mkgblc4szvdkxisifamzf9hphhcw2',
-                        messageProtocol: 'rb1o8iqn0c2pstyf1kduk5s8euvrfuh2n93qe5i8gqco8qsa77hsddeb49i5',
-                        adapterEngineName: '81eb6qlo8tbzei22pskbti3f71zowxo631gezzz0vt2478om8qj3pvxe7n6xf50h4k9x4890mcr5ywbye9ntl3b3p8b41kmyjnfzs68pjm0iw0stnxu9rpdxfxxo7sas1rbbwhl2t5ene7p5qlhnv5y37qu70tvh',
-                        url: '1ce69yc4a35y84paklwqzpa21qvnq7ldwb749leeysdcmtgvps5ua6n4iu7lh4u1hjaahqjhjplwqa21s2ui46am4d1whq53m106bttbhkf63y47laai473t9jaozd44yjgpyqpv2xf3670z1d08027m6ddsfz8uq3k10uwhpjg83v7v4aytw9jt86qki2urt97xibksb21bl95dmefwhmd0h8qkr1svdmkc2s6ew26tjjcstqiol9nppjbhhv747zrp3r3il8czjtz9rg3353mnbkrf5bd17vvapedhtg9jlbq8mywy9474lpely5rt',
-                        username: 'x1tfntk73800mtlycjto9ioi4mjjyfqmp4h5632z4zqu874e7e3tg1yx9ee7',
-                        remoteHost: 'kc5jnfzjtw0sa9sf6i8knlbi77l5lf2uhpu07h71g598eqiik5ef5skth1j7wuiqe8nnf1e0ob04oajht00bein8804qkeis0bcpiuu6occ013k85jpmfdesa64z5nojmbz5rq55b9u36dk99bjwmdgin4ybolpw',
-                        remotePort: 3766483361,
-                        directory: '43f54yh2up35sh2tvrv3djfnjkfdvytspvn3p6z4s8bz4796h7g8ekeh0exxs3d3jusjor0dnq5m3fhubb28eq1k667f6rhrcd6ldyggogc6rxcon4klrwtd4r87m5t7z7jr6s642dfmlzt9nfnuqmy6jeqkdr91ity3werbxradv3n1x0icryhq0xqx1wwctfk5xj6wka1503v1q3pswkavhvl70hfkui6qo2wabmpdmn0wd56xm1jlj27ertujxiooo6mnqb3ndgty5whres0pful8t53rujv49tg8ir6tcvfn551g0l2fs4huae4frkkqh9v3n31k7k24npe76n2b1cw3i5znisdzwcbbgjv2k3l3vix5zoqrw9wq5jdeu81k5yym3woyxpquxe08aeqo72rb6ho8vmxohd3h09osbt5rtrmvwyo0gtcyoljxi9eaj79f04ra7e8wms9v1mn2dgdvmkrw5gbmac65mcqq4lqsq202p596oh9t4yn5uri24ttm5407gjh6anyh7h7pmbfsyoiwlcctovmebokneoqc0596bsnfslgweg4zifinil8js7jagdavocs7gl37n9wpbrlgax3l3ybt4z7lmwz4pmx63lz2jlxi5rjvebg2xnoeo69t8dq0cz17c8gqrnwwuqhhtcs8stqgamomchv2ql3wiz225j4berd65no6r9ojzcitcb7d5ikee6zzt5o1ukdbcsqnj487k881r461zfgt9bgbqzi1b9edxz3hzhdt743polnkavjf8geiq6dprh467u5r3qidgugvu39ux7rcsamzjhn4tgnc70xv7fb5xfxxzrwhrovg9jzmaovkf70lnixie9om0h20vygui0pk3izofkvhjiw79yrehokml0oye4o8m74614tpgoyxy4445yfgf57hdbsegokj6s11825z9a3zuaqxb9po6sdgxfwdv80coij6ajff4u9zq8ol9nw5zavf4gnqf682x76i6uai5qmlvkk1',
-                        fileSchema: '34v0210gbcdw0zfjterga1pn5nub2vfm0mc3wygazzkgab95t6aa61pwzwkdbfwly7sz5sduee66iamica65dq2uskd1o252mvn9prg4sbzob4ux7ebva474me6xdvk776zkqpq0tyvdl3dha1jw1j3gp2ow3vqwlk75v5iv3ac28ude6jembmpo90pjs6zvhh6wurjrfpi8cc5dsupw5gvc0gt6dszcavbnr99r4pwr9toxe30tk187lmk7j0j9x40bxnsq626j9xgn0q65xgwnw03wuguloib7fxeok7zy07rw0cb1p64j28qpwgnpz63qilomakc18pzv4wwfsnr4kdvrtjdevbde0kyphmtauu5ilpqcj9lb44q0lulqlq8gipye367txg1uhp42r6pjd2ngqfayzxn4zjf5aj9hk68x2ennyahux6dkdjn6h5vbuc2od4ye9xfphb40aii90pd30falr9qmqzpirkzxe6c8cjo1jdbttquxtotw4lrilh1fzu5nt7h0a6aedoam3f60ayvevmkqd3w27agnz1up7qcy20ds2ue1w86l1txqs95bvpv3rw8uqn0o0i02l4w0212wy98hmxneyqpzlsqqxkho1ryxxosvkgxii04ekrsjvprhzjvao11dab1swrv2k7fei7zk2gkpuupd1hy161f80wg7vcbeej0sizlc4i0z0ke9zz7k7uzip5s80o0di5phiw1q56d6un1kohp3bp56y232wh7xw8mnmlqrnfd011ks3j7u5lapsi1uqg5nm1ne51ipp9cxuuu79dvq0pfx7c39okngekjxzlexx038eequndywiarj0i6wt9sq61gf5utrv1vp4pla93uu4ez7ypz4gm1eo9vn6tik75w1irxnkwvoh38zonvddbx4myhm8e4flsbmlrjmxttp5wk5qmsy888qoejzj76f7n6t3jpsh5xps57ftcjqaqw3nqnc42xgk8w5m6zwn7sni00t71ttyh67cdzs',
-                        proxyHost: '63kn6egdv6prpfkkfwvseucye4ti2jtzdw0tlp2yjs0u34zb1qji452chxoa',
-                        proxyPort: 3223990499,
-                        destination: 'td0qrmve174zw56iaz3769qjt9x8157x4hcytf3wlfxvttr7um64lebuk5ggke9q8xv35y6q2jl9dtm0v4xxvs3gawgidxwkji0tq2zc9x5fnr8cg37v8jqp5m3jkejhnx9bjse8x357c6yvt0d24n1s3utzwvvv',
-                        adapterStatus: 'ACTIVE',
-                        softwareComponentName: 'c7pn9vp4vt60zh1jbqlfbs70iyucgx3h25gu0u5yxfl09stb61t791il36njxy0ex36oxfxg5h03xgmwzz02isf9kv7x26bz6y84n1noumuf4gi1j8g375rbzzcghhm0lqi4mg96v56n74vq1xz9ads1s4khda0b',
-                        responsibleUserAccountName: 'a5s28rbmdo06ofabn266',
-                        lastChangeUserAccount: '2n2dc3veov4b7oeqyetd',
-                        lastChangedAt: '2020-11-06 06:39:29',
-                        riInterfaceName: 'renqi6hqag5woec6zieg978piz2amnc0siduxhlsdfzu1hj4fngjycgz6p2hz4pr6rydbnpekzv09ux1t9vcfx3p88ohqg4uupkqfv2xntx8r5quss1aqykxy3m80e1ga7japrki0h0rgi4wzlnulnx85l4fsufw',
-                        riInterfaceNamespace: 'kt6h317sp32nohomuce2s4i710ep6ay6ymhavgcexhzexec9w8s3ptbhx79uy3ano2z2t7yyjl6br7cfj75qoe1hy05a06cetl0c0m6yc7l0adyuc58b0m5wshd0doso6649qy6z76dqdgag5xh2gka1iqqgpuvk',
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciCreateChannel).toHaveProperty('id', '37f20fa7-269a-4b56-abcc-217e0306dc64');
-            });
-    });
-
-    test(`/GraphQL cciPaginateChannels`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         cciPaginateChannels (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -3364,289 +3335,24 @@ describe('channel', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciPaginateChannels.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateChannels.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateChannels.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.cciPaginateChannels.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateChannels.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateChannels.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL cciFindChannel - Got 404 Not Found`, () => 
+    test(`/GraphQL cciGetChannels`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindChannel (query:$query)
-                        {   
-                            id
-                            hash
-                            tenantCode
-                            systemName
-                            party
-                            component
-                            name
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            version
-                            adapterType
-                            direction
-                            transportProtocol
-                            messageProtocol
-                            adapterEngineName
-                            url
-                            username
-                            remoteHost
-                            remotePort
-                            directory
-                            fileSchema
-                            proxyHost
-                            proxyPort
-                            destination
-                            adapterStatus
-                            softwareComponentName
-                            responsibleUserAccountName
-                            lastChangeUserAccount
-                            lastChangedAt
-                            riInterfaceName
-                            riInterfaceNamespace
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '65bb3ec2-05c5-4e56-abff-4082fbf53fe5'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindChannel`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindChannel (query:$query)
-                        {   
-                            id
-                            hash
-                            tenantCode
-                            systemName
-                            party
-                            component
-                            name
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            version
-                            adapterType
-                            direction
-                            transportProtocol
-                            messageProtocol
-                            adapterEngineName
-                            url
-                            username
-                            remoteHost
-                            remotePort
-                            directory
-                            fileSchema
-                            proxyHost
-                            proxyPort
-                            destination
-                            adapterStatus
-                            softwareComponentName
-                            responsibleUserAccountName
-                            lastChangeUserAccount
-                            lastChangedAt
-                            riInterfaceName
-                            riInterfaceNamespace
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '594fd1d2-4836-4f2c-a615-cb57de277431'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindChannel.id).toStrictEqual('594fd1d2-4836-4f2c-a615-cb57de277431');
-            });
-    });
-
-    test(`/GraphQL cciFindChannelById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindChannelById (id:$id)
-                        {   
-                            id
-                            hash
-                            tenantCode
-                            systemName
-                            party
-                            component
-                            name
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            version
-                            adapterType
-                            direction
-                            transportProtocol
-                            messageProtocol
-                            adapterEngineName
-                            url
-                            username
-                            remoteHost
-                            remotePort
-                            directory
-                            fileSchema
-                            proxyHost
-                            proxyPort
-                            destination
-                            adapterStatus
-                            softwareComponentName
-                            responsibleUserAccountName
-                            lastChangeUserAccount
-                            lastChangedAt
-                            riInterfaceName
-                            riInterfaceNamespace
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '8be3856e-8b7a-43f2-bba0-596ca37ea1a6'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindChannelById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindChannelById (id:$id)
-                        {   
-                            id
-                            hash
-                            tenantCode
-                            systemName
-                            party
-                            component
-                            name
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            version
-                            adapterType
-                            direction
-                            transportProtocol
-                            messageProtocol
-                            adapterEngineName
-                            url
-                            username
-                            remoteHost
-                            remotePort
-                            directory
-                            fileSchema
-                            proxyHost
-                            proxyPort
-                            destination
-                            adapterStatus
-                            softwareComponentName
-                            responsibleUserAccountName
-                            lastChangeUserAccount
-                            lastChangedAt
-                            riInterfaceName
-                            riInterfaceNamespace
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '594fd1d2-4836-4f2c-a615-cb57de277431'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindChannelById.id).toStrictEqual('594fd1d2-4836-4f2c-a615-cb57de277431');
-            });
-    });
-
-    test(`/GraphQL cciGetChannels`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         cciGetChannels (query:$query)
-                        {   
+                        {
                             id
                             hash
                             tenantCode
@@ -3694,22 +3400,23 @@ describe('channel', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.cciGetChannels.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL cciUpdateChannel - Got 404 Not Found`, () => 
+    test(`/GraphQL cciCreateChannel`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($payload:CciUpdateChannelInput!)
+                    mutation ($payload:CciCreateChannelInput!)
                     {
-                        cciUpdateChannel (payload:$payload)
-                        {   
+                        cciCreateChannel (payload:$payload)
+                        {
                             id
                             hash
                             tenantCode
@@ -3746,176 +3453,70 @@ describe('channel', () =>
                             lastChangedAt
                             riInterfaceName
                             riInterfaceNamespace
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '24cdc9fa-7cf2-4695-af69-a28e80f610e4',
-                        hash: '4i3kdushvjk894n2p7sr1hl4lgz2nfv2ajv385vb',
-                        tenantId: '70a9bc51-76b5-4298-9334-105a8759008f',
-                        tenantCode: '55dg4nngu0r32tbuwytuqjtzpq4rw8inzhozh0d3lx9luwuofy',
-                        systemId: '1380a4a8-e0c8-4a81-9b4d-d78b2f78dec0',
-                        systemName: 'bbd8cph3ibxqdgztd3y6',
-                        party: 'xqrf9e2jsasow0amxgrcsf199vwkbloexxco1frqru0u181ps05nel95bogffz8x98c7jxy5u8wa1n8bxl7fyyw0bbph3qm3pv0t8be8attnsm0vwt4g7t5o6gs14omvod7oamfq4vnvcdvqtbd2zbe06cbpzhlb',
-                        component: 'roqumfxyr722uczvusw0d5j9wmrzdcb7c0lzlnqalpgse9osuyoinr7y3okbu65qg6f0d5x4ocx4gbs6bmao6fpve3ufmxgytqdo7dte7wcc29vb2o9wzsdj9kgk0ha78r4anq0d978xf8j3hdr7n4v93tjg4udr',
-                        name: 'gyb2szezkj5qt1qpw7qes397c1ioagxrwedqks8rjypvnx7l8z0oyf3u9ojopfkvfx6a2iqzjfgf2iwp6er8is6gadv3i9mq7geagh5en8a3yhuwz43w4c2pfr14ouacz54rkxn6topkq7g80mkcgypfaanz0zqv',
-                        flowHash: 'qwwh5aj8oujdckty5f5c3wy5e2spde80t86hmh1c',
-                        flowParty: 'nglqz64v7pcbt6lovbhiq9jlv2c8q5pff0uch9pm9b3bh157vgvqcdzmki6t03ua8k8nz4pgh206mv8bzqkrxfuze7bkxcfzx9ygq6yd9k7k3npjiligu2biorv3xo2p7vux447c9vzq0uzhgb44cbqi8jv03alq',
-                        flowReceiverParty: 'pxk0klwjd3im970w007sbhrk4z6wq4xmugnhmo18h79k0qq73l0ldlhtcwsgklpd6yjpgn970op4wbph9cyvtnqsxfalmniejocxy3rg3c9ax2cllvpgohc6yppk8njpjkch0d59z6z6ym5ct2k2trrbh8aq29pm',
-                        flowComponent: '6atzu2k2mm663cwb8hmrkpbuvfepbawzqqdqof59cx1p7eucwqi6w8yibtvtv9g36spqlzjbr2cl9pbszicngqnajkd11esb70z9t6flvr3dq3fpxb3ydhm1ef1hjwsckbj4547u7ql6fe7i1cfnp3ssyx05r41s',
-                        flowReceiverComponent: '1dqmw8syn1hzbj0mx904wc4vh4lxealdz8xhuk1wvqc10zdn4th2x9r3384bdkravcte7ws1nv6cjfery1uz1saska5d169g47b9h7krcnx6g2b2v6t2f5gcoxacjfhifzfi7fq3gdh1b8ugy587063zfzgclvve',
-                        flowInterfaceName: 'ncka8aomu9mpvxxv1jppfftc474v602vk3a0mtz8theiy3lyxhaaizdtmvtc3t6ewxhi1qswj5yg4czn4j6voq6k2fuvxbd4x5glwawcl6p19x5448ite3qbag0jo6iz4pj9xvj7pxejxblpmnf4czi0wr8icvc4',
-                        flowInterfaceNamespace: 'pukomwb364unpwy3va7iv57qjon7ofmcid1ryx171y91ql9t1jxwq5rqetmctdii16g8hto62eeqrb8e31ziql13x765tnr5hzz1yp0ysvatymgaqo55ja9tdhcqjlvwhn24bibusi8ohi6wpnp96b5gw5ai6v4q',
-                        version: 't5x1dq4ubyg541frk6u9',
-                        adapterType: '42sdwf7jznsdv2tgvc2m5h05co5iaq8nbc9n54gfb2gm1dnbjz9v8zk1cdub',
-                        direction: 'SENDER',
-                        transportProtocol: 'uj3n4142gxii2ejfbb1sopsgwpbhr64dzrf8muie6ob3tsp5j8dgiyxnqlxn',
-                        messageProtocol: 'cocwtfe67lvmec4uufwkc5ohs3socs7pw4a2zn9b5d629obwuidxsqlb23ba',
-                        adapterEngineName: '1n1d0w42i62rd7ulge757zwjvxi12oame3tynkohuivdcllh10nyk45u32yev1352og057pq3p2dsx4lppcmwcisvb583uu4j0bcm5n5pr6rgxtfgimuon3hw47xhka9695opndie1yr133mq2of3u8vtij0pp3h',
-                        url: '6k0vlv7w0rlheleo8houliqfoqlag530w2xtb4eygiwqv5wvgdt26vu8c1mfidsutdu29uymjodxmdz64jrdrpw9y8rnqljc0jtnvvgn4dh2cyl2khnk1txjxpajyl2ivuh9z8wkjvjywzgqtd1kzr2sr9xlaufpkxzoolf33z1qjv5uzo24myln5vrvag7rwjsfo4b639fardqm7gj9vi3l2f2h3xm3u9nftnuj356xki3p410eyb153cryj98280rwxfga11tvm709pva1xojwlnlt0p58klkudm8svpb30p2ntpgcbbh69hcjz966',
-                        username: 'acqv1w28v28i5t6ohygma8vtabj297k2l40mc6xb3h1zyy1crtgcs0ai5m2p',
-                        remoteHost: 'bzwr21ztvpewwqisz7klnezw2iyjmw3f5nim6qo8gvh4hcy2cgeurdmg81ev7763m6f8fqnj8s4zghbfxwf8830wd33drll9j8pr5yj472kfy4tjgnlt1f79xl70pu2jsfcacofn9vl2t82wm3axpakz956lird1',
-                        remotePort: 2776723350,
-                        directory: 'u3r79xifx5qhnhmdn7zu4f6c0wo1mz0ka2y6k18tf7pa8wczhvhmxoi2am056ukb1n78ofx28wnklhjfhv7zf2j1c2ttda60il7h8lrcsa5n9be6fm5qen1dopd9k0ethj68sg45vwarid2tynlfpicy3bmefxkf8j41d2hrv1jgaf09p5i4yldn42xyk1rtvi3xvsy5gexzogt3m18siavzdcu8k62a26pwyt2whsdktotoflgyrl7j497ihmz6azetrcswegpfkjjz6abhc13k3c4iwho1082uleiu520qez4apfazohnz1nmuh2ak6wzeg63n6idqdosazfx9izj7os0413p2hmjrqqyq4d6ckeq0stvi6ahjjns6kvwrjhimainbiburg04533h3lzl9ulrzzz7qvr4ldqrvgkmaoset7ff6bkphsjc1io8tep5tor1n7knh0z6gf97nwwryvf0vwh3u4wv7oojsvyrvi70z421u1xwcj8ahbt4lvalz7b1o5ooy2sr1y6rx2lpn24mp25ayphhsx74i1ckii2awu1oiumk5cb89siek1mog1bzqutn3k68my290bt0xyrkg6gz0udj6dj391cxoxygwnm1wlfwxncwhe395kiqs3xjf6zywtkd5zoovyu74vzl3ztqkc5wt30d9l969idt0druvbpe8pgozr479zkkogqx2imo161ciwr63rmw63q9snjvunb24vplwfe9erys9qcgfvgt59a0yovxrj2e6uk6eyjq2fav9sgblrds958gbgvhg9rfjw61wtrzujsds7p0rxcyculi6q5qq85lat7s2bybpg6c8jnct5xgf781nnkunhnfrx7i1cvh5cwujv54h561lpoviq40rlhw0fjhxcs0pbn5agotje74wygcecckj5d7onyimddew8t7vjdikgh6x61y92hmq8zldxgon422ikgvtybfq9vm7memnw1p09ysaa3po99octhzgm2p0arsaxfioebtv',
-                        fileSchema: 'k9dvyct3puspatkud7atd9p19bsfqad3s3nfelpj35423e8drglkfddn06zzjovfu6ah95q7p2dx1mqmti7055yobk5e9phtp2b0fi07c7oea4x534wp8a6cmkgnpjusaurm1pdv4sayerv6scwgd3i3xd747qka0b0wl8c67cqm36du9477pcnqrcmcoqb58ech3uqjwx11mk05e3vl7cuf3ezzslhis5fw35aacsiiglxdy1jentbrvywfz9s5m41ijppkpiqc33a4fuqec7lkduz9dp2jeanuv1dcuxrf00n4dg52gccuedb4xnk3esmgy3pm399v5dz00h6u7ojc6v82nmzzd20zsypbgq39xe7rqeianbifhisg0s6yqyfoktzius871035dhw9620c3mglc4krl79j7ropt2rw2i5fm2vq0xk08woa2ryokfr3zzdxog9tjo9zvymptxvm02ezqojcwi01ne84r2qf25rqk1txm5csx8pakm13dbsm4mdhok612seow8z1i5qn958y884tyx5cs9lksk49ht9e7va882myhrgm31agym7xd6ndzon2mf8acyegw8zk8sy9e13nzlogmujqn90x87ipoacsk7d4se6sh9iq2op8k04s9s3ogm29wan805o1a2aguvz6tbps3j5gm04xc07c8prrf6ir9q42i6285irrjuqok4ljpi5y9xktl87zqwqrh7g8q5q3rgnmtsrem7nz0vp3w1xrv6cmvfj5p363qbcmdpoj64f7i1rulvgyfl761f3dt9vom54koi9z0qsz5vxt46bvht4pqh468rj0xs6ru48tlhj2yfaes3sl2h46wqe3wjc8jkyl4taavtwgnmatjqnx65l72i3slv69hqzr3cvbfedexxp8mi00ofzh7hs93xg3m54gfeva3hpda5j1tzp6hbox6df6tel1jupntab8d9z5g5fps0bg2k3miv7b22xv8dmjclvvshi2v6peifzdkw2w7bjg',
-                        proxyHost: 'u2bamk97bxmdecpurhdc3o0va7pevny69rg7yjhoi253cbzwl9gjc6t91tby',
-                        proxyPort: 1285645794,
-                        destination: 'tmplh1bfn9h5het1l67bmhgfr5sc6ye02anc2tcnluu6sdvyssalnfj9wrq5tlzw3eepxv7wlllgazlc4bis9ot9lr4e9lcg97e55zajt767qfts8lpo5uh0ednfucvkusdk8og24m6jmlmrxiylt0m7ctso45yq',
-                        adapterStatus: 'ACTIVE',
-                        softwareComponentName: '80vemyd2uh3hdoc9pn2rrejk4e8eyfbf3d0qpnytg4d1dup84r5coj9eul58sqelzb82rwgqg1wieytd0z568ikuckgk5rqi1dfrs8wsnba2lpqv8hxxe5nohxerimqm71mjr7ibbzy1nwyvqghji86ts1ku2d4o',
-                        responsibleUserAccountName: 'ltdb1zjq3foswnzz1ufu',
-                        lastChangeUserAccount: 'bipur54bi6fiidbsbofx',
-                        lastChangedAt: '2020-11-06 08:32:08',
-                        riInterfaceName: '0nu0c6n057psf9i3euk1k9ocve7o9y3q8jlof2i91rhsj1qonw6efaqev9xczcphvxlfya8alw3s5p3irmp547917061d6bv1r7yrbqxablzpaxngv4nrvqrs0409cx90s5md6atz6sszvwc0cmerx23x7rtnw5z',
-                        riInterfaceNamespace: 'mzh5ug56027h0nf193bkcrhqw6kc6340jdwerj96jw9a71tzyecpsnd7lrqxnego4n1vcr6j2zbwdp8sfxvw8xdu9d696zkllmjyhuptldb97up30cxi1j6p13ehnwd7rtfps0qvadozw6gh8jnfc40ciplnsabk',
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciUpdateChannel`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:CciUpdateChannelInput!)
-                    {
-                        cciUpdateChannel (payload:$payload)
-                        {   
-                            id
-                            hash
-                            tenantCode
-                            systemName
-                            party
-                            component
-                            name
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            version
-                            adapterType
-                            direction
-                            transportProtocol
-                            messageProtocol
-                            adapterEngineName
-                            url
-                            username
-                            remoteHost
-                            remotePort
-                            directory
-                            fileSchema
-                            proxyHost
-                            proxyPort
-                            destination
-                            adapterStatus
-                            softwareComponentName
-                            responsibleUserAccountName
-                            lastChangeUserAccount
-                            lastChangedAt
-                            riInterfaceName
-                            riInterfaceNamespace
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        
-                        id: '594fd1d2-4836-4f2c-a615-cb57de277431',
-                        hash: 'ezz2qhljkm00r69bpqthlmtayszlbhvz1y66psav',
-                        tenantId: '7606537a-9e02-4da2-a4d3-96f3c54e4d1b',
-                        tenantCode: '4rf9hgi9ijk1ua3vpc89y1ug7q4vxxxf199fn8yfugxeiiwvmv',
-                        systemId: 'df403267-e916-4fd4-90b6-12a09c7a6c8e',
-                        systemName: '6l0jd4ldmstdun59srbf',
-                        party: '3zgnftxhorjafxduhf3t7wnif0ycjtz51a49cjmg1lxnoq8rdwrvxtkka4wi3y9k2oiiea3k39uzplnbqc8hwdl14pk8e4jeumvsarutqfdt0q7resw0c62ofoxr3grxdskcly2gf3ibpyqnu6lvwe2vmnmaumkw',
-                        component: '6y9aszeapqomlt3pa6b9c2vub7zciotp52v67gelbnzrhiez87lvlp8nb26ijnz1wsqoe1fm6z9vuezev2m3693umbmxv3qtodqoa7791dm6kojrmeide1gbxy6raym74fqiide5a4khm66nzcjfrxq6jmzzht6f',
-                        name: 'j17latp46xcgc9wmvrot0uin0gplo1rz1wecqtzto761tzrtcamuhvt6ztekwsr3bkframmv3f3yr7g7tbddij88wvfqcq6l2y8amja4406oeqli7h5z1nmr399c5vo5cdnjqupfn2eho9fkk511kzjk5wry49cc',
-                        flowHash: 'a41u0a9oqqv13nr013azg6k406l9h8oswp1bn7bi',
-                        flowParty: 'bsjj8zdmtks4sfwsovd9i1hfi1q0a2ifi9qc7nwv3u3r8zpkl0a22lvm8tmwghhedsza09is9h2g5dliuaji003jts6l9wxee3znwwqjqkwxuquqij9zm4wb8t1djabiogal17p270i6ssu3zw5vsnnijykg79k4',
-                        flowReceiverParty: 'iruvi7j42u7ohb9ug0qrh1fzt47cl5zazpdcf91hm6x6ynl7cih1ss53ihfdkozbsmyet1kkwe8c36d7iobgfz7hrry00aqe71zb4x02rr21tf7gtynhpsiio7b3rdlfe0ulzm37gmery08yb6anog5s8c73blyy',
-                        flowComponent: 'b16iqr27d6n2i8v2nse0bkuii6w41wseb29115fg4fgn7rivw9g9sempy4k6pqp23xmnex3btkrzfoy1kkys0wdx9hsu0jv94ou78mf4sri1xfpctzpsz2r5grd03jtnrba0zyrvosgpz2dd5bd5zj64atybqijc',
-                        flowReceiverComponent: 'm54um6whifa3bxsd1m86xw7149ksw242p48vd2xa7oz8yj9dhdzfc3g7ko09nj6x70x0t0lz498eg13zfnqktx30p81n9e7amseb7jmhjdkyaxyo3fbco7y1xy7r47jb79ylf6x35z26q1pmmldb4qrbpqufoibf',
-                        flowInterfaceName: 'c43swnboxt5h15wicy14ciujogodab0d2oe61q3un0k42qd6dxx3217v6huouzqmqqxlvhnwnunnril300gng4f6erkkv0qxfodpsmlctf8vwmbz1jqrqjwbaa0t0myskfayop3z7wycifhdbdwnnuxm4jhgn1rk',
-                        flowInterfaceNamespace: '1lytcrkk63h2jk7tlb05hfbjopqog0x9r100wcek6j55qshsr3r91xudh36ml1eo7oe5cuwkd8mo4c6b2fryspuiilrgryg85ds2q70a8vizrjaiebzqyarvrkldp1talnol05u9qgiqay4w1n0aa14bxoykr98l',
-                        version: '5o01d8t3ywm87nvx0w7t',
-                        adapterType: 'woau0rgthg0ldkl2ndy9pru8hwywtgnewog1smc1pnswf18kkq4qhbzglfek',
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        hash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        systemName: '4iyw9pwsdxcmgcu744j2',
+                        party: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        component: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                        flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        version: '4iyw9pwsdxcmgcu744j2',
+                        adapterType: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
                         direction: 'RECEIVER',
-                        transportProtocol: 'qr4iii1x9s7w4q2fduozzq7y8ei3m743tg1rgnanu949sw6htgvqaosal080',
-                        messageProtocol: '58ao0sueujrwcydbzpmfkv7lvdafqr6e8n8gewierdjbb6ev1dmhii4i3vbh',
-                        adapterEngineName: 'bm66g4by1hn8f9nhcgcacm8i1p7zxj9yos80g17upqb6fj9pn4l2qarxm916if90paq3gjmqmdcu89xc4ko7sl98463zn23d48e41qz9neea4ov3j5w2wfu59azemfir3awgmq0yxla34y2cfbju0pvkxwysez5t',
-                        url: 'drovys2oagiq976sc37cj3n3c2hy054zq256rgy9jjb9u260ie1naaml86or3k0vuiuwim6y5o4wsp81ptwqn5chtwlen5uhqzlndl62zim85ccz6awz6hs4bto4vvmkwfsmx9jmo8qwgtc5bm6y5k60q6iyw4r685lbb0sow7lxzjq39h6o4uuozzlerpstsqpzzsg7w8iy2nqurzz4i4bfm857bg0tn77woalgglhjmov4ma73g0idewef0vwgf2pl4k3u09w2qc87tcn3gd9q51wohpp649nzbehxgqzy9qkljdisjdufx8bty22f',
-                        username: '6d8k7ph1rgc2zh2664p302joqvb1uj9f36qq3n8x3vwvva07ecqou2v6f2vd',
-                        remoteHost: 'hkvqiiaac7dghcv49wv1lir47hha5xcau18ytvr52c3zbu6fpksjrycefjxcpih2lgi50fhfvzn59jdurqrpggydbc24oqdi5ao4wqw78hbwhycctdvdw803ekpngltni0lx85w98q33inio9i2rze4ga7rv15h9',
-                        remotePort: 9346931971,
-                        directory: 'o4klc2tolzt35unf4e87oizryl7dytpfzd0tqjyek7dhutdm9gj2600y97tkbvnjdfay4d7olp8gb8zuj5srxqe0erquzecgycpwleejhkgf9hi34o0oti3vgc91ct4aum4dlrl6j6gyf7hc3yfigjmrgcqdwqtzovvlgzf0h4gv8be844a340kpjogfftlyh7txbng6n1r62i1la0osipd2ltvvyvb5jwmrefru6a5jrpiy7g7zue9xq2doaoanb5xjn5w3vrpgqpr7dc8mv65wpo2nnpenwlmenajvgg3e06kib7280z75gtgase3j9ln64lebayxgwual8tltbv5cma1svuflz6lb2wdpnrd9zntkwyk9uxroo9k2tzl2mourfobofw3ql43g4g8bi3yidrr4qgoikxwjnm9jlaa3bstpoe4t9jr16e9vvqzsoty6mivx56e9sku6xh26p7b5783o0l1opwoakiy97uvjnkk45ppe88uzwlfhrqilphuuynw3ms2nbo1ncqctj9jqo2ah0gau1ogjue0ucb7zcjjw7545ft3nh43yilffsfwb00rndvnkmw4e4nlod1jcn14ukeztvr7idoko81cv5r32c88hff25euw2s4kz5hji2stagam5cs4qoerdctz53xtzpzwh6xa6oj0vt185t9vt0d5sr55o97z7z3otncl6zf53ovjj70v259hghhx558js9eq6xszs41o9kjyha5v6rx1jnh9e70te1247giclzpl2suvurt1w3i6tgra3sgksf5ad0azlbdmyjavv4y202zlwehqd0gj66ukdgy0ed9ja12helq5ja35mpxmaxyy9tfqb1yym0w5obifwovpyyx27li9bi9axxh9a0cpmpyucs6dlzykl0vzmjasy1xwmlyizcyllt5w0w0qdaoxpzagpv8nvzwjm5nei49moxj6mkftqlsufu5v55ljssk313j7rrqk7t5ne61ufulji5wz283fbygo9pa40',
-                        fileSchema: '47sqoa2xgrwulc30y7ouov8swbsyyvt28nr8wa83hvknxydkxahezvifzm7xqfeaeocw27k7aplpxto1gtmqhq1e5rc1bjx0fekug5vxguqiw636d4yj1mgohl36m5heyp0jivkb0zp1bj8zcxrecqs3ychqa2wx1s30lsaybnhgpg2wh1twlwhkj7zsd7tdgsyjrr8r0uhdruec8kisawrt3c055yxf0k5ryq2dtrqzsytm0bkuydnxmxwtp324qv3wyjgod73k2m24rmftgbk4gkt2lr1lf6qujw10hyylfieq2hqc9eqhldhgofu110nf1ctb21l8mkot1ogjfutj5y08auzbl9noys4m4uk1r1fqpkf2gonk5gg0u8awqvdhn3xiq9f95jd059mjxlx9lfgouvkzeugfriyvhzaq0h1l0u0gyl3jlh0xtt5ipw2bh403bhppiqprx37v6nj1a96xd9r1do8mh57ymmhbuf7ui6lmtb7ktwj8wc7zwyf5eo6dflf4hb74ow7tyi1jnhv5smwx84d56u5lluemc14dx2j8ub6pls5d34efk0q6lpyczsz2za8q3ek3douk8bhhy69q5kd3yl10wls2y3ztt82crjwyshydu0tynkpxidi3kjc377myx5qe43qa33faaelivk54vwv1v4ik9u5f6hp0kw1exjoyxvde8ga4xi9xw4kr98krb2uhild116x029lrc3dcguwkf6wlrgwg1pg0433uxmrvn31coq5w8nz41td4nrzjtvhg7uk6bcj1b8xwiebr393mkx7iwwlk7kjajh7qov2ys9fcx4bq7kk7luysw7az8oans0i5ytj8ktanrmjcbbmp2azxewdwo6mq3i4y74q9fvrwd542105dvgs54i42vswlw131t660rn9ykpmpms4yt5be8b44qxqwg2stgz9mvcktei44k8h0st2lwl3fifxnq5i15bkhntt2es02fy7ych29beawr97jgj75w8sygyqz',
-                        proxyHost: 'w2g1wp9wj6pqj1ccnpeiq05vajkrnk22w1jjafuj62tf7mozol9kd7rk3dc8',
-                        proxyPort: 9209660614,
-                        destination: 'izqm9znoewvgkw6zdjcdhbeib1fpopfuirwnfvv20r4m0zchcd5ln4iwksw6ca7qmkfojh5u5stu1mw4dhbkyqk458rzdetpsev0tlqt60byixsmrwik2xvzchwi1jismltacp9vjsag7zfyvvwj6jsu81fvwork',
+                        transportProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        messageProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        adapterEngineName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        url: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tg',
+                        username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        remoteHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        remotePort: 4772229189,
+                        directory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                        fileSchema: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                        proxyHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        proxyPort: 6161811929,
+                        destination: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
                         adapterStatus: 'ACTIVE',
-                        softwareComponentName: 'tz7qrvizshtprkuzly6hvmqdcqas4y2t9qu20mu19qo7uz0hij7wstupekb27f636cralugaunufawoha6kw1hif46v0zjbdfqcfk7rlr6cab9ggie0pylefenht3z207brk7s8084sxsnjrm7woyzfn78y853jm',
-                        responsibleUserAccountName: 'bp01dy7rlozh91bf8i00',
-                        lastChangeUserAccount: 'l60sco75grjmck47koti',
-                        lastChangedAt: '2020-11-05 23:28:26',
-                        riInterfaceName: 'nnwog3jj5ww9os2mr7sjbz4zfqirzn2tmik4m5x8pxw7w80b8yt0eu82mxs947y8akblgdvfezb3y60jcedbrva5qdryb7482dnmxeclqa0szhsosdl35z4a825eu4wxb801fketmgdx7wwz42a0eg72iwhi25g0',
-                        riInterfaceNamespace: '7124b5bmz3ryehl0e2bwduqh94lkrd8bwvle98bdjiepxwb1bfzxki17a76xdxjquewc0l0z30zcdxwuy33o0ozsfzg4cnvh77pxvljvdi0yo9hupmjudob434mcrc7ds7dymk27w31wjbpout0tgr3i52mqzkmw',
+                        softwareComponentName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        responsibleUserAccountName: '4iyw9pwsdxcmgcu744j2',
+                        lastChangeUserAccount: '4iyw9pwsdxcmgcu744j2',
+                        lastChangedAt: '2021-05-23 11:11:58',
+                        riInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        riInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciUpdateChannel.id).toStrictEqual('594fd1d2-4836-4f2c-a615-cb57de277431');
+                expect(res.body.data.cciCreateChannel).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    test(`/GraphQL cciDeleteChannelById - Got 404 Not Found`, () => 
+    test(`/GraphQL cciFindChannel - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($query:QueryStatement)
                     {
-                        cciDeleteChannelById (id:$id)
-                        {   
+                        cciFindChannel (query:$query)
+                        {
                             id
                             hash
                             tenantCode
@@ -3957,8 +3558,15 @@ describe('channel', () =>
                         }
                     }
                 `,
-                variables: {
-                    id: '0b1929ed-1c32-4caa-9c63-aec9e0702c45'
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: 'ef3f8760-70ac-4a43-9dca-4bf10205a476'
+                        }
+                    }
                 }
             })
             .expect(200)
@@ -3969,17 +3577,88 @@ describe('channel', () =>
             });
     });
 
-    test(`/GraphQL cciDeleteChannelById`, () => 
+    test(`/GraphQL cciFindChannel`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($query:QueryStatement)
                     {
-                        cciDeleteChannelById (id:$id)
-                        {   
+                        cciFindChannel (query:$query)
+                        {
+                            id
+                            hash
+                            tenantCode
+                            systemName
+                            party
+                            component
+                            name
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            version
+                            adapterType
+                            direction
+                            transportProtocol
+                            messageProtocol
+                            adapterEngineName
+                            url
+                            username
+                            remoteHost
+                            remotePort
+                            directory
+                            fileSchema
+                            proxyHost
+                            proxyPort
+                            destination
+                            adapterStatus
+                            softwareComponentName
+                            responsibleUserAccountName
+                            lastChangeUserAccount
+                            lastChangedAt
+                            riInterfaceName
+                            riInterfaceNamespace
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciFindChannel.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciFindChannelById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        cciFindChannelById (id:$id)
+                        {
                             id
                             hash
                             tenantCode
@@ -4022,16 +3701,415 @@ describe('channel', () =>
                     }
                 `,
                 variables: {
-                    id: '594fd1d2-4836-4f2c-a615-cb57de277431'
+                    id: '85f9b03d-e416-4a49-a117-b3efd1c4ed0e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciDeleteChannelById.id).toStrictEqual('594fd1d2-4836-4f2c-a615-cb57de277431');
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
             });
     });
 
-    afterAll(async () => 
+    test(`/GraphQL cciFindChannelById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        cciFindChannelById (id:$id)
+                        {
+                            id
+                            hash
+                            tenantCode
+                            systemName
+                            party
+                            component
+                            name
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            version
+                            adapterType
+                            direction
+                            transportProtocol
+                            messageProtocol
+                            adapterEngineName
+                            url
+                            username
+                            remoteHost
+                            remotePort
+                            directory
+                            fileSchema
+                            proxyHost
+                            proxyPort
+                            destination
+                            adapterStatus
+                            softwareComponentName
+                            responsibleUserAccountName
+                            lastChangeUserAccount
+                            lastChangedAt
+                            riInterfaceName
+                            riInterfaceNamespace
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciFindChannelById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciUpdateChannel - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:CciUpdateChannelInput!)
+                    {
+                        cciUpdateChannel (payload:$payload)
+                        {
+                            id
+                            hash
+                            tenantCode
+                            systemName
+                            party
+                            component
+                            name
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            version
+                            adapterType
+                            direction
+                            transportProtocol
+                            messageProtocol
+                            adapterEngineName
+                            url
+                            username
+                            remoteHost
+                            remotePort
+                            directory
+                            fileSchema
+                            proxyHost
+                            proxyPort
+                            destination
+                            adapterStatus
+                            softwareComponentName
+                            responsibleUserAccountName
+                            lastChangeUserAccount
+                            lastChangedAt
+                            riInterfaceName
+                            riInterfaceNamespace
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        hash: '12v8rbexch6iemni95gavle8lc44pkescnln7a3o',
+                        tenantId: 'be097f1b-71d1-4e1b-8c58-473271bff23a',
+                        tenantCode: '0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281z',
+                        systemId: 'bdf096b0-633a-4fa0-b0f9-065c35331eb3',
+                        systemName: 'v4ajo1l62460waru7gxt',
+                        party: 'obxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoa',
+                        component: 'kraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelg',
+                        name: 'ewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4a',
+                        flowHash: 'zd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jn',
+                        flowParty: 'unagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7c',
+                        flowReceiverParty: 'igf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo',
+                        flowComponent: '95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vn',
+                        flowReceiverComponent: 'u51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g',
+                        flowInterfaceName: '3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4',
+                        flowInterfaceNamespace: 'a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff',
+                        version: '9yo7uxtsg8w34a3f7ecw',
+                        adapterType: 'c6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh',
+                        direction: 'SENDER',
+                        transportProtocol: '2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1gl',
+                        messageProtocol: 'b0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9',
+                        adapterEngineName: 'sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzdntq2dwpfe69m3t43mgjqiqozv9',
+                        url: '88o5uvrvzar1sn5k5inohd66avgziqwkfrh5yokp5zfcokdax2wvhrolweqcbr4523r7pxmgq1lpka4smtlwwoy2z1yp7i4ky5d7hwje8mjrpcsxyqxcafwoiphu9onf67bj10ih0r2czpwg5xku796d23v2fei7jhepble3wu4exl1x0zul5p0qv2ahsrg3i6x7r6oxhxu0ox436wmc6e90hg1qzprjqegqzvxybflf53k64rl60ixc3yoyaq4b5dsnppzhh0xbxsyi61qmqd8xwa7ma0do4vxf1z4oqahtt2gnbyg2gqc383b9j7j5',
+                        username: '8ilxh0o635ynbj3p1314z4ruc5zxlgdcoh4hsr8rzap39slxzj92i3nx18hn',
+                        remoteHost: '9hbt8tv3vuko4uxvvr8x2yp6qei7j14xbrti9oc9y8vofpxqlihxol63jjd28cnmb26u3cr1n1wau1fehl2jqe2kq7kddrcscxpi1v8fkk0y7wdzv44cgydt008h03qs6v1s3v441yuxarbxog66bxf6rzih1co0',
+                        remotePort: 7116252422,
+                        directory: 'zrwmjkki9n0xafrh2tts2ar26nvhfkoolce3bf4nexrel1vcoekekzvv1jjhs9u4hfsdddm8a39ppv7xyaqfei961o369koum4imkc1rwsnb9udmb00415h2uwz7a70e309ux0etr9w04q0qhgr1q7xyavsxfmvtbul7chommvhfzwfi9lvwdsaqvbzknq6maqnsq25wy0mfgd0f2k115ic61q8pv27rolnkrburd6bu4lqfhbti9hdp863ipefk7u4y3r9eq1g5v533zqn2d3nckwn48lxkgpbbhemaoidurn08vcel26a4aarh150mtkezyia1iv9wz3jaxq3p8k3gk777c3pip5oa2t18jfxy91m5yjzzub21i7rudhhrx9h6mdk15q3b1xl8o6isub1nvd2sjanjdxnzy6w5xf0mslm3oo200c2burdu2hzb86dv8bz89y203r4lz15ox4syb1otjzbxr9rl5ys1tbh1sm9qjea15x7pg5p7hciz7rlqb8vxznizh7s4opar59gc6lpgvr297siy3265w1v2vtn6kwoe948o67j371bj5umen4uem0vfq56fqgfuedaosd98bn5sgja46113tk4uunvynd3frv6jzguefgic7mf1litwap9qwrwqkhf6brghmg60gp852jo45q9rtqs91wrs9hices2f07iqddtgfm4d1n1x8rxot6mq4z51hblu578t7n0ufrm2480vd51tl3vld5avxhioook57742o1sx4qzxwx5cxgh5o7wcw9m2ove6nku7nm5lgfh3eakk1auiq0xkhtklhp71tkkh6adt4aahkksvs7guhp70srcvzkkmlu8ykwen9458cyet0f5mddj2aukgrx8hyqhqd6qlprxssxoowdr7mqpb8uqmrnfh8us571ankn4ia4nw80fzvzrtg8auyirunqjrpm241k2gozmljs9ngt8aw4owofccs4nqyyx5hoj1bx9puuwxqlb2dr41buy2whe5',
+                        fileSchema: '9op1lzvhmsuvw2qefw8hvrad1pqrngmyos6r678dbgjooxjv7k37xxwapq77ouufx9rhbvlmw3qs1213eaoo19xvstcefqfyiyro60vfc347tdhmpkgmuvs0s2rl2rw8h8fvenog3akipxip0rxxhpi79xo4b1v0p7xpb8elonc2bm95z6lnhcqmbxg0amibbxqwgnmp6q8bnx1ozk5a7m4c8gq503b9r5iq53ybl21qjlmh9asgem85h5fqh8oqtjwqq5px3u2mdixhehurhjmb3fva1h8d3s8x3w8s0mtu4oqy8uyysznxmejjnj57ddyg32gvyhj10hwbp851iq0en7l2evkzf3dwnxp36xbzjhqeppba22k5ep4cw2hj1c03vulkw53zloynmuf40k0jzm03ol2gs28fof5brn295ev00pl5fpr16i5bty3qgxalocuiqydbdyimnzdg5w4q9c9z4letkq0aezvf8nozo8eeh4a265kk8j9xnwh192mw9bano05b3r30fxcdkvsx0fnye6lqsyc5s8fzayow7763087dt6i47v798y6vyz0hngo32mk8d42r7u9pisk89m400aucf83bobgi9y59mvzc4pt0rygqjfw2rvbzkgrk7jthli3yy3g7uhg0cjwnmn19te8nij49r8dtgnw0z7xaa1bgv3340l7z44rztqrl95uziyjzt4rtul8p2oyx4dwzcj4vrhw71x1bywjfb36rxna4aq89h89zdt6g2r3f5mvwhalni05jyxtd9y50918chekg87jnntb45wy8y5dhn0wuzzxfcb7eetadoxirl0ulwniy1klatdzdb3emc36fvxpp6mnetdg26dzv3u2sgmaetnd737pxos24ar0x7b9ze15qfnp8k0zpe2rucrutdyf0z2k4xzyj6251lfivuzo19kgdlluuu7xm12bmjx83cndbxa71way162l2pst9uq8l8hbjqgukt7p1vn67yani904xwhqarkwk',
+                        proxyHost: 'pj264ostad0tyxsweml5j2ec1kjj1tu7s7e3sjhasog9775z0hv5d133pnik',
+                        proxyPort: 6317280425,
+                        destination: 'n1iyzy5fhdvk3wfpxduvavsx9yvgxs28u85824fuwujnpty5mtpjiky375g1bfy4caab6qzcpbx27udkf4vajs1iateeknrr41ova3ow7lydznhpz6cyijzsxaesnow3x59e53mhwtnvyc98uime6dtazli2jnlf',
+                        adapterStatus: 'ACTIVE',
+                        softwareComponentName: '12pdl0ooxdkmnnos0fx4nefwd3vjem4besqydofd5xqdd789yos16ez640pylnmc890ss8g10hie6o7i4usuaw196jmt9gt4zs5itpkcgtdf66bfuipzjt631cho9jbj5sr9cdczflr5f7orvaol902i1e0aqba3',
+                        responsibleUserAccountName: 'ujbohphb0q0revh1jkig',
+                        lastChangeUserAccount: 'ldqw5wjha97gmzy0tyyc',
+                        lastChangedAt: '2021-05-23 06:01:59',
+                        riInterfaceName: 'gp339imtubhbktzimvzifkttlw9lrkhudewn1jbovtal5p25rbhtm63cb3d98qvujtwvymve6a3o24f45ahh67q93f9cmcmzlekvapvc56zmr798yifec4025q585wj91c8mizhu0ic8m5ntm2suaifuk5mxcy87',
+                        riInterfaceNamespace: 'mlboaeb6mcnah4cldkymlbxzxqkbm3eokxyim3q65p2q3p9oeonp59mamaetvgbc9ywua03dqlbv642g9xe0ib3tp2rgthir1dqbiexrb69iqj7dpyipci2mc9tt107arcp8mmk9uvlckfy16o8y2eou640j25q6',
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciUpdateChannel`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:CciUpdateChannelInput!)
+                    {
+                        cciUpdateChannel (payload:$payload)
+                        {
+                            id
+                            hash
+                            tenantCode
+                            systemName
+                            party
+                            component
+                            name
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            version
+                            adapterType
+                            direction
+                            transportProtocol
+                            messageProtocol
+                            adapterEngineName
+                            url
+                            username
+                            remoteHost
+                            remotePort
+                            directory
+                            fileSchema
+                            proxyHost
+                            proxyPort
+                            destination
+                            adapterStatus
+                            softwareComponentName
+                            responsibleUserAccountName
+                            lastChangeUserAccount
+                            lastChangedAt
+                            riInterfaceName
+                            riInterfaceNamespace
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        hash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        systemName: '4iyw9pwsdxcmgcu744j2',
+                        party: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        component: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                        flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        version: '4iyw9pwsdxcmgcu744j2',
+                        adapterType: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        direction: 'RECEIVER',
+                        transportProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        messageProtocol: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        adapterEngineName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        url: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tg',
+                        username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        remoteHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        remotePort: 2072313091,
+                        directory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                        fileSchema: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m',
+                        proxyHost: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        proxyPort: 1148929850,
+                        destination: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        adapterStatus: 'INACTIVE',
+                        softwareComponentName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        responsibleUserAccountName: '4iyw9pwsdxcmgcu744j2',
+                        lastChangeUserAccount: '4iyw9pwsdxcmgcu744j2',
+                        lastChangedAt: '2021-05-23 11:11:58',
+                        riInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        riInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciUpdateChannel.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciDeleteChannelById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        cciDeleteChannelById (id:$id)
+                        {
+                            id
+                            hash
+                            tenantCode
+                            systemName
+                            party
+                            component
+                            name
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            version
+                            adapterType
+                            direction
+                            transportProtocol
+                            messageProtocol
+                            adapterEngineName
+                            url
+                            username
+                            remoteHost
+                            remotePort
+                            directory
+                            fileSchema
+                            proxyHost
+                            proxyPort
+                            destination
+                            adapterStatus
+                            softwareComponentName
+                            responsibleUserAccountName
+                            lastChangeUserAccount
+                            lastChangedAt
+                            riInterfaceName
+                            riInterfaceNamespace
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '002cf6b1-c6a5-439b-81fa-1a8831694ca7'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciDeleteChannelById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        cciDeleteChannelById (id:$id)
+                        {
+                            id
+                            hash
+                            tenantCode
+                            systemName
+                            party
+                            component
+                            name
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            version
+                            adapterType
+                            direction
+                            transportProtocol
+                            messageProtocol
+                            adapterEngineName
+                            url
+                            username
+                            remoteHost
+                            remotePort
+                            directory
+                            fileSchema
+                            proxyHost
+                            proxyPort
+                            destination
+                            adapterStatus
+                            softwareComponentName
+                            responsibleUserAccountName
+                            lastChangeUserAccount
+                            lastChangedAt
+                            riInterfaceName
+                            riInterfaceNamespace
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciDeleteChannelById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    afterAll(async () =>
     {
         await app.close();
     });

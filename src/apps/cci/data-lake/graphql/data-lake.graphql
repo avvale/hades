@@ -33,17 +33,17 @@ input CciUpdateDataLakeInput
 
 type Query
 {
-    cciFindDataLake(query:QueryStatement constraint:QueryStatement): CciDataLake
-    cciFindDataLakeById(id:ID constraint:QueryStatement): CciDataLake
-    cciGetDataLakes(query:QueryStatement constraint:QueryStatement): [CciDataLake]!
-    cciPaginateDataLakes(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindDataLake(query: QueryStatement constraint: QueryStatement): CciDataLake
+    cciFindDataLakeById(id: ID constraint: QueryStatement): CciDataLake
+    cciGetDataLakes(query: QueryStatement constraint: QueryStatement): [CciDataLake]!
+    cciPaginateDataLakes(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateDataLake(payload: CciCreateDataLakeInput!): CciDataLake
     cciCreateDataLakes(payload: [CciCreateDataLakeInput]!): Boolean!
-    cciUpdateDataLake(payload: CciUpdateDataLakeInput! constraint:QueryStatement): CciDataLake
-    cciDeleteDataLakeById(id: ID! constraint:QueryStatement): CciDataLake
-    cciDeleteDataLakes(query:QueryStatement constraint:QueryStatement): [CciDataLake]!
+    cciUpdateDataLake(payload: CciUpdateDataLakeInput! constraint: QueryStatement): CciDataLake
+    cciDeleteDataLakeById(id: ID! constraint: QueryStatement): CciDataLake
+    cciDeleteDataLakes(query: QueryStatement constraint: QueryStatement): [CciDataLake]!
 }

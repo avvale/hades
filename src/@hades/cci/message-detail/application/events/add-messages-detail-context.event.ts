@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciMessageDetail } from './../../domain/message-detail.aggregate';
 import { CreatedMessageDetailEvent } from './created-message-detail.event';
-import { DeletedMessageDetailEvent } from './deleted-message-detail.event';
 import { CreatedMessagesDetailEvent } from './created-messages-detail.event';
+import { DeletedMessageDetailEvent } from './deleted-message-detail.event';
 import { DeletedMessagesDetailEvent } from './deleted-messages-detail.event';
 
 export class AddMessagesDetailContextEvent extends AggregateRoot

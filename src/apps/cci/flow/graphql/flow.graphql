@@ -93,17 +93,17 @@ input CciUpdateFlowInput
 
 type Query
 {
-    cciFindFlow(query:QueryStatement constraint:QueryStatement): CciFlow
-    cciFindFlowById(id:ID constraint:QueryStatement): CciFlow
-    cciGetFlows(query:QueryStatement constraint:QueryStatement): [CciFlow]!
-    cciPaginateFlows(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindFlow(query: QueryStatement constraint: QueryStatement): CciFlow
+    cciFindFlowById(id: ID constraint: QueryStatement): CciFlow
+    cciGetFlows(query: QueryStatement constraint: QueryStatement): [CciFlow]!
+    cciPaginateFlows(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateFlow(payload: CciCreateFlowInput!): CciFlow
     cciCreateFlows(payload: [CciCreateFlowInput]!): Boolean!
-    cciUpdateFlow(payload: CciUpdateFlowInput! constraint:QueryStatement): CciFlow
-    cciDeleteFlowById(id: ID! constraint:QueryStatement): CciFlow
-    cciDeleteFlows(query:QueryStatement constraint:QueryStatement): [CciFlow]!
+    cciUpdateFlow(payload: CciUpdateFlowInput! constraint: QueryStatement): CciFlow
+    cciDeleteFlowById(id: ID! constraint: QueryStatement): CciFlow
+    cciDeleteFlows(query: QueryStatement constraint: QueryStatement): [CciFlow]!
 }

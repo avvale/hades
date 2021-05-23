@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
-@Table({ modelName: 'cci_data_lake', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciDataLake', freezeTableName: true, timestamps: false })
 export class CciDataLakeModel extends Model<CciDataLakeModel>
 {
     @Column({
@@ -17,7 +16,7 @@ export class CciDataLakeModel extends Model<CciDataLakeModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -33,7 +32,7 @@ export class CciDataLakeModel extends Model<CciDataLakeModel>
 
     @ForeignKey(() => CciExecutionModel)
     @Column({
-        field: 'execution_id',
+        field: 'executionId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -48,7 +47,7 @@ export class CciDataLakeModel extends Model<CciDataLakeModel>
     execution: CciExecutionModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -62,21 +61,21 @@ export class CciDataLakeModel extends Model<CciDataLakeModel>
     payload: any;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

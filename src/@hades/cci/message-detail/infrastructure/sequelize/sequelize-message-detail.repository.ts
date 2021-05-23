@@ -12,7 +12,6 @@ export class SequelizeMessageDetailRepository extends SequelizeRepository<CciMes
 {
     public readonly aggregateName: string = 'CciMessageDetail';
     public readonly mapper: MessageDetailMapper = new MessageDetailMapper();
-    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','startTimeAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciMessageDetailModel)

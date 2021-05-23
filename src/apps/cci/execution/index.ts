@@ -14,8 +14,8 @@ import { CciCreateExecutionResolver } from './resolvers/cci-create-execution.res
 import { CciCreateExecutionsResolver } from './resolvers/cci-create-executions.resolver';
 import { CciPaginateExecutionsResolver } from './resolvers/cci-paginate-executions.resolver';
 import { CciGetExecutionsResolver } from './resolvers/cci-get-executions.resolver';
-import { CciFindExecutionResolver } from './resolvers/cci-find-execution.resolver';
 import { CciFindExecutionByIdResolver } from './resolvers/cci-find-execution-by-id.resolver';
+import { CciFindExecutionResolver } from './resolvers/cci-find-execution.resolver';
 import { CciUpdateExecutionResolver } from './resolvers/cci-update-execution.resolver';
 import { CciDeleteExecutionByIdResolver } from './resolvers/cci-delete-execution-by-id.resolver';
 import { CciDeleteExecutionsResolver } from './resolvers/cci-delete-executions.resolver';
@@ -37,8 +37,8 @@ export const CciExecutionResolvers = [
     CciCreateExecutionsResolver,
     CciPaginateExecutionsResolver,
     CciGetExecutionsResolver,
-    CciFindExecutionResolver,
     CciFindExecutionByIdResolver,
+    CciFindExecutionResolver,
     CciUpdateExecutionResolver,
     CciDeleteExecutionByIdResolver,
     CciDeleteExecutionsResolver,

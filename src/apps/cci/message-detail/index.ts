@@ -14,8 +14,8 @@ import { CciCreateMessageDetailResolver } from './resolvers/cci-create-message-d
 import { CciCreateMessagesDetailResolver } from './resolvers/cci-create-messages-detail.resolver';
 import { CciPaginateMessagesDetailResolver } from './resolvers/cci-paginate-messages-detail.resolver';
 import { CciGetMessagesDetailResolver } from './resolvers/cci-get-messages-detail.resolver';
-import { CciFindMessageDetailResolver } from './resolvers/cci-find-message-detail.resolver';
 import { CciFindMessageDetailByIdResolver } from './resolvers/cci-find-message-detail-by-id.resolver';
+import { CciFindMessageDetailResolver } from './resolvers/cci-find-message-detail.resolver';
 import { CciUpdateMessageDetailResolver } from './resolvers/cci-update-message-detail.resolver';
 import { CciDeleteMessageDetailByIdResolver } from './resolvers/cci-delete-message-detail-by-id.resolver';
 import { CciDeleteMessagesDetailResolver } from './resolvers/cci-delete-messages-detail.resolver';
@@ -37,8 +37,8 @@ export const CciMessageDetailResolvers = [
     CciCreateMessagesDetailResolver,
     CciPaginateMessagesDetailResolver,
     CciGetMessagesDetailResolver,
-    CciFindMessageDetailResolver,
     CciFindMessageDetailByIdResolver,
+    CciFindMessageDetailResolver,
     CciUpdateMessageDetailResolver,
     CciDeleteMessageDetailByIdResolver,
     CciDeleteMessagesDetailResolver,

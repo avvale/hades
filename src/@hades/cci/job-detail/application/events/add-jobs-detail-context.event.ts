@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciJobDetail } from './../../domain/job-detail.aggregate';
 import { CreatedJobDetailEvent } from './created-job-detail.event';
-import { DeletedJobDetailEvent } from './deleted-job-detail.event';
 import { CreatedJobsDetailEvent } from './created-jobs-detail.event';
+import { DeletedJobDetailEvent } from './deleted-job-detail.event';
 import { DeletedJobsDetailEvent } from './deleted-jobs-detail.event';
 
 export class AddJobsDetailContextEvent extends AggregateRoot

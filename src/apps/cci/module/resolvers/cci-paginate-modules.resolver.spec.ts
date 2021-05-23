@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { modules } from '@hades/cci/module/infrastructure/seeds/module.seed';
 
-describe('CciPaginateModulesResolver', () => 
+describe('CciPaginateModulesResolver', () =>
 {
     let resolver: CciPaginateModulesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciPaginateModulesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciPaginateModulesResolver should be defined', () => 
+    test('CciPaginateModulesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciPaginateModulesResolver should be defined', () => 
+        test('CciPaginateModulesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a modules', async () => 
+        test('should return a modules', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(modules)));
             expect(await resolver.main()).toBe(modules);

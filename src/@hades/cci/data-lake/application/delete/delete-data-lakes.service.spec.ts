@@ -6,13 +6,13 @@ import { DeleteDataLakesService } from './delete-data-lakes.service';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
-describe('DeleteDataLakesService', () => 
+describe('DeleteDataLakesService', () =>
 {
     let service: DeleteDataLakesService;
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteDataLakesService', () =>
                 EventPublisher,
                 DeleteDataLakesService,
                 MockDataLakeRepository,
-                { 
+                {
                     provide: IDataLakeRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteDataLakesService', () =>
         mockRepository  = module.get(MockDataLakeRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteDataLakesService should be defined', () => 
+        test('DeleteDataLakesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete dataLake and emit event', async () => 
+        test('should delete dataLake and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

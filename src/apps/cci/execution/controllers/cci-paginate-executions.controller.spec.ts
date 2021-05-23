@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.seed';
 
-describe('CciPaginateExecutionsController', () => 
+describe('CciPaginateExecutionsController', () =>
 {
     let controller: CciPaginateExecutionsController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('CciPaginateExecutionsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciPaginateExecutionsController should be defined', () => 
+        test('CciPaginateExecutionsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a executions', async () => 
+        test('should return a executions', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions)));
             expect(await controller.main()).toBe(executions);

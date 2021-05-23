@@ -1,11 +1,10 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
-@Table({ modelName: 'cci_message_overview', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciMessageOverview', freezeTableName: true, timestamps: false })
 export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
 {
     @Column({
@@ -18,7 +17,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -33,7 +32,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -41,7 +40,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -56,7 +55,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -64,7 +63,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
 
     @ForeignKey(() => CciExecutionModel)
     @Column({
-        field: 'execution_id',
+        field: 'executionId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -79,42 +78,42 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     execution: CciExecutionModel;
 
     @Column({
-        field: 'execution_type',
+        field: 'executionType',
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
     })
     executionType: string;
 
     @Column({
-        field: 'execution_executed_at',
+        field: 'executionExecutedAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionExecutedAt: string;
 
     @Column({
-        field: 'execution_monitoring_start_at',
+        field: 'executionMonitoringStartAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionMonitoringStartAt: string;
 
     @Column({
-        field: 'execution_monitoring_end_at',
+        field: 'executionMonitoringEndAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionMonitoringEndAt: string;
 
     @Column({
-        field: 'number_max',
+        field: 'numberMax',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
     numberMax: number;
 
     @Column({
-        field: 'number_days',
+        field: 'numberDays',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
@@ -156,7 +155,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     holding: number;
 
     @Column({
-        field: 'to_be_delivered',
+        field: 'toBeDelivered',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
@@ -170,21 +169,21 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     waiting: number;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

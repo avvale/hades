@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciDataLake } from './../../domain/data-lake.aggregate';
 import { CreatedDataLakeEvent } from './created-data-lake.event';
-import { DeletedDataLakeEvent } from './deleted-data-lake.event';
 import { CreatedDataLakesEvent } from './created-data-lakes.event';
+import { DeletedDataLakeEvent } from './deleted-data-lake.event';
 import { DeletedDataLakesEvent } from './deleted-data-lakes.event';
 
 export class AddDataLakesContextEvent extends AggregateRoot

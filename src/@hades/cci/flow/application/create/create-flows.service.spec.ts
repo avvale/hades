@@ -6,13 +6,13 @@ import { CreateFlowsService } from './create-flows.service';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
-describe('CreateFlowsService', () => 
+describe('CreateFlowsService', () =>
 {
     let service: CreateFlowsService;
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateFlowsService', () =>
                 EventPublisher,
                 CreateFlowsService,
                 MockFlowRepository,
-                { 
+                {
                     provide: IFlowRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateFlowsService', () =>
         mockRepository  = module.get(MockFlowRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateFlowsService should be defined', () => 
+        test('CreateFlowsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create flows and emit event', async () => 
+        test('should create flows and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource
