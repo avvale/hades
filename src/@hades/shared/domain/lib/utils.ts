@@ -3,8 +3,15 @@ import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import * as path from 'path';
 import * as mime from 'mime';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import * as dayjs from 'dayjs';
 declare const Buffer: any;
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(advancedFormat);
 
 export class Utils
 {

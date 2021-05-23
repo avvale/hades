@@ -1,8 +1,10 @@
 import { BadRequestException } from '@nestjs/common';
 import { StringValueObject } from './string.value-object';
 import { Utils } from './../lib/utils';
+import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as dayjs from 'dayjs';
+dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export abstract class TimestampValueObject extends StringValueObject
