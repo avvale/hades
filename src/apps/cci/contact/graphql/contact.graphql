@@ -64,17 +64,17 @@ input CciUpdateContactInput
 
 type Query
 {
-    cciFindContact(query:QueryStatement constraint:QueryStatement): CciContact
-    cciFindContactById(id:ID constraint:QueryStatement): CciContact
-    cciGetContacts(query:QueryStatement constraint:QueryStatement): [CciContact]!
-    cciPaginateContacts(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindContact(query: QueryStatement constraint: QueryStatement): CciContact
+    cciFindContactById(id: ID constraint: QueryStatement): CciContact
+    cciGetContacts(query: QueryStatement constraint: QueryStatement): [CciContact]!
+    cciPaginateContacts(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateContact(payload: CciCreateContactInput!): CciContact
     cciCreateContacts(payload: [CciCreateContactInput]!): Boolean!
-    cciUpdateContact(payload: CciUpdateContactInput! constraint:QueryStatement): CciContact
-    cciDeleteContactById(id: ID! constraint:QueryStatement): CciContact
-    cciDeleteContacts(query:QueryStatement constraint:QueryStatement): [CciContact]!
+    cciUpdateContact(payload: CciUpdateContactInput! constraint: QueryStatement): CciContact
+    cciDeleteContactById(id: ID! constraint: QueryStatement): CciContact
+    cciDeleteContacts(query: QueryStatement constraint: QueryStatement): [CciContact]!
 }

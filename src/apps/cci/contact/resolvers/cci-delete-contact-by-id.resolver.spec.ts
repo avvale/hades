@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 
-describe('CciDeleteContactByIdResolver', () => 
+describe('CciDeleteContactByIdResolver', () =>
 {
     let resolver: CciDeleteContactByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciDeleteContactByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciDeleteContactByIdResolver should be defined', () => 
+    test('CciDeleteContactByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteContactByIdResolver should be defined', () => 
+        test('CciDeleteContactByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an contact deleted', async () => 
+        test('should return an contact deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(contacts[0])));
             expect(await resolver.main(contacts[0].id)).toBe(contacts[0]);

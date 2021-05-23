@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 import { CciCreateContactInput } from './../../../../graphql';
 
-describe('CciCreateContactsResolver', () => 
+describe('CciCreateContactsResolver', () =>
 {
     let resolver: CciCreateContactsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateContactsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateContactsResolver should be defined', () => 
+    test('CciCreateContactsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateContactsResolver should be defined', () => 
+        test('CciCreateContactsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an contacts created', async () => 
+        test('should return an contacts created', async () =>
         {
             expect(await resolver.main(<CciCreateContactInput[]>contacts)).toBe(true);
         });

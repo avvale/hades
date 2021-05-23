@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.seed';
 
-describe('CciDeleteDataLakesResolver', () => 
+describe('CciDeleteDataLakesResolver', () =>
 {
     let resolver: CciDeleteDataLakesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciDeleteDataLakesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciDeleteDataLakesResolver should be defined', () => 
+    test('CciDeleteDataLakesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteDataLakesResolver should be defined', () => 
+        test('CciDeleteDataLakesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an dataLakes deleted', async () => 
+        test('should return an dataLakes deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(dataLakes)));
             expect(await resolver.main()).toBe(dataLakes);

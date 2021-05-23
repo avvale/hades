@@ -13,7 +13,7 @@ describe('CciCreateContactResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateContactResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateContactResolver should be defined', () => 
+    test('CciCreateContactResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateContactResolver should be defined', () => 
+        test('CciCreateContactResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an contact created', async () => 
+        test('should return an contact created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(contacts[0])));
             expect(await resolver.main(<CciCreateContactInput>contacts[0])).toBe(contacts[0]);

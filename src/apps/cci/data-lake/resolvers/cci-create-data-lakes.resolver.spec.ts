@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.seed';
 import { CciCreateDataLakeInput } from './../../../../graphql';
 
-describe('CciCreateDataLakesResolver', () => 
+describe('CciCreateDataLakesResolver', () =>
 {
     let resolver: CciCreateDataLakesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateDataLakesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateDataLakesResolver should be defined', () => 
+    test('CciCreateDataLakesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateDataLakesResolver should be defined', () => 
+        test('CciCreateDataLakesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an dataLakes created', async () => 
+        test('should return an dataLakes created', async () =>
         {
             expect(await resolver.main(<CciCreateDataLakeInput[]>dataLakes)).toBe(true);
         });

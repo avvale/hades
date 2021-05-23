@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.seed';
 
-describe('CciFindDataLakeResolver', () => 
+describe('CciFindDataLakeResolver', () =>
 {
     let resolver: CciFindDataLakeResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciFindDataLakeResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciFindDataLakeResolver should be defined', () => 
+    test('CciFindDataLakeResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciFindDataLakeResolver should be defined', () => 
+        test('CciFindDataLakeResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a dataLake', async () => 
+        test('should return a dataLake', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(dataLakes[0])));
             expect(await resolver.main()).toBe(dataLakes[0]);
