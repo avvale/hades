@@ -12,7 +12,6 @@ export class SequelizeDataLakeRepository extends SequelizeRepository<CciDataLake
 {
     public readonly aggregateName: string = 'CciDataLake';
     public readonly mapper: DataLakeMapper = new DataLakeMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciDataLakeModel)

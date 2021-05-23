@@ -12,7 +12,6 @@ export class SequelizeContactRepository extends SequelizeRepository<CciContact, 
 {
     public readonly aggregateName: string = 'CciContact';
     public readonly mapper: ContactMapper = new ContactMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciContactModel)

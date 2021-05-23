@@ -12,7 +12,6 @@ export class SequelizeJobDetailRepository extends SequelizeRepository<CciJobDeta
 {
     public readonly aggregateName: string = 'CciJobDetail';
     public readonly mapper: JobDetailMapper = new JobDetailMapper();
-    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','startAt','endAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciJobDetailModel)

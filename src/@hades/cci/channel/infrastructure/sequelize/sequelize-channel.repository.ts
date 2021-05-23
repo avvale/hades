@@ -12,7 +12,6 @@ export class SequelizeChannelRepository extends SequelizeRepository<CciChannel, 
 {
     public readonly aggregateName: string = 'CciChannel';
     public readonly mapper: ChannelMapper = new ChannelMapper();
-    public readonly timezoneColumns: string[] = ['lastChangedAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciChannelModel)

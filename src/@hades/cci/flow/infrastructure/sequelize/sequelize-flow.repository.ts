@@ -12,7 +12,6 @@ export class SequelizeFlowRepository extends SequelizeRepository<CciFlow, CciFlo
 {
     public readonly aggregateName: string = 'CciFlow';
     public readonly mapper: FlowMapper = new FlowMapper();
-    public readonly timezoneColumns: string[] = ['lastChangedAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciFlowModel)

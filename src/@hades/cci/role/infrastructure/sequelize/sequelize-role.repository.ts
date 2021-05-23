@@ -12,7 +12,6 @@ export class SequelizeRoleRepository extends SequelizeRepository<CciRole, CciRol
 {
     public readonly aggregateName: string = 'CciRole';
     public readonly mapper: RoleMapper = new RoleMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciRoleModel)
