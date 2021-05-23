@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
 import { CreatedChannelOverviewEvent } from './created-channel-overview.event';
-import { DeletedChannelOverviewEvent } from './deleted-channel-overview.event';
 import { CreatedChannelsOverviewEvent } from './created-channels-overview.event';
+import { DeletedChannelOverviewEvent } from './deleted-channel-overview.event';
 import { DeletedChannelsOverviewEvent } from './deleted-channels-overview.event';
 
 export class AddChannelsOverviewContextEvent extends AggregateRoot

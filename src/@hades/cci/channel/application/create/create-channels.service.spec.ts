@@ -6,13 +6,13 @@ import { CreateChannelsService } from './create-channels.service';
 import { IChannelRepository } from './../../domain/channel.repository';
 import { MockChannelRepository } from './../../infrastructure/mock/mock-channel.repository';
 
-describe('CreateChannelsService', () => 
+describe('CreateChannelsService', () =>
 {
     let service: CreateChannelsService;
     let repository: IChannelRepository;
     let mockRepository: MockChannelRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateChannelsService', () =>
                 EventPublisher,
                 CreateChannelsService,
                 MockChannelRepository,
-                { 
+                {
                     provide: IChannelRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateChannelsService', () =>
         mockRepository  = module.get(MockChannelRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateChannelsService should be defined', () => 
+        test('CreateChannelsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create channels and emit event', async () => 
+        test('should create channels and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

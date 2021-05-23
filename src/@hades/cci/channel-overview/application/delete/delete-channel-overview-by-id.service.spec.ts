@@ -8,7 +8,7 @@ import { ChannelOverviewId } from './../../domain/value-objects';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { MockChannelOverviewRepository } from './../../infrastructure/mock/mock-channel-overview.repository';
 
-describe('DeleteChannelOverviewByIdService', () => 
+describe('DeleteChannelOverviewByIdService', () =>
 {
     let service: DeleteChannelOverviewByIdService;
     let repository: IChannelOverviewRepository;
@@ -38,14 +38,14 @@ describe('DeleteChannelOverviewByIdService', () =>
         mockRepository  = module.get(MockChannelOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteChannelOverviewByIdService should be defined', () => 
+        test('DeleteChannelOverviewByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete channelOverview and emit event', async () => 
+        test('should delete channelOverview and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
