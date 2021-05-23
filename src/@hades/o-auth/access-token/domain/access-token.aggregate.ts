@@ -12,7 +12,6 @@ import {
     AccessTokenDeletedAt,
 } from './value-objects';
 import { CreatedAccessTokenEvent } from './../application/events/created-access-token.event';
-import { UpdatedAccessTokenEvent } from './../application/events/updated-access-token.event';
 import { DeletedAccessTokenEvent } from './../application/events/deleted-access-token.event';
 import { OAuthRefreshToken } from '@hades/o-auth/refresh-token/domain/refresh-token.aggregate';
 import { OAuthClient } from '@hades/o-auth/client/domain/client.aggregate';
@@ -116,23 +115,6 @@ export class OAuthAccessToken extends AggregateRoot
         );
     }
 
-    updated(accessToken: OAuthAccessToken): void
-    {
-        this.apply(
-            new UpdatedAccessTokenEvent(
-                accessToken.id.value,
-                accessToken.clientId?.value,
-                accessToken.accountId?.value,
-                accessToken.token?.value,
-                accessToken.name?.value,
-                accessToken.isRevoked?.value,
-                accessToken.expiresAt?.value,
-                accessToken.createdAt?.value,
-                accessToken.updatedAt?.value,
-                accessToken.deletedAt?.value,
-            )
-        );
-    }
 
     deleted(accessToken: OAuthAccessToken): void
     {

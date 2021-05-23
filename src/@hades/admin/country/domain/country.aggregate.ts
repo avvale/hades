@@ -1,20 +1,20 @@
+// ignored file
 import { AggregateRoot } from '@nestjs/cqrs';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
+    CountryI18nLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
     CountryCustomCode,
     CountryPrefix,
-    CountryName,
-    CountrySlug,
+    CountryI18nName,
+    CountryI18nSlug,
     CountryImage,
     CountrySort,
-    CountryAdministrativeAreaLevel1,
-    CountryAdministrativeAreaLevel2,
-    CountryAdministrativeAreaLevel3,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
     CountryAdministrativeAreas,
     CountryLatitude,
     CountryLongitude,
@@ -28,24 +28,18 @@ import { CreatedCountryEvent } from './../application/events/created-country.eve
 import { UpdatedCountryEvent } from './../application/events/updated-country.event';
 import { DeletedCountryEvent } from './../application/events/deleted-country.event';
 import { AdminLang } from '@hades/admin/lang/domain/lang.aggregate';
+import { Utils } from '@hades/shared/domain/lib/utils';
 
 export class AdminCountry extends AggregateRoot
 {
     id: CountryId;
-    commonId: CountryCommonId;
-    langId: CountryLangId;
     iso3166Alpha2: CountryIso3166Alpha2;
     iso3166Alpha3: CountryIso3166Alpha3;
     iso3166Numeric: CountryIso3166Numeric;
     customCode: CountryCustomCode;
     prefix: CountryPrefix;
-    name: CountryName;
-    slug: CountrySlug;
     image: CountryImage;
     sort: CountrySort;
-    administrativeAreaLevel1: CountryAdministrativeAreaLevel1;
-    administrativeAreaLevel2: CountryAdministrativeAreaLevel2;
-    administrativeAreaLevel3: CountryAdministrativeAreaLevel3;
     administrativeAreas: CountryAdministrativeAreas;
     latitude: CountryLatitude;
     longitude: CountryLongitude;
@@ -55,25 +49,32 @@ export class AdminCountry extends AggregateRoot
     updatedAt: CountryUpdatedAt;
     deletedAt: CountryDeletedAt;
 
+    // i18n
+    langId: CountryI18nLangId;
+    name: CountryI18nName;
+    slug: CountryI18nSlug;
+    administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1;
+    administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2;
+    administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3;
+
     // eager relationship
     lang: AdminLang;
 
     constructor(
         id: CountryId,
-        commonId: CountryCommonId,
-        langId: CountryLangId,
+        langId: CountryI18nLangId,
         iso3166Alpha2: CountryIso3166Alpha2,
         iso3166Alpha3: CountryIso3166Alpha3,
         iso3166Numeric: CountryIso3166Numeric,
         customCode: CountryCustomCode,
         prefix: CountryPrefix,
-        name: CountryName,
-        slug: CountrySlug,
+        name: CountryI18nName,
+        slug: CountryI18nSlug,
         image: CountryImage,
         sort: CountrySort,
-        administrativeAreaLevel1: CountryAdministrativeAreaLevel1,
-        administrativeAreaLevel2: CountryAdministrativeAreaLevel2,
-        administrativeAreaLevel3: CountryAdministrativeAreaLevel3,
+        administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1,
+        administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2,
+        administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3,
         administrativeAreas: CountryAdministrativeAreas,
         latitude: CountryLatitude,
         longitude: CountryLongitude,
@@ -88,7 +89,6 @@ export class AdminCountry extends AggregateRoot
         super();
 
         this.id = id;
-        this.commonId = commonId;
         this.langId = langId;
         this.iso3166Alpha2 = iso3166Alpha2;
         this.iso3166Alpha3 = iso3166Alpha3;
@@ -117,20 +117,19 @@ export class AdminCountry extends AggregateRoot
 
     static register (
         id: CountryId,
-        commonId: CountryCommonId,
-        langId: CountryLangId,
+        langId: CountryI18nLangId,
         iso3166Alpha2: CountryIso3166Alpha2,
         iso3166Alpha3: CountryIso3166Alpha3,
         iso3166Numeric: CountryIso3166Numeric,
         customCode: CountryCustomCode,
         prefix: CountryPrefix,
-        name: CountryName,
-        slug: CountrySlug,
+        name: CountryI18nName,
+        slug: CountryI18nSlug,
         image: CountryImage,
         sort: CountrySort,
-        administrativeAreaLevel1: CountryAdministrativeAreaLevel1,
-        administrativeAreaLevel2: CountryAdministrativeAreaLevel2,
-        administrativeAreaLevel3: CountryAdministrativeAreaLevel3,
+        administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1,
+        administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2,
+        administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3,
         administrativeAreas: CountryAdministrativeAreas,
         latitude: CountryLatitude,
         longitude: CountryLongitude,
@@ -144,7 +143,6 @@ export class AdminCountry extends AggregateRoot
     {
         return new AdminCountry(
             id,
-            commonId,
             langId,
             iso3166Alpha2,
             iso3166Alpha3,
@@ -175,7 +173,6 @@ export class AdminCountry extends AggregateRoot
         this.apply(
             new CreatedCountryEvent(
                 country.id.value,
-                country.commonId.value,
                 country.langId.value,
                 country.iso3166Alpha2.value,
                 country.iso3166Alpha3.value,
@@ -206,7 +203,6 @@ export class AdminCountry extends AggregateRoot
         this.apply(
             new UpdatedCountryEvent(
                 country.id.value,
-                country.commonId?.value,
                 country.langId?.value,
                 country.iso3166Alpha2?.value,
                 country.iso3166Alpha3?.value,
@@ -237,7 +233,6 @@ export class AdminCountry extends AggregateRoot
         this.apply(
             new DeletedCountryEvent(
                 country.id.value,
-                country.commonId.value,
                 country.langId.value,
                 country.iso3166Alpha2.value,
                 country.iso3166Alpha3.value,
@@ -267,7 +262,6 @@ export class AdminCountry extends AggregateRoot
     {
         return {
             id: this.id.value,
-            commonId: this.commonId.value,
             langId: this.langId.value,
             iso3166Alpha2: this.iso3166Alpha2.value,
             iso3166Alpha3: this.iso3166Alpha3.value,
@@ -292,6 +286,24 @@ export class AdminCountry extends AggregateRoot
 
             // eager relationship
             lang: this.lang?.toDTO(),
+        }
+    }
+
+    toI18nDTO(): Object
+    {
+        return {
+            id: Utils.uuid(),
+            langId: this.langId.value,
+            countryId: this.id.value,
+            name: this.name.value,
+            slug: this.slug.value,
+            administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
+            administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
+            administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
+            administrativeAreas: this.administrativeAreas?.value,
+            createdAt: this.createdAt?.value,
+            updatedAt: this.updatedAt?.value,
+            deletedAt: this.deletedAt?.value,
         }
     }
 }

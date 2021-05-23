@@ -6,12 +6,12 @@ import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { CreateUsersCommand } from './create-users.command';
 import { CreateUsersService } from './create-users.service';
 
-describe('CreateUsersCommandHandler', () => 
+describe('CreateUsersCommandHandler', () =>
 {
     let commandHandler: CreateUsersCommandHandler;
     let service: CreateUsersService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateUsersCommandHandler', () =>
         service         = module.get<CreateUsersService>(CreateUsersService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateUsersCommandHandler should be defined', () => 
+        test('CreateUsersCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an user created', async () => 
+        test('should return an user created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateUsersCommand(
                     users
-                
+
                 )
             )).toBe(undefined);
         });

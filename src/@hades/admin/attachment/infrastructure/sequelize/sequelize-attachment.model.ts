@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminAttachmentFamilyModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-family.model';
 import { AdminAttachmentLibraryModel } from '@hades/admin/attachment-library/infrastructure/sequelize/sequelize-attachment-library.model';
 
-@Table({ modelName: 'admin_attachment', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'AdminAttachment', freezeTableName: true, timestamps: false })
 export class AdminAttachmentModel extends Model<AdminAttachmentModel>
 {
     @Column({
@@ -16,29 +15,15 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     id: string;
 
     @Column({
-        field: 'common_id',
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    commonId: string;
-
-    @Column({
-        field: 'lang_id',
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    langId: string;
-
-    @Column({
-        field: 'attachable_model',
+        field: 'attachableModel',
         allowNull: false,
         type: DataTypes.STRING(75),
     })
     attachableModel: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'attachable_id',
+        field: 'attachableId',
         allowNull: false,
         type: DataTypes.UUID,
     })
@@ -46,7 +31,7 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
 
     @ForeignKey(() => AdminAttachmentFamilyModel)
     @Column({
-        field: 'family_id',
+        field: 'familyId',
         allowNull: true,
         type: DataTypes.UUID,
         references: {
@@ -160,7 +145,7 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
 
     @ForeignKey(() => AdminAttachmentLibraryModel)
     @Column({
-        field: 'library_id',
+        field: 'libraryId',
         allowNull: true,
         type: DataTypes.UUID,
         references: {
@@ -175,7 +160,7 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     library: AdminAttachmentLibraryModel;
 
     @Column({
-        field: 'library_filename',
+        field: 'libraryFilename',
         allowNull: true,
         type: DataTypes.STRING(255),
     })
@@ -189,21 +174,21 @@ export class AdminAttachmentModel extends Model<AdminAttachmentModel>
     data: any;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { IamRole } from './../../domain/role.aggregate';
 import { CreatedRoleEvent } from './created-role.event';
-import { DeletedRoleEvent } from './deleted-role.event';
 import { CreatedRolesEvent } from './created-roles.event';
+import { DeletedRoleEvent } from './deleted-role.event';
 import { DeletedRolesEvent } from './deleted-roles.event';
 
 export class AddRolesContextEvent extends AggregateRoot

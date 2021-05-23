@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 import { AdminUpdateAdministrativeAreaLevel3Input } from './../../../../graphql';
 
-describe('AdminUpdateAdministrativeAreaLevel3Resolver', () => 
+describe('AdminUpdateAdministrativeAreaLevel3Resolver', () =>
 {
     let resolver: AdminUpdateAdministrativeAreaLevel3Resolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('AdminUpdateAdministrativeAreaLevel3Resolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateAdministrativeAreaLevel3Resolver>(AdminUpdateAdministrativeAreaLevel3Resolver);
+        resolver    = module.get<AdminUpdateAdministrativeAreaLevel3Resolver>(AdminUpdateAdministrativeAreaLevel3Resolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateAdministrativeAreaLevel3Resolver should be defined', () => 
+    test('AdminUpdateAdministrativeAreaLevel3Resolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminUpdateAdministrativeAreaLevel3Resolver should be defined', () => 
+        test('AdminUpdateAdministrativeAreaLevel3Resolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a administrativeAreaLevel3 created', async () => 
+        test('should return a administrativeAreaLevel3 created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel3[0])));
             expect(await resolver.main(<AdminUpdateAdministrativeAreaLevel3Input>administrativeAreasLevel3[0])).toBe(administrativeAreasLevel3[0]);

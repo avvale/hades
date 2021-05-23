@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 import { AdminCreateAttachmentLibraryInput } from './../../../../graphql';
 
-describe('AdminCreateAttachmentLibrariesResolver', () => 
+describe('AdminCreateAttachmentLibrariesResolver', () =>
 {
     let resolver: AdminCreateAttachmentLibrariesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateAttachmentLibrariesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateAttachmentLibrariesResolver should be defined', () => 
+    test('AdminCreateAttachmentLibrariesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAttachmentLibrariesResolver should be defined', () => 
+        test('AdminCreateAttachmentLibrariesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an attachmentLibraries created', async () => 
+        test('should return an attachmentLibraries created', async () =>
         {
             expect(await resolver.main(<AdminCreateAttachmentLibraryInput[]>attachmentLibraries)).toBe(true);
         });

@@ -2,18 +2,28 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ITenantRepository } from '@hades/iam/tenant/domain/tenant.repository';
-import { MockTenantRepository } from '@hades/iam/tenant/infrastructure/mock/mock-tenant.repository';
+import { MockTenantSeeder } from '@hades/iam/tenant/infrastructure/mock/mock-tenant.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
 describe('tenant', () =>
 {
     let app: INestApplication;
-    let repository: MockTenantRepository;
+    let repository: ITenantRepository;
+    let seeder: MockTenantSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -22,46 +32,56 @@ describe('tenant', () =>
                     ...importForeignModules,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockTenantSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(ITenantRepository)
-            .useClass(MockTenantRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockTenantRepository>module.get<ITenantRepository>(ITenantRepository);
+        repository  = module.get<ITenantRepository>(ITenantRepository);
+        seeder      = module.get<MockTenantSeeder>(MockTenantSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST iam/tenant - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/tenant')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'ex05pksvj4uene2cdhp6fmd8xtfljmjuq8ope6ff3djtvi1des6w2979xm7e6tcnk1un0zm760qvq1mdxchfhs56iw54jmuu0eybzzlqi58l020rx0wpvvnfxqrz11j2r69vrurxpedea0fmriscjxvr59e2k5zmyccmd77wdz6zlue52a8mq2gzwbmvby8qwe4db6brdeynzwggixf95xryftc9far6xa19pzgolxgxl14qcfttyr3uzku6zyq',
-                code: 'zmpptwp0ud5c13dn427y6z1m0kigokygsns2ugfd4msjm9sa8x',
-                logo: 'ab2gddbcof9tzqk3z3upxk3oqo40ybijix7o3onegyhqq6prat8i47y4twvp45d2t920g5n7xyl41049iwyihite41fc2qixq88ty7kfonf6g5kc5nefzllowavv4z4svqweicujzgkpjy10p36mm65mdpwhdp6csdscskf9c7o3ovwjzr6yllr9anzca7ytc24cvlzlpabwy1o3m85yy4ee4rk2xzto6iqfphmtwt6cz7qj4ey82hewgsx3kxn',
+                name: '369kja42v6858nd2rpxc1h0agn9rauts9js0hws5wipw5mhuzt69v408zw87dkmbh8warndrrogwtiagyzd5ttxwcohh19jndnwv5n05duwxkbxe4ub2uvvrvgv5t970v050q7jq79zz0ftr9wxqbta53u764amqtix9tutvu12q7rzqd8xz3hoteba12vt8f642w6l9w06vxkthd8mf9drk5iaji3hnd8abpn0yem4gm63qfoq1wtfpz71n1jn',
+                code: 'pyr79qd0nx9dc33rvzzz5kfk7m1olz12z3chmof84hhugokr0i',
+                logo: 'ea3ho92htqwpownfwtdws9wtkpm670kn79g8c2ra8yc0o32xjpxmmmntn8w0v6dsnodnndmweteodclbojlwmk4l4dqk2ypj0zaurn25gjvpjg1xrn8muv2jflb1hv5vcl1cn705qh2newknmuhry8e7fbd77tbtzrrlmed6ijyjkwfis9lqdediewhiyh6h7wxscjhvqhm65hmzqaxiry1lmo1drdyggu80858q121nf99cxa181k53m1kvean',
                 isActive: false,
-                data: { "foo" : "bar" },
+                data: {"foo":"-fPA[]FkbC","bar":"e28{9NI1/)","bike":73821,"a":63969,"b":"i^=\".iXa`p","name":6679,"prop":"2dif)lR?S,"},
                 accountIds: [],
             })
             .expect(400)
@@ -70,38 +90,19 @@ describe('tenant', () =>
             });
     });
 
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantId property can not to be undefined`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                name: '7j4dj6x2k38kr0f5kwef4yxsawj9g9qs8p211a6f2wjyoeap4amwggi8bl59hrcd11sz0n69zp4kqe278hft3e85qlig1dex8dyizok6ob81vayos7o920edpi4i1j3es2zqjzzp0xykmvl14u9izyh9ao9r840z8pivv1twfso0409gs4mgveuhe12laja178xu9630m8ndca7y9drqnix6p0fug6byehfqx316t7w2qkuu9eflrjbbuc8ehvk',
-                code: '805gd8ujpjbzsbmehexf9393hjvok3l1p9h3hgnmatwpm9acxw',
-                logo: '2yzsv2qs0ciulooygk0eo72e2zda9kwu9qd397uscedbnbgqed4pmvje81v2axe5i1m9m1wooki0df9ihmsel3hcba3ky5zyj9uh8teg22dvg2is5rzfz2we3thq541j3vk5aqskxec86yyq2r9f379mhckdiz39hp7jih4eocq6jhnbvd5577qblt4g4dtay1tsx8tmqe0em9cxle30d7lqwnl771lss31bcp1h7j8gdf3ijg3pzw6g3lv4mk5',
-                isActive: true,
-                data: { "foo" : "bar" },
-                accountIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for TenantId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/tenant')
-            .set('Accept', 'application/json')
-            .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
+                id: '0199bb41-a92b-437f-954c-d12c75fdb99f',
                 name: null,
-                code: 'p979xdw0gw7zrmmzqlxwfn4h4uex5tb68pffm542ho184le87w',
-                logo: 'hy3rqcvs4gt6llvvuzs45i6vdn0shi83f4f5rb35jratd6phhjo2ko9ikvk0heu9jhkdgvg3g8kf542tq3wrh4tedxxl6ykdga7z7fqj78k7saae0gadknh0skxapm5jm8ghk2j4lz9xq28h2kqq6gu1mfmp6aildg6kum4tr7cp5s2m7qwprzihxlcran556pi8t6k3goqi70xn929940nzecxmh6ql9gxsidab21rnnri4ba5vht84af21dn3',
-                isActive: true,
-                data: { "foo" : "bar" },
+                code: 'wyumyrwbwpo3u9hkha7brjx6w7hibnjb6zg8rjzh50vasju8o6',
+                logo: '2tskrrwajpfmmudpaowf5tvse9ueujffndk28spulquhuzlsouys69cmndu96ggg08mtenfadoijxul71depbf83noqbm2fm4umyzl09lwq6wyka8ngswb2qjv346s4znlsnw8b4hzap7nmzq49c3jmp2c0l8yx3mfblbv40ymkdompu54td614shmrcgnhc17f6pi8x1vx8fm3tu6qha65se9364vz8jsu6xc4p1ub3vjcmiro45rpmnp3qg3m',
+                isActive: false,
+                data: {"foo":"\\jQXZ:|8!H","bar":"\"-]})::)x_","bike":37204,"a":"zG,Hl-hw[:","b":"3TF}K\"Zj\\h","name":"W/!%4I}CEI","prop":84606},
                 accountIds: [],
             })
             .expect(400)
@@ -110,38 +111,19 @@ describe('tenant', () =>
             });
     });
 
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantName property can not to be undefined`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantCode property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                
-                code: 'th42o8annlq6gwy3fmzioxqnrn0zgz94azzj2r2v6ksnsi0194',
-                logo: 'ebw75mmj7afreu9jt5eonb1r4gkx8dco3dcxf1v3zq5f0mpc50clpgr3bt31cm36pmt6so5hi1aefbrhzoz516nihpsk1b4kw6b1gczssn1tpuf6t9xiebd942vr9hjkqvtkn2ehekblvr2o6j4axc5xs2hvk4y03kd4jh985ghzay5h6sesv9owf7o08r1a52esfv7u6h6v1ywmsf76fcy0za2isudoojjza3x2vrhrlcvo5yawddf2mhwiar7',
-                isActive: false,
-                data: { "foo" : "bar" },
-                accountIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for TenantName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantCode property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/tenant')
-            .set('Accept', 'application/json')
-            .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'j1n5pn20r3nfzrryac284lowd1isq5v7ugjjyuuc53io8c1mm22o0ax5kh7wdwwltasm7rfwmue7x4irikng5imdpzqm0u6ogbik6qpl1dr0owhvqq9zsfjqasvy9b9co90do4qfcbfvomh3unn16vx8f2qbr57l6v7li2vexq4n7gv9bdi22kquoh07d8qcisfeudr4m9w2nxt1l8z0ly9efgrrv1yk918hhut79xynjqn2kze48iydxpw4asl',
+                id: '868424b7-4bb4-40e1-a438-cabb01bf99fd',
+                name: '3swt1bncq78qq1tz84b6xj5rqlfdeq6hgr3nx1j85d17my8crrxce0zt6j3jcuanyixoi26rt60k0n5pzc5eqa2jsvg4s4zu0ydd1h5zhfgr77ebh3b3yd0chfpr3047v7ujt6i65480zav1lnnt6wua8xso5t0kuq200kt2h1t83w5l0l2r2o2dp0lu593zzawisz584f5ugwnr1x26p0w214zteswbi7758wk22525ns7ec4ysrzvdn15dzla',
                 code: null,
-                logo: 'smemvu26eh11usnq5n70m5w0etgvp03rie9o0xf5rjauo1t7x908q2miie4062dsffd46zl6564u3qk9zbcatubui8bcw048tlrj72ve3od9cg1izewfxk4lp34kx2hiss7dxgq8fgqzc0ykwe1degln35nsaf71c6i8zdbfa1tvpsdxm7xll539n8hvdjv58hhnlq25qcdhvus3rr40qw4efogvrjkqrihs6hs8njb2pjvah1vh4upli4lksm2',
-                isActive: true,
-                data: { "foo" : "bar" },
+                logo: 'tj1leksfyz54l1p5edkw8xy7r0f2oo9tk5cgy60svmks5gna5ti9bwpetgp8u40v2mp9vo5iwwtkt0bh2p77uu92a5y0nq31k8gdh16g4gyr8m6sif8q0p6dxrtm6okv0ignxje57815fpxn4harer060dm6y50wbl0icmr42j334tobyz85kp8fmbgcx739h6k4ay4hkwctfisfs81hwk317uud39kjh8v2v8hlanol8kp59ag0u3ynm84kgv2',
+                isActive: false,
+                data: {"foo":"D5CuxOpDDC","bar":"W=T5xQYK^9","bike":"J;drE)8{6?","a":69219,"b":"Y/X[_\"I&Q[","name":25145,"prop":"5/v7%;q7sh"},
                 accountIds: [],
             })
             .expect(400)
@@ -150,38 +132,19 @@ describe('tenant', () =>
             });
     });
 
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantCode property can not to be undefined`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: '2c1ydx4xe3v4643blp7mfn7qnd0clgqvtjf6gvpfgm1zjyp0rzj72emcv7m2azsfm418mp7x8ux1vwb4bi992iqr24y8olo04vr8znwyq5goh5zy2zikz0rw1ya00y2c3fiqfa64hn5gle95gqjek7pkhydrl0d1w9mgbntikevy7i0pk1o9ywdcl09iw0hcw44cguoykikkq6ieodyy1danx1w6t9ztkvqk2stb8cyks8hmpwa7yiv86chvkzu',
-                
-                logo: 'ragtpuk44rllq6vgj2r36s51wo9rl8t6s8dev602jn9d148p4b5ps8dabau7wat1xg3mhyhns6rqp8z40qxwxp8h1z9nhumg6ka8mwhvs1aay971o2d5bm7xeic0aak7dvaf3iszzj12jr0umd4ux81zq8q2d9gjobpql8ksyl3dnolh5drh1m1dmiin91xt2x237l3ah9f0jokg7m4x7npb4asvhlnegipb2gjx80c7n3pp3dvluz0rpfu6wce',
-                isActive: true,
-                data: { "foo" : "bar" },
-                accountIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for TenantCode must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/tenant')
-            .set('Accept', 'application/json')
-            .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'agqlrx22bykhtrc053cyp7yhkhfnk7geb9khluo5qwjey1czd3qwqyvhu8n3loslu0rq4eekt67c7vebka9c4eshujab6s1yt6fh0t0pyvygxsp3jp945rrg7agrjif2qf2ae2sra4v2ui2kadffw32ydwmcqmpbhtnj3c668w9f08rj56g1rzi2s0nbljqd465sfbsgaay26z2hhu2zi6c6b4vc8nxv2geshp23ikijdp88rnainey02hggrdo',
-                code: 'qckbve1ua99o6sq07hgs0wdzbsyz0f732mibt3yiyovdxazjvy',
-                logo: 'viun15mg2lilhfdz92gjkutnfo8fd32yzd9n28a1d7dn0fpbelx3n4i9xdqowy1w7110bn8hhl6r86g0l6gg4lg744d9syzgre2umxptg5q8ofn2n5zracxtdk8iwdz1gqhspdjdtrs82oyn1z8ithvfyogpbwzvc933516is5igflgw95spl9r27rurpzhl6efhl3debd6rkh9yh4etsgqzw1jc598o5xuqgjerxpbjzrkja115n5aorm76z1y',
+                id: '572d01ec-942e-4ab3-821f-62f3477621e8',
+                name: 'zqewxrx3ac24amdwzlzl4ukdl2hmz7aaaax33ckb71ylexqzh0u3uis9zug3tr47qntjjoe0wggtwurwd7xgwo7cbdzrhjho63m2gy5h1snjhxhx92h5n2plcg77pcnmm624p7peq7wawfplzqve5g2zzksslqmqkrv8nr32da3t0gz7oc1sndko7x1hh6kiv2pwdjgbzn5bo0mbf92td1wrdpwn4ryy48yioz90gslu3drx99yb9r7etygod0e',
+                code: 'ku9oyqbexkgv3wxvc164im0r3t173blf6ra077ttg6ukc0b5t7',
+                logo: 'a40w11vx74r8to4z4g7q6iunnns7ied8jylstxy9bhf4uzd7sf8qqzfuw2q0b4dklu4hvz87b0rjekhx5kbyg9nnlepaofgodfix2mlm28ail598p3qtxhhqi1btm4jr31n0vaavbrhr1apfa4iqp7e2wlhyy5vbbagvqx4whxyhwwhbydr24sxvtdfyrdy0tobvoob2ikr68zdu0camk8hy0fwwzf1q6ju1fm8bt0u1bsky9p97hg721eatucc',
                 isActive: null,
-                data: { "foo" : "bar" },
+                data: {"foo":"sc`k,PE\\mf","bar":":]a:y7.(8*","bike":31756,"a":55344,"b":84637,"name":56196,"prop":38996},
                 accountIds: [],
             })
             .expect(400)
@@ -190,18 +153,78 @@ describe('tenant', () =>
             });
     });
 
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive property can not to be undefined`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'gy5sh48nrx1ayqusnoymktg9dvpwsq5he3lndj9x2wdl0ay3uiynz52oo2r4pfi2xbvqj2jvbgokd0st6qlusw455wljd8m3srus94jidedp7ws3vwyp23ij883r5tu99ldwek9so4qe35k94ndk3f4cm3b1m64fjrwd7q4sogc5ef97b8cqg82hvsx83l0yn6r2ykngb79puz86owx0u5zd0wxnuv991xyfn46pre0vpg3gx7p8ahn18maa1c4',
-                code: 'biaj3d0t67yggdpmqm1d405lt86rpop8xo62prxrr5y6ncbb4f',
-                logo: 'c5x41g9eeuxszcv74t6nmq33txc2hrfwfhisj5us89lu2647h7zp98x7ijxojerc8op0qwuojs9mziu9fegbano4qmmu6vtg95iekw37mnjlocrqk0g18uulvif0opour2m96ympjgum2v2j2sxhjoomalyi4j4q1fwen4yzkaaitnb5ds4kyu1vou9c1hqe7ivqdkj9tnii8i83hwrqfca3uo7h6fgwsg5bgdbd1einow1rgz8uu9o9b2cjt6r',
-                
-                data: { "foo" : "bar" },
+                name: 'ai78wwqp745h6q0dr52fzh3kagm8on1guruk0ffisn5kqa93vmp4ccb1zjl448a0p46jhui3hf1vacx23nmxnk0gkjw7iin7y34rl1n17cddctgx89szvxct0vbs1uslg7viubaivtwgltonvw4ocbuxblspzq6umpvlprf3p9dke6qucafqnsh0il0wcs75af4g5f1u2mql6yyztvxgu5y2bb6ja8x3yb8yy81fwfr6i93po6gp43ov8o9nta1',
+                code: 'sqmjawe6qeujmbap8xvp4jvt52kb9wlmjk93ekfqanjpkurk9j',
+                logo: '8r6tk1dhm4ef7pl1rdlb7een3s955a1i16csfqctydcbdhvt67c64ak87ule1xmm0il3p50bnauuebgjby89brjegwspz81ti6txl9xwvbj7dlr5v96vibymzh2qyuxr8ovgmuhla5kx2iwf9zcwyazjhm1u1fxrt7dlsp34miuzydbuz3so2ssxqd1i0afwlenuh4fdhn5div3cq8eu8dtjsw1nzyiaz4s5pc8v07lmzdu12y1hmrysqfp8gp7',
+                isActive: true,
+                data: {"foo":"4X.e{8n+>M","bar":97857,"bike":7029,"a":"[b,nsK<cNg","b":"6%yChyuPy@","name":32656,"prop":6712},
+                accountIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for TenantId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'd9272fd9-35fc-4e85-9a75-c396fdee6048',
+                code: 'wm1vhcndswfyq21vc1ojboqscwdvxksdvazw307pc4t5954rlg',
+                logo: 'ssqi71p6i55xyetl46rmmcv86recyfkux6v0ipow5fbmk8if0chb04w01ddv2anaza6y4m60uh2uv1lsffctdbeywszvrnt4l51n4cmn2xuvb5lokh4u9el8koswvleo8gax07ev0unbjoce98f1npi2pioe9r7ha0gziapcr8aux3yopb508vyec91bvoirek783i9czbum612m58j4676s19fvjdwuajeh09lsv27x3cnw7hjrxmlr10fubx6',
+                isActive: false,
+                data: {"foo":6722,"bar":"CW])8AHHZV","bike":48982,"a":"&WDY@dI-BB","b":"a(zU?\"\"CT_","name":"fA`9N5n08o","prop":40896},
+                accountIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for TenantName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantCode property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '7b5f2d98-80c3-46ac-a0e4-93859b15dd58',
+                name: 'q28x1n81yssg44zuw1gpaev96068ogaskn9nhyivdt0m3wdzqykep6a9ao6jllpa8sl0r068g2k1h0za1nf80jb110u4oha2o477zhh9jvpyhm21sl8891gj4e6xh9v1zpk74ide7o1o3f356cqffxnfhazgxk16lmff5ajl1pz1yhrnt2qvwths4tyhe8oozvr5m2wbux2jmgwld1tilpjt7c4q7x4gacudoj3rxgnfht1f24jvr2zhloidb6g',
+                logo: '8iqlmijdfxvht40mxzj51e7i974yco0olhtdyq7f3wvsagtd7542mwmqm9fziwmb784g5u6uilvns3j5s9kxfxxyd48tr2uc84n5ucnx4awp5jbqbyczhk13d2b8vagoky6gt0wimjlrh4nrxtryp7juaz81lcwi1qafy7ku1kv6dqrmkd9grw4eptqzj4jq5tpincmchrstkrwzg78f4nrfdet6a082zj0rowg2ff41bj5bbcr4sdelybgnba5',
+                isActive: false,
+                data: {"foo":68875,"bar":85730,"bike":48332,"a":"yh(wXE],ve","b":"$3u\\W@0#w=","name":"p2O6U?rjs}","prop":"*7r6|#Hyo6"},
+                accountIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for TenantCode must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'abcbd191-3cd7-478e-aa62-f96111a7d957',
+                name: 'vi4iqdwg6tcigy5oxp8bz4pv9tc0vjcy6rtr988cz4q4nbivrbo5ve8tal4k1noy0reloggvw5451kamycdss7wpeg3gh5tn9lk82ha3b33jg0g30kw9o07wu4jzumwyu6xynvzvxl1ebidlgskx4r36wpase08p9etn6htl4ebt8qn3jxyrthtckocyg1xus8qjhhtlkyl23d5tzglidqa9k8ncbcf4rwy7npksb2e0y3lv939u9r8ukdtkkyh',
+                code: 'plg4xh0pmuv2e9v00ndt4sy4ioqsuxe0ecfbbpr80ede6xc6ei',
+                logo: 'q3fvraxaj32avwqlp77ueumglsusdw3tf1h1lcey8hmnynpzz3zwg8rm8lw4spjjmbf219ie5wz4da9sjby6oag1x8omcbmel8v7lwwls2ug2pp6r3egpmow4ema7z65sl1d5cg3h482mm1eutlzcbkkp8uyfgzxzawt29jm832uzzlrt1lytx1op3ydtd18u1tj5fyoaql02h7dra2fpsunmswgm7vfajhxqryzodvqmyjnvo6k6jia7r5dg01',
+                data: {"foo":60744,"bar":"ogv`R1|_o7","bike":"\\A8;{:E6-B","a":"!J@}I=4ev_","b":70201,"name":15225,"prop":"j^!t5u'QF2"},
                 accountIds: [],
             })
             .expect(400)
@@ -209,21 +232,20 @@ describe('tenant', () =>
                 expect(res.body.message).toContain('Value for TenantIsActive must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd51co2satw2c6cfyl6yu5ux8l47v918m1ohqc',
-                name: 'cjmssrsy7pan7k784m1gjp4jxzn7rrc9qs9fgmsi0wz7wdpvqy6roz704dp4o5sksv70m78qrhgh33dq6ccr4s6qmax4qq5cy3dzku7fci0dvqm5rsax2ridb35u9tepg8mxk3n5dowafd1mphb21hx8he3g4ixbwglrk37cljunuggf0f5tp3s3gbpf5g5nrav0cxfn0f7jf325ma2g6i828msyo23n8kv6ukwetwwqdunvy544dclhetmzqy5',
-                code: '363ruxryuuphd8f909kjub9n3boihr4adml42xc16j1ulpclu1',
-                logo: '2oyvdl3fawa5vsrcq5w14663brfb900cm201nh4ssfuewuswz5zby5kls6dtn4nn2e36uaqgkl0w1j1ldy2or96fz4o7bt1n4a8c8vq6drq0bm6j8a6ufr5bj83z96y1z1ee00gvp14ex9qnnumjdalb33jhadgwbl934b5tvrxkzws99t3kv9ql8yzzn7zbex8pvzhfx39ttye24axnzg4l8nuogpqryhxyn947qvo3g5wsozlevurjlca032i',
+                id: 'ntdvzakdsfcwmjab37l90zp917fr4qmv0o0eo',
+                name: 'qdbaor3atviwbyci176ul34ls39lxvuyru04jrgob3gw7behf52k1l4i00yzhfcpbxmxyd7dki0bq6a8yclimlq35plo5q2tvwhmivxskz0hp4213ja0j0le0nlclvids02k04l7qv40j472y06e9afv5xpmgz31pto1dvg8n5zxe7dxudlu69upyq9bgjfrvgkusngahsyawv1kk1y5yhyu7izti56asqp4595tvwzbomqobhxrq069clyfzrt',
+                code: 'tlpkbo8j59835347kxr5eezpx4cu684qvwk73s3qiof04cetsb',
+                logo: '89tuyr2c7cd8yknjnm1hqqnoay1q8jbqmfva7sfpqibhjml2zev484wjqbdp1a879lrsfh9uq0ksoo5fk9zfmee60dz6vqycrqqt649xjlnp486mf7q7bqho8fxcm8j0zdg4u2kmjkx8xdempinaaufn77156njzcpo2kcq4856sv3ty209o16tyr4yomw8f6dkfxqiiewwvyw1vxk8p0dy06jwqmiprdehtf4pt19d37rxturqzk15r0t37x2o',
                 isActive: false,
-                data: { "foo" : "bar" },
+                data: {"foo":74611,"bar":"4[!icS_ZnA","bike":69928,"a":":fO2.o13Dk","b":"[YVOHEehY-","name":"p*?dn!0,Y8","prop":91265},
                 accountIds: [],
             })
             .expect(400)
@@ -231,21 +253,20 @@ describe('tenant', () =>
                 expect(res.body.message).toContain('Value for TenantId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'kcdnbmcj7jovjmwzzc1on6p4lrb4rglazjiwrhyzy89t1fm5h0zw112jv5cmdjzd691x0wzbzt70qie8uadwtztrgdakmgw8j9be7qae7tjzd1bal139vm291jd6pdioj4idpgosip4t02tu7cifnsdrrtfgnk11a87kke74fs9e23fk1632pu1zbnp9sfirr3hizht77p8frppu3f4i20h1znbzi6a6csdntfpi0htc6kg83kcykdcqjxwiuos6',
-                code: 'inr2nk190mdfo01u5bbhlj8sr04axrc9tyuo2m0ng8sxzwjhqk',
-                logo: 'rsw89nonug8nwt5d73yolkogsupckmk7plx5lo3ibuwjb74gzi0s3vwispuyf46ws1i6tpi10zxej9pork555ht47sbksh9kg7pl7zhsnzemdpm7p4jpzi4d1j18dh3d17w5m6radqhxlheekl55svyfokc4j2rwpq6hjs0tbbn4mhb1kevmyqtycgqfvxf0mnc46j7ox4fylo183pnyqp88bm6r3xcj3037wqcdulckxhesstjl9stu85m5qp4',
-                isActive: false,
-                data: { "foo" : "bar" },
+                id: '4fc8a42c-3bef-4044-ada8-7e599a2deb31',
+                name: 'evxl2t2cacrng6w7jct9o8mkqhpz2bwq9whyvx4ej5v1s7b2ynt2wbzqq12y28rpujjkv35fog7ryzk7o00vkkkl2uubd197hjc3slocw5fpsckvofglgm5lo20x40y3oe2foo73gzbv541qvzujdy376skrd20sb1nbcihrqbfvkxo8vl8k6vu0wermz7fsn9117s627ugjma29rpzmqluv535p2z6o7e9eqcwzb1j6yelllm69sgbz0puo5v0j',
+                code: '75ezl0b0w3ayat93bi87pmubc4folqlzhviei5ncn7j7jqs4l9',
+                logo: 'kgjie5x99fxgrbfaetaitx3skmno99i32a71iktzg19r9evyuiej507ah7ltmijqbs6duxo24qw530yqd11kwladx99hkbvdrig8kmla1jntjbbnboc94tmdym7la5j0cc4oxqr8rb0lpq0hln87gemnxw6c6eoka8nbi6qjfhy9m7hh132zotu2yy8wqyzzj4hx3szj4lf3b1rf5qfiry0exgr2hcvqudvpaipfowahouhkul1imc4703uxy6h',
+                isActive: true,
+                data: {"foo":57096,"bar":65216,"bike":18777,"a":49103,"b":43559,"name":11366,"prop":91145},
                 accountIds: [],
             })
             .expect(400)
@@ -253,19 +274,20 @@ describe('tenant', () =>
                 expect(res.body.message).toContain('Value for TenantName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantCode is too large, has a maximum length of 50`, () => 
+
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantCode is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'o2jc5piu8c4jlc7ye96p0d1pppoo7x0aqoa3niu6vc8xhgjr4j3mo03c5bberp4w7hgknr9pcj4v2gfgbd7dxqgmvagtiuyorgjwmfftbnicrjjswzzqgyah50qavxqwnduph1zd0z9f59ejxel8kgww8hdp1h9fmjlgfb0tu7btqftvgvhxrsjn9ca0ow7vso05c4jeib9lvzq9xgipgyb9t79fz2vseqbqgofi86t23rgnm7z5fddt8dlx6zr',
-                code: 'g912f96aysgelwxiojqldyh9ddbyszdrh2mjhqar3tu8zw367n3',
-                logo: 's9k1hcax23ftlsv5p9rupk3bu3s3tpmkypuz7dfvvhhf26ly6uddykuwgytqseuejpq5u093h1zyahi19qar8n0t6p5isa3klnt6dee0s0thm40gcixzwzy452zx4rsmt7rrgdr6tbhax0axn9tk0mt5k0rsy4uzjaz01noxy6cm3zf87okvnp2hz96xdk88h54gfxskdn7lercyi44o41uw945c53ksy1m3ss45n59584vc0xq8da6bleneruo',
+                id: '9c9d9415-b0f2-4b83-9172-a32001d5294b',
+                name: 'q0czdfoo0c2cku4mmc3gd1ye68pm9aod4vmlnhs8y8ndor69ynlfw8xfuo4ppfztjid0t58abh0xn596e95rfnzfris7ai4ayqximos9u7j6wl9x4jt0xk4phfhyopxkq0ee8t86twyhf6fr6b4dfglbihfpswtr2imybt6xja14yqm1iqun8q2rge0d007hxvbksacj6y61cb25wu81gsl2rgcdmm0ji3qzgd2mvytbzxmpgunkcf8ubxujskm',
+                code: 'pxvbwodind26jtw3encfu3p8r7od78ak7gk03k294d8anfmn575',
+                logo: 'ji6znl47ydbww35rnyf0z7v1xww0ax4mlfij2y0hqktrzwgdfwkh9kr5n6ossnt6uojdnteozgk4jgdvkcl8z6lw7nvd3l8wmuhw765qnw8x7jj0hlspmi8hpokst3tna9900zgxzxyp0w2fi0gyu1vls40ng6ybbbv0xec43k0jcpfm3mdfyo5w2r6xu9dcn7s0jx2xwdntv0rzkvjr13iebr3mggculifxuhimzwwgbcrpev0twu9tljh68ir',
                 isActive: false,
-                data: { "foo" : "bar" },
+                data: {"foo":"6uAXp{^iTq","bar":33328,"bike":25057,"a":"9NrH6J\"#@,","b":"wecB5;0IgH","name":"4C/Gi-^62>","prop":84557},
                 accountIds: [],
             })
             .expect(400)
@@ -273,19 +295,20 @@ describe('tenant', () =>
                 expect(res.body.message).toContain('Value for TenantCode is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantLogo is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantLogo is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'g9cb0xe379r406xrn3zo9ru0nt7ma2xltnmhr38vp3cxjh1jajelihie1gnrlrruttf4dsh8oucb08iu3dj3ssbcx7fmp5ycbpjfulevanr76pcpbxd0oh7kv4w8fl2luqeh88witlodi4npqjxt00sj2evrhf36tw58mnbu4tcieynd77facqfonj45obq6s0n6tsj61qcekcf76lqvhmlcwo9kdo1ehtgdsx50c8ejzpd4c000cmepndhv37z',
-                code: '15ac9knvb7mwl9al9k2r00swa5ynjenqeg4fwjg0wm4ad0oi33',
-                logo: '9enapvtud6ualbo3ewr5lt5u1p9v3okdofkoa1luueyr5bpavykt3oviidnfpv9q3levccszvcbcvq3ves479kfkpr1ykv05m31rsn5i4eu4rpv52buqzcsigj83u27tv0aoyd0zknd6fx1swlk2dfqg5hsgeofhkrl9msppe9ht9cwyl9vnq01s50mpror7t7racc5wzm6dfi4dglwfncyw8sm78b9vutbc0pdh2lbwfuxueaohv1wynb3do9hy',
+                id: 'df673a66-08d0-4271-b984-19270babfde6',
+                name: '76qyhmirpyhudhpal3e90h6r0fo4gr0cma3cbrwg17szlen97a5ovgmsvcwp2ygrwvqbp0ch26hr8pbad9yhuwnl9brnn20kr1ln8oa4h9kezz0rbo0t6iktclgxxnops5dhpjy3csxcvmvuu9kx43pbfr3tro4o3ot42pkbl6or1vx0ln76uxg2jqonddn2qiogw8aqj2euu5cqmyocbjfn5s20xznns7tjjt5uqgtb7izbon81pqmbtg60fn6',
+                code: 'hxd1ojq1kpoozsv0hdskto305ae0t7fj6qhtembzmzkvc0bapj',
+                logo: 'r2k0iwg6n3tu2249daxa16jaa0s5gnro71fky7ji203kayobtrbeaytu2qwjczdafzei1b7du9gmf8473ssnue7w5tr0ohfya5jerfwan45rjzi1awwvlav85ivo3wrlw0z3g19n5y4jym4vzxzwsq4b1dgeri8a1wg5462du83959g6cdjwnac6ohd8k5axatl9ody5otvqr45o4ch23wvpz7ot2xtg4huy7n14bihx68cbzwucj7zbphkdw167',
                 isActive: true,
-                data: { "foo" : "bar" },
+                data: {"foo":"-zaCv#tq?{","bar":"2)<)hL&y3!","bike":"oj^..!`5tb","a":"vs^JWXpqh$","b":94364,"name":95714,"prop":78068},
                 accountIds: [],
             })
             .expect(400)
@@ -293,27 +316,20 @@ describe('tenant', () =>
                 expect(res.body.message).toContain('Value for TenantLogo is too large, has a maximum length of 255');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive has to be a boolean value`, () => 
+    test(`/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: '85g09rsahgbmkf4ffmaydgjfnvovlgvway2i2cgn7or1urx1k5utr3dlhccx9nyqtdqn6xbfoevgdir68yvymu1n7kdu68xcl3d2ce3l49eb6re5qevk1t1275c7jzw0di7jr9x6442fv77lcuxvvls1y1n0x9eoazis1y1whpjpkh94bdqb32riz8vqvu5oq4jn58fpd381q1qb9rsq73fb93bw6otsxg296cb75b222rh8e69gio3xx3hf2lm',
-                code: 'n8ry56skheha24btoswlq7enpnx3mjk34gs04l50w95arahthu',
-                logo: 'n75076hn3e5tularbxhd7g0lbnezth737forkwcnhdhw303in3wygt51hcgohqh42o9tvzzuwmkru9j4h3mt7s0jkyn7ulpyj0w0av7svjkekghevyp42dq6vnqupn3fql3wspklef5nlafsi6fp0jeet40a4qoingv2hed0sv4ly1r2s52v9tv9qu5pm891ogpaawdpw80uva5vidjt3ff59jhk5u20p69ji0aebamtrlcnjpkxva4u8glv399',
+                id: '50c3caef-f0e9-43e6-a478-d410e0c375af',
+                name: 'q3cmq8jv7vki003rcmd6bgdg5ct8afpluo3b1obzl7ij7rl3awknl0cuvc3dm5z225obauicfx0a18fcjc313mssgg9ltolsjd8vdr4dsa797k0p2qho5yd3c90i4t8llkdoo36hvbzsv0vtzsewvmabtw2xod23qqxi9j8629bg43mnye3uolp9uwf57mp3478416ok7t4hcac3dghvr2oom2uqld9eilpvkf2rfqppyj1me9ill8qrcrsaol0',
+                code: 'ef65n1vkniqjdhroy5wtvgdn98l6twn091skqoaw8js5f4xf7h',
+                logo: 'v84gdgfwg1t09nr3xu9lviyc8e6zoti6e5ywuln42yd4sa2jfy5d9mes4695ckkgy0hbjb4j6gys4yas0nkbqsdeprd3mr2thykupkehgggkfy4i38uw0usxa8lc05bdsxqe5bnj7jcqqazapp4n9f50uk6o98gtbgv8zvhchzxi010rdk9cb0p5uls4jmh88fsljl55gwh9j798g0xi33i6oge36crmuat4lk6e6gj7k23miarvik2p55tubz1',
                 isActive: 'true',
-                data: { "foo" : "bar" },
+                data: {"foo":"+DMv|ry\\`8","bar":"I=\\f@lYH;_","bike":"e<R][tLos@","a":94223,"b":27815,"name":48702,"prop":"OmB9_UQ1?2"},
                 accountIds: [],
             })
             .expect(400)
@@ -321,188 +337,207 @@ describe('tenant', () =>
                 expect(res.body.message).toContain('Value for TenantIsActive has to be a boolean value');
             });
     });
-    
 
-    
-
-    
-
-    test(`/REST:POST iam/tenant`, () => 
+    test(`/REST:POST iam/tenant - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant')
             .set('Accept', 'application/json')
-            .send({
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'q5kakklp4lgcdji14e898h0wvhhkh0ca67zbcbzh987u6zpt17wykuz4u8nkciq32l21l7tty3yuxx7619oxdnlodz0sgljzv3k1cvde7hn6z24e9ec182jafkvye8f1a2syktkoq8qs2eopwa9lx7gvi3mz2astt8za8w7q0er8d5a5hjsej6n53ebj54mv71jmgv86tr2qvicfnois7emvzgg4joy2yrxda0v4d2f8lo1uhsru17f23favsxp',
-                code: 'a3ofgl3l64yf2wxk4unlhwoywuesl4fi5jsezzbzazgu0gjtzt',
-                logo: 'v1rjsncbn8h00ad9n1lij24ecjptwfk1uovn4czgpwhtkoyfaejpogxz8egyjnpcaili6ip8h4ltnbjoddd24sjeoolbtcq7v5zoxlhbq1f7bo8mlyco4r5swn8sxz1bslw1rglrmttfguk4jq4krd6x4x0trbuljphq2e5qjq8g1s5vc1cbpadubt8ws3o8h00udmeu372sjh8rlrcx4c2hjpfheu0a1xt6hpakplx8kcea4cf89jcqo0fbsux',
-                isActive: false,
-                data: { "foo" : "bar" },
-                accountIds: [],
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET iam/tenants/paginate`, () => 
+    test(`/REST:GET iam/tenants/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/tenants/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET iam/tenant - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/tenant')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: 'bd868b74-0466-4051-bf85-722816aac5a3'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET iam/tenant`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/tenant')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '03e3c2e1-6860-407a-9e5c-0600495eb6cf'));
-    });
-
-    test(`/REST:GET iam/tenant/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/tenant/65fdf9d4-1d77-4828-92aa-9e14e133406b')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET iam/tenant/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/tenant/03e3c2e1-6860-407a-9e5c-0600495eb6cf')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '03e3c2e1-6860-407a-9e5c-0600495eb6cf'));
-    });
-
-    test(`/REST:GET iam/tenants`, () => 
+    test(`/REST:GET iam/tenants`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/tenants')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT iam/tenant - Got 404 Not Found`, () => 
+    test(`/REST:GET iam/tenant - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '4450bd3c-6865-4264-8a63-ba399f4c80db'
+                    }
+                }
+            })
+            .expect(404);
+    });
+
+    test(`/REST:POST iam/tenant`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                logo: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                isActive: false,
+                data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                accountIds: [],
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET iam/tenant`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/tenant')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET iam/tenant/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/tenant/06045fe5-968c-4e0d-a7b3-aa916aa46603')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET iam/tenant/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/tenant/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT iam/tenant - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'dfa02405-4d3f-4980-9b53-ce46c43eb09f',
-                name: 'mub6rwenanahzo0l30khvnkt2xjde16r8v2aiizq4w6sz67q1apati28u2vi5nlbbuafueno1v5cdwbu45ig1wvvz13j35olxe8sdqfqn54yj87p4nwvm2da53oc5vosn8f54iithuw3skftb3nzrz58p9tukixoy64zl7ryr5bs7uest8gwirqje1uai11torjg3uadl7hk19h6ophqcr0q6qlfyvu8oj5gs373ix5qnwx7vydg0iz733u11r3',
-                code: 'xspa0npf8oub8y8n5c532wu4ckedgul3nldptkcwxo2qa92bjp',
-                logo: 'uc53bbc1mia0rimcvjymd2dirgcyr5espxuny03izqa2hykh39toto23qy9qb4abb7zfyxyk1kckdldev0sjpd78t6cvafs7omrfijatxa0ylqqg0o1f268hccxi279e4edyxeojn2ysqk737hifujlpury7rnk3bkqtretay9ibrd11zavb09vgnjilwih0q3dak04d70dn18yct1ema81wh2m2viggrzdwad3adnhpdygp8ar35vubp6f9tdf',
-                isActive: false,
-                data: { "foo" : "bar" },
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
+                code: '3tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkp',
+                logo: 'ahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14',
+                isActive: true,
+                data: {"foo":"P3Ll{3dXb)","bar":"6@C+\\adSy%","bike":7462,"a":71701,"b":66185,"name":52468,"prop":44625},
                 accountIds: [],
             })
             .expect(404);
     });
 
-    test(`/REST:PUT iam/tenant`, () => 
+    test(`/REST:PUT iam/tenant`, () =>
     {
         return request(app.getHttpServer())
             .put('/iam/tenant')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                name: 'do1twh5uxtu6e5g9dpsqf6ogob7xygdvdg1uan3z09t3wmk1tl6jrm4omk325sbvasc5hfzdy59a07t1dtlv9eajmgx7co8353mky0catrjj1pc68szxlxprk6tl6a8cmkqol3nrn31avwzzhsa1rbnmn5v9dhmi32gs12ntul2vv8ym4ais7a72uihhxqlzjfnzbzv2npxyh3qkbci3wdkrub8zsq31u4mpyg1i526vgxyv96hv1lc7hi1tpj9',
-                code: '1a24fes2y20n4ouxzx731b1oyewx3s6ynnwd7ozco042dipdtw',
-                logo: 'bvrnh2a6qjb6tvgt8y07xqdxciiwsojxcdoqpovlz29ifixcni8l3rrp28hh17dvr54o9ng8eh77krg2kxtgfvriynt4i0h5mbtbuwj5gas0johrltwbli9ju8z4fji2ghls6euu5odh8z4cwgksw0iqel6xtbmjjkjkh57kxwu3uqkevm96onjrorp1bb4fbs21jgawy1n9goshbaqc5tvijlab2gpom70z83byfffrft0sio8vu6cjzmyol7h',
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                logo: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                 isActive: false,
-                data: { "foo" : "bar" },
+                data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
                 accountIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '03e3c2e1-6860-407a-9e5c-0600495eb6cf'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE iam/tenant/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/3564f0dc-9297-4c3c-9de1-76ae2d5dec76')
+            .delete('/iam/tenant/dbc021ca-0808-47a7-9bf4-ba08279b5d68')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE iam/tenant/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/03e3c2e1-6860-407a-9e5c-0600495eb6cf')
+            .delete('/iam/tenant/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL iamCreateTenant - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL iamCreateTenant - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamCreateTenantInput!)
                     {
                         iamCreateTenant (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             code
                             logo
                             isActive
                             data
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -513,66 +548,27 @@ describe('tenant', () =>
             });
     });
 
-    test(`/GraphQL iamCreateTenant`, () => 
+    test(`/GraphQL iamPaginateTenants`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:IamCreateTenantInput!)
-                    {
-                        iamCreateTenant (payload:$payload)
-                        {   
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '0035cd34-7a5d-4d29-8df5-722dd089bc91',
-                        name: 'cow3719mksngrvuddn23hyx50khiaj8c2m6ztfwjx3dtpzrr0k8t5d9bqhektxy28zbw7nflmsx87570s531jpu8txicqad6spl6jyd5hryqvpbbjxpfor3aaqvbr0axhevqhxq9hngtzj5f8fn9dhx11xgeqwlxliw6u30xm7d88sx7onvihjfamt0e81pu61cgaausf66zjq9rnmqn0wa1bou52ovn49q6v05hfpzn7qk99z4jnk2uk89o6o4',
-                        code: 'gffna1zx95sq06f8squ7lsog8n7h0b4cbmdm1qmvwlikhp5uh4',
-                        logo: 'r0syrh70awbscs9smo5ari7jo7hraaybj97gp6c1sje9hyh9ezpeukiidxnuyfwiqrfh9lkgtjriuaf63ulk61towa49l88ihgx4uhgxwrd1bkd4s1cbbp7mklnhevexd17n1d1dwb4hspa4h8abfnwujygi3hum43pwzwwo43qf40qsp7jwfkf9mdsxja9ndezrdeejw0b9v6ke45id7rwyff09tyb681kudnrj5cczz32es3cvbsrdt61pu31',
-                        isActive: true,
-                        data: { "foo" : "bar" },
-                        accountIds: [],
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamCreateTenant).toHaveProperty('id', '0035cd34-7a5d-4d29-8df5-722dd089bc91');
-            });
-    });
-
-    test(`/GraphQL iamPaginateTenants`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         iamPaginateTenants (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -581,169 +577,24 @@ describe('tenant', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamPaginateTenants.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateTenants.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateTenants.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.iamPaginateTenants.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateTenants.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateTenants.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL iamFindTenant - Got 404 Not Found`, () => 
+    test(`/GraphQL iamGetTenants`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamFindTenant (query:$query)
-                        {   
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '03194384-9cea-4e9a-b7b5-d99efe2c8a00'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL iamFindTenant`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamFindTenant (query:$query)
-                        {   
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamFindTenant.id).toStrictEqual('03e3c2e1-6860-407a-9e5c-0600495eb6cf');
-            });
-    });
-
-    test(`/GraphQL iamFindTenantById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        iamFindTenantById (id:$id)
-                        {   
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '39ec5979-2c23-438d-afb7-e74194e56581'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL iamFindTenantById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        iamFindTenantById (id:$id)
-                        {   
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamFindTenantById.id).toStrictEqual('03e3c2e1-6860-407a-9e5c-0600495eb6cf');
-            });
-    });
-
-    test(`/GraphQL iamGetTenants`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         iamGetTenants (query:$query)
-                        {   
+                        {
                             id
                             name
                             code
@@ -761,106 +612,62 @@ describe('tenant', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.iamGetTenants.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL iamUpdateTenant - Got 404 Not Found`, () => 
+    test(`/GraphQL iamCreateTenant`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($payload:IamUpdateTenantInput!)
+                    mutation ($payload:IamCreateTenantInput!)
                     {
-                        iamUpdateTenant (payload:$payload)
-                        {   
+                        iamCreateTenant (payload:$payload)
+                        {
                             id
                             name
                             code
                             logo
                             isActive
                             data
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'e483bc16-f0c6-40ae-958e-f9b5696385c7',
-                        name: 'ujyrfalhwpfolz48p6fbqn0ehvrekbx2052j5wgae1w3y7w4u7dcz06ifu7x05tlc1tgt00nf5iqrz9jw5nvxykhxtxb2sfgz3f1q2dnlrktz5g31gex7msyg73ld6z3fxn08yn2ufqlcmg2o1cz20ecubnn60ka02al9gzsbeko167jvq80ist2l21w6m4nqd0fc8jjqxcnvbdl62d4wx5psfan7rdz54ea3iple8cjm1cfqthnvmf5nqubymb',
-                        code: 'i8st33qi6hg8wz8uztml1fuwc7jjwmcazte6yuedxzawlshrmx',
-                        logo: '5e0dky77h33sc824mi8vuljfijox0694826of1i8pqftlyv0kndkeh1s4yg5m26jvypw3giul9t7yba0cebknn825o6kb0iiwb4usz061sfht9077sm83wt82hon2j3mst4ucbjlj61wfms3c3nhndpo8orz9g1v24zajpid4fg8xga8i206ed8onpohz3ze0rkr004hxstrjbay9ak8o5h1qfyh4fg2kqrngrzz69vt7vvnux1ij6wo2m7r8xp',
-                        isActive: true,
-                        data: { "foo" : "bar" },
-                        accountIds: [],
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL iamUpdateTenant`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:IamUpdateTenantInput!)
-                    {
-                        iamUpdateTenant (payload:$payload)
-                        {   
-                            id
-                            name
-                            code
-                            logo
-                            isActive
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        
-                        id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf',
-                        name: 'v52cdj608rgmzdbps22fzy022tfiah6x76dj5esx46b0piozjqfrhzxda55mrttjzfgwmyw4osomo81g78i43eb2gz1glly05nbxs04tdmj6jjwtzlehrd35m0njlccer0lyegszs3ugltygbwhmcyv9aeol458ddbpbnxzp8frmjxntfzcp9fgiz5nrw046cmsykzxrtgrx3zy06a10ninabv6w8ilk7qs4f6tjdfxrw4x4wxwza6th0apuxwl',
-                        code: 'c83aqou6st98r72lo5on7k4canj7d7yhop4lr7w4fug8n8pn51',
-                        logo: 'tu86j1i8yilncjusbaxk2oqo0he366svx69s52a0foxrd2bqo1bsd9ptb913a4mutcry7to87rr1gdmqrz49a93ze0deis57ftsver248oh3839ke3lf49gvsn2mqntesjc1hvk6qhqmnk3ubeudohjcog4b3gfjs49espp5r1v54dhfh09jajsdng7cw5j6wbsnyxiy5h1budmk2ereph1hmq2b0evqram0vvbmytpdxifnci510nqten9w87j',
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        logo: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
                         isActive: false,
-                        data: { "foo" : "bar" },
+                        data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
                         accountIds: [],
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateTenant.id).toStrictEqual('03e3c2e1-6860-407a-9e5c-0600495eb6cf');
+                expect(res.body.data.iamCreateTenant).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    test(`/GraphQL iamDeleteTenantById - Got 404 Not Found`, () => 
+    test(`/GraphQL iamFindTenant - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($query:QueryStatement)
                     {
-                        iamDeleteTenantById (id:$id)
-                        {   
+                        iamFindTenant (query:$query)
+                        {
                             id
                             name
                             code
@@ -872,8 +679,15 @@ describe('tenant', () =>
                         }
                     }
                 `,
-                variables: {
-                    id: 'abf05c3a-126d-44fd-a470-d7a07122164d'
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '4916bacd-eb5f-4452-b74c-ceeca2b46beb'
+                        }
+                    }
                 }
             })
             .expect(200)
@@ -884,17 +698,58 @@ describe('tenant', () =>
             });
     });
 
-    test(`/GraphQL iamDeleteTenantById`, () => 
+    test(`/GraphQL iamFindTenant`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($query:QueryStatement)
                     {
-                        iamDeleteTenantById (id:$id)
-                        {   
+                        iamFindTenant (query:$query)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamFindTenant.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamFindTenantById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        iamFindTenantById (id:$id)
+                        {
                             id
                             name
                             code
@@ -907,16 +762,203 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '03e3c2e1-6860-407a-9e5c-0600495eb6cf'
+                    id: '208c0d93-02bf-454c-9836-d91ba7b0a953'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteTenantById.id).toStrictEqual('03e3c2e1-6860-407a-9e5c-0600495eb6cf');
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
             });
     });
 
-    afterAll(async () => 
+    test(`/GraphQL iamFindTenantById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        iamFindTenantById (id:$id)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamFindTenantById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamUpdateTenant - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamUpdateTenantInput!)
+                    {
+                        iamUpdateTenant (payload:$payload)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
+                        code: '3tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkp',
+                        logo: 'ahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14',
+                        isActive: true,
+                        data: {"foo":"P3Ll{3dXb)","bar":"6@C+\\adSy%","bike":7462,"a":71701,"b":66185,"name":52468,"prop":44625},
+                        accountIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL iamUpdateTenant`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamUpdateTenantInput!)
+                    {
+                        iamUpdateTenant (payload:$payload)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        code: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        logo: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        isActive: false,
+                        data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                        accountIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamUpdateTenant.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamDeleteTenantById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        iamDeleteTenantById (id:$id)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '58c78864-28c8-4da9-9486-7aba69d2db01'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL iamDeleteTenantById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        iamDeleteTenantById (id:$id)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamDeleteTenantById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    afterAll(async () =>
     {
         await app.close();
     });

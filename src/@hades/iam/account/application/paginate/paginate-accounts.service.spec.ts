@@ -6,13 +6,13 @@ import { PaginateAccountsService } from './paginate-accounts.service';
 import { IAccountRepository } from './../../domain/account.repository';
 import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
 
-describe('PaginateAccountsService', () => 
+describe('PaginateAccountsService', () =>
 {
     let service: PaginateAccountsService;
     let repository: IAccountRepository;
     let mockRepository: MockAccountRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateAccountsService', () =>
                 EventPublisher,
                 PaginateAccountsService,
                 MockAccountRepository,
-                { 
+                {
                     provide: IAccountRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateAccountsService', () =>
         mockRepository  = module.get(MockAccountRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateAccountsService should be defined', () => 
+        test('PaginateAccountsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate accounts', async () => 
+        test('should paginate accounts', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

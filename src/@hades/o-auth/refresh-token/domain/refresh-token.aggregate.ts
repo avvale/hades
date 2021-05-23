@@ -10,7 +10,6 @@ import {
     RefreshTokenDeletedAt,
 } from './value-objects';
 import { CreatedRefreshTokenEvent } from './../application/events/created-refresh-token.event';
-import { UpdatedRefreshTokenEvent } from './../application/events/updated-refresh-token.event';
 import { DeletedRefreshTokenEvent } from './../application/events/deleted-refresh-token.event';
 import { OAuthAccessToken } from '@hades/o-auth/access-token/domain/access-token.aggregate';
 
@@ -96,21 +95,6 @@ export class OAuthRefreshToken extends AggregateRoot
         );
     }
 
-    updated(refreshToken: OAuthRefreshToken): void
-    {
-        this.apply(
-            new UpdatedRefreshTokenEvent(
-                refreshToken.id.value,
-                refreshToken.accessTokenId?.value,
-                refreshToken.token?.value,
-                refreshToken.isRevoked?.value,
-                refreshToken.expiresAt?.value,
-                refreshToken.createdAt?.value,
-                refreshToken.updatedAt?.value,
-                refreshToken.deletedAt?.value,
-            )
-        );
-    }
 
     deleted(refreshToken: OAuthRefreshToken): void
     {

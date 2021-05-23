@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
 
-describe('AdminPaginateAttachmentFamiliesController', () => 
+describe('AdminPaginateAttachmentFamiliesController', () =>
 {
     let controller: AdminPaginateAttachmentFamiliesController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminPaginateAttachmentFamiliesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminPaginateAttachmentFamiliesController should be defined', () => 
+        test('AdminPaginateAttachmentFamiliesController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a attachmentFamilies', async () => 
+        test('should return a attachmentFamilies', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentFamilies)));
             expect(await controller.main()).toBe(attachmentFamilies);

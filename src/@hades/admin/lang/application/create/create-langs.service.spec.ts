@@ -6,13 +6,13 @@ import { CreateLangsService } from './create-langs.service';
 import { ILangRepository } from './../../domain/lang.repository';
 import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
 
-describe('CreateLangsService', () => 
+describe('CreateLangsService', () =>
 {
     let service: CreateLangsService;
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateLangsService', () =>
                 EventPublisher,
                 CreateLangsService,
                 MockLangRepository,
-                { 
+                {
                     provide: ILangRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateLangsService', () =>
         mockRepository  = module.get(MockLangRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateLangsService should be defined', () => 
+        test('CreateLangsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create langs and emit event', async () => 
+        test('should create langs and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

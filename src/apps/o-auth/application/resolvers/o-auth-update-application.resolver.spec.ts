@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 import { OAuthUpdateApplicationInput } from './../../../../graphql';
 
-describe('OAuthUpdateApplicationResolver', () => 
+describe('OAuthUpdateApplicationResolver', () =>
 {
     let resolver: OAuthUpdateApplicationResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('OAuthUpdateApplicationResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<OAuthUpdateApplicationResolver>(OAuthUpdateApplicationResolver);
+        resolver    = module.get<OAuthUpdateApplicationResolver>(OAuthUpdateApplicationResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthUpdateApplicationResolver should be defined', () => 
+    test('OAuthUpdateApplicationResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthUpdateApplicationResolver should be defined', () => 
+        test('OAuthUpdateApplicationResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a application created', async () => 
+        test('should return a application created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
             expect(await resolver.main(<OAuthUpdateApplicationInput>applications[0])).toBe(applications[0]);

@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 import { IamUpdatePermissionInput } from './../../../../graphql';
 
-describe('IamUpdatePermissionResolver', () => 
+describe('IamUpdatePermissionResolver', () =>
 {
     let resolver: IamUpdatePermissionResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('IamUpdatePermissionResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<IamUpdatePermissionResolver>(IamUpdatePermissionResolver);
+        resolver    = module.get<IamUpdatePermissionResolver>(IamUpdatePermissionResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamUpdatePermissionResolver should be defined', () => 
+    test('IamUpdatePermissionResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamUpdatePermissionResolver should be defined', () => 
+        test('IamUpdatePermissionResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a permission created', async () => 
+        test('should return a permission created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await resolver.main(<IamUpdatePermissionInput>permissions[0])).toBe(permissions[0]);

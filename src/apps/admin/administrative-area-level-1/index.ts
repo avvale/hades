@@ -14,8 +14,8 @@ import { AdminCreateAdministrativeAreaLevel1Resolver } from './resolvers/admin-c
 import { AdminCreateAdministrativeAreasLevel1Resolver } from './resolvers/admin-create-administrative-areas-level-1.resolver';
 import { AdminPaginateAdministrativeAreasLevel1Resolver } from './resolvers/admin-paginate-administrative-areas-level-1.resolver';
 import { AdminGetAdministrativeAreasLevel1Resolver } from './resolvers/admin-get-administrative-areas-level-1.resolver';
-import { AdminFindAdministrativeAreaLevel1Resolver } from './resolvers/admin-find-administrative-area-level-1.resolver';
 import { AdminFindAdministrativeAreaLevel1ByIdResolver } from './resolvers/admin-find-administrative-area-level-1-by-id.resolver';
+import { AdminFindAdministrativeAreaLevel1Resolver } from './resolvers/admin-find-administrative-area-level-1.resolver';
 import { AdminUpdateAdministrativeAreaLevel1Resolver } from './resolvers/admin-update-administrative-area-level-1.resolver';
 import { AdminDeleteAdministrativeAreaLevel1ByIdResolver } from './resolvers/admin-delete-administrative-area-level-1-by-id.resolver';
 import { AdminDeleteAdministrativeAreasLevel1Resolver } from './resolvers/admin-delete-administrative-areas-level-1.resolver';
@@ -37,8 +37,8 @@ export const AdminAdministrativeAreaLevel1Resolvers = [
     AdminCreateAdministrativeAreasLevel1Resolver,
     AdminPaginateAdministrativeAreasLevel1Resolver,
     AdminGetAdministrativeAreasLevel1Resolver,
-    AdminFindAdministrativeAreaLevel1Resolver,
     AdminFindAdministrativeAreaLevel1ByIdResolver,
+    AdminFindAdministrativeAreaLevel1Resolver,
     AdminUpdateAdministrativeAreaLevel1Resolver,
     AdminDeleteAdministrativeAreaLevel1ByIdResolver,
     AdminDeleteAdministrativeAreasLevel1Resolver,

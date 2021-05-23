@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { OAuthGetApplicationsResolver } from './o-auth-get-applications.resolver'; 
+import { OAuthGetApplicationsResolver } from './o-auth-get-applications.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 
-describe('OAuthGetApplicationsResolver', () => 
+describe('OAuthGetApplicationsResolver', () =>
 {
     let resolver:   OAuthGetApplicationsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('OAuthGetApplicationsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('OAuthGetApplicationsResolver should be defined', () => 
+    test('OAuthGetApplicationsResolver should be defined', () =>
     {
         expect(resolver).   toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthGetApplicationsResolver should be defined', () => 
+        test('OAuthGetApplicationsResolver should be defined', () =>
         {
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a applications', async () => 
+        test('should return a applications', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
             expect(await resolver.main()).toBe(applications);

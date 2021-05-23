@@ -6,13 +6,13 @@ import { GetBoundedContextsService } from './get-bounded-contexts.service';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('GetBoundedContextsService', () => 
+describe('GetBoundedContextsService', () =>
 {
     let service: GetBoundedContextsService;
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetBoundedContextsService', () =>
                 EventPublisher,
                 GetBoundedContextsService,
                 MockBoundedContextRepository,
-                { 
+                {
                     provide: IBoundedContextRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetBoundedContextsService', () =>
         mockRepository  = module.get(MockBoundedContextRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetBoundedContextsService should be defined', () => 
+        test('GetBoundedContextsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get boundedContexts', async () => 
+        test('should get boundedContexts', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

@@ -1,8 +1,7 @@
-
+# ignored file
 type AdminCountry
 {
     id: ID!
-    commonId: ID!
     langId: ID!
     lang: AdminLang!
     iso3166Alpha2: GraphQLString!
@@ -30,7 +29,6 @@ type AdminCountry
 input AdminCreateCountryInput
 {
     id: ID!
-    commonId: ID!
     langId: ID!
     iso3166Alpha2: GraphQLString!
     iso3166Alpha3: GraphQLString!
@@ -54,7 +52,6 @@ input AdminCreateCountryInput
 input AdminUpdateCountryInput
 {
     id: ID!
-    commonId: ID
     langId: ID
     iso3166Alpha2: GraphQLString
     iso3166Alpha3: GraphQLString
@@ -77,17 +74,17 @@ input AdminUpdateCountryInput
 
 type Query
 {
-    adminFindCountry(query:QueryStatement constraint:QueryStatement): AdminCountry
-    adminFindCountryById(id:ID constraint:QueryStatement): AdminCountry
-    adminGetCountries(query:QueryStatement constraint:QueryStatement): [AdminCountry]!
-    adminPaginateCountries(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindCountry(query: QueryStatement constraint: QueryStatement): AdminCountry
+    adminFindCountryById(id: ID constraint: QueryStatement): AdminCountry
+    adminGetCountries(query: QueryStatement constraint: QueryStatement): [AdminCountry]!
+    adminPaginateCountries(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateCountry(payload: AdminCreateCountryInput!): AdminCountry
     adminCreateCountries(payload: [AdminCreateCountryInput]!): Boolean!
-    adminUpdateCountry(payload: AdminUpdateCountryInput! constraint:QueryStatement): AdminCountry
-    adminDeleteCountryById(id: ID! constraint:QueryStatement): AdminCountry
-    adminDeleteCountries(query:QueryStatement constraint:QueryStatement): [AdminCountry]!
+    adminUpdateCountry(payload: AdminUpdateCountryInput! constraint: QueryStatement): AdminCountry
+    adminDeleteCountryById(id: ID! constraint: QueryStatement): AdminCountry
+    adminDeleteCountries(query: QueryStatement constraint: QueryStatement): [AdminCountry]!
 }

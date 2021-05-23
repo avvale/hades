@@ -13,7 +13,7 @@ describe('AdminCreateAttachmentLibraryResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateAttachmentLibraryResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateAttachmentLibraryResolver should be defined', () => 
+    test('AdminCreateAttachmentLibraryResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAttachmentLibraryResolver should be defined', () => 
+        test('AdminCreateAttachmentLibraryResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an attachmentLibrary created', async () => 
+        test('should return an attachmentLibrary created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibraries[0])));
             expect(await resolver.main(<AdminCreateAttachmentLibraryInput>attachmentLibraries[0])).toBe(attachmentLibraries[0]);

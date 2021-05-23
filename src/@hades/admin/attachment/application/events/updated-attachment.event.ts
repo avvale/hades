@@ -2,8 +2,6 @@ export class UpdatedAttachmentEvent
 {
     constructor(
         public readonly id: string,
-        public readonly commonId: string,
-        public readonly langId: string,
         public readonly attachableModel: string,
         public readonly attachableId: string,
         public readonly familyId: string,

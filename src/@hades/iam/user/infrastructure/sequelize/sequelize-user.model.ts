@@ -1,9 +1,8 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 
-@Table({ modelName: 'iam_user', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamUser', freezeTableName: true, timestamps: false })
 export class IamUserModel extends Model<IamUserModel>
 {
     @Column({
@@ -16,7 +15,7 @@ export class IamUserModel extends Model<IamUserModel>
 
     @ForeignKey(() => IamAccountModel)
     @Column({
-        field: 'account_id',
+        field: 'accountId',
         allowNull: false,
         type: DataTypes.UUID,
     })
@@ -54,7 +53,7 @@ export class IamUserModel extends Model<IamUserModel>
     mobile: string;
 
     @Column({
-        field: 'lang_id',
+        field: 'langId',
         allowNull: true,
         type: DataTypes.UUID,
     })
@@ -76,7 +75,7 @@ export class IamUserModel extends Model<IamUserModel>
     password: string;
 
     @Column({
-        field: 'remember_token',
+        field: 'rememberToken',
         allowNull: true,
         type: DataTypes.STRING(255),
     })
@@ -90,21 +89,21 @@ export class IamUserModel extends Model<IamUserModel>
     data: any;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

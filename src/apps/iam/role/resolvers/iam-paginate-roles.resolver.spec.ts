@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 
-describe('IamPaginateRolesResolver', () => 
+describe('IamPaginateRolesResolver', () =>
 {
     let resolver: IamPaginateRolesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('IamPaginateRolesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamPaginateRolesResolver should be defined', () => 
+    test('IamPaginateRolesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamPaginateRolesResolver should be defined', () => 
+        test('IamPaginateRolesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a roles', async () => 
+        test('should return a roles', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles)));
             expect(await resolver.main()).toBe(roles);

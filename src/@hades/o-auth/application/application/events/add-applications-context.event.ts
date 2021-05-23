@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { OAuthApplication } from './../../domain/application.aggregate';
 import { CreatedApplicationEvent } from './created-application.event';
-import { DeletedApplicationEvent } from './deleted-application.event';
 import { CreatedApplicationsEvent } from './created-applications.event';
+import { DeletedApplicationEvent } from './deleted-application.event';
 import { DeletedApplicationsEvent } from './deleted-applications.event';
 
 export class AddApplicationsContextEvent extends AggregateRoot

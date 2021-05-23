@@ -2,7 +2,7 @@
 type AdminAdministrativeAreaLevel3
 {
     id: ID!
-    countryCommonId: ID!
+    countryId: ID!
     country: AdminCountry!
     administrativeAreaLevel1Id: ID!
     administrativeAreaLevel1: AdminAdministrativeAreaLevel1!
@@ -23,7 +23,7 @@ type AdminAdministrativeAreaLevel3
 input AdminCreateAdministrativeAreaLevel3Input
 {
     id: ID!
-    countryCommonId: ID!
+    countryId: ID!
     administrativeAreaLevel1Id: ID!
     administrativeAreaLevel2Id: ID!
     code: GraphQLString!
@@ -38,7 +38,7 @@ input AdminCreateAdministrativeAreaLevel3Input
 input AdminUpdateAdministrativeAreaLevel3Input
 {
     id: ID!
-    countryCommonId: ID
+    countryId: ID
     administrativeAreaLevel1Id: ID
     administrativeAreaLevel2Id: ID
     code: GraphQLString
@@ -52,17 +52,17 @@ input AdminUpdateAdministrativeAreaLevel3Input
 
 type Query
 {
-    adminFindAdministrativeAreaLevel3(query:QueryStatement constraint:QueryStatement): AdminAdministrativeAreaLevel3
-    adminFindAdministrativeAreaLevel3ById(id:ID constraint:QueryStatement): AdminAdministrativeAreaLevel3
-    adminGetAdministrativeAreasLevel3(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel3]!
-    adminPaginateAdministrativeAreasLevel3(query:QueryStatement constraint:QueryStatement): Pagination!
+    adminFindAdministrativeAreaLevel3(query: QueryStatement constraint: QueryStatement): AdminAdministrativeAreaLevel3
+    adminFindAdministrativeAreaLevel3ById(id: ID constraint: QueryStatement): AdminAdministrativeAreaLevel3
+    adminGetAdministrativeAreasLevel3(query: QueryStatement constraint: QueryStatement): [AdminAdministrativeAreaLevel3]!
+    adminPaginateAdministrativeAreasLevel3(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     adminCreateAdministrativeAreaLevel3(payload: AdminCreateAdministrativeAreaLevel3Input!): AdminAdministrativeAreaLevel3
     adminCreateAdministrativeAreasLevel3(payload: [AdminCreateAdministrativeAreaLevel3Input]!): Boolean!
-    adminUpdateAdministrativeAreaLevel3(payload: AdminUpdateAdministrativeAreaLevel3Input! constraint:QueryStatement): AdminAdministrativeAreaLevel3
-    adminDeleteAdministrativeAreaLevel3ById(id: ID! constraint:QueryStatement): AdminAdministrativeAreaLevel3
-    adminDeleteAdministrativeAreasLevel3(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel3]!
+    adminUpdateAdministrativeAreaLevel3(payload: AdminUpdateAdministrativeAreaLevel3Input! constraint: QueryStatement): AdminAdministrativeAreaLevel3
+    adminDeleteAdministrativeAreaLevel3ById(id: ID! constraint: QueryStatement): AdminAdministrativeAreaLevel3
+    adminDeleteAdministrativeAreasLevel3(query: QueryStatement constraint: QueryStatement): [AdminAdministrativeAreaLevel3]!
 }

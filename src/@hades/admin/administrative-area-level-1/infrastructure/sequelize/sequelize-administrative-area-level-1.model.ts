@@ -1,9 +1,8 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminCountryModel } from '@hades/admin/country/infrastructure/sequelize/sequelize-country.model';
 
-@Table({ modelName: 'admin_administrative_area_level_1', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'AdminAdministrativeAreaLevel1', freezeTableName: true, timestamps: false })
 export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativeAreaLevel1Model>
 {
     @Column({
@@ -16,16 +15,16 @@ export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativ
 
     @ForeignKey(() => AdminCountryModel)
     @Column({
-        field: 'country_common_id',
+        field: 'countryId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
-            key: 'common_id'
+            key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
-    countryCommonId: string;
+    countryId: string;
 
     @BelongsTo(() => AdminCountryModel)
     country: AdminCountryModel;
@@ -40,7 +39,7 @@ export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativ
 
     @Unique
     @Column({
-        field: 'custom_code',
+        field: 'customCode',
         allowNull: true,
         type: DataTypes.STRING(10),
     })
@@ -82,21 +81,21 @@ export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativ
     zoom: number;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

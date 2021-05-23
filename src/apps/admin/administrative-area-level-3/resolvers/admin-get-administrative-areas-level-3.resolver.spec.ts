@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { AdminGetAdministrativeAreasLevel3Resolver } from './admin-get-administrative-areas-level-3.resolver'; 
+import { AdminGetAdministrativeAreasLevel3Resolver } from './admin-get-administrative-areas-level-3.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
-describe('AdminGetAdministrativeAreasLevel3Resolver', () => 
+describe('AdminGetAdministrativeAreasLevel3Resolver', () =>
 {
     let resolver:   AdminGetAdministrativeAreasLevel3Resolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminGetAdministrativeAreasLevel3Resolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminGetAdministrativeAreasLevel3Resolver should be defined', () => 
+    test('AdminGetAdministrativeAreasLevel3Resolver should be defined', () =>
     {
         expect(resolver).   toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminGetAdministrativeAreasLevel3Resolver should be defined', () => 
+        test('AdminGetAdministrativeAreasLevel3Resolver should be defined', () =>
         {
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a administrativeAreasLevel3', async () => 
+        test('should return a administrativeAreasLevel3', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel3)));
             expect(await resolver.main()).toBe(administrativeAreasLevel3);

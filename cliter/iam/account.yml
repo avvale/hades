@@ -92,3 +92,6 @@ aggregateProperties:
     type: timestamp
     nullable: true
     example: ''
+excluded:
+  - src/apps/iam/account/resolvers/iam-create-accounts.resolver.ts
+  - src/apps/iam/account/resolvers/iam-create-accounts.resolver.spec.ts

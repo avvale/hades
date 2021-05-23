@@ -14,8 +14,8 @@ import { IamCreateTenantResolver } from './resolvers/iam-create-tenant.resolver'
 import { IamCreateTenantsResolver } from './resolvers/iam-create-tenants.resolver';
 import { IamPaginateTenantsResolver } from './resolvers/iam-paginate-tenants.resolver';
 import { IamGetTenantsResolver } from './resolvers/iam-get-tenants.resolver';
-import { IamFindTenantResolver } from './resolvers/iam-find-tenant.resolver';
 import { IamFindTenantByIdResolver } from './resolvers/iam-find-tenant-by-id.resolver';
+import { IamFindTenantResolver } from './resolvers/iam-find-tenant.resolver';
 import { IamUpdateTenantResolver } from './resolvers/iam-update-tenant.resolver';
 import { IamDeleteTenantByIdResolver } from './resolvers/iam-delete-tenant-by-id.resolver';
 import { IamDeleteTenantsResolver } from './resolvers/iam-delete-tenants.resolver';
@@ -37,8 +37,8 @@ export const IamTenantResolvers = [
     IamCreateTenantsResolver,
     IamPaginateTenantsResolver,
     IamGetTenantsResolver,
-    IamFindTenantResolver,
     IamFindTenantByIdResolver,
+    IamFindTenantResolver,
     IamUpdateTenantResolver,
     IamDeleteTenantByIdResolver,
     IamDeleteTenantsResolver,

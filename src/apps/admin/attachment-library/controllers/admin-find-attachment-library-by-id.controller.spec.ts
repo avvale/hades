@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentLibraries } from '@hades/admin/attachment-library/infrastructure/seeds/attachment-library.seed';
 
-describe('AdminFindAttachmentLibraryByIdController', () => 
+describe('AdminFindAttachmentLibraryByIdController', () =>
 {
     let controller: AdminFindAttachmentLibraryByIdController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminFindAttachmentLibraryByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminFindAttachmentLibraryByIdController should be defined', () => 
+        test('AdminFindAttachmentLibraryByIdController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an attachmentLibrary by id', async () => 
+        test('should return an attachmentLibrary by id', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentLibraries[0])));
             expect(await controller.main(attachmentLibraries[0].id)).toBe(attachmentLibraries[0]);

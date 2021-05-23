@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminResource } from './../../domain/resource.aggregate';
 import { CreatedResourceEvent } from './created-resource.event';
-import { DeletedResourceEvent } from './deleted-resource.event';
 import { CreatedResourcesEvent } from './created-resources.event';
+import { DeletedResourceEvent } from './deleted-resource.event';
 import { DeletedResourcesEvent } from './deleted-resources.event';
 
 export class AddResourcesContextEvent extends AggregateRoot

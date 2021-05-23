@@ -1,3 +1,4 @@
+// ignored file
 export { AttachmentId } from './attachment-id';
 export { AttachmentCommonId } from './attachment-common-id';
 export { AttachmentLangId } from './attachment-lang-id';

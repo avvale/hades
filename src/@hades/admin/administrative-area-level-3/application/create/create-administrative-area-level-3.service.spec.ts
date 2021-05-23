@@ -6,7 +6,7 @@ import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-leve
 import { CreateAdministrativeAreaLevel3Service } from './create-administrative-area-level-3.service';
 import {
     AdministrativeAreaLevel3Id,
-    AdministrativeAreaLevel3CountryCommonId,
+    AdministrativeAreaLevel3CountryId,
     AdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel3AdministrativeAreaLevel2Id,
     AdministrativeAreaLevel3Code,
@@ -63,17 +63,19 @@ describe('CreateAdministrativeAreaLevel3Service', () =>
         test('should create a administrativeAreaLevel3 and emit event', async () =>
         {
             expect(await service.main(
-                new AdministrativeAreaLevel3Id(administrativeAreasLevel3[0].id),
-                new AdministrativeAreaLevel3CountryCommonId(administrativeAreasLevel3[0].countryCommonId),
-                new AdministrativeAreaLevel3AdministrativeAreaLevel1Id(administrativeAreasLevel3[0].administrativeAreaLevel1Id),
-                new AdministrativeAreaLevel3AdministrativeAreaLevel2Id(administrativeAreasLevel3[0].administrativeAreaLevel2Id),
-                new AdministrativeAreaLevel3Code(administrativeAreasLevel3[0].code),
-                new AdministrativeAreaLevel3CustomCode(administrativeAreasLevel3[0].customCode),
-                new AdministrativeAreaLevel3Name(administrativeAreasLevel3[0].name),
-                new AdministrativeAreaLevel3Slug(administrativeAreasLevel3[0].slug),
-                new AdministrativeAreaLevel3Latitude(administrativeAreasLevel3[0].latitude),
-                new AdministrativeAreaLevel3Longitude(administrativeAreasLevel3[0].longitude),
-                new AdministrativeAreaLevel3Zoom(administrativeAreasLevel3[0].zoom),
+                {
+                    id: new AdministrativeAreaLevel3Id(administrativeAreasLevel3[0].id),
+                    countryId: new AdministrativeAreaLevel3CountryId(administrativeAreasLevel3[0].countryId),
+                    administrativeAreaLevel1Id: new AdministrativeAreaLevel3AdministrativeAreaLevel1Id(administrativeAreasLevel3[0].administrativeAreaLevel1Id),
+                    administrativeAreaLevel2Id: new AdministrativeAreaLevel3AdministrativeAreaLevel2Id(administrativeAreasLevel3[0].administrativeAreaLevel2Id),
+                    code: new AdministrativeAreaLevel3Code(administrativeAreasLevel3[0].code),
+                    customCode: new AdministrativeAreaLevel3CustomCode(administrativeAreasLevel3[0].customCode),
+                    name: new AdministrativeAreaLevel3Name(administrativeAreasLevel3[0].name),
+                    slug: new AdministrativeAreaLevel3Slug(administrativeAreasLevel3[0].slug),
+                    latitude: new AdministrativeAreaLevel3Latitude(administrativeAreasLevel3[0].latitude),
+                    longitude: new AdministrativeAreaLevel3Longitude(administrativeAreasLevel3[0].longitude),
+                    zoom: new AdministrativeAreaLevel3Zoom(administrativeAreasLevel3[0].zoom),
+                }
             )).toBe(undefined);
         });
     });

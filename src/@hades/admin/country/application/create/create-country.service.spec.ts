@@ -1,3 +1,4 @@
+// ignored file
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
@@ -6,20 +7,19 @@ import { countries } from '@hades/admin/country/infrastructure/seeds/country.see
 import { CreateCountryService } from './create-country.service';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
+    CountryI18nLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
     CountryCustomCode,
     CountryPrefix,
-    CountryName,
-    CountrySlug,
+    CountryI18nName,
+    CountryI18nSlug,
     CountryImage,
     CountrySort,
-    CountryAdministrativeAreaLevel1,
-    CountryAdministrativeAreaLevel2,
-    CountryAdministrativeAreaLevel3,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
     CountryAdministrativeAreas,
     CountryLatitude,
     CountryLongitude,
@@ -30,6 +30,7 @@ import {
     CountryDeletedAt,
 } from './../../domain/value-objects';
 import { ICountryRepository } from './../../domain/country.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
 
 describe('CreateCountryService', () =>
@@ -37,6 +38,7 @@ describe('CreateCountryService', () =>
 {
     let service: CreateCountryService;
     let repository: ICountryRepository;
+    let repositoryI18n: ICountryI18nRepository;
     let mockRepository: MockCountryRepository;
 
     beforeAll(async () =>
@@ -53,12 +55,19 @@ describe('CreateCountryService', () =>
                     useValue: {
                         create: (item) => {}
                     }
-                }
+                },
+                {
+                    provide: ICountryI18nRepository,
+                    useValue: {
+                        create: (item) => {}
+                    }
+                },
             ]
         }).compile();
 
         service         = module.get(CreateCountryService);
         repository      = module.get(ICountryRepository);
+        repositoryI18n  = module.get(ICountryI18nRepository);
         mockRepository  = module.get(MockCountryRepository);
     });
 
@@ -72,26 +81,27 @@ describe('CreateCountryService', () =>
         test('should create a country and emit event', async () =>
         {
             expect(await service.main(
-                new CountryId(countries[0].id),
-                new CountryCommonId(countries[0].commonId),
-                new CountryLangId(countries[0].langId),
-                new CountryIso3166Alpha2(countries[0].iso3166Alpha2),
-                new CountryIso3166Alpha3(countries[0].iso3166Alpha3),
-                new CountryIso3166Numeric(countries[0].iso3166Numeric),
-                new CountryCustomCode(countries[0].customCode),
-                new CountryPrefix(countries[0].prefix),
-                new CountryName(countries[0].name),
-                new CountrySlug(countries[0].slug),
-                new CountryImage(countries[0].image),
-                new CountrySort(countries[0].sort),
-                new CountryAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
-                new CountryAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
-                new CountryAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
-                new CountryAdministrativeAreas(countries[0].administrativeAreas),
-                new CountryLatitude(countries[0].latitude),
-                new CountryLongitude(countries[0].longitude),
-                new CountryZoom(countries[0].zoom),
-                new CountryDataLang(countries[0].dataLang),
+                {
+                    id: new CountryId(countries[0].id),
+                    langId: new CountryI18nLangId(countries[0].langId),
+                    iso3166Alpha2: new CountryIso3166Alpha2(countries[0].iso3166Alpha2),
+                    iso3166Alpha3: new CountryIso3166Alpha3(countries[0].iso3166Alpha3),
+                    iso3166Numeric: new CountryIso3166Numeric(countries[0].iso3166Numeric),
+                    customCode: new CountryCustomCode(countries[0].customCode),
+                    prefix: new CountryPrefix(countries[0].prefix),
+                    name: new CountryI18nName(countries[0].name),
+                    slug: new CountryI18nSlug(countries[0].slug),
+                    image: new CountryImage(countries[0].image),
+                    sort: new CountrySort(countries[0].sort),
+                    administrativeAreaLevel1: new CountryI18nAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
+                    administrativeAreaLevel2: new CountryI18nAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
+                    administrativeAreaLevel3: new CountryI18nAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
+                    administrativeAreas: new CountryAdministrativeAreas(countries[0].administrativeAreas),
+                    latitude: new CountryLatitude(countries[0].latitude),
+                    longitude: new CountryLongitude(countries[0].longitude),
+                    zoom: new CountryZoom(countries[0].zoom),
+                    dataLang: new CountryDataLang(countries[0].dataLang),
+                }
             )).toBe(undefined);
         });
     });

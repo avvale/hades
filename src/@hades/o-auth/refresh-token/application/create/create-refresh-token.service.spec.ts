@@ -1,24 +1,20 @@
+// ignored file
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { JwtModule } from '@nestjs/jwt';
 
 // custom items
-import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokensToCreate } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-tokens-to-create.seed';
 import { CreateRefreshTokenService } from './create-refresh-token.service';
 import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
-    RefreshTokenToken,
-    RefreshTokenIsRevoked,
-    RefreshTokenExpiresAt,
-    RefreshTokenCreatedAt,
-    RefreshTokenUpdatedAt,
-    RefreshTokenDeletedAt,
+    RefreshTokenExpiredRefreshToken,
 } from './../../domain/value-objects';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
 describe('CreateRefreshTokenService', () =>
-
 {
     let service: CreateRefreshTokenService;
     let repository: IRefreshTokenRepository;
@@ -27,6 +23,11 @@ describe('CreateRefreshTokenService', () =>
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
+            imports: [
+                JwtModule.register({
+                    secret: '1234567890'
+                }),
+            ],
             providers: [
                 CommandBus,
                 EventBus,
@@ -57,11 +58,11 @@ describe('CreateRefreshTokenService', () =>
         test('should create a refreshToken and emit event', async () =>
         {
             expect(await service.main(
-                new RefreshTokenId(refreshTokens[0].id),
-                new RefreshTokenAccessTokenId(refreshTokens[0].accessTokenId),
-                new RefreshTokenToken(refreshTokens[0].token),
-                new RefreshTokenIsRevoked(refreshTokens[0].isRevoked),
-                new RefreshTokenExpiresAt(refreshTokens[0].expiresAt),
+                {
+                    id                  : new RefreshTokenId(refreshTokensToCreate[0].id),
+                    accessTokenId       : new RefreshTokenAccessTokenId(refreshTokensToCreate[0].accessTokenId),
+                    expiredRefreshToken : new RefreshTokenExpiredRefreshToken(refreshTokensToCreate[0].expiredRefreshToken),
+                }
             )).toBe(undefined);
         });
     });

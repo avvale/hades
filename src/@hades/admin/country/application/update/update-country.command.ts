@@ -1,3 +1,4 @@
+// ignored file
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
@@ -6,7 +7,6 @@ export class UpdateCountryCommand
     constructor(
         public readonly payload: {
             id: string,
-            commonId?: string,
             langId?: string,
             iso3166Alpha2?: string,
             iso3166Alpha3?: string,

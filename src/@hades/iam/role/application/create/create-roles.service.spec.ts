@@ -6,13 +6,13 @@ import { CreateRolesService } from './create-roles.service';
 import { IRoleRepository } from './../../domain/role.repository';
 import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
 
-describe('CreateRolesService', () => 
+describe('CreateRolesService', () =>
 {
     let service: CreateRolesService;
     let repository: IRoleRepository;
     let mockRepository: MockRoleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateRolesService', () =>
                 EventPublisher,
                 CreateRolesService,
                 MockRoleRepository,
-                { 
+                {
                     provide: IRoleRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateRolesService', () =>
         mockRepository  = module.get(MockRoleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateRolesService should be defined', () => 
+        test('CreateRolesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create roles and emit event', async () => 
+        test('should create roles and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

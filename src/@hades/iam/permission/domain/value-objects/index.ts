@@ -1,3 +1,4 @@
+// ignored file
 export { PermissionId } from './permission-id';
 export { PermissionName } from './permission-name';
 export { PermissionBoundedContextId } from './permission-bounded-context-id';

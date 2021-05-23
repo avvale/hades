@@ -14,8 +14,8 @@ import { AdminCreateLangResolver } from './resolvers/admin-create-lang.resolver'
 import { AdminCreateLangsResolver } from './resolvers/admin-create-langs.resolver';
 import { AdminPaginateLangsResolver } from './resolvers/admin-paginate-langs.resolver';
 import { AdminGetLangsResolver } from './resolvers/admin-get-langs.resolver';
-import { AdminFindLangResolver } from './resolvers/admin-find-lang.resolver';
 import { AdminFindLangByIdResolver } from './resolvers/admin-find-lang-by-id.resolver';
+import { AdminFindLangResolver } from './resolvers/admin-find-lang.resolver';
 import { AdminUpdateLangResolver } from './resolvers/admin-update-lang.resolver';
 import { AdminDeleteLangByIdResolver } from './resolvers/admin-delete-lang-by-id.resolver';
 import { AdminDeleteLangsResolver } from './resolvers/admin-delete-langs.resolver';
@@ -37,8 +37,8 @@ export const AdminLangResolvers = [
     AdminCreateLangsResolver,
     AdminPaginateLangsResolver,
     AdminGetLangsResolver,
-    AdminFindLangResolver,
     AdminFindLangByIdResolver,
+    AdminFindLangResolver,
     AdminUpdateLangResolver,
     AdminDeleteLangByIdResolver,
     AdminDeleteLangsResolver,

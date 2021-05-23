@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('OAuthDeleteAccessTokensController', () => 
+describe('OAuthDeleteAccessTokensController', () =>
 {
     let controller: OAuthDeleteAccessTokensController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('OAuthDeleteAccessTokensController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthDeleteAccessTokensController should be defined', () => 
+        test('OAuthDeleteAccessTokensController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an accessTokens deleted', async () => 
+        test('should return an accessTokens deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
             expect(await controller.main()).toBe(accessTokens);

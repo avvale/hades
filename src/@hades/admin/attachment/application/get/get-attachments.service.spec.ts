@@ -6,13 +6,13 @@ import { GetAttachmentsService } from './get-attachments.service';
 import { IAttachmentRepository } from './../../domain/attachment.repository';
 import { MockAttachmentRepository } from './../../infrastructure/mock/mock-attachment.repository';
 
-describe('GetAttachmentsService', () => 
+describe('GetAttachmentsService', () =>
 {
     let service: GetAttachmentsService;
     let repository: IAttachmentRepository;
     let mockRepository: MockAttachmentRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetAttachmentsService', () =>
                 EventPublisher,
                 GetAttachmentsService,
                 MockAttachmentRepository,
-                { 
+                {
                     provide: IAttachmentRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetAttachmentsService', () =>
         mockRepository  = module.get(MockAttachmentRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetAttachmentsService should be defined', () => 
+        test('GetAttachmentsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get attachments', async () => 
+        test('should get attachments', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

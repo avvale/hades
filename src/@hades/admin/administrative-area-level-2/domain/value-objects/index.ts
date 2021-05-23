@@ -1,5 +1,5 @@
 export { AdministrativeAreaLevel2Id } from './administrative-area-level-2-id';
-export { AdministrativeAreaLevel2CountryCommonId } from './administrative-area-level-2-country-common-id';
+export { AdministrativeAreaLevel2CountryId } from './administrative-area-level-2-country-id';
 export { AdministrativeAreaLevel2AdministrativeAreaLevel1Id } from './administrative-area-level-2-administrative-area-level-1-id';
 export { AdministrativeAreaLevel2Code } from './administrative-area-level-2-code';
 export { AdministrativeAreaLevel2CustomCode } from './administrative-area-level-2-custom-code';

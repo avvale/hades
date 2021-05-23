@@ -1,3 +1,4 @@
+// ignored file
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { CreateAdministrativeAreasLevel1Command } from '@hades/admin/administrative-area-level-1/application/create/create-administrative-areas-level-1.command';

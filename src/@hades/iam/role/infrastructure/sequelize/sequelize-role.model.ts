@@ -1,12 +1,11 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamPermissionModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model';
 import { IamPermissionsRolesModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 import { IamRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
 
-@Table({ modelName: 'iam_role', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamRole', freezeTableName: true, timestamps: false })
 export class IamRoleModel extends Model<IamRoleModel>
 {
     @Column({
@@ -25,7 +24,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     name: string;
 
     @Column({
-        field: 'is_master',
+        field: 'isMaster',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
@@ -36,25 +35,25 @@ export class IamRoleModel extends Model<IamRoleModel>
     permissions: IamPermissionModel[];
 
 
-    @BelongsToMany(() => IamAccountModel, () => IamRolesAccountsModel)
+    @BelongsToMany(() => IamAccountModel, { through: () => IamRolesAccountsModel, uniqueKey: 'Uq01IamRolesAccounts' })
     accounts: IamAccountModel[];
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

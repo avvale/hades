@@ -9,8 +9,8 @@ export class AccessTokenAccountId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'AccessTokenAccountId',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             length: 36,
         }, validationRules), data);
     }

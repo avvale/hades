@@ -6,13 +6,13 @@ import { GetUsersService } from './get-users.service';
 import { IUserRepository } from './../../domain/user.repository';
 import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
 
-describe('GetUsersService', () => 
+describe('GetUsersService', () =>
 {
     let service: GetUsersService;
     let repository: IUserRepository;
     let mockRepository: MockUserRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetUsersService', () =>
                 EventPublisher,
                 GetUsersService,
                 MockUserRepository,
-                { 
+                {
                     provide: IUserRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetUsersService', () =>
         mockRepository  = module.get(MockUserRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetUsersService should be defined', () => 
+        test('GetUsersService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get users', async () => 
+        test('should get users', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

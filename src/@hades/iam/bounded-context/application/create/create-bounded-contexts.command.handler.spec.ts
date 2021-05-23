@@ -6,12 +6,12 @@ import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds
 import { CreateBoundedContextsCommand } from './create-bounded-contexts.command';
 import { CreateBoundedContextsService } from './create-bounded-contexts.service';
 
-describe('CreateBoundedContextsCommandHandler', () => 
+describe('CreateBoundedContextsCommandHandler', () =>
 {
     let commandHandler: CreateBoundedContextsCommandHandler;
     let service: CreateBoundedContextsService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,19 +29,19 @@ describe('CreateBoundedContextsCommandHandler', () =>
         service         = module.get<CreateBoundedContextsService>(CreateBoundedContextsService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateBoundedContextsCommandHandler should be defined', () => 
+        test('CreateBoundedContextsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an boundedContext created', async () => 
+        test('should return an boundedContext created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateBoundedContextsCommand(
                     boundedContexts
-                
+
                 )
             )).toBe(undefined);
         });

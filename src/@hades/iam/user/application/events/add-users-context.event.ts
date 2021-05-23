@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { IamUser } from './../../domain/user.aggregate';
 import { CreatedUserEvent } from './created-user.event';
-import { DeletedUserEvent } from './deleted-user.event';
 import { CreatedUsersEvent } from './created-users.event';
+import { DeletedUserEvent } from './deleted-user.event';
 import { DeletedUsersEvent } from './deleted-users.event';
 
 export class AddUsersContextEvent extends AggregateRoot

@@ -1,8 +1,8 @@
+// ignored file
 export class CreatedCountryEvent
 {
     constructor(
         public readonly id: string,
-        public readonly commonId: string,
         public readonly langId: string,
         public readonly iso3166Alpha2: string,
         public readonly iso3166Alpha3: string,

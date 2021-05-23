@@ -8,7 +8,7 @@ import { UserId } from './../../domain/value-objects';
 import { IUserRepository } from './../../domain/user.repository';
 import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
 
-describe('DeleteUserByIdService', () => 
+describe('DeleteUserByIdService', () =>
 {
     let service: DeleteUserByIdService;
     let repository: IUserRepository;
@@ -38,14 +38,14 @@ describe('DeleteUserByIdService', () =>
         mockRepository  = module.get(MockUserRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteUserByIdService should be defined', () => 
+        test('DeleteUserByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete user and emit event', async () => 
+        test('should delete user and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

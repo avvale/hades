@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminAttachment } from './../../domain/attachment.aggregate';
 import { CreatedAttachmentEvent } from './created-attachment.event';
-import { DeletedAttachmentEvent } from './deleted-attachment.event';
 import { CreatedAttachmentsEvent } from './created-attachments.event';
+import { DeletedAttachmentEvent } from './deleted-attachment.event';
 import { DeletedAttachmentsEvent } from './deleted-attachments.event';
 
 export class AddAttachmentsContextEvent extends AggregateRoot
@@ -25,8 +25,6 @@ export class AddAttachmentsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(attachment =>
                     new CreatedAttachmentEvent(
                         attachment.id.value,
-                        attachment.commonId.value,
-                        attachment.langId.value,
                         attachment.attachableModel.value,
                         attachment.attachableId.value,
                         attachment.familyId?.value,
@@ -63,8 +61,6 @@ export class AddAttachmentsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(attachment =>
                     new DeletedAttachmentEvent(
                         attachment.id.value,
-                        attachment.commonId.value,
-                        attachment.langId.value,
                         attachment.attachableModel.value,
                         attachment.attachableId.value,
                         attachment.familyId?.value,

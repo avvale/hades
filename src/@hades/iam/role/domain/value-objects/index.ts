@@ -1,3 +1,4 @@
+// ignored file
 export { RoleId } from './role-id';
 export { RoleName } from './role-name';
 export { RoleIsMaster } from './role-is-master';

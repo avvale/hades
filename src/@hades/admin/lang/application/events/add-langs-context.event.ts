@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminLang } from './../../domain/lang.aggregate';
 import { CreatedLangEvent } from './created-lang.event';
-import { DeletedLangEvent } from './deleted-lang.event';
 import { CreatedLangsEvent } from './created-langs.event';
+import { DeletedLangEvent } from './deleted-lang.event';
 import { DeletedLangsEvent } from './deleted-langs.event';
 
 export class AddLangsContextEvent extends AggregateRoot
@@ -30,6 +30,7 @@ export class AddLangsContextEvent extends AggregateRoot
                         lang.iso6392.value,
                         lang.iso6393.value,
                         lang.ietf.value,
+                        lang.customCode?.value,
                         lang.dir.value,
                         lang.sort?.value,
                         lang.isActive.value,
@@ -54,6 +55,7 @@ export class AddLangsContextEvent extends AggregateRoot
                         lang.iso6392.value,
                         lang.iso6393.value,
                         lang.ietf.value,
+                        lang.customCode?.value,
                         lang.dir.value,
                         lang.sort?.value,
                         lang.isActive.value,

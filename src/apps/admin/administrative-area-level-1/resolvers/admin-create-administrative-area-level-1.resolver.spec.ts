@@ -13,7 +13,7 @@ describe('AdminCreateAdministrativeAreaLevel1Resolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateAdministrativeAreaLevel1Resolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateAdministrativeAreaLevel1Resolver should be defined', () => 
+    test('AdminCreateAdministrativeAreaLevel1Resolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAdministrativeAreaLevel1Resolver should be defined', () => 
+        test('AdminCreateAdministrativeAreaLevel1Resolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an administrativeAreaLevel1 created', async () => 
+        test('should return an administrativeAreaLevel1 created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel1[0])));
             expect(await resolver.main(<AdminCreateAdministrativeAreaLevel1Input>administrativeAreasLevel1[0])).toBe(administrativeAreasLevel1[0]);

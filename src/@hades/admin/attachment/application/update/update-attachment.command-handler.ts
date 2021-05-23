@@ -3,8 +3,6 @@ import { UpdateAttachmentCommand } from './update-attachment.command';
 import { UpdateAttachmentService } from './update-attachment.service';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -43,8 +41,6 @@ export class UpdateAttachmentCommandHandler implements ICommandHandler<UpdateAtt
         await this.updateAttachmentService.main(
             {
                 id: new AttachmentId(command.payload.id),
-                commonId: new AttachmentCommonId(command.payload.commonId, { undefinable: true }),
-                langId: new AttachmentLangId(command.payload.langId, { undefinable: true }),
                 attachableModel: new AttachmentAttachableModel(command.payload.attachableModel, { undefinable: true }),
                 attachableId: new AttachmentAttachableId(command.payload.attachableId, { undefinable: true }),
                 familyId: new AttachmentFamilyId(command.payload.familyId),

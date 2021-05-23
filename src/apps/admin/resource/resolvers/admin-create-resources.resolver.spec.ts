@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
 import { AdminCreateResourceInput } from './../../../../graphql';
 
-describe('AdminCreateResourcesResolver', () => 
+describe('AdminCreateResourcesResolver', () =>
 {
     let resolver: AdminCreateResourcesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateResourcesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateResourcesResolver should be defined', () => 
+    test('AdminCreateResourcesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateResourcesResolver should be defined', () => 
+        test('AdminCreateResourcesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an resources created', async () => 
+        test('should return an resources created', async () =>
         {
             expect(await resolver.main(<AdminCreateResourceInput[]>resources)).toBe(true);
         });

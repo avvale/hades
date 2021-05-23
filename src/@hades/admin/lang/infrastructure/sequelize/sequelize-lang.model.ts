@@ -1,8 +1,7 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
-@Table({ modelName: 'admin_lang', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'AdminLang', freezeTableName: true, timestamps: false })
 export class AdminLangModel extends Model<AdminLangModel>
 {
     @Column({
@@ -28,14 +27,14 @@ export class AdminLangModel extends Model<AdminLangModel>
     image: string;
 
     @Column({
-        field: 'iso_639_2',
+        field: 'iso6392',
         allowNull: false,
         type: DataTypes.CHAR(2),
     })
     iso6392: string;
 
     @Column({
-        field: 'iso_639_3',
+        field: 'iso6393',
         allowNull: false,
         type: DataTypes.CHAR(3),
     })
@@ -47,6 +46,14 @@ export class AdminLangModel extends Model<AdminLangModel>
         type: DataTypes.CHAR(5),
     })
     ietf: string;
+
+    @Index
+    @Column({
+        field: 'customCode',
+        allowNull: true,
+        type: DataTypes.STRING(10),
+    })
+    customCode: string;
 
     @Column({
         field: 'dir',
@@ -63,28 +70,28 @@ export class AdminLangModel extends Model<AdminLangModel>
     sort: number;
 
     @Column({
-        field: 'is_active',
+        field: 'isActive',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     isActive: boolean;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

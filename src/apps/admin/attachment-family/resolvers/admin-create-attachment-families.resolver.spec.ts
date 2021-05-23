@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
 import { AdminCreateAttachmentFamilyInput } from './../../../../graphql';
 
-describe('AdminCreateAttachmentFamiliesResolver', () => 
+describe('AdminCreateAttachmentFamiliesResolver', () =>
 {
     let resolver: AdminCreateAttachmentFamiliesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateAttachmentFamiliesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateAttachmentFamiliesResolver should be defined', () => 
+    test('AdminCreateAttachmentFamiliesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAttachmentFamiliesResolver should be defined', () => 
+        test('AdminCreateAttachmentFamiliesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an attachmentFamilies created', async () => 
+        test('should return an attachmentFamilies created', async () =>
         {
             expect(await resolver.main(<AdminCreateAttachmentFamilyInput[]>attachmentFamilies)).toBe(true);
         });

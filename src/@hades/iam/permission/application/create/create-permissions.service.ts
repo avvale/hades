@@ -1,3 +1,4 @@
+// ignored file
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
@@ -7,7 +8,6 @@ import {
     PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
-    PermissionDeletedAt,
 } from './../../domain/value-objects';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { IamPermission } from './../../domain/permission.aggregate';

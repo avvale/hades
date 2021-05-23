@@ -2,18 +2,28 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IUserRepository } from '@hades/iam/user/domain/user.repository';
-import { MockUserRepository } from '@hades/iam/user/infrastructure/mock/mock-user.repository';
+import { MockUserSeeder } from '@hades/iam/user/infrastructure/mock/mock-user.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
 describe('user', () =>
 {
     let app: INestApplication;
-    let repository: MockUserRepository;
+    let repository: IUserRepository;
+    let seeder: MockUserSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -22,51 +32,61 @@ describe('user', () =>
                     ...importForeignModules,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockUserSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IUserRepository)
-            .useClass(MockUserRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockUserRepository>module.get<IUserRepository>(IUserRepository);
+        repository  = module.get<IUserRepository>(IUserRepository);
+        seeder      = module.get<MockUserSeeder>(MockUserSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST iam/user - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: '4d04eo0gx816bkqsehecg9kwqack93bgq9awsgcerdq8atvqnmmg79cwl4ptewa7z21gzdcfs5mqp07mrqi6nl5zbeuydgwrbutsxj8f6i8pt82x19wagl6j1hju7xs0upd2cwfyqmmyiga63e5kjp92zf2vgtb0h8b5jroyx6kmp1mnlcrb1ia6yodrye258tzx31134t0h5zz3naqs3uusm9h2250kwoez9iyejnbij07iqtcn45g929rkj7v',
-                surname: 'ejyli3ibo9p21c9gh27nk0c2g0xdg8a2qd32h2pkt6yx3xh1b4h9ndo4d97odbw2qfqwiu6sitpv5gur51sbgpqz3x40t38sziok9jv2gnp1coeishrd5zbzt7hv0gwanzhj37wimctvusuufmhtmhqjrclhru147xmeg2xba3c1sbn5slj845l6vwu3t3r5rbubpjcpwdl6jww588yldknv4htwy2zam2wgazjtylwzqceo9chbw5ov8vzybgq',
-                avatar: 'jta9u6y89pqki2dgbqbu7rtb8ti4de9n561hx2mjoiasge1muhnefpm2iwmqij5mdbrq3lxnlm7ks6vvrkp9co2js1h9v8d4n67q0urbc8db86xnfzyrmt4ojgc5o9h5q31ft5zfdm7p13xxid3hwxdbvavmq8qqw7y9z21st3ey2gbhap3jvwpdk8676r3u2krfe9owf16e1ozf10sx9vg4u6dkfgqyvvqy2bykxi2zyv747npt0i88zd1ji24',
-                mobile: '3w47szy6hsed3jp80t316rum3plgdvolj612vc5oodlkpunhojolfvsb2lx8',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: '3bhfzxuvzxj2u4nowpg1i4hffkfbgjzbre5h98as9n2aq6c5wldqda3282ktw25ciz24mx8hmc8dq5ctgeq6zedp2wbsz5q9bdjd94rxs023b5tfxaezy0ud',
-                password: '4rky225jgmqp4huvb5pykgm5h8er9hn30lneetau39xjflq87gui5ee4ykuxnk9uc9m9sfozepb1uyfcz2cibeqrejo7v5on1gvag4oifjxlmx3ayjyjgj7guer0mv5mznznrzb4bmxy5t1hrj31wod5u9l2k12a8svfd7fsh8v98ltyrhc3nydlxyhahal7velvqxiw2q23zrju8mnbhdnargi3dutsu0wgll2eumix29pgjyuvwmmokpj0vli',
-                rememberToken: 'c82s2vlmfc59w8log8rmqlxefx5skor966od57xvpcrn2ni7vdhabal8ckdylcq5ghri75kb6224xc0m6261qau9t9od3ml0acnk0d09has18n1ky6yyl14vbn9ntq2trlmsxv34djacdkk1zjaloqgsv1c83v6wslygwkgx3suy32eq2cmid6uqv2gzn24ark0intu9m1ra1r6c71jxuqbhxjzxyrpc5x17ese71gbselu7am30tqgdvgwk5ov',
-                data: { "foo" : "bar" },
+                accountId: 'fde8668d-5372-4f00-a17d-19aa9c8dddd6',
+                name: '3xjq7mpz8s09hucjdyb3jt1q7rn9eq2ek3jrndcvet4osfv93khy6odgogvhv605pa1zsmapynods75w04zepmvbkdq0c5nrgrh7s36tnv7cb9vuaox3q5t82qln5fht1fnub6xhf22lb9ipaxagnn2479ewskipnniqi230jes627o3ab22wjyxg94g9adkngtyr8tzo3udifv2qi4jy0uiuhnqsexesuatshgr444zodiyeo7ouhdo7mz73x6',
+                surname: '51y7yojxandh421nz6yuud4vkcpvn17l6pp1p1qhfv1d36oocymfhqyz7zoor7t70ig7plgix41e24zwn99w2w5za6mcgryi4gwj1kegyi9z7mnm3b4x23qp96itqmexe046kbcj5j0qez8xpr1ktf3d9yddiu60hdj9pxwbeeesx18bekm5joihw2ig10ti1pla8morsns5ais842yrx3bllip2dgu65j90swbegaxnxit74icj0in5uyoy8ea',
+                avatar: 'pzvr9gigycoysa2wgr1yxq8gj2iefj26u0o3p0q4grzujh02262aby3bd3g0jxb9oa4260tjrq5tfm0vspjxq1ag555cvst1qis69sjpjv26kdmw4zlm5xzvqipfsuz7288dou63rt1bbpdbf7fo9oc9doqohxhd1fdj9594bzk82j3qpxd212w4p54exm9i7rti5mxk2a07u3445kts1yf5dh4tt96qmvqnypa2hw59idjy8npi16lcnlnjah4',
+                mobile: 'd58yaakomkidbse3z6tva4pbuer3v72ddvk9io21f8ds6onnv7dydp6c90yv',
+                langId: '472d16e7-4c3a-4ed5-820f-6bb2de769938',
+                username: 'g7r3jim2qmcnm09pgyggzmcq4tonxfu3tn72oyv4dkfeuxad4ny5u00rvv5k995f3xuakb75ampasobnoaeyyc4ett7d87fq1eldd2buh2ntaxs29w7iwdb5',
+                password: 'j6r12g2wodhmblzu3v2dvgkqhv1emwb8v8ax5kizyrt4ffutcqckcrzcos3ccff7126iif3c5iqt3tt6yke7zc7xwhr2b7l11336m9gcfz66qfbci68ziegxzdbm5ly0s9g9bloilh81nv62n5c92gaa61qho2jpsnvlwp9eug1z0kl5kuv9s09wcvov2t7j8zyaqtviwiybmmh59pyh39zvxxal8j655puq82bguyb7e803f7r2ixrmxlv6yy6',
+                rememberToken: 'exkjniz2h6g2tb5j5sed2y0gm4jr4hiuz5sktssggto9tbtglx6wsopduedd6zeq40waakaxdz1x2a7vrtmgkdajqlni9wb7zvyoucrpfw86oyqk99jblwbobwpuq4b0jtv24xkh26tsa1zpb4qhudgthwr1fo5lhhglc19ur9o7go1tpr5vvwom58rkoco4ml390wzz3n30oyuinfkgn81bj2vvayff1ljtobm2uh5bv077vuz917da4rkxvz8',
+                data: {"foo":"Bmlx}wHq^w","bar":"K0B\\kXb@Wd","bike":11684,"a":"1>8<`!2`KW","b":"Q6$.>[[IL7","name":"!v>^*xE\\*Q","prop":"w!WYBO}&hq"},
             })
             .expect(400)
             .then(res => {
@@ -74,47 +94,24 @@ describe('user', () =>
             });
     });
 
-    test(`/REST:POST iam/user - Got 400 Conflict, UserId property can not to be undefined`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserAccountId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: '84127tkal7jzim4x0qsx6zzyuj9s1ohdei49tsfu8jrwj6icoshxuwiomxlerckbt6fd1h6imgcn1tqe9j2hueepyzplsopodcowtg06udjx2bofrae7u338wp6qjr3ya16k47u2lh9am1howtti7pzd046fxrhh4vi270d2o9r3h7df1sk5znc6l4boivdwqmfyk6716x5pgjqtjedpo2am9pnrox05mylo3y7uorxd17dc3jva4zcv3l10pns',
-                surname: '6mievolybx6xb02xaj6tjxoikrjx9lo28clj9js0jfpohzau28o4iei1oq5vul7zy50y1tcsdv59gfcs4tro4ktmf7bqug9d427itjtnnczx2p8xuslxlz8dsv489axj4jsdy2afpsndfel14othww07nmrhaykacc4a4deldvq9v2y169qt44j3pe1iyuk88606a3mfn1mxahg7w2mpd9vgyyguzkbmgcevrqkcaha7j27jdqpmjd48hbbdh72',
-                avatar: 'e02f8snyiwdftajkvjxgiq91ihbjheo7dx19pju1vvvoo1zoqaz5fss5nbtoqmbuldcveglgvlbpcpuolctss49y053r7a7sorsgzzqqz036v3kjbrbaws6q7trsf1jcy2ptypedwkh8k5zov8bywelpe75vv6q0znt54x1q9h8frlcf5mbk51jsh6e56fd4xd07jvtlx54gghlw54qypm8n7n23v6j96ljzjcvf8n06vi076iool403alq7i4m',
-                mobile: 'jy8y8usfxwx5jssxy2f00eyv6ep9vzv1m56cwxjzpetsfritknzbxwtyif84',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 's3zsbcs4466vnsnco9z5mludvn4jz8d7bdyrfofkjz5a2ve31v4vrvzqtlshe7f41tr5puqj9x3eyxismt7uyijcanlz4e0ny6w1e3sinvk46gxz4gt5u5rw',
-                password: 'q26jot79hf6xe3hxi955pnusl2i24uvgaihyz6gnummfw5enqrpx9gd97zgvztbm2kz8antsmcxc5uxma8tmejt7sobb2ngtrispjhwjhi0e8lceo4wgjcyhkpletr4f5hmr8rbrhpnxl571vh9burboxyftdn0juksnhd47ubvkr0sktxujxfo87hq6vctiqi1kaa886my9ig43wsaegeofdychofdx62vq5jgq50bwz7bndtyrda82ieur1qj',
-                rememberToken: 'vcv2xp97q1m4crfl39wigkd1l3ll53l37lvxkjl3d2499377pjfoig89xcy5uv3uzlsbgvyrir3hzw7evl7ntplhdnmzqs1yofsefi2jkztlkqprh5egu5b8573o7ykhvscuwj7y8ur8k7vbmu7mh9jwl9mt9h2iw9irwqzuxp93kwthwkzhq17lpxabmtuzh60lsibvakojzg21lbgct8s4oc04uyl2m0ebmxvklsb8didvnw6c6jo0nlj486o',
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for UserId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserAccountId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user')
-            .set('Accept', 'application/json')
-            .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
+                id: '78adb3ad-b3bc-4bd3-91f8-188d28162be0',
                 accountId: null,
-                name: 'tcstdrqj9ino4xmvf4wpapljdhaaqsmxm3ibdd4sbkogmgqg59wuixzct8edmff6h7cgyzpogwip299fj63jz4pifbuuwl6y5kay9uqy3smlxdks2xf0pe67xqjjhbv16fx1bz9g5hkffl8xppxl5z6bocoargdfbxspma5swp1kgo90vy63if6d6p0e0ua44q1jtuid5gpnkv6olpdu28qz20g8oxfw7e5txbkqloylb3t84f3vz14g2s0sijd',
-                surname: '0iwu3svjl4xtlnini563ntn3svkx93cymusn179473ch2dy68qvah6qh9dnznn0j8jray4n09hi9y4pmye3bgzhv5n7q8wk8fffwbf8bzee775ykit5f7i08on3tx0k7h6dfp4qbjhi8vbrwjm7338u6ysici5vub2hylvseizlsrtuc1cijxhsk9xjyoxanglfk6z5m885h8ba39071komhja7suv2dgl21bibft3kq18helb5f34fjw7qcftf',
-                avatar: 'xbrkyoi0usee7b4q51adfzoee847h1t7zzjlyz0oz9og2r0t76gzzbx44mkau4ej5lqp9uhk14fsvx1v8now1gw6xvpio1h01pk2kiva9radocp7mxy9n1nb02pp5xtwzte5jm3xe0tdx0a8nnqw0gleom859ho9p3t21nastugehy6rw3cbc0usr3hvggnrzvgxnpz9pd0vzqdk7s5llwb9v33fvd8oxhog0tqnxo7c5ngxdmz50koq5nla9jv',
-                mobile: '51cju6k6uqt2zr6w3vvy9p9ax4pqqgyqkcqtj9ulddpybb8gc6ukmdkthjf5',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: '440agvbvvzgisempckwe60nzorb1ylhangpobsjwafxf9ohm81isdn79hz7offr12jvdh5fslzyvjpv8cfbu7keeovprzfjyb8hx8u8p0qhwlrwuyym4izr7',
-                password: '97wzmj0u3d9alubz3cywv9ftbb5iy98kdryohaj7j5k0guvwy3gapqiau7iv7f8ctdxo5t1qba3m7xn00cj51nlsrvgl9ye6mjmxuhdoo8xscc40bicflzxv9eoi6fvr89dkf1zsidkjqyuv38pnf8m97bz4s19zv09e42z1hsibyljfu1nxqqayb0ks103p431zjntkgv5lpv0ygymchwepdb2zuknfwu626pwl5r75wwfcwgr9ww08h5m07wk',
-                rememberToken: 'hdzek74bmbi1tae9fjtdy36rs9z3uh1djyewgjqjr9c8jzwzj2802dk7i8i3p75sesb7hgdqbe1luetih3p246a9ol3bcfzlqypsu0tvjtyc1xsdhotir1ha3vphkcaslbhciaqxpari3tphy6pbxoifj04zxbtpftdsvr091vbrs21cijp87ce3vgidqo2v325zn3cdasb0iwv66ppzicr2054bojj8sppckdccqexmoa9ui30jyyo2w3947v7',
-                data: { "foo" : "bar" },
+                name: '5pp344yvn97bugx437zi40avj9fpmdgcw8h7c5jyp6kr6fhqn987sbmyf6jr38z881nhij5e730m9o1ftz4hg80gh3yk9mt3j9lkod4zw66gx7p5qu67uextcpei1dfwlw04l9yp26mxzhl35arz8a1ineoinp6p0472058uc0dfpadfab9a6ut6zlxvt7dd3az9ho2rdefzb7y6kohlm0gk4mgfarmzfb6syh0z793jlm90w4gr8qu7039bibt',
+                surname: 'hq53gispjocunjhbg9i99kmtnqbvs5fcb2nthwk7c771dyo4sqspe0no3t93v7kbc7hia7tn075wmefemsbaf1yedc4z80s9a7p24y2h03yb4ymaf7t89j092ua58q3h27tnr1wfils0kh5uv64ntnouf3jp8b8dq7gooqhfxo91tclof06qeuaqwwtwcy6c919pgtw65kbo85mavrizmmubkyb8a7kcqay50eh5hosc132yynjnhppdodgidul',
+                avatar: 'xe5hwvh241nr16ddylwfrzb1079sftd2csdrzojf2kfnvw9t5mupxws4fymud4wmjezwgty60gpkuoptsenvcd0bzoa0rtblgr6oe29u1c75ojyra7c6es8emd1ramgn79c4li42ly0ob1dlbviwczy2151g1317e72hkjy1yyyx4t8n8q4l5qd5b62m2082a4jmyvmosfa9r2qvfbax4w64lbkb11z37q0w563u6flg0ecvzb6cyoowjnu0msw',
+                mobile: '54xz3jhbobqbb1wkku2j65mg0tczo9j9bozp8kf8zp5dyvp89o9rg9my48ql',
+                langId: '9ec619cd-c12d-42d7-b68f-65e502243f45',
+                username: 'cos55cams1kwd6pfu7jmga91f7uigo4ovggswnh2anvlzc3v2n50nsr7957qia1pyh6j80vvauertu8gblgkgehk4ck5c6m1j4q357sth9sia0j0eri7frs5',
+                password: 'twt1cg31testv64r0mr0bvwtg8j1fuxx7tmfvrshu4ww1mufi1c0qr7n7d3bzx2w6hbm98qnr9pskoi7j8qqngt57mnio9gtooart7jx3tyu90c80xfyb5eu7ok7ag6zidkk35trduoa4h05orhxbes7b4xe49nqzsa6azbe0rxwtm6iafrskwde5029btt8d0r7x6zntzdrplq1u911ymsn5unzz3sp4jnsdkbml5i905dqigrq880va6u2gx9',
+                rememberToken: 'fc9fjwfr12uxszzhhb92oqfuz51qtloxvhdhts8sgjeavbax3ckvg6v2nlzr89vflpmj25p8m2kgq2kl8h0vl2tyw7e4sy7jqyucqw5twfi0lyps4f8bsg1jmpgcxq3n3w3c3zv1aqt000w5nv5am563qkt6u6i2ooqkvvf7ccf6cw6x416b2qiz9unrvx4vfyaqnxv8gtwoy9a42r0wbuvf0i3os2eite17vz3pcydn5aqr6ful16lp5i31xj7',
+                data: {"foo":"u:`]8LKoY;","bar":55627,"bike":"wL@\\>D[hKG","a":";`iADZ+@p.","b":"@M#}.U0Z;S","name":"-BJ;pZ>cjk","prop":55044},
             })
             .expect(400)
             .then(res => {
@@ -122,47 +119,24 @@ describe('user', () =>
             });
     });
 
-    test(`/REST:POST iam/user - Got 400 Conflict, UserAccountId property can not to be undefined`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                
-                name: '5sfsuk73cb9wtkah5dophb82jwhdtxqbbzaw0qoldbst3dhx50durtmtzsbowu40wtejwpus1aa5kivb4n5n7iw0489ufr3tqg7ev18t3oba2sjy30f48wei1h1qqs7weaqbb59u3qnnpa8bgys3zi29v6ozpys1oa16l4c1euuimkqnyo5xt5k1izshswa4guujnm0r67ypvp13cpqglpbf9vyzs4fo971bugzum2dl8gwuogixelu5hv06wuz',
-                surname: 'c04r5wuk4hkfiklnavliub2zf0n0l00dsqbbwpibf2d1jtv8szrd0r45who7zathq0ieuqa9qm1bi59s90daihda1ss4irp9ye6jtse5hb1ezbj7e69bo09687rmz2xr6mb57ptxdew5unvaaex2k41pustkco5tdofnpq588sp1lh2z6jo2c1b7cx5p34lorn21kpvegk98agto8too2sjhfvldgywpq813ik7eznf6t33ydrllzs5ow66vsdd',
-                avatar: 'rlcksdszyxflcuwi8nrom03blp0sxn11twxuio12e6uyakxg497ppqf2virxzfie693wjil5omyk3rfg07kcytc756fzgk4hszmxwnu2pciwqkczajxj8dqj10t9wvasqunzkuasna9p6oze7c4jxam112hs0c9yg6m1tgnzn8422o0w6k0aheu038r94p79p6s3caxvj9q5ptf3vs8htocpf3ns41hw91ch6f5rndybldcd5tes8x89hlnk5tl',
-                mobile: 'neqssbyxurpam7foxtr184wpvvabbr7zxb66qfrfitqn7ry0kdvyscnk6ij3',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'tlwb0kirafjrax9tnpio72gevtqg6w0do7zxa9tullo47c13csj9mphjy38vx2d9383c9rgn798jox422d5pleiw37o4rvzvjia3c4bllurghitfbeu2bcvt',
-                password: 'e2cysn2c2wm174dv3lmfnd1lykkx0ma5uhdew842y865w5xyrgwxgl9ahdjhsohf8ds0gpiohs1oo6fk00oi7otgwojymqwehkuysmkvgdka40fvb07eiith0mjl3zodx8e8swlj200mycwyyxjq3ybcidqk1bnv97eewogx37czvqeho52up4kcpnpf7po6tvaciiyfxtztp3ksa12oi4nh8jmgt7rc6bjo3us9rilmjguc3pjjdzoc02nue65',
-                rememberToken: '5rhxq9ayzgelik30a1e2qfj0iwmszsn1yshsxk3hxepc7d4x555xqsjbmngva7dgwp1flqaeneklzv8fky1aar1uud27j0er2gt0nab7pwws3i2p0r4mnia950yg1umsi6521f67uznsdm38qpzisqomwn9v6tly91f074sp1gkoah6srv590jhjh4vfps3pwemg9nywasratz7q9zvbap3bon7whs04pyvuvrw5rm8q669leud3swruktwxdpm',
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for UserAccountId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user')
-            .set('Accept', 'application/json')
-            .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
+                id: 'f8e03f7c-6f27-4964-8fb1-e024dfddea29',
+                accountId: '2821abf0-aa3c-4897-916d-f59b15c6ce83',
                 name: null,
-                surname: 'a8w239k77ki4tdvu7p0n8voexe20mg1s4sqkzkj993l1gixc9l9a6hdbcoflq92fu9jfr25v6xh4evf961jjqmfm4k65fij3irtpil6lmczr26ttoqxtnnkq8u7tl8v8zvvpe5u0rfu7svp3asxxf9xumhym976o1xs8a1ujuksfv54becktvzi2xg96g6qa47n8vgb31a7ofuzjo0cxhkgz0ojcsral842lky74lknl3yyz6pxi76h91djg5ct',
-                avatar: '118h95kojekj2at0dqi5cg4u2ktesif03yei2p44m6dx49doxef0oiv459yamtuufkvxjrd2q5rlo77kw9px1mbigr274ieyqslv3raabd2q9sel6gg2ye9lq5kdjsh6hru4yyuef5vy8u3gv2zq8ti5u9zaliakd8mp4sdqfz32iibxk5sur7xq5u0sawzof0dqmdwc070i3peczchvxacecgby8q9cid67873t4fwvrjdu0cbt1sl7d7w6gnj',
-                mobile: '1v8chubv82k08xe5vtowhldl2c9fjqyoegbwhx55i7ef9ibuvvq71v83d1lo',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'qg63ncfoh95vy3m00xnqk1fhfzr3uwj9kzib5g20bktznuzzsm8r7pkmpegcxhmpsbebdw22eiah70nmd4wydxt3zo5ifdv06viysthye4qg2uy9u6kgixj8',
-                password: 'jx4vnx7y06alep5px3eb8uha1igc8u5dia2cnf7ag0826skqruyydd72zb528becbkyr63gm104sa78i8mkqo6lpj0w9kecbja98m7f1k4bc434epf2x3mmu1gylvjyd0bvmzta0u57vj9ip5jpmmkz7zyuvyh01a1okczf4b4b056b0q1m2oooeeuz74v54eo8ke08bdliw3am1eu9wkas8y9xtu9zidxoz4vq3dzywgg1greca17qqwkzcvey',
-                rememberToken: 'dj7t27mrjsillkbakvfl9b3bw6v3s30kmpulcea71gdw4l9wu3qbwcogftjqt6pqu0j27eacmqlvifel08drwaespacn8lavfnly9mnibo06kvhmn4shf679lwoi2f85t9h5onfb70futfzf3e8i7tsm8zt0exz53bs0ime3z7u6qd9ltokmt87qz6zp9p4w0jef9kytgiz3afzcci8212vub5l4m3r45mmmtwtvccbb6j2ikj6k5cb8c5ruqee',
-                data: { "foo" : "bar" },
+                surname: '8ev9gq810r87uleysbj8o0yyedari5acxdukh3v3ek728t5jwg7ye930zqz2dad7d6t85njcjh41axm3spcd4mqh440xgqnlwua3cgmejjtpa2u4er6mu49r5x5ip32lihb2h1wm1t1bzkmu06kx1i18d6bfm4v4hd7g1on6mg0y4cem65ifd039flzkciqtjww5gpl2y148f24gqgdyh77at2pm5078825ee08ru28hswwpo68up2xhqzd5yfy',
+                avatar: 'pa6701nhcbej2unneujkgibbpct4ztawsdebcvfblvq6eyqz90yvqegx8gh0xdszlikqgsv4ldz07t59sf5ysnxmo1kch5bmin3rl8eh0ktlpduvemj7vpieq2ezoe6ruvlrbt7lkqkha5rcvga5a2ur3sc9mrbvdqhlkc8pfhlm9y8fjtrs1x8mpt7m07vhjbasmey4aj18dudwyrnobx97jd8ia8muie3rosiqhwvrpb1jikcg6n4xkokssob',
+                mobile: 'gpspf7kd8h4m8p3t466q3bcc4jwefsi1pvo64e3c6cx7wsvd875fscmpomdx',
+                langId: 'ffe68aaf-bfbd-4f34-b02c-bc0695dd82b3',
+                username: 'y3t4kqtdoy6z4xmdjvo08rsmitaaochiyvvb90rufzdgrql6kb8o8ilzezjwwoqobjwszmw0elojhkx5m5bfponj2ufxpcwb44hsg27fan3vaiwm3jv402n3',
+                password: 'vjq2w131bwxsieetigr1j1puqnrj7mu8kogymfoqpbv8c63jgwmsxtmy7d20sin8ud9h00pdy2octchs8on52hrerltea1r1z3kb7wr0s1xkpkuz2uir5pnlcxqriy7d062yrzdtfpn7jmk56ohsgcklws0ejzxu2d5d17fc0bxsygfvdtxabvdj9t3jr1vwfn8jpqd9b8htp60qylh7jwt8ip1c1sqry1gi6s33yufjf6w8cl5hhj2r4gokdya',
+                rememberToken: '95rue7m9z4sbe9c5lxrp0u4aby8kqaboyrw9zekheanhg3vlhh55vysmoz9xzkmwnz43zfs9j2959b1uvslbzhe3zhna7xi662xb7ciakbumtwme967ozjuso51tgrsttv5rox6gy845d29oh4bwgrf3zoystalkkhburt26hzhugcf9mf5mkyf4zgt6r3kjj4dvi7i6j1sn42m2o9pdznx2xkx056xajjrs0vzu1gsua1umh3t3u7e7c02ig9q',
+                data: {"foo":"K.9/,?.8gR","bar":"K@[lKm&S-)","bike":"FsCmsl[\\G.","a":37079,"b":48756,"name":"k+?&pyrWh]","prop":"+q2asB5dD3"},
             })
             .expect(400)
             .then(res => {
@@ -170,47 +144,24 @@ describe('user', () =>
             });
     });
 
-    test(`/REST:POST iam/user - Got 400 Conflict, UserName property can not to be undefined`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserUsername property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                
-                surname: 'i52g5o8u69t2gp7tpbwsbby1zy0avlx0ao9b062mkfb4zzyn1pxvbyx4zop5qgsn9aq2b9108t21z6vqh0xwd9yxun729esyzsw1758anxt96dpgmo4v6ur0wn3q6334uo8cq1wl5d6eqkvau6db1ls0os27qnjk552fknvc9o0n1ipd16rexn8mwji450u0bhrvx2rqnnro7lz7va2mbsvp1gimf88ei0sc38hi76uuz4lzmggwjtijtvvtrn4',
-                avatar: '7tapw4f6q935k1ok17r2sqxwcavfywl54k0i6x2cgjm71iqqqa7dfcjshynvsc62z5rtf3wmkyckswtwsib49ui2sv9aplhgwe4fxhzwvd1ua4moapud5x9o9scoq5og3dhuu9sais9c5e3634fmrgzxfhingu3o6d9m2rk7ph0ow4q66lr1y3nkpzkoof9y10xnet0sgpcb7jkn2o9oij2jrcnrzx57y57ef69fmult5mnsndgp6uhuvjp52s6',
-                mobile: '0ioxm0zixxab14npxrbqxwakcvdokkon5cask9g8egupo93snwebvl33v7p0',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'txgbp5nhykixt8qlz5nqew3p5z1gmm9tpek04d9l4iaqkvxnwlpf3lbh84onnhrn41ifmuzjzq6874soayox7xxw200v21t87ccv60rsag8lplaf42ryickt',
-                password: 'ms0wziii6horp1fcv390v0hhiqice2yncxkrv1ys6rv1cnbrty0yjidc9klsk2jdvs5an5pd2c27r82jogjr61ao9me62b4qi8siptbfk214b9jjgf9j0t49mkjsxao9c20d69zqswkir0ig3u2p8xtn5o4fx860lu0130obveig1pk29d2eyv6akjndua5a1xopoeh1ahodrbny7or0r2u2mac3fsubgg6kxxcbs6bqww0mgw4wa33p0d4lmc1',
-                rememberToken: '936ypa26zq9a9aqkv9yg3vqho2r7fmepjqroyo2tuidftyusp80jqnu50hlmlbvfo8mcxeedgl76rq36rx6s094poq22puc29yzc9mkbzvb4rjm98xtjna59dn62c3bc29lg89kf507bnjm51jd7cp1phy85v85r09jk75b21pwu2pl2yka3xnk0h8oeb6y78pkmp8a4if52r8k2zgwlykqdsttyb5qcctn14p6qlmkakr068mqg90hpeo87ywj',
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for UserName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserUsername property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user')
-            .set('Accept', 'application/json')
-            .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'qm21pkgg1tzwmdm3aonmpih3thxdk9vw3c7uot1kb1m0gch4dydz4lfl3g3vqa4qat120edw0wtkj9rfjabl22fkkghzkxwlsog8urrjfosnde5qych2efytzce7e7ry27hyj77vunruztkk7mwegkmzs0sth6exqx7elbj0w4ks9wwsra4txpsg87ag0bw022olsl2iaqdhivnliie60mew0oe0psotwqsdaaabgmfpezwxzdlca3sc6xg4wzj',
-                surname: 'dnzofihdkbftd8blk5qq5gcdq0nhmlrokfs6xt4pl9wuf62ga65ns3ojyp2p8bofuh37w059y62944cu9z95ptt4ytas6szta4otk3tu2lj4yz8qjr5bm91xfsvig8ru776u2novsm55hgin3kklwx23if37l9p7vuh4yuzwbyup5ijnamrycwl7s5q5msrpe1ivzg54519y3j068kwf12ta7bahk6br1gfblw7gkoj9iuu8y6ng3qqvr32we67',
-                avatar: 'vvof3lcxzc3niev1zqj8123e43cnbqzu2g1sof1khfvgnegapf2piwhar0ri555utmacrjhxpuw1stn55pg113pux8bak5e3nxr0fxg4fm8xhjhvuhl0qferf1ommlw01wmgdjj2qg5owf7lqpx3yuo0jmn37y8z90jwydhktowhm8pb9ca9ameolafy1ilzk2jqia7bl07x2o699vidf6r6aq5axa1hvwtfwfxw1m51pphequpjbogchah15rx',
-                mobile: 'rk22enpowz7nvmil9y1o6ylj1hjgabsuzitl2teej2nj0r7rdg238tux766b',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
+                id: 'ad9351d9-0105-403a-98d0-e8f15d00d6c2',
+                accountId: '1364f809-1c5a-44cc-a5e3-b746d229e9fc',
+                name: 'zq98056top9jfl6m0guql9qqmapp0al5eyo7eojn32ank63hr09oltz3ihfny0482j74ktt5pz5kz8rz1o6ys665v6qjsljm1c1mdg5qyzez52f1lpcwfpr3p6q4b39gxr7w7vh5m000wtbslyl1x87g65rzg2zsumgqoeee2ielrrx03caci6xlhfe2up83pn2u0a64kfmqc6gzzwbxtmtibdpuq1ryfdeew6u2m45rwg7lp1lifzzm9s14567',
+                surname: 'pc5q3xor7h92zsibrtl1dmoja904cjbm3ir4k9hokqd121kd809fduri2rohs3wm9ljxa60n0acz5llqe9wml8i3xli34c9wn2xau21svy6sg1esgeir34vvxamox5mp9zo8ot1hggdo6dtzs2to87nfqpzui61fhh5ltq35mdckzn6vbdh0td453uedwqleuet8afed660d5zjazpf9jn217md52rwf7ql9xqppgygm6khgp3pknvy7b9c4nd0',
+                avatar: 'ejp95ousc5pftpmkwoy61iqf9ew9xfxe3jajv6lzu2u362429u9rnkokyvlunztn36etmob5af0pkm5onazgy25kcxvoqwxpems3ftsqjfqq932k9tpkxyacn3sd1f9zyg3ktsceq6adzxf1v82bvyz9dwpqmfcl2v6v3oeqq1qyw9x4jht49six5ie01vxpn7x3wpm9i2u2yvtrbrcbxgkpyu3q5xho2qysz0qt5z2wvivuj05qc9uops8kdpe',
+                mobile: '98yf38e9kz0xapcpslqyp08hw6hp1emn5e5yky8kts7g8rfuy35r3fus42qp',
+                langId: '2bd06edf-60cf-46d5-8c7f-cf3aef3e47af',
                 username: null,
-                password: 'pxx9422qqcn7nj3bywd964bl8ws0qn53r6rtn6jeu6elbgb4h02nohy1840208glh5p71vxsmxdom8ndc0txav5xin9n3iy740iv8a9ndg2qmf0plgplh1q6o5pejv5oa5rmhk1qk46a78mxqzduhmjkm5vvafihe5ynw7bork03jr2d4rfyfd2o2n326ptg21arw6pinggllgrqz9hvi4lfaf0nu71hymcyqg1g4ulvpu6jhped0ps6vcpad0o',
-                rememberToken: 'qjulnbx0cw0362qgk45idkxct7oczuruxzn9983zfc5yobll9dw0yzg7wffquotbrszbcw627tyq1u85qg3mewsmipdr7w9hfcdsiq5dsot9pv6efddo74fx2c624s2g7ipnckhn2nwolwt8hfyziw37j0gh3fkb25b4u2v3x24f7a4damc92f1m5wjl3kq6re1rwr0713hp7ft75o19dfrg8pfmdka395gh3cktkoe56zigjvua4wh9xnfxlny',
-                data: { "foo" : "bar" },
+                password: 'gp1ba0ew4j4qrtd1y3bwlzlvuthxxahvvlo4t66c61mavf19382b0vp58l5ltalvr26g3jfupw6hqiyvderc3v52mn96jqoldq01ibes1eo691ouyfy9b3nycxp00ut1cdil67qw1v2hu78vv2z6lvd7zp30rd0aqthebsyorhpjwyp63e1tmld0w96wxko26r239yyfn1w4wpv4slo69a7vpv3r5akj83j6006qx95zzckhhlt5rf3obct4hm8',
+                rememberToken: '2pinhthqq4y774v24hperu3pv2682rsuf90rivzxqvimsgig56r11qz319wanuni8t3h0gwc1wt3wzl3de7dk8f6g9tq9udac3yfiwily0ekytxf23ld7wprp1ly5o0jymtvtr9xplo76dt5hw7464wxghdaxu8vpun29pze2j3dfu0wx824sca8qde7urpwplfz4k1neco43e04pepi7kil80tztf1dki0gjya19y674bg9qcudevgjn720pig',
+                data: {"foo":16946,"bar":"O6c[iHp./M","bike":"]N!E$<qa[/","a":"i_%Dqg?nOJ","b":"86?4R&\\U5B","name":91192,"prop":40801},
             })
             .expect(400)
             .then(res => {
@@ -218,47 +169,24 @@ describe('user', () =>
             });
     });
 
-    test(`/REST:POST iam/user - Got 400 Conflict, UserUsername property can not to be undefined`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserPassword property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'rmttatwawq5dezm1rpw2hy53zxnflqthsvk6lrvqqzsjzwch7qhrca4m9x9zird9i1l84pc83ykbggyc3s3wwv253skqph8brakb7qnem6a41nkmsgthqtrmr3kqqy63a2is00cxiifvdzy8v3minfcuv0buzd5mdpn79ip32nnpuek3ibjhzviwrcj4c721j0tonm2g9l200vdfyf7erdi65rj6pjkq89tk3fik8tj6g35hgbfmezy6ry6jg47',
-                surname: 'lc0qj0wkqmjdrnfgfxfbnjowg570k2kamqgbchmoplxmrvi80jh09sdo1qa6dx9ape49hn50ajac9g175dluo6eayq90xtu578ksebbr0jz16whafqpf8q26idpkq7rlmd2p7kv30npbgejygs88ff8sdtc96b9ddqq5piduyezru9txfvuwikr3srjdwcyg04iwymp9nhw7euah6uq74b547jtb70bvgvpx5q91iupu03gidt0wh0nvtejsi96',
-                avatar: 'g1rfbm5ds6vd9yqlkfqi1sairh1hmrjxchq8ejcs6psmb6q517d2fz88gb8469js9rz0c781gsvrywytfbhlnw4jks8s2zl5l0o17el1a2l0qqjdt5dx8ot7dzsh7j7z0gy4ohqs6wd4unvuzy1wrrrwa6qqu77egykrl34w9v6xdgy30990zh1lmmm3m7i4u72k0vsc65agsrh8ny6v5dr6w5eaczge9xksap24p6gojylyeehjja581ww38ot',
-                mobile: 'g821htni6o127q27ceojjdwh2eeemf94p0k2z7lrzyh9fvssozu9vk0kg1x5',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                
-                password: 'h7j5z9ulhv7eip4587twtnej8d414pj4g9imdcpb62s3q03zmh3itmsnwsuyimc68yrwv8b4kovoumrwe1f7cnfwy8nofxf8o7qxfpaqqtel4e3c5y9mn52tgqcakf14or35onb06312habjho4t9tn5edn3c3u6e1ajnuqstl6yjg8e9p87a6xibfcorgrw28fxbcfsib7v6ui5mnut1ilv1sncrrq9vu2wabb9vpcx1kao8wfjq5xa9xk7q7v',
-                rememberToken: 'jyfvkte7zu4f6nmodeghtubjcrdsxsndh1meex12n9zev4flgyts8teky4jve9oocnk2p3pq2sf9cwfidlgfpgb6whyxkn41j28til8zydgdxmkk1978n4ui4z3ifgudaamusgz793wrdbgrdy5x2nasxogtxmgulgcdqw6pb9c0m2tofkvidf042tygdiew454zi8lq8fomgctciku4ptt19m1hf2rjh474tuz5ph7pitraqmopih84r10xa5i',
-                data: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for UserUsername must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserPassword property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user')
-            .set('Accept', 'application/json')
-            .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'v0kx5um8ctccsh95uc6c6vxbly92wo3c7icay5c65wdbpy06t5jjx341lasatdlbaeez8e6r94zrm8kzp4yfbv695fhzi41xz8wb4btrd6n4sir63u6eoubw3zbvnxkyn46bkk6k5nvjksrpj1h0rhayh3kscktrkwlbyqvgxoinl98xqw6f53hictcpn5c4t4azzko8lw8cuw0ht2x21stjtn3tg58p5l3kgliisgiq1ajir2x4ftu66n01imn',
-                surname: 'b9k2sngtqxtpgnx2mzxljjm2y8guek7z78qqcoqr9xfdtu42d2dqzt1wuijfvi2o8yoib3m45f332w5oiyednnryg51ctin2hxoa1i2h5v7r4zxylrlopyw0bxww5xcjpehlwdjq8jbt7ob6zy8ief6ygrgia86n1iavdiwlyrkimhomt8kdgdvwjg60b832jq1lcpypdl6w6qcaw09bv4cxv56csm3ypx4f21aut1svn6udc37flqtlwye4u7c',
-                avatar: 'ivzqwbizmlvwnxdtoomxxo4g1ea290rfgyq1mdyadox26d5eflm8uqqkmpsozatg3130ky78o9ev0q1qoymc9wcfr0fsle52ziv0cxdts37a61ngeotbdybvvb4on1arsohbj4bpyat62mhbrih0b26y9orup05te4mzbn9jn15jz3h14l3g26xzk7torly5n4jxqpxtrt17pbkuvsho2rm57opmhrforp2h2xyy5rhc2c74py9xp6nw3zofg3f',
-                mobile: 'ayhsfvizlck2konju8necvcg6he76hkhrmg4sa2lpcwyc7xtc968312w89gp',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'lsy324ye92ajhu9tygiqirzejh480764gs59iooszlulyupyvh9j9x2937wlx2ohye4w5g7d46adklasro29ds6hq86w31ackg4kmz4865lbn99ys2ln2pnf',
+                id: '00c7a52b-fd1f-48c7-92ae-3a7d9d270547',
+                accountId: 'b1c8226c-f5ce-4baf-b9f1-daf8cd7637c3',
+                name: 'vqdzv1wck273qvzj6dto1f697b10cmr13gh7933xd6tvw5to68w9m8cas0a4qpaut9xelaytfd1qeryxah3t386w4lak1go5k3zjf32mvohdod0sax3urdu45u9a1334v30we9ttu9h7dlqfwk0kqaxliuozr4on8s09i0rexgwkhl394qftso8941ycg2bofwoi2mpeokyeepuqk31me1acmga2932zel4mry0kht3ncw3x6iiea2m50gfo0is',
+                surname: 'gi6xjqxrwomfg3jf2pejqfg1j2rz4ogxzr1psgnun4v4aphm783pbbh3es3ua1sr5i5dbdyis2cvknui172xy8ezzobfjs8uma3uotj5gl1llfom7np3t2a1zygnan6pijmnzloilxo5mp3pes1rrzdwfnzm0wcr70ztlx3aw1u93vnk8kko3qx6dp6jn6piwq93fxfafolpaea0snj9xvvpqgw13xzep4op4y4i13papo8mze5idpgxubepke6',
+                avatar: 'f5318f028q0f0fs86ycnsr4a7vhmk1m82lr1ngew948qp55uhqi419pdnnva1c10lab4qxyw6v6r9n6n4y9z7fsf8vbud66qahawzpipqbhrh2fdjyuvhrtvguwa9akm3p1rjyfykg0g1l582syvtpghtuybopuxc8ws5qkm97x3a1pvpwixblmibfk3o71lnlat3m4sjsk2aj5e3l8205gvxktku4hnauok7hy1txq6uqxrvq3t0l6or1gcwvq',
+                mobile: 'kevz6zuhp4ymy0spnflb046aehheyll97mgjxnv0qye1qh46vukk9glqq4ob',
+                langId: 'c3b74eb4-5ef9-4a96-80c2-d427b14e05b4',
+                username: 'kvby9iih0hngdouriffm8yd6gj2986p18ztifmo6wxerniasahq6n8yt5oy4ungji73sfmfapcm0o3bvvtsajoidal40vpa71kmihej0z0qxaif3ymmg8v0t',
                 password: null,
-                rememberToken: 'kettjs71b73c8lyfvkarxi0lczq9t909lm94gkvxs40f2vcs5lznta56uctrnw4nq7jm8k7lhflvefqu0alpoh4orll36qu4inway8fqnrvhyouscdl5ajs7smvu6mf456vig71nn1yc56z4pkyh2ybswpgweoz4ek59lvwp1tx9199ogdtfmsi3ey7qes3rtx4phnv7pdtl391nhe3tahfutmajbd50onpm5yyr393sp5r73j0y13h729lizvk',
-                data: { "foo" : "bar" },
+                rememberToken: '3l6zgtb4nul0mgnu46l82v617sz8k7h5k5ev74yo4dyjbw406tmzv135opc4r9363zyteuulm4p5a5s14kqezd21h98fiahrby6re7n2f7bn9kj9h0mxhnz2t2lrpgs5v7jt5v1efpj1oqa4b8w9sj0alw0x5jtgzzi1rk9fdxlboyp0chhrpprngbzs25qzy9gdxs1d23ippqnt3yv6mi392ijfyepnsf5t4d1gcqygtfknxgsjdnjmqawmfhn',
+                data: {"foo":38989,"bar":"(pJ{+KO/)b","bike":20642,"a":"IukYAbayO/","b":"@y8GGz-g?&","name":27165,"prop":56362},
             })
             .expect(400)
             .then(res => {
@@ -266,461 +194,577 @@ describe('user', () =>
             });
     });
 
-    test(`/REST:POST iam/user - Got 400 Conflict, UserPassword property can not to be undefined`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'p4mjz7sp1ye5jpwzt8fqeob06p74w39elr9p195hh91lg5rfhfs4pnjekmtx8q86wrjocma574l9wrux8qb70axkojewe7hvwnwk1acjjugvdqgnbiqw8hozh93vzsmmh30kr4s78vbq8f1ww2pk0ocbaxyqypf283gruz3en9nd2npmv4kmq6v53zwcb1449ryfesq4ipqxud6jgctf4ct816vdxl5ranw9dwkmyvn461zjf6jhuket90863tj',
-                surname: '274ka9vv7dnnile3tvybv3ttejxx5p2l03tm6dol5hcm76zt0rg1ffyisfq90yyhxq1njir5y5ulmhozjhlfif0thwsoeppxna70lc1hp7et4ows8cefzj4mt1ffnk0e0uqldvyk2radyf5jqe93qidyayds2o8cmim35a7igezzdvgecgegxmv5dcmxtyde3usjrx2g9bva8bp71ry55ttxqchdmr9fnbp1tgcpr27cjm4ya89bjfzoxj3t7gk',
-                avatar: 'asg7saf3h49g9bckgvibb0ipupv69eyr81ke0utyvs139z33auq2z1wmppl40ztnpcat3l91q6r4fc2aiov9t4udosqz625k6wqaz2dp8sp477jo60yb5yfztee1laqc54tr5dez43qsrd853kqm2ruhs6cpqnn9pzq0sqqmlrgdvnxaln9zscrx31tqns9dzt7tbo25brd5kim0iz4k38vi7x8nnpa21ko5217avv307rqvc02143m3n26fvyg',
-                mobile: '0hxydxkqqd0h7z2f7oeaa61s7dq613t11de5u6r9v5d1tta9823iy9u02dbt',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'rx5p7pajwe2y2rt3ybyyqvvu0ztesbjvxy63wxaxybthtwxji4xlrsvwtlqfpaqcpbxvg4bcf55xqnsfal3kj1dv85106rxdlib8aaq3e9qh6kgz1nzptmxe',
-                
-                rememberToken: 'wc3tx6bjubzfz3btjmp2uolz6h1lhmo5tx1uw8b2ka7g80sddzxt2f1y9jkg5gxfjvu03h2cv5xrnsovi2ot6o7pjouehwcdklnfcypkuup02l9m7xarsp2nsmcrc2kunmenciq7wow3icpxoauixpbewkj369n7z3j2998sjuagrsjeesv4nf4jhj39f2phg3cn1gn5tmamg0frf8iactkn4v0li7mw1otpzjvv63mlarx5idcuq7fl2my7wph',
-                data: { "foo" : "bar" },
+                accountId: 'd5461058-bfdd-429e-bb5b-bd65b3140a68',
+                name: 'juypw2vckya76gykqqcg7tplrzcoyj43l6rie50en44ou9prelgo9qkzhz7dwma4vsagjrhqojt8d6uaz4t9wg8fylwll71mec272awexo6urut9vsqez7s1aer8pf6ekmsu9pqly4svppihcq13ohfe4ijt8wz9slh8bn46vw52zbpfen6he99s06zq7j5d1xvw2t3dizhsv3bihwtcfpapbgz1rdpmb8tdumbdnkmsujpsh6i0d6ziqdyvw4m',
+                surname: '6kgyjv0sz7z5gkk9aiiq6oibg0ild7otlylaih5f3wkrv4ccxwbu1p825szy2g3zcub2dup2uu88yigoglffarlg3yzn7wgk0catmnbhj1u5cxudaam9egkk2ieo4jdnd2wpqs7zqb9iamv5nrzauvf279noh1dlben01v1fhl4zjnftjtfw8p3x5authsl4ftqvsxdq143tlctbs4ewo7gcugucdtfze8vddvbapqy55b4m84xcoieh5wscla2',
+                avatar: '7q8yvizlm9l7jaco7amm4s2o7pi6u0kpsgyo3bfat8501aakpxwt16q24v0pjke1mqd6llkfgx0grapwq1vbm59kzuwiu8mn7reibww8k2p8dkh3kyqt3tifir5htq8dasj7bh55js47we2spj8hcdfwuxdaewoz63bqroem00dasv3iohoqqqvie8346ukmb80xta97wlpvj1i0male3zt0luv45vlwoqc6lg5u7rau2gfogido2z94k3ymln9',
+                mobile: '53alt8ajbspjoi9shhkote2gu8gbxvqto4r8vz3v0bba0jowh39xfbsjsxdj',
+                langId: '96256040-7610-425c-83c0-7c5d89fbfa14',
+                username: '3dy2xj0r86xl52939044agd7ple2s6hnm5a9xz37gtcit33u3u467hme9769bhgu8wtxrl9gwrm732r5ldbj94d59gnugoh02fagvfqxhwwa955rqwgqrhdg',
+                password: 'bpwqqm0o0jbwhqz9zj0cs06tgt71za83w4alhxpny39kjqoqxuyv0bttxo48bii1zmnvaj0oxdhjkc3o3uajw5efjo9p3afjioielki1onygjqgis3t3irs6ryznmu5u02q1axsnyfaymmirryty1y70h49e6k6wrrd8al3dmwogwj4u4knw5mkyaigu2egn102tulcnvm49tvllaw03c2ubf5ytwzp7hwynaovw7mc1s72gxz12lsasqb37v8i',
+                rememberToken: 'nnd2fety23691hetnut8hwda25dapnnss3y0wsllhv70ibr1dlkb74vjxac0yfs7l4pc32hn5luxtmak8hzxm7vj7tliea2xpjwscoq6mutcjvj7lufdyp8gtdnh3zxl96p4fgxt9n0028o7rsjjasf483p1rdehd6j6dmtmy0753zw1rry08b2ddgnz0h8g50h6v2t20sm83nt2rnm0s1x0jubgjhv28ycqjewtgh7ypo6valmzvpyb4unb41h',
+                data: {"foo":72460,"bar":52012,"bike":"&>kbI5T:_^","a":16562,"b":67169,"name":4541,"prop":50599},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for UserId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserAccountId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'd113b0e2-3508-46f5-b273-04dcf5c9a97c',
+                name: 'i57a0y8fm8e2dp3i5g68u82lfd11nntyry55lg95t1wh7iums00f7uiotcza9t6q3w2x2fu9srn4ulxc56dkakibhzb4xilkm1x9n43wnodn7id0sw5cy69p1jr7hazjxamrzfyod7ggbltdwg8e87r5vyfxik49dni7v90juqde2b3tkzh7km6b451hip98g5ntia16lq6d2x8sj57jz1x9x1hd105k03f3gj1xwnplwf371lyu8taljsyav57',
+                surname: '8zyv9qt7n5eoclp9t4yw00jfv2bos3yenjk5qnvzzjyaxpqknu0z20q335foivkhzzsn0u1x7j3gl5lvbdb6hx6pq3jvz7fv9xhacy3r3qhabthwmybglj3u8ndchmsb8prw3eqiferpg52i88tj3xbs26qgvl9jy9p3hb84t3qqgcerloo1lupmh7rs7kbv3h1azyh3ythouiwd67nra33ycx3y9yis20t7ksdywksys7qfv7tx4r3p53g7de5',
+                avatar: '9nfbl722z38vndyueeskv5wevducpeaxz1xtng27ppbfbcygmg83i87mhxi4eziwmqyfc94btc1ihxecexr99dnqruizvo1tq4xzli44vgjahqsjlr8aqyk3kgue604jilk02s92jqb0uo34x8eghmthiuk4r709218ni39gwog6kiexblawj0i5f2ql6yd52g2pjv4voa5ppjpuk3xu9s8xs50byh0g43ayk56hjdg77fstf7x4zenb8mg2t3z',
+                mobile: 'qu0vdkmpj5nkgmjp6hjj4gphrs1k0whi5436eyhid9staoj1ugztjh0d2jj6',
+                langId: '015858ac-bebd-4619-a38b-ebca496da947',
+                username: '9l77lrlrfae18kmfts17927srs29whkyvgj1wmkcvun8nq4o2s7a710jkymp8j0xk49ps0cdtu3vvinobymog91tiez8ap6zi0w9ulovm7ic6ao0yzrmq6fl',
+                password: 'xbixs4nzppxd6xkhnw54sipl0d73m0xby7zhkbof8ms5zz10nkmhm5tgb5lb8gbodnklqybozgy8xmbdyk50tyvtub555gtj1s5dexjieessndu3qz19jlx5kz3z2vteumu9qt3t15fljjwmmlh0ai187wtiogmdx6gmzzvxlsnu1wt4avitkzw46og208jdxbjpiegc79uwm5wb5kkue9k4efwdlcdzuxrwik58a0g6cvpgfl0lk0123p19ge3',
+                rememberToken: 'hd5ixgvzu01fa1s2bo5ta4c8f0vdvv2fzmr423uh06hpxa0c85szwlyezdlvxzxmujxj3271vid4fnzsfnotsc8a9umkm2esl9g9butzz15g3mns3ja0u3ie9n7q52jslmhdh9b15wd9wlfgg5dtv67jfdtlot0uz9vbwbq3tag9iqm7k52rv97twpg72ma71jqilvvtdefwqso697n3ruiolsqy6jrry5ndmwkrycehvnwdjfa23orne26p98e',
+                data: {"foo":80413,"bar":"Oy,)MHuHy\\","bike":2125,"a":51697,"b":"U*q=@,JKN^","name":"^KC'v>sEO)","prop":"`xK}W;`RTg"},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for UserAccountId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '3d78f3ad-0684-423d-850a-eaa4ef9aa924',
+                accountId: '87ed8c58-b453-46fe-b0dd-66ca81f63ede',
+                surname: 'iw5fqyu266h7bgac2ubn6enve7317ujrd5wdzj3cs4b67jj95sp1zi6zy4l6fav94z8owaoqo3ax6xy45frpfvejkzmwusp79d151qcnp2rs1n9ud9bisdcgwfeq5lcfop7f3k6nl10hj7p3iyjbswbaryexwtdffu9xelfzgmzs4epp4zhlb2sqf92smzmt9mu8e7eqv06v6i1se9mask1b64tkpjonx8jcwcbbwp9by6qcz0qzrvkv5j6q5wk',
+                avatar: '1n2syt7tz642qktnjo01whhdippx87kwoljib4zc3j26qpewaq24pkexxo40i20zpi5ecvvh5fryqv1cjwrf6woq1q2ukqfoqd39d07n8fxvxwi6lgyubqg4p0m52hok5ra7bfqhw465ari0ctqoz7hnwljkcqfqc2l238lmdcmwyxvtc4bhf4ch7ouqyabz2lo21hpzkwbw3ii7fo16ml8gh68q1iiz5tbazusikxzntvfruv60ob6mp7npyit',
+                mobile: '4rbdm9s2ucwauddwqzv0sy7tkm3ma2o6lt5gtlzban28t6coyqs9g0m9need',
+                langId: '1c2caf58-72aa-4c65-93b5-05bf465da037',
+                username: 'ukcww7q73w58x0dkmu616jp553wut5655igy998dkbbxoxg4kuu5y2mt1zshzbbny4tgp9cqawvhtgcyjk564mvcpk0uwdmp1eayz72ml5tg0qoz13uj2rf5',
+                password: 'p742v0yjpluesyp6sgk8cjn1u6ohjybx7egdoncqeaymsz3krk1o8lffgbi3qcbqrxdeb7xfwiiuqkqmhrm8uztxpuj8ydncd4qo3dg5dpri0ybqow1rtxwhedsnxqsy5rr9gzh3t0hzawqm4lgwm3zveoem1sc9pox4dbzll44lailp2c39ypxdpuoslg1f48mh15fzaaz0kz4pu6y6kimrhza5hkfm07r8guoox4b6h8ssnt363osc1rj3c1b',
+                rememberToken: 'sn1mg5swi1bwjntk6dmsfsrwc3roz0n6suz9qctxu76clud8u1pppa6i0w9fk9wa1y6ap3crvlkl7rv8ftjyeizeuu2ljccy2ypx2zs8k1c94mq0ymmy6mvgqvd5pb50n7l4oe7uw4se6pb23xwrqqho3bqww908vwvu4b7mf5u9mkoukqsmu7kwabyukzmcucowgth6f0ex1llhcnvw5k3196spkflp8vbczcfeiqqehf0088hhc5dhdr2zztr',
+                data: {"foo":"{R_qUIU\\bU","bar":52913,"bike":19575,"a":"bAZeOq\\wHB","b":97295,"name":55638,"prop":"01\"r]SI3e@"},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for UserName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserUsername property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '7f544319-a283-47fc-ba01-2cd3f5f5b024',
+                accountId: '7245f045-ea55-4b73-8d8b-683c1f41dd36',
+                name: '2np36mihlameskvt4z6v604ogdoajoqs5mraa316ivuxp169r6gudqcb3h2yapgi0nejbje25opfmff0tew2qvu5aymmhz1xmbcklq810x3dttvcvc7tneyqzhpr5kn5hfdh559xx0z8vk1bfmmcaxx0kuep3jv1vhaepk4t84zm972nz26rjg3svk8c41kmbm8313ppcqwv2f0cklapub5kpvwk8xpwfptu19wviifz2ekiik0efudq54wr990',
+                surname: 'h12ez0jqkaf099npssynzo1smk9xuiye88ea44xkdwfns836k30ojmo884wq6qnxgt3rvuuk8ndtt2imxa3mnb4y90nkqyj3x11qwmhnivmekbxkrvhnpueg1qld8ldkand8m7kays74gdoprexqaasn6h6c8nqyha8stehote31ea7dnwfcmqyqbude7252fpgjfgl8dkkjjzftpjvwbk231xd0l28xedo9b8qehgntwoalmultiedgieljp8l',
+                avatar: 'c19pice3nw0bp3syz124e2d2nxzfxxjtcclhex06oshxpwg9icqapr3l0jt1s29g54hm1xwlwzzwywpeph9o1cxhdnp5nl5m2r0k30mestcgns1pt8gtzw9iliyteyuvs6gir0bfsgfxo9yjxtrumkl9hszxrn9m8z4lc2yyt1baqiuf43nsknxred3y2uioirbxf7ttegnil250j3tf3j0cucf07j9jxcbp1pji0bfdupn5hhx65n4yxkj0ei7',
+                mobile: 'er6r3wh4l5bz26ej49z9kq0qvsthroimlf4vm8ez0bc9es24rzohdd4ja40s',
+                langId: '6cf5f56e-0500-4f2b-9e9c-f277e9d5097a',
+                password: 'x09ow06veutir8qiukcrfpmy788b8f29x4kpyzvwwm7qmb1c1vbk3romektb0bvna2petf886i4cq6a4lfvyckjvw72jnnbnq3aykbveuu0ie6cvzsc3zof6olutnpxkbwcumizpc7mkxejsh7fkogw6636u68yznie00h201s51ikirnjk7iri85ewol6iezuo3aoahaqkayfx123qs58i9e37oqey5j4bt0t43pv575w6w6fjigu2np5y6ioe',
+                rememberToken: 'takcb19c6yyhscwq3568q9rvggeqydhs1ibmnryubl87or03gx1eh0bx1pg30q0ap8i4rquo8gqcud0t9x7ambdpg0ki1bb9swxbdagcct5xm21jc1nw01rg83ywob2j91ozagm5x06hydfwqv8dgsh1ghfhee4jtcty7gp06qg3cgg4f7kveugfn9d21i7liwdjutma5f7p2qi35321qo385iqheqeejai2mym6yf29985fd3y728605pl6iq9',
+                data: {"foo":"(ms;iIaoxM","bar":38887,"bike":43854,"a":37153,"b":61656,"name":32320,"prop":"ITC\\8(4jr+"},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for UserUsername must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserPassword property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'ec9464d6-1984-414b-853c-92103d05c6b9',
+                accountId: '70a7ef68-e41a-480e-a7e6-f9226e1bddb6',
+                name: '1o40mdq7tn3oem0rdcrohjzvlurq2x44ym48kjx41cefd2yb4r7gyvyy8082ds38t0fk1mmg66vzv4hk3g9if2sz8swp7g8jyc0ac912z2rxuuq8onyx6pwx5zv2ofm4mjpqafdhjias2xhjb81v0sc3d26630tp35yews9kw9vorfpjmfviz9sv43w0ri48yt1kwi6rjua00ii3m2cfr0j5vv1l3te3z94qjp65afnosh6ipnc7ox5gps63nuo',
+                surname: '66pax3g2qwab1i7jqx7w1q18cliuts534avu1256i8usflqcvmjdbhouvans2p4ndx4gpx8j61l8lrnwxo8tr644kkn74ao7w4c16470nsrai7jpfzj61uls2rquo2w43v42wwxbb021kpz6q3zwabczeznun9ni88qxsxuv2ystx3wqxlzjvkke88zxgvbpd69g7epzb2wdrxlpjpmjpabczmuwmuoi14zywkldmm8a73uoz7rptwihq7u6jnf',
+                avatar: 'nud9rb0kuz8xt41po8cjjdqvxsfoeo4eg23qhg4qnl3oqwfco2p53juf3bd6q3yp2x4ravrh9g5d937v8oarvee90fynh111wozoqjmhmhpi8b5u1ms9on7psl65yo2ibyjoxa7vhomx4nd9b3gnikrg04azj0o6p56n9zfkq2wmkkx4yiali68negt0u4fjzs5dzalt93qp12vgkw8er9v9njjo92mghdxhl20a6bv7gltwjqpsjfttzj8b888',
+                mobile: 'p04sp5p9gjvrzbkvke50fp1gnhof8hjd3kdtz9xt4bw3sw04xs8eaz0al5m4',
+                langId: '101d8fd6-aa2e-4622-a736-c689b432a7c6',
+                username: 'e3nrlnhq4ubm09cd3846im6t08s4v9skg6aoawy07bqbdc3nl6fvxqymyud1flshpkz3uby346fu52e9mnlfyumjyo108u5mlcujdmd14ecv5ovbmt5vtqsw',
+                rememberToken: 'ciabp8j6mkru5nhcl448xch6k1cwpvdbxfhsskewp89xk9y8rv0tvz32gvz1r8igui5nkj5v4ys261d0c102litq73bm39y8cj7nbsct2gbbvpn0uw3geo4obhlahbc140d8mp298yy5vb6s6n9j734e1rivcbxsyhhq8pw2dv32z0md5xgfhddo4mgi238omajaoykmqr8niobxsm7oii50lpsnramf6uu8bzamqtsiy8mxditvmixs8m6ud6y',
+                data: {"foo":57309,"bar":1137,"bike":")3+<;jG`P8","a":20743,"b":79309,"name":"s{93f7UQF7","prop":"A}%DygpB1>"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserPassword must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'wzpcwcxq2dyhcwkwznap21yk7zm2vlg3fifvi',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'brufwwojmohy6142lm7qe287xfdkdv6smnsb01koei5q2yvqn3gcwpvzy8ugxqq8tdyx1i02upsflcp2j8erc973szvsoea5c9qbo9v7i5ewkxqsic9f6vixrrvq6gvou4htu36etohioxfls2wwarg7ptq1zf4frr40onlss6s11h2v9oy70pg0sgqd4o2hq93x10f34p6fw0jx1czqdpp0cb4wbv1htf1eahb010di44w15ymck83al56ll0e',
-                surname: 'mc6kzj3ja7mwx846zeu4hvdr96w4w7x6umfxz3pol3gqkwffa9arsryt7mb3sga10ighzeszsr53uklmu79uja5sidymq10lerel0a4jzxy81ibgaxwcxqkkwswt1wolbzsv8fbk2qfjh03n08rg5efxgli3y4pvw8k4etruq0zrf59mvnt7ffqcy1zlq1h2f5jmxpz5ew368u4y5jfbb8sqz26mf9z4ui651avenpkco0t142g8o801o22j7s4',
-                avatar: 'yqy0opdobd9ujh7oyprsmjg7qxdevtvyfdlmrtwzvptj30kb7tj637vxk9ququyrhlvf5vdmiodrgwhcm2jgt0fbyd7okvaplt2d99y86h9is5298y0mnsj23ucrwq8e5hnfowzpv2schhvg9a5m4zmqeeropeft2r5tckclf9v6o089eqnmd2l9jxc4v1j0z6tcgz291ru2ma7kossvx0x0909l0xqh0m7uhn9zgby97hv7j1ex7mo37jx9itu',
-                mobile: '23k4con6c2f9zffqu0kx36w38aixmwqa7nxeackb7gj4p9jegq0adhwtqgte',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'dytg6zhejx1m0910xudci35pnc8c531w1zd1s5f0by20s6xkwrvljnog116stfiuvv7df0p621wi11rp8mlszkl4w7z2r34zyuuzi7a1v32vm21oxy6mz26p',
-                password: 'mthckg5uc5rbdrm3wno005fwh5gmmjvl6oxvzr4t8oz5d69devljevfarckv8tw4epnftqko237mt4xx0ls0gpcit5hckr2ofjdm6j7uni4ymvzbnmpj8u2w6i3m02ab48op446op1oavmw0op2nr4v39tg3lsps56p4yza0shneu8s655pe9veh6v96vrkxqvzw8sgbnuq4xp7r4pis6iz0aukyyitgmnwqkw0xiy5ojq4emgckn5r72am6ql3',
-                rememberToken: 'ey4ofzepdhp76p55l2ofdzu2fnprm8fvv836y63bnq4h26zgu3iqby65r112tpqm5fo58gw2hcu4rs0ysh2xfyk7dua2ek63j33c6r7hiwunof2tz9p55jqahblveuo7qkjaduh98fi6nq9w9vmnebtzngvtih69n9p8pvkzo0cpvsamg6ml6h460767um7hn3hgkm8ouyy4r0crhzye00jyhdsurbcrilj57b2md0ypvhn5lj0bmmr4t7dripj',
-                data: { "foo" : "bar" },
+                id: '3i4ztmoxkkoxbhwf9zpgb6v8fu4zogpjp2c1d',
+                accountId: 'd8a956b5-72a7-4788-9505-4946ed3b4f4d',
+                name: 'ycln09z00exfmkmebniosm0iez7ylx5fy2gkxsycq0vv70mzahuqnv0f9nyz9uylurfc94ejydabqavbw3t9iuqw32lkusojcv6tb9uhknllfo1q35qtmvm9a79m50vvndep11ai42iomedz3vli6y8cqwc924u7iib01vsn341w9xcefdvj7tc0sy8ye8j0drlmjexsayu7llp1qhszu0e0c9zqaaqw0msb43hquzgfz6mi31xgv3dakhpdieu',
+                surname: '2da3rr252usulnb2tlu7fj59kw13p4uenllkh0k40svdq6x8rnduifhet382jwmg1t1exqtbjvqslag5lsma32ngi7wmy4lnsqm8dtwbcxhptu5kv6u3p8rkgzsvi8h1sq99ou0rvpr3m4bx24j7a3assxorpe1g92gko7fvkf6796lycm1ii824ds8dyf4gr7hse0gqf96xp7qbu82tlwxbdrhza7941n216n3oak2rxjrapbcsy31u5q2ib56',
+                avatar: '7i7oelwfca6s6gaby886r49we9b4my32w6d8kww5ppyij3b8vpwyvdipd9d8wryfefhkw1pv6rhjpe6bfwnnrbe1nls5o8ou0uqt5wbdo5khijpkdvj1zb5rlpzxfqc4ntzfhre55olusyzeb04u6vmwsnzniqmrgdwppv0vkhyiz5vwopedbi5ateuwxoqnmberku4teswyl03y4s2hm1devi6imjq0cjqntvosaazyodgigyr61rgiuwvvd80',
+                mobile: 'j9tit5dr8yi5f78xe4d2fwdppnyiswl03jbgz8hhcrij3nfq60j5i7pnplxy',
+                langId: 'bc83ece0-2211-479b-aea7-61ec065fdbb3',
+                username: 'wa3dvib90z09nnpfbhojirzs838duxry594w3h47bizohz7d04b7cq0xif6u3hrd8f0927filod2f9t1826n4zd8a2pwryuixqwkq8r86ofdwjbsye4mq963',
+                password: '7hy2bvc89qgg58lpm9bpokjadxqosvls3qg4o5qrkmxu78ttmk2ddqbl2csgg6moflqeibvi6ege5ts4m7ncd26mjzydzxemh2l1qd8ipzobb1gj9czy0ab7bd9ae0yrlrjkdz6tia0iz9rw8hq5xnkmqwr7z96cmyudv6261lgdjzkm4njhuww5to3gtf7e2nmb1v92ksx4wnhgve9xxmreftewx7dkrbfbrevvbk3flfviz6uqs1f6yi6ck1u',
+                rememberToken: 'l4slevc52p2i6a590kn21sjq1h84pnxlqe70k9cnhbfmot5u1g8b57lhhx2asntt0sgdo6ocw0ifzvilr57dwbd0gd6ime2p147g97y1lx14goltnt5owt0hk3gi16vaxq1hjnynnwmwiisphnqg6885qth26igplck025c98qo24z9yhrx9wayil0au8luci7hgabksupn4epoh34fpi4roqaf1huyc9709hn9yrrbioejz65ob8e1lvfvwtie',
+                data: {"foo":1555,"bar":18783,"bike":"'04uB`S6i>","a":15890,"b":45308,"name":"5)8C,&gnH.","prop":"V;fens}-_i"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserAccountId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserAccountId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: 'e60mzhwhmvq82mndthudeu5knoux6v34t99rg',
-                name: 'f05azdhwg6m1s6f1g0sjog7pi9wwv0aa4fkdhf57g9csrj8sz7nlfram9qkaiz2bg7kbmupfs8tdz6nxy9yayk7yzs657ihx3gxyy4bstgbpmgdi66eiklcji7wn89zkwzvt66mj4i69pknkr47vwnw4h1npb7t6itliwfmlujvguad7rsxwlqyarbspnjdfsyxqu7iu9u4zqxwgp07105242syveh8w9lvhjlrnzp08b9kdar4rl43zf83dzuh',
-                surname: '42hz2qgirgfrc4bi59pcnnnycguazlr04nplil26ef3hawaie4fzzpaw0gymplnnoiwm74muhzznjoitn75ocdv8v407acqh79cmblg0a223kls8gz0y4yktuzgq5iwfoenvlgv8hkeksha9g76ug5gjodzreh74saocc9qhsg76tp0eebhq1corr5m93ejqhdvtk7777841v0oge4k1iooeihayb7fjrxxqb37hil338aex3ig7c9m8vyi7q7h',
-                avatar: 'uu2kmcqj4wn764a612mvh2c6ktvcsqm5e9wtcqhg232zq24agu3bnb1esu8073kbbh8nupl2xttm3fc0d4dnz1227na3uo72xbzpk18qlgu4p9cumj1x02pzwoor2zhiuchodozszkrbae4unzfq3fhm7p37leklsecd9kl4gw9br4agl9ggg4rlt19t6drfarqkpu119sddece5yz2684owis4ttbuiusr08g29qesa9woz5pdvr1krmg1zrbm',
-                mobile: 'oh369tq6z9bjtzhwult2ygfaxv7moz19860nmeq6rqvl2mmw0d7w5ppypcii',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: '0gx8dqu2168avagqv43nd4ivn08hjww117pokfku0xdqacwlp5k1egcjho4cnn7ek67xd0k36n9iaedwjx44owpjfevxlqrc4tkbplmpovc3rerqvo14b3kn',
-                password: 'kgc0liajq46o3wixac4hsii00mz45xd3ehzlh90x6vmp9rz6et0b2iawpqkd6upzy69riyyzp6z9ddty5atokos4bila76fvt8d7awwmj52twlks786wshjwl20quxoea0d9zefs24c2jp63qiurd6hcnovgullt9813t7263j1wfa1kzcip6q71lfigtzlox4ddv73cclc5d39scftqrct7hpw5rqz38dx2w8wtrxumazec4q7jzi1by4me63y',
-                rememberToken: 's9cwkrmtsehi4s7h5jsk2j9tn6z8m1bjf1c985kvt4onxlzyjv5q7l0p29xeo2lhbz029q2wse4kc82zlgpgs64gpryucc1zesdxsowv5gznjc0x11h7rcr9qwgwhik4ctq8gsp1xfo4j458243febxvq9z5qjfd5f6v6jkpcnwcf2v4oflbky6bxk57p9ngvy56bv1527rmrmawp7bv26ykv2p54lkqa89e44v7av4m8bgue8isfh6ig37354g',
-                data: { "foo" : "bar" },
+                id: '8330a26a-3081-47b8-874c-eb1e88d2749e',
+                accountId: '0gu7noss9bngunxqn8nuhxt6jym2dgd6acat6',
+                name: 'dgbveect7pbw09o6ivdfydpcjy9pytaj3bvtgrx39y7d8xnit5mojxzvyub7vb0xvyujheqcn47yy0p9dwm26aqxflkpo2zd44g7ken239f9qcf0gjo05bkak8sgzyqldk2l1ye4gkvi1x8d5edf2d9afbmtan8pgb50s9vyu0316wxvaxhd7wut8sq7ylv3oyskpobjezfjwodet55dmsln4j8fursjny7yhfjtviw3kzv9mpzeis748u7whpf',
+                surname: 'k4eeyzha0v63ejx1ibexcf3hqtk8ejh3yej0gp9wan6762u0dgkt0fjhamwxf0zgsrulrwatx1i50cgejqhy2pjgs59xrocyxj5glihpyxxbnyu7zx3hxe9dim9ov3m29nbqtfo83or5wd8oz1h9dbwn0ck4zlz4xhp1q4vxwru8claycf1la0ayxwosegmx0d476y6n0oi4033avmdj649evkmpekyad6zdaotj5zcvyy7w5nargmlg6vwx5cx',
+                avatar: 'unvnqohbgd3pfoaaxatp6dbbz3v29ws5fteclkgh8mowcriievvgfgrrwmb05x9bruqa2yor5ot5ecku3yf1zswwefzxmeq6wwl2d3n06r74h0d84pj9251pz1o5w1hq3szf3yy68cdw211174d805rcvirl5uprkttspsiitdkx02bp5sz8hisuml2f0r0efg5xed4u09ljwfwc6c822dpsixc7xnm5ekqpoceguappfm5mjrgkfo8jt7011fv',
+                mobile: 'est0f5l8eh5pzuen0xo08ao4ha964rfqkr90scs1ytudgev0n7zj4llnamow',
+                langId: 'fecd60b5-8bdd-411b-9a9e-f2de73acb13f',
+                username: 'fb14qk3rnmyffgpqc1x2vv3fp0ccujxot72m856d7z9hp5yrsdwyelqofee086m41gjw0aehjbeb5x5e51jm1d8k020tm7zzqit9feiv642pwgq072egpvfc',
+                password: '271x46d0qispsqwiegb93dg6u5f4d5crbgnwruiqomcu8on6q9zosw5nq7csb5z0p7xgn114goc15gi5acmjh4zj6v8op8djdw9kdyd99csnv6m5vtmd78wnzm92zriphu1vjs6aesk02zcat63o1l7vrr9ijw1xiew7x61ov46vpbwwgwwkyck9nxzbzl0aa4epsucjj0w18j8olv54i55849gp8jpt8ydbi9unjepy9ydkpjtsy3zc0bvjgu5',
+                rememberToken: 'jt8k4cbpoj79wlg45kcan9y0p1ipt7jof0805ih9lylgfg0mx09we5zlflvn6yvak1p7pobz3yauijplmpwkzksp7luj022xi2ck3phvysiw3k408xn0wpy8i3jwz7bluapjg64rjwhl8cyloi9659yxvso9h7pezqeg4zggokdi9vjw8jocyjnhf15dxvc5bh4pq0k43p2r58cu8pquix9s2t1kwzwl37wzwvju4tpj4qkje2zw5ig99umn7u6',
+                data: {"foo":"e}4|n'Nu<(","bar":69483,"bike":76285,"a":40927,"b":37280,"name":89503,"prop":"!rD1(bYoV("},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserAccountId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserLangId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserLangId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'ii86gzoxgfluamcyfoe1emux6dpg64uhmfrgo3jp9xunvu5clxhf4r3qrl7sgn6g08eadyr5na7wjz9ndiya1ucwsew2iydgognt7taqvftffs6wbfyvvpaokt91x8lfg7jhkf44mo5vvl30vcnc8pv1ep15ytjmpjy8w7ase4q9ilj8f1mh64zr4jwyp9770ehftyt8rvfr9anh67xvuu07pwcztljnnym9lw0uok63pqh4g9b4lh0dlznsasc',
-                surname: 'ohn387u9ktnsg9a6xejr697z3fdrr5cr3zpj30uj4may7u2hii862gg504x9d9fzfjp7domtcv6p9p3riov3n02v4ic02o5j9yqb4e10k48x74lfckix5o3acfv5w357oboa4yz0vypeohuf7fgegbp6o4m3fknacmqfqvndjbhpisbmkcnjs08lz0mh82pa2ar8tm33enk18senrkhbu64odex558fgs76hso3kc4fthted72alte2usialn5s',
-                avatar: 'e94s5pde93avk5xrxeyaok5lu3qo15fyu86phcc6wiw7yu8gz9140b3l3cfm3jimci1nntbgjbiigzmeb69wuzp428av1a6gl93ruwyichzzxtj1dpu9cgx7kwlgkb1wal90yv8tbvmjq7kee07xfh8jk4rip07jllm7hvehgzm5236orvs3swftve7cyblkshuv76its5h06uslepx2n2k268vfpv4piu33mzyppfdw0z08jzz7muli7rgtcq2',
-                mobile: 'ukaej7hgll5b4t8olhomk79zysefwjj0jyln82tt71ltnu8ax2kzopu8b1k6',
-                langId: '9m8kv23efktkhkpun6z3mqisduika23f19j60',
-                username: 'ls7ys9ys0p1z4wcepko8e8sze3mgdajai0pidert4j1ub0id1v0qljmo7lkix6k7jo0gk88bicxv8srlh5xr91silwy0emzats7piuep45uup7i5l4ei6o98',
-                password: 'los01d8lfducvgmbkmeoj1n7fwt3c26800jfotkazw41hbrk4y8s6k654xc9f3au99ypjafbdbul61rjlpu839v9x2kwmyafdhtxitrsk0ce4w0ytuf1k9wmya4tqqphsv3pinp83cegv7xe5y3l75qqcwag55taq1klr0ble85h3duedky4l7aq5ehr3wciza9p4h2mehf0zocaal9rojex79xpuc195e6ydo548ihnh1bw17lnywhbzsgh19v',
-                rememberToken: '176491djafirfx4jku9wsbt6wdu5ew1ug3s0gb91crlvna8r9cj4vkikk3o8bp3oclnjn5xtihfjy5w02t830psnlnfdajwajqw2125unbol58bej4yjlbkkmd3nfpsyu3j4vi996nlvu4mwmw2ve1xkt99det9p5rcmk9c2njihriy3zxdqde4go0hdnzotceoy42nakq8n61j152ldbgabifguz9ft92ss3y8xxzlcp2049yyp6rp66vpijae',
-                data: { "foo" : "bar" },
+                id: '4a0baba3-931d-43b8-90df-89583c59bc30',
+                accountId: 'a919089e-a14f-4ba0-bbf3-cff459a03fb0',
+                name: 'nz4q0fh9ab30s4vljx1eb9yec6247hf4f8cd5us0zogdyg6dsx4ya97grasf6mny31n9vz67f0qm3eqx4ropn6iqlmvceyt6ijzncxmwl9czzpdxl12wrhvjadi2nz7mc3vv909ec5nn1t4o41cb7r4vq9y1xlr74vzhtdpxg90rovxrvqom5qpzs429bptf17ksba9xdrg8nodpquh9sf1s2o5djp60iarxj88froaek06cucfi2aaix3b99rk',
+                surname: '04d0up73l99mn3tvyt9fy887zt5jn8zskgy6ifx19752lcpdon9smh92mw50ka3o7swxzakm5cnsuh37esqxfttg1b6u6ybz7454d3a6cn1pijeqcad81empgs5ki3nwifqpulfpaqvihny65lfjnx0w1e6m2bt1n010zwc5cgh8teu92nfk5tzd2tcn41t204sn746lb7pyalqilivslzzqvk51653nx1giqixmr01o7frvmlosehilh9goyny',
+                avatar: 'fgngcam2rx6qwfrvx0ty1qk61ssbax6kn89ok91jbaa7of93t1l143tkne7jgp8zxpoliqvj066mv7g7os6r0ze4cdgl0p2r9l3e0nmd5g6q6a9amrqufb0tvrium43yr1ssbp9pn9f3at3vpug4qsogqy61qluvfx958g5e6e6vl8kifdcpwh8uapkv1ok2wmiw96alexe8i2ojjzaaujds18emgl6j7xj64hfcg4tqpmqgk47bs704ertvq4r',
+                mobile: 'caggwhbuyxgi3z5eunll80bl29ulmgdfa9uga7iey5w4s88t8zgww4cng7m4',
+                langId: 'j8usd0tg4bjraogrggbmdb99bjzxe10wzfkq9',
+                username: 'a4n5om3eh9fsbv3vhe66mzm3ibfxytrunkd1ni18wg4x1q8cdthwnno6ngdxdcthirtlq4fa2zuv751vpl1okmk0a9z7cldft2a7xdyf400ktcih1c4rimfk',
+                password: '29jqyttmvolkv19nmdulcwge3ysvbo3gxxefzyxi2esuaiwleqq35cz0sac6r70z33nz68g5x393x20qpzpdrpltv1l9itieacnj394k3smfj1ldnrvphl4e84vv6ps64z6jd0t7yhmkgr75tat35693qduzn1dm0427j00koo2xg9uunxch7hdlfda2mx6thujatdh6gdzrsaa1zzr8jwlis8vu982kygmjpt9ats0p9srhzo05zlvb6mspqis',
+                rememberToken: '2s2525da3kpy4tgc7ma63d7ckwuxw5701ntjr2t6enhulgcacgr4ae8djcesek47jum14o7do5ojy95nu6d0kq67wwxck3bqeixs1agajx3sa3wqqei2wyhuqm9k2tujnqvtbm0y601j129cb93zfqnine4ax6unxwt6lku7qn36rt1udy19egauyy32t1qd3w2b325hdw4v3b1le19h11ptnx0sx6x583mkk5rj1k9kg0lhehl1u7d0bvbwybk',
+                data: {"foo":"x\\kSVZ[6j^","bar":"g`OSJ-vz7h","bike":"N\"8Ps^PQ`c","a":"@1$,7lbeY0","b":59061,"name":"=ADD(S*Xsk","prop":19468},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserLangId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST iam/user - Got 400 Conflict, UserName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'qokwljgkq2wljnonc27wi795416sk7t92tb5yxuthwdxvqox92e8h4ih2azgvt4397lghubp4wifhm9xvp5c5f0b7dx0ryit99750hfoa66kor5eo59khz47o1vzxvouch8glf6e2268uhssk1cgc3l4huvgwd9lnxyjhkjgp0k2i0tha8odp6vuyb59t2ul97il6gjyh7rwogtrjh27y6vo18azaiv4a5qx4992fmnmsdx3xits4tgl8xjbmajb',
-                surname: 'znreoztj64gx4lekosk7s5fpvjhvmqpnjk26d158dq6q1rbydgzzj8p016w6hey6a0wbafrextngee46ax16nacetyr141a2s7irgu86xfq5jlvpur4dnf81b0vw2fe71c2zzrsrpz95gt9onxb7euewodl4k3jozp66xvzpj8h87mbp7oxwxxscea5bqte1ux1rtu5cfvkakvrf60vimyp53tqb7k64ljia2eu9hhi1i9jxj6ajvfurq7thhlj',
-                avatar: '3rqbcn9is6pbyhmhtabfz9xvca8823t9rrifbqg3nsh8loh8kgu6qfxvxvzrvn4vs6l4s7tz6juh8eek1d7int7xcyd0882of8jf7fsq26ai9tqu4o94uxlieey2647dc7ugwi2fe8ebyl3lhft84zhtqgwttmj7kkxba9suyrkr26chynty3jafrqlx07jj1dnldu29fzrybr96xh7jxe3fcv86hcryfj15aokaflc0j4f6dlz3mqn30jnlzrn',
-                mobile: 'owk15twgeb7yhd78mwh1ud9l7y76hmz6wddkkvzq5v20wanwfen6rxcd5qhu',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'o2lh8d9k9bcn4p9sjyt383iwx5shnk7cultt3m5s08ck4c3gwfnixfrzmvt3lbojxeb5iu85nm2g0nhj3omoyhq7yti751sc8b2k9x9o3epfmgp6tv8e978y',
-                password: '1glzqxkblqqaciage3g8ecgozmruws7hle7pbc5ytxmv2aw28mjmkfiln1ek2tx7t4wyacqwyx8ru2zwbfuyvy88dy8f3x2loc9vuwaut47b2vgtlf6d4414l4ezxem23607shfpzr35dzx1tbp1vsry69qkcnjleije8hot98d0nkgibrr95j73g4ssdf8u6nj6sdliv9axqmfi52hs2cxlhdh7uvdykuz6gh1g2i8fpf600ytgfmcsbn70j7t',
-                rememberToken: 'vvh1lbmiin4byybhdm1yssaq7242din8cn7sitxeld4i64ekvgld4yt6tdpb6ivck07q6r4l3vn1p7m7vje0v5t3ulxbrf7r0ll5m97t2t56h93hraanttl124wb9kmi9k5s327evyecadkzs8yxn1bczhe3k9rxeyizgktg4pkfv53y5bj5znvvn8f7kb76luhgezjn9ig50qwimetc1cdsgkqbmn7kd2dhbdyhp7lv0ct3rcs8nhxzwjgnq81',
-                data: { "foo" : "bar" },
+                id: '41196776-bf6d-4853-ad99-388aabf1acd5',
+                accountId: 'eb404705-953c-43af-9ef7-2a92c257a3f6',
+                name: '7wdq2142m29h3j7nqkqv3k68cm11funnz7erw208uh3de4azegz16j5jcet8tul72qn9r4leymx4p5bxyugh7w4qf3teciqfbewyitl92vlyhqt50qe4r7gywqdr1wxfsdc80iwselk0as6n8gmxtnd6kkya5zejckr819w2iunq22x3fb9jl74w0yrr32xm0vntajxjx9emepnwgr6lt4v7vqhjmaa99rdk7kcr4bdusry96v9tdl4zbwux3upw',
+                surname: 'tv7arbm0yzr9hlqm9oeax727o3yonqhlndwu0usjbg8228j90i7sx9g0m9h29y5t3z7mzgiq1vzcznaybjk92z3h7a41qoiafr6dfmog70h0kcimvnem1s9mrxnr9tkvycp0djg79jwp8a6ib4f6044zzefucg3rsdpnv1fy6nc64ibemxrliz8ucm7ijp8j1en8vlpg9gzuj6d6ng1xan55dapur2cvn0uliecrgb7foqhe4enu5792feqnjm8',
+                avatar: 'icpfzh3huwgz677xq7waoonwq0f4x68hfluegy1ef86ofvc6ipo1kfxis6tfbzge5xd6tk92maptfhv8ruto8pog5puqrvymt4xxoq87gxr79lbk3pv1evkzyd7mvubpyoejajoapup6j4vdt0sfonow4mfzljqu9kuzn7v3p2p1isibpfwqh293z7smmthgoktqtder2bge9kyyop10dgyjtgs5ngbal0fi7zvc3axmg9e2hhx675wr8hejdm3',
+                mobile: '18lsa1iyj3ky7augtj4tjkuc27ith412rjoz9yvj4iz4hafoorlmb69uvblf',
+                langId: '90712f8c-b9db-40c3-b1c1-947822731705',
+                username: 'eb6xh2go6sqm1o5d1t4lh8afvxs5fwxhqf4yh3qajs5wh1swmm8o4etvg1e5hghokmpq0d6us9q7i70q3k56v48ud3uqmvwzsfdrwej3hljh2i9sd1o14uj8',
+                password: '1i7te3eqaacx1gb9z8fbi99fn3zy6m189rq80h2yb439zf2iajcle9jb5rgff9g1oleskb7yh2czpwxtgit7sakjdsep2x4atsh4i6ya9guoowyahqr5rc7dzqijyd3zv2b4ayy557jv2kjkrh97j9d50bff9i9vbijgwc3rtpznydwtw5dvhv2xa4mv9go7q6rapuhqhvo283xxdtd6khsbo902yhwrxc9lq9ei6z1rjvdzzm07ii91wzxkf0g',
+                rememberToken: 'kdgcug2ihmq1hijzali9m240dmwe9zp17f8n2skozzgk7nemtafzg7wb74ek75f155ejftffemaeddh4l0onods3zzif5znuzr5m8ssxe0kxfpulutjskk707ynva66lbxth26ugpv6twj0wg1fje7aln4owwnzshtpktfisz1xeu5zblfpo76mk6i3i98cf1jpik5470bf3f905jliflgjwv310hc3lxfsq6fjjv0jym6e1cuihcqotbl3ocot',
+                data: {"foo":":z0.xPN+]F","bar":68556,"bike":"SC4c(/G#T5","a":"eSIx=DNv2]","b":42687,"name":"2lYp9:}DQ\\","prop":"1}jn7&8DA&"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserSurname is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserSurname is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'r1r5ad4l1fca2lrkoik4mqfw8civ79dueis925vxdv1bjrfzvfr6z7k3c803y8su6hjt8px3qxtqfqp0sq2mawvabu510opwcvrz17q47fj590fzhqv9jyaqmx4amjusg1em2ekp3z4ifmxb9tsm51lxztey0huisnm4jwdtdttzi6j3jms7cr7175zrv0d835v8o582d2d0b1gr5s17u1b4ksof7ytm2sfyoeri336151vd5r4qmfynm5nbdnc',
-                surname: 'z2uvo5m1hysi7vfca8dor64xfs7mysdzzmjfq091z33sunt03ry7ppsivvz7jebg5w29o28bo8vnk3u0bctn3a20mw983jfmzhrakc9c5w75l9t5r4ujtiysyutok4lsjkxm0aw6y28ckytzrjtfeydykzeflp7nv8z95ub0x3hsqgqria75xs1r5z73mp763cnluwif8gqz969t2hdpq1uv4zrd1gu4whgw9d7cwvkwy7oh4ekm84i4omqaft5t',
-                avatar: '1k8bx676m4wedm182qmirltva1hdvuyh4s8cd2tl4craei2lt3xycpx3e0tnbdxdiy2m73gae8upyqfpwga424xo566ezdpulfttvb8p8io8rs4dn866mr0dzf4b47bgzjsrtwmt501woyq6by1483jcabz7819nsq5lwkjyemxdclbwo58ripxlih186eh97gw06bzskjp301xjvogubii18oj6kroclmkjmlki2dxy7gmfdrlgveaccpqopti',
-                mobile: 'fihydeb8sjwlf0m9eg3b681zb0voffyiwdeynu5gxe0at26auqvn5ucjr474',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'iw0pxm9zqofr7q8eh54z7egjq9k3w9tcj00jwfogw7e91osc1u9knq0uwiec9sz0uu5dswn3vokgy5i99p2qbmn67kgv9wmq6xi1j7klypj964ufh5t45jba',
-                password: '0pwh2urvl5di5bgzn7ypfkxp0nvlyop7h61jnyvo7ukrljwcv82a460pszd2z0uzp2z34x5k4o5ecxp3r4iimd4shn6i2t2ukvk85n1zfpint4xj7fsuenk3id1fpzn06bb4b5w34vkgu5p48okaphaniz0sw8y78mwkwlwsx7a1wczilu4dlubzlezky31pkehdh1eg8y6l0tr5lay2zs2k66yi9zpvg6p8rljdi8phk2a0d7ybvxfyd7ao6jd',
-                rememberToken: 'lp2d0ptjbud5lg2xde6pircgxbmppzf1q2xddvoxsvt5chb0v5cpsn17nbdq9seqyv3m9xwf51zthd5lt6k6ypw8z68c5m4yupuxv8r6o0crzhnwsbrcaj3k0n9o3utbt6y96rtj7fqygeml0il152lpi8duhzbktw2i4zmhg1hd23qgca3ewmddc6ku9i6zq3qv4wxi2tbi6s2njn5u1f3xgou6prn700jlgmk5aqd4xile9w2r569c7iq6sg4',
-                data: { "foo" : "bar" },
+                id: 'c2ee0a60-3355-447e-93e2-cbda04008eab',
+                accountId: 'b6f73324-7e39-4d97-9801-9292dc64a674',
+                name: 'nrpnm6u2vy0u0sovwqjyvvw1hfgiwzmwbmprgjqrp8bso2y9tv2ygmjw0st3h8iwa7ftx79l50uprew2o4t89xhxqfcha239kld4hm0lepwulaeavkyhorqpt3soolp3wch5cmgcea5vagwg3k8xxbvzvluj73i954g48rgf779qx16uluqjau11xk0glf44p9mjpw8th5jdwf6xh6iqraoeulyg3v0u8rhiigapm4h3zv5i6vyypseuk7y7qhv',
+                surname: 'kcflxunafgaf8vrct1w0ylngq026vym62xk74tduzpujk5iswkv4sy1hmh986ytejyj2ku4jyxtrsjwqst7gduz3br8y1v7b8jrp30bf7lugo41z3fhb0naurhh6ay3aiard7p7sucw8fqibr6s6s5n9fbypxckfd5mm93iaas94snxl6gkso1dz1a7oghk4wgjt55v4w0satnndwf8tzwgxen07yfr3rbiov6fcysi2wv0r6krruvod9oz8aboh',
+                avatar: 'tf7bsc5yw9hq225mnel3udnpcx722y7f5g3opa7vhl5mw83fbnlot4jbpb1aysn6av0lw1gsnfirreope07we7z4nx0qro5h8c0gn7jdyzolhz7aqptmkwoc6n3cbp2u8iywwp5dfq17fwdh85cp84q9q3dzmkfv8s5onu8o0njbu8w79s80yf5ko6fw19axxj0621a2do6f0h6onrojukj753oxdcr15oe7llofivebli5wbqwgsae96wgannp',
+                mobile: 't7j8cmydbicd2y1ejmfnraixjxojobyfsl6bg6ebbm1eintg690zfrl0qz45',
+                langId: '9a43d6ed-6c94-4ff1-8421-020057880345',
+                username: '4zfip6mxdnfrpkn1ecs8g60zgbnk6pmo628i1svhw6e0wkzg34qaq9seln0cv8musjoj8cg5yj47vxs4wn1flrzp3t7ucj2bj0tgzsyvxylg0ri3l37ao7sg',
+                password: '4dfciu8be1tne2irfvh76b9qz674atgt9hohuuc7t1cwwvtur83p2fj20iki85kgkt0lghcejuxcbq5yemxb5x7qvfpe8wqwarlvhab7oi4d1st25t3gy41vesko6uq6f517x3015n93qkhxkdw5djsyxhesnu2zcoyid1xr4b2e52ggxfusvymvmidkskfynp3lpaix87tgjlubhn4mdeahhb03kjf4d2imqoi122dac5e12tylo82wh56wzw6',
+                rememberToken: 'v1sv0monseqhmhtnwrpq6ve8kjj1l026fcvg8zyxra0hfdnkd9pwaqpjfb0qukgs2ft9lqnap7hpqkawxcd44redvvi8dqfdu4cnu7r4xnw25rvvpl0vbing47i2802bxd2451m8oa3ukdluq4x0gdql3wavu2m1p6r4gpgcywa8bpwnjvhg3z8r7jpda9vp746lq4suhjpzg0iitvxv95u1ibat2ba2qf7qlyradkwbmgvogbad6ihfrjpbgex',
+                data: {"foo":24888,"bar":9975,"bike":"H[jmw%H\\p`","a":"uJQHIJC)A!","b":"^(6f`k[o}v","name":79108,"prop":80462},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserSurname is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserAvatar is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserAvatar is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'tyrt46mb6v1dh47kslxvw9rhgo2idoc8d184mbta1b1m885dfvbzz1mvbdf17ga9onjul5lope931sdl4j8ddf3srcj88rd4dzrfzqhgb3rknd3r7qj7967k3th8s9ti8o8de0jfudi8fxlsweqeiiffm1udbmdkjoem6vgywnyz2g0hj2ld1vzc0bpsjawlr0gxpj18u9bdbj41kepkjkish371m0h2q6qbbaffw9ihs4130n09edccgwp4gjw',
-                surname: 'olpn2pkllw19f064x1yssmdo9zkcnmy0d9thpdjffcfflrltidmfb1rp8q6ot5u43xgoik6s456ww5vujzi130mavkinilurge5l3mvn4tlxpffygdozo7k7sgu9j528fduhqzxa61vwfz7rzl9i7pujifqptzq0sfz0uxorqilgogbrkx4ok3szqvc95ho0odxzg6dhtvajxwvrplsa6diab2z98gagljr2olhpykg5s88h1py05g9j4dfampi',
-                avatar: 'mo5pu70v0ckx9nj2d1e3to0pntxdfuavakps7nr324ctd6qc44euq61r918yi0ldh3uqnz1tfltjwnx33px37b0o60vnzo658beyvnfthv0y2bmy1ak1qog5zkcsv6rym2qr5fkmgkk035ifqp1eeo8l4439zc7bwvsknhvipir8wvbcjjbfigifpkuvq6qrvjxux24f6u4doix4uora03bgu7xvlhzrn1564o2ceg7u2m070nmv7opct740zsqm',
-                mobile: 'fsbcsmq26t594moo2dy26vvh0sx6kh7lgaeov63zgw198ah5ahsfexojcvf5',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: '4cypwei90muxrwdt8zmqhkd9hz8ztdj9wi3y514jmfgcq2j5h3yfls78e85p9vdtdwxi6fjupugsw887uiukvzfauvlpwdbbl92edaj3lyowthi4syx14gtw',
-                password: '70bhgy4fd733vtl10c3quekjms5vzxyhtrr6ta13nf6plcvt4chz9y20vbyzzekdrfmpcj176rmw0oud9pshuoe5aefv9xleepy9uifcuc6w4x9aglg09qr1iyzlsxnhfocsosj4rivjfoaqoh74ht4g3t3fh929uwvflaicir1f292ebvsb8dc6nmrczdzif77jqqo0z18hpji9cowx7f7zmi70kooxh7j9a91tj4odn7bbrgtnocwllzwtyvm',
-                rememberToken: 'm14spjy0ujvpyjtjat8qidwkqgzt6tvfed6ujjntid4hxixe3w5rm3asda87ke54lc6ei05ar1a3jk3k9ayeskzjqlzm7htfe9pczwi3eoexunf0zyfeuhw48silf5lwica0aj4z78l7ndr2wsnchhgojkeju6a09bm5amn3bdkfhu4o2iud7v1uesxyvkfcqbbu2ni81mkxwu2vtjepbk2ez78c5jzc5fivxuid7nseoqbzkngs3g1jg5t4xl3',
-                data: { "foo" : "bar" },
+                id: '3fed0631-26a1-4bdd-ba2e-2c357a3070dc',
+                accountId: '46fb7db0-5b5d-4e75-97a9-657959c5f3f6',
+                name: 'u9q04216wnj96k3tuwr7obgm3cf7jokbezum1g0w91ztirfg55n9zvrfv34elttgcjne9qobtsyad1p30uyq9nb0691n9u2kig7x06dj1hvrpsjcy07x2617dj8yht4bfhqw8u5vqplc9g6zyp4f36sxf724pfgyvqacfeu868gjz19t19k80bc8phlvrhcmm12l9n3vm8clogvi87wj16lyyj0wrm05ajimxpaekg27tzvsi42lp1hfbr33qee',
+                surname: '345uizxwvizs7z5j0x8ztl774kw5nv6pbsl2p0caesy8pawjb344pz8665hse3whdgxty031tx5pxkr24innxlyetnz5eomtluwmo5hl8bs3zgtkaujwckya7qhvd1aun851o7bwp11oi85eivk5wfxu5f0z2pk7odvsjpemd4fsvgjeldta9vxf4hkpd2af3ts7k1pkr3e2paznq0g2v4orvwi7zsmg8sj65m4eyjn9ymaxqi56z67yblt54ri',
+                avatar: 'tv5f4q38uicww447c33z9lcugvi1lhfgz893vxle9d1fs9fpiu3mhnzas57dpw7eszb46a9yjifutry3zxm2t2wp7k6z7pp3bbpves6ihs0k2bzhtc7xe9h5m2jta8cd65o1vlz5qfmt54a98ri4q5qyqw0r3jgukg428jtyb5xq207ychnmgqhn4m80w4k6t0ijdf33eo0g1lqfwhcato671nj0rpazss3wrl0oz5qyfqkyuvn3knsm7lg0tp2h',
+                mobile: 'vqposajjre3ig7y90871fy8zoen1nbpxo0l0jp95myxmuhgi4qowouguond6',
+                langId: 'be5ed48d-2dda-4799-88d1-5f12c4d8a3d9',
+                username: 'qbchs14na8aldiy6871cr7qlluh56rj0w3j7utbwmc8hyu950fjmk620p9rebs0grz62z6uajt11iq5g9w4lojp875wfxfi1wekcoxts4v7snwyizl866mhu',
+                password: 'ur98fpyt2amcm2lycd135rgblka2mwiez13wfhoh9sbi0qqme80fgeyxv709ch9e0620ef2cbqd49fbjz9b6pgl1h8h2jnsif3aubsbnbmhz2cfkx5edd7lrtt74bsu9xo1xa7pa8zbr1e74vcuurtdd63dcky6jx8z2dz05udnc7dqzlcr3kn0vt3s4z3jstwd2nbv245mt2bhrcx4aq5rtks6ih4yz2l2mtnyw1vv8j3i0wo13u4ey3hwtwkw',
+                rememberToken: 'phjv91h9wopwp0bd0lygd069a8wgs4sunma20j1u46cq5s39lksb2nz3xnfdjk8uda97dpa7x4dgidbfvuz2z3sd52vpvl3hjzwanytwsqstkvs7kmv1d4wem0usj89nhwa5o0b1mgqoz3mijxtxpt4igh10wa7l28rn2ev2mstojuhr3ng6pv550wz2h9hxwv0j76etii7dc9ipv990zfitgtete84ikd4s9aoz0jln2pzdp3xp0uf1qux9v21',
+                data: {"foo":70651,"bar":"wV{?7g\\H;i","bike":"wur^uhZH-L","a":28772,"b":"Gen21yA-\"_","name":"85Nx:g9Y.V","prop":"-Wicho]A<6"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserAvatar is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserMobile is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserMobile is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: '809sasbgo3uocg3ifdstmzi4jva8gxstjvn6i3f4mn8b7zrzkvgyxt8f324rs8a7ozjgdkcchfaas18t3bwnvdt5qe3yk1d6ji9t19ub25djfh8tg5vdsh2v6s5ausqdgllocrzw0zbs0kkyc5p6l4ryb8i8nz4zqfsgm31nljkjj8k70g23z2wqvdtr7oc0jko0dr4un6yireefdneezamrr5r9o09sl908ada9vfvnod04ubybkk4b7ymee7n',
-                surname: '8i4op5p9dqk81e0k8m1z747hkltp5mc1yho8wkz0y9nbpu5mlg88gj8wonvb32i1lmrk0epjxmbcw7uii6pbz9htsep47dktgmy5zwhd39sd2zfgfw3ls1pwwj5oz7u451zvnq28ubrl79b3cp99e9s00ljr3p6kwfnidpq0tpzadi9c9t6gx466qhjhiarvrpi3eofxrbdg15rgoyhyvu1j1d5fuouy2m35k2sa1jjoqepsbxqaj81obzlmfzs',
-                avatar: 'nzumc2bmydbc51k5yowvip3ucxspttri5so3gcbf04n9do9ds90eoqgp30zof07q2d0yf1zxav5l5hv9thvy9dzv7ecncnxbq44zw8qxq12x05cqy5fs6f8f3ubl7kzeody42h6o5ckf5gh4xg39jxhhs2qv7ew8tj52nsku2gu3qlqu0cmrgef4o5px7ctxecbgaow1065mi0639s8mjruunl6sleladsaha8qi13tg9ancckn4y57ulbiuqdz',
-                mobile: 'qb3099pxl28f7wyd4br6o5j34a9eirefe38ys6lnd67b1zfjfym6a2ieey6my',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: '3dhf6lk9yrvoehsg6zg9ep517o9lmagpy3ln3a5omyx0ujfb6f8dym82annboiaqqhqbg3kzoikw2iz76mj1bnfshkh0pw11lnquk7tgy3i419ttjak6prnw',
-                password: 'w6ttx14xoktil11tf8f4ky2skc4sydro1v2z41ge4vbxaohn8csqzcukbgocasygstjxi77cw49tmv2gy7kh6h4defdoo5vmcqk3nf096hdmpa3d2dg1ai6gt2o51xaa67bf6wmp13zk0jv1bvkpfotcld95ehf297zjtbhdl5ptsvbznj4idtpsny7tfz1k92ehsx37943ff9dxbpbawzv9elvkmzm3iatj8vw9pbc76oetk6j3ceeqvc2yo9s',
-                rememberToken: 'ibhafchy4m5g6xcd1es8ffqucj8w08vpkn5i94w76454m6d39ch43svizlqnu47yghb7n0ayji3yzmxtqxiai096sxurc4n84tjloj93jwyd4465sbp6e1rmwv6ifgknexgpfcl4m6ymfbmskvijw6avrnniep58oi1eohtwyfkjjtgukmaazmts9u9016trnfipug9xpygb20aph0efghn031vfvcsb70crsj7pf706mijvpjdif8tiwfy3fg8',
-                data: { "foo" : "bar" },
+                id: 'a67aefdf-ea3b-4971-af9d-4bed7a6dd71b',
+                accountId: '9d9097d7-f7dc-4c9b-bac4-d03ef69ba8c6',
+                name: 'pwtsl5zi5drhk9kvlzhklbxanf297537mm261znxd4969ogjmuzzvx9i0t747avi8c5lj303qfokjbcxln0xstll7d6a53hbygjl4ldimxruguuu4f8b8mbzjsrzzfi6qngeecnq5qb96t2ogls0yfir81yk1ywb1yy2auel258snh353ajbuqyhuhf94vdvywp00iwr6drwu61hddkwdc1sxxm1n5nuvgzs76rbhez6sz4r1hjizk20t5odupt',
+                surname: 'ytpih2ma86d2s6iiz65elg93dsqr1vxtbnnwn7y9ym8v23o38br3uzt1gaasq2sa01eeu5915ofrdv0p8lssxovqri8cikm9dkb2lpmnep6c54oos5dilg9na6cjwgnyxkjdx59411lk2cmgm07g5k7ihp9egoyegsfh0ehlnfhf3r13w4sijbkqnmlt7nllnrggeo95ju3mh93wy11mqbs8ovavpp39j30p63vqoblej2536zy1f4lppulkse3',
+                avatar: 'mq4lljoqoio2gk6v6shsm48jkxjv94dqj6cpuwor1766u4gt8irg2xo25drl0qn54x6x9p1iewkk03xg6ak9qqaeyht1wzrsw2ygnfs3mea2a5jzoybekri9lxj31htm8ryyrk8e3bnte6ruwizo7f1d3jaa1d5yh427wtjvmr4r79sv57jcqq26vzd3q623tkv8mompe2ee5bt9vz3irbvh88wbwjqpltslumsl6j9x6mfvaz5rd80rc61qnqw',
+                mobile: '1auleev0z2a181vfybubdsbm3puw0mvb6ep83x488sz4y35gza9pi6mbhex0k',
+                langId: '9b16930b-0b79-49bb-8b24-785465cd857c',
+                username: 'sizwlrvd98f23j56l4jl4e5p08qs82odd7vdpncx7bgoby1qx8q9e4pu2jk53y57rptqhfuff6r9ewbfaoezcqtjinny8vti7ebkoyllkdt40he4ec3ltynr',
+                password: '0x502furnzpeufjb0w4c0vo3vrho2y1g0eqc0jav6fx69sr7w5i5sivp3t21qlguyu1mwsa8mrl2670mrwkzc9jaiqat8c4cm8obpg9owvqhnl9r582tz15qe97l5pq4f3un3f3ljvvsjlybuovwo0rubb9pex96ylao4086w06lf6ky24ucq303892c9a14ghn73m08c9f9dv6aqjd7b3g0afhbdblp8ttc07klsg7bkadwwz2za5sbqvb0mbc',
+                rememberToken: 'e6ek6s7ysei1457k32nqfhktqks6b1wdwi0ty90cy3xu8xgctooqzq5erppr9zw0xqx7ukat2dxlge98901ns4bckmd9fxrh6wtlk2u1kg6kri62hadfuwa2yhypkssf7swh0mugv5ywmxpx1a5p3ddvpv38equwmgvdbzfpzyknjk3pwbebvntldlzdnugqltwnt4xjwe8ztxighge6j6corpv4c2ba3294fb6cfy81mvlmlg3ydphaenfk4ri',
+                data: {"foo":96100,"bar":"h3L|KrMDMg","bike":21049,"a":"[.F7Tm@\"CO","b":"KY!Gp&sA`#","name":"2ZdJI^i/Su","prop":25441},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserMobile is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserUsername is too large, has a maximum length of 120`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserUsername is too large, has a maximum length of 120`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'tpewurv1bcrkanq545gbrhtj9erkdy0t91yei89zwda0552z1f0orsd208ya55vwqgc1pyq2svwn2ozx3bkscq9zu18onskjpo0v1t4vpu0ayyhgpxmr88tackjmh61uftd1zhpuimsmsxz7uohw8f7lmxqpxexmqw5vvgk7h7tbfo4lk3kt38s9mq5gls465w60tpnmtwv27eunvhwgsjdkqu32wygbosz37uu24av2k3i5kdp99lmrz1ovcld',
-                surname: '5pkrlaw1775wppvepsds4ta1axbnk4bs6ebi090k15mqzbed4oej7aha3nqehdk9ymdskzvl49gv0inxvfvus10abwkzq2my7o5bi1gtuiqzpf9ontqth84im9qqgb6pfgv9uhwxzdpyuoa5vw69bui2kgyhio9boclba47726j0y0o0tvrkhoh21jafc9upq87j2aghl0tb5zjypwx0ullauxr8av2ec80ckwd3iff2nwc53tknr9rog3jcqr1',
-                avatar: 'dq4ekfgwnx95zojsaee57ucdfreol03k6lo4tag4hrl5fxz0v1hzg4uda84qk0p50x7vt6br4emwus3uto4tn57cpmnkwxqfsdszfxjoxjbzewixueigsc70km959bw8cjl50d9db3cnw7jowa0lv6xhscnx98sduwr9oqgtm58hb9lmr33zjalpph9lt3w6o72ul2ek61yr3e2j0k225mj1ma9nqqech6j39492u3j4j94b58tl8nk3cabbal6',
-                mobile: '9tmcvods3oqe6ndlbo15cucxhe1rl1z31p69oajmtc8dfkc672jlufmerqik',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'zprov70m4whtnqbdtkqks4m73eggmh7pnad9wmbxv3914qznnvcvxyrz6yl8emqlmnf2tjjwb5xdl3omvz3n7yjh24s1ds6ciocbuw7pxx55pi3o6t4czgrat',
-                password: 'hmjbugud21v3ivru3uxek275r68etjo8kkozkznhe45obmoeze2la55l2qd9bvn4lzq27zwoqzg7dqt6oi70i8mxleyxmjk7wrs9mg3ub55iayxg9fpgbzmh8ha6gbxtzyho54wbfcgbj86mws5mz1sm1zj1h26zi9k27x32ygjnnwtdot0dzabhx1f9xn6gebgq9pnq04yhk789u7nq7u0rmylyyq9af7b7t44t4shwms0trn53gyb7qs3g3ks',
-                rememberToken: 'lhqj0msk8rjdyhsyavxcfypgxgzf9toy7ez3ep2ksq647j3m7hn1392xd0n70uf13r6i0ji8k2wi8fby3u2k8cj26dxvvcdazg9lyezdi3eiv235qeeu9g0w73p9j2e9a5q79lz7axncgv1fz5shwdazxwrw4zgfndgozuwtslttm71eq8ahww80b3eg83hw8q17f5woba4li67i5vy8327png7vlxkvnmvdb8lyk3190f785x0c6u25xspf1ps',
-                data: { "foo" : "bar" },
+                id: '924361d3-dd8e-446e-8615-ed01f82ec368',
+                accountId: 'b2dc7c7a-71a7-4ceb-8880-9eeaab368cea',
+                name: 'j7vrnamzvq1ka1pa6sdar1alawb9yng0t2fhfqcyfdlvy7wxjkb28d9qlkl9xnk96mdvywix9hhrzpqj225lqe03a86vphpiz4eec3g70exok0mht7s2525s4oavfhco35dhwcfw64lo0czz9siflc8se9p7mc0t26b3ec53bdmrq5w9ahdyjkoaz7dfh3isjztk29up4pcffou1yan5rccohs6lju4rkyzwsn51yrpo7cjgpnub1rvjksutldy',
+                surname: 'dl5mc8fxk996ocq19iusv3lyud9awuy74cb0uw5o3lz7z1jcp65y2k751hkmia1qjp4dz2e08k5hue7iaisdfdajx56r01b3on18fugsrsawaf58fnrkvith8kmk23m0gubqkd9x52tmcdex3r5s2pm0s9sy4v3oht1cdcan2q00b1m56guekelqgme13yllp5v1reog4y1ad7ezeyiie04lyb48cdnlm91aaij3xp2qdwcrbep3g5poz0k58pm',
+                avatar: 'dkygb0rb92j0vjhsfzfperm3z0ick6p2vqprdzckldayp3ghkdn1dkur8pi9wnkpj3t9oafhmsnwu1k9tx6ix9c4tsszzr4uj40ox8e3qg392othur83kqkjeiyi1f4ep21rbik29cugbhd6067lhq3554n96beyf904seixafj6whham0k4c8dx9f0dmkvw2srdy5s67xesy75nknro435dxtydoqz1ji5xwsw13j8z4cq87yqi0t21u6z0utm',
+                mobile: '2gvixoadvrqdtj1ccmws4oyvjjrig6o1y2b9d0ks445ntd2pozlgdpp8cprn',
+                langId: 'c65c3110-78e9-4927-9a76-be4a27115bb0',
+                username: 'hkfdcfims68uylb2pga9w6rlqhsa4gto15ayhzbsljlu4p4agtjbs8x7ahk4dj2y9ejz8q4d7psqczs11tt6t8ar3i0flrvrkn8uw3h4i4wpeeuh3tcngsi82',
+                password: 'pup1ujpkxtxlc22hv85w2218m5eqg7yv03fxvccxhya0ngkcn1xpw51brjjfwewxeipp16w3e25ymt2h8qkgjhzdwfg0b6tmrcheue6yacg6klnjoh65ijc0gzruhn6spwbupbg3g1ofqkzcecrlp0ktpmakpwvwfwxc3iz5bodparslncdtww886x4ho0nzx9u2y0k72nto3cijscqbpnjcce5wy7t25f7ocbi9proae2rwhg5xji0mks2wa1q',
+                rememberToken: '9nrvzpnhcogkknbpn2qg8vu55sk8gfbe8ndm56c7sjbv1ckxve20lr2vyf1r1bglo2pug91c63rq5siw1pxlbmh5dwjqu45dgc1qltceonyd6mynv438x2lczo7ld0ihlo8x932h0g137qglb7z8aqpexsq1cyxyk0h3v0awhdu27or7hkmyzp922itjn39j2th54ws184rtppk3ubrdlodk8b1of37ua9422a5netxufd7kj885q4lcce5flun',
+                data: {"foo":76710,"bar":43193,"bike":45401,"a":"b@C}2#8.RQ","b":67350,"name":"];dK2o80wW","prop":39032},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserUsername is too large, has a maximum length of 120');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserPassword is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserPassword is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: 'vd44jaydjcozf1w9ngqw6ck6qixvugbz2i6nlbkqiqeamooceq0u69wzmz8pbcyy8ww53tdjswsxtlcy6hmcf518z5c10l9cmn90a2uiwm3n88bxg1vjvfidrf3t6eufohvcu7eqiccbxwcg83mbvmmioxt60n6lil8gecr6gft059ib25g00hzb4x5kaz18zq59swj0iei4kolfammulsdkuskrtyv80gzymwbu1ygcfl2n9utfekxfimwlfzy',
-                surname: 'ld7qo1q2f5m9ukeesn4glyvb8yq7y41g7rlx39t56e1f8ncm13x4g3jgdn0esfas3fy67xggaisx7wd81mwlrdgikqwwo9lk1eyzyyvqd2vaeg3qnmt2hy56hexirgqjv8m02o4uaih3fcrsp94hmpfufra6ujrte1melbfmko4le98yfnqd9h09wje4poenwucuh08eeyti57854f1j25vpxnandxfqb3au0bztphdw8btu2nghlz2ccec70bb',
-                avatar: 'wmsxdfabzpfbjl00m8ufeornq36tl81micvrg8z6hlel96ua93e71hsbeh6e6r5muv19ymnt5xy9fbh51ukkznv0ioltjjlywhwg9yrjo0tutnnu0l9gd3422wr67c47mo7js91j4yzkgeln6oxd0jd3l77cymth21z8w8fa1kaxojzksbfnwyv851w69qaf0r3lhvoomc2xcr9ylbgkk794nnqwrqrg4m00b70olg02pgs3puu0ocpqf3rl392',
-                mobile: 'md185sdu85z0wxqm0v7goksehprpil444att2zrywijbq4337drmml1zt2lf',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'b303wkdzqiudrzy0eq6i2jv9dl0la26j61w1nxzc3sux3pjzadsn6e67nzeeorot2rco2xoa4b3nuscfpslo98ibm7q5b17pcn7n7jwsf48w1qbzjo8ymiy4',
-                password: 'jxmkhpxfct6ilctbjpar48zyny4zvzunkphy8ffr0j85t9191x9xphte16ojzxw1wd02dfsajzzcikfjvzwwjr0zhql79nfu9661ki0gkmddqyn56qw1qvnb0dkzd53dqfrwmdw91t7v7kvb4ydazorxrzok2wal61t8fxs9u9ibiyhcsmbznosmcg6qm0hfnct9svptl2lyig3usnrjx15u5vn1r782oes4z6dwv17r2t7r13jfpdavpv8bq7cd',
-                rememberToken: 'oocthtjncu0vkr2juffk37bu4083vyal6e7dw9vhgvy2rjthj94iyjmkjh8koeqf70st4aa1bcwk87xun4pxmgqcasn2zzvrgxgzklip8v0y6ilkoqkp33vmfo4zdifzs6lm2fiiiuyvpehzjqi1sqvaobgsjlvxfb36wth6p116y3on5hgmhri7vhbrnuwrkiyf87voax74xxu1l1erprtojoq1rgad38y2uco1zhqeme9j9k9wwn500z64yl8',
-                data: { "foo" : "bar" },
+                id: '7ffa2dd6-438d-4ec9-92ef-51049842bbba',
+                accountId: '50d4f6a2-89c2-4cd5-a6a6-32cfd65e0d65',
+                name: 'cyftydcjyh2up782n4tbse1znggec7rjv4ordrxyx5p40l21wtlw08n0q574kj4f830nw5i6co9arxvu5lct6qlpg3ylrt3wa8xxxlyl8puxaez84imi57kzafv8qv3gif30hdpivkxr0ugv409s0gon0voepkmjzafpdbiimfqh48u2yx339dohbewpxv8szmlch1whdrjh08wjufnw8f7kpv4wy094kyf9ro8i7mdvzv3tq18318iklr5mrqs',
+                surname: '3366qqtjkm9usg3x1xyp2esvbjzngkclj8gcau7ymuf6pgi0nyiaj9xb7azd8crorvmj1gqm4fhcek8vsufm2xcoqwkodrj881jojujjgjken5mx63mzm35r19u654j0eshdsd0lsya0mhv52001o4mxzxdvrl01jhz1p9p6186nyzkfn8fgvl10uh09vwca8k255esqjf091jcrlytif1xnodxsdx7dv7rus06sx7bm683bute7qmmf1a48trj',
+                avatar: 'ncu9ryen4oqtxgbecojbzy3n26hu0zeraajijmprruqgzeq9ji1fcfqkpu4ckt4amjyrasi61mvabunzqix3oik8iqw28nqz9xxf61eablri56zigb5j6dqlqbjnvjhlujmv0y3ic3mq11ug505dt8vjxbllj2yrji3qnh05xjoni13wmmzmxqi884jm3v9dz4nv2m8usspjp58s59tuje4dw7f72tnjk1r1spmst76iboyfl3q8oowa1bgcykt',
+                mobile: 'h6c0iwclc9c98hz5gjr48d7pxp0u2stjbpdadzh5pfk8wvymm9220z71yekc',
+                langId: '4a4b4685-fc80-4d55-984c-f28ad2504a97',
+                username: 'qepafhf5opnhtrjrctd6uvs18j708dd0co1m40f0a4x5dyj1ucmlehjlrkc0cd9h0agjk3eae7gx13iotyzxi80z48zrye96gephs7r9782eu82e6rgr8yt7',
+                password: 'a0q2ym96d6e2t98vfx87tz194qj9yn7q6kh1rggv2yi2hgje3iptb6bfr0pep05q2prtnrce9duw4ttrbr4wfczuuuu2xsn230v0p892phe376a610fknwxu8ou9op3unq7k0q5p9py9ooq8uzwuixntu80tzinrboe2z3l16kxfovcu2cln843g5c165dcps080j5s1vas7ka1wrmrc74z93r2vstvw1fiim5t219yn8xhttrcmfkx3r005o1bu',
+                rememberToken: 'ow4g7mmwuh17pl944j14p1f685rgszv88qap3t5dcninqf0ihpkh5x8r59tlcnp6nk5ql64xe91rvlvpeo1oyg6kse1qm0xm4utbia8hk441s8ly8oy0zvd8c6dt2obs2lxjgozznck5ndcngy69vxaiimt6lkqtido01xje6txl5xjnc8hpfxozz6gg74zs4i1as2dhs6l0trh8tqj16yea7i5ps7s869rnzjv0yx6uea5l74aq2qvbrnaa737',
+                data: {"foo":14201,"bar":71956,"bike":33352,"a":29437,"b":"O_Ko;L/D@X","name":45474,"prop":"d?w)q}j]rA"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserPassword is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST iam/user - Got 400 Conflict, UserRememberToken is too large, has a maximum length of 255`, () => 
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserRememberToken is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: '7el7bfeo2hjsvetnybeirqk1get9hvgpnaj8cdhtixv0rlodwp7jl8cou5ae1caz38beq0vw9c70xa0lpmyzmzwwtkgkmpgsgel9qqrg1gh44kprsslo9hc8rl0je6hsl3lkc43idcmslbmocsigvjcz6jl318avdk398hr646iw75yk84s5lgkz4iltqwxzvfqnc6iatih5y7knt004elkzrfhrp4oyvdv154dz6e0q9bf6dfn1hh8su40lzwp',
-                surname: 'cd1k96867nz53w52e22nxs666lffks25d257s76rnu431lfajp4fj81z6ml777u1bu6yl84k3spdlx35h19sb51i2gukxvgk119nwcaq0v3yg15hgup9629m0s7rwza5fu8mna7v7x2628o9es3j28cxjhjsifwkr8y0473s18ke564f952o9nnlyjf852otqje4nq965wvvkcpvm3fzsqn8lrnqtnz15mt8x3uqpjackk2s929cqtq4eghqc5e',
-                avatar: 'ygon1io0spd9e49gkxzvyxm1ey78xsopo6auid4mq3x3uojv22lt8bbj9pu48yawb148ibm1oosw3z4byb1or4jdnhsaw2irggtkkgtejs4g7lv1j4qdzzudvdksy85mzqo3y613tolipu8ovtjadradve0kdknl7n3hui56fqsq0eo3zp214up0enk7gneh2iglcs2p34rgrqzl8thteaxae2btj8lp8ptj2db6vkyjcph2x2jkdp4cerpsi7y',
-                mobile: 'ul4p5eyyvh3m9hpr82axx5kslmba9qhi4q2zpmki5g52wokslmsxvatm2ksy',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'mtudtxujchzzub00d8tm1qhkg15rl5rb8mwwl4vzbiydbxw9beiann6rgbq6q8ii55g1ssj99bzdi67z1ix54g6xt2uw71y92k8en4tn32r0hdcnk9z9nyel',
-                password: 'b0ejgl2h1v3k8sgbvcyr18lueyehtlkfe4lokm3gxkqzow9icfmj283mwwm1mroc8andxfsxrlggrvdmbln3uv1f9va5rzxkrb04v6sl9mz3e84cbign4a8argxwsd5p40d2lvcf3mv9qz2i0kud6rn1kav96pquusx15xwjutmgl6m3pji48d25te66y4jwwvp9aj43uliekh3v6w4a6xbqelpbovwzedcabd6mhjeb75vfcpiojo9i0rzjara',
-                rememberToken: 'i9y0vh689414aq6qw0cxzlzpltvqfq6lea69dnhe0i72lsxcr9xf872ejzvk2bf59vwq1o6q8y6dk1wouw3bvuqin9dwztk2cr2yh7d0w1an82da8pn534bf7rgdd1j25iubgw8jawtuf0p9qvl5nn58apty32uhc4x89pcdnchc2s44rg2d0zwudkwu0wv9fjl9w911qnxt1n9eaumzpho604o3snwcdhp2pqa96et91m4tt2wszhuph01s9ujm',
-                data: { "foo" : "bar" },
+                id: '182f1039-24ea-41c1-8d47-cdb9c3f362b6',
+                accountId: '4ad5929e-906a-4b5c-9e0a-7b8b55bb98a5',
+                name: 'gikzitee9onbm8gkhs58h3g7qeax7k0m7vdcrgns9uuz6zwmm3zt5oov5vztd1atxqv7fqholm06f72esu3l98w4szhcffws2867i9n5f6igseyquxvmz0d8hvb1y2z9nvi26lduigj5jnba125jgyjkvazt1osm4kl4yd0fvnc8nvhjcc842f0tm7rnuatl0tpc4f5fely6nuy1ws3d5kt498rcvmae2qgd6e5ijk3gd1fj7a99oxu84jom14e',
+                surname: '2v6ibjeg1ejho4zrq3o0ubupg9pwpqjijfttx0rfsjoe5phls1uhdv7moiqy1r3a41840xo1ardd8aavz9c8izbabs928824yqj3zehvuspl2nmontw24trvz0sc9pzzawrkt5rp9b51n9p8hukny431y3puudutf6igjpfi4pihdy6fx3v5t61ftbcn6ixr231iwjqkbzndtlk97qgq17buww9mt82onzjhpjgnpjs9irvvt1z8cn5ni8x9sdk',
+                avatar: 'hzco0trek6vdrqudwqlwcqv9nrmk47tpe68hr917bctf7hh1c2ps7sewz8vhd0yti5rcp9j0x2ccopl64nv3f872apycbyarf5msfoe5kn3a4cavvsvg0bwrj012v50bm2ztwx21mowtocwkg0cznb67l31y63tmxkvadabu7yfm7xqkyk4eifs4jnsctwplf5h47nutaqkn42wfx1avysqecqlike4na0mtyg5bav06od7cfnqzdwler1x58cy',
+                mobile: '9mvj0njg5tvc6ld6yai948zmsh674bmyjdgbbg9rxh2kr394iv5fjvzm3673',
+                langId: '38b6299b-f9d9-4eeb-b2ab-6ecbbf349202',
+                username: 'f3jr3ewdkzw2vkz5jx9echkzx7jo6srrymrqak89zpmxn6xoi37a1j90o827nq0a2cvqtb7vkqazguvyofxx2dhyedg6w4asozd1k20ewfi3imwxntx46sqm',
+                password: 'npxzlaz5vsl6nk8p3rjojgbwdbfb074afma7mj9d1p9p6md9gz2s2hc3gyu10cgtbbimscx74b0e0x4ymgmo3a87xl0hwpw25s6asl520qw28v4xu4xn9yyouhqwgr7u33rdref2d7pmlzsl1mm2j0x6nsrohx3pvej1cm79jw75lbnwq94qty3xb0g9aguagj76g8az6eejmngydjwat3gjxw5z7ju6024qt9mzvoe2y239j5veghsz4pcub28',
+                rememberToken: 'wewwnca7h7k5opt22w9z2ijm3pva9ibdxks4a83dnwldtez0l1v2pxor6ox2dj43mttmpzn4me2gndckq0gb0lonitaixxl138lqm0o9avucjdknhnowg0u3y4j4g8of8s1roh8q5qwopfuz8wwdzs33z6wc1xpqpkokaxq7mu6bmvhy2fx8uedk36tl97gjkyr073tof0fhbew1o3928mqpck20fdteb4sp68el6p80um61g9xruedch91o6wtf',
+                data: {"foo":47665,"bar":91951,"bike":34118,"a":"G(0ny5l<-s","b":"y-A\"j_0W14","name":"#_D:.}|w84","prop":60099},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserRememberToken is too large, has a maximum length of 255');
             });
     });
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    test(`/REST:POST iam/user`, () => 
+    test(`/REST:POST iam/user - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
-            .send({
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: '1xai4emh2vjivm3xv64s98nzgn29h5uld23knsual75d4yw18t97697ahju1hs608oh2j0y57qi4mynmni4rbyxebde30hs47vcv8q8fgczj7qk7rh0xq78arlx28glnh2nit5c5shtj29v44g9n4jljakzk0krkgl0qf58vlgy848kb7q8smkibaa718xht0mt62ijqsdcb4cbf0eby82o9i5soh7ed53zh40a7jc92a12wxtw98lqa8da4jip',
-                surname: 'k7q4e2n3006rmyjbaheo9jmnaceu6jwtxkevito3nvsmm1kiw76snrikb2pddqye2fhmjqj1r3wyf4zeazxu8x2i9kcwgx7z9a9h3yu0rlxwy548gtcds59v0mqtmc9prdqd9fbdgo22uzt6vpydcdy3uo9dwk0byuloyglojsezhlz9m8mtwi0681p5tm4go69kvaeo9c4bynu67c1hfr8n85q08qb1p7budsy0irsra4vlhls0plwph9y0ei5',
-                avatar: '1qbwolmit43oa6utz25xyy3u3674zyd3cgr8m4u0nw8umdykeyyeituvxv45hk8y1fde89n91rte1dvi0c2q9htan3xmj5bn8llfi78m36bjg9fqs1x7desx4tuo0ikh3umi3vnzaampkmcj5xywfb23igyh9bno8dxgq0jhd9q5sut9xx8mhbzg7bmvupogmw18hpeny2tq2p0805khag8txzsfect8p13jnojphr4ycxhs8g819u4xcp383er',
-                mobile: 's90eudb6z6cp9vgwxy2xc1yvmct2vgphmvt6nyb208omuzurbrcq0td4tw50',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: '8ubhqu31ouqo6xxdg540w51tycf0s3oygykwz9jiwihq2nhgwceajcyq5t05js0f3x79nntxmi8s7ebprgwfodo0vl9rv1prrl4nzr437ha48zwhxeade77j',
-                password: 'o7onxsk5v9zt0wj6wftzhza97rn9th80df6htyd0lg143eq5ii8wjdcl1yek9beoh0es3tk5v47c0cchm8enufazlgtc91t8timnbszp1g6oo406hq71r38r14ci46h6b78d28iugsuqb6llsda3hyfj1a3pm19zvhiimdxb3h95v12nau64ldfunupx5hl6c0ivuksoxlpajwqb9l6byyovkn4b8hevwye0c3foay3wz0olf7h33u0evmau8le',
-                rememberToken: 'qro6by08a96cv428m2cuupdosafn3dr1q5wis7lxf0m9hbkj80wn6uvbq1ojik9n93tf4poeh89pu7etlia4sv3upxvdoluihbt3kdtjoz6f8ssdgegfswhe6hrp09r0h2cy829xe4g3aclxes2bjfb1k2ee4stph0qrg9osbya42808rz2cewf652ygq135or1zbxlb0t9epab9hqyqiyeb3xyy601fzkh7joznornrigvzd1hj2qnmwejadt1',
-                data: { "foo" : "bar" },
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET iam/users/paginate`, () => 
+    test(`/REST:GET iam/users/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/users/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET iam/user - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/user')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '6c19c764-bf06-4b8e-b68b-aa27d55397d3'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET iam/user`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/user')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '5b70ddbb-d674-49ca-9069-f3cb6cfab48c'));
-    });
-
-    test(`/REST:GET iam/user/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/user/7db422d5-38ec-4efb-b8cc-b561c0fbb7e6')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET iam/user/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/user/5b70ddbb-d674-49ca-9069-f3cb6cfab48c')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '5b70ddbb-d674-49ca-9069-f3cb6cfab48c'));
-    });
-
-    test(`/REST:GET iam/users`, () => 
+    test(`/REST:GET iam/users`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/users')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT iam/user - Got 404 Not Found`, () => 
+    test(`/REST:GET iam/user - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/user')
+            .get('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '7d9b80f0-48dc-497e-91ba-7dd90972af64',
-                accountId: 'f814ce5c-616b-41a7-a8f6-d74fa0e0539c',
-                name: 'ynqcjrx2j2p9nyvjvliudsi420mcmqmbd8co5urnwyfa1st35pzpwwoxn3zox1241317h3hakt3f3mxu83dqso46j9219pq67ig1lyrn5xr68k8ybldnu18imajci0d8ehime5jcev7hx1ltdhebec4c6hnslui3uymwxr1pt4356eozw9jmcthrcgba1ktifg3mg66wj0eif578n533lma5wndch3mosuggqac0r2nmtcjfufnf4t2h1fzendf',
-                surname: '12hkq4idqa2yh5i784umh4hrsu6lbk7p6qbr22n2zkastxpt8xrbtudhlgh1pm00s8k070ag0wxkefldhllxn3if3ltmf8k3j63zo7a7kwn45oaa7kbh1e1z71dvngf0erq8ak4l7w2rlprpqp7wrmjzw5duqilobb8jfgxzhp5qnpd0bqyoffxzur8he2aguhiki9k8tvwvbty7r7p8nd0yiibpicimspvf0o14eacgyguve6xavmjxqv5kdll',
-                avatar: '85770neg5a5t1ux32h5t6pdnr0nqrv97fp12yfxxfqyrb79b1rt3okki50lvpbyyt7itfwlzxqpbm3vrgqyibv06l4fb7ajjzmu7y1nxtf9c5n53eplbq9iqglaklx0nqz4rejpbclxv9sblibofsawe9bmoycsz7bmqponav4ehjc9z8a6qd8hwxnn9rbphcnlprymiuaqlyegy2l2efmh756sg33zkrj22uamypc1w2b34vvtgwyu4la3a8kl',
-                mobile: '7prpqo9xbywbiha613j0f7e2oppodm9rrxue40lkhue5k4za9uj7he3v321j',
-                langId: 'b1eb8250-7683-41e9-a7eb-a8b5a31907ae',
-                username: 'ueqgczejtx8wh3wy4dxr5tl6y3t60o6z69phkpalu5o5ajhsv7q27rds8w4zrajvdt6l2a6q95qgjbbeq5m56pvltsaje0arh1p5gln34w1hg82rubcyiqdw',
-                password: 'czarkwgc949dfp5gouxgzgm21bwv7lnrwg0mebk0z1795lnrqbuofa1cp6lzlsfwrdxw73r8uy0mvgy39g48c1ntj7trsekd8jrr0zhbp4loodwghqvqmoa0m4uxtjclrd3hx80yy0tgi9iefyxf35am07yu7tzm02y1iyhwfisi2yfawr8gq1zu0dc5n5otcd1ii0y8qw2slq4pxurcsesarzd6eudjf9zeq3ssanxy75suf785it6crhvaywx',
-                rememberToken: 'nj0tezp9prc66d319ng1pebr5v8end1wdf5vp14yy1yrn2n3v4ls2brk5saes2mvc1tbel5z5e2l3d4dqp8p2gatadqrsvpm32c06kt09ci3rsudb2xo5xsxxeyh62t92riv8m4smg0gy9hvd6r3swy0blpthb314vedtbx50qedxhi52gspvmhcwpurrl66avepzimve9z9x6vp33eugqbgsc2bqfhkh9wvzqtyqt61hv423c9tq1d6s60kvvt',
-                data: { "foo" : "bar" },
+                query:
+                {
+                    where:
+                    {
+                        id: '56918e94-e2d1-4b50-9ef5-7e674011d623'
+                    }
+                }
             })
             .expect(404);
     });
 
-    test(`/REST:PUT iam/user`, () => 
+    test(`/REST:POST iam/user`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                accountId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                avatar: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                langId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                password: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                rememberToken: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET iam/user`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET iam/user/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/user/cfcda9c1-66dc-48df-b354-a96dfa5608c0')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET iam/user/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/user/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT iam/user - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/iam/user')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                name: '7lzgc9pq95c2p78y5mb8xd63hvrhjoz0qjpufh7lsgwt6m5sgzim3jlb3l98y05wowppc4x6827ugphclm3qj056cloku6qy9rpsroh8pz4wqwbpp4reiln8x3ihrwvvsdg3pm08q59ybne686wzt11uy69zu3assufwdknwt4xupoiucuo2l0kg2vppb8pvblrzqt96fkpoqs6m47mo5tl6leyn84ff3am33y5dnu4xpa3c3lr6n7sxd1mfigu',
-                surname: 'x30dcoz68d7gjir7vgq0v9sbhhzoho43cf0vpo2ljj58893ok9uc7kdvkn5vjtx0gyvcwoacn3tp95jat4zu6ql942j4vlqvo0vgbfu6l5l6sngumlv5cwwjfgojwqvrlkh02bpcqmk5hs0le1dt3tzauzci5xngsxw3gej3q1x0st49cfjlu438utuc4iz2j4wnmkw1ko1qisedrsvpcj2bajr48ymyoi1azx4z1igu1wmudcmp1bcdb8flh1i',
-                avatar: 'tyib46y0fvtymm8hqul6footnws0lgr18l2cwq7xuu4u48l3wv2jze0ya3a6my8pnyfehbaqv0n9kxtubep9z28o92k5ieihnddyfckxmebny9frscabcy98uxbi2x3wd9qr5lb7hbmyz51hpdo6wws8vmi5gc2pdp7j5sgy7z6kklb9mxyf5rc7pj1p82ws91dyksd3lwe8atiji61e6u2mg59rjitueiwlpsft0rwhkatadu230kc0kjr587l',
-                mobile: '28t31l7ige6s7q7go5ukxf673uhh9zgmw1rurnphl7md6nvc118unmms00p3',
-                langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                username: 'kemygko3g4nzs9u0nwd8wgpg3pj54gk5pzwvl81sz8a2cjgnuxf7h7gwsdhko0da9lphdewptzjjpj59xygkqr3n9djp6x0svy4wlfervuw15eg90bo5ah4o',
-                password: 'kr9o6vc7b5akx2qfn4x1wmcjksly8exjjbfq1dt3kobrcm6ltuo4rj4zc7kyoavrq1wnmgr75zkuo3ee8e66d16d5b6pc0bsba1zbi124idugekxecnjci9ydgbgmj9fbxtfqabasw33em8rryq8jsutxdi76tuintrm1bjqjegsq0efyigap7y5n7iwsd3pzsdevkc9t67so9pufvnfr53i9ycykffd6vwgstgmq1dnymduo3br0oqqb2vo8av',
-                rememberToken: 'gr85owtzn2s4rhmeup5yjxh91kb12azay8xcambnogsuejs630b6mmbvl8fn7yo9lpffg77f0dm2s6qgelttgij6st4e9psma1iqkn6jdx80wd000snvptskuhkrg5jb8pce3tzkqwih2b4ro550zeocglhrfky6qu2izrjy4yp3lyunqjg2j6mf4tyviaga6ijui13wbfywkrqtpktn5jyj5i796e7abjcbeklu89v1g1vgf6zz9f9klsse9h3',
-                data: { "foo" : "bar" },
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                accountId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                name: 'scnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu',
+                surname: '74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudr',
+                avatar: 'w05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jf',
+                mobile: 'vrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6',
+                langId: 'e6873d02-c595-4f91-8cbd-a652b9335fe4',
+                username: 'wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q7',
+                password: '8cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k37',
+                rememberToken: '1q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axo',
+                data: {"foo":"u.5d\"#tugD","bar":69120,"bike":"rx|zcxp$2&","a":"#P\\#G|o#;.","b":"VTNzdv:sk2","name":9491,"prop":"\"O9:B*t<{Z"},
+            })
+            .expect(404);
+    });
+
+    test(`/REST:PUT iam/user`, () =>
+    {
+        return request(app.getHttpServer())
+            .put('/iam/user')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                accountId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                avatar: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                langId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                password: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                rememberToken: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '5b70ddbb-d674-49ca-9069-f3cb6cfab48c'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE iam/user/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/user/c8864b22-47aa-495c-90d4-0e3bf65c25f1')
+            .delete('/iam/user/cd123421-5c1a-4977-98c5-eb94edab5621')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE iam/user/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/user/5b70ddbb-d674-49ca-9069-f3cb6cfab48c')
+            .delete('/iam/user/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL iamCreateUser - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL iamCreateUser - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamCreateUserInput!)
                     {
                         iamCreateUser (payload:$payload)
-                        {   
+                        {
                             id
                             accountId
                             name
@@ -732,14 +776,12 @@ describe('user', () =>
                             password
                             rememberToken
                             data
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -750,75 +792,27 @@ describe('user', () =>
             });
     });
 
-    test(`/GraphQL iamCreateUser`, () => 
+    test(`/GraphQL iamPaginateUsers`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:IamCreateUserInput!)
-                    {
-                        iamCreateUser (payload:$payload)
-                        {   
-                            id
-                            accountId
-                            name
-                            surname
-                            avatar
-                            mobile
-                            langId
-                            username
-                            password
-                            rememberToken
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '2c76a4b4-506f-4d98-8418-9831422c48e8',
-                        accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                        name: 'y22h9yv2llvom77yiukjzr4fepxndyl2hjh76llomqiyxedpwgyj5qxg7u5d0tsp50ot15wqrntf0ffybwcanvkx519fs6v1ny697dgqk8kd6za3hhkrztyp6npioa9d3l29b9b41ujwrfb8ujzeelmkuwj1frw9in6mv8931gnsc475ocaet8lowho86pvks6swjc937rbx64jkxo0fnrf3clffnrj5pvr0cb5fgkcjr8gynag9t0f9abso7g3',
-                        surname: 'b83g6jtoumspwiznyelx1che9ltslqztffhuu7ufcuomj43y29v8treytndf4k4a6gfu8uubvykm39gfqm5lchwv8mymkphg3wsbiec2cicga33w95mmzcrlweblg830xkgpv7wyf3bifphocqk4zxb26xw8pjbvqlhlte9n2ijyyi85on0am65b9q1m5lfc4r2kt38wvfqkhmeaapr8o8viu9h60q0nddb80dqgwnihpovot9m6jtixq9u4m2t',
-                        avatar: '4igftf0ujqtsl3dwc2uismovrcgvpowc9mj7hnfuxga7y3alquc5wxu2k5fn2e7gbx9lzd7abc84q5ot1f65rruk8922t5t06sf7mf8z55cmffofiwi2k6giun1yy2n18aarc53ub2ksm4tz190xom0e5axej6kxdjgu6t3arllu4la83o5q5ymjh6dyanb3mx3253r0zpdyc8edqyutm7k22ucxyoxmzsrdunxfuvlmup6iarwamr56itqzsrv',
-                        mobile: 'rqk94ujghx9ckxz6uxd8v0c45q7fxticjm0p79czarhijt4meahcvouuds5x',
-                        langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                        username: '7zpwqhl4b97dcqe6n97qyhd66rmhk6aymm3cxl2ngifkj6mwy4pb1oaacprbba7e5xv5oytypawf3u8l7u0jyy2t42yvm5ul0w5s1pp2j8j3v6i4x6fwe4df',
-                        password: '01wc1egoxl02602ihg88as404ulyn74xc2t7inpg1ld76dqmz46smhwnsui5fqybf5yv5f4et6vl530aokiso5xn0gnl60z17wtlg4nwcituzd6475ocks7zdifjm7u7szzfuac06u4o0eddr975s9enox2bll3ax3njeigfiqjcr58k8oxselbvi4xobyte5lsl2n0vgviawz17knh7sshewbmtirl0h4shc7hl8ptubxm5u1pjamaocl9rbx0',
-                        rememberToken: 'xt6sgkc6pzokltj5w3g3wxh0vp9gncczeiubx8cba91vod0vrln7ymsptoh79g72c2g4644yeunphg5mz9enxfwplqjr66g8st9xg1uljq8mwk3giff5vk8vuy0p1tlm763208lxe7cblybcbcd9czam3zqpec5hxxrfz8o9xyhkg2iy0orlooo9a2wrki1lvi8clxwzsahzj4bc1r2tgwy1d2nprbh9nogu4jfy4ocg0n30b59w3txa8s8bd6j',
-                        data: { "foo" : "bar" },
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamCreateUser).toHaveProperty('id', '2c76a4b4-506f-4d98-8418-9831422c48e8');
-            });
-    });
-
-    test(`/GraphQL iamPaginateUsers`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         iamPaginateUsers (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -827,189 +821,24 @@ describe('user', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamPaginateUsers.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateUsers.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateUsers.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.iamPaginateUsers.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateUsers.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateUsers.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL iamFindUser - Got 404 Not Found`, () => 
+    test(`/GraphQL iamGetUsers`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamFindUser (query:$query)
-                        {   
-                            id
-                            accountId
-                            name
-                            surname
-                            avatar
-                            mobile
-                            langId
-                            username
-                            password
-                            rememberToken
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: 'ef0d31a9-6527-4ed6-ab5d-8e7f3ed3337e'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL iamFindUser`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamFindUser (query:$query)
-                        {   
-                            id
-                            accountId
-                            name
-                            surname
-                            avatar
-                            mobile
-                            langId
-                            username
-                            password
-                            rememberToken
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamFindUser.id).toStrictEqual('5b70ddbb-d674-49ca-9069-f3cb6cfab48c');
-            });
-    });
-
-    test(`/GraphQL iamFindUserById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        iamFindUserById (id:$id)
-                        {   
-                            id
-                            accountId
-                            name
-                            surname
-                            avatar
-                            mobile
-                            langId
-                            username
-                            password
-                            rememberToken
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'c8b97f8f-868f-4a7a-ad41-e87620b65fa5'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL iamFindUserById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        iamFindUserById (id:$id)
-                        {   
-                            id
-                            accountId
-                            name
-                            surname
-                            avatar
-                            mobile
-                            langId
-                            username
-                            password
-                            rememberToken
-                            data
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamFindUserById.id).toStrictEqual('5b70ddbb-d674-49ca-9069-f3cb6cfab48c');
-            });
-    });
-
-    test(`/GraphQL iamGetUsers`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         iamGetUsers (query:$query)
-                        {   
+                        {
                             id
                             accountId
                             name
@@ -1032,22 +861,241 @@ describe('user', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.iamGetUsers.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL iamUpdateUser - Got 404 Not Found`, () => 
+    test(`/GraphQL iamCreateUser`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamCreateUserInput!)
+                    {
+                        iamCreateUser (payload:$payload)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        accountId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        avatar: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        langId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                        password: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        rememberToken: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamCreateUser).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamFindUser - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamFindUser (query:$query)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: 'a47b33af-8fa2-49ab-8946-f086467cf345'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL iamFindUser`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamFindUser (query:$query)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamFindUser.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamFindUserById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        iamFindUserById (id:$id)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: 'e16d3309-b6f5-4354-bff1-3007d01b574c'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL iamFindUserById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        iamFindUserById (id:$id)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamFindUserById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamUpdateUser - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamUpdateUserInput!)
                     {
                         iamUpdateUser (payload:$payload)
-                        {   
+                        {
                             id
                             accountId
                             name
@@ -1066,18 +1114,17 @@ describe('user', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '7f3632cb-75fb-4728-bcd2-38ac7d886a4e',
-                        accountId: 'e07259ea-14b7-45ea-b390-656fdaa15819',
-                        name: '0nmlm2ma14434a4c9zgv69cli0enqgiciqcl5vda4cxts27j3hvir82nlhtn9jttncc0ogx6k82x1hgl5n8volt3gvf2woty6lss633eq9jxx9jln3uxzwa4c8slpc7j16zmmwdt5m2fzgax6ls6i2ityz13rgr9q4x2bkhp1xi6okwm7f2olg4i2j7eukwcytnw11i1izho840gdaofore8zdqkl6brkx12oibvc403zilw3zgsh8ijbq72bi8',
-                        surname: '5aydrcrdiv0opxufk1b94r661qjauq45f8uzxiem4k32u1wkbmxvvpahfef6vislm0je1jhxt7gqu5tonewv8quu0xtw21cxjkpnjyb6qz3up6frx2j073faqtofes7ljn9hz00cywhfxxbui3eewfn3a1u4bcez8kvh2g39yia8vd13i6s1ihsvl1qzyo9ubnmara9j4zyb5psckyizbwqao0b8zspckdsc9e9emrguq82cwf9daayisbu635f',
-                        avatar: 'w3oymv1mffbs52p0zd278ufd4mrj5mw3tsm182p7jlms4aboakjqtaujfy84pljo5iqzo30ri9d67tvm7ftkqrjnispbfqpo299esc5fyopg9h5fgh73wniybpnjjkcikxr7ii9yzkxh4aq2h31utpj3qlk61t2pbi2r48965kfglsihp7gq1amw6ldizr3kkaqrxtmccb2cafs477pnneb689bjfwib0jkb19ci7f96auo5v5fpti8s5j8756r',
-                        mobile: 'r4sav4315db8jz4u9x44lr885dyst81cmvatnj8buzxj4p719ae5senvxbzi',
-                        langId: '17263ee1-9d7c-49a1-bbd4-3163f030df4f',
-                        username: 'tie2mz0tqxmk28fl4qil8etes5qc238epo8ksozevtznqn7golvfzyq1h9mr8pkw7eixniuyc6ibhtlzg3zdeo7a12hxd5jueuqucifvhyvp0ysw0mlew8lr',
-                        password: 'ghf7df749tkthivwikhdmcn0fekoqgi9cbyhfsvvxejq5v9lsq3tfalm6gyoj0774jj0xm4ogt181z96eze33kpxagk51vz2cc524azkrhianmv74paifo04pnu6g5rm2uohb5lg7xan9chon99ln13bfim37ckd1kf05ug2qn4y1c2ptltnrtm5fw353xblygx0b32t1a7eiatztp1m2mi4sa8opxdevnhulc8w38aouzvm150ezx23bk6rl5u',
-                        rememberToken: 'wpz9h2e8g4hvkat5w62irr30a1bb9oa6ze3ycb1x6a9otl0nfpmwq2gaqdo9s8purbr96qbov0mseujs9kueg2w7ko62nghkdo8ftbv2kcwqr4xskk7ear95332s58c13t9mwrbpugimxdvwqe2ki8nzt5enujna5t6tui2hhv636ozcz26jrgpc8uwhcul2tjr53uhud0n10j5c5hscuwss0ejj6ud0qy9d6noddc0nri4itoq0fmst6neqsnt',
-                        data: { "foo" : "bar" },
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        accountId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                        name: 'scnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu',
+                        surname: '74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudr',
+                        avatar: 'w05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jf',
+                        mobile: 'vrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6',
+                        langId: 'e6873d02-c595-4f91-8cbd-a652b9335fe4',
+                        username: 'wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q7',
+                        password: '8cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k37',
+                        rememberToken: '1q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axo',
+                        data: {"foo":"u.5d\"#tugD","bar":69120,"bike":"rx|zcxp$2&","a":"#P\\#G|o#;.","b":"VTNzdv:sk2","name":9491,"prop":"\"O9:B*t<{Z"},
                     }
                 }
             })
@@ -1089,17 +1136,18 @@ describe('user', () =>
             });
     });
 
-    test(`/GraphQL iamUpdateUser`, () => 
+    test(`/GraphQL iamUpdateUser`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamUpdateUserInput!)
                     {
                         iamUpdateUser (payload:$payload)
-                        {   
+                        {
                             id
                             accountId
                             name
@@ -1118,38 +1166,38 @@ describe('user', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c',
-                        accountId: '8403c292-1f14-4908-9e80-f9a448eb9c69',
-                        name: '4idxyrf64bc4iuskfnh2xmov216wvrkf3mpinn20blii2eqv027cdcjygq5wqh1c1293rgom18c9kcx2nq0ezhvxqg6d1mona0dacfffyywhondftpzufm404gxb12uj0qhmg0pg0himnyrpphg4retv8a9pgyw0d3np8uuf4wsjkgqmpn08pbbkyeoe8bvtcm1xupntop7080olq8r49b3jscd3zb1ozodn06eqberxqlni8ilmhk1p28aazzg',
-                        surname: 'gvjpwh4uuhrbdzfwpk69ocsotzlc2dtwor52gvk2jnurx8rfmi0bawik8q3e2h94h5egr796ra89bfusy7yy4z6d97p91y2i6x5gs37t330a0qqeenoix8yua5bjoaeeay4aehaxkb0fovxxkl7bmzcuajm2d8ec8avswptq4v1xubzh769jyip29rqvjxsv2zxn00symhjk6xtds0kvi9xaak6x4173tpl414cverr9q6d9dae1xyjytbiafbs',
-                        avatar: 'wxtuf5in87vccj08m0gfyi8en9gapn5wnoy8jw8pj7hamspn0536hpg195i2bjqj3kd7au3kpoktpedg5lwjo0zbvon7puqv0k958gd5el840thx5x9qrfq99ru6h025ag6w5b9lg4n7it5o97gom0slbazrrdazk94wuxnywj17ws5bvb9whvfox3q32gi797u1ato9dgrrb2irqaemrjwt5a209a57z0a9ire9faz79fw0bgqu6oyjpv831vz',
-                        mobile: '4kkzjazdugurchkf3sy18jczebjqp5d9iv99x4pg338oawzdqurmc7yof8vu',
-                        langId: 'a654c6f6-aac8-486d-93b1-fa5048bef610',
-                        username: 'u81sw7i68cxcrc3itpnyhiyye9d257i57yqk1pg9255ac7ka2ybrsdxtqjuxrzbpm3cgii0ab8pvtabfl0pbzwhzs6uub1ldukrsu3k8rck2cpszd7hh0t41',
-                        password: 'be6n26thz4ebdzc4qqjokhga453wzkmpsuzbcbqnz8cef7yhnz4bu6iuut5bav2fvr73tzl910qtuyjzcw4rvwul67zwpk1oa3s5lo9ebgijrp7jnk5qpo4ad90gcdvzy4ztfgqxb5yoshbc6nd2o1jwh70tstgryeoi4ivp8wopug3yisbbduy5npc8edgp00rjrmgfa4mrwmpw26yli7t7j6smt7zkdfgtnjuezldihsora9cdoxcd13ny2ux',
-                        rememberToken: 'bkxswxwq94csfj467xqqcpddbahdr3nzdut7wzt1jegcidezu47mf2kjm71zoftr20ps6kuqhby3h3pspyxb5c2gtvqvzw9phnf1oq53m51lyf77ssuvk082k1nke09gll095e4v1zom2vgl67zkynsi3cpwkzh68zbiafhs203ao9crnfdo8tr583svymninwjj6v0gyk47grwji7x6e6otlg280eqcb2693ollb142h1dltk8i2k34peq41ms',
-                        data: { "foo" : "bar" },
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        accountId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        surname: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        avatar: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        mobile: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        langId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        username: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarb',
+                        password: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        rememberToken: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        data: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateUser.id).toStrictEqual('5b70ddbb-d674-49ca-9069-f3cb6cfab48c');
+                expect(res.body.data.iamUpdateUser.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    test(`/GraphQL iamDeleteUserById - Got 404 Not Found`, () => 
+    test(`/GraphQL iamDeleteUserById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         iamDeleteUserById (id:$id)
-                        {   
+                        {
                             id
                             accountId
                             name
@@ -1167,7 +1215,7 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: '7bf43668-0893-480b-aca4-af9804018423'
+                    id: '42368c31-ba8d-48dc-a628-6efdce44c74b'
                 }
             })
             .expect(200)
@@ -1178,17 +1226,18 @@ describe('user', () =>
             });
     });
 
-    test(`/GraphQL iamDeleteUserById`, () => 
+    test(`/GraphQL iamDeleteUserById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         iamDeleteUserById (id:$id)
-                        {   
+                        {
                             id
                             accountId
                             name
@@ -1206,16 +1255,16 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: '5b70ddbb-d674-49ca-9069-f3cb6cfab48c'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteUserById.id).toStrictEqual('5b70ddbb-d674-49ca-9069-f3cb6cfab48c');
+                expect(res.body.data.iamDeleteUserById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

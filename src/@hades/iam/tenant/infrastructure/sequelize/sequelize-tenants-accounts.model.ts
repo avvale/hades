@@ -3,19 +3,19 @@ import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 
-@Table({ modelName: 'iam_tenants_accounts', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamTenantsAccounts', freezeTableName: true, timestamps: false })
 export class IamTenantsAccountsModel extends Model<IamTenantsAccountsModel>
 {
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         type: DataTypes.UUID,
     })
     tenantId: string;
 
     @ForeignKey(() => IamAccountModel)
     @Column({
-        field: 'account_id',
+        field: 'accountId',
         type: DataTypes.UUID,
     })
     accountId: string;

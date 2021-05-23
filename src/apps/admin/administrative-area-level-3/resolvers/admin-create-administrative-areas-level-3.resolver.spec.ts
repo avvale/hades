@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { administrativeAreasLevel3 } from '@hades/admin/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 import { AdminCreateAdministrativeAreaLevel3Input } from './../../../../graphql';
 
-describe('AdminCreateAdministrativeAreasLevel3Resolver', () => 
+describe('AdminCreateAdministrativeAreasLevel3Resolver', () =>
 {
     let resolver: AdminCreateAdministrativeAreasLevel3Resolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('AdminCreateAdministrativeAreasLevel3Resolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminCreateAdministrativeAreasLevel3Resolver should be defined', () => 
+    test('AdminCreateAdministrativeAreasLevel3Resolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminCreateAdministrativeAreasLevel3Resolver should be defined', () => 
+        test('AdminCreateAdministrativeAreasLevel3Resolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an administrativeAreasLevel3 created', async () => 
+        test('should return an administrativeAreasLevel3 created', async () =>
         {
             expect(await resolver.main(<AdminCreateAdministrativeAreaLevel3Input[]>administrativeAreasLevel3)).toBe(true);
         });

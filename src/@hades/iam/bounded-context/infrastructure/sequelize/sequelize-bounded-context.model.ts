@@ -1,9 +1,8 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamPermissionModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model';
 
-@Table({ modelName: 'iam_bounded_context', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'IamBoundedContext', freezeTableName: true, timestamps: false })
 export class IamBoundedContextModel extends Model<IamBoundedContextModel>
 {
     @Column({
@@ -36,7 +35,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     sort: number;
 
     @Column({
-        field: 'is_active',
+        field: 'isActive',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
@@ -47,21 +46,21 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     permissions: IamPermissionModel[];
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

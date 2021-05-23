@@ -2,18 +2,28 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IBoundedContextRepository } from '@hades/iam/bounded-context/domain/bounded-context.repository';
-import { MockBoundedContextRepository } from '@hades/iam/bounded-context/infrastructure/mock/mock-bounded-context.repository';
+import { MockBoundedContextSeeder } from '@hades/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
 describe('bounded-context', () =>
 {
     let app: INestApplication;
-    let repository: MockBoundedContextRepository;
+    let repository: IBoundedContextRepository;
+    let seeder: MockBoundedContextSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -22,45 +32,55 @@ describe('bounded-context', () =>
                     ...importForeignModules,
                     IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockBoundedContextSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IBoundedContextRepository)
-            .useClass(MockBoundedContextRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockBoundedContextRepository>module.get<IBoundedContextRepository>(IBoundedContextRepository);
+        repository  = module.get<IBoundedContextRepository>(IBoundedContextRepository);
+        seeder      = module.get<MockBoundedContextSeeder>(MockBoundedContextSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST iam/bounded-context - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/bounded-context')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                name: 'egddwadjbwk1g3xaty4boilquufk3g28pl28ldf3vhf5iva5lnia9o48iy4bqsn3lgvabbqoxpwwoc15tculane1e0i0o3bkrzpm6db1dp0zv0krn5fa6tj6nmvocpcki73dnxsrhp8zsd9yz18s1axdmjuvp8cotv7nbhoiof8cy3r7bz0gstsb5qkxgx3wu1a7svbt0fsiaqgrwgbuseb6sswkh4ul3fc89uu29p0n6m9jpe2vt41496hbiae',
-                root: 'jyv9pgci0bkz3hpg9ngdtfb3fbhmoy',
-                sort: 383911,
-                isActive: true,
+                name: 'zptk1wxhin3tme6w2nvw8p0co25k6xm0t0vwzyi03l2z640oygu3ntsaz7hdu80cjrc2pr66v5rojhigqn2ts9s1n9oenvvuk6fe8j4r6ird3bzb7wnvplrskdwal3fchga16dvgkv1bkdx3risht63lwdkgv70dumjw51ycka8mt0ru32kkjwcjjb5ylh3psisdhfu6vybu6n614knwhnfatjdyux9yf3x3cvfqcis2zk9xvnsdpsf8wue5fvf',
+                root: 'encl4npcekp9yzxktxoqm3r3xrl75t',
+                sort: 830241,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -68,35 +88,18 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId property can not to be undefined`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                name: '5r5j0hptl9w075bygt2ag3m34cici19dur35hvvcpc9aktcpqm7e96ao5ogmyz7fn4y0f3kpaea3bnvpkxwnidgnagxk405ciegui0wl0okfdu5dbn0synxxykolasvs8ppsufjsym4k6ikrudf77aa6seinwr1cra9eukbh1poexpn7z292xo7av4g91j6961eg6zg9iepbyzr8cehfvhbocgmynmjkm4v7rnbmxi6sdm2n1rijb171n7zqtld',
-                root: 'sogbfyiu55gh2vw73w2spblkguham4',
-                sort: 905283,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for BoundedContextId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/bounded-context')
-            .set('Accept', 'application/json')
-            .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
+                id: '77ffe137-b361-4556-ad91-b2de49276a99',
                 name: null,
-                root: 'jng02kdxwgxcb0gksew3p3dvcsqb5r',
-                sort: 697264,
-                isActive: false,
+                root: 'ou5munq1vzu0nmltwgssmjhe2mxpp3',
+                sort: 285341,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -104,34 +107,17 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName property can not to be undefined`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                
-                root: 'ys92ft86euo6cismzde3859viengqc',
-                sort: 938528,
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for BoundedContextName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/bounded-context')
-            .set('Accept', 'application/json')
-            .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 'zic30l6x79drkwsw1mpnh0ffdact01hb2ckv2o4117tya36tzkw1y37iz95zn3jpa2lot5nzhjkx59yaq5ndbq5p5t3uoggpy4i4lcrcr8izsc8r2b0jbrfb5cud54hrhw40ap912bh4tsh99cu70ajf8we6zyu6z1wjvlw1asj5eofv36t9uaxwxidupni9j812153zq8o8nr8t9tqtg93smjjc2byruty4hu95yydwjmnai2r6ed1c0tbsn00',
+                id: 'dbd0a93f-086b-4674-9696-9c268a464dfa',
+                name: '3xr6hqc98t8x19ak3wqedjuselojbgjzl4b1vt3m448mzyf4yhv1l66sp8ge4n9t1o9qjr2yxvcpp56f6t9vxf5286p32ud0wp8dwyon396zxbj8tugqmxj9bf4e0v3z411gre9qwy8b2xrf5t4cbintmu4ukxttruch7wqpvutaogo50euh5ny5io9pzv0esnfhi5ulhrwun51ambk17jjzibvfaa0unvahr9txhj4cxxozm94j86dplugrlpm',
                 root: null,
-                sort: 460044,
+                sort: 807987,
                 isActive: true,
             })
             .expect(400)
@@ -140,35 +126,18 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot property can not to be undefined`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextSort property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 'qhd34hggg8ybjdqafdrqgelgnnyugd61lrz1rr4k4h87w9u2fsgnjzo8ay83hd3oe9in6s6gsqsxabeqnwvlugrr0g68owwm43khchwz096h9k6jv5wabepr9fibejbeudadad2dzvi81oi92emiowjj0355awfxwgut9in7ntwmqv57b98yolx4kti85nbyna7m7uau9zi52g097g3g08m8qpi5x0b8gjvoowqltmhw081pmqvrf9u4ricol3g',
-                
-                sort: 683106,
-                isActive: true,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for BoundedContextRoot must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextSort property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/bounded-context')
-            .set('Accept', 'application/json')
-            .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: '5gtdg5kq6ftdgcdbaqje6zhohmktpr7d358ft2z2jdog1edjlbhfqd1z98y63jmm492rtk3le2gletm8q0551rhrzvsz415k8vwajcfl4aa4zepuc7hvghbrcvu4j785jq4v1jmthowzxp5tluj89262uup628860ar90ij4olctmmblhqtkn0v4qzi348vznzw18m7etstvqxqc1mqr3qtephm9sqhuhptvhwezsd06kdc80flyl5o6z1xuhg7',
-                root: '4bdxgz4ypaj14i98ftswcvgxj2d6ba',
+                id: '3b90b3d6-6287-4784-94c1-b5ecbe3f764d',
+                name: '8sjnsbpa8x8soefrf6oqy6b0chtqpfwg8zhmgii2kx8z0f01uwgc7eq5i7lfyxzuj04s4ux31giiahk2kxjb8k79088imgv4hsgq9cffma1po1rphfabp3fprugltt76p9bcvu5dinfm4sa3j7nvx209kob3xt4p3eak4f93u9pyjpqb56ao5wwedh96px158790zvxh692d4f8rbyjy07vyrf3mexbv51co07rnym3g0fcwh3aak2wu87qd997',
+                root: '3xh3fz373wd3hg1u9kk5hau0dxywh7',
                 sort: null,
-                isActive: false,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -176,34 +145,17 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextSort property can not to be undefined`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: '87re2sw4hpzoaf8tj6p6c0a8p38wo6zf9u9mhgw5uat8unv56d7kga86rit4742seq913fmn6p1s5pwklxb3rir3kdg6i7ubn8qjmxe7m3tuppxpjq6jqv2o88pvhb7dfv6amcvzwdpj86jjxuavjf55jxc746rx5ks9yn0mkpcb9lq7hznby8iqr5u67rietscm65l0udret57nkk7cw2vytsl2j2vgrxh2upz0om8ejn5wqut6vusrel0qfkf',
-                root: '6b79pizq8o8d4e4uuitko1jrm8fsim',
-                
-                isActive: false,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for BoundedContextSort must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/iam/bounded-context')
-            .set('Accept', 'application/json')
-            .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 'vzvpmb6gn7ee2xtjhabcfsikxuaoith15kjblac5noamf79khshmnlzfhpw222ogdd46adeq6x0t1tg8unbk9n46j0shh3wa5k9jgh7nkjf6rzl0elnu3ujbii4wy90eketb3r3bsht2zue0tidqo0a9nniz36n3osktifls6hunyh2mcxrnbakzayvt3yjlif01tbc4qvnl7dcjo1wgvkcdkm5pb9a8j29anoi9uln9imlrlumcmkde0ptfi3h',
-                root: 'sacsj6el7hlqlpprk05iadzj62s5uj',
-                sort: 479548,
+                id: '7f1da1b5-aec7-4b82-ace4-39880ab81c7c',
+                name: 'aaa8n195dz7u67a9koatqrljthfbs5za6qakz7gsllmxx2ok6hs4bjuegguqlaee6blpxcr7ag8l7df0c5ix4qwhb8046h4v8rnjytku3br15c24bq6abdpl578hc9au5ha8u3g1uhwihjb49m5poml4icxuotsip6xleux5adyrlrk63dwfnps5lf7whvbzxt3dciw6kazzfcnyahd8pzt5qukd9r07qww2h0vqmuu5ryrhl31ntoy1y0aph4k',
+                root: 'splb76lo50ohnh7l6rsbo5by5577mj',
+                sort: 962140,
                 isActive: null,
             })
             .expect(400)
@@ -212,56 +164,126 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive property can not to be undefined`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 'oitf3og573i22zoeybmcztnd9v3sr7ath7wtxlnqi4jl67ssd1nrnfxqgsjom4s70po432uq269blhhhkbrvqplg5xu2jk16qgv7nnaktdrx5r9av49hm55g5u849fpq356a94v1k1c76mxopzk2dzr9jonnb8nw4i6fisa7audjfhffvk1h1tv776a4q0qodqbh8lbdgzm1kfk5ukom62qv3dob6zputraxc0h2pwr7we05i73zt2jxbsczc41',
-                root: 'h994nj5reslgpv7bb3yx4vbd2a2a42',
-                sort: 554497,
-                
+                name: 'f2e3h0abqqq4toospibmm8pfex2xgln8uzg0vninvk2d1otdzkhliitvxax64i0x7mlagv1gz9oeptaseq51c5vc0ql44jffq6hhvaz7ak6fhsgy0njtza825d7yqtvep9v0gf3o9g016q98m52tuyfd68kvntpwycc32a95pejx17zdbr1dg3uyh6ofccnmftrxzflx9n1upig6rqioike17s2xzrdv0rrwpg0s47xp27sef2leq7etfne2x4i',
+                root: 'gapc94uwiqfi7bkwvbl6vmxwbkftqy',
+                sort: 843564,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for BoundedContextId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/bounded-context')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '89674612-811e-4474-b97e-55cbdc2fa47b',
+                root: 'pqnd7nz7z5dsj1jqgeq3j9gwfwol77',
+                sort: 622863,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for BoundedContextName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/bounded-context')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '480c7ae2-6fd8-485d-abb6-2eac3d92042a',
+                name: 'dcpd29214p1yufhznhrbc1yrfhtp2oejcmh8n1qv0wumfe40949bmn35ljd3qfjzfa839hg7ndqydgwfbbc70s3tp7l9t2yxc0n786mr1uexdorgfmo60xrunzsh0y5gld8h0578th9l38ybsgyuzld828gbfrjdzstak15doamlrd2kgrykmmt35q0szeax7g7sdr89aywjb0v0thtl5z7ma6lbmksehdsnmwi5ygnq0w2d5bev43kr1ao15cx',
+                sort: 926102,
+                isActive: true,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for BoundedContextRoot must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextSort property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/bounded-context')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '44c37dd0-22b0-452b-8f51-86bb5cc47ba8',
+                name: 'to64utbw2w7oavyrpl23v63z45h529bakjavw0weuvt0828nh5x1urqbi8h7smzymjswxvqne7ujoit0fp1uzp2seu3tyau46pdf3ffe3frlgze0eb0a0zrn5srfzpvw8eko5e5qpfsxs5s0e7nbgeit9h5r95ky0w51912st9fvxb6cyehf118pnipsqt1cpin9imhajj7wbuujlxdvg07obr9wz1zq4mrpvwp4rbcgfyl12fmau3rhk9u6xmd',
+                root: 'wmxmjqqf21hrpf9zshgoqajki9fvml',
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for BoundedContextSort must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/bounded-context')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '0ef23a34-5bd2-458e-a24d-eed4d05eca3a',
+                name: '39ldiu049q2wjfdr0rcm4k850j00r21k0kh8b0xhdgfdk7dyw5hzqwrh7ai7cpqcxacrnc0tep71np82a5nqsnkhdpmhuy4fexcakeaw7ta9j8ev8kus5hv9nq0xvxi17bglsrg2r6xl2cyq77hp38oa86bi4ye0372kg72eu17ahcqqtbgkuztkm5q2mg99p8ar5ck9fcqprhcxvuqqydyz7ggpn2zizhh9k7keapw85zaw2lfghzh8l5itimn',
+                root: '5uieo7l1ydo6akv21vq4rpef0wu1ln',
+                sort: 224069,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for BoundedContextIsActive must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'n7d6i5063vj8zb232g9owsz2lxngui5djgdr8',
-                name: '99405t0kb0y85251wf2htiph4bwnhwiw0oi7pg2gr8qq7dt775c7r5tao084my4qua7gy9prdt2h7j68w5hzli5cmz8dmwzvr3qrwh4cyoev1uz8ha98v594rit90lxxtpmcoggjyfrms56qoglp4zn841pu4vfqk7ddf55s0kzwvhdti4gj83670lf959xhs1dfzykx6ocmnpxaxrg1lhozqa5n2tg6w3nj4xp519btvpmz554o116p7db2rcp',
-                root: 'hqwy2uvq1ou91rrtd61o65l97od45t',
-                sort: 688732,
-                isActive: true,
+                id: '8exui8cx48zx0ayqlgres0zzcdp7gutgwvny5',
+                name: 'fm83yd2oduodwej8yxx1jaha7v45zq13xhso12tpstdxsyom7navtyyaq4a0psxgvzmcodmgf5lqi0qv273erysk7va1p61sse0fw86zrmdkvi3devqe5zpzp7bfh3ji3sjl98lkl3tgf4l9zom4jfjocnw3sotuiu9cca0r4e2269hyh0pstw5d2noldpuywh6iseo5j5oapgkndpdzxu4u0fhr30ym3v1ssbjkey0nybq8b8i4zemtlg3thhq',
+                root: 'e3r99rywvye78hak8n6r1oaz19wqm6',
+                sort: 659691,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for BoundedContextId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 'o41c1evf16qjvazxr32tnntihhssozmkh8vbz0277d7wmpsel1ekpftok0mx4afqg9vdgl953bk3bhi54r0lahxf3c6jlgm0mna8qejg4xkcpv08x9amz4chbl27unz5gutp4v6h4uxlhmkjlijo2843kz6cy14vta738hbr4a50sg3x8x08yjzak18znupwgh2rhgo6ci2uwinr4wssjuuwdrz28gmt5xswwv6w4fbmziqx3vaztwylf2pg7j1r',
-                root: 'li1i815156358ze5qk1he3y1m0j2hm',
-                sort: 136691,
+                id: 'e9290b83-9633-407b-97ac-3a351e3f0e88',
+                name: 'jzkwi1x6epcj85zlbfqwhtqfjadhnycwi4zwc590eoc98sboevifml04q8exx68n38j3nuz7g03t2gisicfsy1i8cn52d400zckynjvoxz85de3xvnhgs2wufisnk5fytbh1qxbaoypfy2exz3m30pwwftp458jfzzen5s1p9qblvnzpeuawtstnvvkz2cnofn93u1vxjsio2c8zkg1y9u5u1xgmfzach7cmbk0w90buui5bfkwe83u85izhugci',
+                root: '743jbu22xcl8ml7dlx8w5imb2quzoi',
+                sort: 887484,
                 isActive: false,
             })
             .expect(400)
@@ -269,61 +291,56 @@ describe('bounded-context', () =>
                 expect(res.body.message).toContain('Value for BoundedContextName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot is too large, has a maximum length of 30`, () => 
+
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot is too large, has a maximum length of 30`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: '51cqb0oh98hiky8gueflujpirkq6p3t6p1p6yinntiuksqrui1k7pr73d36m1h2j5577x7py77he4zdp4s6vfawzdir19rnnw164i1jtalq4wmnb85ipjft4gedvmjoc4i8entwqibk86n703rw1w9aopky0ontfgcmwoim3rw4q35f45z4qz6runusxurm8lffkntmmixydm4igb7fjen3mnogw0s1gqj1ou5qngy5y6iihom0ntdpxihk6t9b',
-                root: 'ir3fliz9oulk0pa69wk6nf1gfh06q85',
-                sort: 217142,
-                isActive: false,
+                id: '6c2e4f9b-e9fd-45d8-9705-6e4c2d4fe25c',
+                name: 't7w240bm7rggfza65frc8jlwh1qo3g2vrf1rs3iojj6wihm3yrem3tqrx3f75kc9w4b28puizgdcgupjexm2cn6kcx5u82z19a53pfml86msa4mrv2t3bsqk03c3cluma1wj7pegymv8t7qq4ww6yaj3a3xhw5j1nmifcqw4w00pri6wgdr6aefp2r8xz9enrbnf0ofhs8mxeq2n37ev3sv0famvqr1yxp83alv9pklxa8himeko9fmzdzixxry',
+                root: 'xb97oqbbknuxse6fs5udcfp6p42lz11',
+                sort: 424546,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for BoundedContextRoot is too large, has a maximum length of 30');
             });
     });
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextSort is too large, has a maximum length of 6`, () => 
+
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextSort is too large, has a maximum length of 6`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 't8snaktdompczt9n03pcqbqy0m2njskfmtjbqom0ubn4kfqe5xno14ljxxgkvitjby4zs5lzwsjfl3je5uke118tqixjxb4ttk47rvnyrid6fo6oilfnoy5fgmljx06n0tjoom2geb1z0o7cj99s0u4553tqtsenfup5at1o49ks7zje2hl37043og8dyu7qg4pjdxd86sxf538fxlq11e7zpm7b3y6adnuat740ettq5391dif1d2i9a93nquh',
-                root: 'cfn67w0jcmgbiwr8l4kdqsw1mnzr9k',
-                sort: 4364778,
-                isActive: false,
+                id: 'ad1e2d10-4e9a-49f7-986a-8c45c7667092',
+                name: 'fj56gwm7dboww883jp907eiyv3pqhau1mvzf5rqjmisval7as6arlecgib1vl87xqalhrou21h81nrggn3td93fpe7pavmwmbldn8zqojvkfbiyyjgk3wr4ebf3rb73b0syfhed0xo5qldiv6t5llt1dec5sp4yalrlycbmvqltq8g3q30z6dl228mprnd2ir8fn72o8fgeeo4rjavjycuuh0jc5xn6adat1vdt2sirnfmrhvaz9op4kzs0bef9',
+                root: 'y7lg2pzm51tf2lato9bvjnqgsdihmg',
+                sort: 3070548,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for BoundedContextSort is too large, has a maximum length of 6');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive has to be a boolean value`, () => 
+    test(`/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 'jtaj801rtdc4vftcjtdfhx2uf0n5ex4hceudcf07kl7zkd3ahzw63zhb5ze52lig21bkezuagvh2osmp3xejbbctggq7bl9pa6v0u1hri2p2qeg76uyuavyd7ejd68nwnzois4se4b6ukr5ffx53yv0kavhjsv8bvihv3ju0ffhtjrksljd7jjqmn2lm9ikgj0e9iiaga3fsd9rqc1ijvmp5uh3v9xzw1vjk4rk21ll78jwpt98uh9l2h1gwe0b',
-                root: 'xv2ab7tvn92wu2pl20c02558czuoaj',
-                sort: 299989,
+                id: 'e5965542-6d47-4a0b-9561-4599c3af9a96',
+                name: 'fixife3ayme9r8f97wmpdlwh4dvo6jlznhow7634pvc13m25uz4wx31t2qvvxfxhd0t84endq0z3z11xsbarl5vddla1zfo55bs8aitv15kfjfbaayeb5qr774ywwxly3aozm9exv3qiyk4w409gk0n9dmqfbeeaekxhpt7egfhhmfwxrpwy6jj7xw28cf4whaa3dtm3o07qsbfqcld2xebmsrqys5hpc8cpvs0covpdu3878ddksolt34iv5zi',
+                root: 'mnin38zbplvoctxq2g8gx7lh5lzgio',
+                sort: 888987,
                 isActive: 'true',
             })
             .expect(400)
@@ -331,181 +348,200 @@ describe('bounded-context', () =>
                 expect(res.body.message).toContain('Value for BoundedContextIsActive has to be a boolean value');
             });
     });
-    
 
-    
-
-    
-
-    test(`/REST:POST iam/bounded-context`, () => 
+    test(`/REST:POST iam/bounded-context - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context')
             .set('Accept', 'application/json')
-            .send({
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: 'ohyv6ytixml1jfv94rkchfbiw189qxcyh43m6dtfgqjioxht4wk25n0s6tce1ec0bg06fulpihqrrm1z12cb8t70plok9585cioji9s46xh4ms2j221pi7hdx05x4boipp5frxiz5rb9wkgezaydx653x0jlxj8ticgbm0n8qeonkv9e8peedbijptciuuhiudtyvdzarmqc69wahb3qaw25lt47r96tmr8mpvpomsw3cbkx0oa3evy259xafsz',
-                root: 'gqhyq8yh0r7xij8isrsbcnnywcdbph',
-                sort: 605040,
-                isActive: true,
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET iam/bounded-contexts/paginate`, () => 
+    test(`/REST:GET iam/bounded-contexts/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/bounded-contexts/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET iam/bounded-context - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/bounded-context')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '1a6aa0ae-410a-4606-af2c-e5421e69bbd1'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET iam/bounded-context`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/bounded-context')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '969fd7dd-109d-41d6-8da1-6504c5bc7dd3'));
-    });
-
-    test(`/REST:GET iam/bounded-context/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/bounded-context/587dd218-77d9-45eb-9e80-f5395fb5480c')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET iam/bounded-context/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/iam/bounded-context/969fd7dd-109d-41d6-8da1-6504c5bc7dd3')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '969fd7dd-109d-41d6-8da1-6504c5bc7dd3'));
-    });
-
-    test(`/REST:GET iam/bounded-contexts`, () => 
+    test(`/REST:GET iam/bounded-contexts`, () =>
     {
         return request(app.getHttpServer())
             .get('/iam/bounded-contexts')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT iam/bounded-context - Got 404 Not Found`, () => 
+    test(`/REST:GET iam/bounded-context - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/bounded-context')
+            .get('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'd0d93907-556a-49a4-a026-07754718777c',
-                name: 'hhhbuhgmte7pquzgbzldx83o3534tmvpozrcmnec491qig683atdrx4lwwskmpuh5mw7nshtt1s4izf8r9ftbrk8h7io40fjozj1fqhd4jilkdo2i3rgqbqxe26m4jzh2vluvlvyysftnye7rds00wa207nl1bkwrukp88gypm4kuxteu23lsve2yu60zwthfvvl9tg1vc291x0ml5uerms5pvd4ce539jlmmdrnrsl6xr8bze5y044ojx9ztd4',
-                root: 'fkvzun5bcqwqrxca3b7trp12r07qcn',
-                sort: 852560,
-                isActive: false,
+                query:
+                {
+                    where:
+                    {
+                        id: '3b265229-3768-456f-ad9d-d7b2d078f89b'
+                    }
+                }
             })
             .expect(404);
     });
 
-    test(`/REST:PUT iam/bounded-context`, () => 
+    test(`/REST:POST iam/bounded-context`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/bounded-context')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                root: '4iyw9pwsdxcmgcu744j2ddgy4xuct6',
+                sort: 286504,
+                isActive: false,
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET iam/bounded-context`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/bounded-context')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET iam/bounded-context/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/bounded-context/0ac02248-08bd-4723-b791-96350900d1f8')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET iam/bounded-context/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/iam/bounded-context/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT iam/bounded-context - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/iam/bounded-context')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                name: '3s9j65092bmnx2qm0hfbij4sb6ia9qjfeu3wdh3gi10ja9j3tt72z0plolylt3i1x3opu1hg19e0fmdgiyqrdr612pljkuks7c06v2i9j0mxyacib5zyv3zb7lcjietu8blck7mmhc7naosrzx7ibuvsxuh3pvg162fmcwib94aak37uxcyq80r9c1a10wab3bwjku9q1y3mswhlmczr5cgk26om4p9xfjvo7v0t3a4tthryscw4v9axicadoa0',
-                root: 'lynyw0mqh73cf46uis3e5gztov6al6',
-                sort: 964774,
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
+                root: '3tgjhehkgt8ou5lht4kje3qnln97hw',
+                sort: 134256,
                 isActive: true,
             })
+            .expect(404);
+    });
+
+    test(`/REST:PUT iam/bounded-context`, () =>
+    {
+        return request(app.getHttpServer())
+            .put('/iam/bounded-context')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                root: '4iyw9pwsdxcmgcu744j2ddgy4xuct6',
+                sort: 373502,
+                isActive: false,
+            })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '969fd7dd-109d-41d6-8da1-6504c5bc7dd3'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE iam/bounded-context/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/bounded-context/3585a3ac-3290-41f9-886f-4c0c0723ff3f')
+            .delete('/iam/bounded-context/f1aca5f6-dbe6-47d8-81fa-def27943f656')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE iam/bounded-context/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/bounded-context/969fd7dd-109d-41d6-8da1-6504c5bc7dd3')
+            .delete('/iam/bounded-context/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL iamCreateBoundedContext - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL iamCreateBoundedContext - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamCreateBoundedContextInput!)
                     {
                         iamCreateBoundedContext (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             root
                             sort
                             isActive
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -516,63 +552,27 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/GraphQL iamCreateBoundedContext`, () => 
+    test(`/GraphQL iamPaginateBoundedContexts`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:IamCreateBoundedContextInput!)
-                    {
-                        iamCreateBoundedContext (payload:$payload)
-                        {   
-                            id
-                            name
-                            root
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: 'edd6aafb-90e9-4b0b-86ae-b3c2242436cd',
-                        name: '9e4dcok7n3i9u06f2yz56nulb408a871pcdxwx1xohiv375t0ypeih53ttvsjx7dtc2pgylx9fu0wmev2tck9sd2obx19mo026hjh7uuuf3rdqdukkwmxilj53sake8j0lj8yxz55digljcjx1gdsl5ehfh1q0b4ywl9ubmmbasrnxg23zd25nophitsm10o2rspzo7o5hgj4rb2z84dez5ey3ehnair8ekeq6l5qnx2lzv1icnk4caajl2qthm',
-                        root: 'qqbau0my5f1rk9ycwfaa3necv3cgt4',
-                        sort: 528641,
-                        isActive: false,
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamCreateBoundedContext).toHaveProperty('id', 'edd6aafb-90e9-4b0b-86ae-b3c2242436cd');
-            });
-    });
-
-    test(`/GraphQL iamPaginateBoundedContexts`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         iamPaginateBoundedContexts (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -581,165 +581,24 @@ describe('bounded-context', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamPaginateBoundedContexts.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateBoundedContexts.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.iamPaginateBoundedContexts.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.iamPaginateBoundedContexts.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateBoundedContexts.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.iamPaginateBoundedContexts.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL iamFindBoundedContext - Got 404 Not Found`, () => 
+    test(`/GraphQL iamGetBoundedContexts`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamFindBoundedContext (query:$query)
-                        {   
-                            id
-                            name
-                            root
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: 'a8a6d29a-6b09-4338-afeb-6ae38bdf0a1e'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL iamFindBoundedContext`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        iamFindBoundedContext (query:$query)
-                        {   
-                            id
-                            name
-                            root
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamFindBoundedContext.id).toStrictEqual('969fd7dd-109d-41d6-8da1-6504c5bc7dd3');
-            });
-    });
-
-    test(`/GraphQL iamFindBoundedContextById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        iamFindBoundedContextById (id:$id)
-                        {   
-                            id
-                            name
-                            root
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '3260294d-955a-4785-ab09-33f56d23c94a'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL iamFindBoundedContextById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        iamFindBoundedContextById (id:$id)
-                        {   
-                            id
-                            name
-                            root
-                            sort
-                            isActive
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.iamFindBoundedContextById.id).toStrictEqual('969fd7dd-109d-41d6-8da1-6504c5bc7dd3');
-            });
-    });
-
-    test(`/GraphQL iamGetBoundedContexts`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         iamGetBoundedContexts (query:$query)
-                        {   
+                        {
                             id
                             name
                             root
@@ -756,22 +615,205 @@ describe('bounded-context', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.iamGetBoundedContexts.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL iamUpdateBoundedContext - Got 404 Not Found`, () => 
+    test(`/GraphQL iamCreateBoundedContext`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:IamCreateBoundedContextInput!)
+                    {
+                        iamCreateBoundedContext (payload:$payload)
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        root: '4iyw9pwsdxcmgcu744j2ddgy4xuct6',
+                        sort: 129715,
+                        isActive: false,
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamCreateBoundedContext).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamFindBoundedContext - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamFindBoundedContext (query:$query)
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '1e662d45-0c05-42e8-8365-f8241f74162d'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL iamFindBoundedContext`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        iamFindBoundedContext (query:$query)
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamFindBoundedContext.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamFindBoundedContextById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        iamFindBoundedContextById (id:$id)
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: 'd8f2a00c-1e57-4266-9a58-b7a1c7e77364'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL iamFindBoundedContextById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        iamFindBoundedContextById (id:$id)
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.iamFindBoundedContextById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL iamUpdateBoundedContext - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamUpdateBoundedContextInput!)
                     {
                         iamUpdateBoundedContext (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             root
@@ -784,11 +826,10 @@ describe('bounded-context', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '528d59f3-c375-48c1-8077-6ad64b0d1aa0',
-                        name: 'z1ys67wmrao8us565fel424b3yfw6nyktmfjr6ib27axhw83luxrc3id1w8htat04u9sajyamehi972jynkmqn2u7n85s1idascz1p9xt623hkaovjcg0372g73y2n7am65mfl40u4xj1n3z61if8ust4os5jbxubsdmufh01x5ktgowb7o5w2sl1q17dcd4h8sogijoiirk1p61w2g894qxo3zvt9blhe05wwwg8ky73nhd0cm20wvy1h23vp2',
-                        root: '78k5my49px3udw16t8xb7rqj7rjs9o',
-                        sort: 577678,
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
+                        root: '3tgjhehkgt8ou5lht4kje3qnln97hw',
+                        sort: 983195,
                         isActive: true,
                     }
                 }
@@ -801,17 +842,18 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/GraphQL iamUpdateBoundedContext`, () => 
+    test(`/GraphQL iamUpdateBoundedContext`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:IamUpdateBoundedContextInput!)
                     {
                         iamUpdateBoundedContext (payload:$payload)
-                        {   
+                        {
                             id
                             name
                             root
@@ -824,32 +866,32 @@ describe('bounded-context', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3',
-                        name: '8578kz3wjyfmbc9q09z753nj2h7bcom0fi84zxjkjbsx7qbhgjluuot6cocslel9bj4849p3n4efgmkj9vztqndf29i76e2v8e30lc2j8rx7d1kwndzuiflgislgupe89ozfd68wgeq2198ubl21xavu5oqtngudvllo3k6kxh6p71lifs0lzxnununtx57xxazs97w74xt1jrsre8lrmphaao332bh8lwwtto1zotfkmwp8roaxoodybx8x4fa',
-                        root: '69a83ko3nktq91cd5it4w1q02jm3jd',
-                        sort: 942788,
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        root: '4iyw9pwsdxcmgcu744j2ddgy4xuct6',
+                        sort: 226673,
                         isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateBoundedContext.id).toStrictEqual('969fd7dd-109d-41d6-8da1-6504c5bc7dd3');
+                expect(res.body.data.iamUpdateBoundedContext.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    test(`/GraphQL iamDeleteBoundedContextById - Got 404 Not Found`, () => 
+    test(`/GraphQL iamDeleteBoundedContextById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         iamDeleteBoundedContextById (id:$id)
-                        {   
+                        {
                             id
                             name
                             root
@@ -861,7 +903,7 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '029379fc-8a85-40a9-9fc1-61286831f791'
+                    id: '0cd95c55-21f5-4746-a2cd-cbcb936c7496'
                 }
             })
             .expect(200)
@@ -872,17 +914,18 @@ describe('bounded-context', () =>
             });
     });
 
-    test(`/GraphQL iamDeleteBoundedContextById`, () => 
+    test(`/GraphQL iamDeleteBoundedContextById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         iamDeleteBoundedContextById (id:$id)
-                        {   
+                        {
                             id
                             name
                             root
@@ -894,16 +937,16 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '969fd7dd-109d-41d6-8da1-6504c5bc7dd3'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteBoundedContextById.id).toStrictEqual('969fd7dd-109d-41d6-8da1-6504c5bc7dd3');
+                expect(res.body.data.iamDeleteBoundedContextById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

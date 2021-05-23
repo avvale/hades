@@ -1,3 +1,4 @@
+// ignored file
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
 export class CreateCountriesCommand
@@ -5,7 +6,6 @@ export class CreateCountriesCommand
     constructor(
         public readonly payload: {
             id: string,
-            commonId: string,
             langId: string,
             iso3166Alpha2: string,
             iso3166Alpha3: string,

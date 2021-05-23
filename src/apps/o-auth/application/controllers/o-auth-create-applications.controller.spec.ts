@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 
-describe('OAuthCreateApplicationsController', () => 
+describe('OAuthCreateApplicationsController', () =>
 {
     let controller: OAuthCreateApplicationsController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('OAuthCreateApplicationsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthCreateApplicationsController should be defined', () => 
+        test('OAuthCreateApplicationsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an applications created', async () => 
+        test('should return an applications created', async () =>
         {
             expect(await controller.main(applications)).toBe(undefined);
         });

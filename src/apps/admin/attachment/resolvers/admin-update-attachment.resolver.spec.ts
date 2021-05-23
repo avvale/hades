@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachments } from '@hades/admin/attachment/infrastructure/seeds/attachment.seed';
 import { AdminUpdateAttachmentInput } from './../../../../graphql';
 
-describe('AdminUpdateAttachmentResolver', () => 
+describe('AdminUpdateAttachmentResolver', () =>
 {
     let resolver: AdminUpdateAttachmentResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('AdminUpdateAttachmentResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateAttachmentResolver>(AdminUpdateAttachmentResolver);
+        resolver    = module.get<AdminUpdateAttachmentResolver>(AdminUpdateAttachmentResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateAttachmentResolver should be defined', () => 
+    test('AdminUpdateAttachmentResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminUpdateAttachmentResolver should be defined', () => 
+        test('AdminUpdateAttachmentResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a attachment created', async () => 
+        test('should return a attachment created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachments[0])));
             expect(await resolver.main(<AdminUpdateAttachmentInput>attachments[0])).toBe(attachments[0]);

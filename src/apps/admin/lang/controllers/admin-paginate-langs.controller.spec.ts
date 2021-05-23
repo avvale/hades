@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 
-describe('AdminPaginateLangsController', () => 
+describe('AdminPaginateLangsController', () =>
 {
     let controller: AdminPaginateLangsController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('AdminPaginateLangsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminPaginateLangsController should be defined', () => 
+        test('AdminPaginateLangsController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a langs', async () => 
+        test('should return a langs', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await controller.main()).toBe(langs);

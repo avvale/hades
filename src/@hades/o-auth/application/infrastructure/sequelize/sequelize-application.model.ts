@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/sequelize-client.model';
 import { OAuthApplicationsClientsModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
 
-@Table({ modelName: 'o_auth_application', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'OAuthApplication', freezeTableName: true, timestamps: false })
 export class OAuthApplicationModel extends Model<OAuthApplicationModel>
 {
     @Column({
@@ -37,32 +36,32 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     secret: string;
 
     @Column({
-        field: 'is_master',
+        field: 'isMaster',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     isMaster: boolean;
 
 
-    @BelongsToMany(() => OAuthClientModel, () => OAuthApplicationsClientsModel)
+    @BelongsToMany(() => OAuthClientModel, { through: () => OAuthApplicationsClientsModel, uniqueKey: 'Uq01OAuthApplicationsClients' })
     clients: OAuthClientModel[];
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

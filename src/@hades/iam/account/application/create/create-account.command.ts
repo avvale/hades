@@ -1,3 +1,4 @@
+// ignored file
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
 export class CreateAccountCommand

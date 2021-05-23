@@ -37,14 +37,14 @@ describe('FindLangByIdService', () =>
         mockRepository  = module.get(MockLangRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindLangByIdService should be defined', () => 
+        test('FindLangByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find lang by id', async () => 
+        test('should find lang by id', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

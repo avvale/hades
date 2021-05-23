@@ -1,3 +1,4 @@
+// ignored file
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CountryDto
@@ -7,12 +8,6 @@ export class CountryDto
         description : 'id [input here api field description]',
     })
     id: string;
-
-    @ApiProperty({
-        type        : String,
-        description : 'commonId [input here api field description]',
-    })
-    commonId: string;
 
     @ApiProperty({
         type        : String,

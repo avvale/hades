@@ -1,8 +1,9 @@
+// ignored file
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminCountry } from './../../domain/country.aggregate';
 import { CreatedCountryEvent } from './created-country.event';
-import { DeletedCountryEvent } from './deleted-country.event';
 import { CreatedCountriesEvent } from './created-countries.event';
+import { DeletedCountryEvent } from './deleted-country.event';
 import { DeletedCountriesEvent } from './deleted-countries.event';
 
 export class AddCountriesContextEvent extends AggregateRoot
@@ -25,7 +26,6 @@ export class AddCountriesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(country =>
                     new CreatedCountryEvent(
                         country.id.value,
-                        country.commonId.value,
                         country.langId.value,
                         country.iso3166Alpha2.value,
                         country.iso3166Alpha3.value,
@@ -60,7 +60,6 @@ export class AddCountriesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(country =>
                     new DeletedCountryEvent(
                         country.id.value,
-                        country.commonId.value,
                         country.langId.value,
                         country.iso3166Alpha2.value,
                         country.iso3166Alpha3.value,

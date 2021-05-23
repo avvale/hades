@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { attachmentFamilies } from '@hades/admin/attachment-family/infrastructure/seeds/attachment-family.seed';
 
-describe('AdminDeleteAttachmentFamilyByIdResolver', () => 
+describe('AdminDeleteAttachmentFamilyByIdResolver', () =>
 {
     let resolver: AdminDeleteAttachmentFamilyByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('AdminDeleteAttachmentFamilyByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminDeleteAttachmentFamilyByIdResolver should be defined', () => 
+    test('AdminDeleteAttachmentFamilyByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminDeleteAttachmentFamilyByIdResolver should be defined', () => 
+        test('AdminDeleteAttachmentFamilyByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an attachmentFamily deleted', async () => 
+        test('should return an attachmentFamily deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(attachmentFamilies[0])));
             expect(await resolver.main(attachmentFamilies[0].id)).toBe(attachmentFamilies[0]);

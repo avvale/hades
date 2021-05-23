@@ -1,3 +1,4 @@
+// ignored file
 // controllers
 import { AdminCreateAttachmentController } from './controllers/admin-create-attachment.controller';
 import { AdminCreateAttachmentsController } from './controllers/admin-create-attachments.controller';
@@ -14,8 +15,8 @@ import { AdminCreateAttachmentResolver } from './resolvers/admin-create-attachme
 import { AdminCreateAttachmentsResolver } from './resolvers/admin-create-attachments.resolver';
 import { AdminPaginateAttachmentsResolver } from './resolvers/admin-paginate-attachments.resolver';
 import { AdminGetAttachmentsResolver } from './resolvers/admin-get-attachments.resolver';
-import { AdminFindAttachmentResolver } from './resolvers/admin-find-attachment.resolver';
 import { AdminFindAttachmentByIdResolver } from './resolvers/admin-find-attachment-by-id.resolver';
+import { AdminFindAttachmentResolver } from './resolvers/admin-find-attachment.resolver';
 import { AdminUpdateAttachmentResolver } from './resolvers/admin-update-attachment.resolver';
 import { AdminDeleteAttachmentByIdResolver } from './resolvers/admin-delete-attachment-by-id.resolver';
 import { AdminDeleteAttachmentsResolver } from './resolvers/admin-delete-attachments.resolver';
@@ -40,8 +41,8 @@ export const AdminAttachmentResolvers = [
     AdminCreateAttachmentsResolver,
     AdminPaginateAttachmentsResolver,
     AdminGetAttachmentsResolver,
-    AdminFindAttachmentResolver,
     AdminFindAttachmentByIdResolver,
+    AdminFindAttachmentResolver,
     AdminUpdateAttachmentResolver,
     AdminDeleteAttachmentByIdResolver,
     AdminDeleteAttachmentsResolver,

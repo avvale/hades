@@ -1,4 +1,6 @@
 // ignored file
+import { users } from "@hades/iam/user/infrastructure/seeds/user.seed";
+
 export const accounts = [
     {
         id: '948a5308-a49d-42dc-9ea3-7490e120000b',
@@ -12,5 +14,6 @@ export const accounts = [
         data: null,
         roleIds: [],
         tenantIds: [],
+        user: users[0]
     }
 ];

@@ -1,8 +1,9 @@
+// ignored file
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
+import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/roles-to-create.seed';
 import { UpdateRoleService } from './update-role.service';
 import {
     RoleId,
@@ -10,9 +11,6 @@ import {
     RoleIsMaster,
     RolePermissionIds,
     RoleAccountIds,
-    RoleCreatedAt,
-    RoleUpdatedAt,
-    RoleDeletedAt,
 } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
@@ -56,11 +54,13 @@ describe('UpdateRoleService', () =>
         test('should update a role and emit event', async () =>
         {
             expect(await service.main(
-                new RoleId(roles[0].id),
-                new RoleName(roles[0].name),
-                new RoleIsMaster(roles[0].isMaster),
-                new RolePermissionIds(roles[0].permissionIds),
-                new RoleAccountIds(roles[0].accountIds),
+                {
+                    id: new RoleId(rolesToCreate[0].id),
+                    name: new RoleName(rolesToCreate[0].name),
+                    isMaster: new RoleIsMaster(rolesToCreate[0].isMaster),
+                    permissionIds: new RolePermissionIds(rolesToCreate[0].permissionIds),
+                    accountIds: new RoleAccountIds(rolesToCreate[0].accountIds),
+                }
             )).toBe(undefined);
         });
     });

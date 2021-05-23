@@ -4,6 +4,7 @@ export { LangImage } from './lang-image';
 export { LangIso6392 } from './lang-iso-639-2';
 export { LangIso6393 } from './lang-iso-639-3';
 export { LangIetf } from './lang-ietf';
+export { LangCustomCode } from './lang-custom-code';
 export { LangDir } from './lang-dir';
 export { LangSort } from './lang-sort';
 export { LangIsActive } from './lang-is-active';

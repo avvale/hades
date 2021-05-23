@@ -62,17 +62,19 @@ describe('UpdateClientService', () =>
         test('should update a client and emit event', async () =>
         {
             expect(await service.main(
-                new ClientId(clients[0].id),
-                new ClientGrantType(clients[0].grantType),
-                new ClientName(clients[0].name),
-                new ClientSecret(clients[0].secret),
-                new ClientAuthUrl(clients[0].authUrl),
-                new ClientRedirect(clients[0].redirect),
-                new ClientExpiredAccessToken(clients[0].expiredAccessToken),
-                new ClientExpiredRefreshToken(clients[0].expiredRefreshToken),
-                new ClientIsActive(clients[0].isActive),
-                new ClientIsMaster(clients[0].isMaster),
-                new ClientApplicationIds(clients[0].applicationIds),
+                {
+                    id: new ClientId(clients[0].id),
+                    grantType: new ClientGrantType(clients[0].grantType),
+                    name: new ClientName(clients[0].name),
+                    secret: new ClientSecret(clients[0].secret),
+                    authUrl: new ClientAuthUrl(clients[0].authUrl),
+                    redirect: new ClientRedirect(clients[0].redirect),
+                    expiredAccessToken: new ClientExpiredAccessToken(clients[0].expiredAccessToken),
+                    expiredRefreshToken: new ClientExpiredRefreshToken(clients[0].expiredRefreshToken),
+                    isActive: new ClientIsActive(clients[0].isActive),
+                    isMaster: new ClientIsMaster(clients[0].isMaster),
+                    applicationIds: new ClientApplicationIds(clients[0].applicationIds),
+                }
             )).toBe(undefined);
         });
     });

@@ -13,7 +13,7 @@ describe('IamCreatePermissionResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreatePermissionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreatePermissionResolver should be defined', () => 
+    test('IamCreatePermissionResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreatePermissionResolver should be defined', () => 
+        test('IamCreatePermissionResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an permission created', async () => 
+        test('should return an permission created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await resolver.main(<IamCreatePermissionInput>permissions[0])).toBe(permissions[0]);

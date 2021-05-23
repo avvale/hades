@@ -12,7 +12,6 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
 {
     public readonly aggregateName: string = 'IamAccount';
     public readonly mapper: AccountMapper = new AccountMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamAccountModel)

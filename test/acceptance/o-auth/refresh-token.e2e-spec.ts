@@ -2,18 +2,29 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IRefreshTokenRepository } from '@hades/o-auth/refresh-token/domain/refresh-token.repository';
-import { MockRefreshTokenRepository } from '@hades/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
+import { MockRefreshTokenSeeder } from '@hades/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { OAuthModule } from './../../../src/apps/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
 describe('refresh-token', () =>
 {
     let app: INestApplication;
-    let repository: MockRefreshTokenRepository;
+    let repository: IRefreshTokenRepository;
+    let seeder: MockRefreshTokenSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -21,46 +32,57 @@ describe('refresh-token', () =>
                 imports: [
                     ...importForeignModules,
                     OAuthModule,
+                    IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockRefreshTokenSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IRefreshTokenRepository)
-            .useClass(MockRefreshTokenRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockRefreshTokenRepository>module.get<IRefreshTokenRepository>(IRefreshTokenRepository);
+        repository  = module.get<IRefreshTokenRepository>(IRefreshTokenRepository);
+        seeder      = module.get<MockRefreshTokenSeeder>(MockRefreshTokenSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST o-auth/refresh-token - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/refresh-token')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Sapiente repellendus ut soluta nam optio repellendus. Hic occaecati quae velit iusto aut distinctio quos architecto. Et dolorem est illum culpa perferendis aut.',
-                isRevoked: false,
-                expiresAt: '2020-11-06 00:53:26',
+                accessTokenId: 'c505295c-8c0c-431e-a3cb-3336c8b58238',
+                token: 'Ut temporibus aliquam consequuntur ex qui earum molestiae. Beatae commodi expedita ipsa assumenda a inventore. Delectus ut in nesciunt molestiae rem facilis ex maxime. Doloremque quos enim aspernatur. Reprehenderit et fugiat. Corporis aut omnis quia sequi saepe dolorem adipisci.',
+                isRevoked: true,
+                expiresAt: '2021-05-08 09:57:38',
             })
             .expect(400)
             .then(res => {
@@ -68,35 +90,18 @@ describe('refresh-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenId property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Inventore et perferendis sint. Nihil facilis reiciendis ea. Nihil sit dolor. Quasi sit ad est earum est labore qui magnam facilis. In blanditiis aliquam consequatur ipsum a quo. Autem est perferendis.',
-                isRevoked: false,
-                expiresAt: '2020-11-06 10:09:19',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for RefreshTokenId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/refresh-token')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
+                id: '65a25a02-0a27-43b9-a163-26b7cbaacd4b',
                 accessTokenId: null,
-                token: 'Ut cumque consequatur rem numquam soluta quod qui. Quis facilis corporis repellat itaque ad rem sint velit. Consectetur facere eligendi maiores voluptas est dolor ducimus. Aut beatae totam facere culpa quia excepturi voluptatem esse sit. Vel ut ut minus vel aut.',
-                isRevoked: false,
-                expiresAt: '2020-11-06 08:24:05',
+                token: 'Maiores quia est aut. Iure molestiae ut iure veritatis ullam iure. In iste aut. Blanditiis magnam neque vero quidem. Rerum nesciunt magni laborum eos ut.',
+                isRevoked: true,
+                expiresAt: '2021-05-08 14:19:09',
             })
             .expect(400)
             .then(res => {
@@ -104,35 +109,18 @@ describe('refresh-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenToken property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                
-                token: 'Asperiores aliquid voluptatem quis totam quia eos. Voluptates id in illum et cupiditate qui consequatur. Ab eum cum vitae. Inventore sapiente atque et sit. Suscipit consectetur molestiae harum quaerat illum autem architecto.',
-                isRevoked: false,
-                expiresAt: '2020-11-05 21:05:35',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for RefreshTokenAccessTokenId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenToken property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/refresh-token')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
+                id: '33768770-879e-4cc6-8510-dde4831b9b1a',
+                accessTokenId: '5f2e7c3b-52d7-495d-a951-7e76ccc4f15e',
                 token: null,
                 isRevoked: true,
-                expiresAt: '2020-11-06 09:21:28',
+                expiresAt: '2021-05-08 15:27:06',
             })
             .expect(400)
             .then(res => {
@@ -140,35 +128,18 @@ describe('refresh-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenToken property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenIsRevoked property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                
-                isRevoked: false,
-                expiresAt: '2020-11-06 01:07:38',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for RefreshTokenToken must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenIsRevoked property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/refresh-token')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Omnis at perferendis molestiae natus dolor fugiat minus corrupti voluptatem. Quia dolores deserunt est. Quod dolor temporibus possimus ut reiciendis quis enim aut. Odit autem doloribus ex omnis velit ab qui est sapiente.',
+                id: 'b580663b-9140-4214-ac3d-ff4591be820d',
+                accessTokenId: 'b61f4217-a42c-4064-a1d7-f0fc9d9257a6',
+                token: 'Necessitatibus aliquam eum dolor sit quisquam sequi molestias harum id. Vero exercitationem quam. Enim in ut modi sunt dolor. Recusandae doloribus et dolor voluptas cum quia error. Ex omnis mollitia omnis exercitationem. Quae rem doloremque velit amet dolorem.',
                 isRevoked: null,
-                expiresAt: '2020-11-06 02:31:27',
+                expiresAt: '2021-05-08 22:43:53',
             })
             .expect(400)
             .then(res => {
@@ -176,104 +147,145 @@ describe('refresh-token', () =>
             });
     });
 
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenIsRevoked property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Odio aut eveniet autem accusantium rerum voluptatibus esse non ut. Debitis soluta ut repellat et hic eligendi saepe. Eligendi reiciendis impedit. Et sit et non deleniti cum officia et cum aliquid. Quia et odio ea.',
-                
-                expiresAt: '2020-11-05 14:31:34',
+                accessTokenId: '1a510531-e95a-4183-8bd9-07cf1188f852',
+                token: 'Eligendi dolore officia esse doloremque itaque reiciendis. Et magnam dolorum veniam. Voluptatibus qui est voluptatem sit tempore dignissimos ipsum.',
+                isRevoked: true,
+                expiresAt: '2021-05-08 01:17:32',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for RefreshTokenId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/refresh-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'ba6056ad-ff37-4c1a-8ad1-a07a5034701c',
+                token: 'Consequatur ut vel beatae nemo provident. Vel dolores et aspernatur alias rerum. Soluta adipisci qui. Maiores eius optio molestiae fuga distinctio qui facere. Animi repudiandae deserunt aperiam nemo.',
+                isRevoked: false,
+                expiresAt: '2021-05-08 04:56:16',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for RefreshTokenAccessTokenId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenToken property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/refresh-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '972f26ca-c5a7-4911-8397-d52bfae9a9a3',
+                accessTokenId: 'c2fac00a-fd72-4bf3-8078-d61e39195598',
+                isRevoked: true,
+                expiresAt: '2021-05-08 03:18:56',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for RefreshTokenToken must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenIsRevoked property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/refresh-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'fb8ae857-b0de-4d69-9177-8b8c81d25340',
+                accessTokenId: '4df37ee7-d3ce-45b5-a446-f45c7fdea4c7',
+                token: 'Aliquam voluptas aut aliquam ex ut aperiam impedit nostrum. Esse quaerat similique eaque. Voluptas ipsa est. Numquam ducimus deleniti explicabo mollitia quaerat facere officia quia voluptas.',
+                expiresAt: '2021-05-08 17:24:37',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for RefreshTokenIsRevoked must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '30rpxenzvm50yz8lmhu9gofwspmg21x52q4in',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Consequatur est asperiores aut qui quia fugiat nostrum vel. Ducimus sunt neque qui earum. Perferendis molestias ut nulla.',
-                isRevoked: false,
-                expiresAt: '2020-11-05 21:56:06',
+                id: '7swkheom3rexkgmt1az1vjtzm2ukuca5gtcra',
+                accessTokenId: '0c2a9468-adc2-4c6d-a375-68197e332cd0',
+                token: 'Debitis quibusdam ut odit quasi deserunt exercitationem. Alias quia corporis itaque velit. Incidunt rerum omnis eos aliquid sed et neque. Fugiat ut quibusdam laborum quae architecto sit iure placeat explicabo. Rem sint itaque quia ad.',
+                isRevoked: true,
+                expiresAt: '2021-05-08 11:44:15',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for RefreshTokenId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenAccessTokenId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenAccessTokenId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: 'cehltxjrppoa68ag37300395h7qfvwe5gy9a9',
-                token: 'Aut perspiciatis praesentium rerum sed eligendi enim consequatur. In enim pariatur ipsa quis quis dicta. Quam esse magnam eum qui. Accusamus atque perspiciatis. Et laudantium earum iure.',
-                isRevoked: true,
-                expiresAt: '2020-11-06 05:46:26',
+                id: '3d4bad3d-af2b-4624-b637-557f7940a6aa',
+                accessTokenId: 'u3443bzb9p7hn6ws7kv4bqg1opgp0mvmkxaov',
+                token: 'Ipsam nisi vitae ea necessitatibus veniam ipsa aut dolorum maxime. Autem rerum corporis. Eum natus autem non. Et voluptatem non veritatis sunt doloribus. Numquam natus hic mollitia laudantium. Soluta voluptas aliquid corrupti molestias ducimus veritatis.',
+                isRevoked: false,
+                expiresAt: '2021-05-08 10:25:35',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for RefreshTokenAccessTokenId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenIsRevoked has to be a boolean value`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenIsRevoked has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Nulla eligendi voluptates libero sed. A et qui consequatur. Non quo iste sapiente optio non sunt aliquid. Saepe consequatur ipsam laboriosam. Voluptate qui non error voluptas autem eligendi temporibus omnis occaecati. Ea dolores rem excepturi voluptatibus ea consequuntur sint quaerat vitae.',
+                id: '1fbde24c-ab0f-4d82-b43c-9890016a50da',
+                accessTokenId: '606701b2-9796-47ce-8720-04f2fe79efd2',
+                token: 'Libero in quibusdam ut minus culpa necessitatibus quia maxime. Illo qui officia dolor nihil quasi ratione deleniti. Deleniti id incidunt aut voluptates.',
                 isRevoked: 'true',
-                expiresAt: '2020-11-05 14:50:13',
+                expiresAt: '2021-05-08 16:33:27',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for RefreshTokenIsRevoked has to be a boolean value');
             });
     });
-    
-
-    
-
-    
-    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenExpiresAt has to be a timestamp value`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 400 Conflict, RefreshTokenExpiresAt has to be a timestamp value`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Sequi sunt aut cum iusto aut asperiores ipsam modi. Et aut in minus in ut commodi natus et non. Dolorem qui dolores eum est reiciendis rerum labore ratione. Corporis modi rem minus perferendis quas quae commodi. Sequi placeat sed omnis ducimus impedit deleniti accusamus.',
-                isRevoked: true,
+                id: '16d79a60-4d8b-49af-b9b7-6bef770290ca',
+                accessTokenId: 'd896ef03-c54d-43a7-91a6-e870aa938dc9',
+                token: 'Est similique aliquam et. Atque laborum enim deleniti. Illum ut eius nam.',
+                isRevoked: false,
                 expiresAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -281,177 +293,200 @@ describe('refresh-token', () =>
                 expect(res.body.message).toContain('Value for RefreshTokenExpiresAt has to be a timestamp value');
             });
     });
-    
 
-    test(`/REST:POST o-auth/refresh-token`, () => 
+    test(`/REST:POST o-auth/refresh-token - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token')
             .set('Accept', 'application/json')
-            .send({
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Et laudantium repellendus cumque. Quibusdam et doloribus iure velit dolorem. Corrupti cum consectetur ipsum quasi accusamus quaerat illum voluptas. Modi quis sed est iure autem. Id libero molestias eum repudiandae nemo voluptas neque.',
-                isRevoked: true,
-                expiresAt: '2020-11-05 15:22:57',
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET o-auth/refresh-tokens/paginate`, () => 
+    test(`/REST:GET o-auth/refresh-tokens/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/refresh-tokens/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET o-auth/refresh-token - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/refresh-token')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: 'fab1efdd-feb1-4901-a8c9-7cb1b8b7a20d'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET o-auth/refresh-token`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/refresh-token')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'e9b72952-e244-4112-ae1a-a6bbd0b21b53'));
-    });
-
-    test(`/REST:GET o-auth/refresh-token/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/refresh-token/443074be-7331-41db-a111-39760f05b4da')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET o-auth/refresh-token/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/refresh-token/e9b72952-e244-4112-ae1a-a6bbd0b21b53')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e9b72952-e244-4112-ae1a-a6bbd0b21b53'));
-    });
-
-    test(`/REST:GET o-auth/refresh-tokens`, () => 
+    test(`/REST:GET o-auth/refresh-tokens`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/refresh-tokens')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT o-auth/refresh-token - Got 404 Not Found`, () => 
+    test(`/REST:GET o-auth/refresh-token - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .put('/o-auth/refresh-token')
+            .get('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'ee71dcac-b83b-47e2-b4cf-4818f2076d51',
-                accessTokenId: '14ad4c7f-d1ac-4802-9b51-d295419abcba',
-                token: 'Et quia quidem et aut qui suscipit soluta tenetur et. Nam vel tempora vel qui animi error nihil enim quam. Neque quas doloribus cupiditate architecto quis qui libero quae illum. Explicabo voluptatem rem voluptas culpa enim est molestiae. Quibusdam laboriosam est ea quis.',
-                isRevoked: false,
-                expiresAt: '2020-11-06 10:16:12',
+                query:
+                {
+                    where:
+                    {
+                        id: 'a880ba51-116b-41dc-ae37-6967300dbb4d'
+                    }
+                }
             })
             .expect(404);
     });
 
-    test(`/REST:PUT o-auth/refresh-token`, () => 
+    test(`/REST:POST o-auth/refresh-token`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/refresh-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                accessTokenId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                token: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
+                isRevoked: false,
+                expiresAt: '2021-05-08 20:09:13',
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET o-auth/refresh-token`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/refresh-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET o-auth/refresh-token/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/refresh-token/285410ff-57ab-4faf-a032-7cd04c60973b')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET o-auth/refresh-token/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/refresh-token/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT o-auth/refresh-token - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/o-auth/refresh-token')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                token: 'Rerum dolores nihil. Asperiores consequatur possimus aperiam. Aut nam in numquam aut eius aliquid optio nesciunt distinctio. Beatae ea consequatur est velit porro tempora occaecati ut quo. Perspiciatis ullam reprehenderit. Asperiores labore delectus ea.',
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                accessTokenId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                token: 'Distinctio mollitia distinctio velit nemo. Tempore minus et. In deleniti earum. Eligendi dolores vitae. Aut eveniet et minus exercitationem possimus ipsam natus enim. Non eos corrupti explicabo optio earum.',
+                isRevoked: true,
+                expiresAt: '2021-05-08 19:58:57',
+            })
+            .expect(404);
+    });
+
+    test(`/REST:PUT o-auth/refresh-token`, () =>
+    {
+        return request(app.getHttpServer())
+            .put('/o-auth/refresh-token')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                accessTokenId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                token: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
                 isRevoked: false,
-                expiresAt: '2020-11-06 07:54:26',
+                expiresAt: '2021-05-08 20:09:13',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e9b72952-e244-4112-ae1a-a6bbd0b21b53'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE o-auth/refresh-token/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/refresh-token/b5cd27cf-e249-4d96-a3a8-f4f3e3edd603')
+            .delete('/o-auth/refresh-token/967f1248-82bb-4943-a2ad-2665136a07cf')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE o-auth/refresh-token/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/refresh-token/e9b72952-e244-4112-ae1a-a6bbd0b21b53')
+            .delete('/o-auth/refresh-token/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL oAuthCreateRefreshToken - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL oAuthCreateRefreshToken - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthCreateRefreshTokenInput!)
                     {
                         oAuthCreateRefreshToken (payload:$payload)
-                        {   
+                        {
                             id
                             accessTokenId
                             token
                             isRevoked
                             expiresAt
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -462,63 +497,27 @@ describe('refresh-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthCreateRefreshToken`, () => 
+    test(`/GraphQL oAuthPaginateRefreshTokens`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:OAuthCreateRefreshTokenInput!)
-                    {
-                        oAuthCreateRefreshToken (payload:$payload)
-                        {   
-                            id
-                            accessTokenId
-                            token
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '05d39984-0c0a-41ca-9808-b3457743e404',
-                        accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                        token: 'Id rerum sapiente voluptatem vel voluptatem. Enim ex natus impedit non quam. Laborum laudantium eaque voluptatem porro nostrum provident. Sunt autem dolores aliquam libero alias commodi vitae. Aliquid voluptatem et dolorum qui. Molestiae architecto ad in praesentium non et quaerat.',
-                        isRevoked: false,
-                        expiresAt: '2020-11-05 15:46:00',
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthCreateRefreshToken).toHaveProperty('id', '05d39984-0c0a-41ca-9808-b3457743e404');
-            });
-    });
-
-    test(`/GraphQL oAuthPaginateRefreshTokens`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         oAuthPaginateRefreshTokens (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -527,165 +526,24 @@ describe('refresh-token', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthPaginateRefreshTokens.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.oAuthPaginateRefreshTokens.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.oAuthPaginateRefreshTokens.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.oAuthPaginateRefreshTokens.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.oAuthPaginateRefreshTokens.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.oAuthPaginateRefreshTokens.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL oAuthFindRefreshToken - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthGetRefreshTokens`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        oAuthFindRefreshToken (query:$query)
-                        {   
-                            id
-                            accessTokenId
-                            token
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '2739d7e5-0a80-41af-8bb9-cd39bd89a238'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL oAuthFindRefreshToken`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        oAuthFindRefreshToken (query:$query)
-                        {   
-                            id
-                            accessTokenId
-                            token
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthFindRefreshToken.id).toStrictEqual('e9b72952-e244-4112-ae1a-a6bbd0b21b53');
-            });
-    });
-
-    test(`/GraphQL oAuthFindRefreshTokenById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        oAuthFindRefreshTokenById (id:$id)
-                        {   
-                            id
-                            accessTokenId
-                            token
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '78fbad5b-18c8-4ac8-baa3-b060e548b7ba'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL oAuthFindRefreshTokenById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        oAuthFindRefreshTokenById (id:$id)
-                        {   
-                            id
-                            accessTokenId
-                            token
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthFindRefreshTokenById.id).toStrictEqual('e9b72952-e244-4112-ae1a-a6bbd0b21b53');
-            });
-    });
-
-    test(`/GraphQL oAuthGetRefreshTokens`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthGetRefreshTokens (query:$query)
-                        {   
+                        {
                             id
                             accessTokenId
                             token
@@ -702,100 +560,59 @@ describe('refresh-token', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.oAuthGetRefreshTokens.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL oAuthUpdateRefreshToken - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthCreateRefreshToken`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($payload:OAuthUpdateRefreshTokenInput!)
+                    mutation ($payload:OAuthCreateRefreshTokenInput!)
                     {
-                        oAuthUpdateRefreshToken (payload:$payload)
-                        {   
+                        oAuthCreateRefreshToken (payload:$payload)
+                        {
                             id
                             accessTokenId
                             token
                             isRevoked
                             expiresAt
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '024c59e3-21a9-4541-8829-683c87f64e4a',
-                        accessTokenId: 'f48693a9-1210-4f7f-946c-cd0dcdd8305e',
-                        token: 'Quibusdam doloremque velit unde amet. Dolor maiores dolor rerum id ipsam similique eius et. Excepturi numquam cum accusamus illum cumque.',
-                        isRevoked: true,
-                        expiresAt: '2020-11-06 05:00:57',
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL oAuthUpdateRefreshToken`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:OAuthUpdateRefreshTokenInput!)
-                    {
-                        oAuthUpdateRefreshToken (payload:$payload)
-                        {   
-                            id
-                            accessTokenId
-                            token
-                            isRevoked
-                            expiresAt
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        
-                        id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53',
-                        accessTokenId: '7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3',
-                        token: 'Debitis nihil reprehenderit fugiat impedit tenetur adipisci. Porro incidunt rem aspernatur. Et quam optio non at corporis ad. Perspiciatis qui qui inventore nobis nemo explicabo perferendis vero.',
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        accessTokenId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        token: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
                         isRevoked: false,
-                        expiresAt: '2020-11-06 09:46:08',
+                        expiresAt: '2021-05-08 20:09:13',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthUpdateRefreshToken.id).toStrictEqual('e9b72952-e244-4112-ae1a-a6bbd0b21b53');
+                expect(res.body.data.oAuthCreateRefreshToken).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    test(`/GraphQL oAuthDeleteRefreshTokenById - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthFindRefreshToken - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($query:QueryStatement)
                     {
-                        oAuthDeleteRefreshTokenById (id:$id)
-                        {   
+                        oAuthFindRefreshToken (query:$query)
+                        {
                             id
                             accessTokenId
                             token
@@ -806,8 +623,15 @@ describe('refresh-token', () =>
                         }
                     }
                 `,
-                variables: {
-                    id: '5fbd18a6-1e13-4c2b-baaa-863a041efe83'
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '317f3c23-006c-48ef-a3fe-09032c92d74e'
+                        }
+                    }
                 }
             })
             .expect(200)
@@ -818,17 +642,57 @@ describe('refresh-token', () =>
             });
     });
 
-    test(`/GraphQL oAuthDeleteRefreshTokenById`, () => 
+    test(`/GraphQL oAuthFindRefreshToken`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($query:QueryStatement)
                     {
-                        oAuthDeleteRefreshTokenById (id:$id)
-                        {   
+                        oAuthFindRefreshToken (query:$query)
+                        {
+                            id
+                            accessTokenId
+                            token
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthFindRefreshToken.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL oAuthFindRefreshTokenById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        oAuthFindRefreshTokenById (id:$id)
+                        {
                             id
                             accessTokenId
                             token
@@ -840,16 +704,194 @@ describe('refresh-token', () =>
                     }
                 `,
                 variables: {
-                    id: 'e9b72952-e244-4112-ae1a-a6bbd0b21b53'
+                    id: '692e41f6-3db6-414f-90f6-caa88b193c39'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthDeleteRefreshTokenById.id).toStrictEqual('e9b72952-e244-4112-ae1a-a6bbd0b21b53');
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
             });
     });
 
-    afterAll(async () => 
+    test(`/GraphQL oAuthFindRefreshTokenById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        oAuthFindRefreshTokenById (id:$id)
+                        {
+                            id
+                            accessTokenId
+                            token
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthFindRefreshTokenById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL oAuthUpdateRefreshToken - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:OAuthUpdateRefreshTokenInput!)
+                    {
+                        oAuthUpdateRefreshToken (payload:$payload)
+                        {
+                            id
+                            accessTokenId
+                            token
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        accessTokenId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                        token: 'Distinctio mollitia distinctio velit nemo. Tempore minus et. In deleniti earum. Eligendi dolores vitae. Aut eveniet et minus exercitationem possimus ipsam natus enim. Non eos corrupti explicabo optio earum.',
+                        isRevoked: true,
+                        expiresAt: '2021-05-08 19:58:57',
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL oAuthUpdateRefreshToken`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:OAuthUpdateRefreshTokenInput!)
+                    {
+                        oAuthUpdateRefreshToken (payload:$payload)
+                        {
+                            id
+                            accessTokenId
+                            token
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        accessTokenId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        token: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
+                        isRevoked: false,
+                        expiresAt: '2021-05-08 20:09:13',
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthUpdateRefreshToken.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL oAuthDeleteRefreshTokenById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        oAuthDeleteRefreshTokenById (id:$id)
+                        {
+                            id
+                            accessTokenId
+                            token
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '84c19153-fd77-4885-bd9a-f2464dfb8e45'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL oAuthDeleteRefreshTokenById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        oAuthDeleteRefreshTokenById (id:$id)
+                        {
+                            id
+                            accessTokenId
+                            token
+                            isRevoked
+                            expiresAt
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthDeleteRefreshTokenById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    afterAll(async () =>
     {
         await app.close();
     });

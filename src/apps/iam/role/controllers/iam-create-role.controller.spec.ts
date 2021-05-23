@@ -1,3 +1,4 @@
+// ignored file
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
@@ -5,14 +6,15 @@ import { IamCreateRoleController } from './iam-create-role.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
+import { rolesToCreate } from '@hades/iam/role/infrastructure/seeds/roles-to-create.seed';
 
-describe('IamCreateRoleController', () => 
+describe('IamCreateRoleController', () =>
 {
     let controller: IamCreateRoleController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,17 +41,17 @@ describe('IamCreateRoleController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreateRoleController should be defined', () => 
+        test('IamCreateRoleController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an role created', async () => 
+        test('should return an role created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await controller.main(roles[0])).toBe(roles[0]);
+            expect(await controller.main(rolesToCreate[0])).toBe(roles[0]);
         });
     });
 });

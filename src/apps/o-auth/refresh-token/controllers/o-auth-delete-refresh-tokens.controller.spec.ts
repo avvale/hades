@@ -6,7 +6,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('OAuthDeleteRefreshTokensController', () => 
+describe('OAuthDeleteRefreshTokensController', () =>
 {
     let controller: OAuthDeleteRefreshTokensController;
     let queryBus: IQueryBus;
@@ -39,14 +39,14 @@ describe('OAuthDeleteRefreshTokensController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('OAuthDeleteRefreshTokensController should be defined', () => 
+        test('OAuthDeleteRefreshTokensController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an refreshTokens deleted', async () => 
+        test('should return an refreshTokens deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
             expect(await controller.main()).toBe(refreshTokens);

@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AdminAdministrativeAreaLevel1 } from './../../domain/administrative-area-level-1.aggregate';
 import { CreatedAdministrativeAreaLevel1Event } from './created-administrative-area-level-1.event';
-import { DeletedAdministrativeAreaLevel1Event } from './deleted-administrative-area-level-1.event';
 import { CreatedAdministrativeAreasLevel1Event } from './created-administrative-areas-level-1.event';
+import { DeletedAdministrativeAreaLevel1Event } from './deleted-administrative-area-level-1.event';
 import { DeletedAdministrativeAreasLevel1Event } from './deleted-administrative-areas-level-1.event';
 
 export class AddAdministrativeAreasLevel1ContextEvent extends AggregateRoot
@@ -25,7 +25,7 @@ export class AddAdministrativeAreasLevel1ContextEvent extends AggregateRoot
                 this.aggregateRoots.map(administrativeAreaLevel1 =>
                     new CreatedAdministrativeAreaLevel1Event(
                         administrativeAreaLevel1.id.value,
-                        administrativeAreaLevel1.countryCommonId.value,
+                        administrativeAreaLevel1.countryId.value,
                         administrativeAreaLevel1.code.value,
                         administrativeAreaLevel1.customCode?.value,
                         administrativeAreaLevel1.name.value,
@@ -49,7 +49,7 @@ export class AddAdministrativeAreasLevel1ContextEvent extends AggregateRoot
                 this.aggregateRoots.map(administrativeAreaLevel1 =>
                     new DeletedAdministrativeAreaLevel1Event(
                         administrativeAreaLevel1.id.value,
-                        administrativeAreaLevel1.countryCommonId.value,
+                        administrativeAreaLevel1.countryId.value,
                         administrativeAreaLevel1.code.value,
                         administrativeAreaLevel1.customCode?.value,
                         administrativeAreaLevel1.name.value,

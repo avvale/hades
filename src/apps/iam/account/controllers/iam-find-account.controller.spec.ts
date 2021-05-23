@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 
-describe('IamFindAccountController', () => 
+describe('IamFindAccountController', () =>
 {
     let controller: IamFindAccountController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('IamFindAccountController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamFindAccountController should be defined', () => 
+        test('IamFindAccountController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a account', async () => 
+        test('should return a account', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
             expect(await controller.main()).toBe(accounts[0]);

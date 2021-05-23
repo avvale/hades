@@ -1,31 +1,29 @@
+// ignored file
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     CountryId,
-    CountryCommonId,
-    CountryLangId,
+    CountryI18nLangId,
     CountryIso3166Alpha2,
     CountryIso3166Alpha3,
     CountryIso3166Numeric,
     CountryCustomCode,
     CountryPrefix,
-    CountryName,
-    CountrySlug,
+    CountryI18nName,
+    CountryI18nSlug,
     CountryImage,
     CountrySort,
-    CountryAdministrativeAreaLevel1,
-    CountryAdministrativeAreaLevel2,
-    CountryAdministrativeAreaLevel3,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
     CountryAdministrativeAreas,
     CountryLatitude,
     CountryLongitude,
     CountryZoom,
     CountryDataLang,
-    CountryCreatedAt,
     CountryUpdatedAt,
-    CountryDeletedAt,
 } from './../../domain/value-objects';
 import { ICountryRepository } from './../../domain/country.repository';
 import { AdminCountry } from './../../domain/country.aggregate';
@@ -41,20 +39,19 @@ export class UpdateCountryService
     public async main(
         payload: {
             id: CountryId,
-            commonId?: CountryCommonId,
-            langId?: CountryLangId,
+            langId?: CountryI18nLangId,
             iso3166Alpha2?: CountryIso3166Alpha2,
             iso3166Alpha3?: CountryIso3166Alpha3,
             iso3166Numeric?: CountryIso3166Numeric,
             customCode?: CountryCustomCode,
             prefix?: CountryPrefix,
-            name?: CountryName,
-            slug?: CountrySlug,
+            name?: CountryI18nName,
+            slug?: CountryI18nSlug,
             image?: CountryImage,
             sort?: CountrySort,
-            administrativeAreaLevel1?: CountryAdministrativeAreaLevel1,
-            administrativeAreaLevel2?: CountryAdministrativeAreaLevel2,
-            administrativeAreaLevel3?: CountryAdministrativeAreaLevel3,
+            administrativeAreaLevel1?: CountryI18nAdministrativeAreaLevel1,
+            administrativeAreaLevel2?: CountryI18nAdministrativeAreaLevel2,
+            administrativeAreaLevel3?: CountryI18nAdministrativeAreaLevel3,
             administrativeAreas?: CountryAdministrativeAreas,
             latitude?: CountryLatitude,
             longitude?: CountryLongitude,
@@ -68,7 +65,6 @@ export class UpdateCountryService
         // create aggregate with factory pattern
         const country = AdminCountry.register(
             payload.id,
-            payload.commonId,
             payload.langId,
             payload.iso3166Alpha2,
             payload.iso3166Alpha3,

@@ -8,7 +8,7 @@ import { PermissionId } from './../../domain/value-objects';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
-describe('DeletePermissionByIdService', () => 
+describe('DeletePermissionByIdService', () =>
 {
     let service: DeletePermissionByIdService;
     let repository: IPermissionRepository;
@@ -38,14 +38,14 @@ describe('DeletePermissionByIdService', () =>
         mockRepository  = module.get(MockPermissionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeletePermissionByIdService should be defined', () => 
+        test('DeletePermissionByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete permission and emit event', async () => 
+        test('should delete permission and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

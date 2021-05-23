@@ -6,13 +6,13 @@ import { PaginateCountriesService } from './paginate-countries.service';
 import { ICountryRepository } from './../../domain/country.repository';
 import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
 
-describe('PaginateCountriesService', () => 
+describe('PaginateCountriesService', () =>
 {
     let service: PaginateCountriesService;
     let repository: ICountryRepository;
     let mockRepository: MockCountryRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateCountriesService', () =>
                 EventPublisher,
                 PaginateCountriesService,
                 MockCountryRepository,
-                { 
+                {
                     provide: ICountryRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateCountriesService', () =>
         mockRepository  = module.get(MockCountryRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateCountriesService should be defined', () => 
+        test('PaginateCountriesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate countries', async () => 
+        test('should paginate countries', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

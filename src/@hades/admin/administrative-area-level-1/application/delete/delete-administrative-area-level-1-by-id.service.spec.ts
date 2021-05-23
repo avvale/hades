@@ -8,7 +8,7 @@ import { AdministrativeAreaLevel1Id } from './../../domain/value-objects';
 import { IAdministrativeAreaLevel1Repository } from './../../domain/administrative-area-level-1.repository';
 import { MockAdministrativeAreaLevel1Repository } from './../../infrastructure/mock/mock-administrative-area-level-1.repository';
 
-describe('DeleteAdministrativeAreaLevel1ByIdService', () => 
+describe('DeleteAdministrativeAreaLevel1ByIdService', () =>
 {
     let service: DeleteAdministrativeAreaLevel1ByIdService;
     let repository: IAdministrativeAreaLevel1Repository;
@@ -38,14 +38,14 @@ describe('DeleteAdministrativeAreaLevel1ByIdService', () =>
         mockRepository  = module.get(MockAdministrativeAreaLevel1Repository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteAdministrativeAreaLevel1ByIdService should be defined', () => 
+        test('DeleteAdministrativeAreaLevel1ByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete administrativeAreaLevel1 and emit event', async () => 
+        test('should delete administrativeAreaLevel1 and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

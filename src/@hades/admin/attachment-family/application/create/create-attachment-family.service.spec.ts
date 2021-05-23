@@ -61,15 +61,17 @@ describe('CreateAttachmentFamilyService', () =>
         test('should create a attachmentFamily and emit event', async () =>
         {
             expect(await service.main(
-                new AttachmentFamilyId(attachmentFamilies[0].id),
-                new AttachmentFamilyName(attachmentFamilies[0].name),
-                new AttachmentFamilyResourceIds(attachmentFamilies[0].resourceIds),
-                new AttachmentFamilyWidth(attachmentFamilies[0].width),
-                new AttachmentFamilyHeight(attachmentFamilies[0].height),
-                new AttachmentFamilyFit(attachmentFamilies[0].fit),
-                new AttachmentFamilySizes(attachmentFamilies[0].sizes),
-                new AttachmentFamilyQuality(attachmentFamilies[0].quality),
-                new AttachmentFamilyFormat(attachmentFamilies[0].format),
+                {
+                    id: new AttachmentFamilyId(attachmentFamilies[0].id),
+                    name: new AttachmentFamilyName(attachmentFamilies[0].name),
+                    resourceIds: new AttachmentFamilyResourceIds(attachmentFamilies[0].resourceIds),
+                    width: new AttachmentFamilyWidth(attachmentFamilies[0].width),
+                    height: new AttachmentFamilyHeight(attachmentFamilies[0].height),
+                    fit: new AttachmentFamilyFit(attachmentFamilies[0].fit),
+                    sizes: new AttachmentFamilySizes(attachmentFamilies[0].sizes),
+                    quality: new AttachmentFamilyQuality(attachmentFamilies[0].quality),
+                    format: new AttachmentFamilyFormat(attachmentFamilies[0].format),
+                }
             )).toBe(undefined);
         });
     });

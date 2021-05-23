@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { IamUpdateUserInput } from './../../../../graphql';
 
-describe('IamUpdateUserResolver', () => 
+describe('IamUpdateUserResolver', () =>
 {
     let resolver: IamUpdateUserResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('IamUpdateUserResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<IamUpdateUserResolver>(IamUpdateUserResolver);
+        resolver    = module.get<IamUpdateUserResolver>(IamUpdateUserResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamUpdateUserResolver should be defined', () => 
+    test('IamUpdateUserResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamUpdateUserResolver should be defined', () => 
+        test('IamUpdateUserResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a user created', async () => 
+        test('should return a user created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users[0])));
             expect(await resolver.main(<IamUpdateUserInput>users[0])).toBe(users[0]);

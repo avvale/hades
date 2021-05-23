@@ -4,8 +4,6 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { IAttachmentRepository } from '@hades/admin/attachment/domain/attachment.repository';
 import {
     AttachmentId,
-    AttachmentCommonId,
-    AttachmentLangId,
     AttachmentAttachableModel,
     AttachmentAttachableId,
     AttachmentFamilyId,
@@ -65,8 +63,6 @@ export class MockAttachmentRepository extends MockRepository<AdminAttachment> im
 
             this.collectionSource.push(AdminAttachment.register(
                     new AttachmentId(itemCollection.id),
-                    new AttachmentCommonId(itemCollection.commonId),
-                    new AttachmentLangId(itemCollection.langId),
                     new AttachmentAttachableModel(itemCollection.attachableModel),
                     new AttachmentAttachableId(itemCollection.attachableId),
                     new AttachmentFamilyId(itemCollection.familyId),

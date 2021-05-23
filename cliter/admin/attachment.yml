@@ -11,14 +11,6 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
-  - name: common_id
-    type: id
-    length: 36
-    nullable: false
-  - name: lang_id
-    type: id
-    length: 36
-    nullable: false
   - name: attachable_model
     type: varchar
     maxLength: 75

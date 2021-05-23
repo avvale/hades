@@ -14,8 +14,8 @@ import { IamCreatePermissionResolver } from './resolvers/iam-create-permission.r
 import { IamCreatePermissionsResolver } from './resolvers/iam-create-permissions.resolver';
 import { IamPaginatePermissionsResolver } from './resolvers/iam-paginate-permissions.resolver';
 import { IamGetPermissionsResolver } from './resolvers/iam-get-permissions.resolver';
-import { IamFindPermissionResolver } from './resolvers/iam-find-permission.resolver';
 import { IamFindPermissionByIdResolver } from './resolvers/iam-find-permission-by-id.resolver';
+import { IamFindPermissionResolver } from './resolvers/iam-find-permission.resolver';
 import { IamUpdatePermissionResolver } from './resolvers/iam-update-permission.resolver';
 import { IamDeletePermissionByIdResolver } from './resolvers/iam-delete-permission-by-id.resolver';
 import { IamDeletePermissionsResolver } from './resolvers/iam-delete-permissions.resolver';
@@ -37,8 +37,8 @@ export const IamPermissionResolvers = [
     IamCreatePermissionsResolver,
     IamPaginatePermissionsResolver,
     IamGetPermissionsResolver,
-    IamFindPermissionResolver,
     IamFindPermissionByIdResolver,
+    IamFindPermissionResolver,
     IamUpdatePermissionResolver,
     IamDeletePermissionByIdResolver,
     IamDeletePermissionsResolver,

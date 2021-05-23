@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
 import { AdminUpdateCountryInput } from './../../../../graphql';
 
-describe('AdminUpdateCountryResolver', () => 
+describe('AdminUpdateCountryResolver', () =>
 {
     let resolver: AdminUpdateCountryResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('AdminUpdateCountryResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateCountryResolver>(AdminUpdateCountryResolver);
+        resolver    = module.get<AdminUpdateCountryResolver>(AdminUpdateCountryResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateCountryResolver should be defined', () => 
+    test('AdminUpdateCountryResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminUpdateCountryResolver should be defined', () => 
+        test('AdminUpdateCountryResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a country created', async () => 
+        test('should return a country created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
             expect(await resolver.main(<AdminUpdateCountryInput>countries[0])).toBe(countries[0]);

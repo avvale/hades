@@ -5,7 +5,7 @@ export class CreateAdministrativeAreaLevel2Command
     constructor(
         public readonly payload: {
             id: string,
-            countryCommonId: string,
+            countryId: string,
             administrativeAreaLevel1Id: string,
             code: string,
             customCode?: string,

@@ -6,13 +6,13 @@ import { DeletePermissionsService } from './delete-permissions.service';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
-describe('DeletePermissionsService', () => 
+describe('DeletePermissionsService', () =>
 {
     let service: DeletePermissionsService;
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeletePermissionsService', () =>
                 EventPublisher,
                 DeletePermissionsService,
                 MockPermissionRepository,
-                { 
+                {
                     provide: IPermissionRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeletePermissionsService', () =>
         mockRepository  = module.get(MockPermissionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeletePermissionsService should be defined', () => 
+        test('DeletePermissionsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete permission and emit event', async () => 
+        test('should delete permission and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

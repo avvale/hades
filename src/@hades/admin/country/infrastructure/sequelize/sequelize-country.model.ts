@@ -1,9 +1,15 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+// ignored file
+import { Column, Model, Table, HasMany, DefaultScope } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { AdminLangModel } from '@hades/admin/lang/infrastructure/sequelize/sequelize-lang.model';
+import { AdminCountryI18nModel } from './sequelize-country-i18n.model';
 
-@Table({ modelName: 'admin_country', freezeTableName: true, timestamps: false })
+@DefaultScope(() => ({
+    include: {
+        model: AdminCountryI18nModel,
+        required: true
+    }
+}))
+@Table({ modelName: 'AdminCountry', freezeTableName: true, timestamps: false })
 export class AdminCountryModel extends Model<AdminCountryModel>
 {
     @Column({
@@ -14,53 +20,32 @@ export class AdminCountryModel extends Model<AdminCountryModel>
     })
     id: string;
 
-    @UnderscoredIndex
-    @Column({
-        field: 'common_id',
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    commonId: string;
-
-    @ForeignKey(() => AdminLangModel)
-    @Column({
-        field: 'lang_id',
-        allowNull: false,
-        type: DataTypes.UUID,
-        references: {
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
-    })
-    langId: string;
-
-    @BelongsTo(() => AdminLangModel)
-    lang: AdminLangModel;
+    @HasMany(() => AdminCountryI18nModel)
+    countryI18n: AdminCountryI18nModel[];
 
     @Column({
-        field: 'iso_3166_alpha_2',
+        field: 'iso3166Alpha2',
         allowNull: false,
         type: DataTypes.CHAR(2),
     })
     iso3166Alpha2: string;
 
     @Column({
-        field: 'iso_3166_alpha_3',
+        field: 'iso3166Alpha3',
         allowNull: false,
         type: DataTypes.CHAR(3),
     })
     iso3166Alpha3: string;
 
     @Column({
-        field: 'iso_3166_numeric',
+        field: 'iso3166Numeric',
         allowNull: false,
         type: DataTypes.CHAR(3),
     })
     iso3166Numeric: string;
 
     @Column({
-        field: 'custom_code',
+        field: 'customCode',
         allowNull: true,
         type: DataTypes.STRING(10),
     })
@@ -72,20 +57,6 @@ export class AdminCountryModel extends Model<AdminCountryModel>
         type: DataTypes.STRING(5),
     })
     prefix: string;
-
-    @Column({
-        field: 'name',
-        allowNull: false,
-        type: DataTypes.STRING(255),
-    })
-    name: string;
-
-    @Column({
-        field: 'slug',
-        allowNull: false,
-        type: DataTypes.STRING(1024),
-    })
-    slug: string;
 
     @Column({
         field: 'image',
@@ -102,28 +73,7 @@ export class AdminCountryModel extends Model<AdminCountryModel>
     sort: number;
 
     @Column({
-        field: 'administrative_area_level_1',
-        allowNull: true,
-        type: DataTypes.STRING(50),
-    })
-    administrativeAreaLevel1: string;
-
-    @Column({
-        field: 'administrative_area_level_2',
-        allowNull: true,
-        type: DataTypes.STRING(50),
-    })
-    administrativeAreaLevel2: string;
-
-    @Column({
-        field: 'administrative_area_level_3',
-        allowNull: true,
-        type: DataTypes.STRING(50),
-    })
-    administrativeAreaLevel3: string;
-
-    @Column({
-        field: 'administrative_areas',
+        field: 'administrativeAreas',
         allowNull: true,
         type: DataTypes.JSON,
     })
@@ -151,28 +101,28 @@ export class AdminCountryModel extends Model<AdminCountryModel>
     zoom: number;
 
     @Column({
-        field: 'data_lang',
+        field: 'dataLang',
         allowNull: true,
         type: DataTypes.JSON,
     })
     dataLang: any;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

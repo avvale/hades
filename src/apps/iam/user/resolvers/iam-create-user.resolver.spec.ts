@@ -13,7 +13,7 @@ describe('IamCreateUserResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('IamCreateUserResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('IamCreateUserResolver should be defined', () => 
+    test('IamCreateUserResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('IamCreateUserResolver should be defined', () => 
+        test('IamCreateUserResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an user created', async () => 
+        test('should return an user created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users[0])));
             expect(await resolver.main(<IamCreateUserInput>users[0])).toBe(users[0]);

@@ -1,26 +1,22 @@
+// ignored file
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { JwtModule } from '@nestjs/jwt';
 
 // custom items
-import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokensToCreate } from '@hades/o-auth/access-token/infrastructure/seeds/access-tokens-to-create.seed';
 import { CreateAccessTokenService } from './create-access-token.service';
 import {
     AccessTokenId,
     AccessTokenClientId,
     AccessTokenAccountId,
-    AccessTokenToken,
     AccessTokenName,
-    AccessTokenIsRevoked,
-    AccessTokenExpiresAt,
-    AccessTokenCreatedAt,
-    AccessTokenUpdatedAt,
-    AccessTokenDeletedAt,
+    AccessTokenExpiredAccessToken,
 } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
 
 describe('CreateAccessTokenService', () =>
-
 {
     let service: CreateAccessTokenService;
     let repository: IAccessTokenRepository;
@@ -29,6 +25,11 @@ describe('CreateAccessTokenService', () =>
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
+            imports: [
+                JwtModule.register({
+                    secret: '1234567890'
+                }),
+            ],
             providers: [
                 CommandBus,
                 EventBus,
@@ -59,13 +60,13 @@ describe('CreateAccessTokenService', () =>
         test('should create a accessToken and emit event', async () =>
         {
             expect(await service.main(
-                new AccessTokenId(accessTokens[0].id),
-                new AccessTokenClientId(accessTokens[0].clientId),
-                new AccessTokenAccountId(accessTokens[0].accountId),
-                new AccessTokenToken(accessTokens[0].token),
-                new AccessTokenName(accessTokens[0].name),
-                new AccessTokenIsRevoked(accessTokens[0].isRevoked),
-                new AccessTokenExpiresAt(accessTokens[0].expiresAt),
+                {
+                    id                  : new AccessTokenId(accessTokensToCreate[0].id),
+                    clientId            : new AccessTokenClientId(accessTokensToCreate[0].clientId),
+                    accountId           : new AccessTokenAccountId(accessTokensToCreate[0].accountId),
+                    name                : new AccessTokenName(accessTokensToCreate[0].name),
+                    expiredAccessToken  : new AccessTokenExpiredAccessToken(accessTokensToCreate[0].expiredAccessToken),
+                }
             )).toBe(undefined);
         });
     });

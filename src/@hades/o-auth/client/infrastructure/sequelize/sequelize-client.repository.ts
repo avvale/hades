@@ -1,3 +1,4 @@
+// ignored file
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
@@ -56,6 +57,6 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
             }
         }
 
-        await this.repositoryIntermediate.bulkCreate(intermediateDate);
+        await this.repositoryIntermediate.bulkCreate(<OAuthApplicationsClientsModel[]>intermediateDate);
     }
 }

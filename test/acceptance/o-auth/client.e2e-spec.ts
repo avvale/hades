@@ -2,18 +2,29 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IClientRepository } from '@hades/o-auth/client/domain/client.repository';
-import { MockClientRepository } from '@hades/o-auth/client/infrastructure/mock/mock-client.repository';
+import { MockClientSeeder } from '@hades/o-auth/client/infrastructure/mock/mock-client.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { OAuthModule } from './../../../src/apps/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [];
 
 describe('client', () =>
 {
     let app: INestApplication;
-    let repository: MockClientRepository;
+    let repository: IClientRepository;
+    let seeder: MockClientSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -21,51 +32,62 @@ describe('client', () =>
                 imports: [
                     ...importForeignModules,
                     OAuthModule,
+                    IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockClientSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IClientRepository)
-            .useClass(MockClientRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockClientRepository>module.get<IClientRepository>(IClientRepository);
+        repository  = module.get<IClientRepository>(IClientRepository);
+        seeder      = module.get<MockClientSeeder>(MockClientSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST o-auth/client - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/client')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                grantType: 'CLIENT_CREDENTIALS',
-                name: '17cvwxefumj1m58u0sf6vmc557da1abjtk49zyxjk79uj4lbhbu1iizg4r37d0blw0xgqbj4wk1h44afs12jd8m30hfayjcfn863yxwrnilsx3yn9pi519etevwyzcccld8qumg8u4fi02hl7ouvhyaty7bp7re15f52o9pk64p1e3lhh6i64rsuddy58kwkysczz8dmr8bmooano9ph3rtiigv8ws1o4br13c7d8hbnt688ifieupu8759ti8j',
-                secret: '5o006tiv14wt3iy5q129lmdjhkc4a2tqc4xcu6d7mdsem0ftky7dr2d3mv2s0mr1usvypyjlly94oq3d13yprof17o',
-                authUrl: 'phf30z3dl7san3pctvuxekltxzbyiftaf3bncy6ro88u2rt4nyaim6oq8xz16lxe4ju7fq4nns0h6ihr9ftyhyte55tsi6expgfr511qg7lo9i05dp9bz4bg218hqm6ghviaw83lwhu0brquejqgxxwakmmoedejdtug9vj3ey97gft4mk75nv33y0wyw3i0j8o0qe4niuos7naxufdf12fx2k1iv0mvp12x1hokrx3rlxv5hn3q7haxpb46thsu7j934vf68kc6posgqc7x0bnuirqmxfnje9e5t2hmu6jryry3zi92f192maj3g29qqnqkug8slya0x5d2mcog06hn7zd7brb9jm9ad8jdpg6pe3jzld5044zv8682jl330d34lj08jezcw1xw87d1dnns37fy3lj0e40asaic86v4xiu10sgaocfpmw7ckg3b6226iy4ft9kzpugp5s4n47n1vtip7sg03xr62gacm77wykbg80lttv3vjgodjjfh900x2ozya0cih49ul2ye24avsguu1xvd4o5e44gd1g7hngen90vsgo331njscno49py99lxeej618rkyaz4ynxckn5tiqgbq5kz8sm1icmluicbw7hgjn6wn2mkzlm7glvb3ard8ko92lthnhm46igmc0p47h0px9dj3zrfr3ltsifpk6qdm1p6f9fas2nyou105pi4h2mblz3t36ofcandafrlmfzwluaj5x8cvvpamj4wt7bwyia1i9an4xfsibpmvuteflwm6bcdy74a2kngqsp4y2d4x2i947jxwzni2ye2qnu650yqb7o0xiva8o4h343etmx3rvmg77pi5h4pk6er5svhu1ql2slnv3ogukide7yiajgoz07xokj2pfkqarswn3gs7ee5sfdyks481fspre4ystpii5akh94yshi5squ8uk0nq2i9y6nzt9kpxmpph5squff4jta0xjqowyij9fhlt82ldz853k0v6k13olebgsetbqr6o0tsljoaj9iif8u7qlr0szjgq5b2g7wwf1evuu6nf8ygj8a3yrprf5e7ij1asnossep24vgc4byy57qh6yxq9p8umj5fxsuaddk3t37c8pez7d4ucmfzbmb948p918mxgt47ekavazzgavuuc21njpw41sl7o4n6ai3mf58t69awgpo6i9lm1mhnl3817d8slu795jrw6f8504sxz6d4tmsvu6xa2qcs162d1yl0xrx4a5mpzxi4ogjsten6cwjs2ed0nk9w1u1wb0jw3dvfw1q8qbpkeddpg548l627xe26e37zwxyhqeybq83wyecikuedwd3gaswts6qdumu5166daj61g076up8xhdodc0vxa7y3brjbrk103fdwy32arkrp8m0sbdx5syfifaj01n5zlcwk6wdxto65s8qinbkzakthlv8r8y2ua921tsvpuvdvdlwfz4sxietlij9kzty75n5fa5oymlmaoj8649kh7itld5flpgvjh6jpu1mahr7m3ngcvc5i3nwuy6swohu3kfa4ghptdujjyyujzmfggtdzy1hy37gf889tpwl1jo9pneq9jdkxn93od2rxq2zmy129rspvdenfcvo3q5zxoj1xl0exroailh5aj2adyzabekh1k4jdeucmv54sus2k2qmukxindlg05hdw0ojr171otm4qz1zbcsn9yhs7cly83km6q3r9jkalj6psq70qcdkm63106tbiofdweta8z2q2j1uf6ehb023md34bln4lwju84h4vgi4bjxc50lwd4v0d9qkck1is1u5d4a8ldau87e3ug5yzbdfek8uwo65qqnlo0k8c0ensn6mnyfonmm7fpa5hnmei3hsloykxbh0j2x56zxbo6mhrl4igm5qdx9chmvuw52fkizhrb1ce58q81srjckh6q3ygyfuedpzdznrlhkmo2xg0lwakhpxcaaxj3cn409v76lbovjq7itufgieo45zun821o1jxpx962i73gdc5pf3h8xyoc02mi',
-                redirect: 'yph27ito29nwzurvbqgg003meng50xckaa2i2o124qyh9h6uiipv5s058escxfmp0i1aum29iuoqgvnbzwpeyjmr8ay0zsenly5xfka0mnu677sqfsg8dcfy88zz71v3exw0q5rr8eb93ze6wns3ouaxcpyaxq3hykrcv6ncn8enbqf3jvy3fz5jgj97aciub4zaeo6gz2x9wnc4nhq3lbqx8yxr6ixvoapilwi0bcog6j4n2oh7sq219py4v5279f9j4qyrqb3836o2kyu0w7nfcsb46kzmnf2i844mfxxu3eyekaret5zyrr8vkqvsyvmgf2i4pd1y4k0r6yoifoi02lrs0crmvmjlffzf31z0hpovbd2rrvhwljdlgdrau2ltfxjrgr9dkp4blhambzuny69h6f7rlr7f9qzu5c8sfbbd1vn1zrmc5hn0bzada0902by6xwnnh8y0tzp7x46pmj162au7h3ojwswt504gmf6ebifbs09rju3wluuig8wafz3rat0i6eoymjrlvda7x5kv23y4qgtn00pkdcd83anmpges3rlmbbl4ra0u2t42wi7r35hnn01js4c35wtjms46i00owpofoixisd0qli5hnpmjht917i41dvubvu5lupz1bkqbhlft7yq550lij9na6ew4jcgzyrtue1uuptx0y59cn5p3fy3846lr7m6tsoiio2n0tctgeqd75i2bj7s7krxmff898zb6h64kgx7nm5qy12h5kli62xbr6iuim4co54m0p8sfkdmnu4rtkqji87xzp7t6han9srwe71pjmmizwidws1vnpn60acmwti0ffberin9hf58wv4lg1gdmilfovjqkm60c3jra9woajbg5cm8yurzoze7pvgommb5qn1uzquoe0nb5rdfoiiif88soqtqueliq34xigdkhsc1ac5gy0em7c20j6cwaj1ukiy7pr7actr05ri7y82cptni7htp88aiiddiarg1cwdx01slaig1l5q5o8btrji57dklg2q8ltp0qzp4tsa9hexmd2veq4nzsxso51x062dtqmlljimyo5oyxxspimt633hjlq24rmatyufql3hya7hyg9rp6z13qf0u68sqy97k3gr7nz6j21j3a8978c5ujlyvxh5xpytp7dsenzyty2xuk898ihj5twqmbncnvbt08wq87cldujkdsdzpfh8lgdrs98t5k7ohgcyi8wnpgtmr4qm5f12haf01l9ntoyjjabobdsewbkss45uufkcqhcr71h64xepbq5b2skcmghxwibwoxjsg2h51uvp4hconxhz3g4eb42eqdv4a4sl7fre0tznj553k9u0ssvjzfjvaagofpkufhg3v0sw8d2uc6e131dn9d1k59jux17894f6v4otphmf8evuif6xo6b85rgpzugsda6ls4yjhns9p2z4fwsujdlf1tuqsjfxm8q8wdk4bbzg5tdj373ti29weumt4rprtxtreeoniaa9da9huxbynkqcd71btzdq2f8ublfyswhmauqyp5a2wt1pj7bj4dn4nneglq83sge9ribhpfv263yuzwopatonz6zsonq9p7wa2kiidflf4h1819zxf4s6atd1deqpgd8m4x4vqsyyz2sgg18twcnfntmmmiogqha45jpoqr4a5j77rniie3z0h4v0ocazh5u3d2fh28g6kdiijano2z1s0y9x0iito92z5tl6fi90mh8upnwunnikul2zyk1yxdv572qt90he4f6rfcwzsg1ahlxpem7qo113kaqwxe7gs3h5fk6g0tungxbuur9j7fspx7rusbbxzpx3v2e360fv9jq0uvf0agh3lrnpkkxp2zqgsffiixz3fity5hwv783z16t3qrt4ip3797ecy8gtos94ghtupqeg6qwningysmxroajjm1q5yazw83r2gv4mpccnj24lmbaqakkez4oyv59t2t0gnmpr85km0a475t1jqy7rp619o9np05jx6k1qipr1ij9gr3na9x',
-                expiredAccessToken: 6701391669,
-                expiredRefreshToken: 1250760606,
+                grantType: 'AUTHORIZATION_CODE',
+                name: 'n56og9gu2y83ypkvvjrpvj7bsteyl0a5wx0gbyn2gtpeqwhip8sx24lxds1uxlcayt4qurc0w53w14p4nm1u4dllktf3kfsh5j0moyu96k34j22u9bnv19zra15wa9h384jbm7jq0qov7vrxpxzdj1df1tkt1te488cilnijpka0myu6wc22s2totpvd9i2rdhug14y7jekvxg41m5b33gurdpmxqkv632wsbi6gd79ftz960fhglkf7wvk4qak',
+                secret: 't3q7vr0vasfva4ppd4feubw4951l48xazip12udwoxr8iu68r0zebpe6apwv5q534hjodoziky3rha2wpdzukxx9ld',
+                authUrl: 'xac8cay1ymln17i8mio25p4avx09urzxj0o5ox33iki0dcp9ugtw487i917ivw0mjotzfsvm04m3q0469r2o831beav8vaabf07hi5he0uyfzj9hisj184dxc53zel2c7gxndash7gqw5nspwii3j9mtu6k6ay6yun5uai8u78sr6r6v4gi62abw67lle8u10fihvp7x7aluqnj7o83wbyc804mwrxj85gaholditkaekwh15oh74jk5b0dqavs4jqjlr4wz6j10svh2c1n1eo7xox7h606aed511dqd8p2uq7qw144msouthipiaihjjnvuearea3u4yib103d5ec137oqh1mpmufnr7s3ayt8uebfr9u6j536tzw7dpl7t3wv1j0800yrwtnz04xe8wjsm6vkja8nis1fjp64npwg2pilugp3gto0z2v8d6dn9vx01wp21073grdzwmv5nnp6949uyjoz5l24b49j76wbiy9h2z4n11bpg0hbsedu17jbpsp9j2d53txxkqsbd9tyy8d8g676rbs7ptwtjvhtt6ez7cvfp2o8hkp53ksr2ymf2xi4u7ocl8e4greepk3e8xijxpjtxku6w9i03lxbpj9mjciwiu59mky1a2evvh5ju4jds9ec4y6tz1g3nf9bswpyhkca70y2jibygpg0m59dl9h7o55kdqyh2piq0u3y4rasjk5c39sr8vylwr2t8ptiohjs1s2u3wzoqgaqtd82qp6j3bglqg0rfks8b54gtfgsk23e67u6ekykyboisqtv4rhkgy6l0fciey8wxyallsgjq9fowaclbmdjv4gziewpmd788prxw2bkrh5r9to3fbdzn93f8b5q19tcw4qigsbhllyj8l3ih41jgl00fxhtu9ulah3wzkc48ex8u3ntm9p8c3oxak0n9nh5gmzpbeelgs8qf553qx4lln7v8ebh51jiy60nljqktrtnfe9maq6wbfs1spjax0cyvovs2q5cd3esg0iu2hngj7s93e2ecb2odelfyp46b5mqyclg5h3ecty66wok7lqzw09aabmbxc5c9m335wjca3r11ksxlnp1n66vm7i2i218v8l3ng5uks62jo3952rjppprpwaedpfsozl40ru5lwj4m583bk3nj2d5slutcgbezbqr6kaug5jwhd7krd3tpc0pwb6kx9pzfnmdaqw2wh19mj8mpoopgqcmh87914iojfv781vebnvd6quumxyix0hul2w5s99kz4t0u6t7cwpojtarrbmzao1npuby4mxup3xa09bu8xvl0vtvgx3sc3crr86nlu15ap4asz36prnisn7e1lsanqkx5wubmtw88i4lxp9g1cxeob4qx85lgtbr17nr6inj0v4b3lktaiv5k03wwqdbw8di6kz54vaxjgavqew446746dxjuag3dr8oagkzfl03uj1mn8lalnqqzy002qtzjs1tfj26n6nlq1nxlah9ek2c38cek8425f316al1kbu7n21bkrdnn1xfj25ppuas432mfzf4o9471xwrbss78rw51kgrup2o0cmqwanwaemdfy0d3gdp3dsdfixxn2zq83gm4yfaxbw1a7v21ta8cwo189yph43emupui5iq8tfdhhrs8iejdvmzxi7l8p6qdao8ptidaglps8z04jow3j418m8n75i1ovexanfrjwt0v8rf6mfhqrisw4jo9kau6ityf9j5zlz18tous1nav6mry5rtzf73z1wstdaqe8twid1e01gm1ustwkrysiliif9u2ey0ysjw5lzcrhvc6oowuow86mjlrh5czkyy3fjsmydli22rg3qz4uf39ykk2p1d0rhybx8fe00gm82459oyha6dk8xioyn3qpy2m5j0dvae8g6rg4zwpoyunrmxjb8ihophlwna38qeycgg19psxhwuw7s4nxgdtuhy7fl4gdco3liunxpuewux8u8alj0l85qwtj3td74i580ac3y9zmov2dzq1myzvlzly889fw55fj4vk',
+                redirect: '0qpgg88on9muo28r7joiheztgusfi704mdi33pfm7cpqbt1a86nrjagm8szltgid0ds8umu362rdpz51snak3kqsxjpszfu4f4d6j6kf5k9wklvnnffj7eyb69hyptv4r9sgbjgg8kv8n3bueys4wqpr5lxll7gl2ukdj9px2b3nxecif05a9mcng3tz4etp681uxgvln9xfp4rpqkbs4v840ecz86msbite76ohw03u6mgghc04d2iwpt3japfnk2484jy5zz44ry6t75501e8x54g7x8gyzje2x5f9p9twonq9skj18ahklsjp8g2qixarb2nqm7tuk9q15zonq2oiurtxaq9e3ciy48ov9den8kfjty5w8xrchsv93ziwvz4frwyzewwvot8xrw4du9jko11xhvnxzd7n17zl2ylbr0epsmw9spwww10o6qixz9qlpt1vkoywt2x8dig0tkumhr277ino2q9fy4nhqyg4dg6vh1icb4i6jj561arzo18ovg8qlnejiayqxocd2era9ayz3hkyo7kqks7a4ndgntlbfvs4r32blzum555z2m8eunolhda3v2wco4a48f2fsid04glu5e753ymhadzxwrfjiw3ar3i9afbi4j1pgjiupeh1i7lhav5k2wnqgc0mvazty1ehdrd3e10lkd8a4b2newi0pbkzypz74lavr9ghg7uifxohk7ffdy3ht5d5wbsru4vmm5yqa2jjvbzpdpjikjix9yl22ebhmihs4cj5e23hqy1mjgnum1h3aftrjhcc855naatx8kclbjel41zxlmw4h7gbwto4u2lhlaeckrziotjzunc4suqrqbjhgv1jk31cnrbtjc6o4m1vgz2z47qhp572sm21s62y2bptp42u4fmh2kllpurie3csueh7cet43pveh54irimqd8y4qjlaghzw8pm3xbxdkjb41w4jhjng6rdqjr4r5jmdhi0zx6ycr6jr268bju0ijsnvaxi703m3sx2xuvbgnh69cx1co4ut4skpnnd1h64a7sfl5ev0zm0n6ylvy7juiami5g68sjjgeu5wtqzflpwsa4qwvbmeng4kemonk2zir2dw4bwtj9ib1sefw64gr3l45v479lcjpbn6hb31ecnjwtet1vvtjyb8mbw8a6vrf15wi63v43po5kl4zjfy5e2nz60a1yg7kzek2qqug3z8yq7o54ym34jm3g1nv2jy28a7g1mnn9th8jwsdpoeulx62c5b86443dagg747m8a1ln8rrj4ldzi8ydhxgo17snoe36or6mgoe7zf90hc140qce8v135un6e32899sq1j6ihgpqve9te6vzm3el94bmxme9htzcghm2aup20bf148ckwujzm0ii428u1o6mgh5rj8lug6f6fuwsisq99qwiwsb21xjtskimv93j9yn7vg62mf3007qou75jot9yho771lw2r52gf3ydzngf4259k5h8etrfim17hdhzbiygl15wyihgm4rgeqtck4jylblv2aa8dk6pts90xxtz55dszla2lyob6rq6n4y8fl7e6l7sxjs4evlx29hsnlqw0rk7razqwzaalcnexnemzuagim3r9f2e1jjobwaoxe2tcwmwx41kzbqv77hwfv0drky7skotzw0q8zubswxlk5orpuqylobo4kkw38e4w258bgar9njanvv7c5n34s2hf4b4cw4tbpwifz861etxi374ungsjonbt9thcq7o5s9utxg5auleixlgqs3pyis5wscnq2vhheezvjmbsb9sogndmiq6hgdbajs2s36nwhp84vgcvz3dibhfr1w5mmz73dhqj0dtqk7355eh3us79z4jbq792b4qtbeq4mdihkow5ans1y1wdag52hklhtptpdlcrr9p5lqbr21dpxnsv8czj9quc8zmrbyknwaz14f7hsy9j6bl1tlhm65gsk5cbf2h9g1gohpmmoal76ha7qxkg7py1a23u1l5f3rwfn0smz8r8hvljkxgw4hhbq',
+                expiredAccessToken: 4897572295,
+                expiredRefreshToken: 6123515310,
                 isActive: true,
-                isMaster: true,
+                isMaster: false,
                 applicationIds: [],
             })
             .expect(400)
@@ -74,46 +96,23 @@ describe('client', () =>
             });
     });
 
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientId property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientGrantType property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                grantType: 'AUTHORIZATION_CODE',
-                name: 'bbvw24djv6q6x2tsm3a68uxjqgaruwfo6lia3fucidojxoeldyk37f25nmx03mldfuvox9t9uuae6l2fvp9t1fvxzkyeoab7c9k1wt0abncggb7h9g6i9s6gaamd5juv79dvmzfnj8p2fawv0f70efb81mxquhmn7yjc630rg40m63hh4gcfy7pk4q8er4e47uw452urcm8qlxy69afg32hz8puqx2jnr2t3xbchs27d0wibpcqvoypiso2rfa0',
-                secret: '8dqkd9f3nozn6l9vax7pwrabxu770mebt6w5nn5wm3zget598x9i1s818nfbqyj46e7xdra64ugt6u2sy88ndla5t6',
-                authUrl: 'a0swl8a0cfpoonbmkk3zplyps2j7kr41errh2hhqsh3eu2ubphgomzwy79ux986tcgg7q279qnim1aoqok4yhickxm2941macksui80nsmtyk8csni6ncd74zbhdjrfqfz1ouk76q0pbxwqoh0n0eyes3lxdodfckte05tyre3e5bcmwnfr6rsq73j0kz6ij2wvc5fgz8g9ew1rfrcrcqo2ewzfejnvvo2e15osv4j6a8c3ldy2olo1e3s3c98ksoilewl7ag4wi20s83syd4rw40l5518l8bgp005c5qucgmqd9mvde8nz8x9r1b5xsr1l81ukq5w4irb3dsvi9a0w4jvx6o9ecvcm4f1pb0smrdh02jvid01ycdyos8m7qrgb4rkfxenfy3ssr9kw77phnap41sipwzkhp7qtpy9yryufxqlpztnuc9lntkk0hr63rl7t36132l7bbt1r4lqkfzpvcdrylhqsecmmytv9z3mz7vb4nie8klybfaegpxxl30bsm6p1j83fc474rcz32dv8rrvblak36dyt1um1qp1m51a215j89livbm6cyxma3vjq6xmd994s8dq34upg2r8dal38daxlt1rbvnzt46y2nlon3l0jqg7zf5p71j3v2spccp15ubvxourygv3znu0a08zqspngvjld4reeprnfhs4rl9mozkguilelnz8nz95pqet56vpp3j0deb0aa7k2z8mmnye7p58otmqmwykkfbui4oy7dcucr64i4inclx47kkcf4bgyyit6x1sx0bg1ouqtmg85b1i19of59ceef9dv0rugeg442xsryzu4ot25ivoz7qc50q7mbli7qfgp97tczdiiguturqcaqtx2hmfpu9bapotujqudzuu6qwu13mdz7x5iryylu5yjwaj8su7wct96qcpb54s2h2rm24jhcwwb91l5hj4o4yl0e8mntrgxpdn50eddecc5yt933to5bcanfmpagloi7n15q1hbwic3eurz57bbfydjv7uovyzz06ote4nzq01saqwd5bs2gvm3a5zg4xzajnjam3emxa9nw74ib3xw2pzuishpr82m7jqvxngetfe5h8xi5df7oa741zzg1blt9vr6hwoids23oa8v05b859q4v5th9htsjtb8204jslwhmfctjsstfmtyrmepfcj0zdj604pvi2euvg706qlr9y88hecf0sswc503osp6q6f5a44jctr6o0sgaw1zq3cik8q8hu0lidmx9pjcduo144mkibg76mqf17j24snb3x9buq8clg2ncehqt6m1ufxhwcss9qykzou96uhxnhuqqwzyxl62a8exbmhh3e046m1euu8pym2fn0qd31jfm86lfv6rv0nfkf746p0rq1ulnsz11f58a2rhu4czl8k1m6gxdufrzbwu4wkxws67o5glug3m48j120pm0cliyf1ykhh9u8vutf0v3i5o32ouvmptt8ogct6qaev79c3j4mzlax9wk3jykoqi4wwbf8e6ps2zfjcfz75cwsv4lqtp9lxagelj90skkljhivjogpuzarrztear5rd69fgo3ulfq4m441anslykupp6un2yxqpfqzdrs4gek5bkdv473x84scf6j9yg1s7iiicvundnt6aev5kbuz9g256m7wyuabwuwr8e7ya1naplrzv0wiwiyp629qnpyvhymsk927ziiud4bz5javygdwk1dlopg1woq0ruh72exhqu49xja7nrutyar0vr1pq4ex4n7qeg1d04ezi9x47n9aobt4bbldarbfqkjrex62jvmsdpvyh3t1id5a6zh5d7atzabepaeyx4gepuvoic23raed66z3hlkf8y8vfndfpgu01soegzritzry9h940p7js4gayqomqdcicgk0xvo6epoleq2pcpqc8kucnbn85riczer4dc4kcyhgl3ctskh2mpw2tdvf8w1prw61vfabarw8144rxzciofdsg55nq09rmpc8bz8glw0nw985ns4d4q21umq',
-                redirect: 'pvq7gh4cozljudfll6j1vl8h9te350916vz7npn4ohlncfl3i8xn4h7b8njvq30av49kpwc59gvh1nb2pz4kj55cz1bny1gzv8aez1p53k2yaoc7rkq0m40s4x9y26hnkunm0bvgepdkmj8vse8yrp0um7duamykzsoph266xi9ey8aeaag5a0m0fpf1uwinll6rjrm6lms7oz2ne3ywtymoq3mfk5fku4yn6m572wngbln9v9sxbtc0q8r3u9ickzqd69wc2a8g1t5pk76hqwpq3q7wc5cc6b918gxcje7yu9rht577032qchj9op4m0s761bcieqoefdk15jxxa6dxyi74mdqhq905b148hyog2wbabf1b2m5n1xt24a5lrrok405xrx7kzvd3rn8yupnj9i8hmgugluqrcm6u1h2agquf86fomh4c8c7c8mifgekgixqstmgywbu7jllnj2hdcu6jq798p2z0pvq65euii5izs9l1s881u8ihpehfei8gf831i0cf3x9zrgdnk1fv4gxx0m9vbjb3ogljlknx1vy124t611jvnxmtcznksp74kryerypalcs7bxtu8zw4uabu2attop6enusv92tpn9lo3y9dlr1fp92ki1bfazk8az9q1j8iwjj1h4qozyb5obkgfl1u3tpg1mthfrbz1z8k86sc6bu3lku07wpn2ikuiebvhm8sfij2pbbrup6i2213xb654te3v5wi0pr3yfvvfue6shbf9gbumazvasi2m36iet89nv9t02zv66ahtuzimaofce02egxr8yldsz752lsl5py25oou2axjta3ptw5t87i56luciw3zcq73oxhubt12yuoom0e5jg792hyzfxelp6527ks1xbau44zp73ybjovtmgzh6ajbnw9m0f0m9l1yeu5txn03vt3hbu7xhbln6jnpx3zifcpsezpzbjq9h2f65srv4190r1zmddod6kicoue1pby26rrpv5jc2so34ypdtn64atuurojp39c1i2u2du7m07m1pi9ytt5gyj5chqy30gxiaad9e8kujgjzqbp7pej7aelpk69mrmy82402asyeq823slwcl4xrkzdvgie63153ht03zijs79l1zmpka9yzggqnoh8l4hs5q5b2xyt9c6j084grplntgbt1sep7cbyqprvboykahalifur0u2uxu7ozdg0arh9xxotqrg3b4ze8jxnbxx0peirhi3bewugybd1htgjgd9qukzxpzphi5r12ztdayk16u06r5qq46znzfxq7zsk077pa038nx52qvovve7368h7mcw52prnbelxtwlshj95io71lp3dj59xr4gmf4pjpehf7xf1kbxzug2lp0fdseimh7tx9qa23dydqs7ua7d0utmwrjkajb96kppn81plnqhbujsbeygc3129fq6i70yuet1ovq807aqc1sos24t1hk925sgt2ipeqwpca3d8tvmzbe5fiziszca4msybjm7p5509zwurtcmspx98eomsavgfwf4zdsnjatxxwdvp1e3f14ngvuehng5sjmerehtpnawus0gvd0g43u46oipj3w3c5rvj5pi3lo8uqs25sahod6042pn1ifz4revvm7x9qkrcui12ac9m6v1ld0htwpcyihois9y72ddtn3kqx3i767mly08jt0wt6eiland4a7ci0x83llg9gw3opugt4vdzbe3bo4sjqbnipb74x09lm3y16fhlj5hc013dolz8aeod5okydzqo7ifb074o26xwztk395xykz0w7ipvl4lkpop5unq81abskxcoqejk75undak3ayfgaly2tolnuoaxxm5imd90t4dd08kzoa7lptefm0ybacd2vsdx29nihqyugxle3vc1tvx33lnq5n8cjj0ljyu5l8gnagitze4kq50r9n170qmn7uuexy1872mrqwupmw8o006edmozfko5da7u5vhvjioskutj2gnqcwrwja00wkzzkhylve24sauo74gu73f3v',
-                expiredAccessToken: 6602163130,
-                expiredRefreshToken: 4086027861,
-                isActive: true,
-                isMaster: false,
-                applicationIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ClientId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientGrantType property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/client')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: 'b83f3b0e-d579-45c7-bfc3-8d60c152af29',
                 grantType: null,
-                name: 'g4ag1i1bj428ucxe9if2uvafubs4bni7sz1u0cdbpyxfwdhbh3tyfqpi71x3hq8cs1gs2gfobzfbc8hmnm17xa1s4m25gi3it15bdd0dnjpbo4qjrlm4yxqj7xwgr62komebyqqhuoz3p5au3x9xamnjn99eog0lzsoof3rt72olyxuk0uec8odzzf8bmmukh8gkwdsg1a04jlmjp09h9fulb7fb9neuuq4h84sf0e6u7b9tzlygr8gpc07hqfw',
-                secret: 'sbzfiut7ju8vipt0hhyh4ca7zc1m3scti9d48es5bs55pbji1ytw04cuv9xal1wpo3ml8wux20qkym978eau9e1bbn',
-                authUrl: '537bdsjcdsfi2dh95zn482ib8ql8t8oz6bbeuke7pv97873bg23pas2gfatpzgjo5mc2a3vx9lhavav5xnicl9zf9kldi7k8g8kv6mv053rg9946ex9abvu2i6fsw7koi4w7lgb1ofc22ueojprcxxvia7dhfx0a7b7ucr7a2gybmkko201hs0mwdni9izx0u4ncwar5eblpqss6mqs18o9fg8n8lse37k7wf4jkgdllpbof3eugv0ct4bbvg4yr5dkws1bzkup37brrkqlplwksslz058e9mzg08yy5lilmzgvnjbjaxyhm0dyywc4hk3nuw85ojeti46n5xchqgx4qqy0upn0tpkzkxj0x4folmqicu7mv7xmnyb3xb6t959hqemn7aqcje1wu7yc5hgn29564e5g6jipzd246ik6ufvnptwp9tfgicrv3in64uky3762rof073yqy2gb0ggzxn92j6tpyxwclg7r22n6mclx7i1jw2xgdiz9bhp7pav6jyrljh8bqhlu4906074zozl3836wmp8fhz87c2onxqac61vbe3hjyswxj1pmkhlw0fe5qrwiaigapok9yxf9waaga3e9um9kbmrpjcggs5zicpnwyb8etwhcqwpt740zpq4g9nmnv8bskryn2r614v5bmab1bs7usvrpw3gpa01ye0dvwkld9k5qqc2xkv5zx3yaxglbtuao1imxslbnxi3x7qnc3afu121ib1qjsutvu40343ml3vyg0rcxye9g64xvqqhn476vu5xdd97ctp1e4px11f4kin51fmf4ohgn32m8lkrmit6ox8piyxsnsp1f0ijza9jm34mit1jv6hm6kczfwy0327vdywpllpnoq2zc86vchftfopdbebgeqsl05fyk6p9igffrc2suv7ze56gsc1td5f19jp9tarmp72qna4x58frbbfzb94vi154hr2jk08zczwk858dd5mfyh7zfs3jg6cua5uaao12hkxozrpbg8p99pr2h2iba8rbue6bth5e7qxt5qrop3z2time30ii8vhkkx8epiogt71d36kjqsgnxx9bl3cwqlwu3em846t9vezsdy4kglzywrvfv7of4yqvxzrchtv6um01k7m7g9shfle81m2hfh97ahumzli382mvli083v0obdf4e2nfs1l1fk588oeobs37btgb79n4x5ztmls2ph6xh6biqhqmlku7er5k8twcw75ugrumdc6zvstd8rl3p7mkqs7fh6lzvzlln6qdfkyfjgk57916fyj2h194ejc46ukienllv01kye9gwqvzal0c2s611ouyu2gk8jalwxleiwskrsny11pvzll6mhpf6ga5ch79vmnrxcjaxk8g81ythoeaf3rnq09goc5clzqej4b6wbbafh26cgnlzgeucktuefjeorf99cgvpmx3aowryh3hg0mutsuf4bzhkd9x5oeqi6oolebzdn8rotnfvn3l3b8rv7wphc0fwlrzlcsasw5izqyh0z41pmsot97kat4uofx4z4gz9kr56cpukk5ftjv9e2cvcnp4wzitynyjs0yn5dxbkuzr7874hvldnag6wg2rpumpmdnaul7cwbn4t466bw1z20izzr5z4jsuynz7g0ynbfcu1l6tg3esc9zcqwse0c1b36r3vyr1wpta4a31e2ul8qhn0xhtapenlfpufiq24li75jo4jbb26n6zqznqf9r4qufwkj8xogbb4krr03rdbdz2mgp64z6n2ga5oy2jc3mvf2cfjssqwht7siyinulpdsdwzvi19nnvxaxeorbteo29vhi6s5lming61mbdb2hdvhaylls2h4fgtbx5f3mwjmhqgyty1epvtzo2ttakhyfklj109o0j51l6mk6zgeo9mhdghm687d9uvhfrc0j3u580gwv66f19r15ksfd1iv9osjll0pbt8qnd3dlkhh9u4by35idsja6baggejfxogjunyj47tt7uuffe14ebmqgtbjiiwfeezx25nf0zr18s89',
-                redirect: '3ny86shs2wwlcmpxoww5fwugbmcjxlfgxmilho7kda5k9cnu4o1mdgj8bdio11psvysmg6g2jp64ro4bwmrclb6cpw6p3chmfcvfiatnv0dros42z1b961syif30k45jh0dugkg6h340tad72v8uf4hjb2aw1zcxcsofvdl7sdexzatgt4x1uutb803m4c86bf9o8zhw7uezprzqfsdsb2j1emffxiudikrxaf1rvgmpz886zeyevwjuwes0m1evxh512voszejd0bo0ngyv7f5iz8xab6fhdtkupzu5tzf9hjn9eejmhu15b8x8nd3lbybf0wbvw9pl6xsw6uwvl64us0atzjkr9y5j9djjwo6cjqmtjvm5w1ftv9x6m2kmhzkrzjurvp0nykk0pw9rgh42hs6b2me7s4uxv058icbt3z294z9w77ooi9f9ig0rvjbxs0y34tmfxtvdil200vy7wl7eq3zfx6n68q215zlcms6vdhztwtwrp0f1wk2ugjxs8ga7ifdazs2yybe3px87rnlare1iw06w7if1zw8gjbc2fefujgkh0r6qzbpvd7wtbe0xyfhnx0mzcrx9yqx5qvuad9zthw6sri9jgjtvijk8mqb8rokw30gp211k8bzt5ja8xhmc1odsrju3waveh048dit9591z0aj3uo9eg4560ca0ft0ycc3gn0ysmze8g3y08cbdwjtgltvl4olxjnjp6ur7ydu6kbpr9zjr1fusmt4tvfuwiugav7wiahsm43sjg06dx852exs4n7elh03kyyf7x6i3mbj2gdainzkp01yemw8fijaimp962zd8qgf47e7317i9tsfhts1zb3j0tgphs6tyy9sl19gg4vog8sqrny49sgplsxxtmenpb5jjdauvxphlbq8e3jo9z4nh31rptjotbzxwby8rlyh67j434v9cyqatuvrahs9jgo48p7ftnn9j1fbecls8v9a7gjquu5sj084agx7mr4x98upt92dckwxw4f886ta4v8fgt9l7207j2edis0n5fjt3g2v216wz2t8fda8xp12283aqcapcjazla7n17w46ges8ealucdauwlzduzh7jpwexkgqbrrkmkihhde7hi74wtpklto4cuuz1a72kxfp0omt8ryhobge04546b8rxk2z3pdngqg2gr8lc2jkc9kxk1gm1e7ta6ifj8axvd3dj5l9lynp62p2qo239gq5y5l2yeopt7xj66vxqraug8oka5otpndnqabe0dkbg1ay8e7lspl32nlrge5umesfhxacajaq2ghjghb6670edbl2uf0b3ogu27s8ojm419wb1xnctzqhfy6jlo3yd9nad5lbs4zx2zhwy7vkf2eu7mmaxggnryisn9e61u11ptzlyqsektkhj29fp6gvo44ltcimpprxp36mew0etvk57mwmtmb3gelp09bwiw5n9bk5lo7j6c7rmi5n16r5ymksf1168ijkbkd5xt42e70zr8y6ibtcwnlkfqdghngd048mr8wxa08qbazx35z6btrnrztcuam6oxdz5i78h02xa2wshbtxiv6q72l7nq73yf80v59pd56wz30w9faxkw9hanac3sx86trj57efds1a3uy9x8ae0dbcxmmn0w06vj2rsyj5vpthrte9kd9ciz4khgppvja87up1theflxw9i18m9cbyiwyowg94bczjv5xzzjmezxipq79q3utacfom8ynu1aakz5t6ibwl9cm143sdsyos71orck2fqgkqoxy0obka697l9sf6obghnpuxiyd0tllx583zor09wphaufcigsn69gaofltvk0rxvs3p7cbdz77wfe31ip413wp986zkzwln9ivl96yg2wl8pph2ve7rirlhbsbau8hhhotanahykv3mx7b2vat6fr73iy6trn1dze2j57mcs8ol0qcytwyr1ak6axrq7q6pz8lsx1u9wecp3sh4skyk1n5o9bzdv9f5b1duby432ve6cx1z02os0wte05gf2eij',
-                expiredAccessToken: 8648307275,
-                expiredRefreshToken: 2736590590,
-                isActive: true,
-                isMaster: false,
+                name: 'urwcvzbjl56en5y2gvxcbblnthk7r7rl7xtmufm1mq3u1z6gitw3f5j1u6wgmup1gqms5z0jbrtzyfe5vbkxgxcqn4qtz6z34u1ig2q1xvtrpxq2ms6ygvznd8772y4z421bvcmp7dig4jz837mjkxl9alrwxu9q4pwi91aduf34pn20qvpwnba6b5a3mx2hsqpgqrl1ilrtbqmp9hqtr4ne937jvhip5s9rm26d4yu7l6hrcb7maoirtk1njgm',
+                secret: 'sc9tvmg1kvsqcwft7243fib99iuk4ef37yuolp7dkkzgzgppjeejv8pqla6x5rtdpxj7p3mf6wewpjoonvvpxnc4z6',
+                authUrl: 'bnbo789gmspybhpwxx6gt7ojc0i232tbmwnhk325rniwbwgggnhk9fvqndlt6xff223oh0rdy67j30vg0egyj8dowa0048qk6sldyed7008r3f9btblhy5ktwbg3v0s3gj55lf5siozkbxlpxmyqvy2lh8q1t6lk51zwoy5mzhlaun7x0cf5lei68dc6xqftek39k0ry8optfwho3l981cgprg5o6wg2ndrvhvfl689ez5ukdgtj921hv9lgwaqmjgsc1ap0klza3zphomjc6c624fkhauxlimhkx6j12vr76p4trz2c23bwt1ol1fdrnll63ucn1zkbnsei7m0roy7209ub57czrel5dlwllo7pi2l3bgslshugknqvf93gwylvc2acoju6d9tjlwlii9q6erbhv1qqflksfhtc1ehuio37v3y27yib4j6oc5gdv4q0uwrhasrxy1r75c5afiyoksiydqo678c7b983eigwfe8gop237ryj2kvtxlyrvp8bqydmmbwvjuo82flyo6n0kvtmyiwyp6sogsqp0e4kjg9or2werk356le7zyi1eigu4tkje1u8lj4n4npfai70wzhrggxjels8j8oubxat9q96ugk4sd38dbyi6ez07fcxjtbb0k6nve97gfleqxp7uxwf7sbdjo68bxu0t7tqkmndnnuof3kkrdk0q0rm5vff3zxh4kghoe133fwfslsszj6dkhpry41qd3iykxa0nb9l90m49xvdfxudobfxg16lu3t1ru6wjiplg02oexwl7ugz2xit1payaa8syabwnu88di3cituqne7a7hs7n2omp4ix5ik2y7pemehe0ly6lzwgbq9270p4ityp3hn74s0oouxwfnvqkhgx6torfn8mi2oc6ud9iqycdobqb1j8qi1t9fwr66f35yudcwzusnhm8shc1zvoxll56mchc84xjily1gzmiuraltys0dlql1uhrvkzsf257c7sgsfw3ylzkrte9itwz9exo5gt020cq7wgxccf2uvz2d28mbkuun4wh4jbya49i8yizrofsfmtf011vgi2ul8dqmudj2ger0d5zc6l7n8lf79gy8izezqxchg9ek48gyvjaj6t0wnsswc836ypa2edi2ib9n2b0qy8h4vgn3datu3euhaaenm1jfmgnzuknrdp8ec26oertzykwrwafrckapar9j6wwoo6nn75sdjwp2nuc8d3a1rgxlmly4tt4gvt6m9mc8uvcj30pdqcyx3q4wat6nt1zgg1daiyv44na9zoj93r1sacekbnqj8jwcqq5aa5k1me5q6654lo3ho93la1b4584fh66ur62zrsdp7lpbmdlyg5tyly9oh42xb9w5jivwh58yv2rw9gj4z7cokvgvx90pbb8pj98wge6xchaolxzp4lpfphy158zvha2k1kd2bdft73v3rur9gc5oazg63zmmxs2brgcsgpfzaxazdkktaywan770azytds8t5g0z823bndzj8loohzo63kfj999edv6nlrmjr9pduiqn048kujif4vya64p80gogs8s8s9oqhl9of2il78zry54nd6pfnrerc385cdc44euqj2pmwni7zbk8cbc5gbibdamfpj54du4old4un4srtds9cpqcjgmwslu8mb2fqlfitdycv9it57ga2kp5x7e88lotp03gnkf0k2v7u9f2nvsp1h7o3uxh9pdp1pwx3p8y73hbn7bchixgxcb82j63dm03mfwm6zee72behgq4fotjrvdr9yoclxrf4ucf6oddlp1547eo70x383tjnxur1goys9tltpn112uso6m2euu6yn91nr1qp7clmxc4q76esp0oul9qeos56mlqyg8yq58qywp5a65nu3nahhn4cf7lpfdhvefueck32cxj9dd1er45kdexipb8cn5svw4hnkd9h3uivmsjtjc07f6pfyrih6gmjh590v8l8r7a4jppaff47pj7ey2lwrw6mo40fvccscg37qh0gvq5uj13mq',
+                redirect: '7yxn91j2bwbzqat28y9rbga6tm4rzpnt13m8487fsmn6adbr4v9afc169jbhwbxc0ngaaeykyvtjox6v9nxkmy91ps919qisjkovlf7dhm1cbmqs6ot91ysaj92r4yqq0xacov2gso29fmqi7553d9o29l5nmivnj2um3xrxgzmu9ngze343p4hd0dz2rsxw0i3o967sz5wmyabuzakm6v3ouuvfxoiqrtk9skwjrswakfb6m0vlt1ewgq5vxpuxkx002d6teh55v0mtc4vqn8ms3rjzdlxtm0lxgzzcrzi5cjhxou9f9jjnm4j2ucpxvn35v2k6dthfs6i4fj5kmfc90f65rn5t1k1cflrapzwpjqw1ce2w9qs6xtb3sfagdovhgvc23z448njp6lc4prwlicjplkdlakm7cr3wlj9z11dnom37rugh016xin5s8p6f8gnsllwj1ijbnymt6dfoofix2iseshr5xhy25xyzb4nwyixuv4xoryf45kc6ux4jpdpy1up3uqhmjr7vonfvkyi2r7ixueil0i9xsg281hfywvvs5f4c5hlbpzlh91ggrsh7pk4mtx5frztpqejhch4u638y33mmwob7jnyl10oy21smqgk0jvftokwddzvv0l38sc5e24vdh1e4pj8hjkmyqj95u2zosavxje58z4vuj9ns3bp8gokxi6f1ho73pk333gmnn4jcja6qhhuk63o7gvgh1yvl5h13rlpvuj781r2jff8nijzcjq3pu54tjvxu7tu0dw2k5ofm2y5fivm8cdpzhi9mmfviu4vncm0axxeojyni5x7we0umc2e01bicly33zj5as2nrp7cw9revdto3n6p1nypvaglxevxkwzj3jqknl9hyqmrgieadeutz59zbygo6t291nxsgco8vcqzwszjzrkikaitpr0gf11bf4566i0ehlk3s6pdv8ngilwpph21eu81o202g42coqnggmudl28c0i69ff72hltslfa9gv6c8106vzj5dblr7lw28c52q46ckqseufgoehk1w2gndehir4d0ahjefzzhk29iwvlnu5del3npxuxfwvzx9jj2908wmhul52hukmuxmdhpnlkv7ifvyrba9c661e4ow531e440l04n7m40y9jghznajafxjari82rea871zsxpcdx9rlgl4ju3764omo0yhh4ki6nlceah3oujgzw4r20yqiatuq3mswvitj2o34sy1k01tm76dk793km5y0wyurjtecityfofuehfsgq5ltu1w8snnhlol6zrm8qktrx29fdobg9t6jp9yhstskiwmkwafz1yfv5kfvio74ctk2ch3uqab7kdru4zojmspt4isxckmpgqw7mtgpx1t1easbqv5jqpe1x6kn2ar08svgsjbfmd285l2uvomgs5mbkjydj3ioo1f6jvv3r45fl95aisfx6te68vgmdc1cy1433olwoo4tonsndhusch59jpgfet563n5r6k6fcuqyeqcgd1fw4r2kt5f3ld99rw366z6om4jgyezc63j9d2xuq61ap4kc6da6ak8teqzvm3jcto5wipqr8johf8gdkmkz9zghiiaxge3yzpgapppjb8fw7tz2xgqggdzsssntv85uvd5h3grszephs12g69e2bkju8b1587rkjqdbpf75n8mxbsmd3g58mhembzqyg0xvflwck7ps7xlb3lyyn46xv4p48d1sfyq7iajhm4b8i17wy2v8gjnnvbyyb8yuk2g1ypiiyin90oxwsokrj3bst387lvn6ughmmy520y31ew3gxse4dajfyuxi2pg4uejf90x192jglz6ezxxiug425o1mggsdjf2g8pqt03vi4aym7odlxbvqp653lojfvr7gai36o5e3de6fea4fhpghg47rohcq1er6g0c6qpxiyquz93yu6kssbijsyuur4o1cxjji8rh9oqleitdyidch2puj8ql3k9cvdb41rkunoe4iciudde3nrzxah5sqgxd44vd9cm3',
+                expiredAccessToken: 4824329637,
+                expiredRefreshToken: 4488231726,
+                isActive: false,
+                isMaster: true,
                 applicationIds: [],
             })
             .expect(400)
@@ -122,46 +121,23 @@ describe('client', () =>
             });
     });
 
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientGrantType property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                
-                name: '2pzaq3dz1f580zmmc1ruvm7813tl5glf53ywvhh22jenljhwgjw554hihp9aj44aolhpygp32vky9edjl9cq0yswa2y2ve7c5g3hoyrbsjwdseq2nnvxeurjfum0on2r3dh633vv6bhxaa1yisnwhawjz4tm8yhx4ozukrqtedyawc26i73bwkw6d4tec5pzkf9qpgg7p3oxqk9i4kiuo3w4xk24lfon1zjew9dr59ck19tzmv8qpf46euklfbe',
-                secret: 'sjskvfis0g3lvetwgtrxmhuofb9rnv6i2a3xksaicgw74oejqzn6sx0y273ybk3te7jd6kylu6jcs0l3zcuq18my7y',
-                authUrl: 'w5bbugsxiamh6y83tjvfcii4g7dx6svpzy1t0b4cv5ux5g5nz4vcnrl4heoznblz5bd2kpekszeq5ziao4g9hnqjtxygsw5q1697fbr2dc02h0p6pytk944rdoq7ho3cg4whp3d8uyzvm8qeq1uj7lptyr74ex9laemsng7obkhfy1aunfaip7jr9g3qavgfk0ik5sa4wzqsezocs0pigpkk3lui4lnjjsowhogyssvlc3nbx26wsefijdfk7lr7gqusk3iofzlwpjcyqfz4zxj089o6mq8q9bq0oszjswsmjmvhdu4cylx2mkuk4kix1iv613yjwgy7zfe63apprpwhh5jknupbu6aqexv4at8fgiqfw3qe7v0wlewxkuffp3fyz1rr2t1t5nhvbro1bhzcn9owyzwtl6jj4h5vivrawopcr19qw7q1wme8bi5t6dc7aq3nq3f1h92vvyfes85xtrjlrw8g5hk8zomcb5xzqoypttr1ci4zr0fszyidxrbhr30g4jdkyy8gvr1gkjav2otcj2cfc3p7n6s1emleuyc920fnusky8nm9a8i6aat3rx353kcax40ylce5f6wwscq96kphtlf520t4laj64wis2dbn3cxcvdxwbz7ufh12bzc4rr2p9l4kbt9s0tdqtm98gn2tt9p450tbray6radzvb5crnz900z51swo6iyqv52wioiw9e01xiqo0cp5omlhve00nwgdh7xw7fugundsoohnjht0b809ho87glb9mr14xzvmsxre551tdu6vo1i8pe2l187c2rmxjahcivv7lnwje7ia9t898q3i2zwvmr1sxjjnrd3oqrqe285b4i9ppcpsnsfrbugwilrd3swndsucy11z4da3snqz4cxsq0npq3qafr1yp6sjwzk2xzmxt5t4d5505p9r2ii90vmd7xbjqqo2rsqb99fsgz59kdv76qa5dclbkxnojqatsrf01pwoavzjcxbwz566brv5wlh9hav1pe2i9o7k2nwtyiq9n4qvjng16uvuiditt2fzba9bi4p9lzsu6nwn6nfcad0emkzqvf4egdpi12gdcbstb2yuzmxdtzmkohqd3yb902xop7ftcrjy1p09pqpvtkjg86pth3im0uovqd7tayndsxu0s9xy3xc69l1qfpzxk2dqadv6i1tudvqny6jzgnql0rq61gh4sem6w0r3afra16lpk5y13cejd6gng8vhaidhv1i0y0gg1luq7bsc5yj7qrye1a5sty2l3aobdpgbntxq7j37x2mxoxmcwby69zwjwu0fr5myh0520prpbkohlan864pygoxnnz3wl5692lgjyncyzssqvqtmjz2nzr5atn30jmne3yj360ei9eamyll6ryeuuypuyc0zvse9vc1gurhm58v8xo71aj0pdnda6om975r2pvm9qtz4rqkxgf8yitftjitcmvd7d2p58adrzwhytsocfw7gax2zz3ozq8edda0s9jt3cv5nlq5t54h2l171wsn7odwa7horvsvnzeov4pis5r3s3d2ifjo4tmlk6kn8pvtf5um48gh6z4zapme4qkdytobpn9srzal0lv1bsddk7g5bd56eo1evi9dqh7k51bouo7b5udapaka3jj9rr5x3ntmq9c9vdcye94wezwpmo2skp8i2pi1ksgm8x68i447dwspqoy0ve40fwtdnxd2zl2jiy8hks7sakvb2juwps5lrh0f495ist1bv651yma6y8xudnd68owgtajcxv44x8i22pq789ws992mqsnruq9u4b632scxy7tsxdspfxeu8nq39a3awgvbyyv9sf8m8x4nzxergzp6qb4ygab5ueo7yc80sfc3b9x0dm11at8jxshdxcyu41haw8oppl1174ksz0nyrippz3dyw79dm0pan9zt0dagvgdp786lyqf4zfofatxkojjy9mteibpdfw8md3x802q5774mlcmowr0n9vogf4hlbep5hpjjww4bem3glnqyc8rk55bepqsxr',
-                redirect: 'j2bcf9gq5pa330ji7y0wb1ei10wv3qo9n8d4hx40bi9ld8q17bjipwo1v8x33efgg1h0illvednwr96oqkorgpvl5l23n99bgljrfzzrcmidribcvvfdywfhwub47gf3600wvn0bzithtkll31rivy8narm3fp1gpnzeejngnndzcodi7rmis8fpstfijubbi7a1u6s7cgncczvbh3s18r0hnokobuw80k92fa2wwqdsgg4o1y6lke5norrdeknzmahr0n54yqj2i6w24nccbhlfyb4j1uvqdrwrwwy1jirmiw21dg11ddcbbn4o4ofbnokv3cf6cgn9kq45i307qdcz82xfocr10k9cx1mr1y76wa3uahiobz8hv13th53wiyxi64jm2sdxw3wuybavse5042j2tl9zagvaf0xul5wvzk1q4a9p5y9qqs4zp49mm59xntjczkgx1gso7jqaey2dbzqkg7e9fydfbfxqvbmjk92ui5dcn3s9ugoa19qqjlgj3xdakg4lnqc869hkaz3nzrmgol2l5659h6fumayoiqf740b74rmomuy1hqan2j2q9kk9kfbb7p8anv797kha5wqsqgedyf3bapao4bch91uk1pse48zw7fclr0hai8cfh96yv69xtdz3mh82jf2qncdv5dsn40ulr6dr9j69b47o8pefyb0ifx0k82436f9rl2tag6dv1sh9x8h2d64vukz2no3g71azner2s5hmzfn523m6er7749uqmyr22tcn05oqlw3voe5wkoisaudlfbctzc4frc21rck36zlen1w8ditj3j3y48agwiow6zvt92p6uyh8l1hq34nc7bc8vclnrwgcan09rk0vq0gwo8c6jhpuc01bxa4ob3uwtha093i6g7rfbls1uzrhcemjkls9vep75en1i0u5vozttm1dekjlkmrguhilbkqfyvfyq6sqqe8rnm449eisaupbzr1fg0up4esb6fgrh3p2sy27u5zqqmwnq8h76hlb3i6inzopcpihn2ql8f947ntxyqm0spidragtlhyz2nkoex3os176dvir2pql58kafjlzgcpw85l09fq79ibdugnaffgbnllmgole82ypw2jj7l01zlzth9n2wpls95nqfrfmzglhjqzd1wacm4bx0dky6n43txergfc3nkhe2g0uubr5u7zlvgem4f6v8iu01sdk7kctkvecnlc6libo4k9ewfpihao39pzbpnojuei8ocvx9jxz6jxxnec92o0wicpyel0dw5sq9zmssymbn9z7mb7p61jh90pq30h7x1gzlxhrlpm5jhinjlhvf7p5jagpjlvn6quhqmaancokxspz00z5vcwrgr38tm9sqk7rsl5gdfjmxnwvv2zo8eoipd5r2dp7aub0aq22qhy781br4ra0r0y6t5h0m2n8fkc7y3xnkq1i1uxgf2uhe96uy0m92gqjmxvm7furnyygl02ho49kb5ki6lcjvsmp7dmsu92lxv2st56x5sm8nznfjzkjhe3idgggr1nicj0r0ditap4anls1nj1m1zbtyptqmz3schb5pf5zzqhda80rrck6nwj7es38ukv7gy2bux525epezprri637fz03gijv7wljv9b54kb238rg5ibc0jl30uujjcfy9qdypvesmcxmen6nuvspas4lzohj6fvhh561n62gdtu0fag2xa22de9o5qra90luznacnr740ntkbfnt8l0l02dvpuozy6bcnssv5wcnkb1k91adfdzrk77z2petp6undg0fkylidvibouxsnvuh00lto1kcfhcu8lp770r71g6gp9mef7yc5slaxq3apbrtx5l07dfcgqop1sqqzypbj2cs2utsqvzc0by2ml31bim41lna3zuxlkcihyuuth832cwlbqdcmawmv7rw21yfzt3qnwnm1flphtnebyrser3s84ncp09yklp416qs73sfruo7adc8abmdux6kwyt7z3utxp3uv9yynlwcnyrqc71lsnab2jqr',
-                expiredAccessToken: 9168473365,
-                expiredRefreshToken: 7346009356,
-                isActive: true,
-                isMaster: true,
-                applicationIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ClientGrantType must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/client')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: 'e14cd84b-5b5c-42ec-b3c8-0333991555ef',
                 grantType: 'PASSWORD',
                 name: null,
-                secret: '0a4wnu4kn6b9nmxjbqxbc4epyi5xveg1gv3qze3t51qxqhigk18pku2sqxmdfy481w6g3utkuyy4cob32mwzza0u3m',
-                authUrl: 'bm4fdcmbheeai8vm1q6gxqn5yh0mi2wi9y2vs20olqdcgapkwuw1bjkewjxj3q5h45l1at31neot4at2029pqs61yfkjkr4i0qgjwq50y6alln9k4vow14cm4phzshhl4lr0x87bcxtduxg687zcd38vwsq5ubkhaqzvx6xqprs8hngo54kw3yl64xnz9vfu2hzjcvf95fc38y37ubfbydzc17269rd9i4o6zwulqkxdkr173wo2dhw15d4y3jdgmwo1eua34ibkromnhwedykttfnwlfmv9nmmstbs8bbeaqdtrq7y3unbn1bmtegredls3bzsc86olxj5x691js5eoinfmksw94beuyvtk2vw65zqyjn856nyedobhb7bkmj4muysm751d10rwreymw4sgshr50r0q9f8d9f3gd7jqpqnh6xi6xo7aph93vzwrp6w2itog8zqwkp593kymmueculs6yzzo2wiao42v777d9ejc3kvt79imz9onr5zsb4ln56vtehqlak4h80l3977vns736dg1farb7xuvo46wg1amgkq6ot20k9alcswuwupgz0y9bssq0u2bei7k3dq0urbabt9smrwomidt2vrc7f1xdvbx8fnlry331t0o3u1phs66br5u3xeqygr5il2frj0rl70ih38fwjdav2p6p60ioe2uuvm2l2als6wooi4kaoiwf9d8p3s2xv42ije5o7uagfx7t9hwgspswnquxze49ezcrfyu8ervuj0y4snunqjjh48au96mii7cer0bhydlfm031f6oea3xwm8abzav4fcl5g602tpn8keozg18395mdz29tm9jbsdfeolnxxekkkt6kvu0tkrkmspbf9165gpj5s7bgxsojeoej2s8bi15fo98yvbi6i3dqs7571nmqk9tw8c6lc7fm8m524hzh8rh2b85x2239o6ulvufjnoevvggpck3bynmv5b66yasy2n0ohhji4p16827qap2hr78bne0f1itycj1lgumq8yez8ve90qfp51yu57gd40v7rsse7ac7uvvt0v1o4aynzwscp4mv269qkl8kzlkywleyhq2bhzuthson4laxcjkt7eabswdby27uy7dqdxg7j5jgsk6sme270q8exgrqmriae8d3fafpr814df1syq3wvmh4xj1eqrllpmo8eig8b1ck6uvshqh4tcqt0ltlj4mo0cxgxll6rxwizv3ladqeeiyz6upp7aaletkpwk3kuk2hyvysxafsp6eopih9ae7mh4k180vfn5vlyyrwjazqcylja2hax676biwe7dnwxsfo7dsgbziu0puas2vxlfj1jm132at87s9u4fxl0ltoif9l27fgyugoqy5wezcleq2xifdyrv5a69de977g7kxkm6e97amd9mbnxwev82ohzqx14ccfbrf3ohgd6pphf6c4043dm9eg8rff8441z5e6iic7vx2e96x8i8b4v9a1c0qgsjoab3c28k1li79idfqxfe2dndpko1j4ul2ttv3jftgbkautba0i1mt6v9pwtei263xrvlxzqj3lg4diuoccskwtyqgvhybto4h8jzs28kw7gv9c8pk2rll5nz5axcyg8m7ptha26y0suqitp4pvzg7ru5g4bo78f1mpoxbq0ctn5it38c7n8h4gs5tqoxjfideookrsokqyak5nc70edyrrg0tbvpmwhaauluzv93w4cyxk7323whoudh40ox1dilkxurfyz56r0ts2sl7if3wuq2nk56zcl2q66nxxnvzrxcgv4zconc0osze09bjj3ugb6iub1l856zcmqgfuakcgbu5esfr1mkslfqsaj17u9ndpr1qcsr251ah5nzvuxfptoq7qsci24zzajw6df4fbet5r8ww1f2ybt41wnkmvdj5z4a6qt7up41g47zcrvhcypxgc56hug3a8157to3an6ghmx8lz3u7n1cthb2h4hrbvqizisrfrawbvb9vdg7du92e07xzpbddycqhlyrhbypl83iq',
-                redirect: 'cm3idzeyon3a3ifaot4bfuwrri6sndbgwcaxlt80a7klqvidpdqs5pim5nnow7gdz4fohzlfpdl9893zra7xg74pfvrnjriyln5hj7vrgv57p8rzw7u14qbyrqn00coysl9dwu9n9k6k9suv1fow2d8r474m01jn8695y3cvmntihornl5hv9ejq1m4l5022vw4hc20rnq794irh62pzcwqux8dgh1ft3fjbll87wle7moikop6uzi7nt0n86yqjkg6rmxs0iely4obxuf6g66ofpcawi5dseuxkc0px747jvjf2eng91hl57nl7b40q4ub6uty8wgmhbg1x9jhshw15akdcgdwbfq1vhs2qarcj3ppwsyalvqf1srze1rgb91xo6nqlhydpkpikjunwr4fge8wkb0igwsswnyyud1babui9oyvyu3bxpaamimmcidvhxuvi2a4ncoqg9qbnnbr3b6q3kpcnhjhb2ars1py6pwc8c9tf6hcnnembvnuh980kg5mzihw1eedhl32poebazl13va3isgczyjlglus7zd3iqmpoduhxgfa2k2secjv45zfu98goj0cry74r11402ak9fb6flbycf2hkagc7mjh937afpe1braqhmq3ibbzznah94nlbps2ysxkdg0vkov131qc18us0l0ar3yv4ey8cly7cxvq3384gcjyi1bxu620kn1gb6mb03mke8yfuojavd6ldwvsysnth6b9e485vual4jxqqfdf46i8goejkhdd6s2juq6xzpw9bt08ja4in3d08ouuf23zp8vq9m96qzs2uj08s2fm4fijqoco3j1pe6k2d3iw3v5ojacn74mxonjj9m6qutcka89nqii01a68mkf9mpq1ckfbijxf1qr7kn84hz4f08dyxch6as1ufv21dfjvp322ewnviw8zn42g9relvzmra6wcsdp0ai8lis55jbjlaxwgey7r37sqabn9fiyui4sjv5kkvv332u8mgv1943m1g6em7rtopto4q7gufqojtnn5oi320hq16d7xf61v8yux10ua5h4yy7g4f8e2sxqh6nh8bqdt0kjfq167unlwwvvbrix7k9lqej9cgq1bfczd8yrssdt0cghyih7qnscnf1s26fctz1r4101ygmp1z72w1is0osag5nexo1xbr2055692se284yvrj6ka4kfoiyd6weixa6guwfgnmzjd1xzd6oq8vnp600c5zts6n9d3uju0ivp1agzxzben294kix1dl9c8cvoky2kelnwh8k2ozyf5s46qsxlz8ngo518wes6r4re8p4f47yddzve45r4q7w54nmzaeutr2738j0ln4okbdwdo3tmqi2z42z1s0w5q0d1g4gbmbk29es5mcupuhgoeiuske0tve2e00dbpkznv2o7b60jabydxtqaw5ys5ti1u4h0818n1128fdibroq9l8vb7qdtyvvm0jw449jtso44xhnn5dankz2ecfh6ufahhc0p8ws5znx51584oknawckn6mqcqfjdlybcxyabang8v8e30l2xtxnlzl5p0hj15va69o0wosehvtp177bh9ju157ybburzfezf44yupkhpwtjvmy7ns59w8kewk4qncwbq48ch9g8b2753kh56ersvcgns08uzkvxexut0bhjz2mq3rtztgg6w9dhr2il2up5rw6c8w5f0rj2y9e2dasj2fnwiepnsygfbl0a4c0csjrwua7tegjc0oh6o53g3enc7ly4gf4sqcxi7gkj9d4dssrpcx7nnbhutq9o0tqb315rzgs8eq80jiqjold8i0kse017ov0qsodsz9c36z5fz1pc2r57qzwtvdlfphsf62dqnslzxbnwv0akk5cn5u9kwqub0gtonrywxc2pk0tav3ejscuxeuw8ijib7crt27fq3pp0r0fgyirbleoasb31x2wn103jk42oyaaweal0omujlje9dsm5udqmwcu70k9b670sopclx22dx4utxw3a9hp1emiv0l46l6y',
-                expiredAccessToken: 9230220506,
-                expiredRefreshToken: 6203712827,
-                isActive: false,
-                isMaster: false,
+                secret: 'nj94bf1ospvjjgp5kvbla38thlfzzlmsmsd4gxm8wokyxt8c94nllmnprdaug9450tcjpefle9xui0608apk6sjr3j',
+                authUrl: 'nngzlz1fkevu3dsmngjlywbd240fwfbluxmeple9zj12hgkozi05tnkteq4towy3atkfiqsel2l4dcb1lrvvsmc4usyjmokt6d6tymfvvodaxpsygjcn5juzqwko6ncn41eu59bcee62e574siowl7vixvyjqotsadn35bv85z867uy072cgw3v6jkvx2wf7xf89bs3vjuc9m3v8yrm0how5kv44dzw4g7suyxv6h1d6i663oalrw37vz230e3hbbl84d95t8ce94rks5hvrodet40dbtfyvjdkuobsjsya1kp1lio7ti02oro9n21hpwkawx1xyjsp8b4baxatri6hlqcct3mmz6ygkh02tx8nvxwgnxbwklswvsubhqlhsx3s4k00u9vfdvkta7kaqlrlluz1kks4fib5dzj3sfgz0ywzllorgjpqrzyog35cqlrtp6ksntalwwho47i8d87zpc5jtncykcc4i5wjgehra3h7ntb8h4gryo4u1g6axes2a1cwsv5b6xr18mxeniy30udw68g7lwpn1c4d7nyeil4uc1yvghsxfkzwkm3s65z4ely2l2fl4ehk4z3pwycxuv1mwmywntu6mz1k0pxghhuchxazk5axwyp102ip7iksxxssxg55213vb78hrswvsmvubpf1q8se2ovj4zieaw6wkif8zyjxi7zzsx8mz1l9m3g6ju95rrzekhsu3t9yu6wlfixfy925amg2ium3wsmhx0oehq1x3ul3xve0bprhjas0aaimupzvkshvcfgnhtucb2u6azhzi7ykugs5xudq79unhdms4jo1gsdr375lxl3rafryq98fjia6ntm8e7tb2utxepn38a93cjs882u7gcsfyji6djmshmu3iawrns128ljbxe1yamegfkxh9b5sdcy46ez2sr3dwik7gnoutjx37drkvp0s89ud2k3aevigj9qkyd9h0two9flyq8kd2k0g40gukjttlbhml7z79u0qw4kte3cscbm01pixbx5tivxolczbir9r59cp9mp27imrornanc7gbljnl6hpj9bhvkbo1t3jd5xoysq0ikphtg8lbamnpqzf9iy3wqe0ui8s1onvdy50hakeye8tn4dqex4nu94jxtjbqmho07626q1asarmm7ez59wvkqa6c50704gqrx51q5i6u78tqe7399mcqs9ygxquqrpyz0d21csifw0bq8ac4h9s9gg7mwdci0w5brxskpb9im3hu3t4yuutn2lq3ovsi3es1fns7ka4i008xti76rtww6p10q8xxfofzem12gq908470mnkgpnceakn6itpnu5e1mrtzo5o6ln4ehhsay2gdrco2obh70uxpzz57od7pakufwr65pmuhqm5t0zd6v6twg37kj78tne7je7sphnyb9z4nmwruougte0jmnsc8fwprsuih0415vschbdohch8cdjf4w85a1pq49ruwll6lcxio5mnbq7z6rqyvwzscpk7hx7fpm6at0f3fdamphpc4khkxijpeqdwwe5bgbor4850ghtc1iiaph7fxh68uuawoz0mj35k9rl729aszth2r60z7jr087crslo22zr4tov8m8wv48wui12k8chd4q8l01ozd6q9rzcnjqj599z6s0jl8qdbxtatxa3pmnl0blehciwx4y5qiakhl47q6afcbbnfrwpwb3kyiagq2ah5ra1dmcy6m1wq3clfv0cywxrzxyw8t75aytvl69rrnyu2tmm4v0wl8e39ai1rk007w9qbiksn4tfta9sarrhwvo9a7wkum881vh0ogqvgtwmw6rjpj5sawcmywahuu7cagq0njmhidykna4crjchqvl6ftll5dk0yuod913kxm7abeeqoylqubuqf1gpq17hrbmrlnz01j80ntaa3a87we287145y1owd67pazhdlm2eyp9xikmnag741nmg1bnvcvkm8cvs3yd5rizrtr7umbpbo0ghhymka7a6hc8jykpdqubtkht2vfmnekcd7j',
+                redirect: '2rilcpolm9ekbx0nvkpgkiw7tcc5rzqziv7w3jf5mbvs93wfc2q3bif68pdln2rgru3urz68yg78nvx5jn9993q33k9e17bhb2zez3zxovg3ji1wxpruqzbckfvig8brgnowvd5k2uytsj3dz5j14k86bspl1umtb1ltzcp8kae1vlm175r6d8jxpos8q846hkqo8yha7lnnelqhfrg8j0274u2m7watfzc305g38zn95n89k3dz61t5lkass5astlig2w1xfof98te91zm4vncvxsg1o4d8ybtai2g9cayn19lcwhugzzs5myl5t25tom7vd78e00vp6k7zfk74px15omf7orc24rz6hcvg76jd2osncw7dqeiyugo0b8ktenv97o300vry3n1f1nyelj1o8y4i6pm7pklkvqbh607bcwx7f4qqugui2yt1r7f967v51ove1r3f972oe90kegxpoqf5p9dnll1p8501qjgtw36yvecjxxr77xck24qqwt1spxvnhv8ivuwjbfk38z3jfzfn48ngkfkdvln7f1az0cudnzh4xuocnudtx1j9xdeuca90x0t93a7fihttujm8u1j7wv6wymctuuakkpf0xv4y0jvddho184k0p9rdmywlmleg5kyoortxq7woxrsw0rwcxu2o5u71ddv5tsbvf2j5kpmgu4ypvo0y2dwo1w88tkw7d6x6pvtzjou3v4vupbhkeg58a1a5q6lce938prpeyc6wwqz1q7aqzpd6fsrqvyfkx0cwoh0se5y6egec10qwfx6kcpi84nrrbab0fmslyy4nfchzftdz62qeo9o7nnh2g0cng31lfu9ktxqw8yq4l11wxrfs7sphaa5tm7ize07ld7vcsdvfanorwhfys048yvs4hrwxp9js3qg97cjey4revlxspag235fw8tk148wam570x9wi9uqtr2iememdwegtnbhq42bv6cw3brti9x8hmw6palzf2zhugg5wtdfm5wffzkwulsu8e28ym8kw3kikl9368ve02s5zdye9mqd7z4ktk06bvl6922ld17um3bfe607l5og77p3dqsd9qd9btlrenrq5wik6sux6pu9uzsz102u9hxx2vy4ccc18s507pp400aci2b2tuuy7xxxkcsknzmxp9vk8wcqwrlksoyzv4knosrg7vvviw4xac78swxh3pfbivl69h6h8lgt6litehvxjeid7ukwzgvr6e4hk5eustbsb199lv8s5ge2yqu5iuruag9jz8drbwdg91c75aljbm6g3ggmt17u0k4wvje30dmb8ikl7xm1wh1lpxj8c1bhvs4dodat6nuxvurcewnydddq0lqn5pc2gfifriy1qa4dvcmgaody9t7w2tzift9phcitjrbt21m8tjhq7aodzo1btkywjwllixugr2q570mqd053z25erhke5ysdkqituspmztyftef04nx2lhghv5aovcvtkri8p2jv8p86vrr27qvctbjga7uow2lc395149k8reti65cwmolcdt7oeaqtpwmkfmezionsnowcw0ifjvarmmooswloagcrhtf7oeswuwq08prxudzct636hevu1dbmpifytdtfy9erwjhn3ckcfcclwdyrc328a9jtlx6v1f6yiy1rj84nb2ralr4p1seicoa0y0j74k5wmdj4eos0zihoqk5tc8t2m4j93f2u11okc4z7xhtmtvzgddhcf564sam5dhliy1abjtelhznk33kr4p2zrz0rckregxezuel9p6h07k1rwnnsml4auz9f7stpkxkoqbuzj3hs65jmntz2p7kfkb7ec4mgleitc5stxle25c7eq5y7j12m9grws3sw4iwyl27uj9e1i9i2aqa3w1tjxs53h6upczew28ku7u8gq5nyp3nxmso9rfy1kkp4ks4zhwrbyln3omyykr53344ez96fect3fo3afhl8sghn29g0ahtfzmh04ixv0b9akfcr1v164ciote1hrf59t3g3sszefdd9b',
+                expiredAccessToken: 6227706326,
+                expiredRefreshToken: 9923364356,
+                isActive: true,
+                isMaster: true,
                 applicationIds: [],
             })
             .expect(400)
@@ -170,46 +146,23 @@ describe('client', () =>
             });
     });
 
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientName property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientSecret property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'CLIENT_CREDENTIALS',
-                
-                secret: '5ie8vmkeocslo3t3cl07h8xh1pqfrng28nn9akv2jvrl09arln5xwsv9iufbkg1dzpu2fgr95f8uwuhpmzv9jlob8o',
-                authUrl: 'vjcrfgmz92dxbp9otfwae987nako69uvvfkkzsrxns5jizuge0pt6riw1qes0bagj8k0z0lwrt1jykff2dcvmre4jv4au8uin0uus1faidsj6hc5nb5lsb1i9h2dfe4oow1qydvw3914t956z483x4s0bxyxrgywojl2rzsctgwjy27rp8drzi6d2f6l4zer9uhxituowf5dwbizbb6siuinxiklveeo1azcfiw16mon0ybj9gmx36kl7n5qia0f3yxgkekz4g7biglr2fi53hlya8jlgp6u2ruqg241oi66ynltqowafefk2fnxrgy2q12prdiakt9kto8sx6y6yhchk1f3qy8utmf6jtrsqquqv46uyfsb6h3x9f87kmz9igxl9o10ht0dupm1at21ecg7vvg5x2jl0bjao4uui596vs22n0z0681aim9f2o6htf6buymaxgff8a4y1b0uedcu40qfe5tr27zrur6ae6wrpsq6v35sm9bgf7dlyg1d8d0r83y276w86anb5jtk4q4a1vhnu6v8ghsp8y0wy9jniu7m109vwppspn4q5oy24upuwgyhhdi4mh3zc256777xaq57rxq1vt63ycr25kveqrilcs36vu1zbz5513urt9bq0xsv0oz36fgt4vc96lwg595fl0ep17d6feqfubhhmhjgjp1wec8p6ap5l8j5rxh54dwiw4kcfhjks0jwzyumgzw1kecz6qhs8qhg50hzpawoldskioneyte6cn6715fc4l0by6jq7dl3gg2mkij1b5003adpn40svb0pa4jhew5bpzdqokzf5rkacjejzo0aybk954cdfzqad8egt5vjpbvwobjcqxl8wq6jqeji4jilx0i3npf70y1d1svtna8x34hvtte93mgogpax6ktoqmyzyp121sspmyxvr2yl0z0dx57ird2092er5v184zyj337vp7usdqs6uhe1zzgwt4zr5cdy0ju6w32jzcq39jjcl89dnr8s7a9fjz924ryk35pkiqmmwu8ba6buoqt4znvehwpms18fj88jyov3trrkc5sllurc71h4jfl3b28hb5f75omkkpiexxvm38pmg65b29crv3qt8jfuit7m43z4tszb00lqh8ulggvxeja22u7zm1x56kifvjihw80x945asbaa18eluooti958ax62g20xwt1rhlvwzv5l5b0c983ovonbjbs71wgd5y6vckp7o6o01xax7s95sbgil3hhw4l5200j2kaer32z50rwifkmxxc4v6ozn5r1ws6ttfen6nd4pkj6w67bcf9k4euf2x2wor038p782xocrakbclwu30qsidzae1tgf23o4i08pd8n3es8kzu4sf1cqlmz1kn8hzscd93dm13n0vmj93crrduj3ra7n5mfgcg4a7qgv0g75e41d2gzaqm3zvc3xyjal1mjfj8zkhk7nom3vgji2s8bvu622puwty65b84iqr198pq5bzn1l45993b2v91yurdwq9qgm4s6l25jr182dh5pgn6m7n5dqhq7wxbwgetuun2y0ikrghn1crweqeuxk9ytqqniev7c70261g5wd13fgqaxfptmmui6abjav1brcmw4cfqtz5ie5htp1pgicrrn4c1ztorhnlmirhnqgiyfyjobi6s61k0m4dm7xqsd6fqlfju0r8i1lttmqbcma9jd7ufm6vyqt4q148nyim1zr9oj6gorfqhmme595jv2toi67wh4tnpc8snh0a3vq2cqm7q91prgdj9fup18sybit9wo0mh64ov45lou853p0hbwxtc96blluujz0yybvym1k4g7lxpb0ipgfuql4gdknpipvh73l27i7rayjt9040jx8h46uwztaczhu2yikl7nmg5gthf07rvhosby643ssjgaj6wxm34c2emwfryb1tft8jvk6g1u1g0h4hya24bga9yxexvsbgsxitrjzlhgfh49xjdegw52hf9u11z0ucwzmb3uxmyquwln0va4uiuhj3xu6k6n',
-                redirect: '4s5xwzkomhom88gc01ydwqyxnz6cfdc5nv2y6ltejj1bcrpzdzp8epbt5n0zysrwd2lp15u1724qyx05lpcsfd7gotz6r9khums66mdczry2moc00gs21u8ud22g7cpi0u0tgyg66shgoueodnrtm876b1x0ylopbad3cnvjpdukswifmbc28xu57i1434uh451e0gvveinmxfttw0l5i25fyd0cw1yqjw1fifqpkxgl3fwb4f7sj81poxpd6plxxah2an8gadwr0nqedjf26f82nmnwlp2cnqws76lfw6c1xazgpsmw0o97imcbu3aplgevgeco3f6yuaxraa20x5b150ats3fvvqobzoxvk17dwlc8fjjckh7ymc98x9415xbaqy04u4eozemr5lg8jnqjb6eai620z1svqtjekvcpkzgfhxwl88348rpvudm3ycz45cfh59sp0yyo0hqho3uar1ysp80fvw03gmplb8mejqtn6ly9rhouh6sdszfaoz3zga1umnbwdb37uwj10tib2kna03uals8c0nr1naoycvkr6xp31fqwqbummlvojvgloc3niqo8vqs17qrpmma6fr3wzbasqea90hyrykxtojpwxmywvj0sy903kpcgzbzozk4gd3ym5161km8kyaie0u9cuslanaz6clb1kcf0qxa5r0nx7ycucdn5p0x9ad2jdgwqxfu4lvyir1p2r8dnnhzow06u0lfcgnkwepyysldq9bo9jtwr7f0y29j81ydmemf5f3udtg90ubwipw84tzd5xwdq6q4s4fixkx4028uahq13esptf7wn2k9puazryujgs15cgkksooogcdur1hxfsy1u5v189ip4wfpwawspj16yvv5w4s227z82dvjsjjbx57lkd4gse1exhyorcfgt9uvsaz1y1lxs44a2yimpbgvz7eyk1qukxf5ssvypllk12t0934cofuzjntvl14rmnedwbh606fipjmh5xwynd8l7uh8rblg9pnanfcxfcddpvq26wp3e33r9s4hojml0oz2m3i0lqpz7bj4uvsjzdaqoeg1vtifkqqxcppk57xgaqmpqz7vujswrqrcgzd69yncd4f7k57n2v3fjn8erfca13nr8y7vbolyhinsyrapvh8pjazntk24eaqiywh4wkg5vjqcw2ejf24ijzherbj4rfgvhcw1yprwjxwpyy3h76sz9nizyyvvgu110544izceqp2uwoaduxev5gqgrzy7jejbc376lyupvl87v8owkglxwoiaz70xsbmb3wzh7o54zjjpnjg2yfccusumrgjndia7e5qs0hl4xpalpugsgsozfjv443iwuchddfwjxmbzh5kelmo3voofi0aluygnv241de7mq43cy6owql30tm7grknng32m4scud760w2s3ptq5pcl1ktm09t5h6hm4516idn7rhn9vg3r4q0lx7eh3kq43r9r435gplglsys76zw18zo85whmtctbaojl1v6cgjxypna9ep7ptg20b9193xakkzaoblr8to7rvauzpvm6bexrkfyiz257hyizy61e22lhu4uzu76wcg5yjpqjmhtw2kvygdsbl90kfx2au75n356m2covg8remx16co0e8dtz1poyckf11j3pdcszgiebrt0k6oi7sxd4ylkkwsjll5wdftjhaqz96eccpvr2gdu7tknos9fvd9n0jr4detubzofcf7wlvq5gwc1oj118a7ceoq0933cc5cgpyl0fvrim5m10gxo878nxjh2ekpkpwrhj103tjabzrc1qsz6cwg3ygpynsbe8oytr9ila3efjstxj6h5tww5pqzv5fo6uybyx1lgnwt446azarlotmj03xd8pexv0ezoz45e3nsxtdyg913a5ek3i1vcf84petps5jnzktjbawbwcg9r67teu2mi7ckde7veual0s8izspnsfoq6qpdlg0xbkfpviij4dxe8shtnil3mmxvfod1xthqqo226rei268wdzf02m3syoju',
-                expiredAccessToken: 1872655287,
-                expiredRefreshToken: 7287120282,
-                isActive: false,
-                isMaster: false,
-                applicationIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ClientName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientSecret property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/client')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'AUTHORIZATION_CODE',
-                name: '6ot48t1oq0640g0m4xuyc9ew0xwn1sunz2zfcaspts7jr8rw6cc4k7qayprgo0xgz2tzv9mbem1np70uvvw6pku9p6cs06qk4gu5rz8pzr1er2677tgm06sz6l9wg5zuma8pkq82mdzyensj6empivu9kfjj0dv7tfut16iz4b3wp4y20lburad5waye5ctykyi5l4cr3hozr4rdskq0ntpcvrwi17rk1j3pd61lswnd66uuyhos67atywnuogz',
+                id: '987aa221-8d5f-48f0-889d-5cfd62b481d0',
+                grantType: 'PASSWORD',
+                name: '259fvtotkq1elq7tb3mz38d8tycufiimhjtw9sbc965e52erdsdajjhlh6z77iuk3pfvbh3o0x5xf5puq201ctwieo5o686cdzzifo3jkb7nb7c60a3aplcuup87clpwq58gvvkqx6k0gxezjle9gc0oac1jvqikig98mchg9v1th02e8y3oddhhvthloy9r1yjonohtgucc3b86jyk9gl45koorry802su77esydwzh1xj8i3ioh1wd5rdv1m7',
                 secret: null,
-                authUrl: 'prd2ak0wiackg73wqadq9kwr2reqf948j8ryf860iy60yzd51gcccgoonutupqlfp28la18wrhydj8t6ppj71p3n8bgqt6uxf3ccqoqn9p7efn4cxcly09xntd7w62apm8ymfqzbobdnho98lc1yfshkvleu8kkv0l7u4ejfkhuauzqsppzcuypgucvb1nmr3dbk0orc1ga2cmrkp5if3u2xovcb3m8tt39pn0j7bu6n4zqwaa6npezxizpxxjikdojq3o0tscr1xvol0tqh2eijxs9ocg9fmdh1gjn3qtehifyn14la6zvpf3puadcm5uqzypk9nm3imqgsr98fgzmngx01s6vxdapsi06jdupv4ngdml421ty0hvv2l1hn0lydvwtg1y5wcrcj0h4okvr4xutmb49ft1zgw7iryykz6g88ec0rofzv9bt09spmyg72wd8s7bs2ryq42em2hj84reigqsoyvkrpber30ycoda3tdr0hmd8559ew9sdqu1wgnmdosh2cnb9ch4a1hitjzw5cr66p5452o0xafb7k799ckcr6c4phv7hjgncr483rzddnxt3wyb8j50ex49gc071x0sssprlhp8s08iegcaj3x49dofjfpuq8ft0rz9vlublteff8caddybye4led2zidxro8p75ymy7mxglt79vgfoy5rteg56ivm5x27kyyv7bwy411wbd7y1v7dbgtnedd0o84vjytjs0tk3z48adt6i7rzqwhnlwdb1c3vq1pua3qs9ix535ml8z9xb0w5xsas3ey2nwtvddmf1hl5jer6j1132ywo7nu60sn5a14tvzuj7dfjstdzjqeqdamo6oh2h5lu6zjb8m5u5rqr25shg09rf12acy1bjvny54lk7udlztdddxxgw86j2xgipq53r37ah1g38fdaj3cxqnptk9j4yx8ap9ek6nphtozb8pymtdvyissfszj5pygas8hzcrv0i7zb9jrpu88mjalo0nt5sl479014mmtty1srhmz381nmwj9bkqffo1uow2ylgucuk3p6wokiymyrz0ifhjjik3jnympuckujokv2fbc2y7eorlevc8tk607va0mnmn900tqzlyple72nz7lfqsawigbdsfn434i4u45f8nec7x0sx8t105sw3fyvqfl290ojydycu7dufivze9qm1i30i8r4m7hep4vjysst54yhw8re7vlja4w55rsse25auq7tdtrrgnzugg460p9un6z927nat1n5ykqg4vk1h1mm695p3o6u8wm570xruami3m3yhb47rr4cacb9f7l15w4l2ichn9hnq5uarscaix69k8qr7rz17m8054ehrimwtbnq4llz9bxmsuch6q45lug1zn6zy80rjyuen81y4xw7qshw4rhljsy61o2ipv48crjl8b981nqa4vmyn3xtggml8hazswipk5r9erwb70tsqembagsm6suqbh5grkc5v0eqnwsrt4j9gw4cwl6luq6i44hgx3c99z3rcta9n99t52d0gv108lf1zwbepjrdjfl3yu0qv2su9pfmrghq37nk5ebagob4cci3ntjkivxao6ps2a40i95y0xidlsbo3voow0h2ap9pduu0rtmg9q5cejplshu1aq7hntq8m4gdtd42wrl0uyqzagac61zqwe6u4d0umkhtahtdkd624kcytgzuxl5qp3ticug2lhuel0a543j24zm4311oci2ywdfokdzdrb85pvpwmduh5ioscs7te28tvkc6dt3v5dv7zezfesptyc1fjfdjdlotasamfqn0zu3giecq37wq8zhkk03cj28cfavnayn7icpc2jt06v5clajmof3d6dl6v83n0mggohwkb5c9vo634pl6nkvwl4ywn4swa8nnxehysudiqtja1v19btl9tmp4d0sgw6ooqjzquw2xhj84fxuloavy1yv88z70z9cjsuxzq87p59wja0tfg20k1wfiyu1350ro4tp9s880llxzeeflzbr495g8g3s',
-                redirect: 'zypvnh0kutjk54uiqfa4gjlnpcuozqg6wtxzyzcezomo8t4jlo1oh65pcoax320o3mgq715vv7fhc70sgw6h62b7id1bxubwah8fbdt2ix7k3t56n06x88oblrsuujcsm0qn9l187d0jgouiujwit5zw9vyniadw4zq2ynajck4hey2zpuxp70lgki8efce2o038hw7qahvtb02yx0ofs9jyn3s8teei2i5dsvc3rj5rejro64hsfnpdv4e5s24pcr1sa78jkzf0blca8gjg5senjc0s6ag2cmmdhv1soo99heb2qztze0zovbgw07pl20s8vocfrtfb63pnzee3m6yfa0hi87guuij0m3p0r9pl1iiiamvnlnoite58dnzf7hpx3ws7adp9ohofrt6dhxc19z3ixdgmpiry6clo275o249p9uusk5a6s08a1o7v7uj1b5x5ir8vbyf5sz4xp20qrwc6hy76gq20b6ej88jgdt4491suu0u3mi3xhv2nsxo65qom64e4q57bxvhvq2g870rnznyc3qsh60oi4710f86tojy3c3htkgqwulc4wl49ru4cg8msi21zl1hta0g1q5cdd1qfpozqrp4jg82wvzysriycmbcm2lbckoydmdkr816pq0sfsncyh44hmgfm3nrtaljv689wbqarw19lvdnqy8gaerhldkc4xbdn43gqyon087xp7b61nlv1cgpa0obnmrwhkin41faik4ieci7xcey35xkoowc8udfcuo9r27c6gg0rjc56vsclnyiv37znqb261tngra5fpqngv91tp6h45higwwb6p7an88i4iccbpq5a89soza8nexwi81c1nn55crzqx9u1i5sl2tqftkl71j5pkoz51yt0j33559edlocb8l19sbywmvyskbv309jam4z0901p6thgzifw7eo6pxgj9d6f2ibqtf907wq7li8xg3ehlaqpjtt31ieuqu81lwk65eqnvptj8sbwtat3xacz8eyvs4iaybh42gr0hb46v0znsr3yne8tz4jceb332iz5cathjas9ngzlni71plca65s03ykf1lwu0ixwfdl4x6t6oak7vevdylg43g8cvw4mpmnmstl9ydum8ej0o8m1g29e4ms57j04yfq6trju3zt7hf74tb27tyi8fyozk446qhk7h59vxrysyzcc6g85h0ur18wlcjllqo4lmp0eahku85efi5xu2w6q5pon0kp7n32ccsn0p96dzym75u3cypld2a694l6xzutswhlqljevkxkb7dq75dgzcnjwylrhbw5i18qr0svzw15twaun2cig5e5feblu73c1zf14cs1pyhsx53x9ri05k9pzjetmanmjzkckcqaozvyz8xgqpd3d75x23v5383favtil3upaeq242hizhp8lsnj9kijpitmxyhnfhklnr738npq814kkhqhb20lee45vbl2jb9o3s2lbpu1mjggk0y6l8ohm8tlbad40a4fpb45w8n5nrte8ff6p4cmzyjpkpyb0qkqf5kbzxur6tax7itflhyoentebifrvcetu5sybeqab32xotm1y8jpokzks3x7zzmdxaqnvamzzcws8ckfdkwj09jmavmcn6ofhghgzyot4r9ggpdjk8dpehj5tjzvd23k0r9b5xo6x7d13pe3ium1hoq9wfqa6os4huv4xyx7ymvo9hcn2t0wgpik2tze1hnisa4lwze01ov7ohloi6fdgn8lezi8k9e0beb43rd94zg1e92yjc8wdy3jkw17fqdyzfjeq1kdq1op06pkln96idd799qkv5rsprlfqs4eyu6u8c2kccerj71lci3hs497ohycrv24vtdstf8h1vmu3wyhztcn2wmbshobcraxtxpz3bqmmybic1pmanxpwxwognlhppexf41siher4686ju4ll2thqsez1izno7uivpuwhfdszn2tss5jzypnmb9kjkffx5olr3vlq3no7t3ph523got1qpk1qf8z9kv2wa7pwpo10',
-                expiredAccessToken: 3771937986,
-                expiredRefreshToken: 2524833320,
-                isActive: true,
-                isMaster: false,
+                authUrl: '7ht8i35oj3utemjh4jrggbhutcw2a1dfjfh1swko7udosi3ew5y2x68qo562obimqa65grzusdux85d3gvkd3zuoa6l5vsjv5e4wkmjd79jyyuod65m0zeq1bdskhyrm8jvb2raxaqn3pkqtlgofk41z6o1obceih7094s1mhkc20w3ewbdls49fliro2ljrq3i32qkow335elh14maxiv3wuel68l9yle8zz879dp48u42fxqmhjg9qrmjo0ezgoqf6xsq99cmu5yz0gntpvvmyj6xjrg6emy0glylebsz1f7lnyxml0ddz7ggvdvpvhhg1cp9k2m0sseuygpoehzzhbu0h6ikjynilkemb8xb193zcedjgoz5c343sf5dly62y5mkd0wtf3krjosxmcxnwl0e7nocls75gi8ltcgql4r41jkctusk2jrhdtuipurfo1lvsyr2rd5bgcpji5xb3tv2tzykgrgt05ns1r1n00jct59xa7r3l7c6vk2oe71gi5vps1vktzizshul4t9erwt3haxaontbunrtpkc5eeu9eegc4f784j1tgkftizf5p5q9vex76ki3maz7x3d7b0iirg87yy36nkmxy0zdmlkjcel6q55ovv55qfqjowwsgitozqbzxkr75n40w79ldf372rjuhdihkq9chncqs315g0bjac2ywtighmfp7y3fj91lfli5yjuyacggk8b3gf0ijpsnal5xkue3x9l1o0j8vto499p9auakqjavzulzcfwyzdldpcimsi11w1i3ovv2bwwrb47s0jjbc3s04h0jyx0dgg560s0scdaucc6rntdfmq9t481iumr3fa2kws7hjr8lyfe7vx4mriysi1a7ya4aaomvth7dauty7kf7srkqibsmakwgerugfc4t4vr6yezgelvs9vy0295ip1q0hiimichbrypba4cnn8d2lmfrsgs97fq1hoor7moopb42b1gr7sg8bq22ze2m9b3nci0l65om2do4lqzn44gg66swp9a2cyfkm73tu6ut4wdh1zpw4hme6sefigfdh57cb2vyyt3a80bzcqiifci9jsmsk4i5xpnu5to0i9re5ao503z4sp7bbqyz1lpksin7rbome48y6ymy89wwbfwu38vc2fhnp1udp0w4ff3id7lg4l2h46eit07667eeak58sub9yytpdaizwfw5zk1bfvtks08rv5bnfq0l54z166sfa7jye9cpobcnm3771mkon3rvagnfl4h504vwplgq31r38u16wc6zalywpfj503q43uenn8dgg78mg1jtaf2c414xpco7nepae8gzc3z9rpjm9pvpgkuwk1r3nsornm6myi6pe0fiu2ed2e21ko0lnmyn74efgyz87bm7v645m7fdkr45v0uly0f5f4yj50f0nik3c3z6g3m5vcz6z4t7dgu086to0o9ykqneqnvo271gxut0ttb768qo7irniebwexgjn5gb94zkyjq02knjvzv1siymmzwz2hw8og15nxr3ghq70vdhch1vjvv8uriwqgotgr5t6j6nhy72vnr6duo18h8zeawf9i43js7akcx3zay6zcp55q1dk9hnnx3aaa1pi1winstarsevznx5glil20oellrhq43tyog9bi8j10n45fxuyraqtod95xb8fewvsvr2ogt1ovpewbqwjqx8o97ffzp8x00drdtm6376rgjp5nxnrgevmmzbv5m4vijummu5xhc4qj1o2xtyxe7ls7as2ajtxt427j89iwn4npijk3a2ahn6rbn7ncdyhfj9mao3tecb92vkyjr58w5ctbm6g4hb79rqpwxiy97saclm70pjdvly2c35ecmug5datmjwg8yv43ffv9l7ogvsq471miemxlr5l5j6mh33lax8jzz5yewx8bbj6sht9wi8v93234zwhcknsitszss6l45vvfhibzryzakoub4zmrn4ddi9xjmq24awzc1xbee1jfn000jnga9q4xv4u5jdca1ob1gu7k4za',
+                redirect: 'c9mlibs76mod1vrz6loz0hj66rlmrsu5u1guztq4kdedh55use9f9bze108bfq27c584qyc8userv6awgtydlnk1aq92fsvh7dfwreuwr5vuyphy395797t4fjyny9q8plfj9dw6eypcdg833iiwqfi7ejdr442671iu6houmehkir83ke4zx40xobaffa3nngaohdbqgkcjehiuwftwoqev6bnrnkwnx5kmvn883gosgd2miiduk0c4i6cip95setebpglp60y5nov6jq96zwjps9yyre6uekj7r453jbcqe3q929sv0iwqws163957xxvqu1qt21e3spyelrv4mqgdhn91h8li4hs0ttpyvfm0sby5q5gq10xpysdkre9ai33ryfzch1n7eflhsuzh89dt6c5azpg34jrmlofc8srvbxuuv0y7m2eqi67j5bs4mo7b6lldrvve1ofj2nspex6edzrq1rvzqnjhuxd1g19h8oi8i4v55ievpf43sqewplawrwtxw7419hkviqtdt8lerqznn7wvdq9id5p2eidue373hrzua9mqzal3ltbhn8aaob6w126ps4qfnmh84zsdwx4rwkbv8n3i42kcwfmsp0rds8otien7jqulvrvyoims7m4tixuw6aqeiia6m318206l447jelfffij9bsaoweyhaxna8sy2iwl0sn93j8kx8harzyvblys1qwy40gai84s2fyogojqf54dw24gvx30yqtiowkgnhc4t2xr4thqcippgfld4q5w9na79clcgc5otk52d0s6osrfeouztnxuxzzawbkbc8zj76e91mr7gfsyoovbhn32oqskjazc75j5p6op714wchoc0zx9vpd1dqicg6jbeyik8odsjprcch3u9lat0vc19ie71jjuvw71l899hlalt6ig4p109fzvdieloqhfikj660q0xqxes8u4sdjlmk5yx8wx4a3al2i1clpldroxwxre7rvpanjky4far1kkxu6ohw790t0q8vb98161su45xpqb354s5q07krpfj8gea7ihp1c7nouhhusmjai3eka5qer3hzq360hs1gxl1d4pwvdeenjo93l9xdy6lnxcipmk90fnta4trx5j7c14025xkhrog60pk68leldv8mf7u404xkl94h10z8ojbk941igfdv0dvyguejg1pxjml3yrmg2257sw3ydkzkpl08y1wvror4fhpwpx8tnd2ll46o5dsys8xqxii49p3magv5cgvf3zsgilbnxly6pz4ibzc0s30ok3fkkbghxv33hikg0xf8chko7navafhfj4ne6tw2nars96l1l73qg9vd80vay0x1jdzim263rbjyw5ro9z4g4wny2s6ecjy3rr53172p5uitjpbc041awaghculjzqxhjjv7h1645wt1y5nnfe8tclaq3asus7hmvcy9h38b2nas7043w90ob7pncm29eyjug20yopi9astk64carqs9s5brgya8sa3zkjv2izn3s1kz0pebzc0ytjqdfs7vspolcc6f0ljeybyyo7tct9bs42t4yl29ialr0ownpgmbpasxjirz5p69bdfb9qpyxtw6c9je1jq9hgq8gdd9eybmrgsevcqm107h2e5hxetvyl2d2b09udhlp57jpfqvpcxrceh4rxkj1ehzi53cd4jiof35qcisfaa49jrn56doa1psyqyqz40dm7o3uk1mzenrzonnica1ny09gx65k4xjcyf9iat59lo3tyloesbqh7nnp37ks4a2yz7p89ubjw3zskmlhorlxvszl104q78p8vyj1onu9lnbk5i055sm5s7g16ui5l3kat8zsl7yyyuovyb32f8vczglmwfq32d2uwha8i42czgbgo11fdv6jaeyxtjgammv76eputa9b3l3o2opfhakng0y5db21hjotp62yebx67alztjxnlc5r38wcm2bmluwyg01clrjvtvkojsdx6bpzpeqidzu8wzlzzojmuf3n77k6qw69j7r8gt',
+                expiredAccessToken: 4497509361,
+                expiredRefreshToken: 4420740060,
+                isActive: false,
+                isMaster: true,
                 applicationIds: [],
             })
             .expect(400)
@@ -218,44 +171,21 @@ describe('client', () =>
             });
     });
 
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientSecret property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsActive property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: '3be7b209-0121-4c52-ba13-fed0cdfd9429',
                 grantType: 'PASSWORD',
-                name: 'sy6r4mtixcviuxwymxbcdd2ujm6bmygy000saug8vdo53h0i34ujq4drsuh4wvl6boo4s9y4bdgysk5nepab3q0ldua8t3w0mdtxsg6417cjc90rm6dj29nb4uaoxr3w6qsul8wc13wukd0kpctgpxsnayaevco6q6bxxczc133xc9erlt1eo6kpjk04vclwstmizetrh6ovymnmj8znw5rwqa6r2szd3x2b66ookf1op3seg8wucna67nh4dmq',
-                
-                authUrl: 'g9tryf3zkl9x9phhcfadthrrm06ngtrgctg164d5j7hs0bv2zwh27avpxubk7vwn0pvmvr2rrgylj6l15by9ibpknu3yqqqyzojogwv4ygwo3r9a4lws8ywlgwuh90ohpayf5o86tcih8vbqqng6ztnrlt0jmg4xc8xnooee1cufy75dy59gdu9pat3qk3gouhd309fcc4wmufggnki37mtyivejwrt41k6s5v6fqxsnk20itnbcmvpbe63m3whylyokh7ut3br8j98su3x5nkb0cunnom1uxk07mxz9myn1tdmuifsowsedvojrxtkjt4ixrmtmfm9hh079yajybmsm8uvhtk2umna7wpsuusyohewfsnsfjqce4wqptml8886vkxscvijhwbrhofcblc8b4moewkdd9ov17ssld19u64d5frnf91ykha4axwv8ca1zyj27ixk42e2bl5oa74flu2fo5k3hf1hz2roml18wi06l2vgwobonf3t0a6hylyagzit7m5t1aep6p39bj74cfbx4fxsnci3dod9g840bbivi0ax1usxmthmi2yxjk4pwrmm2f5ywxe5cgkjk19rf9oy4d7lo45etmxcqpgh4g1ed4h1w14r8hgfrhoohxyhuqlxhcn7xwvtuajxe93i1sywlwxtctsqf7l7j5xnov3m1vascxak73fief2ltshzfg8ipdpvvp4xm1o41zx6ex1pe2xv8q22hcg6umcknlnncz98k7018kbhinb6sbqfdscryhm9yw0ps1h4wz8tz4uweaf96rx0l5xlctqlsmv0wzvo7nxfjphiihzpxoz5v6bbmth02t79w8ysok1zbktftvwsu0pdkvzvtmu06n9jrhyy5nqsrb9to3z6820m9cllwwoxxyr6jhrgm0dy2joo0cfm09320t4n84jpruan2hzs2gmk5m484qp8wrcxus8614bm2pwu2i1po2ei03rzaxwg1u7m23l16id62sy46676732mnxa4o6nlwq9pshwo2o5ykdqre2qgby1p94aw7fp1yreq9h3vi7d3zvux19yct79wibjc4zrzwz2bfe3md48bkkmn8pigtkjh5jp5zidfrdknfwm9pp4ztnj827jksqhv6x348x4mys1iug1ff74mi4j1uw0lw7xaoxsdr049au54w79ipqo4gwifv03ysizq4adde9d0of3k92k55wnrzbitm2olbh8zph7mxaqdr9apbf8et818dvwer4jbdvxt505k1t5cjyc5objswm1pmyiys1f9cfypccs723efi8e0gtb5cs3gg11w2kl9jg774mim8si70zbyjwk3ggsajw8gpyhrg76kaiohih2xm4dvebpqpqn066e1wzeanv2fxmlbhswgym87au8yi881d784eghbb24qd11jp7xtevs1q5aro8hw1ckkybq48oe9lve3jz55tpfdw922z20psizqa09xommkh3fu37o25bwq7dizbr8tnlk3w7h25lval9tgzszb3uh26ej145olsfp0cigyn4uaakbpg73hn0t08z3srd3agu1p784ppcn3x8jh5bhv9gnrffxd3b7jwfpsbqz7ghxhgeomurs9ohwso415z9ns0l4pz09wl9lkhrmmdjn5jnfjieyn9j0q3f0gouymhxeac72saty38utot1ebeafxwsvbkpo3zczspfacntvbr072aeld8jmodphhsjdgoa5fkkrt05acvf3pvi8bdn2idkq4w1te6mep43f4zx6nluurnju2i2pehgcw3apjdigjbxpz7aej9qt872vf647jjx0uh9ff9pyyhxyzg29bbjv3rw3byg8ox7ucu3if4ntzeq9phh0co5hv7tb6nv1yhvk6db0ller5cs2i4oa22l8mdnuy759rqt6hu5eqscbo2y11kdlqi2v0dk9w4wsh87u64polkhkysju1tv3dpg2syiik01xtmdcpl0h5ro65sbyd4vhqdjrubad7jnjdsvlc3sehrb3501li87goh',
-                redirect: '7a9xu71rvnmzpv8uh6xjeq2jefum2tppbvvnpmqcc48d1ar6a0jl5e2zyqp1fhquz5dmispl603fhepa5zcknrkkyywi1lrob4gqwcrytxy6ku5lz232cr63hybw95a46hqm1xrfbjyha80rk2zru5n82x74p9odhmg4s5q34jyq4sebc5nu3f9b3iolfb32hn852ymj8u11wp81uwh6knijbk4593q0k5ad131dy9j2vmgyqyfhms8c85ijn2es4onduhb4g4hho0j713h16rn9gpha1c8zje5pbv6kkqcdr8tttrq79y6bx13ueuhowv2w15xlz8urmy96oiy8oa9s22ymk18dngk7s16be9dbfg3daxn8mq5adkqd2xhxapt3vq8wn0jox6s7qpxbu7mgbukab6o0cejy9qmge3hdjl6i3de21fvm4v9skdysvmvketg8h6dgrzq177mapf0v64l9ddcfszq0oyu7imrllf7800jcu2ipf0l8m370a8jdu05zuo6jdstam6jy3sofq7n8kw171gqc3jbl5luyyqj1y0dpd8ijtk7zj2r368rjldrjs3eutk08d5wb2nyn1kjk63lwftihcg7azbu8najkj3rjcgsbnntys3gxbjrvbbz99k75vxxl8detgp215f39gcvoprnzi618x0wdfbplhdnkhm05ipo5iwxokjbhjmu7vtgq72yqotelehfkolgbwe5apsrrqj56zaf4vwcb09j8i8487s4976owv599kwnmelxmphxiatrappnlhf3fam5d1pxklbkq3t9nnixr3qy4ueppyuvd3w67m9oe5t6izebjs35ywv1vqowsd3i7vzmy452aairsfskgby8wf3k43glok3dkal34e4qdp9ti8g6nf4qzn0brbcvrw5t4ypshn7znk9zan7rj5b4q1b7xly13vp5swwu8jvqwdyhs7z5sk9k8s8k5skiotlfmbjw7lem8mojwb7vnkh36oxpzdum29k6as91f1jl32gl4iacg0i3p58mfs6slkwyy7hdvjcogl80r6w2m9ukxmge5eys2iu27pky701iyoh6ndabaqjiruox7097xhxoeqsr0ity8r98nvydfocc574wzxtupeg41i5f9vouphkoqq1jpx6n3lh6xq0zpw02nxen4tzo90qqbqdk5l50ckpmfmxpqbrp1mr8k23phznji4v6clkwi2hs3nylad9lcd3wc9ppcx1dtq4ce71l3p2l6009yelr739fbm09suhr17udemnt8o8t3i2scanz2et4sw102dcujy0icpwhqvt8f0knk7feq7f7vxgmy28umwwjp9pzt4ozsvu324xx6vmt2e0pqau50hufynt56we5ouu2l939lxtyvefbrrujo4v22r3jl5bkd7wn85ua89ymw0uf2imve0wwas422tzycvvujssqq15j5lsycoszuejjoqorf4mut6tig7nbd7jbhgnjlu67m0bg8q7wz0tobqxkz2an2d1ncuzbm08kbvsksx0601hlvo2vls25tr1qqsyczhpxqy0qxxuqw0a7h0otkzg76idtjtjjyahb31kbwz82w2cmsv2o2re0xz3a7rbqwrfn2dcrf8x4qmkbla6ry1285m6mlwuxxo7x1973gukzhq3ahq0qrbsdwu7t7w72u22mdp5q179e2tvixdjay5u8q70aqhu3g4kmleakcddm1y2uwdqjpr1vwfdti2iuqf17e4y8s1eg6cegk671n87rrpyoknpr31kbbjf1io4xk4nv2lje6x0av2lobio64949csvydmsbto4eh4a5pew92z1akyt4s1dkbxn8i87dhmvf88ylmqm4blxjiiuoqjpwzadipopnmugoq61402beiai1txphftwdwin2wdik79lhkv2z5uvdlvzb9xqz295slezlfnzznbuf1somm1fye525nulyj5t45uj96f1ka1ui3fyp7kfvxitqwvfn1hn6zlhdv2qneqvp2pis0w8jq5aq7',
-                expiredAccessToken: 2380012977,
-                expiredRefreshToken: 5754001920,
-                isActive: true,
-                isMaster: false,
-                applicationIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ClientSecret must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsActive property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/client')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'PASSWORD',
-                name: 'cxzqyzgt9y5absu41yf7h1ru1dc5e9er3qcottymqsubwpesau5gz53a99h2o3fqv5f8euoorglucdiyouhbbwrbmtvjyrwyzniz92h34utktk1n3jfr4nv8ovuyr41jd7q8efpvhacako3o6kiv6qlmvrssvy5r1atszgofy36jprckgnw195ud593v6rjauwid8u4oj5fl13p9h5mkaaccqdsoo97a9qltjjli277249hx7ig4rgc1ho6hgkn',
-                secret: 'w9gpayrwhi4cp0g9gz49pcsnn6hx6rteomwqahp3um0ets3d6q3u1n5nsd4yzpkupuewi1ic3m9qdgcj30nj3lpkx2',
-                authUrl: 'ejx70zdgoyjh171k1w69xoi5ncjxon9hjgyft6u53fljur7xm5gly6kr9k4ksmc7rljsl512wcn4kwnt7pr1pjrdi8umf3frkxeebn327me739vtba0fywoxc5vpfo3fba8u79uzrb2ue6epu44t2i54i3to325bzfote85mwu8u5cn5jig8upwqaqmnly1r6ksemege3al5o25af8xyjfsy4bb9gx8c6b2srob7ifgz87fuuribgv3qhbs6ut909b8p7n77htjtndw6i9tdkig67wu4up242b3jvyf47znvjvsiy7hpgc7iaxhrpgs7muyrpu6szq7avcd2o7id6e9p4wkgbb4f4k7majiyqrczuehr3r7xrtqsn1thonuqv0plei7mdmumx03832dp7h38uic5rqscrr76iqswagyza8t2mxi9qy6azjm2vylujzhgvohjryptk8p5o2ohk6riescqcxef4njk15fiyykmcbp0t8ok8wf3q4z7wlwvc5urfoextbnjs9uggt4id5zc1wisw763y33qmbb3y3860j1v3opaubwcnpx5wj0plo5dq1nyavlk2sjar9djb47xon4s1fxu19hd6fb0ivc2hz0wa8rqyzn9mscjsomcajyfd0ugs0cq5anxtvneeuons1vftucwxfcrrv457jaeb58znc203scujygx7afsjeh9g91u20zx30pwy9gwccpjw7hs85tufb4t3ombe4hn94ammzpq0ng0xt5drxz1xcv14smrlybtnqmz239fjbdgleq6kz7r2ikyietpbjgyz198ot4glrc2z51sbhxxhc0psobvk5ccm3ziktroxdy96krplpqj2y145bnjbjlicf07yw3zz6zd5y94iu6u9ngyj0siwbrim11t1pz1d6o4736ci44nsmlsgj9ze9y2jqjpx650uyyvnnapvmi0ar38u5pp7pr9djc2tm1jmcagbky0wa2h8wdvfw1w9ksy7szuwb44p5o87dj8zhixc6c1cauo4y4i9d1cfb7b39yrg1cu8e8fjfckrnfrwyatdpwpvdmnroag8nn1j6mym24e8rjauda4mxbjdxsandk6w2zwpo8maswmgbvqokcw1ilhufhbzc2u178wvq67xd182fuv3clxi91xo8z2p2ccno7t1k9id0eoqugv1v08p1w8s950ocssbf929kpbtduf8gnje75htthj9d27a3privvn5s61bo4v1aihdi94sb9y7zfthwa069j8ev1ngufntlxb214saxfpr2djsvn50md3mwfdiybg9nbfbmcjzcmpm16linel39el5smvz47mygx08ri28htr3b5ugfzpkvnql4bxl1watdqy5hp648q6l67xbpvsblsm6vn22q3gjcenyvsywpbhlf2z9yez1jorh3xliha1yrwilucx7ccqsembobs3zwddwm1pfir22ngrdk9ns8mmphzqgupm4sgvhcvj62ni4t23h574v6dtj9ju52o7bx1qhtqc7b8q912jg4xyphzgk3kucdgdf7fzi7l341m8fbiho35vfd3wejx4gt9zxu7sajuidor46pnjhojnujs9iuoq3x6v994c671qbljre9jsh9z2aj6z72isxcgw5kx6svs24lelqe41gncengx9vadve6lh21ce1k34iv9ptun678aj7zqh8wrfnltqldisuimcyzvywxqzmosbl8lfpci74ahx2hf7ppztu8a0h8ffgtwlxgn5gk50dsnm9drp8mh3s4g1ct5g3sdi50ut3qz843n882az07cfutfsn764rk2pjafz9qykl59tzyt47hcp7pmi0reb2gp9guklvd5nnrnsezq1f7e9e77cb6wnswnd1dpwavnm8xbwmyf371aaqjcib2sr5oay57vmeb0apxd2gjjsl99q580oemcwyuarcnsnwjst53a4b6902jgnzelf8iu27qq5ykiyp8jyu51sb20916axj2ko4rxxhyxtsy73y8snpzapgdut6t89',
-                redirect: '0u5t1ambhka0oywhd9ql2hh1mg3n9co02albn0bz36awglu8uackl01fv89sb4o6buuwi8gjbyfqpvsb5hmu5s69yn791l8uarqacks61dqeulgmg1kgv1rv71hv8538g1a0gtop7qrjmzgq6pmu3jlr42zv0f9sfpotxtv7srec7k6du7soex14wkexx5ify9tbleqlq4w2wvw883com6amks7bcefv2n92meb92i22jzve0ri51n540bce12bxsjo5dq8eqf2mngphjs9yccwl5p1nyguvwrbv6amp8wsaswbbihwqycw0ieprkhbewdcmym1l8z6ndr5i11woyvocizouq4y8h4jtock94onb49wwvvvezldzj9tly3u7n91idcdq9pg7fe60g5nrhav4w9jhw7qunmhzsdriope562tosle0psq2j0qld4nin4rzvlubh9rgd9x2xlxqjs2qauwub3wyrigtv2gvaez8dtgvl1qbk7mew7llkslofn20mq3bfuf7be3sx58maarsh83qautye92mhszv82ft7bjcvm1qikp3iqqrtomhso9n2viiswavhie8sg82xfiki44gtb85u5o73dtujxgxk8adlzxyfpry0uwe8v3g5o9jlnwpxyin1ywd96ncqp4uikz04u9u54g85zdq8pftgp4uuxxtv4e35zjhh5nohajhnt8k6s0terqk7unt6ticvwmul2iqoummw480574bu1vabn8s9rmg4wgffvxsvmjmj5gqi9et0jzy5lidks4x7lz2npfhv94sqxekgwslkammk3qcofkilh8xg6g12upvon9jkhj8tbp0alf9d1h17x965u1qcz4tqeo7k4jy0zw4d6ibyp3ey5x57lyqaaert8k015ihku109k0vn7rrydrbhwcnzob2lzys9on7ln8k7o96hz2o0o0d0unyvaouamwt0g7aw6jpz00wtcesr56rda7080plbd1kybpoy6jb3ri13k9qehhns7wee4u0vvao5xuuy673lsfc9gf9db75tw79yy10idiiblm09igdo01qwy11vnbkqzj0985mhblh996xos7tsqeleky0gjyyeyuky2sayz6vcinhgpe0tezg4jzlhyxurnljcfli781t3wqtge55pw1etj8bl9oyei1c1kx563c412b4rmkiytz5856vazx56frl6y8t5vimthlgvm342bvf8q8wwf4htjysybk3db4ymbnq9y9tk7jun1x71giap933w49swvrxka247qdx84ypkqtq48xgvedjxqcu7g5r1y9zxkag61naqnlutw3nvfrrenk6xth11qkqcbx9w8dcobwsi5h30bn33w57ic92hqlozsgyy53sdgfjsuji49cl3ad8hp2fiydommx7nb0sp3qn8xxbu3cer05ke63d8ww9ads95yy35ehs321qck0j9dlhkwqm8p0ippa7s3namlxsxidxjr3hkzraw1y1teocbrl1nj3kzsdt630kktu2p136tav2ip5ajc2vfa6fh1ju12uxc4h0ckc33i70rgm43jbsqokqk5rpw1ane0lnjqk376y3chirq9snpopgggujw9fozrbq45778dlgqxg463rpyj2rzlbsno3ct19kv6632rw6wazrknug4shbs3gabtdxzyulfw6d548vhne62sjx74mt4x6bb7go0actn2m6gcga2b8h6adrw3cg0dxo9u7d4wn04k820rakto08ff6hoewxy3ku3izy2mlu8tcyqnq4mloz0m8i1lgyuw5tiupecm0eap34yk0itqtfs84zmh73drdk46arfi1kmd5q5tz7m1xikaq21pgn2y2aqydccvy2bzyqfadwqqn3dmwso899mk4ofa2khjekd2bzww02ct9bwiq8q0tutpousp01uwed2fhh63hnr3nqwqvs8jqpc3x4w613jamwuod8jteevrpdhzc8047us14iqz1fanu0kftyss8relf3xxvieghtpz1w0g8cxaak',
-                expiredAccessToken: 3622588349,
-                expiredRefreshToken: 6536686799,
+                name: 'ygfwc5fswwamcsl1j1fre2g3550rq7zhh5clqg97vcy87s6ne4fj3lge4hzdqi4kifglp0pbx1jlpotdscjkbxeii49vi4n1kj29ldfg9eaf6zhb21t71iomtlfkdowusjl4bek9fyc1z7be9hs2aeocejq54gv7p19jrig457w3aau1gqsn9wnx7znq9z41o4cf93gd5xib59d2ofz7ebngfhkbv0t904fy9qu03tyzspeyvba9h0smwsk2wj5',
+                secret: '7rh2gb3an8pldewfx4hfdsdovbplmtckupjfal1aaxuolvu4429emygxfmej0idyka28tn10kb3yxqmx4q8vby65vu',
+                authUrl: 'nrmh767herjzptl5kqldheptb68wizt6xbvrhnzfvdr7vwua42eurschwga1wevz5evetnclm2shscoti1fm1gxkv96mlqx9squoj6fcpqhpjhtrn4h0lfh1exf3kbfqlwke3huso4rzg9jw909jt7spyx71e60t4bnk2ihdnyun2kjo7xasxw26tvy7akz25dyr70st1jjhbhaq4phkjn4ln8kx0gpd4a7cv84z3cvzs5w92sy98ptamni0brf7uys1fp5eq2a7qnonxt9v3agj3jnqhmogv4u51jtqt9d7akedim55ef6pydzrnlpwox0wks0o02uab9kq46ux6d5z0xw2pxwnz3qc4ispx4loh4uijf2sx2ynmssepnq3pn2syvmbtypz2grewvy7y9v1anl156o8urbrb6nkpipzpscwyuyb6t2sa2ebtgomoxvqbdbs4exbrlpnlng0smoa7g2y52xhnj05ynd3cbwiyjmtz9goggbdaywn33quvf5k8wt098wxcmfv71sm43xt4lig22zbrlzco037w53xrr5szs4jcffbyl46ltl345el71nycgb2w74jlpjjj1diy9as1z71217nui0ffvaasl4blakg4g6m4mccj5wrzd7c3s7hi2czus55z1vwndjo7oump79fbg8a7a8w17zn3x9i7dvkieogy6tbfv41kjeke4r3qgv7qdq7rg7c5xwpnmi4m1ntyli7v3okhjjk6p1lkv6bokfd9alq52qsmbc4ogetlwj63vvrblps6dh987cswhojv65w20kvssk0vyzmajwmy3fdbhqn8e7mc49146s2z3f95z0kn9rl5b3a6s21panyaot054shcx71if9lqqrzfw8c6aq42e87fvqc5w5lh6k3rrb072rz7ccnohon495mnk3ezcj8qrrxs999bfqdbktkxkg0vmxm6wutha3747tsz8vauubazt26ndwsw6nrqz8t4ojluyhgg52pgwq861o19k8oa0swwislaz01ghi61apxtsev48uxmtr2ytv0dznoryst470dsl2lwtwkq5j9xutovl7wkc28kt5i24ag3lsgvb3ewytfxmijn71vikz9tga4u6zmchck8fknhpz87fi7qiuj9slbt5k7zgzejeitlkynaiqglnwfjjvs00zg1jnczksdxtgfqyd1qshubcjayp3skdvgfzvai7e7r4padfhc8cs9nsc8d0n1iufqhqpyqwebrjl4gmvjrg26nlr2hifdraa2k8uiy3ctw16xbnjmaqzsljpyhmprsg56jspvbbqgqowz8xczdy3p4q9httoylc4o59x9064fyrt8yyz96lek4xox8gk2k6pr0max2f7h1vggoe1v7h4igsmxfxkgg01kv8km8unycg75q2j2imb9rjeidaz77i307lap7bjo3ffb6k16odji81mue2rq3vvt7zzedv5fkwb6vxse2uu5j42i30441hf3cqb4u7ea59xew5rebsl03g5mxf1oshvawb4l5xhj9kch0l0zaoioltznszyz1rjdo7b3bniz6qyn1ht9byfadgjy2bkc9smzch47xjangkkl9zny9xq6ddbpk2rh5tm4wuuu6elu3ql2xcxdsic1ptdv7vqgdv7xfi1pj4ztmvx182pi75omxh9paejmskdwc0k7mbkjnk5rhdmahxr3408881e4h3zhsvdtmixc5fd0e9cghng9r043tmq5m1qd3l1xfkbs9gatgffrt8sjme8z3qf2v20cx49crwv5xhvk73whazz6b78axtfk24utasb7ywu4qtudzaof74al1dgsukwoz2ikx2ksku6qiwox36y45jcqqv8fh7wdxgb643arvm1zgp7lwfe85kfb832pa8fkd3e3x8o4v4f2n3azx71hlzx1gl9u78wkn26naf0rbjnmss9h462vv5nz0wa43n28vd8fxxieqt8kbdx7smmqq2y9pf5br2spq6ujobbxbgucvu6un1p9tmuhm57ddsi6',
+                redirect: '9ozk8f411rercw9enak22cwssydchlc8090jas22c5jnjz39p51fp1uaivsxrmi3yidpbo80y7ufbxsnx73mbgisg267l7hkpdy0tku7p14lz8vcmobmiq80orc936x5fh5vufwoko41kqps0k97xudr3rvuezxbslt9pbgskpkz4bjnb7jgbxf0o5ca596xm14src2f9tdp8pfy1n2ge2u12le4feh4j465fjmvbvgyquxm1h9zalpr7ybq60f3mo6cxtkvn6iwzc9svayfl3zxz7831n9zqkoqxsa2j9oxtoyn2joy9d1nkba87zecaxfk1pxn9ww9a0dfrcekg4bxiy635lqnoqjzkqryilv6hefbsysrdt42lmissstn130jiw308q9cdyrawge06cmyukvcm3ik5gltxepylzsi5aol7sdfuy21z35h3j4c4b5m558qrjto2oshejk1m1170fp0ocen5dmf34q0fl1cltuwiqpkal4a5tdmm4ceoim8sqc9bb6jp656veizma1gx2v1uf7qn9lqomnz2vjnmmz1qhsrjlrfhvh1e39qbsv22tz0gszhy7lw4iaunklev029ptzwlmip308vsouueimbh2b3i0e6kva9ri22n78p1mw42anokr1vmhruke407ofb2jnstlh9cgfyevrwaertasbov7hdjdvt7m26ifqtbwyu9hbgo1jmcruj3oomp5k1fd5vwvrh3sm879x3frmtwga9hkv2cix7k71ki2zp0gopsi47gpsvpop0zgfomage8b178sp9dibrrk7ovbi62z2yopf26sc6bnwbt7lodm1vwji2zydrvqxk7e6no2mkniv76t7iluecn1t7ce7g6w5qr70gy70mhb8xkw3hwyyiaj35q1sovii0910vaqcvvcrhvhieu2shkwpxioytw4vwxjmawj9fnhoorc1y4z4u5ao2kr25as2nl63hrlc8c5vun5rovaxyd347455st7wzvhbywapsw39cld3jn1o2se3o0utx09777fj2z0lpi3jhjwevxjvqw6a5xzhy0wz9dv66u4yl9udn3ek00w51w7tkpyn7k8jpempejarvy3g9ayu4jukf76b3521ozdlvfp1s48kpu51ryje3hcergdqzqlbxoq4so1f3tzgjoqkvstnx8c8n2fj1p738gc7ldesqhyeezite28rqhqelg395ztwzhgkoz4wa5x3s9l7x2utv360wb9lgivvsp1uezflhlq77gtoso3gma3a3sr0lsmrtm6ha6hp20sxmjpnnsn0b2x8rgyskklx4tot76wmez2qs342vaqerk9ggtuxdpixwosh57db8bk6mpmzecjmh0iy0yndnlmw135cur6gfwjuoyqg39v2ou9smpfkvyge3v81o0isljba24x0ijhwhqnacoyfs2ypqkzlvjvw7tywbwnmfsr0xy8px3zmy64limepgt2hyn4zi89m9v0ac85y1hbspg9fo2jpoqkk80883gx4hnmkd8cgooizy9o6g85m90zz5hpn2guvmpy9whia90mifo3wsz73ik9sg0y7rbhvzm7eshg66bulnpq4j4kxrsvb8i57ajty7dh8krne9wte4amaocur3tbptpr1leo4xhgejrv3xi7vw3v2ec8e4f4j39auyar3v2bhdubxfiwm1smdwrhxw8lwxg946kg3d0u63q0hg4c04hle4hqmvev6bl6om26tecqffqepu6sdh84ninlr0zv2pc9q6g040rvh10uki3ska6270gi0lax3tuvs6o3r7fwwrpyg6bd43aipdyopk39qhwvnu79b1zi15n4pj8vyzdv6w2b0lpamh0660b3o1aifrgx2np9c8qkxibt75vvqe2ka70n8n66ql1i2pcrw8jywdb56k4ogppym8eb5vecpla8eino4j6egnqnq6igmibnjxuy5bxpz5xmfe02gyc3fepex01ax9wqnc39k3fs4x8wybrdm6tos584b27ofvk9495blp',
+                expiredAccessToken: 4291587600,
+                expiredRefreshToken: 7208518193,
                 isActive: null,
                 isMaster: false,
                 applicationIds: [],
@@ -266,45 +196,22 @@ describe('client', () =>
             });
     });
 
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsActive property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsMaster property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'AUTHORIZATION_CODE',
-                name: 'bttev3wh9emty4zn2sg9edvzuwpx9m2gugrlphk4jjz86rh2v3tfsfnf9i6re1l5c0ebwaxmit15gez3g98ub9q6xr5nzeb2hk89mcnpusptno3flrm7j3u8x8qp5sy9waces7bu29eyn3v2mwg1er1jr8i3z93x4lsoe1srsievbumchzl5u5u900n99mai7v0mv4xxxlnhqxnqy02ut4dfnx5o9fp15kkw7xdnqac5f3mlf7j64p7ddvvh2o6',
-                secret: '0j6sn5mutyjxk54lh8ti0wg1bxkydf4uxhxjcbyhrahipvn23p2buebdbjc71dmyiqqianq3gnxwfu78u1snxcqe90',
-                authUrl: 'a3dukyxsoadr3nb7cuwz0is2ome58ovir60snsc4kashg4ibb1478t6yusxvkp4xkbr07o305aotj2dr45tvhi77ga97xultfsvptidnhxiivuah3niq70pa2nfqz70engrcltd8tuwhrg7zo8bi0eu6c16z4gokm84d20yn8u26pte1nlvfcgh21oxesuhjgjeag061s1lwupdl5p6rp86uzygaj2hcv5fype46ndyxgnna9s37iacm8gdpnu03xzj61blifakf4nkqjdsm0vze7effm4um9ecnduop6ycck74jf7ldhheh908kqc5cpew2wm4wcf2spheiiji1naa66i7fe0vq7dt1vvgehr1wcm61yl6pdpw74z7r6eze7g44mqdz0k7u64gbe0g4yop22nco2jxy2rjkvru826wq20xdmp7bb765krsfbd82nm1gxehzvcp9zrb9e951md71nopj9m4g8wwkia6n8xlpbrlt4cgqdqgvl623frhdasl8g5tl3xp737aphm6vgjetuokan6tyovjsu940usqtvyleoskcxn7mrx7tj59lyswrde7ngh1bjtowznfogli1rl4bab5drzib3j3jw21rc4b4awunckfrt717r9vfnq0x54r516ecr3a5cf68iwlirklfm01b1doddqkw4shsqdoe3t89sz29lakuikxz23oz2xy8bgth4sg10x858msm9l9zv8gyrpq9wxmt3qc2edmatx9xmmu9awx53col7xeztme6way21bra0e7b8jxqj2vju8x028suiwlr6b3r3zl03i7outl1f5hvep4s3chjp1en52qp2pm5aezss3sbrxtpbdarycwjmbvnddfxqawrkjqi83ffog43pi5nenfcve98b9mtxxixnw9karcoqnprsguhl89hy3f99rwkg8qd082nvwmnwxugkgl600wd6gghe109j4dzmm9ldyxc042gu2il6a0f21zmpxxf5la3c3p9a0w52xkd5k1nkslcy6s9o9q985xyyk729jx3s6f6knwq1m29s7bauaz13ns0huvbms0m1kjqtygpxsholgmmi7apop0k0gsutl4s88hx8uhwojv7zoy4wqzfz8vdpqe3e9p6in0tgf5ozqtsecjqa8l6j8e9zkkwkif7g0ucmlo45msj3nbtn1ag1djhavnjh08c4iiuo3tqawyv8wwzi8ipm64qdbf5y7bw0ru7e6mqmj8pbrrkfxx59f1oi7a6rre8uzn46aj9bnxhxipwkztxdpk0mqo44hnvehhqqu5suq2e2vztzf2msydg2na4n0mnhyl4vcwac33dhpz57xty1whjmi7joxleexjxuhsuw9nujrxpbn289uvy43d9rko40j45d9d9rz6pcjyv18ylg78wbflzyiswxqo50mcar3jyybefnlh30xzd4mcc46aihh90u3ig1bftzsbbmv4xjuzkanb7o0agffwbbey69kl5dl4c18meeb58fnun05cppp69c8l1axkrx0zb2h9ders24w7v9l8b4cbt0ag694c6e44k7gyim53npytpp892jk5uhihf0f4d4t6uw0d4t41pg1n4dyxz144wljxfa0hty9161fmwk5vtekic9ic49ffr2yhnr79bvcpmqe6kxjxduccl316jryqdipyyzm9acd1uwk1l88z4qpdds430a6m5qwbi28bb73noqvfxgg9er2n1qittdm2tvxsm1tn6q2mtvjebhy0cl5uyoajetkevho3krzcg9hjhq5z8s7z93xpfckfmfopxcyuo5mo280u5wh2qsc75wxeiasorh6lg8hoh2p00qzrg9wl8dvac9tup0hq3i0q7ka10t7m6z9sax6rrp7jks3fg8zqqa03536om4f0w84q7kcv30jztvnw5p647mhij2yz44fjkx2vzz7gkad24xkik86kjsvv2prif388x7stwnf3fzri1zw6hlg7ul9faxwjac7uqp00qhw0dy90zeioy481cchp1seyo',
-                redirect: 'c76st6ebeskawmfwz7sdfaxjj3bisiyr9u094ymiuk3u0cj8rtp1wi4ts6uo6jiunkm7w6ucdxmrzxjb03mildk4u5pifehc4w1am3pc6z2oigrzk28adau063effrop7nfp9h0tuy5e6ow3jywzn7j53ac4j6cxbej209yhewrajrxaz8tseizj3pzywjantluf9cxcybkdc2vk9q2a79btyxlixxxkhmrtgiqw94w9mn19cf1d2ovxduouhhc8zm31no5no4j2ecwc2z9impd75siwra0m2hzvl6r4mby0zdjvbr8ubvd26mdq2076mhjznxavcufs4fgbc6wyon3ycswtgz56zd3nsqcdgq88ilr96on1my2i7xjfre26nil5rtboa58lvoq5vrszjiagyerrmb1u86mqezcevk0t6m336n40by0rnmo0ntfwkcisjvhdpqmoi3tssia218b41bm1kt9mx6fvphsgl314hrtvwridfixnq5011fag6ydelsqf8p5tv9u38k0s5xhjobtyjqiswckv6ssldfm9mkfvfvfxh4s9lviuc0uqhmzzjs6e0i63p56dp1wsdry29jm5hse10a0tlnnwsbulem0yamsfkxx8gjnx8ew92lnicc40oh8hmcnaad8zw68jle2yzths70var0zit8jfgifvomkfkjau6q1rd6ltimljkdsgrdoy3mcvuknxircorv3sovqle2vfgy4zoasz9jxozwce3hbt6lfi6i5rmvtpk0gj2annek79nz2y6ywmz9hsb9uxyy8b5lue508tmbnj3m81chvu57u6hol1ni0q064mkket9kz0dk569qgywkndsvxg3jj7exyzwq3c2i79ikdgj1zqjosmc940wso6vj34ey52dc5rd3dj8tf4ors542klg0yqm6e4g2157rmjrv4q2t6wwdeg3m60grku3rve0mq3uqsi4l9hhw9eh5oyo36ty618epxndlroujsatbkotg4jvwa08n99a6w3tff5oyr2zg9van0ps7ue3ha1fk79bmawdp3n2xfikrx9a58c88tyomapbh8o76cn3v6nxcaz7glriz14ypm8dv9vzgf8fs4q9erguuk6u3v3iuh2vy50cmancjkcbnoxmuy5zflrrgdr4n7txcry70298k4lvnx6wkcclu9r2dt458jjc240jy3mqr2z51r0ktqliinzibz5j9khu2lp52m35nrvj2hrf84uqe1enaxkuye5gq2zs72b93lzzncx0gqk8os0k1mq63joewecqlic3ups08jrjrsco6bvwx32q7a4kr9wglfkgub4vvr2cuzkm5an2sxcp4ai7k37zw5r071ijf42ad1opncstx5cmu4fkz6s1qgwylqh6j7hdonzno1uqrr7d67t33ehlbyj65eo1218yic008s837hcrnb9sog4as1uc1iwq8o03p7dd3ec9zgiltbihgl8iwl8ke2mkr2qbgn60a70lx2zmipl93t25lrgq01zrh967xuw17homi0pmy21lxgb4w80e8ti2vbhbldmku11miza3amzlv8q6os9o3iyeipzfyod8peb43gsc8wczb86d88idx78sfy7wkb460mcnoer7o9us6hjwt2wqwvzagd5bk65twx7f9dgn7dowo9pnjsq1jcomo49u5afhw8ezpguxswdp364u5oqo2cb21b6fd1k2ama5h7tknr5cyog1fg0uq7ebnumqm389pvaif4nkwxbxfckusy83bw7f6eht1ameltc03nq91hv1ozrfd09q1cfmvph5uy1gu503c8ww531491so5xsvezn3659h293xo49uvkupvla69evbc9pvbc6cd0x49dh38ctz5dc38b2yhus0k9v6p0oa4fua2ew5a2j5lpe1kyh6tpfezv5mulqw58ygxekfj5v18a2c8zu35gmj88vv172mfw24o198mxozx48q4gkza6zehmugie0o9azgejk003465prpnrcwsnecimom887',
-                expiredAccessToken: 3577265515,
-                expiredRefreshToken: 8806793271,
-                
-                isMaster: true,
-                applicationIds: [],
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for ClientIsActive must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsMaster property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/client')
-            .set('Accept', 'application/json')
-            .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: '4d6b4ba2-f395-4088-91d4-17d07afe7c59',
                 grantType: 'CLIENT_CREDENTIALS',
-                name: 'xs75f5san9nguenv840w5ampprfozoqjbxxbpwymxjtz1zs95ydnejsbk5clbragpjo8ameniyng11up2lkg3c591uxta9g2i7e8ugea07p3lf7ykir5yqy6sbgzr5b4nkh5ys5yb0vnnn1y3d54leckzwwej8m3i5egv5u39vp5lajfoptxo0cpquyn99vcdchvw2jsucrftunvb0q5e9tbq96qlxvbj4qp9wc11s6xpezo3qeq0xg3q3uf3le',
-                secret: '9q1wfs84urw2mpi30zd2djve87ahq0ys27t4b7ecnfxqzxjdjht9f9ehwb1bsfumgdnqtle5khn4j9tlq8asnzqzrc',
-                authUrl: '8z8di3n6eg6hakk2mu0aqe4tl7fa776wao3j7ltp2esrmymig32z8o15go4qp6pobl900lxmflq7loofflj8h1xofrifp739r63f2ay5ct1p6c3fz41wf7wivjn1bfz7x49tkb9rki7sfxrrm0cjocb5ukxzihwdiw7q4kmtlj8acouvcmte907e4093pop414p0lmtb4iq9rvpivk9u64o4h3q15jprp0641ijve4bh8fwvqnll5qdhy5ri7cryxxfh6xabtwn0q35ex11gwdwk53o76h3a3qnlgvsrx3v4bqlbuymnp2ttoi4b5v1x35w189ard1nbjtrkuchyh478x6phb97i42774nrqo7if1nstu43j2lou0vkqunf32nkjq8obolhtdq69vbq8io8yw1mskrzxr1aemuua7iq099dnv4vmtupvmm4psz3lg8b6xcy3p1qjry2wzw0c4k1kcxm0qz7b7qyqp0zn9q9v1x0pyw04th42thqr5mqa9k7zl11fkw1eh71smhsxj0kzdf4nifa6jlcrrnklf7n2z3xnf775am8ns0d45x3cv1znpgzq91uqp7gp37rkn15b0cypjybrtejehz10g3iryqkmohx8hmq3idtiq2ncx3xrkdl24hcrjwm5uypins1zmsmc76czb4vxucfztpumbetpvohf1chjlg925z4y47bl24a155c5dlqmqk74mce9pwvvzuy4pui5zso7sus69hstdyaohky9wme9bvbew0bqbeqqkt5k2n2h81eah5xvirp6xvnjoginvpwx6u2dpbuizik2lekkzg441wd0c8rs8bgaqj8xlsrraqe1gv18ztpon936nspgaq988736jpbk42ruvbm7lhoq9a99wae3o6i5hoc82whbe94ufetn5fe8kowbhtxmd5vionze2pn9czph9sparvj73yo0iw1he01jfftpm2rukwjof5mhcmvixlu1yg525ojr4tft010e548jji6y8z53gts0bvcwrag7st807vsuqoje6vaawm89pvwwprs1jiigcpzbwq42actv3qi8eol5nawb0dz8qzd3xfka0sirsnezr0jfp08u8a0pxxdstzbvt4w55zs90c12r1hm71ij0zabyqr78ndl3x01iasivjxmpt2le04iynmiq90ujmbtxa83f05zvg5dmqw2so8jp2lijjkgcol1j69nx18po357ye8y5467925xgjh4tljw725ievkgkmtx3pshsv5l9puynqiw0jy1rq2yfcbpocux31o895mc25m5evfvi9onutbkwm764eujz2cwwg1eogj6h2q2a3lmpku0l22smr7l1vb73mammafhn6nds2yamplk0vbcbt6gfpowso52ng302brldyil28o1if120mnj7ty0pdw9shfht9pmk7pf3o478hzxjx9fn57d7x2lcjpvfi3xb2o9getou2qbti6c7uewaw9cklxhh2t7xkwe41s47xzshmkgzn21tblucwwz0d8tmgpsigkmtff20olbc6eahl5ngk5gvy12hqsffcrhhhzsrji7hc8mgkvhh3fuh2srsrjzg2qpudhyd1278a42jmo0371eu0bl582huqfwzowh5fx66gijfih71yoewt0uypc5xcglgllcbclaeojrk5210xnccuzv85pquscbafl5w7i54xvoa12tpt860bb4atb8fsipblic8b8ixn7k8vjsa3dfy6xthnk3t154qjfsls609mzp2vy6gwcfagy8w2rszh09ga4706myzk1h9aoesxvf46e7hrgth2ebgyo1o81a5y5529b97q4c4fuciz4y0djg7sht9mm9z2fd8f0d980j8lai0jpbaz6jjkmdfmnymc8bjy7t493x0qxol4dzmo4fhnndxahji8m16c66ej4z61fh79o4v9y2j615c9owzkdp85upup7b22qf1f54pykl8gh9v4dqtjsmxsjaunt5ioto3symtvkcvjtdgad3flcf1xaeyhiq',
-                redirect: '6fria0ye28gkr9mkeqo5qbcnn0ac0eopf8xisrprhggm8oowd7nvzhkgnu3v854qrpn598euq48b0hohr216ooohgcvd9sa9ejcvug2efcqy4291u04hc1sk1xx3vp0ulqporube30vy1sdgbuef461j8czudsegc20a30l4g3yrt1tutzujxyjs6i0o5u3mepij7g68w2zo96yyigi37v4uop4ufk0elly7hrhukmay6z8z7iqx9xdk9rzaqoixmr5yqievmohoq12u0446fnrle8o1muimboftxzvp0md8engs63olg68mstgkhwjyg1gqiiz47reuuhgqk9xu7do8xtlni1tfor1jb52x89kky6xy09heo38o0tyk3qt3gm87beaexnsjimevu3q6ur7s6zh6jl1wdce3ks3tnutw0ya04musfzo90xvx07xrt2m2t7ugf6cogbh5g25opi0yb6l8i6xkfcnd53oqwk0vocpkokxseophhxq4im2gvtotfhu226kjuspnzqwxkkeld2tzy8zbform0qboaartjl05jax5d96z19rr3z2o8wn5ey0q7wrdil7v018ib1yix65zlxa87u2ueywl9ne3a0uh3a64tskr2jbe37hkk06kslqijzhkjxkxfoofahuikpkvyjbwf1uw9izt1wf0ltqk1lng7hmallet23kff1p9jx7oy244y0fn275wodeu001i45se69dcwr5rg7dp9r3a3lpvor8y4y9n38bpaq7hu01fh4jmzvk2vbbyg8r43kn6ii05d49ewl36qwon3gjdyovigp88tttc89awt444l13xj2bnmqzhsdqolp9w7d2euxpr4d80g0ntjqlq16ah39i167qz4rlxnz73rg3ta0kykaskx0bkc0emcv691q9iairyonnvqm2z0nwj5z3bqirp17fdzyphjcx2g2x1kmmyvihfh10gfxh0ffggoas8pblmzpnywj6f2qsqw2gr21dr4nt1twoy4xkpx6oss1gp5izq2yggah77t3sfcgwb1lpwfvhdvrof19d9cbwtpsqe1f1z0ycjk9lo1evzrrbujj97aiwmlhuq3ozoxf9pkqhlffbuef4w2qj98k4cq9e4agmn4pekobukbr1jov2qxls2bio9pgw5mzy2mj40lgcp8x9chyttw0ahv865g2zyk7q8dnpzb2oomzxk1n7nhj6sg797cdi0gjqcad8u30q5ibr7oq74fef2dy4q0p9zsqkqeqrfsddpnx9tphai5j5g66su1qhxv8ogaqgmdpu6kfveqoa0bhezulnxmwccwpx41fxtxj5vftdhq5bf228861z7dbot9kbuc4fvggl6syq2pfgpqmlkpyfvq867fl09g8w7bteawa0x052jr4v1rkgxwq2qovvsvfsw8zyzkvop7ifogigs7ryqgurn3fpz3kwhrcj44euk99mz0v2ytxhjq7wpe1ontvyojwzfwy48ifcpb5wb8sbrohiokp5z66j1zhjql2ocuaddie7m9cnn589mejfvh4jz8xy16xxrsog1eduyw2hu9b44ptaxqlbx6299e7iyjyh3062bymsfywcrn593npm9zy4n3ues2l54en6nm05o6clgdxerqxwwkj3p97vdh4t37gd1bbz2a3cv611d0b7dbu69kpn3jec92khd9ojprwhbch4vyfo18a7ge8b17o6jrwsnvknemwh7veeym8wjs299ac6v4tsu5kmd3yuuh7rnc90zeq6btbkaokrc2p7sngbruk7wb9vmvqsr7vud21234ks9nq6c9zbjid1jpovwp8mhf5hyyd8h9iejc3sxart4187xgfgwd2j36orr2bxi17y1znvle0tj789ftk7wv2c6fl92ff1jarwgyq4pdxp533nzg5krm2y6oxkt17u9gkoz5weevbvrth7gc4y02ohj4e5rsh52oylq5xayl7nxinkw4r8iw0k34aofhdq12hbzlj03dqh9y97jl4v48mz7hbmnt4z3',
-                expiredAccessToken: 5135582812,
-                expiredRefreshToken: 7959226811,
-                isActive: true,
+                name: '9git2yfpbowrmwc8n093ou9upcjjplcpjfzp16ldct5q7rlfawk8vplishs1g48pmowfwlchgcje8e7nnj984w4wrtaa71r3yu5r8mr2mfujqs79eesudwdss6oz4hj8ml0af0k8132zsr6ngtq9tidwk7lry1xij03vnozwcbctwpb5pvaoc2u9sa9lm5enxzgopw878i1pefcykya3eo8wqurfi69nmg1p91djltzboaxob5b9cy2zy3jtj2o',
+                secret: 'flfc31oxymiknaadlbfxkyb1432i3tzt1tb0sgayysiazfd3lj1yj197nv8uaawp1rrvxioev8qmx6ln42lc8yf26z',
+                authUrl: 'dmcdbmdq8p94h4x0ofm51orkqub40njnlv3aswj7clzd7vajjj9z0wosswxqxn7vsm0nc6cp434woq22uwaw0gf87glklymnysh265cfcr1l7x5dhdke1b3c86gbjz6zba2cwvf6mtiew09ri764uesk9o3wiini94edsoy3rustei5euzjct52sz5ainro6bbbj5rhmfl8b7zi7w7ahg5ws4oz43q9tj61tuaov4u40le3yv8i9qz5lk18pp4x6yvusvsvwz98vp80gm8rj93d8qz2mlvklhfxkwrpirqfmmiytzcvf5hy3z6u2z44cjsktzizt4nu9tnhf9pbj9rf7uxznwcgwyvzpmq65geiyonhkhqjy3r837lu4z31j9tygn79ipfnp01eqb97sna9kbrybqmj24rxpphi4az95rq9kw5y9w98bcoc7wgk7ksggv37tonx5cg7hnbuafttop29e1f3k145df9ewy9r6fqau538od5nx6inms1duc3m2z2g0nr40krunzdp65wjreonbse899p4v68dzv3ogeyexl0qj9yyazogqadhggv3po3db2zthzqyw1i71bqse44bncdz4i95o11azylkf2o7alm88gzbviyt3b6oq7uk5zoj8xm67xhevhi7ra9ejef5i2iscycy3mob3zkeyu74hppdyieshniep1lhvr6ei4zrp1zx5ycbzszfeou0sf5k6wy4s35t8yt9q101dibyh9yt4tngn3e8wdgty7565nssigvjt41qej1b3ic9g6hajtpjptxy0wat15l717yq50fkomxsno2ydslil33xmz3gzaspn9n0yt8lju6leni36m1zar36vzn8xp48qedole2ebarqwm62a96lz3n1486mmmp32oeuh11ndb1lhlcpi7phuaz3luutvjraxbizoasac5ypg41kxnnbrqrh7lznjzdkszkx8xce4yot1zn5vfw94ovn9h3yhz68wumfr6su1kkdl2xxgtv48ub625wbk5darelecpq7ccf787gxkdwxmlmd3wl3jnzupy07ev2o8uncir9lks70zlmkkyvxqtf4y6mjr9e8hcv51xxphhh7ujbwqgwny4yne976kbeq6eailgbtg98spdarzpm64mtee93nz4hhbqhile6u7k5phlryj1x710l7zew5c5yexs5ywhw7qeg3fzhjp3ivi4s0hxh7i0qpul5q5wtfo51esa76am2u0ah7ahi3ukvz7hetw4ak74gnuvxkjbvst3oxgkiimv58oglyfns8x9mh7wdmgnfm5rcfl0ms4w2r3mr3u5f1ogf9qlgj97wa4qctmcbrs621j9giareqxq5lp04bz1hqetn81cqfi6nbvcxxrvuszkxop6qj965m99sc47hz31ehklffjgfatg4oa6yo7ddlbe0924lml4nxjk97g2tlm1lnhm9sv371z39cwf6x7nr4s5dgrvtn8wlnqqz5l84ibxrbxwvrr8o8xd5e2i0zu74soia795og003xe194dskc43yi17hihqqd4k60fwjkn6dcptpu3tw4h05n8nykwy63eck0jrcl521c5q0vloth548obprghxrnn25ve67hxxu0ec64a2nwda7syynuq5sne60n5u79oyoubjbx54ykrf90hfqxws47mxy1t1xmws6k9l9t8yok8m9bwbaae1kqw6ck6zi4aszsu041lrq569l6x5aq9nwf7o4vi65hoynh4va6jhmw3gbxvv3eyt0sbb7wyqw71807r15559yozq2w6d3nei1jrv4ls7yb0hamw7jjcc2v9bccwni1om760opztoqvgm11qyfbku10hzjap5vy2aihf5lmcuuc2ckvr36cac9j5an9lafv5syap7j0kiddf8wkm0rierkolnbpf9w7syqr2earst7yz202hgxzaollzjvl6b5hqfrwv13q4l1i2lpb1iv67b70ailbyxfcbeacxf8dvz5kg3ihyhv6gqm71tm5j9s2e5w0e',
+                redirect: 'lnjbj0scv7j887ifhr94jcvaucvuyp9vu8av96zi3yb355gp60ieufpmg4edx1i5cekbxg0l35ybbzw870sgw12yo7aqfqtljnjf4m2zmbi8pn60yum1k58rwuoo8eioaprwkcvbnydmqi4svigqnzl0k74m01u09xhm2yykn53iuevm7bryhb1emmwxxuhi9e0yfren3evqlsosi8u3tqumsrmn4eouwfano6y6cxfs210nuw6x8gxwd6wpye75o2m1i4v8oi6vm9lc0tbv5kythwesjz02db7oper307dvfrumq8y0zazi3arvwyefv4zosvupkmwwbt2bat120omj4wdvs89e8untagjuehrb5qwtph86yerqrzhjf0qbfktupchylvda1cc2eo6kh7jtc278yvkax0lvhrwels814oez34ujzr0antucjnn0ch3xznyyf2k0hik4cfmumxxj50a1udjbik2z6sdzlmnzd1oroea9uz68wuredy46w5qeg2sxs79umt43o60ok001l4appaa6tlhd1eworhf1n4z4qwwgo7e1vsbpgstbefuabfhg7qa8us3w9pywz2558es8u9xc4eo6n39n8s1pua1q44yryw9sefkk9u5lrnlgo6itmsl8ov2x2oo6xyo2j3kucs2jhyfi9eio6k5hb89c5pgosepn4y50erylwguqp9nacxzraqz2rur8x9uzpq6lpkjwhr7pso0c7w76p52plrmtdryus885pq00o6pg3fynrfzqfx3jisnmgztcj72kbtftdkvvv85wmgcp5mytlq7r7jtzfzqlcd7ak2scvbvbk06bp8wzhjadjamigo4l1jxc5fm688mhr0dnsla8vlirqcco0gijuybnv99kofxwkhk9z5evkcamv4il5yit3rzhwec6gdysol2pd4m2ikshkf5htcr3b35xgnxwv23e5qimv919nog48yxj9o4uyah4mi7n9ia6d2l5mfst5o5101scxgfdbr9vd3y9q2vhnejoy8nkhzs5l6lb3fzpvfzl6ogungseg090bmhsg85q91d296axetnmu4g6jfzcid0ko58hcm2s14g6bkcq0eeoueumkb7tmes9eahja87brijteuo7un3lgs5k5awc50ln9lpojw5web5hyr6ylqwaguiox9ov7mff0m6dr06v1z3h7y9t1pk358j1ddyochy96sotbrvrmshwt5xmcyv7zeb0wefz2v4yd3cvwahtvwzl942x7vix4lhf7tkcevr8kzvivzeiulpwcsnlxochlr2q7zdv0gljlb9om0361m62s9rvmszozspoupc067yyhgq41ts7r8yb7nsslmm2vfgzxl9mb2rq3qb3m8wrkm07302bjq32f5q7savux23i18rykuau9ssbf39xzievnmainumugp3ebamnm28bcyykwx13bfmu5bh31ufnzyksxsuaufmfav2j78528hxcbaxb92ynon6s5bhvischlewy0lpxdfdnnym43ae8n914b5s8h0xsgrcr94m32azkx3qngesn3zxuq3yda9q5f9nyfgmqfpanqlvt1w1qsmbmjsgnltu8x9nq225zuxezlz43iqsnh6q6532uvqry8hv1y2kkn0o612hm1wsrg5to9ihohkoj3iu8cxto76h68imhq0c7km3g0s7u5rj7bqy6l1n6aas5nmnlsb1lwl5ie3foe61x33htdqevylkde1qxh1w6aj7mqinib4pthnsmzbwcb6srlct81u8lyyo1c7cmwa8k1cfdezod342zelvx9u3x7tou6woepm94uf1smhb86v6teqpkjfrnvpy7l3j0e4u757arjkczum16kit3n0jn5texft1f3mbebm2virbd9a7rzydkcvo0qmw3m1ewkyps8pgnl4101g8472mq4twnwsr8ynbosisereo07xs4t3fzqz1xiei1kx801ceza0vyh9ngt8j63t2yy2kpr8vbpinbq8htqrsnu7vt78vxussy',
+                expiredAccessToken: 8943321529,
+                expiredRefreshToken: 4654122946,
+                isActive: false,
                 isMaster: null,
                 applicationIds: [],
             })
@@ -314,22 +221,142 @@ describe('client', () =>
             });
     });
 
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsMaster property can not to be undefined`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'AUTHORIZATION_CODE',
-                name: '6ecuq6gvjrgzfja76jtgu6t2c3z4quifk4h4r3asawihqugv6morxadnc7awmia8jjy7kbu7atln71gpiy8sanl6kr1wxn9a8yxoomsq199wxok6htqk6o5kkqjg1exhu62gmpzprsu5q7djvvsjgkh71yx9n16nz0b363w26fqj7cpp71xzxz05cob27da8tncnfivo0qrn44b6bjbsoul6rut0yvdvdcjprxotq2x7vqmhb72umtvvz6ri1oh',
-                secret: 'ddbw6vlk1cx2ez970jwwesqs482anj3ekspngb5g16p3z7kkqafacbjk2jvgqafexg2wicrkwl1x6boc0jebmnnxhx',
-                authUrl: '2nhqvrjp4ugmhcp13vqqui2mbyz9kmyoktgivctoj9ria8hjyio78r56phzxhk45mmt6osnsp2mrj7fel5bkgxh69mblfymypipb3q1l60r6ber7jkdegei5r2q5uycgs185lgp1eeya4hn1cnx4mr7kjbozhklqrulp71gw3sqeksxtn69e2d1erplyap0wig78y7ii2542k3dow13ypxstr4zyga01h8959i8o0x4x8tf66cft83id2tqgwd4pw798sqo9x2ootafw5c652puwdk2qc1vqynxr38v9yqab33hbkxj09w6m0zbe77i24t4itgv8tj94n5cbb41mestntvf76tafvmb9hvd73nxgdjm0hndkyaf2yndmiawsz718763dol8uhmuuxu1gogihev1i1irvxih53207499a1ypn507ij9k1ycv4kl98g7w0lr6smgag91bed3c2gm4ck7zyq9sz6ovl6s5i0t90i69thpvtyv8nhmjf58ndb5jojh6f3g7g4l1e5qc681xkgiwu9ofc3qv5oi0gvfx9crrowux2ovq7am8nj193421xb2fmsqfqz1lw9zl0l71g42zbgu7t9k0vik5vdan97ro945mzz6zof7x80ewdco3zur812p7roew935tiqcy2886q3tomgumg38ccvtmg7l0g43ubvgmc66nbv66pp130gpheg3yuko7xtmvs053tnqsdok48qc706915rp9jxgqxcrgbw6pgen61l7bdcp012fugjzo518hro1tzvzbyzqq3hxoy5x0y2mwe3sic9f0evyg1ygkzg0run5tizr9tmyr724eqylzqhu631sl2ga55xcq4zwlxcum3jhzmhb9k1ybdw15zuxus2thil8wiydvmizpn5azlsrvk4b83cojj24mo4jdrd06euas2klxr5qod55tq8pppl9pz06jzk2pxelktnudwaoqvi2mvcgfnosm0ej9sqt17mlhqx7o9z3nvh769twuygas3war4xxvoq30asppsa5igqnueyraoceb8tip845xh26uhzmvk15hzh7nsm8ou44zcpztjsz3n94x1di0qvxijiykfg4wtcikjh29w8ugoy5malxaz9alky9ijpsr0upgmakf75v2go4g026m0qi4g8ipogqgj2mpqzpwm1x8bnzh1lwuuvw842mpkq0shz2k9kbq2yomao5yhia4f08ze94dcci6hcg8zfjq27gmbz1q2oj89s2u6a48j01nfpbnthtgywwp5t38tosgtauxja93osvu0vc8cex7euc01ritq74blsdw3g2k57tpdaxdfx4hwpus1vlkj0fpdgstcdnkdyvug29d7i8vi6ncq0h2hemrfxd2dyi97wh4x18jc6hhzhxe8fmtw68z1kz5qpg4a2vj1wlrbl1k4lk86hwp67frg8cm56i4n5yx2ni2h2pu9424c08ib2pcsb8dcfnx6cmibo4mjrekfliq84o3hahv7ni2ksuudaep30of0uci19pm8lbwrm0o63ghonukm8qqsiuhmx13exb0wn4g0k1qnsm3817oxzdo845z89104h56fxmmtyb0cwhin2uo082s4caj5e2wy3mkez2uuh7p8qszdmasbbdw3n3iy1x9sc8m5hmbw547a98yizo7tmsa7ceou2q9cymzm6vfne772hvc8tryatd994p6g3a42ovj2yf2g1af3o9wvbupbsbz9vnw2c78lafrh168rtovnbk70i4p8a64va9xsplizr71k0d92y6h2d4ic8t6gria4fzxm7tn9b6w8d4hpkuot4n1kmllkp8ydi321ndmdxyi24zfv5uowpqlhw8dfoqrq0dgi2ai6ejivvgvzg3vxq4rvai29ayon6yimwks0tg8k9lasqyczvyoc2wvspkqyx72a27t1lq3c6o1d77sqo55bmyqdueyvvwm8ot3s7ntjwl8sqkbo4zfsy2ytbhhuv2r0ghoft0spka9s05uwvbmp5ukgbafpoyf6',
-                redirect: 'pcgpymsi0s1w8y36fllrjj4vxxc0cffkv8zxh7oadrt7aanoc4ycgj1o2twf6atdxvl1h8y3toq06w131k9ndlcnzkodai6hpldeyyqey9x36v1oj181raj2183lpips5aawcd9d8mobivyvpej99jslvekkv5b5790o6pr1trkc6dh5gcjqjufuc5kb792sx928518i98whtlusksjb825vr2sh1kw0xfvoxopjf38y616a0uc60x3f07tn199bpro666icuayu6p8b2l6h6vv6f9wj2l2as0dspghfn1qkgu9emeop0udje94ts5nrhhf5pj3d4whzpfb30cwaao0iwiteo1efv5xageev7eh09cxj9ni0e73jp20rjwavrx8o5a5y588wcvdc26du01jbcw45czf7d08ns8pigbnsj6ok4eho4t5l2wglpwmyudg00tsbneofbhdqumulv6n1yb1zw673wkhjqfl85iob8bd4p7os8wy9854u0uhegr5c7um90z2krxsqafu20hgj3osc0w7sz1yz5t53xvf8zyyzmyelmhz79wps55zbj0jlaws3noybzok81pv9w7q6miq0cfdze4n8cvonj686sxulk6pt11d0k7yb05u3yj6crd7yw5m9y9f6rzowwag0u49mzgguvyaso71ldkvpy3nk63kttbaxfloddfblyuirtknlp0o3ito0497w6bwspt0h6eai17eponyhrgbbdwncmjcvshe3tmew7rr9sz33rh6p75owtjems04vpuv02vkuaia8z5ift8t8hhjxrqzrcmkth93ami8ic72n7kqgh14i274pwps9syglqw0nyyv32hy9greotrmfguskf7j1s17a7w8qzqvr97b2h7pxfpsjkd28u708akzqang1xdv1j0hadhe5qdc09pkyds4ih60uw5epwanp39zvnbls4fvk5mgtip5s2a8grrvkg4eblt4f3ya26untpzvjwy8e5hh8sq8uggn8fmypj71xk3aq71edhloxpo331zk1s5hnyb2mqxnunafoaa23efpd0sgrlnnxkou9ugvfhm9lhlwgz3fxgem9oatzdhp091yvryp8zwz7quxh9asn2krooa0g032vl4l6toczdgouia6yk7hkdbt286cugjq9di8cxertcpttdcmqhrzooqtizle20db1irs21w06j8peia03945sre3ahpw4nuef25vij9yvroszt7ypfdkh74pbi0w7zm8mkle06ttt94e9479kjxnadkrzd0qxhikn5i6phippepxmqyld1yhija1jpnj8i4r60ea83584x6x18nxj1fctcu5imn5re76pj4mvipats7epfr3a2am8yh3wzrvzm0r2e9nxz02q7z8njzw08rejae876xd45n05aywrq2tw4b1lnekxcm2lfe5sv8e3y4mhmlc92e6fybelf0d1dio0jo3vodwuy94eo5yg3xoex4sdzj7e189pbatgbwoxs3tnqnmufahinetwx3bsvremudysoslp7wy61pjnu4rrgbj7jepuccfs76jil7lv7o9frzht6xraxhrz92zzmwm9b5ayycrpt5d74zom2jhxy6n2qop2x8lhwvmrp2r8i3od6tngq5l3gkqfd27vai67545swyfr812d3639u2id4iqv4sgmeaqpfpwqfsomhx410lg96q134luq9ig3exjt9ze1sf7ou11j6o9yeqd21vebrd21xw9z5xswxllabv2lqq4e441avq7wlzpaz4a78ou0x9fdl3a8fb3il47987tmcyr12hhs54975k4y9xol9k1qitqlbcdy0g6pavyechpb9zf02uf4403o4dnjf6mznpumxzwve2oqtyv0upunpif0w3g4uieotx1qlhs14ndvuv8016sq8hyxiq43hozyvwi5p5r4db48phs63wi1bch34sgef4qoggso6f4blqj3b97lae5pkjr0uou3urmoes1z8w0p5fpp1rsbklp7dn6slkkj',
-                expiredAccessToken: 9804244752,
-                expiredRefreshToken: 3474711789,
+                grantType: 'PASSWORD',
+                name: '296bwivhp8ds6dx1d23l49d6gcarhbacf43f7nkmvarqbw8bx6av5ae1zkewdevvt15gz588yfyzn44svkb3cilrxykjiw6845s8uwkbfwpwjw0lwwng16q2mgioxuwjt68tfm9h66d6o6xk5d1xp4bm76byhc57d5sfm4od0739nx7r0zutrqmuo0d8ld14vgukm9oj2xshwo8gde4fn9oew43fo4gqz314e30qiuhoi8hhck6b2fomczzwj3f',
+                secret: 'xtskklamirf1972akl10w1sxsoz6nb2g2zhxsufhlk6kmp8tz8awmo8577zts0f4hzmkum2wzf4d62l5rcdnhg3a1k',
+                authUrl: 'lpc7tdr80wd69khxatnbxbwttbft0xjmtwv16ve3vxp9dy3euhekzxkpexeqd8bws07nyxde7cbwqmx2mf114athm853ma1m7lvwvq25oye8ix73v1at6z2b4ndhwsuz5yjd39sb3fehd197pq60vuxq93bruod5263q8ebr6ca1n6v2typuy4ijw79tazphlxxk4b6ub9qn2mcvnweym9kacqnwsvlz6pay441yhn4463xk5ikoxqzmfl90tt3502oo881teic4lqu19emjqmt4a5n0o98tq1t2j7e6exhv053nkkrgr39lozx141q0k3rdosyy0s945ecrl2nfjj84g7g9j6bzxl8tr3tmoi7hpjcujwiw7yfb2kfgots2vf2ddiz1scgg8npuok0gvvjj29etaee0qeynmw3m9zruh042qfli21zmcg569kjncs0gkdmon63xmvmf7r6sglxpodxgqqs0n3ke5y06zxfj2xw64633jg86cfo9b49lehq5x26i9xox8ra4u8b55luvsjy6mr6gvboimc6z292589dz7via9c3do6j4r41qc3isvmnv6c2w2reb87avmjec542sbfqv38apgor05fo1vuhfkf2z96qsqb9n45ymqf1miq0d4qvit5bnpap4t3oazl9m9503s1e8f6751x5662jbq0w4wsdkaonsm2lm6fi8ce011koprmpd02hn6p4e3n3vz9qrymb3s8frvdusr7u8thbcq01uodty7x2lnehzlismb3vwoh4ff9872elridmlorjod2h51rhuroglz5nhx24341mn4txc4mx0jwn0u3g10z8oc7dxwc9zl19z3w2r3pxsuoeooik2s1pb5gxesc3xxtnyiht065vdgcgn5mt02mirpk4jydtasx4s0y1ifi3qz4brawt9tncvstt4pc88db0bwjwposhll3v2lmvpb5xh8klki6jr2fbzubsklkh4bdzr5ouuimedz7gphbkm6lkydezkud4hpjut3dw1ly0od6ti7t927ehyr5nrnnvmgwopek1fki86j4baxsjqee9joiet0z1j4z3624r2n4gii6ygd6o7vpv9uoujuyf04syf3nusprcmpand4kqj6gxdllf81ryhxddjrxr1hnx5shwxd3ucg7icaft2ewn4a122ccalmwbxjqj9vj6tlwzmx6jtl639ma58en7oph0tkx3gdkayo7fiho2k2df36ut7lpkahq2ok4ps7k3ha8sslwsmbal6q5xqk6l0bjuyfvoxnneify8f0ut2ov6zmwc4uzyvs1pq1ei7if0wm6i4wg34jzuwzmzd8hse4f8j8iqvzse3re5fyyawvo9et3nn6knnzuwd2uy0kl6o1n0x4crckfg32zdotm0d5amy1n2i4ke1axdr042be6x5mudg3fzuvk9mp7cfgdz3f719o76jyppqsrp1qjxu27sehvxdcxmieqmb82yidruvry3wfd1g52qbu8r5ztfh42dbdktq47o59x2t6why9b007smnn9ytv2la0yt56bx9sdauiagcxszvezg44jgdi0wm4gnzus5p6ida1sxhpxxpf0k8qjzynpdcee93rodebhvsyi0acqx5w9z9bqbmzwkjwbnkgqg9fakq6tx8816c54zg0taqhmofsjns4opswpb5ogpk9yzelgn4jwgzunvmufadmpm3090xsjqfipger0jdostmu9udy75x062exkx6le376leagenmqgzzl6xaqv5rrz3t7m6ngzf71uoldc7o6z2gj9vdzhwr9jtrx62ai34fyzsswlh5wbmzikfkrfr9273y2vipbc7q2syl00oeafga7pqby7r9oar91ibifoxoo806728uougnwkw9jvpnx1g7qe9qu1j0ixqpewn3wqg0dw4lfa8oernao71qa99gwh3sravantauu4mac812wp59j1h2iu8wzb1sz5cbfw1into2cmx7fk7i3rfrk3swwkn1qpflhaz2ipwwat3gvbhx',
+                redirect: 'krikvbfxbh53kqjo2188onoee3cpw5bmuvg149i6hrk7r7zx1licp3l91gmcxe03fmuoga7ymqb07sqx4wu22lw8zz1v6t5g3sme09o5e26rsxsco5vtcpy0uuzxsd373rfwe0oaslc7pkyzzo0g1xksk3bo7hfo49eth0acm0vg95mlyn5pgj1rmk0buokpr24swtmsm4r5hjzc6jk1xxsl5qoykuclbe7wxqa0cwv5qt8s08m3ve0azjo5kjyauanbharmyiqlnhtlz0w14pb5m1tnr4gzch96lpcnvgsrky1bd3hpmds3aezi3o1pqtwml4z5zyafmqqlsaj2ex8d2ubajnwftchzmtl9la568qy7zn3afhdwb9jzew5su1nhf0iqzkugf8wtuyd04tda1e4hr54h2wcg31826snzq8aj0csrurgziopk66vxywnuvh4hx0zj2wgbd6s9xpi88cx8ab8t6amj0ub7veby4o7sc59jwxkr8igbcq2e0fc405xwff3e6gexxkzhlzkq3cdl0jcamgtcgxly8z3sfouxer1hsgdcyjfxma64gtclx21skwz5udtyz458mqtn8qr31erk586gq0anoutk429xafwqfv5lu59sxj13p2gj4shcy43ur3l4j2rd3eivmgkfsfkjgzrblr8q1yqrjs3cro1j5jp1a5dse9l4nj8e6g30slf11ypsjr6nah1c83izujjj3eme8iqge7lpbt61tegsvurakifn1eykv0n8jnqpgexjwyoxq88s8p58r3a2y5pxb2g5sntin14szqk1o9e04jfc7zt37tk1928ywpphaxbqpf4709b1ca9z339ood90z8ohkobeodrebvmq88jwoviuno8jgate6yqanypwh43kqt50tbne0ln5u95r7jn8ixlxmyjq9ezjazjy7vje78dx1zwjbia5cyj6jztu7uyyxkgruymcak5ajbc10o0x6p6f82ga4hg49kembe6e4bgf94tofi50dqmg9g8i0apnz2opk6qvxjvnmquxvqwhrw3cie297ua8da4ik8z15m2afk8xe0tz25k0fe44mw62wgoiao0v2x9yy1359wgrvltqc5ymkmeq0m4446f765z3amnwau9vr66itikkieil7kp5t6x2lhadpstgai65oxim3d8h7x0dfrx2tsw6rt5kzuk2dquxsslyd774ptmxvpv1oy1m00jc1adissuxfwr0v8ttclfhwlntfoc8lfwt9b28mon9utqr1zdjmfkopv1rl8dbippshq5cud49yha0uk8uuus9xg8dwpfyl464prv95bu4i8wf3pih59laz639d17ndwftvjitd8a3f7a5fz7jotfszxzrmfxm93km1f9tlcuyefg3wd4w6sbz0u36gaots356jly7rmqyzxiuas0ysoi1fsxifzpu1fn8p71sgypmpt39yfyk0hlx6l0ez2my4sorxt41gy45je0q5k7wt7w6xj2u6i2oovegiqbt6cipo35fba5n93wi96xt7ykygurf4rn2bvbufz5s1katp8gz371e13tqf2so3jddt85lkvxsn5milq8wsfozhy7z86qzy54m4b4vejnd8cpb50quhvxmyryyz9d9dolmnyv7e4r0m1xw7lw3g5ydx6ojwoq59p1cn249f6a42qi1h502bqblblcqumf0g6akvgzobcaerf9iha5v29i31ra8xzlob6tfibgatyoledrymfniepm2v76jhq6fqxyr135e41egeh5v0z3qzq9ztbcnow7m679gd2j5f3t22zst4qlnyzjbn8hkptheqkuyiipybmftcrfy2kjz5oprf94ujmz51oapuws2dyk5q2yfiadnkttr1ylaxiucvjmwbvj1jmac80zpbon6rvoumharm45xtp5elc7u33b94l24vvr6uomi8n1qaoj9bwhtxvywcc1aflly34eb3cykgvx4xx78pnmor673vznk62l0t6ypslzuk3pbtrqt7sjx46d7',
+                expiredAccessToken: 7813496109,
+                expiredRefreshToken: 3367658583,
+                isActive: false,
+                isMaster: true,
+                applicationIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ClientId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientGrantType property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f223f965-dccc-4e65-a440-2d8304ec0fdb',
+                name: '4tp9ks50ywgq5be44tjf0gs99d90krt8b7j8gvbruxljncjolr08f6ha2b64t5yoa4ga3345keiky2d0ib2y6u6phhprus09x3vxe4hifdesezimnjicamw9j5x5r1ckg9di54c89nldh0xadv3awy47zjlckp3xynvg2k7jxlkr8dvcuqv6t1uooyhezuprgszhxy9jaqaszrwzzvm0z15evmkk8ofhkl7o37l7pvbr0mr926qqj6qttso8hff',
+                secret: 'tyon95s53tjlistmgp4n4kf9p1xblmuh3ezhko9tahtw7mi7ucu327dn13sydjfjpafwsyh13xydj9tuh7bgm65woc',
+                authUrl: '59vlwtgez94t0n2qq4vkjhude58lvkew4s5yymur6g5mezc3slx4x1qbkjlcw2892hyniop35f87obfdtk3n1mebeodsaymw1ogkxfbvnqhkorlgocz61qt2h224k77dd0jveq3khh46rvvt3e1pywgc8n8xxut448f19d8k31nub9udjni4rsastjrs0i0rvkt2hlakrbzn8el41omhauyjreh0xvbvegm5fsoopjpurlurk04tfii1v9dpuhn9nnwnrsiya1aysbg8t8dqxew2r7bj5c7o9jomuhzzcxnwzuc15mscmhw4q8vfuo0ax6b6j13qejxzuimmmi73h3lavbpqluxm9omfwj2arwpstvyflk1wdmb490u6czbjnnrfudfjgj4cdztdto1y4oodjid1v4k019kicuda64fe05w0u2fxbybhfrhk2odg32tumdbdogyjgqbwwfpndrlygmcnut124t415tew37g3fw8d5dna67bz7ob32zmh9hqajcgv9604jtg07shzutrnlz49w8z62godhvjabu0ldxoqcze52hdm9hkdezgect4k7hnznt2v31byhbyzscex7ghntiwwyrb90ue2orhl66nn92u6h3bes09o6iyblp4ljujkotr1yr9jsnmxcm9e8j1bcnz8nmj8wiycprl0ar4zauy5y3mxhuao2mojzgq5e4j9aqvkomue16mb0szmel8e5o93nxke4iw29bs81sd5poffzagvrutgbhtu0m5soc6rb0rt3m0eyn9ruyqvvsp5bs38bbaqtcjzqf8o8o5rofran5f8ui95vmh1u1syzgoqwq9zgregg7mfcvo9qccw887ciekqnuynxj4mechuaeq6un8yuoweopevrmbqd7t9qve402ufqqucg4z7v5js9pa8yd3ndgafdlqzcbdg0boen6skpgk0apb1wbe1vagy61rvr78n2u3xes9lwrmr8j45tdmc1pu11c62zzt99zzlvopmo7ddcqz6sndljdpkg5p5ksr8b678lxtmot4wnbnt7eugf2qvuf374z9s2fgh3ev6zrm9g30lbljqgijhgmibe7xr6yc0lejjj8cfmqigt5iqp8vw8hh813tzyrfv3wxuh273m5gujoytoh0zt6hdsxrd6tvb7a3x0onmbck73848b96nase5hrfw1z6nhau3k2129sz2va6nmso7ev7a1xkagnp3yorezqof19vc2fppkxsnvl0tdalx9l33y7w4ngvxxf1vhj8snqg80lz2x5j7q7sjh52tntpcs0654r4a1ztmiq6015ovuuy3s259xu9hx4luqmhl1r8j1g4cbujex2owjgbkm8sholdjd2ql6y0gw9xvurn7wuyx70378e62n95uwpzkb11ls7sq29prjf1sbqd743dpfec5rfvvw255f74edoz894ugi9dkabbgrs9mogvoc3f71ljh0wfg72hde5w9vrsadq7k6im3twl5ryqwvaer24ncujq5bgdj6gqnjtmygdue2mzq699odq5x3zocz59szw8qt923rmij399k7owm2zylu89ra0ekw6n5qiph3622rmtuze3bks5jwzm3avku9g9exslar07o8mhfgjkus3c71yn3o2nzgo4pmk5vevjfb0tjt6m3yk8r3f7prhbtnhwmv7c1rwd673tzby69fy3pncg5v7uraibl6libfikm0imyyeqvckpum6up3arc8m2e9z372x6le28c02wv3zlwmnop4qzn4c8lrwrg6f7x8pzyw4kemaqqagxicqudmc53holxtanir17lw2vz49p1s0va01zgshpydrmnhrf6ok9y51h31tvcjc7bzob2l4b3y3g3uzif6el4l0vbm4omjuirxgykqbg022rhg4bx8erpfxsif3imuqd3pjazjvsbo5uzihabr91qeanm6zqtai4kbms2jt69at91g7rk1exlha0ow1nnjykor3atr1m61iruksw33bb4zwjgqh34zgu0qmh1ij9c',
+                redirect: 'vi9a2j44kbr8672ipdum61riaqjgvnyzymmt9yqqb27uqug6l46q4mi19zneevgs9a74phdqvnb84rb10vlymmff346dsj1k6hde3xhd72cqlxzb80uqmfn70dpusgm4eak7a8wtikzlz6spkv6xpdyhvxba5wwfkbj79qym61dvecnd0jck14t96oec3zgo9fyob1pwwbffrl69azll02jf38yicbgwgt2sfv4uf8jdyer314jf8cpecgg2iy3x9axtkd71ov5pgxbmnh2fqx06a204n61hfkc9z6s5rg3fy5cut17r57qzp27u2buvza3euw1amqrbf5pssy0vpamud85tjfvzynyj18i31p4v5ark0j6gqwjdh9s789wuef1a5vzbd6zwjyg7fjhg83ayutuelt9yxow0v51t0rkl8klgx9s4baxh9yswms9pv0ariaopra2nwsf9hg3e7pik830envbluv1tk48n3060o0fec5kjsx1tnj0riu574srv8lqkdhf6xwkn6lggou31amvjq0sxw9ei61frc9hhgo80jgj5uer04hkvmmmvjeuhz8fxjx53xcwog93xs6bnzk91e89ws657rsy43wxz7i7xprv2fhhtqfwa63m5c3m6pyc7okl8kbxfgqcu3b9splpv0oydmxr9i12zftvgix75ayns6tchxvw5zboj3mlm04y13w4fnu7jzbcukiit8wmg2ras64lian8ieulaj544g99sqqdrzi1oz66lrlfmmtl5vkcd4xho1plg0mz5j1m3i9qax8anho51za0is8felubgd2s91xikr594ewe9d3uc1rc8fdzqj1xfu82y6fb55uqtpq2q5v45vfdpe84a8n8tvsvtmtlbp3vdfkuewvm1vckasp635i1p7rb348zcrehauu4l8p5xbi4574y02lilqoor2hx32m0sj1oazdpm5y2pjkp394rb7fhijwlbw8d5dyxsgjezznrf78zzj4ncbmy1wuc6e55ddr1gd4wh2hb0t31nkfzud7iksrgocvlqoavu06e0458mhboiaqjpf8dwetp12fw8fa0jor20ygin07dh5pb1pjy51n8hxb83if98gtum7c1arin5i5medngicdnlko7bvpt3rfgwakl3ag2vno6mogswx6rzn6eye8570jx3f1lmqndi6447j99tmb1vewbnul27wwjrpx8bn8ggqlzrvivoxxmglnp8wzwnpp0z83ur91z7cdfps9in4rty3rv7dq4qvhdpmeagi97r5t72l4xnpyq8hff429benf9hegxx7fhhon0zvrbd1y1aspvu2plyitbllscsooz6l0l75xdknda08vrqp0yfim9des0iwfveg0tbn5bj5r1280vfam0hxvglssjxbp23slrqmkt4bnwa8etndy4qgt8eiy5v6nnma5sg86bxbwa14ckrn403q1w3rgc2j5mmwzhai8davv28kqg03rgfjlfjrz7xpyvlvehqn8h83vz90bp55tsec8pecdn7d4bx1d3cy1taio8ngby2oesii5arcpyhks3c6mzhk3j7wn5vpylpq9x0xg3t7idpvzkrftkw4j9j6abbeafbgwblis2v6kdxml92e0ar6jrgyoro3503hscu321art6uj1n0n25rmb2495m3cs1xksya9ywi14h2r7xz4wk7o49ekmav34aw8tyhibqo6x3b9k85ck3tqzvgvnbp6ws70mrqocxuich0gmin0qklet7mma3lf9lolsnmu78kdbokqh0frq433mghk5fq0fbjevsf6tzw2jp4o01do6cz5xp5j91djz7ylb8deqo7p4om1tonsq5qpye4p8wumc4iregn7llx4gvd06jvjxcacs951odyodb1cnr1jdx8u2h4gs00i888lbl1bstae228sykzmnk5sebmm2ma1o6hlauoeuidfdh60tzmzvjsdzro8cb62g44lzfb633qn7k7unb0jtqbr3roc7nzaaoojv5abw1skdae',
+                expiredAccessToken: 9788573782,
+                expiredRefreshToken: 4216047875,
                 isActive: true,
-                
+                isMaster: false,
+                applicationIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ClientGrantType must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'c9a5dbd9-492f-426e-a485-870958a897b3',
+                grantType: 'CLIENT_CREDENTIALS',
+                secret: 'ndqy6qwiaq22vo3a55j78mwjcrolp5hg6jigok8lmvwx9qeufuxx13tyj0u8u05ricvo2i756c1mg5fgg2olclsrwg',
+                authUrl: '5s49ec8np4lka6ijopgwcq660aqvv4lrflqqmh0uw894yd3czv1iq2pjs8g7d56em8t4jyvw6nonaz0wvkoqd2ydj31rvuszibrvmxcc6kcy7hxvvb7hyt7370htu4bgs2d2hrqj5r5r9pnnju5usd6rps2ey0wnx1xjionlmfe6vy3gpe01aos4du39i2yqqxj2wleiakoslwk2zlgjtmhdb6w3h8xufjmwrcjaipoepzl35moztit3ayce1gwkckyt2ijxi0lcl1qtkp2py6p2gjydmaxc1hdrajlao963ojevm7fcm5ft5rmh911033uakcabltinfmn1zf1ophmarfqo1btesks7ui9r5chfkk7mmdp1978bgs8iff8j5c0fzy5kmjhljxck3irk8oexacyqcde883p0eseler8evmctild37lic3e92yd2lm7lnw33ai4hfux6bww7q2atqd3zrtjxhmt2zu7wl2q7yrv7333cxueqnpbq6jjfzc5ckzt72h3bne64m3qywj67wliqvk6hfq4xib6jzd9znqxvnaavr7pnsm7sb45lqrgawtcjlf04hdzrtx8mj6rdrptk4eijiifqh3avukd4ewwhwrqgk4gdezm47aovb87rs410a39l6ujluw2kyokoehiov0rvljdaobpxusuicfeteeg96oo6ktad67nbjeqq8kifrcbtwl73k5122mna7vjm61sjmwbm3599iy6xgdvjjlf5lpfog92zibgedvcdl30wxrx2pqwpidaot0uplnx9ryy9v9unmus5cmmnsiyfe9xjzn3zko3te5g0n98u0apn7dl6c6s4vemxwbdw7iwof1xtleg4ubueiswo1eu5nv14mls0x6an1ua8u155k7651r3sqew0y5gy428esieie20yj8swix4hx10pviebcpex2quowbclvmz0ik8r824qoefhpvsfnp6ujizikn95v1ud60q1okul5xxca7c3d0i7np5o4thb44h58dizkt0m56u2v45om9fu15yypywjdw4my4imx540jtduxicafs0233n2itibwxqlyt183uwfvsof0eg2n0y2l81fa5fxp7ok85a5f6eif0cx3k0ob8qcydwg70de1vnx6zb98bvce89h6ogvnlfay1mpcns9n14nd9wb0s1fjbbjuar8zsex52h3y2an5b969i06qjcpzmnq18vt0e2obsn4wjwpu4nd2dh8p9ayfsza2299v799q6hky8kaobwkx9paq3b05be49918g65po6tkkvhv0ptdqy6n8mlev6ko96gsiyr5biy6nrctg1m6xyv1lrka0z3o3dv2zm6e13ag2edak9ifgw4hr8e2y59va0x5094ebf2hr8ty5ykd7o83hustxvbr95z9skxw95t2a6hubl23ks8n695g501b9xi9vaj1pfy9ty2i2nssimtrwjmqy2bc66suw5951pdv55f8pk79m8maygmplq0ys9dvuxeji3d0lwym7gwxdwx2k7kqa9hb88rgtlqba2hqz66bb9sj2voe0ivxn5g57uxcd6b7sbw7d6qxat4lu49eqif4iac4bhfhw4ikumdmqd4flg66b1iqrrpx7cqtcqw4wv8hclmt1hvzwux8ep7jcgic4pnaxii60p8w1enmghsx4m73oont06g9gl9sr58jyos7r624fjo1smte6qdah3z8sicgilzz77llffzs6u6flpve6sce15irn9qxek7iefg3nxyrjn2pim8yqt64rzkvoqcpdifv4qo4ic1zgd19046td9nt696l3uu878jolfpn5d34odulzd1aherptrlcmmdxetyvawn0c46gontfwt7fo64ancvnd9cqlx4mvcwkdizuvgn1u8g6xvsmnkf47nzdq0s399q5kgh3ot7fxj9nha4kkjkhhk3tm0ws0vqwi3cd73piy5ggfdugbykvny1izkgdri9niunyilzf00rnz6ecggga2ybs2mlvfmck7j0gxssw49p4i',
+                redirect: '48ifw3io01afoa8emqh6yiedvrr9d3a85bv14aajto74flwftr4v3sgollivvbdw6nng8rvrefksykd793xhavswiuq6h8gwb8jmi47a7medwo08gsnjnrh6jbx8x4ct9e8ojgl9mj78oxqyd0fdfpxyh93e8ifx69j183w8nqypsxrttjmxq3wwc4hwjq1sx157lphb2uydp3okjt2clo7bolqhbvgjk55x7zlis62tllj2b2f8n0gl1rotcqewjv3lsp9rgph7hv4yy4k8iqe7qsvzatx10h6gdpgiypjdj0x4y95uiah2utozy8qpk1rwdhbr65j18uk2i5tv674dsohe27qy3xom2fjvhyymuobxk25g50yi2b5pxn5nf4epmzfem5rbk20z9q6bwenok0nq1a9b6t9ugre7igls4n7alndqqo4jipugprhpd8mg24wn4a8ekgi6edkrp6ybnjbm99p1v2kpcd6ucp2hsb9kkmnqpeiw9y41syrlxospgqkoc9xbovvzsx6qhwhnz71j1g5d1094td23i1hyx2ngul4euhaoye3ow2tpucea8vyng8m534t7nibg7xy60lne9d9cpqgwtzou9xgui7d652lsrrwzj716by08u5zwkfbqb4byg6pu3ly4pau5j7qyjv0kof2xezbffv1frloxxom392704dzmvwr2d9foa3rgcyz9yuucizr1gbec9wx5fomhcln16q5zkmjf0diuerol34l3i44qx5b90mqaxrc0wdye6y9row1j3rkrgvtlh3ib3xqtk7vitipqw1de272wynuhgu3rtbe5dscjdsf6p8fw2c9h8s5c31r9u2fgs9w59c2612xd2o5ria6tse2f4s3nxnkxr8qof339o6i32jj9lk0umzzjknrnyhs2oz88hm8t18w9xvdi4mlii2u0ri2q3jtltx890e2tntiynbzb0rbehse0pzedgfdlyrdpo854bp2gsn82vobtrgxcjn18y4vdgbu15a7u9ircitiwdsdldfd54hggab66k1jzndu433l91og407pcmd0yptprig81mb0um2k43kqq31e8pz48av02lo23jrn4jcd3cluy3ww4s0q2vwxpdzcgfox5e1yxnw397t1xmia7rat4qh9pgzcvk9df624do75ub1rvw0mtqqb9mpb2fhf1thdcgn160vm4h7d5hg9eqsllbtxe4gxl7rkx1cp0i4g4pwoqnvcprqts2da9e6kmcvkk31y2d2wjoust1egje1pb67dfqtghkpbju8v1htolq9libhl014ssryk9anvrbm72u7urae3yr5qb0oowhujz7u1zfvctepbisd9y6ppkyt4oey04nu6hrd1jctgjyb3uizo61mzl4u4itr89zdtx5d9tps9x8graviczkrzd7ezbgcsd3sy8m40dl4ct38wyszls2ksc5jptthyai07viudb4tvqx9survyioheas1qjyqbofb7ggev91iqukllmyi1306uydedgck6q6w05xyupnbv6zehxniyowuvfojziye272oo8armo9514vy9zdltkmhkdvxqvivzns5j9r1udpz6viktb3hz52ac42yh6ixfqin1wklo3e3swpdohus1d689s1h1d78hork9o7l9ukbd55hz7o06hu7qrptl3r7muqj2r9ayl92e23230r749bh2nv4y0gi62520kyih5usmrruqs8g6lg96pokvh9bu2ujp3yqtglt75gt669cqb22n4yiwoz31wt40gta9h1h09768q6ab5eok7ok63gqhs4zg0qfy14eo3i6kp84i6fya77y3hlc8erqqter1bkzp9u98ya18ypjjy488dbzw2n9ldgewgf6y5d7ve26au76kco1ut6kxdwhfq87l9n1fv2cvhnnco9htwvruy6heohi4suchndx4l0muwkqxlr231kfbf71cd85way1uask3my6gu7oixkv4ae8so6g7305e5ni42vqbk3i34jo78pviz',
+                expiredAccessToken: 6484598751,
+                expiredRefreshToken: 5716566382,
+                isActive: true,
+                isMaster: true,
+                applicationIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ClientName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientSecret property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '20600e44-7cab-4bc7-aa50-30f25e563737',
+                grantType: 'PASSWORD',
+                name: 'okj9xhhfms75h0wae39uuiho7gl32s647mg5inppgicr3un3dlv4kldx3qi3lv04emrab7cz2pdwz2drep6reh83ywdautqe1a59h7mw0jsc9hquq1no8g08y9aeiqvtkcnuzgfpnw0dg2hpum0nx0b2qx0jsjehgvvkr4q9aolmlvx83bds0mnia0j8i1kodn6bm60ecnyxn3uocl8lh50ygknmvpqo4gvxk13pdn7k3c6l1a81j3qgcg1ip56',
+                authUrl: 'qxxre97yfqjeruvtqiamh6n064x3ed0aph8x8vm8toow4z9oesyzynblijn9tpwe0zv4qdb5xn85r3q4vsu9k801mwvne9g5180xftqp92vlnfshgbvpyqrw5hck11yeagguzd2c8g9gieq9fm8jtxfymb09u6u2bq7vjg38if7vyvzqztwchyy3w03zxxo01z3j1515uo8i3jcicppzu1hk8no3sp1u0ztaav3uevh21qi9okjza7la2wkv9auve2evc33y39te04ry6e8u3orbjaxl2l15t26nyn9gwscxxn45ltxbl1kuabox70v2x7h31lz8362g52h54qnsgpp0oqwehigigqqampeinj8ygcu97ws4j97bdb5u875y65imj5fnjo5h1h0qwao154xm0asgzukqg8sqsur5zvq61fhk7u3wpzpuspntz1j9z67r6yr50b6i9hdd0sh5gmwckdtr67bpwu7azqzprvl1yu4nxj6g1q02nkrn8dvcwgewr2pq804sdayx31mg1a1i992hun06zo9ysz25kkf9zlbc4nwx5jr1n9skyls1u9xvqzf2fhhl3xdru0g2chpmlhrx6p0adieux0j35f77ptah2adzye7g964yk5i73esngnvluqcq42mjfdoxgk8c38gtcislg1cer4md8mnt5hagrqpwo8mwuobiaqne0z0ktnz39dvo1ddrqq1o3nvezjdc0i075b30gv1cfej9kc5vqakn82c5qfgmdekdxck3gsk8hu07bpu9snm0ae7e6tsedio19oqdhq4o6ort2nd9uvnehcst6a221bzckp1puue7yjjigz2sxqpjqxifq63k4ne9g36nlz9dob5msc0nd3gie7rs0ebx19rqgehhs42de1qhxrmdmio9yb086qtwxnglf3167sf2ibyh72ltntjmdg8jqmnfq83do1uhq6g3hxen9wmuq5xylb77jgfxpf8b00qoilykmn7t1migekhg1h6nrhyrl2yt72ir83bsp5ngr57dsa1wwta30hnxwm594717idnuwfx95zaf1sf2l2t90ry1aek3x13br0m0cdz0lllsc3ha0wyj0yq00v1zpdd0dhm2wcxg6td8wxojidkws1w1mcpzijbet16p0n2e79x7gptx2p7d31u2tble3zv9qngw5x65422l8iiq4sivuitgpflst7n33rp9eqe2p6q5j9x712yw7go2i6kie4s0witnl5ymwqwcirmtxn4fxi9mbind7pub49bzxix284uyg158hrnnbdcgv5wjgvl9k2y4e6tovjiwrtm9jhpi68ydx5tmgwtdlj5tmdwcfkfejioai1yenep2m0ynwf8nrbd8of2asvub0eg35tay2bi10ybuz4umbrmq9k4hohz60q62cvgq726gth3mu6cfpvk2n27waymoc048zzo930l9ht5zmu1maavvallsg65saqr3nnz1j55eu5b994haoaoosnn36k86mbi4vwn8o9gzezn3j29egazmhw8pdiix1neao2nmi6yoj8zvhbuzslmfqbbjdo8w05ysb6elqxr1y3we1ygsoxts9vm8q6rxfw1sykxs606ltcx1m4zcvzerbzyjyp1soypmwdet497tf5wowof0tiyhhmloua030q6xkvwl34t1s2dhy8tsqa00g1wz7wxfn0nr42i2uvb0rjjf51lf20p83wd5k95cjhf5arvkoym4lng4ampizd5hg5yywycjc6dvzmw1mv5bima2p5n7trahr1q8im4fezzbj1adcucdce89zdzovultpv1hgnn3rfy48kzhuqufubr6uh741tbtl1hww9m169p2vw4738lykuz8kpoo4ubvvyid3dsr5frwogi9vrvx66kxfvaeensweosmf639hjp6z2wpfh2ah5gwj5495mca369qd88ztuf6lxbfv4lvv91vmnx3xlx3spq8itoc75ugepkufp5vf5fhjtvdqo38p3w5n4y3ca6cuzs45v7d01c8',
+                redirect: '2nn7bet2m2mjauuqhq4m4lpg3tpdovu1wg0h6yy73s9f0g8hupmmv942w0h2ump2647jhi0vv6mkcvo3bmexp12oi0v5jd37k7np7l6x13ld4qs3c3rlix9mpy9dis9y5zpiq3bvzhr88xorlp5jz3w7bkrnfp60cdkwchc76j1vpb0f6a5jxhemsh92oph8bg93035m4omvy1rhea7la9iaa26kj7zdzetqfhiz1fdxd9y8nyv6hvwx4xq9jlt356cwxze0125g1sh70bow803q0m7t79bsim0g5sooyxr93qideksufo95duqxs6yg372wmftxf1g4err8nufn0eig6obtjukf30hhvb8s2ga266gcj4pw6szbelpaq8nzexyl0e7918s7g1e2xd5igp4idh7p0si06ej27r5gvd4x1kwj2o443wxb1fmii71fcehh0kj2ffyiywyn0l8ut1blaatf4rivdh0nxtzlom1jevq8t6sqd8mqa98ns8p7rawya9vl12m6nhrthqfrnfkr23oliaqn4ijc9wolz5a061rw37s5udw7vhnimfn9p5bhc0ud50cp2lumi4h0xo1eevn09xvwtnwxcdottte5bwthf0zce7p7wvjklx1p730rdf1c9ghi2otmrb92xoexjdms6z0cyzcjigrr3cj26d8elfs4827rjfk7h1ja4eip5rizhw3e1qy5mgbmwe4odduf35lyejf10vb7l1hyi1nf3nnhmtb48r25ghi6zwnr7dfn73vk62xtmpiea32d67rt1xqdmgs640o0mcy8bvx8stzym3vrm3x1idk2xio2220g1erv8yzk0g80tqq0zqv93oiek1licbtn1ovgdsbl5cbmaplgy2ydecurlnh2lrjzpx3tau4496hps3k7nd0mvteuquie3uhk2nohfrj1jwjjhr4hhog01avjv2ok1x0ur4n094u5pzu6otznmgrgc93q52tyeye31dwlwxzyvm5du3uvyz1atzp7j3dlfdeycucocum9i3aosnxgns87vw22s8x1c2jl0rknwmv1ekzti8s0ycxs5kje9cgfz9fnv2cbt83z5qvz239hf4ax3i70gns1jyavaih5jalexlwwac0df8ibyjy23v5gdnkabptf3chzgsiou0ye5ffx2fat8dqyfrwrt47dofhr9aecasigxaedvb3uti8rbxdiky29cenfwe7cxpi81wbms2z7yh2nzodx20ob4dchj7l7jwripi1ww782wajt0ubiy8sqhxaqd33pen560j90hxki6ghlx01i3276flavavfz14bhyzg05v9kuvnhrufglxg76p9qfxnzby6ytqeyf5l921sfgs3mhoh8vd34ijwyaxig468c4ba0oklo7s0k62dg2itvazqy4hu4ag7pwloq8xsn2d730kzgloavqzaefug03wm5kj2kq3ju20gd7a6v0schtq0atm5ioavtksi8fw1dc1a5848mk1cevjycjm7fa7dlqvzl2h5pfz1ojzs1h5wb5fb7vzww5o0he9e7zycygg9w2bcw051vy999j5qaqvviv29csvst8bvnk4xrbucet28m075jkqduc9l26dff0hc233o1l7jl9eopaektwt891r0xtir6x1hfax7b8t46k6yod2l16qvdsjgcne89j0n9y7ls6iu3ejzaw8vonbq4e8lt5bcrvwsdm010dv6r3xp8naiysk75vftnuojywnlp2kccg9y7w4jdb5g2sp5ald4flcnwrvcgexc49a7q1vp5yot7ocvz2ayyypf4eqj52wqqfqbikjmos3tz9ed8c6lybw75fu2hgogf3e0v9m4w70cif6wh03wba593ocuqcidpcp3rhinpk6e80mz3fjyphhroycfj41fy7xmvqqk68aoj61uvf2tkp39o6khyf2oysef35a1c6pixctus1508kj1se1njkptxw5l29888o5qecoze4ic703mzj3wzsibkgeab3p7agjjj4evf6w3p',
+                expiredAccessToken: 8614221565,
+                expiredRefreshToken: 3639835357,
+                isActive: true,
+                isMaster: false,
+                applicationIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ClientSecret must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsActive property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '84892cc7-0803-4b11-a346-1e81f34f1e1c',
+                grantType: 'CLIENT_CREDENTIALS',
+                name: '5h207zfrw764lw7xs6isr3qoorgll8sfglwwvdn2t4uvtqqtp5x9h99bvbjtgcxcq3dructalyxiar0l7znuoi47yzi44prn553cqdv341yn36uwfji4lnbiqeo0f2odj3cvjqa1z0yvjdhwvt0xemvujuqcswg6rlwo2lo05mrfkno1h5gk1ycv2nud41idrgv5gbu3cucotmkluw79g92hjim6makzq99q3z61yjgtto77xoodld6bp86o40r',
+                secret: 'kzs7q6ow2qj2j89bd344nub3l48j1dpscmtnb4rz3hhcerh34n12zqju6lmv0eemajgxzumhgp6gzjpkdm7xp8uckm',
+                authUrl: '14db8rok7otnwh96jtereudtwq7htrgr0nbp3t3j6qpupu49rnxo3kmzdvdoe7t7ujzaee9cq8vc77yt9sevz1bpwkcve5c2qzrclv3hngengzhlqn57te2to3p99bdc7lm4bxpqkddwuww155z8phhnocd0bn2t7pj5azkz65ji4jexmd0kt5uj8jqe3ebbetntox6onx49ngrwro3cj9azqqrrpu5mqn4ti99qa0q5693s1si1m5riqn79zbqmeimvqeannmalvfe0xmo05gegmyurlpt067tfffqv6c8rhlboke179tay91aydg4nxv9bsuejsugkbu4gft1udsfhjhtiu0zhn5o58budoetrwhvx2mh0nrcp6nxg08pdaknggfg6thwqr3x1ilkppycu62a6b3q3gyd2hutle4cs1let2d5ugtf4npclrhecczaqlr9fkcxrbemv9p6p4es2zg4qnk2dwst1sc2gttr82iunngaln4bb4ra0e0l2vr5bvrr9tr3bqyis3qpn959yxbsuj4u239ik2jriv76fdqykbwhhpd5ft7npuwujmasoip03iw5tfk02b8jl0v74yw70748ibg48bq2uj42nind5rfwedkdw5zenqc29qct6u2hcith7nl2mazv1jjya6ofcaq75a29g91o2gkwg9w1y1gfai4sibpm00vcykee27hpqcg4lxptju3pm59iifhaafrf13mbi5kk7qmm5yzior0qj7hfjvjd2l84uich4cc55kfzr27je8cbcs7yja94wb7elqmxn9br0nv5af8tzxu0lap7y85caat2oumczwvwb140029jc4r3px2czbjghyaj16fgk5edm7xf6411dict1mgfduyl6w1teglxxjki0tr4o45rotltco1k0t99ljeiq2w9jhinurgvd20turql01o4ux9jezuerv6ygumqoerpfxcdpduuketuubovz9pc32hoy1bsp52rspqvgf3p50qk3j3i8m7rgxh22hsxsh66q5646k1lz2seyyfwkpxjicx9bxyihf2hl7cxzvva37mms0y46ftw4utv578fpfb22jkmirp17hk2ws1c8qzebdc2lhvgquxmx4qaox16t0k19l3b5bt5teitajlvrm4gq7xw4yq28hqtdgtwzbsotq9c3x3tjzmg9bpqi4f93m1uuc0wax8rrs0fb5x4d219hbz7lbhfrmuww6n6zqxy2jh5ycnifj4yjbbkudpbw8srajxyzqkxfv9xxqo9j1proyx01xc08fs3wb0t6rcx9uqawxdntlc3sdc4zl2d0te0taw798c7h5sear5c2f8l65iaraa0rhh5k4do0fvyggx0by7tc5piss8qn4qb9e0ef0j2x7p0lyw3anofqf3dydsk9z5zqjg0ax140uw4x7f1pm303tbsdcgc9h94yk76irl5ne4thnx6ffvo8eue5hafgpkpam4wsb5jrywwc5zj4tfpy3vfcmkqidlt4c7aq1w19n4o2o6825pto8ayxxdgfzru9ncpg6mn9hg2mdg7avibb84m6qegvilcoigcx0uhqe3sge5wp8tyhhym3h4ooxfa01bpk08x21d0x9g937tw3ka2vrsj0g8xvvlel522varvwd2nlj8glv5qojtd2qmj5dri3oq4uze68uh31so266ugq96gnhcldh1u88oblkovefy4ddu8eh61bm3zjotiormog13le8xiec7uhqz130qy8ne0mw97v2k389zt43z8ajhvj1m9za4z3dwvxcy9l0di2abd5beym5686hhasepob3di2ydr3li2xc5i7m6lgti248o8apyloshdlqr9dqe4nhdizcz4jj4fszu5uv1dlma5xhn87fiauyrmqd8n8ndi1gxxsg6n259auhj5vfa1o5ymsl31oyfamb20boxxc94jlf156i2aqod4tnwrntgwzrevvsw4qbq4bnbqzsb0aeu9w3ujhbw38pbx1485suaiveqkgesupadxn6en9',
+                redirect: 'emux981xj88x477yktqmsgn0180xw648n0yyec9o4gvlgcky2o8o3u3baac8zsuzgu4sigctwodls9zrm7dodrdbv0soz0prdwu1g3youzm1rmk11qkv8amp1x6e5u8krlw2mil0ll3oylors2d8q8qwq8jpl4ls2z5f2ox43ngp6p3e176aeon14irod0iimaqsldakahnh3qgk2326s125qo2vvwlclwa7rshidecsf6dl9g4uvuw8pasevyqieo6lu1f2mv7u3b4f8f84p1xypzhnsmfdkxin6ss949jvc2lh2ywq4c5y81348sdlsmp78golob9itaz3s2u3pin6z34h4f4jo4v5d39d9znx7a4lj3koaq5dypo20qqfprs2ew2m8ui1xqc203mwhkhduve2uj5cklqed3jyrqwg0i0186x4si2433shn1ykoj4absskas4duxgtllnm7jq66ref11es0dxm4g5qbuwxjm0gm4dnubc9qx0pzg1sg1exoicclh5yml4875f9lq3zik55258hys1o7y534eq8uq5elvay1gldazscvypc5qj5gwg0xxzg9nysnjpi0wfyy8r6retphsigov6gtbq5jfw8qv2c7xeai0a16rtjh8euaemdhvclo7d223mld8dzdx4a31sb5fd9jrofjah7kjqldtq2lxxi0k3tdzo4gn8tjwym0msn7sk46zhuqz5grchid0fxxu1omcn9x9l6duco2d1q074g2wh8swuclfit3xm1wt6vwypxfg2xrc2ed8uwltrcpfugtblpzd62oywr2lw2r38s9rf3e8flf34ldzspyl11odq10kni4xt2sjkfqa552vncps3ryujva5iuh7wf42mxa149r36kze51idzpwhulcjlyb5ei24zgy2xaqvc9ipyw9vit1e1z8655kjk06r1to4kusnx4275h0ln3tfba5qm5daktuhdjh02czsclw8stads72u89n5l5zocw70ptula9dsrxb0glo0ldoqbn9t9l0gyhlgsqyjxqf3teeun04zzdcmqc1yyc1psgj5jso063qsb7sxkzmo93qmgtzvtn9n3sb9shvrgcno3mrj6cyppew75ogpskiljkbwk533tz6szi4d8mn9q9j2x408uj26tql1rurynt39iuiz1h7nrxcge3yeqhic8bprdyuu1qxflvman4ovn1ewqyan1dcw28r4ljygwe00wzolidwxghqg5fdw0dbljywlbm53v3cr3dfdagwajziwl957uent86p9kthhkpppclr8ekfdjhwd62dave3ysddjodgrbnzy4ueckv4mrzzcipa45qz95s63k49pmew36a7kk0jdlof400skwxy2yhyod4eun75knhg1la05sqwfd58yhu43qs0f74umlplv1uax1smy3xu4mfjgoolpnsapgo91mrphtcs6k8szyslx42wkdk1tqsv5bimee8xsfzau033nng37mks897nk215u26dyv4ff4t95qvf7503350mjbqxdzvjcde74auyjmiy50o2vjo86wwjgfdiv6cvgvvunzj3c24dj42u9pdst7h8n3qgysrci360323leqkx64v6y7zr178v3wimjwz6rscu7ddn43kdubkt5balnztywbzgyyv1c1tsa44gg5ydb0ff29t2ofysc4jwm1c44tp2boppn3aeyuydbzcc43lag1ljqndnhfnez3b8bvpvew81zxb393gplotkstg2sh0bo9shylb5jj3jcj6pgxu04aruf2kn0gg450lke2ijdptcgl88iauwoyu354hdbesrx7bev0zw1tdzc6znzkmh06urkpb0ql9rlvwa39w5yf1xivqpsy58dfi3fy6bw9g71cu27noc0p0k7y2tqgwr7qoveoz20cs3a9hhjssng144bh93iy2jxxvdf34re3rqhv30ulfg5n0kerf3br9nl3peeta6z02zrww9bn66aocqdiiset2lh0uaeh0zyj9eghnrzyg',
+                expiredAccessToken: 7538722318,
+                expiredRefreshToken: 6350454455,
+                isMaster: true,
+                applicationIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ClientIsActive must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsMaster property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '8eb19f99-50a7-4b19-9982-1699823c0c37',
+                grantType: 'CLIENT_CREDENTIALS',
+                name: 'mec8lvu8yg1eab5jigbow8mzud9j6odoeh5o4spr17n4sqj4z8srml1kbb03nsb3jwtg4t1s9lc18r3oeovlhbbdnxzws6i55atisirllfkxxuxgvcrh5he3d7z6muod7zdkkclykq0zlufstlh8w958iivbxyjyovaslpl39vlr3ixttsogs5qkw1bynniiwlw5d2kuzrw2xmlop415sagsiw4nmzl0vqvnsw58xl4n2ssdgf50vkvnn63qwon',
+                secret: 'scwwxd6qz4jbisql410wlau2cvat0ccomwv11npocv61k2i4iypn6oz0czbnf59wepcfej6p70yc4eu4v0l5vvbrp1',
+                authUrl: 'yzl6v6cv47b0tazbxv5onq0idllmszxdl4a1iaur7bh2lv17ajs63lz3oksj0l8909pzsksdevy4h2924v12a7rkbrizpjrf8z5v55jk7a8y2szl9zccp3tbhyurtjc343fstq8owjqzsd88hced2wv1dtqqhwdbvwbj78pvzueipjfrvlvkgf2sekz5aqfus76cyjnam4cxcir6jbgypn8av9vzqfa6y82lnp3iz7n4il0ib038gls3v5jkg0cc7vvt4uwqhoynsf599tc3sbz69rckhkbu1eoklao9jbqdsdroy1dx3x01zk1vrzdeg7tu9eln7bzchuwt6xudx0qyqk34do5ieow84f4i716335yac5jwlnwz28143jcd16ehgyk0173fg36rz19gzfkp7ulku43uco0nk65lx509pbnlpsjqg34cjxd9iu2qpymmk0lg9qgxy204m04sa322eosq61w3rzzlcs0x38j6xrahfav8mic1mbrd4n7e8w60o9khvdkira9pvv4o0om3t7q73sk0g13vmaax06xqdkw3jhdhe4tzj8kzyw26esaoqgqu0bf6d915yk33zzh6zz8wyfxokloiagi9nkz4d1el0uv2zrh7jf7bfjnnkxdrc5wtv2qiu1yxb3e8edcmwni5ji993ae831lwbiz6jlbgcaqwi2t9bo1g9c3lvrw8xcpto9k1dvriiwa3w6q5j5k9ezgzn9uqyd3kuxg4kyaa3q9h0fx901wdypvz4wr4pc3pab1imrqzl27qldun6b6n4n8ys99o7o8jh0tf0ivtlsh2sm32uk7ogqg5z8sbyngynjmskl73mwl8pjmgsriavf2mzb1xtajebnyraoeg803hkqxr5f2bi5njkpp3p446809pnbbwcc7pndisv5tdr4m3k5jilp1i0nvxrdnvr805caxcykqlzuh34vw59ce3wcf94o22a25dc365vx4n9v292gzp8zsi65fooamo16a6tyx8ewi43zf7m5zfhmk2cxorrw7gdo4nxev1dz11551kzb7wyddj715ldzqk9b64b4w76gwyonwsvxuea1x4qc8zcju9ga1vpjikkga1ivfd0ho0gdcuecfvkn79limvsoc4hdb3eno0pn8anlio3mnhqfdazpbz5wyehkkc92os3nl6ei6owbikizmnfmlojs8dskhp1vdm0maxlvsm8tcjfhuppeasn2pe25pk1omka2505xjxewpexj3f8vnx87qc2v2yrpt13qgz9zz3gj8vx1j3h4f2fwr4s3l5hnim1w1fxyt0tuvuikdcyq1x2nd2cmxuys08gakfl5n8pq3r6tx2h6yisjqgiy4ohwqx6hbnlwrppbuewsybronvxtqewl9tlqnz92xmp68gibubmcywbhbrl56ejce9umisylnojdd1mwhg3umzyp0iljy5rh3heb6ogd7vncm4umvtaq7t99id4hf112o528eaj90gyilf5dlb6nsa7n4jajss2ptdpu1lllea6684tb8l1z1gs2z7tenejb84hzxl27wz7304yn9epj9ukcyw4hr9psip41grh4edplns881mwvawa780p35mzba5etsbacz7bwy0z8snu6tsav7zmhjcjqsgdi9b0lyvs3owixw0a487yocjh1rdqj1t7y4j5m44edu6hr90mgi1wv97av82a4li3y4ck8b2lx4lzvwag92kygxe51y41wybvtl3om6ht6ga37ni0bpkn49jfi6mrdpzl1tgzhhgpzwbv9nruvmot72fwi44j4oouofhgugezfhvmwsedt9hki5eoigh4okob5n9gtgoi70xq026n2cjlz4eoq20lyd34xxh0h6tg93lb9goj04yua6sav94kv4ao1e1g7b5vy8nt1rerb9sqyrqn3zjna6lect19sr98if0xyepb1408izoe8ef3m4vcgddcrbleai1dhbx2jp7penoutkh24vpagipskyt0r0nr6l7u04srz75dwz0vmb1notg',
+                redirect: '4132jpvxfklhqtseheib4egwbnxqrhas2h7tkq3phfcwis882t2hd49qxdv6as5jmvii981c969be5latmhug9rrgbnkjfpqs3528230qu980ynp1glld84s26hlvnlrpk2f0l6cp18btznk5zkqdrdr5721kwyv1d3g1yk3ryubaubxpi4dvn85ehn6mgu9bxw2h29st1zrtw2x6n824xgu1vq4h7674bhlplniv8d4agm93rjsdjkrozkkc86jnwd2bhcretj4u20oggvwy7yhjgdluyut5775tlojh9682h1edlur7ociytdvpnyey9muojfnuzzat7cy4o5ex4skfm6p2rvtgg2nhov4ajowc1agzuwiq5qmtkteuxvfeqnhuiotn320tlfldu7vlwdfl417i50s5psox2g49j4hprld4zfg39by6e3vzvtbalm837hfnv4xvaa9zstoj511dxz3y6wpz8o8dcb22ems42e85x08f0d4h5q5hw3tozvnu8sa1k0a2bj24de9oxpwixbtsz58svc24jz7az3yugsu6j5v9r31vgiy52ffx8qf68oy86lyz640i0732rviymmkxkjff4i8ox8giad9pmjmacto1eziw9ctu3c2nmr7iheylu67ki2nhuhoj8i3wpq0vpnf9flbcd6busj5qnbduw5k9eozj3sxeojgtqbl3vc5nd2vcmjt5f9y22v1e5a1lxw8bl3n5c317ks286vanclxz8oou1orpppky54mtc7ocvh5iba4q0xn8dmrz8rzqe854mmuhifu68r9bjd4tt3q45nfwneuc6ha9h5shusjvbjm22acvefl794yv66mtbm6ba4bil4fvmyhmcm27hce8rxorchqsa511zlnpdmjsg4977a6evzb7lg6i2x8xtshnzgq0mb37j8uztgeonj6nwkp9k4jzq7v1oet7hvega33lk8qvwm9uju9pw17p62w2a19yu5whn3mbnvlqbdl4sgxzosl0jawo1fe2ztxjub9qfeo529rrfeayjapmzpbttg32l04lu60m8qfa9xloennm000ck4zr8kkcfq7tascvoo6sp9z1ga28pqhptw8xkcf7wq2e6mjq8qfrq8t31mi7xfh4zxt6nmuxbe24z0h4zuhiv3qddi2taovlx1y5cr7xybnt0u1u9oyw68bn1gasf7vxvtpvf5ocv9l7ffw3om3eq2qbjtnwr1qrb6oui7917xxy3agq74rvyzmj24i0afl6rwde6l16rpebfbo6xrnmy71xee1api8hry6xt7btljgsh2thk9a9ymte6fk9zou30d3tn3nqhvlcugynbef43p0rsqnj7hmh0jm10jzgq5cqtdl1mzva6ji9gz1tj1wjk66zdwvkm71mpzo0vzpk90so5v26uxu89o9w1ri8l6gb3rmj1la3oxip3sdw2cyqafelaxt2qrp7ngqh0jq98jh975kgsyl04iq4d4m6gu124e0vb0okk7spp7u9wp4ilq88dglx264goyi0ahmjx0pe7iihsnjwuibo1of5x34rbo3df9kzglxwmbdziowqhsmhi1df0njc70fvunvw57wh82zc1hoxzynjrbghb0pwng3tki3ux2avpxnmmvh2falewbvfdd278z64nn1d0lduzzftnd4pspj23373ekud65rsrvfaribatydsjh0acu2opolbf5dpah1c7h7zyu482ekxyqxhrajw1ule3u5bfzmy4af53e652lct4ytpjzptd64ufsbx55eao0405tlrrynv0lv2k2r7yrvv4txfzlihgdqcymoir5daluqvdlb5r8olo2tnd12we3t5tnne4g5t996ydge8wr1feu3nt5owi4u51oyz59lulllmfkk58byurjcdicnryxpjphczwb5kqck6gpttef7u15vsw969gxqye0re7a5k9wcox7el2i09y3rt74y4i2ax7p8z8mukokajvobyqcfm31dtumfms2w5s28vsvguirrr4gd',
+                expiredAccessToken: 5503930232,
+                expiredRefreshToken: 9604343372,
+                isActive: false,
                 applicationIds: [],
             })
             .expect(400)
@@ -337,25 +364,24 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientIsMaster must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'nworszpezubgg8gu98014dqj863ltc240yi6c',
+                id: '496hbzen848jqnppj0zueyj5ki9j2an7mxf7v',
                 grantType: 'PASSWORD',
-                name: 'qoe0q2006lzs3na4i3801lae4d1etclbz65iyaiwfoj2bvgd13tm9n1tnm5nxcxk0ynebbl9rx7mk8riylslljes2fcjrekuw2ii1uuap1i74vlsm110tkfxu1fea0nezqp7l0z42e2e6q0k6ejgrnn5fcm2lgk2fju62xhmd35chm0e7a95dks3yvtv7zis52vzyo1bh478qqxlf8otclgig4hbl719n7vx3e669zx6aj9etio37zf1jv8obws',
-                secret: 'zd8k2asd29v51lxm4qyq70kp3cmldg65z53jsvix27d0v8lc5q1yfrfxcis6u4upevqg6mpmbfw3qvg9q566jx53py',
-                authUrl: 'zmmlzo02qxf79hlxkkbq9pi9xk4ivm58lw4a9lnenn6iln0ke4tw9qb9w62hrld9e116gljd7nx1756gxl93qzkd5z6ealt7qol7tnsnmzsovj8hsbaj59jihw3asstjjocidscw0okrsvjcm99a1plu7envah0d46wrwauomf7h207ct4dc7hg7babb6oegkkdavxw4nrcp4sdrrjzgfp0b7caw7bp6yrwyj574lh1701crfhf6f00i36sc154snq86s5y9eqvsjlwb3gp3oppmczgf4bz8gzfpkoloxzxutor6yesytuai0zrcd9s0uvl92onrpg0d6mzs5h0etgfxddshtwf3zh7hlvp5gpcim5lzx9u1qtuxnhozash34ddzskwykvzjui2m3x8scjydnln4y0yus3q9m8crrx29ecypx8y4e3nwuc0d7ejfjb3sk22312am85em290dj90x73k5ai7xdn9ddnk4neewkz7sgqjfjrmwgnwnqdxylnihd6ifwtcvp2qeppwege5xxnykosg3voptoncfqvh2d2zcswrzzvkvrzzsew2et5nffj69pv1bikje28evytv5cu8afeiepej2mchy7yzec47hv6xkauhegs1x9npqd3nuvz957dgxxarmdexqazqcy96ymxdc80lk4azlvxy00qqrholug09x8klk6y81pwtpcb4o4romn96jlfhrt95q1c2g1hd76d3fhhx9zd8rs6h5zx7b8shey214wlwkdgu7efflt8ocitx03w1kyfze479kk5eapgs1hgnjiodblb5jufluil3hamrcavw8g7vqwzj030yq15ufwddon9pozz2c53k2dy3zv7e80cvuoo9p9se7jnh5h8nps3iim13mng728jp4qvv1cols6zctrrmzptdv39cogow7mxzhywjsyiblvs5r3q6x667v46wvsubf1zzydcqqylj8ggkwfh9vqsfzmx77edkfcys8u5ilhnad7o4g4ef32ita45v6chc4wwdjh1g0pb3zgazswh5r9t1z4i2wymy84e54suaq6xnrcuhyr7ngv730vai9xuead95b3i9qokc3thgfg2y60ugufstowp9mu2gwedtmpaoa9rsk4ff6meodib2dpe28evhiv2615yoxcvgeljo4qr9v8p83h0upzcsu8a2uid02yprapgopdsgmqo1pwf8m660yx0vgpmz8tppvmjc74cevjlucenr59uw751x3cxx1x9fdlttyyr35zwctlcu2cnabmq1k87roer9e1xvdlptvgucg0cy3hj61v99y48n52mktjb14kd7d7t43rpntxj485zbn1tk1zu4kciar1cwn7bsozzp6nzp0sycgsw6rk55rvagxrmke42cxlkyld65jbiras02tomedcvwknk6nlyndilvqn7w7yxazax0szmapz25vvgfs171llgbkiz5zlwpzgpd3h6mhuw75g38f7mask8jywqkatdc0h64qfakeeucihngjxk1h0wsutxuje3zz2xndhtyqbrxg4dltmsq8w9otr9q8k59zogunhz1ikxngtk6y17ztlf6kjdsk1sq0dh5ecqorauwl2i4usra3if8ycaiyzdljf0vmi83y1zrgpa7xshflb1o3w5ilc31xm3j7fepo0uqayvkzvg4h29xxxjjbr5w4u2hvbr2q956vrem1c5ysjzbiowi0frr3fsj28ta96ohdaxmh8di3m56vav9pr1l051zf7e33gh7wh6d83vejt05wbnbaefqr9qs5xjbhqc1dktyvgmps3h2ynhcnfsx40z30zrg327kbz7ddyhnsak8sjbfskvu0u7hrew8tv0r6bk1nnazpwygrmkglfgb1m5n59mmvwq2yed5bxdocywwo6m25mzfrgpdgi6bz1skwcms0dfdhcpl3qyo5nopc71f7jldeycwwcnp6ws0o18cdliyqwu6c87nab6pnkjv4fjua8zckq4evqyhy69x2z32o6iz16qbheuse',
-                redirect: 'nbosdsr3rb8z9atyi5nkcafraw1z1boi573faye2l0epo0tbyr70zhtp2pmtk792otkp9rr4y5df2uye7e2p8pcual9j2dpiapw5y46rry7hl1us18tvbnr2mxvj9u9je4zuimw28sxzte1caczjupa6ollsdvttkwaw2i10kzkwcl2xsag9gdzhp79uh65fb8suphjlgurxqil63sv6r9yl23go1gpi7xwdh6gmbgh1a9md5aydl1h1aizq2kj3z1itvda1ydybhrxuwh8bnbue0yhx7bz1n966tkvj7cdoww89zvg8668qmj52ru11l4c2n679pcpl5dv1sau1n13y3q35o7hiqdi1e5r4ohiywlv72mg5lq25v10egxp23827ynt9tvnf8j1hb47m69958iewzglk9ri8356uqkewqsdvhxaknrz9p7uk4p0nn2ui59i2ihxvayc7er4jel93i7s677ewqkb05e9b2trmbx9xkxkbtw8jqsffjdh520hk4qcaoxq5i6k1yjeo379eanu4ozts16w4ze8h8an0wngxu8o7tg4gac8kzruu3rqvt2gujttpzqfpsend6fpwmck5no3f3gemxiomnoy2b70h0zw1vhzht5hebg56g9rjbm4i5dclfrpju19j1albdls7l0ag75eq2yy432aoxr7o8ranfpar3hh2kljfhvztn8shss2ljif6uhltn9f661v0o1fhlx0zmes0lcc1vwa8wyikx8usnstg1f2zklubjlnt7dzn5q0bqxsaujnrvf7wld7pi1ryonl7pgydio0qugmuhkym05u9zy0vp8ckne3kr200orkg5fkzdcbbz5qqteevacmeaaq10hxstnzcjlfyhfsfgs4cmgndc32n0qx5sxdloi7t3gx1zuc7s0d49gxw2tjkh1mcdgijpdak4k0jr2sruse4zbjf7rhigaxhqb1mrg0om1bc1kw2nw58qofclbs8ok04ftb5f0e1ckzatwk60nnfi2lkhzudu2xfjymost35zddg6wbjq8y9p41nlkdccyeaunmidg5di2yazln066r69a6hub6706so61jhi8zq34354kjvmk8tlrxz1k5yj0uiiil5pqx3iap3ytxeu0s65pudqb9nx1jhnxpnzo1an1qoqcrkxbjy06cucnxr66k529nxvxbho69max7gsrvwoo8bxktuw4omud0bylyky6fkgqnl8wlvx3x7t26ix084a56vaaui7hh5qshvwi5u8hmu2jvhbdl9gzd3jp9u6bf5ka3ccbatx64ywyu96bilgcho3995ov7q4wkdf3ulfl8kutama3vx2n6dlygnwi9xmyid1d7fmh78p4xgfe4bpxbhmq5uczgcduuko7vwo44bwo064wb8384us6xdib16yhnm9l847reu5pjgsa0vmumfe57bkr3wmk3vak9j16n4ne3h1g6xuuao3sx1g10uf8npzhfp97crb28m18twtmadg20lxu3od0ywpmk35lq65s8jnyxinznjgjbz1acrr6w2eh9qxnw5g7k073zqg6ws042setkprpefca5o0zzu3z0i4a424yg2nfrz4yqznsau4wvx1kmkm0cg9hs0ovtjom2fz4jdv4uipkb3zsx2c7dbi8wokjklpbl7zf1huef37x3mj5ui3yks1mm3q3ub4jnuoqik5c66stsp2ohivajl3dhwj156499iq2ide64p4annzsupdqqf5zh70be8i6jm9153l04ulfpeulx6bmjaewytvo6o71cycwavmoykr6r870c1cus2lb11251uat5rnu6fiy2r841n42kpc7y8r76kjp528a8dqp7bw5lem03v3q0t2w98jtjyzg9k98a3otqsu108j4wmevlpa608l2zyt6lk5kd341okwtdqbti98aobwhakty6debcvablzo9whape478q9rg3e6xl270qlo9tbcv4h5bv39kws6bwv7fu7gke9jk7xnd941a9pe9vyv2hhvqukd1pa',
-                expiredAccessToken: 4673130862,
-                expiredRefreshToken: 3421435409,
-                isActive: true,
-                isMaster: true,
+                name: 'ddpo55s1j93etr3krctrhwkuos47itf7frhwwyh2adoum3o6luttt3n4jwv6nsy59bwp196g6wpevhpg2wzvgtjvzj668u5cz5cy05w0l0mro2s6rfxw920h7alu32gmqhqyewonwiyeeotb3ohka41qvsn2a4qeqvlb0ony71sxlnqw1rkcxpm2nmpgzya1bbnhyko5k56yl9j8zgx80uv1tlxpudik0bvi5zerrrzc08q89zv62deod5hnrhn',
+                secret: 'p6pz212c6kf4sxdc4zupjka6uzh5v2uv6khfkh0a87lcjjsy95g55aolk03nw311jz2cinl4ht5iv8bsdvja485fi0',
+                authUrl: 'zgv4wkdoi70qdeuqqggu0qe73oefg1o9ruh13cff9q3myvwkwe9rb9fkmvt9y5uydb857d32ujkq7w4x15ofbub4a6zmsex0i1u9owzqua5c3sjp7vb5d1zt6r5bqerl1gov8nn51v4l0bmknu0orwmonxj3nrq52vcasz6lg9de2nyrciz1sx1grwerx5xfbhvwnfzjd5zasur9pctwyio822gfknie5uajqvhs7w5j6dcz94zy9ho3lwtx9gcj6fm6vkl5aze51kbcfpeaxziw0z8jgk9uvree0clzv6scxu61djwq8qo6cas7ui54z1t9lr3txx71nlssbhctbrnr334s584rir9qzfpsj1afxh2fr9922gszorku55kntuehwe84h4qqs44d6n6dso5wz69iyv3rw3xbocbf723oethqftayrfctbls0u3ehgo5zqs2mbp3nne9sr6je9akean8ymhykjz2axeq7iywavou6bepy3zsa7qztedpdh2rvotlkm0sjshe4ipb8gh92inwrfhxjkpb6ma1pa3jqdkihbj0gttetu5u0ileh49keixai2gkgx7cw7zjd68zh2vczrnp3jqnjxopgin7xwnx526qkd35b494oc6uiod4phgj8ht1ygn6s1s1w9azwo8e4xhqtp5hg5jxy8jthmpu9pab1adsfbvf9fp810ttn2a30v2t5b7ngzewy51ed1w650pk87m3qkncvkeejfa515jjz9ze8grtnpm6i4qxoqlbtiatmtstp7ixaoibjsjq81iirwc2nnv8ukhxmmnbem2fq6f0en162r0oh4941qwen4azo2cvcxavqgni51ma4tqarzxewlr0tgwcdwp9dxrdaxevj7tv8mjq7xy28zk28rcaqgklhmaewez9542b3mbmhno4kwe7bju0htt084120sloycim2162pp7xqwnx7jnz1ub22wo94dv2dc3yemawgb6i3hqcmcdmhcsao3untq7tkzyz7ry3s30vzop4gy84lcb5iamk5yk434m3nq18b9ypoewr9pnorp59sif0knw847lxyhgx98eez4dgnrrpwfjv5iptwsopja6p3k3sjjolney2dzf8za4glikcyz1unfbrykwjk4xsmmmxpc5f9pqa8fd6jl83kqedm0l6d1g7hc7zp7xie0o59sjuvkd4xntrselhfutc2zvshywgr5sbwic0hgoiq5bunbh8z1q7c9bwpfbnrfv3chaavwrd8cyjlp52wc8uukrpwvt11bh2a7xcjvj5exienhu29fhho7l1tyffnvmof7eg2s6dmhpczhgue2hn2ta1wmnkiz2n826ndg0zsgnuqkj7jjvn87gkvqy49n7cot90zfhqvrc59oldm7a9g8qxa8nwq9jjs36knqmtdo3z8dfdfulyyd2qqor0m3eqwdasy44rwduaqdfn0rm0g7rdrpaxzew5r60s0ob91nmwoms4fbb05z7fqu3gyvtkz0tsz65u3xhzhuhvaxy16osm3pmscmiwnrq2cv8mldjn8xb21028b4fxu3ggyfbtlvmtw0t43i2nkq0aknxjn2g1uurz6shjxy0nchsahofbptks1v6qwxpfl5b7vtuq99pkkges6ef70zow3nb0hcb7vf2ijlxem2xca2ybi7ulnwknrgbsvu949gs23wzhebmqd3c65s1w9iwmpqw42n0hlaqpjnw7i1f3q6v7v19rmze9pqbe9c4t38yv8y2l7avg1r0lupntusjmzdcw7tou6676i8j3mp80etvyy825yrsgguoj0yre7x791twmw0s99zl1xo4hus7lnme7anxi4c8xn0d5jqvocgl1vy89wbefa2dhxz0eanea8wz9htwdsdjufzs2v1inqnl7byn8arccjz6y5059kzsg7kmrxnrpxxn0qahig4io6x9yovn6wyqw74w1s537lstzc7tbzei09w6meoa452xt3onna7fnagxncapq5l1vzb0gq2lwyr94v58gvo13d',
+                redirect: 'ggthxfv9hy0fwyoklgvgavj4r3ts82em417hakz5pjaq5ps3yzudaf0dsvnnz66xxdqogr62ybwftq9w6sa4p5oh5ufp0c6ydmkhw84ectxxhyp0rurhmvb8amqunskk6azskhleq1oiamuarg3z2etump3vef51edsy7lsvvid8gxhvgjlywdspbt02aszku4b25i48oap2xrr99qgvx5ucz4fo2ltz7i0zhiaz58ljdyx7rx2oy5ugitojz4miehbxghfkzl8ew0prrokfani2c8bz5u5gr7va0w73xu2o1yrqge65vzwslve3tsrrrteiemkyoeebsw4xaja3exbhrc8vxjedl8ozfh4v60qu6irdlam24d23ydhwlspxpotkiard048m2xkkc1tdrk8v6aeczh4b457yv3maxzip5r1py6or7d3p8wvfgqv3u6wa7ec4in6fxrk0a3dmy7d9pbe51fan67t3yt7ucyniwzqh67xu6f71n21tycqr4d1e76r0qeizzwpn0vxorqptheswaewqhgp2gwwabvfct2ohkqu4vfxy4lmrngulyrluvs8absiu2sw9ir77f5updxvrkul5yg2xtex33njio83ninzs4jccj56pmbiar9n8tbig5g03gtl4aq91u3fge540rcw4sy76n6g847a0u2f6k9ju56p4tm4os3clv5yffba1ro6i000oipjwzp0dr9s697g3smnj5be93w75j9qvr137f20zuhje1v5wymypob49ow5eiiabo9jvjtfi0nh6xwplc8kfuhqao7weoilowg893i2nkn3php53qty55mu3hlc1jv3xu5fp9bifyb7vdsqe8if783x3g2hy1n7sn3994k0r8xv0wj2t8ezp0vpy46a7y5r08ywiyh9xst5igrvnrfkeo39pk1joa3o0b3tfoye5tt2zrvagi3kbis2zhi4g1b3tzfvvh9vbu2pr6w3vbvt8gtobdwd4qs1r4o89aolfx6wnqvhc0g81jnbv65mfe732ylwjk0mfgludqtnf3oi2872defqt2hf9ppj1bcicoyv64tti0kp4cjnsn8okcfeejwfqlbaewf6p7mw1ph9c2kz3031znxbfb9nxe0dv41kdbos95ca98nns1m7ytpog8bv6u5ko0s1pkz8hhzg2txarzbtap186cdpn1g0fkbneko2h7wqe1k80mz0tlev5wqhqt96kmm87qm19d52o25zyxgmibb48wao2jxu27d878n2r8deh4vxl0wa66zzzpjzmphp6yow7qv8mnff1g05iy7bykfz5n6m69k1kyv0v4h34cs0pvor93q1gsms13fv05mtxdpi3u7zog71s1npndedulfhynqbtd637pacrtkaogbits7ujba8lu7kei8sj1uxdewa50of80go5pd0i9ye6yd8w9h18rmlntl78o0fahnicejvtqq3o0ssew3y5cy72w9flcseoo28w5yrgo85a4sfspjp3tad0ghjrhhidrek3plhtkos7wha254zu1ffegkh2be5efg2fr7l4ivndi5828oqnczx38xdgbqap453tx4hcwycmmt3qqrdgifnphp4syvza9sp0k6q3xnp5z2mzbldzird8up7cvyhr6rb8mh58qwmxwmi9zkgky45s25bs8oinh1cxvnmwlyiqafuxk6nmcxavc635xtly6xahfv4h1a8qfyelrr8wzt1kv4vfs85r54nykhgkwpu1p9skku4ehbxlsebekhvi1auudvc0p0vmir3bicipqm9hsjk0t8k1uwdflg5zzxtsg7wzv7e5fih20dgpzqe85f9e71tsqg8x7xkjz5o3vpos1660mdt21qztumo70m3xg5nmwj7nyzt58zmplrwb8ogl234gi79kbkdre5tkiem3cnklln355cqp3perpq62uli0zjnbsey7jeydr73tgxgxxzuarhdxcucansta42vssq7y65qpmtxykmxxezpmpqnpa6r0gdz02me9aoqu',
+                expiredAccessToken: 7185017718,
+                expiredRefreshToken: 4764031599,
+                isActive: false,
+                isMaster: false,
                 applicationIds: [],
             })
             .expect(400)
@@ -363,24 +389,23 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientName is too large, has a maximum length of 255`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: '4f70229d-065b-4518-b1f2-e380c62f20cc',
                 grantType: 'PASSWORD',
-                name: 't71dwgsz1t2jrg5i2giz2t3gg9vt8k2e8q17sl52wliml6bmlxw3v90q901w1prihww92ne4nw1yk6sdnjsr2ij6dbha7al2gp2rmal1zrswfm1emr2tcqspv4ezw79364k90ns3wsw74ckbztfyccf0qjja2jlme3spjsgo9lw9wu8siau8fjocbqpxih33l3pboe9a1jg4a0sqr15p0ppd9sj0dp3370rxy2y99qxjbd6prqx32tn80mhx4gil',
-                secret: 't4zxd9m9cardl3vk0x0hqk9hveqond8k6zgjmtqh9gyss08em0alotuagw4rmono0o1dobr2vbok5ytdf302zqz7v5',
-                authUrl: 'rud0xr46oitibw2p4ijntzjo48eukjjz8jnwbsf2kabgsceikjebn8a1pqv3kfuvn25ar86nq1qvcwkcupqt7pn9hpohek4w5x7elhogcoz2b925ubljfo0j25etq4omhwajlm5cx20q9lgh0sfoava8q7kww0algaaiuv6tdd0ge47h9bori5kkt7hvknwfj00ye5osnwy5jwe4phyzvd45jdakhoxavr06jukxdt8qqf4zd65242kvqfehyw2q2f9lz7pt2qm41x79bsvwtm8crbupn9t5ydkxkrz14nacvu0vry76o1sywwwsrb0jdjwvvjiwi7a0c82cognh37s266zkj5ecrho0oubiavskov5s04pr2qg7iai8ez8f12m5xf1om92hecra0tipow9cg0iotr9u2bl7rqui5c3fwztkzw2htgpauz6hx1abw660xztev9bptp84balt9he593q7eu9xe60juks7y50ldsmhajee7zby4960419pwlr3lv5f86gu03y0bc24rft64t602w3ryhz30gajo00a41z9okjdxh0apry4zs387wk3978iv919xd4xnmmnkfntwzlko8ph0rvmuothwdbtxgqyvuq40ocbtui6dp8n0suyur7uxsxgej7kyhwfw0jm2sgaxapvasu0pfxmj0bi8o52lkyz7bacc424rt9ebmg6ug3870osiol69t480li0twsup19013refb7a7aiy8fl5a68f696i0a727k7reiphnseogd668oyhicjhwypfghjg2xuw7q2rzhg35jnphnpk0p32nql17tv5cy0qpymxq1dzn6u8tgii22d0ladd3e85ugeysjl87thmza9o085me55e9xy5jgp3y913ux2qddjqxlzmkadzevu1d2r2j7co1g2qw0n8p3rchmmccv0qf0pj3q2oi2m5siqlymzkejjgcug8kwj6kzec5v4h8jxr5e7tmmp4pini4uamn9j5zvct6g2o7xo9rglwiydj5ehguqr7fbrye35an3sng0jv7ysglwsogijky7frmxrjninvcyp2y3qbre8o33ya7kwihvcyf87zi1s741ibrqnh7k4l8iahowr6x3zwtiypd0ld2zznke3auzwmbxxhwt8xkcqzziltihm9ru1npkp3qu388eyerigk6wopbwzk2v0v4k691xnt7f0wsvc3ayr443a0ovnl29r4et9n814l3h0d1lwcbf5x4b9fejepuyry7swjdlaad6ms17u467difb43powyptfqfivt5c073zb4jk26am27ryfpkrft0shh8btvsvgonj58262f2jy1fzcu5ggrihrrs4zzff16jhvqjh0crspmhe2wqwg7rgzh2eukhublz41mnbqqgw62hoyc047x9i0hobdhox22b3oweb71tv75c0okamaeflsqbj3p41014l6n32bcxtcad0ll4np38xby78kjx3gy0g9vlsqs72byiyui93fdetux2j6x1jse72h4mqnrd595m8y7bafsuwuf90ru6p0gtuvvv6dgkxm4hoh08bqdcfxodeswc2q0k38rgzzv9ei57mihnjd6gep6i0ewjkre8xervrueiuzo09vip16pp5akfcfm9ot7v4it1fkwg2n28eg98elfu5y6teemvtruvqa4jclcjmjrdy5m4ct4h2b0xvf2g8phjtrvanumkix8s27dmkd4s0ansrmnsxmgmgckrn3e865cofzpsb7cwtefqr59ak7fi1cid42siq2wucrdbvb8cqn7m66vxkooz83hny014d12d8ki5ans0s33fq1l9ofjod3hc74916oftyvl7y6xptcrckoue0sqg1atng3uhlh79yec0vj80v9tlnk0xy2un7zzykjethc66lyf1j63w8mmt570f1nizsc1cpvhm2h6zfos4lfccyzvfxntz5veotgkcxsinm3632y2amge8lahvjbthiuzqktb9f4tcf28fz2xmowhqqbm7c3r6ooowrzo',
-                redirect: 'shithsu4foingdzglcw8quisxh13zc9ucv9724zv9mmt5dlcav74oz9ag2owkvjvqa1mtj7f71hm2aaglnew3fes64zjzyr0d55nfif7bbrl0rc66ue1ksbzw2ckadfeyemdde3xohhc8ew3d52u6scps8x92zgx350rvjfmnpqllcbdpiev0ssh1hoaqku3js7os7l4a2fdsgatmq3x97s774ueouyvb83cd03quy34ue8mj803sr2ve9is9b01doecizflaz01yqflz8kb9ld3wzw1htt7geaqjozf2bx8ifibl8b93au5g7o2jqp6pbcfrz3x0lgjwv2sw72h17zoatxkhx4rasgt0nlwlprc9yy58kds4syhfdd2exojcl4irtl4czpwwobq6lzkl3vng67wdbvu45mqgkm9mkkgn65hmz25iv6gigihdozz1fefz09vb8t0h3cos9vcaj174reizem4cix6xif9d86y6ppx5xy5l37tode24kqcmw56wezyspbl52pkz6eyhh163l3r2w4tspffyukezfj4lp9m1dmspmud2oeq3fp0tjnpmws4frhebdlf9ylh2hhuqz8ktz33l85qk4j407ee0fuka19fb0n5q9z0fivnhfms1m333cojb5tae5dy0048hayqg2ojj3dybrdg3fu0dd44yfyg4vdenuxgpml7p40r96bpl98xu3oannlgd76kyh1zz6vu1zduxrd32llspfvqf1879tuxcms5rfbv1ogqemacp0fmt3eoxyk8j1kmddnhp9082wypjngcmp6in63cs13sn6oh4wcuxko342s5ztldmyqq2bh66iy81lyi6herdxc6o047x79kkw9a90cjyteitowg814wuaksgfwiif6z9v7i6txozidvhn0ujjdnpgxeegzd99h4z73y0el2qut9ed3gchqvfzxcqg0lr6lc188gosjo6ke5m2djru9t99pdncmdqxoosb3qmchdgt1b540zcw6a9cyk3suuuar3zyvejze07aacc68ho2edhhcl5knzig0gaqh4ppi9twnjx2fxfmo282rsn43qzj24sb62xowann9xjo786gsfzvrxfatie8cg4etw8sv6sb6rwto0n8sg3hxdfr6trg4p5sq35vutxxnhqkoflfko2bdvm3tdhohr2jy1m2a7egmkmici1qu4hselayq6v00isb9fgbug072rfkpa8jtw4rey02mnreu3hxm2rdhixdi2mctakugme8b2tjkc9h99y9ptt2zpp895uxemnnr3n9hbjaqo2il5lteywoboaz2ppj555rq01aeg8rh24wxoslb8ft1tqcmcpr14gu3u5uqrfkzw5i982ysxnl1z70t9hfqppoif57aak0wc1d3fx4e5jdvkvc6nm3sib70xy6c8i22sjqfh9wchhouwm0ol305gb677doc1b0db27osh6kxkomug2t4ha9r6bnwis5nsclqdx1zqkfsfj8gq8svm00fip5lskpgv0kl5wk475spba8ujnfcyu5jeaaud42djsm182mkemu859fdp43xtx64dzssl1ti9s19x8sh8x5u6wzlgyhqg7ft5nbrebeomrrqa5lgt0xxhbv1x5igm33oxl10irf2ymwx80gieo7eglcsusi2cptktax8thypuzxw1m6jhnw7hti7cgp2cox2avnfz09dxeac46uds1pfs9ho790e8ju8b2qhcnqtig2ch0x6je4yv4i82v01behgyd4xx64swijgwwxne73g7hr4k07afdnw9c04c4t9xe9xxv48q10vjkbjcxa2sj38s6zs2l048mitqwxzwuoep7ribbbtn0wtrqkiu5cea2koiyj8ngr9ow4xkwykqn0qsc7xs14iyelhm4rcpg0xr9n9cn7u5i1rqifm9xfid4s87tlkhq5db8sxreckmnh4zyje9no9ti63sqjo405b6o8lmebleckebo42k1jpknb13evu5n7ibhyx5jto40sail85ly5p',
-                expiredAccessToken: 7158041456,
-                expiredRefreshToken: 3658330266,
-                isActive: false,
+                name: 'd8pt5jthto2v5yy5pwo1spo3vxz5694x976baplw8hrd5j1whnuh8v2fzwy3lt5vb4gp0esstnoyg37sqj9nafmv74ntvokkfi6fqm0mf4xdcatekhb8iyy3tp38kup05i0ktedy3h1y6663d4uluj3l14dtdq6bsldyu7fmn0cm8xbfygnszrth9j79ws4sliai9td5t38n5qqre7zs7solujcs65c8opu1d0ri6oibn1npuny7hmho4whl1aq2',
+                secret: '6cblvvq9e5gii78tr708xx2r2trnzuqsj2fizl91tur9civ8wnxuw7hf5gvgriutfl3piwbac5zfhem11ugfsur5i8',
+                authUrl: 'zk0n6yhrn1c1iek38qefzr6dlqkkr1o68tl7o7nrnps958o4sa8gqffwp2238lf62c4nhsekbztwgeyqdnti4l07ai7qfjit6bssoku4l450vmfyf0xukr7t7x5l4jlzehkio3f8hkj73ljp8wbgrjz8b2c133husa2ycl7ixq52bd5s5fsys98jqy7xnwlc23i7t41t5od1p8zchgy765n89brngeaefyeqz2atdfci1uo2c7x63zwghqxhmrgxve2ne77khan2qxlvr0v6c6l5wpg6hdjmb1662qm38hhtyq9dfy58eha2qiw3f1fx51hu0b3yv12f1pwtafjkps30s9qzl4nisedq4fv06znu1icuzej7zp0ierf3b3jm9mlyq8ty9izeljkftixw7ei5zyz1n7qrbc3944f5s1ohb1hze141bhxxsir8cu0u7apniyurfaie1hkvnrliqbw0ziqflbvn9c08d89wwnwod2d22d7zixr4rw7unrimqdjae4719wbj3me7oj0rvn8ds0jinwn6c0wevucvpmheaowk2teertfzi454a0pyb0mtinmqap7v07982lz1mvyledyvgv54wrlfae4lvapjq8zwogd2awie4yx0hcdyyds3jttx0dmmjk95qbbqtfafdpzf34o276dws8ggugqt0a0lqzi52pzq84x3oe10ectrrd6d2ufpnjp0iifp0hjfoq2f04jjhnhcpdmbkties6xyppf4w3yhoe2dgedxzuzh011ju54qtf8tdb97e8w8iib5v4v2k193rdhyhnxu1ywtkx78g4lq05dqfdv9ll88b4v7qvkv1l75br2fluuekc4zf8vjjhs8ry5a2nyl401gze335kr19jkw7cdb69u9vxizs256lsed1yn375r76r0ajg1qvh3fkd0b3y259hkiv7gj30xg4eecierve5h5rgujavjdshqtthkpaz0co7byzvy2sskrxecpjlrsfy4zweasvnrsh8z4uhztkropdkjkk0ey99rtmvt9mmfincnx8anfzyizjvxzdvnmqc7xu059qbngtahtv8sy6esmw272ps3yclx8vrc81kcdmsoi0sb60qz0u7xdd8nte4raksnc4kyvtj3xu2oqjdpm3y7m91o6ubz8se2ha9nue0esjlxlxosubtn12bb4lktijrxpnf4x3uwsw76ekvtdv1m9gz5te60qylhxpt3iaj095umle4zcup04mybgyi16hp4jowx6ip2kajhp7wynvnx5cncwbrq30fevdrzwkyplf0rka454l670127yqvpylbuugpjq0138ct3jiu55ka1yfewi7pq9k67npxw6g0u0a6saw3n9jlam3a2pv31zrjx4ca8ojx18otkghasideq6q26zbpzbum0qhc1263a7z4ikln61880si89fd8lonq8butnder7aeo0a77814vdqh9cg5esrpt6kyce6fqw8ayfcs7vyj8usljv5wuak0kxupi15lala4o83iofg4xrfn77ew8jop9z4h7lddt8esj8rs3f3nlfreen5repdsm4ehqwwsptpzerllqinmu0kgfhy2tkba5j7my1py04wxiwnbquisvgbzv2qewrvldtcgcb8a367w1wzw72cc08tfxuoaolx5tnbyw5yeb2fc2dthxrwvqr83lk2ny47g85ct616cat80b4g9xu5g52arlfyn9hn4wptfdj2ql6z9igqzzyp4n6u6yvcciy854r8da8aq7n6cfg9j6gonw0hw2jtplcspzyc4cr1mt8nucny1tvyrp5pbau4t3mosh3g3gu19mtfehxw5uk442ae5fgdkvnmoas427tvyh12g4nznv5hrk73d51oced9h1uziigse1ht9mk5p5dwyldyy6pbvnm14dpql6eegck18p4gq78vu3511yicwemotnce3s7bsf174ur537mlxo1y3rcb19j6gl6oyhqprm23e4b6d8ucdhpo58s5o422fscfhjap03ddnw1s',
+                redirect: '8y4psbyy4p0ie46hif5x32scej9wqcrsyf178v7237tz861lo4k3g4nbmedgm3vchfk8gz8ojzx4jel6qd42x07tbi786m05447l3o7olhlxs1u81k67xz47q5mnxyvjimhr28ws4nkj0f8t1om09q4krkh77yq5bfs32o09r0jswok482lm3oqpbrb64dly8xtxqoidljsswqh67imw4pzbg9htwycqhc24qynxpbwjnqdn3yut5iypeyv5ziykcmalg4nd3ot782gyeo29769remyov1cz6sfhr6tdee2s0m0i7zp4tq63ykwm95hswm5cwe1gpus1gqyzj5z5nuvyaq3dz3auico15hkm9it2v9jw0xte9lncrzi2k7qnvy7aook9z7h4bu6qw6867wamh557j51v6oji0goxj0ds9za03wzaajrw6skew3417ugkvjgd95zolggzkxjnsb0we8xevyi8h49f09jr1p028i077m6u42qzempmxgzkah4zrkjodnhhf0t09dug55tu15l0a8wxu0lkn1vn661rs9djveepw4t3cscpm9wx3pecg2xwjcr02a37bzv4vhn4ljmzfx5tbm3lgly3c0i7pg5zsojxe9mu5rnnvacvrbbkho289rf9xzjud80zdl61v50ts31sgs09e65qy6mo4n4hnj7fo65dqtwce9lo6vcj0s1rb19nf70in3ibykxh4fmuqy0fr0jgtadklvz9cmbtqsgyhkrivojc5w4269f22yf8spr8y6bu35fce4zd14jommoedjqmbjgfum3nlukm9h1s2wbvivlkqme6ghzoqiggr67z3bidtg6l6wss1s2vy8lftqmqoiuonpqunb5srq5yp4edbrjuudrqjv81bg1666lwdfd8mjexmzxaxuultaicb5tjsx8lnenhxl5yj7815kkicd4zlkc7osn74kjeodyvdj3rodhd7rianwh5imomz7bzovldu9wrl1z5jn594zttyi92wsu2sl6ly89n4r412e7j793tt60edo17b8za9rl4ajvrw9qfcwvei9d0r1bznhc9gtiez3ztpd3lt6cy93g7pl0uayce2g52cvze43yx0iymi00r43vk9ijkcyfbwgjho6ovty8gm9vmex6kfbjmhuqpviyfgnytfd0jlu8s8prjuepk6cli8os394ysoojek2pt0ohlc75jr35457f1op52crzsaumvgwsmlv059naaa438gj6i1db5peiv397nbcr98frq6bvjp4km20veldou14bkjmoanivu97nt59wvcgvatncrlb3pyau17x9hdkqw1kck21nfygnk1220yo7pvnpl968e53w1qlk0ofkj6wzhil2qaz6stytmon2dm8e3f2a5iu8x26sxa999x8y8194p7o7ad5gkkyqc668pysl3ar4fg93e4zur7m4kr9vttkyegupuca2o75abu53wf7byk1ag8sb0fpj7vnsztv8yr2uzo4om0lxjm86s1hp40yhtaorlzk5he7bh9vdjkd23v690mj4yqm85h13yccavc5hyb1c2u4o2bd014jzgpg20lvccrvapp7vryhwve35xsvr6pu2n9pqmlgaivkcmvx1e2wbej0t0eunl0mh15rjom4uixshgh3lgtoe5iezxnirpfw99s6q79i57mezz3rbqpnxjgvs7gyvtaei6u5o84uxylgpa4a5v4dtppsz5ffupazkv6i69i2u195kmi0e03yl2pddwjr2xmdgwlu6ifwwwwgiylov0ve4qrxuq4u824283erceun601xhk7goyayq3rxvqtpcj3bnowol1tngemnrjsiildprbsmqlz9v2r7pd2fakdicnuc42cawv8uut4xn36gro70qft4uoahoubldl23i7asz8snaem08ccs0my9b0hxy707gr00ngz0ujtoo2m1nxzd25s4cs70f6e1q3f209n8rnzmp4nh0162l9og0vi6gejynjs6d93zmragzwkp8ubacw',
+                expiredAccessToken: 7579097279,
+                expiredRefreshToken: 6707643009,
+                isActive: true,
                 isMaster: false,
                 applicationIds: [],
             })
@@ -389,21 +414,22 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientName is too large, has a maximum length of 255');
             });
     });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientSecret is too large, has a maximum length of 90`, () => 
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientSecret is too large, has a maximum length of 90`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: '26169297-c00d-4e17-ab9b-dbce22346d0f',
                 grantType: 'PASSWORD',
-                name: 'd845vrmrgxrgpg7tbrci7xanhtk7lx4hysh4pvklh10aasfj5z5px4fxdjmtwweivhpuh114dly20slavxev2z69htoesz79w48x2li4s00v45pmgjz1t651utun8ny2mz1nyuc0b3nnduim5yvxwtzfn29cwfwzhts4e9fn828urv3heidajezkx7fvxi9q6k2ynp8uqeonltyr3kyttgf4xd8kdtvh7plwrxh8zwbl94sr3s69nwfl49ppu13',
-                secret: 'nd6n3qtiitqrzqyz0j791s7x2zlbh80m73veyjz6nxk36doopuunqh1wsa4jouyvfvuvvoscz2x4hsdahqhl37jf5h8',
-                authUrl: 'jd9aeorxjhwjko24nwkd00cypro9vh9irj815dy189wtptx8ifdl7ti761b4fhvl9s6q1er9dd5lgtirat12awatboioxd6m2moo5w4z3sw3px9d4cgzo2ltj8p2peexpo7lbn00h8x1phprcoreoic3ezla0wr3rhzmkgyxgw6rhz2vxj6s77j2dh1lfpz29400rp5lourfl6bks2cihqcpehdsgxqz1c2w09i2q1zbf6scg26v4z77ai0nfdfo4uer5l3nwk2bfthemcbug4ekfr6vwdvsr6tyqb5sb71ejmwrxzqpacp0ldwhh6l4386l09auiem41hq4yoqy36o0g7bdqhi9bxr2r2lt4wtqnchfxydfp2ohzhxde75r9xoju4i63vrsesvl0mv6koqi04tpp4wlr20ypp5s6nasxn000zbqfjzg0a18re79fnrlo3jirq5ayjd9lvf9rwcnvdbghosiw7kevaw5a9vvyyfa20fb3te0zx7p2mun4la8yj4g65ijvi14lokkfx69da1rb735lv980246rw3tk1a8y7as21tbsixszww899rwi2l5da666nlf8u73nutqx17cfryws4g3igfz4obiji1jxyifv6fj9cvf2gdjdv0urzqnpt1fkiif72r6lq99q4djo0whi71vxxwvvklm6s8yog1g3l5jxafue7jh6oe4knyeuyc1cr2ozjxs5rl38qe7t60doo68kpb4rgevtf0ml2usmsplj5yfaw5xcshjb9uijp4kecc303i05i096vxnudm2sn11oiukso04m0hmfreaasiqa5ku5kkl95fzd7z0ninx50k5t9yw24k28wpn2zh2o4osqi4n7c5ydul7smdxy3ck42cqa4j7elf0gco2hyspl69brq9njmv2fuvrs8fpoygdizrmxblbtf3yjqaflbomf48nw9ferpqfpxgvi2vda3o11d0yy9ap4935fegqifayo7dn9algposwvfieqfwqyqsfazwqczcj5539d9i06l8s0xs9j2etnko34zyczeyvuam6mtuyfa4m45ckx1v4jb2rmzhojlc3yeajw6fqmlrxa5vmjp54zmbpqom30hl8bb1cw39zvv4shznxee3kpk00g3keqlfyj0e8zzx1elznlh01cdos5omk8z0mo8jmp8zvr198elqvn733tv3yxgzmwizflzq80hmzy94j6bbjhln1m0l8o09hvknvyiy16j95was4ijcgmmsmf1qxvp98bv4v0v6y95b3f7wx0w1evpfe7t3lib7aaraplhj15yqnse2nw27ierv0r4xwub3dqrxnjtkmm3cb658pz7gtuwspu042uuj05na2smsmmi4o7zy1j99pvgqbq4zojv29vzkbv1jz0jedd35hgokk40a6pktd9mr19g221aopqf54zx8ygo805wmr2cioppgx1rkk028e3rwfek7fxp66bn7c0y3ul16lv07nd5n451uhotszaykhfbf7q271uv9zonkni3ke7275i2tg9gib4gcew06r548djazjo21u7k9m6sgdmlkfi92scnh75eo0ccwhvajdrzm40rinjkbkx3tqt73qmot5icpzt73kuj0xndm4u6xy4vtaqrtfg2yequg6tpizvwknffan60fysofca57h6y5198pmv0xz8xfhwo7ys8wu5k8ap9qqndrn1k372qnwrtagfvmrj4jafql8n7aav8avmdgyzoavmpnu8dvgw9cztr1x5f8fte8xnifkcd3qbhdzx6g6pl0oo74yw3z22ozhsb9nvl31zdoabklvq1krqjxc5hd03nskmha66asscwjob6n8ysub9d1nnjskyicinwupr1a62z7f1fr70sxv8s0wgwr1dtxc1r33dutexrz6paegciim3eeby55endvhc813v3q58f25udc94q9mk1f9k9rj38fngclg6l8nd44vive1krvmvlvrrz1aa6uafs47yja7uvi96ml6azidk3ulmyzzylj1svm6',
-                redirect: 'lgml16n7my7yj5pemft4lpuwcmqf3wynx7d4i058k58ls2bjx6vhe6qhyif0txs8s8d678caak4bcaj9l00cf9oevcuzjfjy0ejsk5ic9cjccsf3w9t2gwzlsgz7tnw2gy4a93trw26saa30ri7z3gytc5o93kh8sw87jmp9v07z30ecxmhb57lx3sxxrpxmcm8ecgdntt0kjx16x815qjbf6q25mkmn4v4d6hbud1xnpnwq5ggnb6qsc7j8oicucj3gb75t1novbkian3abt2c0mqredseuw9m18oxqrr4pvt8g1ixijmlsvavowu777m6tv77cgt6fu0jdo0hjztddbvbkup92esl2fu2af4d5oyqp30sio0g6kv60odobs4fnoobq86glq9rzzp1085bw4ozks28ynnxu701ivcgsjz35aryl5lnu0fzxhhojvhgzwfb9akx5kuubdty1azr9gxgr8lp18a56gch8baxa497278ljbvjyyqbgq27mze3j3q0uhm8au8cd5umtzrqmpxxzd696lrjdh5d97cdyie6czrq2fi419jpp2lfeqngmkqmo7l2thtryyujvorfzkss9eks1g66jn81mk38ybnhz77l7osf533hu7segdxnj56c0tkemoz8937oxnepom18g21llmds2as4mddfyd97q6h6btll0t10l1usgnbsx7yvzzfjme1f8jym3yocrw0xvcht0lmpt0b0zyw7bmtafaao174bzlpon8iha9a4nmuf64ojel41js3hix785en3lop4qlirru5qx6fva6nvg9z3hlwqb0y47r8d21r7m16rp9mx85zusjgzqt150g2z99a0fwy1wqe4pwhzqczb3o80olv060hc4stahy6vd6240m99xyb34uaqx2x7aol8i94u59r3gsxlawafgrf2udsosbaufsrdocnhz10vunqtl3kf5zr2bei6nywbz73wa6kg2mf6f5230s96itymvazys8ej4k8csclrcbk00pwhudv6mp23yqf9e953imik070fzwd8ltjv7zxfy7a1cc80lj0rrvqs8tz5ruetnsmda3pcli5vbabkxtpjt8ac3nnythuntzmdnca7017ms57feh2eytcs76sce21qggjs9q2fhb5k76hfoewpq76vwvl11vfij8alhtlqccdzeekj89igiqtjl6j5zvb0choxlhb20edyjqvqbxc77i292t4v3z6jdbilh4k9zo4cahf3sye5cmsrnn7xjgs6eon6dvclk87091ko3pt18ht9i5rkdxoz2w7g7f3w3bmv18pllylle5fjb9d97sbtq1cjmbrbt3bfdm6lfn01u1d84ezrrllj8n2mf1fczhc4gsyztv5g6yrzodm3w8konc3wce887n0e822jnq9lsfrdgab3w8zfcz36653soup7zyw916256t1lsuocrq6vnp741fuwjhcjcyq0quuircrqsj18j0dbbj2hfnqye7mrectuaszje2ftng2bex3n9ffa63g1xwsvgnuvdn3y4cfdwc8i8bllh1uhba3mxsratjt11ku02fn69mcooxyxszeuwi06cxm0v4w9ttkhhy1dxql4bogii5va8640czurwucfxdxkc4usthzitmb94rtsqeq13pxpky3lmfwoqk4nlpiodppp6jz71v5jpa3gu9b5mivl5i19f6m4lph7wg94fk11k0hyercxavmi5iecbvukpcge2rytrzdf9473mh3gtsanc2a0v9zj48uzd8zqmni9zosnyuwxdi9ogfb0uggo1yktlfsbxqriige3amppfurj4bpnfzs6l17ubaz34bht9ayseb9cvc0s79ktnj7cua763s83taffnfcrsi9fsznggpy5si65nx4tg1uqvskgur5zz4jixflrwf73ap37enc0xqrs9acy0i35t7kf5hzci360gwnaqm6v7qpdl53u7of8qj4iaf1ckfna8isyohzb4uz9cg43x8xfb7tv7bz7o0nx92iie',
-                expiredAccessToken: 4412132253,
-                expiredRefreshToken: 6326658839,
+                name: 'ox8oq5pesbovjqfl71sd3m58497o6a97j5vi27lafp0946m2h3ilha0w9c4a0zvtrdz024bcn3u84dk6oyp3su3sritmodagr4qdqiqxax9x42hgzhhlvz4jw7bjk4tohimizywiifsho0irsbrtbdn1syyyum3op69wmchyhmc9vig2b4qwp3ud2xp2eiami851e59jmzfrmlgkb72xif7jgxti280l38zxejoalne3p09ytvp4huvvxzyxd4b',
+                secret: 'ddw0h5uh50p7kqgb4z8fd92upjamc5b5zf9l26nhry794u11nszx9tk470498cwwlsak875exwtoctws25csyx4q5q3',
+                authUrl: 'fr4u7p9hlmfu0n17fwiw2y1clvomaos96cgkw6cwm7zxgwal93kuc8e8mxjaci2cyhls4we32nclzk7cwybhkw1xnw2hwl3l95tcg4wnx54hx15seb4aa0bs1ty9ena84w0f140tafy2by40aa990xsynvcrmbo8rfz7y8cxdm4d2j9gbd4424xu3so7tl0wdydezkf6ospc63oquho10ndtdjltfql3gyrhhhaek5nrsaxhr4giyybi3cnj53jorx6gmfhxjqsjnzn23sus4jgcxcdmydyosyysxxl1bx9n809r3zegptw2twgrt911u2ukdny1blmci3sk01kr4py0z1rj0167616j6541oq2kuenkbfjnw2awq9bpjqt3phfi2himq15lptnkssxvejdhjdht6akedcmyi4sfeq7ug1jrnua8qw2lmond8he1jdovl0v4qo3s9b15uermlcdhvf73h58fntv05z1yi9rcxh17j61xj7vt2yfi0iy6ovi4157tb9n6ofgcbu7v5ml11lky6lc2pz230eg4v9vqau5peobzwphnp97l6gqheo7y123tpfgmluehoez19u0q48zcj9jxvv9jup25dub5ifbvlidunh5r77z77fnex80z42mlr7t7b7jt9s6e6fal17kykcv02ui93zgs0qj4b0hpdtxwi49ltg8b46ksll53e0oxv66cdihkcneodrg5ttphe4nkbjd52vbu76ppqseotmlfnvydn8g28ar86q4z0zt3e3bxk48rkqymjqc7vpno3hlwrr50bah0r0ad7qlzrl3a9v9vi7vnpjw2u1pjj6p1guh0o5dejc4zphstih63uanu3p0oqtdqe0b05w44rxe26laazz8zsyid54rtf1ui75fcrv6m316uli3dygi0ca4vniajiypjlil0tx4cd7ro68uevkld3uqyai01xlszr4fj4lg0d06rkuhyfehd8ppxgtb19t0frfrw0at0h1m1j8n2ty3fr4wvk95lznve4n5qbtiwkz8lxx0a1a0wnke07nt9x7nl3wbzq41nit6sx15njs4bs0hmw69n7s6ivsq5qm1okwvi3brr014o1lpqk7yo6whqgz5dzy8qpvr2islemyqrleu21yuffw7z3njgypt2dlaj54s8upr6dbqtzkjasjxi8mebhkxxgk7htufl4qkqkby1yxx6ex020ich2yhy4md0kkut0nx1bf6xunx2t286rs3fffvotxmx8qzdceuocp4z8mrohwedslypk24p7t9hknlgc0gj0g3stvawta4kb3nhgohy2fp1xrfasuqzbqqxq3ydlw0pn4j1nb8frnsiyekmab24e3ur59oaeffqdka96qda6wz3q7yijd1ve64rmwa406wlzuj37ug519uh6wy8tn7btvkq62tianhby5y3algydgkdpagll80okebisif78yu6mvz4fl4zcxst7ji62i9egkhdrrr49h0fanj8vq3njre6bsl4lu66zw39tihs7o9mmv2p9imjkrbgrqe1mhaco4914tqn40fp6fcae4v8j9mlfak82ocxe6d861g8hzbkvtr2rqx10tzdx32a7u2p8veqzi9cc84e4udld7di1aqerfe35yc5mip8z99o7mgooz22nv1iqn3x52r9uqljby1bj382xpz4x3ginhbyos33agndkczaaqolrh75elkmbqp6r7ys21plind8ayp1vhihf2mfrgxknx6fkvszzzcoizl8eajd02gk5bgd9sn2a0yhj8of5kdkw4dk565pdzhow14q9tt6sccjl3q5mb1uh38iql3vxu76q66350avgwx2h6j1i0e7t79q9axtw42ullxfjx2txxsiap79t3jz4tnmtde9b6qydl69jp50eoguurzrx3zneb3f4pm84w4x4aypbicd9emgingpoh9lzc7w8r0gpe7f11fb3rdsaa4muq6vdxgfh2b3wc3zrhdvgni2xungruwuscfj8v3dasybvi02zcz3',
+                redirect: 'yu69jbrvunc9qhvltfshrma6ywqm9br6zljn7mu4qf4fgqqdhkdop40g8bog3jgafowtcnj49s2z813h7wjpgwrmbd0j0okrta54tz7ehob3dyde5al4p3tiy0g1juzrj97hn8daknmi5ox011k6a1zcdijh43h5eitob2vwpyyyrf32nzumygw36jy3blx9g8axj7dt41zx2imw04n7x096qq0ojv9opt2e7cmxzeylf8bryxkttq9jo4apmc5443l069m2jt43bft4x7mdmdzngll5c0eehtebxp61lrbia5vx4a3sqjiqdql543t3jiq501qb6zsxvyqhk5k9667ndpbi7i0s00bs0d0m9alnkswc8i9kqp25ejbi3df2n4hegfxpcearykmh2gigid673jmfcl1lh6dcvv2kkcwlp5wcd28kzhatq99u2k4b8ln2peznnkt5hfjrvunmqg5z1ogjripucpzgyzg6774g5v025aibqfhdvvvkkcfzrg3s6tc4qimiq8bmh9za13egp82qytieim91jdoff07kg7coqk606m2textyxbzralchciwufamppbp9rlfqg8yy7ns8w960b88jz2xytadsi7d8oyvfvqnek0uvyzrst9mr8ghbp96nk2h0p3orqi4u5w2gksc883pupnt5blcwmgnj2xnwmf7dmeqjmhsy9j2wgf641yqzi8z86rn18c3d3f0yrxm8jcm79ipfvlyt44vxjx79uyferiuu0e0i08oc02fsk6svcs5wldqhm3japoplfl0zyf0jlhhyrshedz8jbjsx53wojuj7qrrrgoiszl5fiwhnw4c37i3av0s1wwusdm8el8phq8x7ux5s8851vc5le8j2dus4si40y8uyn6iui7icpxqd7i67cb28k243l545vwysv2pevn6md7gut4fwvy0e987kyhfw4zhvqy5gfiqegrhx751y0wy25pu9ltvaaquw1m3430rum3r1q7tr4bh6e16fjmgttqpizomqltitkqkjcdwy3810ewd7bmlr1ny7frq3hgfzz87ujq2g84d5jfhdo24t7nb7wotnmk1lvv2owtfra5lq0ty1xgcu8mi5q1b17isxwod3hvt3920r3z0qkzn0scew9kjoj06bu3n0pnk1lyj6udxz12bqptq3nhgbvr1ai7vbab417wiaeal7s28qi7h91gvitg83m7doxser3zevusixi8ciabtcj8ci7z2ozniaujm2dgkacrefkdwlxdb4sqdw0u6kygg7nm59y90nqqyyo4bk9c8jfqbqgqo86jkjph97sri6ds7g41bjo91ej4kaan3vcjy5hggc7mmdwbgg44fpe4fvjoz2my07ghbzw0hkw0fycky8khm962odwqd57phudfkchdrcv5t8n44a0zbzstckkkdj29jy14cx5u5ijk19cjjpd8k6e4uv9wr8gj0nvuor241x4stqcqxkkvc1argbacg37wb75uhg4xigmpnmihh262b7w79543ve6pusdbtyhvy8pmnn7rxdocxef3xzzrypvfs6z1nks4ngmv7i7oyz4kfnlx85rcxhr32frs2z5k7wnm89oir3iyljuzttfp9nbe9b70t0bmlgxs2bwxogukvgdf39qeynt757sd2hlg6xudosbczqvsmflh3onk76zt0uq3cqjz8f39viffvxnn0xjw0wap0tdqckpk5aw6a60y2i13eugybz65ppupsldbn0lnh4yajkadphc7y0qg95i1rhj9vy1o86vt55gihvmi0yeopm8h4r7orfitkr3bfgjz44be8n0w6tri99kvxfd3o0bn6w1kj4m21lgm295zlqq77zjq11hqyewkzv3a44dfjauf2xyy6skqril9bem5mt74lfczb3ps8v73g1co7eww971uk7t0lwi9orgny6cadyto8mqkk4z4wytud50w6npkrci1nsm6i7r0ewa45gp9cd7m009ygtfg00705jxebswnwasluw70fad46q',
+                expiredAccessToken: 2304813964,
+                expiredRefreshToken: 4195125359,
                 isActive: false,
                 isMaster: false,
                 applicationIds: [],
@@ -413,23 +439,24 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientSecret is too large, has a maximum length of 90');
             });
     });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientAuthUrl is too large, has a maximum length of 2048`, () => 
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientAuthUrl is too large, has a maximum length of 2048`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: '35b41b41-4f69-40bc-a01d-893fb6e740fd',
                 grantType: 'PASSWORD',
-                name: '6lwpykuz7gg3gt4x690bhiap6emuy8pwjhuylezu3dbfmtnfh0fmo1l0nn123gid2v7iczl8ysca6v1uzzm0xlqf3mxaczbdkjjarawzdvae74rrfnuyp8h5fqbaigatdgweq1ap6t7v3chh3152s0howqazestf0lptru940gy1oa9b7yp43kcxmv4ss8w341r3rdnirojubp398sa1rcxfnq7h8m2b84fb9dua2ufecxq6ka1pp3htvspep90',
-                secret: 'armf63nq6wffat0gz7s1yzez5yav37p1r02x2tq5n0ff02oqlh0emmvmroiyvkeheanhb6x04j433615i0x492r5wf',
-                authUrl: '6kz4hrk8km317il2nqia1alq7dx0q69zih9j4z13626e9l6g7hcpixgh6an36x9hzzvevosdmf9lhnxxv5x56ytd2nccxojtqdrdk4o5yd55xxqltk3wyq2qgtaqd5m3kgwk7hu0kq8q9kd731q8jci6ks71kwvj9pb4gprym2zy0h2aa83ykcp6chf9aax1xcz6my6bnfzkprvtmgwcszbvctw80v298turclfg77743qd27b52ilmjfu3cmjcgnajqu5ha09gplllkeml6g1opgp1g4i963priutrkka0eat6xr1cyhloz4usvf4jxzxa8rpl0dghkxck9bzlmg09zhli4da3d0lygkpw0nzecestkdsa4vzdvcq2pfr9i6kvmgocv2etgqb5jg3o5mn1fowtul7kabnbiuzxdom6pwrggdewki7qykof2nte8h6dokmvw1cmto8cm38v769bi9m608jhxrth5f5dr9jxm0y2quhbyvr7rcpwasqc1uuapxrdnkpau7fekz9ymzb2fvg7lhm89vw4cdd0vawc88wr3kinyxsk3keob62098fpp8wm867fcwdubrpj0w47opo358nyxzygco1kd3rbnw553eqgturibe3tcem0rcwkh9idwedk4x372ge9wuyzujvznba2kgrt4p2t5vrm2nfvd1k7wrxycaw0l7uq6ttgf2w9eotv19hzeqq89vdq0n97ttof6hp28anser3jadmi9wfwgzw0ed5zps2sfs64xi6001sdr5olubhc9teg0aoq353qxbj337t9m9dzbigygt00c0mbsv4wvl622kobvvso1e7jr0jgwab41tultcv01hmsnmbddwxf0h3lki98gtn17gigyy1olbv8q5waongvds27s584ns6ar4xyvk6y9ume4bl2g7rvu5o6jv4x6yee94xt3pw7jtfj8222gf55a70ussivc7ojkq6f3c4q5ar5qthup4b7vdwkpxcip7w2ej3xqee5mzrimwyjq9w5kekl8i2najwmdl5b03xycz48ncqxb1a5zgcj7u99hi8c1uj15oivpf18nrn8wkqyq1yqaqjmhz93t2njp23abdx551320f7d8u1cab34wnu016t5dumm89b8cmsgyicsnuk4yeldwgw72tv0rlbvp9ik2h0qqoww14z4zmmx3cng4yburo346cqozpdbem3594hrdb1ots0b2tmom3396hmjr58ffqbnt8ih18t2prcqosv4zbvrctri46s7m5m7tqdqj8hsk7wgsy86ewxbu1fgexgv827e8ruwsba2f0f2c1ypepzk43w5trsw4mw5gzao1t24h6ahsqtgj951zm4xk5k7x2ivzypfqhvdnvnxslqv8ldtq4jnv3nhx56fd207un74e8ah63jdue8vyp1jpxrpak1pzbrso16h4fy92mlrmdm05zk6s112oydvrsncnro2dsw9ke7gyzh2i7o6ibjun13ku0y5nfg0395i8g8cqymurxwvi6dscqgkcmmflw6hv9i3dithkuthock3hkz29li5l72enfc3nk46j86jk9ttblvfmsmw6ezf35n8i0149pbw1xmuwm8oyy5szyayujd3rlxpuh5o1hrv0gflpe636zvqlyp4wuy5b93f56lbi2lt94j8tr9yp7r571hla08n2przd0x1f6ifugf6332vub6clcef3qchic6su86klmzfbu7byd0qddxtysgkz9xcogaxgitp09xms8a7v4xfx75o2cbuf9pk4nc3he31b4o4h9xsyiy8bh442aodijovoxupl9ur4xf8g3nqm8u68dk0iqa9vqtb3i8we4o91rxxl6ifk0qi34z8l9c7qxctzgbzlrqapc7tlhhyb0ztsdyj87w6jctrvxtaq2u5u9lmr91nmf05ujdvlge4jt1ts6t2k6cit87ha6kkyztvurtzqn5jy4qeytfq4t69mu0h3r1v4t595f19mi854l93kzamk00uir725bhig0c58xg2n2',
-                redirect: 'ihu9x0bhrda99h77sx8fyq90k8931971doib43x78evj9e5j36uid89qgffzx62ysun425l4d6lytt6o5dbq8ptt2w3t99nwddl3v3vb437cvbdt5w0nlubqalzgm6sm80jz3ympa0ulq270jqtp0egdlt8p9kt2y0i0o084ys4f0jktpq07nu3jb9beyk5tx8ntnpjpm5dc3kfvmvxjtkmk01bmrog2hrkqc8wx8w6ehw03pqvfusxjya4zd6sq09ewo0vi5aqsmoe5gpznbifrbm0o59bbwtxmjzt0momib800maidu2ouczcwomiewae4sfmelof06lirl0jhwhpzvmv43f8rpnxhvqmrqwaxns52nkm3qvafsns9igktyk2o3marqclorv7at1kqngno2eyuj0cjaxhclq5kvo61tsfrrfa17kadr5bwxad8ge94p34123ha66l8dnv07zyavzh54x3lvmz508ty049jfu5cqdarmrpe5zcls0ummf0hzpz0d57c78s7z9jfddtst9efl2tttgisp9zrhmjxs9jbz33i10stgf1wk5dmi5nm0id41f0fi5nxl49mb23axnzdolee6nia89r4dqkbd5h52gho9ddgl0re9s8ur9bu0p0jcml3q7eg0ltgwpl2nwt645lxe5fenp24s1mxmvakcx1i32b371j096csncsz8h3538tkxefw961gacdm4u5hmji5qsfrqlmr4xeu22gs41xnjidt7z9itia4rrxmn3oa7v72va964zm2jn38oy1ani8xlonknkq33ablmypa1mq6slvt1hdw0itp1p0whnoyhcludfr72i04i7ayqem9mqi2j8cqzzrbjposn7nfrvghgw0968mmgs3heq7098fedpdbplmytz9w4lt0eznz0blrx5zfo5nyp6qmgbyix7e3rx33r9tynzom1ft8hz0wimzu8wfevij709dsv98vucqijnw9fvqktr3dckq6zz5zfm6y8r64vrpcr44caeaw26a9d8agouvpsol5owxtkqvdpf298ihl9ftqzbsnk3ymwx053m16bhjt59c85x3u0xocxyp0vln4sfqojwrhynpx78hsoswai2ksfq5ee115jqeqrt14kbpez126e53mg08ti5olwvzppovj31vfrt2haviot3u2xqp3so1t2957u38qryys942yqa3w1rza5hhd5ea8ub7v2dw73tkq7hrfmr13nspwh3s51ypqr4lwflc0fdcvcdgy9w06t6tb5k98rhszvg9c29pdb1n57bpozmq08clntp0ymrbyd0clq16dqsc18tqkstppqj80c54w9o7f29jv2py8e9em0qde445l9547gjx87pcpsuuu5g8d1w2uuy20sb9jlb3jupt2v9txqem94ivjropysktt90sbk1s14a0mezweqfk3btwqovpg42a0163bkfmvl2ul11axd8o9kjc65cztwnfsv1c61zdpmdjjjvg2zlin9vbqaz70ud1611jagkihefn497ydhsw9c37vhpf8ltsjlchg04kyogziw1enx6b807jk8n8kkq2t4n0qloi08ix49c8men19cu3vx9ulu47p0tee9dd3xgl0w1lj9gkgpp2e0zqie96s5h2ibz8atx0grsy9k2y91c5ds8g4prg0x6v61el1z0cpa52mpnygw6pidxkkerowrtucvqlzvedh3uxqv97trmb3m79lk5dqf045royacbav7q2hkyreobn96vftq5zju3bi64krd4qtomt9c70uiei0v57tz54yp457h7xjfooyb1n8372iq53ajxsca0ystz61450slurnyoy8ivun42cua0qoq6wr56i88yw255x3puxow0lvfd5zk7gzbucwi5ug915jj36hydck43vra1qd1lofktve8plht4z8frt9q2epp15f46qd72pz3ncs3unkm1naqd83r476ahoxzk2gih6pmsr0sib19wc5f7uopasaci2dshcd8xoej79r',
-                expiredAccessToken: 5926834464,
-                expiredRefreshToken: 2869626353,
+                name: 'egcs3gts11p2inugspaim2uh9f75i6b526zmk6mklc5fuxtu618r6ccrejw02tjujbwolankvomqn47s89e7eqxxy1jaghr4ux2n7kc0l9ce3460jmxajst9ro2reqeadx7q78q3js78ncyv2b61b7lh73d22bc6di7htwsiljfx5eia2io85a3wjiy27x8t5des9de9yho7d8ifmghmvpka2ax1bzr87eg349e3xze2xuvzto21ymmsdl6edf7',
+                secret: 'qu8ix15cx5yymgh6lbmq40ymdm4z5fhd4f4xv4tmzlpt9ln9sgprcp6n7jp178k57gbtp6klsgi6e6tahs5ymra574',
+                authUrl: 'e1yabc07l7ax7ypo64mvjsjabmoiccoaea0b2oq5r75vno1ysa2rddzph3il3w6jgqn2kqtzqeaedq5lbgkujq6ytmvtx9s16mjlvn0by2jdealo33t0olt4rlb5hgq1afym4vn1lujsq14v3871yas1jvz4dnjkyhjtzxe3lfvlf2mggr30bnd4sa7y8vux30blf7xz1aifc4yxu848gq92go2n8otlqcbxzcm221w39t3jhwzb3noqpbovv2mco7k0ng7tzuzmqz8sexvkod4fgtpiu1k634tu6i1qx4x9sozdmntu6zl6v55745c59i9ast486ke2icvi134x8kh65ggrhqfdsl4qme23cz3s2zbq691jyrzalq4b2w70dqmmsoc14ynta3mrney6ylhtqkwsc9tgmxsz2mjw2fvgke8f66so0spo22a0gc4exx15jsjinlvodva16yfawxff0dqdu77t4he62wc3ej9wub564lqe2tuqvdw33709xcaaimsluxfc9ewwutze1mzq4cayphzpa5xwl8ajj6856k7zi3vh1y5n0jwtintx23hgvh5zkfzrjriha8feq9xnvd6chu9jhjqlnkvdb9bj4sujpgoct1sqdg4wriqnm649fns5c8qwl1vjn03tczmsjhfdt4rcwleou0vv1z1sa6fo903f7px3nykhg8yaved2pf7njsmzezlsn6xnuwqc4ajo4j8236ub3azyga03hdwdrg0e0e3qniqcrwfi561bp6a8osi41h3xh457g9iady3mvmp1cw8jio46qxeokpobo3upv559f7aa67c1qwnrehx5q0o7xms11aobb28prcqc9ns2fcl0p23mqbyarbnpp1bl5lzg3rnt8imn1oallb8fqcbkjcmpad52idmwd8qc9srd0g9lqjlul8sadvhghsmfus5rvxjqmjoi54kpbgepz3omdhh3fr2kr1makmmyd0meckeg2apsjnbx5u20xppdp716n5bj13ei3uzwtz1jlsjg3y403i52wni74zdkqh1d5nvdpvs6fhfuozvtqlmhku5mepjz2f3ysvvkk4q473y05hx5d5ntrzjdry39obdzjlkmncoijtkbrd170y10v0rbbd6gez3x2p326kq7m9hd82qzfc65y8u99m1l0ktbp1e1wgb2xjwjqsad8vzl7r9b0web18cex9staques8im25yzcd530nkaxoyhq3tsyu5q57et7hjlxptnyzjv9lqnzevgqf4keznpqinyievfacqug451w57hl65zjpfapevk9k4ohy90emetuaj2g3ffsxbv8cledtjxbgsswyp90c75yti3442sx9kn3078sye5ttxxj4wjav5ywcsy2goho90tajfxws613wdap3m5a65oike29zvtkc32n06bhduelcl462mwbshkc6vmzfko92cdzume6uiq252xt3p4vo3uckqk4imciawo0f1n5jo2cqizfgjr5gjzk9xq9gjl4uv3oh832wykooi01l943pkhbdm2iaf4z0tap2ra5fbu0mgqn7x1a9w0zxwqkru2xkbrucsdzjtjmq8hgvoao6ncr9al9abjaswdic8fzggohh3xtkahidnecxjb3a9qb52iitadiptqc2t4o41kego6jl483ehxhcag1as87nv10rn7r9tm2iwc8st3a64z2ko50usdclthxb3geg45iu3cf5sqneikn75rfm7sofjjpruxw07uebrhw7huv462xx9i7jf2dwy6kmq41vv7ruetppqv3n906vk1w31we1uyapwwso1y0trh1gmhb24f7arddjatccuqq021lem1851ux566mwq9pffpyqb1gi3cbnd01yu3s767mcx1hz4ubo7gzk5fhehunwpvfpf1cv6kobfkopxetbnewclsfhjsezs7utmz1hgytjxez5s4evgbrr7m4a8vi4yjcirzi3xc049uqfzun2jt9aswfaf3o6vzi1e55g3m4vx5b13ft67u74fry',
+                redirect: 'xcgv2johllj8kyqq4q24fuu70orlbkg0uiu3ta0m1i0voslfmfbtb57ezf79vcpxr3frn1z60yjz1zd7vbgel7ugmkey2wt5squgsn2q3yu42udsfti5lw9h9xdy4sjw1vbjkgtst4309qq0wvmz6fdhi8nkpuwh13my9agvdd22xyw51mohtkn1wz6ro7jqysy4cx4t3dclixc7r4jpluas5lp5ubkq7ycqv420djjq8el4p8zqib3ilpf2eig8nmqf1veg0fr6fmpevu6mzg45ikw9xe33x6fwls55qfd0de215ov5laquf50l1y2bvldhvzjgj4tmlxzmuatsznjy5alod00swyok6wnszojyt7q13u7ywcj0i4m94crlh3bb0oltuo5gxsu8920nvrtmt6hfr67t1l0k4xxbrf6emzfxqkiuolusn371dqhpm3v4ivnjw7vuubzvrdfu908g6hc21rhkqfeidcyt2fhcrm1lz5wz8seelxghzcu9mhno5yitlw1s35fw77inzam18gmwqr7dbgtzl1jzlcey6oeoynfd8rw1tnkllzb08f55t184nftpfuyyw5k1scb2yitjxazbf1ocuil4i11akbydwsq5pj4cpfnlwlwg6x3mxhysx65s7xarewjcabkwbxcb3cbdaw27qbg2lneq0f3ps2vadcamodgzdu87ted326737h9bjqgilxohee4r8lm0q19be2841rrecx6rv9vor2kfeq7rn5rb1tlyqo30q0bzzxs4jp65lvxmth06e7augnyhltu491lo5r8otkut8hbb9ul3rml8ewyeljjwubx0wtlwq3s1ze1trmetsys7gz01x0hw8i6brs250wg0fe8hornpbg91it3gl62o27wkgwszt2bjgaafod582nof5chdvo0w3658zrd92mkybismnyvtg61zt2hznca5wc9isqb6db50r70badc1r7q3fxzc3n7csj06yng09zqu4xkpemmfcw37tk195er2aytvve4dzc0l3l9kvcwy698apvjt4axwp08y97v8t2h3tywncxqx9jt1q824cq7o6yrgugscjuwte5d1aj8tpti1zkxnw4pn3vtm05xucsk3h5rha397w69v5ke7m116uhot6ydoc7sjhk0he0tmcnoobzfal66rhn6w4aqigzm83ztxt2f9b7cqhslmr00a95rv8kazgecir5tjarx6puzhkcmh60m1jzbrk88epe4z856aa1k6v18vxv8niv92c7z8x5ov32njr7pzp91gaqmh1f5bvm07ebokq93n8aa73tlpnxfyilg111qsqq6chv0fb4zuzx6uytd5phfah41i7zvzq9mi7jc58201o14kq5u00xje7ebrsy3adglp7umxwuaf30wncbc8hui7zupa2nfu03z32sbmlbwkycbhs9eo40p7lavwyjtfffts4rbqtflxizegacv9yr9hz6ndva1j1stdif62i632dpl9izs4kg96l7vw398hq6t23tiaa82oqmiweriq1jx21vhlgxdq9hz1139y09eglimftdh5uft2rpqmhypubly109vfh06e3fji7x2cmynpaupimizu8lpudg1qmyqi02urcj2pel00kcomu57r3jwim5i4luvua06yei8e21khiupaptgpgqlqjgw9oh2honzijbalgcs80t3o576i897j0dvkuzq8xwlh9orkqxndogtv86cz7w00hlc8umjug15luit2s98peq5yd0s5i3onuit94dcgoc8m1je76jjn5576jvtxhjhy18jx9odb0fov826vtctkm6chca1wafxsfb53zxqs5485catt6ajn0qku4cenvomhv9u68getg3n47xbzpaafxdwq04g4jacsby3wo068mazx2ag3u7ntqagouc0oswyi5kyf6g7pf17sag0w71mdj8x6fde2l3h6zpaiv1b6xgfpm7ck4gymhvqzm8x1gpy594f08nzv98di5sxgvtxc4zql75vo',
+                expiredAccessToken: 9575744507,
+                expiredRefreshToken: 7782108837,
                 isActive: false,
-                isMaster: true,
+                isMaster: false,
                 applicationIds: [],
             })
             .expect(400)
@@ -437,22 +464,23 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientAuthUrl is too large, has a maximum length of 2048');
             });
     });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientRedirect is too large, has a maximum length of 2048`, () => 
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientRedirect is too large, has a maximum length of 2048`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'CLIENT_CREDENTIALS',
-                name: 'wuhnfajx98uznoiqnz7ze8pjso7d94nj67vuns3u276i58q0szuzcazl31ga1f4gac439zevails23et5yarkzd7prytots5wnj7ennjgg2hc0ld4s8lct3anuaanszsuurbc363vf3t1tn7ht7d0psc0qb9qqdfw2a1892eam9i2a6bmsy86y0m8f3hf5sesyb3cdm6gk8ch88lzur5n979grrc14xep2qmuc3waewbiwftvn2m5vbc8kzau7o',
-                secret: 'touunlxvu4n817htcyno8t7o44axtl1vupbqxeedw13kj8lpomk5zblqt2llexl52p1u1f3utd65txyfjtoa91f6pi',
-                authUrl: 'i6wz1h0zgcdk2t5iwq18u3oi8wgknrlxmjhbeok8pt5hky8p4s2hhj4q7kkub5r8wkzyis8y1tv5wy57eq5kcv9nktf8d94e5iaz7nlumge1ogwxkyfj3qlmdcghfakq3jzsfe4l7p9oplqeihmuzluubujimxxnqd6zyzkt5cpqr4zfylj3yksk4w8lrvykij78yf833jcwibyp5hqqygv6rxk2poptfblxfes35hw07ro2gazu3mwwl5i8l8ii7f2nq7cnsixizguei16qs78saxkft8qwvmpw05nnqsf3vrewvf3wr1i1r98fvb5gocf5nwlp3df16dwqysz6s7b44tievkmn75d4veynsq4ubrzrfbhot1ifqepae9523rlfin4n8w4xkwc6hj9a3e84m6azzbj9gojbusthivl7bcoaum5vbme6uco8xd6gshy1r3ptkrymdck2nqp9dhcf76nu9nyvgod5wb1drmqo1z71fjsj58f6cszk6zhxgdbr9c2jl9nqsej4y29mkbxj48b872c0pd1cx4n0wdr2xzd16mwlg3852oxfy0k2wpukfwwb987yn3c0ne0l6vankns1fz1fz36l7v77woemawuu5yx1rzq3fid5qkhu6y8p705p5fapbcs2lv4rqrvpiod18nx2rho8zybnj0yf8gkzrnqo2uao57jxxl8r1vni1innqfsi3x94tbiwuapstapzvg6genkl6xqseqkqoqczdm8vuc6e8hpagapc0m1relhe4lzn3n7mrau5d5o3kr73skyvwrnshyhcdh7o1da72hqzvwz9uy0l0ykzjtwn48x0dv5zkidkchlozr0db9k599h4igffgc2lu6522m9407tnepk2rw6zit71b4tl30yywwf0tlowbe9zu9fi5w2kljacgsjx02yc8xnbi8ij6sjafif4a1vbgs4pds4kbibsqigfki1mflpwyursoinb0s3ske8mkob4ef43fycpi54z3ej0cfi47ackxz0jevob0k1n93ygn8luqpc541syp59lqphcxvtsf2dws7rlzdz8yphcbckdl2n8xc4uhur3e51uemc6904rj2tm8frfgql539okza4dy0iugxbo5f8crnkc5ae7tu215x7tbzj5zv0zydqi9qf4aoh5t1qamdtzmket3b5ow2dsvrtcswigaxs4u4e15pksfmmedq8hnguviu2e91ixzqek6isxl2p6a5upojlmtpaqa5wu8t9v995fq8lutjnen23m7hyk2dhjz0cgpizv3mtegnvu1z2xjmlygk5hcyqaf672bgh6jpsqms4e8t8qeq87l9qz8uhmht7xdwjdl5oofcapxosp3a8nk409z21nv825x9tsv5gdinag5epx313o0cb6wwhc6tklc7v5ami2mh5b49y8jtyqyfr3f2anr1api0axqb7mea5k82nxmbnctf8yirppemmvtp1y0b86yndb5spgvv0o9tro56jwnfaguxy7l9o8guuvp73jk2ke28wkmqx3wd4m2hf0b5h8hsdt7fg183kbzlmi5n4ywfgm7pmuihhuaqc1s8amtgv5ux693vpr0dyiaq9eq2o4m5i2rbth8hr4e8m8ga0uxt6a1ee92m3teo2l93xyg8vezi44newwh61ubgxw7sp8mx3jmmoqerkme9gjn0pdfdfkviteqv0an0vvmoyo21w2zaxmq1w800lugw30jknroo5310s6vtk55pzwr6oukfilez6qtu1y10utfr44g1ccbj4vpcpen9vwoxiv7bebajg9ncnyxwu2b1fjkri3h9utebhj018zz0epqhg9dzsg8mstr4zeibcyrn30ttz7s2f8cehykduxxblwa5tr1e8uw4i1ufdbrkl0697ox0s03n6v6m1raqak0fthr71ypfieo7qbfkpt60w1lvkonsyc4ynzw1wwu9qanj00wb5kf6vftgv4fiq0atggco9aaootctuz1mqq36qomv8lcp595mvr03lom5w5grin',
-                redirect: 'r2ykoh6ekdktf6xtpad7ltsx2hzuzdgcvys7tnafxvjj7m1e5m26k5t6gnvqxeh1qivyoa0515b4y73lyd9wh9myweusiyk72zfffdp4229r0joebtq0scitkm14q094myxufm003mqrrj8jdfwdfgara3vc7faod78eeu7hxs38ipe9nhfrt57oj5a8llchhjcpyatmb3hy9lxlqqx1p3i0xdh5wll24rczpntz9lr292d0t54ippcvca34pcckucsdexhq5m5sgfghy352ug53cl8anpm2dfw95glv461o7bc26n0rujibrsn46go7h3tg1a8elr858a15680vcbu53wsx3e1bhn7slouqceynldou45k8sjp3jfnp9j9k4ejkre0mqh1j8wpl3wh68vukygwurb8kwyr0s5i3ax9qcl6mrplvla94njnkexrlytgygzr9qg6qfsoad0q75558v45dhd5oqtchru0fjqdxfda99hg95v6u732vxuy4aupvpi7dpudh0rde2s0abx9gp0nn8rlcmb0anincc8z1ta14gd5i2ghu0pa65mcpgyu2ha7evb38ygk63eor2z7308sqemtipt4lgz2107if79d775ppruljp6cndv84mer6uzb6jo0qxllych41atm6ddrq30cknqoyak000mi5ag0dh1m7n522wvrebnrp7aan5l4jbwrg3t6s3r2ghfh5s0jx8hgd0t5x6j3eh7v75xr6lbqgpjm6xaw46b3b7w1jg09hn9op0esiiixgtkn5ofetbcgjmxbdpgj5ajys8c7d9pplt2a54z6aaati5h9k6d3l5nt6q89bdb2aoy7mcwz613m7s1zf0c37ohfa0qgi05z2a2f2epp1ord1hd96um2hrjp7g32zlds745c14xplc3ipdp0hj266d7n7044k7ss30r4jmbclwln3vruy642mgxppqgfq8dgi098mjwj5cxquprdtwx4ubd2ofn94awz2wzz7hs1ierkzajltjajj0lmorx80k56l6za2ap8k591kho3con7d1ei563b18tuabaew00wk8gr1nw4nreog0webzn2bwtpyeyrzxssp6kf13ne8wun9n2ang0x8suekiufhw50oazbs9npehd6uyygnxmiuol3f7dcc1v4535cx7k4hxhab5cqy12hodpiz5azor8i5tkmm2g7q2kbixw7f1wj829dwjs605z3x3hb9615elnaouc1ofvgvbb71q3yy3w2vefmw3ad6cjz7zyey8tw66nlqv1ev4mn74meiobtf28205741jl16g12fw28hwb2orlmlgis67yxqqbl3ady5id2c59dpor7dn6ywi237j9bpoew41jrvvhbvvwdkvvdvuvhyy2j66t6dwcrxd9gh7ng1c5ycqgu61x16if8vu4tjcnl336229uf99c4qogp78zg4syzyjm8zac5yky3amw8k1ujj1o898p7u88scd35l3ayj8figomvoepgllkqaz1nikrafal1jx1coj7tror070rzcjsoh1rzv10b9qlp98schlwpz3j8po6mc5xlnp0hyfhwzw5mgnmfb5r0cv7dm2y78e0c5nr2i2mzmy0618vgq6f5kn0cdij1v178j6v37bd3gfj8dfppuxgcl33upwcx76as78eyxmz86n0bv1qjdzypg9vv2z0mzh3tbvk9pxqs2zfjjcvcbnvmd3kwipivgv5vuovy8fx9qrthhyjna7wd0j61b5ho4bh5jezr8jc8364el4ie0zwnpvl3t91hkx1uv1xnj929w6g135fba1fqx8070y2uagx0hcybt2oln2y4emv31tm1jzn0alp1rm14qrlrf4kqup9eenj9azvzeddvxd5ti79f9xd4x8n12ckyk201jl3bghhxbaq0aswq0kdm21b1fzy11fm45nua032vlw6u02h3coronfp0kna2etfy7v2jrbm92aftjcisih2qvzvo6kc9r3aha0wzlb21qyuk3dkveda7ik',
-                expiredAccessToken: 8160765068,
-                expiredRefreshToken: 4068059112,
-                isActive: true,
+                id: '6eed1c38-d161-4ee6-bafa-5c2ccf6187a4',
+                grantType: 'AUTHORIZATION_CODE',
+                name: 'bmnt6b3i1ih57o2iv43kvg4jsmlon3qw8wi9jycc5tji4t5235d1awg9uztg111szo2txoyd9pnc2h5dral9fshpduysmlx8g68yuw93u0d7mczaas4tfbz7ifmm0vcaraqk3goimb0sylv0y1fr35h59v9iulqwgruxgflwt0uhgjdavz86920z2947socqbdqk7vw2raopd52i0kuex537ydzr7klt4ds47iu9m5tut393kmincl7mfg12pxb',
+                secret: 'pd18nswqzey8rob0svvng9j49ipmgiaueajdd88upmu6bh5it9frz2wjj21sajqozwura4jzrp25tk5xtc34s4innx',
+                authUrl: '642pcgl3qepdggm70csdplxvmevxz1r2zyy1dnq0ypf7gh2pxj217vtarpostplux7wy9v7x9u5rjmq8ub3q93ngskf5umoxccm9t4tn7v0utr2nd7xyu6p4377ur7ceu20jenhvmpwhg6dz0wcy35uedhius5pt2zi85cs8z3bay2lygmultzxa2iqceu0u7ty5rptug41bj2kkh5jjq791j859x60o37czev32hizn8szv0xangim75m12pppa2cp7x5kk9ananv17kr3xyf4nev0kegwcm1fvb1bixx656m147xnzzfvj8u6u05wem5wrnnfp8goqg9anyp5zpnr5xc02z8nm5kqhmntdgptmwghlnprdsixma07989zzgzym2cfju24pfg5uomqylaoyc5v7l5td30hxfke5f9iz4k8ljrvmjznwx8voj0do8brlhzebfvoei9waxlg5ij7ap6nogoqmhl3i2lkhb0rg7ex1gic1o219h3w66wbwbhmozwvh39750wj7bbci245puzktmsam6p7ja14tqtrvblxhank4cvert9jtzflpzemifb0tcn1j36t5y3bimcp1mih4ow6bc9i1y193ajvx5x0nncbot8d00dwqaqnsaopdr1cp7c3qpk0cz748fyo0zfo2h59bk42dco4wllne4y2dk6ppf5szcfmnb6plx3vqoc37pmrqpovc4r0lsvgagn7ltyr2dje5yjsumkvogxsbsfss5qq4dni4m77h9q0vfhuf1ne9jekkb61z0zc8w3qoq6x03gjob6wqg7wbk862r4uf8vx3gqyhyl5ga11ev29ijfzog60w947revnu7hvr4z7ekq4ptb6s60pg6bjarey1gehkxvqbhxacw5nwhrsk2rkzkjxj8km4ql7jd410qa6cm330ttsgfwtozrjjodxjpjnesgazqywa30dptsto6u3sp9mgcgxrky7abi69n7hpy4n4gacc2qlzl7wbdwm1z5di7zr9nh5nxu96el1fsv57eu6pa622mmczx0684riyxn3aqe37nir1our1u3p1ulrq5ll4092fxe2r596hwtnw4uios0bwr8kriwwlaxdei1iq8yqdrkzma9regou0v3tltml8p5ql8sd62rqscztwuygioxswhw6odaa369upcbbaw6hpbsd0pequk2v7hi1anio1x8m5slz5g81j7npozn5qcd6jssq3phfzsy6llxtnnxvrmug086ivjrat5pq8chkx70lug3k0i2ap2r3ejrm6kgrgepvbam3sbuu1g2r03g3m8gkcf2vhkib8p56vbjxwf0qx6vd6c036o7136wa3pkzpd75g7ncg4h0vifcoghxmhz1xngwbg28t1qzoxp5zkmce41uzzhpwsatwk0xgp4ynp6rh5i1fij3aqq4lne4zfrfbvmrxqm2gutktria5m8xw5gvxz9bwly882gd8ofwwie6me0sraktjwcfypnpf148860popsdfun5p0fzzekndwl4zzf0wxlgfqzgfmgzztkk6g4oo3bbmtnfqpnpfmfq9i927w8te2u79zjgu7dlc0oly3isqpzdk2x97tjwin9c45psly83tqgua83grsc1bqe7ip8i1o1ib22gkajg9opkcbqv9tpzjko8eoi79rd9sbvzgc9y4kdmxqxebmj1b5fkc0j3cw95t0j8gtor5pr8fuqz9xbfcxuffhgigf3cu2fhb2ob7rc6s9vd2klp3rstuvodqxpqzt8hzqrra9ulnfmfejyzlzeull1wbdqs52af5suly3n2j12jbrpxj43vb0otvotzajibu0g9ulvdk971nsnsp22ghzcaj3ivvib95ae81mn1kdtpm4434f1jhszvecrcg4zbaf1qxhj65bxbawcwdpznl5duvg5qi4ffbcwn9yqrnkqxewbhuvxzekj91783poyg6u9pbvfhwvzbr6wbdf4q2agk4s1pargxh6sj19a07y0a4048fareqen3c1nukp4b6fv8w',
+                redirect: 'is2cynr1uv1qn2blgx0xsk49uzqfqqnevz80wg1h9g51wha2d0sehev7ahofup9nmlye9ru6j1yp5w27mcdzaea6sbk710dx9bmp475bpva54btsqbe7zd0m0as65gvfcdc70sivkham75y3k887d4uhh9oeolvd01qc96kfpxk4qzlth36ga44raraoyixu7e119uw242uzihmcao0yne6ytyn97k9vaswiuqjahmxdqfpu5m111gc0ax3ksqugenzyei5dnpppl9ckfrhofsf6qkrbatwd4qyxrn6q92h3evx7glrve05nx1skmb83vgo9k30qpwcsjw2xiswl0l51es7fp9uqht4qxpa83v8gggdpd9uaocl6lx71iua08wvzlz2qnr8sgt897r3krigryt1n1fbwoke1sxwyougi6nmbo66shf8qrw9nakiyf41kr40ldo5lmas3kg3fuv4bxuukgtcc8czirxekzfk8iej7mwomyw5igxpi9nq5by1qtfqlnes1y70pal6c4riq3pucea9c9a5bm2vi3eq16w5evc4huq74olg7xdazt6j0qh8400yr5iwlwqdo2py1rrho2frkhebirapdz0uoih74la0b1a1ru7ww3fsbgnvh8b6ajh2xclijd18n9q15jfma68t25dk1zh9bexb5kf1yk946ohuzaaz2qxdvr64w9oh508vppj9z0ueb6s3tp9sfugppbwtznpcq9eig4zf60crgotf73ekgyfmexyl3z7vnypo1wj57ftikey9pqpkelvddsr6qqzb24rvcbq2qnqmfp7vmzdwmmszby2k9xyl1zwio6kpbcfx1ddrk8nrxwhw5cykink4k2lwaq4dlelhe8hzuxn1vzd2ycxj2lw3pv69xjrb2sw3zcin0pczidb7ym92j8yimhlc8s5fnwp024ik46chnwzlqj4x20n2436ecel1x6yygtslb5ra62zqxisth3cpiacinpyrf68l8d4ma39h8008rm90dc23jxp48dduibbffswwpdq202fc6hx8lf2qeo4a68f4q6flx9yi6mp8k3tn8r8wpx0123k0zocrh63utaq0y0f09ciyy0tc8pizwv5hxa7trbw305nfbhqnmrftqx62hgb050nmlcd1ny2hnz1k4pfqp56vjp7d6h2e6yu6rmhwe6nindky8x3ivldyvgwrntq1c6pwdo6cxcfmjwzdyomfie21odjcs4mi4twudvstqb1vp3hfzbvy7qbf6q8thrltfv9787bs7pv3fum2eimngvhwi9ge3onpk3w25wwpzp2t49jvjmspbzc9dm5mm8k4dgbk22dkcqdqj6homb7j697nroizpqrwkfbu21xeh7d5mpskhjyi2wkqfdyyxepbtc0s7f1ij8h98o4c79n694dlbjjbt7qvd8v2mgb12qby09iilso8h6bhunsf0harn28vuhsnxghsst1q6u9ro8wwpgwjbqnq7xsd5o522hakcsfw9jwfth2gl6s5c5ju9gg5j5cy2boe7ic2bgm1aknm6y4g7v67nnxhpyb74z07tlh82w5jgsirqglcfhdziq9l47maxhwycpywgyd7r9g1k9iwwa9a52ckr292wpjwx26u5gapa7etzpperavkvi3g02dgsps6asghvzk023r49399z08k59imtljitryp4jxt65umi9qzw0rz86876w536zz8cqp5s9nnyizpajghpjcwh67j56pdtblpx2pc7jfyj6mnk27amripa1wii9vdtbpt9bot4pe86l884iuv4117552xmrgfy4v6lht7izeogth7l7hcha267l2quvgjv86dpkja493t8bcrn6r4oweavwh9t9qb4zp9n6l3o9mds8yynlxdt8d8bwl5p2dgeuht7mtbvc4ohn6k2qd6hs2pfk75ii0l1xl005gthaeynxtuqvc08onpf78e8kkzpvu3fv161elvy5ypeu09y94qd520ipc8upugmjbu398ic4m3q72qit',
+                expiredAccessToken: 8425491973,
+                expiredRefreshToken: 4316041337,
+                isActive: false,
                 isMaster: true,
                 applicationIds: [],
             })
@@ -461,23 +489,24 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientRedirect is too large, has a maximum length of 2048');
             });
     });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredAccessToken is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredAccessToken is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'PASSWORD',
-                name: 'z4r61fat0iliweyhprahwlxn1wqe92xfjfuxeacu4sdncdvydawadkv5lg2yv2i2xfa9glruvxpl5dt8zyinrxbjsaf9ejk4dkzmopiweku4xi2pnmgimcfbjdr47zy00vhuvf3ijpj84ff6kk5qrbgcjskkw1p8iz8mymgsbqgeu3ocjxol436kbygudpway0n9fmp5th22ypyim57ek94jsdnye2bp7gpo1jvrb10h4fdfxtjjavxo9ckvxnz',
-                secret: 'qggzouryp6i9rgahtarjdm3mjpgklt5dqdsgugh7mtdtu2bhfkigrdv9xe4op3oqytb6zt85n7y8734od5xmyh50uf',
-                authUrl: 'mn4c07d0xu2iz1rgzzz7e1qb4dpx209af6o7xaa6w19rqv3n0m4m1ea6qopjhgmu9biwp1kjixw3g57o79dmzrpcb1rxjriylt24bk3r6727hof5vgep68dsysb3frtz40w69jnyst5aff5l4zx3vt5glukiqjpsyhxoziyc337oywm0jlxsrqwgufjpqurpod5gljn88mj8pfjlo6dq31ujutf1ww79l10n4m4e9zcrc59lhy6n3frqsdgarmu7b8me1wdwo855d0bx7j939rc6kykb2gvf8vpgp050gairm71s6p9wabhswk8kf4pxgtqje0z4ce4ou57pkbv8pg8j2mbcwsa5ozblf8crq2fbxm1iugebimsy2384m4gswduaqppmqiopbxk3lnqrhotcfq63rluc047fxbn5hckejikqyq6cyqjl4q1z6i6uvrb4ccjyk3t7eglze1tluqne9hprr4ak3ew5avtsw7pdaiu1vwk932snpcu3g1jzisx7lspsrl4mam72c23i0103r1agsjvye1ddwu773mtugrbvhyk631c02k79bqu1feb7svtaun4ic8xioe8rpqnjiork6xq4ag1coikfcjazww3qjjy52w4timarhm5drkz3d5rxc3cj8ckxa1wn2h4dg9r6ez0klvbl50jy2szrl664lm8wc4lvk87vi9u8piqbcldbbn9589cx7nwdgk8qoaxnbe7qijsjlf2pillgbr3s9zhqzx36cpstrz5ej3utrayhz2vxnjloxjoojyjbuiawa9ip4sbb4ds7wa3kpy9gkl7n0tac3h7top2ct5hiho9h8ch9r7q160i7yif4evt4xmhm85m18gozifgzz912gld210e4pcx4fpmpyvzp05o55jh2yjapddr9qzx4ftvfe1u4jtp8ixijx4t8kiuo5oh47sdht7sjth3ewk00f2j22fkttt7wl7dzduc37d6fjycfvjaxvjm55xz5gpl2b1zbz4p4098nxsk83xrjnwleyysg008cwxb2z6sggtyr5vwanlkn7w7d45mgsji221d9cr5s2abelyzcc7ugbglte6x11y7z7rq5ki10f9s7qxpsz75nrs7g24e60ciwgw30049u3wwnvchulmjwu4189c4x4shioc27wj59hpv2y58w0rpbf8ku2w2zaps95jfba8bw0q1axqawqxl4xinyj017a65bfbt22s0bqr7tjzex1ma19q44txvx0m5d75nnyfhkw7n3fa3g3i0i4tuey4q4ift3kkozbueluca5btw2hzu2e9bwaaewlekjapxf1ynd0r84rcoadrtrc9jm334j11e4ohfnynoemfrfuli1cg30zs1telq2ds8xt5cnu01rec09yl39vsip3pggnjxsq7m39dabi2jze9btqvp7u3xeuv4e3hkcae2yaspswn2odc9bd2sw5xjmajujoygg9451kwje54m7sh5o8xlrc1izqb42bau0rwyuu5ruy2mu1h9atdnuf5rpbo2lsc11x4bkjzq29kukhp7n4alpz67rp0i05gd5bohb2t8enmfuhbx7dmpqfudc4py0wpnxpik64a8zgw5fxqflui14y56p0x6hdvkcc7izkg96agfwgwac5imijzgl46fwwlxwv0pmnnycr25enlurk6rulyito3pdn0ps26c4t7gxdklfi0mc87dkib5cbb2grg3jrpd4dy2ls9mm7ebcpacdgcs3lpz8bd7ozh5nelovajaol6k05pi1eoxh828efj0hhrp39ir4pnqqso2rofj8ir0tzmayhnk1q9ltfs04s6qy8nzhviyj0srjxzn4u81dmu9x6etp7i1p0kifmnlj4s91cn4w3kmqtk02bmnirmulwfeq628ylwwhitwmbqhc6r2ao40cvkzizmktn43m0eybxwg2zsnfdjcfc92dqfgdaml8kkav9hqyu8xt440s40kufm95ezdw1tii1v616shrb28sn1t98zrx7t5xgeki0mun3w1l',
-                redirect: 'esftcvxnvdb6b0dfvx687ltvqg477s6cpbw3ht10yw3r07m3slexuqs1wfuvx8w7zietw4jbmpxdm1jykk8a5zr96kn75ml51kvao09udnf8f8fa2u0z7v1x0wppmla510w3765lra3pva94gbnrigm61sgpev5qo55lgajhqtj56lbgxihnm8fkxph5pd0z3cvjwwnknixmxe2dk0ygis9ifyxxoqs2g3cfoer4hcs46z93lvzlme4562re3r6xdikv474umf0b2ukao7h9xz94h5zgis4lvrw8ue44yir79e4fh4evl47noe82begohtr9ysjc7g5iu8uclup5xpnt9vvwhg0xzxd5gle33ayw0m5ts8mae7okskutmwvdoil7mja3iagk017l98tz9krbw0ogiupyqm5ufbm2fkjko8bf7p3zny4x66ax9woujf3am4540yq50dnrsxvzrmsjg30jny7c1kp1vdl2rgwfw6pht0nvkh88ynsvy2tpowg02jo5wnr1m9rpvut035osmb8rwe546d9itb5ce7xlg1qgnrw2q4fi83ug2c9nwmtxweei4jruxb8qz5uy9ohlsjgy5hv6vwph6zgu4yva48zbekjarfj51xiy9i6a9jznoabbxnwxxao9l4q25q41j7p7fc3ennu5j38j5lnj6ln4omko50sksu1v9bj9bgmqx67m0mrmx4qp88funnnqo90jfhpnavbsteo4gze0rhbnci9gspyj7aavda77nbthz0md355n1mcqt1j8zkl8o6xlig7s6ux2yr108879j1jvqd7ghokorwdg2y73g9y42rsrc8grkuudwx8g3dnkap7x08ipi2ir9fx5ocay7ikhu5ldjcix5joxwvhtfune5qnubhz9dbvj4qr4x5tpn3funntkyoncuklnk8xsz8n8gn94n0tuuxupfc8o9ahmp1al1q0mwrr623k93311lbdm12tdl0jksxvy19eliil4mizpdtznj6zrx86n69njuf7gpceav2c718h7xlw7wulhsrw4dh6jyde6exqkqwu90wgqjaory1h5tk1rbquyq29s1mmwnv7t8xu0x5l3a8ho4dmy1ymd8vm0o0x01nfdwjwoew6jqmhpxbmipv2fzlz8on3u2fwg6ijvr48ozahq8pfrmi5wg37cmftw2z9iew0wliujayivwwtvcubohc7bglrsreeair66so96jd2uix2zkchueljskyqw69bee085ldlgznl8k354aln1nw3cn41rz26mczc4qb912sfptgkwqv8wu2o8q5oa8nc5ar0z2u14x4fal4ezs4pd8bu99ud07i04f7d19rhxhm5go4si7lj7q472w624l7bjcfeh47ugy4syxm9f5dr9jjuzlvgy0lw37r3gkmtmdicmncbz826avm9s8cq4h3wwtwm5o6dg63bux0pm477zwfquokxyuiqntqhtc9dkp4u6tw760hl3puc14baa0ag4wxh6mz4zvrqz3wv9c8pyf1dv2u4h1hovyaf0usfqcokjzpfbpq49cngwwi2olxwgl0yxul652cmegw67biev6nzshsoe7kzw6bm04bfj2cweej2z0jy343vmaqmnthy4i4pcdnl31w38eqdl4wpewjcsd6vi38rsv8p0rl85lykftvnd63drpj2r6ltjrqs47vixfxb4c03vdmcw90zetjryr32hhm6kqvcfjxv0361trsrf0sy0jgtmria507drlx8cbz25fnx5f2hmyh02g6kvy4asm5amzor4v47yvrj44cdne0bg6hobrnrd9777pfvp299y0duo7h0qzb5o3eyaw3ux7pg83ioqh9ewl6sfzenxoq4vyvhnx0vrazk0o4dcs8r6c9t3tuccebccm89dlclbnpeh8a9attuoevynlendz0crtf5malj05c7pmz7enehydlvw35cjvjf1o9qf809jg362jgo73dllp41zzsid8qfqf06ia9qminhs7q5pj1kbpb8xupv8',
-                expiredAccessToken: 54670564584,
-                expiredRefreshToken: 6414445052,
+                id: 'd5631795-2bdf-476d-8f55-a4c33a5968e9',
+                grantType: 'CLIENT_CREDENTIALS',
+                name: '3fr24f3hi4w7kvvq7ifswnttnovuatyju09tnfzoy8obt8kjerenzujeodqtba6haci9312rmjjdpvin3f7x5fxichwb9l9b9ld6qdrtwrppk7lpe7br6rao2lzjfwo0gb73h4dnyppldn8jbydz01r4xancwavp8v0eoz7ddjxr1n6da2sfkoqmun1o8ylo1fak0r7bm3lym1sq0enczly05jn9w99l2j35lzsmex24joavghaaa7ck4utqoon',
+                secret: '9c9hw5sxoqrf8jexko1pxxxlgjzo672362m2jkqsvmbyhpuboevlk49aearwxhhs2xqi283a1h509qyc8l0cftx2pb',
+                authUrl: 'a3jxng6vo42f69im2ryoof9vhi2phdu4w36v73rzvvsfsen59klqniklpjt5wja9ji5xyjr6pv3ezam8vjs5w2pvbga77rou18yy745u8qm4gch2lszfad9zl3hgwyv1rabifcgg0g8u01g0v44owwh0gzdjjzrv2y9oviyfqayvrtwbmqvdwwhe2r4e41u8guj8db9yinaotco3svvdd6hftijbg995qdbcyantg63kmxf7ftigohhaq7tj4jcpllcgc0dkaq4ypm6bec646bn0ipjqgixqnk783gdb25dmc21uezynpbjtx6utn8vcjok27imc9z2mmldza5v2o9l0c74gplcy08qk0kmwi1e6qo0ckqyc3ixi5hibugrxbk8ym2y2497vze0cvwjkqdf2s8l1coc3dct13nimx1gem9ufkoiz4plq33pmscul53y3i9oz6vec3moy1mvrs7bhi9h89olvy0cgcpyw216cwc0lm86prtalqmoe483eajjr2yut1dyx059w3w36sks6480wknwv2makwyg2ksld2g0c35x6ks4h0eu3rd8xv3yp5qhfizniil2d60hd0ahr3bvkmvag24ddotwwre2se4bp93zduhoqwjjo4ys4qctae3dipzkfef8m83fal9hic2vxfv77e0wwjgcktz0b2g8ippl275vxw2fg4n9w8quhqynfv5l113ya12cbu8gt054h5hvoj2qpll4w2yryxiacy7kfhxqq08h0a1n1z8cpfocmvf4rj39nxvn5s2ne5efnf3mkcn7o2pt68b6ewtu6rgyo8fpy1lm8qpjesuke6cr2aqnco22lmiu23bpmfgpurgyo1omal8dmcb2lmuq0fqmm71qb4444odgwsn2oojiqntnvn8whkrqgexgoy8dgplc7tkrgehdnr3sn0qdaj7iir3b7agrvgka4wm65gc8vafv8u0vo2ikmumcyj112tj4cm6wf7b95debbz6kkj6v3yrc18yjc9b8j5gkjrapntw8stjvcdc5ui71tjx80o8k1p4vot225amfr9lguopgqbilxy67ypwrulvopuigc379asyt1jjty4bv1jbhnh1oi13lxrr9bl7edp8y4si5e5qbscnqb4emdufubvopupv18xv7cil577xs2nv2ykfn49xw1z2eewcbz5jolo610x20b13x41usmdpurnnadgnqi3k47vdcx2vz2myecvwniomkbw5dacue91cqrkv07m3vhjuiy4jh4nkh0qocww12mnxg96sye0qoi0qwgfibxqywqix5wzn6a8me5uqenx9pju5lk0rp6713ekfk2smoi6zflor9rzy97nw66nad8e5pzdh7owhcr7ulqfjk8qa6e8zi3ou3oygmijitdkgh1ghxqc35v13xsz2d8xugjkw1k38cokrhuh5ah8fwshq95meri3hj73gtdav6kzlm60qvl8yo5p0ysa8y9zwlm2c5ot6y0okxv1mtx3f4lde61jaugw1crafjoman2hoz8ksswkpnq22x667ty4a1h1utfphb5028zwl6ojaa5jrzwrzy9yjpoj4fry36wfqxn1pjeotve4bzvcarfj89598ydk4319ml0ysrcjd13449lqcc64tv765mdpwv2c57zhq9udbywt4crzdbeb3h7bv76kd826qcsjt1e9mrrxdq4a8xbl0qsg1g97hars4kmga3rjag9mkud0k243athfknaij3y4ek6y0b0xm7i8dn9minsbqgwb791l7h3a3lkigo3lh3iub2zj7lws74f2b5pny1du7c370egw0af6irhenzcr2ty97rlbph8ovtr0j4prk3z3z43k4x8lrtvwohubb21icoznltfigb5485k7lsjh6ow45sekogf1hl7h0wlax66ghy6yejemowmbvba42krlb3owmvl3u26qqq50eidyp4w8v8ogc7mpwsdexe40fahcn3a5ebseogt3kq1z1nfxbnns67z2pa7hda4js5vy4zp',
+                redirect: '1a1pw3rnbytdtbzcr24jzx2p59ryf3lmvhtzkrfcgjnr64qizklee3b4y79m6iqszy12ef57ndchmlz4p886xhs1wzblr5mqacagnewrfihq00bffqvy7xngd8ortyqpy8nxwo8jdfh58woo3cl8j25il78z1yrpifbbdju3pa6p79mo9dcous6rsguu167kuzob7acmk6hezqvlx9ey1baq55jkvc85850poryyhrp2nnmuvl2qepcezkd05xxgldtq7p58d6tjligywjf44aacb3fjzy3n60nbro4obbqf8fwnleis8dk7esh714ynj3rrzagyyx59ckfaufvk04xozcv1o9vf4z41a81n0dbmugnxueb5mvke9mx15vvbpo8cswc84lwdl2775syjljcf4gbxqplmlu2uk7pfn16nmxuvgi1c14c20ejgxjid98an0ie7ngxw26adw8bzlknquotr24pyyrjyr8zoqrqa258frcu7y8tvzq2ouxzmcgepxsfcdqh26ty0w6wencdg90m3d6awk2jak2cqgi4kl3476buo6xbcrhxtle5twgttlgjg9nv9humalxksjm8rikydc1em6a4it7hqrhtqlr4s4nmsuwcoyb4gw0eoxuf6lekiq4vfzirjtso15m0c3wpykwrxcikpv4a5cw4p4akc8zake2sg7y96as0v8p3865s6bs2gfxywivsyt6lmkfq6v6nz04gr4ugo115vppaybfs579ankt62mvwyumf3tl4bqxuduzqxbx9ty9zp5rl5a4xkwt5pswu8s9xczugy373xf1ehldh8n8yvfpd3spy1i2a78jcpvnvrzl76005rv222odi7xb1i1wicsjv0n75tqrofi0qemsgo3y3ya4qm90uo79b10a5m7eon8dsq7a1w3cahhne9jzcw9474xy13iwnw3by945swsqor6041y5m0ivubdle8340nssg4xgamzrupb0s1ykmmowfsmvn4pm61zh51li1s50eg3mvaamxn0ivbglhquduypczap7og8vmjdbh6ok8w3iv7hxznrk5jyp074n37tn8b954oe0pyi20qrkwqmuxy8sjj0ohpmi003v550t6gflfrqpkvmj1i4wiba5w3o74nl1jv474o9tllvj0jp35yahivvad3fhm038s3qcglhcche7dp6khv9v5tmo2g7xxz8l0mz224csbrx0qldvwn8b0h99a6tkkz99phyg0747qi8o5c79940sytqs4xhpzr5vsuhy6gw1eqb8mssf4x8z6iw2qyfonmy6wprojm2x1q1eoj4iw5fcin7thpthe4ww63jz6c2vjiqqr0q8168ogzrz1vt97v2g0t9yrlcxnc0py6gedsyn6exmco8zbmicjyw1a3pfj5zktec0qfamj3d1le3zxzhd4soznkj4ol9oksn7iwm5w017hw1py86rcvfjtldxa2yrkztt5ig87i0s092150x41op75n9vmnze3qqviqe21fg1gjdw02ryrsvadi1z7vdrpvvoib3uimyliz74iwhwtb1c629vi99nm5ar51q1gv0vraql4mg36bhc84e4o91m1arkxiaztic2gsxw2l8bgpdj2im8bd1npj7e62z8htl9vu1koogbikc069btladogk021bljacbm2to6u1xprqqzbk8smgvoesun4l45e572t208n6970872viocdjfzu6tnfmf9oabtdeh0br3eleyk3zj6ukvwkolfg4qhe542ucrh4wjinx2ejif210ucklr9kzsd2vyyeljurn56ozpjl1q8xttdqsufp5ifrbhqdklilfazktu0uq6xqqlxtqbh23dyokqcur6nb6syz9f9mk3tn3f3kejyuyda30zofzgjsksirc9t4znlmeduypxnx9aq4s09ieeth3lbo9di29t6c6bakkd0x2w3tyoidwx26fgyc82fs2iei23l59hw1k6e0hwrgzc29j8ijqxeb3mkvdg733ojkw7xybrhny',
+                expiredAccessToken: 77318036867,
+                expiredRefreshToken: 8124410111,
                 isActive: true,
-                isMaster: true,
+                isMaster: false,
                 applicationIds: [],
             })
             .expect(400)
@@ -485,23 +514,24 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientExpiredAccessToken is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredRefreshToken is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredRefreshToken is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'AUTHORIZATION_CODE',
-                name: 'kwl8pq18gb2ehhc0qvzbparcvwiu1pjhbhgwhe0pyliojyyymnsaszpmfns5ba64fnlzufy9jmdmjfakhwm5bkiwhw1r6gxceqpgsuyo4oppamyt7bb5eq9ehfxma23r11dw4p5vw2l9ahyiijkut0zsoz418g3m86oxbdybbvidyg924p4xn4snhpkvhf9ilvg39re9749wwuajiytyqnlbgli4dky6bkljfyb450nkoo1lmw2y0464csl5886',
-                secret: '3b9e7kwe321053rse9v8sbyfrcjasia0kvk8cpyn6ejzue545y10biyaf8lizxugf8v21p8ae4s2zz8vw6tiz1qy0b',
-                authUrl: 'eozinnbwhtdn3uhqd83fvdaaob7c6ll9m5kxq2rc2c9044go741f4x8g5xqoi6s3z2e9pstgx0of53uyovh4a95g4owq4s9bamhkfaetx3emyb4maxh88imjrcqtaihza4w3rsoapjcgn5thsilii31khd0lxabprrnfqlwgs6iye3vmuywxvhk7h0p4ezthiu8hs79ew9qzzblud0xjufr5evdonjv2risvf31sx17zta5s5icsgjqid5es0two0rvulw35rkojg0f6tidr1gzr8vc5muh42hdkd0i3ynfbk4e5pyadrwck121ndog8x1p0clz484z1mts323k0ld5l0q9skujg9fxj4dy50qef88nimsce8e4k07z66p09c8q8l1tcs08pa5rf4zkw76p2bdyqdm8ty6yjppsx0zat909942wm7nluh57fm7ccbe1fflxdk3g5dp8kg96i7npmtkg39due5xw6zh4m1r29qf5jbjwpdclj7uiru41wvjkmuvcgozllbgubb1anhwhqusrwdu7alhb2tvnt5d17lcnq437lpixuxevzh8hy0tn620dyw57m8drw53po765bxfzj1wqsz3f7ktuo7metx0rj0bxp5gg1618uz1k59muj7umu1rur7sjhxdjv0o4cg5i0shklya6g3b1o9g2blmr4p371fuhg867e7y0ofv7ag7224morapfilqf8ui3u4aacnopn86h9qlysm708v8h29gel2obnulmlgesofx5t7v26zdgicalqrjme5b7ra58801mn4sf2yj8lhdvwv5sawjiaecghlhg2cacpvebvhwgfteuq21is9hf078ge3me4ccu0pfmli3ll1ws8bo4bs6lj5ewa7n6wxbbf28kg43d5chjxvmxy1n5gdmnum8dstx7rmt0o00hutdb3ilgk9knb1i9rkwdrtayt10x23jdye9kwurd8skd1fwhx7v03p9l2deo8bgkfdhpgr5149wesh8o8q5je8q6uf8781qy4o283r6h926nw1etjhghguy0cu7g1e1jnmca7b45l93alvz3no4tu47dyuklla4utzrqksc3ixee0qhkzsxry03cjg5193jq0um7pioglaughrgspd4nvkzzeo5hfod88prz1busrw3ple2rya24eq61hnkpsr8y9da58nxdf47mt8vlycd5bod0z3oa74wfu3w3yv3mjpwahgejf9gh5eumxe69wap0wwbrvipzdvq0rsicur3ww3v437bkix6h7mde6r694rsnjzfnnzeorddd07g0z8s2ebjobzpi5mlbxfozqtbm0q4trv6mgvtqylbx9d0llqdra974qi3gjmvaft6dzokrftt3rowmvb4oe23pur586f5ieqz0ndmmklvordfnpnuk3j48c2wkcb8ixwq90uhriz4o41vug0831c5951xijxjsvs2id1b52a8w2vmsvuogd9l8wwhr5oyu7ucjdum7vfaq8u2ex6vq9v5y2fmm5pj8duku0x32591z1smu3d4n2k3yp2g0v7t7lqlmq9d2uc3kkzntndjuxm1utuo6dawcpsuvjyd0y72mtqfik4c1y1yamgx41kgmn4qr4h2xbkn2wmfve95eel5m7slusvzwropqpbrkgs6t6zu0c38ms02xepfxyzsexmyp1eiiv2m21eevlng2czkgeg4cncz8whzljwttxov2ih7pder2zh6we0mg0jps7jnwni5tsob693njszi5mosbnm970wf3v3xljl72nr55tdz7402ueh5k3l2yer9xwi1vw9kclpvhj6cz702qhsiyhkkeknx69u1919vibz8541w714t5zam3563zkk897jzd517glvrjrkie0dtavvd8egh9jzhf2hn1uh5v1ykuv5udsdhoipx3rw3ktnakq02dvm8nml701tmjh80vgb5uc82cenqsdrspd4jdgxk9u09xyabrxaqu83xlsbp6b02570fz6lvi1wxnjcmld0zkol4z937l0',
-                redirect: 'i4lulsudp9etb8za1y0kpupje32ib9d4aemwu2j0xcjbsc66d6b2ag34fo6p1acse3oerjcl9o52pst47edd92qad4rwjt1q253s8mxjbpoyip1vlp37wvnxdy6lxntjopjwjti0drb3k4nwqzc6oupd9vq2cma62noy3njnd815rdtk1o4hzmr26b1cvm8ygijdzugwrnplx1atgmsaqvc1gr1gk43gtj7h3v3tya0fnitxwe57kib4fckn4jksrkv7l3jrk011ihrcyav1l75i9nz8z79d49utw5eg46anx4z1jnmxwtu9usa8p55zmxn56t3g27dvqp6hkt7yympjqws6ydo22nd78haeyhv56cu3t2q8vf86b1emhdsfcln27bbe6x9nqv79lh79g1w514e4sdyl4em9obqu7j2i0ufvsjssqzsc3e5mxdwxnya6v6816d2ql1brzeirnq1y7zmmrcf8u5gyx10kymf1wxprd1phcekcmvtveyrowu0gfy8sdxlqfxlrcgrl71n724s9dziaapgvvbhdh9yh3lj7niq5fehfcugcliy3ovwg1t10mu6cmqp7tscdi70gh8084qrb8rxim43kskwskxzi8yegdhy5hdfxct9fdsb49qvntwf84d8a3aeq41wvlrn7ksjvy1epoj7klb142p4ms37hdgd1y2wr7r7yupcarixcyooc7h9s79mkq32nz13xi678xgh48k2evfjzdlozbxnb6aeezb0s0eultjterq0qy0m6xv2jg2cdxji5k4af08eq9epmn3pjluxxprbanvtjgfu42cvctwi2966qoiy0nygd5lfrtk0hkp4dmq3s03nu6tzaqpj9eygq2shf7tkdjmcyvwz9tw0q44tvvhv8avdgxd37r87yxjw09axq2pun4hte70fr1jy97qppanlto40uzd0ens68xsrj615mgg2s6sa0uepdrf0tuuis6bha785yemmqjheiyti9tlcpi63ieb7j9z31r3ikfz8jxna90ngkqcy5n7iiwbvdmigauhcpoij9ufyrgabsj1d5vzbgbhox8iv6vqtd5mrckrdq9z181scz22sf3ajwlf0f1zaa0evktp7b14ukm9isz41k1ham0y9vtbun01r1tq4ug2pdfm3ehhj099r2gjb5zsnzrdazgg1bpxki9fzs9co6ii1xjcr0c6rj8knfrl7y7ygofcx7mqkgmf1mhw3e342jrul1ijw07jojgdyuyi34eha6rqb58g0ndao8ll2w2blve33l52m4mvtr2wqe5ii3w8wc21gx730lacwcmcgj8as2y5n9frme62h1cscikmn7deseth2qc30am6og4i6vj5y4dr1dg2uf5kydls823y6g9m99oxymyj2kzjk9jaoekgt5ic70rp7ygdn0nwsrp9oyt9001m903juuacqw34jkchmtvva0lxl8li5el9d1m0gzty2ghzok9rgqx8cd66el4ex2ahaqw9pj658azdx4x9tf0cho84mfb4rzyy4kgksh8bxo6c6crr9vzipi81d9tviabz459jqs2dsn05z9w1a1mhx6rzv0qf26i0qjsk2vxogy9omiio0ipmr86rkklqy3pesky6xbzj1r7f7hbca3azzzvsjyhne04ydm9vrvo9oakusyqjnzhrvr80ploda3i0bh29kyi33r3rr6kk0ho7lez5c4eb3l3xqukprrtu59ibh7fncl4jl790iefgs3lhdiw9bb1z1b81dzom7cjjvdfq4i8mdvw8ovupy9bb8l0nez6yxbtsc917146z2hybky4efa0sr03em4s7166vdln902jipb8clplticnsakbt7wn49fr2tr2psl7987vdbm8r8wcrzeys64e52e6vmhvg874cbvcrz0yc5nrcvndrphg9om8sekjnd5uj2ul8tf7akkf00aejpyh8pr9zjg07lc08kj56h4fm64he0uj8dq0ugl2eyn4aju7xln7gjhmnnkfvo5ueiaup9e',
-                expiredAccessToken: 3317712479,
-                expiredRefreshToken: 53622151956,
+                id: 'e9ab2b62-1a8d-497d-8bf9-7586075b6dd5',
+                grantType: 'CLIENT_CREDENTIALS',
+                name: '4dpgwyli627u5umpf8aq9as58qnjj1ir222h2fp9x3ienrt4yx7zwu10nybitqytfeei31ajcx4jhh7ybmmjikwq9z8bdoziii43yvznqmnegnvlt2759se5n7n1tupsn0lgb0ugg86z38u4qyhnbidfuvffz5eakef37no2qx27m1sacenx1v311v1zl2pb5v6kpe6z1gpw1ezk7e38hmbwfpegrdfkgjconhvmzgio9h1vaweikv2cg7mn3wm',
+                secret: '2vnfvodswp8xxln8wo1inv5le30eiocjibn8e4x8ahgr8t8hdkm9yal7xnbnovgpuqizk0fkwxvwnfkwgvop1cxkq9',
+                authUrl: 'z5htk2ca2dd8fu0zc3uzyv0wde98w4aurxuyu908rvvtfc5c674ckmfbib0ziayrgff61mxlwxv4sp2wo5etq3k3yqjxou2d5fxwez9817ws1bhwjkhpdbet925ty48xxh9l069ty0qyvkr3sq1soqr1asa0k0di4foqbj0s96pmiottyfaucc4hrch5hkmqo4sn2lhng6xbk3993zq8ht0tktg6rz4l8q1l389ax85ij5awb8d0l3c152uu60wfd4z2e6mnbuh06dpsmfupe9dlaiyce84n9fz3qyto0ppbwd08r1ez58v6neqqvb76ndgi2ril2zxq9sjggbu6wvwevuh2vsajpvz68yr5jdlddzluh9x2r16c00n2dte3r20gjlmtu8b8j8zie8bjzxm9bwlap4r30chp9b6wdjhgscft9ulli6mdiylgvqgmc5euz1v0qdl3p6sw7bd035ynb9w2u2rhd9s3ufoijxxl7ll4pqqy391atwchlpr2vdnwkqwd42ebjodes0nkccutjmct73obx3dxbu6lw8mrotswpu242f2t73dqou8t98qqiu7puzp5oxnaafu2sohoyuo9p886z4yd9tsnawpurkhicrb44etq8b6dv7r7dqndlowli5lt5b2h6f179fgr4omzsnc5tcmuf3dn59yeuhg34pzwrzxknsp1u2ax5pqkfvsykhgg22gs01li6lgecz1bmc82h2x5j923uv2pb6p3d0edh27w975dtm7v3ysy9nzfo49642g9tem6ty5ugx2c7zrgfz9roxbcp6rrkv39r2t28vfmzylr90htocwjb6ylqfaucacdiypso1wikzaepzy7ck9ammif7rgubmj0bht9yh5ntj6fvkz18j2kcsf6jdj2u85wytlis6knaajtfcyqk1l7os1ja6h621xvtp84swbfi1t3gwcs15y5w77027uk4fuqoqoofe0hwqesp4oc3xqic4yi1er3opw7t25d3drjo6sdxocg5gd0i7bhq5y2tkgdt5wx8zjfuca36daw9sm1h00hmx37ueo6zi7jxr4x6qfd3ju43wqpd4o1wbj3a10j4ng6opz8ay0jm2mxj3ehpj75kb2s4xrjr2rj6rdk51wmwlyn0ulc8emzgt54oh0qeyetflgxmnkkd0x12yhjtj9lixfwl3zdcp87rkymaowcbg9xhp9gm8e0112z9f2kugua1jhss0jfzja13rh3i0jmwqil4as6ce4fvxwyqpre92dkrl49yy0hczrj5ssi40n8e7qcrw516sxifost0aykznk8n9lvi31ks4mic5fwh3yjit1u12yr58uamhp7n9m92rqlgueyurthfhofzibjt5riv5266si9hi90rgn3lrodzvvyrnsc52572qz2dlh51e3mrffqo1aa6l5bi1veyy74j3mgwrjkcbih9ftt2s8n37822fqkahx81p9dauhi5wvqtkrkd9dipp3k7n6y4r4by3xvhy443xmddxk2u0e19x1bh6l5l39yb1lr7o596vffk5xayhg8296f2mos9zp7rpd26mf4fvzwffcqhikjllfpqd3f5aorl63nvol4n9ix62sqhet0t4uaz8rxxqrhjtsrvdkrid98b111q2x8wos4en7xvd7juq9bc0n05zbjyhrm6fxef9lww12jygf7bkf3xhhu2eaamupl858x6h9uqfuqtuxlk0of1pbc8k0ee8ul6k0iyqmsq6egjw1651he1b74ns4o8wdru5t264t1e7w3wh9r2e8q4847gf0w1pv57g3s2k00meicgd08l42jqwndblvfphkik4aeifm8u687m7hfm6tw51fdfu4q11tm6aqhskaa309590ig1qx90xwr2w6nrv6qvcx8tgmn1ulkpul5yhrexn7o5ye9fvdbhxyunovge1kaj4xmchzxf3l9hdyu9inr3t7l9mcl7ijbh7b45un0vspymtrvw3ioc5v19mbhr4fkgbrcop1d61k9rnwb8gyxpls8',
+                redirect: 'mzjltolb1ugewqjpid7o4fj9b9re71c6xoq8wyy4dbhk6qbo0ctf6km5ngmiu5u9uqqmddpengmgl2a3hh9ab3szvj4iw20kc1dfd5bexa59rxl7szaiuep93tcg048nivqvwlz0nen7acf2i42pmzijvy2vx2t904barg6n5vyi9mlcdgz2qjlp5n525oe1mrteudmojxu1tayq54bwrp9pm7z9awqvpc8g8dta123r4ied4lobw4oo4g29gd11c0fg7cbyd4ubl6hswxlrx0nexmks327jun4iacji583kvna3lonri8ifmzr6b35pdb3xd48gk90rok0962z6fs9hm3b24ghcubg5fjwhc54xjg2cxpz03tnrchpksb43nycigxcfsfyciuc4dm3gythmw42r5966eqv3w1lin19lk7xxmx2me2ls58bkz6bflf0a9vdw68gsifnb1iswld9wq7zhzro9znuynhvo87vrremtujmz7hagroa43vqyh5t93a4x9xblcwl1y0mhwzragpchbm3bge4n98gcrx12jazgz7frldz015ybtligkpe6mwx71lhvrczn219d83bpmbzvm4idms0cr0pkie1ub3j5wiq1bpmnqt3v9vrkgtspzyutbk2t6br40cp8sqwr7k19l8sqhulkqwebakcik9r09x02x5znt1r7l5omczwf721lzx3io2e6h6s4126l84bkqknju3h8pc12rvbu8dsvff1v7y6b6tmo0sfa2yajwkag4n9prqz5omugl2m0saq8lrj84kjqo0maiditwlnpunamucuxz6d74qcmx6fqa3wzemu4vnvyyv4s9uf2ubg2v2p20qsty49vt527scatkeil75kkarclw1i0pf8p5s5bavr0rlhj1inozh18wph8evshu0eo7lxxz85wfwaeemp2r08a3og8s6dlcg698xisvkd7u75hcvcbslxrtscogyeq16ht3ah0iojh5ztmwlxh33xd451x4oar5cbfuepk97ovmdvigi441lysfvapkj2ueyvllevmlak9kgurpfdoai0ew2jnn9u6l44y4kzx12xv6mu3mxi4im3i0sanlfevuhrpmtzx7fj4yc8nw0px8eg15jok7ludz9tsr620dfdjo1oa6hh54cn42nbuvgekry1vr2y5rx4yb9unzq8lhd3lhd9nd78il6dxv2nlz4mhoca0oymaj1dy2mrh7srn35kc5ry5awc9leh3r1pb2gc42il7h0mq8q4fk1xtisgl8k6mni39ykcvo12gsx8qathfka5wex0e8atipno1f32gjiwzmkhk1jxj4jwahmt1g0frybb2c00bshfdj5e4dia2ck8w5k417ojxsonvv391x9323ppj89n3bqkcw0qkxz9sucx4w46je5ep5qmzp1061b45bhyfftxcx8yfxlfw9tgjjixcyhtzi0cbvg2z609435v1hpezuv5scz5qx55twzdvb2njjnegey7jg842ht4gghfw3ku2qbqnggk9dn3nkbb71ztp746r9zfrpv12vm3913xt6iujxluvhjnuztvtik43yraze6nyab6k0h2vg0jgb1xqanmnj7c7hi86dd3gup6sulwle27fsgxe3py3x6zoesi6vrwur7bth3p7ew7lxmxgi958moi1xrp8w6y6rs677rf7389ni6m57qx14xfb8a04nyxmrbjcw4i5nyqqzsflcluvyaa6v2xxditqvdauv9r6jujp41nkkt7mvqmx2ap19sd8ymhnpqi4ofpnzx5dzjz59f2oq27t1id71jeb7wk8sygel11pxy6vu71um6ludu0k2puonb1eaoiqa3rikvfwnvly3ztqbszujw0qo8uudpkekdgyrw7jkesbg64eci0etnxmbb2z3ote19eknxyat3rprfri83x20l9ho0elpybwkzi9v7lfbrziz430x8v1jzwm6qdn4eizgouf191rhlpdsvicl6f9qlgnyz9gr2xenyvzn70kdfgn',
+                expiredAccessToken: 6344596167,
+                expiredRefreshToken: 19868509102,
                 isActive: false,
-                isMaster: false,
+                isMaster: true,
                 applicationIds: [],
             })
             .expect(400)
@@ -509,29 +539,24 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientExpiredRefreshToken is too large, has a maximum length of 10');
             });
     });
-    
 
-    
-
-    
-
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredAccessToken must have a positive sign`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredAccessToken must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'AUTHORIZATION_CODE',
-                name: 'xsthop5v95qrtj9t40n20uyge54yz3tzc6kobulrsq18i07xwnrnseo58ayoqcnntisvfcqmrh480r4squyuw6d3kjg7tozyhmerdihge57gwk72qgdim0ovypt0e5ctbjdry829o0fx2xwo78k9xapgacebahheofwo4um7ct9impjo95oncnsz3cyb57fy86blnzd6rszp5q1wgzyc7qh2neilndsjoxplllproz5noz61aaeheoibou5hvy5',
-                secret: 'yye6686uxlx543jeywz0b9cgn4osiaebofvbsb417pnnqanxhcnw1znartudbpb7ry3p266sri7oj88bimjhnvq80d',
-                authUrl: 'is6xrcp4su9r7axlvv2xqodavi78ka7ikkegavq9qf47pj0tt9uepvjenjqtbrofzm0qxb10p99wzkn1o2cp46i4fpjz77kkjxnbzrrnbot49bc1q1y7v5u5od5eth7u0j65nh4ektjhr0n3zu4wfn8mbuhp6ajlggcv7oebyuan3rv9ogouojfsrioiqpkq7ykyoew1fekl464s0zmlsw3dxmlj4moro9u1hxazoosi43ococlrfvr6z2621nctxfwko0l9no3zbljljtmw77q3ikqzluoa225aw9zd001xc5m2vzd9lxrrizvy3xida4c6ff006w9rphwownu2666333jql55j4fc2r26i8c10lkmza1qagtrnqoq0qdxfzdi7x9bzh06kv9gr3p3hxhlmn4y39k4ry3amv7itycttin78z3ga2nzd18nxnc97k74kauya1ou8gx9adcj44bpp2rhqmzwxpxseu2c8sef5ety91byw3h40l7tzkm4ymusosnfrvgvxdbi0ac3u6idoqu5l9kzrftr1iuddlw42gsllwpdarl58cpago19apuxwpz8cszgpg1wjbtiazyes0tbusoz1p8fndkopb0plunal7gvjus6qr0a2sd0x6cq2ebprq77tovufjqw4xvf47d3nbo9ad1b0krcqunnbxycgqm9kxtf19zshtgfqoukbdssnckpee3yf9er6arx5zxr35bx7eoo1onmcotuzhl6cv50aq6b66xxkb4viu1rrmauz5s7tm0ecpbjiaphuj6q0g39m4jaeowegtnvt5f2f6inocxevmiyb448w3vct3xgbmoem4sayrtdgxdyvgcq8bhh1args6h4d717j6b4zh8jwny2c2c84i7ptcvib0ew5xegt5qtlzzteq1elcze967xuakqri0b0a8s1ta4lyimomjibwz4fesv0yeq1nijyr8vy25crvfb4pr0d65mindkrn5kh6zzxwhvpyri80mrkvqn94arbal7a92l7qtzvk8p37f0erpt5q1zgt4tanki1niiaq4iebe8j0vb2b51hg1ds159l90u3yvu9hpsncoxy4dab1p5wvsvwp0dn2hfut2bb2gz2jy0jxf9cgdz6eb27ayyy39eg1huroqgacvtjxqg55jeeuan00pol1oh7l6lqy00hn3lp7tpc6ios94y56fp7rdmroyfcgehty9njd2rsctprg9cm4p5sf6516ar0v0x4tw5wvg1x7wkp5gt11s1noy1n1gumsomlrn4m3paqzp2wu1vdjlz6jfe236lys26c4k5rogeq2g845voworozyck0mj0m850e92vb49k808046zorab7l2liaujz2sphr2hermwfkoaa769nxxbnwxch6a72a6fgqvn8h4cw4cvj9fux4r8hltc9eiwqrbzl33kv3g2aycfbxxpkeqi45zovef8p0bea6ikcqke6otc2r66a4h8vxw4oz6jjrb6ykcp1rtabkwg42qdq2o8jx79b0rf5qvwk4pcfwz21odubbbohrjoiybls1vo0n51vxnb5drkif655193skqulezmwv2rssw3molfldqeix6ikomsfikb42eugxx2i6hyxx7xa8zoy3u7f86nl8w3h1vatyw8yn4i53q72vvnvz0hqd8n55b16uqzj5n3qbl3ijmqjvmgiqkkl0s54s2ukldfc768ucou3yzqqugxij3djlkyh9ass5z3twe4e251oym1pbqh2xsww1fahvthz7gbji9e45ryokstffm1p9o246rctslwfe2974k1s6ovz2xbhtec2g94e3p7kzzo93b7o597pwbquvhlj2nuw1aal48uq35qi2vzm8ocb1j42ll5dc0gf4q3sf4r3wwzvz73msa98ckn5qjtr7rv6aketh8e7p0j91ugdfkegwztikdybjfzdpj12o6ys7s58o3iydvt7st93at93x4mqlrileyjncdo5fdb32alu9svghaqmeqdb5xog3ddghd6j2k3ef',
-                redirect: '829740e8po6oqg8206640ptelfo2k87ichlammrm7p36yg4xfwtnlbq382zmumx0sw81uhz96nr7krw7cprvlilyyus5gecpk4bjq4hb6z58hsd7fjhiw6v1ij38kychxtaha4ekhhujy6x7piagxwcjik4iza76qg4t5xnyoh2lwcu2urir8skz6m7hxasn0zju7p57echk8xil45qj1s94vqqi8i6krmc6c85cmtt4dpr2y6oygr1alagghs16bzvqatamjd3m15xmq5qyfm86lvzbfy0oer0t5q1tvtbj9d2jim8oxczqrpho5whhl9wve2014fbb5y0mbyj89qqqefh7j7ol8c69uis86sxdcb6459z1amacdxxe7hzis1wyr7or1sl6axyzeq8q66b5pchyjzt1737nyuorjurqjwn14z2zf5fqusnqvirmnls5a27l3z83dkgkvtt8h5z3sl1x4tt5a8y706agp09mguqwatkk0evmlc1za1m52eluuhqr06fjf5aifep7zm6xt1irksr1dnd7k2s2cwc9w6cndk0lljp2kanf1tooo9tihghkeupu8jmjbe6hodzq6p31z5laxeai6vjzhn62ir8c5348pr3qmisahx887bjr87hjl4nj0ftnciq2wtpopberrhbbuxnytxk3m39f315hgjj7yheiqqalot9skd1l614nix5ihrb0dsmhisv9srjnyh8bmimmkv707tkqik8s58guiyewo9u0mcz7wum2l8nnm1e39m1ijswqa5nba4q3e5yb8r4hq4ty2t2xm2pic7fbcklq2n0tqact4oohftry6n5r4a3ghzjshh3q9x4j9g75co4smqnqgkj7215sth6ly0lsxswjfm08x338qqvpv1fnmut4xj35t4fli66p6clg64kqdg2vqv8mts5dot8mmjdzeh5eg8ctqz04t7tkxanadqvcp8yarju4w73q9g0i4t8iu17wlcfy1vfi0h7oo57gqvo3d8cbo746o1srlqgb9bg1436aeucbcr6sz7sbna32kxa8m63qzxp21ihb7o1nc8kj37h8akk8i18rrl16dxl1nqz7a1udig10cm6rqczm4d94atga6cwtptrc7q0gxlbxayvhfrbd7fm2txw03jyce98orx95cbhscc7g8zxkj6ljcg6rtb69dsdv6pm7c673clf2y2qzzoshnc6phrgvg95m3r30rfcdnmjtipslirhyap03yqqt67v2dxayh2ughyyd2lt17rcwytch0usakpf8r1z4d4vejbcf59pium7dhm73dwj4mfzrl09jiwnt56orjk7s24vfa6ej75fwhsn5batqipof8varz7p49eyuptcvyesig3ntxwpikvfsux9deolje1qr16yh0qbz78vxhbxcvzkkk756p5kmda29xdveq41n2xyyu2ub3l564j0fja5joy6h12lilyevdbf4f8k7ptjdpfsfgz1ey49xq7nb6gv2wl5s212oerp1k06kzpnejh3qlhk0vni9pfu9crrtza7iztpt64u23v64qu7ow92wunzmi4pd9qo79plnryur0db4rdgpzzjfqzpna2inynrgotimj2da9dami40f9qtr25kmstf8u7qoha1hj61n9ymm3o7bnulxi1mlnsivb03amyb7dqnx2gbkcb35l4pa3cu7ff1uy8viep95a7yv9lruaaqobwcv1yuuan1me8n3hmdj6y8oni58nhvtcshmdid5ebdgua6mw2bvu60n4a622ise7lq7dnle6uxb3qskycvu1gfkv4m1ljjnvr00w2ik1mh6ighi73u80obqf47o9l3ndy3ossnzfj1ki0h2fmzzoe0hx7mor1nd2g9lyzik205lhvu4b5v3gjnsqzoc4tuhng2rn467dzp7cb0r7tny3a9w1ookyb6w8l7nm6d0dvylnwpjziqcjnp5yz6eauv5864zpxi2l4nd1603fjd33khms3pqt82mkd27yvof1fepsoq6k6hx',
+                id: '3ac85c2b-f0d4-4f7c-ab15-b5e0b5114374',
+                grantType: 'PASSWORD',
+                name: 'q9fq4gomw5cywwfm86l10rizzvrmqp5au6r39pi2kh228g1r5g3o4xo6iaxixd9f8tj3ov05nikcxrm3d5n2vpvnuxdyuye9nxhs15rx642t2uinsarebjf3nnv5a707bc3ov1ktbyr33e3hu0uw42xo0hq9o8klfqffn4wfmgxcajtr6jhm543b6xv88du3xj60jo7nct2zj8jipdomxn08r1p6o93urnn8lrq8dvqujs5rmj7hph35zdwb83t',
+                secret: 'bns0icbqd6wrldtxy2u7vcwr55i45765fpuhcvjffveaqg0654gc2rfwf47loica3ghziqeywvuoiiiekpai74e75r',
+                authUrl: 'trk82ou2qj513ru1kobkt44bl80tle3is5puxl7siri28qgu6xylg2m29yqrx0a2btv5iulth1bo6e4gerkbg3uyx8581m6pvottk0h5uz5ypchp5dbgbi008if2thozfy7l3hb9pin1tin75j8emzzef79icw3ts8dvhg4z2bxax6wpxaennhodr62nziraihef5vtcam8h9vuow67rb3qgpo88dxyuxm0u31vb38ko73dsi18aqj9uskk7gbvjtap539wk7gz5taukcolmv6xiz6b1ix82w0suwfsh1xkzqgt35ln1xba42w99tmfcxl9zujaekih62h7s7ak4y8yesk9jat03t4sammg810kbkzdnachmiyoip0t7vwoiuxec9teqmuvjmp8v356k4al53z24h1ossu7p5mtrk5wbwvfvyjurxsvhr0akzfs9xljby1bg9bdpk5vxted24o1oybqbl5o1xh0foom0nuan49c0430cm2w1qtdjto59o8m7vsvjri0kgx02uttdbqvbetlg106c621kxfe58p52u67t67u90ehc1kvgoj86kzp55lpboxwa980rssitc44rf7yj2xblrk15ypw5jxnc1364sbukqz26w902kuysgfmmwwob0ceuv4xsj0xcoic46avcwz6ez0xccws6opmbesvkmimwo83qeqenwxiq1ruo97ur0mcx56ev9cklpxujewj71blyjxv7k5fjjipfa13ubks2502p5oiy1v2ovmgbjyzxp07xwnu5er3a6mh166omi91i8v1e9mrt43dcu82uvgld9xe6eyy8px9k9f3kpep7aofdc55ddh85f04vha5rlh2s6gho4yiicxt9q4cim55f6b1z8rdr33ekauxsongilwicjhza8slbcjyugzcpbynpeqj26sdg5df0ocbi51x4zk7qajci2i2xpij2nyof49detpqh7rv6v4p8gzk0cvtp81f0nbv18k1zfjczcoejq6u98hqh065v3r15nky5mmer1iehcrfveqnqtwfoxtkuhomfel4su315ywbtq825n1qyun4fahlgdh6t5g7atmhgkgxnzp3fwwmj9vpkmdstiqhlebmn2b02ww0oda6z88wv28ch871a0791r5o36jwthp467bg9vedvwj26oqo8bme6eksn2kt15n7vqm5qb7yz7xehw9p2nkse39u5a896pnqiqa2rfeibni1co7i2yf7igwqpt34x7w3qrcfcomuvmzdr98tqo4ar8qcz0x7ck9j1gq2zqaycus1usjwsv6mae290eu7x2pfictwilwls0mvnvubnlhjh83xp8d7kukrevfrasqtx7eaaxihvkmelm5svb2i1a3loezvu3rbxjj2popccuwp6pqfx15p2vl7jzsir80z962qpegnobczn374xjq2ruynm1dpsjfzv1969zml739kwmyiam551syjv0rd6usk0d33idf50bmpjy2m5yb1x3n1f8h3xw6ggxb0ntc5p1os869rrbg20vpg6l4ncpp5bev5a1q4vkv975yqqxbcssi4rnvrtyksjc4sl9wsy8pw0vrcouc55qhken4ppo2gixk8i7zb038o0g1q1fj71nxpu5ih5qmdudvf8ww2i63yhfftg1v6x4h2e5xrdkjaqaobn2aiagun68euappnl75q3crpytzlc5hneplxcklnkvxn8l3w167zndplkttu7456xgpin0mj5o4xb4g0ym4vamjxsyeq6r24ce44jibui86kjtpoki2wv5t6dzs28mr4fj1ec3fq3zv1xw6j0j3lz5c3jfzqhp8pgb8ppn9oc4en07ouohmfso5k7g0sle4xdn89q08w1yee5ov6torwarunmnhh7z0wviadhzk31talt85x02p0gi0jxfptuuq6qarv5b3ad72lsv7ws41otkv1etzrt4el3coy512zert1f3mzy6vlzivx2fgfngpyo4dzf4jiku3pu6lu48cuulzu4zkraplokysfe',
+                redirect: 'no7ihwpmxgxt2omiafno32z49tjnv01fgtw28pkxnei61rna5kcp0gy504vcajgy0fwlenhhgs44ciffefz7nwokw9ei3hppe22oyao7njgdpgz95c1wkqotso8d6sr65wdui6kh3swwo8cnw5f58wl7tq5ovroraqp0hkkgw03ypgokjr4i2rnfdr36wjcx607q06znhpp0m85iaaj1gzw7hfverfwwfaktsb0mra38o6q1gvraymurmi97hvshdz8gpxxkrb7hdy35bm4lltqkgxrdgk79zk7iiwt165omlzwnkocfbdcp3udbbot5vi0wzme85203weopa7244lzcxi4lrvj7vqmcgncuffnvam1jpbkrnui4gq80v8gl5rbz12prekdn5xqk7l40d2wrzzfjb4fid86jcaxo3s5xwffevvo8cssx74rfbs9ckguno75zzo4fjv0y6drt2fveiv2ourj9rq230xj9t7voveabu95oedsj0ymvwl4krdc333f1rxz4k41ssc5zar7hmjdaez670n4ewxb2bzlwlxv8tuafe8apx0o093toy5cwkb8nn2x8kfdqvg8vv2r4q5iiycmqx2titbl0r6r93bzfqds0gxxspk2hbydhjrscs9qjzdonr2znrjq6ftxqodike5iayqf8w1tp39yxquotbn8f4gkxs08ikc53wnst3d5fsa6ftxkz2eopfpvk6tww9nd96zlp3bv9xh06efrskl0rgbjvo00hp5x7yen662xksfwsq3mw5lotul7yrp3lj59dnk8yqb2spoeg0i574fgbqnkzdoue5l99qzta7nn5fwmi1h3r9vq62s1th5qpqhsbqy1gpeo8a6k8wj3r2tz4dvmekb0g41tlcwo2fspnjuqxo14enui0q0voub3a2ty2m80uj7yskm3w7ybqbmpbf2j46rpox17jp0pe5twcm3q476ob3h93jeahg9oank68hqnv3x3njv2rw7i0kpet7ihevp40uheuexr61xtmiywu1tng4rcor50zwuxo1xk6m635qin1k9afzej2tbjts746lyw5fd2w6km6rq5t2hogckfny9kcif2w413ciggofxuovstup9sut185l0ikol1ea8fmfha6xgpfjlahgxw6vac5o5u0f24xh6glj0gdg0dlcsok7ykdxepnsiy34qut6egf0i23bigf9h5j8kwcie7god8du44a2v5o7srr2dra03mzpxhsgsbutsyblkcj8kerwg6yuhf5bzgunvbzvlo84hbk1w0hykmiqkaod5nuxke7ighni5y0gxsefx082e4955qz2ntcur56oizhqqb9149iczrr2xyjanbtkf2xjwak38lbu1ub7hwsg4lde2uvsuyb3dth6wx1s68u302mud1uaitagss3f4ippx027lq3obfdd6lumz42glcqiluffwfr0idrhrazym4j6lrrivdro3uue4k0w0y5e0is48l16k13lzmxwkq5oyps7yldtp4vownhoj91r5ataz6s0hsibpzz5axsw2ef6nwlod4j96t3ugudutjyyqnf1mnj8nfzxz9o5ev7w9ssesolgglq1c1fx23rpgvblnytakgqwftoasj4pcbqw2w5h7u7yxy02kszus184656rjvgh7f82mijc4hf1qi6duqh9fkxzkn3br0pzrymfzk4xb3lqzwtth3w95rlv42vasbylw1i6cqdspjfjq17mghs8mrkmhpw31rtcakhp9rg09nt2cgxy32ja7e2dhj5w6jiagecx8l7xg4ne0z3uqolk2x9qokmrdxnrgiw2959p2hm1ddtfcvh5zitfuxblyqz0no67zxpsmpn0ksc1449rkt5ouxsdfaxnf0lgg45vf40a6b3u8tnt3bcyk49yma0fox6eil2aleax9wu1i45keq6bxmf7hoz37c566smrciq591wdkx608wkrhx750c24jbfis9180n2k5q2ab97dx7ifh1xlcbatw81rj03w4ewhfzj',
                 expiredAccessToken: -9,
-                expiredRefreshToken: 8688808998,
+                expiredRefreshToken: 3679802299,
                 isActive: true,
-                isMaster: true,
+                isMaster: false,
                 applicationIds: [],
             })
             .expect(400)
@@ -539,22 +564,22 @@ describe('client', () =>
                 expect(res.body.message).toContain('The numerical value for ClientExpiredAccessToken must have a positive sign, this field does not accept negative values');
             });
     });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredRefreshToken must have a positive sign`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientExpiredRefreshToken must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'AUTHORIZATION_CODE',
-                name: 'hxu7yakvqqnl1xks6d87vqc3l7mczo1f7r78ed127s5nplipq027n1nyv118uhy2azb4jef0gc4drdpw3hrxsdisu2x8vj8rnxb9z6m6pb439apu9ddxhqii65s5b132pkemk61d6ezcx9ogs3w3jpnl4b1dl1hvu0buha1hozixndqv00odwo4cx4a53tp33q1pwnr88hkiszb14gg64zuad3fhdswjo3w4h309gdzsvjyjmmwlq6edf1f4lu0',
-                secret: 'fx3jkr7ok795krvbn6fkrxediy7c9nf5y0s91r9bwd4j2u9ybmo4re1raj1tbkf00t6oj16q3t3g8y3w4pnc114991',
-                authUrl: 'zs4umjs133gvj33dohzscbeatcy19ln25d4f6gj9t3qq2xos9prltj2u3bippp4ycjnacc56khv1yh4gz5y8goamjwsjusf60vmgo2g6juxwmjv6ooy4c391g43b37zf4ye8zs21xngor6jf50pjjzcjgbkamrk14arse28up6wzwoxlje4zfylwy2g42xzdvvb6vi9murkkqqvyemrgkmb3k9cunm8aecgbdfv1alote681ufqfpvnioskadaw52sie27exffocoqyzhbqefrg674hqc0v6o8iqp5h3fuhs4le85n8k1rruoe9rqdtvfos19zpqoiiv9f89stsdssvw8pbjmrnxpq1lvjjz1cf95npst2xr0cfz8bee43eket3x2fkfiltkq0sxp9t52iti8wci9apjts7kaihzpdilhgkg26q1rd8vvpdfjjd8s9ci74qvm2ux9o7m3fuvxyq7xnq5o4rjawr41pyltqmoemwzq7k9c2kj526oq2z98osojycpr93wl8aps1t3flzpgronorxa2f8bov9lw29dd8jue2gzoc83t4xpmkl6euxdzkjlfy1oe6qmi94x1357yc5c0n6iackztn1in7uqb408vtdtzri56okjx6v6j2t0f0id6rrku2ky0epbeze13mhfp4a95q5r6r3z8xdgml1m4lqy8r4rdkkbla098rnhl25lb95qfeohlk1dq1rm6r7e2v1oeepj34gyv7wzel4gwb5l1vpkyxgy4fznnpv48g784u5ckcwo6m1u6a4x4qlgzx1vgfr8tn6wks9oume1zs45zjptwlkrz40g5hu296ztcaatoi6qcao0zg3hzbmb0u923pqxr1rheteey1z49kllzhc2m1hogtcmn9d21l0pmuqw33wcvgzf9nwredq7ld83iu3mgh8ulduurvpmhn0eb7epmmrd9hixz4o1stchfmld9uyeev6nd3wey2hfk1obuskkkaa0grumvcqj1kfsbmz296mfke4ynznzbik7nqdiwymnilcewczmfs79csglze6as7jgfv6ui269f19ch865vziwrdpuoace0mx6n913uvjny5lgimqdctu4628o0hdg9wh6fjdzozrr6bmxbrtf2i0kru8qthgmpn6kejetd9qqnjbxo16u8x4v4xec2iio7zci2wcm4i1vpxvblfnzxqf4huotoh27orglrn08beow8l9thun99w88uc33b338hsoxanifua8vowsydgp6sy89b5igrcbe2sx09uivmtkol5nkow0pt4544vaf84q05u34qcg0l0kd28zq6qzma50nz0cx702eap52co45edajjkw3o9i7ez87t75niecyiiy8dwu1vhuxvxqqp1xldzdqh71hm1ama3xpzpp6cxpiqf6oj7j48wnp6kpm73firv3cpj6dxptkx0xn6poplthrysftyvrleqmg3y9o7e0qkqk567dgsv0wcvt3c6cxhlbuitfbmqfh3anm65xw76i93bb1mgwpk0clcskw90w00p0mltzb0flb2c51539yi4j2gvew20w2o2lsnru2e93qjm0q6c4jzu8kk8bbxu04bdtu6xrbi27pdklza6auv4d098bqxj8ueiueqk2y1atc4oc61xy9xrqmkm4fz5k8g0lycqwto5dad0xd208ati4ycqvhr91x7q66j85jc7cpls278cnjedmsb3kx48rq4kqu2ln2j0ccb1j6lupk9xflqjqqkougugk7vluyq6spzgibx5mt170fehbiz64o0trr4bz1bmv3hblbpxqf8zrqzmiqr15z1790tl51dhqne3uqf0qph38akmzrehl44jpe109vjcp9csnt7yqks3hryxx8s3u7euxd71h62b48cxltt2opx7j74zutl14aunm2r198lay9jzan48kcy10v63rc40n3c9jdbkm18r46ziabluzv0qixupw6w7dfo7cclk972yijs8h1zgdth67u7xj6e5pw61jy285zjf6wian7',
-                redirect: '4euofkzi6w763cu2ubvlizl3qcudzoxzsi9g1annjw5nh1summmls7a5j1rktdfah2w5b3g1180850dt2kxgmrp5m0nmt9uam9e0jz0ekgfsevgpip42znr48rlz9yom5pqswve4vz1mzv9u6jwp7pugznsbvil8wgbmu7rytz0wl786qom6ms6jric9qb1ulssb6j0w0136updmka7v8ftu5mo76lfcw0vet8lw3oqnnh2u0ly2s1eez359agm3dsttuj8m0ammybw4dmu5c7dftoqsx3z9q3vk26jn71f9t8cus68e1xpu6un3yrf1vm8ebye29ljk0cce02uznv7lfhi5i4g3rv2h3gpp7dcamj9jqny2qgz09gr4j595djxlxa1tqagt0xnqu9v1ukc4are60nw9nwx9ei6fe547wegx0mv5jnxfft691ag4wgseqqkvbozry2iavil9yrcf2jmj8wngejh4xndilekr0jg1gv1tluf7gyk26pkoerda1t4cvv30fw6s5miskvl415z52mzwjbf5o5ea0t9qsmkf4e3biwi6tpwfsfdzrs9dwfymvvn29x2a1y3wnnnncohl76dywbv3jccr1fq88sv843bq8rvwtbnjsqmi8yhcc3e33spc2mgbkcwz5b24wzgxjfhr9wuossudbhk18zbaklzmso84mbcg7pd132wquzbxeh2fqk0d9l3zhhnvy8kpn6cun9aatt1yy006z1ov13jw5dx8fijujy6x828ruvh56sxa3r4dyoezvu1oufla325364lhcvcf5xfrbuw1onl4bvsb8vxpznhcbl971nvvhfddtenbm1aiqy4eeid23t3u9qi7fpcpdlnhjwg33eak573gkeegswbihipklcwszbwlrm2tqrlmpzrn1ve8bksesce8xlx7flyecgq7e6nx4pzg9t8e2lwwttj8cp1affv359uiwe2dhj01g32p1tx5ui7nz4bpsn8i30qwc8pai2tcvpj12h4itu0t1cmyowknzubvd1asjg2p21mas4k317v9t9oaa07wjmqm2lrehqtxma1yzn6mjdffnx7pb73p44f8xx4igu20omg5c9lm055j12zsd2ema11hebhhs8zwquuss0xjl07fpe8q1cjf45vgelsy8yu3v57zzlv9y6327mtghtqiezeaf2c33o970taumtaeoca1ri6n8h43n4axn73fzetqjb2oc4v4947i2oco2ky0uv3ml3ju4feltyjmqh1jntk2uosr5wuder79e9e3lnq4zufa3a1zjysbe8v1hrd6lp1ku210l5v14ip8fwt75jlgahtorre62191yth8n92dkgnn69hsgfej0qehxqczvj251xkx9znf1u0fidtqef66xruax6qcl60a7bbz0yplp86hjaefw3vbq0an9zwdq4q5qshf38fyfsc0wnri7u35r44xhdhvcs677jiq3gxo5ysh04x50wsyrsai9wwfi9kqjd20t9htqdbayutq11uvbaj8wr9gkuvu1t0p4vo8e5lijaq55a5nr1bmfav8emwewd0ib1d8ve1czlp0aua3o6rrgh4ep6ekhlo1h1fwxb42cgxlf3gfqirq6dpq8vbwls7rfbp4gov31icvos0uzsj0v1ly5su9hr85espputpkrxtdz0gq36dof7s8lugzadql9jv9p3rp5t0pj6iobgzpeg7cy6z7y5er7h7s2fbixfucz6zu2cewppy0q2d2qutz6vnolko4oezyty9nwexs5qk0z5rkuscle6h30nyqv7woq0r3yw4n8amxoen13h1963ybkwxm5tar8sq2gqhixrdrr7ivte89lzfdgtu1kul3gxbm5o7ksk4ws8vm3hf8ycvfnllgchmwk2fvw4q86a1rn5q5afuh43kzniuve0g90g93te8ibcol3om7oclvsuivwdrah9lcrr76oxwox0n8ogzggbdqkycm4uguq71luz5hqf1hvct3q3bud5bmkowzp2akgoey',
-                expiredAccessToken: 8169874865,
+                id: 'ca054610-bb8b-48f6-8d38-c314fba14fe7',
+                grantType: 'CLIENT_CREDENTIALS',
+                name: '0eii4ba4305g7mautv1samddn2fykclq6x6uiacurkg2li65zo01x703edm8gb97gbhorj407n3lnhx1zs5ydivl0syp15eo45fjricc6l9ai8sio0zdi659x4p3mlgpjfgqsgqaxuzpiygzvy7ye1wrfzhdjj1p1edrekvsr0km3tgyivvsrqirzif5iqjwuqsq7069p28ecnajmrr59525d7a4b047h7oisdpy0vpqcshy2pwsvo3wunp6waq',
+                secret: '1loxw32gaa1sbrvuc9qgvhsbo47ckxgo1ycghkhemj48bwu21kt5783f7hn5yq0toqys671o721s7nnl3iercud91b',
+                authUrl: 'wmy8kf8ija8sqx5rf9vhdikralkknps8q005il4yhhsc81avy5z18iv7wbbhxcpzcvkjpnkyk8wprj5iu6a55a6vhxq1v41ewq1kjyuix1y343y9exortxuy1fii1a8jnvh225bxdifvqie9zx17wwusnw81ztb0ubvhrxatb04x4986m1sicaid9zld60f73kvqk2uu9fmgocer9nz6tclitycq8w3yss89v3wqdbn30bpg5o26nvzl18f26o6s9e9bwjkf5ccfwa1zb15ytsr4py8cunu5p4f6z46nx7am5puclhy170muo5o7445eznbo1vtow6xebdis9ju0mfdyxg3ae1qwhuaof0wamon2lt0vg4bzqlqa2gyyamuuz4ocdlfjmidc34o6fxx71jbbv8lclqwbldprevpw68v2eb7mye0qdat3koexitmtx3hrli74i6coq4ampqgb8rfivs50qeeexzptzh7dqp6z9dmg45hz1ms04kl6qij1qzysampaaefx0r50je6x3uhcee8k9unmcnap35kp1l0uw4aa7r2j6bjbzem29rivkszqv3zevbk0eiqkuqfg427ryca7n4x0d4yu8g1rwrc34132owe8yy6v2gvvpa908jxqy1ubgiccuw6tme8zzeiqzc7x54mkbif4hi44ylybtf83upkp6ep1tbobh4orqw0mmjpuha1s1mol9yi5xmx8anpud9lx0ms01xd8uof61wi2pihuudywsphj6xjo3aljs7cq7jxc9fjd89rydnirmzx0vqsqrhj3jhbqyiqft067iipd05nlf33upp93ltpf4s1qqa3mm9x4glh5c5yoiocp3dzlz9h0w09yt6maxoonc2f1fkf2800teteke5zkhpdeweirxkpl00s1kt4bonkwdr2ud9bgnr19ud10vb29bf87lji74yxtr2xibtc7ivk8btsgdy5ecrq8aw57s1w6qt2zwet2sw4of0ip4sfw1hd5fmiz5sll78ewxbo112n4zisv9mk1ra5j128dlhz8dnua6p3kc49zsjjq861vnx1252usgdvg474lcd1j41j49ha2ax8r8njdz5etf0iyl6kej0hsooqoz36q4nk4pg01o75f5po60277bt9vkm1mdtkx8iur7l7msdf3b1lknaorbtgr7o92emvd8o96e1xveohrmc92zzs8m3peqyck7rgg6kmrd1c4mbrjs1s72xd7sp888esipdj47jwpcs94c5xxj2dn1ry2ry9e5fgncq71hb33evupatj75wt7qjecn5bn062m6h6pln3f85eqfsqonrt9pp8z6r3ldx9d2ad0ek3bg95umfn54m59pd77fejgf1jgkxrsfab40utw9j83qkp2ndz5xhs8pb5uhlcuwmb3hvhfsrs9z4dxwbqci1ee8ql49144bws8tyz9bl3qvj51uqd3z953hma5t1fad2ugz0zskum5cgofuxw9t66q5iml3uafhbk88k6qxzvsbobk9crljaf1g176602md22c82xmcm4i8rpuk0gsy33ijxjd40lp8le1xz7m9maozgo56of6vwqof0benvzy8gr2n1mt2n0hnc18ag03rjetyt2bjfd4m30v1o6tmz7pfmn5r9lwl1berkg6y5ernsdngl23i8lgtb5qynwlolo8s4zms00myug4qz7j0givd3v8l2lcckjztxpjnvjcfp0uvudlv3ghjqjri3t4b891auy6hvvht8svcqcmaafy9cshyvvnashfs9bs9cc1pa7e9k14r1ny7gh3l9rl4r87swkheom3rexkgmt1az1vjtzm2ukuca5gtcra0r6om9fiour4tdu67hbdj3mgv874su0mivsw32lac07ax7q8ns5cjn5ytjsl126dq3bgwx69qh7vaomu7tmy4qf5boe6hcbhyfl91nenou3443bzb9p7hn6ws7kv4bqg1opgp0mvmkxaovzxbc3eva1vmq0sva8dksxhi0x23za7kylgjouchig2',
+                redirect: '6j4zqvw59rmp0yuj47a7rkjm213fnc0vne1eg12p5lgkdhsw1h501ax6zxgkvzu64sokscqkw6qo1tl6f25hbhq83w92fvhlmd09uiqlnz8kpheoxyhh04l0sotjkdvz08rb9t8mgc3mdvjg0onl8jusk78rk9v8hm9h6t97n4con8prk54bcb9m5ykzx24taedlawkahtndz13pcg3duez6dhfptby5dh3dcdgeiwn878uij2voog85tpsokctv9ahqlp1dy6qkwmhwnjkvb6t0dyl95laowjy1c0ith9mu2robr7prmv5rzzuhdz4l09cd8l41m3vqrmc7ds16qvkepxo8swcp3lchtyzy68gb22z1taqe56ntiwn2leu2omup0z9hcwk7usn6au992eetnrqwfyi11n4ekvgxvr252qih4q2z943vt7ei23thlmi42t1e03hny4gdm1jhbr1g9yczaisubu1zeohqn5z6p74lg8iigh112uazu3ga438cbo44hc07ji2fe2kwk385dfdo9mkkbgaavud28lhqmri99xfu7wtafwsckqd3qy1pd7wscez1uv9v4lix67t4pa8iicgan5n73uiuekuzp68t6rcbp6j0r5lmgio7qmkdarj2ervvmkt24fcg0rld5y2j7fa8lr8n7hi1ocy3mwmoo8isadckx8gijj15swdp5zw8mniacfohn9rd6obpvd5jytrn9fcgnqx6t6zbzu2csiplv5tpw5ul9kgxlkgczy1gmzj2yg1z6dx0eh85gs9x38pa2w2dh1zgsdn5ij4o7gek0hvqktht1cyji09z99h2dg5kt1rmc344bbjs50olfwgbyqlvjyaj37ub8w6ggefkbedz52jyi1kmq2xk2y9ssaf009xmq1r730b3kna2poi8j85r6la0xdyhwri0vlxbtv4xohc6k2ldk3xpax8isrda7v2ws2kit2g73cn384a52wqc5df10xdjh5eacgzd8qnln8wavq7c7gfce6sbyxqplr40xunuugztsxj08mfhtsdhkeedkfr7gvvec43bqezhekmzux0nd224k7qxvx26m3wwklklpoxhz2n5vb39dvnj51gb3c82lgx1qf7x36yhmj90r5wmegmr7s7bcp1nr3x9z8ce0c3fqbs15uiq17pkcsdmru8f0ex7fepkd66ycp7qs6m2ppw9ga2v5nwqv1jn7btfp7g347irrdfvl8y1677ne5kkirr5yq8f2bppb9gxdco0f9flhv106f7lsmslem4zdxwywalrufmca89xd77x18gre67pusp1j90yuzwo99zq9lstskghevlxybv0w36dc86gmaykth6yrnfhd1qf7kqp5jzuvg1u1ytuoccta2620d87gngm0ok8xjh4l0xesroyzj7fdpnh0vrtx48d1n2qvxmawki02dcmrgm8ur4hvmb0fp22cry3ukc84cyhgupd6gudc7ts6z9c1bcodekie53ilk5wcc9cecdkghdzs8f2aevvuspy9dlrln64k695ovlt4w0egn3w80lemjpqr9djgi62wl62pqag1r69gd2i3th0pqcq0drvl2piowztl2jzx4iofhmbr8hr250n8m2tu04cma2bfhm7kgfbvn2fv27e4tcy6u1i48m5825g33jtmgv5r8taar66xz51atoowb1c5z0t5n46227mndljgnj62h9sjc3fxlzpngxnu7cj7anlh5v4q92xqzyyey6snocgvg4ml2r0v6whndi8aah5y5r2dfvkvrhhxbvq7vkl3mcbjig47ku546dcbqhqp47d931yhjl41mqigpev9bw7036738iibkjrdd09jny16hby5y6as4ora1mmcq41dw5fjvl21ebxq72v1edn0uyx1weoifpufs5cffiugbh5m5gb0qtofccaob35vmhb4hw9dlkil2z284il3rgjg7aghg5h21ghkenp59lu8s9eovn4cuvwt6mpv7mmrsnqthustc6gfp2sefst',
+                expiredAccessToken: 3504759804,
                 expiredRefreshToken: -9,
-                isActive: false,
+                isActive: true,
                 isMaster: false,
                 applicationIds: [],
             })
@@ -563,23 +588,21 @@ describe('client', () =>
                 expect(res.body.message).toContain('The numerical value for ClientExpiredRefreshToken must have a positive sign, this field does not accept negative values');
             });
     });
-    
-
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsActive has to be a boolean value`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsActive has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'PASSWORD',
-                name: '2ysfbt9lxy1uaantkm3ysh5ukbge9xu3iczvsbxqgiruy50hzzhask1x6618cz305srvn1uhv7y0efw9nzakvuv53eqdp1tmeasd2sjfleyczvhvljeof1qjy2xez2x6nj3rjt7rd466fxfcfcvnzjfw69jdds71mzes08syxyf2hdkbvphbbwsrkmexmccxu1lwme9p58g75c68s2st7mzt5fc61jyinqfb6qtr5m7zpaoxvcvlpes2aqutizw',
-                secret: 'pl53jvbcoc4h7288iva80mrh416yeocvgubo2r6mrhxk6zy8993hkdpvlqpbe1c5oos6ci6d45amcv9knv8rk2sv9g',
-                authUrl: '3tiqe3zwzc013m4jp08j0s2qpetwq77aur5lx7r4sxgtkstmnw5pfs5kczyu6ntedw5zq7htsajs7gv3v3p81uzcrhrqafcqp79wcc6kff37zeqsw7qe2drgqru7qtges2a5leqeozlucgj3luw03gb7omm4323s6ow2gow8cue63kgzhw2ezq18kzwuwicbuog52qxzbcqtgcuv2rgaemv0wyyhm989oid3cg49013hefr5j58xax45umzlcwd5fr7h87mft71pd0jz8o04v9l0wsn6uwja9xtjnu7dygbeqfkwofg6zisbh7piph35hqpt13g54dmzys7e9mp7ligxmb246yym5sgabxk0840pd40r42z94enc1j983x7uwcfo9em4dn3dfe2bt094xk8yrl2fxorrw7b2sebf7dw1fmh7bi1vzv9ti6yprc37hx5cag4stm9eg42lw8vuhipiivbvjqtzrhzzhqfpf11w5t71i4af5513glqzcq77z46y5ghjt8b7vtii9de6s8znt9fpmgy5xmxo4ay0uofxrf0edix14358p26n6kkrxn9cn3vn732wb2nexyo4ym34jdkslscf0qpom509hdgox5jxeoc3wmfcm9up580llptcb3cfr7djc0jplakj6g3udvaztyu35mk3ycyf7zkf4k3ucsqx7p2696uvf0otham9oi6lqq3jnlsp08jnkk1kx1arx79v3zuz7qs387uggtw7zvij05g9h4jw81k9hs5irvz49fd6av2mgozxvdu9a65ypsx4jm24a9q3pkdghvl6dxud9ufj5p2lz5o85nkmya73glsvv2zqeki3hab13kiglehz276zlt85cmqou97l5m4dw87fcuy7use294zv98x5vruk1mfkq8ohmrrsznm7yaxx6ywftjzsq8q0nb5abfu33yo323i4dieal34oxx59drfunnf9py00mfixyb459rqrz4qm6tswszvvyu1n8zq9jiprf9d35dj8vugp8cefq218eda2d4aevt1hldykwd5ijw0s04qhb47hxsx82c2a3o9w5izgkolnsv7tryrh63cansz5atg2mb5c1iesijfycvnmyqe6501wbwakf5ykdkhjml86yenchtg30pd0gbdj918mynbi1itq1dwir8qd3pebv6jnnmt39umkbrl1gsw6a9nzour1cxj74olq1d7fp3mkexf1td5ec6kbfhdh236qcigpps0z9angm2w21skd9dsc86s35xgophciekqjokk4agngllme94sjsvy5nyszo60x48staorq1y36939bktr6izfuqvx1edgqpmnu67nivs83fb03th4mx6d74dvh15xt5a2mbwblblwjwikw2ehn5tdybiuco0j3lp3420spbn7078mwzk2tcqvx3jc79e3tzbpz8rw6v5gtvf0zd5v6yvvbwcf5qxzktygukgbbc00x2nlo06ha0usf9wpaq4hn3rz47mjfcmam63rylm7jvtplhu7vdfcgrnaf4mvidd7k6gy2xvc00a5aqyu8ip4k0m8t1hpa10ab5lkupou56miu5p9vmw7r12x0p0rv1t1lycgvbfia3d9d8lrbfagl7inneks2ziq1dhwhl72uhnyint3l39r24mxobakvsnr4sk17e9398t7ovxtngbgxa1m1rrz30urtuyxvozo8br4gcqm0uhvjegnwkxip3urauakomk29517uxauq83pmtor9h5h665t93p2laatsz60n3wf620x6ocr3kcvu6262c15hj5ug7hrbfiryymmpw5xxf5l7x6zpo75c3i0qmatc1taevhz7h0ffatwc5vuw6l9e5l0hp5bwmvxhqpggnv2rcnw3q0xe4hzvrm8alj75piopmg4znao308wzwy4bn003zsmcnrsjnz48ckj286oqtui95g858lbfqqcri9i466tfyp7acoqea6bz4yw7culjghxmo2lzr8w12oorp5pxm1cdsj0qd7q5wbynaqfn',
-                redirect: '4yc2uh4wfuqa2kd10moc4r9amlalzlsj3q41v5n6bfd5xhed46afz7ch8vukbtiz2suuc1gxcp4rvl617pcpp3le81pcptrh2fxkclkgloruiwccx55d0w1iwfpws2jy93yiqjtimvwtyqn42052zvhnqwzx5ssqw9s2rg8cjcfz3a7zrxdfaaqk463gwpfumk21zync7twouurt4nf4ivwox7bb71xna7hdn1q94zndyqlsvybuaiv4cbcc597p935onr1g3uyx65h3wd6bjz15opqquadrk4rq29apqcpvb0r0iz6g9zhc0lt6znwiz8h7qv1f6mopi6ftuyio28p1xsnoow1arnic4w5qdr383tkvmlrec6w0595cggidna134y181hrq3358p82q93bmq0vbhakk63dpfko8cux7huigv7fjb8l7p2fkpcn27kqgwnom3evv184shgnjkcvne5wukv1br54qexowwg0bgnwbxwo28xvhgx6wt2a6hz8scmb186ps44vof7s9hd3vvoqw03ect5eakdpacjr2go4pk77xxqr622cjk0vcpecnuxk4tu8w9nfsc18r2glsc1utesewpapl66kjqrfmpc5mapatilnbt6fuiayrkywqi64cdr5rp4d3q59jofzmp8w005rl5bl73pu3xw67b8snpuea7z2mfa65mdudlugh7rs3fz6yooqyxbi54vxziwy4yt3o0spp6ckoyt6q5krmku8mu7s0s25qvm3mia7ow1xva1hj1jvr9jrws804k7gwmdnr8ml688ld83bhd0es0mr1oclrow292f2kzsdy7getcv364oibej2cilwjhp9lcds4yr18h1ab00g98l2xabspyze7bedapzwtbrosgbm6hwkcee1wcezu6adyr4u0m7y0tmw6hewata9h82uhi4hp8r1sbxqscrrnms3w77okihlctxwfefcuzj0i9kmyzy36g2f04vp5s90v42izf96pp8n2fhehkrja5c9b4n0zdxglv3la4pl3x0dyeexmr6kjxsgnwylm4t1w5pwlaoj7ow28c3hzvqk3kbnabtgr1lpfihvdvc899apgax769b35gaywu2lyqyjade95lwlwotew9321rtzeqzn63e7q07sv39vcxij9vd1eu6wrm0mn03mnwequiz8ma1f1c8a5ia784prllpjpote3c5cxny3e2fboau4etyg48btoag06f6b6nfz1y9ls9bylax0l61gff37e7bi15z3sjenhs5tz9ykmffrd6glrtxk62oalmvaisqkv1qgcw0ipslsycdmezmh79svn5l013yztho6f6wotbxnbuzo92f4yqbop2s4eb2591a9nfdg6yq8s1acsppck7muw6ab5mlwp8vv9lt4p9v9lz95oegean0lb5jdpbivrjw3vr6qyr0rlf7wlrirj3t2az8yca681tixnu7h9dqttf678sk3m0l7qjf4nh7y8ng3xze9rdt428ftcoi2n88t24fjf26bnjrj3f8uzvuog25r3l827amloly2tzpou02p107dj1zyvcogn4406k3o7i1ia6a1tqvnpv5wht463jy1zgo1cfn7739zhhqcmqtn04my7hrhxm4iezgt719cpz9nuid70sou91bmnnspmcf3h70ccjax4gecita0iz1u931ucu5ioc2xztkad7a0us8sivcmcvyvatplv54u6glgkyt2ijsp5touc9ronyuco1gdqvnatstsf5zltbhesf7s3t1icxpbdm6nzcapmucapqj1hjeernedcot5rtql50fspi88ka81vq3exqwl9z608f2srzk48pawzm0v03ufvtpfk0ejx2sim1z8yswt5c416imp3i3ugic51i2cmex2kgjovdml3h4dbjvemd51nlgo76njushi5o6jitkofwj7i3068pcilywskb3sztgqbogra310j4glx8pg38bh2twd8lkkuououflpkvb02ikxpxnkvdz9ee5o5xn3r',
-                expiredAccessToken: 9310679552,
-                expiredRefreshToken: 9860651351,
+                id: 'acc9c83f-01a6-4a38-946c-c95336012faf',
+                grantType: 'CLIENT_CREDENTIALS',
+                name: 'irhiyu09oyq5uoa51c1v4nv051xhadp7qbzvkuslfkw1put24auhuxi5ot883j48b7q8bof26dxbr7r0eiovu3ft4uim12b23yex0fypxmyf30j0skvwmbcxzad04jmkh2cz2rsbtt3ng4pv4clzcng64006g3fwhqwlx3uyvleppxzqz8t3qqa9pk4lresareuiy151syrzs8eec7nr6b7bhocpl2vm30ru05rp0pvsi9ikv34xp72j42m7yqt',
+                secret: 'beo3vkhyi2eo8sghxh707mvxpd5hqcmho6m1zc504uc5ukghewf5d693hok99huik4gkg9u7xgev2vmrwgn5xvggh4',
+                authUrl: 'jwpx5aevsxt36a3aauqej08wm4ck59z5x0dkq1fak3h492g3e1o8dxq9h5mpbrwesuskklo4nkjmx7hi6770o4n96kf3ywts5cln17bqeiyynph5vuojxch2jtfn32wbti0bh3h8yaxr1radzns8whfdnttcge4ccrppgkxkvh971dk2lp52kx0kdpvkl2mlx3p8e3oboqjrnfminyebkq3vrgfsjch9q4t7csc42ottj4omx19bf00u63swrk0cjneb7do70yyktt73mxor3xdernm92cqhywlhhg6evk7ztxhm7d5alf4r09sr9d0bhevo990dhbk9673mi3n4luejjphvjbt784ivuzvtd0x3f2dnec1mlkar5bkxoe3dr6jugg4pu7zsrf3raakaim11tc72cpovfoi7d6x61qwj3xhbsg1m2amvdvatf1j8vg1sxjzeo7u1e17lucfm0olqszborq1dyeobirizy2md3hi2so1ihkmhbmdtrdjrbywj67sbyk7vcei0fldy7tlv9vnkz1p2yd4km4lhobizr6vmapydmfqej3wzx6ue11fna4tx46f8ygr7gwa5d8c3c9m8ei0rpg3sddicj08a4a9iuu7r4zmarw9yh09s484xuxhz1541o9c272gwwytfnni54tt9yge6e7anmbyxa34f59n2amrtdudsn4qvecnat4b04jc4ts0sye2cihuis5ypgyv5b330b9xb0rgnmp28n1mmv43l7krhrx2sbg41s2it93tg2wmp8emeteiegzoxxla0vdrqp899yaq8bya427ykqhx0lw3rb3bpvnpqihx563ib4ced3wzdlnpelk2pnr5r6ren19ox1alrypmdi5d318n6zzguwdoegst3gfwtje0cwzyymjj87s493osfwmxfgwejzehlow17ovsx1jr4uiruffypsco5nff6205mfz1gflwkgz0b0ww1ycffw2dp4hvhir64b5tuu9y2449o0t3m0c0ucoxoregw8p7con5phaxrvacy0oyjhgp0cbjq5boeuy9mn497qxi4uotfw4tokw4dj0ikh7nidl3yckk9sgatuershljijo98sx2imxy208w5sl8ep09jzokowaq4086vsg452kzeu6fk34aoc0akmx1qodcbmw42gedjothovtqbesxubdyy9145g8kob89mphrd2r7kvpb7zp6yfhq6cn50a9nlmi2zheo9g365wkm29qjj2o1mnh5r7c1u9drrc6nj33p5y7kojlhu11sj765318jldimbyk9cndffcpjj6gbolra4yw48bhd9y9hf01z46jkyipg0nguz04obo3xaxlqq8zm5mpq82rcxknppgwcnpv77or74s2hskul360iuiks5cgq4bb94dc395rbtvo89j8vwnr02i9n9y19ifzflbguv09oi8433rk2q769odj9gdg3zoirpt9yfbhbl6286f0watkyfxl5gdlydvb7hmrs1yx58vdg006zs8ea8f278hunnaqppnb9y38cbcllwjefoyglozv7zz3pzjuf1gn867r18ropy4bf2b1s1qmu0u66uaews874ckvf81qnmzoe3kl23fmzmlnyod585rxk7gz9o1o554egondpoxaz7mwbznwogjolglbcn0i8wiolqdgidgd3wgq5n5rw8p40pr5wf1kxnrfb3gd7g2b9amdjrkqva86fcz7p8emf73qqcdu8irggv9auir044ecih1u3vhs9jy48nhroa4rut87u1e3y1iut3s3tepqdbi877aw36grsg62d6pwi5q1gouwzar5mppw9uv8yss86qb5htcx1t4efhrxal2db37qmcz3qprzztds6fqvjceg229g3odtdtsshv6xvugp6yzhfrhuwxgghuv4ekw1dpsekagt13layoxzjcpavsnph4wpmtkb77yzycie3z3holmw442sc24hso5gr2vhhj7p1wkd4ol87cpit75t3gjf52cdxv9hvotpdccez1',
+                redirect: 'n8vql975dgyw8ktehafhahsjbboyg68aieuz46esinywvm3ofzi1m9p549a3orcqrai2e996yyzxdlbxo92n5vi28l08geoo60nvqs6qau8g89tf80ssy2xfb8ioweb2sajwgjnvc9g20rmgmnsihfn8kj4gb3flfv41mhhd820n3lzv52h0s91ntpkx17stwgb8aq51oh6q3dcebbqi6334z0imfed4cp12sfwlai2nc8hcbr44xjwz8i5od3kb5q6nh6r0jqvvf42yz9bg15x8144i1d9m5jd0i2juwi62i6cw0wcssfz38er1h6i21er807drdywhb1js0to78kz1q66fzwvnxor5ecogm8vebjjpjm7d8jqfnysimyosp2yk6mehivi559qs81zs96f1gb8dxa6s1dzvpfwi3ybj8occbxt9fn48v8ehuiyshv4ig2w7xby46thhcyipqh2fpc9xbhngwobzs240fbsuvwxkr7pzsq5rhsdj6kndlu4yxs40rona51wbew9ichnm2ozg7nd8ecm1hs5g1lizaxaod6tv525kkp3djf8y3gs4i14z0scsvwdgrob62cr7hccdz3um47mlzwvfgcr4au177y2a75tdgui2zsn0an1ejupq74ah56vfa02wzou5racwp6njck672wuam7s7qhxxmily3cj5qedgv24ckl4irc42wwj8tb4h3wm4blr5cbhv8mcs7qs5lhlmdpjfxwveeh3soa35nk56zy8pji6h2exoq4dh0aptv3nvsr0xc8i36qj4esijsmlr9676tt78vchowj7z9y13y8rkjhlzpbmsfllcp3132yk9db3sq6nhjbcpeulgc5ctjryr4q7ln1008oykjjf5g69t588x7l8mcof4l25dhyj1wvtxaujmls4q1dmzdfyq09svb02bhmo7wcp7pmtpd1bnmjzrfa2zt2s0jdj3dhwyf824b0f7n9jj0tuodwqfycmj3ehkpo5zka6libl12om2y2be5w9gqpve743h5p1wacm7dq5ff6q5aqestok7ikp3h2fu3tj33ybigsb01xoybtvg8462oleeyd65atvt0wd0astvdqj8htwvbfd0tom023e602entzu03prz7ldn5pl08jto0cuphxrjxvhzm4d0qd5jn1isbs1c3q5wflbkfu9tpiwhsnrfmdd6n26pp87mh1ox4r9tobdewwf4w1qaem60t7s1qng3xvhxk18r30h7q1q5bhgn8n9r9hl10b5yw11gans7tf8r7b37dc6gg551ym1f55ul1fz1msn0c02emu8v51hxoule4swxinzxl6g0jiydwnbbdced7q3mbyyr6o4qjjq4wk6zhdvavxmia0fd4pmm1ux7q4c35vvecb3yxpuxmml8nlqyb48b8lz4z9qb5al1cr9ges5dqrjfrqrvfymcgtruzxjh8h28qfk5zt083iggwl10rmmsmtqt6grahwoa0lvixnsp97lquhshdaz10njowzhnhz4rp1zbjn27mbo2jdd9o9viie47bx6l66v8sy5s50fy5vs8auzz7wueql9o76nxdoi3kvhxh8sxsj8j5wpst81em0xtphilav5qg7ropl48cwo4kydqre31arr925cf4135bugmm1zv9nnacxrvmrowbd7menx2oqtf88w5qygg1ny6b0iohuy29zjkz55rexlfksfwuoy2im2krsixoixubp7zcnfkdd2csn7pee2nlh0dig796wfe5e7uek6qk44hw12olqjbxux7je9kb5yrykuuoxfkwfw6e1xyl1yivjayliilbs16iql0883pmjfrd2tvqz6ly00z20cgtmnotw8ljkepneblwe00ugpcurazwe0k76ub6tw515zgp6q7j4tr3tlazpr7z85xbysznkxywsbmyf1e9oc6kbqd6bkjykmulizoyzapuld6xp679q9a2vbc1rnpbvsk7nnrpj3uiarnkp0ukag6f7xrqmgyowwpz2n9tf4cjvtf',
+                expiredAccessToken: 9918568777,
+                expiredRefreshToken: 4838031081,
                 isActive: 'true',
                 isMaster: false,
                 applicationIds: [],
@@ -589,22 +612,22 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientIsActive has to be a boolean value');
             });
     });
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsMaster has to be a boolean value`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientIsMaster has to be a boolean value`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: '0f668fd8-bac6-47b9-89ae-96a11e8f770f',
                 grantType: 'PASSWORD',
-                name: 'omcrw11939im20qvgoewrjfs80v24qj5ul9d7hm6hjz06edcfnsv2v9zoeqk02uxob4lx9po3rqookan4krfgom759pgfhtt0ojdeazcg874gejdvyr1gj0hw07r44e1hxzuodbhiqd6lcvilf8yebn5dlfqeq1c0l6e69arpwhm39fecwtnxxehih2x33rzrm3hkavtk226hgm5go9n65qkdvo5uhhyudki2rvoh2q32n5vsuypn2o5x3rpctz',
-                secret: '3m24jggzyqcgo4qkxdku2ssx1ddw2gec2hvpkia93gp2upze5ove3c70l2zdt9flqdxagc6u6944444pm9gl3on3md',
-                authUrl: 'f6pbd47da5q76cpi10yokyo3y6a5oo0fpeezqjgf12ye3055eyj40w8j8rvsom9fxus6pf6nvez2e0vch7nxo0d68awaoc16nriif3ra714iif917i1xuixisix7ttwato1kqkzo0tj2lpvvos0onfaxadc0osbhz52je22j2j4kvtn4oj8jjkb5gg0otv29k293m5zcyrfxepr78wn7vdmu226qp5dgb64unxmxdbvuh0888rno7pdwfo5sfsv4nib5lbepfftzwmorg73gsc6hjsdkjh7pqccb9ailg9dshn11ybzthctmiug478xd32vq2et39faxbc6k306lx554dyoyqz7mkcqaqiuagbv8buz5gzxxy5698ijpmj77k7dyrdmbh0720n0wmaklrkscrbp0j0n79t4pihv2siy8mvlmkkoefl3v1dam4qbndc0hl9bbvujwpd89znujvyjmysbbqi5ynbkok96hr4ti9ms27882qgw4am0zrhnz6n1qhxi8ywi15s9kpyf4xqanc0g2dltwxd0hpflxo01y0w4p5atpoi3fzw3sja1hifba39no9sm3hglcmsxhpocia6p6g56x03kltazn6eqc1hbggzfzqsvrqivj2lwgjk71gg6vcwvukbxvbow90q7nsom1zb5mn85bfxhvxy82qu5luo6rnoelqpfdinnn3qdayo8pklk9gu3o1qf410f5v9cpbq7em76ob86xkuxsl8it5sevws867ask59xxrbc2o4vsdlrbeq94oy31e51i5jitdx851spxrnsg76ipbbp1b6tlbvlu5suh1fbwkjw7ygb43laf22d513vt0vsy7h1g2tmj92oxklfcwkegzerwk1i6twj1qizprt0o95znc7m52wmfq38pc1s7py6sjl3bfurlb0osuro1nx033fvyajqye06p26232h0q8jilbou4680f9ob1bz6lg11kzbyv454uz15h0tfi7oio4t8f574c8lgpbrg3c4gkj5o212ud025w06tvi0jyvlqghxadg5alz8wtctft114zpjgl8xp6ggdmonudgrujtundxyqdr5s3jl1whzjz31xqqs2w9fqq18x16mnlyii53qofp3gorl2o1nr2iy9smjc6h7l4o0xaiweyyt4iz8xqcqe151x7p3irlzmvijh17f3al5o31pq13ppyi67bxt89rnyz04ijemghiflf65aqk0prdo540jwzm5dbstw8yaufigb4g0hbvtsdm8vq09jjggy9spe033gy7saefrm6anwmb5jcr22xf0sbcdzvccqm7plunxt2w7520iei4q9c981ry1zcjx2kectoe74ce3gghgg85cd02llroqie408o0n5rvw1j3s0yqmyjm6qx02k9s3ipqn766xvy5w9jukm35phuztol9lipbzesojxqcd0yeh9d7u1omsb8akwukjesvcvjgtkaajao0uc0m6g8kck3fw7zn50sw8t6amw8a9l4tgqybtj2j8xpz9tahe2ndblq52xwjaaqftxr89nj14ep47ja8srz7u30f65sza21pgy43cih5nm7goasdbxg3b5iy5ck1f1hgbsjwdz56s0dzq4o3k2c1w6jnn4leigywf6rganzf6w5ted0adoph91cy4zem14i1pl8s7bu575vk5u8e90eu88byrp8umu1h8d756autfaedaxqsmdaqe4p6fyj1yuuuaj9awshj10s1i3xdlqu7k77gqb2wtemb21bkdhd297b59nspaf1j1psoc21scci0rrwd9sgq59vmee440edubi20g8ydtmrjb2hn3vxwl7tvw31zjc4jz7xic0icocmuejt90zqbzo0v0jnelkcl1bclf4c3cqem2lu2e3kkmbdi8ojgizxi9y5d3hsksf94ui773e2pn4c89jqgk0do1ykawr89a2iy5knh75i4dsxd4d72w33h9rvk0ezv7hlazz7uxu92tyz3r8ly3jkmfvhs76njsryf48ejiypbq7w',
-                redirect: 'vu92c4ybrl37uemkrjyvq7dae6ke9hplahpqsbf6fwe37x4ngvg1jclb5llaxtd7xx39x3myktg1vffkpvzc5xpjzbplyvqwx7jsqf43y4tlrshfee5ovxy089ckngt86cxrburutfqy1n178z80x3ul5uto5yyti1sqr64j5xni4s8nhnf7q5qj75npew6tdlegd5vi2np57b42dgdboblu0w8bpo1q2ucvrkvnka1mchohx2uz71ars6kgqtrye30jwv1djsn50v7obbpc0qtb8qviq2n2a39yhq9frmvk06973g1g4eivrx10o7hxgdsih9j92kiz33i6k4cjzd0fl8a2jj4x5bx5iprxu14p2i31srp2wzugqzvykww2qm0kha4vghtg65qvch2s8eqi5nwjrpvwgap56bdfp4ylsyr6oznrto3w3wj4uy4gc61n31xzbbmh07ret9e0euf6e1o8gx80xbd6annrjh6z5yc401utmeji0tvtbxrj2g1cqzzl7t7mgymnjjujb51givu80tovuy2if90lhd0p2nsrxjw3mvyf5fu991fcxd56vj9oxh8o7xtcq5vtfzfwdo93hacqrqs5t1odwyjko6q0nossub6b9jk7wntgsoiirpj1n415moqdpieutj11n82mrtqwj2kdui82jnjljuk1j6mg7fainreo7dy9bx9q8t8mqf0hwf2pmyqrlzdigj0t8jj5q1j6ott6b981qhg0x0bh4kl9yo0nghmp16dwe21nt3aqsvwxac0o8foqoreyopujw0q7lukhum33gqw2hykvhrvlb9uk9srejhcr9odsm4ky43iixg6ldtmg0vgnritrl7pbbmz03i3l3mssyutu21aa5uxpyg8jjuze10z0ayslsvp0l37fzal30hftemyl46byufpchjqswiqmizqe7dfw0fd6wad0zb7oucapxrakoes22i8ndaqrkhnura8oo5c1gcwipnokh2pzxtijl0axr1p9p05706qthmbz8h6r8hg7y9w8j6qrsyklw699a606jaxs9ebbbdxxpdx8kri7e5jo633cnyc9t1kzli3wfqttj40k6ps4sfl3cpcgl8uyrsytm27cql9emw0br4xncr1g47ocd4dgp3169p8xc7tphh5p69zqk291j2ebpe3byxim6kbm464t53kw0fbb0f53uh6i3wapd3qo6ceh1gc1sslogdjimcbflhm28eztpatowpkduezegvct1kqevyifwp3pu2xeqdslcy7vs9evf014xvxh4cl8wr4z0qcgi4bkzgicu9ak7f7jii8wt1t6ls0ykspf4zxjdjah9zymhtfcifqa6skurxmam2ui2c97t955wo0xvbimblg6dur13v4v0yl6gyw6jgb4duxutjfszzstdco3w4jw0dvmmbd74w4wwx26w226eczdbx779gozwg84sckvacyi4ifmmtdpds9ifo8ssga375r5jv75agwnmvfbp2tyzvmslab0n8bes3dwmdhyp0pxod5t9v6vf1bzsojcgyul01e1qfn9r76mde2gcr1b002h2figes6qeqtg4u0q9v4o7f5knzriwmeqvb8fc85keiwuhmchdovi0hq1ay1xe4t1cf0lo5whgc4hwdjf7os31mfy94sg6t3c51cklxrvn43d0wdwwb3p2fjmhpbnkbgo5anss6i8zx08617v1mb7zx326kphw4ljbjh9i1b7p6oe4r4vpwz30tdqcbblsssnn01866fvr59jms57ljdadkdttb515921yp81s9fy6fs42jby42rlabptjf6vw2qkngqpy3zdvpz3ljvvaoycmhsz2asgtzbwg8exfmck43j4f8dzzhk1dq5o1zazzf6xj1ex6qo9tytzkqxfcf90e1i9zm86otnd8z29of043qhyszo8hg2ww220ic6cewylalgth8sb0s4be9fitzq5lr1dckc0e18fuslhlhp22rrgg8jnkle1exhtl5ae05f2wxnnu4or',
-                expiredAccessToken: 1393790990,
-                expiredRefreshToken: 1677500148,
-                isActive: true,
+                name: '8frtibvgh3we4tfemvuyziawz1brqlzoq078q3gixas13i10yshix702j0dru4zgk0n804hiup86sxgehuqmqpcr6jvrae84qnx63b5b4lts2tw0vk3ji8jzyo3plalwrc8e8hnr2y0ojh4xsp0no75sxn9xfo09bmpvmt6boztrqb2kr1bbi117gxbma6ati9uop61h3ufodwyhjaifmqj5jevojw0hk1xzcwvmzdyz49c2wgp0i2dfzqmhodj',
+                secret: 'i5prsz44i03yysri1dwzyrkpar8grh3hi9tcndvdf0nv04bqgq6yz4eitcwba19nwrj0auvujjhrn59qe5mdaxflp0',
+                authUrl: '4ymltcfyeuda6h17p703kixtfjp13aok3tztrqv6q9dvtdzw5a8gej6itjltupdb8w57fuod3fmsec3x2c4ppqfgwejp2k1e1uhhru71475uwxmqkry9czqyugix5nyi34703m6tsogxi5zqurmmnu9r01yxaaan09oam769zwvtbs5g97zf07z4sbcjq3l3ib2jgd55z1oiq2dnqiqqqwtkqg2n2sp60uy3nyvyoujs6ufe6tdkytdzayqwpg6nv4qxjzleh7afw0qo4foy8guyysk2mwbuic9rrmfv1npmxmk1yjak2v1h7d92vafb4xejdrq6c9jng3pfuqfqq0he0v6soyedz8w1pca5ri6fprbaykwubbemiwonxomlsx0bjsejwdlc66d74pzo2k3l0360g2xiyzbmzozwq3q2anbkqjau35eifhhcc4v1v2b4hbg5jmasmro1okyuul4tvk80m3ymsd0oxd3nosz4tck513jxyq7g42qd3sme2wr7gw7tbgekjl8axiktqahaxy0leru7nyjnm5i7sqmd4h890uw1mkrb7s6encnen8th6pn4jh2qjlgmal9m5yj9f8e6j281j9nwdrc5yh7tqkqt28byh40r80ikl2tx5pz5ubp16n8x7imhk58lf792pixpv5ku70qplvwp2ro67pv5suqnxey4jq56rpq3mm25tjncu75evexrmk0vrohpd3i5kxhohbwo1wrri2atllp9a1zags09irgr2hrvzz0p3r5t09yureylto4xnz7yh88e3qq6w83e63vzyveucfo3t69jyk4ithntri7zxadhblrk6tv3dmfl7g23uu5govxob2pqsxhcr46n3tbgrfehtz9q21iti7urv0fm1vruypq7py1qripv4wutg0n34ajiyh1gaim00ltoloceyr5kzz8ouyte99yi3hprvgbiiu12aftw4dzc9gw00plomkswtr7lu6ch5y2l4j5u54mxknze8ybnz22wvnyqynxdftyx2gm38cbqsookz0erfpb6l67hd7r5piwsmes2g526dhyq51b24cu2lgyepoyvqffit4u65z6cevff6gyysc6toqf7wszdh1pdjkwkswp11eyd1oo7ksihgexpdtwq2shtbtqgczr7lhkrjycr1r630hxenq554kf0l38h1guuk4q6a460558td467ub8qjdxb5afq58bvcgkcmfijoy4grcya89j1up4ckcerqhqcnq6wjlld78qavvuq1m0ob5kzuvdvxx3soda1o2axmk9edwh6bakw5j3ovjyinfage6kmmzeh552l78s7dr43shs64sv8kml001fi5i7qw8qs2dumpntsp5tlgl59wwosppk5d6i1qcgv6xe5vs7k5ci35y8accj92h01qlnflvmgurpeq6j31elula1xmcbk6b84orzd8xbbnjv9ffnh7qkf673i083ga946vc905hesiahzj8jc0gmqqknnm6gjrw1d8arr8ofvws3nifj85wt20n32qged71xgoa7gbyroen06ct03h6go84bxyr7d8277qtgzspl9856wj5b6uyamlvxobrn9nere7pjo4k2avx0zrgadk87xj25zl2i3hm72upl885ri43taxrqurf0adkqm19w7saeappunysc26o4gtm0bpjjjyv8qbuwdwy5wnlhf25s261i7ieel396vmnmltajlijk0r75fg58p1m3f9bvpqm395smwm1qu6zp37hv84seprwarv58ncw88fzi3veetwetx1dt1xsc30cpxgcfrzi5e1596ywzggq3gnc10rj5sflfit8nlle3765mqa8ntnnrho7e4ihopifc1ffxl900vcro6v92k0wb9h8bnmvge4im7cjkc7gcixzs1opnlgg4sbcczha2ll4w91gg1994hykttehciggh4395xk6ro8hnhidzonzn4n0urydmt9omhyzuye4bzpxexgwl6vi39xqu2t6k5oqc07vof99igno8o',
+                redirect: '4g3ei2m59pbkzul1gu1hdtgqejjl3i83k49xihbqx5k5044q7jsbkmny61xwfqw41g2gjh6o5friy4tbu5k6bx99k6xqooh29b4b3fwnss5qvzth3tmfvr7bvoy4etn3cvfecc8cfq47mxb7ror2dgukundm0xbn82remfwq3yd7cwy1n5ba39g4gj2e0cuz5lsjx7n956pdz7veq3s9ou9ezbribcbvbmuep4xoawhoqa2munlxnrmosd4tdwfi34xz04oljy09rmpgofqbuemeag6hylzf4n3gqgnca2akb59ritovnibr8k74k8x1uw6aqzi9h70xxtp0myw1n0wb9vfhhtmfk8lkxmzmmtrgyg50f9whpvb32hqbulib0zp6c2n0zymaiu65exjen1svf2i3rmhoz53oxc9xpo1klb1r81isxxu11zq4mn33zrf6st1ko6k467tnrcjuvilpf8jwpwbywy0y9anpulzsx6ljt3evgl1jhqrls1zw1e7ej7v8xl4wu8stlp1k9bljr2fpkd9lvqfpywavwikipo1a1jj21y4h6j0504ps8llfg29jvl79wxskbc2fpqitdwbhr3jyzqf6rxrjsx6u7c6g15bjkb9njqtz0usmevmwct1de74i6i7jzhjz5ssn0yc9dk1p6a7mztnlvoqmnq4jcbr5ome4it674odmfr94yay0g1f5xscgkuun6n3izl8svwm24ep69iwe9jk69z23yh5m5btk8t49q3st6r98o2cjuqml7k3f9fpb4thao4f1b1kfgt65zj4agmzd84wy0ha34vcebpoiuelidrpdrlbkn7mh6uikc4zmjkwtfzuc2ley038sp6u0wyof7ne8hvphybcqaiohbvt148i1b8h4bebskary4sva6vlt175c7gbwi40fw16p2dx8o9hns5q2l7v7d01aq0xlolhh4292184ze80plu9c3x31t20xb7ij22el2q6tqqyzm5uvvxgkscyjyf7f5qjcc24jw3m3cx8kqor1kjnc9tlyclqjtrzoupk96genhnperzrzkwjbw6p4bk5jmiuhj275u5b1uab9n73a774dg17oqgeyas1aiu98okvqofjc2ngpipnh7l3c03w5ej32ftuegaoii8h6fcm0pflu9h88v0528gm6uqx3ti90fy61tmnmijc39ir2upw1w78dklp7nxjejdssvkwqfou9ktv1gqzdggj7f73iqx70h8l9aul9f9svn54xh73feh4v1yh09t6x803tzcgqq47ukinfeychcui2xojmtfkfy5y9hys3zyxaaxif3eekbkhg7355yf51vv3xasl5fnvedog810wzziorhuoydfjfpugujbp9zbnje61x893c06si0id038o4e3juqu9ldujvb1dfoh2t4u16bk2fzqtx3b7lu0t0hmfcwogxsoqwugrqijg1cbe7kz7in5singcgwadxz61dvy8x2aq1zk8qol0wsm6beqb5qzanl3bok0csyx9xdcixb0feqg3y12t5hci6y20vb2wsjhzvikrcn4hnzivkabhtpfhenqafwsnzxjfrlgt8azqzulcd0vd7lmxlmjntebtgvnpnnbcsty1wkygizsym4fsnwnfrjuww7jb3nt78uh49mvboxkr7d0w7uyl67xzdrzle9rucppbv81rm0ftybwa076pwxzjjx8ezvs2jn0hkxm8ipts0p4ucg0sek0pk4vqrsvib5ue3qohlwf6ohpo6u8oujbzvtnk9zvrmfda3mkzs51c3217ux2uzwbsaktt2pppk1are8akzcd7qrcgkjlzprg97t7wn601me4gek8jmaavy5n8r9bbj2udv95yn3kyb2gkskevl9ugx9p74vlbtvb9ko1i8o2u1fjz47umgenuoqkvxqn4avd0nk8beqinxo08hfvq70vcxh2hp307wwdwjcbdzhkego1z2azkyzjyize54dy9qdy23rtwjljwgww2bmad5cbqfdib8ufzkywh2',
+                expiredAccessToken: 9887020741,
+                expiredRefreshToken: 4661991765,
+                isActive: false,
                 isMaster: 'true',
                 applicationIds: [],
             })
@@ -613,25 +636,23 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientIsMaster has to be a boolean value');
             });
     });
-    
-
-    
-    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientGrantType has to be a enum option of AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD`, () => 
+    test(`/REST:POST o-auth/client - Got 400 Conflict, ClientGrantType has to be a enum option of AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                id: 'd9690f38-de25-4d24-8fec-f410bd98c905',
                 grantType: 'XXXX',
-                name: 'kceaiwi3p0jv6iib12ih1yfssdf1vboxmgjttxt3j2zx9dlhg2a7p0yldkqgqv4qk2qnceluh33n4fe2l7cfp5ygvwuvcsm2jem3m88404l3wywvh1uygkixpr6iskk832satd5p616iujqmg0dw11hp72mhhtsl7lzuqa712kpchbn29zisfmugjhshbaih2wtrzoqpgxhwv0hs81ipa1q6esvbvbvuwyzqjvnckrqr0gvfcsi3bm0ej82v8ic',
-                secret: '671jqv3frcesa8uenrrtn0cio4sondj1d961q1018awynt3rn21913s9ync0zxykxx7mma6cy4mlptb1bh09iwq27j',
-                authUrl: 'qyn5l66gjyts99pipoxayv1d0qzxz93bmvjmcq780mepnrnhbjw34zn91sefdtun4qaoiz8fxf15ilmiz4jx42esbxsm1ytysobd2uls77pw51zxfz1og22ohse7ajl1alvogy4n6dh7q2duqje2unxs0rgz43c84mx5p0temu0o2syvxk5hd7jq6ws9pec6zimxmprqc6pfbbmm2rbbg78hapc3zqynoocfy7uci2j5kz0590viwthu5dmyvtemi4n5av28x0c61dxb23eef1iwn3enfadyauq0ouvh0zxo5bfvcbe2bwya6zxj7qs081hh6tccctxj20quy2md7gu2dqairwxsonaxpvo3kgq7eogcxhi3a66lx3efs08lee3vbcebo3iji4exow9mnxgvhxm1wr5c5lpc7d2qo2puwvjex9jbgksebas1u6zr0dognee5m9cmlhl48vzecqoo6dgtrbl67m34as7iflais7sxrzjlycrnag9usxbhcykkoure6tkfcnufyal8eui5kpsx2jncy6sran1tgynt5zvx8rxt5aw4mgjlr9h6risc4kj2k9mauoh44c40wg3oxwjlsak4wg7qmku0pv447c4u2oj204ex96vm7dzh08l6pqx8xe7km0i9j4f9rhhfoenp0serlu21q7722wpatpps2uu8k48fffjdoawi7tpr9m745fvp1f2xrutfebk5azf8u8hrru2pw7h9cu9q84llwrlu5m9d6t05hppx7rokoq5q9f6u1otyrkq1g22cjlrx98tufgckahwrcv52wvfnrw3ajizz4ymbzi7ampjhg3ed4zh0snabvp30009cvcjtdv57jz5rr4x4g1iormyy1uu9baeqx0kctyclcs3o358z9vd31044k8ju14l5g8f2c2l9tuygj6seza9sbqcw8o87ex2960mzflk0y7p1qu9mn2kvh9eewwrynx89msez38dd4n7ybytuqqf5fv403he1ff4tqavh0hunkt2fmb8tqjs4pgb2v1shdqyuzjnspcxmfuqul0e4y6jzqm5qwlnfynw2afpb0k8rmxfx8ozgbdt1vm5bl2es1ib7le3fwby4iglvuiumg8ix2ap7g8ni2wne2bq96we6etqetlkx5rh79u3bkuyvvoe3etamooo3vcbpx5rni969kstk52kpy7256ouwmyr43u1z93s4o4tnz5mvgz4ojg106xethhp7dsm07dc6bmiqctdnhbmteuvdqqngjfb29wwqx9yleo7x8dbpcuuudzwcclhodfm46jga9zzxtnzxgh0p6egb7aokpevamwoyc234bahkstuw5ks6bditf25ys9hoqq7di8y3kez8d7flby7raw1kwc0ylpl3aelogppwja9qdz5pp5zg4pdt83ufxotofonjlovroffn0ys2k9e5f91dqiltfu2pexozznmqn1x2k8b2gvhgn6xuij33xv46wrdbp92ywaajh0xgle6ic9s47guouubv04krv0da0zizcecig3e2s5exqcphdlspz1snhgv85m2hrj4ent0ks3ctj9829k907wiq86i8ujpbib8g590jzlv92idm6ahhsbhotxnvhkbcj2g02ocmkk6xz8fel4bl04h7kgsp8nic9u9w1yd9p5gxd5begobg8i0lzf0uqfo0md1zp3v67l583333aqiwr25mkpk55fprczvzyj6f1v9n62c1jre1h2hwqp3nlprpinjd3suhuda9him66ft2h02alcvezq2s9lkzkwj0zncxmxjlc6xusk110p70yzctv3g1zanyxz6x7x5u9cmkudzcnvnkn53unmjutrw9bm60z160oywgbtbytau54n1v16vvp1zn1et7f3yc4ml7a7z4hcu9hjtpmtk8h9zmy015vbt0zb1aruik9a4sfl34peh8bkqvbi0tg7kho143td8gjfoe7zls5ta8ioxc5hfx9c89v2xorgs9lwde0y2wno4jbl06j90cp0msofk0u39g',
-                redirect: '07hh73vk015toocqg4hc5xchercbitxgosryfgsofoy4wa2hxspcz6qt1oq26tti4jqqr0v9ac3gb16hkvmkcz82ptmtihj2ymfigukccclcoxq3iu1efyxehhhjwq0vh1bgbvkhoa5eb82aynm4xhdf5gtkxpc8c0xuedukxl439i40ty0iv9dqch8yiokl92vgluakpfgwclosyzvowouyzyyongfndyddq5b8ioznxvx8e8cdv70zpyrmznhl7dbzw865fv6q8dasro2q2yfzwej95n23yxxrxw9mwjmgtkvd1gwdb55aty45vmg262td5db5eahal0v8s3uhxwzyk1102x360bmnq4fzhdxy8tbfvvdin7zjql0r3n8xy71jblt1bh0gutaszywh7lll71oif87m9iqo2fsju93szx65dkd59uo5je14egjpspkgxh5t7qwswp17sx1y88wj0edaq8l5rayndlgidmv0hcgputobl6zvnrfz2x77c866gr7dtrjsmr0yaa8eryhafuwgvdzv0okeawfbrp2wygqf8xn4w76i64z73rsd3yr1gpnbbyyr54m1xpt7zc17pxzxhn6v07we98ytota449simtefh7p2c4frnan54rzvfsyt4lh4zg6vhfjqosuoryqn8n6lk5qw8qe6v7nbtb2aczipbsaj6rzm9dfjd2qr6cp3zhczoktc1gj55sdzakah4bm8krgs8i33ph0iiao11aq67tywrb2mwu7yqx2qvf3n8daarp1fper0wpkrcrc0p9ehgk1sxi8zlhvnv5hudx2ixn2bop7i9xz0g96gmrmzdhltgnifj3n9u38677mitzbwfc1a5y01u5sgmylkwq0eijukqnfx1vjkt6i1il5qw1b6ymp8rj1m6fvnua0edg51vfj7rkqu92eh56esr27xgo6bqdmrjnyih7tj59fbyfbopzkcc1e51h5agvwzeazv7dawdy7ngtw1mx12sh1ow2b4udhjy5n4issnqw21eoll0p2i07ylh3f4nkseb04x94vrqiosupmfxv3dg3gg5col8zecnhjvaujatw56evbxi10gyomia7uorkqxm38zcnnbmi1xwnq60ihl05eb4g635tc3ixmu6cmm066kznq00ty1d4c0ph963ftjfq4zi3vd6w6lxzyfmhtqd18xk01z7tkagakpsolocp9d8zbqrajbo2dwn9kqmfdm51pvy8gf6sfz1cj4c6q9fxe1t24nhe9pjn64590mla9l6uja75zk0rz0fr3we48fx29x20u1oq21wddleuwbqdntewtfmkll95zxtqxv3340o2fiatumg8jz913ysxegpqf0r4m1q40v8jc9jj8q6xmb8aaltr6ivzv0b0n0aydxni478wry22nja1y6s9j5aachrkbnfpe6g2biyce1dvrvcohwq7ptmjj4qjubqszzna023vcujnr0ygo6j07y6spu3r2yg0fj0ifa3t06jko65h9nspm7x778drf29mq3sr7f9laf6l3ds84opb7okb3ji9r6xxcsynt17ixekeiiqn2paw43dw9u4jyyenpv3zdspktraox22w2orguzdnvdl3qo47w8adgzp2s0jfiwdpexhl2lfwh019f7ka2o9gvuiza3ozqq7oidlw89amk65jpzn0scknin5vljbbruqd68qbtpw8pyb8nv0ycmjrfnu1lsxkm130vlviv1akspzl4zzwqbugu64c45qgw3mllsw6wjx556sb951xe4jahfpx80oc0afdl7bmanlrp91ta95gyviq8vbzkrfuykqtkpfwz6lkljgczva55mcc4w5zqw24agpl5ogw728r5nqup6z8kfm2etvcb9wfjz17ii5e4q3t5ihhscdyuvj00qztzva2ipbqrwppq3qayfmpgzru064r83stdaxdzzu80s65co13037hqqa8dlwgackad0onvhiyesusbw1v24vrisic3n4wvr80p02jaw05pxs7e0y0k3',
-                expiredAccessToken: 4038534372,
-                expiredRefreshToken: 4508545204,
-                isActive: false,
-                isMaster: false,
+                name: 'gysqac78nejt7scxvj44r6aj2um5kn9z32i4rx0wcfpfsg4e98nse2hkmni4k6suggoymrd6hr4ec98uq76vr9xdfayteuf7zrncvfrtlwt6du532bakx82e7ifk0bekzwosipsfr64tlylbtz0cussdsgig2ztuy7oa1uhctz9ur4hx1ay2686n0wsedsqp5m1k47u4gha51lvwj5agjdsvjmvz06ztplp27xfbu9pdrlbg309tpbhj3tvlgdz',
+                secret: '3d6kmuvc0ly2z7qeb570xpbc8yb4r58sqsyvtbdpn0w4dc09d4xj41ayhejxh3mbkdyscq428mtttxid4j00xvlijn',
+                authUrl: 'gy0zjnsv1fn96ni0436a0cdqkremx53klc0eo55gwlxnkzx7qmw7brl7tmf2zlkyghvxs0nqvhf0oh9amsrzwms9rcmj35xlf3gd7dioo9u5ireuigprleyc538ju5tu9rybcy5kasu026t6pi3rlp2zkmgjqgou8gbusbbffwx9pljwlwk45w1p0a4e716fgko8t0o4hl4qmgxjpyvwmokpk8h9fifbnty80h09oyi4783thud5z1bphbnulxac35vywpyge7jj4osov8hmny4hyxkko11mk4x8m927cv6nas1g2jlc2mbstigfo7w2fqcsv78fd9xkjj7evspybo5joblyj2ojcetcat6gqu5l44y0osovxhdzwdw77ri2xsrja19sehjbzgx1hjoz3ao0o630xnydwunip050yvmygzsnovx7817ljdbw3id3663alchdovzr8axktmx13fbclppwy181lbakm6ap86xggeqc7qdfofh3wsa7onvy8devpp2zwit0zm1dpssewtnh1q4bug29n8mr687al320qvtkkzhsucwgj4o1ruhswv7ktnpcwib9fmmejnm62uiux9z0mmzqhwczo49hx1rl6xynnhw09jd6d60ehtq6mqx22vtfwotek574ums9o26w558nwqwuabniwp0hldnakyo3s82qvjkg8wdeybie09flcrahao7zmcyc00ub7b565fleocac8kegtv7b7l3d42gn0cxt58t96sizchx36mp1caouf404vf309yr7wuu51izek2onvwd10ntzanh2fzma1ac4opm5vrpocolg1hnqiyinuer7rd2xi8c7een6ehl4y64utcwgiog6a6ejm8oz6ej807lmuw3a8kggw5yilv20sz1czbhluxkdlxl64vuo244mubi9c0un3jdmajlnts2xm0obw1omjvruq89e22l20x9ws9zupji9z8ugoljuwt4trdlq0r6jv4njr89vjf6ygcsy5jktym8dmxmif8l618rpwrbogxliasulb2u7vi5bmmx1zoku019xyxjgebvfrkyo0gst0kgu4zi3vr4356rlt3qqg7qkfzvq4e9i9ddwoi5uzewbhwrdz2cyx0awgdppdbgvt530wwfy1ilfuc4pmbk89kdu8xhwvs6eivsvwu6aavgzy5yxuju30jlfsp6mw19qfcyqp4l0rntyaggx11aak8pwp0j93vu7dc1v28ivea85xrlwdp2b7rlo0kpxbx0an3emuuscta1q015gyaae9y2lzfn3slld3gul90d0jwgopbtu2udssus52le5t5qox9w9ow41j0pd3xya7fs412l898d20g2ql0dz9ojxys9wksqe8rdycazs9pt5gsqhvlu5t6fb655h9htinn0b83pjtkv00desp464ladwjfnfbarq5dvis3zi2igf5k3a74uq31qd10mo2l03p7hdv4eyhg459pfqoevznkjl5w9hs8hf0l10zgz9kwelgq94auj6dphho6j0dqi8ry1t4iuwrrpgsm2hrjr8i316t655kafo63m6qwgs22ksblgtyrlyn06t5j6aucpbj1g7w1drblay2cmevpofev7trueq67ku3povp859p76l3mjbpzagx3u2tecb2d5n0sd6nycz5lhypx0iib1k4sjoier7quzfgdyhpkxcg0sauutmjrcos6g9us6lzwp8x736wp02zle43kop4h01dhttqbvhu8541u2b5ajn774xwes89d3tiu4813qznum84u1wh1jyr74tazbwdsyynlwa838gmzzb8uocffv2dl8jx78c3gx3jrgtdzeruezn0kfn6da863ysgwvej1e8y04a3i0gfde408nw6odr0feu9svtl9k3p5i05ctr12n0wn0oqeboqdx1fcmo63f332stq8s9335bbj2yoy5wslxxn11cc4to2hrmuq2lgm12u91sddexv98d0c2ydu298uqoamkcpua4outs6qcfmimwxpg3jrk0',
+                redirect: 'xq1szthe2nhuoizs28jwl9bbvktpjzipgk40syga5tm2kdjtyqwyxw974vf8uqfytam7cznne46leezbclmm1l11xq0i1t5mr6u3qde561vupcmnpfk7a4o6wvpzyn2yenk9k9p07jlficr9xp1d0kqeprumuatrflyl7qlmq0bqc5ix3lvfeacpn2iw86fkxluabl60zdh5dvbwxd9r74k6w8oi3evj7c4ga0uiy6bx0se9i57wj1yddhfnqhpqutj2ko6n1sfkcdbgpaaw24opb2v2aqu7g9z3hnqiep47rseqkms673di96dpoqccmo71iyimn1anfszf6dxjzzukjh237fqtzu14sk0gnm6v9qpgco9gestucur4gmp18kwomkhngzefymqzqo4f9ibsxzcn1u8p1ilp4o5b074wqij3dcfdgnlp5bg1rpq5qdmohmr3681j42h02tav2z7yxznxn85f68r0cyb8kid84ny50yci9pm4vglizmt466jjm8nn1gvhxmp4xxi5ysiva6cjghxlxgxg8u1tuajwqv2ju97jiy86tv3ov5270vsbknji96lnddsd6msxuqlle2epvue01kcf38lb4rvf86pz4hbmuelwcr1xq31oqdof5ka3podobkh9ruxrdsb6y8loojnrr329g1vvxdtpboaqrca6lownd31mnla3ibpmzjnuvwafhbxrqyu3svp0ctojw8mx52uuiluodqgpwsw62ail377by8pxnq456a93i6avm4nwg1wypr6bao4vwv6x69qukxikx4cm30sfqqxstclr4tvtwetzp5o9oxa9ir1u0jdlvwjwoxp2yzbeyqd7qrzu6ala3pbnp1kou28cjm9qppnxt3q7ukavxerepybqletr0iig6f1hfrmxt06dvk700s63k9yrwtap8t09ql3zszqpov5a33ax3f8qgdssoiawbzmtc34ow69kvknnsogoh0gg8oste8407frtf0uv7xy17graykrn2anxv03kupochptcwsz58o257jicu7uyjlxqa0ki3jqw957xyx0ucuo84ams14ffuaw1nwrjjta83xvkhprvoexu2tks4dr8r43rcv4yn3pblzg91uvmwdy2hlify2kofdmualykcf9y2drit11wmph5xsbzjfljc9r0t59p56m2rq6anwirl8cdp211d8v96n1fviejj43n35iv7fayk0nc8uvqfbqknxwxbf7fi6qydlcyp2c31d3hou1gvgz46raec5ndjv9yfrx3kp4z4538p1jdhvr0ky3v1lm0r3eb0hphk3mt81ykthzsgqfxbcknlgeyxdcqvvvj655268fqt2ta2ycgm4s6ne4hiq3lfsl3d236kc4af3qoagqhig9gtaqulkj1652ci9qjxmfrn8uf2sr5w1rno8r8a92xhxrbc96exa0tpx1pxvbyjvqid8lvpnlrcrukl75v4cov1c7b9me9r9kc49nc4ifdm6grwjbbh98u45t0xepppy504rxkfsjx6sqky5l3e15qjxf5t4u00quwn5io3pv0qopw1696s0jvjcuesb5gdhag4r1hx9g4phpdwooz7tueyibkmkett3fc1dgl9zce2smwzf1t6zv684moe5f3nzdtggrqxzjfped00mngcp45b28w4u4bahztl4k89k5q1nuenog143sxe7kzjib7yn2un1osidc146cy5y0wu2lrvy40fx586yv88tf5hzj2qfgklaq0bg76dmii3l97wtsqluelb08m4q39ushmru58q8oe7io3vjod472wlrwco9u5qp0r72oj5zmnarjs4smc4g42qub2dgfsf2v11csjp51h9kz705db1xhh4u4ncl4qgwf3bnvbwpcksnm1j1cjxsvnzrnz8rnz1gpze8nhvqhqn6nw75iaa1a5rjcr4tmpf2c2uivr9enp5g9cp81akgzvqg4u7y79exwl795rnl5ncnb4fc8fkspgrgybg669yy78j95vg6xayx1p',
+                expiredAccessToken: 4120449564,
+                expiredRefreshToken: 8029508672,
+                isActive: true,
+                isMaster: true,
                 applicationIds: [],
             })
             .expect(400)
@@ -639,184 +660,207 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientGrantType has to be any of this options: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD');
             });
     });
-    
 
-    
-
-    test(`/REST:POST o-auth/client`, () => 
+    test(`/REST:POST o-auth/client - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client')
             .set('Accept', 'application/json')
-            .send({
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'CLIENT_CREDENTIALS',
-                name: 'z3syr5qbmqpycsee0nikhdpxewaliacpfmcguekow7swu7od5kgbsa7mvpxfjx5dmkhdhvj5pdrxpqj515znv0blfzw92csgexs32vzv8yjmogmghbnpokjcb949gn2h675z90gcw86a2cskgkrdewws9jgqjofssw0h7rsmuzo2rh9rwvxe78pgppvgjz3jtdu55soe5bzgcq5ao7e8umgo6fabmx3ysmq3p168qzdop2um7u76p3pzlgkp7eh',
-                secret: 'uw5ns8nl6lbxs3wpd0pkmsuaywuq55yt98doco45of7iiikrl19vwojri14w10n2jwe90ziefhgmf0a3912gopppmf',
-                authUrl: 'sbfhag4p5tn7e002q5qnmuz9nz5hsb9icdla74bzkzdnujfgk5xwrjjczn62wg25xhm5fuh8m0lcwbz9pxhl72fogwpqw1u2m0ug2k57zpv68hthefnlgmvmutqeyn962o3qac5rtdlhwknei5zormhf00dplr759oh1ivxzqecgf0y61d9nhsjapkqopgatvjp2i0lt0dqardj9sq0outgzp72oryo9wxwa48p2gh2m1bxj3pvf5dhy6o62o54satvefbyn0lxy6zxldmz3jnp784wc8avjd49kxe28bpt8jn65ofjqqrdr0touj07flpx1a0c0tzdswc6xmjcs57k3ipc209qdq6cxfiqi469rt21tqmk9ets54zgmm5j2j48amei4jcbxzepsfc13i94b80qmiva6v9vlp1armipildoo2m2gxpmpk7nppx1varvfiavt7j74d8li0v9xn4ybyyqyvn19u7lp6gnuidq17sjpgdz5857rw97u3hjoddgfwx8yn7imgrxavt3p1epbmx2r3ciuvimdj54iw0ok5rgtuqtw0r2h1yzngx1n1pnzwtxbm6qbnp48620z36s391eblgfgopmf2vbu8tuwxvzqncdjfy55dclmglpt9tpf4l48fqmb49vgetkucaynq3ogdd9s4qpnplrec8drvoumz6dyixg1n3umkvjkvg41s7g390c2kvtx1r861a2dadq3gxhthf98pl03atezvjufy4xt70depvqnce231995rolszvbgb75l8hlv3fzj9rzw7j6m1qganx8kt0xia014su7w7p7h8f9n8ewkjkxtorxkipobmyjcyqrr0foxl2vlihffyoblisnzzyyyuebss51uvi6ajd1fmjasf0585i6cjw75ti7j51u4djn2bml3ybclu5ba54jmlim13280rxw4nfg6n6e6q4oso1rnv04vrmqhacqahd219r71nyfo9fgx7520popbxta6ih26c7opr38j1rt9adigfj9e72rwx7yfvb9i1363fu4c00bh24prqiigzhhhvs0ntnvg3i8jsub4oon01s8jtapseb1zza627f5adoa0hya7gglf42gew4qa6fzzv1vloucx3h4xj0bwmvmjnnngaepo0naz7uybgxkngxgf5tmn99fjw39xutxh21i0tv56pjd03r31a8lcg8casl2q6iv2mckhytn1vfcsf67zgr0ehtl90kd31hnm8aboc3kyeirpodi3cfe0vjc34xiqn8hdpg1w8ed693hxo4k8mzcoqbdo1oesg5w7lkttdnyaf4o7jj2ah3v0gbqywn993xu690uz4lbkxm56imhoigy44xvfo84n6q70mou1savdyvqh4bukbzrbxl3hp0r86ytpvj8peuteafwv2wt2jqqqkczxqibq5hqa93eszq0ni3m242p58h7juaotqqvkwnfiyo96wr380kpvorcp80givacyetj0tfhmkjlipwqicjp54etrxomnvwyp3nn53d38eadyhgnkaplt185ohlt4c899ohma3nkf7z02qhhkzgdxat9wyhy6u4mp3erahh8gb2w7ow4qhfvn20tvsva1wmbksw7nlxwlhb79oqeg5k2sa6vohl3yeb2zfpt7h7awjxamdfzzk4r4d0ztq8qiu4q9707jxyzg2o8itcrflgr1ltienxprvzmx4x18t8sobx707mizcumpxyvnagg8coti10krb1dshcu5t8het6b6w6s17i5404j1hj7j60vlqq3b1os7wwug5bnpxqqmwd9ibvkajt17w1ybovslg8we1med6mbbk3vs1x0ni5havmhfkarnylbyqldw937alld9vwcgpkqw4tg5zw3cbydu7qfd9m4a5qmpzoneejbr5mbfxj9rjy111qgo1g3qwpcrda84fjq76hnfk4014y8xmqk1wjzvfwvuf9m7b2fskyvak94gpm04v6v87ye53e0pl0t45wpo0dt6pcngd9tasckpyz5d32sqi1go',
-                redirect: 'pdhxwt3xiyfn732hkq2n587ilst7r7okosq1dz7fooc9msrawkxj3mes09mp3j4sij6ypgzryc8jgygbgqm1a2oqgpli3t83013chsrjtinajllhj4nq5pbzg85nviqgxr0s7p7ur5cuwxiijnbm2v9m5daqu74nds2k8zjt6ns88x3iwoef7dbjy1qj6vsqoyt8mustyiu0z14kq0yv5j4z3t7rz8xc67jze23ryz2z4hgdy8ovtnaz9xcmkts1r4l2k4mzekye9rindk45hx5qm8w2xtrrhkyhzxd48i4yz549vv013nqnseqs2h82q7nglwvaanttcsteo89l6ox2yb9l484uoag7c8k15b6hr3dfe7midrmq9hdkqxclk7rqwkxxm5h27lrf3yq107ruc4xy1k665fshkvextyrf95ow02i43x9umqcmn579anczu168dhhymqb5ewdthewixr4xbkfu33st7dvm9pq9ioko2f4y6nri8orvhxof1nqa2rfx2oil5r34j02vrh1yf1iti1d7whef0ed7jmjkczv7xeprfogbx6vz2qd77fehk2xjce4vewe6yjdb9nc9utgtud29svawlhypkpza9csxaaty0lmfmkcr8ocz7n1pmlxrxt3asi24mtfgoq0qwhyzvq36ri29l3rv3r35cbhf2y9laeat9d7fq5trv02umzfsf58ut7iii9bw03jdie5j6kongb0pvkaoggrp2v1weayzdf5g9ii1eobaprskehj107wdja1l1wii9feop9o5jakuap9tekyo9rk51l6dkyajvlxwgr1dqud3s1otwlw71dpwbc5uzsuka93wev93r1htw2jh3wo6h0b8c8li6qqgff2lom7pdju5xkhtfg7m9xgk704pcpv37yikpfuffkxax9b5z56w70uo1otcss7hkttbf38tcjz20ijab67754rd1govq4b9xbqi133r8jkze5dq53u8709m5o2o6b5tgesdygtenjfrlyic302bkl8yxg7118q0zmm5t6ajgtf00a6lgxvfxswg0j7q8i1frgyqzm7bjcuioaq613yfsscm9pb1ktoyjon0bv6ejx6u5rdspu1xgvw9rg253dfderq1y274z3rea2cu035nt7qlvzrk8yxjct8zm9avtwrmh9r98y6mm8dgy9jmweytj5ntkt6oyo77yj8im0lx55wqxh2ou0upg1w27t67lyim9ee874d5tv3bpff6fjyhud5rwozktstwtse2gu3satde03tvz9fvpjp4dowgi5i2tsf29zhimrlhxmct963lvc54laa0gkd2dyl0uz804b6h2t87c7l1bkliwt7cjgkdcrxm80v6enpmbk4tvgq49zv8dk2uz76gpe5szzys05l38kjkki50ws2m6l2yrwzmgspt78bver6dpmns3fz4yvdkrga34w0odhnk93kkcp87mkb14wbhcw3y5icfaserrg699mfgomvhd1h5fmhn67f7um9atqwwl792wyo62u3c6977wa4zn4iits64iiscj1mn6yk96mti2419p2ix6jlr5lak3bx3nro6j6m98e4u5pwnkl4l4so5h9qk8olf9atbvl5hyy0yis4sjqx928tq5cesenhx0zmcxqk1w1dnrw9dwh8vwevg7c5bj2i1hjliwfihwnai3r4ocvoueaoaytw24x8mcyb2lmh5pel7n91kvgok99d87sdtlm1howu92zejf63vedlwxwaqd0mvtuzf9pjddr4zggw8yv3c1sl761un2vy3pzzyivsd36c40hj5ug0tn9zq5c3hgl4041mberyml6gv5as3h77n3ibf6nc4fc71ubjl79j4m802088hg25lbgm3p9mv0jj2hul4z7c3gvpew8p60bzh47syykjs4pqemn4kmamd5l73kpomzuek3pp9srvyhg8a79is8lia370zycygxzxhz1s7mtr4wb2sdaa3kv9x0x2ms3o4l7yb937jrcyunw42cee3oyrb',
-                expiredAccessToken: 4082193437,
-                expiredRefreshToken: 1432208495,
-                isActive: false,
-                isMaster: true,
-                applicationIds: [],
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET o-auth/clients/paginate`, () => 
+    test(`/REST:GET o-auth/clients/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/clients/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET o-auth/client - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/client')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '906d954b-d102-4a4f-a095-69b76ad42241'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET o-auth/client`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/client')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '7b95f0d0-bffc-4ada-a59d-77afa8ba866d'));
-    });
-
-    test(`/REST:GET o-auth/client/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/client/bd87fc92-62b6-4a94-999c-ab7fa2979be8')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET o-auth/client/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/o-auth/client/7b95f0d0-bffc-4ada-a59d-77afa8ba866d')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '7b95f0d0-bffc-4ada-a59d-77afa8ba866d'));
-    });
-
-    test(`/REST:GET o-auth/clients`, () => 
+    test(`/REST:GET o-auth/clients`, () =>
     {
         return request(app.getHttpServer())
             .get('/o-auth/clients')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT o-auth/client - Got 404 Not Found`, () => 
+    test(`/REST:GET o-auth/client - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '8a02f94f-1f32-4c80-b8a4-eddff563252f'
+                    }
+                }
+            })
+            .expect(404);
+    });
+
+    test(`/REST:POST o-auth/client`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                grantType: 'PASSWORD',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                secret: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44',
+                authUrl: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                redirect: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                expiredAccessToken: 3276228185,
+                expiredRefreshToken: 5027358806,
+                isActive: false,
+                isMaster: false,
+                applicationIds: [],
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET o-auth/client`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/client')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET o-auth/client/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/client/8c3ad696-dbc6-465e-99cc-62732661a15f')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET o-auth/client/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/o-auth/client/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT o-auth/client - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '9a4e3eb6-1f20-4bec-8a4b-5add773001a6',
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
                 grantType: 'PASSWORD',
-                name: '8k0svsje93pnxryx5ahrx5r8is6zp93naq45a2kyoe2klwbdszbbzpwbct2t5zb7vvos6cqa6bfnga6h18dsibbte8jslsu21pdigtg0xa7sr14yw91fjyebv5wr384p0lf32f4c0zfhqmk9adnwpjaxswimrr5dp9yv0upikb60x6z2l04lqhn2t685c55upi7pcgu7zk9fsh0a8uwkoeusi16eta5nlj0jhd7p86q653hcdm8jy39hk128i53',
-                secret: 'dtodzc4oknntbx6lsh620btn1mvft7cxu9faj87bweqd42pj8s0cbieid4jw2zfx0rgzccy8f5d63sn49hnbjkdc9v',
-                authUrl: '5caet9dg8w67rkl8mzrzlp6bavl0r9e9wjc8bv1lg7krv4n8n78yy1lzywoh806gb1hkz96b0124tysgg4f3290blccg9knp4obdx88dcr2d6ocubpydwcyov6cnlysdn8gpbkskj0j04jq3je52ag76mdhsl0370dthr20unrnnn8q2z27dwopo1w09akuza9b2utxcxe5uihzt0hvgk9nptkpt51f4s2hz60pomji0fcj1zyswwweamdauz9969q3prh29v31uhn6g4ua57fp7gruzgvxbjn2zbntdgy7rcxgu0z7fam8npyy0weg0hb03s8litb69qmaec4orrbltbhjsufcort0kdtigj5h8gbniprg1o00kxakkc9a6t4tov3n7eh18j67ahbv1y8jcxq2pca3bk0stey0ohkhnpxlomuureboczdpqcqq4p84wk3u0mlh5v1zplhhaho2rujpw1dckpxy9zw8chfup1ff1tyso7ayhdvkc2o7tf2co5hpneqt89bhesyi3nt3niqt3d9mb6ox2c8yi83na2ftifl56wfawi54zor00ldwso35qw24mkkhn9am7dwdxion0kurugzimrsdmvpbxkju69rkubsejfhxob0gltouobj2bafeuin6jjz27f7u1g62ibtjazf1v0h98d9y6hwtlr5jj93vnq6843zhuvl8286k4aomvf37kerjca5x7mm081f0h9kf0cltgvvo7x5pi3qi3wg1u34olnhiv90vq92va8qhkkw09pkepzf0kn0sems5972py9pj9cjm76mp1ydon17tjwuix6c7chzvr5bb0vyilik6wn2zvt43nct7s4fuac6qzkyk79abd6sjxp0ieu64043o4j3tdv8lxoujwdisxona1qlvcrlx4ndzadoigr37wc0jslw5zvktse93ykij9phg951hajpuaf9uh1z4qiiyihcee8jwrmwkir9mc0021sj7ab7t84q9l7kgqbggj1r9sm0w4prxir6fqpswm9cy3zya5cb34np81dp6gw7d32n32oxyjnoygi7zf6307szl4jwbfpfyqek1mdgy90yg5ehur2o6b6c01yom13v8yk9b9f1i73ib7rjss3xc0i2crklx8rg3kq1n7fqxfxybs8859nq9fensjoce0dmmiq9kq0tmyuwcldsz222vah8xej39xlhw8qptlg2k33qik2miecha991564w94mf8oapxi49eduuksrkqo6w2l6syxaco9nsux97qa0er23hzgs8pqwquzz6dz9s8qz7r0k2ckqg29sgilubu1let887e5ert4bosxyen7c8h6wl7ebpu0c0clujpr7ll171l4r6kqkxbxnxlx0mkfk16nx8na81ztopui57r7bmos24dvmkox5r77wo8ns1463f41uho3pi2eu4o084zzralrqbfz5kh5oetz51cj9wbx32v9xk5cggc8q9u9svrs22nbjh8kbt0vke7glk66sf0lgy9auxytd9na1jp0xjnc2j3yo5q3ccs89xrpamsrh44xohjx6vt9nfbzmkornxrhwzdp2t5tc31evm63jb634ssgg65kgetpocxr4u3loasd2bu9mdvi0nx9xeh6n6lfo0gg6qnsyn5e5f9phbkzxifk8r97nlodsbvoizwwepme83jpuci38ixhjwjh61l8f280333ofgtr22l7pelf24uump6zhs5ymhkd9f435nwysxac4vlk84sngzrw7pmd0ht9i8icasqnx838wzkcuejpethi3zsf0im5udpnxi16055dwshsikjh392dowo366p6mp1tcmcu13e9opeg3u0d22z4luqik24jbelnk6jlad97hk4rk747a7fzq0dvjlf7mxe0velysji2u1w6960mw4v9y9suoa1216lh5z8p9n6goeuw3ee01c4w36zw9cjemgi6f7vh85ulsiy4ez9dvhiwd4ve8i2i2dn503lc0a8r9dfhmwn4jjr4bykvou3jqzr4',
-                redirect: 'fa0zq2j504mx21sdxfp1yfuewdagjjsws304rdvorlau6lh3uyex3lzitaxepsoakgdze833q0linhdscktqs2y8yimfam8ar11cy5lgjqf77p0a1oku96t99gpuitj89lkpr3cb1hld95kflkgoah4eqvv50c5weuj9qh3q2gts4epfphiqtdkwu1fdkbj3ixfa6arvwvhnklyyc6z517wos0jlkh34c975voveud0bt9es4821gx51odana8aispwal75pkk6r0lkvdj3wpxfmhkzt574bv32f77kttlluibauxyv0g8ivq27k8f7qciiopemukvbd8j2h5spdbjtyz6ncgkfz4o7pp0zhymhu4unx2tt3ulppnnpswmn18jy47eh2yy1gcrsypx6x7c10uz2qlw8fzcpptqkrnl0f2yqg9nyqqvwz1j0ty8y924xcl4x01y1aa8t3vjlpd06i42kdvrhcpp0qpx5vhflvtow6njjns38qyy6lwelh6crrq1vlqwiyo43zl6sp2kfzcxqa13kg0rmqivp20ukb7v72ctpoih2vziwakzqisxsbkw4f29s4yy2n93axdb5shcyr3aq6k9c28gbhh77d8sqhj55jdtktnpg4lxr2rkbchn8kp14u4n03ybxal3tlhz6qnnt7qj1adljqs6osfr348le41yrc9atu0slm1iapbthf3ohe6ar64cmgiubcjacogqxrrls9jiwwgemeab6m274btp6n2axtr1oxpohtk4hti1t4ckf8fn8f0u5jnvwnjvk3htiwcyfc9i4582m26fhi4730orhjfhz7vokcfbbtgu6y8mvdzx6j9uveg4f9rcgmkp2euodseagoarill00fr0w16co268yy36tskqverqkf449nid7ussizkaugovkcdejue5cu6qobo8cy09jfawvq6howjggacip2vtet0br5dbnndw0tbut5mjq7uo7j0qzz8se1wk91kwzcew5j1mda8fvr3h9buzswgfi2afbb38qagjp23v8la84yf6q5y9aql4uzuxcx7ey878b093ogj2lhvv9xez4xv0t74iq9bvlp7axpp05lggazbh0ynl4befxqpz508imcz90xcxjj3cl2gtfrw5t7mnaqkg74rovza6wxwn7lf7w792t75eqe5xsyb9wo64i9oeu5uafic0euo16fbsifetk10l7mnyt7m720rgfsrpifcnsfn9m9wxfxu1kzksqmvhwte0f23l7xfhonqi1gk1v1fi5r8julmsokbgytue46hjnhpmskaowilfgdl7dqhqtst0fgh32htejujmhgy4oydz0wut21ac6v09pyx6xmmcfbfqdj0mnm8n3vr2977m0oqbbwqljucxrro6ehpm8ss6yg7d0s7l29j08qgstz3vwlwmx4duzd6o5r6n82p0rlgay74jjiuws6vnvsg0ax05feefvjljrib5qkfa3wyeit6igix0kwisr0ilnx6rfs7n8ub4tbbddecrn52kfe0bl6c8njp7eap8e6wx79pict7mvi5i73beinwbrc9ojlql36ak35zcwkzub48hl2i6cn2j6t5vcw6k3fqe3wphi97uiksucuq3deag9kaarxrnkwf5vpixd9no018h4isoxsl6qfdn2ywptey4c7zertr7kau9ak36o7nmvm8x0p421t1uw1isoqkklatdtysnmc01q396pjnf7d9r8j6pea8zh8idaxzs541tfg8uaif1y40mzyrtwb9ah7etjeo4pii1ibxxvzy2ubqzee4h285u84jjwsqxudv9jgv39stpzfepzi5a3tmd2y95p9afhy0frgk15bq6uscj9b75g0ig655fkc0ylzreftd4ju460r76q24wqu6a3farzj8n8wsc135x84qgjxcr5jgc76b537k8tqq8i6rq3epq9pewdscbdcm0l09o6icspdx3gozqtwwr7akkywn1gbx3tx10ukxz1i01g2w5xs8ugbavotdehszl0j',
-                expiredAccessToken: 4519859807,
-                expiredRefreshToken: 4417351222,
-                isActive: false,
+                name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
+                secret: '3tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe',
+                authUrl: '9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzdntq2dwpfe69m3t43mgjqiqozv988o5uvrvzar1sn5k5inohd66avgziqwkfrh5yokp5zfcokdax2wvhrolweqcbr4523r7pxmgq1lpka4smtlwwoy2z1yp7i4ky5d7hwje8mjrpcsxyqxcafwoiphu9onf67bj10ih0r2czpwg5xku796d23v2fei7jhepble3wu4exl1x0zul5p0qv2ahsrg3i6x7r6oxhxu0ox436wmc6e90hg1qzprjqegqzvxybflf53k64rl60ixc3yoyaq4b5dsnppzhh0xbxsyi61qmqd8xwa7ma0do4vxf1z4oqahtt2gnbyg2gqc383b9j7j58ilxh0o635ynbj3p1314z4ruc5zxlgdcoh4hsr8rzap39slxzj92i3nx18hn9',
+                redirect: 'hbt8tv3vuko4uxvvr8x2yp6qei7j14xbrti9oc9y8vofpxqlihxol63jjd28cnmb26u3cr1n1wau1fehl2jqe2kq7kddrcscxpi1v8fkk0y7wdzv44cgydt008h03qs6v1s3v441yuxarbxog66bxf6rzih1co0zrwmjkki9n0xafrh2tts2ar26nvhfkoolce3bf4nexrel1vcoekekzvv1jjhs9u4hfsdddm8a39ppv7xyaqfei961o369koum4imkc1rwsnb9udmb00415h2uwz7a70e309ux0etr9w04q0qhgr1q7xyavsxfmvtbul7chommvhfzwfi9lvwdsaqvbzknq6maqnsq25wy0mfgd0f2k115ic61q8pv27rolnkrburd6bu4lqfhbti9hdp863ipefk7u4y3r9eq1g5v533zqn2d3nckwn48lxkgpbbhemaoidurn08vcel26a4aarh150mtkezyia1iv9wz3jaxq3p8k3gk777c3pip5oa2t18jfxy91m5yjzzub21i7rudhhrx9h6mdk15q3b1xl8o6isub1nvd2sjanjdxnzy6w5xf0mslm3oo200c2burdu2hzb86dv8bz89y203r4lz15ox4syb1otjzbxr9rl5ys1tbh1sm9qjea15x7pg5p7hciz7rlqb8vxznizh7s4opar59gc6lpgvr297siy3265w1v2vtn6kwoe948o67j371bj5umen4uem0vfq56fqgfuedaosd98bn5sgja46113tk4uunvynd3frv6jzguefgic7mf1litwap9qwrwqkhf6brghmg60gp852jo45q9rtqs91wrs9hices2f07iqddtgfm4d1n1x8rxot6mq4z51hblu578t7n0ufrm2480vd51tl3vld5avxhioook57742o1sx4qzxwx5cxgh5o7wcw9m2ove6nku7nm5lgfh3eakk1auiq0xkhtklhp71tkkh6adt4aahkksvs7guhp70srcvzkkmlu8ykwen9458cyet0f5mddj2aukgrx8hyqhqd6qlprxssxoowdr7mqpb8uqmrnfh8us571ankn4ia4nw80fzvzrtg8auyirunqjrpm241k2gozmljs9ngt8aw4owofccs4nqyyx5hoj1bx9puuwxqlb2dr41buy2whe59op1lzvhmsuvw2qefw8hvrad1pqrngmyos6r678dbgjooxjv7k37xxwapq77ouufx9rhbvlmw3qs1213eaoo19xvstcefqfyiyro60vfc347tdhmpkgmuvs0s2rl2rw8h8fvenog3akipxip0rxxhpi79xo4b1v0p7xpb8elonc2bm95z6lnhcqmbxg0amibbxqwgnmp6q8bnx1ozk5a7m4c8gq503b9r5iq53ybl21qjlmh9asgem85h5fqh8oqtjwqq5px3u2mdixhehurhjmb3fva1h8d3s8x3w8s0mtu4oqy8uyysznxmejjnj57ddyg32gvyhj10hwbp851iq0en7l2evkzf3dwnxp36xbzjhqeppba22k5ep4cw2hj1c03vulkw53zloynmuf40k0jzm03ol2gs28fof5brn295ev00pl5fpr16i5bty3qgxalocuiqydbdyimnzdg5w4q9c9z4letkq0aezvf8nozo8eeh4a265kk8j9xnwh192mw9bano05b3r30fxcdkvsx0fnye6lqsyc5s8fzayow7763087dt6i47v798y6vyz0hngo32mk8d42r7u9pisk89m400aucf83bobgi9y59mvzc4pt0rygqjfw2rvbzkgrk7jthli3yy3g7uhg0cjwnmn19te8nij49r8dtgnw0z7xaa1bgv3340l7z44rztqrl95uziyjzt4rtul8p2oyx4dwzcj4vrhw71x1bywjfb36rxna4aq89h89zdt6g2r3f5mvwhalni05jyxtd9y50918chekg87jnntb45wy8y5dhn0wuzzxfcb7eetadoxirl0ulwniy1klatdzdb3emc36fvxpp6',
+                expiredAccessToken: 1169564060,
+                expiredRefreshToken: 2152813517,
+                isActive: true,
                 isMaster: true,
                 applicationIds: [],
             })
             .expect(404);
     });
 
-    test(`/REST:PUT o-auth/client`, () => 
+    test(`/REST:PUT o-auth/client`, () =>
     {
         return request(app.getHttpServer())
             .put('/o-auth/client')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
-                grantType: 'AUTHORIZATION_CODE',
-                name: 'glkslzyyrgelediaf6kjhnf894dkn1s4rfadhuvt7ne1vdf7o9bac50m153hvaf5pvv65bvj5ycv12jlls16mpmokqzcv6w5wlnqnds6hfekjrjbcp0pzuo9pfevooaka9t59aq8giksv0olhzy80j6tw4yusnk2antyws781vyaje8sau3xu6ywzyom7eb45aqw3ho8hzoli9j1godebxe0u6e1qpap1qs7w91zho4w68ae2ij8bm0nk41jtkk',
-                secret: 'uidrvnestl15fxw3g417glbqi8e34aej9hjy5fagpae75i348ehpgv989hlsnz981ys5u39veges7wwjikc1ayskl6',
-                authUrl: 'ji4jtkbrjqd6zb12uimacdyx0hk428hb1w6wfqzhpzue69ffmay3s7rf81frfucsa3rlk0averj3pw8koedvbpmaxwzd8vutxxdsjzsi64etu5cikfqxrxah2gnogn0ww959xm6zg780rx5lny7bzdgclize93zjsqik3r6vydym9cyrc8kl2osstfpoja3r3i41g9xm5lp0ctjejmbogza08ol9gyj2ezdvtdmj60dp5xa0au3rjuyo1y1inke2mkl0egcwb1ev28gnyn64vrvicjoaa8pnus5utk7ljimiunnwmwybztoxjjg326kr54cbcxwncxxbg2kygy5vwg3a07ju6fdp5o74wjqgo8tj5o71lao58jac9p0kezfoz79afjnpzuz33jkl432gwc17rjjhnyu8l8usitfp8si1bd122fr2oz4i4niomq2061kus4e44kbwfrpv4ni9e9cezhs9pcij529g5z9w03q2c5jmtcpawsa3rj6sx8ddbrf8jvi1yceqricmfnbnudefgz8r4gag8c48bs58l5q0x8d6f2vc2fy84p1h3q3zem82ygq58986tjj75yz6twttvjb0z2rutf3x20dd2z3w8yh43mrnj2i8norihzk70uuwa5izc23cizeb3egursy3x76t768rtxbemryrdafnckwl3vrg89t0k3bez9cf2f3gceqm58r0jfjipw2ycnnh5szn6f1oybl773kuoe8cp8zoyti9jw9e21mzrrv4vp4kzstqfchwljoius9yspzq3tpf8tnofqbh7uthh8mzkgae948t9sjxiwj48w18z8t4mv1h8vlnyg2x6vsdj2vlerlpx0zna3zhhr570rnzxlupfw7u5pfol0kg5tjgpkocd5pus562l0tvhchgl5u3k57x5jh3y3lebjwrw27qe5tf7t0b9r7hbfnfouumcc8p6lsvqvu08s5422yj3j9vuqxsahvsy32rozo8cxmlryklr7x0kl0m132iuzsyazw8gtdhjtcuvfov8y7gykhr0h0aijdxehwitpkxlbuobke577svkj7hdby6q662sjmnk876tobqf8wtic4kkprdn6s57gco9ar0ppr3t6b3758a9ag7zprvu5yo4qedz56zfxht05u8onv92hd0qwktdcdlv3bchh44g1284r747p577hrkddb4l68rxlklhc0pozv4l3f5uzmbo9rzjv5jdoc0f98xt2ci84l5tqumlfh82oqjq5s38080h1wzkn4cmzqlhw3klen2xmam0sm662dopxb4uwl30k5m7j0krji6za0n8e1amhc89yoi8pu2smmri0khlj6o0jp3qw7i94dswe1mu763f2qhgrx5h2nypwsf2m2geximakfnvjh9f2zq8w4yp36gazfvqfwhcg0o76l28j94a0qbj5hs9mqds9kj8lsjrnt6z2bpglkapddg3wh4y19atk0uqhbmjkrt1c5buftfafdkbu5oqewnhwt8p7a0u9js90r654876tclqxa96erqq7iklmmyo688sa70gzf9dygwzzoik1f9rc3sarief0g7hnzaqjwlez5vaed04tex73uy08x7wkl2k2msgfn427dvwm1sok9g6alvhu9zwlwxollxdk2pmuas1ok18q90y2wglxrw651vapp5ys6n1wpwan9ydasyp88ly2iekl37jqre55y8tzzriaeexjuuqc5g2qlxdd4rjtug4yw945pe3basz8icofvapkwkf6jlhovmywbzr3e1fi10kwlmqixfrg20fiipuwhibz7w1h8a3b71dysyfqvoyu9pmuuzr7741bfi7p3y5k07etiavwe10i9v9wm8b68shnhjyjjjdtu1tdn0jphdt4eztj990pezdzjz9mo4ls8zqm6cx6ytsg2b3vov7g6xgyptt7yui44qvu3nzx3qixg93tlokp6iq9bbmj08a89ziapn7vxfzq986wb3w742qzv02ygluppu2bix74c2i5c9dl5w13lm',
-                redirect: 'i2nsnytq3iaysakw7syhn12ikrgnpdixyqq7vmgdrnmd6mip4g4pyo919umtcds29qk1ofnjj7tokn8at1de1tmymrcukjjzjmpyp7c9xtr3v1dk94ckphwp6vzjs0tid2ib3uajv8vvnwwm4eycnl7a4hpa13dfr228xwxf4nsoadzwzbda1ffcdvdg9o2in19q15bvbndcgiyd59nimk5hi82kviz3g8k76cld3nzj1p2at694hzu0m0h222pd3bbzk40th7okla0g0hdxfu8ist1jfb23zppx2ih1f1zgausjnfffd9s5q4zuogs46d1fbv4dqtu8nrnqv75rt1lazik2p2sdhvj9sgz2zljg7y2vkoyokkvfbzqmui3kp7crgcwdsmpcg9bewnc03auqh6qn8x0ba8vt7sudvu0kt23m4v2rwkqlpy8sba1iu29e5us0fcsuhfgg2wg1sj3dkgfj9bpu73uwdy39hgz7jk42bfco9wvcasjjmxxgybyvwr1czyzp4340zgc7zftcj0axcvmo2oil1r5zbvw6m3daeptq1dpvv2us5s6q8vxypjxafi1uwvu6pkomprre1snt7feusis55bfy7sg0gl67b5bqeqwamsgn679yrezvpwkumq2m1gd8pooqp2aex4dxb38jicpgr4jops30i2k30zksfcqdhiy9j3ut8ye5maqsrcvfetn3zf8a8hggmwumbb24bfh1zm619q73d005p55zj22rk7jzg6g5ar2vwcnpfacl747c4mtltcx64ljfnrz373giesuf09auo2qy1ua4wnkll0iv55o99qiam5uli5wx4ly6r87tgk2lh3sfmw3a1vip2qibt9k36ykfy0176bajyx6w5o64nvfl9z7tvu6zv5f5wi7sxcrus4usdrxlnnpe472z2lurhq4m3hy9ulyfpr3ljg1ir4tcj5zl3fkt3nej34nb8nuuyeweluls1ansjd1uy1lwqo7p45w4b3ke7e0zfar2d2cra4s9un6s2ih4z7ka6y0eyhqkegfvdp9yrl2aqk1usg7ycxtex52fph2gtww110jiwav1xqun59a7eb2knlnkc94xl5kxt9nsuutjpgr0kdh4edv1jc2bvqhkbd56na3w1p7o32fnm7is97isbhzdiz7tfrd1ah47pa7s1pzoi0gks93ah6nzpd1el2t5bd47kpq7bc444vy8ki66bsi1le9tlcrtcv8071m1r0d6xygs8grpqfpwgg96utj1uvgs25jqwdtle78oq55z7l19j4uqj1skbn4wdrqmmsaii3tei09z4c1jecuckyc4o7wzxu4bpq53fzqwinr18sa2hilnqrvtjkajbxwia0k1flnffnyo5ggss27621v2nqqrix9npq5co8e8tejfsjvjusqwbzf0qufd246hukyndd0tlyw2raok6snjyw34o2u7ncs4snrbg3q1b4kcnojsdmdlg7k9gannx49z7uzwnht0hnb2oekanl83qid7h4kt2a52o2d3jcw78ppdr1ouaw12810b0cmmbnro5a9h27hei0444kwloz0jdzm0e0biwinijoj2k7dl14oc3uk7atzp52ehu417l4bxxkmld0eph4vn0wuqr0puhty2zile289e4df0j94sc3vkmrqluzbm8hiyxnafkee2bspcmcm161ivsrk503aa40go1bj9w5o80f56kh7xywsox14uddyjg3fig2k7g5amv9vb8m79h7xbpuu4vpg1au6b42k2th5umvaukzj6irak6dy2cxw7bl1b32qiegohgg9v31roybqm8tnzbt1opsq7pc8pb55934zjap8809orncr8iusrl1n43ly2l515iek61dgol0btleyyrwsv98v81h39nzpdzkv5rsyjvna3kxhz4q93pr1lgrhgy42dykj7wc3242vjbih5y8h9mapiqneonz9zttevitenlv9dng60u1ovu20b53ipv46npm46zhostt1t6xv1mkq4rx87',
-                expiredAccessToken: 2542901173,
-                expiredRefreshToken: 7574340370,
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                grantType: 'CLIENT_CREDENTIALS',
+                name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                secret: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44',
+                authUrl: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                redirect: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                expiredAccessToken: 9545279154,
+                expiredRefreshToken: 1669720284,
                 isActive: false,
-                isMaster: true,
+                isMaster: false,
                 applicationIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '7b95f0d0-bffc-4ada-a59d-77afa8ba866d'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE o-auth/client/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/client/3892f0bf-48e0-43f6-bc6d-2b809113757e')
+            .delete('/o-auth/client/e8ddc823-0124-47f8-aec1-12104d330bcc')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE o-auth/client/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/client/7b95f0d0-bffc-4ada-a59d-77afa8ba866d')
+            .delete('/o-auth/client/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL oAuthCreateClient - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL oAuthCreateClient - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthCreateClientInput!)
                     {
                         oAuthCreateClient (payload:$payload)
-                        {   
+                        {
                             id
                             grantType
                             name
@@ -827,14 +871,12 @@ describe('client', () =>
                             expiredRefreshToken
                             isActive
                             isMaster
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -845,74 +887,27 @@ describe('client', () =>
             });
     });
 
-    test(`/GraphQL oAuthCreateClient`, () => 
+    test(`/GraphQL oAuthPaginateClients`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:OAuthCreateClientInput!)
-                    {
-                        oAuthCreateClient (payload:$payload)
-                        {   
-                            id
-                            grantType
-                            name
-                            secret
-                            authUrl
-                            redirect
-                            expiredAccessToken
-                            expiredRefreshToken
-                            isActive
-                            isMaster
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: 'f1879f37-3f05-4055-bb47-8a1d1fad576c',
-                        grantType: 'PASSWORD',
-                        name: 'pgbnw597brew1yp7erysxa3v96z04r0kr7s91sau5odjdyd84qu08kugykfbbwrcwqbjz2nzw8cbl9ptl2hxww2kgf46t79epl5spbowkdojvg4byahmuxcb0qw8sex2w5v1x8yr4sudquigebhy1xa6uc93jnvghxqc4mkk9q3q052fsrjhl0a2qatnx8sneg5ah34gmtk3jzjeis8n4i4ahc8ufa800wz1wl44zn8rqx4kjff2aebe2zmljba',
-                        secret: '3xrwii37nbuye7c0gvdp0x4plu830xvw1k190mrai5oldb615e99c55s486x2tjfn2ydamd29auwfe10xypsbrplhl',
-                        authUrl: '2kvzy1dcdn7lnoyt5d0uxgwe4cf4ng2fgpyz40pvi2977nc2n444476w5dwd6jk3szoap3hk32huo6qns8wlalcjttpvbachojvi2r5e03b7q21wjqw45d7uy9jk8h9z8dea8uagcty3g2fkauu79yidekmwq1bah66qsorlsbgbeannisvg6y1r6kd2hvjmioja6eboipii9nv4yevmpsfj74loaao1mnqbwv03250w3cfmr616tt0zj58njpjtqp54e69rzzkmgcffv5jyy4nk2khj6nk6cjo67gwi5bhw6drmnn8zlgiz69wubagx327uzemawt3ku4ssib14z5qrt8pumxvaieny2xhlq1a2zm6tl3ep6ns78npu6y6vswp5no5qd71bttogdkteyu9e4jxgava8x1ajitdtdyv20mofb5gfn2bdtstmjnpcdi1mj3kyx2amb3y73hzjza5tjhyjgmi24ko9ndxmijlrjt8bqbpp4qeqb24li21sgjhsaifim33b5xqc749lhsvgfkbu9zvyam4f82y5a2xveizj3k1j9z2w5qzezb1v2js9gdkdhlatgxbne4jisu4rkpt97bffvqusvx0cmfwe0mm7kr679anu583tq1fmt5rr8rceg9q5briwnik55p4ag5fdyj88rdb79undqju1yjfenq7fc0xfhwm8ah47hg8gnxfj30rfwxl1yq1rrekwzezvw851ul23ezuaj270g8edozpccfv9j22yqpgnjqtm0wkbme2bdowqltsf2aj0wi3u9i1163rgg13pen74olguch9elmq95p20hllcx5sy6mrjoleffvjj92qy4bsj8d9a93wh1ly3w14hyo3mzlpp1jgii1npzlikedsqqkvq5i4q0hnnvqhnaawa4yrasp70ykt94uvm5eltow5pf2v3ryagm6lzl67plp9ngfbeumvslu0shfyycmhiat9ufs44xmo0rwftq9p903lzl5f8oy003almw4mvuin6lfhl5speci6rxx93hveek0rt0cwtymqedhvksa67xa74ym5nmzuu6gb5kevtuo3n8c4e3904t40y9clsbi0nef2ui157k8a79qbr7k3wpg961vq7kd5eufqxiv5wt0jlzah7oh82ls7numodqlf679ahkd5rznrokzf78oj96yrdtygxz8jf1asvfhnuc45f11l3zemm4x1vv8i4y3n4r40wu8rt0nql59ll4kceofga4t6d005j9mfsgskrrzdvmfrwz3niqfyqebugk0xffks49kz87lbdctyl4h3ethp0ijlhfchtw1m13kl6hal2vr3iq5m1s9zw3hx9sjz0avyb11b2kk35lvrsq0d0ub239k4a35v17eqiu0dqis78xx03tgo3votgkf6x3l856l1x7qzjcra9avhtci12uvbbhtccbwi2vy71tsorn76eexm4jwubqf7srvprmtx4atjhpxy1ko9r61rvf4vs1x5ualcyp11t0qqyghjgf0vymby5ycgxxjdgpwai70yg1kgjbgnobyv9zpx31qiwq7mgle0raiyum8y30re0tosf3eo75jnxxvhirkoxiiwffpmsmg5ksabccij7pzbj70avbnm9h84djabm1n3tpcqicvrkauuq1prajz0tc2f5s5qq8x35pbzucz0vnybgnkslumyt40ow885w2kfox86vy6189ge6ivkz46g9003ivggorteoccbgtt3vyu767jiopnl5evkvdj9sdozl4pryrghr9t7im2bzom4sqoj7mx1d4hc3tz0a4qcw7pic01qeg2ec7hf3dd9las1xlllllpexc3mmmnich6piegkgyzu74g6ldp8phidxqhxhwf1z7x0t11wn0gs56v5gyfbw8do38agawmftx3ibvuhpd2ots8asjgpdr5rxn82wlraetc5f29yz92kenkaamhe619v0trscteiz6s8whkwu4axpjus4woapfef7b0br84rumu55qgyr9qfqjso8w0e3',
-                        redirect: '3tflowajie4vld9o563c9j4xhplx6hisbgy3oardka5ebf9j18eqp8c2uq9wndx96t5r8v38lsmlsseayj1yxtcb1v2kllj83xkfpaqrszdu56xv3b958cwi7k39akl5gh478f6b49gtgfbbbxmd19xq7qvaxpzl1x4kr48zss23hw5eu2medpkh8t34lt5wh9bjrcvp8bnd7hbal8eruf4vt4gr1hr8ohobhu5jhvnoifyoz7ikbnb781rpc0f0ez37tkgvrnqa41meybkn3ijxes1p7crasi1rieotl9srxwtbyha1rv0f1q4i0s2fd40v4ezhlxoyz3qbc4yhx9qbah5lzui6shlgxy3yijkcbwry187214zrsi5p6zqrwbhxxdwqvau8bw89rymqpzkpymz9wz3gh5xp8ncmgvo1qr39h7xmg4gbe8sk3ex1duehohglf4sjrv53oj2qct77lsr7wfj30icbm3n4fj8n1x069te6cxvfaoh04i2uytryhpfaeti20qvndh1cewc5mrym3e17o0hg8220an2usotr1avakynvh6c8o98g5wfgr2b24wbre4v63qb6gvt3x0xc1gf99lonbu9xk88kwoxl6ufogbgedlhh325m929qu1jxr3qgek5ldecx4pskcw94un4kxet4ih7a9ell16qa94olnxkxuqp4gj2bvcopmrbiib5dy3hxt59w9ny343qmt7wjx5z6r1s5dezqnhj4dn4fl9kpm0goryoom6ytya7am5zgwn31u6tihu89zngaj6n7f4vgeby4giizfyn24qnny4cy658f665j5c7uykgqfp2p89wth47wkim7vb9p63g6pqxmv9er6d9mtlqn3ytx1knfnj5xnrh9igauo7bh8p118zbvdo4qjpxie1l8nzgglevk81epqchyxi1srutv1m4hsxusi1zehvlebatpnijcjtpmpp7juga1bo4ii16wxu4w59zre5fogr1jo9sutg2lebc62z9221fycsasz6cisi0gl3wyy5rfjroxdyr9znsjgvhj7s9y0y6ci2ih3zr53ezglxc07ut90b1h3nay3lcx2zpgovb32bsj0c2t117kyn55n8d9lzqempuidl6rah315sla1wx1kvnzo3r1lruj5cz5fs5w2eswhnqmmjkuosq9o9rruye2iahgk0ax9jpeomxcfdqzlk6yxvmevx4x052n7jmh6arfsy7fas7sy5i9ljmdpo8uhnni375p30l31fseo57bq75255e7u4v1r3fgjgbucgfhk4pa2q46b5ybd01eru6sup536d26p2igk72ac1slqspo8sel93wmf8cmzmft6xq2kalxt7rm3afbxy5g3aj7u24gzitzo8c8posjak441lkidgnlwgzmyatuayuquxh3d25ufm9g76j1q6201368cxpfpjxowv4fsebicv7e1bs2tn7yat6ge6y370nl0751t6icucholf60gj1hu3s9a8nkffnojzfu663to4pr4bihppawa0k5bftualxsfzt1p5llhbllxtc7sm2bg8timlbmshldmd1979v6gcrtzyg02csbs82f4quu0cmxlanf0450im7moxqilf87n8w2e9gqn35pkou0t296q06feezsiyh6yupya15641qtztgwvv0gl2ztlwrseab8sfzgyam91zlfytm33wb2u9l5rjt23q1ric0617yc9hidmjcg070isdw5xr0af9eow36myqeyc3ht1sysl4nih65lasd38tkvo4rtkiyii5ued6ul12u5w5beyqn8pstxbhdx5g6f4pjpmva8q8ilejf1zmzx0ohjrnwi01wi2tzhss89gynifcj9wvyts7kz2k036eq4a98yq1ioihyqwoeqakymj46az8iie57sa42r35sfuqlip3ze74hmytikee53034xjsixtyt88hruon8amwo3yyofiv5ctkujb8uwny64z0za2y2x2hax40h2wdpsdry23hhlm9f63m5y',
-                        expiredAccessToken: 4258881071,
-                        expiredRefreshToken: 2153848040,
-                        isActive: false,
-                        isMaster: true,
-                        applicationIds: [],
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthCreateClient).toHaveProperty('id', 'f1879f37-3f05-4055-bb47-8a1d1fad576c');
-            });
-    });
-
-    test(`/GraphQL oAuthPaginateClients`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         oAuthPaginateClients (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -921,185 +916,24 @@ describe('client', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthPaginateClients.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.oAuthPaginateClients.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.oAuthPaginateClients.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.oAuthPaginateClients.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.oAuthPaginateClients.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.oAuthPaginateClients.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL oAuthFindClient - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthGetClients`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        oAuthFindClient (query:$query)
-                        {   
-                            id
-                            grantType
-                            name
-                            secret
-                            authUrl
-                            redirect
-                            expiredAccessToken
-                            expiredRefreshToken
-                            isActive
-                            isMaster
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '4d9130d4-27d0-4c69-9f91-cb607b947c21'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL oAuthFindClient`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        oAuthFindClient (query:$query)
-                        {   
-                            id
-                            grantType
-                            name
-                            secret
-                            authUrl
-                            redirect
-                            expiredAccessToken
-                            expiredRefreshToken
-                            isActive
-                            isMaster
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthFindClient.id).toStrictEqual('7b95f0d0-bffc-4ada-a59d-77afa8ba866d');
-            });
-    });
-
-    test(`/GraphQL oAuthFindClientById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        oAuthFindClientById (id:$id)
-                        {   
-                            id
-                            grantType
-                            name
-                            secret
-                            authUrl
-                            redirect
-                            expiredAccessToken
-                            expiredRefreshToken
-                            isActive
-                            isMaster
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'fef6997e-b117-4d28-a44b-9c568b9716a2'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL oAuthFindClientById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        oAuthFindClientById (id:$id)
-                        {   
-                            id
-                            grantType
-                            name
-                            secret
-                            authUrl
-                            redirect
-                            expiredAccessToken
-                            expiredRefreshToken
-                            isActive
-                            isMaster
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.oAuthFindClientById.id).toStrictEqual('7b95f0d0-bffc-4ada-a59d-77afa8ba866d');
-            });
-    });
-
-    test(`/GraphQL oAuthGetClients`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         oAuthGetClients (query:$query)
-                        {   
+                        {
                             id
                             grantType
                             name
@@ -1121,22 +955,70 @@ describe('client', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.oAuthGetClients.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL oAuthUpdateClient - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthCreateClient`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($payload:OAuthUpdateClientInput!)
+                    mutation ($payload:OAuthCreateClientInput!)
                     {
-                        oAuthUpdateClient (payload:$payload)
-                        {   
+                        oAuthCreateClient (payload:$payload)
+                        {
+                            id
+                            grantType
+                            name
+                            secret
+                            authUrl
+                            redirect
+                            expiredAccessToken
+                            expiredRefreshToken
+                            isActive
+                            isMaster
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        grantType: 'CLIENT_CREDENTIALS',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        secret: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44',
+                        authUrl: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                        redirect: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                        expiredAccessToken: 4703549812,
+                        expiredRefreshToken: 5477989276,
+                        isActive: false,
+                        isMaster: false,
+                        applicationIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthCreateClient).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL oAuthFindClient - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        oAuthFindClient (query:$query)
+                        {
                             id
                             grantType
                             name
@@ -1152,20 +1034,14 @@ describe('client', () =>
                         }
                     }
                 `,
-                variables: {
-                    payload: {
-                        
-                        id: 'ead8f6cd-9ed9-4a56-9038-b02eb95a87f5',
-                        grantType: 'AUTHORIZATION_CODE',
-                        name: 'otvyyfoa9j6t6qridfmcjvxps4cc7hdq27rbp4d67ro7zfe5l8k0v4hb597uyzb8f1qyqomofhdasztsj52sgke8o0pbzhzlnyntb4lcbce1gpwqij3wljije3os1rybx254mnmen0361wiynunlqvo8vt1nik19azd12uf08if9vpg0v8jhmp4p1pkh4osp78p9qq1e2tlfeyn2d4s4z5f4sjhszklox360nqoed36oajfmdhoz9trjhgb59mg',
-                        secret: '9rjihprq7pmh4mruxnmjwdmwuvg5ptuq2c5a4bu1wttym0oydlzlfwn3d3m4q4g9z5frgljt2882i3q08iobgdvc30',
-                        authUrl: 'ld775h3ylchsmr6yfao38pp8h4rulrvmbz87m06b640078gapnxiw356o52t3b7vut4ctdiqlta2kg754l9cm7jh2gfpts163o3d2s3ob3w5rd5kpyviwnsu00wf75hsjtwhxz4m8fb7ok5debe1wfjr35j897ayb3l5gcwp6huab915qikk11yyhe0s75tk377ukirv2elm6wdnk8oed3huj0bsd3kfdi4i1dfgx5orq9870vq9s70ydwwzk8wegwgsup981weh0qj676wkci8f8uipsts21gcdhiti8w9fr33egmgaurpete2108ksmxytjigasfaqourm4addsnhxh3km05bjfnji88vde45jnko9646q2n21g5zm4mf5z09rkion0mmkamam4f877ojougwvofipmuqpgyzjoye4cz09uto55be1j0qf07hcsoegrvqtmrgpcel00pnf53f05ise7r6qbtys3ygyhux2ian5nq84cjny9zjnt6bphob1z4vbmk9whsvgqdljiwoceuzgp3a07prtqqd7gpgsrsll7l86vpe5zcauphrf12nj2sg3d9izbqafszt8focuizipjytxbzlyqo43dse6pzdrku3x76zjt1szxjkdkxq4m6rsxujs9ey0lu5kmhwfq4xys91pfdkp40m8cbfgefgd6him28k8udgsw1qnhni1j47kov6tozewas5a0tb3q806v5v01t0h5dauoynyfj9sr45sn8c10gblqb65a3yy77fmnzc1h9pnyjtkq2yspsiq3ewu8omubgkq6o5bzc2ibjnhtpkgoakhdphfmtf163yp0spcitj1pzxdor0rl8rt1o1ln3ustowl502zdm09lcszg3xk29cmxahtp5c7r6u3sykd2ipizqshov7bgggcwnnonoy9qoe4b1dghahtzz8jehhdvyv4iqbc0czd4faw8hncyz4605vbq3xcjlqrkr1v80tlijdh6rotgkeaw7az7zfjfxi3t6x9gdsd03k768vypd0o66xh07qvnxeynwx2ftvbqtz9gkmk9cmshhiqun3duj6dee95e3wng8bvhi0xqonefxu47b57nl6r1hzomkq15cwndglzone4yz5sxicgmctcgeufa7z2v3p3hiei9khktmh367bapasdfvzb1jlkvv9dugfs1sfm83o1mhxq0060wog13udkvr4fa7ez24m14jotv5uzz9bc1o0c8xg1993v1f7shkgfr0obyemajp0hgypp7wsh34xf1ap8v30i3dp541k4e83md1ngikm6ss68guxy0ntbv6zsaskqzzp1vhzouhqqhmn8vaf9bn631jrd7c3e639zd0h00tyto8p2glkme1w03ppvti9h93qp3x9uc5l7n167yhggn0o9k2toavkat433aej6yll2kerj64g4o8z5fw7ayz7k3yt90aq5oazdvgzu7lb3vvdpansg9ts1vy8614thwg3w0r1byqrmra1uvl18pr7ajmhotlmgu8nsihvfoabjar2fe9b28ebcdeh63wss3moed1h2sg2suqpxslyunjxt8rtwjmny73tx8asx5g721w6m3xshqh5u7bjf9agbyfnt1vdxfx6chokfmmu6bgao5jsvv2w710sw9pp9t3ui67ona2csdl0rsbvdmpvad6o75pkd0fitef9pucepuhpxomlyimurqgntyiudljrwgy4xrxiami3gee9fb42c508y811wxx5crzmrdnbyiq2tl6pety76ky2bfl2z8xukb79mfh0222pnv4r0r4f3gcxktm9rna27x2hyyq7z2lp2w2tu2zvbo449guwdnbhhir5irrr1uh3qz8me71ex8nk47j1ntup1zn0horlu8u77d6qfkzwyz0jy9irzbgu8jb5hnm1262amiwulxo306crd3zwpf8isvm98mu7peb8u7y4o7rfjsrti7a6cdtk5pabhdm7u8t85idxo6qyxzxprfeo4c9cqhpmsc400rfj8adediy1q',
-                        redirect: 'ikz2o68yv7fpbha2ttg2n8olptp4mqhtab52x082115m1rrq8gowumd49hbhs6weifibigsbqh6jgjc0peeo2ld9fln4synqw6nx9d2plf8z7usa4lsopoj44yw4mh63165bh6a2eci3s04r0ziwy7ctcbm010ax78v50pvfqrrqtq7fr8zweno9l64saofcg1zy34nkzv3tgoh117cau0xnwvi2xwo37a7kf5tr3hm1qjejhnm29xcbu40rmjthbiakqjgd9kvkcpiaq2mouq2w96x5k4nj9c9y359fugrs6jo1i4hv7xl1uol15eu12lbt5lw8qj18irw47pggvjd3uthl94bf7qdqbi3qo0b2h9vp7fqd5ifcm56asnk32jy6q1yx16iwnbpdeec62vrvgtxmiuolbrjxf0238kr4p8nchpcx9zx3qgbmqeqdx6wuy45qvc9z2qtmc2o8jvtmo1uovo90pk9c7oidssnsmcoq71w0v6nvvf9q58hu3z62shd61fs6bt8vt22dm4f0vjovp3vhjuugtgypek0u7ehahyccf24yqxmy9p7nnj6d7qjjjkfv0ccjyxerzcssssg3q05hfzyosptb332r5l4lrwflxu1zpiclhia6infoqr8lfsmsvvy86c69qy4bu5n2mt1in61z80pdns51ns5gxrih3vihuqfrnb7vbuszv1s63458k7gblq8tbuedsoi2ga4c97iqytfd1vrjp55dsiy1pxeka74u7v4yx4ucoftxqc4sdbpr3ovmpxzien7aqgbch13l74ksw5z6w1eu0vv585uan91c2m31mt0umsdzvrhnsyjajw77qvq5oqsaws1uso63b1hzs3tb4deuxtwbc83u8yp8d8o2womzdhxi2tw3n8w2luthnl8e6xcveysuqti8prwtn4v76zfjydhxv7wok606f0rvwsk1d7at067myfr8vszmqsfr914wm8avm38xg47kb7uqc175ihp5txie1kfnw58myciffw0zaq6ls6ftwqyab3032ak0pcidurpmuoxdzkv892mwy2sa5k5qfy088grjxr66ro5w7t6xx7bkwgnj9it58drmbc0gi2yph6k09u5h0qetpeanwpd2jiyvdypz2blkb24xoe8bttlqcikawyjz6lv3tbj0u1c8tcwsm7a7a94uxctro34cg96rsmx18mez9n9f8x7c5kflxeclc1tboxh90o118j2n13kahb2j4q4yjpumf812hikw5w2e4sba4p0innu71xjypme6m8zbbb0xbmdzhequ09s7crub4wgv2w400sl1ycq5sn41lybvdc4iwd8ou6dlezit2b5o1m7oizmboznzzr5l2zseml9xyff9rt88cr1fdnmrt2b6o93yxxv0qivznn5ki8ng5t85k3xx0xm2q26tlw9ecq7whwcwl4mfra4j24imihw0n5toh1v3egd4kvk7zgtg76ehsyge6h7kaough6v6tezs2ci0gixb3qb8jknwf2c91kebpu6enz6xpxqwlpl7oq2zxuee94zucta19hwchmw3cwskybydj1o3solwsbaez45j8hhv01ie0fm9uvaf3yhkc53f1o91yhj3nqhcprf7sgdniylhbk5vj5cav6d35bgto850mjj576hcdij2c52i4nofahiw8g7qhzsi8td40ni4n72tnmtlmkhsxv2gg7zz5ck0wkbhh6lpm57ldo5aez2sarw0uuqf43wvi8aljf3ypgpgyoyhll6fqbfxnhprtpwd5pwbnafu6brx18ynawt4np34ajzbndd9k3v0nmntv07iz404rrdt8a2f12c9ef8twkdp9yi6xstg31hnnj3wpkwn2j1oi3rs0k10mb93dq7glxwclquymiuje94rm0e2svonvvgwevpdlsjx4cza1kj0d204vbld5ywl9g1itiafis0b5hrrrljqv6n5odzu3g37wr9y4ktbufg3nt7cz5zvbkwbiewdnbunprwdnikfmubl096k',
-                        expiredAccessToken: 1497145445,
-                        expiredRefreshToken: 7431761457,
-                        isActive: false,
-                        isMaster: true,
-                        applicationIds: [],
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: 'dde13522-000d-4734-b43a-61b3e797b1c2'
+                        }
                     }
                 }
             })
@@ -1177,17 +1053,138 @@ describe('client', () =>
             });
     });
 
-    test(`/GraphQL oAuthUpdateClient`, () => 
+    test(`/GraphQL oAuthFindClient`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        oAuthFindClient (query:$query)
+                        {
+                            id
+                            grantType
+                            name
+                            secret
+                            authUrl
+                            redirect
+                            expiredAccessToken
+                            expiredRefreshToken
+                            isActive
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthFindClient.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL oAuthFindClientById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        oAuthFindClientById (id:$id)
+                        {
+                            id
+                            grantType
+                            name
+                            secret
+                            authUrl
+                            redirect
+                            expiredAccessToken
+                            expiredRefreshToken
+                            isActive
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '701b2911-8767-4038-8852-ab4d077540ee'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL oAuthFindClientById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        oAuthFindClientById (id:$id)
+                        {
+                            id
+                            grantType
+                            name
+                            secret
+                            authUrl
+                            redirect
+                            expiredAccessToken
+                            expiredRefreshToken
+                            isActive
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthFindClientById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL oAuthUpdateClient - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:OAuthUpdateClientInput!)
                     {
                         oAuthUpdateClient (payload:$payload)
-                        {   
+                        {
                             id
                             grantType
                             name
@@ -1205,15 +1202,14 @@ describe('client', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d',
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
                         grantType: 'CLIENT_CREDENTIALS',
-                        name: 'z7f8fjhwc7jivgiov4jbm2mf29pt4uldpdu9nqq24j68q7jjkeovgummzoaf6oxrucwlonh0p47pl84fwer6ima4tqbs9m5p5n31n5n0majej53c6pe3q5k1hw6mxtgycoh46ro5x3tplv4vu08w0rlbnrdkrvuva6mubyaz4sg4g508u7viflwyyw2t5v1vjwte8lzh59a3zmoahrt98upgiifi5dmftmme2od0k4kdg3tsvz66rnngesnph5f',
-                        secret: 'cpj34gqp5mffzn3wg52xpkuembtqmxyhjrjtvzsrmg57cd3ilty02eutq6iji9sj5r958kjn4ygjhpz4ho5fn09z7j',
-                        authUrl: 'zysxar09yvi9fzt9ca5u85nwv39plgv6ezmrvs92qss2xj94dro89iw9d3uapx8g9ydr7vlszq7538s5ug0q9pvahe44fpk3mnn6h5j6zux1uh1yyax1uo0f6gngc8b1cef6g8vcaqkx0ukraxqihk9ssedxrami780j0i6rhrxqvmbbepx6cf6dyoe7xvm0wpvz95k883njgis9yy7vhh6c4rbt45fryo58zu34s3smp7q4bnbwi2n7mc4c4nnvlpu1lzuu28bw83mfu25j4xmmy686n783j5cktbexcdgxpp2jql7gp7k2kwa8csts6scrnhvjuevyoah958ouf6xw5n3vqnt1q1rszsncjkem30xg4y63mqcotfte2nd7t2oo1nynn6kgy49zzqqemsxjipfx8d6tgi01bav2drci1eutc2u1ma0zzc0bwwijvmetizqy02w3rvkigsviu6aob19cjh7s739tvx8sg0y4chsxlftbtqcja5gsgx6nawm509aqu63yot9aya60yysno3vv85vyakzci5xth0vjuyq8y4br4syz5b0zewn3zjtck826m9cdrbohslnsp3ucb9xg5cztsfxwzb7kiegnvthq681m1mzt0sz0wyntsdihiktj2f54ir2njwddnt4psd38azyfzngpuvs85ntmjxtdm6osnf30v5t416fgmqkjpz1okdio56wy1umdnqa4qajxwd6k0qd8s7zln19pcmva93ys31azd643oi2rymaxih335d6lfl4d44aun8u31nc3ipxvz68mxg6pclf7fcxvuxtaq4x9w9s74ee4dx8vv4k7ysc9qvcw8jgiefdmp8h9nbn92iovslzqx2pd4mzul55i2wykzmmclppqodged7opvftkzzxihj2kli2gcmdlzn489obp45ibq6nkns95hkqh16xxokj2u54eygapqi7rc6fwz36t3idmz1dshhh87vccpv8afw4dbgvqrz3f0etvxzqity3w7isf8csl0g3jei0w7a00slk48isbmtc7cvpdl35t9ex1471w5fzi0tvw52qgpmhdqpcnfpswenvrl4p4zyvir58a87lxb5mlmecztf1sais10m4xllhhqj3ddapzzp5mze11vt77mk1ogzbd02ost8armgrj5wdn6zmd41cmeeikql5agv7pz7e7j12u57le8plltmv6js2tqivhat9x3hn5z2lhtb31xtye7yxvajg3se02te6pm5o4zfraroagbu76qfz5oebvc1tcrcdjb32pqfghzmotcovz2uld7kyrnw7b5unbtu13gy6zyxrwuouzh7lclq1aymh6jyii2qzoqvq5q0jbmr5cy4zz0tkoha0550vaelrycmyp30eiijwf3sq3ncb5faho0df1t52td28qtigqb9sxtkafli3w2nxdhw8ghsivfa6s8j0i2cp1073h6kd4drzvshn6xdxu4e2cny3insxafdcm6wst8g3bxokqfl0krkkspwfvhzzfpn8mgzicb6uz5z7o1ttlhaix6rrlqlvwq0wbxhnrkzqibdnj8nifevvjvjrxka9dr9bxgp7qgas5dzrnw9vvcteb0ia22ayvwsze9cngq5xhalls24v5ex8kv5hidsy8vyz016djjbelq0296wh38qqcaa7ymww9dpdbcljf7khi1eoy1r7hwp72h1f8xbo7izze5tjh4bth2afmqm2aupvc1aldep6twcawumlsu0q3fqkewtla9979slnklwt933vyzi8qtxy2wejjx7hwycr7vqs1r0blnu3lycznavtzhsqjh0xjsuju6oewvcndpd8nyka4e0glpgmyhu4c06habg5d6atsnjzs7cmva1jgg9lp7p2fk827rmcd85akvzbxh6l1jqtkb547iuzgxbdh5pta1gc4q44gem0clsc77h1cmb4w12884bhpr6pk3qild9fndgeuc3s6jz5mtuked0tg2ioie5ywm0tnt9tqjnvlcr107rvm4uf65d17',
-                        redirect: 'pitjbl0vantguz6ycz7rr0kr8v4tjcdklyabhkko682all90zd31bqwd0uneqpva68x8fb4dhmwtsxaqp71ox6d0mutnrf3g5lheqa59cd8v4l84r0hjdiutaeh2eumsbekoyx1tfmuqy2kbjduej15wvjansl8oudh1zj24n5fxrhyhlwtffcfmu6zu7w4lc7di7l3wsh743wxtfvtz47osg7oqksszwyhxhnxr4ntwcx4rnh8xrgvr2f6zpbkvrshpq0koc4t9ptd093skmeigg92l1h72flju7jv81hbui05jtd2ogtzpvoiimw51pkclp7zexltomreiniiadv5qmcengub21x7k8xe7y9s9ep2tovulmbpyrmxn5xwb0goqw1ybfy3khbbqthrw2mqfdoc2izr262u0mkdg5txwq5n3t68s7ij71i0sl71dvwjmw2vdjtxhwizxv4opxfz9yrpi06m0xldngjc8ctw53zxf2jnnykf4oos6ub9r81bkchkha3ws7lnn1hkax24himwjdiwtdplle90gvvm903b4pstikxzp6ub8adkm0hd6dj1buypgcd8qyhqoevm6v3qv9dhndz3p82kviung8shtijff74lib11osxe8jcjaxfsvyo3dtit07qvu8ez0c3y06ox1uqbzks9jrvmsmgjo9fzjehc0etp7h0wrlkkr2ukyhwbxnxrkqc749f8ema2ck2psi9pujvn6rx1esn3cv1efajo3ckq18nafxeo7qlc9o3qenm2bt0rws201zf86oewxd9dp0qkzhhpgw38en67r7s5y8a9yvcbkudyxfp55w1smt0fr2gukj2y6jcal5ghk08b82j82h8tkhjdda0pqo6c7462divqh8tmfqyu5mvoz7lr6277wokxoqc3p6qz020gte4ymccl1v7l58b8vhj1p0r227znjhinh30rbllhah20p1hy8tz953akdbogv1mz9wn42cgk4v3xcobbppcwioyldro0paysop34b8mtibboiuoikehc6hc3kpqtr9hn4sn9pqr7kt8kwq9mevexzoehr5jxc3fe7autpf51qfcebj53inri9121pypgav99l3pvsqzexbn3w9yhk8jrqzspjix1z3afkxjlfncyhi9d82mlco1zg5t8jx6on56gehif2h26bsxv94cva8izhz3g5ptu22hxadzmrnje5vaatp6vrr7uzx7khluccj8aplmhuxuq5yw29zhq3flovczvuwz9ui7e48aa5sxa38nx317q69ly85z9dlomntpc410u3zm7j5cv9gah62bh35kbuq86u2us9e9lpycu5swdk5jkmww7tdm9xot02awt8cfcgl2mafhbewvxdwsdl722zlmo4yjrarxk6gwib7qxiin12te4mbviqpzhy4ucp4295mjpxdrkg8tv75h36lks11d44upykeior73ihm2nzys60aj09x6s9c7q1pf78jiscemi5kodmy94whg1pni3958958jrlj91nlxtkqcyr7tidzerjtdbcjaxe7ejly4nmo63slkhbor9y0rtf81uwpau1qw32m0jwcwqespf5squkpzpegfx9t7i73nwwzt607yx06fgmc8klzd8u08m1768g22cr2k5myew5s9t55dvz4tfk5al2mnjml0nz4utioh6uu0nxwufpflwthowgvt5dhrm0aujj8u2wgo522u9gklmky8er2tol6vbhq26osf9rrql1urdea6umsbuzm7vovi1x7jotcov9tom9a72pes56n1m2yp83wjcr0w9nduxx7ucyoesibgilzogir7maetj8ni3hcr0jybod2uydlrewa4fwsck11uglummgriw0pinx7d90yh8n10zwy2krkk1bjo6i3sc3tt7r95smk54o83k6i3omfzqzs5g7kbfmal4jdreq1wlb20erk8ntvbgg35xeddpzw4xy8naaepwuiykud5zpf1pinqty40wa32ef2lfjk63vlk4pwpw6',
-                        expiredAccessToken: 8024473547,
-                        expiredRefreshToken: 3304619012,
+                        name: '12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g4',
+                        secret: '3tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe',
+                        authUrl: '9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzdntq2dwpfe69m3t43mgjqiqozv988o5uvrvzar1sn5k5inohd66avgziqwkfrh5yokp5zfcokdax2wvhrolweqcbr4523r7pxmgq1lpka4smtlwwoy2z1yp7i4ky5d7hwje8mjrpcsxyqxcafwoiphu9onf67bj10ih0r2czpwg5xku796d23v2fei7jhepble3wu4exl1x0zul5p0qv2ahsrg3i6x7r6oxhxu0ox436wmc6e90hg1qzprjqegqzvxybflf53k64rl60ixc3yoyaq4b5dsnppzhh0xbxsyi61qmqd8xwa7ma0do4vxf1z4oqahtt2gnbyg2gqc383b9j7j58ilxh0o635ynbj3p1314z4ruc5zxlgdcoh4hsr8rzap39slxzj92i3nx18hn9',
+                        redirect: 'hbt8tv3vuko4uxvvr8x2yp6qei7j14xbrti9oc9y8vofpxqlihxol63jjd28cnmb26u3cr1n1wau1fehl2jqe2kq7kddrcscxpi1v8fkk0y7wdzv44cgydt008h03qs6v1s3v441yuxarbxog66bxf6rzih1co0zrwmjkki9n0xafrh2tts2ar26nvhfkoolce3bf4nexrel1vcoekekzvv1jjhs9u4hfsdddm8a39ppv7xyaqfei961o369koum4imkc1rwsnb9udmb00415h2uwz7a70e309ux0etr9w04q0qhgr1q7xyavsxfmvtbul7chommvhfzwfi9lvwdsaqvbzknq6maqnsq25wy0mfgd0f2k115ic61q8pv27rolnkrburd6bu4lqfhbti9hdp863ipefk7u4y3r9eq1g5v533zqn2d3nckwn48lxkgpbbhemaoidurn08vcel26a4aarh150mtkezyia1iv9wz3jaxq3p8k3gk777c3pip5oa2t18jfxy91m5yjzzub21i7rudhhrx9h6mdk15q3b1xl8o6isub1nvd2sjanjdxnzy6w5xf0mslm3oo200c2burdu2hzb86dv8bz89y203r4lz15ox4syb1otjzbxr9rl5ys1tbh1sm9qjea15x7pg5p7hciz7rlqb8vxznizh7s4opar59gc6lpgvr297siy3265w1v2vtn6kwoe948o67j371bj5umen4uem0vfq56fqgfuedaosd98bn5sgja46113tk4uunvynd3frv6jzguefgic7mf1litwap9qwrwqkhf6brghmg60gp852jo45q9rtqs91wrs9hices2f07iqddtgfm4d1n1x8rxot6mq4z51hblu578t7n0ufrm2480vd51tl3vld5avxhioook57742o1sx4qzxwx5cxgh5o7wcw9m2ove6nku7nm5lgfh3eakk1auiq0xkhtklhp71tkkh6adt4aahkksvs7guhp70srcvzkkmlu8ykwen9458cyet0f5mddj2aukgrx8hyqhqd6qlprxssxoowdr7mqpb8uqmrnfh8us571ankn4ia4nw80fzvzrtg8auyirunqjrpm241k2gozmljs9ngt8aw4owofccs4nqyyx5hoj1bx9puuwxqlb2dr41buy2whe59op1lzvhmsuvw2qefw8hvrad1pqrngmyos6r678dbgjooxjv7k37xxwapq77ouufx9rhbvlmw3qs1213eaoo19xvstcefqfyiyro60vfc347tdhmpkgmuvs0s2rl2rw8h8fvenog3akipxip0rxxhpi79xo4b1v0p7xpb8elonc2bm95z6lnhcqmbxg0amibbxqwgnmp6q8bnx1ozk5a7m4c8gq503b9r5iq53ybl21qjlmh9asgem85h5fqh8oqtjwqq5px3u2mdixhehurhjmb3fva1h8d3s8x3w8s0mtu4oqy8uyysznxmejjnj57ddyg32gvyhj10hwbp851iq0en7l2evkzf3dwnxp36xbzjhqeppba22k5ep4cw2hj1c03vulkw53zloynmuf40k0jzm03ol2gs28fof5brn295ev00pl5fpr16i5bty3qgxalocuiqydbdyimnzdg5w4q9c9z4letkq0aezvf8nozo8eeh4a265kk8j9xnwh192mw9bano05b3r30fxcdkvsx0fnye6lqsyc5s8fzayow7763087dt6i47v798y6vyz0hngo32mk8d42r7u9pisk89m400aucf83bobgi9y59mvzc4pt0rygqjfw2rvbzkgrk7jthli3yy3g7uhg0cjwnmn19te8nij49r8dtgnw0z7xaa1bgv3340l7z44rztqrl95uziyjzt4rtul8p2oyx4dwzcj4vrhw71x1bywjfb36rxna4aq89h89zdt6g2r3f5mvwhalni05jyxtd9y50918chekg87jnntb45wy8y5dhn0wuzzxfcb7eetadoxirl0ulwniy1klatdzdb3emc36fvxpp6',
+                        expiredAccessToken: 9607685360,
+                        expiredRefreshToken: 9914140060,
                         isActive: true,
                         isMaster: true,
                         applicationIds: [],
@@ -1222,21 +1218,24 @@ describe('client', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthUpdateClient.id).toStrictEqual('7b95f0d0-bffc-4ada-a59d-77afa8ba866d');
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
             });
     });
 
-    test(`/GraphQL oAuthDeleteClientById - Got 404 Not Found`, () => 
+    test(`/GraphQL oAuthUpdateClient`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    mutation ($payload:OAuthUpdateClientInput!)
                     {
-                        oAuthDeleteClientById (id:$id)
-                        {   
+                        oAuthUpdateClient (payload:$payload)
+                        {
                             id
                             grantType
                             name
@@ -1253,7 +1252,56 @@ describe('client', () =>
                     }
                 `,
                 variables: {
-                    id: '8a264b36-25fb-4b31-913a-466948cdefda'
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        grantType: 'PASSWORD',
+                        name: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelb',
+                        secret: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44',
+                        authUrl: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                        redirect: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczfzwdlk281zptz1leq1e77myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduelbosmfyshp9ibmvhpjzrh18nv9cfp1qiocdyrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eqgg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9m8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdvihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswnje4vs26k81996zf869z6auhukkabcjfyaqfpchcbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef6ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0aymiddm35tvzvmb4nypouftdf36pc1yhkdb61qc4v4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzd',
+                        expiredAccessToken: 1353612680,
+                        expiredRefreshToken: 2404352741,
+                        isActive: false,
+                        isMaster: false,
+                        applicationIds: [],
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.oAuthUpdateClient.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL oAuthDeleteClientById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        oAuthDeleteClientById (id:$id)
+                        {
+                            id
+                            grantType
+                            name
+                            secret
+                            authUrl
+                            redirect
+                            expiredAccessToken
+                            expiredRefreshToken
+                            isActive
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: 'b7a8b080-03f3-4a29-8b7b-5c802b990b7f'
                 }
             })
             .expect(200)
@@ -1264,17 +1312,18 @@ describe('client', () =>
             });
     });
 
-    test(`/GraphQL oAuthDeleteClientById`, () => 
+    test(`/GraphQL oAuthDeleteClientById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($id:ID!)
                     {
                         oAuthDeleteClientById (id:$id)
-                        {   
+                        {
                             id
                             grantType
                             name
@@ -1291,16 +1340,16 @@ describe('client', () =>
                     }
                 `,
                 variables: {
-                    id: '7b95f0d0-bffc-4ada-a59d-77afa8ba866d'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthDeleteClientById.id).toStrictEqual('7b95f0d0-bffc-4ada-a59d-77afa8ba866d');
+                expect(res.body.data.oAuthDeleteClientById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    afterAll(async () => 
+    afterAll(async () =>
     {
         await app.close();
     });

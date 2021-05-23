@@ -1,10 +1,10 @@
+// ignored file
 import { LangResponse } from '@hades/admin/lang/domain/lang.response';
 
 export class CountryResponse
 {
     constructor(
         public readonly id: string,
-        public readonly commonId: string,
         public readonly langId: string,
         public readonly iso3166Alpha2: string,
         public readonly iso3166Alpha3: string,

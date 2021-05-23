@@ -3,7 +3,7 @@ import { CreateAdministrativeAreaLevel1Command } from './create-administrative-a
 import { CreateAdministrativeAreaLevel1Service } from './create-administrative-area-level-1.service';
 import {
     AdministrativeAreaLevel1Id,
-    AdministrativeAreaLevel1CountryCommonId,
+    AdministrativeAreaLevel1CountryId,
     AdministrativeAreaLevel1Code,
     AdministrativeAreaLevel1CustomCode,
     AdministrativeAreaLevel1Name,
@@ -29,7 +29,7 @@ export class CreateAdministrativeAreaLevel1CommandHandler implements ICommandHan
         await this.createAdministrativeAreaLevel1Service.main(
             {
                 id: new AdministrativeAreaLevel1Id(command.payload.id),
-                countryCommonId: new AdministrativeAreaLevel1CountryCommonId(command.payload.countryCommonId),
+                countryId: new AdministrativeAreaLevel1CountryId(command.payload.countryId),
                 code: new AdministrativeAreaLevel1Code(command.payload.code),
                 customCode: new AdministrativeAreaLevel1CustomCode(command.payload.customCode),
                 name: new AdministrativeAreaLevel1Name(command.payload.name),

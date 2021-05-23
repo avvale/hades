@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminResourceModel } from '@hades/admin/resource/infrastructure/sequelize/sequelize-resource.model';
 import { AdminAttachmentFamiliesResourcesModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-families-resources.model';
 
-@Table({ modelName: 'admin_attachment_family', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'AdminAttachmentFamily', freezeTableName: true, timestamps: false })
 export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel>
 {
     @Column({
@@ -23,7 +22,7 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
     name: string;
 
 
-    @BelongsToMany(() => AdminResourceModel, { through: () => AdminAttachmentFamiliesResourcesModel, uniqueKey: 'uq01_admin_attachment_families_resources' })
+    @BelongsToMany(() => AdminResourceModel, { through: () => AdminAttachmentFamiliesResourcesModel, uniqueKey: 'Uq01AdminAttachmentFamiliesResources' })
     resources: AdminResourceModel[];
 
     @Column({
@@ -69,21 +68,21 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
     format: string;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

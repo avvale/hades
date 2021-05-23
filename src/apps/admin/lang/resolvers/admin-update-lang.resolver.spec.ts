@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { AdminUpdateLangInput } from './../../../../graphql';
 
-describe('AdminUpdateLangResolver', () => 
+describe('AdminUpdateLangResolver', () =>
 {
     let resolver: AdminUpdateLangResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('AdminUpdateLangResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<AdminUpdateLangResolver>(AdminUpdateLangResolver);
+        resolver    = module.get<AdminUpdateLangResolver>(AdminUpdateLangResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('AdminUpdateLangResolver should be defined', () => 
+    test('AdminUpdateLangResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('AdminUpdateLangResolver should be defined', () => 
+        test('AdminUpdateLangResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a lang created', async () => 
+        test('should return a lang created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await resolver.main(<AdminUpdateLangInput>langs[0])).toBe(langs[0]);

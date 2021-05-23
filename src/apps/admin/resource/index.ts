@@ -14,8 +14,8 @@ import { AdminCreateResourceResolver } from './resolvers/admin-create-resource.r
 import { AdminCreateResourcesResolver } from './resolvers/admin-create-resources.resolver';
 import { AdminPaginateResourcesResolver } from './resolvers/admin-paginate-resources.resolver';
 import { AdminGetResourcesResolver } from './resolvers/admin-get-resources.resolver';
-import { AdminFindResourceResolver } from './resolvers/admin-find-resource.resolver';
 import { AdminFindResourceByIdResolver } from './resolvers/admin-find-resource-by-id.resolver';
+import { AdminFindResourceResolver } from './resolvers/admin-find-resource.resolver';
 import { AdminUpdateResourceResolver } from './resolvers/admin-update-resource.resolver';
 import { AdminDeleteResourceByIdResolver } from './resolvers/admin-delete-resource-by-id.resolver';
 import { AdminDeleteResourcesResolver } from './resolvers/admin-delete-resources.resolver';
@@ -37,8 +37,8 @@ export const AdminResourceResolvers = [
     AdminCreateResourcesResolver,
     AdminPaginateResourcesResolver,
     AdminGetResourcesResolver,
-    AdminFindResourceResolver,
     AdminFindResourceByIdResolver,
+    AdminFindResourceResolver,
     AdminUpdateResourceResolver,
     AdminDeleteResourceByIdResolver,
     AdminDeleteResourcesResolver,

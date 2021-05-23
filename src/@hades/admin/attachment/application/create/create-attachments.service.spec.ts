@@ -6,13 +6,13 @@ import { CreateAttachmentsService } from './create-attachments.service';
 import { IAttachmentRepository } from './../../domain/attachment.repository';
 import { MockAttachmentRepository } from './../../infrastructure/mock/mock-attachment.repository';
 
-describe('CreateAttachmentsService', () => 
+describe('CreateAttachmentsService', () =>
 {
     let service: CreateAttachmentsService;
     let repository: IAttachmentRepository;
     let mockRepository: MockAttachmentRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateAttachmentsService', () =>
                 EventPublisher,
                 CreateAttachmentsService,
                 MockAttachmentRepository,
-                { 
+                {
                     provide: IAttachmentRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateAttachmentsService', () =>
         mockRepository  = module.get(MockAttachmentRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAttachmentsService should be defined', () => 
+        test('CreateAttachmentsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create attachments and emit event', async () => 
+        test('should create attachments and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource
