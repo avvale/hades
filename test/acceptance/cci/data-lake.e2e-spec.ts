@@ -2,12 +2,20 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IDataLakeRepository } from '@hades/cci/data-lake/domain/data-lake.repository';
-import { MockDataLakeRepository } from '@hades/cci/data-lake/infrastructure/mock/mock-data-lake.repository';
+import { MockDataLakeSeeder } from '@hades/cci/data-lake/infrastructure/mock/mock-data-lake.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { CciModule } from './../../../src/apps/cci/cci.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [
     IamModule
@@ -16,7 +24,9 @@ const importForeignModules = [
 describe('data-lake', () =>
 {
     let app: INestApplication;
-    let repository: MockDataLakeRepository;
+    let repository: IDataLakeRepository;
+    let seeder: MockDataLakeSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -24,46 +34,57 @@ describe('data-lake', () =>
                 imports: [
                     ...importForeignModules,
                     CciModule,
+                    IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockDataLakeSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IDataLakeRepository)
-            .useClass(MockDataLakeRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockDataLakeRepository>module.get<IDataLakeRepository>(IDataLakeRepository);
+        repository  = module.get<IDataLakeRepository>(IDataLakeRepository);
+        seeder      = module.get<MockDataLakeSeeder>(MockDataLakeSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST cci/data-lake - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/data-lake')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'pdlwezu88alcm3d6chms7l29bc8ysi5susnw7awr0pzfji99ks',
-                payload: { "foo" : "bar" },
+                tenantId: 'c2b9a43e-140b-4dbe-8e59-a84691a309a9',
+                executionId: '4c191c8c-8148-4261-9310-27ef9d9d27a4',
+                tenantCode: 'uok7hy1txq6uqxrvq3t0l6or1gcwvqkevz6zuhp4ymy0spnflb',
+                payload: {"foo":13699,"bar":27984,"bike":49813,"a":40652,"b":"WW:3YKSx^q","name":72746,"prop":"G$fM,1roUV"},
             })
             .expect(400)
             .then(res => {
@@ -71,35 +92,18 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeId property can not to be undefined`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 't70geiazc5h6vgaesq0ixoo1vejus6nlz0cib5l7y6zqaxo7nk',
-                payload: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for DataLakeId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/data-lake')
-            .set('Accept', 'application/json')
-            .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
+                id: '479bb2b5-c3b7-44eb-85ef-9a9680c2d427',
                 tenantId: null,
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'm966vxuf5rl7sgsbvniqh4is6cqhcfdpxd4bn3o1fp5q5uvw1q',
-                payload: { "foo" : "bar" },
+                executionId: 'b14e05b4-9e5f-4488-b07a-75bdc87693f5',
+                tenantCode: '6gj2986p18ztifmo6wxerniasahq6n8yt5oy4ungji73sfmfap',
+                payload: {"foo":61208,"bar":66936,"bike":31046,"a":"qli<TaPC;Y","b":236,"name":"b=5&V[OMFR","prop":98171},
             })
             .expect(400)
             .then(res => {
@@ -107,35 +111,18 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantId property can not to be undefined`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeExecutionId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'g8nuvrt868mzi7amkom6gmbwy95lkiglwczpgjjb91bdycy4sw',
-                payload: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for DataLakeTenantId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeExecutionId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/data-lake')
-            .set('Accept', 'application/json')
-            .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
+                id: '0be4871f-a973-4d0d-992f-7d51ad9097ad',
+                tenantId: '13931e20-3cf3-4937-a926-e32fa15f85e1',
                 executionId: null,
-                tenantCode: 'tr4uocn523tnlq2v8dobp57qo3gpd98kcgcg5fwtrjcm4jlgrc',
-                payload: { "foo" : "bar" },
+                tenantCode: '06tmzv135opc4r9363zyteuulm4p5a5s14kqezd21h98fiahrb',
+                payload: {"foo":"2gE3^&H4?\\","bar":57057,"bike":":O\"ZwN^{(m","a":59098,"b":"bLk0r5Sl/s","name":41469,"prop":71123},
             })
             .expect(400)
             .then(res => {
@@ -143,35 +130,18 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeExecutionId property can not to be undefined`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantCode property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                
-                tenantCode: 'civbhazgrbsybep47jxiierxxdat36lij9f2rwilxe5ip2vwum',
-                payload: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for DataLakeExecutionId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantCode property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/data-lake')
-            .set('Accept', 'application/json')
-            .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
+                id: '80ab4253-e4c8-4049-a0f2-8d7ff80c9466',
+                tenantId: 'e95afb05-77cb-4bca-b5fc-02bff476ec06',
+                executionId: '118bbbad-1fd2-4981-8188-7f6bac62d150',
                 tenantCode: null,
-                payload: { "foo" : "bar" },
+                payload: {"foo":33924,"bar":"xLlHV]vKjT","bike":66562,"a":"Zf;sZIM]CE","b":"(pJ{+KO/)b","name":20642,"prop":"IukYAbayO/"},
             })
             .expect(400)
             .then(res => {
@@ -179,34 +149,17 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantCode property can not to be undefined`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakePayload property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                
-                payload: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for DataLakeTenantCode must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakePayload property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/data-lake')
-            .set('Accept', 'application/json')
-            .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'nvr6mnfz3bxy32g23sysovekzwldjbfhxavk1szxnfth5p6dle',
+                id: '95f366f2-c506-4419-9546-1058bfdd29ef',
+                tenantId: 'b5bbd65b-3140-4a68-8dfb-e1e59f4327f9',
+                executionId: 'bb573cb9-cf5a-4f81-993c-86206a21ad4b',
+                tenantCode: 'relgo9qkzhz7dwma4vsagjrhqojt8d6uaz4t9wg8fylwll71me',
                 payload: null,
             })
             .expect(400)
@@ -215,280 +168,364 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakePayload property can not to be undefined`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'sbd0yss1gj5yi93q2qg063pqym9ce1zj8k0quqio62ihct6es0',
-                
+                tenantId: '51314e6e-a2dc-4dc4-acb6-f3c046c3b636',
+                executionId: '89cd4bb9-f2cd-4bb8-b5b0-1b776188c3ef',
+                tenantCode: '9slh8bn46vw52zbpfen6he99s06zq7j5d1xvw2t3dizhsv3bih',
+                payload: {"foo":"n@Gb;a?L|#","bar":"Ec\\?7mDo[>","bike":64576,"a":"ZjpSdkN1Q\"","b":17035,"name":"QdCyrt+[2U","prop":97141},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/data-lake')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '8e0cf3f2-7984-4488-b2a8-5708963ad9f9',
+                executionId: '487261e9-cd25-45ee-8d0b-302cff171f5d',
+                tenantCode: 'b2dup2uu88yigoglffarlg3yzn7wgk0catmnbhj1u5cxudaam9',
+                payload: {"foo":46911,"bar":"U'PE`-TD]D","bike":89059,"a":"fj3{e=8Q<Z","b":"/]h{;psI&4","name":65386,"prop":"O%DX?E]!%r"},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeExecutionId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/data-lake')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '06791f8a-7d8c-46e3-b1e2-4dd7c916dbec',
+                tenantId: 'f6b011c9-5d5c-426e-b375-d7d55c6f63d6',
+                tenantCode: 'dvbapqy55b4m84xcoieh5wscla27q8yvizlm9l7jaco7amm4s2',
+                payload: {"foo":"4bP0n#UdjJ","bar":"`*=I=l7.!#","bike":29908,"a":"cvsl%2d(-q","b":72214,"name":"VE%[dB2XYU","prop":44999},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeExecutionId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantCode property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/data-lake')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'e07c4beb-0e5a-4249-bde8-d39a3c685ee3',
+                tenantId: '91b35971-9fbd-41d8-a8c2-7cb364c83472',
+                executionId: '28c13e61-cb83-4755-aede-546eaf215bca',
+                payload: {"foo":63124,"bar":1847,"bike":29523,"a":"q*Q`M`edds","b":"E6)+0oW[=8","name":94388,"prop":"<:5tYbrT%R"},
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantCode must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakePayload property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/data-lake')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '094961fd-09dd-422e-9ebb-53972d3c4d07',
+                tenantId: '7a786a1f-4291-4fa9-a421-49d3485cb8a8',
+                executionId: '4c779ad6-17d3-474e-9bca-2c3df1d05440',
+                tenantCode: 'jowh39xfbsjsxdjlf4de090ge315bra8s0gtdukmzoym2a3dy2',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakePayload must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'boetwj3hoxdvmzi7dhciytocuwf4h78rjl9xz',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'qehoi6k7i1f5gvd237n2kwu0c6u41bozmr6u0iitvo4rk3vaob',
-                payload: { "foo" : "bar" },
+                id: 'xj0r86xl52939044agd7ple2s6hnm5a9xz37g',
+                tenantId: 'd58d11d1-d133-47a6-8324-577d3edec947',
+                executionId: 'ec9311c2-9648-4426-a47a-d7a701747e6b',
+                tenantCode: 'xhwwa955rqwgqrhdgbpwqqm0o0jbwhqz9zj0cs06tgt71za83w',
+                payload: {"foo":29018,"bar":"Ovc]y):VRf","bike":"fwpyr#?mnw","a":",7>QP$}Z^q","b":54968,"name":67231,"prop":"DMRU@)`(o:"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakeId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '2qzfpb9igbmphc566ft1q0un54fj8bzmiucon',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'v1xfqeam0xxzdyw8wjhv3zajobv5kmh497yqescwu5ve8hjg89',
-                payload: { "foo" : "bar" },
+                id: '8e2668b4-b147-488a-8698-80aaf78b78c1',
+                tenantId: 't3irs6ryznmu5u02q1axsnyfaymmirryty1y7',
+                executionId: '07246393-ecc5-4349-959e-a7e81d19ae2a',
+                tenantCode: 'kyaigu2egn102tulcnvm49tvllaw03c2ubf5ytwzp7hwynaovw',
+                payload: {"foo":63742,"bar":4942,"bike":"3'Kx|$'Wk<","a":"e?)5q6P]]C","b":41998,"name":80581,"prop":"&)09%LFm^p"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakeTenantId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeExecutionId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeExecutionId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: '43nqe39rkb0680icurhhh3l3forwkhe7gcl8a',
-                tenantCode: 'fd74i8ln3tpz7ufmactgjt7xnrvyky316tn6c7mk8r6t39sbd8',
-                payload: { "foo" : "bar" },
+                id: 'd37e5412-54ba-4acc-9f0e-c997e3085c06',
+                tenantId: '99532d8e-450f-47c3-92b5-117a29dfca49',
+                executionId: '8hzxm7vj7tliea2xpjwscoq6mutcjvj7lufdy',
+                tenantCode: 'p8gtdnh3zxl96p4fgxt9n0028o7rsjjasf483p1rdehd6j6dmt',
+                payload: {"foo":"z!3/)|t#fg","bar":"\"7>(DDJ]}#","bike":24174,"a":14087,"b":48870,"name":88420,"prop":81065},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakeExecutionId is not allowed, must be a length of 36');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantCode is too large, has a maximum length of 50`, () => 
+    test(`/REST:POST cci/data-lake - Got 400 Conflict, DataLakeTenantCode is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'b9dl60litfdrgkv9zitvfkrqouno099jif4ggcsbz5tg0hhqw8p',
-                payload: { "foo" : "bar" },
+                id: '10ca31ad-1ca9-40c0-b08d-5787e13f5b86',
+                tenantId: 'ed773fbb-2e49-49fd-bf42-da52073b08a0',
+                executionId: '5cb6384a-a524-4a70-a8d1-13b0e235086f',
+                tenantCode: 'b76g809trzdrlnlgsi57a0y8fm8e2dp3i5g68u82lfd11nntyry',
+                payload: {"foo":14642,"bar":"L:/m%uM5Pp","bike":"k\"!G5pQal@","a":"<9m2d*s'x(","b":84000,"name":79711,"prop":"]+pWv@/2BV"},
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakeTenantCode is too large, has a maximum length of 50');
             });
     });
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    test(`/REST:POST cci/data-lake`, () => 
+    test(`/REST:POST cci/data-lake - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/data-lake')
             .set('Accept', 'application/json')
-            .send({
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'w889b6nioo7b626wafli587vgpsns4mnpi4rmvh22aex9vfrol',
-                payload: { "foo" : "bar" },
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET cci/data-lakes/paginate`, () => 
+    test(`/REST:GET cci/data-lakes/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/data-lakes/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET cci/data-lake - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/data-lake')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '6541074c-e083-404f-9128-7034e350b40d'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/data-lake`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/data-lake')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '95c84534-6a1e-40c9-8f8d-09c371d9ca70'));
-    });
-
-    test(`/REST:GET cci/data-lake/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/data-lake/dffa4903-8db9-4ec3-a011-ddd857aabfff')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/data-lake/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/data-lake/95c84534-6a1e-40c9-8f8d-09c371d9ca70')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '95c84534-6a1e-40c9-8f8d-09c371d9ca70'));
-    });
-
-    test(`/REST:GET cci/data-lakes`, () => 
+    test(`/REST:GET cci/data-lakes`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/data-lakes')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT cci/data-lake - Got 404 Not Found`, () => 
+    test(`/REST:GET cci/data-lake - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .put('/cci/data-lake')
+            .get('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'a5a92cce-6fb0-4355-87fa-b9aeb46c9a8a',
-                tenantId: 'f72816c8-ac1e-451d-84d5-3a1ffe4e46ca',
-                executionId: '8a1d786a-edf1-4335-8d6d-cf8a7fc978c2',
-                tenantCode: 'xrf3td9mmebieu9wv4s0ittnvqvn8wa5xj816v3ac3rf5hv9tz',
-                payload: { "foo" : "bar" },
+                query:
+                {
+                    where:
+                    {
+                        id: 'd1b05dca-9a9d-460e-943a-ebc119c12773'
+                    }
+                }
             })
             .expect(404);
     });
 
-    test(`/REST:PUT cci/data-lake`, () => 
+    test(`/REST:POST cci/data-lake`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/data-lake')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                payload: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET cci/data-lake`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/data-lake')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET cci/data-lake/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/data-lake/805bb050-5f80-4f07-a019-e5ee499e7270')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET cci/data-lake/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/data-lake/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT cci/data-lake - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/cci/data-lake')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                tenantCode: 'zh17upz7mnpat761677y57u3l0brn1feauqjtdq53zt7270mso',
-                payload: { "foo" : "bar" },
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                tenantId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                executionId: 'c5a9a341-abe0-497f-9b71-d1e1b4c58473',
+                tenantCode: '4h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczf',
+                payload: {"foo":"sCXU(8%{cl","bar":"%WGf#G45[z","bike":"&8&}X#FBl8","a":18791,"b":11323,"name":"a7s,:Sa$Y0","prop":12024},
+            })
+            .expect(404);
+    });
+
+    test(`/REST:PUT cci/data-lake`, () =>
+    {
+        return request(app.getHttpServer())
+            .put('/cci/data-lake')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                payload: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '95c84534-6a1e-40c9-8f8d-09c371d9ca70'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE cci/data-lake/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/data-lake/865aa661-c6e0-4603-8c6a-047964035111')
+            .delete('/cci/data-lake/a040bb1f-aebc-483f-a47d-03f6db201436')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE cci/data-lake/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/data-lake/95c84534-6a1e-40c9-8f8d-09c371d9ca70')
+            .delete('/cci/data-lake/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL cciCreateDataLake - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL cciCreateDataLake - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:CciCreateDataLakeInput!)
                     {
                         cciCreateDataLake (payload:$payload)
-                        {   
+                        {
                             id
                             tenantCode
                             payload
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -499,61 +536,27 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/GraphQL cciCreateDataLake`, () => 
+    test(`/GraphQL cciPaginateDataLakes`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:CciCreateDataLakeInput!)
-                    {
-                        cciCreateDataLake (payload:$payload)
-                        {   
-                            id
-                            tenantCode
-                            payload
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '2c94e60c-d0e5-4977-b82d-f4c09659f0b7',
-                        tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                        executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                        tenantCode: 'z1lqc7uuvxtiooehps5wn5i7s5gfb6n5unips43y26mgyje40h',
-                        payload: { "foo" : "bar" },
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciCreateDataLake).toHaveProperty('id', '2c94e60c-d0e5-4977-b82d-f4c09659f0b7');
-            });
-    });
-
-    test(`/GraphQL cciPaginateDataLakes`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         cciPaginateDataLakes (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -562,157 +565,24 @@ describe('data-lake', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciPaginateDataLakes.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateDataLakes.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateDataLakes.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.cciPaginateDataLakes.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateDataLakes.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateDataLakes.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL cciFindDataLake - Got 404 Not Found`, () => 
+    test(`/GraphQL cciGetDataLakes`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindDataLake (query:$query)
-                        {   
-                            id
-                            tenantCode
-                            payload
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: 'a6ab424c-62f4-4dc0-8db9-b165d1006e36'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindDataLake`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindDataLake (query:$query)
-                        {   
-                            id
-                            tenantCode
-                            payload
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindDataLake.id).toStrictEqual('95c84534-6a1e-40c9-8f8d-09c371d9ca70');
-            });
-    });
-
-    test(`/GraphQL cciFindDataLakeById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindDataLakeById (id:$id)
-                        {   
-                            id
-                            tenantCode
-                            payload
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'a4b9393e-3fb6-49bb-8260-e3b46a050136'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindDataLakeById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindDataLakeById (id:$id)
-                        {   
-                            id
-                            tenantCode
-                            payload
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindDataLakeById.id).toStrictEqual('95c84534-6a1e-40c9-8f8d-09c371d9ca70');
-            });
-    });
-
-    test(`/GraphQL cciGetDataLakes`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         cciGetDataLakes (query:$query)
-                        {   
+                        {
                             id
                             tenantCode
                             payload
@@ -727,22 +597,57 @@ describe('data-lake', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.cciGetDataLakes.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL cciUpdateDataLake - Got 404 Not Found`, () => 
+    test(`/GraphQL cciCreateDataLake`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($payload:CciUpdateDataLakeInput!)
+                    mutation ($payload:CciCreateDataLakeInput!)
                     {
-                        cciUpdateDataLake (payload:$payload)
-                        {   
+                        cciCreateDataLake (payload:$payload)
+                        {
+                            id
+                            tenantCode
+                            payload
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        payload: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciCreateDataLake).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciFindDataLake - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        cciFindDataLake (query:$query)
+                        {
                             id
                             tenantCode
                             payload
@@ -751,14 +656,14 @@ describe('data-lake', () =>
                         }
                     }
                 `,
-                variables: {
-                    payload: {
-                        
-                        id: '6885d29c-2eed-4b80-9a96-4784b2d2413d',
-                        tenantId: 'da018872-fb0d-4cce-b851-bc6899a60c16',
-                        executionId: 'bf56779b-4e32-493f-b893-a05001e220d0',
-                        tenantCode: '3gko05ozzmodq7zpifiv72futg3fujis2oyw8div9xxjhwlah0',
-                        payload: { "foo" : "bar" },
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '326cf89e-e33a-46b7-90fc-d0d4594aa410'
+                        }
                     }
                 }
             })
@@ -770,17 +675,18 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/GraphQL cciUpdateDataLake`, () => 
+    test(`/GraphQL cciFindDataLake`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($payload:CciUpdateDataLakeInput!)
+                    query ($query:QueryStatement)
                     {
-                        cciUpdateDataLake (payload:$payload)
-                        {   
+                        cciFindDataLake (query:$query)
+                        {
                             id
                             tenantCode
                             payload
@@ -789,34 +695,35 @@ describe('data-lake', () =>
                         }
                     }
                 `,
-                variables: {
-                    payload: {
-                        
-                        id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70',
-                        tenantId: '8259b787-0182-4010-9f4f-cd7cddecc6ff',
-                        executionId: 'e7a7be9b-0c79-4f34-a55d-c7d10309fa87',
-                        tenantCode: 'v2f3syxodj3hxn5xt265cuz1qq5svmnc0ewlr486gqzkq6onqo',
-                        payload: { "foo" : "bar" },
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciUpdateDataLake.id).toStrictEqual('95c84534-6a1e-40c9-8f8d-09c371d9ca70');
+                expect(res.body.data.cciFindDataLake.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    test(`/GraphQL cciDeleteDataLakeById - Got 404 Not Found`, () => 
+    test(`/GraphQL cciFindDataLakeById - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($id:ID!)
                     {
-                        cciDeleteDataLakeById (id:$id)
-                        {   
+                        cciFindDataLakeById (id:$id)
+                        {
                             id
                             tenantCode
                             payload
@@ -826,7 +733,7 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: 'ae760253-60f1-44d8-b0c4-707070313952'
+                    id: 'dc35277e-3e75-4a31-be4d-c4f82a4f944e'
                 }
             })
             .expect(200)
@@ -837,17 +744,18 @@ describe('data-lake', () =>
             });
     });
 
-    test(`/GraphQL cciDeleteDataLakeById`, () => 
+    test(`/GraphQL cciFindDataLakeById`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    query ($id:ID!)
                     {
-                        cciDeleteDataLakeById (id:$id)
-                        {   
+                        cciFindDataLakeById (id:$id)
+                        {
                             id
                             tenantCode
                             payload
@@ -857,16 +765,152 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: '95c84534-6a1e-40c9-8f8d-09c371d9ca70'
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciDeleteDataLakeById.id).toStrictEqual('95c84534-6a1e-40c9-8f8d-09c371d9ca70');
+                expect(res.body.data.cciFindDataLakeById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    afterAll(async () => 
+    test(`/GraphQL cciUpdateDataLake - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:CciUpdateDataLakeInput!)
+                    {
+                        cciUpdateDataLake (payload:$payload)
+                        {
+                            id
+                            tenantCode
+                            payload
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        tenantId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                        executionId: 'c5a9a341-abe0-497f-9b71-d1e1b4c58473',
+                        tenantCode: '4h3pxy47m0n2f35cvtol3ikt5hhyu65obmmem5e8o2tbd0jczf',
+                        payload: {"foo":"sCXU(8%{cl","bar":"%WGf#G45[z","bike":"&8&}X#FBl8","a":18791,"b":11323,"name":"a7s,:Sa$Y0","prop":12024},
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciUpdateDataLake`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($payload:CciUpdateDataLakeInput!)
+                    {
+                        cciUpdateDataLake (payload:$payload)
+                        {
+                            id
+                            tenantCode
+                            payload
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        payload: {"foo":51491,"bar":"t9btiDw@[J","bike":84025,"a":12310,"b":54302,"name":37301,"prop":44799},
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciUpdateDataLake.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciDeleteDataLakeById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        cciDeleteDataLakeById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            payload
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: 'e40270db-4b70-40b9-82a3-4c42bbced678'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciDeleteDataLakeById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        cciDeleteDataLakeById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            payload
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciDeleteDataLakeById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    afterAll(async () =>
     {
         await app.close();
     });

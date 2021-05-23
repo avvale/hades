@@ -2,12 +2,20 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IMessageDetailRepository } from '@hades/cci/message-detail/domain/message-detail.repository';
-import { MockMessageDetailRepository } from '@hades/cci/message-detail/infrastructure/mock/mock-message-detail.repository';
+import { MockMessageDetailSeeder } from '@hades/cci/message-detail/infrastructure/mock/mock-message-detail.seeder';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { CciModule } from './../../../src/apps/cci/cci.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
+// has OAuth
+import { JwtModule } from '@nestjs/jwt';
+import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
+import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import * as fs from 'fs';
 
 const importForeignModules = [
     IamModule
@@ -16,7 +24,9 @@ const importForeignModules = [
 describe('message-detail', () =>
 {
     let app: INestApplication;
-    let repository: MockMessageDetailRepository;
+    let repository: IMessageDetailRepository;
+    let seeder: MockMessageDetailSeeder;
+    let testJwt: string;
 
     beforeAll(async () =>
     {
@@ -24,80 +34,91 @@ describe('message-detail', () =>
                 imports: [
                     ...importForeignModules,
                     CciModule,
+                    IamModule,
                     GraphQLConfigModule,
-                    SequelizeModule.forRootAsync({
-                        useFactory: () => ({
-                            validateOnly: true,
-                            models: [],
-                        })
-                    })
+                    SequelizeModule.forRoot({
+                        dialect: 'sqlite',
+                        storage: ':memory:',
+                        logging: false,
+                        autoLoadModels: true,
+                        models: [],
+                    }),
+                    JwtModule.register({
+                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                        signOptions: {
+                            algorithm: 'RS256',
+                        }
+                    }),
+                ],
+                providers: [
+                    MockMessageDetailSeeder,
+                    TestingJwtService,
                 ]
             })
-            .overrideProvider(IMessageDetailRepository)
-            .useClass(MockMessageDetailRepository)
+            .overrideProvider(IAccountRepository)
+            .useClass(MockAccountRepository)
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
         app         = module.createNestApplication();
-        repository  = <MockMessageDetailRepository>module.get<IMessageDetailRepository>(IMessageDetailRepository);
+        repository  = module.get<IMessageDetailRepository>(IMessageDetailRepository);
+        seeder      = module.get<MockMessageDetailSeeder>(MockMessageDetailSeeder);
+        testJwt     = module.get(TestingJwtService).getJwt();
+
+        // seed mock data in memory database
+        repository.insert(seeder.collectionSource);
 
         await app.init();
     });
 
-    test(`/REST:POST cci/message-detail - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
-            .send(repository.collectionResponse[0])
-            .expect(409);
-    });
-
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 id: null,
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'mp81vsqr6ktozegw9bkyje58ejdoe8lba0bsvyjtuu09f1sxfz',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'rt82qe4xqrqp3tip764a',
-                scenario: '0ltvire95c4s1th9mwd17r3geidb35ktn7u5457j6uzts4gem83qmfnv92kw',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 06:29:49',
-                executionMonitoringStartAt: '2020-11-06 04:21:24',
-                executionMonitoringEndAt: '2020-11-06 04:58:45',
-                flowHash: 'spglfc4hpfeq3448ufof1fpcmtttakvt9fv50oke',
-                flowParty: 'hf4tb4s5vawvpx21jqvf7zkut4ycf6az8u0v4w9roe9z8956ahx2hysvm8qt7nld8whfh48otqgp6f17kqn4mo3o2n1yxji3iiyi61p5zflfhzrjnbdt9mq6lifpb6bd51lyxqsgpxxx27x98mnjvgs0gu07c5yo',
-                flowReceiverParty: 'vbl5ss95ixkwe7wfsvfn3syt5i1kga0xj2ij4u2nend3w0x7jvhotunehil1v9bauuds5nexj12p6x1m3iw5d1gd5ck73xc41xj3d4cmj3incwg4k7jg2dpko4cw3no6w6j71mlkwxxyy3x8d3073db7utocu7c4',
-                flowComponent: 'vb1sbzgcrthy9gj01j682cgcm95l3n4kd9v2t9re8okhki17fz4bglq0z5uz29swvn3ti6t0pnekbtwk4qubw8ft7239b8m24laq6ciyypdn5tdveaselyoy38o4t3vulcdlu93u5g9z0bhauwnpbgsqty7l0d6y',
-                flowReceiverComponent: '9aveqc12d9l6anlz3z6jow2j0hk2zlyerdf5sob7ndetit2xg0kyz0mc6vstn3vyok4zyqid9hqadcyrsfr3qq4xbinciovnps37o4xiufhsjb9utgd0q2i12tvsj1ishp9ctz323a3z5p0lxgzh45w3nkkpu3c6',
-                flowInterfaceName: 'i94vwg1yw0gfhz8zava23iok8xf24xqpf2hk8p03r7mxtd73kpqcr79jtm5debd7xtxnn92snasdydn7uyimkcakukms7z3qh1a6pa0g0s60yi7l9jx6nxw9qvg4g4fmghpw4wc3op4exk0hd17371rthifuae0u',
-                flowInterfaceNamespace: 'tn3jx05z8qwfsjev52gwhfvpxo8reeb06rpvkclxpuzbi23i6qvs9k9giyln4728zz7ukr5ocedzz75m45pu0c2lhoak2to2ld1ctue8ulke6icudipi347ql1qt2dgxirtesohktlrqavblz65jwm4mhicsx9uc',
-                status: 'DELIVERING',
-                refMessageId: '56ljkctj0eh4fhtuzqt5yv7ufh266koo8phrhg80ruase0k18guxjxgfcx1wg6qo403xzd57uji51vf40pea25yxfn5u1x0cex3qfvpfms1pv1urcxlm19ivva6x3jt8ooegg78nac26gokv4eqzu94op694cu6x',
-                detail: 'Sit velit tempora repellendus vel voluptate est quod ex ut. Eveniet repellendus reiciendis maiores est iste et id. Sequi velit aut quidem et autem tempora quia ipsa.',
-                example: 'w34bx58a5uhojfkn71z96mse54nm1gerddlvs55lvreiasg13evpjfmy6qkdlrepbwj94czzsydoef07xmbp0swncw1mij5xj4es8sn63m48c03u5u1xgjbcwlk6op444hr87eid4s7krvm88st1j3i8q9xvnxif',
-                startTimeAt: '2020-11-06 03:42:38',
+                tenantId: 'b5d6552f-6b10-4e44-84e5-f0e143dcc979',
+                tenantCode: 'dajqlni9wb7zvyoucrpfw86oyqk99jblwbobwpuq4b0jtv24xk',
+                systemId: '712dc40f-b51b-47d5-bd7e-c06a29777950',
+                systemName: '9ur9o7go1tpr5vvwom58',
+                scenario: 'rkoco4ml390wzz3n30oyuinfkgn81bj2vvayff1ljtobm2uh5bv077vuz917',
+                executionId: '541c9edf-385d-4def-a6da-ea725ac9b59b',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 09:26:08',
+                executionMonitoringStartAt: '2021-05-23 11:27:52',
+                executionMonitoringEndAt: '2021-05-22 14:50:47',
+                flowHash: '6b8ao06ogkmi815bmmfh8t0xbn3xem3ilx0klciz',
+                flowParty: '2rvhjntq8nup8prqt722zi3jit6i2e5pw05pp344yvn97bugx437zi40avj9fpmdgcw8h7c5jyp6kr6fhqn987sbmyf6jr38z881nhij5e730m9o1ftz4hg80gh3yk9mt3j9lkod4zw66gx7p5qu67uextcpei1d',
+                flowReceiverParty: 'fwlw04l9yp26mxzhl35arz8a1ineoinp6p0472058uc0dfpadfab9a6ut6zlxvt7dd3az9ho2rdefzb7y6kohlm0gk4mgfarmzfb6syh0z793jlm90w4gr8qu7039bibthq53gispjocunjhbg9i99kmtnqbvs5f',
+                flowComponent: 'cb2nthwk7c771dyo4sqspe0no3t93v7kbc7hia7tn075wmefemsbaf1yedc4z80s9a7p24y2h03yb4ymaf7t89j092ua58q3h27tnr1wfils0kh5uv64ntnouf3jp8b8dq7gooqhfxo91tclof06qeuaqwwtwcy6',
+                flowReceiverComponent: 'c919pgtw65kbo85mavrizmmubkyb8a7kcqay50eh5hosc132yynjnhppdodgidulxe5hwvh241nr16ddylwfrzb1079sftd2csdrzojf2kfnvw9t5mupxws4fymud4wmjezwgty60gpkuoptsenvcd0bzoa0rtbl',
+                flowInterfaceName: 'gr6oe29u1c75ojyra7c6es8emd1ramgn79c4li42ly0ob1dlbviwczy2151g1317e72hkjy1yyyx4t8n8q4l5qd5b62m2082a4jmyvmosfa9r2qvfbax4w64lbkb11z37q0w563u6flg0ecvzb6cyoowjnu0msw5',
+                flowInterfaceNamespace: '4xz3jhbobqbb1wkku2j65mg0tczo9j9bozp8kf8zp5dyvp89o9rg9my48qlmwse2lsur34u4tgheizddwc154b8yabcos55cams1kwd6pfu7jmga91f7uigo4ovggswnh2anvlzc3v2n50nsr7957qia1pyh6j80',
+                status: 'WAITING',
+                refMessageId: 'vvauertu8gblgkgehk4ck5c6m1j4q357sth9sia0j0eri7frs5twt1cg31testv64r0mr0bvwtg8j1fuxx7tmfvrshu4ww1mufi1c0qr7n7d3bzx2w6hbm98qnr9pskoi7j8qqngt57mnio9gtooart7jx3tyu90',
+                detail: 'Voluptatem et quam sapiente. Voluptatem in vero eius est. Velit quis praesentium quia maiores non iure. Similique dicta nesciunt vel est vel at.',
+                example: 'oa4h05orhxbes7b4xe49nqzsa6azbe0rxwtm6iafrskwde5029btt8d0r7x6zntzdrplq1u911ymsn5unzz3sp4jnsdkbml5i905dqigrq880va6u2gx9fc9fjwfr12uxszzhhb92oqfuz51qtloxvhdhts8sgje',
+                startTimeAt: '2021-05-23 07:22:32',
                 direction: 'OUTBOUND',
-                errorCategory: 'c78tzj4bkzgky01jggzzo9qxlygtsdh8nl9br6c6brfo2ca9hie5vlqfopjh90nlmind7w4hpxsmjs685ayvuolndzec7e39vylxtdxtr4kikook6dtbr2b03v52b8e2bxmcubakpfwwj3scrx3oiaeu1pxjcqfh',
-                errorCode: 'pza1ekul3764bp39nk3v8whbcp6c8o488lgaeelrhpgieqziq8',
-                errorLabel: 930832,
-                node: 8654045211,
-                protocol: 'nfulkfo7fadsi0a06b3k',
-                qualityOfService: 'rw81mc5p6chhhomvho28',
-                receiverParty: '24oxokjhvla5zahas41kxctvpvcp0y24xo6n6pp3tmepmptzmvmw9ecmq4z7jf86e5g3175vmbhbudowey9x71mp567v0bmypnzf0ol66w13xdjxarwrzkcag9qdykl2jn5h4humtkq0ysxgil39vikz5dnlkmgv',
-                receiverComponent: 'vfwd30zlq926j5y3zvfcrke5agly370xmwl7jiwhw31aw9ygh1rewh570geocr52yl3nuxs64aq064hxegdzfwve7hq4mdqusuk23a80bb4tb3865qlufq2j3iz4mr3c4cap9e44uz9baboffkrgywalc52amqmy',
-                receiverInterface: '8vbx4kz0e9wd9in3pn2tuhdrn69467fs6gonkzh3t36v7ijjtcw106z3tlkbsur5fly0ld79sl6aemams9klzhbst2w3hfslxztyfcfejx2o5lfdol3ko88jndkqp872sv8ju56dhlbz0febfs5m0vzqx13ndf5w',
-                receiverInterfaceNamespace: 'mroxufxyfc9exd1il1oa9f9fc7fvie8mxxlhhq67uj4lgsqjyfhplplxojan0dsjlil64c44aryihewrzfv78xih81ujdn72nfs49tl2gu0s7r2gcpfj0cd3lyclbrfzf2mq4wxprjhe0dng6gwk1n3lc3yzh0s2',
-                retries: 5106993352,
-                size: 7770202859,
-                timesFailed: 2205057057,
-                numberMax: 7239627473,
-                numberDays: 4278542191,
+                errorCategory: 'vbax3ckvg6v2nlzr89vflpmj25p8m2kgq2kl8h0vl2tyw7e4sy7jqyucqw5twfi0lyps4f8bsg1jmpgcxq3n3w3c3zv1aqt000w5nv5am563qkt6u6i2ooqkvvf7ccf6cw6x416b2qiz9unrvx4vfyaqnxv8gtwo',
+                errorCode: 'y9a42r0wbuvf0i3os2eite17vz3pcydn5aqr6ful16lp5i31xj',
+                errorLabel: 796774,
+                node: 5789906416,
+                protocol: '7rw9on9ggula9ktxgcnb',
+                qualityOfService: 'dmrgfoaorcdm4cu5ych0',
+                receiverParty: 'z5k5majs4cgaumbpssbjyjw27zgtdx4gmea0zp3w259uyttxn5k5i54nqy2no7rjmgm3etxblp3cseswi88ev9gq810r87uleysbj8o0yyedari5acxdukh3v3ek728t5jwg7ye930zqz2dad7d6t85njcjh41ax',
+                receiverComponent: 'm3spcd4mqh440xgqnlwua3cgmejjtpa2u4er6mu49r5x5ip32lihb2h1wm1t1bzkmu06kx1i18d6bfm4v4hd7g1on6mg0y4cem65ifd039flzkciqtjww5gpl2y148f24gqgdyh77at2pm5078825ee08ru28hsw',
+                receiverInterface: 'wpo68up2xhqzd5yfypa6701nhcbej2unneujkgibbpct4ztawsdebcvfblvq6eyqz90yvqegx8gh0xdszlikqgsv4ldz07t59sf5ysnxmo1kch5bmin3rl8eh0ktlpduvemj7vpieq2ezoe6ruvlrbt7lkqkha5r',
+                receiverInterfaceNamespace: 'cvga5a2ur3sc9mrbvdqhlkc8pfhlm9y8fjtrs1x8mpt7m07vhjbasmey4aj18dudwyrnobx97jd8ia8muie3rosiqhwvrpb1jikcg6n4xkokssobgpspf7kd8h4m8p3t466q3bcc4jwefsi1pvo64e3c6cx7wsvd',
+                retries: 5446030939,
+                size: 2387996835,
+                timesFailed: 7933856426,
+                numberMax: 6529110487,
+                numberDays: 9298068802,
             })
             .expect(400)
             .then(res => {
@@ -105,103 +126,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailId property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'kg5wvp0r5mw9scz1nd4yia24p2jsel3rewa86w1a6lpsf7ess9',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'sl7g5vm4bgvrr09q8omd',
-                scenario: 'fy4t4lb18zv0ww90qz6pvi8ptrvjhei4xi7u0t3ss8npvzk82klm7qqm7i3n',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 19:45:36',
-                executionMonitoringStartAt: '2020-11-05 20:27:42',
-                executionMonitoringEndAt: '2020-11-06 08:43:36',
-                flowHash: 'grffawfyplykl68cihracmrz6gxmvliydt909y0b',
-                flowParty: '7fv71yroqlpag0ccmkkd2hnebgs1rjhkmhbdrscffghrjb1h5eld5uusafe93wy55iigzg5i8763nder20lz7z5ox0y6otf8xf8a9ew52nwlk41eh55x2tb6drmlhrh5ub8wbqtjwjwsl5ch78a1qp8fv8qumbc4',
-                flowReceiverParty: '9mrvndzlcexah0zq48e5ans4bo4knnnbg93ceha77pzz48q01lvutc20alsgydeneibxx5hkbozrd4ohsn79n18m459egpeg7t4u2qqa7kayckl628i306c6dltg52smri5e2t133r84le0k90h65cttek2k4yoi',
-                flowComponent: 'gobvgw506gb9mdbxyp2dc1rtr2ixa6wk5039l54rpt1i9bkfl4f3pqzmq44dmpezq1otjnznqga3ct73ag0t5q5z1w1br21lmnpk80grof8eyr419gku55itn65joixxumswttgpdfvxm7cq1lrhrqcx86vcsle5',
-                flowReceiverComponent: '5qu9pj4i4tex1q1kabqc7xu6vlg8milhw0f6tjk52qg3dq8tk12fjr03uscb832tpolnqe5k4g4rpqaqij6n6q42c63jpwxf4mkr28vgjw7eqx2dkf9uwkftaw75uey5ceupovu11t7hu31j7sg4ck3t30ewko33',
-                flowInterfaceName: 'co5ee429rij0hdgz8b7x50n7ynwjv6jba106f0f7597tjdjydsmbudyt90urhf4fqftd4eoecz7qm9hr0hjnri25doqzx4irsq69huo4f9nkfnjsg8y0xtbh7oj0803acmyvzyudpctuyk01n9hmtn6w1rlmjsq6',
-                flowInterfaceNamespace: 'ju3cr0w8xkbf7cjceu6m288huovuhths8ufreov6kl5cs62ydet70cmzy3w464iequ69lxa790p1skh38y8jp06c3t7b5pi91arot7kpqkial9ne3fs2phkec7tdcj5hww867rar6le3kvvnd21yrmtyipk0p2wa',
-                status: 'WAITING',
-                refMessageId: 'laeqvqdkjvfst7wyiclhlcbok6rkwegeil7mji6p6a9yc4av0sozrzfv6vywilih7mgnlptwtj3kw337nhqa5l3w0e71wdffsm8pwvh4jkvy85rgk3d7sl9mevimnaau4y81r3dgia1ejejbzgo2grbiggi5dam7',
-                detail: 'Minus ut adipisci qui suscipit omnis quod. Et voluptate est possimus. Sit ab facere incidunt voluptatem sint.',
-                example: 'ya3e31jdxkzvzlhsopynu04i4bduj1vv684v66yfzabvr5diwhji6prymepd1j7yjqid6of37evzs53lx0kgrknkhv1uxag3utqotfnr9ubq2aok08e1wcklfgof0zd0sxtjs1d1p3qx2z8gfzyb0svm4qsw1i6b',
-                startTimeAt: '2020-11-05 18:34:15',
-                direction: 'INBOUND',
-                errorCategory: 'btap2ps8c0dlwl4tbjlb60c8mh0jwuulsfjo1qeemts8x2qqyjjvbufyr5sdn32sbk37k3nli78drqbbzg863p4t5a59da3l3x7j1riv86n8fd8rjgi6f1jlwlyzfni0efqz0t5zhov18i98894y9yiudulcusgm',
-                errorCode: '5vb6iox2orqyk9up3in9wqcltud08nkr5ac6pm15lt5w2hftv4',
-                errorLabel: 207747,
-                node: 6681007426,
-                protocol: 'ovxy1jgr824cc7rm75bx',
-                qualityOfService: 'dd4mkmfy3exppobpw1qn',
-                receiverParty: 'ojycpztqd73zmqdx2rwzksxrbc4zlxrz6121rcng49zk0yo53cm0h5i1k421ibs1yehhbcgq2ktwri54was7ocict3y5xzjo21bv0oblh9207wpxnago0gvvep7rdzgzsw1bb0q65ebpl0fjm5r7r4g9uyq3yppi',
-                receiverComponent: 'sxevzs409e57a38s0976r12ea9km2d40m0vwrv5xqm29a3zrszfmpkqbkm52r2ei67hvtkf55iga0qpmo38ld7p99nmu74gargll16x7twnsk8yrm9e47y3qkecxdqaan9ccqujjsybumszhq19izhlxoy7n8ftb',
-                receiverInterface: 'v82gd8yfd4vs5jynva0zjtjc3fz7vu4zme6zt2i9famk65n96s874p5qp5iohibkjqzaaer1y98jjsilepcd8ef91iypdwavo9blgqtwjvjq2nrcu3jo7g2ad8rhop6u7th4r3a84jk5b8vwywjshzac5yn4s5of',
-                receiverInterfaceNamespace: '57d2kmqfwnki1nltmvd7ikk949d22dhjfgsulnmofmc5wogzitutbfxc9hq9urjd0np8yfscrmzdxa42q7c4nsppt3v3d1knd0w827cgiyo3kgaiuszj8f9h6cry7wdfs2x86bhq1wg1g19h61e13yon23mzes0u',
-                retries: 8430336333,
-                size: 7005682539,
-                timesFailed: 1467893612,
-                numberMax: 6256004424,
-                numberDays: 2470060494,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
+                id: '3326c5ab-a95f-4ffe-a8aa-fbfbdf34b02c',
                 tenantId: null,
-                tenantCode: 'hi65cuu7aiu4g4vuizf3aju4nr3mdabom4dpspthfr725r9fd2',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'bh45hf60mq5klu98sxap',
-                scenario: 'm1tznwu5ildv6njh0l7vcrwbo344t754xkwhr6rkeog1wtmyq4j923golplz',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                tenantCode: 'qt0dmcuti6p8y3t4kqtdoy6z4xmdjvo08rsmitaaochiyvvb90',
+                systemId: 'cd6f57cb-9285-43a3-89f6-f8eeaba48ecf',
+                systemName: 'mw0elojhkx5m5bfponj2',
+                scenario: 'ufxpcwb44hsg27fan3vaiwm3jv402n3vjq2w131bwxsieetigr1j1puqnrj7',
+                executionId: 'ad39a7fa-6abb-45d3-9218-7e9cec9f3510',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 14:35:56',
-                executionMonitoringStartAt: '2020-11-05 16:25:53',
-                executionMonitoringEndAt: '2020-11-06 00:58:21',
-                flowHash: 'aopd8jkgf6ujqoyk6wabmg6r0bupvntehqwvkmry',
-                flowParty: 'pw5u2d44qztnenr57nbsc0r3kei4h3g4hbnm96283wwoltc0clayp123lum2u2h5e2vlgq7exc3m8ebemd3elm03jsu7k147gy481pql478wptcmup95j3455zoyyc16f6tns3d32w1dmoi26s3oi1dysisk105c',
-                flowReceiverParty: 'q8vhzzveob6danti6eswjohwuiddxjqj5k0jmlgp6srsdl9p13x944nv2uz1q1jkxxjyn49ea03slivck8zw6n6to3bj0yevxxizd0abrpzm71gl2oej0kfaoohoa1u2toiagp44ezv5tcdl27x63afap2vmv4im',
-                flowComponent: '3pd7ns6yrbwoa7grviwnm6xa5mt1ou99dylq8yogf9f9ma5yo2o1zj1dbruhs4y0dr87nskkk2kv0n12llhjheoqlmul5vyidm6rk7hl13aor17g99fpfappptdqxr1hcdrja76ysh1ymnt8d7lgqyrrvcr3ve8j',
-                flowReceiverComponent: 'v65aqzfta1j64r3dz307zt4nzwgbgf6tkzw00axv18ymp8xr931eyvitdch4uqjh1juurai6wu0rsz3fn5fhzjny7sn40e34olbjrg6t0acz346binydjqe100kquw1q251pgmutp7q02te7bwjeoaf5djb73ev1',
-                flowInterfaceName: '37xuf6sak1rs98l0zx2etlnx8vlx453jbg8p08idj4ggtlz4uel4lmn0yn1ychp0nsvn2n6wrxacq7iwm0zwpbczgiq5ixyk3yzfo58q6nsjxuopt1sd79wagbe3xpvq3q02st0q5od7ul11wi3u4n0lgk2gw5iw',
-                flowInterfaceNamespace: 'avjr8zgujmyy4xvx4e474x977a9d8sug552z0l186qjghp1l9aecd86nhut9fcqwcjws0kqi7vrr1v4yddqbmg4fuat44j477pcjrdlp5hskwtz5hwmzv9bjsmym5oou31mwn7yhd4mnprx00271c1raqwpwufhr',
-                status: 'HOLDING',
-                refMessageId: '13z281vwif7prkyd729husw6ccyhyckwwcc2knd7p73fwlbggx2gz2yv3wqa1hj1k2u8we8wr9hqhtk4op04z8ys0005b4fs65b87a90v7jpwac8aamxlezgbpvvbynwgf4bog4bp4jf4eo0mmlz7xgnz6hj4hnu',
-                detail: 'Porro unde voluptatem inventore. Dolorem omnis voluptatem suscipit doloremque sunt. Dolorem ipsam dolores doloremque amet quae corrupti aut vel. Voluptatem et sint sed qui. Omnis rem illum.',
-                example: '8ejmslqupzq8jzlnl4dm4clhk8bhkmekwv8polw1szpm5r7ffe0vwkf4yan4ogon3qfi1voxmfmvbeevkjvu9u80qbzb0hsh51uctaaqj7twpl88pfbheq1sr5lsv7596wxb60aqgmjx2szqt4hh9z7ri08q3p6r',
-                startTimeAt: '2020-11-05 18:56:17',
+                executionExecutedAt: '2021-05-22 19:05:55',
+                executionMonitoringStartAt: '2021-05-23 01:43:29',
+                executionMonitoringEndAt: '2021-05-22 22:44:30',
+                flowHash: '8ud9h00pdy2octchs8on52hrerltea1r1z3kb7wr',
+                flowParty: '0s1xkpkuz2uir5pnlcxqriy7d062yrzdtfpn7jmk56ohsgcklws0ejzxu2d5d17fc0bxsygfvdtxabvdj9t3jr1vwfn8jpqd9b8htp60qylh7jwt8ip1c1sqry1gi6s33yufjf6w8cl5hhj2r4gokdya95rue7m9',
+                flowReceiverParty: 'z4sbe9c5lxrp0u4aby8kqaboyrw9zekheanhg3vlhh55vysmoz9xzkmwnz43zfs9j2959b1uvslbzhe3zhna7xi662xb7ciakbumtwme967ozjuso51tgrsttv5rox6gy845d29oh4bwgrf3zoystalkkhburt26',
+                flowComponent: 'hzhugcf9mf5mkyf4zgt6r3kjj4dvi7i6j1sn42m2o9pdznx2xkx056xajjrs0vzu1gsua1umh3t3u7e7c02ig9qrg5954b58rjsgcmtgt2j53uevdtvtmme53dfhrs4b1uyvlrnr4v6owd7qd7otl7c3tl241c08',
+                flowReceiverComponent: 'muiv1xjx3cu11ufs648eayj1l3sbn9ssebw8qhbfu46kwlzrzq98056top9jfl6m0guql9qqmapp0al5eyo7eojn32ank63hr09oltz3ihfny0482j74ktt5pz5kz8rz1o6ys665v6qjsljm1c1mdg5qyzez52f1',
+                flowInterfaceName: 'lpcwfpr3p6q4b39gxr7w7vh5m000wtbslyl1x87g65rzg2zsumgqoeee2ielrrx03caci6xlhfe2up83pn2u0a64kfmqc6gzzwbxtmtibdpuq1ryfdeew6u2m45rwg7lp1lifzzm9s14567pc5q3xor7h92zsibr',
+                flowInterfaceNamespace: 'tl1dmoja904cjbm3ir4k9hokqd121kd809fduri2rohs3wm9ljxa60n0acz5llqe9wml8i3xli34c9wn2xau21svy6sg1esgeir34vvxamox5mp9zo8ot1hggdo6dtzs2to87nfqpzui61fhh5ltq35mdckzn6vb',
+                status: 'WAITING',
+                refMessageId: 'dh0td453uedwqleuet8afed660d5zjazpf9jn217md52rwf7ql9xqppgygm6khgp3pknvy7b9c4nd0ejp95ousc5pftpmkwoy61iqf9ew9xfxe3jajv6lzu2u362429u9rnkokyvlunztn36etmob5af0pkm5ona',
+                detail: 'Ut architecto eos sunt aliquid earum. Cum qui voluptates molestiae eligendi reprehenderit harum temporibus sunt iusto. Autem placeat perspiciatis nihil id id ad sunt beatae. Enim illum optio natus itaque a quis. Expedita aut omnis quis ab. Voluptatem maiores sapiente laudantium sunt culpa.',
+                example: 'tsceq6adzxf1v82bvyz9dwpqmfcl2v6v3oeqq1qyw9x4jht49six5ie01vxpn7x3wpm9i2u2yvtrbrcbxgkpyu3q5xho2qysz0qt5z2wvivuj05qc9uops8kdpe98yf38e9kz0xapcpslqyp08hw6hp1emn5e5yk',
+                startTimeAt: '2021-05-22 15:05:23',
                 direction: 'INBOUND',
-                errorCategory: 'ru7y866n79mtpu0whil8ld4r948wa6jm5uursk826h3apyjcp77byltyy9dws04eop7j03zgewb06ocnvcqxic8jlj8h1ysibteb9vskwtklt4pknyynidcb5rici47pnk37041097qpa4er9a26xz3anzhalgix',
-                errorCode: 'dlchm8g14zn3zojob3l4lidejvhm0ktl65blwb0p3t2sek8kk7',
-                errorLabel: 319867,
-                node: 3173187975,
-                protocol: 'ak5kuwmwu82kdo352is6',
-                qualityOfService: '1zmunk17mvx0keucraz9',
-                receiverParty: '21cfujase4qpyg0ux83cof73fokk53zp9vub6pkgduoomyhcs3k7cip5ng6j4lv821lk75mo3zvwarcrs63rnxjrfl8xtjf1mbgl657tyidp3ul4ijrydmbgitd1w1oewzcbdyuabk9h597q67bvtpo5m865mw64',
-                receiverComponent: 'gcqo5km8xfnn70cjceuqfakkql3qbudcivx9wcvq7qzz7vaz6sh4ei9xd9bk44pka085a0lwx0j6gszupcxk0v3m9vw4y7hygy33hdehp2pvd6d3zq5d8x9ifahh9q2gmo73fo0zcclsnvyt5hd8e17asmzt6as6',
-                receiverInterface: '9e7isebj7ijmcq844g16kkzg8s5wzr1902dwm1q5tbz2ppto1bhkkm6xzx08nuu9rvdep3zoo34ppphfdy66f5lvbur92k0xkxrtldd4mlqdbit0c38zwj83hgnl2036r0x8lyjib8zicsukg7svk7nz8hlzivni',
-                receiverInterfaceNamespace: 'smdzxy202g99qq93irou2xjsm9hecllwwjdyytpfx5s3kfqopml1k8q8wa94e3lgd8p998zwkv5k784merutaetmdeozqe458d1ypaedleuudfbillux73vs1dfcw2ut5clt5zgnhisuvanwyn4atxsy8eeh6yl1',
-                retries: 5749592977,
-                size: 4932621418,
-                timesFailed: 6970566426,
-                numberMax: 7484691434,
-                numberDays: 3952035228,
+                errorCategory: '8kts7g8rfuy35r3fus42qp6pv1dxvyf0syeucitgysy8nxy8vafozgp1ba0ew4j4qrtd1y3bwlzlvuthxxahvvlo4t66c61mavf19382b0vp58l5ltalvr26g3jfupw6hqiyvderc3v52mn96jqoldq01ibes1eo',
+                errorCode: '691ouyfy9b3nycxp00ut1cdil67qw1v2hu78vv2z6lvd7zp30r',
+                errorLabel: 270215,
+                node: 3871500635,
+                protocol: 'd0aqthebsyorhpjwyp63',
+                qualityOfService: 'e1tmld0w96wxko26r239',
+                receiverParty: 'yyfn1w4wpv4slo69a7vpv3r5akj83j6006qx95zzckhhlt5rf3obct4hm82pinhthqq4y774v24hperu3pv2682rsuf90rivzxqvimsgig56r11qz319wanuni8t3h0gwc1wt3wzl3de7dk8f6g9tq9udac3yfiw',
+                receiverComponent: 'ily0ekytxf23ld7wprp1ly5o0jymtvtr9xplo76dt5hw7464wxghdaxu8vpun29pze2j3dfu0wx824sca8qde7urpwplfz4k1neco43e04pepi7kil80tztf1dki0gjya19y674bg9qcudevgjn720pigf6ni8pm',
+                receiverInterface: 'sfu55hunh0d1avpm5qro1dvrbthgu98b7j2nk8c4w6e01shnb4ozu4yjrgb6nw7ngumv5g0dahq3si55erybswonygmz3tmyirvfe7hs7vqdzv1wck273qvzj6dto1f697b10cmr13gh7933xd6tvw5to68w9m8c',
+                receiverInterfaceNamespace: 'as0a4qpaut9xelaytfd1qeryxah3t386w4lak1go5k3zjf32mvohdod0sax3urdu45u9a1334v30we9ttu9h7dlqfwk0kqaxliuozr4on8s09i0rexgwkhl394qftso8941ycg2bofwoi2mpeokyeepuqk31me1a',
+                retries: 7758148156,
+                size: 8561715063,
+                timesFailed: 6703221483,
+                numberMax: 2373912559,
+                numberDays: 1993844913,
             })
             .expect(400)
             .then(res => {
@@ -209,103 +179,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantId property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantCode property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                
-                tenantCode: 'iciu80nact4hc1rdkyyqtg3m779e3q9g8670w6rm0ab1jc9tky',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'g6fnizgtxc4cm43ee0x3',
-                scenario: 'fuhqoig5i5lf83l31kuojj2ujzk15hnvnq0j8nlhy2b4gt2vw8r5sw0vyj2a',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 23:16:31',
-                executionMonitoringStartAt: '2020-11-05 13:38:37',
-                executionMonitoringEndAt: '2020-11-05 22:52:16',
-                flowHash: 'ji9tywij4v542nygn2ptzcii7d3sfuabgllsxfwb',
-                flowParty: 'yrke8zwrthpub1jknbp21zwvm1rp6cec1vhbdcz88qy436xrjhflywexqevun8x98yewpkpilhl1a5ugwlinyw6tx7yxvf41jwrevvakz4ybnnq9pxqinc2cp58cjuldy2glnu2bn8xg8711tp54m2xk27ul54rc',
-                flowReceiverParty: 'a3121keyhf713ybx8fmcuni404lp7pr8toa6rkmdmnixpgn5d3v45frcur4ek3oi4x4xmuq0slzqh67yvi9gnpefokihrs68dzbrkeq8kj3uaia2ay439emnju5slwbq76kqcn74p1r0b1f7f47sfc1824ut1wap',
-                flowComponent: 'c52zrwt2zjohvrsg8ywjsln8m6faf6sr60pe35igdxulhuu4banvvqjq5xelzvmi03103iraso30tssh8y6o7j0a6dxmp178t41i3y9b0xt77c6rojufouumkawmknuzqtmmd8tx5etlrk1e6q2aoa3x8sbiahvn',
-                flowReceiverComponent: 'q3tk4gj5rhlv9h16k8y4m51t71nda5d3i9vjdmaa1l48utebkqrs1w4nwprox4rw5les1usqx5k1zptbua8a3m7fex7oajpkwbncwihhzewt1x4bpk2d1ag4jivq905d0ceo7756hf6ahfuzxslqfb4v5v5hbt39',
-                flowInterfaceName: 'sg73b0ckz2j2z1c4a2agrobteq01humf5cwjzg430ojb1yadgx17gd5pgahm6y6kruvfbaasrwsiyvcx55oq3j1uobofexyeknuyphtcbjwuvdx213j3eba5n2ht5trvmwew88lseg1n1cxs2xuvfunhnkl4dt4s',
-                flowInterfaceNamespace: '044jh4q17qigthc4wdle6bm95y40fh910d90mmmjq343vd57zrl1ydv9aj8mgxodcmbo60gu6quujdqznjq52ody4ppepgiz1nd3a6qk0vcr6644rgpithog4cpaz4je1u4mugc6gv6t1pzncn1p7ix72nzra2uc',
-                status: 'HOLDING',
-                refMessageId: 'fijalh273ojnifjju9047oim2txoz1ng0dbev7ivyz20qczvztzfj35b3s4606kaj3jm86k1x64s3eyfpcdbbmna9dtcr9syklxe0uxwlkkxs4tpehsp59lyu97yn8wjoi76aov9uip1m2vx8pdf5rmhlik7z6t0',
-                detail: 'Ut numquam soluta saepe. Maxime voluptate illo repudiandae tempore veritatis ut. Corrupti quidem adipisci. Ducimus ut modi rerum qui ullam quo rem. Quia expedita facilis optio repellat ut eum repudiandae. Eius debitis rerum ex expedita nulla quaerat rerum.',
-                example: '5fslcgizr9m3uk74foq6ehqe8aoeugycjhqrolbg41u08tyjh8q75g926v1teswtw3nblfpuuojiegei2431gxmeaxyx7xargvm78nhze1tbwxpm9serkiev40x3gpnufifuhss25b7xjll08hketn292m7kerft',
-                startTimeAt: '2020-11-05 21:49:46',
-                direction: 'INBOUND',
-                errorCategory: 'jscxsv2velao392twc2szjhlfsjok0kbymfvqibmeozf2erdcdbfllhg0byolw6s20d39fudg550wdehhldyf21990tasb58400apg1av1lqqbjtq1jjsq9keq3qrigaicawwfiz7db1g0j404x0zhcd2ot4c5zr',
-                errorCode: '3yd8uzeld59t961p42zhal2r82k5ije51sur3farrjem729jlq',
-                errorLabel: 992921,
-                node: 3199286072,
-                protocol: '7jpoq5394ml8lb0igphx',
-                qualityOfService: '3kwqpuno9nff6aw4snw9',
-                receiverParty: 'jd0n1v0h3tckej1zqng0yk3blj9cbgb3wcg3j7zstlpydc4qhwnlsn26s4u5py6121e9hzgnt61b297ri1bfkn0iqi8n7ivpibczy69fkzswuhsm9f75v35wpdhixpbeuuo1ps1s0wpnvq10lrtng01d70uv1nsg',
-                receiverComponent: 'topdl26dubw4p1k6z8gv82hgcgvsgz62hpki21qy4kn9wtb6ec2cklr3o3qkha4c15onfd6blzykqe785u3n1729alsjntvsnwo96jnwa5juhp2n121w20gb4z8ykta1pzofhcr9uac9914a1degewbjkvp4hxrh',
-                receiverInterface: 'vw6yka9ok62lun5f7tl9izlzkhrmjqc5j0bux5yv9ijfjg71poe742lhxmm6giqyf34fwmiiew0kwq0vk8xinj0z6bo5owb3n4rlfpwuhxznuqtemjpzuioi190o5wmjzxf7f8zxdfcnluli2azhhnsrhive2is9',
-                receiverInterfaceNamespace: 'ghwz0kpk5ejzvj96z82utpfucqwxfu44b52tm2l1sd3dkvbhrl3qh029gtt3nbznqe4mwwzi1znpg7bbj10ux57h8u3oj9k66degfiisyudkankigifg6q0cgznici6tqfiykfec446r9o20gt7bizmxnpodplnp',
-                retries: 4538664805,
-                size: 9430796312,
-                timesFailed: 4108832409,
-                numberMax: 9815920319,
-                numberDays: 7801017106,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailTenantId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantCode property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
+                id: '5a741411-f691-49cf-897d-1a5e1e288641',
+                tenantId: 'a2076a08-c782-4e8b-acea-a771861b68b7',
                 tenantCode: null,
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'vhyh7w2i1lk6ukcjsed9',
-                scenario: 'wkut55sre5e5pqtp8hr2ll4ets8870w9118qspisxss426puwljfd4d1eaqq',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 12:26:01',
-                executionMonitoringStartAt: '2020-11-06 01:26:46',
-                executionMonitoringEndAt: '2020-11-06 03:28:43',
-                flowHash: '3hn59nhb0h9auynn9zpmu0otsqmzvt6c5ggbmjsr',
-                flowParty: 'c6boaoxdof4bbpo856nqbatko49zylf589m4sg4olx1te4b33q8it5vwih56zhe0gy0ty9vrcpi8dbg4iuuyhmwlrceqcsb0jv9xspksmz1pdmf7cd8v3ypiitov47pmi5ttuztxezs9ie4cmvlbytgoi0qtotiq',
-                flowReceiverParty: 'np2a8zj72rjpp5pjqig4t0gg1sbu4ht03xol1qd4lllei8zq5bxg6i720ma6l0443o8ukhscbp0tg6jgmyxnv53x98egrjpslhjne719x3qx3ofxtkcj1g0c2bb61xggjglh82udl1ekjgnead4eir9xlue2rigm',
-                flowComponent: '3dm6fxgf99ay1o5w4fw0h33y0dm9o6gafth2v3fex9hnivbakv0n94v2cdga77m3q327pmlskwn3dh2s43coh1ip0enx52lineyw5elkhce4eo26bckyw5q9dupaaktbs756oovznh4s5e1j7v75ebv140zfqo11',
-                flowReceiverComponent: '2zj225bz73rpozt35aoi7pt9bbnc00h16ofdvg7d6nrk739rjr6857dlc0wyfad1wyocdp3st1j3hxhd4ch8wgcf1w7hn6x9ms2g86a1bwa3c44lr1xtorc21hjlax7kax1mgfxmvse4d4bu9rpx5jw1839n3tnf',
-                flowInterfaceName: 'z0hnuftjn1pb8lmnohpc0nw37zjjjb3b1kvj7y6qrznf6urwr6k6g0hpfgqf6ogy0wneeiedr3k81vo7icwmodradfza5l3fjvd4ka9j0ydxzi847g323jbu0ea3yuhndaxk27iob7y49qml8ve7soq16tskeioe',
-                flowInterfaceNamespace: 'qstqetqqoj1hbexy67631br1be9ca478cazgwqa0s4fiuvl4hee5cum5781wjijvrjns2sc1x34uwxlueqaam7pcnqljjkzbz4boqvw3fxsosapopod2z2hkxu3zkip2803shpk9b6bl6nvrpahr8il9iuprp112',
-                status: 'CANCELLED',
-                refMessageId: '54tq24hm7demf9jshgz1ct4f5v5fsq5y3toyz1a7opti1ghzd9pjzmw5x82ysp6ed4k2m2n2nxrv29e4z77otzuucbkm0fgpqg0hokpcuicsw715sudbzrcwlcvgtx2fwwfsj9dewtlbrtdwyiavbfzbfj6e876p',
-                detail: 'Itaque corporis delectus totam possimus vel modi. Est maiores non dolores consequatur est nesciunt assumenda impedit vitae. Doloribus aut ut dolores ut earum debitis soluta. Dolore deserunt omnis deserunt totam velit asperiores est dignissimos. Quia minus dolorum quia suscipit cumque ab distinctio expedita.',
-                example: 'vf788oiuic0qmpzj66rfdlwodsx23q1q2y26lplk5qh73vt14tvd4q8mfzp98dz9codgr1xgh4zhbzkm9kctcsz5dyoqpjrqev5cgfqas8d57dz1rbm4ivtigdqdhg7fgmqnhmo67vk4e8t9l9yqyv49drlajuhm',
-                startTimeAt: '2020-11-06 08:59:21',
+                systemId: '7081cf2b-7efc-40bc-bada-2e24b7a331b5',
+                systemName: 'bh3es3ua1sr5i5dbdyis',
+                scenario: '2cvknui172xy8ezzobfjs8uma3uotj5gl1llfom7np3t2a1zygnan6pijmnz',
+                executionId: '9a89ea2a-b1b6-4c0c-8f6e-6af90e5c30fd',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-22 23:39:54',
+                executionMonitoringStartAt: '2021-05-22 15:40:55',
+                executionMonitoringEndAt: '2021-05-23 12:05:53',
+                flowHash: 'aw1u93vnk8kko3qx6dp6jn6piwq93fxfafolpaea',
+                flowParty: '0snj9xvvpqgw13xzep4op4y4i13papo8mze5idpgxubepke6f5318f028q0f0fs86ycnsr4a7vhmk1m82lr1ngew948qp55uhqi419pdnnva1c10lab4qxyw6v6r9n6n4y9z7fsf8vbud66qahawzpipqbhrh2fd',
+                flowReceiverParty: 'jyuvhrtvguwa9akm3p1rjyfykg0g1l582syvtpghtuybopuxc8ws5qkm97x3a1pvpwixblmibfk3o71lnlat3m4sjsk2aj5e3l8205gvxktku4hnauok7hy1txq6uqxrvq3t0l6or1gcwvqkevz6zuhp4ymy0spn',
+                flowComponent: 'flb046aehheyll97mgjxnv0qye1qh46vukk9glqq4obr6qgawoabxymokej0r5tb5gp39w1cq9kvby9iih0hngdouriffm8yd6gj2986p18ztifmo6wxerniasahq6n8yt5oy4ungji73sfmfapcm0o3bvvtsajo',
+                flowReceiverComponent: 'idal40vpa71kmihej0z0qxaif3ymmg8v0t3l6zgtb4nul0mgnu46l82v617sz8k7h5k5ev74yo4dyjbw406tmzv135opc4r9363zyteuulm4p5a5s14kqezd21h98fiahrby6re7n2f7bn9kj9h0mxhnz2t2lrpg',
+                flowInterfaceName: 's5v7jt5v1efpj1oqa4b8w9sj0alw0x5jtgzzi1rk9fdxlboyp0chhrpprngbzs25qzy9gdxs1d23ippqnt3yv6mi392ijfyepnsf5t4d1gcqygtfknxgsjdnjmqawmfhndeq2ugz3gh53pc7vfwslcppyh5lcy8e',
+                flowInterfaceNamespace: 'fy5rb2d93kucbf21cipyuu6kwyqcooufcp7290neijuypw2vckya76gykqqcg7tplrzcoyj43l6rie50en44ou9prelgo9qkzhz7dwma4vsagjrhqojt8d6uaz4t9wg8fylwll71mec272awexo6urut9vsqez7s',
+                status: 'HOLDING',
+                refMessageId: '1aer8pf6ekmsu9pqly4svppihcq13ohfe4ijt8wz9slh8bn46vw52zbpfen6he99s06zq7j5d1xvw2t3dizhsv3bihwtcfpapbgz1rdpmb8tdumbdnkmsujpsh6i0d6ziqdyvw4m6kgyjv0sz7z5gkk9aiiq6oib',
+                detail: 'Quas id vel. Cum vel id tenetur. Minima excepturi atque nesciunt quam sunt eveniet. Est accusamus eos aliquid aliquid sint ut.',
+                example: 'bu1p825szy2g3zcub2dup2uu88yigoglffarlg3yzn7wgk0catmnbhj1u5cxudaam9egkk2ieo4jdnd2wpqs7zqb9iamv5nrzauvf279noh1dlben01v1fhl4zjnftjtfw8p3x5authsl4ftqvsxdq143tlctbs4',
+                startTimeAt: '2021-05-23 04:27:27',
                 direction: 'INBOUND',
-                errorCategory: '5diuo8aungb25lur94dmp2urk58hgjs3rxug3pzvfnk6tl7vwiyit331ovf1xr02zha87d0remtu6zx1eqs53lam8za5jhjnewldexjczq39mlmwr3l5ldnrum4h9qu6vdn4m3vs0m39op16f1g0b2rn5l2gqn7x',
-                errorCode: 'x1ijny5tyzd9me9jxrztdprxag96en7ljgdo1f4b9ptc1ccbbv',
-                errorLabel: 577847,
-                node: 2568807428,
-                protocol: 'yldinmisi3axufatu3vq',
-                qualityOfService: 'oimug2o3g2qjnud9xd4o',
-                receiverParty: 'yvdy6a5d31en6rb3k134s5l9miidhoza237otgd9qlq6b3wucldcdb5wf0b75w5mgt0xn68lytk1lfh3hp9pvqysw2mx2v06s5yairy5idx6oozyhtxkvi0v5zr1qai6yi07gxmnx2fq9k53nef1vizcivvubuhi',
-                receiverComponent: '08c4nijvi06zw8d084yeencorn21latbxp9c8hsstqp1kbol4br8asx4b5z2kzxk7menbgynspa14ip80mv2vzuypopck66eozckcsnwfipx9asw20ncdix5cuz1gf2wahv8tt2xyw55ebo1geufrive5wf78v9w',
-                receiverInterface: 'drfljhps0znb2zbovv4h0xeyk6mnwuhk2iixvwzqhsksq2wdkwssmir7vn9flr5c6qpnipet57abjktmzu19d4jns2qy2tk9hxkf2svj5e0ru9t69uharb4c1k86l2qakh6ybht295tl4elg0okcf5e87p0db7yh',
-                receiverInterfaceNamespace: 'apql1ack8aqr8gsixtxi4dfbjjaey7q7iyh9uvnh895u8mccd0xsgu6rsibyq6ox6zgijwgnt6npnbz4zv2e8ged1mtjam1igdkarbeg902fketqd97a0wopfl7c2r5cg4h1fc89p2rji858jswdzikmf777py3z',
-                retries: 8499685458,
-                size: 6499254175,
-                timesFailed: 3885855311,
-                numberMax: 6453769207,
-                numberDays: 2258369000,
+                errorCategory: 'wo7gcugucdtfze8vddvbapqy55b4m84xcoieh5wscla27q8yvizlm9l7jaco7amm4s2o7pi6u0kpsgyo3bfat8501aakpxwt16q24v0pjke1mqd6llkfgx0grapwq1vbm59kzuwiu8mn7reibww8k2p8dkh3kyqt',
+                errorCode: '3tifir5htq8dasj7bh55js47we2spj8hcdfwuxdaewoz63bqro',
+                errorLabel: 157357,
+                node: 3657991981,
+                protocol: 'em00dasv3iohoqqqvie8',
+                qualityOfService: '346ukmb80xta97wlpvj1',
+                receiverParty: 'i0male3zt0luv45vlwoqc6lg5u7rau2gfogido2z94k3ymln953alt8ajbspjoi9shhkote2gu8gbxvqto4r8vz3v0bba0jowh39xfbsjsxdjlf4de090ge315bra8s0gtdukmzoym2a3dy2xj0r86xl52939044',
+                receiverComponent: 'agd7ple2s6hnm5a9xz37gtcit33u3u467hme9769bhgu8wtxrl9gwrm732r5ldbj94d59gnugoh02fagvfqxhwwa955rqwgqrhdgbpwqqm0o0jbwhqz9zj0cs06tgt71za83w4alhxpny39kjqoqxuyv0bttxo48',
+                receiverInterface: 'bii1zmnvaj0oxdhjkc3o3uajw5efjo9p3afjioielki1onygjqgis3t3irs6ryznmu5u02q1axsnyfaymmirryty1y70h49e6k6wrrd8al3dmwogwj4u4knw5mkyaigu2egn102tulcnvm49tvllaw03c2ubf5yt',
+                receiverInterfaceNamespace: 'wzp7hwynaovw7mc1s72gxz12lsasqb37v8innd2fety23691hetnut8hwda25dapnnss3y0wsllhv70ibr1dlkb74vjxac0yfs7l4pc32hn5luxtmak8hzxm7vj7tliea2xpjwscoq6mutcjvj7lufdyp8gtdnh3',
+                retries: 3836452174,
+                size: 9215038601,
+                timesFailed: 8792587940,
+                numberMax: 7882392729,
+                numberDays: 6128941064,
             })
             .expect(400)
             .then(res => {
@@ -313,103 +232,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantCode property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '67nqfx4wl3s9eweeivgc',
-                scenario: 'rbjabw9800mwbbdbmvhgnqcenql2bs0erq0r3i9r43bo4ggkx9z16v12biil',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 16:17:44',
-                executionMonitoringStartAt: '2020-11-06 03:27:18',
-                executionMonitoringEndAt: '2020-11-05 17:10:01',
-                flowHash: 'hnp1tkqpdjaozy16m3kp3tdzynqd1hgff1foihtt',
-                flowParty: 'p9nb95i5piil763nzfsnuqsu9joxh94dcj4vjwwvwcfxmi161np6zuaudz3psbi87usnq0vjrl6nkhagtftbrvapqjl33xzyhkwqfmufnueorydt7zim2bwrr0cdjlrdvwmeixeb1w0njsevsdf2imzfbx6tityc',
-                flowReceiverParty: '73nx46qcrhkwfbcinm070u086eb5x1jnc1ce9e9507122v7ige4ucsksyda5gazq5y2a8hq2alsmsofi13ew1che8pk9xwb3ju3wg298ytsj8qhxfku17t3jn9h9t4u8p4zdqdywfx7uyjk62abmpyh11rbvrfjr',
-                flowComponent: 'a1jf7ms91x7ifzr225bto6byokm7uxf9xuic280m0ad21id8brybhnid5s95grik62qyvdcxfib8a20klmmwyuh3ja0na6hkhh8hpt00opyl8p8bs1uju2gi5tyvlfzsqr7cnsqaio1ajwzyrw4o3uikdt9yd6nn',
-                flowReceiverComponent: '1b095hxceqs02k9yb0mj5d9h8dm1z6l9glvkzdplkcggudduzp728icwtnx7u3u2o8vgvrpk73ejdj3b5yq6t1ty4asie7jk78jta4fq67qi4iaqg30caeaw9bk0ciyub9chkm5eltw2gxqnj3p8j80d9r3fyskg',
-                flowInterfaceName: 'enr93228f3vf8xqdal6bar28l1nipn8knye1gr93ydv7p5a25b5k2edgng68q45chqyaynsr9vssuvbgdiqu79roolr59a72bvl8mdbm7e2wt3tdf64trczwo21eoyynu4pto8xmy6e36aglguft3y7axzk1dhel',
-                flowInterfaceNamespace: 'grzfiqvt5s4nkyhuyulsxoi4gck4n11pws7ynhmxjhdybyi4ehhbreq0lnz1xcvretlec48t3si0y72hpivbtlk43zc0vpv6r5aw1dudvknxvkf2hyzuhshs0mt8qjp58m90hvrtsec6sz1i1hnnybc2y7moxcpb',
-                status: 'SUCCESS',
-                refMessageId: '082vz5q0j9oq7y5h8natr1hcmsqhtrjyvxjjz0ck5oe3d6pd4weitmxcpx5baq4oewny3huvfklq4vika816llgex0cuyoe6esahjtd3vrtkjoky6p76g1zxnzuvayox16otsl5laynu1xicdoi5e3leq6fu3sqg',
-                detail: 'Sunt nihil vitae. Dolor tempore et. Enim debitis sapiente provident beatae et laudantium. Quas impedit est enim laudantium ut.',
-                example: 'kzcdhux6gr91hknr4aedajbotrluu0nuc8itnmvj0ramn2xny1ac3px8ftq08ma2t3vizey9wj40nj2nrxuztaes9iux4darc52guj3q3nxi3cpbgfsptwmzk6zv344dlsxifi4w9frlezc5cg7xer7qlfci10bq',
-                startTimeAt: '2020-11-05 13:45:06',
-                direction: 'INBOUND',
-                errorCategory: 'vssb9kewecc3ins4drqpn9g2utuzsi5hne4gpj4cjv4udu7erxrgehf38863f7lk0fy2wawk5hxkocdqo3mbxk2swuwpk97wrn6nj8h95k9s55w9znejzr51bin3kiggt84ka09gtly71v3kynkujmfb3cfz1fej',
-                errorCode: 'i910bdq1zinmh4vlpjn4jqv0u9n2w7ichlkb5ptp5648jfcuto',
-                errorLabel: 479679,
-                node: 3151492785,
-                protocol: '79wlk1nba20jhqi93qj1',
-                qualityOfService: '3nyyl5v55rb5vin8rghx',
-                receiverParty: 'kxuz2vveoohwctuz0nmc6ocozysowbbumozjpwny69wraxum57ctpliol815zhggymjc29wmcf3fgrmhsuw33hmvdqudyy2rach6bp16dbzyi5gqyu4u4n82302f5b2t4f8m7ef8uhyowx9l5twv93ek74kyyxfg',
-                receiverComponent: 'h8d5c0fdwgodp3tctmzdm5gfevv2mae4z90oatbivjc61ck0u0zmfiybguf8c0dtijwlbmgwz9uul3cpxxsi70sq2560yiate2o1eorrzkbxgtfgx1ipjqpi6sw01alw6u8x9m5znfdabevyq1nsjv3nhn5xdbrn',
-                receiverInterface: 'iy6txjshd64d3iwjl4x66s9dgmm3xjpbl4r96rt48bi1edz9jvq5n7e03jsd8n70r3bdkwa6rhbwjqo4jinz7x8fddbr0l7soako3dwktvzgdige4j4rvhacc1rkh54xzoqpbykr1nzy2bmsqwm9ouej8cch2jj7',
-                receiverInterfaceNamespace: 'btovx2e9ama77vuofrcv6om0uufq0smf686mfxij9p21rew5vhxohuxmia3z034wotgafxy9hg53loyioq3zemi8eo4kzrohw4cqvvpbqylryahkxz64bdx4xtbpa843dc4v1pzih7p7lujwwydkh182qfpb99cj',
-                retries: 4877051828,
-                size: 3392145374,
-                timesFailed: 1273942780,
-                numberMax: 3616051833,
-                numberDays: 2019856671,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailTenantCode must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'r73bkhmn653rf3phd6visfdbjg8y2j3jta395thxns4yfxn5rl',
+                id: 'fe943b16-7ed4-4a00-93a3-cc884c7231b0',
+                tenantId: 'c5676282-59c9-4f03-a1fe-0ccf0351667a',
+                tenantCode: 'z0h8g50h6v2t20sm83nt2rnm0s1x0jubgjhv28ycqjewtgh7yp',
                 systemId: null,
-                systemName: '9czgacp3p4z0o91oocq5',
-                scenario: 'qo2qdd1d64f8buek18zj9hejn7mmlu27nfuypbo8j4xygu71j0634vru5cja',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 03:23:33',
-                executionMonitoringStartAt: '2020-11-06 09:14:25',
-                executionMonitoringEndAt: '2020-11-06 04:17:22',
-                flowHash: 'rpgzn0947rl865l6quzo8qgvpd128xxetfdctbrq',
-                flowParty: '66a5u8jrcix7j15idqfp1xkl9jbdnc16u9z7qql2x3edfzosf40g9x3nzjiqetklpvgptzfg60nfbdb3rh3nrv2uem049y0vlvm1rcfkyle2bacedld41qek566ja2okdwal773limgam4maao7x59omw7nys8xk',
-                flowReceiverParty: 'yqzzepj8afkgcdexm3pn4gqaruswbhvo5c68umfinj7ghgucqa97lskxqr7hhhew3tjy2kvn1kzuev53do1emyag03j2jxjn2ar3o4myu25bozlcjbgj4m2bgt13g8rf8dqh97h9hg5lyzbfg3e4vquk3x45v8ws',
-                flowComponent: 'd0btygm3iw5taulzdxu4ry0u5aij880nsdwhdw05xs4ysn6njcsqibrlnrywhso5ppho3wqfogdoooxwpcd0d8rltkmddjk13290egd2qv9p055f5e7p6brce91kc38qm5n8evjyxqhxchqr6vzisuxqltv5a4g7',
-                flowReceiverComponent: '8anwi7gyduioj1bgc3h24shza9esr3x74yoafxbxyxafhqaomzbdrrwtbyporzsx0g09yfh7uf602077arhd4413q6bbwlsc25o9k9rb2j1fbqtn80b777au1qed80j4rs15f1llbygn3mues17n7siu8gn8l1n4',
-                flowInterfaceName: 'lsrc5gxs7ae89bompdfmqi8fguihx7rsbdjy7zwr4hex113k0oesdyx13zgqtxk15q42pn03q7ih7hrbkll62bpgeb0dxvj0y564rau4dk51ffia6vboz7eobqk7aqkbrbzygocttjpbjni2wz92ajts30irlzrf',
-                flowInterfaceNamespace: 'jv9gs9uuzz94igcbfq5g69n7owekz1vsjt3hjcxqnhyg3tc67sn370xkxm9phuaw6twa9g3upfkd2t2v3dg1xnl0g2r347237cj0ihrcg1tgst9qcnnhjg2zk0rtm3ip3zludjmcl9jamio29xpwvh1878mo9elx',
-                status: 'CANCELLED',
-                refMessageId: 'faujsxhazi7g6wjrdj68l9ipfrrc2ofqzc8d8egiiojqp6dhr5bzgjax23lrei12hewuahkle5p49r26u0pr6716ydc2xr718vaf3yzkr1bndvzhjzpg917bd1dzehcbbupls9b6325qd9z55luqmcyjk5mmvkqt',
-                detail: 'Ipsa id quaerat labore minus voluptatem. Quis quasi libero ea modi reiciendis debitis molestiae odit. Dignissimos et sunt saepe nihil. Ipsam voluptas facere delectus quia dicta dolores voluptatibus dolorem vero.',
-                example: 'fuo2q017wiv5dqwge1w5kqh685wyo7kl2yy3em6qkxwnn6kqy31mfz3czseba6jd1aspsqvuuf82r72fykm80ygu54azmlbz0h9mxh2ovtf65mdyh667gkwt5qiyyh5lcy1zcewkjsogu599t59oolrf7wy157sh',
-                startTimeAt: '2020-11-06 08:24:02',
-                direction: 'INBOUND',
-                errorCategory: 'vdlq80y27bmi43rp78wvgpmr13xjqpp1hpisimkdnmiryv06kcxgnqmx4cqlv2vsvqyevpuwt9892va673w135mbyakclge8g0c5ododfca1j3fw2xuxy3nxzb6fw2afnsork59econxqjpoiwzth9261ckd8bwk',
-                errorCode: 'o3vjxfsciueoa82d4ztbnlztuptkrrsrnvmsn7vdoc9biehs39',
-                errorLabel: 194472,
-                node: 7829776661,
-                protocol: 'xctt9rxl7sar2n4hh3ks',
-                qualityOfService: '5dfzqs33n7p9yw2nxstl',
-                receiverParty: 'i9hhn385rg5kswr5eij9oapx1kd7r1crc7xkz1vyiw44me47o2x53a1b04ff87csizeyhulvcyj9vft1rvhykdyejo4nyq0u6az4cwf5o10do9od3ogo5oo4dzrulachyy8awipd176n63sfieqmit08lkesinvk',
-                receiverComponent: 'sgxry7xr0pwltnuwd9u08nxzhebsvcqusuj149b5o01c6cvue5s48gt4y0qe0w65u1c2a2wpbu7x2zmwpd7g61dgulpyfd0bb4vh21u58aaiu370h7y9j8drd8ozk6xms0nd6qgcatqbcpl1a6uovtnzqbo3zcvo',
-                receiverInterface: 'd850mg2jjsxe1tbwpenh69hjy3ezkb2tuk0akjhawjtv70322rt8iuiks5a3k5tb8synwcav05lsaclcp8xnm8gcdimt5z5ls859kf1kuirt1215gcn2rokmvqk8aeyrpqjd0pszeqyg9koa6mxo1jf2kl7xoax6',
-                receiverInterfaceNamespace: 'mqfmuca7oy1xjqpnkj744ktjjs24m6jz1ydyhlk9xwjmasbypyq3l78pycf4xym208oqkvuu5c3ia7pasoykcycw0lz3psbasl5eb03s1n95lda0ef7ogumtsz26ou7dszggyy7ig8p4rtrued56ukckj5f9a4p0',
-                retries: 2553096863,
-                size: 1625039712,
-                timesFailed: 5056799621,
-                numberMax: 6933613671,
-                numberDays: 8622682466,
+                systemName: 'o6valmzvpyb4unb41h7q',
+                scenario: '0im2bspf8k9onc5boh15iv328q1w67b1kezb76g809trzdrlnlgsi57a0y8f',
+                executionId: '93616b18-2723-4d31-9660-0aadfcf22974',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 10:38:06',
+                executionMonitoringStartAt: '2021-05-22 18:36:53',
+                executionMonitoringEndAt: '2021-05-23 12:59:48',
+                flowHash: 'wh7iums00f7uiotcza9t6q3w2x2fu9srn4ulxc56',
+                flowParty: 'dkakibhzb4xilkm1x9n43wnodn7id0sw5cy69p1jr7hazjxamrzfyod7ggbltdwg8e87r5vyfxik49dni7v90juqde2b3tkzh7km6b451hip98g5ntia16lq6d2x8sj57jz1x9x1hd105k03f3gj1xwnplwf371l',
+                flowReceiverParty: 'yu8taljsyav578zyv9qt7n5eoclp9t4yw00jfv2bos3yenjk5qnvzzjyaxpqknu0z20q335foivkhzzsn0u1x7j3gl5lvbdb6hx6pq3jvz7fv9xhacy3r3qhabthwmybglj3u8ndchmsb8prw3eqiferpg52i88t',
+                flowComponent: 'j3xbs26qgvl9jy9p3hb84t3qqgcerloo1lupmh7rs7kbv3h1azyh3ythouiwd67nra33ycx3y9yis20t7ksdywksys7qfv7tx4r3p53g7de59nfbl722z38vndyueeskv5wevducpeaxz1xtng27ppbfbcygmg83',
+                flowReceiverComponent: 'i87mhxi4eziwmqyfc94btc1ihxecexr99dnqruizvo1tq4xzli44vgjahqsjlr8aqyk3kgue604jilk02s92jqb0uo34x8eghmthiuk4r709218ni39gwog6kiexblawj0i5f2ql6yd52g2pjv4voa5ppjpuk3xu',
+                flowInterfaceName: '9s8xs50byh0g43ayk56hjdg77fstf7x4zenb8mg2t3zqu0vdkmpj5nkgmjp6hjj4gphrs1k0whi5436eyhid9staoj1ugztjh0d2jj622dicjmspvpte3lx7jqxpsoaldtnk9h9l77lrlrfae18kmfts17927srs',
+                flowInterfaceNamespace: '29whkyvgj1wmkcvun8nq4o2s7a710jkymp8j0xk49ps0cdtu3vvinobymog91tiez8ap6zi0w9ulovm7ic6ao0yzrmq6flxbixs4nzppxd6xkhnw54sipl0d73m0xby7zhkbof8ms5zz10nkmhm5tgb5lb8gbodn',
+                status: 'ERROR',
+                refMessageId: 'klqybozgy8xmbdyk50tyvtub555gtj1s5dexjieessndu3qz19jlx5kz3z2vteumu9qt3t15fljjwmmlh0ai187wtiogmdx6gmzzvxlsnu1wt4avitkzw46og208jdxbjpiegc79uwm5wb5kkue9k4efwdlcdzux',
+                detail: 'Cupiditate error voluptatem et exercitationem consequatur ducimus consectetur ut debitis. Qui molestiae animi sit officia sunt alias ab. Vitae quo aperiam. Laudantium esse aut voluptatum quis. Cupiditate earum laudantium aut. At alias ipsa nihil exercitationem doloremque autem vitae nemo tempore.',
+                example: '5ta4c8f0vdvv2fzmr423uh06hpxa0c85szwlyezdlvxzxmujxj3271vid4fnzsfnotsc8a9umkm2esl9g9butzz15g3mns3ja0u3ie9n7q52jslmhdh9b15wd9wlfgg5dtv67jfdtlot0uz9vbwbq3tag9iqm7k5',
+                startTimeAt: '2021-05-23 12:55:37',
+                direction: 'OUTBOUND',
+                errorCategory: 'rv97twpg72ma71jqilvvtdefwqso697n3ruiolsqy6jrry5ndmwkrycehvnwdjfa23orne26p98efsphy43hfwfyn803ixk3vac4fghnpngd2xbveh3soxgzkaojkr7uhjz7nu0fj948vrc0nxon9xyknnl5bkgv',
+                errorCode: 'uksbjp9b7dzwh1tteesmi3ye6wtwiw5fqyu266h7bgac2ubn6e',
+                errorLabel: 553587,
+                node: 1562312669,
+                protocol: 'nve7317ujrd5wdzj3cs4',
+                qualityOfService: 'b67jj95sp1zi6zy4l6fa',
+                receiverParty: 'v94z8owaoqo3ax6xy45frpfvejkzmwusp79d151qcnp2rs1n9ud9bisdcgwfeq5lcfop7f3k6nl10hj7p3iyjbswbaryexwtdffu9xelfzgmzs4epp4zhlb2sqf92smzmt9mu8e7eqv06v6i1se9mask1b64tkpj',
+                receiverComponent: 'onx8jcwcbbwp9by6qcz0qzrvkv5j6q5wk1n2syt7tz642qktnjo01whhdippx87kwoljib4zc3j26qpewaq24pkexxo40i20zpi5ecvvh5fryqv1cjwrf6woq1q2ukqfoqd39d07n8fxvxwi6lgyubqg4p0m52ho',
+                receiverInterface: 'k5ra7bfqhw465ari0ctqoz7hnwljkcqfqc2l238lmdcmwyxvtc4bhf4ch7ouqyabz2lo21hpzkwbw3ii7fo16ml8gh68q1iiz5tbazusikxzntvfruv60ob6mp7npyit4rbdm9s2ucwauddwqzv0sy7tkm3ma2o6',
+                receiverInterfaceNamespace: 'lt5gtlzban28t6coyqs9g0m9need3r4rnzcjh5nnsdck8qb1cpx9fdtn08fukcww7q73w58x0dkmu616jp553wut5655igy998dkbbxoxg4kuu5y2mt1zshzbbny4tgp9cqawvhtgcyjk564mvcpk0uwdmp1eayz',
+                retries: 5116638094,
+                size: 2808409999,
+                timesFailed: 1649104590,
+                numberMax: 8390695995,
+                numberDays: 3872338549,
             })
             .expect(400)
             .then(res => {
@@ -417,103 +285,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemId property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'qa2pi3dwt3i8tnlxb7h5x4n7ffaeb83zmsliixseic7xb1wud9',
-                
-                systemName: '9r254bkjlrh7nd62enu2',
-                scenario: 'g3jxmu6uxpuwr7zdtbxrgccaqnqvs71z1yg4msxw9sxbal0wry00c1imh71y',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 03:01:58',
-                executionMonitoringStartAt: '2020-11-06 03:13:25',
-                executionMonitoringEndAt: '2020-11-06 05:54:04',
-                flowHash: 'fpy15vd8b03rnzd0j7ej1t6xbitrmaxgoc9mduni',
-                flowParty: 'wb8wx2m1hyv0kwtodh0eys52k4lll5q1yuaoo35lfpu83o94l6ehltaux2r96m5ugv8azu605syjwkgn9jthhqaqxu9ota07205tn7p7o7fav662xensr64w876k9aw7yn527t3k8qaj7lnftig44fscwwxpbwr4',
-                flowReceiverParty: '6pty2xacut0no9owomcvtdvrxp4ij86q4gvj6bejwrpxvrmjtiw38ashg4gpddjztmgprmujcgokfmuy1ggc9fecbvwxx4v79yenf4u97jny56yjpdznaxgkdb9n9v9cz2fwldok4pnn0tz68c3xyqi52xmvuz5o',
-                flowComponent: '6hn48z05yw7zephnj3w13wr0cfny5wvixs2220vz65gqa0bm94r1gvg9amsy4wby7sni7a30exfwaow7if06fy2iq40qq052spe3w8vulo9y87ztayefzrhgkuprvbstqcglsnyaeyyxy5ljpkjtaf3bn1nt3kci',
-                flowReceiverComponent: '71gqklf9ryso2vzhoehpinq5w97njea9r9n5z6y8s0clafqhqqt026g6yi3fpmdiwaz56c41592ddbwqykkbhvqczzyj74gecau90fjjvl1qz451csvwulwttjq0v240r9kexpugaxxun4u4j4y7h4s5ume2l7q9',
-                flowInterfaceName: 'mmubleqqd715lw42zmvnrazjx97z2umoj5xqae6irfxviug4nvcscjutst7l8f0rwwoxb3c9sqd0zjgn455e4n4fsokf84w57dkn953bec75qver5xr19egstsw8zzcpt9jd0aselivbeq6endafaxy7qmd21kqi',
-                flowInterfaceNamespace: 'k0qfnj51fzumf5sr4xvvv49vl0jdbiu26oogj3mv9137ufz6o1k63eihpho7b8adcttmu7k9ijz0i4mvtoiguymeoygucp9v81irwrnz4tgbui29vgcehttwato8bg4d83hvblps1dmhefyvf1li1vmhnopy0o12',
-                status: 'DELIVERING',
-                refMessageId: 'qra4de5t2l99m55mpm7zwn5o7gwq4bczdxo033kcgdxo02f3kdlzhy99x1iiu4c4yf38qorc4vvgph98c040koagj47od3az0zgun41beldkcbez48we9o4mqkwdiyhv9p22shv3n6ygtnnb5n6ppqxuhnuauhan',
-                detail: 'Quibusdam iure quibusdam sit eveniet sed eos delectus. Sunt est voluptas suscipit qui autem commodi temporibus occaecati nostrum. Quam sunt nesciunt ad beatae cupiditate non ut veniam cupiditate.',
-                example: 'e2tii5yq1cslgqzeufmcbpdlnas86kv4y9mk4xuuv0wqnnhtwqiqizprru7wxrq7oln57pumunwfe1y20aqgusb210aty4dfg5fs669y06nki7v00453p756hhi11u5j7wzqa4ksf6unpkipfbf5nnl73k0bltt7',
-                startTimeAt: '2020-11-06 11:44:34',
-                direction: 'INBOUND',
-                errorCategory: 'w2hhz7fy5kzddbvzx7b0e3alusasqg5z97ga9olcxnb4yc39zssy4m9m6vmmm4tq3xxkjgqdhf3tp3uzya5fp97mwcrp7fxl4ljy623lyykqpsmwgygeaiqislz1hes1i358agftpon9palsi7pwmhb7tc1a0wfd',
-                errorCode: 'vbtesw412j4vckvzx882etmma7dta0e2qvn6rmu1qh1863jzcc',
-                errorLabel: 973951,
-                node: 8219414759,
-                protocol: 'c4ducfjh2e8atvrppjcu',
-                qualityOfService: 'm5mqfr8rcsvrk5y8mwmg',
-                receiverParty: 'x6yd9ep2tjn8ej9b5xfp0spxkpfx63b4qyk65a18e4leitez66994p5s4ehbh0ek1np9a9720hnb4o4qao8l052nyml6zwi4iu87x4hvk27szmjpisy2j4xkl2codmmrx3q2txnuzjrx0pbpsww6n0h04nc79ab6',
-                receiverComponent: 'in9tyef2aquuda7qz8ng77vb4zhdpp4glyvdbeuiwpq9wnv9n8nb8wmc1t6xjjkbn2idqqxqg8d3uvs3v39x19x9knytozn62ejqjipk5yeqp4a90tz7ekudmjiu4tc5rlrq50mxi156c5og7n1jac7g06xe1ini',
-                receiverInterface: 'nx8jtq1i3t3d7cnlmjq71sur8km6girquf7fqgsfhvvpx56spkqz303t4iezqlij4wy3kj9ng119o84txz3ue7cwclqjaa4ul74ns6eigyy3rnqyvevbzfnz9qq1te1okpdq3s1jx5u54aph456zhmc7cd3dalfa',
-                receiverInterfaceNamespace: 'cflmlcnz08id05jgrb26w8r9grg2g7wq7xovls0waziidgh0s8sre2dn78kaltv2cxh8u0ef6muyk5s87sqsjtqnwr2ajdj2lf22g4mbq5qm8scofrma3r1pq29exlqj8jc48v7oc3j390pmmlghf451zg4pktv5',
-                retries: 6236040671,
-                size: 3382028094,
-                timesFailed: 3221099633,
-                numberMax: 8529328346,
-                numberDays: 2149111758,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailSystemId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'be6b8wpnsk5e3fufe5bofvd4v0imc8bhyisvx3tm63nor38bwq',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
+                id: '31a92d70-baf0-41d8-9c62-b310e0f8b9d6',
+                tenantId: 'cfb2c793-58a0-4d2a-b8f5-e3676ba5b64f',
+                tenantCode: 'msz3krk1o8lffgbi3qcbqrxdeb7xfwiiuqkqmhrm8uztxpuj8y',
+                systemId: '6a551ba1-5725-4bc8-8f5b-ae0ccfe766ca',
                 systemName: null,
-                scenario: '0xu2khq332ub55ywnhzpxqvouw8pyglxvba5bwhgkbcu0zkg5rllt8mupkla',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 23:35:43',
-                executionMonitoringStartAt: '2020-11-05 14:37:42',
-                executionMonitoringEndAt: '2020-11-06 10:56:38',
-                flowHash: 'lw40g3fw7kxuwyfo4ym10ogattlvx6jp6d8gupoy',
-                flowParty: 'q5vw5jncl4oib2eckt6251own8niwt6uxz4lvyt05v5137mzzfrjfwigatnnn0jbn9evyfwnt4jfftj2olmgoxe6sbh4jtniihwcoopymw642r1pisq48dmyj8karfh2a1qmlt9k1bpe1ueuuyzu3c7u4p67bpuc',
-                flowReceiverParty: '0jebam2867yzhvmh9eeta29un9sdzidvb1dg52vdjsqgyzxw8znm1qfjiambzt9uw0ec3r5f43imj258t1cabf933y43kkupij7mvqimds51kuu6w5jj4u0dvcriu2y7f9reaax9r3b1rwva5atml1o2sskzgvpj',
-                flowComponent: '203rkldxda8a6ub943s9bvxza261wvr03j6x0y61vfw6oonxy9o3wld45k34x9seg6fo8rjv7qlnypwhg0i85m3wypmhalsv91tum5n7g4onfdeaafevg5nrnkzrfher10ytulsxczwcdk7cc4148mtogal3hy6p',
-                flowReceiverComponent: '1ozktfk706ovnhm2mf3lljug88dzpamgs49gwvv0i0q83rizrcigrcqzuqz61190r62onoa0n1n8ha31sr393mhs7bw3dm338yq7h4xscy99gli36wclq9t403q2fsmgb8vg3xlquve0x8208sc4td2s359fi4et',
-                flowInterfaceName: 'hd5rbg7n9in96qqvvj7xfklh1ywireh745nzy5w89xepmd49id5cjbs7muwvlu4khbuj7eg73m5vxv6aezqy1epwmuyufk9defkr2hlflthnpp54iq07cbdgo0iq40m32o1hdr7n9wxcnvm5p5phzg7sm8lyityb',
-                flowInterfaceNamespace: 'il3v352cq6hbjl30uslj50x5epwoztau32jfg087psop8exhtrr0qqrqr850o6u50oo9lwkg1zcvq0m8a5z9tqcosfuxdftvzu7988lxezlrcz21afr6148rkhznkizxhyn31vw8gk4zmt0quclad5va0z8yp9ox',
-                status: 'WAITING',
-                refMessageId: '5zqz8ywxf2z8ctzyupobiwzujf8mfeldfk9gosfk23lmpp2j9yemmzwhu2z4s7p13n8v53x92k75nu15vxzd9m46gqmdbnlc7ouwdy2cju2qa0fuokcqmmdi6hm97339u7gxgb8quayuosky089lj4y765f91xdg',
-                detail: 'Dolores veniam quia beatae voluptas omnis laboriosam consequatur id fuga. Ipsa tempore est qui modi odio consequatur accusantium laborum. Nesciunt architecto quam modi enim est ab libero aut et. Quo debitis ducimus. Enim consequatur eaque officiis nisi repudiandae quam.',
-                example: 'z2y110q0uienyj9n4cxyq26puzm4p50gaftasznzfyejlyjtg4ajnyfzzew97tyl7rtonwzmlcqq2s3ajus39qn2ykrn5kzty0fmsf3xozg53ivps4jp9hvdx4cnmiq2b1gc94fmeo2pf7fsr7k1xci6tnzhayb8',
-                startTimeAt: '2020-11-06 09:30:24',
-                direction: 'INBOUND',
-                errorCategory: '0qgkbobutuqemngt66slkjedxciguyaock26x6zxupplfbv9t00e37veeoe2vf44g592oygo6ub7yqey1kme68elrcrtfz5qf9xzpos6fripmhetv7kevvexe1cq779d9efwxgenaokqa7dsufgqn4k2mhbeqp2x',
-                errorCode: 'ogzocfzyhsntbid94jn3kekefml04gqmlhc7ddszxa35rd1ub5',
-                errorLabel: 184764,
-                node: 9194858072,
-                protocol: 'qsx57ji88vuiq72keyig',
-                qualityOfService: '9vj194amblnwcnp099dx',
-                receiverParty: 'hebxsl0o4g199bly75o582qz28k67oryj84bel8685td659epoaol6y6n33542udo6hx6zmwif7bqbqik1mar10dyr0dws77y0pkyq8m21usf7be6x3zgff0m6w4nsntkmk3c6gmbl98j6of59kajmlqx2udvpjp',
-                receiverComponent: 'qtl0clm49skqx6w01385a432yrqovtb3f29eamhhk53tms5ibdyzruj6zxzbl0zkfw1hazqimhurk47whyxa8sob14vxz4e03mvn8iux5hpylf0ng1qyjr8yejjd3op8ikuqghntsybbpqco3qy9d8hlsohz8uy1',
-                receiverInterface: '5mfg21c739f1o2508rbwq7sis2ytea7rul3vl6kkyvlyjdmn4j4uplz05yh0668u1vkf5i17sgoss63ggxs1dr66rdo2qnoub7coxwkejwpa8co60tmrj3cxaoou8q8xidxwm4y7bit9hhoi1t8fvjbr2n1mohfr',
-                receiverInterfaceNamespace: 'p7d3n21jmncm17h1i9j8hztdye9jw321940i4f9n7lo05n0w3si2jr76err26wm2o9mlxg9h6asy6te3qepohku6cibm2oq81fxpj6ibj12qw7lx7abyw78sqofm38lpatmr97rexuslhm6i70rauc7an6nbrfs2',
-                retries: 5670297162,
-                size: 2141109672,
-                timesFailed: 3237475806,
-                numberMax: 2242423072,
-                numberDays: 1718385732,
+                scenario: 'xqsy5rr9gzh3t0hzawqm4lgwm3zveoem1sc9pox4dbzll44lailp2c39ypxd',
+                executionId: 'bdac9706-13a7-4027-b44f-09f1bd2f2989',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-22 20:01:29',
+                executionMonitoringStartAt: '2021-05-23 02:27:27',
+                executionMonitoringEndAt: '2021-05-22 14:54:58',
+                flowHash: 'a5hkfm07r8guoox4b6h8ssnt363osc1rj3c1bsn1',
+                flowParty: 'mg5swi1bwjntk6dmsfsrwc3roz0n6suz9qctxu76clud8u1pppa6i0w9fk9wa1y6ap3crvlkl7rv8ftjyeizeuu2ljccy2ypx2zs8k1c94mq0ymmy6mvgqvd5pb50n7l4oe7uw4se6pb23xwrqqho3bqww908vwv',
+                flowReceiverParty: 'u4b7mf5u9mkoukqsmu7kwabyukzmcucowgth6f0ex1llhcnvw5k3196spkflp8vbczcfeiqqehf0088hhc5dhdr2zztrmyjovkfknpkcj77mpcmqivmxfd3zgko560vnjf7qcgyb9a73km5j8fzrzo046ru8ybzd',
+                flowComponent: 'p159f4ady0abxmbbqh70uipdi7s2za3tu7e2np36mihlameskvt4z6v604ogdoajoqs5mraa316ivuxp169r6gudqcb3h2yapgi0nejbje25opfmff0tew2qvu5aymmhz1xmbcklq810x3dttvcvc7tneyqzhpr5',
+                flowReceiverComponent: 'kn5hfdh559xx0z8vk1bfmmcaxx0kuep3jv1vhaepk4t84zm972nz26rjg3svk8c41kmbm8313ppcqwv2f0cklapub5kpvwk8xpwfptu19wviifz2ekiik0efudq54wr990h12ez0jqkaf099npssynzo1smk9xui',
+                flowInterfaceName: 'ye88ea44xkdwfns836k30ojmo884wq6qnxgt3rvuuk8ndtt2imxa3mnb4y90nkqyj3x11qwmhnivmekbxkrvhnpueg1qld8ldkand8m7kays74gdoprexqaasn6h6c8nqyha8stehote31ea7dnwfcmqyqbude72',
+                flowInterfaceNamespace: '52fpgjfgl8dkkjjzftpjvwbk231xd0l28xedo9b8qehgntwoalmultiedgieljp8lc19pice3nw0bp3syz124e2d2nxzfxxjtcclhex06oshxpwg9icqapr3l0jt1s29g54hm1xwlwzzwywpeph9o1cxhdnp5nl5',
+                status: 'SUCCESS',
+                refMessageId: 'm2r0k30mestcgns1pt8gtzw9iliyteyuvs6gir0bfsgfxo9yjxtrumkl9hszxrn9m8z4lc2yyt1baqiuf43nsknxred3y2uioirbxf7ttegnil250j3tf3j0cucf07j9jxcbp1pji0bfdupn5hhx65n4yxkj0ei7',
+                detail: 'Consectetur est sunt repudiandae deleniti dolores qui sequi nemo. Veritatis ipsum velit unde quia ad asperiores ut in quod. Est et autem. Corrupti possimus libero excepturi dolorum mollitia iusto fugit accusamus.',
+                example: 'm8ez0bc9es24rzohdd4ja40sftyczbew0c00z6q3wkrz4hgxltb1lgnx09ow06veutir8qiukcrfpmy788b8f29x4kpyzvwwm7qmb1c1vbk3romektb0bvna2petf886i4cq6a4lfvyckjvw72jnnbnq3aykbveu',
+                startTimeAt: '2021-05-22 17:49:46',
+                direction: 'OUTBOUND',
+                errorCategory: '0ie6cvzsc3zof6olutnpxkbwcumizpc7mkxejsh7fkogw6636u68yznie00h201s51ikirnjk7iri85ewol6iezuo3aoahaqkayfx123qs58i9e37oqey5j4bt0t43pv575w6w6fjigu2np5y6ioetakcb19c6yy',
+                errorCode: 'hscwq3568q9rvggeqydhs1ibmnryubl87or03gx1eh0bx1pg30',
+                errorLabel: 761505,
+                node: 2910608807,
+                protocol: 'q0ap8i4rquo8gqcud0t9',
+                qualityOfService: 'x7ambdpg0ki1bb9swxbd',
+                receiverParty: 'agcct5xm21jc1nw01rg83ywob2j91ozagm5x06hydfwqv8dgsh1ghfhee4jtcty7gp06qg3cgg4f7kveugfn9d21i7liwdjutma5f7p2qi35321qo385iqheqeejai2mym6yf29985fd3y728605pl6iq9k2tvas',
+                receiverComponent: 'fouxhddef2dbm9bofjdn827sv4wrkbe9td3lja39qrb8sk4308t0cteqkh2nfxzejwa2oi1xnhwexk45fx3putpd1o40mdq7tn3oem0rdcrohjzvlurq2x44ym48kjx41cefd2yb4r7gyvyy8082ds38t0fk1mmg',
+                receiverInterface: '66vzv4hk3g9if2sz8swp7g8jyc0ac912z2rxuuq8onyx6pwx5zv2ofm4mjpqafdhjias2xhjb81v0sc3d26630tp35yews9kw9vorfpjmfviz9sv43w0ri48yt1kwi6rjua00ii3m2cfr0j5vv1l3te3z94qjp65',
+                receiverInterfaceNamespace: 'afnosh6ipnc7ox5gps63nuo66pax3g2qwab1i7jqx7w1q18cliuts534avu1256i8usflqcvmjdbhouvans2p4ndx4gpx8j61l8lrnwxo8tr644kkn74ao7w4c16470nsrai7jpfzj61uls2rquo2w43v42wwxbb',
+                retries: 4500067022,
+                size: 8040998880,
+                timesFailed: 6743281161,
+                numberMax: 9397243821,
+                numberDays: 4420677134,
             })
             .expect(400)
             .then(res => {
@@ -521,103 +338,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemName property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionId property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'gp9yy4na1rvtnyrhwuchdazt7hhwronkzskacyk0vhlaxmcsfx',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                
-                scenario: 'yvublrk4iscyes3soknajtyngnko33mw9jocw9q31hj1gxw9tlkftvgv2t9p',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 10:22:33',
-                executionMonitoringStartAt: '2020-11-05 23:56:13',
-                executionMonitoringEndAt: '2020-11-05 17:42:53',
-                flowHash: 'tl193stclvgz010l20yknsq9fxfmz5vasytrc7w6',
-                flowParty: 'em4w4z61mxvyi7ofg31khiku32gjwg03aqpd3euhjv2po2b907700sa9x910eenvt1s3k06sgh33t1wkawjwgkmiwqcj3j1pm8l6l20t6bivo7e99hqrylal75gg0ido087ttq6afs87d1spldbg5beazbx6j7t9',
-                flowReceiverParty: '20z1ijk98lrpqsefgs05yw2qlhyazcyolyo1oqkr7vsahs8751htn6y8m9re59mcs3e6nrt83mbui3udmmtp3m033uqzlluq4ek73qut5zhbae1x2717ekvp5jy5z7bj82plujjl68hpc5gouho58jzcrvgofx0x',
-                flowComponent: 'xjkkmeiqfoxwi8bf1p34vxggfp4i3688zxc8jm4dw23n8go5iazexff8e15q350d5ccff3p2cultwm4h5o6gle9x2zm9dctbee3jdspm6xfu1myjz9mik1kicu8sfpm3iy9tkcldjk7ja61ya8f3zu4i2d5xdblu',
-                flowReceiverComponent: 'i0fmpppvmmoihn61izmmitc7edw2vwc4ebszkxy45kwm01tfq4kojkqj0rwz6xk3uq0z3fwt7pe2lwz8vj0stl3hsiqh3r906bu6dtumx38s43ygxdm86412yvwvnsv8f35hu6l248ia2dh017s8wmd9dn6lxwvc',
-                flowInterfaceName: 'rj12is4ob97720om12w63pdcad8vr8ox0m0fbcfqn630540b3fxj977xmwf9utf326xlpgn2txy2vp28rh7fe8ab5d16t5l8951j8vur0gsr6gxqq75uijgyepbffn3od7721pjppym0l3h97xjwh134akvdlx4i',
-                flowInterfaceNamespace: 'by362a6gmlp1wh3mil7jxxc8aqba4uerj27x2pkoskgvbwsl8rs7omlxx4m0ga75ierk109udzcrjb2gjqy1yn104mv3x9dcbipin24svliixgvo8gdz4ro8ieyhxl5kad3reyrdl3gjljktb8t73j8wf5g89jmk',
-                status: 'CANCELLED',
-                refMessageId: 'a57x9egzde6i87630ibq59tgocmyxko0r7qf39x3lv1n5dyy51x82pfpf20wysypr2z2q6kha0c7m9f216npgyubg407acu93jiof86p1hd59e4opsiay8agir3498zgsbusijhu2kbe6lepr722q1p3rppg5ug3',
-                detail: 'Minima nam sunt. Odit laboriosam ea veniam dolor est quia possimus. Aperiam eum dolorem modi doloribus odit esse.',
-                example: 'eznzmzxun8ptx00gebbtwow25tgybbn2xw3xx223kzj1gwv4up6eb648cq5pka8j2qhbw4f725bfcrxjsn6a311c34pf5tx7lah7v5525ph1gy3mzhxvpjqzhshwh8031v4va93r5veb0kn8eowuy110yxqdably',
-                startTimeAt: '2020-11-06 07:29:34',
-                direction: 'INBOUND',
-                errorCategory: 'vb7zxjlfc6ke3i4y97d6ikhkbsonsn3pomzkoz1njtne9ng1dbajohr3c2odekhxgg5mgb31irntohr36tac8vdykmzg7q5uddwcjr6rpsxibeq9ne29q4bwxd0hxgqht3f6x9vql3ynnswlc5yl7v2ja69xm7z3',
-                errorCode: 'elgdmzsqmjf1w1jp9z3td0uec7tvqf7bmg79un4li7xva0es4x',
-                errorLabel: 509122,
-                node: 5502704488,
-                protocol: 'rznh8tynl07u68i1y2kk',
-                qualityOfService: 'o4yzchj3ebyxa2uc6gsg',
-                receiverParty: 'k21xcv6vyxuhvf9hy1qjo14jxptdxtpvvpvomi4ytqi63mh06oyawwb4gvow4ljy7n6mmx06e6yly5jiadt30jgarimys1gcp3dceecueoa0epcuj8g684e5h48ppga558fd31qc8vmvtdk4edy60ckgwukr3pbg',
-                receiverComponent: 'sj2hnsfm2f2ympjqga0guftjaryeg5aqnwube63a7intnehnprr65hljgptunueq1ybema3olp7z1efbzpt8a3qn9c2h4npswzo53o28e9h1rk14qmokq8x48omk7wvu84ehc7c1c06krhj4y2pcw0xro9jdajc1',
-                receiverInterface: 'f8sn96oni444lh44cg6b54w21spgh65w6jpn1pykn4g9kre48hgxlh18krkwippe079cxvq223x88lq5duj2cqtx84o7ec4sgck2jvny34bldukls2kfnybdwhdmc611afmkmts59ievb7nj4pu0sc3oxfczfp3f',
-                receiverInterfaceNamespace: 'nduhwnrnf5ue5bex58xdqlq70p8e8pdewzjhj6h6xwaco38cz0qwafw6ys1eoddb32zcni8y7v7u0dj46h44n4j0wfitzgc2hy9l2dcqgm9dp9xfgo5cp2eypwy6f613nmkpye6zhgx3r58qqw3tecwgikt1z1d8',
-                retries: 3720607222,
-                size: 3306131715,
-                timesFailed: 8174344513,
-                numberMax: 6133232129,
-                numberDays: 5304105553,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailSystemName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionId property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 't82rv9pg59uryvq2zvdxv9q267qe7s020yri3m9y3v2pb6lurz',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'dlcgzbolyl0qx12pdcyy',
-                scenario: 'ctnd95p4aqtjvywwfvjhxh8fscxkqhcds1n9s8n4kukxj8200xs9chgn6rvr',
+                id: '0109bf2b-1fe4-455f-afad-a4a833becede',
+                tenantId: '1fcdf1eb-f9f8-4e99-a33f-e7d5b634736b',
+                tenantCode: 'zb2wdrxlpjpmjpabczmuwmuoi14zywkldmm8a73uoz7rptwihq',
+                systemId: '3d28a6ad-54c5-408d-b3ed-20ba35885bef',
+                systemName: 'sfoeo4eg23qhg4qnl3oq',
+                scenario: 'wfco2p53juf3bd6q3yp2x4ravrh9g5d937v8oarvee90fynh111wozoqjmhm',
                 executionId: null,
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 03:18:38',
-                executionMonitoringStartAt: '2020-11-05 16:49:26',
-                executionMonitoringEndAt: '2020-11-05 16:22:52',
-                flowHash: '8alfkqtspsqct9vealdvr7sa8ljysn3h71596cnp',
-                flowParty: '863fob1oysutju2m7lrn9ebw2bq96cs0urhan4rhvaanpx7n1ijcqghaj924k6gcsqeu2sxbh6c3n4yav0v47tqvsn9i5aozihoxdvshnryvp5roi0i4xsg20z02dayphml1urlyudw5vu366k81qz17yvauslke',
-                flowReceiverParty: 'tvemut37776ggowk92uqx6qhvxg1vaxa570nw2unx5d9gq1oxrtodt1jyqx03szwcmwciouwd0fx9867oss1lp1t0cl9tkexamsvf8saxsdf2re4qnqmipx37qsg8o3ry7609wn2gjlknkc2fgfpmmop66vq5t0y',
-                flowComponent: 't1suqtpi4yz1jwfl78ewpyhwp33h1m8734v5hm2s556aaca962em7h5vfie0tg7xtxn0ckr89d1igbbzglai9j2u7ju4729ufuxyzz4ftgbvbsm7z8rkmoo8cpiy0j1byu5fy3g2nmyo7rrc8gs3lohuv31m70x1',
-                flowReceiverComponent: 'xpdqttpqilpojtq9jsycgdou4f5dbi6k1v01mqhiptmw38b9yhn0w7pq3jxgmx7ws9gpk6jkn53ijclsm685omgvtkg8w8w32i8zolyhifabakaam1jt8vb3rbdsa1lnjh28feaev40cf16qv9s4vimtljkkxnqt',
-                flowInterfaceName: 'ywuj3v7m3mzgnc6lg6wjo7jhakfzw1xeby1arxzbmnwdo3us1mjtqg7756wzae7iz9erjji8wh3z307fbuxcy2hyjw7umy96tp2jxci0y29ox2zegs7s2yca9olgo58q2lwfc9fzgvjujqtj04fjilo8c926ew6c',
-                flowInterfaceNamespace: 'egm23rqqevwy6yf3ze20oglkywm76enw2xzlwftqrbx0pxgw7mpypp5fggji08hwzl8w2ys7lytdx5indo16y40yyquto98afacem7qsxq0ppvmpwcbsf296n6yjwdc474iwh48n0l0ldokr5i44zdyhamyi96sr',
-                status: 'ERROR',
-                refMessageId: 'wpc2djf0y5wta36r45g3u0iowh8jachi9i7w2x3ffe951yptg72r4buqoijjb9nu9vmsctwiy3fof7nadyqh3ph6hdck8ov459gsd7ia7hqnmbss2kcptp329rl3ztezwaig55hwph0nkqifiarlqnmso3re4wqs',
-                detail: 'Et aut dolor doloribus quia sed. Et debitis illo. Velit sequi molestiae et quia qui fugiat maiores impedit. Libero suscipit asperiores quis culpa possimus numquam et non.',
-                example: 'sopi0t0r6u1l8d7d15exs6m4x32oryzy8qzf9tep7vhcqzczdz66jiv3bb1eqgoex0nr10k6xjmpyhjumze300evev8h3jadnye7zpgk160x1d4azeyoqrz14hfkkc6uyb8q50xkxbnf7alatxwl4qutmd9e4n1m',
-                startTimeAt: '2020-11-05 19:16:06',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 02:44:26',
+                executionMonitoringStartAt: '2021-05-22 21:02:22',
+                executionMonitoringEndAt: '2021-05-23 01:53:15',
+                flowHash: '8b5u1ms9on7psl65yo2ibyjoxa7vhomx4nd9b3gn',
+                flowParty: 'ikrg04azj0o6p56n9zfkq2wmkkx4yiali68negt0u4fjzs5dzalt93qp12vgkw8er9v9njjo92mghdxhl20a6bv7gltwjqpsjfttzj8b888p04sp5p9gjvrzbkvke50fp1gnhof8hjd3kdtz9xt4bw3sw04xs8ea',
+                flowReceiverParty: 'z0al5m4302uizveom5wf55xg7dsfjlq985mhrde3nrlnhq4ubm09cd3846im6t08s4v9skg6aoawy07bqbdc3nl6fvxqymyud1flshpkz3uby346fu52e9mnlfyumjyo108u5mlcujdmd14ecv5ovbmt5vtqswci',
+                flowComponent: 'abp8j6mkru5nhcl448xch6k1cwpvdbxfhsskewp89xk9y8rv0tvz32gvz1r8igui5nkj5v4ys261d0c102litq73bm39y8cj7nbsct2gbbvpn0uw3geo4obhlahbc140d8mp298yy5vb6s6n9j734e1rivcbxsyh',
+                flowReceiverComponent: 'hq8pw2dv32z0md5xgfhddo4mgi238omajaoykmqr8niobxsm7oii50lpsnramf6uu8bzamqtsiy8mxditvmixs8m6ud6y5k40j374aasfoi8477syvz97q8kie8qcz1dyruc6b3i4ztmoxkkoxbhwf9zpgb6v8fu',
+                flowInterfaceName: '4zogpjp2c1dujmmceqbh6ohgij3c0calaewu7p9yauycln09z00exfmkmebniosm0iez7ylx5fy2gkxsycq0vv70mzahuqnv0f9nyz9uylurfc94ejydabqavbw3t9iuqw32lkusojcv6tb9uhknllfo1q35qtmv',
+                flowInterfaceNamespace: 'm9a79m50vvndep11ai42iomedz3vli6y8cqwc924u7iib01vsn341w9xcefdvj7tc0sy8ye8j0drlmjexsayu7llp1qhszu0e0c9zqaaqw0msb43hquzgfz6mi31xgv3dakhpdieu2da3rr252usulnb2tlu7fj5',
+                status: 'HOLDING',
+                refMessageId: '9kw13p4uenllkh0k40svdq6x8rnduifhet382jwmg1t1exqtbjvqslag5lsma32ngi7wmy4lnsqm8dtwbcxhptu5kv6u3p8rkgzsvi8h1sq99ou0rvpr3m4bx24j7a3assxorpe1g92gko7fvkf6796lycm1ii82',
+                detail: 'Dolor modi consequatur delectus et dolores. Omnis non corrupti temporibus qui aut. Maxime odio enim consectetur itaque impedit.',
+                example: '7qbu82tlwxbdrhza7941n216n3oak2rxjrapbcsy31u5q2ib567i7oelwfca6s6gaby886r49we9b4my32w6d8kww5ppyij3b8vpwyvdipd9d8wryfefhkw1pv6rhjpe6bfwnnrbe1nls5o8ou0uqt5wbdo5khij',
+                startTimeAt: '2021-05-22 21:33:00',
                 direction: 'INBOUND',
-                errorCategory: 'yt2ixjqmpr09d8qrewydgyx1suam2ke48xcpg416zi19a5arjgbtl7v1g3a63y7j1j36178veswi9cqb31eflrn9b5be2lc4c8gb1n4dhhm01jinqon3rdc0i7lwro1ah5ts616et3mqkw40w1ywq1s93svesihp',
-                errorCode: '3yw6ql7aicf019kf0v7gymd3smz6oruf49fn8iewq0yrd87mbz',
-                errorLabel: 559558,
-                node: 8268302133,
-                protocol: 'vpctu9xuvtsx4w48nn27',
-                qualityOfService: 'tw5gztakyijtk08xzf8m',
-                receiverParty: 'oci4inmondltxh4p7pzz1d8sx16bozee61v8bsqug2b6tnm3t8cx5qmh7sopwlsq7gi25gwid2kdmnyqd6coeimwz97xdz225bzzneu4c4sd1lr5m8w0keuxjdp3jms4loc5w09y70y5s1islg2vobpsbd7pcqzf',
-                receiverComponent: 'nptcqhjt0n2bjfz4xp811okcoe6u0en7x29frace7pw30o298oftfjlrto13cidp8wzwg72l1awpd4ryvyhbkbdep1gr4dq3e3jyi3z4i6pjdcfc0h6uv67vutam89fnkqty60t2awr0tstli717uyvr3n9ephqq',
-                receiverInterface: 'zwwaozrpyejmb4xvqiw4ugf45xbuyun8gq381d9a7mwb2dghm6zildmbvjtmi0npt9d0o0s9ticyi00pd4tacu99a49e80fskxbfouny849kvwf69unwu1x5g54o0ouin1kk1zu7ms04k8tftc3yystvijkal6f9',
-                receiverInterfaceNamespace: 'svt3pcslnbluq259dz1650xmqf6md7cm1ofydpaib6sud58qjnb67w5h2ak9evqq2m5lyhb0n4yakqydev895xwwgxb2x5wrzenifh0yvtqm36a2qu1qq8bentkiaifbnwrbd8nnnu5ndcvxbh63v09tk9z0nem4',
-                retries: 1012344918,
-                size: 3371924159,
-                timesFailed: 6672679896,
-                numberMax: 2903391892,
-                numberDays: 4339051733,
+                errorCategory: 'kdvj1zb5rlpzxfqc4ntzfhre55olusyzeb04u6vmwsnzniqmrgdwppv0vkhyiz5vwopedbi5ateuwxoqnmberku4teswyl03y4s2hm1devi6imjq0cjqntvosaazyodgigyr61rgiuwvvd80j9tit5dr8yi5f78x',
+                errorCode: 'e4d2fwdppnyiswl03jbgz8hhcrij3nfq60j5i7pnplxypsi7xt',
+                errorLabel: 403875,
+                node: 1776078434,
+                protocol: 'w16444hlpfwmgd3ws2fc',
+                qualityOfService: 'ztpp8wa3dvib90z09nnp',
+                receiverParty: 'fbhojirzs838duxry594w3h47bizohz7d04b7cq0xif6u3hrd8f0927filod2f9t1826n4zd8a2pwryuixqwkq8r86ofdwjbsye4mq9637hy2bvc89qgg58lpm9bpokjadxqosvls3qg4o5qrkmxu78ttmk2ddqb',
+                receiverComponent: 'l2csgg6moflqeibvi6ege5ts4m7ncd26mjzydzxemh2l1qd8ipzobb1gj9czy0ab7bd9ae0yrlrjkdz6tia0iz9rw8hq5xnkmqwr7z96cmyudv6261lgdjzkm4njhuww5to3gtf7e2nmb1v92ksx4wnhgve9xxmr',
+                receiverInterface: 'eftewx7dkrbfbrevvbk3flfviz6uqs1f6yi6ck1ul4slevc52p2i6a590kn21sjq1h84pnxlqe70k9cnhbfmot5u1g8b57lhhx2asntt0sgdo6ocw0ifzvilr57dwbd0gd6ime2p147g97y1lx14goltnt5owt0h',
+                receiverInterfaceNamespace: 'k3gi16vaxq1hjnynnwmwiisphnqg6885qth26igplck025c98qo24z9yhrx9wayil0au8luci7hgabksupn4epoh34fpi4roqaf1huyc9709hn9yrrbioejz65ob8e1lvfvwtie1056q257wcoj8rbh5agr839d4',
+                retries: 1758401396,
+                size: 8034483451,
+                timesFailed: 9760534678,
+                numberMax: 5845255792,
+                numberDays: 3595151187,
             })
             .expect(400)
             .then(res => {
@@ -625,103 +391,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionId property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionType property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'hkp7qbsqkborx0wq3a2olae6ogq0lvubpwhcikshtre56tyax0',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'i64noxiq3ugf7lpbfvy1',
-                scenario: 'u6ahqqb2i71jxuco3vnkqtnz4a6egggax243sdelsr5mtrvk5t425w5ndvwi',
-                
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 06:54:02',
-                executionMonitoringStartAt: '2020-11-06 02:01:02',
-                executionMonitoringEndAt: '2020-11-05 23:27:43',
-                flowHash: 'vx6h2u4hs1hnie7tlsg52r1nwqxpffarhy4hzqqk',
-                flowParty: 'wtwxosggc7y0syhkm8fd5n6kh8x3p3b2i281plppo0fzl9nvroz23rh36wmbpgix0xjq9cglalo7i9rni66pgkdto49gjl8x8tgoad6dwfg4paa0b7v2e46k077hanrj0fi52kam1kse3otc0m8d4ome6bmftrje',
-                flowReceiverParty: 'c21xw5lyb7fi1re2r2uoo25fg49vq4tsd7nf4k0dj5oz3164ybdpgno14pple15t7821uf2isq6eaxl9u3ps95ucs71r7kx28tvg4j4x0rpctj7ncfgb3an5mqo7mrj6ccgm6t6bgjbwqbdpl6cibi1j4f47vf2t',
-                flowComponent: 'g3nakzn1asgfqkk0kf5dbjh36yc84n92xsxxfc3rfdp09x8gp3qmn843sd247sus0iuuwbpkrpvm9mnnrhh4tyrm4wj0jfaokfb9ykayw3j8f0ea2az0m07j8byohlitt2ujcltd7t01us9lytyy9aarw4dz7mes',
-                flowReceiverComponent: '4xvc7uprqejqg9epo14xvoxnj03si8a0q9jdfprxh5evshj9cntpchnrq8zcow8dhu9bi4e4jp5nlpheumnq62lax8w7hj57v976uzopkym5qosb590r1vd82lnqljxck4ptvb82kbu1xixjs1ukgtfzsxpjmgwv',
-                flowInterfaceName: '1v1h81q3s8wh151yxnmn27q8i2c8uxbfij38fk3leq4tc3v1hcra75ubzx0suu1c6p8c87r2usfe1p9e058zbmnf3810l012gti1c2k1cxpmttm1ow611vhtoszylhqeuewp3qb87fv4i02b4z5118ijmjwuklta',
-                flowInterfaceNamespace: '3k43je3wtigs0ql33jaegbsqfqg4r4hi0wpfko526pgl1y7ui10s9i2hp8gb9uabbudpj5exg96q6uejxu8wu6nn1tnb6tb7gq3enryaamkz3e9z4tgf8z8rpcoayknnk7w1v34a5cwsigu9sd18y79dwz5v21sv',
-                status: 'CANCELLED',
-                refMessageId: 'z0azp0woq14qnhb54h9fxo5rwz9rcwkrvgy5ai2wvzzqe9cqlmdfc063oyx2mbiwy978aokffsvppnx0lih273jhwoq9y9eahlklzxin7qftqtwfxwadpalz6488st0julrknkw8hpbxvpu7uvwuk7nxuppxrdoi',
-                detail: 'Dolorem reprehenderit dolores nihil est voluptas ut adipisci. Quis et ducimus. Voluptatem doloremque nam. Autem ipsa vitae ut porro est.',
-                example: 'lq3ngb93h1il3uo4icr5id4ur71b2cagkcaik7axp9s9chpzzj2jvi632htzdbjj7v08qdlqtoiy6sfmk31g8uef6ufba39ywxu7f504c3g72yice7qx8v0rcnxn2oc7605os595ykivjpupuxf3f21djctftpz7',
-                startTimeAt: '2020-11-05 18:02:29',
-                direction: 'INBOUND',
-                errorCategory: 'o3mlyrwybq8jm29qpgtsum5tit8108k85c7jyqmhl14eh16in6oxtrv6sau11dg6uvgrnjs83ayqq531b82dfhnkdz4vg83smyelpa243izi05ob9wfgdxbnh49c6wcgatoq3rn646u2p0oorww4w5z5004r8tj0',
-                errorCode: 'fz4mi7gs5fr73n3udv9gfuceqpxr0qmgogbiex8lbbqhvsdyqn',
-                errorLabel: 804147,
-                node: 5072227068,
-                protocol: 'tpqc8md1xdtu3zm3qy04',
-                qualityOfService: 'efm7iawrmk3deqnxouip',
-                receiverParty: 'l09l5zrj3glru37xl8k0jo98ew33j0uo3vsxcpwfhdhg1felqk0mbu2ifq9jekrgupvh2swio4ry4uy3zvk4xfpln6luvodj4baul1qjxix3vhfkm4lnx2bnr8i77qjub55o9pp986jlw4suw99l5y7cmz66ulbm',
-                receiverComponent: 'p96t1r68kkajv8pbihxbg1bzvqj07nsqmwr6f275n153gq1hc4oey7fma3a5unxtyhtl8hn94tmyxp4y92qcpqzoshjo9ef5v2fozz2192zr9ajivgz6ytkftglt39cd4xidcig0ne6ap8stwl8jzxxmal57pxa5',
-                receiverInterface: '4pqbt1m1y9uu9wljezhkxaw2wpfchktvgkplfnlcw3g2kki0j0n2rvmm7kzxdc8wkolfipuo4yadl3b6ktunbfog5658i6zwruza6fimfr26g0il4z7j72pvc97ocwgazzje3rul3h9r4iif7vzyq8br1pw0sy5f',
-                receiverInterfaceNamespace: '17eo61s6hytij6bjcfrsrqq9z7to90h09edv8vpnvzq3febfe4xyo7hqhonzps227sdivbbtxpufkokxzhz9gy59olm7wcuts5udslozejtysdsni5fu3b3co6rc9nsu7l1a6iw8ts00z1l9oiz9p45274iry98t',
-                retries: 2830944066,
-                size: 8498689908,
-                timesFailed: 2136152361,
-                numberMax: 2966004235,
-                numberDays: 2886218571,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailExecutionId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionType property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'zbapldn58qmvp9puyf8o8317hlylxazhvdefw0zkpj76bd1fkl',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '2g9be9lyogd9mfa4d0w4',
-                scenario: 'w9o0z5pkriduwh8a9qq4s4nenw7yzf6kq4uylsafgte6n9addxhm9x8nkydj',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '0cd62e94-cbde-4f2a-8833-0a26a30817b8',
+                tenantId: '074ceb1e-88d2-4749-a07d-3abcc44a7dae',
+                tenantCode: 'qn8nuhxt6jym2dgd6acat6dgbveect7pbw09o6ivdfydpcjy9p',
+                systemId: 'fd4815dd-7ce1-44f3-a3ea-8c2ab8ffefd4',
+                systemName: '7vb0xvyujheqcn47yy0p',
+                scenario: '9dwm26aqxflkpo2zd44g7ken239f9qcf0gjo05bkak8sgzyqldk2l1ye4gkv',
+                executionId: '80e35266-6164-4465-9c4a-3b7420c4dfd0',
                 executionType: null,
-                executionExecutedAt: '2020-11-06 00:45:25',
-                executionMonitoringStartAt: '2020-11-06 02:39:49',
-                executionMonitoringEndAt: '2020-11-06 02:40:00',
-                flowHash: 'em6504ol0dxavq9ivr67kaacxs79xqu70328g72m',
-                flowParty: 'fytzv09qkcdkmj49i7rlc8nm7xa5krctfswj545ponma9ufdb65a3pdjh3mdaaxshd1lbxxmfll24tg8o14hjwk6ekekpar7o2knq9lp7b6ofe3wobei0eysdq74balf20ma1sqd8byyxt9vqtvlplwsu45d9um2',
-                flowReceiverParty: 'bze1dmj6ed9xazg56iytg6l1fa29jfr77tzoog6mwdzx9o0gpdq9c31ot1h2u3s0vn2sxm7t85vm1rb6e0t75i05m5j11dpcxtcjgv1iib31ubc8xhhkz69cbdf5xug6hiefztsjgnxg8gd2htnvc8lcaemtwc2u',
-                flowComponent: 'l6o6f7ql94a7pwuem7z058o515w8l5ubmeqo896f42uco1130t4nou24r44hxvry9uvt9zc2t580o9ohj3uhx6enrj3apsgqpb4rlwwdfgfuhqphkmmo0obbjbwz4irjaoyy02ji1o432hefqjbwb6duutp5voey',
-                flowReceiverComponent: 'ipqnp1t6bkn1tssdvuj3a6tzrw3l1azmhzfi7djgj01y1esibwezqddrwhytm3opkjeppuk37jydsgmghitb6hawsaaa46qfhcviu3vgp7la3zoiifg69dnhwo3tlcs0o31xlrlq75l4e12o0hcn2m6nbpealcbw',
-                flowInterfaceName: '6kmy5u50gop42o17xk9rb4hqem9cmbpcumtpw1jzyv3aj1t8iy05leu3gbkl6gbgusmxijb5d1sf45qzge425lgyamutgubgovp7im2cn17m90sh2kf0ft1kqeyjz64wlvociu5x800kz7x9esysr0lewzbjajhi',
-                flowInterfaceNamespace: 'jiob2rwezjktwcb22fz83uf2qb46kvfs80g6devyuvtwffdlzkbryg3ynj34yulq3a0wtmq3zs1hjxv23z7896tuc39i8em3tjffleoadoxcs9on4linol14hzavthz31kk1dbqqoadysxa7jhy0fbvacr18vply',
-                status: 'CANCELLED',
-                refMessageId: '0b5x7yg90n1df5wbeibudss81vvhm2vktdw30z0r6myjsuup40a0vyaflqjynnajqlobtcc4e5qro7xijn1q02y4xv6c8u4qs8mj5kbdg2h5ivlgvr0zq653wm30n9kmtnp6wycl1zx0yqpa95brw1x8x134yhsq',
-                detail: 'Voluptatem in voluptas exercitationem autem. Voluptatem magni cumque numquam quas. Molestiae debitis veniam velit occaecati modi. Quae officiis sed esse dolor sunt. Dolores fugit dolorum ex asperiores vitae nihil molestiae. Dignissimos vitae quibusdam exercitationem ipsam fuga natus.',
-                example: 'wjdiwmx095jt1l2kglr944p8ef42ni0r84jmcux4erjrpili68xdvps9vquygo09ckmomxak2z177b7s2gj7fs8ep6j0yr6czpdzp9b4gqpqizfbs9rtwvt2jtyjvjwor03v5qdmlc2mq4a6vsh5vau8h357wu19',
-                startTimeAt: '2020-11-05 19:04:44',
+                executionExecutedAt: '2021-05-23 11:53:09',
+                executionMonitoringStartAt: '2021-05-23 13:07:39',
+                executionMonitoringEndAt: '2021-05-23 10:06:08',
+                flowHash: 'wxvaxhd7wut8sq7ylv3oyskpobjezfjwodet55dm',
+                flowParty: 'sln4j8fursjny7yhfjtviw3kzv9mpzeis748u7whpfk4eeyzha0v63ejx1ibexcf3hqtk8ejh3yej0gp9wan6762u0dgkt0fjhamwxf0zgsrulrwatx1i50cgejqhy2pjgs59xrocyxj5glihpyxxbnyu7zx3hxe',
+                flowReceiverParty: '9dim9ov3m29nbqtfo83or5wd8oz1h9dbwn0ck4zlz4xhp1q4vxwru8claycf1la0ayxwosegmx0d476y6n0oi4033avmdj649evkmpekyad6zdaotj5zcvyy7w5nargmlg6vwx5cxunvnqohbgd3pfoaaxatp6db',
+                flowComponent: 'bz3v29ws5fteclkgh8mowcriievvgfgrrwmb05x9bruqa2yor5ot5ecku3yf1zswwefzxmeq6wwl2d3n06r74h0d84pj9251pz1o5w1hq3szf3yy68cdw211174d805rcvirl5uprkttspsiitdkx02bp5sz8his',
+                flowReceiverComponent: 'uml2f0r0efg5xed4u09ljwfwc6c822dpsixc7xnm5ekqpoceguappfm5mjrgkfo8jt7011fvest0f5l8eh5pzuen0xo08ao4ha964rfqkr90scs1ytudgev0n7zj4llnamowzwrue0qcipuu33pbnmvy5txh8orq',
+                flowInterfaceName: '38zfb14qk3rnmyffgpqc1x2vv3fp0ccujxot72m856d7z9hp5yrsdwyelqofee086m41gjw0aehjbeb5x5e51jm1d8k020tm7zzqit9feiv642pwgq072egpvfc271x46d0qispsqwiegb93dg6u5f4d5crbgnwr',
+                flowInterfaceNamespace: 'uiqomcu8on6q9zosw5nq7csb5z0p7xgn114goc15gi5acmjh4zj6v8op8djdw9kdyd99csnv6m5vtmd78wnzm92zriphu1vjs6aesk02zcat63o1l7vrr9ijw1xiew7x61ov46vpbwwgwwkyck9nxzbzl0aa4eps',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'ucjj0w18j8olv54i55849gp8jpt8ydbi9unjepy9ydkpjtsy3zc0bvjgu5jt8k4cbpoj79wlg45kcan9y0p1ipt7jof0805ih9lylgfg0mx09we5zlflvn6yvak1p7pobz3yauijplmpwkzksp7luj022xi2ck3p',
+                detail: 'Hic quibusdam occaecati voluptates dicta sunt sed consequatur modi. Facilis consequatur et nihil tenetur tempora cupiditate dicta sed eveniet. Numquam enim officia pariatur nostrum porro sed qui dolor aut. Ut saepe quos officia tempora ex a id libero.',
+                example: 'i9659yxvso9h7pezqeg4zggokdi9vjw8jocyjnhf15dxvc5bh4pq0k43p2r58cu8pquix9s2t1kwzwl37wzwvju4tpj4qkje2zw5ig99umn7u6yqz7zu2hwa2apfree6ddwz0vd62pluk2ao0pnpn7l82u7qjv0t',
+                startTimeAt: '2021-05-22 14:45:59',
                 direction: 'INBOUND',
-                errorCategory: 'fze7ixomb2lrddi5p8sg0thzitg2ny0dgspxlbufni2lgi2w7f641shgu5wz7pueat7k9nc4j90n353g8gosl7txi6gpdffh07g6sjv948sqx3rn96w3rjxmbkf8uoxmqmmtlp0u0qtuxbo4oupld4buslh2ashz',
-                errorCode: 'lzd6k6nnch0oe3912gylcrio0x7yd8oim3d1edjv1eo765q7j9',
-                errorLabel: 605852,
-                node: 1284870668,
-                protocol: 'evjghhtg59vsjmqjje0j',
-                qualityOfService: '9hoydekqt2inj8k7daeo',
-                receiverParty: 'o5stjxw1uutzcdefhj8gymqgi7hechwr50t9dzqc1m7wez4c98e8drfq1j0hay2r38m3mz2qyr9o0iz748x0j2bdg7n7mbxbkwz63wgu3ax799xg0l8ge61ig6a68rjeyappm00zhh3ip49ypjjijvl638x3pg4l',
-                receiverComponent: 'bklve2sqcv12dzlrb7jsa2u2pprseweync5djmadkkxtv7c3xc381zsk266l1magusm4yfq8bircz0u7ti39f15ns4ffg3i9uqe78qwiuqre4nvqef0fx1lqyqhc3fvl90khnerfqr2ga9muc54jczbisktqwlse',
-                receiverInterface: 'k0j9m7tc9ynwvtfvufbjyq9pxvorohzhfdl909gkfnl45e5xss0c9spakgbckekzfsun0h9h18kk67r0dgdrp4c45xngnb69et6iklikldxc7gilvfs073cd99s8u3nrwnjb74ob9ey84kjru0vh1177vzi0mbxl',
-                receiverInterfaceNamespace: 'uf1me9ds7wwykzw1xyivnqhljxvw28c0hjw4l10g12vl7tw5c2szs0zomwjehceb9g8lbti26pagrrsp4r5l2pvfy6tp4w9ix5yue3ysey3mok993wrdkg6zy2ep7x3v2nypmffmq4ev8bbl0ggb8imvwc2t81e2',
-                retries: 8783409379,
-                size: 9770852631,
-                timesFailed: 5739416804,
-                numberMax: 6180522481,
-                numberDays: 7439083304,
+                errorCategory: 'ilbk8rclpr80nk2m0ilwn2axpm08qy7rzy9bln08zp1nz4q0fh9ab30s4vljx1eb9yec6247hf4f8cd5us0zogdyg6dsx4ya97grasf6mny31n9vz67f0qm3eqx4ropn6iqlmvceyt6ijzncxmwl9czzpdxl12wr',
+                errorCode: 'hvjadi2nz7mc3vv909ec5nn1t4o41cb7r4vq9y1xlr74vzhtdp',
+                errorLabel: 208581,
+                node: 6875414730,
+                protocol: 'xg90rovxrvqom5qpzs42',
+                qualityOfService: '9bptf17ksba9xdrg8nod',
+                receiverParty: 'pquh9sf1s2o5djp60iarxj88froaek06cucfi2aaix3b99rk04d0up73l99mn3tvyt9fy887zt5jn8zskgy6ifx19752lcpdon9smh92mw50ka3o7swxzakm5cnsuh37esqxfttg1b6u6ybz7454d3a6cn1pijeq',
+                receiverComponent: 'cad81empgs5ki3nwifqpulfpaqvihny65lfjnx0w1e6m2bt1n010zwc5cgh8teu92nfk5tzd2tcn41t204sn746lb7pyalqilivslzzqvk51653nx1giqixmr01o7frvmlosehilh9goynyfgngcam2rx6qwfrvx',
+                receiverInterface: '0ty1qk61ssbax6kn89ok91jbaa7of93t1l143tkne7jgp8zxpoliqvj066mv7g7os6r0ze4cdgl0p2r9l3e0nmd5g6q6a9amrqufb0tvrium43yr1ssbp9pn9f3at3vpug4qsogqy61qluvfx958g5e6e6vl8kif',
+                receiverInterfaceNamespace: 'dcpwh8uapkv1ok2wmiw96alexe8i2ojjzaaujds18emgl6j7xj64hfcg4tqpmqgk47bs704ertvq4rcaggwhbuyxgi3z5eunll80bl29ulmgdfa9uga7iey5w4s88t8zgww4cng7m4j8usd0tg4bjraogrggbmdb',
+                retries: 3688402728,
+                size: 2578358532,
+                timesFailed: 6892658471,
+                numberMax: 8953270518,
+                numberDays: 1408328026,
             })
             .expect(400)
             .then(res => {
@@ -729,103 +444,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionType property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionExecutedAt property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '3ep2t6p3wriw2pohxs6d5qi2p3n8b3mcec225okbiufmxh82p5',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'fa9xxjh5oyu3rg1xoz7o',
-                scenario: 'viks6gq9i823i3vzeqs4mpw4lerc48jacvjboz4b78hthi3k3uw8cun3ti4w',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                
-                executionExecutedAt: '2020-11-06 11:26:25',
-                executionMonitoringStartAt: '2020-11-06 08:11:29',
-                executionMonitoringEndAt: '2020-11-06 08:40:49',
-                flowHash: 'h77c6vefu6qix8y7dv97jctd8u2y69ftqt7mt0mp',
-                flowParty: 'd14d303x81x44nvghjl74etlzpdcdh7frvvxc5e9q53iq1olhq2bwjr7qw1psm7rqtxssjr7b7m1cu9089wux8cwyhgmwc7tk5wlosoavzc8u3hubxrng99gllt4z2lhbgsfu1rgp8u4ujvnxpj2q3605lei8ong',
-                flowReceiverParty: '30jzqeec80eh6hw9icpmp7holrh4gfjizcluq0cutxhtbyqdnl1nydk0f4r5s60t5ea4ev38mcji6d2nxn97qyvwwiz36nbzt4r39gi2k6ch1lvofp0628bx1z1lvy4z85lq1sa4zh5qdtykg2ld9fah7ggn4f0k',
-                flowComponent: 'i3s9kcrgnpdd88v4z9h0nreh9bzibclpadpfaz4mqaxuwxh2s5fkv8zvequkpbe2a8civxy0yz9or3uhnrucdmo3vnshgwtry23wv7nw2e9aptenlnh2m453if359o04ja2dtvi6h9v2v1j6jume78cergeky82e',
-                flowReceiverComponent: 'ao9a5ou2rpz62lqm3gba6rzmrj6sj3pau9qgfnka8urkj4l2b81mtj6tmevn3r73ggspzemu14ozuz6siirq910ef8uz35nbpvc5x0dxa74yd324kboei2tbwqe7fj2nyk1ydi6ky6gcanf7pl1y6axjnexlv3mv',
-                flowInterfaceName: '76te2iux8i1i0y57y2bbjavt5pd0pym03pbcd9vr28j83i4mf61cqyxotxmnzjef5ikegnhurz7c45r6awoxd9njtopolr7jdi6scc1j2ogb2u24cvqdjxtnl5wx02lz5rj57mdp517qx2is5s9bzew0r9xydbzl',
-                flowInterfaceNamespace: 'gwd5p6fip170jm7pzl8bsv72d6c985mpe6apl29o7pnobigde61cqoikt6zdgaast4uzq0a0gx5682cp4gndmtfq06d73qpptgul4dj4f7o56njpf11v2upigsixd5s9628covluky0r9aqhiu33edmm8c7co8io',
-                status: 'SUCCESS',
-                refMessageId: '7kn9dfvauhd5wmp7itp0981vrmewd3jy19q7yul0xezg5ll9i311s1y6mj0zd89txqohm7f7bhb2t1kbx9ufgfx1ksk2lttgq5vup18e8de5vjxk9587z9u70l0ehp7k9xj5ygkibex24xtsuvkqubdsjylgsfna',
-                detail: 'Aut dolorem autem est at ad qui voluptate. Reprehenderit nostrum voluptas. Veniam non cum non consequatur quia doloremque. Accusantium et necessitatibus sunt consequuntur. Aut fuga rem cupiditate.',
-                example: 'j8gjtkylpzmvmk57hky7ec8uri1eh5yxw1ypzq2le043qatfdo5nescnvcv2lzil379bkdqvt2btw9k1zs2ruj2l5bai8qn9z5hlll2i838vcnvg5ygf4vo1xrxjmzxoqbuw4src88seo596x7k22hwjhh32qnno',
-                startTimeAt: '2020-11-05 23:43:46',
-                direction: 'INBOUND',
-                errorCategory: '91ao6hapnux36giw4cq9f5mzby2ohgj65cs69vhylcb2ycrt2omu7ua0k58h4bjtab5fmv36uje2bxp658d6fnrb1w4jipfbxpxl4ur2zyp3clrogklnrj1mke5pbwia1rsspmsnbn9b0cvpp4th8zutykfvu3z8',
-                errorCode: 'zsn7s29totyewf35rq3nxcga5jfkch4hq2kk3c1ssvskdi32mc',
-                errorLabel: 460225,
-                node: 2943794921,
-                protocol: 'mazhel4bg98ikzbmbbk3',
-                qualityOfService: 'oafiu3k2681u3svwo0ks',
-                receiverParty: 'gvy55q8vxqna1ogx6azycw771rgta80jr0mingxtbizomjtfsig6vyp2f4ew3w97xuasnn1fcpp3ztbdpic1sviizfaolh3cfs9vvrj3n2rnsh338a2torektvggvqikexw4ssb6yh4hdhi3wwndip5b4hgx8ly0',
-                receiverComponent: 'd42ci0oyddo3gi769jfdusna0ohuggp45910jjan8y968nydyeqai0bzk7g7rvf5yv9n80yvkebab5ftjukj6bjmt1rqfqlvubcb2kque4pgch2ps6tx7oixg3f6q1p552ydlz7p5088asnjtp5prtn7cl57i140',
-                receiverInterface: 'qzagh3d15ec8eilaxtz6q583im71ick14dvnlz1t5mn56vl2lv4tnt0q8u9lx93e2sdvdjg4mjrb3ta9uffvhk80zor6e4ytl1myiviraxngnbbk6j0ukp47yj8mw8slmhpzxtoixynh5ipkr6y790p76qlhxnsj',
-                receiverInterfaceNamespace: 'bcwui8v134qcw5qmbyjb5kk68wocofvsgan8rxiahulunl5di2vn6614evvw48veasj4q0vk3lp5sc7stn7zhrbi6ubnkmy1bu8znrjckj5cwwuofl4riy1ldubtjjnz8kpkh13t0noltx8kil2f0avv7efdlug9',
-                retries: 5942059015,
-                size: 4902734098,
-                timesFailed: 1107782827,
-                numberMax: 2599715865,
-                numberDays: 2098242491,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailExecutionType must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionExecutedAt property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '40twwqwbuyu2fzdcl79pylxvidgyznogolhfxbaq24gyc7rddk',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'aa81we9demk679v45o78',
-                scenario: 'y70fis9kweeiaqbegbfbe180x72u507ahva301hzsdiaccovkpkma1ha9sfq',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
+                id: '4458fe60-0ef6-49b4-81a2-a916746c5e1d',
+                tenantId: '7633af91-857e-4fdc-9a86-0a803e71e0b3',
+                tenantCode: 'cdthwnno6ngdxdcthirtlq4fa2zuv751vpl1okmk0a9z7cldft',
+                systemId: '043e6f61-008d-4587-851c-8969048bfdd9',
+                systemName: 'volkv19nmdulcwge3ysv',
+                scenario: 'bo3gxxefzyxi2esuaiwleqq35cz0sac6r70z33nz68g5x393x20qpzpdrplt',
+                executionId: 'e0948d86-45a8-4142-91c9-68096aceb791',
+                executionType: 'DETAIL',
                 executionExecutedAt: null,
-                executionMonitoringStartAt: '2020-11-05 16:22:07',
-                executionMonitoringEndAt: '2020-11-06 05:07:53',
-                flowHash: 'ynhg5ye31bjnntcgk04d9fn82cp8tdsim92at4wf',
-                flowParty: 't8xs3u5t65ectt9ybz7k08wxq3vzcoapxlqt818pmlbolbaucq28r3kcyl9t3y2gu4hjpxrk9fd4rqt37euwv04o5ypowqt9n3n2r3zz1e40vx7ke0hvyz2ff0xd718f46rnocn2fqozkep1oox6tqs6603t26au',
-                flowReceiverParty: '59dsq3c3w17gnw8uxn902svjah9oka9e2kifaflw8qzg04wvqez1c4tp2e6jtiojcdi4852gd6zu9hb5mhu30er3kzyht351bsk37gk9dy152sxgdzboj6vxt36sg9crxpoazqfja7nqooup65v7g8peayrxi04m',
-                flowComponent: '0t7lngc5hs4lzesuo0t89p92owwg501qosir97dd7cct802gtzkpzo6zpf7elgltg8vway2ah0ch82csqx6ck0ofh19eh9ot0mp1anrcq3s2oo93re79oxcsr9nte8ugkqmka22o0n4gw59zqs3pzjocajmoicug',
-                flowReceiverComponent: '0l1go9xglvrmrbld3jnnj2v9xo02zq1id5dkwfryaulmrkjdc8z84l7yltn4es7omn2za4d8ej2w4zabuhiah2ocls51qq6etocxdapeyshnun8h92g5l86j3bsxzpd773xjxufpht34jop4vqdzd4rnmrnzz03r',
-                flowInterfaceName: 'jv7zf98b9imuu4s7vxje2doo8auhq6rl50t1g4e6j8l61zczs9enouvtyzrdxitdimyturr2ivflmadukr3ujeuowr0l77h9372ulbn8wnrz37fwoxbiz0z709w90sorl937e3blxptonmdgrr66j42qkneh1nlu',
-                flowInterfaceNamespace: 'yu77szd0p73lv3eqz8k1qjmdk4r53b2src4jf7ohinjcijxhnjgpj6wlbhk8s9kfp4tv6vffm72splgwmersk8ny1wt6uwtv1331kgs49kq2ep48902cobpal7mjqpur66dztnv2s89o683man0ql32bba16ors6',
-                status: 'HOLDING',
-                refMessageId: 'eqs6cmm56o2ihlgkqpc7o7a2h4mm7ex64b3renxj44af577z7q5ync6s6yz7f7bireki0984vewf7ka93l010jn4024ijpe68zdfiw0ekdxj7te2oi0v893a9heu1sef8kwutus2qrpie7sh8jxepl0hk088a8kz',
-                detail: 'Labore suscipit non velit laborum voluptatem omnis consequatur maxime. Quia provident rerum voluptas molestiae nihil maiores eveniet labore a. Quasi voluptatum et consequatur reprehenderit tempora aut. Non exercitationem nesciunt. Cumque et nobis quidem quibusdam sed eaque.',
-                example: '4cduedakw9r9pydcd894o0abalpd9ve64dv3d29gcgxb1r2b39cio589t4ndld7ts8mag09qlvhsrh8802l2oj93ijbh4e0eiahgzmbc88jsgdppt25y0rk4ujewlfiy6agok996db3irr6241jim11g4ywopllv',
-                startTimeAt: '2020-11-05 16:16:04',
-                direction: 'INBOUND',
-                errorCategory: '7dsje4rv4vekjjgqa4s722npve2dkc5x47r6xay2pbtjo2hcyjkfnzbxp9j201qbsv0ofnuarpclcxum4yq89v4pwkrc9rum3fe2iv3tlyfeee0qjun2vtujdcppkm2cqyyexe4x90a5e4exlu8xo0ddqbqs0fw8',
-                errorCode: 'vwe50n5elgm5gznmcazuf6td8bdznlzknvic8o0b3bltnztb9x',
-                errorLabel: 168847,
-                node: 1196701911,
-                protocol: '5xy07eftzneeojrg9xk1',
-                qualityOfService: 'qkmi0lr2p218mjenol85',
-                receiverParty: '903krhgqxzy0pi61vbvdskxcladd6fut82mn5zjajlq18xbi9b9djn74293qmw68goeglwo9qmbe305cwz5gcpv8k8j6jdtdraugb93z9ytqk8mxr9xh22prjt99qckar1uhppx621dhodpm8llgb9d5dd3afoai',
-                receiverComponent: 'ejhbray0x55fdk60i9mj280m9s0i9twdhjjwbrixe5iapmy8c2rizveq71ib9tytkdqbw2c5vrcsi65qac7ekco8bnzdo2w3exzj3gn650dla85uan4oteuyrmw6pbnmqg8u2sc58ma6byg14cmh4ku5znj1yjn7',
-                receiverInterface: 'eo4zatunkzkplnwkjcjqh78ntvmaskwj5vobrx6he5thnejpbsq9frxuj9jvv7ig9odf4xldizi9cc44zebswq7kuaym1sgjg5egd2cwv2lkh9eqi3zfwrn4izk8yb0kav0o5kusyw95s9mweqxxo8lvju2hlqat',
-                receiverInterfaceNamespace: '1845a74ig0lkq9ez37m41brwuszb435mlx29sdn976i0z8pt4e5oelgpdmqxjyzxjxkz86p0hq7hydocebbht4s47isjia5prhrh9jsldcweqm8z0t3zivi29soelplfyvjex0yf25e7784ijfqxnf71bxd3bwfu',
-                retries: 4801006113,
-                size: 2163689560,
-                timesFailed: 5636278542,
-                numberMax: 6275523407,
-                numberDays: 9132474843,
+                executionMonitoringStartAt: '2021-05-23 04:30:03',
+                executionMonitoringEndAt: '2021-05-23 08:23:37',
+                flowHash: '4vv6ps64z6jd0t7yhmkgr75tat35693qduzn1dm0',
+                flowParty: '427j00koo2xg9uunxch7hdlfda2mx6thujatdh6gdzrsaa1zzr8jwlis8vu982kygmjpt9ats0p9srhzo05zlvb6mspqis2s2525da3kpy4tgc7ma63d7ckwuxw5701ntjr2t6enhulgcacgr4ae8djcesek47ju',
+                flowReceiverParty: 'm14o7do5ojy95nu6d0kq67wwxck3bqeixs1agajx3sa3wqqei2wyhuqm9k2tujnqvtbm0y601j129cb93zfqnine4ax6unxwt6lku7qn36rt1udy19egauyy32t1qd3w2b325hdw4v3b1le19h11ptnx0sx6x583',
+                flowComponent: 'mkk5rj1k9kg0lhehl1u7d0bvbwybktxmsjkmm8snkrohjg4xy8rxh08ivniiopuc6148tpql5hljbcdd2j3lws27942kehgfqzeujc75uml8ijoopz4osvdwpa0ag0dlc8r8mycwyg6nk6r6dgo7ye7wdq2142m2',
+                flowReceiverComponent: '9h3j7nqkqv3k68cm11funnz7erw208uh3de4azegz16j5jcet8tul72qn9r4leymx4p5bxyugh7w4qf3teciqfbewyitl92vlyhqt50qe4r7gywqdr1wxfsdc80iwselk0as6n8gmxtnd6kkya5zejckr819w2iu',
+                flowInterfaceName: 'nq22x3fb9jl74w0yrr32xm0vntajxjx9emepnwgr6lt4v7vqhjmaa99rdk7kcr4bdusry96v9tdl4zbwux3upwtv7arbm0yzr9hlqm9oeax727o3yonqhlndwu0usjbg8228j90i7sx9g0m9h29y5t3z7mzgiq1v',
+                flowInterfaceNamespace: 'zcznaybjk92z3h7a41qoiafr6dfmog70h0kcimvnem1s9mrxnr9tkvycp0djg79jwp8a6ib4f6044zzefucg3rsdpnv1fy6nc64ibemxrliz8ucm7ijp8j1en8vlpg9gzuj6d6ng1xan55dapur2cvn0uliecrgb',
+                status: 'DELIVERING',
+                refMessageId: '7foqhe4enu5792feqnjm8icpfzh3huwgz677xq7waoonwq0f4x68hfluegy1ef86ofvc6ipo1kfxis6tfbzge5xd6tk92maptfhv8ruto8pog5puqrvymt4xxoq87gxr79lbk3pv1evkzyd7mvubpyoejajoapup',
+                detail: 'Magni et iure fugiat sit quibusdam quam. Facilis tempore saepe dolores quidem nihil asperiores id. Maxime vero ut in vero doloribus et.',
+                example: '7v3p2p1isibpfwqh293z7smmthgoktqtder2bge9kyyop10dgyjtgs5ngbal0fi7zvc3axmg9e2hhx675wr8hejdm318lsa1iyj3ky7augtj4tjkuc27ith412rjoz9yvj4iz4hafoorlmb69uvblfm1h34yjrpl',
+                startTimeAt: '2021-05-22 17:33:19',
+                direction: 'OUTBOUND',
+                errorCategory: 'q0r883s4kagi65g72h1ceb6xh2go6sqm1o5d1t4lh8afvxs5fwxhqf4yh3qajs5wh1swmm8o4etvg1e5hghokmpq0d6us9q7i70q3k56v48ud3uqmvwzsfdrwej3hljh2i9sd1o14uj81i7te3eqaacx1gb9z8fb',
+                errorCode: 'i99fn3zy6m189rq80h2yb439zf2iajcle9jb5rgff9g1oleskb',
+                errorLabel: 236610,
+                node: 5024611692,
+                protocol: '7yh2czpwxtgit7sakjds',
+                qualityOfService: 'ep2x4atsh4i6ya9guoow',
+                receiverParty: 'yahqr5rc7dzqijyd3zv2b4ayy557jv2kjkrh97j9d50bff9i9vbijgwc3rtpznydwtw5dvhv2xa4mv9go7q6rapuhqhvo283xxdtd6khsbo902yhwrxc9lq9ei6z1rjvdzzm07ii91wzxkf0gkdgcug2ihmq1hij',
+                receiverComponent: 'zali9m240dmwe9zp17f8n2skozzgk7nemtafzg7wb74ek75f155ejftffemaeddh4l0onods3zzif5znuzr5m8ssxe0kxfpulutjskk707ynva66lbxth26ugpv6twj0wg1fje7aln4owwnzshtpktfisz1xeu5z',
+                receiverInterface: 'blfpo76mk6i3i98cf1jpik5470bf3f905jliflgjwv310hc3lxfsq6fjjv0jym6e1cuihcqotbl3ocots9y55xih3ne6oijd7p25e0j8sqjfxadhw6n7fo6tlu99zdinz6zst818dc2s5ww2ne067ccahv37w6rp',
+                receiverInterfaceNamespace: 'to0a01kxmqqfzh774bfw7kukf3i24m5l5vre9neg9nrpnm6u2vy0u0sovwqjyvvw1hfgiwzmwbmprgjqrp8bso2y9tv2ygmjw0st3h8iwa7ftx79l50uprew2o4t89xhxqfcha239kld4hm0lepwulaeavkyhorq',
+                retries: 6272224878,
+                size: 9852012991,
+                timesFailed: 9917535566,
+                numberMax: 9513686488,
+                numberDays: 4094547519,
             })
             .expect(400)
             .then(res => {
@@ -833,103 +497,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionExecutedAt property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringStartAt property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'frvv4hamqywync1plybjgucourp8koxpjia3z22fr7w2ucbkk9',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'nhd54u8dcw6rwpb9p24b',
-                scenario: 'ij0s4isg0cqs17sywu1kbwpl54z1o7ir1x43xiycum6bd6luluh2yb5cxu38',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                
-                executionMonitoringStartAt: '2020-11-05 16:56:35',
-                executionMonitoringEndAt: '2020-11-05 17:50:13',
-                flowHash: 'yuwdyu584po41tw9trx57ce9c3pd4ikfgqeh92rl',
-                flowParty: 'b9g1frez0tie4hagaujfw06d3ihhhme0lwfiv5ypq1sd82s0ufseq58256r9oxnr5at51uab3jl2inn0ts3hpklw742bz7g9ln9todb478u1d4hwdmdsei6xmdyp8q3esyub319vddw84p8xg7d5ztuvqrlizqxo',
-                flowReceiverParty: 'lv93mi2iqqy8v83irbxywnwlzer3v8c55h5l9b1662l4wm7gprsttxauiy9963pdajmfybow24mmfqkpcvkbl457xny8k9c9apbrs5lgabmu4644exvt9dc1molrqwbl62ap9njw045u58xkg13d9m3lb5ei891s',
-                flowComponent: '7c3aryw3cwb7ca0mkyvswzwzwgt778emkoe5ilf7ueah7ajz9e8zvclbbb2fazzctykx2fygca3r5flsivtegfxvs02tbm3fadv3fm4zact1sm7y1yggu83mhbh37f5oh0z99d1ne8vuefpeelz6nz76r9h3dguw',
-                flowReceiverComponent: 'r33clxtkplozajad6hhi6plrojf6lullqi6grqi9dh1f4pae3hw8lzhlb5u6pc4k9qymruycv7lnd1bm9jskwesnhmhivp2d1195b6kcuu8yl39o84mvfdokmd7weg9xob2b9jdw2fou0v9qic2w29h3vmlzl454',
-                flowInterfaceName: 'e7nj619uqozo442gq5z45vsdt5jfw4xt3m16rx6vh84uuxdwcigkhny3469dwgr1wzq54kapdujlkxolwhb0rfd68m07yh5pqj2ljl84hc5hiqpxq4rx1r5h3emwvjr3inrjjq5vxitrl1dk2rbqeptnwndzufo6',
-                flowInterfaceNamespace: 'b9sqfqx6qjew52s0wwmug2wmmk5mtjj7ddwip2wd2w4tv61aej5vpfo3y2kzf8gxs6ffjd3u4veh22c64ij7bwm72cjd3hoqymsoq75aca0hc7x88fif98dyfy282904w0ejgamph2es7qh5g9jpr5p8mcqrblrt',
-                status: 'SUCCESS',
-                refMessageId: 'wso8tm5pnz36dde9pzcc4re34ko6qpavres9jo3ptdl5jrn2sdf83a56ak1tjhkwp6q08jdqk8k1ilkthuf4s8ss6kvmqr3okntl77keykh70qmgij931yhnoujo1jyb1vaiewnasr3rzbtn1c2q87ro6oya4ohr',
-                detail: 'Quae dolores voluptate quo. Repellat nostrum deleniti eligendi in eos veniam. Consequatur dolorem totam.',
-                example: 'cs1gguqho6qgi51921bwlldj2lxo9lryu2vhbs6lug08i2chnk0g45g47h5vzm3x3bi8uaa1nhtt5j56glsz7a4s56nwwy0f9jhlvg4ivoqs81zejwuzq3psemvyfh203mn5xxrj6dnkq9yurk954f7ddmi1tiaw',
-                startTimeAt: '2020-11-06 08:07:38',
-                direction: 'INBOUND',
-                errorCategory: 'cytklatp9nen7r1h3axwp4uo3141spovxe2kiu2fieuphd52s2siaxmnqwmlwxnmjl16lgtu96kuo11h0lpb6j5cyl7feq369ijkp9g5dq1s1c8n71vskgh1z28kttrb3pnddpruofi6czykza79pux0fv47akdy',
-                errorCode: '2e0kujvjgphhqd0bc3rlq8xdyz91wzk89cnscxa3gs4ih3p59e',
-                errorLabel: 767190,
-                node: 7781169144,
-                protocol: 'o17a83pbx6h6st69vvyr',
-                qualityOfService: 'bv7p6btd4m4kbm7ahafw',
-                receiverParty: 'crcmra40cch722v3elmgyqwi9p6xe4iybzezabf644ffgy89en81r0ylt4p1wmf4x4qbpizi9rjhgllf7e0qlxfyds5xg8i9xhteiic1r71wiv6y7ouby7wiafhetqehqjaw77ybq62snsiiivfor97rdo1spa9z',
-                receiverComponent: 'mi7rdl6zz009s3jwi68abajomwyguiscytf5nrf938zg4uoao49uo8orfi9aipa6313jxiiy01ha7mom3nwe9hrccylkyk7vvk7t3rlu9baq08fqtgxd7m8fm40jh0qjb34w5bwkzntfayey6c0nflh3o3can4j0',
-                receiverInterface: '6jj1w9pjo4y5bjf2nindobnjlqd6ihuah138ywb0wum4lmmp2corh32y9kyjtlvfv30fpop0slwjjb0kdnxdd1zdlmi78hesh09i7oh8j8c82wr8rg9a20po6u7m09zpcwtvxg3mzn12gojjxqa2zvnhpvcgrhpw',
-                receiverInterfaceNamespace: '5s3d59hy79nm241gmp3d1hh0l9wa81px8fjb9yi6n2v5u5siswzvaajj0bwvm5yxonxdrsg4bdooshgn3g9gyztbrio0y9k818mndqsmlwx2vcu5vz1k87bry7386nb9144ijn9aun8pbqa8wlujd5rxv5xg7623',
-                retries: 9476432315,
-                size: 3704075979,
-                timesFailed: 5805538162,
-                numberMax: 2656715663,
-                numberDays: 8439451585,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailExecutionExecutedAt must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringStartAt property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '46tmaqzhejt5kx29onn889sj9qogn7739t9gh2u0vizqvpguo8',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'awpthp3lj012id39vhwt',
-                scenario: 'a9oxvurx93qfzli40ejwa1ecpwpjsgktvf9vj3lpw65nwxh6ksjpr3gnox8s',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 16:08:35',
+                id: 'bc1caa9b-1e57-425a-b564-2d47e7183ee5',
+                tenantId: 'dfe9d831-8421-4713-8763-34be02d9db84',
+                tenantCode: 'u11xk0glf44p9mjpw8th5jdwf6xh6iqraoeulyg3v0u8rhiiga',
+                systemId: 'b9271fd2-82df-4fbc-ad93-f3b7e8569eda',
+                systemName: 'afgaf8vrct1w0ylngq02',
+                scenario: '6vym62xk74tduzpujk5iswkv4sy1hmh986ytejyj2ku4jyxtrsjwqst7gduz',
+                executionId: '15c3f0d3-538c-4b10-9739-d7b20f16750a',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 07:20:45',
                 executionMonitoringStartAt: null,
-                executionMonitoringEndAt: '2020-11-05 16:47:56',
-                flowHash: '2ayuku13x8hrwh0r7ksr3yyv6l40ngm6rbg56pzy',
-                flowParty: 'etezf0cqe132p29ikccpjrclhy3ekp74wrf5lpg0zb8n9irn0hojyh79xc0c6hytxms06x66xu4qez3h4m8xmykyrco2f8vvi2q97dfkazzgvnpnvtkk8c98ay395h2mj5miwuyuqj288qs44aeud1alyxoomvga',
-                flowReceiverParty: 'ledfnk89udcvgqpicuq1ujd89v5ttnqdtnft4bhwttchs2htqeebbns0j20nyc4ea9qyvzwyxfdadbp3b27ncb49lrv9fqhoh3eu7omz0lpfr8tu1wytvj1z9nt13tqugz86vy45nfic94f11rw1ddw75s5xmsva',
-                flowComponent: '449u3zmq5b5zx8mfxx7qkb4yje43b0btykdl7nhnwmdzn9e8k7e6fpu6u8vbxssoop67qtho3i1wtne8p7gtgabdphn4mbmg0wjfx0s1d3ktiof7ziob08ws8a977c9onqn0p26hqvnkvbpnyvc5jp0vgkx6xp98',
-                flowReceiverComponent: 'ju3kdlgaqlket1octwg9jck0wbio7w1u9if4iuikjoxlazdq9l84qqtwgrckbwh5i1p8dcawiwx47zh4lloefu1wdf016jok0x475bo0wqoc6stxpcloutmaektql6wouwk1qoep7ct8x3slyg57v7u1cbivexsd',
-                flowInterfaceName: 'pt2i6wy4snceeevqdna3hcatqe3nxsr9ir7e4ttwl8t69pwq9xpxg1cht8vahue4diw6lux5g57xjkv9ziluwn508vh1p9l0koepu2cjfj59m2q5o8fwgi2znz64rxm4m4391suhrjp5krre15phyxnyqpr3c2yn',
-                flowInterfaceNamespace: '0un0o4hitwwfdupoxd52ghwob0ybsywr4cqgu0tzh7vnrjal96nbcx626jsh0vfu9c7gtkuh9porbiq2mnxr4c9gyl7lamdlby6hqkrmdbc9rvx6m98w3ntad5opqtbbc7kwvaax3pxtvkncpnr7vauoyxhwjllo',
-                status: 'WAITING',
-                refMessageId: 'fn8g0zclqzymwuwgf05kfhaffcmor30cr7ahiv8pfhd2jzpluhryq4bkcx86of1pe16dl91m3a921un110ci94vnhcqdo7v47jmw0eihcs0skcw8o97gtdlzkrbo1rhcdeoikw3j5yu779zvgvc6xtwc5qnlw0xo',
-                detail: 'Quod vitae qui omnis. Molestias culpa omnis porro eius voluptates molestias modi. Aut recusandae delectus nam. Vel voluptatem molestiae quos nemo ex.',
-                example: 'ugzhtsz3kpynx76p4jke3261xudndlu7v75e2fw06g4132ihywt71idp8wxzyu7hn323usr5jcwrtgmi00h9g2wedzs21y7ezgsewzmcp6zyubhlz8q70urnw8doejmnv0eq61d0t9g5i6k5xqqijl2gidtbenq1',
-                startTimeAt: '2020-11-05 14:36:32',
+                executionMonitoringEndAt: '2021-05-22 17:48:31',
+                flowHash: 'rhh6ay3aiard7p7sucw8fqibr6s6s5n9fbypxckf',
+                flowParty: 'd5mm93iaas94snxl6gkso1dz1a7oghk4wgjt55v4w0satnndwf8tzwgxen07yfr3rbiov6fcysi2wv0r6krruvod9oz8abohtf7bsc5yw9hq225mnel3udnpcx722y7f5g3opa7vhl5mw83fbnlot4jbpb1aysn6',
+                flowReceiverParty: 'av0lw1gsnfirreope07we7z4nx0qro5h8c0gn7jdyzolhz7aqptmkwoc6n3cbp2u8iywwp5dfq17fwdh85cp84q9q3dzmkfv8s5onu8o0njbu8w79s80yf5ko6fw19axxj0621a2do6f0h6onrojukj753oxdcr1',
+                flowComponent: '5oe7llofivebli5wbqwgsae96wgannpt7j8cmydbicd2y1ejmfnraixjxojobyfsl6bg6ebbm1eintg690zfrl0qz45lm98vewteskbzx419631500bhii07ac4zfip6mxdnfrpkn1ecs8g60zgbnk6pmo628i1s',
+                flowReceiverComponent: 'vhw6e0wkzg34qaq9seln0cv8musjoj8cg5yj47vxs4wn1flrzp3t7ucj2bj0tgzsyvxylg0ri3l37ao7sg4dfciu8be1tne2irfvh76b9qz674atgt9hohuuc7t1cwwvtur83p2fj20iki85kgkt0lghcejuxcbq',
+                flowInterfaceName: '5yemxb5x7qvfpe8wqwarlvhab7oi4d1st25t3gy41vesko6uq6f517x3015n93qkhxkdw5djsyxhesnu2zcoyid1xr4b2e52ggxfusvymvmidkskfynp3lpaix87tgjlubhn4mdeahhb03kjf4d2imqoi122dac5',
+                flowInterfaceNamespace: 'e12tylo82wh56wzw6v1sv0monseqhmhtnwrpq6ve8kjj1l026fcvg8zyxra0hfdnkd9pwaqpjfb0qukgs2ft9lqnap7hpqkawxcd44redvvi8dqfdu4cnu7r4xnw25rvvpl0vbing47i2802bxd2451m8oa3ukdl',
+                status: 'HOLDING',
+                refMessageId: 'uq4x0gdql3wavu2m1p6r4gpgcywa8bpwnjvhg3z8r7jpda9vp746lq4suhjpzg0iitvxv95u1ibat2ba2qf7qlyradkwbmgvogbad6ihfrjpbgex0853kfmstx1fnuopwfiffgd3c0pn38qotmuzxfsbs7yxt0d6',
+                detail: 'Reprehenderit libero aut quo. Illum consectetur nam nesciunt eveniet eos temporibus consectetur voluptatem. Nobis eius aut quos perferendis at.',
+                example: 'raeypfvp0dpbuxgcthnkfcgldlsby8yeu9q04216wnj96k3tuwr7obgm3cf7jokbezum1g0w91ztirfg55n9zvrfv34elttgcjne9qobtsyad1p30uyq9nb0691n9u2kig7x06dj1hvrpsjcy07x2617dj8yht4b',
+                startTimeAt: '2021-05-23 03:37:50',
                 direction: 'INBOUND',
-                errorCategory: 'kztxt2si7oi5heyov3sns3a5fmwhxguoc8ahtsw9hbqw6ftedncusxyi0yaff3wgdgutguyv0jpn9kfphm7kyqdg16njjep3idufc2ef82gxpnamsshqqlxzcdenyrbvaykyhg1t8wsfp2zvrl6gql7ndqgkbw9f',
-                errorCode: 'qwuvbe0iw4jc6fps934t7a33hd5qbp5hqcw68lpag2s7c1onop',
-                errorLabel: 444967,
-                node: 8176964781,
-                protocol: 'etna3bx89zahx9c4523t',
-                qualityOfService: '24i4lhcdpkcwtar91uaj',
-                receiverParty: 'n6rcj90edop8pxqk0jm1dtlbzq686zidl6sxyob5kro2fbaxqsp49fuxpyxx20vhd6rgrm3idvsnjoc58gunyzkwrh9kirjyeom43od83o1xsebi3zquoirakf4g0ril7nzf1dqugo0g70ydss3rxpbcr0v00ktv',
-                receiverComponent: 'txyc7nqqxsw7zu1roigpx3bg3et8z0gc9fdrndoe2534049v8mm5jyxum34ak0erkowy6fwidf56ddratmbs5vjqipucn33xoy326q1m2zqqul2oy2doay1icjga8pxcl9st9w0m0057wb29xuxywhhu3y6w6vex',
-                receiverInterface: 'fgoniksk1iqj8aq3mj9w40e9mmgl6xsez2uhqpfmiyxi258pupjtzcknig8wluqcagpfkkx7nxlxx48e3opg4o00sj6qtco7olzij0mfwtgk9s6kiwkxxrnajox5ovexmjk5x687ismsjhodyrvml3b7vfajm0eb',
-                receiverInterfaceNamespace: '1zl1b68ucxjapn5ae2ox9fh0mjzqysnsehjcqhhl5sf4k9l16x3tpi2vp9g8epck2fd4qj9oliqo02r5hac653hb67uc1vkpeq24fbp2g7d78rgamc4sbqyoo0pke54f6m9o3rzeavloac31vy5jaln1apzh1hld',
-                retries: 9395390663,
-                size: 1225713406,
-                timesFailed: 8525980496,
-                numberMax: 6276198324,
-                numberDays: 3425858518,
+                errorCategory: 'hqw8u5vqplc9g6zyp4f36sxf724pfgyvqacfeu868gjz19t19k80bc8phlvrhcmm12l9n3vm8clogvi87wj16lyyj0wrm05ajimxpaekg27tzvsi42lp1hfbr33qee345uizxwvizs7z5j0x8ztl774kw5nv6pbs',
+                errorCode: 'l2p0caesy8pawjb344pz8665hse3whdgxty031tx5pxkr24inn',
+                errorLabel: 217882,
+                node: 8718299685,
+                protocol: 'xlyetnz5eomtluwmo5hl',
+                qualityOfService: '8bs3zgtkaujwckya7qhv',
+                receiverParty: 'd1aun851o7bwp11oi85eivk5wfxu5f0z2pk7odvsjpemd4fsvgjeldta9vxf4hkpd2af3ts7k1pkr3e2paznq0g2v4orvwi7zsmg8sj65m4eyjn9ymaxqi56z67yblt54ritv5f4q38uicww447c33z9lcugvi1l',
+                receiverComponent: 'hfgz893vxle9d1fs9fpiu3mhnzas57dpw7eszb46a9yjifutry3zxm2t2wp7k6z7pp3bbpves6ihs0k2bzhtc7xe9h5m2jta8cd65o1vlz5qfmt54a98ri4q5qyqw0r3jgukg428jtyb5xq207ychnmgqhn4m80w',
+                receiverInterface: '4k6t0ijdf33eo0g1lqfwhcato671nj0rpazss3wrl0oz5qyfqkyuvn3knsm7lg0tp2hvqposajjre3ig7y90871fy8zoen1nbpxo0l0jp95myxmuhgi4qowouguond6pxbwtakt4tunhlljiu2bz45s9vko8vmqb',
+                receiverInterfaceNamespace: 'chs14na8aldiy6871cr7qlluh56rj0w3j7utbwmc8hyu950fjmk620p9rebs0grz62z6uajt11iq5g9w4lojp875wfxfi1wekcoxts4v7snwyizl866mhuur98fpyt2amcm2lycd135rgblka2mwiez13wfhoh9s',
+                retries: 4455650371,
+                size: 4427810383,
+                timesFailed: 9696039151,
+                numberMax: 1328694654,
+                numberDays: 3311209886,
             })
             .expect(400)
             .then(res => {
@@ -937,103 +550,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringStartAt property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringEndAt property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '4nsxkiyj6sihmy3ms1hpxd0vfakbtszqwc0f5rulp31y3ol9yn',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'nz25guqssmvgss98179v',
-                scenario: '0p8j42bgunwgjb8vzlmbcbhyon2rnbgs1txr8u4pauxhro7omhltm9q2affg',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 16:01:01',
-                
-                executionMonitoringEndAt: '2020-11-05 14:55:13',
-                flowHash: '9fq5a87p1df084vxb5oy90wnglrpkbsvztq1nfbn',
-                flowParty: 'nntfy8p5uvpsj17nqrdf75i9pf4y6k7fqkm03npmvembpn0ypn4gjlhkhskh7wnonqdvgp11ktrgocjqvk089rgkbzhuw6dmfup8avscxx2whcj0fxi58taij00gudp8ymnt55syjru1m6qh6dctkr6s15afefgt',
-                flowReceiverParty: '3lfruih2n6b2gmdb25lyog34idy84mqyuyarsbjs7lz6uuxkbsimq8sft6rfzsnn3pwkzrni3kqymrmmwv7fnqok005fqio8xz98jcpm1dxool17xp3v205og656k0evsgtra0xtuzpgsxc32s2csqi5z49659z8',
-                flowComponent: 'jznnc2u59aushkd501rte5a0k5kap7lscyftlx7i9q9s6rq1zkaczvi2v6evli2yoqn2ssdoy6vd6apu3gk94f49qd1f2i07a2mqkki97bixaadgo7zlj2aldtx9yzg0xcr5w2nk2gz2whla29pftu5d4xphjiii',
-                flowReceiverComponent: '7btphyivrqeta0chqspd96xn0e6p82ex26cv9kujh408qii7od8ug35vpqtbg6um9t3sn3hvxc5fj3bt7l85pdrf8rr7jm2ytd3oc6wuoevm5ghqm27ropvtebznjd8h1ils8giectmzuq2ggljb7oorqvpohepe',
-                flowInterfaceName: 'sxu7fmw4e2n21abuqah8xe8rbq80w22f2baz8g0n3zuarnmkxk2bwudq4b3jbjiagn8y1qhi1h8aisuhr46lp4eqar6dga9c5ufpq0alx3y85ndwadzt8coff2lryn0c8n1vu0t9t96k6b4vlb9as6z5sce35gja',
-                flowInterfaceNamespace: '37g1jrtjrqffmlxwz3hjbb3z2op6czcjvyql7kpeg1t4yhnb3vi6x044s3o0rmgsw2g58831rwgwob98kw1pvwrhcy8uekvgdmv147ybse3yha60k1rjyno70arj41mxqnmeogiicaupl88zxpr1oijv4m2ziu3y',
-                status: 'WAITING',
-                refMessageId: '74f7vmr6par2fbrbx5qxlzdejwdjsve6i0v6hh5lo2jv9lqiz89rfurulij3opqorhspb0ru83kr3mq9k7ugosqo4iw65zyffqk0eyjvrx1sqd20o45bbz03y2nm52aob2pg9gg6p33w65m93iemqt3m2euxvno3',
-                detail: 'Molestiae eum eligendi autem est eveniet. Ut est ex quis placeat est magnam. Et et ab dolor error quas incidunt sed.',
-                example: 'jf71izbmrg4usovq0l5k9hkp2m41rum7cw3nvhbdfjbe6rk9eli50bfwo09ovb5ljxrmb4h7v9n3d0mmd9ld75sv55hv1mi1enxuy7xg22t5cua8ubdocpa0j7bbk4q5scpxfkrjhotgovdrscqgwirjir7u8j2j',
-                startTimeAt: '2020-11-05 14:48:02',
-                direction: 'OUTBOUND',
-                errorCategory: 'dj6g8bcyg2lkyjdhpiufzjr1k0ng6ng22dk1mal9k8sgjy8z65kyzn74qtyubbz1b9lka0ajmjj9x75jki8q2ece2iedya5jlqh6ci4kx08asvkvec7b33e4ai1cg6kg17cro8mgtdfwkfnoe4uywju6sr8621ut',
-                errorCode: 'd287yra9rbsafwhj2x7ie4p2btuqyk4lba34s8uwnx45bcbded',
-                errorLabel: 264523,
-                node: 6908101768,
-                protocol: 'j557g06kmhnb481yoqog',
-                qualityOfService: 'lx29325cstvt09hsbpef',
-                receiverParty: 'log9q6ken6r23ulak2at3tiz4myskn0m020kyuzqsjoitrcew8wqgqvb4qa0igwp47kt9yufkt1oupb2gyi970eqrlt8wp0kdjwvbfe8lwrjr4rauz8kza8nboh4ayf3dzrgdisvnbunzy5wwj7t79m1lpm7g4p3',
-                receiverComponent: 'x2nib0bpocmts871gc1aa03m5f8jsu3mkn0qley9tk55qehvaomdren5dwwilmr81p8hvefcxsbb1klawn7l0hbotdqnhlu6gwn51yqihptdprejr5ewdyiwyyuv0wmapl5wxu5s34l8510wir5av7ac1xv3myfn',
-                receiverInterface: 'w9qyd54jtfh6vdruu33opl0uijt79703u1wav0ytdh3itirjeedp8ezz6ururp3viojqrmsiemr9qk23wp3fpz25kyco4zr3u66u35ghymndh9p7p6kmfvdjgd31zh73fdl4zuvg5mxdaebx08e4gduxdijxb5xq',
-                receiverInterfaceNamespace: '9dc21e5wa4n0awg7clt8qp93165qwua2zqu2e0j1wd0kfqu64fhorfnrki345nl35zacmwq9vigy00mw4p0mn7ctn2wfroeid5kla80h64r71ecy6n1ncc1c60lwezk87lmuivgzp8zch1sci4vlmfi3y3wg9ifh',
-                retries: 7964926753,
-                size: 2309656458,
-                timesFailed: 6871543574,
-                numberMax: 3887302318,
-                numberDays: 4107069503,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailExecutionMonitoringStartAt must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringEndAt property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'ts9utl36nl3blvjinoxsth9gevyt0vdxw77qltcoed6c8nk1w2',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'ogafl1eetm0aajxcsnmu',
-                scenario: 'mnxb5403u8ca5jckch75o7tj1g6ishjws0xfq839udnhz1lpvt0mluc1iygz',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 04:58:09',
-                executionMonitoringStartAt: '2020-11-06 03:39:38',
+                id: '580bb963-0776-4fed-b045-746020066055',
+                tenantId: 'b624658f-452b-4790-b371-8ac8614d5c5a',
+                tenantCode: 'bmhz2cfkx5edd7lrtt74bsu9xo1xa7pa8zbr1e74vcuurtdd63',
+                systemId: '659f28e3-f05f-402d-aa53-5bf95c19a0ed',
+                systemName: '3s4z3jstwd2nbv245mt2',
+                scenario: 'bhrcx4aq5rtks6ih4yz2l2mtnyw1vv8j3i0wo13u4ey3hwtwkwphjv91h9wo',
+                executionId: 'beb05609-f760-4244-be7c-1cda941080d1',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 10:05:30',
+                executionMonitoringStartAt: '2021-05-23 06:05:25',
                 executionMonitoringEndAt: null,
-                flowHash: '2xh7ohj3ph1u4pt9r0qt55goljvxh8ucbxsokiqj',
-                flowParty: 'mi0eurdo81swsh63mcg4z84gwvzadjvmy6322777ugj7w11lyn0ui63uhae71074a6xawni5q7g4mj38kiggk09vk6ue2ohcak53zgrtbw9jvzingg6alhoyuv18yh70t471f1ljtu7p8gr6q4o9toromg5q91ck',
-                flowReceiverParty: 'uu8x0c7t7upi1dawb72v0y5wkqjpz8c0yyna01osgs1crx4e4mcopgncbaar4rzutr1mfriaj35d3rtnpo18xr85ok2fnvit51wyeln3enqcdpzblu2dmtnq8m8xlk49e3z8ivyctrcfqkzceymz6nomt47ihyud',
-                flowComponent: 'wkj2qqkk2p6tom6t6hemv259820uf0wig8bm93b9lj54q04ep9tml4fn5mt1k5fhm4h3i2en5jdksmawm3k9syv04cs18xstcqj9oykm5trxmdiz9vd0houyv6nunkzgtv2ttuybsd7t0zm8dsuo1x5ekqcm9ckc',
-                flowReceiverComponent: 'woreqe8o3ddafl9g23b9qu4z48gws90oqzeayq6mxy6zrt6dexy0juuj38nszuvbk7ouiiwguycencber86lq16tvmkf927kdu55ixly47opin4ow8ehle0s4s2uj97xc6bl6ofzohk1fay894aoadouljjlq4s5',
-                flowInterfaceName: '9u1okjqdvd3zcodbunan3tn2el5ljsp4ld9guiafg730mlo9zdme3am9kttk7fagptxsr12h1vs4eki60m5454xt1q0q9dtsepl0cy8l6sqg9csua2zv7ap2ck9j2k8qdlp4fq5671nvyvpgsmzdx5yraa1tdubx',
-                flowInterfaceNamespace: 'kd4irxjslnpjw6cyk2jdfx5rrgwhnx0jh2iduvua5xcgbc8dwvm72qr4cax1dnqeomsffp64e28wdgb1d4vl11mrt96l9byifq84rmlzf1me7pwpj6jhhixyyz8ifez6icfoegn8ah50fpvfji7kmm9h0yepdr1w',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'oys7mp4j0bw83l1ywtb4qqroew40y9h3mamg4cbi1ewo7ll3w0skzuxlb67jv9es10gqapvt18pwsc6mwqscff81btr0l3bnily5jd98tcor2uu9ejtptp19r132203od1vc0etm7azdn6kzqrfns5wg3ekg40oc',
-                detail: 'Placeat rem repellendus sunt et neque beatae quo distinctio. Ullam facere inventore aut voluptates quasi. Voluptate sed non harum porro tempore aut sit.',
-                example: '4wztfeu0cjx9s6a5xla9yjamwn2exny15fx5bdl2er0o5ah74a1tb6tiap28zgvdrtwpijy1fpfiaukfmpt00pvfvjevgv4b1hkfvy074t3dksfcajhrg02wmim2n1f2g88ux275dhcqvkyf6ntmtwxe1obbgwj0',
-                startTimeAt: '2020-11-05 16:33:57',
-                direction: 'INBOUND',
-                errorCategory: '3869uzv5zz1eapoivhuz11r2ie07o0y5o6pjvd88upql5cl13mplq6d4r06bqxkd9bjejwkhdqk428wps5f7klrgctx1pcmvli7j2qc79z9dm5p4bdcyv93h6w421wvoeb6u9nbnm272r2kskgy2tx5fp9p3nx1a',
-                errorCode: 'axj9dtmqk5n6jt14if8a7zmpnuokml3ibls2sin8oyo1qq204d',
-                errorLabel: 187205,
-                node: 7343154964,
-                protocol: '55garz30d8jkuy5nerj3',
-                qualityOfService: 't553chw3346m4foge8s7',
-                receiverParty: '48nibp6i76mknwmkxtoourxnsuswum7i80yzmefy8d7cy1q1qhcohcwawhv6ntn35z5ehimu8jx27goxi9696ln0mxmg31hmvla2bprp8sc1bv5kf52rcvqukew30jct00rli7sejqkoery0182zdn3jrrw80myf',
-                receiverComponent: '3m21iia2vnun5qd9eeexw3vdx69lv9m9jzq8kshe5l36dwpfmpfr49ksk1117a3x939qbz3bw0f4ageh8i8y7yrx6vw8weap731x9tnriw3u3ncqxwhp7eg757r1ygs2jm5zf44rs0g5re33rdeyfu42tgk2n6gv',
-                receiverInterface: '4w3l5xo46m1cznof093owijcnjfszmeqtkvd8zedzsea8wvubdpobbev9s76qi954n33e1tqca1rv50h7cf3xn0769q9g3pedcrx1jpg3abdojd4zmdugpwufyu98s5lragjtebhn6rptoht11af0pajaq1868ci',
-                receiverInterfaceNamespace: 'kvp58f8ujgy7l0wkhdil5u4blvz71bcor7r94ynyj5cxsx9p9ujq89xcs2l1h78jqh5acpd3z5kvo2a63zmo6pg02qiso08sdqhcm3cadel872w6fg68hzy8b6gb5amtuwcjzphk898rridmqv5u659z30lgul9d',
-                retries: 6449871296,
-                size: 1111582226,
-                timesFailed: 3414625257,
-                numberMax: 7532141320,
-                numberDays: 4743706740,
+                flowHash: 'q5s39lksb2nz3xnfdjk8uda97dpa7x4dgidbfvuz',
+                flowParty: '2z3sd52vpvl3hjzwanytwsqstkvs7kmv1d4wem0usj89nhwa5o0b1mgqoz3mijxtxpt4igh10wa7l28rn2ev2mstojuhr3ng6pv550wz2h9hxwv0j76etii7dc9ipv990zfitgtete84ikd4s9aoz0jln2pzdp3x',
+                flowReceiverParty: 'p0uf1qux9v215poxkzb8rnfaslxwvnwrmf5gdajfqt66yc40oo97hx9r9l5ky4ksprunca8nfgnxzuzwm7qmh35zktaqwvhneutg4pkuk2kgtgzhurrkqgmr9u18wzdlooisepwtsl5zi5drhk9kvlzhklbxanf2',
+                flowComponent: '97537mm261znxd4969ogjmuzzvx9i0t747avi8c5lj303qfokjbcxln0xstll7d6a53hbygjl4ldimxruguuu4f8b8mbzjsrzzfi6qngeecnq5qb96t2ogls0yfir81yk1ywb1yy2auel258snh353ajbuqyhuhf',
+                flowReceiverComponent: '94vdvywp00iwr6drwu61hddkwdc1sxxm1n5nuvgzs76rbhez6sz4r1hjizk20t5oduptytpih2ma86d2s6iiz65elg93dsqr1vxtbnnwn7y9ym8v23o38br3uzt1gaasq2sa01eeu5915ofrdv0p8lssxovqri8c',
+                flowInterfaceName: 'ikm9dkb2lpmnep6c54oos5dilg9na6cjwgnyxkjdx59411lk2cmgm07g5k7ihp9egoyegsfh0ehlnfhf3r13w4sijbkqnmlt7nllnrggeo95ju3mh93wy11mqbs8ovavpp39j30p63vqoblej2536zy1f4lppulk',
+                flowInterfaceNamespace: 'se3mq4lljoqoio2gk6v6shsm48jkxjv94dqj6cpuwor1766u4gt8irg2xo25drl0qn54x6x9p1iewkk03xg6ak9qqaeyht1wzrsw2ygnfs3mea2a5jzoybekri9lxj31htm8ryyrk8e3bnte6ruwizo7f1d3jaa1',
+                status: 'WAITING',
+                refMessageId: 'd5yh427wtjvmr4r79sv57jcqq26vzd3q623tkv8mompe2ee5bt9vz3irbvh88wbwjqpltslumsl6j9x6mfvaz5rd80rc61qnqw1auleev0z2a181vfybubdsbm3puw0mvb6ep83x488sz4y35gza9pi6mbhex0kl',
+                detail: 'Et qui consectetur. Est eaque est. Officia mollitia minus maxime aliquam cumque. Quis deleniti molestias nisi. In commodi possimus qui iste.',
+                example: 'bgssizwlrvd98f23j56l4jl4e5p08qs82odd7vdpncx7bgoby1qx8q9e4pu2jk53y57rptqhfuff6r9ewbfaoezcqtjinny8vti7ebkoyllkdt40he4ec3ltynr0x502furnzpeufjb0w4c0vo3vrho2y1g0eqc0',
+                startTimeAt: '2021-05-23 01:15:41',
+                direction: 'OUTBOUND',
+                errorCategory: 'av6fx69sr7w5i5sivp3t21qlguyu1mwsa8mrl2670mrwkzc9jaiqat8c4cm8obpg9owvqhnl9r582tz15qe97l5pq4f3un3f3ljvvsjlybuovwo0rubb9pex96ylao4086w06lf6ky24ucq303892c9a14ghn73m',
+                errorCode: '08c9f9dv6aqjd7b3g0afhbdblp8ttc07klsg7bkadwwz2za5sb',
+                errorLabel: 870894,
+                node: 3452899074,
+                protocol: 'qvb0mbce6ek6s7ysei14',
+                qualityOfService: '57k32nqfhktqks6b1wdw',
+                receiverParty: 'i0ty90cy3xu8xgctooqzq5erppr9zw0xqx7ukat2dxlge98901ns4bckmd9fxrh6wtlk2u1kg6kri62hadfuwa2yhypkssf7swh0mugv5ywmxpx1a5p3ddvpv38equwmgvdbzfpzyknjk3pwbebvntldlzdnugql',
+                receiverComponent: 'twnt4xjwe8ztxighge6j6corpv4c2ba3294fb6cfy81mvlmlg3ydphaenfk4ricyur7hzgvhdhre7lm5e8jtc0dirgl0eu2wco0t6mqgfns5jwd9l5a7e3v7uuiwafwad3cvu02zj5ws8fjo6usgrgmh2ngswpii',
+                receiverInterface: 'j0lxwonq7fiswnj7vrnamzvq1ka1pa6sdar1alawb9yng0t2fhfqcyfdlvy7wxjkb28d9qlkl9xnk96mdvywix9hhrzpqj225lqe03a86vphpiz4eec3g70exok0mht7s2525s4oavfhco35dhwcfw64lo0czz9s',
+                receiverInterfaceNamespace: 'iflc8se9p7mc0t26b3ec53bdmrq5w9ahdyjkoaz7dfh3isjztk29up4pcffou1yan5rccohs6lju4rkyzwsn51yrpo7cjgpnub1rvjksutldydl5mc8fxk996ocq19iusv3lyud9awuy74cb0uw5o3lz7z1jcp65',
+                retries: 3421544275,
+                size: 7659927919,
+                timesFailed: 4216360894,
+                numberMax: 8293301994,
+                numberDays: 4301252972,
             })
             .expect(400)
             .then(res => {
@@ -1041,103 +603,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringEndAt property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowHash property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'tge4fxaajpwja14o1y9xyyubv0usxleoiadf0p53ronckc1gmr',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'ioi5kp8baitg219uwytc',
-                scenario: 'km60nrrgyjxbvakrulzlccp48yjuhemfzajtk8fcdi9sbb9oliogla6308mp',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'f1832079-a840-4b8b-a5f1-603927d63848',
+                tenantId: 'c67548e2-2c00-451a-a036-d7ccc4e47237',
+                tenantCode: 'nrkvith8kmk23m0gubqkd9x52tmcdex3r5s2pm0s9sy4v3oht1',
+                systemId: '5654a1b0-050a-4227-9696-9b7a601f99b2',
+                systemName: 'v1reog4y1ad7ezeyiie0',
+                scenario: '4lyb48cdnlm91aaij3xp2qdwcrbep3g5poz0k58pmdkygb0rb92j0vjhsfzf',
+                executionId: 'b6c91f08-592b-41eb-bc5f-59964fb17796',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 17:21:34',
-                executionMonitoringStartAt: '2020-11-05 22:53:15',
-                
-                flowHash: '0tgwyla05ubwjznot3ue1h6mm4b6snh2vo8sre76',
-                flowParty: 'uuqawj5lf2z284h1z42ltn4tbtlgyxogsjykovgd9xutzgrkydx5ad6kmqiavrdsqr6i8x7rr91ixu29ija4dpmddwksnbwypcvpv28d5jb9p2xpfigxmo2gq6f5168rokueq7x1hcxere7wesul1zdzrw3prjzg',
-                flowReceiverParty: 'c107i8u3qn8m0wm8al8i7s2zmzhk4vo6fi34rk8bjcfupuupykltq9qsy3tmoiarbhyvf85r26rd6t2hh4vd12x15hp5i61eo6l539gf4bmw6ptvoi4u5mjjjayfvbj502oxhalhf2k6as1tkqxv36gicxxpliti',
-                flowComponent: 'u9yjdje11o9v35kkbzpf2h0xn3i2crn8luim7d7lrr46pjbj5ymxk4dkqpl417umwkxaj1eyukmh1awkcd7t3v1acjenqe8ak2rhbe7wcz74wrnx5m5m5ap9dt3z3fad9addek1utfzdzhh3p9drnwymiugg0eo9',
-                flowReceiverComponent: '69untmiqzm27jl4ed4tl9pgxjejrp23sit4y39dn5xfnuslpee03zzu6y8ashjelaw3rweqox29l3b2ox8ic3axufjie4ewuv5ac68dd1qh0fy4qmzat5xw1k8490ukh1zj5k9gddbu96xi3qrfphndv1vppruos',
-                flowInterfaceName: 'r3ids4rm52xybilbnsdfk504c7549e8szr51n0trxtl02cmsb3wdsev98c8os2eb7ljt80q6n1sakju2z1stepg8oxwsx5udp839gpqkkwqny7zq1jxd6bvv0johhlenm0zsomsxnn97enlap3smmpithn3mbd3n',
-                flowInterfaceNamespace: 'kl6aonvnvhct68t42dxagfgzwczbz5rwod4cqzoi6syhbpios1naq3ozxc7zrbul2otj4hi6ujo55m0rnpb4x1ygr9r98yf6tfoyogf7jchtog8mkujy8htia7uvwayvcbzsxu0xtvqvefkc8n5yf107rsyom6hs',
-                status: 'CANCELLED',
-                refMessageId: 'jogdn2qen6mie7pdav1oy8r8m27ymt8g1eyc66s6bkpk92bjnj91q1dowo2k8eklch1kehvvdqv9mf87xbrfl617wk4s87016b9q98bsdpm8zfyo4r0mbk2h17nlral4sjkigffds2gnehpv0ojhbo3ahy51j1mo',
-                detail: 'Debitis magnam ut quia nobis amet. Dolores ipsam repellat non sapiente ut qui fugit sequi aspernatur. Perspiciatis fuga sint. Nihil molestiae tempora.',
-                example: 'vsdtkjn5889n118lqil4db6s08s6cbq0z7hnmnu8ir5tsk6bjoyizetsxme42yeuu5f8mdjhs52vanpoppnkvwpf2h6s97z9ro7ypkbysav8h99wspjbc5ymtfzrrr61vi4lvkt1s5v2h9eldz56po7xu5ihl1df',
-                startTimeAt: '2020-11-06 02:00:18',
-                direction: 'INBOUND',
-                errorCategory: 'dpjv3svpwic02r1qhojcwnx8qv2l86pzvrnxog9omhv7sec7ekqk1vl52r6s4825ruhej6izvwq9zxdypnt80xbpgl7189mhuldf653w2yabd64l9n192479e6szzno5ylrzrycih9m6j3o9b4wu7ly46p6ibcvw',
-                errorCode: 'i9ak8qpnmqs2x31axihq80zupzpfkj8wa4ds5ruaj7hcl0208i',
-                errorLabel: 425954,
-                node: 5478140761,
-                protocol: 'm5lpdbktx7w4hhh9ncy0',
-                qualityOfService: '2ab4lomrnis45moh54vy',
-                receiverParty: 'e325sdz5kks9l493ct4nrjfmw3bn3mbh9z4h5qwfvpw5ryniw16u571smk0zf1qdgveyit9rm8hfiuxdi5deafmtoaws1ag5cxb6wnz40tkapk8e7nsoav5od1jvs6cpdj7mhbktkr49ok9dskvz318a4y4bfnxm',
-                receiverComponent: 'gk6688q0vhcp18rxp0xk7n7injfs8u94b0quugbs1u6v7nh0wbrx4lpkp4e7imiqaa5jrufmgeuwnlpwyk1bdm1rxaqdcflpjp5udrk45fse33d1tu50yb7568s0gmfzbiuy5xujchwvyjrrq6un00qrfxv0cinb',
-                receiverInterface: '5m6n3gek0q55qsq4gtcf0fqzp8ub194yqx5i9lw51upjc27rgxkqpusf27l3ad3nu5w1ik6khuimy5ms51qt4kd9iibz7bqwchj0ucql7fh3wvdrop12tfiw2quihukyw3kewphgfzwob996fr0ltgipij9s293q',
-                receiverInterfaceNamespace: '9ntfu5wj7ysl7rmuuzriyadclo4ephaiqy607wta7qtczlzamgd0lgwao0aybzh1u7yfedrscdpkr1x7bhfer9dc28tf6bujdvso6z0zb4hyqn82u0ipn49vjk1qy3l0sg5scguj7814ddfwx7e5wx7duxk8fbvh',
-                retries: 2574188533,
-                size: 3439232087,
-                timesFailed: 9786266097,
-                numberMax: 3933527640,
-                numberDays: 6818664137,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailExecutionMonitoringEndAt must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowHash property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '9ryeqn8qwnsy9ajukynge2ngxtb9c4hz2q1vccmq4d68gufzd8',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'aw5habbxzl7sz2ny3wph',
-                scenario: 'fn5qg3ir75antnlxvi25t0w3ymxdsivu5bu99vfevhoczq10p9wwjar1nk5y',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 15:50:12',
-                executionMonitoringStartAt: '2020-11-06 01:25:19',
-                executionMonitoringEndAt: '2020-11-06 06:52:13',
+                executionExecutedAt: '2021-05-22 22:26:58',
+                executionMonitoringStartAt: '2021-05-23 13:26:59',
+                executionMonitoringEndAt: '2021-05-23 05:19:27',
                 flowHash: null,
-                flowParty: 'rwml1nux83fwlgluetzxcrbai19m29jp9xjcxahhdhlinsrgvj0rc4zymnhxa4b9xz73sjctxk4k9z9vbg49y93961p2v9dz0g1jd038owahuj00iqrlkf06qxrczmcz4w0nuocyss1j6ykqpv2kksd3pfb2npsm',
-                flowReceiverParty: 'nspujbc23x4jycwrn1x2au3vyd42u1e79mi791qgidkuyju5ekq8jqoch34n8d7vbb0xemnay2o02nzdv3qmp0dwpdux75686jjppgvlsfbxuvens8bpkr1gugc33jpbxtivx84vrwouai8n42fq7ww7gsmc1t0y',
-                flowComponent: 'qpedo46kj1b5a6dxo6jwck47wx9zyaz9z2szl88ob6bikenjphov9dm963zq3tb2tuvnr9coe40ci5o0awnu3xg9vou5u8oseg6gjqo1nug0bkkabvbym2p2p3bcw12jxnmdh3ifnjhbr4n7rrvr9jlvjrzaa6c0',
-                flowReceiverComponent: 'zi61t2zhrrgjsqhaztqrc2rrii48ecgplnb6owqyafjwqg0vfhkca2e4njpg6lov2f1fyo7q881etfc6ber514g5dd9x9n6dk6rdgllttt4fddgvrgygj79mjlm5efa0nw31wwi502vksbt9y4wqa9zr89pj7fyd',
-                flowInterfaceName: 'nkcbe6xuc5c4c4lq6wuy9s5vax6n5rbxvmjbmr41pofqj2cfpcyfnuvdiknbbgvk62ufxydch3yempuy6rhu7fvwyma2pyipkm7plqnzxac3tmb0p3x6g91y8ax4fkikrxh24e7ta8b5r26a4raklzae2xl48hdq',
-                flowInterfaceNamespace: 'dpmmwnv34p0guxx38hx4izz3e2owo4c44g9m65zljnk5953skkyl2kdvc7z5lxjdhiddmt4kbc150c94urmek7euwapqiv3ve83b4of7lwtrrhi3gs22uqg5524gfwwplkhxggvw675esuhqkd5tyw3az8wp17aw',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'autaoqk1dzyzs0qibvoxaluo0n5kbmrew6v5lxgqemtujq7z974zagm91fwdil3l0t6979ijeif0m3j6q845ynpz50bj7s3sos3103g7pc478qp56cee9ffobvhvyvxm198h8voawtk9zgt0c54ctzg98g11sf7s',
-                detail: 'Aut quos sed totam. Amet ullam laborum quidem aliquam voluptas. Maxime impedit aliquam aliquid blanditiis. Ducimus qui dolores doloribus voluptas. Et tempore vitae ut voluptates. Asperiores cum ullam ut praesentium.',
-                example: '8pap67z0rlcer5tup8175wl305lx4h9udiyzfnmucho45tssntbxhmt1rtsvcg5zkgagw9el6u33hmejo8tv2h6pru96boq2w8agd0y13wgub80jmu7r2dfmwe6dfnqptsb85tjl8qf00ya4zjr64rin3403odo1',
-                startTimeAt: '2020-11-06 11:58:02',
+                flowParty: 'kur8pi9wnkpj3t9oafhmsnwu1k9tx6ix9c4tsszzr4uj40ox8e3qg392othur83kqkjeiyi1f4ep21rbik29cugbhd6067lhq3554n96beyf904seixafj6whham0k4c8dx9f0dmkvw2srdy5s67xesy75nknro4',
+                flowReceiverParty: '35dxtydoqz1ji5xwsw13j8z4cq87yqi0t21u6z0utm2gvixoadvrqdtj1ccmws4oyvjjrig6o1y2b9d0ks445ntd2pozlgdpp8cprnsfcr7331givmk5h2ngepxan6h42cqo0hkfdcfims68uylb2pga9w6rlqhs',
+                flowComponent: 'a4gto15ayhzbsljlu4p4agtjbs8x7ahk4dj2y9ejz8q4d7psqczs11tt6t8ar3i0flrvrkn8uw3h4i4wpeeuh3tcngsi82pup1ujpkxtxlc22hv85w2218m5eqg7yv03fxvccxhya0ngkcn1xpw51brjjfwewxei',
+                flowReceiverComponent: 'pp16w3e25ymt2h8qkgjhzdwfg0b6tmrcheue6yacg6klnjoh65ijc0gzruhn6spwbupbg3g1ofqkzcecrlp0ktpmakpwvwfwxc3iz5bodparslncdtww886x4ho0nzx9u2y0k72nto3cijscqbpnjcce5wy7t25f',
+                flowInterfaceName: '7ocbi9proae2rwhg5xji0mks2wa1q9nrvzpnhcogkknbpn2qg8vu55sk8gfbe8ndm56c7sjbv1ckxve20lr2vyf1r1bglo2pug91c63rq5siw1pxlbmh5dwjqu45dgc1qltceonyd6mynv438x2lczo7ld0ihlo8',
+                flowInterfaceNamespace: 'x932h0g137qglb7z8aqpexsq1cyxyk0h3v0awhdu27or7hkmyzp922itjn39j2th54ws184rtppk3ubrdlodk8b1of37ua9422a5netxufd7kj885q4lcce5flun1rdfcgvpcdz6095ji9ovnaqg6u96xlbehzyn',
+                status: 'HOLDING',
+                refMessageId: '6tuea8iuwtmk5xxd41akka5qppmb1v9yen5ikr6rucnfoe85syufdx0ufdcyftydcjyh2up782n4tbse1znggec7rjv4ordrxyx5p40l21wtlw08n0q574kj4f830nw5i6co9arxvu5lct6qlpg3ylrt3wa8xxxl',
+                detail: 'Modi cumque at non veniam esse reiciendis. Eos molestias fuga excepturi. Quia culpa aut quis. Aut incidunt minus necessitatibus aspernatur rem. Nihil sunt alias deleniti consequatur quisquam non. Error earum possimus accusantium pariatur ducimus eos magni voluptatem.',
+                example: '9s0gon0voepkmjzafpdbiimfqh48u2yx339dohbewpxv8szmlch1whdrjh08wjufnw8f7kpv4wy094kyf9ro8i7mdvzv3tq18318iklr5mrqs3366qqtjkm9usg3x1xyp2esvbjzngkclj8gcau7ymuf6pgi0nyi',
+                startTimeAt: '2021-05-23 07:21:37',
                 direction: 'OUTBOUND',
-                errorCategory: 'ticm4fpih97ilzvzwuoty7trxvws2uiwpqtgm9d0lfxanr1krhkwuu1y7pwe1so39511pcryj9bmynpz6n5w5a160rbzmgx3515efjwhoaedv9ldpuo0k83im93322j0fddxzpn1ooslqqeqczz34q6igd5fvkrs',
-                errorCode: 'ba44wqny8vp4helaqzadssijzk8p18nin14avy6nrdmyn9dcd5',
-                errorLabel: 201357,
-                node: 9167855456,
-                protocol: 'wqaet0err9k9sowa4xox',
-                qualityOfService: 'ckq1wfq43vviuicy2nxa',
-                receiverParty: 'eq7kuf1jzz796zurjz844vu2j7yt9olj1mapa6dagvzeues7stcx8kl0ldx5voxyitek59aidudkiik3ihym22lwh835xcoc9yevkat5ym84k7djytrosly8blfmgjhd84smlz7iocde7tzxi8bw0uyg4oufnmx9',
-                receiverComponent: 'dydig1uwq7dtxs208tq9hhgal3jbvwawdlo51nee57zillx46d5igtv5j25mkg5tn1k70v694e2wljnj2ygs2b7iklux6fmsfuycnz535hretxk126bvvkiytbvah2h9fuwypx1s2zxet8x975o0bvd8qtk47dxf',
-                receiverInterface: '495o0fyvlpx8t4eojk2whkoe0c2elp1tbyncmwg4j0s42xa1lkk03ynbxcm4xmytwma55g4aj4dndqpxi22rof4p2n4cwfnfdl41glmfj5lxn2ir1cgdt0s8xyikoo0ic9p889zxo56b4yusn8izw8t3819twav9',
-                receiverInterfaceNamespace: 'vhr8bsmis8vlpvak69izgcz357sj0tm5wqdheuo82zfxn9qg9mbi0mmdqfumccq2lep809yjvzijo0y64etur02g1do2w080cv3wz6psppg2ya1hk2vz5yyrfrnkssuvynjx141tp06ywpbum3wdp3yw8ttyy7z0',
-                retries: 9670032510,
-                size: 7512163866,
-                timesFailed: 6990556010,
-                numberMax: 2496852044,
-                numberDays: 7262043093,
+                errorCategory: 'j9xb7azd8crorvmj1gqm4fhcek8vsufm2xcoqwkodrj881jojujjgjken5mx63mzm35r19u654j0eshdsd0lsya0mhv52001o4mxzxdvrl01jhz1p9p6186nyzkfn8fgvl10uh09vwca8k255esqjf091jcrlyti',
+                errorCode: 'f1xnodxsdx7dv7rus06sx7bm683bute7qmmf1a48trjncu9rye',
+                errorLabel: 902748,
+                node: 8799493526,
+                protocol: 'n4oqtxgbecojbzy3n26h',
+                qualityOfService: 'u0zeraajijmprruqgzeq',
+                receiverParty: '9ji1fcfqkpu4ckt4amjyrasi61mvabunzqix3oik8iqw28nqz9xxf61eablri56zigb5j6dqlqbjnvjhlujmv0y3ic3mq11ug505dt8vjxbllj2yrji3qnh05xjoni13wmmzmxqi884jm3v9dz4nv2m8usspjp58',
+                receiverComponent: 's59tuje4dw7f72tnjk1r1spmst76iboyfl3q8oowa1bgcykth6c0iwclc9c98hz5gjr48d7pxp0u2stjbpdadzh5pfk8wvymm9220z71yekc9o9q9ejczsi0ucckjasz5jou5c0bnkgqepafhf5opnhtrjrctd6u',
+                receiverInterface: 'vs18j708dd0co1m40f0a4x5dyj1ucmlehjlrkc0cd9h0agjk3eae7gx13iotyzxi80z48zrye96gephs7r9782eu82e6rgr8yt7a0q2ym96d6e2t98vfx87tz194qj9yn7q6kh1rggv2yi2hgje3iptb6bfr0pep',
+                receiverInterfaceNamespace: '05q2prtnrce9duw4ttrbr4wfczuuuu2xsn230v0p892phe376a610fknwxu8ou9op3unq7k0q5p9py9ooq8uzwuixntu80tzinrboe2z3l16kxfovcu2cln843g5c165dcps080j5s1vas7ka1wrmrc74z93r2vs',
+                retries: 9195745865,
+                size: 8815609365,
+                timesFailed: 7346090988,
+                numberMax: 6278773071,
+                numberDays: 3184211024,
             })
             .expect(400)
             .then(res => {
@@ -1145,103 +656,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowHash property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowComponent property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '7solienn0w7fqch2n8ivmeu2agrwequwahn5az72zz0nx0k1gn',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'vpzlxt1za5nqsnfr82bt',
-                scenario: '2c2kqre6epgzxl9x416kbufr3cv7c5kx6kj3airy5yl1s3m0kz5bvk3r1rx4',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'cee07889-2d10-44fa-be7d-dc5978e1c002',
+                tenantId: 'a04dae17-399e-4d70-bb94-12802b06332c',
+                tenantCode: 'gszv88qap3t5dcninqf0ihpkh5x8r59tlcnp6nk5ql64xe91rv',
+                systemId: '9db6a0bf-729c-460b-90fa-2dd584378120',
+                systemName: 's8ly8oy0zvd8c6dt2obs',
+                scenario: '2lxjgozznck5ndcngy69vxaiimt6lkqtido01xje6txl5xjnc8hpfxozz6gg',
+                executionId: '31fc1804-c167-4c29-8dc7-3cb802f64382',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 11:01:29',
-                executionMonitoringStartAt: '2020-11-05 16:04:23',
-                executionMonitoringEndAt: '2020-11-06 04:43:27',
-                
-                flowParty: 'tt6q4vm2mpe2mr9lsbqbzv0zdfhd7k0lyvi4q5lzuzcjdtc3t2kbvbhuiuqwdg1qb6afg56ou186evhx0y9h9hjfxra0tzok523cdcdx5gjk22rtmm2708b2g7bqewck8otp5cq404ai3ryipx8unafyuzjifgrd',
-                flowReceiverParty: '1raatjp78lwm8c1yp8bojq6lbwfiyv0tuz2b1ftfzleu03jqtjfaoslrdeqnrpnoaozie83ep71taq7k2mxlvhkw9xhm2omfn5s9aq4h9lztekxz8o8r3q2w7toh09to8drhgy27uvswcq8ff7gu9h9dgjg2o2t7',
-                flowComponent: 'k92zer9rtmbsg44is4eke0zz5pyixnrublgqbiiiyccihiap2bf7fatqxbav39qp5or6whme739wgy6ti1t1ut0zugqwidmwiep3yvm54h6oum6zd79fkz0n6bww7o7la5z97wezc4fghcx0khha1ywmg6f2fm0n',
-                flowReceiverComponent: 'rgsk2dunrw8a8mcbvj12ogy2fkpxrmixw403yp3zlqfx6pm3mgaj6i80576plvqi6idwlawx2fnp4ryno6nnkeddb68rg0pwngtakpchj3cqjkbqmuk7n0r4irz52kcu7vquikw114fzjrqavnphdc4dvnhmoe5h',
-                flowInterfaceName: 'tu1h8o66odxmzlz7awu8569y89dqngzdlmchxtukimfxjaxvb4qxmp3zioe15xrr6j2im9tum8n0gugni0pk26u85nqnl7z91gl44ovml23rjkhiasjjfu42fazj9wq4slfl6avy7dmcunfs9st65cjt1gvhv4iu',
-                flowInterfaceNamespace: 'pwic76y845ooch56ybss4j2ers31u2fhgym0h0tioyx8xyz60pxzvy2rqsrmsrrk5sbdb0ezif21f42w660bw66f7xj8r7j4ldleah5eqbd9p0dkaw97p84zto4i1j2vcxkfn38hwwdhm3ghdlsxbdz7yfdqr969',
-                status: 'HOLDING',
-                refMessageId: 'czl8enj997xuhq39s6c94qjyegma619n98ehtxadsmk5wbrazb9h9q7gl01f8slu2jx0pzllevhsnng5uxyqic016m045d24t8gn4uulo0i3k87d5viuf5fdw5sc87810vh35qkzhf8h8vzhfb7if34wd68hjarl',
-                detail: 'Nihil dolore voluptatem omnis sunt enim eaque et recusandae repellendus. Qui nobis et quidem. Iure assumenda eligendi quaerat at sit et velit esse error. Consequatur itaque eius saepe ut maiores. Quasi quia debitis modi delectus rem tempore repudiandae voluptatibus nesciunt. Reiciendis expedita animi illum aliquid eaque nesciunt beatae autem.',
-                example: '8al0uoir2fafu145afan4s0l3j22n0h24ypa4bkkvth9r17q2y6v7uajfkyi2jxr5y7lyor0kfplopr4k9ztgn4mkpvth7m9xms8nkxro5n48jagzvejbcjrmdrrpup89e45g8wbdtntwngq92cp701990cwgqa5',
-                startTimeAt: '2020-11-06 02:06:06',
-                direction: 'INBOUND',
-                errorCategory: '2l3vboxt8znzx2sl1kk0omoz7luvwfgq9ehd2a7ah2h6c7msjln6ssefv0vg5aqvscl0q0znz5hz4n3amifa72tayw6c1xl3xy9gy7v46g9kimwbnsyi1cimbs6wxkd4kyxox7dbhvq7df37ui9glu1091hds351',
-                errorCode: '2fpz6g928pxcv02tcnz2oqfpg6dh3cw2oegbd1n0g025e02uyo',
-                errorLabel: 514093,
-                node: 2840192726,
-                protocol: 'l113pcgdrf5o97s9dzgm',
-                qualityOfService: 'qixvh4wgsgpjpahsjitn',
-                receiverParty: 'bmx5qkn9pp65z0f0xp56iani2nog8w3ojd4bkgq0k5gdnc5pqkh8xh2fayqszsidm0hovljavakay3b9styjq50lwli5rektx3v3qqedg9xcewy0o21f807xuk92j07qmz32v14ht92ssqeoev8kcapggd3ejtok',
-                receiverComponent: 'bkxskql0t3aw6tm4ut4u18vjly02arqycllsyurwuqhu9sjvwuegluxebyupm50p3kjy643x7cyf0mdmsk7lgj7m76o5gbe9wkdc27au6xsil90kgmxgm877q1g531f44fire5xdvcecb7yvciodh2qk5ruocszp',
-                receiverInterface: '3gnp822a6gjhei56wfbq46040gs8wyu4ax4vpqs5h8uzo7o6m9n4cfqoajzz5jwufjmifvjbb4365o0yn6b6zykrccswl8y2npulii1v45tc3i6e4538uphx2h5nu1q76hpsvxvfcc29idy1zsut90i2pcjc2g4e',
-                receiverInterfaceNamespace: '29fnuge2851aowu8si6x559nc7g1ysp1zvaiz9cv7xq1jdw4mz3ijf5n3vhv4u9851nlpso63gvvxsh2l58bc6rpkt5h5a6tg6jo2yawybveteh7sdnlnnmkcbnpi30tsauj0sl1xm8hqi9o20c3fa2rwyw7gn96',
-                retries: 7089947977,
-                size: 9611316186,
-                timesFailed: 3235988568,
-                numberMax: 7447463436,
-                numberDays: 5960750962,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailFlowHash must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowComponent property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'lrhmhdt13lw4wdjnb4mpm685mu6cn499cyhgy7l4gg3ze7go4r',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'pq92x4q5wnvqdsgqo01d',
-                scenario: '5wyud8kvf27b78ajvyl911vvpn6od8edxf91h57xliqxm16q2562rkdwyffe',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 12:57:48',
-                executionMonitoringStartAt: '2020-11-06 04:58:51',
-                executionMonitoringEndAt: '2020-11-05 13:51:24',
-                flowHash: 'mznxaz107imkeidklqcvvpvcs0hwy0e12y5m1o6a',
-                flowParty: 'zpzist8d66h6ypapf2rp62p5ogy0veqem1tpxfayh0q5th6dkamvnmn6bmujnfk1vsikngc9fmsy13mjwqku8jaccmset5dwg5pz1fopt9b24ob294vtc5oyevqs05cqwplx19up7vpd7lhhsm9mtturx1ahr68z',
-                flowReceiverParty: '7gcfan4dxbwsh7vin572wnwy7qe71any7pwfrjfb0d73wq6j9ozy2p8a4jkqg7y543jw5d7swt6gt6ln9ndtjjkbu350i4kbyw2nc880k2qtvnn7ry4kleaw5m9yri11z8p80f4tbdtp2hwb7u6p9wm8ep2lg4qd',
+                executionExecutedAt: '2021-05-22 21:03:46',
+                executionMonitoringStartAt: '2021-05-22 18:58:04',
+                executionMonitoringEndAt: '2021-05-23 08:58:49',
+                flowHash: 's869rnzjv0yx6uea5l74aq2qvbrnaa73775hpfcg',
+                flowParty: 'axioguag5dcl2gzpbx3vzsnvc4i5z207k4bwn4s3suafsuqlt8z8e6qebnubk6kxl0enpbscx0nhoiqcdpqmjocgikzitee9onbm8gkhs58h3g7qeax7k0m7vdcrgns9uuz6zwmm3zt5oov5vztd1atxqv7fqhol',
+                flowReceiverParty: 'm06f72esu3l98w4szhcffws2867i9n5f6igseyquxvmz0d8hvb1y2z9nvi26lduigj5jnba125jgyjkvazt1osm4kl4yd0fvnc8nvhjcc842f0tm7rnuatl0tpc4f5fely6nuy1ws3d5kt498rcvmae2qgd6e5ij',
                 flowComponent: null,
-                flowReceiverComponent: 'anikvq64ktzu7c8dgf78azsmifhzb9e9cnb02ikwjasx0ayuhm3ntf1cdk3zhr6fdfc6eaugpha87w7oep6f2mezjuti5o29ua9gp9u3zwfxfau4iwtfwaxn5mqunljq3g7zt3ldwb55afi4tw4iitj4coa9vpzs',
-                flowInterfaceName: 'wvdekcuc7jivitkaau6u6xtrt5kcfn2h4tf76rv2x3vnxs624s8iumwd3seo52nsu1dgy2v45bsns7ts2q1ss9pj0z2gao6w7902uss9se0poxu1911tnwrklz5okuucfedgfbupoi4hxsr0wax9cu68jvp74j1r',
-                flowInterfaceNamespace: 'k9fdjre4ni3pkenjkzwpvj5tvk9edkexe99r116eu7kj7sf9d1q8guxg3q9y40prnhwntz5sp6jiwfba8algjmhg3bacdhfj6ziaq9obibrh0vrkeorn0h8s4hpbhcanghnjr6oyi0ylc6gyq5qprix62bqxjchq',
+                flowReceiverComponent: 'k3gd1fj7a99oxu84jom14e2v6ibjeg1ejho4zrq3o0ubupg9pwpqjijfttx0rfsjoe5phls1uhdv7moiqy1r3a41840xo1ardd8aavz9c8izbabs928824yqj3zehvuspl2nmontw24trvz0sc9pzzawrkt5rp9b',
+                flowInterfaceName: '51n9p8hukny431y3puudutf6igjpfi4pihdy6fx3v5t61ftbcn6ixr231iwjqkbzndtlk97qgq17buww9mt82onzjhpjgnpjs9irvvt1z8cn5ni8x9sdkhzco0trek6vdrqudwqlwcqv9nrmk47tpe68hr917bct',
+                flowInterfaceNamespace: 'f7hh1c2ps7sewz8vhd0yti5rcp9j0x2ccopl64nv3f872apycbyarf5msfoe5kn3a4cavvsvg0bwrj012v50bm2ztwx21mowtocwkg0cznb67l31y63tmxkvadabu7yfm7xqkyk4eifs4jnsctwplf5h47nutaqk',
                 status: 'WAITING',
-                refMessageId: 'o99ijugv1zpm9vmjps0pfn0l4mditzpqsztl6uy35d08vcl7s6okq7cqxkiwuqsnchpnc4inuychysjisos9lxhp9hby4g4138fw81vzbaoik4207ztrh2w1i83vj1lh2sn1ucb8plcedr7e8unzidszrafee9fp',
-                detail: 'Et nemo minima officiis. Harum eos nobis laboriosam quaerat sit a et non. Aliquam quia harum molestiae aut omnis nobis eligendi odit in. In quasi molestias voluptatum. Et et sapiente rerum animi ad consequuntur quia cupiditate.',
-                example: 'ojiwblrm9x24dcg5uiwj6rj6b6224vryo2704nmf138nd92loyah4z8s3lfmrwjgs4epf40ybimnd0l4px7vjduw6ufydcz4kdd5yckmp3n47eaqf8q39os06pdliwjenm7q133pugnr6xj436fh3k85u0tbas6l',
-                startTimeAt: '2020-11-06 07:14:04',
+                refMessageId: 'n42wfx1avysqecqlike4na0mtyg5bav06od7cfnqzdwler1x58cy9mvj0njg5tvc6ld6yai948zmsh674bmyjdgbbg9rxh2kr394iv5fjvzm36737iqe5kmpzlukxwqf5noexsoqy79m526f3jr3ewdkzw2vkz5j',
+                detail: 'Velit ex corrupti similique voluptatibus. Velit perspiciatis est dolor dolor assumenda assumenda a et voluptas. Quis sunt dolore ut repellat porro fuga sint. Amet et est excepturi aut sed nostrum ab. Magnam aut cum labore architecto modi facilis. Alias corporis architecto suscipit debitis qui consequatur voluptas.',
+                example: '7vkqazguvyofxx2dhyedg6w4asozd1k20ewfi3imwxntx46sqmnpxzlaz5vsl6nk8p3rjojgbwdbfb074afma7mj9d1p9p6md9gz2s2hc3gyu10cgtbbimscx74b0e0x4ymgmo3a87xl0hwpw25s6asl520qw28v',
+                startTimeAt: '2021-05-23 11:32:47',
                 direction: 'INBOUND',
-                errorCategory: 'ogttxz7y0moh0hg4bcfseiw1cgql2o8pa5l4vq4a7ovb79e9lqvb13v249f3glsal5db99hgtzizl2gf7py3tdkr2mhe1ank83f8syj4z10dr6lvpozt6ygau8lbn6k9gyb5ffp9ahiuj9bz1i31j7jz8qkczzjh',
-                errorCode: '591w61z3ytbmm4jg42smwf3ewo29ca4mop90t5jt5ciow3svia',
-                errorLabel: 807066,
-                node: 1603612023,
-                protocol: 'aywtz7dp0f88ylalep52',
-                qualityOfService: '6r9mn9yoqo33vql4yla5',
-                receiverParty: 'yc0c0skmumpjz7hc2q8wp207vhkkf2qx0u4bvljjihhqa97vfgih0w40tvmyutszep4pustpvby7i2rx43eejhpuvzadt36jg42v6zjeb2xfmw7yeboty2jte9uqif6e8fbu9b75lzbn9xxymh18wgo1092vwamg',
-                receiverComponent: 'myoyjhmldkdpiyqgibx6xgt6hqtow1nwaouen7gxid4fk0x6a1mmhcbsdq5pidthaelyz8m77okx958ve26mulrduc3hqfu8q3at17ajq2ksua1zjaqdv2qc1ej82e48m2yhnxlao4tfnz3y6hugiz7fu1egc1an',
-                receiverInterface: 'am4oubvnsqldr1klxt3dqpo4vn7eaf7p5kuslc6covehhigzfhqzt2vibkjlcjtvejl8r899nk13tu5fc4x9uzdb63t5npnazxdldsm3et3aqasbx3tz6djy76rq4cm5zy35pvdsb0lwunikpbibs709ne596z8z',
-                receiverInterfaceNamespace: 'bia2uorbja80wsd75op6jyyyhsm67qle30xii71kaeadio05p0vmdeurybx4t1vv96ea6rs1ysxqp4rdih0uls1mi4f36jkljq1m4xhq3ioidfol19djjhyp2d80it9l5iy8nglzr63y9nvdp8xqtjwf5ex2gosu',
-                retries: 1157891839,
-                size: 7130703399,
-                timesFailed: 4799893851,
-                numberMax: 9156319915,
-                numberDays: 7116756376,
+                errorCategory: 'xu4xn9yyouhqwgr7u33rdref2d7pmlzsl1mm2j0x6nsrohx3pvej1cm79jw75lbnwq94qty3xb0g9aguagj76g8az6eejmngydjwat3gjxw5z7ju6024qt9mzvoe2y239j5veghsz4pcub28wewwnca7h7k5opt2',
+                errorCode: '2w9z2ijm3pva9ibdxks4a83dnwldtez0l1v2pxor6ox2dj43mt',
+                errorLabel: 444348,
+                node: 4377251281,
+                protocol: 'tmpzn4me2gndckq0gb0l',
+                qualityOfService: 'onitaixxl138lqm0o9av',
+                receiverParty: 'ucjdknhnowg0u3y4j4g8of8s1roh8q5qwopfuz8wwdzs33z6wc1xpqpkokaxq7mu6bmvhy2fx8uedk36tl97gjkyr073tof0fhbew1o3928mqpck20fdteb4sp68el6p80um61g9xruedch91o6wtf6h2xhcme36',
+                receiverComponent: 'uy7ta4vyy4c0so6k67r0od95zzx975lft4bnb93h80jaz2fjub417yvv4a5w0k0s3rwggef3qv0qetwcruj4yart0z7v0o32bmwre97fau8ai6ez0y91z5z6q3x4kd5xsb2h1rbip6oq67ammn2n6n0vuct4u7yz',
+                receiverInterface: 'vyigoclobs6abe64kb6gjyv78czz6jvb7a4cin54nvzan54t8mipic0yizydvtxzp0sqmfp17wa615cb7u43yhtag8d5jvvjl2ykhjpnu36ncpmq0ku7aqcw6cvpkqsuchfwn4z9xb6hg0wfebxmia3j133thgky',
+                receiverInterfaceNamespace: 'ejt4we7nil88f9j4g057o98fpy65ibn14uqww10gidxvmk2g48x51t8c5ayz6k5or0ej0govfxtye0ezoh4c4x2ju7ltk5h81e8ev1qpi93jbc0718wlo5e5mnmjao2si3sgwsywl14oh8jnpkq2f6ak3wolc2pm',
+                retries: 7874037961,
+                size: 9756217620,
+                timesFailed: 3865614624,
+                numberMax: 3348430542,
+                numberDays: 7027413663,
             })
             .expect(400)
             .then(res => {
@@ -1249,103 +709,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowComponent property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceName property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'cikdnpby3mlea38xg6p726j9zxrwd83cyxqiex1o22jg626wg4',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'wqlm9jmvhvn89vhapsc9',
-                scenario: 'xu4amomyyg2fjkixu131hwnxpk62bpawv2y1zjh35dyif8yclwxoitjzstvq',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 03:53:16',
-                executionMonitoringStartAt: '2020-11-05 15:12:45',
-                executionMonitoringEndAt: '2020-11-05 16:42:56',
-                flowHash: 'iisxzxt5iblh0fdboea781lj3jrhb65u5jasooj2',
-                flowParty: 'o8b3u3a4f6bexb6ctjb4hnpzcghkyy5igemt9tvbpqa7eeucqmbq2k2kyj9zw8n5fjxljm7a2acva5k47cn4661ovzut7faos7dszzw65mf5omh59hz4r2hshll8ai61944t7qasuz33dyn0b8bv2os11tiu74hy',
-                flowReceiverParty: 'irxqn60d7juud8q4x5zn90jicbz5i13h8f7mkfh81i7vuh0107f5zp1chmk5zpi06r0eey4tvtio8nranm2qs3gwx4hpzu3fi49lh46y4e3ly8t3vzakxzj1t1szob8hfdzuj65nq59tgdk5877jrvvrg1vjdzeg',
-                
-                flowReceiverComponent: '01aywq61rxss1vaahk96dplxpmksh9847u8awpnadyqbw2xuim93h0bmh3f2efo7zgeutkz6896ut9z24si1bxya7ag07c157r1xekpyyozr4fwcguo7vkt5rlpdb2zac1js75jufq8i23bz4opo5knfeqr1d9g9',
-                flowInterfaceName: 'urv99lz8uuq6dlalh5bey2ugpjcszi00qetheppqnl016c3iesbgleqgjqjydabfn9kjdrv88sm6ah0q8arqy6itm1jmxbyc6zplr5ktopqsl1z57t9leu8porw10fj18hf7apewd37hsmw38dind4ry4p1h9sah',
-                flowInterfaceNamespace: 'jb04m7ve0b98lsnurxh3ly4nqp4k8o4wy3xgx2ilbv00auupofmflgip87c7njo8f10h1oep3ewqhvlra1ue3xbu3pnuwk4sxwlem2ldt9qgf9jq05qisuldqicn2t0f7e2udduoybiah87nm059nv1ujbmhdebj',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'yh9rqn0bepno99qgdhp9glep09uyetgvdhws3e8yqp393mr7pbqeb1ubom4h7j4phmk4m44m3vj2v0k3b7jy2a8pptf7xjo249skzquh0parqgvpm5gi12igwzvtzr5439gdri2fum6e25py5kbe93x2roxon3wi',
-                detail: 'Sed harum eum ad. Eaque nobis sed aut consequatur nisi ut modi occaecati. Fugit sapiente explicabo qui aut assumenda. Odio et at consectetur aut aliquid consequuntur aut aut.',
-                example: '8plcowarvl5vrdigwgrytdc02jom8grpx48k688lh2c6c4m6wtgeg0aewj9l7eenfr3n5v7jm7cvs6d1ot0s8dzk75ukzmb59kbmlfvxtmgutmk6yt1ks6r2m4mz4ql2y1tlomzgt2a7u3xexp5rznwpr03zs83z',
-                startTimeAt: '2020-11-06 07:02:19',
-                direction: 'OUTBOUND',
-                errorCategory: 'bm0xfa3ry7cucbiv94dsx9quk7prtsqotembpj9pvsvkul3s2rnssu1dqzihj057jl18njaddny8pi9uy0uhpkv5uv0e0wnnc7y2ey75f6fagbov48jeqixb52xupfbkb4hq4scila39cd7ca3xfuiens7o0city',
-                errorCode: '1efzrhl21oppn34xttctr5et0ggxyi3nmw3itk1qo1hu813eiz',
-                errorLabel: 988419,
-                node: 1714576825,
-                protocol: 'eytw8ugswfts88afceml',
-                qualityOfService: 'ncszbm4obfxoa5kyc6sv',
-                receiverParty: 'jcpspavbntptzr4sazsiow61jqgxvinc6964qoyzvn5jazp13taeocg06ymeyay8akn0qttdoqna7d444zq4qelhciopqgwyv77gtgp909kv4fxuevdu3aj58xk1408w7govrmgppok64p9hjgob85cr5brqdsk5',
-                receiverComponent: 'aub78d284se3xwaxvdujtpkbicpx3ve0jsdpeoxikvsu4qanu61cs9tvpegsrtxanfg1fb2svt5c3bhdbqhmg0gk1frx94tbmo3x3vsrgehdjvldgy1i6ctwgm7x0k9x12icb4soqk9xtw7grrwecfvm1xdolxwf',
-                receiverInterface: 'evwiu3nqlpu61h8kx1gvdqn5wmhosep7z5dpyxmn2i4ycuttzh1jb8ywu4up4ndcl38kvlz86bmc06ctgh9cq78ip3un960doz4gmanwofp0o01my1yz7xcjgv4po89e6sa95jv5xevurl5m82f6a0uwn9oghu8v',
-                receiverInterfaceNamespace: 'hry9cl7r7l4n7h3tkqg3rd4hozru6gb0ehrnz6ho23eezv3fs5iebwiftsere0r37a1krahj00n0hahz0hhxfleh0garddkzn6g5m6hd71sevdgx6ge8oljyqrnkiy2xmgxllbqcf655i94jj1wnlse1h71mnbmu',
-                retries: 7938000513,
-                size: 9991805511,
-                timesFailed: 1135830523,
-                numberMax: 8876007555,
-                numberDays: 2831963608,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailFlowComponent must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '93ei12t3hlkkqc656e98kxwhwrp5ovkvk66nhhikyuqbbwxo6b',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'emqoplmuh5q48mqukvrh',
-                scenario: 'fy52eroogoeyuwjfi40i9adz4egbrywjpydrl424msq6rlvw5tplpvc4et9u',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 03:12:08',
-                executionMonitoringStartAt: '2020-11-05 15:34:31',
-                executionMonitoringEndAt: '2020-11-06 09:34:08',
-                flowHash: '0oklkz8e6bvp3ya7bmi3i3h6ye0f9nbf06nk0ked',
-                flowParty: '9t9uxwj7w34brv2f5qzorggffq5gs2y5r8ropo4aun27fk04w357bopmbhpq7yl84xm6nsdc6zwn98mnx91qe0h62fsp49xanvwjcsatnokvjd7kk16m9jl3y8gj7it616xuxpl273wj4t96mrl9cilhm2tjwekj',
-                flowReceiverParty: '63rdrz3h8teqsnyqzeg4spefrk0dkp8oqi0ep73y70qjh0aud6vh07bqt2s72gbb2i1x9o2lnvfq0jkow1x8ay1koyifush3vgdabxzk07qpomryvaxkvhgksldkq89bco53f2vi3d63fyrusltotl9pnet14lvm',
-                flowComponent: 'v833fqriam3yx81p9zjo8zjsu883au7yk5ywe07b7ia1gism7jnskkitniidv0qzmdd6sopz1bkcoj9slec54v6s28gpoir6ha5fymc762208oihcjvu0zwi961666ajk33dv98c6fkn477lqipt9gs0u6c7f4kk',
-                flowReceiverComponent: '6crrm91ndn5dald30szk7qulaj68vwbu5334eia149a1ur1mnlsnl8gkmcmpkf0d4we67bezl8f7n6gbyuei7hc5sqtkauhllfhqqjtnxfnk21753dpoj9xaedjfu5ujllr2m7jcx4fycnihs4u51zevvo88x12a',
+                id: 'b06121a1-ab2c-4b38-a89c-3f0989c5c363',
+                tenantId: '51e62889-5ecd-4378-9660-5cda9f8b4ce0',
+                tenantCode: 'mn30vvhekac5lra5hsnbe0knwgfk9v9ubttiqnzuxzr4187uwj',
+                systemId: 'c8e3ee4a-f3e3-4eeb-b49a-9e1712ae8f1d',
+                systemName: 'qvfj9k655wqlqd36krnb',
+                scenario: '7og0pyhdh490nsbd43bxidtlt976no3c1s5djrv0jlsfgtmxwga0cbx0kjce',
+                executionId: '6f4cf67c-11b4-41ec-b1b3-9aa2e021c380',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 01:59:33',
+                executionMonitoringStartAt: '2021-05-23 02:51:12',
+                executionMonitoringEndAt: '2021-05-23 03:12:00',
+                flowHash: '4lobpoptj609iqczobpvthrhu6xel35b8mnf7hva',
+                flowParty: '0o7nf6gte97xh0xo296r81s26hmqr8e7j264t0arvix6bhf4zxdlqogzjrrlrnockc0lrmt5jubhfph5mjgdzejxr7sw92slbu134yli12q7ftql4op33vxshk74x3wvwfdljnyt9pi9yec0brvfszyb84dv2pcv',
+                flowReceiverParty: 'pw0lh4i2i2nym5dk9r4trd9gkuyum9ro0r1c1ufrx1kun1cxvc5sjts0caab3jpy29jxodq0mmrmi8xllt3fzici3jurgtumn18wmzbib6k0fr6c7r5zxw1xp39edwxcs3etwq5c0hw47r5cinue9p22i3rpvnzb',
+                flowComponent: 'wc0yzlqudioy10j8ua04usp4rgzzjreimhptbxw2l6ljnwvamv6xwervxbool7agx2hjvkh8m1q1n7i72gdtkcjdx1ckaa8yx80ckftlo46we0lz4u0rms31f168u32gu6427s7qv6bxkxjv8dz5ik8yd3v1kxep',
+                flowReceiverComponent: 'xb0f51fv0lmimewv8z2ssqpo8n2nekuqn330bfmqo6zx386ilvcseynqbwv192buz6syg014w9iefuy3uth6d3h5gkh7dvtldo5u2fh0ro2lqzgadkpo6hicnurc2j7ggd3080cby4fagft7lqvpersd9axxo83h',
                 flowInterfaceName: null,
-                flowInterfaceNamespace: '942g7czv2pgm6hel4bm69ck193jggi5bsojpyfd1xoegh7ysq3f1gpglqxxxdpfdpceqatlqb399uk3e9pt4mkus59c1t0ebaj7l0rltu6etpye4ayuknr19je0q5ruima8r6l4h87aedpuc5r1h8soo4xcytly9',
-                status: 'CANCELLED',
-                refMessageId: 'bfpo3u3m68tlvcrw1kk7ge7dqtbc3t7g9onbrvjl6qtcrrzkfwv8k8hcvd1qtsjw2iy6122cw035x9r3gne59bstqntnm8hby8ciz9l8q17lqklit5gdzkrbk8d8vi2b746b0bqd4jkl52rzm8axxlffvefync4c',
-                detail: 'Voluptas quas sit deleniti quia exercitationem eligendi molestiae. Repellat quae atque vero sint animi. Nostrum autem quam dicta ipsum veniam odit aperiam. Cumque fugiat ut cumque vero cupiditate enim quidem. Nihil non velit quo doloribus officia dolor ab voluptatem veniam. Quae repudiandae alias qui repellendus quisquam harum autem non similique.',
-                example: 'lgg26k88eg7yf9y937txw2pgx40i8rfmavhk2swaf3odq74vzhzzz6e8ojp4r4cepxx74gyrf1v6pq4gme4xap51ae1n1g926f9d30h8iybx4qmu44pegveci86xb3cowky9n5siqlqgbesppjg75hnhqfc7uay7',
-                startTimeAt: '2020-11-06 00:20:30',
+                flowInterfaceNamespace: 'e7ja2jt88u4lywipmt5tictwvcwd7ggqpkfub4upaj93a1ic3ci9ip939pgk6358ft2gsk2ns8kxv8qqw3cysi5t8baskn2xrdquxb6zmvkj0bb4865vbnqce3j8t2go4ru9v5v2if9lvt0dvm2mmwa1q7l1k6wn',
+                status: 'ERROR',
+                refMessageId: '46eeaqy04ozoim2xcntyed7aksmjmnz5spiwx8gna5mms1tsbnkgkpriap9qglmo24vm7vwchz5qusrs5tt22erg0cfyth7nq7tixq2ikrim5k874gij6xckxklevg09lir9n13ae6ha6f41qx9puhh27ejnmhsv',
+                detail: 'Nobis iste sequi ut dolorem voluptatibus. Sint deleniti aliquam minus delectus minima commodi fuga aperiam eaque. Sit est et ipsam veniam. Sint iste officia consequuntur at neque quia et quibusdam.',
+                example: 'ib2hlymhfacjfdm1dxaucxm7qyovpzlgw9urh08a1w31by1x87y0jft57y1vd8eitbaotini8zqx00ul8nyua1ljdyz5bfz04ziyrhaokgk8gyrhpflz4rv16vx7qitqpi1vf207fh7h1rxlyscvyt7cgpyk5cva',
+                startTimeAt: '2021-05-23 14:14:26',
                 direction: 'INBOUND',
-                errorCategory: 'om4kneh5n6kjbewpdpewpavd1njhuw1igvhu73tgn34h7071r9xsxhvkx7obi2ks6sftpsc07qrqwm5z6kcuhfhwl5i06oox0lztlhodbp6mx502pxfow4q5isrv2xup3vk35f377rt6u3vv5pwpd1vl8b9hofsv',
-                errorCode: 'y890y6h8kohbhfhz8d04zv1dw95i1dpwc4f8f5gr7oacrfmfut',
-                errorLabel: 669600,
-                node: 5483754693,
-                protocol: '41p8kxv59si0dpq70cnz',
-                qualityOfService: '2tuwqdu1me0zelvr8sy7',
-                receiverParty: 'adgjk7uumsfcrgsa66z14cbvfgdstblj67gl0sg2vcrhg2l4abej8ybh6itz521bz6vmqtmagluh19y3li7pye9fihe4wbm6qh55j50d6pzwbq7lcxvxagq42kls30anr1ko73eonl0sbpqxr3e3ibizv1q960wh',
-                receiverComponent: 'kb8equgnb4wu1mtdj2selr4eqh9wqre97hcu97yzhozruszo98m9k1h84aakp2rh9eolt18k8ophxtcjfhwx5raf4jyhftaqmum2cvcgfs92obp4ymximo10gdixv5clim7t148etfesedxof8ypwrcaea9a2cun',
-                receiverInterface: 'e1eublv0tszz3v22sqa295mpbvgyp7nw0rz67h3j8nt2yojhkyxwwikx8g78ow8miwlbniwrq8ep5h663auqu3vd5ocmmn8ml3w0rjva5jg5hrow92dfkcahfu75o2ckpugi6ugn74ti6e0xd5in2422cxe46ljn',
-                receiverInterfaceNamespace: 'm9cpi5mv8lrupri4eud4upvd9bitsk5e49lzlxj63pwhsnpdun63yml6l2bvcwnunme02zr5hgskt902rf0figwcr69zssm75pptrdjqtlxpnm7o7hdrz6ruhxq0hc86jpoxzt1re6rnwu7bc6mswfrk9yfzweal',
-                retries: 1697913021,
-                size: 6059094555,
-                timesFailed: 6626393928,
-                numberMax: 6523924385,
-                numberDays: 4378535541,
+                errorCategory: 'ddgonik0u75xz1yt3lwpfm4fl47wh5reetpdvgcvrllhkxlwl8o4fothp26zc8vanm2c10kqarhndowejwbaea9yqpkbkwab0ioxse23hzapqzgwvfrhooiqklpvyxv0nwg31e88yo1e8buxr5g2feikb766tymr',
+                errorCode: 'usuo7j7idf65dab1shdoqo1tc5fesdhh0evdu2s9j4bum9njrw',
+                errorLabel: 118507,
+                node: 1356965871,
+                protocol: '28stg1xav7kms9ubmkmx',
+                qualityOfService: 'jmcve019wkxcstey58de',
+                receiverParty: '5cu040h9mskraz983rc53qebuycrwpx5bx4xle9xl8gxk0dvkjv66bac6h7ex34ve4297afod2stbketd7izlus0q918vouzahh994tgc6n1zkjkpmteqzrv3h7u85qofthqt0t8a32bf609mv2p2q398i72s21k',
+                receiverComponent: '3xrf04nt8dol9czmvuc9538hrh35vnwos3jzff2rmz9ncly4xct4m44w86r4xlgwct4y9xj363y4bu2kqjgb3ejoo62kwgur723itkx80fv295i04lglke5udd0ccxr1dm6ygttxc5uq4xt09ny2gcznnrt07kg6',
+                receiverInterface: '9cs72tm0xn1hmt3xenl7jof29r055utdpaqcnmj0xmg6p33r9bc5waayxi74u4ubni6gjqokzflfkd63cky2oep2zjut78s5bq8pqroseu5ttu9xi4rz1rqbbp8rxeochvyxuu0q701vbd5n66aqgea6xcq2jt4g',
+                receiverInterfaceNamespace: 'rme91rc6bfn1hro0l1mwuyjro1pkkgepr7nctjynsy1zo5hcfxah8ut9fmnrg8fyn2wrp1ex6ujoiyi33bnl9p4vqtas4htp8p2g4jcjtwhea23ydvb8qiv36rh7sz33ffwn3ons5xrifyvu7ye2r3lgbum9m55t',
+                retries: 5928812815,
+                size: 6958818276,
+                timesFailed: 6528298554,
+                numberMax: 8185321417,
+                numberDays: 4660546065,
             })
             .expect(400)
             .then(res => {
@@ -1353,103 +762,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceName property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceNamespace property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '4f9ytehgn8w4s2usxwws5awqtsxjkhilak0nnnz3gssg5qbzst',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'qe7gby9xubfn8ll1g5eg',
-                scenario: '0q1txh9gqkjuemuhgvv7qkf7g21r16j0jkddriuzafzvji19brcqi9au31sp',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '93a85ba5-501f-4634-88a9-4397420dbadc',
+                tenantId: '5081090c-5c71-4028-9cea-aa3cd59b2954',
+                tenantCode: 'a6bm0m1i3q2u4pr5jyiukyhy9h6zo3eeaohtvm3dqxlabsrrsh',
+                systemId: 'd32e63c9-c5a9-4ba4-8368-a39281ba391e',
+                systemName: 'f2bxkwuiqck1x6qan9q8',
+                scenario: 'a1gwf7m9fcc1uo3fxqjrtll6s2l3xnns28v5q8bdtfs7nl0gdo8yykzux6sp',
+                executionId: 'e26c1d61-832e-4636-9e7a-fa87ed4e9b71',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 03:42:31',
-                executionMonitoringStartAt: '2020-11-06 07:35:26',
-                executionMonitoringEndAt: '2020-11-06 05:26:00',
-                flowHash: 'txf3wzubggqn2qpxhxvuibdhtc24lnkveqr8zfsg',
-                flowParty: '8pkbc7z1q8ticeqcvdg8inr2mhufeif5ntnvd0vu3k92mt142phzaxrubm9ljo7eyx0ji4wowuu5g9703dp9fu2lrpirx8ny5nmqy876o2abb0dzhg50is6jpvrrxgynkevfpnsov38p6svoj2pjbq90xuxpt4j7',
-                flowReceiverParty: 'sch3zxyq1crqrns4if0uhluqd8omagxdo15u1se6dmdlnqv3dwkfme93vvy36tllqp8m86va8g43yetqebv0bmcxqfvtc1pohx3zi7owaj59d8ibqybbarb54uhricvifr4v6rlgn8yu6z05oen1d1x38drosvsh',
-                flowComponent: '117zqlezq16r83n9af83k8mwshe7ymbf89xsl0ycb04nzsuypro1zprbex78hanaht0dfhu8f99jx1fajk3kk38n0kl85n9sxt3jvgmj7zgdiamsfqlyyp5q2r1jdq9iz3drr69ll74bcay5qq6icc5vmd6ohnc1',
-                flowReceiverComponent: 'efbhfj3o7wa74np5qumfoz7sq63g9hyzm3bpnwc8c8p9jb10fwk18c3c0dahxoq2o1qxajgj73073jcmxr246dtwhskqdr9m6ysdaxbxynlzsxp6us71v0dc6ss5nyzrtm4o9x9flq0vpjxqapa18hrlrgpyihdb',
-                
-                flowInterfaceNamespace: 'odfmh9361y6eiujagex40pqyxl5gkrrhlhv1x9uoyqanlr66oqrkd3uskekwxjjh3kp6ry5utvfnbjpprvs0c7e9vzlfe0ekcqh0p2jdawx4vvizs2wx2bnoankgfmq0fk00h0elv2mkj0o3vdkeypvqocjfzg9v',
-                status: 'HOLDING',
-                refMessageId: '8ryb1xwft5dhj8yit0vj26vc59oar6q8q3hdjctd2rrvtzinflq7rs9x7ruftty0bnxjh0tdxx9psvgc3o8fh1njcwp0y3bqqe13j0ahs6h67c9m38vuoopsxocmzd114duzunqp4oihrvykqbcnzpytf50czzi8',
-                detail: 'Tenetur eaque quos deleniti fugit qui molestiae. Consequatur animi iusto aspernatur eos quo veniam ipsum omnis incidunt. Cum dolorum sit iusto aut.',
-                example: 'hd4gwd3h3s68w9vu0zzm51pvzauk61azgt6jdat608wk5pcncp7agwjc1tc08nkcryxjkzpbzzfbax1rphthflwwqoyqkzvst55qwjlavoqkpnpq3qta0g0e671ywat1ihf56gcqfnso4ehfh6gbs8kqpvwcfrmi',
-                startTimeAt: '2020-11-06 09:48:49',
-                direction: 'OUTBOUND',
-                errorCategory: 't20w7bjqzg4db9s03azrl9k0wqim06kcee1hhnr2puuqq8ovwz166wglek4w6ho5omp1vd1ua89igf47cw5ozofo42fv184mnwew1mmcz90kg5g22r0m229uybeyqnr32uvca37o2jbo35ef97a55mil1uonisxw',
-                errorCode: 'nl9k64ltzpc5vd3nre1c3zl8bm3whh8kg61cm2l5z0h5qwc16f',
-                errorLabel: 671587,
-                node: 3497578829,
-                protocol: '190c0nsdlj9cc095btyh',
-                qualityOfService: 'm7c05mqf3yj9vhg4gyg4',
-                receiverParty: '24o2ajvivz2bcg8p8wxe289dotc4jjw7jg6fqpbtxgjvbhva6g2hxv011nh6naha2c33lmcvsvk7s6quxz78druj40mqu68kmov4m5k4j2jkh7exdolpcr1v3h2h0ax6rdp29ltxrdw80oakmzrvrf913vavo7qk',
-                receiverComponent: 'dsbtyja3u8phxhyd8ss08vye7j7m0r5dcmvvzlz7l8r6e87d4wj84qivq536y2ljvxatsmv6gq5y4v11oc9r6kse3whhuoyv1cfmdgw313kvnjge8o0mjjhqdlaw4nlwtgw93k2ec7d5q0xj1ztcjvje9ysvl345',
-                receiverInterface: 'kef9zwvog44yfd50ws9k7x3dc7qs35nbcbhgspnxvwypxrpv19pqqrpu78lptartqeqklo7tk5aserey8x33uezg024ect5bfkaybq5z0yoj4i1qhats2ysdfkaxdi57smyfw4hlodzdasxnx90y5264166qvmh5',
-                receiverInterfaceNamespace: 'jfg2dqgblk9f283iwhmpclwyv9bbz7j86l926zd33izr2qfeepoyoll7f6q5hvzl22xq0opf39mqi3cj3ruolqmdnrh96wthukdezlfyjnd6fc5q8ic12lvtcrfc2xeosyng8mo7xz9gbp2pyu0dh0amxafhthd5',
-                retries: 6607945953,
-                size: 3542231570,
-                timesFailed: 9620512632,
-                numberMax: 5700785040,
-                numberDays: 1491828609,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailFlowInterfaceName must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceNamespace property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'ox3onroyfv58pnhy53ky03soc56euasma38iekv9mf35jb7ws1',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'yrx9b1dyp2ihxi83x101',
-                scenario: 'iebiqm7ipgvvyz5sw8lkdujooqe64twu6skibe36n0mnkbscyc838oxjfwm6',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 23:15:24',
-                executionMonitoringStartAt: '2020-11-05 12:40:38',
-                executionMonitoringEndAt: '2020-11-05 21:46:12',
-                flowHash: 'twvq74224hzkcpv23dcyj21azb50tp33yyb0cizs',
-                flowParty: '7ox6qlg1q0wgxwx4tm9dp93tt2flbz8yxqa94ipu6a1ks3hhq4je1zv6ljepdvkum6bevmav8020soumeyrmkwtpnh8p8kebom0wue4f0axcuuuex9hellgv88ecmsaguh3mh8a26umi21mby4s2vrzfd94w353u',
-                flowReceiverParty: '4pcnfij01pw8irvkqdnizkalmcwzwlq95aebpj937s265iwi5sva87uwewh7ln4j2z5nlf5fdoh0roqjn75mzydcqu2jn0ce4wt8tmywg9risxma15x3k05o2ut0xg2xp2mhxmbyskrwcx7magkmr446i9b0fxuk',
-                flowComponent: '9udpv24zlhwk8elho22sdxjvksoxglwt020n7jdsd5vbvi1yf3d5pnypcz34qhk985mbwat6tw1fgp5unqvrc7849vimx4g8p1gx9z89tb6pu9halgapszixd1ra2kqe41f7r73jd17j3ww4bcs7yv4t8fnqjzu8',
-                flowReceiverComponent: 'zxkys7u0f8td80kvlm9igfw6oqz2dgfpuyv0ow65kcqxrdq2mtlq7mez51ywsbb4jkrxh3czlnw06ia6qwep80t7er3m4w1tzpa7n70mwxz7p5i95zm54ama4uyw5e3xz0yeo19pzpphsi4lsqnlko9eloqy3iph',
-                flowInterfaceName: '67qlwqmkmp2ajn73ydlpmirs9eyywzpglx17ab6ms95sjh0lwz0a75mdgq10ll2cq3j7val191elkm5pcy2gu7b5kn93kbw4j3ixyo5lcxcuy5k72qalinwlrmszajbnnk517cv8549y3yv35gv4bhzmw5n0x1j5',
+                executionExecutedAt: '2021-05-22 15:10:55',
+                executionMonitoringStartAt: '2021-05-22 17:23:45',
+                executionMonitoringEndAt: '2021-05-23 00:11:16',
+                flowHash: '87qyf1r8xrra2s2uzord3oeeu2munq7a27rfqw2n',
+                flowParty: 'kfjjqqpmhq7ce919ekhlayhvkaetl49jg3a070zswjg4ae5b5czb666j44lsb8rk1rh4gj5f5iys7tq39ro8ljpk7excvp3drqz9vsbke0rqfgb163fgrwdkqswgucplinq6oc1m4zviwgg8bjr3dew8cwtae669',
+                flowReceiverParty: 'cuneelpolufo216evl8fr5v0f18ulzo4q6hsyemqweoc73c6ktvaqtmjpx7qm8ne5ymqk29vh3ylm1ed2sojkidckrv9zcw061xm77a19zcwff688z4aafvqio7xh8wdm8unnczwlnih9bcz0unhtx0v9tli9n0k',
+                flowComponent: 'jhplwqd9ifnv7oah9l46f6z62467g1qoy0zzoj3pcb0zulcw8hgp4oqfuu2g3be04tdiyzz7mr12a00d5t2zs2tl2zkp6vt3rlsbuxz2fvicajt5p4b4mxkwh3m4rkhhhlibhtzaw8z0y4rpjzb8t0gn2102fs1p',
+                flowReceiverComponent: 'hxdtaki5a6hfdw02xmcx6x4yof2uto26domqjq2ythhmy4rjvqlmwetdhuf2ianhuj0eyoox5cqysdpqev2w8iqg4wsj8ey9ior1c4f2l54q8j5c9gp9pd2ycvjptwy0e94djm2rjwyrwzf1wiu71l5qjiqn4yzd',
+                flowInterfaceName: 'je900e7floxjng53vjvz81kwwhj2z0whwin7lo3rd594w654w4rxjshlezmwr71404an226oa9aqahe86gw8t80to6q2tqoze1z3i34oc2cdn7nxhluaqfp56nbhl8c44j4cme1egu1coy4xpuuuppk5il9m3wuz',
                 flowInterfaceNamespace: null,
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'ud872l4ba1ok8g5i7dase86cetauc11wavrun5nwhheyu33ybhi837jf8sotymcynr5qisi0erfcsbrh6a51tos1ltn3002xumpq3a8hzcu1vyo7fkrrujnvbh0hxfzzyvvaf04ecdfdm4x9rjp8htxsb5vxr5by',
-                detail: 'Dolorem eos fugiat sed cupiditate aut optio veniam exercitationem delectus. Vel aut voluptate porro aut sed. Voluptatem facilis voluptatem. Quod aperiam sit soluta voluptatem a quia quisquam dolores omnis. Voluptatem nam voluptatem qui reprehenderit id ut illum aspernatur quisquam. Neque rem minima.',
-                example: 'nge18vgkts7k99yljbsefemq6dgsb6beynvfai41ymeuno8l3yluixucj1xl5ra2aibykj2qft7sn1o41ce6495pk8yibm30gl0ycifp1f7y4fav967jht8w7bdtww254svn44mrkjqejtnhd8rtcepx3x4n2gax',
-                startTimeAt: '2020-11-06 10:05:26',
+                status: 'DELIVERING',
+                refMessageId: '0qfrluqel47jikik98ecgety18y8a9giz3i8utvi0hvsiy97stqznihv0y5mxlxlfeft94sia1npt1sj2e4uwlwzcqxjmsx95x219f1pk0845d3l07m5x63ljzttixqsuqvhhr8b4kkkz1h6ws0tkstb2x9f9kwe',
+                detail: 'Dolorem earum est tempore totam quia architecto eum odit. Doloremque modi hic veritatis. Placeat maiores aut ducimus numquam.',
+                example: '0ket87s23awrgvk5q1vbdf80bsc0exlgmzukwsbpjn98uosb40vbxuyqxtcv2aut3vag2gz8ua9qwna8j3oe1yeg97oymxxh2np5v7v1899y6pan691bqywdt6leyu40rg1472vxr1kky131i2ufd2e3842z06cd',
+                startTimeAt: '2021-05-22 22:30:47',
                 direction: 'INBOUND',
-                errorCategory: 'hclgeti4oi7o1m39zhaafkqrrb1ujuiup5pi7k788lzoplu3fd0tboju3t9zhfydrm0q9e0io2y29n8yovg93y5j0j9m7k9i670kh5lxjy2d41aqzvvw37jc1fp0vnvla17f88fko4o9de8tfv6j9gbs5lc9zi37',
-                errorCode: '0w8uknup00zla3fn1360i0l9zkbdjn06418j3ser8bumvzwwug',
-                errorLabel: 516292,
-                node: 9272280981,
-                protocol: 't15rvsl4d17c5khtdvr2',
-                qualityOfService: 'sqf9peqrgh7ohnglunq0',
-                receiverParty: 'iwsd7g41o679uztv713jmmozr2lyuv96pekf1yn0lcw40kv99ts9ba32234ulqy77pis7q2krpwkuf3kqmyusmulaxhol3epp9wtknus4c28sp6tnf191nid0tao629sothwfhd19zldgb23hqgif07p5cmemde0',
-                receiverComponent: '65trjrvu6m73icqi98qs0adxqxlh7e7n0n059578h6y4yxd8gy8jzj5euj4ksxxqnzk64s5swmqmzm51vv690dafab6rj0rinc2i4yc1mscaiqj86aoh1q4kvey74a306dbl8d89pg6bjom5vc8k5ajvul0zsevp',
-                receiverInterface: 'nw0w5r3dgnnnuw2wjov69tebm8bq014bbxwtulz3rj22crt3y4do64hh9uopf5vm9mltziip1uih3lxjyvfco4jolp3q677jqdw8nmyo98uxh4rc1rxwqllvm711unxtb255hd71ea0vd5d2i7m9ctv6jkgsept7',
-                receiverInterfaceNamespace: 'dpdyhghdtxj36o4ou0km3egs8zds5fk2aa7iifvd42d6bj5gz8o929ij00n5gyzfo7yz93fipue078ps93h9rvww4bdbckq7rju7u4m4epijap6u5voq27856cur9wz61qfgb9fbhpcd6tp4jebcvr3y7xx9wr7n',
-                retries: 2323600111,
-                size: 5834551156,
-                timesFailed: 4428470162,
-                numberMax: 6802380169,
-                numberDays: 2695343804,
+                errorCategory: 'ctlganfqo58z28gxh0cjp8x8cmsp2a8ka8qfwpv5vfg4pn3vdcidbs5vokq5hh1bsrmg2ee6egp84uqdvicvdg3v3felpnh7c5bm4f8t629np8n2luof4761i02kgcwj5urku0fzvya19dq61thl1wqupnvxer93',
+                errorCode: '3ylh8j71obxvhg4cwlvcb70og39s4a85eu5o119xhjcqmf2tpk',
+                errorLabel: 253067,
+                node: 4080392077,
+                protocol: 'tup7vq8qsshy6m8b13hm',
+                qualityOfService: '47nk5ouss8xps5f6v3f0',
+                receiverParty: 'mrve09tapp2c7gllq6tptytx75ljq4785hi4veunpjtwe9dvz479ehpnt7wur7a3nmjlxzwt8iu369deb93h22huh38gi6l5mrgkaup2bb3pkzszpb0my7nsm10t4z26uoldr6ynscm8nwcpusopsziobgqlj9qy',
+                receiverComponent: '4me7n300i0at9av4jheo8btbz4r151a10ywgfeg7ruk6v5ncx0ixyd66hlpssd3ojieormuka90wiev7ifunt13k8u17d60d0hc4nw7yb8uqm0dojgv2pje4sbe7kmfgc7q0kr54m2kxe5ejdpythx6ams8q2ue1',
+                receiverInterface: 'rd86kpgvn5uksbkkl1hit2fyykexgj3nttet7lsh0el28l425zh2sv92rmtw6wuiqj08h2hwztki76w2nebv7jnk2b7zpccaeizajycnu9mhmppphwzm7ssfegxdj97pksag0l21h0fcnkomps6d8ix0ltaj5gji',
+                receiverInterfaceNamespace: 'izlk06bfw8iozuf4nz5dc826smlft5wt3jb4w2a2kh430b0erhzt06hu2prk08cq615u07nfqolnd4rjb1qtkhgrfaogbwitkboiaz7fmwsea47xiihzj70n1yuuqrthrnciufttseiwy7wtug31wodhfhm5ypyi',
+                retries: 3637128822,
+                size: 1008329988,
+                timesFailed: 8201127741,
+                numberMax: 5839702061,
+                numberDays: 3846237988,
             })
             .expect(400)
             .then(res => {
@@ -1457,103 +815,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceNamespace property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStatus property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'fz2unto6oaisajsxj9mfba3dcgr8o7gorb9ec8znj8vogksg32',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'fyszvnqvsr1p1f71n8ua',
-                scenario: 'autlsq0wvna76w7q6z219k1v1rkgwuoxpioeu57jfu8gu23knmy63c4c85bj',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 04:08:55',
-                executionMonitoringStartAt: '2020-11-05 19:09:04',
-                executionMonitoringEndAt: '2020-11-06 09:22:24',
-                flowHash: 'wkgihrg5njbrdcplrp01z21yx9icid7r8e78oj3m',
-                flowParty: 'tvwj30u5v4teun0q90soz40xr4hotcgfrppay9tqber7h5glpzr35v3y0n5dug87cknxgveoqudpcg6m74802smyiut271rstu8pxtx78lnj4e2lw4qlilkgrzvwuuq84vm93m8an7rjb6g8c9cx8a8pcug5bffh',
-                flowReceiverParty: 'zyoby1v9y52ed8ortzzkeucuwt4oui20niinua3pn6i0rdvalxx6kypun6z50etstr9urul8ifssd9yymlhvubaatphav3njcf05equ749qrit4rvl7qz1d3fs6qybodqcq3wmpvdvorup2g2mt8km3kz2ub48dv',
-                flowComponent: '19yyoe1ojv63fvveupmn2n6eq4ho4hcmmcvkv5bd1lbhxy2m939vh0nntn7mz29bauedk8ldqm84bxlbhysawa51shw8iar9vg2mehmidxmr0cg8vn0o5iq0qlvd9crevrgxt6ogilh16t6o0v307vjp8qthjclb',
-                flowReceiverComponent: '0d6n294g8pe0o8i5gjat3iikc6ut370ljfouwc38ptwc4kjjuf5rlarnjdw1pg4zxnoxky5t1ict6gno8iazomchw1ww0dshtzc72y0luxir17yjpvn8k9ocxyd4l9o2zlzzwvvqi1nt2ehxtvxgphs7gbug7zj9',
-                flowInterfaceName: 'qd7ujp68gtoa6sup6chdg0cjpoe9tjnqzwp4f48iijmk57pzuv426m6pv5itxoyjvnkobemqunbvdrplpbaqgq1a4z1ryb6uclhmjsswdjmhknkpdy5fggnjopogp4ec3bu8brujjx5znbdby7fr62r16zbc5pjb',
-                
-                status: 'WAITING',
-                refMessageId: 'f24hqymvl8v575tij8uax9ujzzwbqnk25srho1ufrb8wq0d06e4guds81genrdk25yhcsi1nme4n7tgv8gzxhacybhvasynflk0rgxsawomfvuo9j4z8akm19ww3whb73j2zb5jvyfz9sfgpp47762ph8h6nf0la',
-                detail: 'Sit molestiae voluptatem iure rerum consequatur magni debitis et. Sed rerum consequatur molestiae fugiat. Quia et placeat accusantium. Voluptate aut sit. Porro enim est incidunt voluptatum ut sit cupiditate.',
-                example: 'zdnk9fy8shsu93tbf6rnq0r2cp84di03t3c9vk343ka3n5ha3rua3tokinddevgld9twl9a4za1lh3j9x1uam6xww6fnbx992nv8m6br5sxm3uq7v4fx4vh9qifpxn7iirj99x69woo8j35mcawodcqg59693m0h',
-                startTimeAt: '2020-11-06 01:16:44',
-                direction: 'INBOUND',
-                errorCategory: 'vnpki2vqhcxywsuzr5cfr16ahyaezjp4jkd4mtmf82ve4e8va7ae3cdgyg728wuq8pnszubovn0dfqdiw1urjoxgf7wnvpam58kfi8223is4q6if40kts723il1t6n7snn4t55pr0lg2aysrraoauh0wi0sepdqm',
-                errorCode: 'efk7zye9qbxzplsm5hr387bq9n1jq5z0n185r99cwdmiw9k25h',
-                errorLabel: 975448,
-                node: 6337410713,
-                protocol: 'qrdu4bb5ulvz4zuq6zeh',
-                qualityOfService: 'fnpl1dopbw8fg26vmmq9',
-                receiverParty: '10fja8z4nhv3j8ay6j5u8zmwnmvb2dm02lq73v02qazm3dxrtqrja4661k517bl7u0f2arnp20nqaglvy7is7chbz3blwrffhuriul3rswp7962rdhayf1j4im7e3p3h1sx7ehxo2ze37iyk2xdp4sxij1lowi8y',
-                receiverComponent: 'qv39ct0u59ykjxp8fnaw45tajxshpus0ljtsbeua0thwi7uegjqlo1wjlet4paklf2im9zhlgt5y17as0yr63ts4rnopnbxgri2aygy9zvr3o99iam3mx85trcgqp9vdzueikks1im5lrg5td3fse3nvr0nvx5nj',
-                receiverInterface: 'nkk1h1f672pwuxm0qje7n3ze4ujdk490zz5q122gz05tqtbvkzb6ldn47udra0c57gwwf1n5zufwhw58ltdf3dbr6ucue6jll60k8hp060uk6hlp5l6ahlwqsr0plw766tycbchvfelb7xc006yad9j8hd38yu8v',
-                receiverInterfaceNamespace: '9f3gsshjwjrlx6rh74ghvdljxhr4zcskg8e1l1vfckodlg17i27yflj50kyw8tl8ipj91bmql65dlv05lc9r4x1fg9ezvihrvjatvzmymiap8g124cuj22b54vi9kc1qfleh29epwxr0t0bxswigoqji0ovza6ln',
-                retries: 5834833995,
-                size: 7193638698,
-                timesFailed: 2520124870,
-                numberMax: 3654006997,
-                numberDays: 8883364739,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailFlowInterfaceNamespace must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStatus property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'la62n0qmq6w9d0jf6z6b4kgd6cs0d6zwz7w3vjr2mv7e67anrk',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '54ufe6x5pwwtt05zsiy5',
-                scenario: '90v8dofzjkjvirbnzayi2v4r6rv04gj6b8n7hkd7vfblrmhmqdaqeusk3tl4',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'eab3506e-b969-4da2-a070-ea9c5a7b39a2',
+                tenantId: 'e1852235-ecb2-4087-9671-4ab491ea219e',
+                tenantCode: '59au22lcf8nv5s4ddxrzfhhz5ydgbyj8tfks13caz45tah07oi',
+                systemId: '99537938-1168-4989-9dee-fd0361cab608',
+                systemName: 'i0maxkegk4063ut61o0x',
+                scenario: 'f3q9ubnrzgnrpgvpvv26xdqhhj53731oov0pl8hvxwmrabrxi671pgzmulqk',
+                executionId: '2ffe051c-8191-4a4d-917e-5511f6a17388',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 20:54:44',
-                executionMonitoringStartAt: '2020-11-06 07:46:35',
-                executionMonitoringEndAt: '2020-11-06 03:38:32',
-                flowHash: 'romc56h23t6fl784u9u3kmbfaea1tp2lhnylyasw',
-                flowParty: 'p9u1yqwovwj7tuip4qp3hjn6cf0ter0rmczc8bk07d00w52mig01jrvrngcgixf5y4t4eojcxelngt7lzslydgb1prloxgw5q7bz4bpuglk4gln2vlpkce15anql5p9kv6mkzhclhstyseasjnys4odkiai89ekb',
-                flowReceiverParty: '19pn1v73eg5t52g03lvd5i0mwti9v0kz1gn3oadal5onc8rbhudexfg6yiarhvrbxq7nl2rnpjnr6i3ba2kzfin399ydhae0wr3lgyf6lgvtjf8do2ebturayegl3zsaed6lqjkeb32la5oewvorcrli2rdi39xm',
-                flowComponent: 'qa5u34fr1x83yi3febpnpj05vq3q5o5cbqrut5mqzx1sio2vz1q3ova6k18q0a2cisibg2uyav45ur3w9nrj2v2eage0897aw7dd53d78as9yxpdernylgpm7lopgmzkwne52yt98dcts89phb6ysmbbj10op9td',
-                flowReceiverComponent: 'ai2a9cygdtw5mn21zxtxgnpvaigjpzlipkadr32e3elhflneaweey0jufz8dd9nq1fycvz4fpkdllm6q7khb5jsjf4kb7q4qucn9suld6ndw3c8ryxnkrje96qkp44ttxebqovbqo0ebl7qurs1p5s5uwmnw53d2',
-                flowInterfaceName: 'q3cast9e8bco787xk7zma3gf9y3wm0gp74pr8vq18dbzpbhce7ljajsix8s7hug9yvgxpfafdxvkntu7pkkzz4mklh0pnosl76f3328wj6put3bhdh9nfvp1oae6aa2vwnoue2buzpqgjqfr3mrjmeucjlpl2izj',
-                flowInterfaceNamespace: '5usg8ilwiums7a6z8onl962mub2gcajvkeo0yfbez4rfe5bl5q7xn0ywpbj8zs2svojj74c06sg7auftszuxe0rypjwe700afsryd5xg1kyg5vhbu2ql5vwupca8h2lmx44q88dnh0e5voth5hthapc5ubm4cdy8',
+                executionExecutedAt: '2021-05-23 12:59:37',
+                executionMonitoringStartAt: '2021-05-22 18:33:44',
+                executionMonitoringEndAt: '2021-05-22 21:20:04',
+                flowHash: 'wucux9nk4fbfzk5x5yuszca1wylu9et0f80wob2q',
+                flowParty: '8mk3v8g01as01nef5zy4nu9bjfq14zrnvuemvdupuv1ajmdv0zix4lr4mdxoxuv4zqh6jv4xlel82382tfpcsafuya0wwwpoqkontj4n52eveqna8bg7wc2zyldi4zrwbzq1rs3lqpeikmn6uqvizuxiokcfah4p',
+                flowReceiverParty: 'ksmpyuhgts676z45tqc4k8ugrq5tw2ebwqlu9elecpaat4f08g0f48sc5l2hs3gth65gtxkzu6jf1eczrx7k8akblz8s16a7eqlw54qc7t52ls6b0sb7pkhebjn54hnpzxvys8bl0bo7mm4gre5oahw5j3n626x1',
+                flowComponent: 'a6i6nuxccfvw2schz8922gchgrm7oce2zv52xogb5nuv2s3774v4cbz1det2yencef98tt6h57yb12vn4ioiigcjcb2c99p2ri7lrp0k8j2y1q6jwdia14srx98jtf9nvzk9whdgw60rgt7dji4537zhuulhpznh',
+                flowReceiverComponent: 'gqv59ok00nptwi8649ipl6fyqbl5mlwdaliaa17yn7evfpdzpq172wzkhijr31hcjb5hr4p2i5htviux9c4zayett8mtdsi9n23xrmaybsloo0ropmy21d0q94hcsy0jkdrab26fduif7jdxt8mgr1ufady8ttuq',
+                flowInterfaceName: '0dxaund5ejgzcl2a86uaa53s6klwf3xht8pdazm43nzkbjltw6sptfkrulww4bul8tfb62opx43mjiv35uneqrswni8j5debscx6rcfgyfyzz2ovje7l8uvvveae081m73rwyemon4cchumgn6u7x2ur69y9e977',
+                flowInterfaceNamespace: 'qt6swytai65apwjr77llqx8bs407qxbohp04a0b32jfz628movemps63da6dshikspi3ecjdpzh7fed2p36cdllsom4sx878v2raplzlciecne564tx8ry8i53pumezqekgvntyb4evwb5te0ilxbo92j7ur3098',
                 status: null,
-                refMessageId: '2dtenc6rvatxinntgcu3w6uu8s7m3lrov99zgn9lm3i7k727fibjktt0adujqt5n77rhdx5fon3x8jdy2r00tesnh2uu2or04w85mvwz1h9qqlwbp31ggntgbxo57byzy5wsfmqihndt18ii2voftzysqkfribi5',
-                detail: 'Perspiciatis a soluta. Beatae adipisci consequuntur ipsam nisi sapiente consequuntur eaque occaecati sed. Quia beatae ex autem qui praesentium quae esse ducimus.',
-                example: 'bmvdlaa0pusck4579qefv8gcgesnn63g2ebaxxkaeyznqvf0i69uecotbmxh8uoymapskvxd0ab5wrhs3iu09b9hxpexytb39d03q1nxr2nlo10n62f9hekrc6zcp50e0hkqe2orrusfffcjiganad3m7ap0rm1v',
-                startTimeAt: '2020-11-06 04:23:28',
+                refMessageId: '4u8ga6jnv3mb8gbvllkwnekrm02lz0wggh6z5m3vm5fautbzuxoq7jbmt5k5hk6firx30s0mvfgwlee5dbs055vxemrcf84b8hlcd8syu5i9z6xup4fxob7pt56g9qt0r9fb7sosxmzscdsngqe5o7aaebfvmcns',
+                detail: 'Aut voluptatem aperiam eos placeat est quaerat. Repudiandae omnis recusandae. Natus dolor molestiae commodi reprehenderit. Esse animi fuga consequatur id consectetur nulla vel quam vero. Blanditiis soluta reprehenderit eius ducimus illo quibusdam qui. Qui quis itaque quia.',
+                example: 'xria58y8axxdtihuadbc9t8vfupk1j5weqlt621itdy8qlcgqx4a7sgzqwbfg595duoenlavnlltfem1ggbqc7oscishp2jof8woz4xekkla5ajm4gcu2uwt3zlapohgjpixqnm1fssw6n3ydr3bxd1p5ppyt2m7',
+                startTimeAt: '2021-05-23 06:38:56',
                 direction: 'OUTBOUND',
-                errorCategory: '7714furhjzdrflwaygzk0znfa6grdsiojfln49hm97ijur3n2f9jtchhy4llgj420c69zc44w13h42vz42x6vpw5nq6y3ameizfvpapmowq3s17pudtjpmfkgecmc0b1u920h3k6230bsmc8u9wtdt3bqwfej81g',
-                errorCode: 'malfe13l9hlgooy62juylzr671u9nzx3s8jn9j72vmnm4vdu30',
-                errorLabel: 701291,
-                node: 6263818292,
-                protocol: 'px4oybjjlka2qy5lwizm',
-                qualityOfService: 'n58n05ncz6imruh6ws5r',
-                receiverParty: '7isx8p5jxf1731olebiefxpt7sl8a852w9rz77vakvepbmfute7u177yyb0bvi9rne1b5xt5qydgbu20qzytxqwexbgui9r1oiyqh2dgkc618dpxv3efhrbsefbmylisfmaq6s8a36rnnj211i20rtjwzqvupt4k',
-                receiverComponent: '43jbg2e4pd5shmzxfdnxwjfei5s3swn5zn25q6t715rejhdi9u3xme4035n6l7x67lg1vbkdhygl7l33014s6ujsjas0rla06q73q11j0xvpfz3lcue0aiodu8bfyc27z67q99gdnuakiq99e9v702b0evbq3t77',
-                receiverInterface: 'crpla969hpotvy2gtw7wv6l5ozagwe4ivt477cn900jvt980h80jv2j7sn7w6021zh1r42scg804o5ky3kzq30kwlnw72y28urv2g74eu3qzl16ptm4w4lrxc7cou6gcwlods5c8xkwea3gh603g5sc4qneyoz6e',
-                receiverInterfaceNamespace: 'umjc51qd7z7bla9on1dspwumyfu0ilvvkrqnhppf206ti06lmr5h936a8ad7ukvprq533jxymn8kfidf9ejlq0c9rdvqdq3w8ljugq0fqa77imnzvsrz2sjajvm28h8h0ceyrcn5zmhqzcazo8h6k2pg0k0tdzdg',
-                retries: 3446423074,
-                size: 5571269856,
-                timesFailed: 5645662472,
-                numberMax: 6054511886,
-                numberDays: 9532042475,
+                errorCategory: '5sjkus3q0090czn92wzvv7v27rmwni8bc6wmh844rvusaqd13y04kzt0v06s304clhg7y5z1pdh7ekuwvax7sh8ftcibdemk9p60zb11c5wrcbvutdfxzf1clsdlie51xkqbbzo8fkye9ugzqir8bitt5z9ml3dp',
+                errorCode: '9u9was3arrg4lta3u28k2ll3oao8m1vz77kmls45wsassxeyf5',
+                errorLabel: 103192,
+                node: 1729880521,
+                protocol: '0gfxz78z4xdr6u0hzpzk',
+                qualityOfService: 'cq7tvqbzwks166l1ck3p',
+                receiverParty: 'fmlel66qs32358a1samc5h9b63a1uaqsjgw2dh0tg085p3uk55y1h7fsqrlx2x3fnqqf4rfzxegxk1l0tq4yepp12vkyo67vvetpq5h0ievkqzx9c4lffj9da9njs111jdoiyclvf8t6o5217wjbbkcziy0lqjp0',
+                receiverComponent: 'c4cghnxlroa5ztq56ttke5tzpkl5ioc3rb9b6vqka61h07fvwlvmbw81xd727led8etocj8tf11wf2l5wj2wd9swmpa8fixzil8xfuhjslzu28qg0yznqny1psykl6f115v1ctdrxc433j2yt1jh0zasc1llx3vc',
+                receiverInterface: '4e1xv3dcsbknfrynxfn09vwenc8hg96rtfhp69ruuvzn4sbbhwj7nrzpyghp1xcdp813uksjyfhqkczmgpieqd3whb9vg0r66q9tlsf06iw4rv7qjvcn84waz6aq96cjmz1o5c6noydmwzx9kjwel595srhpt8ub',
+                receiverInterfaceNamespace: '34ixdcgikwudyw8nnvfrfkrzfkj1zhko1rjvxs04l8iv7heepge2dkhpxc9pojjup4b1sxzf645txklvo67sclscc9lzemnpcazdm6da4r0wz03odfv17yuifu5oh8zjsknscivunuo2har2yp1hwzjgw5fbe1c8',
+                retries: 9804634258,
+                size: 9711345064,
+                timesFailed: 4348294464,
+                numberMax: 6785173628,
+                numberDays: 7621081534,
             })
             .expect(400)
             .then(res => {
@@ -1561,103 +868,52 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStatus property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailDirection property can not to be null`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'bemw0ri0ndwla9krv5nofhw6kdwohh0sr4ru7dbw3oqbqmdk41',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'nab3wo9pg16gtij5vap8',
-                scenario: 'b0il56a39x9qzg4mxnzmii55rtr1et5gmhj4pgt9wyk5yjclybcm7d9h1lqk',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '52a3f5f1-edd2-4387-9ca1-9fe100beeb89',
+                tenantId: 'c28cf83d-5806-4ee0-8b8d-0fe765de7a0b',
+                tenantCode: 'ws04cq2qimbxhqdh30t8yctzdsgqq9n8nyay9e8svg44potrek',
+                systemId: '15b4221e-1f31-4a3f-8960-2c828f8a346b',
+                systemName: 'xqkntnvp0oxepkwlldef',
+                scenario: 'c3zr1e9k5o2v82rxvm3bxjlcqdbgpx7lh2vv9ey3y2nv4v4is0s0ib6hzia6',
+                executionId: '248aaf5b-5182-4c91-9aae-2214c89e3dc3',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 18:13:12',
-                executionMonitoringStartAt: '2020-11-06 05:05:05',
-                executionMonitoringEndAt: '2020-11-06 05:30:15',
-                flowHash: '4qvv8uof8rm0eope1imjpedfeqmnqz1m3hwibnaf',
-                flowParty: 'wrtzcx0ey152mvbrq9ajz6igo4fgqd3p294te0opgizfd6fh7ybp2kpfx6321lhyjneulu913zjjk69o57ndn2tr74ingbj6a977a73sderyrd1sy1k4z5fk210nahij8ones1ysdgard3gucclw7biytneyhs68',
-                flowReceiverParty: 'bwo4w2snuy0xcg0nq0562ssuys4hse6cfxh41fqrbrtkuyx3oy54wgopgybqntngx2zfglku17apzd6wbqxfle84egpapuxc2nbxxmego4vl0j3pfcwpa5xf0s43k31f9cm8klp36b16c2vkl1t5i63dnzwbvn34',
-                flowComponent: 'c1bi9uqaej3pc20thsvrqpx8y8qyp1v7if4wsx073zcbofztn6587k61gnj2ecmti0zn4qydjufbb1pv5zak3bt3bs3bdl359hgl2havg5aepdz20w3zfrn1d4q2zyskako55vifvwm9xvz5fttjlzi5d4vxf7oi',
-                flowReceiverComponent: 'mrzu1oy6wpkb0e4bz1upu1jce443qvt6e9iu04ck9avf0mkil0e2m6j9gu71vkitlyb5ll1yiedjp8lahxk7s7wigka51fdfga0t0sj9xkx7gbbgpcmwb53cbvl7blwm2j9cqmwpwh6t1pkjiawmz947eci22jtp',
-                flowInterfaceName: 'k2pmzyfw9owm9d281zsn33fy9bwea1vwty81pc68j211ypo20i7kbpz4ayia3bnb8s3woqc4hlxb8ese22ueih1mtahwignqwaulpgf9ooa76ff8pa7q801i3rnda69aiisad0mf1ijt0pasuihy0txpftpcsqp0',
-                flowInterfaceNamespace: '3zojybx9wq1rabmc3bm9ls2g4o25fsc2x46hrojnfs3jltcyevcoyw67tw7zlcgndyrj5vlx1dzap7b524mxj7j48vb4lgyw23hum79109lgxqsnc4vyj4izhes7qqjjrk0abgyr18vpcjfhnj9moefy9h2nehqh',
-                
-                refMessageId: '2zd3aryozx6o09vtf1g4ugip0oxk99mba1b3ljf91g71xdwu8dqbzcrea4jaljrpqyi54oygd3l3sbovhy109dmyotjg4wz8kxgom9cpgd97ug637rw6dbrsbd52udzqao3fnwworgre92srhz8nqof85lo21s0d',
-                detail: 'Ut nulla rem sed quod. Ut facere provident possimus. Rerum quibusdam est accusantium voluptates aliquam optio doloremque eos. Saepe sed iure dolores dolorem suscipit.',
-                example: '85v3rry4utl1ba5z2gtarvn35y6wfclh03vw0ldrub3vcg6vo5xug3fhjo1q9elzfm8w0ychtmlw254thfj1r6kwkenbbvbjdeun4ljsyf5tytpdh9ztwwhqffv8hs8ar53m4x68475oum8eyapdw64qpjjg0oal',
-                startTimeAt: '2020-11-06 02:41:18',
-                direction: 'OUTBOUND',
-                errorCategory: 'njo9zzgrl2t1q8un1w3x2d5nzp4jp9gdzfjgh0gbunh1gr1w61uj65o8t5z9u1a9y0v4r208cpfn8j26uzf3lvw55exu4sudr1rvf0k23d2f6iqtcahqhrtaqy5u12m5v6k7ohxwa1kyaadk2w2uientyws2vab7',
-                errorCode: 'dxuiiub2kdwce6l6cs2r5pkf4t75gred11ps5832sk76v60yo9',
-                errorLabel: 999590,
-                node: 1463087062,
-                protocol: 'yzuxmoj395zlv6w08gm3',
-                qualityOfService: 'dzl7inxdjealvo2v69wo',
-                receiverParty: 'qv7cv9oiaphqiirdz14yh5oidxnwr4rsp2v1csnhj05269ui1owpr8wq5nxnr2ek21gob0v9h29mfw2cbpf721uhia7v82tngh0qnvmcz6895rje7lpzv4u3e43bwuzkbm95zbwymzxu4ow2vjkmm24nadh5eydn',
-                receiverComponent: 'y9q1s24x4feb0ijchlahmhzqsr7pzr1mpno90wbn2boeuyxlwyopd1bvxwwksopgnqchs12kpymxe4csioht5bexgqn5fdvdiq39yk0aqypu1ny5xrghkk7kl7q3putmt563xfqatde2holi30qws2voxgb7jkcy',
-                receiverInterface: 'dostj3qohm76xdx18ygyktodt2fje71zu0wa1oz3ebzwxr99hgztey8om3m6bs9w53roehkab4zbkaomm6uepskwzvr33s801xw1xxsagcar96qaax71ml6q9h8q0y1uu88gy49qn2way8gl8zju2emg0n5kbomf',
-                receiverInterfaceNamespace: 'izi82hy75zhlfbnuvoze5rolg4pl3701y3y43qfqhvvjhvbjcveogc1uucc1utsbrwczcf98iz3g158ma09wmoyayk21kx1zagoyhdxjy7d87lnpp9oodkvptgxd6k2kfowjplm93ebtretucyaghmrdmawlkflt',
-                retries: 6070965466,
-                size: 8514519996,
-                timesFailed: 2227318124,
-                numberMax: 3386299890,
-                numberDays: 8889676517,
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for MessageDetailStatus must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailDirection property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'a2wflyl5726vwlr4vxl4szr58hg9paj2e5oj68gm5okkijei6p',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'i69aol43wn3pmkrblzsb',
-                scenario: '3go9eg40nj57mqwmmwqp7s3g5xqk5211mhvdzufiiph8q09ngoy1htuaoygu',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 08:16:22',
-                executionMonitoringStartAt: '2020-11-06 04:27:46',
-                executionMonitoringEndAt: '2020-11-06 05:36:25',
-                flowHash: 'e9h8iaedpi6fw91a14ahidv3erav9doy2dv6jkam',
-                flowParty: 'j4h5ojot9itijdgqvzhqg3x7nxeruo9tr7gwfhflbu4ygpmbf1zjdaj0fdgeiwdvfc6szil6k44oib913438qfkqudghizswb6dy0ewqp9ns3x66ta174te0n8mowq5tcv8nyblyxsbbvilrf1l49yywkqbhnks8',
-                flowReceiverParty: '2k87qs40azy1fh3k3wi0d7027h3bfz68beg906bqelkogvjw8k8buscrlsx4ahd3sxcnyw2nee9t0kltsow5md0gv3mpamekdwohvj106xcu4ormxclc6mktvrtznjj3xa48aqu1ezoctn142p2nq3398zqudlns',
-                flowComponent: 'yiiauvwsl217zurk0e41cl7sc348f72ofo601yyfrh835a7tq5uw1pffx4kaatp20la44a65fqfkxh5cnp2jb0w3s1cizull5l0oei5hbsuln7ipa3ampdts23hiv9ad7pe9igjzv4cpukh177tyawgw2momlv58',
-                flowReceiverComponent: 'htm8ytth3kyo7nbljvo1qdpfc3jzwa484cnn0uguq0zpt1z9c6ve930subo4u8fhto5igqreatzo3jugl9hysplu85i1h8571f4r8mzcn08ppsxg7ehqz71hlrokicqy51u0ak6q27dyqtzu4t2wyu14jm1j452j',
-                flowInterfaceName: '6olidou3u7kq2uy0w2byl6e1hfgimv904oeiixxdv08e3wunronvgzhd7ztj96jpeab7uaihtokz9ab3osu851c8hcnikvn37kbses3z0dd2z6rcsotty0j9uehe25ut2t08wyt8w8bfxhoky3aoqky7re045add',
-                flowInterfaceNamespace: 'bphc2ukf3ghhbedty68tpyxly2p2o8ih8eoazm5n7adr2nf1c90hxozmcz3m963rm6ueukxqhudnv78nd1xtzwfyjfnhh9jtljh5g7n951e7km23zt40g1399nen79gccde8i7wg6inljn4g8yehqqhn5od17pgm',
-                status: 'WAITING',
-                refMessageId: '6hmd32p294p5pcndgatbxam6714bo8wstgk94xcnbujsgwqfsbkgws4apa3rrgr51crk4y4hopa3geb8arlszqtsguqg9mpllw6lhxlvjzm1w41u930c13mt35aikrw9lwm9e7zxmrodcmq21pg0e914nb9i9keg',
-                detail: 'Quasi animi ea non in minus facilis temporibus. Quaerat enim quas aut enim ipsa error ad. Eveniet labore magni.',
-                example: '1y2xtvgjzs1rz98ooms8nzaabgkrjhy2xjd0gb2oobn9v85448f24zpsmusqbeddnzwi79dlwu2j7u6ca3r8fmuqemwyez849tad5ydw79rnbsngipmnatwrjdz5yliktvnutaezrxl0lbsrkhn7o55o5l7wmk1k',
-                startTimeAt: '2020-11-06 10:07:08',
+                executionExecutedAt: '2021-05-22 14:41:33',
+                executionMonitoringStartAt: '2021-05-23 01:15:15',
+                executionMonitoringEndAt: '2021-05-23 06:57:17',
+                flowHash: '4x73opohq1dxqcfyd34ve4iwz5uf0owjtepbl6lu',
+                flowParty: '5ww57l23ztlfkjyy2uj5bas5fr34v1oqodsvrqbfsb3zgcqyswklhncn3c0cbzan1r5d5eqi3izymlwqjbqktldisk30sc0dno044ic9xb1cb530s9lzieo89c5zo06wfdhwqrv1y6zflxv1t8vfszlyewojma2b',
+                flowReceiverParty: 'cj7tt6cf5urehi1xineoy7oc0h9e3qmqshcm7s5d993rsnckyysi9id3z7qzdmqrl06574p1ecy61pleixsvmc1vl2hojf8jv1jvigm5k458fmrpr93062y09r6jnawjkn8gu6v5hm4t7f6g3t9ayuua0v2nagub',
+                flowComponent: 'moy7s1euaruml9g4aoczdztv6batiktytt0kig9tprtwynto22d5s12labg7cdcs1j1256d22youohacp25h7nx16fv00pzkypqv8bsczgew6pb4y0ce1qnex8650gzg4o2zi65h5s2xre1gh31h46hgiogej499',
+                flowReceiverComponent: 'fx4qrfyihaby1qqwtanursp08fsomjnyql8i9xmuok2vffu460jtc294jnpvskouz7x18u2szsxpl9e9gbluebskghq4qctopmj36fivp9djhdgpn2pjgyg2axh5to7gyq5gi6yfq7enrd6dd7f5qubknxfw6nok',
+                flowInterfaceName: 'eic48w7jysa1qucg0lzx3y45ywvwnyafalpako9vv071pms31vvbgb7g4ip0xlazubuc2pa580cfk8fefqv8dve5vpxcfccf5uz7i7ic1idesjow169fivnqo9b06a3zpwvluizc4tc5v3z41entjrdxysc8a648',
+                flowInterfaceNamespace: 'knpxo8wie2pow9ep52yjkj4akn7syy4geu2ltujxxeiqfkwf571pmnrixnyfquaqiuja7gor57xv0xfxwm5gpqc3dxq17fj0n3x596vva400z6mt0hpj5zlxjyzxtnbkoc8rxb1t7mioblumvac7xh8mjflmrdbm',
+                status: 'CANCELLED',
+                refMessageId: 'yahbfbjjsb9079o5kzg7ldcozymg58f8uia9z1t21t0uh24x0qqt7hfl64jjndfa2zg1ghj1tsa149ptc4iof6yfgoq2u64cdif2c0xqst1kn2te25mqafcxxpoi5rya3u9hfa2rc2usha5dyet0bg99refesxhw',
+                detail: 'Voluptatum voluptatibus qui blanditiis. Aut reprehenderit hic laudantium eligendi. Et numquam molestiae ipsam suscipit maiores dolorum aut. Aspernatur enim aut nobis est. Expedita et ut ipsa quia provident labore ducimus et. Dicta labore id esse incidunt est.',
+                example: 'xg3ucscx1ja3eae4ggys762vwzms99eof68w5beklpvb44gmh7mpjeua1yp88ca0bn5ru8ido3wg9pjsarc446enmhbfy8n97nvok7mjhf93ivmyu8pl88fphj9imd7guzud9ej95fr7rhdxhwovqhkohhvcomn6',
+                startTimeAt: '2021-05-23 08:13:03',
                 direction: null,
-                errorCategory: 'xvmjpmyhtkmdldtghtx02kdyxgjy0nr91an9p35yggci7ujpt2gjg0j6y1socgdyjoh58uf4qtnmwo4tt72b9257bp7lgoauj337mhlyh5ivyh8cqretc2wjyf9llxbee1gmh3a8ag1i7n96z97selfn8216vbhj',
-                errorCode: 'gjp4gbe8qempokex6lnb2lemswxwu91k8dexgz3x2a8x7k02e8',
-                errorLabel: 247175,
-                node: 2013091622,
-                protocol: '0iu1x35zfzzwatig7djg',
-                qualityOfService: 'heuogf124s1mq4lzvuo0',
-                receiverParty: 'c2fdvwalwde6or8eqblk9zd525fj884g8h4u4ke1p9ewxfdi4l08508g0o1jumszs0t0fe3yg7xr07iveq1b0vx30wkr01tjcm5nrbm2jz5gap3jd9y6rhrvgsbkzjajrn9rpiqbpy0dygz3um9xtxihi53xkcjy',
-                receiverComponent: '2qpjqqmcoqk4ro75jj9yaqj3o2p8rcvkwpir1dabdn5qpm3nuhrea264n3bp7d8cicif2a48jn6syml4z09dzprya8f11lt3q4dqt67udctaxojhj75v1x74yetqzm6unczwd1jbjh1cyk3imexgehopfx9s84jl',
-                receiverInterface: 'm9glhrrhmn8gfd4u1fyywbdcjro9194hptr460v1tam33rir4im9qnlymalibolrb0bf1ottfsmorcx9hm3xuveqk7sncd665bhznnngpa5gm10pc6rtjy1vjmffizo1kbtzicykqi2cqj00hohfl0r0v0ngdxlo',
-                receiverInterfaceNamespace: 'nuzc6bcngfmfd40s75to40117pub6cteoflbt78m6msrkcyeavhjxvqfa2fltwfm3ovi8yi8fi192zknr0sr4r302qhugqqq4ncuml2v5pos8w4y5kipxohnyv85l1uttmyvf94973l0nc70dbmv9z2du6txkbxp',
-                retries: 7474641795,
-                size: 8304931255,
-                timesFailed: 3691403876,
-                numberMax: 4992819969,
-                numberDays: 9168187796,
+                errorCategory: 'm87qkpc4pifcbptxft56ay4hdbvagqfvtj36myqfddblur4808enh4o4k3bg1zunzuz2kuod1zozk7z0oks151u9o876gi5wonltgoj249397fe4e2d9ytl3kxfc14hll2hnf31whpz04xqwa2q34u7f255ltavj',
+                errorCode: '57kfyccjb13goxt4si7f5rhzb54tp4rpuzhcygiy846fkfl0di',
+                errorLabel: 982598,
+                node: 2538999801,
+                protocol: 'ung0gnnzrg7mpyum9lw4',
+                qualityOfService: 'de1d507fmr9uuif5bne7',
+                receiverParty: 'eb6drodik0hx68c8w2hj7t74ak95psdf1dxwodgnm47nd1sqrf6817zskv90yk09gt5lqslkatkwy0l57kz1ha4w7r1ombzvi8qlz9ccsz84mt0jvs4bsud7sl3s8l9qramqg9mspo9mxr1hycrsvt7w67u82ac5',
+                receiverComponent: 'px45728s1km5tt2d04n7f6mccp0q4xibhjuo4xyhpjj6pn2tu9oh7gkg0bj1k6u735wujvwebqxgw068q4ps5dy1x3fele4gswpj0s9kogyx3zwy2wzbid5iblyws0simxv7uc6gsx56qv3egr8wmpxradh1tqfu',
+                receiverInterface: '73sbtigwr3it4bbvxcx3p63qn6pi45hvb4mjo8uso3mx5xp80c2334xkxd5m1ovdqiz3ijon9sz9bj873jhwtezqn1ilsrpzl5cpgejq9cknk1a0uuy0lcuvkkq84k3hvojh37ovdanjvqc5oaewmyyux1vpvf3m',
+                receiverInterfaceNamespace: 'zc9u4a7ykkoxxcxh8g6lxngh3yz6g7ddwube6j5damy0n9nwjhh00uirin9bi0wjsmnq1ptnoc2zv58nmyvpb2euj7o4oclhjtzovsnes0tz1q4qrgvvknmwojiouz75rgf9paxv8ywlrtthv44v2n75ewjmzci1',
+                retries: 7485282502,
+                size: 9181000867,
+                timesFailed: 2256787068,
+                numberMax: 6420110685,
+                numberDays: 9299036146,
             })
             .expect(400)
             .then(res => {
@@ -1665,1984 +921,2786 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailDirection property can not to be undefined`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailId property can not to be undefined`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'pho4jvnharzz6lvzh0iagcc18pd8armg28m53brc5bo5svuwbs',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'zp4sogg5k1vqn9soy1wc',
-                scenario: 's9xg8lbsh7xhizosyfuiylva7pe8eva8kxua8w0cuv0bw2af1d9rs7yngpan',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                tenantId: '5d71d5f2-aa8a-461c-9cc2-ed1b1289fddc',
+                tenantCode: 'e7ys0c2ebil3fvt24zdlneuywslvcycjiu5nkq7690ir0q5hu1',
+                systemId: '1e495c63-ccd3-4050-8bde-d9d761c70260',
+                systemName: 'i6ig4cp3tv3zdvr6l6ut',
+                scenario: '5s83necrlueu7g25y3kmtwrrwckmuqh6nk8itggd7x6v4do0qu4ekr8n5cj8',
+                executionId: 'b519489d-29fc-4fc1-9027-712efbcea899',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 21:27:11',
-                executionMonitoringStartAt: '2020-11-06 00:00:43',
-                executionMonitoringEndAt: '2020-11-06 09:03:53',
-                flowHash: 'fah2rmljc03k6gzs8qqa9zxoi06uvsq3rcva9swk',
-                flowParty: 'cnbc1mlqkcskuiz1ii6fj2ubp5104o7pgyciu7fhzrf4aiebb2zkn1mib0tb0v35w1s73jkkch2tqh76812efmdu9t1hccwezfsjeb2k2ahoyia35qztui7nqnynsnd1yfkedqe3w264fn032hvoqanj6ocvtmwh',
-                flowReceiverParty: '1g3mcr3lvv1xu05ms6iafpdnhsfffz5dgyxybvehx5521q6o5yfth6hdust5fstoxoj3yro2amvr8j19o95onw9huemnh20s7s5jvl4hoyabvblsabc96f6emdripqiclqc73cpp87qo78v565lnuacaaaidyn31',
-                flowComponent: 'a6ggal64l9u6ea7u1tbrfq5splvelmf9hga3fsuqbtfb9u2a1amaqmb03fkfoycaiprlxlv0w9yjxvz9v2eao2chv9yp68hk8v7zps9k7tdss0u6vl2vqty9ljplnb92ersu2uov2wb76xtmir2bw6xraua6teet',
-                flowReceiverComponent: 'iqnnb1mlymfwvpzk0pr3vurr8rzqaw545up9n3qw5luuvkjq40dgz0tqebegvmosptmyi838vz2ra2s3pr5nn6jax7c23gx15ve9rtol14t7kicmuj4lsxfzdgcrisuu3rw6gekgeur33t6uduii2tc4nsqakr8m',
-                flowInterfaceName: '3bqkydmpmc4syns1nixphbv7qd2ae8zgf13dba1vanrwd9hi3c1q15mkpf18wro57t8nbpfgrq9sx1u7x0koof2rev85de0a84xzf0dfcdvgidykdau3hbn3y3q7t0reoxyhl1k3hdfyew44lglq3qk6uqr1rys8',
-                flowInterfaceNamespace: 'j7asos16r1iat0cyj8khss1f3w6bn2wt5ro541kmr54y6lew6smrq0nidkibzbovexjzpuo6qvr7ey420prkwtjwxdkj6tv87h1c4sgfeo6nnv0cnlyd8hph2e1npgp8fvhdu9i7th41dazaztrp4kpp4lf8zktv',
+                executionExecutedAt: '2021-05-23 04:18:18',
+                executionMonitoringStartAt: '2021-05-22 20:36:13',
+                executionMonitoringEndAt: '2021-05-22 22:39:18',
+                flowHash: 'xzzdssvwxuflle3kbz779hvl3pzd37gxyvbkzoqe',
+                flowParty: '9enqmgrkzokmm9uxf168jaxwiv50so9u4et11pllgmjqn9qwbu7q3y2s9i4l3cpbzk1mt6wpvgwnxe67bjx78kaiqpk1ld8om02hdm4wkq5p793thcfmfwc5lmbs7m39mhg24cxao37aynu09pz9qv9phg2zer1s',
+                flowReceiverParty: '7yb1wxoltvh2xqapflv7y6i34cwiahf31te8uqk72wu0vfpwy8dpko9aiwun9i6m3twu719xivxg7y10rxlugqjpec4lqtuywrrxcc2cjrx15327u9dyrp18h81jt8vn26eb3gqyiycx6utrq61dv5byf9i058u2',
+                flowComponent: 'u9gfjn2m3al42m90z8iti4u1g2gfywspgop02vpdq4r381cnwwl58gka14l5ehp6yv6g9etzgobncie7pulvzgw5sgofun6dffm8hsyjrpeq7vtxsv5fgt86c884ym1afifz22fvazsr4mcd96oymrazxbc0fi15',
+                flowReceiverComponent: 'oh40gykanbrreg5i6hi6s8lukqoco4ulu4cpslz506gfv8nke07u5q6jy1zshn5qszes3uoktl1dygy1fokokrtj48vfav49oexq4yq1uchivnpmw4dvw9wo5jiqrbfzf8vfbgz3x413xpp0bllorllimv0s4bzz',
+                flowInterfaceName: 'nyzjfkx7imupzgrq6cb0v3j1u0ntkrf7pa8tis12vianat8ljsepy56xcvpsqrdmp1s9mt3z8rws8y8rbz0opyths4i24k11xfsr7e61rq9tlx461qh75i2lxar4vh1vdyfdbx7z5a7rkado94qm6tc1t424nl3k',
+                flowInterfaceNamespace: '84brk07ep2v5ngnfsgftkj5p6v11yxyt4n830rjc8z9843w8u65hf62vtonrdoz2c1lk0xa6bwua4l7gkaisjbhm4g52er1ohts082sxc5yc3frgomibnpfm77etba1qehl9t5kdpet0kb3g4ji8agskraive386',
                 status: 'CANCELLED',
-                refMessageId: '5r5f4qlw6i137shcf7fy7vmq2u7xgb0e9ok7zayp0zy72l5fd2qmr66fmsm11us3x8j5805rdtdzrj698qkwvg6b3hims703th22xix3ov2yjls2pu8zo3x272ukts3c9tbk7p1wontk2omsrqmisd7l827o9vms',
-                detail: 'Adipisci quisquam nulla libero qui fugit officiis voluptatem et velit. Id saepe iure at quae delectus quia in hic dolor. Iste quod nulla incidunt non enim molestiae ut. Et ut aut. Perspiciatis aut ut laudantium voluptatem est nostrum reprehenderit.',
-                example: '5d70e2tcpmarf5uabqv4e1wdxhk9mq05e29cvssvfe8a2ad3abkjaj07sf9oas5ih55dl5lwxgullzftlnpnuhs3tnufn4h9e8pyemiktcdzk8sutohduve2vmfh6kbz5m9tu459fmoko9g1pfz2h0yso36f2d7u',
-                startTimeAt: '2020-11-06 12:08:45',
-                
-                errorCategory: 'o6tylb2zpmog8ftxg7gurujj706t25nsx034p67r5uspttlelztmjjaz40w2yjp5e2ka8pove4km69omlnkjzw6pndo9ip9861j2pw6y3dhf56zvczh8op7ka7c5atrzo36zfzu3drfp6h8z5dhbceh0wvsql30u',
-                errorCode: 'on3p7mj8atwalvuvd7ucq73n8as9a6gsy4ltz35brmgf6o3bgd',
-                errorLabel: 912075,
-                node: 8517054969,
-                protocol: 'wkby127m0ybe4n6hjhha',
-                qualityOfService: 'xug98l18rllgmp7ls49g',
-                receiverParty: 'bpb2g7jblttp0cnjt0ebyuxas31ze5y3ipb6dwf3gubv8hv47up17s34giknulrja5o7n0ea10x9fa2wngqvivg3cimiklmxlnzi21yj13jlp5qsydq876oth4e53tgqbb4vwi28qdopotw6j7pccdl0jjlrmuvl',
-                receiverComponent: 'kq72mb0rj3055zdl3jzzfhwu9mb3gvo3k2gw13ckcocjwpknq25hsuew6kmqvxqaiv8kdmv4nxetswr5ose36uyz7rlwycs1g0n8uk2v0umywpsww69dwy9r6p9yvgl98sk1b1j281zz5cby79gioaj1tp2w9pcp',
-                receiverInterface: 'sbw5h8hw4me4kevu9homfqmbov6n2tv7gh4jbxpxn71k1zslyyx4v8ci0fzy4tfbsdgg57dkx2002osioqclqji508nbd94sm6fao7x09vnr8n17h7r40902ps39j3z8m0fzfk54xco8u3czsaf5xc3vqlf344a4',
-                receiverInterfaceNamespace: 'iot37zepa0e1l7k42h4n0smrj0w7gjjgy3ve7db8guvf0gkl8si9a4xbtkmz48naqactit32ye8a88hmyz21wc7oxxij7d2caicj4f6wdubfvgdc3659utr68936tu0pfhey9bowkd1zv8t4q7yc3rstjfjn4phm',
-                retries: 2317586992,
-                size: 5830098900,
-                timesFailed: 7950957979,
-                numberMax: 1848564384,
-                numberDays: 7754964356,
+                refMessageId: 'dyiytjykv7dczxpvn2te4d3u7io92m1luzuw9zkbyt7ihkxk6wqvwnysln50z7sqenxxhc741pricyzs5trbs1q2kc443iazitdzlepotvqmdldx2zohka37mt5tosf1cp2b7jtbw8zgy840kclj0m6najuekczq',
+                detail: 'Eum assumenda est qui repellendus nobis eligendi odit tempora eum. Consequatur est quis. Rerum aut minima voluptas. Magni quaerat deserunt omnis quia sunt ipsam similique. Aut impedit voluptatem nam magnam ipsum dolorem eveniet. Ratione rerum nam blanditiis officia odio quia et.',
+                example: 'cj2rd70xzys5osv468tvygot1qmgyj1lm2de42ltm9kad85j5zcz3o7yhapi6p7u82pdkrb0a48iy3jk3cp8uipwy6usqcoqnp0rw3lj0purb4o93rqhk2hi5rlzgoukgn3673hznqebrcf7ehv8dbhu64fd9w9a',
+                startTimeAt: '2021-05-23 11:12:35',
+                direction: 'OUTBOUND',
+                errorCategory: 's1b13x3bbyysc147mf2hgn3s9jnvucinu5qux6fuyeahjai8ucavbvzcebj5rgfimlpsy0gnid0fzgswpfx2ozjqjg8ymyefgz8zuyakwx4j4y8vkzo6v8ubwb4p99hho5bvu20sni253w54o41owb3h0ox4fmh6',
+                errorCode: 's7y7wvugqxg9v2o3hmjupbdsnrumtfype1b4xszy21s0nczjw3',
+                errorLabel: 583242,
+                node: 2143777511,
+                protocol: 'u2pf81c5ymovdx3usnuc',
+                qualityOfService: 'ublwp7ap2utgootimwki',
+                receiverParty: 'evbwj0scvrwnejqhoun30vsq9c5yvgm81rdd2lk2vgwhpdynur4t2pnyswn08xy1iqpffz9knqe36hgkzw6l54hoby9xd33gdhopsb549c84wr4ko3dtufk5iwluzmskbhas96xof9w938v3apyxcshp9hukww0w',
+                receiverComponent: '7f2wa0uirityrwyma14vg04f4gl0j17ql546b1zxog04ap6n6lkz08fmcwxmsipmzp9zqqd9vycdrmgij1ohd5qcchc9946nlixiath6xzflp05cactn7jrwvk8k0yne94krz0l09tgfpzbbfdtb0g7j6ejl8pf3',
+                receiverInterface: 'tbgtyt4qn4adl8k2r9awisira06pxgzenfxkq7patt37yydbpkal9uoi386snbunxjsbh18gv4remunvn0mlq5f7s3nlqbymvtnx3k4d36bid53doca8sduwdfwqp5q8kdg576abo4y58dymjljzwp1gwchlw7fh',
+                receiverInterfaceNamespace: 'c2zmglu0pawmxblmgxsyzwnchrlfyk7j2aynjv7oowkkmq8on8xe8sii8rcybn1ebj7n7avze6vku9v5axbg1dj6xa4ilbo5eqdg5euxzh8vt4lz7f9aonkov5xa59wnrlvfnxt2k75xvq09iwk1ukufsvhd3r0d',
+                retries: 2123316335,
+                size: 8803384895,
+                timesFailed: 6488808549,
+                numberMax: 3398488188,
+                numberDays: 6889784989,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '9a6dd1fa-83ef-4c9a-b018-d28523bf2750',
+                tenantCode: 'n2n7g4qmvjg2idru173unxfvg5bhhj8wtgvclad91bladhgeut',
+                systemId: '6e970cca-fbb1-4cb1-b543-7c041a43cf71',
+                systemName: 'lyiuv9czobsk68c1jwfm',
+                scenario: '0a9noqbf1r3dcz2hy5w9j94g13u943yf0mfnvshm7lm5fkjy2rbsxe3x72ad',
+                executionId: 'ed22d3a1-5396-4385-b340-179c60f9934a',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-22 18:19:33',
+                executionMonitoringStartAt: '2021-05-23 00:47:50',
+                executionMonitoringEndAt: '2021-05-23 09:35:30',
+                flowHash: 'mn4w2aa9rtd0hdqlwsyhr3uy34l2crxewalfgvqr',
+                flowParty: 'e6n8vyglr975ij3hgow12z9wdgyx3n84m03mzwaigh9dbgctcyo7jr72bnz1i08afwo5r88r5t6en6pmyov7etu942ce0m7rpzonkbkzkmnztcd36rrw6sxijh32l0x0fjwhj1yheb3ixh1pa6uwqorq0wqg4juz',
+                flowReceiverParty: '7hmmdgo6dnb2i7awyact52pobkdicwytfu292qzsobu8j1tpu8ophlwetiensx3733fp6nkkr2fol2p28o58yp84irs7u3zed01021hpxfpkt8jqrtbwcqn0irvg5vquekxwe0jur15k6khsuje0ros1jemkoequ',
+                flowComponent: 'nw5nbglggbnqs9783ef9ss97ejhbqd3yf7hfdratrnj8hpwpueamzoc0gt003x1bpzizqbp8on7fxm03tp0lhuwhdjymv3f6r5y4gea744o3z3ygikx9sb20mprqhmjxcpugd91v254rlzcjez5y342zdoc2cjvw',
+                flowReceiverComponent: 'fowk16l00i8fdqmwoanckt433uk2vjdddh2fujk0bygpeprw4ioh0zvmw0ok9tt9z4kmahx6kyl6gs93l2gc3d2sqwysk44fy9pil4ceenwctb9f28gn8e50lrkyh39ssi90kxphv8wprbmo45qnkcec2khl111q',
+                flowInterfaceName: 'jrjjicg3bun9sv1jlc40e9s5ep8a1sb4hjkl6qn78m5oh4dowrpte1piq5fbhzdz206ofd1iyb94iv4yd9u7j2gvwvyplh35qq9mie5yub0pf6xssrlahcwhdcnvooiz4wxqf1b9dqfj3t4vrsbge64nk9i8lt7n',
+                flowInterfaceNamespace: '1zztacpymo04p3mu0lkawht79ce9lm3tmw8yritz3daqb63uju7twgjmdhr2dxi315cs3z01jghj8kmhpwzn018fwt197xa91nayiucscxcezxwmsj496nsve8a83na4w0gv83hajetchjywultvwpfgrkfww9ja',
+                status: 'WAITING',
+                refMessageId: '1s656vtfkf8o0c36eu3fpnzenezqp3scy9uza7qaify4c347ajjt65wu1uq0mjok9mbv73ylf3l1x651o1yb0g09vhbussin2epjo87o5e97bsv56bukixf00k63rlfj6llxj6h6ag4f1fvemi1xoweborej6l6w',
+                detail: 'Quia amet molestiae et. Quaerat voluptates consectetur similique eius eius est. Recusandae ipsam voluptatem itaque quidem est quis repellendus. Modi libero aperiam qui quas. Voluptatem reprehenderit veniam quia facere. Fuga sapiente praesentium et beatae nobis quod ut nobis quae.',
+                example: '50jdrawyoupgwtkrtnx6qjwz1wguy50s125sprwn1hff7s98j5dupaf1f16emlsonezgl3nbzsrnmly6p7jmdgkm727fjn25tzj5u7qw1rakkh0uvav3slzrnbpqynlp0cahjjgrcfw4isek5xd4cuuxehw97edn',
+                startTimeAt: '2021-05-22 16:04:27',
+                direction: 'INBOUND',
+                errorCategory: 'rotx76do9f9dbunenu9kl0m3isarozld95iiflt4oq4e3r0gl1r5lgucw2tijuh20guh1qi9c4lfhl7vcpnktfvnno0uy0mwpzwbz06aavzyga42nog8zhddcjejzqzdvqahtbrpbkdr9zzetq38mqq1o6jhvt9i',
+                errorCode: 'y5ggucrdn8v4bvojcc478dnjg436hnniy5kbltl52xp0vdyyzv',
+                errorLabel: 806802,
+                node: 5895986974,
+                protocol: 'ihd0f1su10e44rqu2toi',
+                qualityOfService: 'dbz0ar0vwv2enadpyhtf',
+                receiverParty: 'x8ptet29w05etbtomovshh3yblbu79z46yzohe7u5nliqhwwgue5fz5xsyj6thb3f462xihpnjsfcjvi7t4e1bbdcw4gtnq6iumls8b04ewkpgnawbucd66elxklbnk5fbhuijeid116wb25fsei48t0m7xhj83w',
+                receiverComponent: '556oaqs4s4l34ymmsc20j9po4i2euov4xp7xlgfw4qz68j79ckdwiz0wpu1a84vm8id1bm9yviirhqoyl9w7offo9wyusjitiewwbxvzdl36hgi73ckyvrbyn5g31ar6t4os7p6rz26z6qpcuift3ew16zujerlf',
+                receiverInterface: 'hr1r1hxlwkfuvj5zk3by0suykxbc0eldfl468e9nlmd3s9wiyie34hyfeqwwpwkw0uds7evgg8so42esjuak3wr693kknwryh1b2earwfpnvymlxyw2cbh8r6h86l2l3qg0xvbtl1b8z644uitmoldos1hssjm30',
+                receiverInterfaceNamespace: 'omuncod0zxpyf8kv3db4ptt77yk8dabw8x3stgwlc6tzt9hhbt68d7jjvzqf4ojod7d6hom0woaynnmesz0a914qm9p6kl1kf2mohtu320grgd79ppasncbv4vflnveu56geeiwnwz1wxm5gg3eftieo8ei06ldd',
+                retries: 5031692948,
+                size: 8356313518,
+                timesFailed: 7911593869,
+                numberMax: 9958952459,
+                numberDays: 7760635470,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailTenantId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantCode property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'd910bdf0-100a-4312-920c-77b7d898419d',
+                tenantId: '067ad7a4-b8a4-4956-a402-8788c7c59f9b',
+                systemId: '9dc98812-1e59-42c7-a6b9-6749a16419c9',
+                systemName: 'd8bay1mlw7vlrtpp537o',
+                scenario: 'ydt7nk2mjkpjrtfrcpltg4yqy6fhbftz9ibgox88au6n0pu6o2o0olsu7hhk',
+                executionId: '4668e9e7-33dd-4d6e-a034-034993e69a8e',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 15:18:15',
+                executionMonitoringStartAt: '2021-05-23 08:01:02',
+                executionMonitoringEndAt: '2021-05-23 02:07:44',
+                flowHash: '1a751t70k264zv4irazsclec96zg2l50ngy9d2nu',
+                flowParty: 'neigrgp8xwdm78nffmay6y786oan2jq0ywxn4pu5esa62orno6bz2lwnre8xec9r26lk8a999jrpe3hq506f31xsdfnmlk15rt4q4h3jy0n9n70k2vmd89yz0muvidmkqg3zsdagirvaj6u7m13auv6e17tsfs4m',
+                flowReceiverParty: '8h4p0t0e26cv1pxsooyyvcyp8he9pp2577imnyk1sxjq32m42bodrzkuni6y3y4e2waahzbuozymp3wdpuzsi5ugrhog737uh92608ugrxlij9zzhgbtov8wcny5vdexbyar3websx9qfly2ool8n2x38icst7c5',
+                flowComponent: '04mcnhp7a4llyda55scu93nqb9ox1qd2vjwx9o6o9lgd922kim271r3z0oebsa7q786ldo72dtupkliwvyz1a68sljmzh71z41pnhh5u3f2kykcm0gpxkeulj6mc2e371lkup6ox135db8e86fwoyov6ogfsksd1',
+                flowReceiverComponent: '2wpjnhc2ibls7e4y3tsrwpjyiby5l6ilwd9wu4v6fphq6q9euvyru661xgk7mbks2y0yzgfe57ccewa6rsmoatuj9kuqd8fe07b0tac15q1eqtn7hg7d7h6hsn9y8t78e0xakmll98guw79m8vstw1xg9dajvruv',
+                flowInterfaceName: '2sxn9zm8csclslp2dnx8j2rsy1wobvih0dqxrlyu68ygap8n4a9n0igrhuiqk7d08cennftu4skgq2eplmxr1f8rvbjfrc56tatnj6ed1t65i19tukzrj7xrustjutxbsx7bw4z4ccnp4kkh9t644cxoi73n865g',
+                flowInterfaceNamespace: 'o1dcm6tcta9k9ikhjawqpi49tb6mipgpvq7ls1xw9yybwwo4ap7296lz790e74xacko8jcoheq8lb5jtmq7pyai8qqck0f1eytlus7jq4swzaxhqiax14kdeosa0w2be7chbwg5bttoh9ed8uv81kf88f2muy595',
+                status: 'WAITING',
+                refMessageId: 'ojdd3xtgsmff0josj9n8aysgbn413x5x28xnmeljlbza0s6s535hp73dowguc25r4omi3h7u6l58gnkabnud5v09rathdre8f7rgng0y1v4qhym0hkkzs17yujvkbqlyu7h55ca7efjzr7uxw71eiwfi7euwgd5m',
+                detail: 'Ipsum ipsam est ad omnis iusto sit. Vel ut vel quo excepturi. Voluptatibus rerum illo error debitis sed aut et.',
+                example: 'mwmyq6yzs5e00bvng3yxwjozz55c3mw8biior4yu8h1pn74kttydmjw2i50fk4tfho087v79jwnok9targsbx2k506pal6b5m7xycveb7au4w3tzzlud8rg6ase1ijnjp32gdchjk0np3cg3v6webzppezvugfft',
+                startTimeAt: '2021-05-22 18:49:44',
+                direction: 'INBOUND',
+                errorCategory: 'ixaw6c90sm6zabmd0bmpw2orw7d248wznikhw70hf93pybc01gsvd296kaqgfvmecqb40dylw4vynmqgdbugbzcup54jz7pg5uxh7tb9qimvfuooyns70wn4hb9gwf89fovdff2y8j0b90ssqwm8emc8vjiypp7s',
+                errorCode: 'c66i8lymdc7b48r8vszrn3f7mtq8l3mlei55e4f1xpi26eml08',
+                errorLabel: 251060,
+                node: 7711514346,
+                protocol: 'tite56jytvd41el6a5yz',
+                qualityOfService: '7aaf3j3mmum03xf86z4s',
+                receiverParty: 'ss7y4j9cgrtbbyy4mbpl4a3rpq013mocp939ksxo28nkoty3eaacyt8t7gu5d95ztljtfvt2xqnu10fktk3sxm5tlergsct6ckr9yd1e39p62njrfnv3862qs57lx3glyf6kes4d36apxmc6rv6lmr87d1lazjih',
+                receiverComponent: 'mhlun4sb7fx8hds4cj77evq1hjq7fzxdh04vf5fnwa42o2tk0tn4oal1yrl1s24iiihqtjzgvvrjmx8ud9hc4k97b469lvdsuzvemcpkv9wbkhrvfnfr5qzhneggrl92v5vnj1pjgnfcgbxz65yfkqrr0xsq4wo9',
+                receiverInterface: 'v0k7p52vs1dk27571cstk8bz9h8mvex4h85myxe2l0bi64sri2cbcu66n4ucqpkxmx0az4jojy9eumi3k08wkebo7xqedr4huq06yzyv4454mxfh1kqzowwv6futpu0glosm17adionbdk7ohunt8mwzmcnktlsb',
+                receiverInterfaceNamespace: 'tqzr02n2a5i8omunhw1knqzoacm2qwttrsmc8guc16hw85wcesjjudk9n45b97abvf2029pfcutontj0ie2vcdwu5ykke30qc63ek1tucd3h7s1526kwys5yh5yrua6nltouinxac32ehospizkbd7m25j4uupi3',
+                retries: 9646721296,
+                size: 7557853996,
+                timesFailed: 3732656013,
+                numberMax: 1474217748,
+                numberDays: 5003094163,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailTenantCode must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '895c099a-5907-4b4e-93b0-99a5fc53623a',
+                tenantId: 'aaf987ba-6bd7-4107-95cc-69509b5a6e7f',
+                tenantCode: '6wxryc2jm3gxrz5xly07b5kcvzm2of00brq9qp3jf79x7v0hdl',
+                systemName: 'i7u954dq19olbt2vqqsa',
+                scenario: '0fno28pl6m0d4dytjmeme0pxbw4sin2onqnucgpwewvh97mm4z4yr1cvhsbz',
+                executionId: 'd18bacb8-eb04-41ad-9e77-bcce8f8eeab8',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 04:17:21',
+                executionMonitoringStartAt: '2021-05-23 05:12:41',
+                executionMonitoringEndAt: '2021-05-22 19:23:44',
+                flowHash: 'g8t5o6tmgj71dntisqr28cx50w60upww64fejov0',
+                flowParty: 'dls52t2qv44xrkl8ot1eg16s997i9zgkpi05t6dbkf1ea3a7rnfa4zy8qo64ljkmb1wzq5fy5pjhzxgc79u9ptlaw90f5lx7mnro351zby4f0y5i6hccqqz2ousy2y08lyqgesc17lfvuds1r0u8ne7dv4nhp0qg',
+                flowReceiverParty: 'l3zcbbrlljtpn4g74b089awl50np157ulm6a1709nzmlxa0m8ctq3zahmoxhzly9gkjtcs9wbx8akt9mmpb0p68e3tkqczdsozkywg9iqhs8jp911jsw9onvc185dt5n8jfamv3nhjb36d82mogsrtsa9sa7mvsm',
+                flowComponent: '4uuyivvd8bplxws6ews4rs0rpmvmxuf2qt9u3msdo8yx4ih4mx3266viajaykd2digdp8ov8kb3t1icx5h4ewysoi5lbbilemyyeklogw12t6uofve5q9chrhdena5deymdibcftxohms4z2mdpjiys3bnhg5824',
+                flowReceiverComponent: 'fy7n3r83xd38mrfk5ohrlwyy8n5o1x7pb8odj7139zmtju8bo3fndq6d84ka8e8e2r4bcvfxqyjx1rhcmkugijkz8m5a1fbrwm9lyo2csqpip18fhn0cm85b64mdtn7b2m6z1nqql77109p7m6bso770cqlh4qm6',
+                flowInterfaceName: 'a8cm1rbkbl2rra130j31lnalz6cl7xh07fttnd3r6s09c24wn3796khldaztlvt9u8qme2o5n4qy9xrt0fdy8rcyt6i2gvymdyaluuo48phlytw3fmwl9sdvaxj0948r0dgzfi7mvmyul3uji3fc3wka3yey1rb6',
+                flowInterfaceNamespace: 'lqdquu5ed935nalm3ihxwq99vovi791yr6tttzr0o0xexyc5zal6hkeybnhz6ejo52gtw4c8etfj6h3d149v9ao7xsjc4mlshtbhgt7ks7egc9ygh75zqjkn24qbemmi94zuo0dmu7mjst3gdv5fr5loo20eyt5j',
+                status: 'HOLDING',
+                refMessageId: 'aauyajhu5ivhzdlqyfkeot7ok02zax3wux7ge0y5c6tajka4h8rs7c2rlvf0l0he5vramdi2dpjip5og5j1krkrg1pyxtccs6vpy2fjo9whz9mx8dti2aem0a6cehzv89agkbmhvnzht1k7fdjdl83e9pwhsj1i2',
+                detail: 'Atque totam debitis consequatur sequi earum ad nulla voluptates ipsam. Nihil ea harum ea. Amet commodi molestias assumenda consectetur aut optio iure. Aut aspernatur consectetur qui autem nihil voluptatem sed consequatur voluptatem.',
+                example: 'ewsmfz4u0ut4tqnleq52un5phnvid3heqt25s0o0kt3ws9d43pdg1901x4jp1stu4pgfjs8bil8lqrhyew17qbzc6ezp65l6a1xpi6cqt5qgm2nuduf2ay58s6ms4jddi8q1wb6t49o9qy3bzq48fc4iu58wqb12',
+                startTimeAt: '2021-05-23 12:55:57',
+                direction: 'INBOUND',
+                errorCategory: 'xputnb03124257v790g2u5da1wwkzhccj11py28vjjnift4w5d2mh4yz3uzuptuqnoh0mioq2veohtycp5mckjsm7g4zgs83kh53q7lu2k1g2ib3rt9nlc1fpgawrfu6y9x7zdajzrxwu6f7zx0xn30an0fdvf6y',
+                errorCode: 'b2nqsvgv8ti50uuof0v5gcfzcu0ob6uyrjfp2k750tb3kkkohb',
+                errorLabel: 908329,
+                node: 8953879643,
+                protocol: 'jqjrjfx1iv99o47967dn',
+                qualityOfService: 'u07udt0rr4m317fwvrzc',
+                receiverParty: '1jdonn6bb7k4wr87nssidd9h9dgz8ywrprhjp4fzoytrmssv62cs12hxzq4s8d2ax6iiwop5soqsveoeh5rezd3d51xazzn2u16f48elfc1xfnuo8ydf4pgk57df5arl3ctvg41h2m6fajl769mkghc578qok5b6',
+                receiverComponent: 'qfacuqmaiy7uaadfndkq5bq5eucazh3qishfefsq6jp6a983d5ijf68jrsjhg3we4lk2l4t4s3egi5kyiupd7sjy67voljl81mz0hgnpttagsk43kma5uzobulr7khcxxrr4j663qlxgpcous4pyascoutgzsamf',
+                receiverInterface: 'd7mibequakcy7q0k40v3y4237dqrs4ky0njcvv1r7k40xapjyl8e9n67xi9kjf2qup52nbon9zy0d3okg53n4qzn66xjvne6vjcnlyhyn2mcmofbyupn56og9gu2y83ypkvvjrpvj7bsteyl0a5wx0gbyn2gtpeq',
+                receiverInterfaceNamespace: 'whip8sx24lxds1uxlcayt4qurc0w53w14p4nm1u4dllktf3kfsh5j0moyu96k34j22u9bnv19zra15wa9h384jbm7jq0qov7vrxpxzdj1df1tkt1te488cilnijpka0myu6wc22s2totpvd9i2rdhug14y7jekvx',
+                retries: 4693367945,
+                size: 1694493219,
+                timesFailed: 6892787311,
+                numberMax: 6594371501,
+                numberDays: 2231978413,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailSystemId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '710a2511-7dc5-4bae-b9e3-11ec58375347',
+                tenantId: 'df420777-9973-4ed9-ab49-c1b3dc0e4c6e',
+                tenantCode: 'a4ppd4feubw4951l48xazip12udwoxr8iu68r0zebpe6apwv5q',
+                systemId: '21278a6a-f89f-41c7-81eb-6fd9ee496f45',
+                scenario: '8cay1ymln17i8mio25p4avx09urzxj0o5ox33iki0dcp9ugtw487i917ivw0',
+                executionId: '98bcf6ce-9029-41b0-934c-1a310464e3e4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 07:08:12',
+                executionMonitoringStartAt: '2021-05-23 06:31:41',
+                executionMonitoringEndAt: '2021-05-23 03:47:17',
+                flowHash: '07hi5he0uyfzj9hisj184dxc53zel2c7gxndash7',
+                flowParty: 'gqw5nspwii3j9mtu6k6ay6yun5uai8u78sr6r6v4gi62abw67lle8u10fihvp7x7aluqnj7o83wbyc804mwrxj85gaholditkaekwh15oh74jk5b0dqavs4jqjlr4wz6j10svh2c1n1eo7xox7h606aed511dqd8',
+                flowReceiverParty: 'p2uq7qw144msouthipiaihjjnvuearea3u4yib103d5ec137oqh1mpmufnr7s3ayt8uebfr9u6j536tzw7dpl7t3wv1j0800yrwtnz04xe8wjsm6vkja8nis1fjp64npwg2pilugp3gto0z2v8d6dn9vx01wp210',
+                flowComponent: '73grdzwmv5nnp6949uyjoz5l24b49j76wbiy9h2z4n11bpg0hbsedu17jbpsp9j2d53txxkqsbd9tyy8d8g676rbs7ptwtjvhtt6ez7cvfp2o8hkp53ksr2ymf2xi4u7ocl8e4greepk3e8xijxpjtxku6w9i03l',
+                flowReceiverComponent: 'xbpj9mjciwiu59mky1a2evvh5ju4jds9ec4y6tz1g3nf9bswpyhkca70y2jibygpg0m59dl9h7o55kdqyh2piq0u3y4rasjk5c39sr8vylwr2t8ptiohjs1s2u3wzoqgaqtd82qp6j3bglqg0rfks8b54gtfgsk2',
+                flowInterfaceName: '3e67u6ekykyboisqtv4rhkgy6l0fciey8wxyallsgjq9fowaclbmdjv4gziewpmd788prxw2bkrh5r9to3fbdzn93f8b5q19tcw4qigsbhllyj8l3ih41jgl00fxhtu9ulah3wzkc48ex8u3ntm9p8c3oxak0n9n',
+                flowInterfaceNamespace: 'h5gmzpbeelgs8qf553qx4lln7v8ebh51jiy60nljqktrtnfe9maq6wbfs1spjax0cyvovs2q5cd3esg0iu2hngj7s93e2ecb2odelfyp46b5mqyclg5h3ecty66wok7lqzw09aabmbxc5c9m335wjca3r11ksxln',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'p1n66vm7i2i218v8l3ng5uks62jo3952rjppprpwaedpfsozl40ru5lwj4m583bk3nj2d5slutcgbezbqr6kaug5jwhd7krd3tpc0pwb6kx9pzfnmdaqw2wh19mj8mpoopgqcmh87914iojfv781vebnvd6quumx',
+                detail: 'Itaque consequatur rem nulla id inventore repudiandae. Dolor voluptatem aliquam natus. Magni qui consequatur at ipsum eum quia ex repudiandae porro. Omnis illum corporis voluptas omnis quia harum doloribus. Libero aperiam et porro voluptas. Tenetur dolores et earum voluptas.',
+                example: 'p3xa09bu8xvl0vtvgx3sc3crr86nlu15ap4asz36prnisn7e1lsanqkx5wubmtw88i4lxp9g1cxeob4qx85lgtbr17nr6inj0v4b3lktaiv5k03wwqdbw8di6kz54vaxjgavqew446746dxjuag3dr8oagkzfl03',
+                startTimeAt: '2021-05-22 17:42:06',
+                direction: 'OUTBOUND',
+                errorCategory: 'j1mn8lalnqqzy002qtzjs1tfj26n6nlq1nxlah9ek2c38cek8425f316al1kbu7n21bkrdnn1xfj25ppuas432mfzf4o9471xwrbss78rw51kgrup2o0cmqwanwaemdfy0d3gdp3dsdfixxn2zq83gm4yfaxbw1a',
+                errorCode: '7v21ta8cwo189yph43emupui5iq8tfdhhrs8iejdvmzxi7l8p6',
+                errorLabel: 144613,
+                node: 5639037282,
+                protocol: 'qdao8ptidaglps8z04jo',
+                qualityOfService: 'w3j418m8n75i1ovexanf',
+                receiverParty: 'rjwt0v8rf6mfhqrisw4jo9kau6ityf9j5zlz18tous1nav6mry5rtzf73z1wstdaqe8twid1e01gm1ustwkrysiliif9u2ey0ysjw5lzcrhvc6oowuow86mjlrh5czkyy3fjsmydli22rg3qz4uf39ykk2p1d0rh',
+                receiverComponent: 'ybx8fe00gm82459oyha6dk8xioyn3qpy2m5j0dvae8g6rg4zwpoyunrmxjb8ihophlwna38qeycgg19psxhwuw7s4nxgdtuhy7fl4gdco3liunxpuewux8u8alj0l85qwtj3td74i580ac3y9zmov2dzq1myzvlz',
+                receiverInterface: 'ly889fw55fj4vk0qpgg88on9muo28r7joiheztgusfi704mdi33pfm7cpqbt1a86nrjagm8szltgid0ds8umu362rdpz51snak3kqsxjpszfu4f4d6j6kf5k9wklvnnffj7eyb69hyptv4r9sgbjgg8kv8n3buey',
+                receiverInterfaceNamespace: 's4wqpr5lxll7gl2ukdj9px2b3nxecif05a9mcng3tz4etp681uxgvln9xfp4rpqkbs4v840ecz86msbite76ohw03u6mgghc04d2iwpt3japfnk2484jy5zz44ry6t75501e8x54g7x8gyzje2x5f9p9twonq9sk',
+                retries: 6587052180,
+                size: 1512990794,
+                timesFailed: 9776552047,
+                numberMax: 3965858667,
+                numberDays: 5215578397,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailSystemName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionId property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '8034799c-8b37-41b8-a4c5-0ab93dd84b02',
+                tenantId: 'fbab1a8d-cde4-4b46-958f-13bd466a3978',
+                tenantCode: 'ty5w8xrchsv93ziwvz4frwyzewwvot8xrw4du9jko11xhvnxzd',
+                systemId: '3a03f90f-95c0-46bc-ae4c-beee00a3b8ef',
+                systemName: '9qlpt1vkoywt2x8dig0t',
+                scenario: 'kumhr277ino2q9fy4nhqyg4dg6vh1icb4i6jj561arzo18ovg8qlnejiayqx',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 21:59:44',
+                executionMonitoringStartAt: '2021-05-23 06:15:09',
+                executionMonitoringEndAt: '2021-05-23 05:01:55',
+                flowHash: '2era9ayz3hkyo7kqks7a4ndgntlbfvs4r32blzum',
+                flowParty: '555z2m8eunolhda3v2wco4a48f2fsid04glu5e753ymhadzxwrfjiw3ar3i9afbi4j1pgjiupeh1i7lhav5k2wnqgc0mvazty1ehdrd3e10lkd8a4b2newi0pbkzypz74lavr9ghg7uifxohk7ffdy3ht5d5wbsr',
+                flowReceiverParty: 'u4vmm5yqa2jjvbzpdpjikjix9yl22ebhmihs4cj5e23hqy1mjgnum1h3aftrjhcc855naatx8kclbjel41zxlmw4h7gbwto4u2lhlaeckrziotjzunc4suqrqbjhgv1jk31cnrbtjc6o4m1vgz2z47qhp572sm21',
+                flowComponent: 's62y2bptp42u4fmh2kllpurie3csueh7cet43pveh54irimqd8y4qjlaghzw8pm3xbxdkjb41w4jhjng6rdqjr4r5jmdhi0zx6ycr6jr268bju0ijsnvaxi703m3sx2xuvbgnh69cx1co4ut4skpnnd1h64a7sfl',
+                flowReceiverComponent: '5ev0zm0n6ylvy7juiami5g68sjjgeu5wtqzflpwsa4qwvbmeng4kemonk2zir2dw4bwtj9ib1sefw64gr3l45v479lcjpbn6hb31ecnjwtet1vvtjyb8mbw8a6vrf15wi63v43po5kl4zjfy5e2nz60a1yg7kzek',
+                flowInterfaceName: '2qqug3z8yq7o54ym34jm3g1nv2jy28a7g1mnn9th8jwsdpoeulx62c5b86443dagg747m8a1ln8rrj4ldzi8ydhxgo17snoe36or6mgoe7zf90hc140qce8v135un6e32899sq1j6ihgpqve9te6vzm3el94bmxm',
+                flowInterfaceNamespace: 'e9htzcghm2aup20bf148ckwujzm0ii428u1o6mgh5rj8lug6f6fuwsisq99qwiwsb21xjtskimv93j9yn7vg62mf3007qou75jot9yho771lw2r52gf3ydzngf4259k5h8etrfim17hdhzbiygl15wyihgm4rgeq',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'tck4jylblv2aa8dk6pts90xxtz55dszla2lyob6rq6n4y8fl7e6l7sxjs4evlx29hsnlqw0rk7razqwzaalcnexnemzuagim3r9f2e1jjobwaoxe2tcwmwx41kzbqv77hwfv0drky7skotzw0q8zubswxlk5orpu',
+                detail: 'Qui nobis sit eligendi quia error error repudiandae odit incidunt. Quia et inventore ratione incidunt voluptatem. Ullam omnis ut expedita unde ullam. Et aut quia aliquid sequi nam sunt fugit. Et deleniti nihil consequuntur nemo fugit laboriosam et magni.',
+                example: 'tbpwifz861etxi374ungsjonbt9thcq7o5s9utxg5auleixlgqs3pyis5wscnq2vhheezvjmbsb9sogndmiq6hgdbajs2s36nwhp84vgcvz3dibhfr1w5mmz73dhqj0dtqk7355eh3us79z4jbq792b4qtbeq4md',
+                startTimeAt: '2021-05-23 02:05:09',
+                direction: 'OUTBOUND',
+                errorCategory: 'hkow5ans1y1wdag52hklhtptpdlcrr9p5lqbr21dpxnsv8czj9quc8zmrbyknwaz14f7hsy9j6bl1tlhm65gsk5cbf2h9g1gohpmmoal76ha7qxkg7py1a23u1l5f3rwfn0smz8r8hvljkxgw4hhbqqepi7y8p0x',
+                errorCode: 'vcglcshzzs6jue0s2d4oz6murwcvzbjl56en5y2gvxcbblnthk',
+                errorLabel: 268356,
+                node: 9963254347,
+                protocol: '7r7rl7xtmufm1mq3u1z6',
+                qualityOfService: 'gitw3f5j1u6wgmup1gqm',
+                receiverParty: 's5z0jbrtzyfe5vbkxgxcqn4qtz6z34u1ig2q1xvtrpxq2ms6ygvznd8772y4z421bvcmp7dig4jz837mjkxl9alrwxu9q4pwi91aduf34pn20qvpwnba6b5a3mx2hsqpgqrl1ilrtbqmp9hqtr4ne937jvhip5s9',
+                receiverComponent: 'rm26d4yu7l6hrcb7maoirtk1njgmsc9tvmg1kvsqcwft7243fib99iuk4ef37yuolp7dkkzgzgppjeejv8pqla6x5rtdpxj7p3mf6wewpjoonvvpxnc4z6bnbo789gmspybhpwxx6gt7ojc0i232tbmwnhk325rn',
+                receiverInterface: 'iwbwgggnhk9fvqndlt6xff223oh0rdy67j30vg0egyj8dowa0048qk6sldyed7008r3f9btblhy5ktwbg3v0s3gj55lf5siozkbxlpxmyqvy2lh8q1t6lk51zwoy5mzhlaun7x0cf5lei68dc6xqftek39k0ry8o',
+                receiverInterfaceNamespace: 'ptfwho3l981cgprg5o6wg2ndrvhvfl689ez5ukdgtj921hv9lgwaqmjgsc1ap0klza3zphomjc6c624fkhauxlimhkx6j12vr76p4trz2c23bwt1ol1fdrnll63ucn1zkbnsei7m0roy7209ub57czrel5dlwllo',
+                retries: 2435628745,
+                size: 4432315284,
+                timesFailed: 8650907408,
+                numberMax: 1004049834,
+                numberDays: 6697922271,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailExecutionId must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionType property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '3b819157-c9c7-4d78-abe6-417ef9e5045a',
+                tenantId: '8d354c89-e988-44b2-ac57-e0bb798c77d5',
+                tenantCode: '1ehuio37v3y27yib4j6oc5gdv4q0uwrhasrxy1r75c5afiyoks',
+                systemId: '8f5ba233-5354-4316-87e7-637ab113cf81',
+                systemName: 'kvtxlyrvp8bqydmmbwvj',
+                scenario: 'uo82flyo6n0kvtmyiwyp6sogsqp0e4kjg9or2werk356le7zyi1eigu4tkje',
+                executionId: '0d3981a1-ab64-4830-af7c-77e869c383ad',
+                executionExecutedAt: '2021-05-23 06:48:11',
+                executionMonitoringStartAt: '2021-05-22 15:37:03',
+                executionMonitoringEndAt: '2021-05-23 06:59:49',
+                flowHash: 't9q96ugk4sd38dbyi6ez07fcxjtbb0k6nve97gfl',
+                flowParty: 'eqxp7uxwf7sbdjo68bxu0t7tqkmndnnuof3kkrdk0q0rm5vff3zxh4kghoe133fwfslsszj6dkhpry41qd3iykxa0nb9l90m49xvdfxudobfxg16lu3t1ru6wjiplg02oexwl7ugz2xit1payaa8syabwnu88di3',
+                flowReceiverParty: 'cituqne7a7hs7n2omp4ix5ik2y7pemehe0ly6lzwgbq9270p4ityp3hn74s0oouxwfnvqkhgx6torfn8mi2oc6ud9iqycdobqb1j8qi1t9fwr66f35yudcwzusnhm8shc1zvoxll56mchc84xjily1gzmiuralty',
+                flowComponent: 's0dlql1uhrvkzsf257c7sgsfw3ylzkrte9itwz9exo5gt020cq7wgxccf2uvz2d28mbkuun4wh4jbya49i8yizrofsfmtf011vgi2ul8dqmudj2ger0d5zc6l7n8lf79gy8izezqxchg9ek48gyvjaj6t0wnsswc',
+                flowReceiverComponent: '836ypa2edi2ib9n2b0qy8h4vgn3datu3euhaaenm1jfmgnzuknrdp8ec26oertzykwrwafrckapar9j6wwoo6nn75sdjwp2nuc8d3a1rgxlmly4tt4gvt6m9mc8uvcj30pdqcyx3q4wat6nt1zgg1daiyv44na9z',
+                flowInterfaceName: 'oj93r1sacekbnqj8jwcqq5aa5k1me5q6654lo3ho93la1b4584fh66ur62zrsdp7lpbmdlyg5tyly9oh42xb9w5jivwh58yv2rw9gj4z7cokvgvx90pbb8pj98wge6xchaolxzp4lpfphy158zvha2k1kd2bdft7',
+                flowInterfaceNamespace: '3v3rur9gc5oazg63zmmxs2brgcsgpfzaxazdkktaywan770azytds8t5g0z823bndzj8loohzo63kfj999edv6nlrmjr9pduiqn048kujif4vya64p80gogs8s8s9oqhl9of2il78zry54nd6pfnrerc385cdc44',
+                status: 'DELIVERING',
+                refMessageId: 'euqj2pmwni7zbk8cbc5gbibdamfpj54du4old4un4srtds9cpqcjgmwslu8mb2fqlfitdycv9it57ga2kp5x7e88lotp03gnkf0k2v7u9f2nvsp1h7o3uxh9pdp1pwx3p8y73hbn7bchixgxcb82j63dm03mfwm6',
+                detail: 'Qui non beatae ipsam in dolores. Minus fugit et tempore qui sed. Eos consequatur voluptas ut sapiente tempore suscipit mollitia non. Et eos fugiat suscipit odio consectetur libero consequatur eum. Impedit ab nesciunt consequuntur non voluptate soluta. Alias recusandae aut tempora.',
+                example: '3tjnxur1goys9tltpn112uso6m2euu6yn91nr1qp7clmxc4q76esp0oul9qeos56mlqyg8yq58qywp5a65nu3nahhn4cf7lpfdhvefueck32cxj9dd1er45kdexipb8cn5svw4hnkd9h3uivmsjtjc07f6pfyrih',
+                startTimeAt: '2021-05-23 10:00:20',
+                direction: 'INBOUND',
+                errorCategory: 'gmjh590v8l8r7a4jppaff47pj7ey2lwrw6mo40fvccscg37qh0gvq5uj13mq7yxn91j2bwbzqat28y9rbga6tm4rzpnt13m8487fsmn6adbr4v9afc169jbhwbxc0ngaaeykyvtjox6v9nxkmy91ps919qisjkov',
+                errorCode: 'lf7dhm1cbmqs6ot91ysaj92r4yqq0xacov2gso29fmqi7553d9',
+                errorLabel: 157670,
+                node: 4169586847,
+                protocol: 'o29l5nmivnj2um3xrxgz',
+                qualityOfService: 'mu9ngze343p4hd0dz2rs',
+                receiverParty: 'xw0i3o967sz5wmyabuzakm6v3ouuvfxoiqrtk9skwjrswakfb6m0vlt1ewgq5vxpuxkx002d6teh55v0mtc4vqn8ms3rjzdlxtm0lxgzzcrzi5cjhxou9f9jjnm4j2ucpxvn35v2k6dthfs6i4fj5kmfc90f65rn',
+                receiverComponent: '5t1k1cflrapzwpjqw1ce2w9qs6xtb3sfagdovhgvc23z448njp6lc4prwlicjplkdlakm7cr3wlj9z11dnom37rugh016xin5s8p6f8gnsllwj1ijbnymt6dfoofix2iseshr5xhy25xyzb4nwyixuv4xoryf45k',
+                receiverInterface: 'c6ux4jpdpy1up3uqhmjr7vonfvkyi2r7ixueil0i9xsg281hfywvvs5f4c5hlbpzlh91ggrsh7pk4mtx5frztpqejhch4u638y33mmwob7jnyl10oy21smqgk0jvftokwddzvv0l38sc5e24vdh1e4pj8hjkmyqj',
+                receiverInterfaceNamespace: '95u2zosavxje58z4vuj9ns3bp8gokxi6f1ho73pk333gmnn4jcja6qhhuk63o7gvgh1yvl5h13rlpvuj781r2jff8nijzcjq3pu54tjvxu7tu0dw2k5ofm2y5fivm8cdpzhi9mmfviu4vncm0axxeojyni5x7we0',
+                retries: 5984136344,
+                size: 1636075968,
+                timesFailed: 9524417979,
+                numberMax: 9560258349,
+                numberDays: 1001942996,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailExecutionType must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionExecutedAt property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'da516005-859f-411f-824c-0acb35e4c6d6',
+                tenantId: 'da1a2b0a-fbe4-479f-aee9-ef818b9a947f',
+                tenantCode: 'qmrgieadeutz59zbygo6t291nxsgco8vcqzwszjzrkikaitpr0',
+                systemId: '76005612-2280-4679-91c2-b6d3a789ebb7',
+                systemName: '21eu81o202g42coqnggm',
+                scenario: 'udl28c0i69ff72hltslfa9gv6c8106vzj5dblr7lw28c52q46ckqseufgoeh',
+                executionId: '90e17a56-78c1-4604-b866-ff79148ee9ad',
+                executionType: 'SUMMARY',
+                executionMonitoringStartAt: '2021-05-23 10:46:21',
+                executionMonitoringEndAt: '2021-05-23 05:08:33',
+                flowHash: 'el3npxuxfwvzx9jj2908wmhul52hukmuxmdhpnlk',
+                flowParty: 'v7ifvyrba9c661e4ow531e440l04n7m40y9jghznajafxjari82rea871zsxpcdx9rlgl4ju3764omo0yhh4ki6nlceah3oujgzw4r20yqiatuq3mswvitj2o34sy1k01tm76dk793km5y0wyurjtecityfofueh',
+                flowReceiverParty: 'fsgq5ltu1w8snnhlol6zrm8qktrx29fdobg9t6jp9yhstskiwmkwafz1yfv5kfvio74ctk2ch3uqab7kdru4zojmspt4isxckmpgqw7mtgpx1t1easbqv5jqpe1x6kn2ar08svgsjbfmd285l2uvomgs5mbkjydj',
+                flowComponent: '3ioo1f6jvv3r45fl95aisfx6te68vgmdc1cy1433olwoo4tonsndhusch59jpgfet563n5r6k6fcuqyeqcgd1fw4r2kt5f3ld99rw366z6om4jgyezc63j9d2xuq61ap4kc6da6ak8teqzvm3jcto5wipqr8johf',
+                flowReceiverComponent: '8gdkmkz9zghiiaxge3yzpgapppjb8fw7tz2xgqggdzsssntv85uvd5h3grszephs12g69e2bkju8b1587rkjqdbpf75n8mxbsmd3g58mhembzqyg0xvflwck7ps7xlb3lyyn46xv4p48d1sfyq7iajhm4b8i17wy',
+                flowInterfaceName: '2v8gjnnvbyyb8yuk2g1ypiiyin90oxwsokrj3bst387lvn6ughmmy520y31ew3gxse4dajfyuxi2pg4uejf90x192jglz6ezxxiug425o1mggsdjf2g8pqt03vi4aym7odlxbvqp653lojfvr7gai36o5e3de6fe',
+                flowInterfaceNamespace: 'a4fhpghg47rohcq1er6g0c6qpxiyquz93yu6kssbijsyuur4o1cxjji8rh9oqleitdyidch2puj8ql3k9cvdb41rkunoe4iciudde3nrzxah5sqgxd44vd9cm3fxw39tui9qbocr6wsq8rk1787mk4bccxznj94b',
+                status: 'SUCCESS',
+                refMessageId: 'f1ospvjjgp5kvbla38thlfzzlmsmsd4gxm8wokyxt8c94nllmnprdaug9450tcjpefle9xui0608apk6sjr3jnngzlz1fkevu3dsmngjlywbd240fwfbluxmeple9zj12hgkozi05tnkteq4towy3atkfiqsel2l',
+                detail: 'Ex voluptatem quae id voluptas. Eos quibusdam harum nisi sed voluptas et hic provident fuga. In consequatur dolor vel consectetur fugiat sapiente quidem.',
+                example: 'fvvodaxpsygjcn5juzqwko6ncn41eu59bcee62e574siowl7vixvyjqotsadn35bv85z867uy072cgw3v6jkvx2wf7xf89bs3vjuc9m3v8yrm0how5kv44dzw4g7suyxv6h1d6i663oalrw37vz230e3hbbl84d9',
+                startTimeAt: '2021-05-23 10:22:45',
+                direction: 'OUTBOUND',
+                errorCategory: 't8ce94rks5hvrodet40dbtfyvjdkuobsjsya1kp1lio7ti02oro9n21hpwkawx1xyjsp8b4baxatri6hlqcct3mmz6ygkh02tx8nvxwgnxbwklswvsubhqlhsx3s4k00u9vfdvkta7kaqlrlluz1kks4fib5dzj3',
+                errorCode: 'sfgz0ywzllorgjpqrzyog35cqlrtp6ksntalwwho47i8d87zpc',
+                errorLabel: 855697,
+                node: 2576760078,
+                protocol: '5jtncykcc4i5wjgehra3',
+                qualityOfService: 'h7ntb8h4gryo4u1g6axe',
+                receiverParty: 's2a1cwsv5b6xr18mxeniy30udw68g7lwpn1c4d7nyeil4uc1yvghsxfkzwkm3s65z4ely2l2fl4ehk4z3pwycxuv1mwmywntu6mz1k0pxghhuchxazk5axwyp102ip7iksxxssxg55213vb78hrswvsmvubpf1q8',
+                receiverComponent: 'se2ovj4zieaw6wkif8zyjxi7zzsx8mz1l9m3g6ju95rrzekhsu3t9yu6wlfixfy925amg2ium3wsmhx0oehq1x3ul3xve0bprhjas0aaimupzvkshvcfgnhtucb2u6azhzi7ykugs5xudq79unhdms4jo1gsdr37',
+                receiverInterface: '5lxl3rafryq98fjia6ntm8e7tb2utxepn38a93cjs882u7gcsfyji6djmshmu3iawrns128ljbxe1yamegfkxh9b5sdcy46ez2sr3dwik7gnoutjx37drkvp0s89ud2k3aevigj9qkyd9h0two9flyq8kd2k0g40',
+                receiverInterfaceNamespace: 'gukjttlbhml7z79u0qw4kte3cscbm01pixbx5tivxolczbir9r59cp9mp27imrornanc7gbljnl6hpj9bhvkbo1t3jd5xoysq0ikphtg8lbamnpqzf9iy3wqe0ui8s1onvdy50hakeye8tn4dqex4nu94jxtjbqm',
+                retries: 9825030927,
+                size: 6528645708,
+                timesFailed: 4896793758,
+                numberMax: 2048373505,
+                numberDays: 6010777343,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailExecutionExecutedAt must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringStartAt property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '7b03212b-04c4-4c99-b6f2-4ed9b4252030',
+                tenantId: '17bce20b-282d-433d-b631-4495bc4f7fbd',
+                tenantCode: 'qrpyz0d21csifw0bq8ac4h9s9gg7mwdci0w5brxskpb9im3hu3',
+                systemId: 'd2fddca1-9b1a-4ec8-96c0-6ac39428003f',
+                systemName: 'ti76rtww6p10q8xxfofz',
+                scenario: 'em12gq908470mnkgpnceakn6itpnu5e1mrtzo5o6ln4ehhsay2gdrco2obh7',
+                executionId: '0dfbff23-b63b-449d-bec2-2b9d7ba2d0f5',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 09:37:24',
+                executionMonitoringEndAt: '2021-05-22 16:57:49',
+                flowHash: '6twg37kj78tne7je7sphnyb9z4nmwruougte0jmn',
+                flowParty: 'sc8fwprsuih0415vschbdohch8cdjf4w85a1pq49ruwll6lcxio5mnbq7z6rqyvwzscpk7hx7fpm6at0f3fdamphpc4khkxijpeqdwwe5bgbor4850ghtc1iiaph7fxh68uuawoz0mj35k9rl729aszth2r60z7j',
+                flowReceiverParty: 'r087crslo22zr4tov8m8wv48wui12k8chd4q8l01ozd6q9rzcnjqj599z6s0jl8qdbxtatxa3pmnl0blehciwx4y5qiakhl47q6afcbbnfrwpwb3kyiagq2ah5ra1dmcy6m1wq3clfv0cywxrzxyw8t75aytvl69',
+                flowComponent: 'rrnyu2tmm4v0wl8e39ai1rk007w9qbiksn4tfta9sarrhwvo9a7wkum881vh0ogqvgtwmw6rjpj5sawcmywahuu7cagq0njmhidykna4crjchqvl6ftll5dk0yuod913kxm7abeeqoylqubuqf1gpq17hrbmrlnz',
+                flowReceiverComponent: '01j80ntaa3a87we287145y1owd67pazhdlm2eyp9xikmnag741nmg1bnvcvkm8cvs3yd5rizrtr7umbpbo0ghhymka7a6hc8jykpdqubtkht2vfmnekcd7j2rilcpolm9ekbx0nvkpgkiw7tcc5rzqziv7w3jf5m',
+                flowInterfaceName: 'bvs93wfc2q3bif68pdln2rgru3urz68yg78nvx5jn9993q33k9e17bhb2zez3zxovg3ji1wxpruqzbckfvig8brgnowvd5k2uytsj3dz5j14k86bspl1umtb1ltzcp8kae1vlm175r6d8jxpos8q846hkqo8yha7',
+                flowInterfaceNamespace: 'lnnelqhfrg8j0274u2m7watfzc305g38zn95n89k3dz61t5lkass5astlig2w1xfof98te91zm4vncvxsg1o4d8ybtai2g9cayn19lcwhugzzs5myl5t25tom7vd78e00vp6k7zfk74px15omf7orc24rz6hcvg7',
+                status: 'CANCELLED',
+                refMessageId: '6jd2osncw7dqeiyugo0b8ktenv97o300vry3n1f1nyelj1o8y4i6pm7pklkvqbh607bcwx7f4qqugui2yt1r7f967v51ove1r3f972oe90kegxpoqf5p9dnll1p8501qjgtw36yvecjxxr77xck24qqwt1spxvnh',
+                detail: 'Excepturi eos nulla necessitatibus. Voluptatem nihil culpa explicabo et reiciendis aspernatur. Odio asperiores esse est fugit modi expedita. Sunt odio error autem aut est. Numquam iusto illo corporis reiciendis voluptatem nisi fugiat. Expedita asperiores corrupti quia itaque voluptas.',
+                example: 'ocnudtx1j9xdeuca90x0t93a7fihttujm8u1j7wv6wymctuuakkpf0xv4y0jvddho184k0p9rdmywlmleg5kyoortxq7woxrsw0rwcxu2o5u71ddv5tsbvf2j5kpmgu4ypvo0y2dwo1w88tkw7d6x6pvtzjou3v4',
+                startTimeAt: '2021-05-22 17:26:13',
+                direction: 'OUTBOUND',
+                errorCategory: 'upbhkeg58a1a5q6lce938prpeyc6wwqz1q7aqzpd6fsrqvyfkx0cwoh0se5y6egec10qwfx6kcpi84nrrbab0fmslyy4nfchzftdz62qeo9o7nnh2g0cng31lfu9ktxqw8yq4l11wxrfs7sphaa5tm7ize07ld7v',
+                errorCode: 'csdvfanorwhfys048yvs4hrwxp9js3qg97cjey4revlxspag23',
+                errorLabel: 398616,
+                node: 6653131508,
+                protocol: '5fw8tk148wam570x9wi9',
+                qualityOfService: 'uqtr2iememdwegtnbhq4',
+                receiverParty: '2bv6cw3brti9x8hmw6palzf2zhugg5wtdfm5wffzkwulsu8e28ym8kw3kikl9368ve02s5zdye9mqd7z4ktk06bvl6922ld17um3bfe607l5og77p3dqsd9qd9btlrenrq5wik6sux6pu9uzsz102u9hxx2vy4cc',
+                receiverComponent: 'c18s507pp400aci2b2tuuy7xxxkcsknzmxp9vk8wcqwrlksoyzv4knosrg7vvviw4xac78swxh3pfbivl69h6h8lgt6litehvxjeid7ukwzgvr6e4hk5eustbsb199lv8s5ge2yqu5iuruag9jz8drbwdg91c75a',
+                receiverInterface: 'ljbm6g3ggmt17u0k4wvje30dmb8ikl7xm1wh1lpxj8c1bhvs4dodat6nuxvurcewnydddq0lqn5pc2gfifriy1qa4dvcmgaody9t7w2tzift9phcitjrbt21m8tjhq7aodzo1btkywjwllixugr2q570mqd053z2',
+                receiverInterfaceNamespace: '5erhke5ysdkqituspmztyftef04nx2lhghv5aovcvtkri8p2jv8p86vrr27qvctbjga7uow2lc395149k8reti65cwmolcdt7oeaqtpwmkfmezionsnowcw0ifjvarmmooswloagcrhtf7oeswuwq08prxudzct6',
+                retries: 7310537517,
+                size: 8704984194,
+                timesFailed: 2511113923,
+                numberMax: 7484186957,
+                numberDays: 4915957561,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailExecutionMonitoringStartAt must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringEndAt property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '1276ed06-49b8-46fd-9d6f-46ce87a15956',
+                tenantId: '559e5fc5-1134-448c-9e2d-063f8f0c832a',
+                tenantCode: 'b2ralr4p1seicoa0y0j74k5wmdj4eos0zihoqk5tc8t2m4j93f',
+                systemId: '1d00a952-f3e7-4d9c-9f75-5756222c4a26',
+                systemName: 'hliy1abjtelhznk33kr4',
+                scenario: 'p2zrz0rckregxezuel9p6h07k1rwnnsml4auz9f7stpkxkoqbuzj3hs65jmn',
+                executionId: 'cf1b3979-5365-41a7-968d-52cdf9612536',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 20:21:32',
+                executionMonitoringStartAt: '2021-05-23 10:24:07',
+                flowHash: 'y7j12m9grws3sw4iwyl27uj9e1i9i2aqa3w1tjxs',
+                flowParty: '53h6upczew28ku7u8gq5nyp3nxmso9rfy1kkp4ks4zhwrbyln3omyykr53344ez96fect3fo3afhl8sghn29g0ahtfzmh04ixv0b9akfcr1v164ciote1hrf59t3g3sszefdd9bnzljfno562itcyiy0rilvbsxt',
+                flowReceiverParty: 'f5qbi2u1259fvtotkq1elq7tb3mz38d8tycufiimhjtw9sbc965e52erdsdajjhlh6z77iuk3pfvbh3o0x5xf5puq201ctwieo5o686cdzzifo3jkb7nb7c60a3aplcuup87clpwq58gvvkqx6k0gxezjle9gc0o',
+                flowComponent: 'ac1jvqikig98mchg9v1th02e8y3oddhhvthloy9r1yjonohtgucc3b86jyk9gl45koorry802su77esydwzh1xj8i3ioh1wd5rdv1m77ht8i35oj3utemjh4jrggbhutcw2a1dfjfh1swko7udosi3ew5y2x68qo',
+                flowReceiverComponent: '562obimqa65grzusdux85d3gvkd3zuoa6l5vsjv5e4wkmjd79jyyuod65m0zeq1bdskhyrm8jvb2raxaqn3pkqtlgofk41z6o1obceih7094s1mhkc20w3ewbdls49fliro2ljrq3i32qkow335elh14maxiv3wu',
+                flowInterfaceName: 'el68l9yle8zz879dp48u42fxqmhjg9qrmjo0ezgoqf6xsq99cmu5yz0gntpvvmyj6xjrg6emy0glylebsz1f7lnyxml0ddz7ggvdvpvhhg1cp9k2m0sseuygpoehzzhbu0h6ikjynilkemb8xb193zcedjgoz5c3',
+                flowInterfaceNamespace: '43sf5dly62y5mkd0wtf3krjosxmcxnwl0e7nocls75gi8ltcgql4r41jkctusk2jrhdtuipurfo1lvsyr2rd5bgcpji5xb3tv2tzykgrgt05ns1r1n00jct59xa7r3l7c6vk2oe71gi5vps1vktzizshul4t9erw',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 't3haxaontbunrtpkc5eeu9eegc4f784j1tgkftizf5p5q9vex76ki3maz7x3d7b0iirg87yy36nkmxy0zdmlkjcel6q55ovv55qfqjowwsgitozqbzxkr75n40w79ldf372rjuhdihkq9chncqs315g0bjac2ywt',
+                detail: 'Deleniti dolorum odio quisquam velit tenetur. Odio sed ut. Id iusto mollitia. Eos rerum perspiciatis nulla hic corporis ea. Blanditiis culpa tempora nemo aspernatur blanditiis.',
+                example: 'f0ijpsnal5xkue3x9l1o0j8vto499p9auakqjavzulzcfwyzdldpcimsi11w1i3ovv2bwwrb47s0jjbc3s04h0jyx0dgg560s0scdaucc6rntdfmq9t481iumr3fa2kws7hjr8lyfe7vx4mriysi1a7ya4aaomvt',
+                startTimeAt: '2021-05-23 02:24:37',
+                direction: 'OUTBOUND',
+                errorCategory: '7dauty7kf7srkqibsmakwgerugfc4t4vr6yezgelvs9vy0295ip1q0hiimichbrypba4cnn8d2lmfrsgs97fq1hoor7moopb42b1gr7sg8bq22ze2m9b3nci0l65om2do4lqzn44gg66swp9a2cyfkm73tu6ut4w',
+                errorCode: 'dh1zpw4hme6sefigfdh57cb2vyyt3a80bzcqiifci9jsmsk4i5',
+                errorLabel: 423626,
+                node: 7452342017,
+                protocol: 'xpnu5to0i9re5ao503z4',
+                qualityOfService: 'sp7bbqyz1lpksin7rbom',
+                receiverParty: 'e48y6ymy89wwbfwu38vc2fhnp1udp0w4ff3id7lg4l2h46eit07667eeak58sub9yytpdaizwfw5zk1bfvtks08rv5bnfq0l54z166sfa7jye9cpobcnm3771mkon3rvagnfl4h504vwplgq31r38u16wc6zalyw',
+                receiverComponent: 'pfj503q43uenn8dgg78mg1jtaf2c414xpco7nepae8gzc3z9rpjm9pvpgkuwk1r3nsornm6myi6pe0fiu2ed2e21ko0lnmyn74efgyz87bm7v645m7fdkr45v0uly0f5f4yj50f0nik3c3z6g3m5vcz6z4t7dgu0',
+                receiverInterface: '86to0o9ykqneqnvo271gxut0ttb768qo7irniebwexgjn5gb94zkyjq02knjvzv1siymmzwz2hw8og15nxr3ghq70vdhch1vjvv8uriwqgotgr5t6j6nhy72vnr6duo18h8zeawf9i43js7akcx3zay6zcp55q1d',
+                receiverInterfaceNamespace: 'k9hnnx3aaa1pi1winstarsevznx5glil20oellrhq43tyog9bi8j10n45fxuyraqtod95xb8fewvsvr2ogt1ovpewbqwjqx8o97ffzp8x00drdtm6376rgjp5nxnrgevmmzbv5m4vijummu5xhc4qj1o2xtyxe7l',
+                retries: 7389420741,
+                size: 9818144858,
+                timesFailed: 5448764652,
+                numberMax: 1438467715,
+                numberDays: 9065231481,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailExecutionMonitoringEndAt must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowHash property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'c34c148c-ed21-4383-88ea-1ab88914147a',
+                tenantId: '2c5a3a55-f768-4494-a1d6-5541d9f8c23e',
+                tenantCode: '5ctbm6g4hb79rqpwxiy97saclm70pjdvly2c35ecmug5datmjw',
+                systemId: '73fd1166-d493-4b7e-8b23-0a86ae9c2928',
+                systemName: '6mh33lax8jzz5yewx8bb',
+                scenario: 'j6sht9wi8v93234zwhcknsitszss6l45vvfhibzryzakoub4zmrn4ddi9xjm',
+                executionId: 'b124ef50-e566-4086-a000-8a744b2ed2d2',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 01:05:43',
+                executionMonitoringStartAt: '2021-05-23 05:25:27',
+                executionMonitoringEndAt: '2021-05-23 05:49:08',
+                flowParty: 'a1ob1gu7k4zac9mlibs76mod1vrz6loz0hj66rlmrsu5u1guztq4kdedh55use9f9bze108bfq27c584qyc8userv6awgtydlnk1aq92fsvh7dfwreuwr5vuyphy395797t4fjyny9q8plfj9dw6eypcdg833iiw',
+                flowReceiverParty: 'qfi7ejdr442671iu6houmehkir83ke4zx40xobaffa3nngaohdbqgkcjehiuwftwoqev6bnrnkwnx5kmvn883gosgd2miiduk0c4i6cip95setebpglp60y5nov6jq96zwjps9yyre6uekj7r453jbcqe3q929sv',
+                flowComponent: '0iwqws163957xxvqu1qt21e3spyelrv4mqgdhn91h8li4hs0ttpyvfm0sby5q5gq10xpysdkre9ai33ryfzch1n7eflhsuzh89dt6c5azpg34jrmlofc8srvbxuuv0y7m2eqi67j5bs4mo7b6lldrvve1ofj2nsp',
+                flowReceiverComponent: 'ex6edzrq1rvzqnjhuxd1g19h8oi8i4v55ievpf43sqewplawrwtxw7419hkviqtdt8lerqznn7wvdq9id5p2eidue373hrzua9mqzal3ltbhn8aaob6w126ps4qfnmh84zsdwx4rwkbv8n3i42kcwfmsp0rds8ot',
+                flowInterfaceName: 'ien7jqulvrvyoims7m4tixuw6aqeiia6m318206l447jelfffij9bsaoweyhaxna8sy2iwl0sn93j8kx8harzyvblys1qwy40gai84s2fyogojqf54dw24gvx30yqtiowkgnhc4t2xr4thqcippgfld4q5w9na79',
+                flowInterfaceNamespace: 'clcgc5otk52d0s6osrfeouztnxuxzzawbkbc8zj76e91mr7gfsyoovbhn32oqskjazc75j5p6op714wchoc0zx9vpd1dqicg6jbeyik8odsjprcch3u9lat0vc19ie71jjuvw71l899hlalt6ig4p109fzvdielo',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'qhfikj660q0xqxes8u4sdjlmk5yx8wx4a3al2i1clpldroxwxre7rvpanjky4far1kkxu6ohw790t0q8vb98161su45xpqb354s5q07krpfj8gea7ihp1c7nouhhusmjai3eka5qer3hzq360hs1gxl1d4pwvdee',
+                detail: 'Libero enim aut qui ad earum autem. Amet qui distinctio sint ea occaecati quisquam fuga similique voluptatem. Esse expedita fugiat. Dolores illum omnis earum sequi. Sed aliquid illo fugit aut architecto eos.',
+                example: 'xkhrog60pk68leldv8mf7u404xkl94h10z8ojbk941igfdv0dvyguejg1pxjml3yrmg2257sw3ydkzkpl08y1wvror4fhpwpx8tnd2ll46o5dsys8xqxii49p3magv5cgvf3zsgilbnxly6pz4ibzc0s30ok3fkk',
+                startTimeAt: '2021-05-23 06:36:35',
+                direction: 'OUTBOUND',
+                errorCategory: 'ghxv33hikg0xf8chko7navafhfj4ne6tw2nars96l1l73qg9vd80vay0x1jdzim263rbjyw5ro9z4g4wny2s6ecjy3rr53172p5uitjpbc041awaghculjzqxhjjv7h1645wt1y5nnfe8tclaq3asus7hmvcy9h3',
+                errorCode: '8b2nas7043w90ob7pncm29eyjug20yopi9astk64carqs9s5br',
+                errorLabel: 662414,
+                node: 1521924045,
+                protocol: 'gya8sa3zkjv2izn3s1kz',
+                qualityOfService: '0pebzc0ytjqdfs7vspol',
+                receiverParty: 'cc6f0ljeybyyo7tct9bs42t4yl29ialr0ownpgmbpasxjirz5p69bdfb9qpyxtw6c9je1jq9hgq8gdd9eybmrgsevcqm107h2e5hxetvyl2d2b09udhlp57jpfqvpcxrceh4rxkj1ehzi53cd4jiof35qcisfaa4',
+                receiverComponent: '9jrn56doa1psyqyqz40dm7o3uk1mzenrzonnica1ny09gx65k4xjcyf9iat59lo3tyloesbqh7nnp37ks4a2yz7p89ubjw3zskmlhorlxvszl104q78p8vyj1onu9lnbk5i055sm5s7g16ui5l3kat8zsl7yyyuo',
+                receiverInterface: 'vyb32f8vczglmwfq32d2uwha8i42czgbgo11fdv6jaeyxtjgammv76eputa9b3l3o2opfhakng0y5db21hjotp62yebx67alztjxnlc5r38wcm2bmluwyg01clrjvtvkojsdx6bpzpeqidzu8wzlzzojmuf3n77k',
+                receiverInterfaceNamespace: '6qw69j7r8gtbr7qwgp50l1362rb5gm38xvt1styvla5kygfwc5fswwamcsl1j1fre2g3550rq7zhh5clqg97vcy87s6ne4fj3lge4hzdqi4kifglp0pbx1jlpotdscjkbxeii49vi4n1kj29ldfg9eaf6zhb21t7',
+                retries: 6228159689,
+                size: 3614205160,
+                timesFailed: 1542301698,
+                numberMax: 3043764408,
+                numberDays: 2005117234,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailFlowHash must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowComponent property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '08aac968-5aed-4c89-a569-46f50f35647c',
+                tenantId: '046a568b-217d-43b0-88c8-7123e144d07b',
+                tenantCode: 'sn9wnx7znq9z41o4cf93gd5xib59d2ofz7ebngfhkbv0t904fy',
+                systemId: '4bd01dff-cb6f-4d54-870c-aec91e823c71',
+                systemName: 'gb3an8pldewfx4hfdsdo',
+                scenario: 'vbplmtckupjfal1aaxuolvu4429emygxfmej0idyka28tn10kb3yxqmx4q8v',
+                executionId: '5f22ddac-9732-4376-88fb-d929b9676bd5',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 09:39:14',
+                executionMonitoringStartAt: '2021-05-23 08:36:22',
+                executionMonitoringEndAt: '2021-05-22 16:35:40',
+                flowHash: 'izt6xbvrhnzfvdr7vwua42eurschwga1wevz5eve',
+                flowParty: 'tnclm2shscoti1fm1gxkv96mlqx9squoj6fcpqhpjhtrn4h0lfh1exf3kbfqlwke3huso4rzg9jw909jt7spyx71e60t4bnk2ihdnyun2kjo7xasxw26tvy7akz25dyr70st1jjhbhaq4phkjn4ln8kx0gpd4a7c',
+                flowReceiverParty: 'v84z3cvzs5w92sy98ptamni0brf7uys1fp5eq2a7qnonxt9v3agj3jnqhmogv4u51jtqt9d7akedim55ef6pydzrnlpwox0wks0o02uab9kq46ux6d5z0xw2pxwnz3qc4ispx4loh4uijf2sx2ynmssepnq3pn2s',
+                flowReceiverComponent: 'yvmbtypz2grewvy7y9v1anl156o8urbrb6nkpipzpscwyuyb6t2sa2ebtgomoxvqbdbs4exbrlpnlng0smoa7g2y52xhnj05ynd3cbwiyjmtz9goggbdaywn33quvf5k8wt098wxcmfv71sm43xt4lig22zbrlzc',
+                flowInterfaceName: 'o037w53xrr5szs4jcffbyl46ltl345el71nycgb2w74jlpjjj1diy9as1z71217nui0ffvaasl4blakg4g6m4mccj5wrzd7c3s7hi2czus55z1vwndjo7oump79fbg8a7a8w17zn3x9i7dvkieogy6tbfv41kjek',
+                flowInterfaceNamespace: 'e4r3qgv7qdq7rg7c5xwpnmi4m1ntyli7v3okhjjk6p1lkv6bokfd9alq52qsmbc4ogetlwj63vvrblps6dh987cswhojv65w20kvssk0vyzmajwmy3fdbhqn8e7mc49146s2z3f95z0kn9rl5b3a6s21panyaot0',
+                status: 'ERROR',
+                refMessageId: '54shcx71if9lqqrzfw8c6aq42e87fvqc5w5lh6k3rrb072rz7ccnohon495mnk3ezcj8qrrxs999bfqdbktkxkg0vmxm6wutha3747tsz8vauubazt26ndwsw6nrqz8t4ojluyhgg52pgwq861o19k8oa0swwisl',
+                detail: 'Perferendis ab praesentium deleniti quas ipsum doloremque corporis nihil recusandae. Temporibus reprehenderit aut quia labore quo sint et qui. Vitae sapiente qui rerum accusantium quis aut et nobis. Tenetur repellendus eum quia non voluptatem quis temporibus officia.',
+                example: '2lwtwkq5j9xutovl7wkc28kt5i24ag3lsgvb3ewytfxmijn71vikz9tga4u6zmchck8fknhpz87fi7qiuj9slbt5k7zgzejeitlkynaiqglnwfjjvs00zg1jnczksdxtgfqyd1qshubcjayp3skdvgfzvai7e7r4',
+                startTimeAt: '2021-05-22 21:11:33',
+                direction: 'OUTBOUND',
+                errorCategory: 'adfhc8cs9nsc8d0n1iufqhqpyqwebrjl4gmvjrg26nlr2hifdraa2k8uiy3ctw16xbnjmaqzsljpyhmprsg56jspvbbqgqowz8xczdy3p4q9httoylc4o59x9064fyrt8yyz96lek4xox8gk2k6pr0max2f7h1vg',
+                errorCode: 'goe1v7h4igsmxfxkgg01kv8km8unycg75q2j2imb9rjeidaz77',
+                errorLabel: 127812,
+                node: 7603414750,
+                protocol: 'i307lap7bjo3ffb6k16o',
+                qualityOfService: 'dji81mue2rq3vvt7zzed',
+                receiverParty: 'v5fkwb6vxse2uu5j42i30441hf3cqb4u7ea59xew5rebsl03g5mxf1oshvawb4l5xhj9kch0l0zaoioltznszyz1rjdo7b3bniz6qyn1ht9byfadgjy2bkc9smzch47xjangkkl9zny9xq6ddbpk2rh5tm4wuuu6',
+                receiverComponent: 'elu3ql2xcxdsic1ptdv7vqgdv7xfi1pj4ztmvx182pi75omxh9paejmskdwc0k7mbkjnk5rhdmahxr3408881e4h3zhsvdtmixc5fd0e9cghng9r043tmq5m1qd3l1xfkbs9gatgffrt8sjme8z3qf2v20cx49cr',
+                receiverInterface: 'wv5xhvk73whazz6b78axtfk24utasb7ywu4qtudzaof74al1dgsukwoz2ikx2ksku6qiwox36y45jcqqv8fh7wdxgb643arvm1zgp7lwfe85kfb832pa8fkd3e3x8o4v4f2n3azx71hlzx1gl9u78wkn26naf0rb',
+                receiverInterfaceNamespace: 'jnmss9h462vv5nz0wa43n28vd8fxxieqt8kbdx7smmqq2y9pf5br2spq6ujobbxbgucvu6un1p9tmuhm57ddsi69ozk8f411rercw9enak22cwssydchlc8090jas22c5jnjz39p51fp1uaivsxrmi3yidpbo80y',
+                retries: 2268902224,
+                size: 2775254024,
+                timesFailed: 3107012701,
+                numberMax: 1103022623,
+                numberDays: 6267768034,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailFlowComponent must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceName property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '3d65fcae-31a4-478c-b123-9379b6f0c9d3',
+                tenantId: 'b019f3e5-9b4a-48b3-8ac5-412f2672dd7e',
+                tenantCode: 'oko41kqps0k97xudr3rvuezxbslt9pbgskpkz4bjnb7jgbxf0o',
+                systemId: '254242e9-01cc-4516-8c5b-3b6f0a0761d0',
+                systemName: '2le4feh4j465fjmvbvgy',
+                scenario: 'quxm1h9zalpr7ybq60f3mo6cxtkvn6iwzc9svayfl3zxz7831n9zqkoqxsa2',
+                executionId: '84afdbfa-08af-4460-a854-33f654f690be',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 22:22:18',
+                executionMonitoringStartAt: '2021-05-23 07:47:43',
+                executionMonitoringEndAt: '2021-05-22 16:21:46',
+                flowHash: 'w9a0dfrcekg4bxiy635lqnoqjzkqryilv6hefbsy',
+                flowParty: 'srdt42lmissstn130jiw308q9cdyrawge06cmyukvcm3ik5gltxepylzsi5aol7sdfuy21z35h3j4c4b5m558qrjto2oshejk1m1170fp0ocen5dmf34q0fl1cltuwiqpkal4a5tdmm4ceoim8sqc9bb6jp656ve',
+                flowReceiverParty: 'izma1gx2v1uf7qn9lqomnz2vjnmmz1qhsrjlrfhvh1e39qbsv22tz0gszhy7lw4iaunklev029ptzwlmip308vsouueimbh2b3i0e6kva9ri22n78p1mw42anokr1vmhruke407ofb2jnstlh9cgfyevrwaertas',
+                flowComponent: 'bov7hdjdvt7m26ifqtbwyu9hbgo1jmcruj3oomp5k1fd5vwvrh3sm879x3frmtwga9hkv2cix7k71ki2zp0gopsi47gpsvpop0zgfomage8b178sp9dibrrk7ovbi62z2yopf26sc6bnwbt7lodm1vwji2zydrvq',
+                flowReceiverComponent: 'xk7e6no2mkniv76t7iluecn1t7ce7g6w5qr70gy70mhb8xkw3hwyyiaj35q1sovii0910vaqcvvcrhvhieu2shkwpxioytw4vwxjmawj9fnhoorc1y4z4u5ao2kr25as2nl63hrlc8c5vun5rovaxyd347455st7',
+                flowInterfaceNamespace: 'wzvhbywapsw39cld3jn1o2se3o0utx09777fj2z0lpi3jhjwevxjvqw6a5xzhy0wz9dv66u4yl9udn3ek00w51w7tkpyn7k8jpempejarvy3g9ayu4jukf76b3521ozdlvfp1s48kpu51ryje3hcergdqzqlbxoq',
+                status: 'DELIVERING',
+                refMessageId: '4so1f3tzgjoqkvstnx8c8n2fj1p738gc7ldesqhyeezite28rqhqelg395ztwzhgkoz4wa5x3s9l7x2utv360wb9lgivvsp1uezflhlq77gtoso3gma3a3sr0lsmrtm6ha6hp20sxmjpnnsn0b2x8rgyskklx4to',
+                detail: 'Consectetur ut et velit. Vitae placeat quibusdam explicabo magni illo aut exercitationem quod in. Sunt magnam qui blanditiis dolorem pariatur sint consequatur porro. Et ut nobis quibusdam atque qui quia. Voluptas incidunt nemo sunt ipsum harum. Fuga voluptatibus velit ut perspiciatis et deleniti voluptatem.',
+                example: 'iy0yndnlmw135cur6gfwjuoyqg39v2ou9smpfkvyge3v81o0isljba24x0ijhwhqnacoyfs2ypqkzlvjvw7tywbwnmfsr0xy8px3zmy64limepgt2hyn4zi89m9v0ac85y1hbspg9fo2jpoqkk80883gx4hnmkd8',
+                startTimeAt: '2021-05-23 05:39:41',
+                direction: 'INBOUND',
+                errorCategory: 'gooizy9o6g85m90zz5hpn2guvmpy9whia90mifo3wsz73ik9sg0y7rbhvzm7eshg66bulnpq4j4kxrsvb8i57ajty7dh8krne9wte4amaocur3tbptpr1leo4xhgejrv3xi7vw3v2ec8e4f4j39auyar3v2bhdub',
+                errorCode: 'xfiwm1smdwrhxw8lwxg946kg3d0u63q0hg4c04hle4hqmvev6b',
+                errorLabel: 869238,
+                node: 7957207020,
+                protocol: 'l6om26tecqffqepu6sdh',
+                qualityOfService: '84ninlr0zv2pc9q6g040',
+                receiverParty: 'rvh10uki3ska6270gi0lax3tuvs6o3r7fwwrpyg6bd43aipdyopk39qhwvnu79b1zi15n4pj8vyzdv6w2b0lpamh0660b3o1aifrgx2np9c8qkxibt75vvqe2ka70n8n66ql1i2pcrw8jywdb56k4ogppym8eb5v',
+                receiverComponent: 'ecpla8eino4j6egnqnq6igmibnjxuy5bxpz5xmfe02gyc3fepex01ax9wqnc39k3fs4x8wybrdm6tos584b27ofvk9495blpf9tepaqo6y7ld0jiu4ub2hu1gmywgsdl9git2yfpbowrmwc8n093ou9upcjjplcp',
+                receiverInterface: 'jfzp16ldct5q7rlfawk8vplishs1g48pmowfwlchgcje8e7nnj984w4wrtaa71r3yu5r8mr2mfujqs79eesudwdss6oz4hj8ml0af0k8132zsr6ngtq9tidwk7lry1xij03vnozwcbctwpb5pvaoc2u9sa9lm5en',
+                receiverInterfaceNamespace: 'xzgopw878i1pefcykya3eo8wqurfi69nmg1p91djltzboaxob5b9cy2zy3jtj2oflfc31oxymiknaadlbfxkyb1432i3tzt1tb0sgayysiazfd3lj1yj197nv8uaawp1rrvxioev8qmx6ln42lc8yf26zdmcdbmd',
+                retries: 4272198716,
+                size: 4331072684,
+                timesFailed: 7032644977,
+                numberMax: 2017107512,
+                numberDays: 4245795758,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailFlowInterfaceName must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceNamespace property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'b3b4271e-0a6a-420a-89bd-520a8a9e14ce',
+                tenantId: '8359f53d-4888-44f0-aacc-eebfa3dca0a5',
+                tenantCode: '6cp434woq22uwaw0gf87glklymnysh265cfcr1l7x5dhdke1b3',
+                systemId: '532758f2-f541-45ed-a29d-86e04c8322d6',
+                systemName: 'sk9o3wiini94edsoy3ru',
+                scenario: 'stei5euzjct52sz5ainro6bbbj5rhmfl8b7zi7w7ahg5ws4oz43q9tj61tua',
+                executionId: 'ae2d2096-1fe3-484b-b299-03bb1f2fedcd',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-22 19:00:12',
+                executionMonitoringStartAt: '2021-05-22 17:12:05',
+                executionMonitoringEndAt: '2021-05-22 16:21:27',
+                flowHash: 'z98vp80gm8rj93d8qz2mlvklhfxkwrpirqfmmiyt',
+                flowParty: 'zcvf5hy3z6u2z44cjsktzizt4nu9tnhf9pbj9rf7uxznwcgwyvzpmq65geiyonhkhqjy3r837lu4z31j9tygn79ipfnp01eqb97sna9kbrybqmj24rxpphi4az95rq9kw5y9w98bcoc7wgk7ksggv37tonx5cg7h',
+                flowReceiverParty: 'nbuafttop29e1f3k145df9ewy9r6fqau538od5nx6inms1duc3m2z2g0nr40krunzdp65wjreonbse899p4v68dzv3ogeyexl0qj9yyazogqadhggv3po3db2zthzqyw1i71bqse44bncdz4i95o11azylkf2o7a',
+                flowComponent: 'lm88gzbviyt3b6oq7uk5zoj8xm67xhevhi7ra9ejef5i2iscycy3mob3zkeyu74hppdyieshniep1lhvr6ei4zrp1zx5ycbzszfeou0sf5k6wy4s35t8yt9q101dibyh9yt4tngn3e8wdgty7565nssigvjt41qe',
+                flowReceiverComponent: 'j1b3ic9g6hajtpjptxy0wat15l717yq50fkomxsno2ydslil33xmz3gzaspn9n0yt8lju6leni36m1zar36vzn8xp48qedole2ebarqwm62a96lz3n1486mmmp32oeuh11ndb1lhlcpi7phuaz3luutvjraxbizo',
+                flowInterfaceName: 'asac5ypg41kxnnbrqrh7lznjzdkszkx8xce4yot1zn5vfw94ovn9h3yhz68wumfr6su1kkdl2xxgtv48ub625wbk5darelecpq7ccf787gxkdwxmlmd3wl3jnzupy07ev2o8uncir9lks70zlmkkyvxqtf4y6mjr',
+                status: 'SUCCESS',
+                refMessageId: '9e8hcv51xxphhh7ujbwqgwny4yne976kbeq6eailgbtg98spdarzpm64mtee93nz4hhbqhile6u7k5phlryj1x710l7zew5c5yexs5ywhw7qeg3fzhjp3ivi4s0hxh7i0qpul5q5wtfo51esa76am2u0ah7ahi3u',
+                detail: 'Repellat sed corrupti voluptate qui ut consequuntur corporis in numquam. Praesentium et quo. Sint in perspiciatis sit rerum temporibus illum vitae nobis et. Culpa molestias sint quidem accusamus nesciunt. Eligendi ducimus est rerum.',
+                example: 'fns8x9mh7wdmgnfm5rcfl0ms4w2r3mr3u5f1ogf9qlgj97wa4qctmcbrs621j9giareqxq5lp04bz1hqetn81cqfi6nbvcxxrvuszkxop6qj965m99sc47hz31ehklffjgfatg4oa6yo7ddlbe0924lml4nxjk97',
+                startTimeAt: '2021-05-23 03:00:29',
+                direction: 'INBOUND',
+                errorCategory: '2tlm1lnhm9sv371z39cwf6x7nr4s5dgrvtn8wlnqqz5l84ibxrbxwvrr8o8xd5e2i0zu74soia795og003xe194dskc43yi17hihqqd4k60fwjkn6dcptpu3tw4h05n8nykwy63eck0jrcl521c5q0vloth548ob',
+                errorCode: 'prghxrnn25ve67hxxu0ec64a2nwda7syynuq5sne60n5u79oyo',
+                errorLabel: 690437,
+                node: 2563990629,
+                protocol: 'ubjbx54ykrf90hfqxws4',
+                qualityOfService: '7mxy1t1xmws6k9l9t8yo',
+                receiverParty: 'k8m9bwbaae1kqw6ck6zi4aszsu041lrq569l6x5aq9nwf7o4vi65hoynh4va6jhmw3gbxvv3eyt0sbb7wyqw71807r15559yozq2w6d3nei1jrv4ls7yb0hamw7jjcc2v9bccwni1om760opztoqvgm11qyfbku1',
+                receiverComponent: '0hzjap5vy2aihf5lmcuuc2ckvr36cac9j5an9lafv5syap7j0kiddf8wkm0rierkolnbpf9w7syqr2earst7yz202hgxzaollzjvl6b5hqfrwv13q4l1i2lpb1iv67b70ailbyxfcbeacxf8dvz5kg3ihyhv6gqm',
+                receiverInterface: '71tm5j9s2e5w0elnjbj0scv7j887ifhr94jcvaucvuyp9vu8av96zi3yb355gp60ieufpmg4edx1i5cekbxg0l35ybbzw870sgw12yo7aqfqtljnjf4m2zmbi8pn60yum1k58rwuoo8eioaprwkcvbnydmqi4svi',
+                receiverInterfaceNamespace: 'gqnzl0k74m01u09xhm2yykn53iuevm7bryhb1emmwxxuhi9e0yfren3evqlsosi8u3tqumsrmn4eouwfano6y6cxfs210nuw6x8gxwd6wpye75o2m1i4v8oi6vm9lc0tbv5kythwesjz02db7oper307dvfrumq8',
+                retries: 5536907240,
+                size: 5867839380,
+                timesFailed: 2014221648,
+                numberMax: 2214689532,
+                numberDays: 9511725089,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailFlowInterfaceNamespace must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStatus property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'f0f4f814-cdef-466e-afbc-ddb99ee5d144',
+                tenantId: 'd010aa81-e5dc-4346-bdac-478d67c42bec',
+                tenantCode: 'ph86yerqrzhjf0qbfktupchylvda1cc2eo6kh7jtc278yvkax0',
+                systemId: '9e7ce69c-301a-46f1-9d8f-c04add58aa05',
+                systemName: 'h3xznyyf2k0hik4cfmum',
+                scenario: 'xxj50a1udjbik2z6sdzlmnzd1oroea9uz68wuredy46w5qeg2sxs79umt43o',
+                executionId: '20a80009-24bb-4442-9975-06eac770a1f2',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 20:49:29',
+                executionMonitoringStartAt: '2021-05-22 16:21:05',
+                executionMonitoringEndAt: '2021-05-22 16:32:49',
+                flowHash: 'go7e1vsbpgstbefuabfhg7qa8us3w9pywz2558es',
+                flowParty: '8u9xc4eo6n39n8s1pua1q44yryw9sefkk9u5lrnlgo6itmsl8ov2x2oo6xyo2j3kucs2jhyfi9eio6k5hb89c5pgosepn4y50erylwguqp9nacxzraqz2rur8x9uzpq6lpkjwhr7pso0c7w76p52plrmtdryus88',
+                flowReceiverParty: '5pq00o6pg3fynrfzqfx3jisnmgztcj72kbtftdkvvv85wmgcp5mytlq7r7jtzfzqlcd7ak2scvbvbk06bp8wzhjadjamigo4l1jxc5fm688mhr0dnsla8vlirqcco0gijuybnv99kofxwkhk9z5evkcamv4il5yi',
+                flowComponent: 't3rzhwec6gdysol2pd4m2ikshkf5htcr3b35xgnxwv23e5qimv919nog48yxj9o4uyah4mi7n9ia6d2l5mfst5o5101scxgfdbr9vd3y9q2vhnejoy8nkhzs5l6lb3fzpvfzl6ogungseg090bmhsg85q91d296a',
+                flowReceiverComponent: 'xetnmu4g6jfzcid0ko58hcm2s14g6bkcq0eeoueumkb7tmes9eahja87brijteuo7un3lgs5k5awc50ln9lpojw5web5hyr6ylqwaguiox9ov7mff0m6dr06v1z3h7y9t1pk358j1ddyochy96sotbrvrmshwt5x',
+                flowInterfaceName: 'mcyv7zeb0wefz2v4yd3cvwahtvwzl942x7vix4lhf7tkcevr8kzvivzeiulpwcsnlxochlr2q7zdv0gljlb9om0361m62s9rvmszozspoupc067yyhgq41ts7r8yb7nsslmm2vfgzxl9mb2rq3qb3m8wrkm07302',
+                flowInterfaceNamespace: 'bjq32f5q7savux23i18rykuau9ssbf39xzievnmainumugp3ebamnm28bcyykwx13bfmu5bh31ufnzyksxsuaufmfav2j78528hxcbaxb92ynon6s5bhvischlewy0lpxdfdnnym43ae8n914b5s8h0xsgrcr94m',
+                refMessageId: '32azkx3qngesn3zxuq3yda9q5f9nyfgmqfpanqlvt1w1qsmbmjsgnltu8x9nq225zuxezlz43iqsnh6q6532uvqry8hv1y2kkn0o612hm1wsrg5to9ihohkoj3iu8cxto76h68imhq0c7km3g0s7u5rj7bqy6l1n',
+                detail: 'Nostrum autem neque nam quidem. Id omnis voluptas eaque est necessitatibus laborum sequi. Velit aut molestiae soluta iure amet quae.',
+                example: 'x33htdqevylkde1qxh1w6aj7mqinib4pthnsmzbwcb6srlct81u8lyyo1c7cmwa8k1cfdezod342zelvx9u3x7tou6woepm94uf1smhb86v6teqpkjfrnvpy7l3j0e4u757arjkczum16kit3n0jn5texft1f3mb',
+                startTimeAt: '2021-05-23 04:16:59',
+                direction: 'INBOUND',
+                errorCategory: 'bm2virbd9a7rzydkcvo0qmw3m1ewkyps8pgnl4101g8472mq4twnwsr8ynbosisereo07xs4t3fzqz1xiei1kx801ceza0vyh9ngt8j63t2yy2kpr8vbpinbq8htqrsnu7vt78vxussy3296bwivhp8ds6dx1d23',
+                errorCode: 'l49d6gcarhbacf43f7nkmvarqbw8bx6av5ae1zkewdevvt15gz',
+                errorLabel: 295659,
+                node: 4536885234,
+                protocol: '588yfyzn44svkb3cilrx',
+                qualityOfService: 'ykjiw6845s8uwkbfwpwj',
+                receiverParty: 'w0lwwng16q2mgioxuwjt68tfm9h66d6o6xk5d1xp4bm76byhc57d5sfm4od0739nx7r0zutrqmuo0d8ld14vgukm9oj2xshwo8gde4fn9oew43fo4gqz314e30qiuhoi8hhck6b2fomczzwj3fxtskklamirf197',
+                receiverComponent: '2akl10w1sxsoz6nb2g2zhxsufhlk6kmp8tz8awmo8577zts0f4hzmkum2wzf4d62l5rcdnhg3a1klpc7tdr80wd69khxatnbxbwttbft0xjmtwv16ve3vxp9dy3euhekzxkpexeqd8bws07nyxde7cbwqmx2mf11',
+                receiverInterface: '4athm853ma1m7lvwvq25oye8ix73v1at6z2b4ndhwsuz5yjd39sb3fehd197pq60vuxq93bruod5263q8ebr6ca1n6v2typuy4ijw79tazphlxxk4b6ub9qn2mcvnweym9kacqnwsvlz6pay441yhn4463xk5iko',
+                receiverInterfaceNamespace: 'xqzmfl90tt3502oo881teic4lqu19emjqmt4a5n0o98tq1t2j7e6exhv053nkkrgr39lozx141q0k3rdosyy0s945ecrl2nfjj84g7g9j6bzxl8tr3tmoi7hpjcujwiw7yfb2kfgots2vf2ddiz1scgg8npuok0g',
+                retries: 6668376625,
+                size: 2023756101,
+                timesFailed: 1164764581,
+                numberMax: 4851464877,
+                numberDays: 3561779045,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for MessageDetailStatus must be defined, can not be undefined');
+            });
+    });
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailDirection property can not to be undefined`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: 'de88146d-4660-4b6f-aae1-a4fcd7011b69',
+                tenantId: '810fa572-3488-4a5c-8796-9ba21ead963c',
+                tenantCode: '6sglxpodxgqqs0n3ke5y06zxfj2xw64633jg86cfo9b49lehq5',
+                systemId: 'e1384eae-3c42-4d35-a29d-dc8f2ac37d5a',
+                systemName: 'imc6z292589dz7via9c3',
+                scenario: 'do6j4r41qc3isvmnv6c2w2reb87avmjec542sbfqv38apgor05fo1vuhfkf2',
+                executionId: 'f42bcb54-a22f-4ab6-898b-052bd8d25ab4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 21:11:07',
+                executionMonitoringStartAt: '2021-05-23 11:06:31',
+                executionMonitoringEndAt: '2021-05-22 18:30:50',
+                flowHash: '3oazl9m9503s1e8f6751x5662jbq0w4wsdkaonsm',
+                flowParty: '2lm6fi8ce011koprmpd02hn6p4e3n3vz9qrymb3s8frvdusr7u8thbcq01uodty7x2lnehzlismb3vwoh4ff9872elridmlorjod2h51rhuroglz5nhx24341mn4txc4mx0jwn0u3g10z8oc7dxwc9zl19z3w2r3',
+                flowReceiverParty: 'pxsuoeooik2s1pb5gxesc3xxtnyiht065vdgcgn5mt02mirpk4jydtasx4s0y1ifi3qz4brawt9tncvstt4pc88db0bwjwposhll3v2lmvpb5xh8klki6jr2fbzubsklkh4bdzr5ouuimedz7gphbkm6lkydezku',
+                flowComponent: 'd4hpjut3dw1ly0od6ti7t927ehyr5nrnnvmgwopek1fki86j4baxsjqee9joiet0z1j4z3624r2n4gii6ygd6o7vpv9uoujuyf04syf3nusprcmpand4kqj6gxdllf81ryhxddjrxr1hnx5shwxd3ucg7icaft2e',
+                flowReceiverComponent: 'wn4a122ccalmwbxjqj9vj6tlwzmx6jtl639ma58en7oph0tkx3gdkayo7fiho2k2df36ut7lpkahq2ok4ps7k3ha8sslwsmbal6q5xqk6l0bjuyfvoxnneify8f0ut2ov6zmwc4uzyvs1pq1ei7if0wm6i4wg34j',
+                flowInterfaceName: 'zuwzmzd8hse4f8j8iqvzse3re5fyyawvo9et3nn6knnzuwd2uy0kl6o1n0x4crckfg32zdotm0d5amy1n2i4ke1axdr042be6x5mudg3fzuvk9mp7cfgdz3f719o76jyppqsrp1qjxu27sehvxdcxmieqmb82yid',
+                flowInterfaceNamespace: 'ruvry3wfd1g52qbu8r5ztfh42dbdktq47o59x2t6why9b007smnn9ytv2la0yt56bx9sdauiagcxszvezg44jgdi0wm4gnzus5p6ida1sxhpxxpf0k8qjzynpdcee93rodebhvsyi0acqx5w9z9bqbmzwkjwbnkg',
+                status: 'ERROR',
+                refMessageId: 'qg9fakq6tx8816c54zg0taqhmofsjns4opswpb5ogpk9yzelgn4jwgzunvmufadmpm3090xsjqfipger0jdostmu9udy75x062exkx6le376leagenmqgzzl6xaqv5rrz3t7m6ngzf71uoldc7o6z2gj9vdzhwr9',
+                detail: 'Facere itaque consectetur architecto veniam quas explicabo magni dignissimos. Asperiores et dolor ut id deleniti voluptatem et sit quidem. Occaecati error nihil sunt est et omnis voluptatem et modi. Rerum beatae officiis. Cumque nemo ea quia qui veritatis autem.',
+                example: 'yl00oeafga7pqby7r9oar91ibifoxoo806728uougnwkw9jvpnx1g7qe9qu1j0ixqpewn3wqg0dw4lfa8oernao71qa99gwh3sravantauu4mac812wp59j1h2iu8wzb1sz5cbfw1into2cmx7fk7i3rfrk3swwk',
+                startTimeAt: '2021-05-22 22:33:52',
+                errorCategory: '1qpflhaz2ipwwat3gvbhxkrikvbfxbh53kqjo2188onoee3cpw5bmuvg149i6hrk7r7zx1licp3l91gmcxe03fmuoga7ymqb07sqx4wu22lw8zz1v6t5g3sme09o5e26rsxsco5vtcpy0uuzxsd373rfwe0oaslc',
+                errorCode: '7pkyzzo0g1xksk3bo7hfo49eth0acm0vg95mlyn5pgj1rmk0bu',
+                errorLabel: 840712,
+                node: 9827034719,
+                protocol: 'okpr24swtmsm4r5hjzc6',
+                qualityOfService: 'jk1xxsl5qoykuclbe7wx',
+                receiverParty: 'qa0cwv5qt8s08m3ve0azjo5kjyauanbharmyiqlnhtlz0w14pb5m1tnr4gzch96lpcnvgsrky1bd3hpmds3aezi3o1pqtwml4z5zyafmqqlsaj2ex8d2ubajnwftchzmtl9la568qy7zn3afhdwb9jzew5su1nhf',
+                receiverComponent: '0iqzkugf8wtuyd04tda1e4hr54h2wcg31826snzq8aj0csrurgziopk66vxywnuvh4hx0zj2wgbd6s9xpi88cx8ab8t6amj0ub7veby4o7sc59jwxkr8igbcq2e0fc405xwff3e6gexxkzhlzkq3cdl0jcamgtcg',
+                receiverInterface: 'xly8z3sfouxer1hsgdcyjfxma64gtclx21skwz5udtyz458mqtn8qr31erk586gq0anoutk429xafwqfv5lu59sxj13p2gj4shcy43ur3l4j2rd3eivmgkfsfkjgzrblr8q1yqrjs3cro1j5jp1a5dse9l4nj8e6',
+                receiverInterfaceNamespace: 'g30slf11ypsjr6nah1c83izujjj3eme8iqge7lpbt61tegsvurakifn1eykv0n8jnqpgexjwyoxq88s8p58r3a2y5pxb2g5sntin14szqk1o9e04jfc7zt37tk1928ywpphaxbqpf4709b1ca9z339ood90z8ohk',
+                retries: 2995912267,
+                size: 9830153108,
+                timesFailed: 9490590783,
+                numberMax: 1300681003,
+                numberDays: 5775944049,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailDirection must be defined, can not be undefined');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'qcvxqdpo6op6nrzqjd7ou49c0ccmvly6p8g8s',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '25ke73hfeciz5tlaxi7rjrs95f8hfobtm5m0tcj003rzf23eef',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'jhqus9mcdm1so6xb4gw0',
-                scenario: '5i0hfw3olkefg1k9jsbzyb7hczd4mckfyoeuegrrr7f2zrcf4ybkscyk500s',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 08:46:02',
-                executionMonitoringStartAt: '2020-11-05 17:53:18',
-                executionMonitoringEndAt: '2020-11-06 06:27:39',
-                flowHash: 'ehi0r634u0hjuj03zj6wco9jnwisglhajikh7qsi',
-                flowParty: 'twd8gejkj6roy5ngnna3h0ycpi5f8sazrmnzqeib64ocm7ahe3x41rr4h41wmii7c7k89o5wsankm9ydj4rcuhrvu3f9bm86qax8tht36aj8tzz8qcbm7c6btkp7ygv1q8uhjia7r8lckutnqezkc1xfrubh9hy7',
-                flowReceiverParty: 'f6vrlp6i79kr2iqclnjmjyk0795e8sbbp15ixe77jjkicioz0gq6kwl61zvlcbo06awjzk3maebt6rt83mp4c8hnfrn7gm8jgzrvuo97el21dr4xlmoyekicufldn3j5rtt416kbx61whb28i3hwuxfsm08woyk4',
-                flowComponent: 'f7spat4rcw19k8yp4h8zj6e77y3n1gbnyp2eui0jsbl59zefiz3u0lw271cohhcea8faclmr7h39q6ici46arvh3v3qkukr1smz64r7bayfltkfkcx2lmk3ivtecc378ma73ge1fvb2ow8qusvw7zn6jwatg1rt6',
-                flowReceiverComponent: 'iovxuy3m7lwqtw4i7w3kmu1ruv7g5w7gc3wijbtpswe26kmnsakq51blmvu5eerq0e2ve2ywbd7b82e8qdphnzunaxbv6bsh94sx9q9qg6k69oeisqzmnb8bjzy06oschv0j8iiob1xrboodgld4r34tv16x7vai',
-                flowInterfaceName: 'cbhmf2q71fpfm60sn56hyk9admim4p3hkesebj7yjseens7ho11zr8e6m8gyb66fh5sr5ynfxypblnm67rofqyacjyki10ue8sucwgb4mkx1aiqg869atofo8xv421zckl3e2w207kxe2dst5wr7e4gf36obaegu',
-                flowInterfaceNamespace: '9rtz5c3xfxlvci5l9ebrg2cueii4wb2itnp8tf3qgkujd5umvnopgpciavtgchrrsn5ybq1xu0tfoyciedgibcramy0a5l4rj0bwtrup1sc1x5gqred9sycoxiac74jyhiyfo01zx0uthbogrb1jd5p9ofppd213',
-                status: 'DELIVERING',
-                refMessageId: 'omz097iuat5d6aczq5yiblti28yw1kszpn89rx9iia72y5em8nvzt0avuplsw6d56yq2r39fbgre4ely3euvofruw2db31jzzla9onxm1qcahu73bllqn8e3lcyfur5giu0iqw7oupbiovf1pc8z589fnb7wrygk',
-                detail: 'Dolorem molestias veritatis placeat qui voluptates qui assumenda. Error repellendus officiis quaerat facere ut. Ipsum sed odit dolorem qui itaque occaecati temporibus.',
-                example: 'gx7xynjnlhzwojhv37yx1l7esun0vye40mbkx3v7ncywjpm4l1vg49mo9hula7v6qxeuxpv6jin0fdqcvc3m59sywkv5jlh180nt5f2f9vydvj7sg59honqxux6n6bxypylkmofqbr5zgn1w1zhy5m79krdjqwxl',
-                startTimeAt: '2020-11-05 13:17:05',
+                id: 'obeodrebvmq88jwoviuno8jgate6yqanypwh4',
+                tenantId: '19bd20d5-a609-4a2d-82c3-8a38e9eaf8b4',
+                tenantCode: 'ezjazjy7vje78dx1zwjbia5cyj6jztu7uyyxkgruymcak5ajbc',
+                systemId: '00a0f3b2-6317-4417-b149-6a4636157641',
+                systemName: 'tofi50dqmg9g8i0apnz2',
+                scenario: 'opk6qvxjvnmquxvqwhrw3cie297ua8da4ik8z15m2afk8xe0tz25k0fe44mw',
+                executionId: '21e7a84a-0e0f-44ff-8124-e7cd9db52fa8',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 23:22:47',
+                executionMonitoringStartAt: '2021-05-23 04:17:43',
+                executionMonitoringEndAt: '2021-05-22 20:34:08',
+                flowHash: '0m4446f765z3amnwau9vr66itikkieil7kp5t6x2',
+                flowParty: 'lhadpstgai65oxim3d8h7x0dfrx2tsw6rt5kzuk2dquxsslyd774ptmxvpv1oy1m00jc1adissuxfwr0v8ttclfhwlntfoc8lfwt9b28mon9utqr1zdjmfkopv1rl8dbippshq5cud49yha0uk8uuus9xg8dwpfy',
+                flowReceiverParty: 'l464prv95bu4i8wf3pih59laz639d17ndwftvjitd8a3f7a5fz7jotfszxzrmfxm93km1f9tlcuyefg3wd4w6sbz0u36gaots356jly7rmqyzxiuas0ysoi1fsxifzpu1fn8p71sgypmpt39yfyk0hlx6l0ez2my',
+                flowComponent: '4sorxt41gy45je0q5k7wt7w6xj2u6i2oovegiqbt6cipo35fba5n93wi96xt7ykygurf4rn2bvbufz5s1katp8gz371e13tqf2so3jddt85lkvxsn5milq8wsfozhy7z86qzy54m4b4vejnd8cpb50quhvxmyryy',
+                flowReceiverComponent: 'z9d9dolmnyv7e4r0m1xw7lw3g5ydx6ojwoq59p1cn249f6a42qi1h502bqblblcqumf0g6akvgzobcaerf9iha5v29i31ra8xzlob6tfibgatyoledrymfniepm2v76jhq6fqxyr135e41egeh5v0z3qzq9ztbcn',
+                flowInterfaceName: 'ow7m679gd2j5f3t22zst4qlnyzjbn8hkptheqkuyiipybmftcrfy2kjz5oprf94ujmz51oapuws2dyk5q2yfiadnkttr1ylaxiucvjmwbvj1jmac80zpbon6rvoumharm45xtp5elc7u33b94l24vvr6uomi8n1q',
+                flowInterfaceNamespace: 'aoj9bwhtxvywcc1aflly34eb3cykgvx4xx78pnmor673vznk62l0t6ypslzuk3pbtrqt7sjx46d72py558zlecvrtrxecxaa05uk819wr1zuq4tp9ks50ywgq5be44tjf0gs99d90krt8b7j8gvbruxljncjolr0',
+                status: 'ERROR',
+                refMessageId: '8f6ha2b64t5yoa4ga3345keiky2d0ib2y6u6phhprus09x3vxe4hifdesezimnjicamw9j5x5r1ckg9di54c89nldh0xadv3awy47zjlckp3xynvg2k7jxlkr8dvcuqv6t1uooyhezuprgszhxy9jaqaszrwzzvm',
+                detail: 'Ipsa nesciunt voluptate et fuga in in ut nobis esse. Similique officia non nobis aut quia. Velit quo et nemo est alias et.',
+                example: 'r926qqj6qttso8hfftyon95s53tjlistmgp4n4kf9p1xblmuh3ezhko9tahtw7mi7ucu327dn13sydjfjpafwsyh13xydj9tuh7bgm65woc59vlwtgez94t0n2qq4vkjhude58lvkew4s5yymur6g5mezc3slx4x',
+                startTimeAt: '2021-05-23 13:32:11',
                 direction: 'OUTBOUND',
-                errorCategory: 'oz7opegv5h6a6wwfsp0rtdrt7wy895wjgrpijz50onrrg1htn2vhlsyxlfu85w8m40qf3i0pv6p15l024fikg6ueuqy2ofc3fgotd77xp0h9rdcn0g0swjxv1qitlovp1li675crfwcb4g78ogizmsezqtygghk5',
-                errorCode: '29klvn5xhsf7b36wxuanpn8oqt4s0pxmhaisjez7465iq58y7v',
-                errorLabel: 321993,
-                node: 8931524571,
-                protocol: 'hn6am7ii8rw4odmtmk8z',
-                qualityOfService: 'sch6rqxnn3yzbwdhc6c1',
-                receiverParty: 'xxxt7kufja10xyc9695r8vjlx39rg5lzfgcifubhvkqjp39dnnzkes3wo1ldibd3amp0v238y7kiyhnwd1bc9gch6qo1pumsvb9anbu15awykr8e6osaf2k8f1i26z6jp2zqffyrloekvo7l81bpewhuw2oe12a2',
-                receiverComponent: 'sssrdrpc9gi7f5ivvs1y0i8wkqmkl3asaxdojguwye9sp1lu7o4joiyxbrrcfpg86jygex8j1xm4ecan12i9icq1s8osp7vh553expxcxkmns6k03pkuyf5bbs4tqxnfr9yur2vv64pydouujolhpd33j4j8tyfx',
-                receiverInterface: 'qy9xgrns3si50czyaa7l8uh5ip4963iux68jp3r94oibwmgoyyrqgeuxh4ga51md4pw0uwopjxu96a0mg6b0zp1b1ukl11gijjpx6cfavtgub4tyxcojdp3ci8fvkhz149ytgazrvf6o2h9mb6e82azy5qggl32a',
-                receiverInterfaceNamespace: 'tkntnrd0b1udw190g6i6mm7vu9lygm8hqf2z2pznbbib5y4ow27ia00enmdrbpt45ha7axqdrciyqhwx70szfams1188b5904qxl5pkbrilxe5z5px54cy3clfeyta2maz9n5howvvoz2433phuze2w8o5iogvlj',
-                retries: 5470064005,
-                size: 5267706650,
-                timesFailed: 4144808476,
-                numberMax: 7071345321,
-                numberDays: 1803045747,
+                errorCategory: 'qbkjlcw2892hyniop35f87obfdtk3n1mebeodsaymw1ogkxfbvnqhkorlgocz61qt2h224k77dd0jveq3khh46rvvt3e1pywgc8n8xxut448f19d8k31nub9udjni4rsastjrs0i0rvkt2hlakrbzn8el41omhau',
+                errorCode: 'yjreh0xvbvegm5fsoopjpurlurk04tfii1v9dpuhn9nnwnrsiy',
+                errorLabel: 877760,
+                node: 1910465961,
+                protocol: 'a1aysbg8t8dqxew2r7bj',
+                qualityOfService: '5c7o9jomuhzzcxnwzuc1',
+                receiverParty: '5mscmhw4q8vfuo0ax6b6j13qejxzuimmmi73h3lavbpqluxm9omfwj2arwpstvyflk1wdmb490u6czbjnnrfudfjgj4cdztdto1y4oodjid1v4k019kicuda64fe05w0u2fxbybhfrhk2odg32tumdbdogyjgqbw',
+                receiverComponent: 'wfpndrlygmcnut124t415tew37g3fw8d5dna67bz7ob32zmh9hqajcgv9604jtg07shzutrnlz49w8z62godhvjabu0ldxoqcze52hdm9hkdezgect4k7hnznt2v31byhbyzscex7ghntiwwyrb90ue2orhl66nn',
+                receiverInterface: '92u6h3bes09o6iyblp4ljujkotr1yr9jsnmxcm9e8j1bcnz8nmj8wiycprl0ar4zauy5y3mxhuao2mojzgq5e4j9aqvkomue16mb0szmel8e5o93nxke4iw29bs81sd5poffzagvrutgbhtu0m5soc6rb0rt3m0e',
+                receiverInterfaceNamespace: 'yn9ruyqvvsp5bs38bbaqtcjzqf8o8o5rofran5f8ui95vmh1u1syzgoqwq9zgregg7mfcvo9qccw887ciekqnuynxj4mechuaeq6un8yuoweopevrmbqd7t9qve402ufqqucg4z7v5js9pa8yd3ndgafdlqzcbdg',
+                retries: 8623010872,
+                size: 4670415991,
+                timesFailed: 6057371882,
+                numberMax: 6887059602,
+                numberDays: 9982892699,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: 'xrjx1mc9j8i31iet4hazdpjq72thutu73r9by',
-                tenantCode: 'tjt5y5bfi15i9fpaxlj6jf7jpk70ixpnqah9whhxnkds4lfvf8',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '4ifb1olxdxxng006t72q',
-                scenario: 't7op9we92gn51kjimrnlg2njmycms496st14zxkxpm08mf4t4o5vu5jqk6xk',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 10:26:57',
-                executionMonitoringStartAt: '2020-11-05 20:12:28',
-                executionMonitoringEndAt: '2020-11-06 11:59:09',
-                flowHash: 'zrs6wtvfbpj8ucfol60ao9mvjv5vvvfwrmflrrb8',
-                flowParty: 'rd0js6xfvm2osrdwoeilpz7otbg90p2tgl48dz6k08ox7ok9rnycds39wynm2baertuftmqv7p3phvjiw9pvh7ccoypxopsmfboc784qdr5lwsbvl14jk8xepjbihbo9rjl2665vlhgb8w20nkjvi8heq9z24fyl',
-                flowReceiverParty: 'wqqnt428hl9i0tifb8zm27pvprqete8vkbqmb7lk2dh04vp49ixug5yhk7eu2blwsnnm813dnhnn491kvzsky6yps0ddx0jx798p099iy41si75txkpmo4xebr4uyyxq6xodkamlh8mgay780463g7slmewjk7pm',
-                flowComponent: 'exdybox5wx3na60t022ajr2tq348ms69djc5y1gygobdxvcqov1226crxosco8lzhs4zhiq7s2gb4xe8weh0965ib3hlfbzil8k1qa7hjsk8ekv2pc1unriw2wi7jrlehgvxqogcobgwjm1b29w2jrvrweszg1ug',
-                flowReceiverComponent: '2mksjo58jjtozurm7slgh6j3q0imlsmcdubwabpwt1cxm2jotnbnmpl8lop02jn8l6cecw65bvkrn0wrq245xdhkjtf2y1ybup2aep40eq9ifm0oexxqfg9tdk3e0iwgwhztfkhno5el1czw7y9f4kk5bbky8okb',
-                flowInterfaceName: '40ehgb9wvnxvn7o63ujon0fh9u970xk4lqbatkogjtcb1pjbuopvhogaefr0i8ej6wr0z26cuw5gtfdivtj51woxgaymviq3ugennenbm0ix386ovtg4gsoy1ddm3at884ujin082y8ipp8dpejmi2vv4h66de4h',
-                flowInterfaceNamespace: 'z6qb6p1mffpcyepuy5qx13jn00royy5t416ouherbqn0mwqb0wzc2koiicb70g8fxkt5viywtl1c7ixrr8n6i689bmkv6i24qkhjkx4shub7tgacumiifre9xj0a6j8grnc6571suqf3bvjtq2ap2ddy66gniepj',
-                status: 'ERROR',
-                refMessageId: 'tgs8o491g2q6n44v0t1h1fopf6l23quzpq3vvet7yn8cbb1kto3e622hdgab3d66erktxjhyuuqt67fiowupmcmzidc63g1gx8ta43vunhzsbxvebhdv3984jt8fn6whtbpkzscon99ea07p5dgbkghtbnfiyk36',
-                detail: 'Nisi exercitationem ipsa ipsam assumenda. Esse tenetur nisi nostrum omnis omnis numquam ut. Rerum voluptatibus illo rerum reiciendis voluptatem. Tempore id quo eum dolore dolor. Dolor voluptate tenetur sit quidem sed est molestiae et. Cupiditate recusandae et rerum consequatur omnis sequi voluptatibus.',
-                example: 'jf1pg7x9qfs2mkz0aiv0gpajyo8z579d50ctbbs34qq662h9qj4k12pa7qghec6eg6k3l187lgvxx049hyzmoj0dbum8vp5mcebbthg42t632ugbcbirrcxwtwqm1qdrsfgufu8lant79hssrvd1vqehp55z9dvi',
-                startTimeAt: '2020-11-06 11:27:16',
+                id: '04a6a3c9-b790-44b5-8e46-0d47f20cdc33',
+                tenantId: 'n2u3xes9lwrmr8j45tdmc1pu11c62zzt99zzl',
+                tenantCode: 'vopmo7ddcqz6sndljdpkg5p5ksr8b678lxtmot4wnbnt7eugf2',
+                systemId: 'bdd6131f-4c06-4771-ad2f-ca47109598b7',
+                systemName: 'ijhgmibe7xr6yc0lejjj',
+                scenario: '8cfmqigt5iqp8vw8hh813tzyrfv3wxuh273m5gujoytoh0zt6hdsxrd6tvb7',
+                executionId: '41e0aaa5-5831-4313-942a-4c627c6e0f2a',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 02:16:57',
+                executionMonitoringStartAt: '2021-05-23 07:25:13',
+                executionMonitoringEndAt: '2021-05-22 18:07:49',
+                flowHash: '3k2129sz2va6nmso7ev7a1xkagnp3yorezqof19v',
+                flowParty: 'c2fppkxsnvl0tdalx9l33y7w4ngvxxf1vhj8snqg80lz2x5j7q7sjh52tntpcs0654r4a1ztmiq6015ovuuy3s259xu9hx4luqmhl1r8j1g4cbujex2owjgbkm8sholdjd2ql6y0gw9xvurn7wuyx70378e62n95',
+                flowReceiverParty: 'uwpzkb11ls7sq29prjf1sbqd743dpfec5rfvvw255f74edoz894ugi9dkabbgrs9mogvoc3f71ljh0wfg72hde5w9vrsadq7k6im3twl5ryqwvaer24ncujq5bgdj6gqnjtmygdue2mzq699odq5x3zocz59szw8',
+                flowComponent: 'qt923rmij399k7owm2zylu89ra0ekw6n5qiph3622rmtuze3bks5jwzm3avku9g9exslar07o8mhfgjkus3c71yn3o2nzgo4pmk5vevjfb0tjt6m3yk8r3f7prhbtnhwmv7c1rwd673tzby69fy3pncg5v7uraib',
+                flowReceiverComponent: 'l6libfikm0imyyeqvckpum6up3arc8m2e9z372x6le28c02wv3zlwmnop4qzn4c8lrwrg6f7x8pzyw4kemaqqagxicqudmc53holxtanir17lw2vz49p1s0va01zgshpydrmnhrf6ok9y51h31tvcjc7bzob2l4b',
+                flowInterfaceName: '3y3g3uzif6el4l0vbm4omjuirxgykqbg022rhg4bx8erpfxsif3imuqd3pjazjvsbo5uzihabr91qeanm6zqtai4kbms2jt69at91g7rk1exlha0ow1nnjykor3atr1m61iruksw33bb4zwjgqh34zgu0qmh1ij9',
+                flowInterfaceNamespace: 'cvi9a2j44kbr8672ipdum61riaqjgvnyzymmt9yqqb27uqug6l46q4mi19zneevgs9a74phdqvnb84rb10vlymmff346dsj1k6hde3xhd72cqlxzb80uqmfn70dpusgm4eak7a8wtikzlz6spkv6xpdyhvxba5ww',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'fkbj79qym61dvecnd0jck14t96oec3zgo9fyob1pwwbffrl69azll02jf38yicbgwgt2sfv4uf8jdyer314jf8cpecgg2iy3x9axtkd71ov5pgxbmnh2fqx06a204n61hfkc9z6s5rg3fy5cut17r57qzp27u2bu',
+                detail: 'Nostrum sunt reprehenderit vero saepe ab exercitationem laborum placeat possimus. Dignissimos voluptatem impedit aut omnis. Aut aut nihil nostrum et voluptas consequatur dolore neque vel. Nihil rerum aut a est sapiente unde. Et quas explicabo. Optio fugit debitis.',
+                example: '5ark0j6gqwjdh9s789wuef1a5vzbd6zwjyg7fjhg83ayutuelt9yxow0v51t0rkl8klgx9s4baxh9yswms9pv0ariaopra2nwsf9hg3e7pik830envbluv1tk48n3060o0fec5kjsx1tnj0riu574srv8lqkdhf6',
+                startTimeAt: '2021-05-22 15:40:12',
                 direction: 'OUTBOUND',
-                errorCategory: 'p02rc032gvq7rrj678we3qdi7emea006iivrf4zpc1a16pf3i2gnhfesyolyre6x5iluhmyaf9pshkbrlqxjx4ijfdna7t3ocbmnmnzxq0mwmz4obowcad6kme0jhkt6mg545usm7leo7eigttqcj7tzd1ixclg9',
-                errorCode: 'vodknrdj46b3fi24zcuh8nlxqhzu2x0utdedpjsrnf3ipf98h5',
-                errorLabel: 824881,
-                node: 9936094720,
-                protocol: 'gfi7okcnroxooqr0lelf',
-                qualityOfService: 'ni4alsrip902n8i311ns',
-                receiverParty: '5mt8rltybuvain7on5q8xyft7z7ux028ystg99n180dztuxmp2f1prbvzr0ogt58lttzop2v4kxkmvz9fs03onjdamrqn8h0ysfu96ljxywnnmprzs6gya5efuzvqp4nqiwo8whh9utt0b95kzmenl4we0lvdnxo',
-                receiverComponent: 'nzsut0ebdlv5v9l4fog29llc41s9u4esf3q3xmsi4pqezpuyjxfh7tyq98brzdfb9lhfa5rdil6290dpzopnic5fsbzqs7dcjgeiqnwnqu05rjqrwpi1stpkhqcpm4khc8nczzauhfiivijocr3q6adp1dk3j4qh',
-                receiverInterface: 'o8b182elqw3i8ym0zbhbte5dfkez7tgukrl56yai6bxfnet7thyqatob6ld6mws5t3h2jacs98zksj7linjy03kywmy0m2njkmby2uao6kt4weudo9nz39gje1xlq5htpyosxz0jyynxur3uo9qd4zbbtcujq98n',
-                receiverInterfaceNamespace: 'ljswbpgzjs1ut4sjh7c5ziqz6gu12zihtbakhycl8n4gvv3h1wj3anjixd8nf451apdisz4vgxqlnicubm2oaihp8kwe3t37i7971v44eog5gwwedctlu5epeeaxjpao39u9np1w4t9qy75e7g5ldak7rdzs4mts',
-                retries: 1570265666,
-                size: 1787036268,
-                timesFailed: 8199187174,
-                numberMax: 9231801593,
-                numberDays: 9442716187,
+                errorCategory: 'wkn6lggou31amvjq0sxw9ei61frc9hhgo80jgj5uer04hkvmmmvjeuhz8fxjx53xcwog93xs6bnzk91e89ws657rsy43wxz7i7xprv2fhhtqfwa63m5c3m6pyc7okl8kbxfgqcu3b9splpv0oydmxr9i12zftvgi',
+                errorCode: 'x75ayns6tchxvw5zboj3mlm04y13w4fnu7jzbcukiit8wmg2ra',
+                errorLabel: 809371,
+                node: 8357193422,
+                protocol: 's64lian8ieulaj544g99',
+                qualityOfService: 'sqqdrzi1oz66lrlfmmtl',
+                receiverParty: '5vkcd4xho1plg0mz5j1m3i9qax8anho51za0is8felubgd2s91xikr594ewe9d3uc1rc8fdzqj1xfu82y6fb55uqtpq2q5v45vfdpe84a8n8tvsvtmtlbp3vdfkuewvm1vckasp635i1p7rb348zcrehauu4l8p5',
+                receiverComponent: 'xbi4574y02lilqoor2hx32m0sj1oazdpm5y2pjkp394rb7fhijwlbw8d5dyxsgjezznrf78zzj4ncbmy1wuc6e55ddr1gd4wh2hb0t31nkfzud7iksrgocvlqoavu06e0458mhboiaqjpf8dwetp12fw8fa0jor2',
+                receiverInterface: '0ygin07dh5pb1pjy51n8hxb83if98gtum7c1arin5i5medngicdnlko7bvpt3rfgwakl3ag2vno6mogswx6rzn6eye8570jx3f1lmqndi6447j99tmb1vewbnul27wwjrpx8bn8ggqlzrvivoxxmglnp8wzwnpp0',
+                receiverInterfaceNamespace: 'z83ur91z7cdfps9in4rty3rv7dq4qvhdpmeagi97r5t72l4xnpyq8hff429benf9hegxx7fhhon0zvrbd1y1aspvu2plyitbllscsooz6l0l75xdknda08vrqp0yfim9des0iwfveg0tbn5bj5r1280vfam0hxvg',
+                retries: 9798110004,
+                size: 4070913120,
+                timesFailed: 5407187857,
+                numberMax: 2609052929,
+                numberDays: 7764832150,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailTenantId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '2qpgt0tyn5a6dfvh73lsal0gq04tp7fs0e4xe2amoyo2qhik75',
-                systemId: '50ysi45dvmrt7iwlyq05980ty7secpajajqnu',
-                systemName: 'w8zwrgcqwdqg92s33tpm',
-                scenario: '1z3dtu7js45knt2yfqn7aa52uks83w4vbojaq9h8lx2i9v2ccqi7vqpybhzs',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 22:09:30',
-                executionMonitoringStartAt: '2020-11-05 13:27:27',
-                executionMonitoringEndAt: '2020-11-06 09:02:47',
-                flowHash: 'o4hwi8n74fnhjgsu2px7krwqy1ktshm0aixdcscu',
-                flowParty: '7iuybj43i7tpi0mcal601l2dao52gfklqi2o223bo0f01sakksrldolwau8t2c9u8i538x002no63sf1emtaaid9jm3n5i3773alebp1dmaaoeg6rx0j870lvov50pykli3zk3rybnq5qwv4bcrk99r9fkk1nomm',
-                flowReceiverParty: 'ngoczcto8wpd1ozlio0lrg2izrbitcspbsm4jialuvolo86vd6pq54ljphdal39oadf7sceobxocsfd0piwko2495qa7upbfirq5hn7xbw35qnqtelfzgnoy8npdpmgahzb4wy817lsyv4p5jehgv537ee3aw180',
-                flowComponent: 'sblukmim2nqe2evh8rhs2lm2gf4jcku960pywbi8p3txcts9f74oogjfhhx2ervzaoqp38nl63c0kohpzuniyk06jbrujyd3pr2ijo80j4mxjkcxardu6pmjskippblkfl5td63r7lm78jmq4vczj9g3ftyzgob8',
-                flowReceiverComponent: 'eviecbud2x2vm3mhy2lytiygv1u7egeao8n98c82vsolmilok07d2vvg5t2z83898u7unvwbsfbbu2s0ywxzmcty5snwyallfcgdbg4w6bw3uyijo288p9ygv3vzshcsmemuhj6nyixhpb5wsu2zvhde4am4iapv',
-                flowInterfaceName: 'v4eyarn66qp91e4dre5ezjht4b5tq9jwqy1tnkwg1q94yxphseg27lg6snnofks5bjgp0w7igzwkgtn7svyzkdh7gdujdp0iu7nf5nrrvvakh18d55nv8stcg0p9a2vjmxdj6hk3b1urq64pj87hjd9bu81ac0c8',
-                flowInterfaceNamespace: '1k4pkg4ps2jh8ivw4ukrdfc9p5ei8k60yyrzzkimhs7qbaoapvzxkmrjwiqn2qw4br1pg4dzkkbiafo8cyp5mqnmj4rqy052s6kzf1jchgilmybpignsx5ebvmzrtdpypr811g7kgw44x4l13ugn86nxq6jr1vir',
-                status: 'ERROR',
-                refMessageId: '9k6gbb7sqo95kdq4xdupxzzhrk27jmfml4x6ujbimv50wkwhzpud10buijkvmr9juz30cl1orrhfah0n85dsb9bwhkr0uacjxa7lq3p6h1zn1kb5t5lh315kr0w33q4rxeepsc1zq4rbcm9cd3c0vsy6f2injptm',
-                detail: 'Sint laudantium rerum dolorem temporibus saepe eum molestias accusantium. Dolor deserunt omnis possimus qui et et provident saepe a. Doloremque laudantium provident impedit aliquam pariatur sit accusantium.',
-                example: 't2m8vxufxoomw67gl72rl1nma7k2a98g1qf2s5kz24jdclrd8dw4bhpcwzzmhxmtrmw8firvxik4uew3hmjpelnd29i0z3rh4g9m22874wtalfbhxxjo21an9olp2wmx47ejjtv4hj2kbxkgtkmc46xw7lrq0dzt',
-                startTimeAt: '2020-11-06 05:09:02',
+                id: '9cc8f5b1-1c9c-4ba9-815a-e436da6f2b7d',
+                tenantId: '368f2d2a-a942-4c73-b4e4-e40259ca101b',
+                tenantCode: '1w3rgc2j5mmwzhai8davv28kqg03rgfjlfjrz7xpyvlvehqn8h',
+                systemId: '83vz90bp55tsec8pecdn7d4bx1d3cy1taio8n',
+                systemName: 'gby2oesii5arcpyhks3c',
+                scenario: '6mzhk3j7wn5vpylpq9x0xg3t7idpvzkrftkw4j9j6abbeafbgwblis2v6kdx',
+                executionId: '9941604c-28c7-4fbc-b120-17c5d1104cc2',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 18:13:24',
+                executionMonitoringStartAt: '2021-05-23 01:30:24',
+                executionMonitoringEndAt: '2021-05-23 13:07:09',
+                flowHash: 'n0n25rmb2495m3cs1xksya9ywi14h2r7xz4wk7o4',
+                flowParty: '9ekmav34aw8tyhibqo6x3b9k85ck3tqzvgvnbp6ws70mrqocxuich0gmin0qklet7mma3lf9lolsnmu78kdbokqh0frq433mghk5fq0fbjevsf6tzw2jp4o01do6cz5xp5j91djz7ylb8deqo7p4om1tonsq5qpy',
+                flowReceiverParty: 'e4p8wumc4iregn7llx4gvd06jvjxcacs951odyodb1cnr1jdx8u2h4gs00i888lbl1bstae228sykzmnk5sebmm2ma1o6hlauoeuidfdh60tzmzvjsdzro8cb62g44lzfb633qn7k7unb0jtqbr3roc7nzaaoojv',
+                flowComponent: '5abw1skdaes9rlnbuqul9l4z4exo9jcih0ldkmjlhp7ndqy6qwiaq22vo3a55j78mwjcrolp5hg6jigok8lmvwx9qeufuxx13tyj0u8u05ricvo2i756c1mg5fgg2olclsrwg5s49ec8np4lka6ijopgwcq660aq',
+                flowReceiverComponent: 'vv4lrflqqmh0uw894yd3czv1iq2pjs8g7d56em8t4jyvw6nonaz0wvkoqd2ydj31rvuszibrvmxcc6kcy7hxvvb7hyt7370htu4bgs2d2hrqj5r5r9pnnju5usd6rps2ey0wnx1xjionlmfe6vy3gpe01aos4du3',
+                flowInterfaceName: '9i2yqqxj2wleiakoslwk2zlgjtmhdb6w3h8xufjmwrcjaipoepzl35moztit3ayce1gwkckyt2ijxi0lcl1qtkp2py6p2gjydmaxc1hdrajlao963ojevm7fcm5ft5rmh911033uakcabltinfmn1zf1ophmarfq',
+                flowInterfaceNamespace: 'o1btesks7ui9r5chfkk7mmdp1978bgs8iff8j5c0fzy5kmjhljxck3irk8oexacyqcde883p0eseler8evmctild37lic3e92yd2lm7lnw33ai4hfux6bww7q2atqd3zrtjxhmt2zu7wl2q7yrv7333cxueqnpbq',
+                status: 'DELIVERING',
+                refMessageId: '6jjfzc5ckzt72h3bne64m3qywj67wliqvk6hfq4xib6jzd9znqxvnaavr7pnsm7sb45lqrgawtcjlf04hdzrtx8mj6rdrptk4eijiifqh3avukd4ewwhwrqgk4gdezm47aovb87rs410a39l6ujluw2kyokoehio',
+                detail: 'Facere rerum officia. Consequatur exercitationem cum nemo optio earum nulla. Fugiat et aliquid nihil voluptate fugiat voluptate velit dignissimos. Ipsum soluta tempore consectetur similique. Minima eum sit modi facilis ipsam provident iure quisquam. Tempora similique excepturi iusto voluptas suscipit ipsam eum.',
+                example: 'wl73k5122mna7vjm61sjmwbm3599iy6xgdvjjlf5lpfog92zibgedvcdl30wxrx2pqwpidaot0uplnx9ryy9v9unmus5cmmnsiyfe9xjzn3zko3te5g0n98u0apn7dl6c6s4vemxwbdw7iwof1xtleg4ubueiswo',
+                startTimeAt: '2021-05-23 13:08:58',
                 direction: 'INBOUND',
-                errorCategory: '2iej0q62zj8mqofztfa5ez5lo8xf8ck8zybwy5r4b0qjfyw9338gzf0c59jd4vvt2xpc0h9e9hcir9pe0eubuoohsywwaxrylrqfijeel0050tz3w4oib37c5yby5i1cxemhsp3oxxltnza8ma2ds9vu3dhraaig',
-                errorCode: 'bbzzr70b1mrhma2448oibf9snuean3shg75cn5l4y11lfqaamn',
-                errorLabel: 638330,
-                node: 9688917659,
-                protocol: 'omhxtakm2b897f7q4k14',
-                qualityOfService: 'gfqn6gcy8dltyba6derj',
-                receiverParty: '1mkrlw1j4t44em9ev6rfdmtt5ndhwfy0ikg6koi2fg2n9jis35bdti2biz5uaklulged1yp01ro1j4ni8ayqo0rc80wwa7ipvi9p5adi7uqw1qyyto38mb6e60npyioesk206fukew2271dzggm26f2dv7xljf7x',
-                receiverComponent: 'ly9gj741dg3fsfd7dup658kma30trqwesax2kc19uo0a4etdu3lm35mmcv9tdmh5c8gn1pldbizctp68xv3abhqtdqarq76fgzw9uvcdcn3dqrd0lj5awsds8n6rfk5hcccv3jif4xb3rjgj4zgy7f5x4net3vdd',
-                receiverInterface: 'cuu2uog70cpty43sx0igulh9eibp7opnwbl6glx65f1njabvmpxbceeevtko0t9jc1c9p9c50lnc3zseh3j1x9gxniio0612ira59opyuas20jartp4qc8qtgnl1bdz2btzng6uqjdvsbqm62ilmioefvgoos74t',
-                receiverInterfaceNamespace: 'ia6l5wn9kciqkg3xhlp5xzuccu3zcvaqe7u4gqxb81obj4jnb979yee00oo4jb9t023l8bzmsq9ptx8bknkwn0nsmvotbkphokq02vqav3219ay58hraazb82ly73w8fx1d1oevtget2kz944guxpeae0ie7ij0a',
-                retries: 7446738557,
-                size: 1351158330,
-                timesFailed: 5413660509,
-                numberMax: 2409603148,
-                numberDays: 6610409629,
+                errorCategory: 'eu5nv14mls0x6an1ua8u155k7651r3sqew0y5gy428esieie20yj8swix4hx10pviebcpex2quowbclvmz0ik8r824qoefhpvsfnp6ujizikn95v1ud60q1okul5xxca7c3d0i7np5o4thb44h58dizkt0m56u2v',
+                errorCode: '45om9fu15yypywjdw4my4imx540jtduxicafs0233n2itibwxq',
+                errorLabel: 972941,
+                node: 1640911953,
+                protocol: 'lyt183uwfvsof0eg2n0y',
+                qualityOfService: '2l81fa5fxp7ok85a5f6e',
+                receiverParty: 'if0cx3k0ob8qcydwg70de1vnx6zb98bvce89h6ogvnlfay1mpcns9n14nd9wb0s1fjbbjuar8zsex52h3y2an5b969i06qjcpzmnq18vt0e2obsn4wjwpu4nd2dh8p9ayfsza2299v799q6hky8kaobwkx9paq3b',
+                receiverComponent: '05be49918g65po6tkkvhv0ptdqy6n8mlev6ko96gsiyr5biy6nrctg1m6xyv1lrka0z3o3dv2zm6e13ag2edak9ifgw4hr8e2y59va0x5094ebf2hr8ty5ykd7o83hustxvbr95z9skxw95t2a6hubl23ks8n695',
+                receiverInterface: 'g501b9xi9vaj1pfy9ty2i2nssimtrwjmqy2bc66suw5951pdv55f8pk79m8maygmplq0ys9dvuxeji3d0lwym7gwxdwx2k7kqa9hb88rgtlqba2hqz66bb9sj2voe0ivxn5g57uxcd6b7sbw7d6qxat4lu49eqif',
+                receiverInterfaceNamespace: '4iac4bhfhw4ikumdmqd4flg66b1iqrrpx7cqtcqw4wv8hclmt1hvzwux8ep7jcgic4pnaxii60p8w1enmghsx4m73oont06g9gl9sr58jyos7r624fjo1smte6qdah3z8sicgilzz77llffzs6u6flpve6sce15i',
+                retries: 2502146217,
+                size: 9085096214,
+                timesFailed: 8012640868,
+                numberMax: 1132723351,
+                numberDays: 6229962447,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailSystemId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionId is not allowed, must be a length of 36`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionId is not allowed, must be a length of 36`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'lu7p06vfdkpvi7nd8nw4g5v2bhiqnafu2nfeuxz2yssisu8a2c',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'qioi2b7250q9cgqtaluw',
-                scenario: 'oxm8scxqxzrbkw0u4mnz6pma6ss97frii0380fsm58ncsj9gxbmgwyw0033y',
-                executionId: 'e50c1a8259xmd8di66abn9mmpp5l0yff9na50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 06:03:15',
-                executionMonitoringStartAt: '2020-11-05 18:11:36',
-                executionMonitoringEndAt: '2020-11-05 22:14:15',
-                flowHash: '8cfkrdn180tbn4m7ofrcgiqjevx846x60sz90ey3',
-                flowParty: '2my9aqgdi70yv4kbhgmthlif4j4umsq1ns5ov9yzjdupu4y7b0by1dpnbegljtcfb2dbry9xqc9gi68k7thovvf7skulsq7a5mku4hcuy8j3mqfx2sup8su629vfnwjspkkj8qfqu55kzhi2zd5orknftmahk86a',
-                flowReceiverParty: 'eali98asxabd6g0dp83o2nsdddpm3zhept8mcusf9gio6alkqc065236st87zkgigl32w9o7px0nqlrcya8vedizuyktlkbc5rbzou9mi98twgoldvn8se961mj8l3jkv81g29ygip4omjjpzeivtej3r6dfobtj',
-                flowComponent: 'd343jkoxmbw2n378e8ztgsvng13k8hadgpm7ps5793ps2zynyc0a3p0dlydrlsmd4idsp8xlps6g4mnje8ab7ki8ihnqxhcqtnzoqy6p76weshcdn76okv3wcs0bu5hgv7o70m3dhqo0axbiebvyclimorjneh5u',
-                flowReceiverComponent: 'ifcf0fzyznm0l67o18kj7dci80ewgtjrdwbi2yzuj5tdgqjn0q2tfc1h4rbub5rae0hrf3lc09pxsnoljbmn95xo1xl6q2rm4465540lmjap8a36r1cq6ozfz40hluhjpa5xdha8w6hy0922kav9y9niz5e0usw7',
-                flowInterfaceName: 'rce9unvnm8lyub6f0fbortq3oo9b4pk6ep6img9hctgbg73zyfiheclt594zexpvbl5k1pdam7k1kob7izdrkdb0c8ns3ipf5nktu701br0gvrwpkng9puo15shlrup89t33yjyrqcp3djqw9p6lotomd7qgs4a2',
-                flowInterfaceNamespace: 'hqj2qryqmjq1rdbnclb4fkdo73ms3iudevqdctpg7kj71d67ixup7g89xgkdtchsj8zgjjck30vnz2uofltco9ty9vx3at58hr1524l6kgf6s62jtqcbu8aguzjmx6pvp9zzw3dvba4tvqm3obcarh9rhfvphuuu',
-                status: 'ERROR',
-                refMessageId: 'r3ot4kibg3uvb10kpnhw80mmjtlwsb60c7sjs5nwabrh3bk5tm3aw6rnbtoqhvorlxyh77wlk8399zekdou9gsulgd2gyubx6h65a2c2ge35923r8a080guu9pfavg2wllmsho58jykqtg6biwog0v9ny4ayz861',
-                detail: 'Rerum eaque dolorem laborum temporibus qui earum. Enim repellendus laudantium ducimus blanditiis aspernatur. Fuga et nesciunt sit. Nam voluptates voluptas culpa perferendis ipsum provident. Est ipsa totam mollitia non quae. Et ab vel quos libero sint qui dolorum.',
-                example: 'x24gnwni6o1dnxsnwq9vc5o80v0qqk6u0t00kpb0qmk7y3pusdxbcw21n2npbi8c2r7krq2u0evcfgxe62wctp2x7kzbpxqur9hnk4y097moia0gpqeach0fh48hxpojfk8fkob0st3y5yt6579z1w93vagbul56',
-                startTimeAt: '2020-11-05 14:33:38',
+                id: 'ca4be693-8667-41ae-bc8a-0b8a3fbd21cf',
+                tenantId: '9dab5b68-6d2b-4a28-90f7-604013d64ad3',
+                tenantCode: '96l3uu878jolfpn5d34odulzd1aherptrlcmmdxetyvawn0c46',
+                systemId: '7aad6ed3-6a22-44a5-aa54-5b9e19d5e968',
+                systemName: 'zuvgn1u8g6xvsmnkf47n',
+                scenario: 'zdq0s399q5kgh3ot7fxj9nha4kkjkhhk3tm0ws0vqwi3cd73piy5ggfdugby',
+                executionId: 'kvny1izkgdri9niunyilzf00rnz6ecggga2yb',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 19:33:17',
+                executionMonitoringStartAt: '2021-05-23 12:25:02',
+                executionMonitoringEndAt: '2021-05-22 23:09:26',
+                flowHash: 'lvfmck7j0gxssw49p4i48ifw3io01afoa8emqh6y',
+                flowParty: 'iedvrr9d3a85bv14aajto74flwftr4v3sgollivvbdw6nng8rvrefksykd793xhavswiuq6h8gwb8jmi47a7medwo08gsnjnrh6jbx8x4ct9e8ojgl9mj78oxqyd0fdfpxyh93e8ifx69j183w8nqypsxrttjmxq',
+                flowReceiverParty: '3wwc4hwjq1sx157lphb2uydp3okjt2clo7bolqhbvgjk55x7zlis62tllj2b2f8n0gl1rotcqewjv3lsp9rgph7hv4yy4k8iqe7qsvzatx10h6gdpgiypjdj0x4y95uiah2utozy8qpk1rwdhbr65j18uk2i5tv6',
+                flowComponent: '74dsohe27qy3xom2fjvhyymuobxk25g50yi2b5pxn5nf4epmzfem5rbk20z9q6bwenok0nq1a9b6t9ugre7igls4n7alndqqo4jipugprhpd8mg24wn4a8ekgi6edkrp6ybnjbm99p1v2kpcd6ucp2hsb9kkmnqp',
+                flowReceiverComponent: 'eiw9y41syrlxospgqkoc9xbovvzsx6qhwhnz71j1g5d1094td23i1hyx2ngul4euhaoye3ow2tpucea8vyng8m534t7nibg7xy60lne9d9cpqgwtzou9xgui7d652lsrrwzj716by08u5zwkfbqb4byg6pu3ly4p',
+                flowInterfaceName: 'au5j7qyjv0kof2xezbffv1frloxxom392704dzmvwr2d9foa3rgcyz9yuucizr1gbec9wx5fomhcln16q5zkmjf0diuerol34l3i44qx5b90mqaxrc0wdye6y9row1j3rkrgvtlh3ib3xqtk7vitipqw1de272wy',
+                flowInterfaceNamespace: 'nuhgu3rtbe5dscjdsf6p8fw2c9h8s5c31r9u2fgs9w59c2612xd2o5ria6tse2f4s3nxnkxr8qof339o6i32jj9lk0umzzjknrnyhs2oz88hm8t18w9xvdi4mlii2u0ri2q3jtltx890e2tntiynbzb0rbehse0p',
+                status: 'CANCELLED',
+                refMessageId: 'zedgfdlyrdpo854bp2gsn82vobtrgxcjn18y4vdgbu15a7u9ircitiwdsdldfd54hggab66k1jzndu433l91og407pcmd0yptprig81mb0um2k43kqq31e8pz48av02lo23jrn4jcd3cluy3ww4s0q2vwxpdzcgf',
+                detail: 'Voluptatem reprehenderit illo aut et et voluptates vitae quaerat eius. Eaque sint fuga molestias quis velit est nostrum eum. Placeat corrupti enim. Totam repellat nisi debitis sunt voluptatem iure et. Architecto fugit vel cum.',
+                example: '75ub1rvw0mtqqb9mpb2fhf1thdcgn160vm4h7d5hg9eqsllbtxe4gxl7rkx1cp0i4g4pwoqnvcprqts2da9e6kmcvkk31y2d2wjoust1egje1pb67dfqtghkpbju8v1htolq9libhl014ssryk9anvrbm72u7ura',
+                startTimeAt: '2021-05-23 04:39:24',
                 direction: 'INBOUND',
-                errorCategory: 'ibd0yz566s7qkkpnv3sm9axom8uv2rvittsslmsq1c8rf4yejbijgz8xdf13hbx5n2yuxh0lo6886rc6g1ugfrohtkobgmy31u0vckdbotzilz5s5vwu8whz1i0styypk598gjht5j2m4dk8vjql1cr8umqbwbip',
-                errorCode: 'kwjxw2q7rmsyyi8ms5kupcdoa0t1zuy61vczci5y8gob1ckndv',
-                errorLabel: 798375,
-                node: 4931875455,
-                protocol: 'zl6n9g0fsbebr99bfpoe',
-                qualityOfService: '838nhn0lsx24ml4xyi87',
-                receiverParty: 'wdkkdk7korbrxf9it10f9rv0m240b4wt357l2bwa2xlvpye2tmpyi7nu6g57w4vsclge9tua1lil59py0uw9f04vmfzrs8vgzryxu0v03scxp33c4zijehe75ro43o1jjxxy1v011ko4unts7bdlxxaupso33io4',
-                receiverComponent: 'wquvh4wd4v5x137gmmp4oxqavzdahshyhki3569bf9y80ia1orqh58n9gw8prvcr0tdeosbe2znro30l0mpogttjh93spf4ayfzp8s4yv6j4a6ecflt2lp0u17f7xvivdqi0v7ol531gwx0vy46vdqien6imgy5o',
-                receiverInterface: 'tzmmt0oyjswg17qsvtoho5vlqkc6027dsvhoaqqj0xc9quqh1am4ntuzjx6cx4ynyyc6r4ugfsvpeku6ujwxg27ejrmbwztjewvsk4nfguhg2278w9ioz4qcy9akjwj7qa8kuuob3wu5dpsikw8dbv4bowvw9t7w',
-                receiverInterfaceNamespace: 'g276gsjl9rbp452jdgjhfmoshbf31rmz7t1gt1ogwd130nrx5fcn7g7a21qh8gbo6ppchqzh78eaxku5wfgagapobayo0aom835a6d3km8vy1b9ahg3qwshsl1pu29tybjc5lu2c3tsd63msugmz1cuynsitqp7l',
-                retries: 3279640461,
-                size: 1045106366,
-                timesFailed: 8693115766,
-                numberMax: 9484183490,
-                numberDays: 8500621552,
+                errorCategory: '3yr5qb0oowhujz7u1zfvctepbisd9y6ppkyt4oey04nu6hrd1jctgjyb3uizo61mzl4u4itr89zdtx5d9tps9x8graviczkrzd7ezbgcsd3sy8m40dl4ct38wyszls2ksc5jptthyai07viudb4tvqx9survyioh',
+                errorCode: 'eas1qjyqbofb7ggev91iqukllmyi1306uydedgck6q6w05xyup',
+                errorLabel: 124194,
+                node: 2020476418,
+                protocol: 'nbv6zehxniyowuvfojzi',
+                qualityOfService: 'ye272oo8armo9514vy9z',
+                receiverParty: 'dltkmhkdvxqvivzns5j9r1udpz6viktb3hz52ac42yh6ixfqin1wklo3e3swpdohus1d689s1h1d78hork9o7l9ukbd55hz7o06hu7qrptl3r7muqj2r9ayl92e23230r749bh2nv4y0gi62520kyih5usmrruqs',
+                receiverComponent: '8g6lg96pokvh9bu2ujp3yqtglt75gt669cqb22n4yiwoz31wt40gta9h1h09768q6ab5eok7ok63gqhs4zg0qfy14eo3i6kp84i6fya77y3hlc8erqqter1bkzp9u98ya18ypjjy488dbzw2n9ldgewgf6y5d7ve',
+                receiverInterface: '26au76kco1ut6kxdwhfq87l9n1fv2cvhnnco9htwvruy6heohi4suchndx4l0muwkqxlr231kfbf71cd85way1uask3my6gu7oixkv4ae8so6g7305e5ni42vqbk3i34jo78pvizmv60e11va9fsnppsgenc180z',
+                receiverInterfaceNamespace: '4dwce8g8gokj9xhhfms75h0wae39uuiho7gl32s647mg5inppgicr3un3dlv4kldx3qi3lv04emrab7cz2pdwz2drep6reh83ywdautqe1a59h7mw0jsc9hquq1no8g08y9aeiqvtkcnuzgfpnw0dg2hpum0nx0b',
+                retries: 2095842262,
+                size: 2103369716,
+                timesFailed: 4847223739,
+                numberMax: 3237235156,
+                numberDays: 8818826549,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailExecutionId is not allowed, must be a length of 36');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowHash is not allowed, must be a length of 40`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowHash is not allowed, must be a length of 40`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '2oz4brjlj7oerniok102u7kijgmg5uji8gfeprbio83clv8e6o',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '07tyy8sjty8fu6fg24z2',
-                scenario: 'yhek8mn6ejtex9sg881dbfzpda3lbwatri8i45j654l5uhgn1ndwtyr04v07',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 05:28:06',
-                executionMonitoringStartAt: '2020-11-05 19:31:04',
-                executionMonitoringEndAt: '2020-11-06 10:43:06',
-                flowHash: 'tf7mlv0nd2tjmtqnxh8brlwi381ocy22zkxf3awt1',
-                flowParty: 'tus71oehukzd7w29hb4dxdb4i759szg6h04vaohcxa88frh0gpbfb9285dkph45oj5u3ar5elm29c7o19jh5edh4oupug383i0w50auogpkqnpa2biv5aev2n6pcrgsnovfmqvgunvhzpmebt2q0hlfhxevruv7g',
-                flowReceiverParty: 'u81m3l0z394mbhbtm3a4y7gvpcxnn2o682xid8j01wwqu3sjqgfn2okc9cmm3kic04lgo6fsrc0rd4diy83ofszb0pnuhkez4pu4g2vko45pdmxqg3ntikekqbtaghn34g43mqfvi9oumxym6qrjfrtb89qst74y',
-                flowComponent: 'bwwypj1w04cz61va060e93b55zjgbu54s1lls5fn7ohuru7exeia3ijh6ckxkfdxdf6gw0jcvbxdnpbgwm5pv9avqakx091l18sasjwi9bc9iw8j6qk39z5o0e7rteittco0v0uvzv6y0qufc2oxt2wg0iwkt09x',
-                flowReceiverComponent: '4mymo423uavifill4vj535hb611uauarxw71sh2cm9rk9nubbgyqd3a5xqekxhz96tqb4hy2ouks16c9zc4upli800ay0tl5u8qeql331t8tc1fvaibyexx2oyrr3tc2hyrljplddj4rchw2nr4fxi1r09rm4qz7',
-                flowInterfaceName: '6y8ebw7is1eqyi5dvkecj276dngbgkoch8e1alkccw40oehjmxfcd98qqubdfokxog9b77xv2moutsp7yyj9habdglfl5h9s80bki8segsujcrdjikzhpbdq3mqp1o651mcp1vfos31kkcjv4rm222sh55ez39r7',
-                flowInterfaceNamespace: 'a1oygww7xsi9z5kgi4c13shtpwe25hv7vzzpy2cyes20fma005h3yiq4b4stoyfljhd1qcr0a54baaasvqxdzcmbw2u9iu6xtir7pua3qk772vzzyxjhg4t75nmuu2phv8id1x5v8en8s67vmbs4rj2l3ek60j5a',
-                status: 'SUCCESS',
-                refMessageId: '73mdruqowxlzizrw1kt01uxbbplsp5rgbrm2rf2glht72vj1f6aegu0ywn5cny2k6u3iajqp5njk2j8drg8rksl417h86mogdjxew9dog1q7r5o4imyve144enxdfw1xy3yx0rxtvidqlqc6c4xrfgoo851snmjd',
-                detail: 'In et at quis exercitationem deserunt eum blanditiis. Ad blanditiis iure ducimus molestiae voluptas sed omnis quidem eos. Sunt nobis enim nesciunt iste. Animi et iusto.',
-                example: 'mubrizr89asbfppjxrzjwno3lp3ytlujkyzmga33lqh5vffa7x8qyb9c44vqo9olmra1x2d0lca5udvqscx2ns0bsrm95ngid9wp0naywq3c9vmmdh6fltismaw3kq6jzoq626vh6imln1h43s3f35rb1wy5kmsn',
-                startTimeAt: '2020-11-05 12:18:24',
-                direction: 'INBOUND',
-                errorCategory: 'wcijatpc0p7zvyrdxfcziup0e31z1w2xk7qa7udar1r8ybo1omdeun2grbkjz8kbb3qyw51hj3e4jlasgjroeiu1vwlt9isirlljm68je8anmsp4hpwao41nenopdq3uo72jc3l1w2vpadcil2jsynhnheyag5ph',
-                errorCode: 'wz2doqtaspiuwlin2bjtgv52945h4d6gx7qi6s14pfqq6hhznt',
-                errorLabel: 708684,
-                node: 2719107159,
-                protocol: 'c08mg93ggpevxl12prj4',
-                qualityOfService: 'nnix3tvqjxwceb775ine',
-                receiverParty: 'o82tvzib17wm9b3cktcfvkl299pq6r96j5ss5m67kai6dwmzil7wfgw1lfu81djee428m9v4vd5fej5kaugu2korig3aocn5h7dr24l9o5k4idnj1ez505bdllzv53dga9ity5kdjzwkf0exr0lotov4dj0sy6je',
-                receiverComponent: 'odlupgk4t2w5xo3qkwhs9qc6szwo6f3rshqgqox21axc9g8rr115wzq7io5zntb28dvkleim8lznkn5hfwd3qr5p4fscvppf2zy79zhvjogfp87kw5an6636are0vm9hpmnjijh7pgi9x8b0zni39arxp9wnj0tf',
-                receiverInterface: '4wudr6euzrisvw8vlx5vdbvhv1suw3r7l5wyid34k3biu19fzqjzue332jerge6ty9fofkslm7k11mtrytgzb3s559vu26gmbjkhvnrk8ynuqx63b0qk89ivzr9ghuntj51sslwqprbwqm3a2zphk0qbybagjxj8',
-                receiverInterfaceNamespace: 'mayok37jtfxiucuzn969p0496fzhtpzwz07cjh00mwrx24rofho6lwau81s8kgkofp4d9tqsn23zdxd099xbwzuqks175ud4x891da5824zy6fvq8wz78z7mmrhqd1i0dr0clhejq2avv4qwmm3319kq9h64kqbf',
-                retries: 9359129540,
-                size: 3519623807,
-                timesFailed: 5311500589,
-                numberMax: 8376524248,
-                numberDays: 8489322477,
+                id: '1be08c86-77ed-49c2-b44b-999ef3156c0a',
+                tenantId: 'a8408380-9a6a-425a-a065-afea1db59397',
+                tenantCode: '50ygknmvpqo4gvxk13pdn7k3c6l1a81j3qgcg1ip56qxxre97y',
+                systemId: '7b86cddd-b849-472a-831f-16504b73e3d9',
+                systemName: '8toow4z9oesyzynblijn',
+                scenario: '9tpwe0zv4qdb5xn85r3q4vsu9k801mwvne9g5180xftqp92vlnfshgbvpyqr',
+                executionId: 'e275900f-6477-4df5-9537-4786b46a38de',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 04:13:13',
+                executionMonitoringStartAt: '2021-05-22 15:20:35',
+                executionMonitoringEndAt: '2021-05-22 23:30:49',
+                flowHash: 'b09u6u2bq7vjg38if7vyvzqztwchyy3w03zxxo01z',
+                flowParty: '3j1515uo8i3jcicppzu1hk8no3sp1u0ztaav3uevh21qi9okjza7la2wkv9auve2evc33y39te04ry6e8u3orbjaxl2l15t26nyn9gwscxxn45ltxbl1kuabox70v2x7h31lz8362g52h54qnsgpp0oqwehigigq',
+                flowReceiverParty: 'qampeinj8ygcu97ws4j97bdb5u875y65imj5fnjo5h1h0qwao154xm0asgzukqg8sqsur5zvq61fhk7u3wpzpuspntz1j9z67r6yr50b6i9hdd0sh5gmwckdtr67bpwu7azqzprvl1yu4nxj6g1q02nkrn8dvcwg',
+                flowComponent: 'ewr2pq804sdayx31mg1a1i992hun06zo9ysz25kkf9zlbc4nwx5jr1n9skyls1u9xvqzf2fhhl3xdru0g2chpmlhrx6p0adieux0j35f77ptah2adzye7g964yk5i73esngnvluqcq42mjfdoxgk8c38gtcislg1',
+                flowReceiverComponent: 'cer4md8mnt5hagrqpwo8mwuobiaqne0z0ktnz39dvo1ddrqq1o3nvezjdc0i075b30gv1cfej9kc5vqakn82c5qfgmdekdxck3gsk8hu07bpu9snm0ae7e6tsedio19oqdhq4o6ort2nd9uvnehcst6a221bzckp',
+                flowInterfaceName: '1puue7yjjigz2sxqpjqxifq63k4ne9g36nlz9dob5msc0nd3gie7rs0ebx19rqgehhs42de1qhxrmdmio9yb086qtwxnglf3167sf2ibyh72ltntjmdg8jqmnfq83do1uhq6g3hxen9wmuq5xylb77jgfxpf8b00',
+                flowInterfaceNamespace: 'qoilykmn7t1migekhg1h6nrhyrl2yt72ir83bsp5ngr57dsa1wwta30hnxwm594717idnuwfx95zaf1sf2l2t90ry1aek3x13br0m0cdz0lllsc3ha0wyj0yq00v1zpdd0dhm2wcxg6td8wxojidkws1w1mcpzij',
+                status: 'WAITING',
+                refMessageId: 'bet16p0n2e79x7gptx2p7d31u2tble3zv9qngw5x65422l8iiq4sivuitgpflst7n33rp9eqe2p6q5j9x712yw7go2i6kie4s0witnl5ymwqwcirmtxn4fxi9mbind7pub49bzxix284uyg158hrnnbdcgv5wjgv',
+                detail: 'Similique inventore sapiente magni qui. Qui libero aut omnis. Eveniet omnis fugiat dolorum voluptatem omnis voluptatum. Cupiditate sit dolore hic iure molestiae ratione eum. Praesentium et vel eum mollitia omnis dolorem.',
+                example: 'tmdwcfkfejioai1yenep2m0ynwf8nrbd8of2asvub0eg35tay2bi10ybuz4umbrmq9k4hohz60q62cvgq726gth3mu6cfpvk2n27waymoc048zzo930l9ht5zmu1maavvallsg65saqr3nnz1j55eu5b994haoao',
+                startTimeAt: '2021-05-22 22:13:36',
+                direction: 'OUTBOUND',
+                errorCategory: 'snn36k86mbi4vwn8o9gzezn3j29egazmhw8pdiix1neao2nmi6yoj8zvhbuzslmfqbbjdo8w05ysb6elqxr1y3we1ygsoxts9vm8q6rxfw1sykxs606ltcx1m4zcvzerbzyjyp1soypmwdet497tf5wowof0tiyh',
+                errorCode: 'hmloua030q6xkvwl34t1s2dhy8tsqa00g1wz7wxfn0nr42i2uv',
+                errorLabel: 744909,
+                node: 7868908274,
+                protocol: 'b0rjjf51lf20p83wd5k9',
+                qualityOfService: '5cjhf5arvkoym4lng4am',
+                receiverParty: 'pizd5hg5yywycjc6dvzmw1mv5bima2p5n7trahr1q8im4fezzbj1adcucdce89zdzovultpv1hgnn3rfy48kzhuqufubr6uh741tbtl1hww9m169p2vw4738lykuz8kpoo4ubvvyid3dsr5frwogi9vrvx66kxfv',
+                receiverComponent: 'aeensweosmf639hjp6z2wpfh2ah5gwj5495mca369qd88ztuf6lxbfv4lvv91vmnx3xlx3spq8itoc75ugepkufp5vf5fhjtvdqo38p3w5n4y3ca6cuzs45v7d01c82nn7bet2m2mjauuqhq4m4lpg3tpdovu1wg',
+                receiverInterface: '0h6yy73s9f0g8hupmmv942w0h2ump2647jhi0vv6mkcvo3bmexp12oi0v5jd37k7np7l6x13ld4qs3c3rlix9mpy9dis9y5zpiq3bvzhr88xorlp5jz3w7bkrnfp60cdkwchc76j1vpb0f6a5jxhemsh92oph8bg',
+                receiverInterfaceNamespace: '93035m4omvy1rhea7la9iaa26kj7zdzetqfhiz1fdxd9y8nyv6hvwx4xq9jlt356cwxze0125g1sh70bow803q0m7t79bsim0g5sooyxr93qideksufo95duqxs6yg372wmftxf1g4err8nufn0eig6obtjukf30',
+                retries: 3501593566,
+                size: 5404166788,
+                timesFailed: 1277217288,
+                numberMax: 3117102213,
+                numberDays: 1102940814,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailFlowHash is not allowed, must be a length of 40');
             });
     });
-    
 
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantCode is too large, has a maximum length of 50`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTenantCode is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'lbaif67ibmvbnwhed2qb6k2obiz2nyt2y63auwc23cezp5ja0s4',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'lylunem5bb8nalb0jw7m',
-                scenario: 'lfmkxabt6o2robnw9sc4hlsus9bd8qoopd12j1c0si121qrsrtyhghlbuj4y',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '77d43c17-4022-4758-abe2-cf569b4b3af6',
+                tenantId: 'ef906340-3c37-4060-a628-7b18573b0c80',
+                tenantCode: '6ej27r5gvd4x1kwj2o443wxb1fmii71fcehh0kj2ffyiywyn0l8',
+                systemId: 'dc05944c-61c8-4d57-8aec-f9a9086eb3d3',
+                systemName: 'sqd8mqa98ns8p7rawya9',
+                scenario: 'vl12m6nhrthqfrnfkr23oliaqn4ijc9wolz5a061rw37s5udw7vhnimfn9p5',
+                executionId: '5750d620-5b19-4d98-970f-a066ea04eeed',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 11:52:41',
-                executionMonitoringStartAt: '2020-11-05 17:24:15',
-                executionMonitoringEndAt: '2020-11-05 20:21:26',
-                flowHash: 's852x61g5lo9lw1ejqzvbczy6l3d3p22gnahs3c8',
-                flowParty: 'n89f4a1b0yxuvnpmdksdwrafc2haud3gsghxcn6fp6bazkpmmi1zz09q7r57q2fksqxh3ht90rx08aptlflpd9hx1yvvk49awbvfa4kzqu2nhbizzfobkn8h06ejv8x4ny9hingko61akng4f33qokgehiweesou',
-                flowReceiverParty: 'pnfbuf1y6f3qn1ucy020neqdbvpdl71zlp6zty9udqex0odavrzo1kqf9s3n05jm98c0gz47aohoy1vwbf9ciu2z6k0pv8q3z1ha72my3h0grz7t8qf8aktyp1aj09kvcdrd2b4yrznluf0iano0g6z2hnp4884v',
-                flowComponent: '58pr0ikpyijfs8bo3cx44n8puyglneifs4wij2omw70ie0he9dabba7uqw50g9ughqrj1s9bbt1kstw5zjx9bnykm7fxk30w5484kahjkqgxpe96qx56isujn5601cvpmsl14g0kl8d7r3035auc4w9xh4dxolzf',
-                flowReceiverComponent: 'q2qlknoq3pyqjnvi4d49jgec8kesu8vc23jfbkr9acwb8b0f8z3ifsyeyakhyz602lovtn5eoh5s3dmfdgypfq5v36dm4wjuowpntsyu0xeyhjbs1f5zhxu57rt2qopmi607e0qwmh9zfqi4d7pmm2fq6ybpd7j6',
-                flowInterfaceName: 'vdxp95a5zbodoz7utji29zo4fzcqgdjri3vfe13firlcdca9gc94e6dzz2wq9szvdtsf3w7n2im0a39ayb16cct9rw4x76629zed3lycaqlnpu0cymgtjzztma60edbppyvhtje6csts8ljrnt9w1wbeuyalfkdu',
-                flowInterfaceNamespace: 'uuclnsvhtw5bsiubub4s5kzy3q48ncmlobe4u4nc09mlk2maxs13c4wyx6h2fwo1dj53c591wt1dle970hpe55xxpqpxc0m4x6rj7i5122avgaogw6m9fvoovrqkeqdzbjofzbo4lex3r04usgypjgcyyorz9e6o',
+                executionExecutedAt: '2021-05-22 22:43:36',
+                executionMonitoringStartAt: '2021-05-22 16:32:46',
+                executionMonitoringEndAt: '2021-05-22 16:04:31',
+                flowHash: 'cdottte5bwthf0zce7p7wvjklx1p730rdf1c9ghi',
+                flowParty: '2otmrb92xoexjdms6z0cyzcjigrr3cj26d8elfs4827rjfk7h1ja4eip5rizhw3e1qy5mgbmwe4odduf35lyejf10vb7l1hyi1nf3nnhmtb48r25ghi6zwnr7dfn73vk62xtmpiea32d67rt1xqdmgs640o0mcy8',
+                flowReceiverParty: 'bvx8stzym3vrm3x1idk2xio2220g1erv8yzk0g80tqq0zqv93oiek1licbtn1ovgdsbl5cbmaplgy2ydecurlnh2lrjzpx3tau4496hps3k7nd0mvteuquie3uhk2nohfrj1jwjjhr4hhog01avjv2ok1x0ur4n0',
+                flowComponent: '94u5pzu6otznmgrgc93q52tyeye31dwlwxzyvm5du3uvyz1atzp7j3dlfdeycucocum9i3aosnxgns87vw22s8x1c2jl0rknwmv1ekzti8s0ycxs5kje9cgfz9fnv2cbt83z5qvz239hf4ax3i70gns1jyavaih5',
+                flowReceiverComponent: 'jalexlwwac0df8ibyjy23v5gdnkabptf3chzgsiou0ye5ffx2fat8dqyfrwrt47dofhr9aecasigxaedvb3uti8rbxdiky29cenfwe7cxpi81wbms2z7yh2nzodx20ob4dchj7l7jwripi1ww782wajt0ubiy8sq',
+                flowInterfaceName: 'hxaqd33pen560j90hxki6ghlx01i3276flavavfz14bhyzg05v9kuvnhrufglxg76p9qfxnzby6ytqeyf5l921sfgs3mhoh8vd34ijwyaxig468c4ba0oklo7s0k62dg2itvazqy4hu4ag7pwloq8xsn2d730kzg',
+                flowInterfaceNamespace: 'loavqzaefug03wm5kj2kq3ju20gd7a6v0schtq0atm5ioavtksi8fw1dc1a5848mk1cevjycjm7fa7dlqvzl2h5pfz1ojzs1h5wb5fb7vzww5o0he9e7zycygg9w2bcw051vy999j5qaqvviv29csvst8bvnk4xr',
                 status: 'WAITING',
-                refMessageId: 's9tegvo3ewlw25pk827u1k37jdjb0xuub7f1h3b1ko15ibs00s2szagv6o6ze65fjskmmjn6vhbsomrkqu5ikz5yio8d2396sz5bbt8tm9b21b1gxx8lj9275dmup3uvk4h5ovo8cxc02cpgf39qrvoyj5109qdt',
-                detail: 'Porro dolorum magnam quidem in soluta vitae quia perspiciatis a. Iure blanditiis eveniet odit. Ut ipsum minima corrupti id voluptas quis qui velit. Libero sequi nesciunt nobis explicabo soluta ducimus est delectus. Assumenda ut qui. Voluptas ipsam natus sit accusamus nesciunt aut quibusdam alias deleniti.',
-                example: 'v2bb53l8uzpia0f001v8h7237kb84zrcb4dq4dukn6p60a2j1dh3xz18ax4svpc7gkgrbi99vadrru9uia7dphl55e0zjfqxfk1ucboav86mb3q0vti9w4uj48e969mpqb60lq5rmpu5rc0in8tzpg3mru4tgxa5',
-                startTimeAt: '2020-11-06 01:39:21',
-                direction: 'OUTBOUND',
-                errorCategory: 'a6jvtissca3uj10pldip9bn4905x7vg1rpmnj2jngpnaa3pldzuhch2muo9dor28mllyawcj8fk27tnvasknyfugdraewlc19eih5fmreqsb6z5ty8atsqqtidipzjr6tm103lsk1342w8dlcpp197g99cozpuc3',
-                errorCode: '13aul1tv9v8gipa7hjrdclhaowyx66i0nx5xhcm2zouow9s4ze',
-                errorLabel: 949318,
-                node: 2454420003,
-                protocol: 'wbfbghmi0v907b4255s0',
-                qualityOfService: 'd64h6ondqhn49e8445f5',
-                receiverParty: 'c4vuxyx0ga4wz7md1uzwuquv11f5cujcfso941wej9mmothu9vmoe5exmowmdaocon35s8h8zwb0tcljex6r47txbrfroepzgb7hzb6u8rb5gyq8ep3rrph1bgqedy4yl6ff9ptzu62vybjdryaou64693ppgrn8',
-                receiverComponent: '6veqz8hpd4qv9fpq8hz195pdp4ruj12em98cd8goy3t6kti0bcrek3jwv1raf9bxfcxs8mfqus7n5vfjunzvsjr3gxuoswqo0pvu9bht8e71e32g9efvd5bg4zaiyr8cw8uu2im56a4nmq62sa8anmre4olgu1ao',
-                receiverInterface: 'za2itqxqauadraw0cy9wovbkmbzwrwhhzrhkrhpa81vm04ioiwh2qlk92gzct9enp0l2u3ndfos1wcplnfafc939w9axl05fdtteliac1jqnmf9pu19booo78fldcd60hsga3dhjksxldyjw7fn27elp6u0ht3f8',
-                receiverInterfaceNamespace: 'xhn0utbd9h6tskk67at8bmpk1vnjbzi5iloijv53xb4lpzsa95xywu389uss6vkd13u1pugwxphiz29pu33qmxs6169rk7c161di34f0ozcqttfcxu8vfu3gy3okxpn0fo8dg0km6r1oxfhwxp0ytk7zzms37pcu',
-                retries: 6738644642,
-                size: 3196736375,
-                timesFailed: 4422389252,
-                numberMax: 2229940345,
-                numberDays: 8978190621,
+                refMessageId: 'bucet28m075jkqduc9l26dff0hc233o1l7jl9eopaektwt891r0xtir6x1hfax7b8t46k6yod2l16qvdsjgcne89j0n9y7ls6iu3ejzaw8vonbq4e8lt5bcrvwsdm010dv6r3xp8naiysk75vftnuojywnlp2kcc',
+                detail: 'Ut numquam saepe eos sed. Voluptatem neque laudantium veritatis et impedit. Exercitationem officia quis eos. Id aliquid facilis saepe omnis et.',
+                example: 'cgexc49a7q1vp5yot7ocvz2ayyypf4eqj52wqqfqbikjmos3tz9ed8c6lybw75fu2hgogf3e0v9m4w70cif6wh03wba593ocuqcidpcp3rhinpk6e80mz3fjyphhroycfj41fy7xmvqqk68aoj61uvf2tkp39o6k',
+                startTimeAt: '2021-05-23 02:30:24',
+                direction: 'INBOUND',
+                errorCategory: 'yf2oysef35a1c6pixctus1508kj1se1njkptxw5l29888o5qecoze4ic703mzj3wzsibkgeab3p7agjjj4evf6w3pq2jakl6trh0j07q33o8ae3xi3y7az2v2s5h207zfrw764lw7xs6isr3qoorgll8sfglwwvd',
+                errorCode: 'n2t4uvtqqtp5x9h99bvbjtgcxcq3dructalyxiar0l7znuoi47',
+                errorLabel: 919875,
+                node: 7342133125,
+                protocol: 'yzi44prn553cqdv341yn',
+                qualityOfService: '36uwfji4lnbiqeo0f2od',
+                receiverParty: 'j3cvjqa1z0yvjdhwvt0xemvujuqcswg6rlwo2lo05mrfkno1h5gk1ycv2nud41idrgv5gbu3cucotmkluw79g92hjim6makzq99q3z61yjgtto77xoodld6bp86o40rkzs7q6ow2qj2j89bd344nub3l48j1dpsc',
+                receiverComponent: 'mtnb4rz3hhcerh34n12zqju6lmv0eemajgxzumhgp6gzjpkdm7xp8uckm14db8rok7otnwh96jtereudtwq7htrgr0nbp3t3j6qpupu49rnxo3kmzdvdoe7t7ujzaee9cq8vc77yt9sevz1bpwkcve5c2qzrclv3',
+                receiverInterface: 'hngengzhlqn57te2to3p99bdc7lm4bxpqkddwuww155z8phhnocd0bn2t7pj5azkz65ji4jexmd0kt5uj8jqe3ebbetntox6onx49ngrwro3cj9azqqrrpu5mqn4ti99qa0q5693s1si1m5riqn79zbqmeimvqea',
+                receiverInterfaceNamespace: 'nnmalvfe0xmo05gegmyurlpt067tfffqv6c8rhlboke179tay91aydg4nxv9bsuejsugkbu4gft1udsfhjhtiu0zhn5o58budoetrwhvx2mh0nrcp6nxg08pdaknggfg6thwqr3x1ilkppycu62a6b3q3gyd2hut',
+                retries: 7464901477,
+                size: 8726569605,
+                timesFailed: 7965319870,
+                numberMax: 5405639218,
+                numberDays: 7898093877,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailTenantCode is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemName is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSystemName is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'rmzwspwdtknwp5m5ctgd5qc3x6l98fd0rtbugw7pswfc79wwj5',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'god2vs839ixos3t7ce0tj',
-                scenario: '1x63c7gqzkfa9ma902qutp0908bsx4471fqx5mndk3bn8r3g982vvbwyav6c',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 14:08:57',
-                executionMonitoringStartAt: '2020-11-05 23:25:05',
-                executionMonitoringEndAt: '2020-11-06 03:57:59',
-                flowHash: 'eovebualjav2j0y3y149qru3s4momi2szdr8izjb',
-                flowParty: 'badsqcs1me60ltonrhjdyhyo8gcct4uod60iyny9i9k2v8equnn4g71r8aa3w9lbynypn0928ok1sh0uy7u5d6a501uag97cnjd0yb5zz4tvgw93xa0g5kq2zzbg9bogovlcc05f99q5ebvb2vicickiciyrz06e',
-                flowReceiverParty: '96n55k45k0wxjbz746wdnkaswa6nz656u7ap0qk9esznddgt5kpek00ffu60vcyhnowmivytz1b07ko6rjtzvtrfx269fwvwirbx93te6mi50og1msp1y76k0lt3htglcw4f0cwvrynjtbg4pykomgzuv6mxqh4i',
-                flowComponent: '0c837nw9yy0pvzdf8vuzvaa5m0qwg9gkqkvvx9qdwoedepbfopwpw0nie9wb3eqth2rdp1glh49stxqmgudo05x4bfl7ko65ncygaitk2qe66e2j18npk21gz2tzinvzcpmbiqbmb5t0fjh5cycywji0lslgkhfx',
-                flowReceiverComponent: 'pydzwufknb4wvgeasg4xdl7k6tuxa9jnqo0p4syxgzty5om2cweffkrf4p4uc82ku7uryc2n5dpef0pmvym76pehox4ujm5n4y0dytl9bzxvckjppu85bctogd86szmnj3tcklmjlzgd7yu0w3ifu2f894ju8bbk',
-                flowInterfaceName: 'xzbfg1s62u3q5ff3v12mmp2l7x002ny2rx4rkffow8l0aae844nscifnu7qku7n0htnixytlnuf7pt3pf6526wwar2my2srvne39otlt3gtazy6qjlj2ml7qcs2ce07qjbqs3zntfo80fcshisexi97efor6cw9s',
-                flowInterfaceNamespace: 'dwnmzqc835ftwfmx4zeofgisaw5jwwrvzdgsktejapjmg31wtbnalahnkgcv9d4v1kq0h67f0iay22grixmbvv3hzjdv7pqgm7gjpoq6dtkfza2mu3erl64v3pdahjanw4h9pog0x070esue6zxkwzpit66zmz3k',
-                status: 'WAITING',
-                refMessageId: '0vhkpg36wbddppitw727w3jmibcyp4xu2rsr59f92zrdsc9lmxb1dqzwqphecghwhr6ybx6ukrbofelhp3g8u350otqzngig4c74l9pl4ggfs9nrvz5j1dd77dsoj08bhb3zywoiziy35ml30xlmw8r51wjmms2j',
-                detail: 'Velit dicta porro est quas aut excepturi est quo. Aut ex voluptatem alias blanditiis et voluptatem accusamus. Quos libero repudiandae distinctio quis architecto.',
-                example: 'k0rzsns674tzso56d464s92qgyj1lqyn8uqb89yxis2y78lq2vxstmf7h0aaouh985dvatmcyjflqe449yfqwj9v1u1jhyumaawzv7v4mejinvdn36uawi8soy4gcp6z6t2m0bnbo852mq94nksa3y91aa7pdukf',
-                startTimeAt: '2020-11-06 05:17:55',
+                id: '9615c096-d062-4d7c-b1ab-59c7655f4b9c',
+                tenantId: '4695ec56-9d4b-42b2-ac0f-71ba906ecc0c',
+                tenantCode: 'c2gttr82iunngaln4bb4ra0e0l2vr5bvrr9tr3bqyis3qpn959',
+                systemId: 'fe4cd82d-1148-4918-88d3-366bf95e77b6',
+                systemName: '5ft7npuwujmasoip03iw5',
+                scenario: 'tfk02b8jl0v74yw70748ibg48bq2uj42nind5rfwedkdw5zenqc29qct6u2h',
+                executionId: '58d73a90-94fe-4088-b42a-654b32404740',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 21:44:54',
+                executionMonitoringStartAt: '2021-05-23 12:27:18',
+                executionMonitoringEndAt: '2021-05-23 03:15:34',
+                flowHash: 'kwg9w1y1gfai4sibpm00vcykee27hpqcg4lxptju',
+                flowParty: '3pm59iifhaafrf13mbi5kk7qmm5yzior0qj7hfjvjd2l84uich4cc55kfzr27je8cbcs7yja94wb7elqmxn9br0nv5af8tzxu0lap7y85caat2oumczwvwb140029jc4r3px2czbjghyaj16fgk5edm7xf6411di',
+                flowReceiverParty: 'ct1mgfduyl6w1teglxxjki0tr4o45rotltco1k0t99ljeiq2w9jhinurgvd20turql01o4ux9jezuerv6ygumqoerpfxcdpduuketuubovz9pc32hoy1bsp52rspqvgf3p50qk3j3i8m7rgxh22hsxsh66q5646k',
+                flowComponent: '1lz2seyyfwkpxjicx9bxyihf2hl7cxzvva37mms0y46ftw4utv578fpfb22jkmirp17hk2ws1c8qzebdc2lhvgquxmx4qaox16t0k19l3b5bt5teitajlvrm4gq7xw4yq28hqtdgtwzbsotq9c3x3tjzmg9bpqi4',
+                flowReceiverComponent: 'f93m1uuc0wax8rrs0fb5x4d219hbz7lbhfrmuww6n6zqxy2jh5ycnifj4yjbbkudpbw8srajxyzqkxfv9xxqo9j1proyx01xc08fs3wb0t6rcx9uqawxdntlc3sdc4zl2d0te0taw798c7h5sear5c2f8l65iara',
+                flowInterfaceName: 'a0rhh5k4do0fvyggx0by7tc5piss8qn4qb9e0ef0j2x7p0lyw3anofqf3dydsk9z5zqjg0ax140uw4x7f1pm303tbsdcgc9h94yk76irl5ne4thnx6ffvo8eue5hafgpkpam4wsb5jrywwc5zj4tfpy3vfcmkqid',
+                flowInterfaceNamespace: 'lt4c7aq1w19n4o2o6825pto8ayxxdgfzru9ncpg6mn9hg2mdg7avibb84m6qegvilcoigcx0uhqe3sge5wp8tyhhym3h4ooxfa01bpk08x21d0x9g937tw3ka2vrsj0g8xvvlel522varvwd2nlj8glv5qojtd2q',
+                status: 'CANCELLED',
+                refMessageId: 'mj5dri3oq4uze68uh31so266ugq96gnhcldh1u88oblkovefy4ddu8eh61bm3zjotiormog13le8xiec7uhqz130qy8ne0mw97v2k389zt43z8ajhvj1m9za4z3dwvxcy9l0di2abd5beym5686hhasepob3di2y',
+                detail: 'Aut officia molestias vitae earum nisi voluptatem molestias quia. Amet id ducimus illum non vitae quia labore. Modi veniam porro sapiente est soluta dolor quos. Animi minus omnis voluptatem vel.',
+                example: 'qe4nhdizcz4jj4fszu5uv1dlma5xhn87fiauyrmqd8n8ndi1gxxsg6n259auhj5vfa1o5ymsl31oyfamb20boxxc94jlf156i2aqod4tnwrntgwzrevvsw4qbq4bnbqzsb0aeu9w3ujhbw38pbx1485suaiveqkg',
+                startTimeAt: '2021-05-23 04:19:47',
                 direction: 'INBOUND',
-                errorCategory: 'umh562b547a8ofpz7jdwluhy110tzc15dr1hzd8w11p0sa82fmykzvb95mmh1dtax3lbhtxgm0ey2ot4hjrz2cjx0fjgs65m4fhdawac1tnmhmjnrpvjecz2of9wdp8dm0mtvrodprejdwq5cw0st7aaaxdc0r7t',
-                errorCode: 'ish89r3m9mrihrs61gytc0jfcgkrq2nlxl0hkyx1jo9vgvx6nh',
-                errorLabel: 650209,
-                node: 7998144711,
-                protocol: 'u69mz5lqcd556el87h4c',
-                qualityOfService: 'p3vd9kzdeg80lz9zfvsm',
-                receiverParty: 'kfciqfrxw52xgrf4mr8jwihkzcr3bos3mj50d1uzcxlmgzkeojcz0zts3tzzms9podj5s7gp97onnyif4o5cpwrjixxf28f14yzbkqyng5arxyy6916ozxsqughjt2piqgpzhdnkfbysx4u0vonzjq5t0f4xxeqq',
-                receiverComponent: '6d1j7n9rei4t7a1y4tjhs5s6bub6xyh52213u2div7igyp0tr2pxz5f10x9pyyi91zalbfv1w6iazlunev2d6q5axumyfpbo7nnpp9vauo3deputgtjstn9kh8ch7mn4jy7clerrt42gr7lvmw4h7qigchkvu4z1',
-                receiverInterface: 'z7h3uei9070c9v3ju3nx7dtf3icjsrax74egk18f74n19goh7tmuptidklz8pyxx4jhtzftg5gurjvcx4j2zpfdg30vbl7c1k71sjpu0pw0x9i54hr2jtzakmsr6nn98jymbp482zsesmf58srkdh8o8hcji5ed2',
-                receiverInterfaceNamespace: 'baffqhb3o3d4t1p6gddzuxemvv9tfutp7q85n0io3a53dkqx94svc7ryzpxyy45ecj9wnenknf8qp2tyfnmh9wdal5o4uf1ugkyjysukpr3k2s03fp5c6domby4amqye3ow15t0jh08smecyyedfs99pw3km8oal',
-                retries: 2119071531,
-                size: 1969648345,
-                timesFailed: 8969455494,
-                numberMax: 9798055424,
-                numberDays: 3374508525,
+                errorCategory: 'supadxn6en9emux981xj88x477yktqmsgn0180xw648n0yyec9o4gvlgcky2o8o3u3baac8zsuzgu4sigctwodls9zrm7dodrdbv0soz0prdwu1g3youzm1rmk11qkv8amp1x6e5u8krlw2mil0ll3oylors2d8q',
+                errorCode: '8qwq8jpl4ls2z5f2ox43ngp6p3e176aeon14irod0iimaqslda',
+                errorLabel: 830392,
+                node: 9718947163,
+                protocol: 'kahnh3qgk2326s125qo2',
+                qualityOfService: 'vvwlclwa7rshidecsf6d',
+                receiverParty: 'l9g4uvuw8pasevyqieo6lu1f2mv7u3b4f8f84p1xypzhnsmfdkxin6ss949jvc2lh2ywq4c5y81348sdlsmp78golob9itaz3s2u3pin6z34h4f4jo4v5d39d9znx7a4lj3koaq5dypo20qqfprs2ew2m8ui1xqc',
+                receiverComponent: '203mwhkhduve2uj5cklqed3jyrqwg0i0186x4si2433shn1ykoj4absskas4duxgtllnm7jq66ref11es0dxm4g5qbuwxjm0gm4dnubc9qx0pzg1sg1exoicclh5yml4875f9lq3zik55258hys1o7y534eq8uq5',
+                receiverInterface: 'elvay1gldazscvypc5qj5gwg0xxzg9nysnjpi0wfyy8r6retphsigov6gtbq5jfw8qv2c7xeai0a16rtjh8euaemdhvclo7d223mld8dzdx4a31sb5fd9jrofjah7kjqldtq2lxxi0k3tdzo4gn8tjwym0msn7sk',
+                receiverInterfaceNamespace: '46zhuqz5grchid0fxxu1omcn9x9l6duco2d1q074g2wh8swuclfit3xm1wt6vwypxfg2xrc2ed8uwltrcpfugtblpzd62oywr2lw2r38s9rf3e8flf34ldzspyl11odq10kni4xt2sjkfqa552vncps3ryujva5i',
+                retries: 5818484152,
+                size: 4684433687,
+                timesFailed: 8333098499,
+                numberMax: 5834557503,
+                numberDays: 3435866474,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailSystemName is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailScenario is too large, has a maximum length of 60`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailScenario is too large, has a maximum length of 60`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '3lxxlr2wx99aquh9jfztszs15q42wzquh3st7zyr4jljhpksum',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'md4xb08043uo9yu5woqz',
-                scenario: 'tnuboe4aq3j7iwsx0dkxzjf8e2tcenv75arcb87g6foieje59ilkn4qyg30gl',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 02:26:26',
-                executionMonitoringStartAt: '2020-11-05 19:01:08',
-                executionMonitoringEndAt: '2020-11-05 17:54:46',
-                flowHash: '6r7c1e8px4v7bxf9hrp13cyrfbtzcwprd1wob3cg',
-                flowParty: 'bt7ag764u3t92b7agx8bqr1czg7hf1labdnl3uogn7mhaq93ikmfs04m71yvs2n25ohl9qyjwq5z0szgg60o4yxpebg25ld33pmvif340hst7gcwvs730swqowx8r97vrrsgxr2nbu46fzjvi8s4j4g9nxyk4plm',
-                flowReceiverParty: '6uompt1f9lvjyt2xzx9q4u0y3yeeqb0rdmz7eojgu7doyoqbo8oaw723ffowzu62rozlaq1c3tnx7dpbj7zsc2vqkqfi16q5j6nj19tgdq9lfg69l53ou3gpfi47qcj4gfjnkpdmdr8yj13hjttig77hfxto8i94',
-                flowComponent: '52e6nomze2smu3wrc99minkrdo3knjjkue2rllcjbnycij81eco6azo92pn05zrorfz3irrib021v8hyos1z70q094wsjflybk6o5u4m1aq4u2bzdx9efkx9ktl8fz52sqs36egln1zpfb2j5mbf2v6qln111jvv',
-                flowReceiverComponent: 'ez1wfelvn4dz123nxwwz3cuwwsy1ugg49h0iutk8mmun0g59kph5s58d6p6gx6krw4ew3c1chddnzbv1qmm56ghah7u9lm2mzjsnnd8y3wcoxchb26tzdfux1sbyi19nucg3p3ofdtp3ibvd9qatlmxr7gyx5jms',
-                flowInterfaceName: '8spvlyy512sxgj1959rrp1e4zuhewopyshvs8n7udvt8m9ao84db5851ccsihcpzumekf97ixtgqeh4axqgy3fm63c7r7jsgyuji1v0f4034v80ivhwjivotjmiiyb5uw6ugbqin5exm1arugl2zilkb68cu7kz6',
-                flowInterfaceNamespace: '9fp4e2nt8g0djy7fmf808it84zxjb2lu4iqd6ocsxlrf6a3mrgg5bxv0xjpr9smm7452ebgc7l1edu6de9pdtuowh1jom24rvscylhpwtal09q2a8nut978qjzdhxnan9lu5fupw3g77nl625qkzo72jzzcmmtw5',
-                status: 'DELIVERING',
-                refMessageId: 'xcvky0u0alwg6jcix4jqfqot35g8jcxg9sl8owkow56mqcwma2b115m2sh49evbj90e46fq43cwmxlrpfdbn8h08ggyxbk7uqevfdknw2n69mi7myehyw5rvbjrnfw5j728gfdidtcsc0uu944lt8tgo9kuwz4xt',
-                detail: 'Similique fugiat nihil deleniti dignissimos illo. Ut similique sint veniam consequatur et natus sit quaerat totam. Voluptatem delectus atque molestiae. Placeat consequatur quasi in nesciunt at laudantium ipsam. Ullam qui vero et velit.',
-                example: 't2uj8jhyhlhj1kj1ujgweos3e7tulsda1gwa88isv8f2vja5vqxfjbrfpierjkx5y0g3f9z8vnfe02o6gbn0j5a6buvtm5i58g6yqf458kf0o73fma4ceqmlloce6mfyoyzjk9zasq3e3the5i8lwy65pdm29cpz',
-                startTimeAt: '2020-11-06 07:43:35',
+                id: 'd73e6219-e402-44c1-b8f6-2086fbe7d958',
+                tenantId: '9f526812-f7f1-4f4b-9548-bfe4d8c060f3',
+                tenantCode: '655kjk06r1to4kusnx4275h0ln3tfba5qm5daktuhdjh02czsc',
+                systemId: '9e3cd45c-31d3-44a2-92fa-5e30bcd9446c',
+                systemName: 'rxb0glo0ldoqbn9t9l0g',
+                scenario: 'yhlgsqyjxqf3teeun04zzdcmqc1yyc1psgj5jso063qsb7sxkzmo93qmgtzvt',
+                executionId: 'a4a1c44c-7dc7-45aa-9ac8-25fbb6e32a7b',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 19:12:12',
+                executionMonitoringStartAt: '2021-05-23 00:20:22',
+                executionMonitoringEndAt: '2021-05-23 02:07:58',
+                flowHash: 'ljkbwk533tz6szi4d8mn9q9j2x408uj26tql1rur',
+                flowParty: 'ynt39iuiz1h7nrxcge3yeqhic8bprdyuu1qxflvman4ovn1ewqyan1dcw28r4ljygwe00wzolidwxghqg5fdw0dbljywlbm53v3cr3dfdagwajziwl957uent86p9kthhkpppclr8ekfdjhwd62dave3ysddjodg',
+                flowReceiverParty: 'rbnzy4ueckv4mrzzcipa45qz95s63k49pmew36a7kk0jdlof400skwxy2yhyod4eun75knhg1la05sqwfd58yhu43qs0f74umlplv1uax1smy3xu4mfjgoolpnsapgo91mrphtcs6k8szyslx42wkdk1tqsv5bim',
+                flowComponent: 'ee8xsfzau033nng37mks897nk215u26dyv4ff4t95qvf7503350mjbqxdzvjcde74auyjmiy50o2vjo86wwjgfdiv6cvgvvunzj3c24dj42u9pdst7h8n3qgysrci360323leqkx64v6y7zr178v3wimjwz6rscu',
+                flowReceiverComponent: '7ddn43kdubkt5balnztywbzgyyv1c1tsa44gg5ydb0ff29t2ofysc4jwm1c44tp2boppn3aeyuydbzcc43lag1ljqndnhfnez3b8bvpvew81zxb393gplotkstg2sh0bo9shylb5jj3jcj6pgxu04aruf2kn0gg4',
+                flowInterfaceName: '50lke2ijdptcgl88iauwoyu354hdbesrx7bev0zw1tdzc6znzkmh06urkpb0ql9rlvwa39w5yf1xivqpsy58dfi3fy6bw9g71cu27noc0p0k7y2tqgwr7qoveoz20cs3a9hhjssng144bh93iy2jxxvdf34re3rq',
+                flowInterfaceNamespace: 'hv30ulfg5n0kerf3br9nl3peeta6z02zrww9bn66aocqdiiset2lh0uaeh0zyj9eghnrzygqixq3lylkb1ohp4mdli42emli46r0r7gmec8lvu8yg1eab5jigbow8mzud9j6odoeh5o4spr17n4sqj4z8srml1kb',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'b03nsb3jwtg4t1s9lc18r3oeovlhbbdnxzws6i55atisirllfkxxuxgvcrh5he3d7z6muod7zdkkclykq0zlufstlh8w958iivbxyjyovaslpl39vlr3ixttsogs5qkw1bynniiwlw5d2kuzrw2xmlop415sagsi',
+                detail: 'Expedita et maiores. Sit aut est eos expedita aut repudiandae. Et earum animi fugit. Vitae dolor dolor autem qui iusto ratione consequatur. Error officiis rerum est dolorem aut quod voluptates soluta est. Ex saepe repudiandae rerum consequatur sit placeat asperiores dolores.',
+                example: 'jbisql410wlau2cvat0ccomwv11npocv61k2i4iypn6oz0czbnf59wepcfej6p70yc4eu4v0l5vvbrp1yzl6v6cv47b0tazbxv5onq0idllmszxdl4a1iaur7bh2lv17ajs63lz3oksj0l8909pzsksdevy4h292',
+                startTimeAt: '2021-05-23 11:34:22',
                 direction: 'OUTBOUND',
-                errorCategory: 'qmeb8trfi3pqauz4obez2yo9gz64u5inc5gxhvc3pukeresyi22uwy13mffpwgp463hsor8s2c5iehi643bezs5seriqlgt9b2wm1ismkmzj18m47usy6o9up62o5d8rz4ijwiwq9i1o5hwpdnmub9r5mpzw32gs',
-                errorCode: 'wf0b0ntc5gkv254tzl51t2qslzmj3vxvjhpywodjcomncsxxm0',
-                errorLabel: 718107,
-                node: 8214882453,
-                protocol: '9ekw5z8msyoog91m7qiz',
-                qualityOfService: '57mhjld8wank8bxi0i1p',
-                receiverParty: 'cdgxix6ccg45zyztrdu2ea7n18n6w9548d3h4ecqpfo96tk2rz9sdyy8w5zsav43l1rledva2th7wy3fxrn0uf555zfww09xz10pcuiy9hcxvsh3qgtbhrpkbueaf4uusc6k30t0vole92kotgb1mgdbizuqho3n',
-                receiverComponent: 'i039n0au997g2k2yit69r5d00rocfr9l7uou3vy3smr5954n3x4zb79ptdo1tp6ft5o0iale9gw345enprvil7g2w490fnl7qlr44y07idol6spgp7d6sff7ac622kxc8zxb24voydxm70iu6w1b7gn2j3rhb4pd',
-                receiverInterface: 'h9ku9j3aewph0rzdq25dk06tt3qqsyh439y432jfeefbnqsmabnfuic9pysop5wlid66bd53l1nlmczl51w6z0izbx91lp5c1f35tflhdwjw9v6hq1l6e1kkh7hnvtm8jxe7cq1pm3ged7w28ox2c4qrwvexfjq4',
-                receiverInterfaceNamespace: 'gx8bvn4srvtlmw8rcf88sv59t3s5jscjxkuoziolikksdhgfnkv5p8xuzmy737n20058po9buecmgpapdkh26o02hdj8blk4hlli5ta21rwnov71358fe34v0bbyfpd06a8hn3xx5lkvixgz6h5kf7fp1n951tua',
-                retries: 6420235841,
-                size: 7464211571,
-                timesFailed: 6639370796,
-                numberMax: 1420424579,
-                numberDays: 2439495689,
+                errorCategory: 'v12a7rkbrizpjrf8z5v55jk7a8y2szl9zccp3tbhyurtjc343fstq8owjqzsd88hced2wv1dtqqhwdbvwbj78pvzueipjfrvlvkgf2sekz5aqfus76cyjnam4cxcir6jbgypn8av9vzqfa6y82lnp3iz7n4il0ib',
+                errorCode: '038gls3v5jkg0cc7vvt4uwqhoynsf599tc3sbz69rckhkbu1eo',
+                errorLabel: 895312,
+                node: 2680005654,
+                protocol: 'klao9jbqdsdroy1dx3x0',
+                qualityOfService: '1zk1vrzdeg7tu9eln7bz',
+                receiverParty: 'chuwt6xudx0qyqk34do5ieow84f4i716335yac5jwlnwz28143jcd16ehgyk0173fg36rz19gzfkp7ulku43uco0nk65lx509pbnlpsjqg34cjxd9iu2qpymmk0lg9qgxy204m04sa322eosq61w3rzzlcs0x38j',
+                receiverComponent: '6xrahfav8mic1mbrd4n7e8w60o9khvdkira9pvv4o0om3t7q73sk0g13vmaax06xqdkw3jhdhe4tzj8kzyw26esaoqgqu0bf6d915yk33zzh6zz8wyfxokloiagi9nkz4d1el0uv2zrh7jf7bfjnnkxdrc5wtv2q',
+                receiverInterface: 'iu1yxb3e8edcmwni5ji993ae831lwbiz6jlbgcaqwi2t9bo1g9c3lvrw8xcpto9k1dvriiwa3w6q5j5k9ezgzn9uqyd3kuxg4kyaa3q9h0fx901wdypvz4wr4pc3pab1imrqzl27qldun6b6n4n8ys99o7o8jh0t',
+                receiverInterfaceNamespace: 'f0ivtlsh2sm32uk7ogqg5z8sbyngynjmskl73mwl8pjmgsriavf2mzb1xtajebnyraoeg803hkqxr5f2bi5njkpp3p446809pnbbwcc7pndisv5tdr4m3k5jilp1i0nvxrdnvr805caxcykqlzuh34vw59ce3wcf',
+                retries: 2156115691,
+                size: 3896973881,
+                timesFailed: 8783844254,
+                numberMax: 5940358653,
+                numberDays: 2114878744,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailScenario is too large, has a maximum length of 60');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowParty is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowParty is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'o0zbtkjy2e7x2yz5dv8hr0358y1c6lu8s3hqjtpdy3mkt58h0z',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'ki89uh3qvr84d3wksc7u',
-                scenario: 'y1bqrrlf3q3vkw2hwfwaw89k1czs4vkyk2n4q3yp1tn3cwh75k8ezzcsbhjz',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '41a01412-5513-42de-aa4d-1417fb3fc822',
+                tenantId: '6aa4ab03-43df-4e36-a821-f63a2f67a915',
+                tenantCode: 'xorrw7gdo4nxev1dz11551kzb7wyddj715ldzqk9b64b4w76gw',
+                systemId: 'fbaecded-640f-42b5-bf58-d4740db88897',
+                systemName: 'a1ivfd0ho0gdcuecfvkn',
+                scenario: '79limvsoc4hdb3eno0pn8anlio3mnhqfdazpbz5wyehkkc92os3nl6ei6owb',
+                executionId: '898f9a79-9a8c-436c-87b0-e59094f9eca3',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 04:13:09',
-                executionMonitoringStartAt: '2020-11-06 08:47:35',
-                executionMonitoringEndAt: '2020-11-05 20:46:40',
-                flowHash: 'tdgvi4ewn0ws6r2h3hpllmxarsjfs9inmn7zw1jk',
-                flowParty: 'xgonu0do2d6uakkvmnxevhwnx25j7rywy6xb09yvkvr3qk1itmr72n225gk8yk43ldkyaqa6i4gr5jsn78nlo2s1jzi82zsp45coysqqman49ja6yai0agi8gvkbrzrv76t732qz2xswrzo0b485t4jcibaak54ar',
-                flowReceiverParty: 'ylwbqz7og8azvxa5cv6xlek7n7ljwoxpdop66xu48hiydbx2t3gury4fq3w5nl3f8gt77xg8940hwebs9nijyyji1s9jakh2kftli8gxazpc50biymotq6ir84cpx5zg3gqs8lw2dn0mcxv76519dd0y81xfs5um',
-                flowComponent: '6o8h0p4vsjmms7ofiwqv36j5kpwcvv4yh569i3hejhpve7d7dnlbimjmxlpalgo4o9t5ktp80gntqtkyq4wiupqkifs2bq6zdjfpsoqzq6qy9y98huhkxrrvevets4eg2m4kiexvywvuvcso9urmxmtbjqkcxlqh',
-                flowReceiverComponent: 'd2ujmoqwpjxafb9rbsvtun5lfw9ois03dl3r9x2rc8et3pwdw10m7nuap7ilxic5ay550ydemvin85r5hqhdvx0xx0o4qx9yahyqyx81299w3b7tt47pffracm6x79fjhe7w8mug4ftuwt8wchwirabypt2orjk2',
-                flowInterfaceName: 'm7vq2s8tp1z1otb2249t4d7p5n7eah4otw2w140m349t8u2yzxv4fsyzb1f7n1rjm4dzs1yo5ejw4rx9xisbftpox2q70igp2yidqifq6iklyrb3i0vohei8ckvyhb4uhpltmkfia3nfbgqcyhhydvipjft3wfmw',
-                flowInterfaceNamespace: 'v27yjqz1bnl58vlfz4fkjlazeawy38wnjbg6tbwgvywzod1ysvxhz17dyg4nul9gk2rh7vluijfcca421jbyy2s0o0qnbsa5rmh6rvw92to18bnmpur0mffok37qnk6socp4ttsych085pq4comqhsok6uduqzjs',
-                status: 'HOLDING',
-                refMessageId: '9uzr4os3y4z6sodlzvjv4wmz6y9idgv2hh6hyva3mcohtjriu4772whs4c68ovxt0ciamohr37m9ko465wr4dndbzj6xbnc0xcx6gznvlkt1cszn32i2kno4v3qfm7dppoandzsa8lk796ou10i6v12yy0tepx6x',
-                detail: 'Blanditiis saepe odit velit repudiandae fugit. In id voluptatem magni eius possimus. Magnam id voluptatem est deserunt voluptas numquam rem quos eius.',
-                example: 'pcqnjkbexuaxstqexiwcn19tg61yos9n943bjrzojuft8chbbqz7vl1p0kiilwf5ckmlvemcqrocngax9urs5vo1xknrtz9d3eanh2d30dzcnugggj4c0n7uph1k7c7hltdgi8ezrueo1woqkmh010l2j1cvuovm',
-                startTimeAt: '2020-11-06 00:37:31',
+                executionExecutedAt: '2021-05-22 18:37:23',
+                executionMonitoringStartAt: '2021-05-23 06:04:13',
+                executionMonitoringEndAt: '2021-05-23 00:56:08',
+                flowHash: 'fhuppeasn2pe25pk1omka2505xjxewpexj3f8vnx',
+                flowParty: '87qc2v2yrpt13qgz9zz3gj8vx1j3h4f2fwr4s3l5hnim1w1fxyt0tuvuikdcyq1x2nd2cmxuys08gakfl5n8pq3r6tx2h6yisjqgiy4ohwqx6hbnlwrppbuewsybronvxtqewl9tlqnz92xmp68gibubmcywbhbrl',
+                flowReceiverParty: '56ejce9umisylnojdd1mwhg3umzyp0iljy5rh3heb6ogd7vncm4umvtaq7t99id4hf112o528eaj90gyilf5dlb6nsa7n4jajss2ptdpu1lllea6684tb8l1z1gs2z7tenejb84hzxl27wz7304yn9epj9ukcyw4',
+                flowComponent: 'hr9psip41grh4edplns881mwvawa780p35mzba5etsbacz7bwy0z8snu6tsav7zmhjcjqsgdi9b0lyvs3owixw0a487yocjh1rdqj1t7y4j5m44edu6hr90mgi1wv97av82a4li3y4ck8b2lx4lzvwag92kygxe5',
+                flowReceiverComponent: '1y41wybvtl3om6ht6ga37ni0bpkn49jfi6mrdpzl1tgzhhgpzwbv9nruvmot72fwi44j4oouofhgugezfhvmwsedt9hki5eoigh4okob5n9gtgoi70xq026n2cjlz4eoq20lyd34xxh0h6tg93lb9goj04yua6sa',
+                flowInterfaceName: 'v94kv4ao1e1g7b5vy8nt1rerb9sqyrqn3zjna6lect19sr98if0xyepb1408izoe8ef3m4vcgddcrbleai1dhbx2jp7penoutkh24vpagipskyt0r0nr6l7u04srz75dwz0vmb1notg4132jpvxfklhqtseheib4',
+                flowInterfaceNamespace: 'egwbnxqrhas2h7tkq3phfcwis882t2hd49qxdv6as5jmvii981c969be5latmhug9rrgbnkjfpqs3528230qu980ynp1glld84s26hlvnlrpk2f0l6cp18btznk5zkqdrdr5721kwyv1d3g1yk3ryubaubxpi4dv',
+                status: 'CANCELLED',
+                refMessageId: 'n85ehn6mgu9bxw2h29st1zrtw2x6n824xgu1vq4h7674bhlplniv8d4agm93rjsdjkrozkkc86jnwd2bhcretj4u20oggvwy7yhjgdluyut5775tlojh9682h1edlur7ociytdvpnyey9muojfnuzzat7cy4o5ex',
+                detail: 'Similique et harum sit optio inventore assumenda rerum qui. Praesentium et expedita dolores est et. Minima provident libero.',
+                example: 'wc1agzuwiq5qmtkteuxvfeqnhuiotn320tlfldu7vlwdfl417i50s5psox2g49j4hprld4zfg39by6e3vzvtbalm837hfnv4xvaa9zstoj511dxz3y6wpz8o8dcb22ems42e85x08f0d4h5q5hw3tozvnu8sa1k0',
+                startTimeAt: '2021-05-23 07:14:21',
                 direction: 'INBOUND',
-                errorCategory: 'yyxd2ye8p6bfezmzejxfrd8zfcezisfvpxcda5g1zich48jmaoc1n1jbb5ykqttg9biqo4hwkhjokuji115conoxnnhgycvqcjzua6fm9osg8jxwun5ncvgq901vabql5qmlciddngelagpps1dnpyeb84mgbqv0',
-                errorCode: 'ob8tvazw72v2evgj2mjtzgvysnq6cdmrjv92mqzgnv2s5mvria',
-                errorLabel: 238884,
-                node: 7343721512,
-                protocol: 'csn9odl6c6msxsogzzsx',
-                qualityOfService: 'm344hwst0w89kfycgkxq',
-                receiverParty: '4167jints1pw6izrwan5thtpexvdbu2qd1camgakdw4cmbxrby1sikkaj3ommv7irlbbckfl3xnaxf1u80e7iy5tyex1loyvdnc9jthv532zaknuoud2438jt0d9pvjlnvv74ityv4hq8yx16iylnz012hb488ak',
-                receiverComponent: 'eakayy2spjslp5lvr4qh3gxwtnxmoqqqsky2vho1urkq7eydirhepxkcfac3ecm51nmwo3z2o1cbi7q3qdxbmv5fmxhomyvz4k4qj7gs2tfu8rdxtifi8e7a5k73g3rpcpxhiza7kb1gr7v21ne9g105rbb3yydr',
-                receiverInterface: 'ut1ey52ff2a6eszyvp7bb6fbd18vo1ei59975cztgcf7pvt2ng2o7jqhvdrhexxpczfs207eo7ljg0p5zwgsu9nuhmpt5v52yibse9uutgox6zt2oaexmvadexlqz8fgmzren4otpur5k9gqb7r6rd5ek2j7uoq9',
-                receiverInterfaceNamespace: 'et0ylupu6hkj12kpbpakf1mwax7ci5fli1k12gffo7lnnvgcpdv4357fr9rwlvqctsmihgx2uhsapmq0vkb24n21ypnlhzpa2r541vkny68xounlpsi61qg2sw0kgxr3risrjsa13kx7c33oj60bp0nwaverx3jw',
-                retries: 9265078455,
-                size: 9220623782,
-                timesFailed: 2712593886,
-                numberMax: 4796005639,
-                numberDays: 2048107800,
+                errorCategory: '2bj24de9oxpwixbtsz58svc24jz7az3yugsu6j5v9r31vgiy52ffx8qf68oy86lyz640i0732rviymmkxkjff4i8ox8giad9pmjmacto1eziw9ctu3c2nmr7iheylu67ki2nhuhoj8i3wpq0vpnf9flbcd6busj5',
+                errorCode: 'qnbduw5k9eozj3sxeojgtqbl3vc5nd2vcmjt5f9y22v1e5a1lx',
+                errorLabel: 955049,
+                node: 1313651665,
+                protocol: 'w8bl3n5c317ks286vanc',
+                qualityOfService: 'lxz8oou1orpppky54mtc',
+                receiverParty: '7ocvh5iba4q0xn8dmrz8rzqe854mmuhifu68r9bjd4tt3q45nfwneuc6ha9h5shusjvbjm22acvefl794yv66mtbm6ba4bil4fvmyhmcm27hce8rxorchqsa511zlnpdmjsg4977a6evzb7lg6i2x8xtshnzgq0m',
+                receiverComponent: 'b37j8uztgeonj6nwkp9k4jzq7v1oet7hvega33lk8qvwm9uju9pw17p62w2a19yu5whn3mbnvlqbdl4sgxzosl0jawo1fe2ztxjub9qfeo529rrfeayjapmzpbttg32l04lu60m8qfa9xloennm000ck4zr8kkcf',
+                receiverInterface: 'q7tascvoo6sp9z1ga28pqhptw8xkcf7wq2e6mjq8qfrq8t31mi7xfh4zxt6nmuxbe24z0h4zuhiv3qddi2taovlx1y5cr7xybnt0u1u9oyw68bn1gasf7vxvtpvf5ocv9l7ffw3om3eq2qbjtnwr1qrb6oui7917',
+                receiverInterfaceNamespace: 'xxy3agq74rvyzmj24i0afl6rwde6l16rpebfbo6xrnmy71xee1api8hry6xt7btljgsh2thk9a9ymte6fk9zou30d3tn3nqhvlcugynbef43p0rsqnj7hmh0jm10jzgq5cqtdl1mzva6ji9gz1tj1wjk66zdwvkm',
+                retries: 3561382686,
+                size: 5170700063,
+                timesFailed: 8661063687,
+                numberMax: 8669562593,
+                numberDays: 4527773695,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailFlowParty is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowReceiverParty is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowReceiverParty is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'fz2x3s5j24qgg5d083hckr03gnvw1f14eeam6chsn4wh2iqq1n',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '3rkr6idjuei0kji138ct',
-                scenario: 'urhdmzswtxpm6zvn51edk5e37dpwu77t5uzfuv916v5g2knj6emba64d9j1z',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 09:00:32',
-                executionMonitoringStartAt: '2020-11-06 00:40:26',
-                executionMonitoringEndAt: '2020-11-06 02:25:41',
-                flowHash: '52kizdi419b1cpi6ucj6bejczpzt0p80dhggzgup',
-                flowParty: 'yyaq3gg4wphi4vh7d4d49kjhd564pl0x3ayiij96hurxfirdkgydcg2tbmvzh2r311g2y1vwywxx97py2az0rxo0pw45fdmaweqs7lyv51cg20mqisl67fh8nvrp0rnutopv50tmp6b5k6usn9m5ie6mz8qru62s',
-                flowReceiverParty: 'l5voc6smm4mpk5f3jw923r3juxk2e0xo9fg04hoqlxq9xxr2nfdzy8f1wh5hgsavz1ep3phl346i4cb2zjq3uaegoyuznihzm4iq1pvig3uovmfqiwjcrana86831v0vvjx1v852zxa064puh3egxc0141fg1amn0',
-                flowComponent: 'n49ej859lmmu7c576p1yr0rfa1agd2fpcer5eo0xzfz2qi9e3y1lmtil3tz7lx7q26nmdjfchl1479xsdu9dofrkfgcj54d4ch6aglyt6k4q4np1779jxiozaa6yw1w18ncd2q9bptqi56ts9gip0fyg2b4inq08',
-                flowReceiverComponent: 'g5nbq1mbpffi7dw8a2atw8m11spmcamc361280btwvsdij0a021bmutnj9dvi03hu3nmmq2bhms1fz6rqqccf7tn60i39fjz7260qpuv0az4fszasuvr0bwobv8j8omwvq61nv6tjmm9sgknqbepzy7kcp2vnbzk',
-                flowInterfaceName: '8jfdrhevs18e5tksipl493zghivzvuzal6mrt1s7frqzw49vr2uqztoczhr5t133i10a07kryl72fjcja4fyj85hykm995k5k0fcscjjl7dglh8sx3vghsm28wjqcr4wl8zgshdkn5el3so1wbh7tdqh8uhudgfg',
-                flowInterfaceNamespace: 'd571350ww8hmv1zh3fo9vtzbno179s3mxn7oroc5kq179w6a025srk79bj4e4xjp403n2nnq7mr8t1361pj52hk6hc800k6mk5s6anmo53yohoq1ai0vfnp1xvc2e6wj20wkfnzjju4lh60v8mjkvoour0jxc3s7',
-                status: 'SUCCESS',
-                refMessageId: 'majar27hetildzz11agar86tlztyjkmy8ukif6dbdy3jjqwoukdozia8zcywpzb6l4r1576vjibypkka9be2fbqre8d4v0tacvdl9cit1kttf1xbxwib8u87s99fk5kpso27poz9052v7ikxu027k8uyko1qjht6',
-                detail: 'Repellendus facere molestias nihil quibusdam eum similique molestiae. Ut animi debitis rerum exercitationem omnis cupiditate voluptas dolor. Qui quis optio.',
-                example: 'kt51nmn6fltagck9mcuzqa3apd7g7u8vknh8hygdssqnedtns3brv5gqsvyfi7f4yjrpldt9n0blky9j5kqosm46qpwwtawgghtvttoyieea9sjqdapxxubiiu4f5ucwmdzzpsro2h6fldi50dfk2ng7htap0lo8',
-                startTimeAt: '2020-11-06 07:05:11',
-                direction: 'INBOUND',
-                errorCategory: 'sfjm6sgsjd923fe1xt6thviuw836i6rqr0q34yhgoddln0kmpe337jsfa7le8qf8lj00zppoupz598lpj0kqbwnhpubz54v2atmkxm11v1qp65t7cfsrg03s90oki9dcf6i6kygryxjrpdxn0r4pct5wsl9hbasu',
-                errorCode: '25qvep6jbgw8bc6oyoxo9cbyw1pj41v7qv5fmp5ih3dy91gjfd',
-                errorLabel: 103501,
-                node: 4400693688,
-                protocol: '3x8dy5b68in8ybtssgu9',
-                qualityOfService: 'ectni032mku9dsojburv',
-                receiverParty: '4kg29ndew0qxrpzy3tlcwczos5x4fqag1qy4x66z03dwhujko4vbm65q0g5daufjs2bnuf32hk7jdt77dn9uruqf50oh90v8q6e5qvlf76239eamq14j4qxx24mgalegoay4ygo2ey6cqa1qaejnfgzhyvvesz7h',
-                receiverComponent: '1nm0zspyyv6eexmq6ryfii1axfjyqkmv6vp7rz4c2y2wkn18w6tknl877l2n1cxqk15qbk7u2i4swngxgzuip8lw1n13gxsvw8rkpadjf7swn9emogxzlmx7in4og6awhwuk3sxfp4u65ddgq2z706ip6uvtt9yc',
-                receiverInterface: 'ma4p2k4c5xqxdzxua6kvxq4rtohm6tehix1c7kha90og8kp06f75aji2v47cd8hv25v3kpz97bc2yjje0ho5mle47h0prkrkudclj565v908lgu1ur4tetfo5hltco2frfgafyobvmqvai6gqgtywsh4ct5ycdpu',
-                receiverInterfaceNamespace: 'a16gbv9r1qnofhphbkmgxq61ijkeu7s0oyjq6wt61edalzk0j1fhnfuclcan288digxr3sqaatpc06vqxyhfn8pw9nxwswvlyhlqgevqtgmj3ok81n1f1uy0zx92c0186bo4p51hz0nn8s5bv790h3mbcj6dwxla',
-                retries: 2254657195,
-                size: 9843089400,
-                timesFailed: 1191877577,
-                numberMax: 7157292232,
-                numberDays: 8711865302,
+                id: '30abfb0d-fb84-40ca-ae02-dfd34b4e0c83',
+                tenantId: '93751c98-0941-4ae8-b1c6-e15fb47694ed',
+                tenantCode: '2qrp7ngqh0jq98jh975kgsyl04iq4d4m6gu124e0vb0okk7spp',
+                systemId: '3d4eb189-b336-479f-9217-af804798e0b6',
+                systemName: '7iihsnjwuibo1of5x34r',
+                scenario: 'bo3df9kzglxwmbdziowqhsmhi1df0njc70fvunvw57wh82zc1hoxzynjrbgh',
+                executionId: '50bea71d-881d-4e14-abea-9ad717496e5e',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 03:41:32',
+                executionMonitoringStartAt: '2021-05-23 05:29:58',
+                executionMonitoringEndAt: '2021-05-23 05:33:44',
+                flowHash: '278z64nn1d0lduzzftnd4pspj23373ekud65rsrv',
+                flowParty: 'faribatydsjh0acu2opolbf5dpah1c7h7zyu482ekxyqxhrajw1ule3u5bfzmy4af53e652lct4ytpjzptd64ufsbx55eao0405tlrrynv0lv2k2r7yrvv4txfzlihgdqcymoir5daluqvdlb5r8olo2tnd12we3',
+                flowReceiverParty: 't5tnne4g5t996ydge8wr1feu3nt5owi4u51oyz59lulllmfkk58byurjcdicnryxpjphczwb5kqck6gpttef7u15vsw969gxqye0re7a5k9wcox7el2i09y3rt74y4i2ax7p8z8mukokajvobyqcfm31dtumfms2w',
+                flowComponent: '5s28vsvguirrr4gd9496hbzen848jqnppj0zueyj5ki9j2an7mxf7vddpo55s1j93etr3krctrhwkuos47itf7frhwwyh2adoum3o6luttt3n4jwv6nsy59bwp196g6wpevhpg2wzvgtjvzj668u5cz5cy05w0l0',
+                flowReceiverComponent: 'mro2s6rfxw920h7alu32gmqhqyewonwiyeeotb3ohka41qvsn2a4qeqvlb0ony71sxlnqw1rkcxpm2nmpgzya1bbnhyko5k56yl9j8zgx80uv1tlxpudik0bvi5zerrrzc08q89zv62deod5hnrhnp6pz212c6kf',
+                flowInterfaceName: '4sxdc4zupjka6uzh5v2uv6khfkh0a87lcjjsy95g55aolk03nw311jz2cinl4ht5iv8bsdvja485fi0zgv4wkdoi70qdeuqqggu0qe73oefg1o9ruh13cff9q3myvwkwe9rb9fkmvt9y5uydb857d32ujkq7w4x1',
+                flowInterfaceNamespace: '5ofbub4a6zmsex0i1u9owzqua5c3sjp7vb5d1zt6r5bqerl1gov8nn51v4l0bmknu0orwmonxj3nrq52vcasz6lg9de2nyrciz1sx1grwerx5xfbhvwnfzjd5zasur9pctwyio822gfknie5uajqvhs7w5j6dcz9',
+                status: 'WAITING',
+                refMessageId: '4zy9ho3lwtx9gcj6fm6vkl5aze51kbcfpeaxziw0z8jgk9uvree0clzv6scxu61djwq8qo6cas7ui54z1t9lr3txx71nlssbhctbrnr334s584rir9qzfpsj1afxh2fr9922gszorku55kntuehwe84h4qqs44d6',
+                detail: 'Ea et libero nesciunt. Aut ipsum magnam excepturi sapiente et odit assumenda et dicta. Voluptas soluta nisi quia dignissimos eius inventore odit est ea. Et est odio aut corporis ut facere et ex. Voluptatem id omnis voluptatem at odit velit voluptatum praesentium.',
+                example: 'o5zqs2mbp3nne9sr6je9akean8ymhykjz2axeq7iywavou6bepy3zsa7qztedpdh2rvotlkm0sjshe4ipb8gh92inwrfhxjkpb6ma1pa3jqdkihbj0gttetu5u0ileh49keixai2gkgx7cw7zjd68zh2vczrnp3j',
+                startTimeAt: '2021-05-22 20:44:24',
+                direction: 'OUTBOUND',
+                errorCategory: 'njxopgin7xwnx526qkd35b494oc6uiod4phgj8ht1ygn6s1s1w9azwo8e4xhqtp5hg5jxy8jthmpu9pab1adsfbvf9fp810ttn2a30v2t5b7ngzewy51ed1w650pk87m3qkncvkeejfa515jjz9ze8grtnpm6i4q',
+                errorCode: 'xoqlbtiatmtstp7ixaoibjsjq81iirwc2nnv8ukhxmmnbem2fq',
+                errorLabel: 929534,
+                node: 1609599879,
+                protocol: '6f0en162r0oh4941qwen',
+                qualityOfService: '4azo2cvcxavqgni51ma4',
+                receiverParty: 'tqarzxewlr0tgwcdwp9dxrdaxevj7tv8mjq7xy28zk28rcaqgklhmaewez9542b3mbmhno4kwe7bju0htt084120sloycim2162pp7xqwnx7jnz1ub22wo94dv2dc3yemawgb6i3hqcmcdmhcsao3untq7tkzyz7',
+                receiverComponent: 'ry3s30vzop4gy84lcb5iamk5yk434m3nq18b9ypoewr9pnorp59sif0knw847lxyhgx98eez4dgnrrpwfjv5iptwsopja6p3k3sjjolney2dzf8za4glikcyz1unfbrykwjk4xsmmmxpc5f9pqa8fd6jl83kqedm',
+                receiverInterface: '0l6d1g7hc7zp7xie0o59sjuvkd4xntrselhfutc2zvshywgr5sbwic0hgoiq5bunbh8z1q7c9bwpfbnrfv3chaavwrd8cyjlp52wc8uukrpwvt11bh2a7xcjvj5exienhu29fhho7l1tyffnvmof7eg2s6dmhpcz',
+                receiverInterfaceNamespace: 'hgue2hn2ta1wmnkiz2n826ndg0zsgnuqkj7jjvn87gkvqy49n7cot90zfhqvrc59oldm7a9g8qxa8nwq9jjs36knqmtdo3z8dfdfulyyd2qqor0m3eqwdasy44rwduaqdfn0rm0g7rdrpaxzew5r60s0ob91nmwo',
+                retries: 5852582211,
+                size: 3985291993,
+                timesFailed: 6084423632,
+                numberMax: 8520648076,
+                numberDays: 6329140354,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailFlowReceiverParty is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowComponent is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowComponent is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'houc2dh5k0r3kf5njbswzz79cjpbk5is4khbhngk1adthj5odp',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '3l3euzfagoljgoqs4nq4',
-                scenario: 'pxsxdj2k7jykria7yk4okswahici8jghoyl6pb52iprrn602xf7da5541t58',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 15:56:13',
-                executionMonitoringStartAt: '2020-11-06 05:46:49',
-                executionMonitoringEndAt: '2020-11-06 05:16:18',
-                flowHash: 'yjvcfve5qdxuglnkp0i8dj5q2y4of0rxl5rz93k2',
-                flowParty: 'xhl2ayt31idh5jmznjhxwokmzn901o97zr8runtkni990maqxgwwuox4sujgvodefalogqweq8pie63qtw06jmsdfgn085yj03zxslektbp0tyzrfgsvtelhjjx4eec3s6zl4jh7q6bv5o25sffesn7pjxu5zapc',
-                flowReceiverParty: '0pqylajs3vhgx19930wdssbo2jyaf13txmkuqlq6ff446gn1ycp2e8dawzp7ffzrvd2ejqci2ugvlzlqrzntb1ah6bj4w27aqdrc7dq07mymbjaqn7hmhw0l4wckf6trxtcib7m67vqe7oy55rlrf3u7fqzppy7n',
-                flowComponent: '4pd9ejx0dvls8nbrq202a9zmnfbn8ury708p53n6kul4qmb2l66juu7d1mt3m2j0qsxdvmeh2gzd4ffgzaal2xyirw620qtvn01rxrbbidatrraxxnofwndqsksbfk876q6laxjon33hbzn1zrp6g3k8salwu7z77',
-                flowReceiverComponent: '1080qm8bfwj4ex53y1ksrlvviszllc3ldn9nwie9ma54g9e5g65rraqwnrbpwy32qwcph6l5uoy3nhq9jp8yn8fnh0tcbjova6339yr3hsdx6kg0r5jcjjgozt4rgj2bykwg7ktx61a87c0c733yyzpia27en3yt',
-                flowInterfaceName: 'zgw3wymav5hwuysicflrbzpxs86ol554i4cyg112mpusosah97oj2kp2i21rcaw0gkwqtlj54bzrni0lg3bn8i76an8p9lfav5wp7awaaxh7ndpkemitc8s4j6v43xtzb771s4imql2ynvv6g9pybex6tol1105q',
-                flowInterfaceNamespace: 'j4fb4ig63g2i7a4lwg6gvyjeighp37euhvqkdzc376n9878zhva82em7hxgtdo83eqvgn5yt4tmhrjza5uon4lhedxp3at0qj3z86swvbchdr5eelakd25q2haribne0x9wxu7f9448dweetf9quc0jjklqjl8yk',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'iurl7qj38ublyde43owxfw9a40jmh2xu6bx38egclqh1tahmb1opwby56zbj9lmoa6g6xr1rfezk9obvahbmlhhmexphbqc3109uo1lrmd61c1f02jmeruamesihti9vtc10tqw6h57g251sdmsi2gpyuga1o34q',
-                detail: 'Consequatur aut et minus dolorem et beatae laudantium corporis. Corporis quia reprehenderit est repellat blanditiis eveniet. Nisi ut dolores qui sit laudantium sed rem magni doloribus. Asperiores qui harum optio corporis omnis laudantium qui enim. Quam sunt amet id. Voluptatem dolore voluptates.',
-                example: '5xdb29a8pgbz3r3uwagd1ckas9ilo92axmimarhgc7xac3jcif7j2t6v9dxixz81n89zp1yte2irds1iooi21aovmzu7v89bv9f3hurtbybt6wxvaxq0jpxflkqfs3im8vibfrvrdh3sgsaltllcfyz455rgsuvg',
-                startTimeAt: '2020-11-06 01:59:20',
-                direction: 'OUTBOUND',
-                errorCategory: 'xz58hs7hbrgg6vr5t5avnrx582s1b2avl4at2pjtxnxnglt8bf3pli2mc0yf2rlfjfp5j6v72mgjt8b5i0ii2c5dityubyjqd8gri1dzczhknhuj817pjkix7eidfdw51gnjxqkjkzpjfmoxv0guvqhebvo1lgkl',
-                errorCode: 'xpyh1xy2ipad4u2rpg0w36kxy254twkyfe2kcj5mmarwg4v4a5',
-                errorLabel: 335561,
-                node: 1800932402,
-                protocol: '99jyageybqcgvn9ywzh2',
-                qualityOfService: 'fn7vn39it24aeemwg0f8',
-                receiverParty: '5ebkbd14x1l2lro34z8aqjd8py2q4n146qcg3oj0aa3j8y6ec4235gfdo14h26auwc4lgww1wu7zzm8i4nhexfhheuftc69d9cybag03pi5ws5vvwi3kgqn5rjbbe9wrhrp0dvy82kf651sdkwy9mzxo0a5asvgp',
-                receiverComponent: '3isf7k37kx9hkei10d7kiui0de2okqvzeos4jyyajtapb4igo74t72f5ghwxqbi0q77ptgk8lyu4bk2ipa93vvwf6fnmhqlu9kkmmg0bytm6y2nqnz9vjskjqf0018bbvs22ma6fsmf1ir85bq03giecr3vfgl7r',
-                receiverInterface: 'dolct519cb1cc6vnyy6vm8sk52n8rakj0ex67e7lvm6lsesm32pi73jbshzplwaz6e4itjndwrosznz7ot0fai88ys3jt33pjkrgqihefk25qjm8xh80t9w3xp3yeegjetty1zb0o7l3nqibhewz10fotngerzrf',
-                receiverInterfaceNamespace: 'z61wblwtl46punm555va5cl6a2sjve1fm7qnyg1g1j3j49vwb7euwdqdai4jfwxmsadxf99vm2iamd8adkhv6ge7807fvufn4fo1hifz48jg18ovrjtpvxxxoew6u291vj8ttigjfohyexv1irfbwyiaz70obdq8',
-                retries: 3318297709,
-                size: 2698875145,
-                timesFailed: 2611756950,
-                numberMax: 9073904004,
-                numberDays: 3587921329,
+                id: 'ac274402-f36b-4d17-bdd9-f0dcf22d1e7f',
+                tenantId: '7d7e4ef0-2aca-41ba-8598-eacb15e39968',
+                tenantCode: 'n8xb21028b4fxu3ggyfbtlvmtw0t43i2nkq0aknxjn2g1uurz6',
+                systemId: 'c78ef0a5-7c47-4a74-bd9c-0e2beeb69243',
+                systemName: 'vtuq99pkkges6ef70zow',
+                scenario: '3nb0hcb7vf2ijlxem2xca2ybi7ulnwknrgbsvu949gs23wzhebmqd3c65s1w',
+                executionId: '48e9bbe1-1a07-494b-b8ae-38071b3e3d04',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 20:12:21',
+                executionMonitoringStartAt: '2021-05-22 23:15:44',
+                executionMonitoringEndAt: '2021-05-22 14:20:04',
+                flowHash: 'e9pqbe9c4t38yv8y2l7avg1r0lupntusjmzdcw7t',
+                flowParty: 'ou6676i8j3mp80etvyy825yrsgguoj0yre7x791twmw0s99zl1xo4hus7lnme7anxi4c8xn0d5jqvocgl1vy89wbefa2dhxz0eanea8wz9htwdsdjufzs2v1inqnl7byn8arccjz6y5059kzsg7kmrxnrpxxn0qa',
+                flowReceiverParty: 'hig4io6x9yovn6wyqw74w1s537lstzc7tbzei09w6meoa452xt3onna7fnagxncapq5l1vzb0gq2lwyr94v58gvo13dggthxfv9hy0fwyoklgvgavj4r3ts82em417hakz5pjaq5ps3yzudaf0dsvnnz66xxdqog',
+                flowComponent: 'r62ybwftq9w6sa4p5oh5ufp0c6ydmkhw84ectxxhyp0rurhmvb8amqunskk6azskhleq1oiamuarg3z2etump3vef51edsy7lsvvid8gxhvgjlywdspbt02aszku4b25i48oap2xrr99qgvx5ucz4fo2ltz7i0zhi',
+                flowReceiverComponent: 'az58ljdyx7rx2oy5ugitojz4miehbxghfkzl8ew0prrokfani2c8bz5u5gr7va0w73xu2o1yrqge65vzwslve3tsrrrteiemkyoeebsw4xaja3exbhrc8vxjedl8ozfh4v60qu6irdlam24d23ydhwlspxpotkia',
+                flowInterfaceName: 'rd048m2xkkc1tdrk8v6aeczh4b457yv3maxzip5r1py6or7d3p8wvfgqv3u6wa7ec4in6fxrk0a3dmy7d9pbe51fan67t3yt7ucyniwzqh67xu6f71n21tycqr4d1e76r0qeizzwpn0vxorqptheswaewqhgp2gw',
+                flowInterfaceNamespace: 'wabvfct2ohkqu4vfxy4lmrngulyrluvs8absiu2sw9ir77f5updxvrkul5yg2xtex33njio83ninzs4jccj56pmbiar9n8tbig5g03gtl4aq91u3fge540rcw4sy76n6g847a0u2f6k9ju56p4tm4os3clv5yffb',
+                status: 'HOLDING',
+                refMessageId: 'a1ro6i000oipjwzp0dr9s697g3smnj5be93w75j9qvr137f20zuhje1v5wymypob49ow5eiiabo9jvjtfi0nh6xwplc8kfuhqao7weoilowg893i2nkn3php53qty55mu3hlc1jv3xu5fp9bifyb7vdsqe8if783',
+                detail: 'Praesentium vitae atque. Ab et numquam quibusdam distinctio aspernatur aliquam ut consequuntur iste. Omnis et non. Alias eveniet ut inventore illum tempora in asperiores optio. Debitis porro a. Sit exercitationem non a.',
+                example: '5r08ywiyh9xst5igrvnrfkeo39pk1joa3o0b3tfoye5tt2zrvagi3kbis2zhi4g1b3tzfvvh9vbu2pr6w3vbvt8gtobdwd4qs1r4o89aolfx6wnqvhc0g81jnbv65mfe732ylwjk0mfgludqtnf3oi2872defqt2',
+                startTimeAt: '2021-05-23 02:38:19',
+                direction: 'INBOUND',
+                errorCategory: 'f9ppj1bcicoyv64tti0kp4cjnsn8okcfeejwfqlbaewf6p7mw1ph9c2kz3031znxbfb9nxe0dv41kdbos95ca98nns1m7ytpog8bv6u5ko0s1pkz8hhzg2txarzbtap186cdpn1g0fkbneko2h7wqe1k80mz0tle',
+                errorCode: 'v5wqhqt96kmm87qm19d52o25zyxgmibb48wao2jxu27d878n2r',
+                errorLabel: 775675,
+                node: 1190847561,
+                protocol: '8deh4vxl0wa66zzzpjzm',
+                qualityOfService: 'php6yow7qv8mnff1g05i',
+                receiverParty: 'y7bykfz5n6m69k1kyv0v4h34cs0pvor93q1gsms13fv05mtxdpi3u7zog71s1npndedulfhynqbtd637pacrtkaogbits7ujba8lu7kei8sj1uxdewa50of80go5pd0i9ye6yd8w9h18rmlntl78o0fahnicejvt',
+                receiverComponent: 'qq3o0ssew3y5cy72w9flcseoo28w5yrgo85a4sfspjp3tad0ghjrhhidrek3plhtkos7wha254zu1ffegkh2be5efg2fr7l4ivndi5828oqnczx38xdgbqap453tx4hcwycmmt3qqrdgifnphp4syvza9sp0k6q3',
+                receiverInterface: 'xnp5z2mzbldzird8up7cvyhr6rb8mh58qwmxwmi9zkgky45s25bs8oinh1cxvnmwlyiqafuxk6nmcxavc635xtly6xahfv4h1a8qfyelrr8wzt1kv4vfs85r54nykhgkwpu1p9skku4ehbxlsebekhvi1auudvc0',
+                receiverInterfaceNamespace: 'p0vmir3bicipqm9hsjk0t8k1uwdflg5zzxtsg7wzv7e5fih20dgpzqe85f9e71tsqg8x7xkjz5o3vpos1660mdt21qztumo70m3xg5nmwj7nyzt58zmplrwb8ogl234gi79kbkdre5tkiem3cnklln355cqp3per',
+                retries: 7270822785,
+                size: 7449578644,
+                timesFailed: 9424759417,
+                numberMax: 1025869740,
+                numberDays: 5694034665,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailFlowComponent is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowReceiverComponent is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowReceiverComponent is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '7eqpwok9j76dtpe5w1foek7m3p4489huerhx5fd96rhik7u7aw',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '908q431pp0694ws5yiv0',
-                scenario: 'w8ok551lotih77p87lmgai0swg9a9u8gs2jwn81qdkr2hw1vhsslzln33isz',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'bb21d980-f8a5-4c6f-b86f-6c31d7e7fefd',
+                tenantId: '4c76e5d5-4acd-4410-9ccb-3f32bb9def9a',
+                tenantCode: 'xxezpmpqnpa6r0gdz02me9aoquhhayh246ku0ecpb3jq4z6x8i',
+                systemId: '0c62f20c-c53b-4c28-97db-0e2ff2beb0cb',
+                systemName: 'o3vxz5694x976baplw8h',
+                scenario: 'rd5j1whnuh8v2fzwy3lt5vb4gp0esstnoyg37sqj9nafmv74ntvokkfi6fqm',
+                executionId: '0a61e654-c697-4438-bf1d-b139db02809d',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 09:45:02',
-                executionMonitoringStartAt: '2020-11-05 23:47:27',
-                executionMonitoringEndAt: '2020-11-06 09:26:22',
-                flowHash: '2kupdjbmlejd9wmtcfdmbr4xilsh5hhtqp44h26z',
-                flowParty: 'twphln7nfvgekus6ewi56dhhnxxek4g5bqez9k0bcac7wcoxrytd6r8m6u0k8b712w3rwkzsqaxojk8ems4868azj3eerepvts2a61bxdlx4v099wyq182o6dnfsvfxblhkvw6b6p1tcuf44jobam3voa2hewvfr',
-                flowReceiverParty: '48czrno4uqke6x9trhpjy3ycdxmlalxo9c7vqapywpdgg510up0neeyg0l0v5huiq5ziyyn6i2ooqvvr4rrnlaxedrvf33g38q9fm9i4qfbxm9cw1c5g1sk62d1ldn4zy0b7dbnkzpz06qalxqj8p3vq8qcmtzvc',
-                flowComponent: 'lhuclcv4309e96evuu19hjbgc8u6rkpkegsqiqt7bsn563ec66v7i6hbcjwid4yxyzmyhwc6xadsdh2nqcg4lvz1rz7j8p8vf76hqopd3zcwihrccpkstnryk6z151uc6fu20p9ne3949f2wlld2lbeji0hjlqc2',
-                flowReceiverComponent: 'k8w10uy0hvshmt4r1c6gk9njky5drxrx3y5zeknysnvupm9lklmeby32v1xiamp7o33v82rgbf66jv5w1m5cc3wyaox2rozd82d71irzfynzub08q31273ebyocq5hyiq956a8ad8wly68lnxolhyivpquggk2f5m',
-                flowInterfaceName: 'wesfodtblc8injtmmn8la71cxyd8y7ya3yl5f219k19094sv6rjczkacikm7ud2r19vf6d6b04zhhc08d0i5dysapjl92fr4u0pke8fpget8r48qmfigvtz3u0uxsfvnrms0qkdk3rcx5wcjqi46vkkkxg2bho0g',
-                flowInterfaceNamespace: 'hnmc6v4pxqzfgkexd6c6te61r8ky0gytdabauaion3pzmmes8d512koiq54s5pcmwdw5mrhu760fcpk0r396i73sezipund28sve29ssbw2lb4211adjdc8e5u3arqur65yt7ymvnb60r0del867pzrppqh5tp3r',
+                executionExecutedAt: '2021-05-23 04:37:34',
+                executionMonitoringStartAt: '2021-05-23 05:07:31',
+                executionMonitoringEndAt: '2021-05-22 15:21:45',
+                flowHash: '3h1y6663d4uluj3l14dtdq6bsldyu7fmn0cm8xbf',
+                flowParty: 'ygnszrth9j79ws4sliai9td5t38n5qqre7zs7solujcs65c8opu1d0ri6oibn1npuny7hmho4whl1aq26cblvvq9e5gii78tr708xx2r2trnzuqsj2fizl91tur9civ8wnxuw7hf5gvgriutfl3piwbac5zfhem1',
+                flowReceiverParty: '1ugfsur5i8zk0n6yhrn1c1iek38qefzr6dlqkkr1o68tl7o7nrnps958o4sa8gqffwp2238lf62c4nhsekbztwgeyqdnti4l07ai7qfjit6bssoku4l450vmfyf0xukr7t7x5l4jlzehkio3f8hkj73ljp8wbgrj',
+                flowComponent: 'z8b2c133husa2ycl7ixq52bd5s5fsys98jqy7xnwlc23i7t41t5od1p8zchgy765n89brngeaefyeqz2atdfci1uo2c7x63zwghqxhmrgxve2ne77khan2qxlvr0v6c6l5wpg6hdjmb1662qm38hhtyq9dfy58eh',
+                flowReceiverComponent: 'a2qiw3f1fx51hu0b3yv12f1pwtafjkps30s9qzl4nisedq4fv06znu1icuzej7zp0ierf3b3jm9mlyq8ty9izeljkftixw7ei5zyz1n7qrbc3944f5s1ohb1hze141bhxxsir8cu0u7apniyurfaie1hkvnrliqbw',
+                flowInterfaceName: '0ziqflbvn9c08d89wwnwod2d22d7zixr4rw7unrimqdjae4719wbj3me7oj0rvn8ds0jinwn6c0wevucvpmheaowk2teertfzi454a0pyb0mtinmqap7v07982lz1mvyledyvgv54wrlfae4lvapjq8zwogd2awi',
+                flowInterfaceNamespace: 'e4yx0hcdyyds3jttx0dmmjk95qbbqtfafdpzf34o276dws8ggugqt0a0lqzi52pzq84x3oe10ectrrd6d2ufpnjp0iifp0hjfoq2f04jjhnhcpdmbkties6xyppf4w3yhoe2dgedxzuzh011ju54qtf8tdb97e8w',
                 status: 'HOLDING',
-                refMessageId: 'q0mnkt7fmb99p12kpdxzm98rr265ykqarpcrxw2rworm37glyh3ca2x5keptbdp75kzpf3egdbhjo7fb2zovrvn105bljnrfkrjs1k43kk88njjv08ps5g91zhyswdzfjpoodixiapc1p5iu4i6vlkrrg2w6k656',
-                detail: 'Et dolorum velit non dolorem eligendi nihil et quam id. Labore vitae voluptatem. Dignissimos doloremque cupiditate vel minus impedit sequi accusantium earum. Quis rem iste dolorem tempore dignissimos.',
-                example: '8xmse7feih8z7t6pzvudfmi40nhdynkgaz93b2rvv7jnfqt5igaem35lzq7h9nnhx1es5a3622ul5l8e6yvn9cpbyeykkiz88kd815vzoxyfg9fxn3vvecnnpztquf2zrgybrxraubyvgfqxrajzvvel1ufozjhr',
-                startTimeAt: '2020-11-06 01:13:35',
+                refMessageId: '8iib5v4v2k193rdhyhnxu1ywtkx78g4lq05dqfdv9ll88b4v7qvkv1l75br2fluuekc4zf8vjjhs8ry5a2nyl401gze335kr19jkw7cdb69u9vxizs256lsed1yn375r76r0ajg1qvh3fkd0b3y259hkiv7gj30x',
+                detail: 'Ea voluptate aliquid molestias. Omnis necessitatibus esse voluptatem atque sequi. Rem pariatur ut exercitationem et perspiciatis vel et rem. Illum dolorem corrupti error cumque minima reiciendis aut.',
+                example: 'co7byzvy2sskrxecpjlrsfy4zweasvnrsh8z4uhztkropdkjkk0ey99rtmvt9mmfincnx8anfzyizjvxzdvnmqc7xu059qbngtahtv8sy6esmw272ps3yclx8vrc81kcdmsoi0sb60qz0u7xdd8nte4raksnc4ky',
+                startTimeAt: '2021-05-22 17:05:19',
                 direction: 'OUTBOUND',
-                errorCategory: '2ihvab5lw92s1tzyh5n1j68lgfwe2ejzukhkq2sfyerb2ds5t845ni3t2qink066cgf6wrtbon3jp9b2ik12vs3klco8kxekidm6vshlsxhz5zf8zn3m51spl1y7l7tihl1clrl6ganp0twf0jc7ko0tajtx3dri',
-                errorCode: '012uaxt7pe8r6rh4ipjid0foj7mbd04k2lkrbhdxlm2d5ldgms',
-                errorLabel: 945551,
-                node: 7497099382,
-                protocol: '1ugp4x1s89pa8g93ko1e',
-                qualityOfService: 'rdjj0qm2ewiumfc42797',
-                receiverParty: '2orrc151zuo8b7iwrykofo74yfxgej7gqa82dltyw6khy3m6ua73c7j2yw2htl77k6l9xige1duijov28mzsqu6es52ypyqj0dgtqvarkggvl0dryzl2joc0scd43hotuwwvjif27nif48yvyejtcyg4jv4sblwc',
-                receiverComponent: 'ctbkkwyquy1dtwrk64r1syb7tq8vjxm1gfqb73ncxe1ocsl5s5ekozya9t412828za5rsvwmkgcnz6xi21nq1qir4fn2xfd3zz3ppn7lcvtocub64npjk4od9x57ritycb73orrnjmtps8wc5dbys54nd0498f2c',
-                receiverInterface: '2053zvlk6wbk34dqc5s50jfewdyu38zgx6bukpizu8hxu832gctfdjlorhdhtaka5ck0kim6agl33yqy5qlqtu9088beiqm6e2vap3imsf2emk80ofvt7n3otvh11ti7zu7coim5ml12k9z428kjwhj84pbkrj09',
-                receiverInterfaceNamespace: '5zm9rvg4k89x68n5btyacwqe6o9ijm5ffsumx0dt059zomqebdnae4n6r7vkcqhbk9msbg3x38lm84kjgays9omc3lmd20ozamg0x283i3pweynrzh1x3qusokm2wzbk41cqlre4pu3j2m7zlhiryr9307ewgyew',
-                retries: 7177973765,
-                size: 8823544275,
-                timesFailed: 3277956337,
-                numberMax: 8413899623,
-                numberDays: 7028636218,
+                errorCategory: 'tj3xu2oqjdpm3y7m91o6ubz8se2ha9nue0esjlxlxosubtn12bb4lktijrxpnf4x3uwsw76ekvtdv1m9gz5te60qylhxpt3iaj095umle4zcup04mybgyi16hp4jowx6ip2kajhp7wynvnx5cncwbrq30fevdrzw',
+                errorCode: 'kyplf0rka454l670127yqvpylbuugpjq0138ct3jiu55ka1yfe',
+                errorLabel: 381109,
+                node: 9909315558,
+                protocol: 'wi7pq9k67npxw6g0u0a6',
+                qualityOfService: 'saw3n9jlam3a2pv31zrj',
+                receiverParty: 'x4ca8ojx18otkghasideq6q26zbpzbum0qhc1263a7z4ikln61880si89fd8lonq8butnder7aeo0a77814vdqh9cg5esrpt6kyce6fqw8ayfcs7vyj8usljv5wuak0kxupi15lala4o83iofg4xrfn77ew8jop9',
+                receiverComponent: 'z4h7lddt8esj8rs3f3nlfreen5repdsm4ehqwwsptpzerllqinmu0kgfhy2tkba5j7my1py04wxiwnbquisvgbzv2qewrvldtcgcb8a367w1wzw72cc08tfxuoaolx5tnbyw5yeb2fc2dthxrwvqr83lk2ny47g8',
+                receiverInterface: '5ct616cat80b4g9xu5g52arlfyn9hn4wptfdj2ql6z9igqzzyp4n6u6yvcciy854r8da8aq7n6cfg9j6gonw0hw2jtplcspzyc4cr1mt8nucny1tvyrp5pbau4t3mosh3g3gu19mtfehxw5uk442ae5fgdkvnmoa',
+                receiverInterfaceNamespace: 's427tvyh12g4nznv5hrk73d51oced9h1uziigse1ht9mk5p5dwyldyy6pbvnm14dpql6eegck18p4gq78vu3511yicwemotnce3s7bsf174ur537mlxo1y3rcb19j6gl6oyhqprm23e4b6d8ucdhpo58s5o422fs',
+                retries: 9898800587,
+                size: 3218180683,
+                timesFailed: 3937070979,
+                numberMax: 5527826226,
+                numberDays: 9647062225,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailFlowReceiverComponent is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceName is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceName is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'rubngkdgor9vglselst4sxrwsa9ddlyxjk05ksu6wvqgpskgkc',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'iar62ld1jjt9x0bcfeop',
-                scenario: 'vw2j3jx1z0j3pj6kwjjz8ue35l3o4t9w3yuxxjzhxbe660x8lmieedjy1cvn',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '56784b01-65ae-40c3-b1bc-4ff2b0861378',
+                tenantId: '62e11c56-84eb-45cc-b603-3e3013df3209',
+                tenantCode: 'o4k3g4nbmedgm3vchfk8gz8ojzx4jel6qd42x07tbi786m0544',
+                systemId: '391b3a97-9ec0-4d30-923e-f23b2aaefe88',
+                systemName: 'mhr28ws4nkj0f8t1om09',
+                scenario: 'q4krkh77yq5bfs32o09r0jswok482lm3oqpbrb64dly8xtxqoidljsswqh67',
+                executionId: '89e2bf57-47ce-4f5b-b501-bfaeb5e8ab6a',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 16:39:06',
-                executionMonitoringStartAt: '2020-11-06 07:10:19',
-                executionMonitoringEndAt: '2020-11-06 08:52:16',
-                flowHash: 'p1o251kxl0vdwdoschqhd8fb1boydr6smahut43y',
-                flowParty: 'fiugs88pip1cungto2air1jrxpjcdhhq8l7wfwihnbl7735zov707aewkk20pibm5l7i6lt8lqge5fog9qiinlagsnnmbzlmp66ijcii384zu4kndwmvstytmobtfbzovookka4eo6co211zu4df6ffd55z3i1go',
-                flowReceiverParty: 'e7istvs9itzq18336kkjs0uktk8kz83y4sy424tprsmdjnb8wuckezho04and9acyzxfgi6ecmj52wjzdpctlth2vxd0pa1eiudhfk3ckqwvywlkb8tk4x7spe2pmbdtbrbf41loo9y6muwg5dpsrf6i2m1860ov',
-                flowComponent: '61wz76ao1a2t3bktjl2e4swy72wbaery7l94j0sp6s5ilsp17olr5bda7b3tf28f5cxu1ncaqquyuhj65h1bfytezyfoznmq7w9rx50w9i1qn9onus2qis39drjiydmxke6240118oq64r7cd3gkkdo1z59h2498',
-                flowReceiverComponent: 'jrwggwl6m7qr9dl619f4gj3hsgt630jq3dkh5t5nm6lsb3vxrw4rlcz940amsr6ruuu1a26h8nwmo0pd2gisfnp5w5l2w747ppf0na5qd4ow44a32fs0rmhkfn9d7u0cmvb7ofystnxk9hf61v4hq01rx8qt0zle',
-                flowInterfaceName: 'hj8jbfztf40cc2119u47ppepn956ztoimnhrfyx3hkwt0ftg6181435vyx4a3hrldocx4ccthf2gf66hm4b7qxgflbcsmwqc2qoencsifetqma2nv1n8w2xdnx756fe3up8e7pmxqriqvok5o65pm0hjf2t8in371',
-                flowInterfaceNamespace: 'yxfnadc53grmu2sgyrwf1n0pcvkl67rmismmgm77s38qppu9uf9r43shnbug2f3v1opc9bmnvqebl707u71pmgn5mjrw8vav24aa2gcbp1kiti9ww7ndnptridnxy2rs5hd7ru3t3zdh9ikiajr6ovzbi77cts4f',
-                status: 'HOLDING',
-                refMessageId: '6i0c1xwzfc6faeji2xib20nfgpceum3tyznotx88168qgwl20r8hti2zve4yx5tjfytjw8yezg8qbcp2f6sf2up5e5huhj8edf0arc7cz3qt1z95zp7d1lacnl7bph2nimac3y0mcl2xynlt0y04iqggqootkl3w',
-                detail: 'Ea aut pariatur assumenda rerum aperiam sunt quis laudantium. Fugiat porro excepturi animi aliquam. Repudiandae odio soluta voluptates repellendus eum similique. Aut tempore deserunt quia accusantium et tempore laborum.',
-                example: 'clvv6wl1x5aqc22scby03w3t1a96ug54cmtd3gywtuwee8slkpqyoaygv1mp5qvn6oxhgpyoh3eciq5l9rgiltcmujfxdcpgjwzyuzzusj186ch9pmssdprx91e0kgk6hzryd146r92nciegc10ndyjyompfjzko',
-                startTimeAt: '2020-11-06 03:17:15',
-                direction: 'OUTBOUND',
-                errorCategory: 'an7j4gea85jr9g7sagpv7kvjqnyr7g741gw74zwazapb50fb3vkood5aiquzvki8gp58zj8iz6weobpypzju9p0520ce1brpd3xopk5e3a03fefn5k8rsfrzfm0jj5hl64pz7jhbfh3dp3n44gq11ea0hruu4qux',
-                errorCode: '6r585hvewbsr39th0bb6vv83oevmqrzwmcjbno7db4grobwpxd',
-                errorLabel: 259997,
-                node: 2425685341,
-                protocol: 'ijg9479d5ns7p8w0wajr',
-                qualityOfService: 'xw785e02ln7hed2xuxuq',
-                receiverParty: 'mcbxphc7djfjuki1xt3p9yn90ty60qrf34vpg6jkq2y65ycndo92s2m5h4vvdeippdseiqn6u0fnu2xwmxkxjo1h8q370svds3bebb66sz0da0kefbeyhoesu6xpd6fwugt0o5cb9ly54k9aazkki473ajo3vxwl',
-                receiverComponent: 'hnmb17rso9asxvktel0qr32pa0v19x4sokoyrht0nhuhmcftt86tvqubuj8fx6v7862ixco0901qa83v2frehs0dlf9j6ik17ngp406o9ipzh1knf9l5db7w3at2n1by6jvw9p9g2bofqq6deatv17vp2dmq4gc3',
-                receiverInterface: 'tve56pwr3r8r2rdnroobc3ieq8meor0umj295f7pqf1ye8z8gimllg1l0w7yg5seoarlcxkri3x35pt0f6ra8o1pv524y6pmjo3b5q0fjo8c9kg88o3nxntkskgnab1nt306u5ymwlap11bwyc2jtn19rsjz3ymv',
-                receiverInterfaceNamespace: 'wwf0nt04z8p8a2vib5wptr3cljsb0obdoaup8qd4meokr8ggvckx0t8lxfau1tkwdfx5ppt2i75lqeb2cjyyrggb5yxhxd49gp8icxcok2dxyrjnm7iquazxu86eusaba9exi06cc5x3l2r3m0h1bsnc7ki3v70r',
-                retries: 1477393544,
-                size: 9326470267,
-                timesFailed: 2540688529,
-                numberMax: 2558477076,
-                numberDays: 4923085172,
+                executionExecutedAt: '2021-05-23 11:49:48',
+                executionMonitoringStartAt: '2021-05-22 15:00:00',
+                executionMonitoringEndAt: '2021-05-22 18:10:10',
+                flowHash: 't5iypeyv5ziykcmalg4nd3ot782gyeo29769remy',
+                flowParty: 'ov1cz6sfhr6tdee2s0m0i7zp4tq63ykwm95hswm5cwe1gpus1gqyzj5z5nuvyaq3dz3auico15hkm9it2v9jw0xte9lncrzi2k7qnvy7aook9z7h4bu6qw6867wamh557j51v6oji0goxj0ds9za03wzaajrw6sk',
+                flowReceiverParty: 'ew3417ugkvjgd95zolggzkxjnsb0we8xevyi8h49f09jr1p028i077m6u42qzempmxgzkah4zrkjodnhhf0t09dug55tu15l0a8wxu0lkn1vn661rs9djveepw4t3cscpm9wx3pecg2xwjcr02a37bzv4vhn4ljm',
+                flowComponent: 'zfx5tbm3lgly3c0i7pg5zsojxe9mu5rnnvacvrbbkho289rf9xzjud80zdl61v50ts31sgs09e65qy6mo4n4hnj7fo65dqtwce9lo6vcj0s1rb19nf70in3ibykxh4fmuqy0fr0jgtadklvz9cmbtqsgyhkrivoj',
+                flowReceiverComponent: 'c5w4269f22yf8spr8y6bu35fce4zd14jommoedjqmbjgfum3nlukm9h1s2wbvivlkqme6ghzoqiggr67z3bidtg6l6wss1s2vy8lftqmqoiuonpqunb5srq5yp4edbrjuudrqjv81bg1666lwdfd8mjexmzxaxuu',
+                flowInterfaceName: 'ltaicb5tjsx8lnenhxl5yj7815kkicd4zlkc7osn74kjeodyvdj3rodhd7rianwh5imomz7bzovldu9wrl1z5jn594zttyi92wsu2sl6ly89n4r412e7j793tt60edo17b8za9rl4ajvrw9qfcwvei9d0r1bznhc9',
+                flowInterfaceNamespace: 'gtiez3ztpd3lt6cy93g7pl0uayce2g52cvze43yx0iymi00r43vk9ijkcyfbwgjho6ovty8gm9vmex6kfbjmhuqpviyfgnytfd0jlu8s8prjuepk6cli8os394ysoojek2pt0ohlc75jr35457f1op52crzsaumv',
+                status: 'DELIVERING',
+                refMessageId: 'gwsmlv059naaa438gj6i1db5peiv397nbcr98frq6bvjp4km20veldou14bkjmoanivu97nt59wvcgvatncrlb3pyau17x9hdkqw1kck21nfygnk1220yo7pvnpl968e53w1qlk0ofkj6wzhil2qaz6stytmon2d',
+                detail: 'Velit explicabo iusto inventore. Dolorem sint vero ut molestiae. Consectetur et earum. Voluptatem quaerat ad earum modi. Ut ab magnam fugit impedit modi cum sed nostrum vel.',
+                example: '5gkkyqc668pysl3ar4fg93e4zur7m4kr9vttkyegupuca2o75abu53wf7byk1ag8sb0fpj7vnsztv8yr2uzo4om0lxjm86s1hp40yhtaorlzk5he7bh9vdjkd23v690mj4yqm85h13yccavc5hyb1c2u4o2bd014',
+                startTimeAt: '2021-05-23 01:00:59',
+                direction: 'INBOUND',
+                errorCategory: 'zgpg20lvccrvapp7vryhwve35xsvr6pu2n9pqmlgaivkcmvx1e2wbej0t0eunl0mh15rjom4uixshgh3lgtoe5iezxnirpfw99s6q79i57mezz3rbqpnxjgvs7gyvtaei6u5o84uxylgpa4a5v4dtppsz5ffupaz',
+                errorCode: 'kv6i69i2u195kmi0e03yl2pddwjr2xmdgwlu6ifwwwwgiylov0',
+                errorLabel: 746778,
+                node: 9331206760,
+                protocol: 've4qrxuq4u824283erce',
+                qualityOfService: 'un601xhk7goyayq3rxvq',
+                receiverParty: 'tpcj3bnowol1tngemnrjsiildprbsmqlz9v2r7pd2fakdicnuc42cawv8uut4xn36gro70qft4uoahoubldl23i7asz8snaem08ccs0my9b0hxy707gr00ngz0ujtoo2m1nxzd25s4cs70f6e1q3f209n8rnzmp4',
+                receiverComponent: 'nh0162l9og0vi6gejynjs6d93zmragzwkp8ubacwz45f2el5lhs21ux4heolqvqrv6479ev2yox8oq5pesbovjqfl71sd3m58497o6a97j5vi27lafp0946m2h3ilha0w9c4a0zvtrdz024bcn3u84dk6oyp3su3',
+                receiverInterface: 'sritmodagr4qdqiqxax9x42hgzhhlvz4jw7bjk4tohimizywiifsho0irsbrtbdn1syyyum3op69wmchyhmc9vig2b4qwp3ud2xp2eiami851e59jmzfrmlgkb72xif7jgxti280l38zxejoalne3p09ytvp4huv',
+                receiverInterfaceNamespace: 'vxzyxd4bddw0h5uh50p7kqgb4z8fd92upjamc5b5zf9l26nhry794u11nszx9tk470498cwwlsak875exwtoctws25csyx4q5q3fr4u7p9hlmfu0n17fwiw2y1clvomaos96cgkw6cwm7zxgwal93kuc8e8mxjac',
+                retries: 9589804072,
+                size: 9081635225,
+                timesFailed: 4976000833,
+                numberMax: 3804813707,
+                numberDays: 9272507489,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailFlowInterfaceName is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceNamespace is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailFlowInterfaceNamespace is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'lkg0mpn2mmaqmegbzkocsodc41p88h1luswrxgs8deyu0nd5mm',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'tjsc4sps8x80wgpmwg6y',
-                scenario: 'xv5aoh423e0h4i4vv1fzfxlb4uh192cv8vgwtmn3rer3xmbz0fpz7f6butby',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 15:15:08',
-                executionMonitoringStartAt: '2020-11-05 14:44:12',
-                executionMonitoringEndAt: '2020-11-06 11:57:25',
-                flowHash: 'm1xf5jbl4el45cskroha5x1zxif66ngscbnogalm',
-                flowParty: 'p0n687ajlvd50wu6ely47tvbdlx81nrj05f0kpea6qrr82z2tk1naah6zqegxjnxebv7e85s46ccl07ybpgdkou2zn0jguyofwwuwbkud6gk61z5m7048m99hokzskm807td2k6cm8z3yslfv1lcoj95y90g194e',
-                flowReceiverParty: 'umrb80u0gubuav4tcml58mrgvxb2ieharon3ors6cmlshpu4kdylogjih9idebgp0ggtrb296dnpe13beza4m04l4imtdumrbd55p01tl1jo35km4i2j763lq2fgm1eyy6y4iflo35voquxnva085cldc3qrqucy',
-                flowComponent: '6hxhgccd7geqn9g4evaut3x83bs2879jef4kz2jhxgyhi06gpb7z1aj92ji00gietr04lw1bhsnxwmf92good9me624s3fe149uo8di6qi4ignl2hwcqdpjy2i1c0bxs3tts3q4ea8w5apr83wfi2r2rhgdqiaif',
-                flowReceiverComponent: 'nasz6x3rl7o3bev7nguzdtdkazmspby1i67fb3vs6xy4vx9btp8zoo7e51au3y935ffkpadacaowxo02oq0ay8nv7tjs0ru1dab0eqtj1uead7ixft3ymini45a11o4x8xy6npq51pin7z9wpmyw4et27nrz0iol',
-                flowInterfaceName: 'geza0ymtxbv06p5fcz0gmyz78y2ne9mpb7lanpw67favtxzx7tkq0tw499lzqvbbwpfjlej5f5mftt6pm13wvqur904yq53bl8jmoxm8ei7pistwdjst8oh8ys6xfrqeq5e86hb3ogo7b92kbuz9bmwwqjgcot5j',
-                flowInterfaceNamespace: 'wz2utvstrdkabtmwwidcv9wq729mtelwgtu9k3iqsltw5ur2sixpzh3d0ar3ljsj621dazu8agteeeo6wujss2qwvmq3hpdc2v5my44gy8mgx0e4e6lsnoogpde11d1bpje6329in4r9kygy4gggf7wp3emjs8f6s',
+                id: '805f79c2-e611-4a59-b835-ef578e0fae17',
+                tenantId: 'e91942d5-72ea-4e21-be02-c6524405c0cf',
+                tenantCode: '9ena84w0f140tafy2by40aa990xsynvcrmbo8rfz7y8cxdm4d2',
+                systemId: '84756221-2fd1-4ca3-990e-5f66f962acb5',
+                systemName: '63oquho10ndtdjltfql3',
+                scenario: 'gyrhhhaek5nrsaxhr4giyybi3cnj53jorx6gmfhxjqsjnzn23sus4jgcxcdm',
+                executionId: 'f6fbcffc-ee90-44e4-a304-c1f67bce1de7',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 19:53:55',
+                executionMonitoringStartAt: '2021-05-22 18:44:17',
+                executionMonitoringEndAt: '2021-05-23 07:44:50',
+                flowHash: '11u2ukdny1blmci3sk01kr4py0z1rj0167616j65',
+                flowParty: '41oq2kuenkbfjnw2awq9bpjqt3phfi2himq15lptnkssxvejdhjdht6akedcmyi4sfeq7ug1jrnua8qw2lmond8he1jdovl0v4qo3s9b15uermlcdhvf73h58fntv05z1yi9rcxh17j61xj7vt2yfi0iy6ovi415',
+                flowReceiverParty: '7tb9n6ofgcbu7v5ml11lky6lc2pz230eg4v9vqau5peobzwphnp97l6gqheo7y123tpfgmluehoez19u0q48zcj9jxvv9jup25dub5ifbvlidunh5r77z77fnex80z42mlr7t7b7jt9s6e6fal17kykcv02ui93z',
+                flowComponent: 'gs0qj4b0hpdtxwi49ltg8b46ksll53e0oxv66cdihkcneodrg5ttphe4nkbjd52vbu76ppqseotmlfnvydn8g28ar86q4z0zt3e3bxk48rkqymjqc7vpno3hlwrr50bah0r0ad7qlzrl3a9v9vi7vnpjw2u1pjj6',
+                flowReceiverComponent: 'p1guh0o5dejc4zphstih63uanu3p0oqtdqe0b05w44rxe26laazz8zsyid54rtf1ui75fcrv6m316uli3dygi0ca4vniajiypjlil0tx4cd7ro68uevkld3uqyai01xlszr4fj4lg0d06rkuhyfehd8ppxgtb19t',
+                flowInterfaceName: '0frfrw0at0h1m1j8n2ty3fr4wvk95lznve4n5qbtiwkz8lxx0a1a0wnke07nt9x7nl3wbzq41nit6sx15njs4bs0hmw69n7s6ivsq5qm1okwvi3brr014o1lpqk7yo6whqgz5dzy8qpvr2islemyqrleu21yuffw',
+                flowInterfaceNamespace: '7z3njgypt2dlaj54s8upr6dbqtzkjasjxi8mebhkxxgk7htufl4qkqkby1yxx6ex020ich2yhy4md0kkut0nx1bf6xunx2t286rs3fffvotxmx8qzdceuocp4z8mrohwedslypk24p7t9hknlgc0gj0g3stvawta4',
                 status: 'TO_BE_DELIVERED',
-                refMessageId: 'a5y4jq4zpewmeyddbdbjqzazrur29qjhch8ism41a0oa5rfvuo0j0qmj0xzpftqzjziqkqk44wlmmcjbfahswod42rmz27k22h2szhrrnlep7jw3ea1uhfe08pye8wij7d507e3o2v8lexuu5dwtybwnrizmwi51',
-                detail: 'Commodi nobis voluptas neque eius quis quia eum. Culpa expedita voluptatum facere. Doloremque sint repudiandae aspernatur suscipit vitae quidem et beatae qui. Quia repudiandae laborum. Sit aut nam voluptates eveniet quia. Perspiciatis est fuga nihil harum atque et corrupti tempora.',
-                example: '9v0tqhbl56n1tbwbo18r89ew1thormfz5iyc115cn5dbmzxxx0myuks0l1xx4xnoqj2nulwnjr0dgs2wtkpcdnmac565y4g14rw34iti4stgo9z5evbzopckko5tfgz6m6r0drbj6zsuxb20j0t2vnwsbkvl6ldf',
-                startTimeAt: '2020-11-06 03:57:36',
-                direction: 'OUTBOUND',
-                errorCategory: 'kwhop5fc8ta7h32be6iwk62x2t11u5n15g8yqk7no3drg28js6nmm8vei2kzkndlwhi1oixg0vl38m50gmc86zm7ew7k5p2vnh1p4875dzj2ynkajtu8rj2lr0hbxd9wmcpeeldgjbjl24qvimul8sl10xcl5w7i',
-                errorCode: 'hqhq95r6ptlmp1t1lqsdvwp5hytsrx7gmxtw6htk4e0o7s077m',
-                errorLabel: 536130,
-                node: 7874592273,
-                protocol: '5ryz1x9qr2qyqh6d0wzz',
-                qualityOfService: 'khq6m0n1i06nbs2bwa7x',
-                receiverParty: 'mcm740acxjt4d19tfhne7effm3acrhz0iu9253diojmkpectpbzscq2fmettj07qgmxmm4zauuejy74f44m7hdt95rgi96j6mhbs87xz90916iea31kzwns5l8q2tnfgljo39oqiyegixfo5b45bm1adtn1zpry6',
-                receiverComponent: 'nm4d1ps6wf3y2k0wvw2jgb6seisd18xs4rshakzp2mlg7rzfpliqmg559memsalo2z5g46d8z77iksshxv5wt7nmbxqn62tab623z1r3vr87e7okbiyejthh8nh0nnaq6x8ulsl50fecck360cje9zjzylkjmwji',
-                receiverInterface: 'zxp7b215xwi5wilsczzx8b7qrfjgk4p3iy5g3ov9s0uun7aggw2ls8nzk360fxsb6bm2k7skdzabh6d6ek75urhu25bjpt0rmkryhbq5e3o8x2xanlrnn9lgaofu6yr4qqjfclksf4pcthyo46fped2utxk3qutn',
-                receiverInterfaceNamespace: 'xulljoefjwhbflvmc6rttsztlmssvqawnt8ch7l0hjgfemlrk2aqz1hic84v0gka8ilu94fhcu8hgxr9hx8x50dvm7g0v88c29b0ruy9iubrh6sgkw2ms8hc70kc7e40hwqtzlsyzs7kep0qdhxn0nm1q4drnbob',
-                retries: 1718927150,
-                size: 9657380126,
-                timesFailed: 5406985950,
-                numberMax: 6213791740,
-                numberDays: 8080035226,
+                refMessageId: 'kb3nhgohy2fp1xrfasuqzbqqxq3ydlw0pn4j1nb8frnsiyekmab24e3ur59oaeffqdka96qda6wz3q7yijd1ve64rmwa406wlzuj37ug519uh6wy8tn7btvkq62tianhby5y3algydgkdpagll80okebisif78yu',
+                detail: 'Et voluptatibus dolores esse est magni maiores. Molestiae repellendus eum numquam omnis. Amet veritatis excepturi enim qui qui sunt.',
+                example: 'hdrrr49h0fanj8vq3njre6bsl4lu66zw39tihs7o9mmv2p9imjkrbgrqe1mhaco4914tqn40fp6fcae4v8j9mlfak82ocxe6d861g8hzbkvtr2rqx10tzdx32a7u2p8veqzi9cc84e4udld7di1aqerfe35yc5mi',
+                startTimeAt: '2021-05-22 21:23:17',
+                direction: 'INBOUND',
+                errorCategory: '8z99o7mgooz22nv1iqn3x52r9uqljby1bj382xpz4x3ginhbyos33agndkczaaqolrh75elkmbqp6r7ys21plind8ayp1vhihf2mfrgxknx6fkvszzzcoizl8eajd02gk5bgd9sn2a0yhj8of5kdkw4dk565pdzh',
+                errorCode: 'ow14q9tt6sccjl3q5mb1uh38iql3vxu76q66350avgwx2h6j1i',
+                errorLabel: 536202,
+                node: 1400674859,
+                protocol: '0e7t79q9axtw42ullxfj',
+                qualityOfService: 'x2txxsiap79t3jz4tnmt',
+                receiverParty: 'de9b6qydl69jp50eoguurzrx3zneb3f4pm84w4x4aypbicd9emgingpoh9lzc7w8r0gpe7f11fb3rdsaa4muq6vdxgfh2b3wc3zrhdvgni2xungruwuscfj8v3dasybvi02zcz3yu69jbrvunc9qhvltfshrma6y',
+                receiverComponent: 'wqm9br6zljn7mu4qf4fgqqdhkdop40g8bog3jgafowtcnj49s2z813h7wjpgwrmbd0j0okrta54tz7ehob3dyde5al4p3tiy0g1juzrj97hn8daknmi5ox011k6a1zcdijh43h5eitob2vwpyyyrf32nzumygw36',
+                receiverInterface: 'jy3blx9g8axj7dt41zx2imw04n7x096qq0ojv9opt2e7cmxzeylf8bryxkttq9jo4apmc5443l069m2jt43bft4x7mdmdzngll5c0eehtebxp61lrbia5vx4a3sqjiqdql543t3jiq501qb6zsxvyqhk5k9667nd',
+                receiverInterfaceNamespace: 'pbi7i0s00bs0d0m9alnkswc8i9kqp25ejbi3df2n4hegfxpcearykmh2gigid673jmfcl1lh6dcvv2kkcwlp5wcd28kzhatq99u2k4b8ln2peznnkt5hfjrvunmqg5z1ogjripucpzgyzg6774g5v025aibqfhdv',
+                retries: 6994807815,
+                size: 3752135208,
+                timesFailed: 1162806736,
+                numberMax: 4017516386,
+                numberDays: 7422904509,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailFlowInterfaceNamespace is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailRefMessageId is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailRefMessageId is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'g1nies2rbniwt3tk7jt855mek1ybiq1u1pmuvfwn3tj99qntq9',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'yq72p7oduzd2q8npiskk',
-                scenario: 'n6euewuphpij60yywtouf90y25ucow0vndine9y4xsz04q2z8ylqie2w49vz',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'ee8956fc-71c2-4d51-b8a8-b35a74f40167',
+                tenantId: 'b30bfd86-8a40-485b-a603-8735ab920291',
+                tenantCode: 'textyxbzralchciwufamppbp9rlfqg8yy7ns8w960b88jz2xyt',
+                systemId: '46c8363a-fe6d-4ba6-90dd-ffccd49c3775',
+                systemName: 'p96nk2h0p3orqi4u5w2g',
+                scenario: 'ksc883pupnt5blcwmgnj2xnwmf7dmeqjmhsy9j2wgf641yqzi8z86rn18c3d',
+                executionId: '160fce93-8593-448b-ae9f-d11ee8e34df6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 16:46:14',
-                executionMonitoringStartAt: '2020-11-05 16:14:05',
-                executionMonitoringEndAt: '2020-11-05 14:38:32',
-                flowHash: 'ivky2fhlz1kf4ux4xv5brrirawi8fvwbxdz81dih',
-                flowParty: 'ds2zn9cxw1og8oimxqifu3lm0yvcky8net87jwjsqt59dwbfjr1ftuf3w6in3ivfp5zrha7c6t7pnkbgy8kj0md7p9batsbk5wm5u3o9u1xkvdv0a1xuvoc72ccn9nniedfs13xer25onlsi291x87ddnfqx26m3',
-                flowReceiverParty: 'ytjz6sqv69wg7r34joabg72fmb011qcqz8e1dacr7x6azcr8lsw15teqnu4wb4p6jodmzrc494mhy1k0a44oj4pi4krnf8nc77gr6v31bju15hzathn1l7ldxin6hth2nvhsbt3aqnsu1j5sokesk5xwqcr8u0a0',
-                flowComponent: 'eo4dg09dglupywc3gc2gaz9yb9fx2ydk2hipknqxp1n10655qje4qyk6ps2gwn5a9cn1n59z6hqe6moxx8g8qs6fj773h196yctvlsbp61xw66mji21ly62chu9ayhkw2c7ny0hrmb0908h2e119hyl0fk05pkw9',
-                flowReceiverComponent: '97agosle43vjdr6kkv4muzapwuxrrjwavltpu8cq30c8p6exsw9v9va3lktk1t9oaf71i595pe7eoxm7d08ixc51p37tvhddk3x1o16xyto2hnjao52dpi8fck6efzf0a41pkl8j61v8bsv2fxgam3kb7t97s7jy',
-                flowInterfaceName: 'xsswtmh05xi50swtzonbpb80wbyaihhxep18p5sqkin4ulclsw8mzaihqwh7cv8k9cf6wvm4j4mdd8a8fv79oks83ywxk9umqco7yv5ej2iwe2tyc21n3rlc9ngmuu5yvi7i24fc2qvj26yirgrnzb2uj8wea0wg',
-                flowInterfaceNamespace: '7r34c0mod3qzv9z7ezw2qxavjfq7w1g1a0gvjjorf8pnvomv8dffc63g3kiwxg352dkdv3gxw8h9lkukk54kx1d8cfr6je5kzdcs0vk3f6yh7t07tpae3ozp5tdgenvdt6d3vtrzj1vfl9nlyakpm9v4vwgassdj',
-                status: 'CANCELLED',
-                refMessageId: 'qifu8ombvnqhf2p4gk99djcq7xlkyhazn231uuxv7t0twfqv1scuhkm4tps5l284ntccm0kpvy8nhmfh4oezhxkdenk94lwwvht340voa8y9ygxlxykr11rdlp207uofe2v0ksqt9j13xn7s64mgd8aiyhk9bfabl',
-                detail: 'Temporibus facere non commodi saepe ut eaque. Libero at architecto aut laudantium quaerat aut molestiae id. Qui est omnis. Facilis porro commodi. Commodi et sunt deleniti odio.',
-                example: 'h2pa43cqv4mkrqtzii7fjv37ow4hn9mx979bql19yl1rugx3kjxqiaag52k1n9gj8qetbc0tw4a4nrauzwi8thz8yhg2mjsosdsp8tats7phnuf6fe53dir8e2kv5tpd3kune9wy1ovvw0mm6cf2dc3lkw2igfhr',
-                startTimeAt: '2020-11-05 14:45:06',
+                executionExecutedAt: '2021-05-23 04:50:56',
+                executionMonitoringStartAt: '2021-05-22 19:43:06',
+                executionMonitoringEndAt: '2021-05-23 01:41:20',
+                flowHash: 'uu0e0i08oc02fsk6svcs5wldqhm3japoplfl0zyf',
+                flowParty: '0jlhhyrshedz8jbjsx53wojuj7qrrrgoiszl5fiwhnw4c37i3av0s1wwusdm8el8phq8x7ux5s8851vc5le8j2dus4si40y8uyn6iui7icpxqd7i67cb28k243l545vwysv2pevn6md7gut4fwvy0e987kyhfw4z',
+                flowReceiverParty: 'hvqy5gfiqegrhx751y0wy25pu9ltvaaquw1m3430rum3r1q7tr4bh6e16fjmgttqpizomqltitkqkjcdwy3810ewd7bmlr1ny7frq3hgfzz87ujq2g84d5jfhdo24t7nb7wotnmk1lvv2owtfra5lq0ty1xgcu8m',
+                flowComponent: 'i5q1b17isxwod3hvt3920r3z0qkzn0scew9kjoj06bu3n0pnk1lyj6udxz12bqptq3nhgbvr1ai7vbab417wiaeal7s28qi7h91gvitg83m7doxser3zevusixi8ciabtcj8ci7z2ozniaujm2dgkacrefkdwlxd',
+                flowReceiverComponent: 'b4sqdw0u6kygg7nm59y90nqqyyo4bk9c8jfqbqgqo86jkjph97sri6ds7g41bjo91ej4kaan3vcjy5hggc7mmdwbgg44fpe4fvjoz2my07ghbzw0hkw0fycky8khm962odwqd57phudfkchdrcv5t8n44a0zbzst',
+                flowInterfaceName: 'ckkkdj29jy14cx5u5ijk19cjjpd8k6e4uv9wr8gj0nvuor241x4stqcqxkkvc1argbacg37wb75uhg4xigmpnmihh262b7w79543ve6pusdbtyhvy8pmnn7rxdocxef3xzzrypvfs6z1nks4ngmv7i7oyz4kfnlx',
+                flowInterfaceNamespace: '85rcxhr32frs2z5k7wnm89oir3iyljuzttfp9nbe9b70t0bmlgxs2bwxogukvgdf39qeynt757sd2hlg6xudosbczqvsmflh3onk76zt0uq3cqjz8f39viffvxnn0xjw0wap0tdqckpk5aw6a60y2i13eugybz65',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'ppupsldbn0lnh4yajkadphc7y0qg95i1rhj9vy1o86vt55gihvmi0yeopm8h4r7orfitkr3bfgjz44be8n0w6tri99kvxfd3o0bn6w1kj4m21lgm295zlqq77zjq11hqyewkzv3a44dfjauf2xyy6skqril9bem5m',
+                detail: 'Eos animi iusto ut. Voluptatem dicta nihil dolor labore officiis numquam dicta blanditiis illo. Cum modi velit ut et. Quia ab fugiat in quia. Perferendis animi necessitatibus occaecati enim cum est rem facilis. Consectetur nisi minima commodi a vel cum incidunt dolorum minus.',
+                example: 'kk4z4wytud50w6npkrci1nsm6i7r0ewa45gp9cd7m009ygtfg00705jxebswnwasluw70fad46q396cp93p949zfl0prx03tim7zpewf90zuegcs3gts11p2inugspaim2uh9f75i6b526zmk6mklc5fuxtu618r',
+                startTimeAt: '2021-05-23 09:47:25',
                 direction: 'OUTBOUND',
-                errorCategory: 'w4izw9mahwmugy22y9fj9x1ssaufv6mwbee0ilr8aiauiyeew37apca13yg3c30klfoied0tiwk48tu043525bvmb08b03roovj8enyl8snv7pp0qjzh7fvums65jqc3x3swj0wmz3188pkf8emuf468d4icgzrt',
-                errorCode: 'qh2772hz7otxydz8523i96lavrlfrmlpm4di6amq5qb3oeoliw',
-                errorLabel: 615924,
-                node: 9395505851,
-                protocol: 'q7kb46ln9no1f0kex2hy',
-                qualityOfService: '2fpn5kadnzwsdo17v9ha',
-                receiverParty: 'zpgs4uvgmg28f2tgtdna7rf95qx54o4w67iex9c17zjppvy9s8vk9brl4s9bleqvd85xbp1g01js9gnygj681ao6gcr556besogxylkm026sufejssspek88z0olbtyilz9lengu917hg5pdfc6xzkqlptvbzhjt',
-                receiverComponent: 'h0f9d1t6m5pqd5ih7jpwxxdwmajxm9j8b3ta6sqf69dq1j1wly78k9bvjzb5lql5nuxt30n07ibix2g9gjctn9a0jjcblt5s85fmf0mx1w22r419yacj47r886dt7vk00ydnonhjpscmhk9cu4xqrhf4aeerauf9',
-                receiverInterface: '1r551nog7c03h2700b67guhe6f808pom3rpz81bzwoezqu028abagiz32udpllgdxev2euk4831qenrio7m7l7gbghymdj7chc3ranfocqh88hiuj07mwqx56ndb3qi44igbbbmqchmpc0gym1dzmcmwl6tmw75i',
-                receiverInterfaceNamespace: '8pab0kpaws7gqmwtidnygy18y8b6412lxwczhph2nhw6z4zigq0oz6kxmi2hlbwld60tfhe2y12qc8ckhvcm9icys1k888ypovuar5g0xk937a5gs3bmtj3ncrakdzyw6svk4l4ckq5dh9rlr94pe7dinjpqztxw',
-                retries: 1832357500,
-                size: 5605184953,
-                timesFailed: 8570254125,
-                numberMax: 1967414110,
-                numberDays: 8533731929,
+                errorCategory: 'ccrejw02tjujbwolankvomqn47s89e7eqxxy1jaghr4ux2n7kc0l9ce3460jmxajst9ro2reqeadx7q78q3js78ncyv2b61b7lh73d22bc6di7htwsiljfx5eia2io85a3wjiy27x8t5des9de9yho7d8ifmghmv',
+                errorCode: 'pka2ax1bzr87eg349e3xze2xuvzto21ymmsdl6edf7qu8ix15c',
+                errorLabel: 920461,
+                node: 8134716598,
+                protocol: 'x5yymgh6lbmq40ymdm4z',
+                qualityOfService: '5fhd4f4xv4tmzlpt9ln9',
+                receiverParty: 'sgprcp6n7jp178k57gbtp6klsgi6e6tahs5ymra574e1yabc07l7ax7ypo64mvjsjabmoiccoaea0b2oq5r75vno1ysa2rddzph3il3w6jgqn2kqtzqeaedq5lbgkujq6ytmvtx9s16mjlvn0by2jdealo33t0ol',
+                receiverComponent: 't4rlb5hgq1afym4vn1lujsq14v3871yas1jvz4dnjkyhjtzxe3lfvlf2mggr30bnd4sa7y8vux30blf7xz1aifc4yxu848gq92go2n8otlqcbxzcm221w39t3jhwzb3noqpbovv2mco7k0ng7tzuzmqz8sexvkod',
+                receiverInterface: '4fgtpiu1k634tu6i1qx4x9sozdmntu6zl6v55745c59i9ast486ke2icvi134x8kh65ggrhqfdsl4qme23cz3s2zbq691jyrzalq4b2w70dqmmsoc14ynta3mrney6ylhtqkwsc9tgmxsz2mjw2fvgke8f66so0s',
+                receiverInterfaceNamespace: 'po22a0gc4exx15jsjinlvodva16yfawxff0dqdu77t4he62wc3ej9wub564lqe2tuqvdw33709xcaaimsluxfc9ewwutze1mzq4cayphzpa5xwl8ajj6856k7zi3vh1y5n0jwtintx23hgvh5zkfzrjriha8feq9',
+                retries: 2606581031,
+                size: 7363542305,
+                timesFailed: 7384373258,
+                numberMax: 7927690738,
+                numberDays: 4353945933,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailRefMessageId is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExample is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExample is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '8m7nis71wde1ncpsymzt2t2iua1gx1jbyfbvtrkw9kelcevsq4',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'zp9yju0xn1i4dho7e3jv',
-                scenario: 'jrmj33shsa2en9ka0slvj4yef78k89fh9kvvayktho9vx0889upeh1ibuwo1',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 08:59:11',
-                executionMonitoringStartAt: '2020-11-05 20:01:40',
-                executionMonitoringEndAt: '2020-11-05 16:38:42',
-                flowHash: 'aq61r91uqelcbxuhxxcu96fszoli6523vw6nk9c0',
-                flowParty: '0qx15okpko3wtpcpxpntffqcv9d9b3qkal07zqx63gux735johezbqs4lve8hrx9tk7ws9fel3blvlu5ekprtnsify0qw19qow8vmybvvgqzfwja43lidji3mqzkctb27cq8a43ytlljd67s315uf4hyamr18ugh',
-                flowReceiverParty: 'po7gpekqm4az11m3vkm522ahdnye728j3crw5489ih15kb1y2w03hq2y58mq30sicz9cw71oudjre02x5azj9ckajl95baie45kcli7upjo9ql6c0zk0ed8dg4lt1bjbcbqqygp5hdawvsj8yk224q3ucyabxe7c',
-                flowComponent: 'crtt72hzqrkg44m3avvdiw4jy3g8g79z0svlsw7etaocx2gnt7z5wf5ws9h5g0begud72djlryolbzozaixtdflv9cx38mzi6p5033cqwx00hn9k5khnz70o8zdozwno5fl16tyzmeqshoaq1mk1r3dk5o506q0u',
-                flowReceiverComponent: 'c00911qrwa85unl6sejhqicn2hcji32wke2s9dvusv8taiezxwujlo2coq59gnmvdis4wgztdyml7u20zwyewi01wkee8k5i4ua08k5sse7qpyu8q8pe6p9waorseonb6eaa8y5n8ixjh50fmqvgxsoqg6n9j0u5',
-                flowInterfaceName: '5sdwvqus5d72es1m2intava2f9y6swl1y8lpxs79ylv5rjaq4j7s9shiiq786qkake40nojjtu4l6rgf4ldo92b84yuhotjogqq2bzsc0u1h5pwm010d2lrvazftxw29suzdmzlt6nlqup5meukj1rogllgpl9xx',
-                flowInterfaceNamespace: 'n8nfs9zjny0l08g7sha5h6ko8ouvnwf4qrzu7b867m9ro1pq74rxlur9a7l94dg41vvw9b3r0dsjx1fsygrr2kl0m5ldbzeh4wvdsw2ko16muzmweiezf6m3ixgxxi323p7u6y12378cmdd2gvanqwc9l8z3xav1',
-                status: 'WAITING',
-                refMessageId: 'po1glqwohnr0gi4r1lglaytyefq8r8gv9emgsl2q97mn0oym8e41bduu1bd2le9xbz1s5bner8b78162eknr8ev155f7bvldnd09ducogm8hjj2yqb474egq1mbzk9clhn9uzw5620rghz7bzhu0iqfa9s2l21z6',
-                detail: 'Unde qui nihil sit placeat quia. Occaecati quae officia. Fugit vero cumque animi iusto minima sapiente iusto aut. Voluptatem eum quia maiores qui. Qui labore et.',
-                example: 'mkdkuipqe0xgntv805buwrp6vvrqmdd248p9jilssqkee2ubs7ia9oo88i7oxgau3fpua3jnrqq5t67c21fg98g96oiu7verxn2ynumh67e4jyi1s1nr82s295isxx22xfu8x7xktemniz2bg45a73w4g8r7t9d23',
-                startTimeAt: '2020-11-05 22:02:58',
-                direction: 'INBOUND',
-                errorCategory: 'wxxmwrbk4wvth8io64g80ujsjyehxfdjyr82qj2rk4c4ecfvu0f5lftjucpqlatswi0ikg5alovkt00m14vb81hc8yjoe9wm17m6aq2rddd10e87n4rz0srcijp75w16wo6fz53p2u2vlt9x1gikt6j9zkrbbyyo',
-                errorCode: '9rtomsxxq3lxeu8cze3l2lr2641gg1vw4gjnnfigcwqn3x9v9m',
-                errorLabel: 768830,
-                node: 3310473542,
-                protocol: '7li5azsehixkyul6p3n7',
-                qualityOfService: 'ahb8puyyzq917e5xdczv',
-                receiverParty: 'ybyxha3uy2wz1yx5ls48pq5p2hfonavcf9ap5auapouo12dp0lsquaenrlp012qk33ncgdrzca1g5rtkox9glpa27w4yb1u2vvwy1pah2ubong1g4olxf2wqb6mkrvuu905vafkdtpeeahtij3gnq4l9j2t2azbf',
-                receiverComponent: 'g60sc83rsffaotgxgsfaat6g8s7662voh9mv6q20js80vkhsbj9gn9drirgr0337afsm0jo9o0kuwkumrby6hdaieju84yuz1pafk1kwpd8ygv1wlqrtbim5nk7keyr5tcovhv55hgpm73m5akkm7kwq8aq7v28n',
-                receiverInterface: 'r1fcpxinx6h5jrjzsx4iy8nyvom3u3i31tevb4wrp07a42vccnmxzv6auk9b2bjy68pxijs1llr2c3up4kjkrpv434xertbeshpy7t4by2v5engo5eu0lj4fj776mwwejzzcnphziwys4mg7pjsjmg0mjmg76nqf',
-                receiverInterfaceNamespace: 'lutcrw82lutf7777buslcnmcmlj8yz7dfxijiun8wuf0rfs51kdrox8kfd61ol9oju5ehyoyfs16hvhaa0ha0007gkki1kqqmlm5qryfrmawkexkeq613h7cb602embzcr7dm0wjlt3f1qugjqua5sbubb746s06',
-                retries: 1537857945,
-                size: 8511009867,
-                timesFailed: 5116945884,
-                numberMax: 9212571331,
-                numberDays: 4392783029,
+                id: 'fae6257d-4878-4b9a-9d65-4582cd8b7a5d',
+                tenantId: '0cb671ec-8ba9-4324-aac2-53be90e8a01d',
+                tenantCode: 'czmsjhfdt4rcwleou0vv1z1sa6fo903f7px3nykhg8yaved2pf',
+                systemId: '3a8caf6f-9ca2-4ead-ab52-48a183112d51',
+                systemName: 'azyga03hdwdrg0e0e3qn',
+                scenario: 'iqcrwfi561bp6a8osi41h3xh457g9iady3mvmp1cw8jio46qxeokpobo3upv',
+                executionId: '22463443-350b-4eac-a7e2-b0b3e9c004b5',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 06:52:30',
+                executionMonitoringStartAt: '2021-05-23 12:51:25',
+                executionMonitoringEndAt: '2021-05-23 08:33:40',
+                flowHash: 'prcqc9ns2fcl0p23mqbyarbnpp1bl5lzg3rnt8im',
+                flowParty: 'n1oallb8fqcbkjcmpad52idmwd8qc9srd0g9lqjlul8sadvhghsmfus5rvxjqmjoi54kpbgepz3omdhh3fr2kr1makmmyd0meckeg2apsjnbx5u20xppdp716n5bj13ei3uzwtz1jlsjg3y403i52wni74zdkqh1',
+                flowReceiverParty: 'd5nvdpvs6fhfuozvtqlmhku5mepjz2f3ysvvkk4q473y05hx5d5ntrzjdry39obdzjlkmncoijtkbrd170y10v0rbbd6gez3x2p326kq7m9hd82qzfc65y8u99m1l0ktbp1e1wgb2xjwjqsad8vzl7r9b0web18c',
+                flowComponent: 'ex9staques8im25yzcd530nkaxoyhq3tsyu5q57et7hjlxptnyzjv9lqnzevgqf4keznpqinyievfacqug451w57hl65zjpfapevk9k4ohy90emetuaj2g3ffsxbv8cledtjxbgsswyp90c75yti3442sx9kn307',
+                flowReceiverComponent: '8sye5ttxxj4wjav5ywcsy2goho90tajfxws613wdap3m5a65oike29zvtkc32n06bhduelcl462mwbshkc6vmzfko92cdzume6uiq252xt3p4vo3uckqk4imciawo0f1n5jo2cqizfgjr5gjzk9xq9gjl4uv3oh8',
+                flowInterfaceName: '32wykooi01l943pkhbdm2iaf4z0tap2ra5fbu0mgqn7x1a9w0zxwqkru2xkbrucsdzjtjmq8hgvoao6ncr9al9abjaswdic8fzggohh3xtkahidnecxjb3a9qb52iitadiptqc2t4o41kego6jl483ehxhcag1as',
+                flowInterfaceNamespace: '87nv10rn7r9tm2iwc8st3a64z2ko50usdclthxb3geg45iu3cf5sqneikn75rfm7sofjjpruxw07uebrhw7huv462xx9i7jf2dwy6kmq41vv7ruetppqv3n906vk1w31we1uyapwwso1y0trh1gmhb24f7arddja',
+                status: 'CANCELLED',
+                refMessageId: 'tccuqq021lem1851ux566mwq9pffpyqb1gi3cbnd01yu3s767mcx1hz4ubo7gzk5fhehunwpvfpf1cv6kobfkopxetbnewclsfhjsezs7utmz1hgytjxez5s4evgbrr7m4a8vi4yjcirzi3xc049uqfzun2jt9as',
+                detail: 'Ullam esse odit libero sit eos. Molestias ab in ratione ratione ducimus aut et consequuntur debitis. Nesciunt voluptatem illo dicta dignissimos illum amet numquam voluptas quia. Iusto placeat sapiente molestiae. Rem et beatae unde tempore. Officia animi ut ut in ut.',
+                example: 'qq4q24fuu70orlbkg0uiu3ta0m1i0voslfmfbtb57ezf79vcpxr3frn1z60yjz1zd7vbgel7ugmkey2wt5squgsn2q3yu42udsfti5lw9h9xdy4sjw1vbjkgtst4309qq0wvmz6fdhi8nkpuwh13my9agvdd22xyw',
+                startTimeAt: '2021-05-23 10:27:50',
+                direction: 'OUTBOUND',
+                errorCategory: '1mohtkn1wz6ro7jqysy4cx4t3dclixc7r4jpluas5lp5ubkq7ycqv420djjq8el4p8zqib3ilpf2eig8nmqf1veg0fr6fmpevu6mzg45ikw9xe33x6fwls55qfd0de215ov5laquf50l1y2bvldhvzjgj4tmlxzm',
+                errorCode: 'uatsznjy5alod00swyok6wnszojyt7q13u7ywcj0i4m94crlh3',
+                errorLabel: 181284,
+                node: 1171366068,
+                protocol: 'bb0oltuo5gxsu8920nvr',
+                qualityOfService: 'tmt6hfr67t1l0k4xxbrf',
+                receiverParty: '6emzfxqkiuolusn371dqhpm3v4ivnjw7vuubzvrdfu908g6hc21rhkqfeidcyt2fhcrm1lz5wz8seelxghzcu9mhno5yitlw1s35fw77inzam18gmwqr7dbgtzl1jzlcey6oeoynfd8rw1tnkllzb08f55t184nf',
+                receiverComponent: 'tpfuyyw5k1scb2yitjxazbf1ocuil4i11akbydwsq5pj4cpfnlwlwg6x3mxhysx65s7xarewjcabkwbxcb3cbdaw27qbg2lneq0f3ps2vadcamodgzdu87ted326737h9bjqgilxohee4r8lm0q19be2841rrecx',
+                receiverInterface: '6rv9vor2kfeq7rn5rb1tlyqo30q0bzzxs4jp65lvxmth06e7augnyhltu491lo5r8otkut8hbb9ul3rml8ewyeljjwubx0wtlwq3s1ze1trmetsys7gz01x0hw8i6brs250wg0fe8hornpbg91it3gl62o27wkgw',
+                receiverInterfaceNamespace: 'szt2bjgaafod582nof5chdvo0w3658zrd92mkybismnyvtg61zt2hznca5wc9isqb6db50r70badc1r7q3fxzc3n7csj06yng09zqu4xkpemmfcw37tk195er2aytvve4dzc0l3l9kvcwy698apvjt4axwp08y97',
+                retries: 9370842805,
+                size: 2591542126,
+                timesFailed: 7640640436,
+                numberMax: 7598467168,
+                numberDays: 3636995873,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailExample is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailErrorCategory is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailErrorCategory is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '9ksb9ccirvg038dybhbj5huadolz2fxkfsqzs1c824k5dd6lny',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'zbtm6ek3s7dw5ivc45h9',
-                scenario: 'zrlxehiq2w0we3e9154hkrnfi196rdmc3nji9z94k1ssqato0i01txp8czg9',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'd3d071df-ea5e-4be4-8c0b-3125b3b2fc7d',
+                tenantId: '7c58dec6-2604-483c-bd80-f9eae2ba1eda',
+                tenantCode: '05xucsk3h5rha397w69v5ke7m116uhot6ydoc7sjhk0he0tmcn',
+                systemId: 'aa5f7493-3c7a-43e1-8b87-f931fdfd1644',
+                systemName: '7cqhslmr00a95rv8kazg',
+                scenario: 'ecir5tjarx6puzhkcmh60m1jzbrk88epe4z856aa1k6v18vxv8niv92c7z8x',
+                executionId: '2ae10a8c-3bfb-4407-8b97-0725da0365a9',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 10:41:15',
-                executionMonitoringStartAt: '2020-11-05 19:31:54',
-                executionMonitoringEndAt: '2020-11-06 05:46:13',
-                flowHash: 'yrt2il4g5928l4jqc6ldlifs2cvkpajtkjzgq1z0',
-                flowParty: 'nr8a090lkff0i5fcgexvm6vwxrksvoqhnjl6cktofzzj0er8fqfubswpam2s5q72j3qcqi5k7t9k6k8r2282i2k2x2n5inh0n2i826kh5acddxvtbeksqlxormf3vpowa0eh4dyva4q0wzmm0qrjyg9aphfw7pl8',
-                flowReceiverParty: 'twyebxq4n0mhd8ojaapkeh5q3qncr0e47jzph7vlee0gsc00yxz93sx3ypxa5pelult3yb8psl88dueuylzk3gycrtwy9fdpsp5mz0d4tduxba0cjw0cr86e20im4fdrtycwpty463rouqwxryhqsr5zmg83me90',
-                flowComponent: 'v0wrwar7lt56bkx40tlur2o93obo2n9nwtu1bx8pn4vf9ar8qz93gecv5knh7rc7imj4pizjlywf7k2v93ryvosb0y2xa5cma8cpbber2pw9yqpzlzvtf7a1iuoggiteuubmv2oppwt22v46bj9l7smmzc2lepse',
-                flowReceiverComponent: 'moqn18k8bqknaiiab9sb085inhmo4zrs4tgdc08dj424x53vdoprtt38xd5ux0wdpbj4aai80glh3sxw4fru9lvo7ky15y47fwvil762mme1te3ieu7ehme3953usya1vtzg6bg9s003b4hqga2lsqoskdy9nxcz',
-                flowInterfaceName: 'cqei3ofg7ge9uelly8xy4un2tiqyoygdsy243yooe8yyuvd292595zbeg8fs6zrr1ao9j26ghmeh2yker8fpm6vk9i3odyuc2vbxrpc2x2pdbb61qd1wa9ve5232nkmfkhy0b1fe6rhxrv49shhh3t23aw1ijbmx',
-                flowInterfaceNamespace: 'fbh5peh1znoet9rz4xls0z73g6gzuu3w6wm1cppn249lrj77bb80f67o9hj4pg7y3mib9f27p2wyw8tb2gkguuzp66ypbsv0fhozun2af82n78lj7zkfzk04hh0uyrpl6qnprdubh1vtxu0p1s1rxn9jivwesle2',
-                status: 'HOLDING',
-                refMessageId: 'ykmtal9ku7t6xow46o3wuwl4h3aymskmt7tpox3zl3qmayedeupqanye2ozngao32zyp6aqpzjw8jckc4r39a5ri1r6o93y8x47fm7imnx8d1nm9ruyfzrchnnvhtp1a14p15k1eurucnc6jwhfgtx4feh63hj48',
-                detail: 'Velit omnis temporibus perspiciatis exercitationem alias facilis in rerum. Ut dolor eum dicta et odit. Consequatur deserunt voluptatum ea enim quos labore dolore. Aperiam non tenetur repudiandae est.',
-                example: 'oumaizxonels0xo0z3nq7ymmlf4yvmwi0ltkm6c4uihuwy3bxflw5zfs3nht7dlysrnkqphn06pbkyvi1qm48sye1kkryif45imptzh7apyop65dwl10f1lf64epinoxb75vkoweoyxu79ww3zd0zwtnc3djdjzv',
-                startTimeAt: '2020-11-06 01:58:59',
-                direction: 'INBOUND',
-                errorCategory: 'tl744ofprtiqw37zkox3dgmuem318qwroegxl13ou7vxw98muztf5au2ogzbxatrvy7pats9hia90yxhbs8a2tkvgpha57rztgvegj3ga51qdr1gagstnb2n3zohxaqp8dzcr4w9x34h5ia317spc90ysp50y4uab',
-                errorCode: 's576wwnzzdg8nr1bo9ogmrk2bui5brfgpzvxfko8vzatd70jks',
-                errorLabel: 400264,
-                node: 1079366660,
-                protocol: 'xpn5alkxfgdqaz63a99l',
-                qualityOfService: 'ka7d6bro0hzn467xefrs',
-                receiverParty: '10fabujzvtz64zz16ocdvlytkwznz0i98xfw5vi6mfaocvg27xitfw0lntz7amwsbngye1oudwjlkn9kp7f13kucy7u42d26oht0vaovlhegillu9tqdwjo7m6hhgfqo98h7g68hhoo1dl60hl8g1xdyyik86aq0',
-                receiverComponent: 'bpcsl3bop3dq4xu09i7wh54l29qv4jxz4lrl7jbwin8bp5bocmg6q7t5j0u1bb6r1lybzsk8936mmkghp7gu0qxmu55uuvzsk71njotgv8of8ztwo55o89vr7vzlf9apzqpoc5u0ft9hgg15zwj7olbrcpi8sqb7',
-                receiverInterface: 'r2nebk7dop6z7f3knhhu2t9wuus64n9g9fcemgsv7v4tqz9h67sh6iu9n5pc5upfpbrnpv92dkvnfsc0xt7kldzo4fttotbm26zkduyk37poziw1ty2u3zk5jjagqwg3rvavnr6lr8nr0v9hndtitrh52fs083l7',
-                receiverInterfaceNamespace: 'cfxwudrixrhm74t3x0fu8e0hl29zza0rjpgy42ipd3kiy4vdmrg9lau15mlc2gqftot2sdr7yqf864tp3bm4nthvtqhptkdfvlgbufrbpi7qc2tcd3ftjrnqn6p3hjb2fixke41prqaegmyq0wpeof06umshk917',
-                retries: 5918351502,
-                size: 6722566071,
-                timesFailed: 8181612380,
-                numberMax: 4215403425,
-                numberDays: 8954707161,
+                executionExecutedAt: '2021-05-22 20:54:02',
+                executionMonitoringStartAt: '2021-05-23 08:05:38',
+                executionMonitoringEndAt: '2021-05-23 12:06:04',
+                flowHash: 'n8aa73tlpnxfyilg111qsqq6chv0fb4zuzx6uytd',
+                flowParty: '5phfah41i7zvzq9mi7jc58201o14kq5u00xje7ebrsy3adglp7umxwuaf30wncbc8hui7zupa2nfu03z32sbmlbwkycbhs9eo40p7lavwyjtfffts4rbqtflxizegacv9yr9hz6ndva1j1stdif62i632dpl9izs',
+                flowReceiverParty: '4kg96l7vw398hq6t23tiaa82oqmiweriq1jx21vhlgxdq9hz1139y09eglimftdh5uft2rpqmhypubly109vfh06e3fji7x2cmynpaupimizu8lpudg1qmyqi02urcj2pel00kcomu57r3jwim5i4luvua06yei8',
+                flowComponent: 'e21khiupaptgpgqlqjgw9oh2honzijbalgcs80t3o576i897j0dvkuzq8xwlh9orkqxndogtv86cz7w00hlc8umjug15luit2s98peq5yd0s5i3onuit94dcgoc8m1je76jjn5576jvtxhjhy18jx9odb0fov826',
+                flowReceiverComponent: 'vtctkm6chca1wafxsfb53zxqs5485catt6ajn0qku4cenvomhv9u68getg3n47xbzpaafxdwq04g4jacsby3wo068mazx2ag3u7ntqagouc0oswyi5kyf6g7pf17sag0w71mdj8x6fde2l3h6zpaiv1b6xgfpm7c',
+                flowInterfaceName: 'k4gymhvqzm8x1gpy594f08nzv98di5sxgvtxc4zql75vo96exxu3t7it2e4wweqmxncs5srye4jfnabmnt6b3i1ih57o2iv43kvg4jsmlon3qw8wi9jycc5tji4t5235d1awg9uztg111szo2txoyd9pnc2h5dra',
+                flowInterfaceNamespace: 'l9fshpduysmlx8g68yuw93u0d7mczaas4tfbz7ifmm0vcaraqk3goimb0sylv0y1fr35h59v9iulqwgruxgflwt0uhgjdavz86920z2947socqbdqk7vw2raopd52i0kuex537ydzr7klt4ds47iu9m5tut393km',
+                status: 'SUCCESS',
+                refMessageId: 'incl7mfg12pxbpd18nswqzey8rob0svvng9j49ipmgiaueajdd88upmu6bh5it9frz2wjj21sajqozwura4jzrp25tk5xtc34s4innx642pcgl3qepdggm70csdplxvmevxz1r2zyy1dnq0ypf7gh2pxj217vtar',
+                detail: 'Temporibus eum quisquam deserunt pariatur sint non et. Voluptatem accusamus non molestiae voluptatem at sequi est provident et. Tempora vero voluptatem aut minus enim sunt facilis. Repellendus similique et voluptatem at dolorum. Sint suscipit nisi et magnam aut magni dolorem.',
+                example: 'n7v0utr2nd7xyu6p4377ur7ceu20jenhvmpwhg6dz0wcy35uedhius5pt2zi85cs8z3bay2lygmultzxa2iqceu0u7ty5rptug41bj2kkh5jjq791j859x60o37czev32hizn8szv0xangim75m12pppa2cp7x5k',
+                startTimeAt: '2021-05-23 00:20:32',
+                direction: 'OUTBOUND',
+                errorCategory: '9ananv17kr3xyf4nev0kegwcm1fvb1bixx656m147xnzzfvj8u6u05wem5wrnnfp8goqg9anyp5zpnr5xc02z8nm5kqhmntdgptmwghlnprdsixma07989zzgzym2cfju24pfg5uomqylaoyc5v7l5td30hxfke5f',
+                errorCode: '9iz4k8ljrvmjznwx8voj0do8brlhzebfvoei9waxlg5ij7ap6n',
+                errorLabel: 872601,
+                node: 1692076323,
+                protocol: 'ogoqmhl3i2lkhb0rg7ex',
+                qualityOfService: '1gic1o219h3w66wbwbhm',
+                receiverParty: 'ozwvh39750wj7bbci245puzktmsam6p7ja14tqtrvblxhank4cvert9jtzflpzemifb0tcn1j36t5y3bimcp1mih4ow6bc9i1y193ajvx5x0nncbot8d00dwqaqnsaopdr1cp7c3qpk0cz748fyo0zfo2h59bk42',
+                receiverComponent: 'dco4wllne4y2dk6ppf5szcfmnb6plx3vqoc37pmrqpovc4r0lsvgagn7ltyr2dje5yjsumkvogxsbsfss5qq4dni4m77h9q0vfhuf1ne9jekkb61z0zc8w3qoq6x03gjob6wqg7wbk862r4uf8vx3gqyhyl5ga11',
+                receiverInterface: 'ev29ijfzog60w947revnu7hvr4z7ekq4ptb6s60pg6bjarey1gehkxvqbhxacw5nwhrsk2rkzkjxj8km4ql7jd410qa6cm330ttsgfwtozrjjodxjpjnesgazqywa30dptsto6u3sp9mgcgxrky7abi69n7hpy4n',
+                receiverInterfaceNamespace: '4gacc2qlzl7wbdwm1z5di7zr9nh5nxu96el1fsv57eu6pa622mmczx0684riyxn3aqe37nir1our1u3p1ulrq5ll4092fxe2r596hwtnw4uios0bwr8kriwwlaxdei1iq8yqdrkzma9regou0v3tltml8p5ql8sd',
+                retries: 1133998651,
+                size: 4948545739,
+                timesFailed: 5485669544,
+                numberMax: 4817293464,
+                numberDays: 4378765230,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailErrorCategory is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailErrorCode is too large, has a maximum length of 50`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailErrorCode is too large, has a maximum length of 50`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'i3tmdjy09dxf4h7sovsngkoq7adzuy6jx9s4amk48172a3hzts',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'felbhxqipjbyqhsi48ff',
-                scenario: '6deo373ebjxs3196kikpgw2zpq9tdk0fw51gve5l6cor6nxn8dilqtmgpywv',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '20cbc5fd-edf7-48ae-8e7e-2a544124db54',
+                tenantId: '44e37b5c-60b6-4bd9-9e37-804a8a0f3a2c',
+                tenantCode: 'lz5g81j7npozn5qcd6jssq3phfzsy6llxtnnxvrmug086ivjra',
+                systemId: 'c2bb3579-e309-4d71-9081-4b0c168ca397',
+                systemName: 'rgepvbam3sbuu1g2r03g',
+                scenario: '3m8gkcf2vhkib8p56vbjxwf0qx6vd6c036o7136wa3pkzpd75g7ncg4h0vif',
+                executionId: '5a77ea7f-0ea7-4e47-93d0-bfaeb2f99562',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 15:51:14',
-                executionMonitoringStartAt: '2020-11-05 15:28:38',
-                executionMonitoringEndAt: '2020-11-06 08:59:40',
-                flowHash: 'hsolbdcppa14evaoc2co97srz35mj28qgcjtmazi',
-                flowParty: 'slksgos66p93dm0gghncvjp8jlt1upli9w4pgvfq9fwqjukcr5duta6l4eh6yx84jo4dhhvc2m06t8vnpl2mvu8p1c38kwvady767f5vr45ls0m7ejyf8aqpz2naos71ocw72ugq3oess67dwla6f78yrdl457kb',
-                flowReceiverParty: 'pkwne7rga31tcbkmjxhdus7wusvwqtnwzv19in5qdmy74udj0d4uoieunjwl5twyy3663evx16ft2dnvhw1hq9nw9cztp6d7lgrfcrpw9d8kc7wajo62ul0sm6jafdtj19hmma6ypq4oh4frrpealtyr9kwmlrx9',
-                flowComponent: '0wrnp814x9ii0fgcfb1amy4c5k1imoo5bv8vngn3tjvzphwm5b7gbmsnlmwn1flsbr88ux1tlo6vt66p65qllstaf34j996wi1j1f5xl1l72sw14czufwkfy1c6tm8jj4j8aajvwp41zdut3a0qjcx77gxhwwfb0',
-                flowReceiverComponent: 'jlq946qdqiq97mdyrgaf559s3yym9o2cph1mdjlq9we05z4b3ojn66ueb2nb5ghw7ryskzu31qdhg7t3bm3u2xt4bonctoeefyukxabwerrmjdnkaov6bbhm10im52jrl2vn8sr3t634npqxbdl9ploqan03wvw2',
-                flowInterfaceName: 'hovna587xrgyde966om3lsb2u66cvgyyd4eec7rena4btmm9yrgucgatav8tjzr8mk4olonmr9v8fi9kn7e8kgxsbv8vr1knps73ly8nvpwozi48ovx722oy2gad6cr25qe14l1trd5m9l4dyffg8sdxsvtkhlfm',
-                flowInterfaceNamespace: 'g31nl8fjabtc4qu6xe76sr1oxnwekv3788inzvctgi6oxb0jx3lcn39vodt2tixot7kq1btx9gpsy7cneatv6no37zccegzepxrw76smxrb12ti73mymoy2s9mb05vcinlc0so02e8d1a8l6hb5o90qs6omaznro',
-                status: 'WAITING',
-                refMessageId: 'qa1aj8uvkqzlj8710n2l1t9jg6mhnohuimrw6eoakiuv6p5dv02neq3rxn4k55ptququalzxbuv7kdgufn19wtdnyen6yj2jd32hri9g220xgwi87o4zbl6leemwuomn1es00tflol132z41nmowmmswq7iihqw8',
-                detail: 'Quas est recusandae quo animi. Sit eveniet repellat itaque praesentium facilis est est blanditiis quaerat. Quidem necessitatibus et placeat beatae velit.',
-                example: '0mjn6yu5igbws71jlp7ho2svu2j43rh12herz2c5yljoth0p84csswm18tqoyzvebuekuusk4gi4nppp0r567x9e6a5xa7msivpq7rsoy0efaxfg4yboobsc63ju2xflr1ubk236n3w4zqv76tmay1081srwry1b',
-                startTimeAt: '2020-11-06 00:11:30',
-                direction: 'OUTBOUND',
-                errorCategory: '9e7oxi1uqw0dht44npczy5dtdavdq85qi1jgedtoazmgx64zwy38ry1e2k16kl2j81bxaw8ekyec7jjlqhma08owuyb7b3ddorwigkoic0gksr5ct1umjyd4svk71t4un8s85677ovk8zhuhnpr3so31kweqdljj',
-                errorCode: '98h6mxqc8e7axry4etvvaspabz074x7bbjgqo7zu1zx3zii4tka',
-                errorLabel: 144605,
-                node: 9191062016,
-                protocol: '12ucvb5ocfumgsb9vqjd',
-                qualityOfService: '672wbntovkqkjafkq998',
-                receiverParty: 'lda6whwnyi0wzgnzuek11o92g4a53psihwe53ahhn62bzy6gf67u1v6opg30w6n6625657yzqqxs8ud99jz2c6xtdsmcd3xrcuzpmb6ui55rpw2pkwi02cnncr0w1k2mhx6mjrn3fpfrr4tav245jmd0n2yschwr',
-                receiverComponent: '15aeo3nqfrroy00jhjqtw2bta2qt00g8aldgoaev0n1dxuzz5bby3ij0zahqrcozlplaqx4sfad88ox0aul4uzsmz4o8tihi5x4ycxf6py26o4vj9m8aqcqyj60mom3vzwny0nf66tqrtvlhgo7p2a2i88pcklvh',
-                receiverInterface: 'f8786jqzr71h1cr32hyj8sahm3xvclabw7br4xybm8ke72lf6419nuwodvq0sbr217yqdyo511f2c6m2bljyhhw404sashbnwe7y22gkvqrvhec2n7ds7wygrdbrymovgy0o32mu0a3g9d8dd55tgc2fgrz17tyd',
-                receiverInterfaceNamespace: 'v9vbh5ckmtbqvc3yex4vpt4ekecdt76d20nwov3qsa8ixctaxlyfabs8fgodyeyxhet0x63p8ssunl6r43gmevlkc4emokidzxggk9vh416fhllkkec1xlmrowx22kt8g55ai0mpl30byvzkswsiieeqequbtvgx',
-                retries: 7486765177,
-                size: 8911438016,
-                timesFailed: 8604039497,
-                numberMax: 6294287584,
-                numberDays: 8557174962,
+                executionExecutedAt: '2021-05-23 13:01:25',
+                executionMonitoringStartAt: '2021-05-22 17:54:59',
+                executionMonitoringEndAt: '2021-05-22 14:48:54',
+                flowHash: 'zhpwsatwk0xgp4ynp6rh5i1fij3aqq4lne4zfrfb',
+                flowParty: 'vmrxqm2gutktria5m8xw5gvxz9bwly882gd8ofwwie6me0sraktjwcfypnpf148860popsdfun5p0fzzekndwl4zzf0wxlgfqzgfmgzztkk6g4oo3bbmtnfqpnpfmfq9i927w8te2u79zjgu7dlc0oly3isqpzdk',
+                flowReceiverParty: '2x97tjwin9c45psly83tqgua83grsc1bqe7ip8i1o1ib22gkajg9opkcbqv9tpzjko8eoi79rd9sbvzgc9y4kdmxqxebmj1b5fkc0j3cw95t0j8gtor5pr8fuqz9xbfcxuffhgigf3cu2fhb2ob7rc6s9vd2klp3',
+                flowComponent: 'rstuvodqxpqzt8hzqrra9ulnfmfejyzlzeull1wbdqs52af5suly3n2j12jbrpxj43vb0otvotzajibu0g9ulvdk971nsnsp22ghzcaj3ivvib95ae81mn1kdtpm4434f1jhszvecrcg4zbaf1qxhj65bxbawcwd',
+                flowReceiverComponent: 'pznl5duvg5qi4ffbcwn9yqrnkqxewbhuvxzekj91783poyg6u9pbvfhwvzbr6wbdf4q2agk4s1pargxh6sj19a07y0a4048fareqen3c1nukp4b6fv8wis2cynr1uv1qn2blgx0xsk49uzqfqqnevz80wg1h9g51',
+                flowInterfaceName: 'wha2d0sehev7ahofup9nmlye9ru6j1yp5w27mcdzaea6sbk710dx9bmp475bpva54btsqbe7zd0m0as65gvfcdc70sivkham75y3k887d4uhh9oeolvd01qc96kfpxk4qzlth36ga44raraoyixu7e119uw242uz',
+                flowInterfaceNamespace: 'ihmcao0yne6ytyn97k9vaswiuqjahmxdqfpu5m111gc0ax3ksqugenzyei5dnpppl9ckfrhofsf6qkrbatwd4qyxrn6q92h3evx7glrve05nx1skmb83vgo9k30qpwcsjw2xiswl0l51es7fp9uqht4qxpa83v8g',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'ggdpd9uaocl6lx71iua08wvzlz2qnr8sgt897r3krigryt1n1fbwoke1sxwyougi6nmbo66shf8qrw9nakiyf41kr40ldo5lmas3kg3fuv4bxuukgtcc8czirxekzfk8iej7mwomyw5igxpi9nq5by1qtfqlnes1',
+                detail: 'Sit quo ullam mollitia. Ex dolores est quas. Sunt quisquam quo ex velit corporis quaerat suscipit. Quis voluptatem ipsam laborum et. Occaecati dicta ea maxime aperiam dolor saepe voluptatem reprehenderit. Ea consequuntur deleniti vero id adipisci fugit libero officia.',
+                example: 'g7xdazt6j0qh8400yr5iwlwqdo2py1rrho2frkhebirapdz0uoih74la0b1a1ru7ww3fsbgnvh8b6ajh2xclijd18n9q15jfma68t25dk1zh9bexb5kf1yk946ohuzaaz2qxdvr64w9oh508vppj9z0ueb6s3tp9',
+                startTimeAt: '2021-05-22 19:30:18',
+                direction: 'INBOUND',
+                errorCategory: 'fugppbwtznpcq9eig4zf60crgotf73ekgyfmexyl3z7vnypo1wj57ftikey9pqpkelvddsr6qqzb24rvcbq2qnqmfp7vmzdwmmszby2k9xyl1zwio6kpbcfx1ddrk8nrxwhw5cykink4k2lwaq4dlelhe8hzuxn1',
+                errorCode: 'vzd2ycxj2lw3pv69xjrb2sw3zcin0pczidb7ym92j8yimhlc8s5',
+                errorLabel: 633194,
+                node: 5863784739,
+                protocol: 'fnwp024ik46chnwzlqj4',
+                qualityOfService: 'x20n2436ecel1x6yygts',
+                receiverParty: 'lb5ra62zqxisth3cpiacinpyrf68l8d4ma39h8008rm90dc23jxp48dduibbffswwpdq202fc6hx8lf2qeo4a68f4q6flx9yi6mp8k3tn8r8wpx0123k0zocrh63utaq0y0f09ciyy0tc8pizwv5hxa7trbw305n',
+                receiverComponent: 'fbhqnmrftqx62hgb050nmlcd1ny2hnz1k4pfqp56vjp7d6h2e6yu6rmhwe6nindky8x3ivldyvgwrntq1c6pwdo6cxcfmjwzdyomfie21odjcs4mi4twudvstqb1vp3hfzbvy7qbf6q8thrltfv9787bs7pv3fum',
+                receiverInterface: '2eimngvhwi9ge3onpk3w25wwpzp2t49jvjmspbzc9dm5mm8k4dgbk22dkcqdqj6homb7j697nroizpqrwkfbu21xeh7d5mpskhjyi2wkqfdyyxepbtc0s7f1ij8h98o4c79n694dlbjjbt7qvd8v2mgb12qby09i',
+                receiverInterfaceNamespace: 'ilso8h6bhunsf0harn28vuhsnxghsst1q6u9ro8wwpgwjbqnq7xsd5o522hakcsfw9jwfth2gl6s5c5ju9gg5j5cy2boe7ic2bgm1aknm6y4g7v67nnxhpyb74z07tlh82w5jgsirqglcfhdziq9l47maxhwycpy',
+                retries: 7654923874,
+                size: 3742859632,
+                timesFailed: 6100863511,
+                numberMax: 3261927914,
+                numberDays: 7173286969,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailErrorCode is too large, has a maximum length of 50');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailErrorLabel is too large, has a maximum length of 6`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailErrorLabel is too large, has a maximum length of 6`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'lq6i8039y0ix1x67ntwcriz4w4iy9y0c078ojnlr9cdmh6bzjx',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'cucotp0vscxprb29u3h7',
-                scenario: 'nxqe69v4qfi3cdjftsob9jz1t101fj6smzlctkw4c8786rhmrsxmmbu9z5rp',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 15:26:58',
-                executionMonitoringStartAt: '2020-11-05 22:07:17',
-                executionMonitoringEndAt: '2020-11-06 03:22:27',
-                flowHash: '75nbrb0d1zim9qmdw907am42ssk569sfh4dh4u5t',
-                flowParty: 'j7m9zj33awks00t367l51k6e1rdzvzms79iu9d93z8wnnkjtm0pmu5ds74mt7p9mmnpsx3mxs0mda0hqj9s10amwd1q80e72cgvezoun3iqy2mnv9x778ow2xytl0tryyld18j7b097oagp7tkkawdqryy7tj9w1',
-                flowReceiverParty: 't462z253tvai2nppe7l22ypyfq23rat4g57ox7pa81fw599fixukpez3uch3l50grabkaoampquy37w5xeq8msuryjou8er0krtqwejobgmxw93xfr44kma7oujajptzw5mhjzy5ioknzpe63l7kmp6wwge7jenm',
-                flowComponent: 'r9crqncy8enul70vgx6zqjxk3pp9sugezkm7qc50zuo7gnmfdbodg9me09dmu0skoe088z5gn8vqsosxvckz9mm3h6brufz6b3mc2q8laiyqulp2gu813f1i5eq0yrmf0ifzm6i3fasmmn52qiea3i9hxs903wyd',
-                flowReceiverComponent: 'fnfepn22uu62dg0gokf2xkm1syd5q7lr1mtxxjx5427osu7c4ik8n0lnw4jz9jzef56eql1q745x9x1slqs9uhr3t7xvwuagaw7vqalkdrds8pkrz5e5syphaqv6pkoyvd2a0bc8eu0pd48zx20tlm4oz9z908zv',
-                flowInterfaceName: 'c7qo0qp9owtqotb4312x3p2pa0v23mguv3yhxh1mzmlcm7j1krvxozf2z51y5qhp0omtoa7p608py7qelrbk259rizyoa1y2qrrdjn2gvwouds120yydfpfmf0gu097vj3h9366dptdw5uvgbevxlrx0ed9scstu',
-                flowInterfaceNamespace: '95nxutyj1do5g35caaj5me3dit8lwfykwghnwor5qn6lspouheviizhyp1vg9hioag0r78sk063mfwoo0es8hvl9v1ex7o6crc36kf7sfr9idg5ku0m4r1batmwhaso5om54lyohxg7eqlnpesykfu3cwzfiqxk5',
+                id: 'e7f63c47-0948-4ee4-8421-59c141eb8ee0',
+                tenantId: '2d274b43-6dfb-4b6c-8d8d-8170157cbc24',
+                tenantCode: 'sghvzk023r49399z08k59imtljitryp4jxt65umi9qzw0rz868',
+                systemId: '32e212ff-35bb-42c4-aaf8-fb4877b85e72',
+                systemName: '7j56pdtblpx2pc7jfyj6',
+                scenario: 'mnk27amripa1wii9vdtbpt9bot4pe86l884iuv4117552xmrgfy4v6lht7iz',
+                executionId: '6b7d7393-7574-4023-91bd-e78e326b9842',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 07:50:48',
+                executionMonitoringStartAt: '2021-05-23 11:58:56',
+                executionMonitoringEndAt: '2021-05-22 18:49:08',
+                flowHash: '8bcrn6r4oweavwh9t9qb4zp9n6l3o9mds8yynlxd',
+                flowParty: 't8d8bwl5p2dgeuht7mtbvc4ohn6k2qd6hs2pfk75ii0l1xl005gthaeynxtuqvc08onpf78e8kkzpvu3fv161elvy5ypeu09y94qd520ipc8upugmjbu398ic4m3q72qit7jvcd83hlb6puzgfv9zcbnas68ocke',
+                flowReceiverParty: 'jxl3fr24f3hi4w7kvvq7ifswnttnovuatyju09tnfzoy8obt8kjerenzujeodqtba6haci9312rmjjdpvin3f7x5fxichwb9l9b9ld6qdrtwrppk7lpe7br6rao2lzjfwo0gb73h4dnyppldn8jbydz01r4xancw',
+                flowComponent: 'avp8v0eoz7ddjxr1n6da2sfkoqmun1o8ylo1fak0r7bm3lym1sq0enczly05jn9w99l2j35lzsmex24joavghaaa7ck4utqoon9c9hw5sxoqrf8jexko1pxxxlgjzo672362m2jkqsvmbyhpuboevlk49aearwxh',
+                flowReceiverComponent: 'hs2xqi283a1h509qyc8l0cftx2pba3jxng6vo42f69im2ryoof9vhi2phdu4w36v73rzvvsfsen59klqniklpjt5wja9ji5xyjr6pv3ezam8vjs5w2pvbga77rou18yy745u8qm4gch2lszfad9zl3hgwyv1rabi',
+                flowInterfaceName: 'fcgg0g8u01g0v44owwh0gzdjjzrv2y9oviyfqayvrtwbmqvdwwhe2r4e41u8guj8db9yinaotco3svvdd6hftijbg995qdbcyantg63kmxf7ftigohhaq7tj4jcpllcgc0dkaq4ypm6bec646bn0ipjqgixqnk78',
+                flowInterfaceNamespace: '3gdb25dmc21uezynpbjtx6utn8vcjok27imc9z2mmldza5v2o9l0c74gplcy08qk0kmwi1e6qo0ckqyc3ixi5hibugrxbk8ym2y2497vze0cvwjkqdf2s8l1coc3dct13nimx1gem9ufkoiz4plq33pmscul53y3',
                 status: 'HOLDING',
-                refMessageId: 'z2rh2kluqulggdwwmv1jff2ez3z3fnbtrt03emxzji7i240b7pa9rixvre8564akshydcp3dc94bd8f20u9a614vokeqfa2hgrcnfxnqhjc0aa9othl01ceqlkp2rc83rsykkb2shut2h9yxnpmtdgdjemr8my3g',
-                detail: 'Modi expedita sapiente. Amet delectus fuga facere sapiente perspiciatis eos et ipsam. Quidem in soluta. Nihil corporis provident nihil at autem error ut non.',
-                example: 'evqkr209cut6i9ucsi1z92apom31aijuud9vvfqwt76b1l0bs3frq627aflhf49aw9bbhf62um7qbhq115gyolb0np9rcfp8hfvk93jt0yhjzx62255gu6gbp0i26ahcnssexp0hu1vf8tn41oj5w68s1a1w5ri7',
-                startTimeAt: '2020-11-06 01:47:33',
-                direction: 'INBOUND',
-                errorCategory: 'ba4cd8wkqn3wxvro6dqifxc0jq4ppx81hdt3qw3uyj645a467b8p8xvtpknse8hg193c13kbtf2ev7cwa46uu7d412gywhjsf2rsn6oaul91fygadbpuvzuql0dw5bhpjg8mnybqaqxcyhm1c6vzc0dnpyrcwinb',
-                errorCode: 'dfjt3o1it7akeq9h045stz5th6nyw6tp3y5xon6voma59zi6yx',
-                errorLabel: 8044716,
-                node: 6216553134,
-                protocol: 'ngm6u3yksr9fb1vqhogi',
-                qualityOfService: 'gc7xwt1ot3dpfaici9pc',
-                receiverParty: '0vbyvmhdhu7vreyrp2pq2cdrv7r5nih23g71yxle52fxut7fr48ppjdqxwkxdaw7li72obfjq30gy9yha1jcou7h9bw85vhqa3ce8iutb2h0qxfstoephdatlioo74ny6jxl40c8ymguaaj6vllgkrsnzkg65id0',
-                receiverComponent: 'bwoq3whefka8ox8o76osi1ll9e2ivjdmvrpsrmo3s05kq2untewo85glfxnayw2aqmxnctfcxdnlphumaj1uj2yjtpoj37l360ybwge6e70a5tw27r87mxk8vk7diz3ek62etk92xv2oq3cik5xujgof3x86mn7n',
-                receiverInterface: 'r2220fedifto6c1fxi8t5to592admcnuwbqzndrjg8xzu05z7a1bja50hzzth0195pt9uad60nb9rvpa7aejqrjfe547a5lh1ves8cv13gqlgmnvuecjduh2a8zamvc9rae99aw324qfqgopkitaxuh6eods46lm',
-                receiverInterfaceNamespace: 'f1clq517719z12fcukdwfua3ct0lxth26edo7iyjrxq56e4x4xzihulnzjlrdis2vgqy1m4hn49i9zgguow9t8so4x4kquyqq5wa993m0dgu1i3hoqwtl96n2kvk0qnitjyg098yfpg7fk2ox6cpuly2wu48qvl2',
-                retries: 3224757610,
-                size: 3423891834,
-                timesFailed: 9550905442,
-                numberMax: 2923906153,
-                numberDays: 8535268270,
+                refMessageId: 'i9oz6vec3moy1mvrs7bhi9h89olvy0cgcpyw216cwc0lm86prtalqmoe483eajjr2yut1dyx059w3w36sks6480wknwv2makwyg2ksld2g0c35x6ks4h0eu3rd8xv3yp5qhfizniil2d60hd0ahr3bvkmvag24dd',
+                detail: 'Eveniet repudiandae assumenda voluptate inventore dolor ea eos ipsam. Aliquam aut maiores iure vero corrupti eligendi placeat. Non perspiciatis eligendi quia hic quibusdam fugit id suscipit fugiat. Velit dicta commodi sint quo. Culpa et qui molestiae dolore dolorum tempora dicta dignissimos quis.',
+                example: 'l9hic2vxfv77e0wwjgcktz0b2g8ippl275vxw2fg4n9w8quhqynfv5l113ya12cbu8gt054h5hvoj2qpll4w2yryxiacy7kfhxqq08h0a1n1z8cpfocmvf4rj39nxvn5s2ne5efnf3mkcn7o2pt68b6ewtu6rgyo',
+                startTimeAt: '2021-05-23 08:44:26',
+                direction: 'OUTBOUND',
+                errorCategory: 'fpy1lm8qpjesuke6cr2aqnco22lmiu23bpmfgpurgyo1omal8dmcb2lmuq0fqmm71qb4444odgwsn2oojiqntnvn8whkrqgexgoy8dgplc7tkrgehdnr3sn0qdaj7iir3b7agrvgka4wm65gc8vafv8u0vo2ikmu',
+                errorCode: 'mcyj112tj4cm6wf7b95debbz6kkj6v3yrc18yjc9b8j5gkjrap',
+                errorLabel: 6998953,
+                node: 5229584409,
+                protocol: 'ntw8stjvcdc5ui71tjx8',
+                qualityOfService: '0o8k1p4vot225amfr9lg',
+                receiverParty: 'uopgqbilxy67ypwrulvopuigc379asyt1jjty4bv1jbhnh1oi13lxrr9bl7edp8y4si5e5qbscnqb4emdufubvopupv18xv7cil577xs2nv2ykfn49xw1z2eewcbz5jolo610x20b13x41usmdpurnnadgnqi3k4',
+                receiverComponent: '7vdcx2vz2myecvwniomkbw5dacue91cqrkv07m3vhjuiy4jh4nkh0qocww12mnxg96sye0qoi0qwgfibxqywqix5wzn6a8me5uqenx9pju5lk0rp6713ekfk2smoi6zflor9rzy97nw66nad8e5pzdh7owhcr7ul',
+                receiverInterface: 'qfjk8qa6e8zi3ou3oygmijitdkgh1ghxqc35v13xsz2d8xugjkw1k38cokrhuh5ah8fwshq95meri3hj73gtdav6kzlm60qvl8yo5p0ysa8y9zwlm2c5ot6y0okxv1mtx3f4lde61jaugw1crafjoman2hoz8kss',
+                receiverInterfaceNamespace: 'wkpnq22x667ty4a1h1utfphb5028zwl6ojaa5jrzwrzy9yjpoj4fry36wfqxn1pjeotve4bzvcarfj89598ydk4319ml0ysrcjd13449lqcc64tv765mdpwv2c57zhq9udbywt4crzdbeb3h7bv76kd826qcsjt1',
+                retries: 4300337556,
+                size: 5627891640,
+                timesFailed: 9120158433,
+                numberMax: 2915552487,
+                numberDays: 5896179822,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailErrorLabel is too large, has a maximum length of 6');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNode is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNode is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'hgcshbemszq81nlrdz4ps8b549t2iu9cy7un4c8xjrvyagp4vu',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '9bcz65y8b1jo6nx28d8s',
-                scenario: '31j10btfvzrr6ino6vwq4zs01kiv2fff1rhsyjngsgt3r5w7ww1ndt4qt1zr',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '64acce6b-143f-4590-bc70-74374cc19974',
+                tenantId: '1c847499-d608-4021-8d76-9a4881f1692f',
+                tenantCode: '0b0xm7i8dn9minsbqgwb791l7h3a3lkigo3lh3iub2zj7lws74',
+                systemId: '6152baf0-6d35-4130-a7e0-4628c76af5c1',
+                systemName: 'ty97rlbph8ovtr0j4prk',
+                scenario: '3z3z43k4x8lrtvwohubb21icoznltfigb5485k7lsjh6ow45sekogf1hl7h0',
+                executionId: 'e94e3277-f2f6-4869-be95-d54118c951ae',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 12:12:49',
-                executionMonitoringStartAt: '2020-11-05 16:16:22',
-                executionMonitoringEndAt: '2020-11-06 09:40:58',
-                flowHash: '0fzoqylc8uzrol9alqyjcu3mhkfjsjd0jf1bwf4j',
-                flowParty: 'awudjcigqax7tr5i9ghi6z7vl9alnpjlna758ouryjcebpn3kcyatoeak7ctagfv0txa1igrr2k0hkb7colpbaq1wv6iuniev25gxp52fxt87jqmppbnhowkaf7bm13v6kqr9yyq95trzpyldgrc5khx4ear931w',
-                flowReceiverParty: 'kim1zvz7o0y1js3k38fzh49mud9puo8m6b3a1ezq9yco4t7ljjgyu6cgfv5h56nv860fjl9v01sxwrz4mvqnzhaom2brt104fr3siz947j4e38tdrm5882wp0zfa6bay7ezj7nzegj75dddj3685awphdouq57lg',
-                flowComponent: '3mk9xp7lf20ve00uxcg2pgk4rzyp8k1zpqtwk5d3mc1etojoafvcgd8st8u2z7fii0mk7gkd1b5mzdztcwd88gti02paiuhxkv70gbjcbj594eh8sd8sect3hwz1xczptpzocdd9ftkzzpe1y052bbmmgthrm8wj',
-                flowReceiverComponent: 'xsxzmlbhfcapylkngx9qg0abttml8g0tck8klr1o0eq3i8kwys2gyqom1m21hswseh6tkkn33r9zz4y43im7q518ullufjq2lpszmqlq03j0mdfrnbhma6dsepts0annrmd99t3vgyf8yr0evt0quwvfqtf1cqk9',
-                flowInterfaceName: 'ptyxctdtndt81v2d147gjm5uq8xkkqh1jear2rew3505wuwu8ndumclop4s9gdi1mozca2gvvybo8d9wajiumgonwucslfix5rbqyjn8hbque0eq4m9mb4al9gu6l4zbld67igoi9qxon3xyeoni6hefmzqa20nm',
-                flowInterfaceNamespace: 'efpt0ddpzn0byi0pw6fvzqxndxdfghlmiu8on5o8lheh2v5o8iih3dog71nz8jfgsol58zcdm4ofvh649hat48g35ofdv0aoecevl6h9u4awxf1rgfqzxzflfavdmvehxi1e21apvej0s8v9lioyhrdns9lxhuis',
-                status: 'ERROR',
-                refMessageId: 'nvg7ztbvqecl7pibt0u7rv0l5qj1et44gmot4pp579ucw3v3ne1v0tz86y7bxxynkpu9tfc20x5au7s824v27vz43oyasy6i93ftelo62bmvna0ypemxukskzortu3b9uvec0zl6hnxku06z90qhz1zg6r2lexkp',
-                detail: 'Voluptatum autem atque est voluptas ullam sit modi a officia. Officiis voluptas tempore sit sit excepturi. Sunt minus deleniti quis aspernatur. Sapiente asperiores aperiam et. Et qui vero temporibus eos necessitatibus quaerat animi.',
-                example: 'uvrcd6ran5fe2dox4eo0sg1pnj1eq220m0xqdwu6dgkishv7zf0k7p724rwwvrgecpq7s1grs55bikm1ycgjmft0ok87nvzi763scsis60ubu9uj1me2qa78e8s833gl73o0ge6a5pcv69obb0jjcgyapzdpbjp2',
-                startTimeAt: '2020-11-05 15:14:35',
+                executionExecutedAt: '2021-05-22 22:57:05',
+                executionMonitoringStartAt: '2021-05-22 17:07:40',
+                executionMonitoringEndAt: '2021-05-22 23:49:33',
+                flowHash: '3u26qqq50eidyp4w8v8ogc7mpwsdexe40fahcn3a',
+                flowParty: '5ebseogt3kq1z1nfxbnns67z2pa7hda4js5vy4zp1a1pw3rnbytdtbzcr24jzx2p59ryf3lmvhtzkrfcgjnr64qizklee3b4y79m6iqszy12ef57ndchmlz4p886xhs1wzblr5mqacagnewrfihq00bffqvy7xng',
+                flowReceiverParty: 'd8ortyqpy8nxwo8jdfh58woo3cl8j25il78z1yrpifbbdju3pa6p79mo9dcous6rsguu167kuzob7acmk6hezqvlx9ey1baq55jkvc85850poryyhrp2nnmuvl2qepcezkd05xxgldtq7p58d6tjligywjf44aac',
+                flowComponent: 'b3fjzy3n60nbro4obbqf8fwnleis8dk7esh714ynj3rrzagyyx59ckfaufvk04xozcv1o9vf4z41a81n0dbmugnxueb5mvke9mx15vvbpo8cswc84lwdl2775syjljcf4gbxqplmlu2uk7pfn16nmxuvgi1c14c2',
+                flowReceiverComponent: '0ejgxjid98an0ie7ngxw26adw8bzlknquotr24pyyrjyr8zoqrqa258frcu7y8tvzq2ouxzmcgepxsfcdqh26ty0w6wencdg90m3d6awk2jak2cqgi4kl3476buo6xbcrhxtle5twgttlgjg9nv9humalxksjm8r',
+                flowInterfaceName: 'ikydc1em6a4it7hqrhtqlr4s4nmsuwcoyb4gw0eoxuf6lekiq4vfzirjtso15m0c3wpykwrxcikpv4a5cw4p4akc8zake2sg7y96as0v8p3865s6bs2gfxywivsyt6lmkfq6v6nz04gr4ugo115vppaybfs579an',
+                flowInterfaceNamespace: 'kt62mvwyumf3tl4bqxuduzqxbx9ty9zp5rl5a4xkwt5pswu8s9xczugy373xf1ehldh8n8yvfpd3spy1i2a78jcpvnvrzl76005rv222odi7xb1i1wicsjv0n75tqrofi0qemsgo3y3ya4qm90uo79b10a5m7eon',
+                status: 'CANCELLED',
+                refMessageId: '8dsq7a1w3cahhne9jzcw9474xy13iwnw3by945swsqor6041y5m0ivubdle8340nssg4xgamzrupb0s1ykmmowfsmvn4pm61zh51li1s50eg3mvaamxn0ivbglhquduypczap7og8vmjdbh6ok8w3iv7hxznrk5j',
+                detail: 'Sit modi fugit et odit velit consequatur et. Nemo magnam sequi sed. Qui alias impedit rerum excepturi quasi aut quod. Natus necessitatibus id harum at itaque a ut repellendus. Perspiciatis voluptatem nobis atque eligendi harum quas. Perferendis dicta aut.',
+                example: '550t6gflfrqpkvmj1i4wiba5w3o74nl1jv474o9tllvj0jp35yahivvad3fhm038s3qcglhcche7dp6khv9v5tmo2g7xxz8l0mz224csbrx0qldvwn8b0h99a6tkkz99phyg0747qi8o5c79940sytqs4xhpzr5v',
+                startTimeAt: '2021-05-22 19:21:28',
                 direction: 'INBOUND',
-                errorCategory: 'tnb506p2cjxwy9m4ncy6n6hitir1s88yix5ae0208nm96funbmzykbzpn9xomo64po4d95qkuj7vfe797f5tzd9dhofiwlakg0u90kekc555hyzjjstrdgbdxharcz9sbhu9c5hqpwdgx3dhk344224qb3sk5nyp',
-                errorCode: 'chqt9j0t0lzyc3a0w44lrtch2jnrgvaqe5cy2b3um1788lsjaa',
-                errorLabel: 272494,
-                node: 23725562374,
-                protocol: 'huk9epvqm6163zryuei4',
-                qualityOfService: 'movqklbqwz5ijcke5a1i',
-                receiverParty: '0hlr13lg5w45cmb7f9m5y58ondwzfbmh2vbvqzelwsd7bedsnkcbg04rhw9xsgug2aaikyfs86yjp3qnlg821wvqaguoyrx3h8c3bc1tsoco3xyggishg5fn381ki72tnfesit7jcq9lkha2hn1pekvbk0dxbnnt',
-                receiverComponent: 'xsefx5g9bxvdynirkq6zp4pugklvxer6u83qjg5um5eq6rf6jngmfc0auknpwadu4s0fdlf6q4i9acvhzkuv7qem7gsjhunqyagvobltp1i0x8tg05nlz9407iljpwg3fb9x7uvfrd2vafw69r6qcfvs7pelqgcq',
-                receiverInterface: '0w1hm1fvky6e2hcpzy4n0d0hrwcvprm8ofbt88swojjty1ky9ug9buhjuj6bqpw0c8y8cdjcqkkxw4y3i6pcmfzj64t2ef93tlusbklxtremyz5tz5cro9tslsullbbyri0bb3lihw0aj1tt5tctkqaf9ur4mt1s',
-                receiverInterfaceNamespace: 'x8cblwsz9a32lucvqcy2lbay26vakwrtr4bq8e4px7gj37kszl6v7491o245fjc3p2nwg1nv74pcd3lmyo8ewdxwhu6obayfunb0tuklrlis5idi5vo37tmo1wxbucze0qaaviqgll4e00qlwqpxm415bakx4p2b',
-                retries: 2674834850,
-                size: 4537189341,
-                timesFailed: 7196617345,
-                numberMax: 8066816216,
-                numberDays: 3027096901,
+                errorCategory: 'uhy6gw1eqb8mssf4x8z6iw2qyfonmy6wprojm2x1q1eoj4iw5fcin7thpthe4ww63jz6c2vjiqqr0q8168ogzrz1vt97v2g0t9yrlcxnc0py6gedsyn6exmco8zbmicjyw1a3pfj5zktec0qfamj3d1le3zxzhd4',
+                errorCode: 'soznkj4ol9oksn7iwm5w017hw1py86rcvfjtldxa2yrkztt5ig',
+                errorLabel: 959955,
+                node: 87386126944,
+                protocol: '87i0s092150x41op75n9',
+                qualityOfService: 'vmnze3qqviqe21fg1gjd',
+                receiverParty: 'w02ryrsvadi1z7vdrpvvoib3uimyliz74iwhwtb1c629vi99nm5ar51q1gv0vraql4mg36bhc84e4o91m1arkxiaztic2gsxw2l8bgpdj2im8bd1npj7e62z8htl9vu1koogbikc069btladogk021bljacbm2to',
+                receiverComponent: '6u1xprqqzbk8smgvoesun4l45e572t208n6970872viocdjfzu6tnfmf9oabtdeh0br3eleyk3zj6ukvwkolfg4qhe542ucrh4wjinx2ejif210ucklr9kzsd2vyyeljurn56ozpjl1q8xttdqsufp5ifrbhqdkl',
+                receiverInterface: 'ilfazktu0uq6xqqlxtqbh23dyokqcur6nb6syz9f9mk3tn3f3kejyuyda30zofzgjsksirc9t4znlmeduypxnx9aq4s09ieeth3lbo9di29t6c6bakkd0x2w3tyoidwx26fgyc82fs2iei23l59hw1k6e0hwrgzc',
+                receiverInterfaceNamespace: '29j8ijqxeb3mkvdg733ojkw7xybrhnyufwlnq6pd52mktkht0pymfbjd0gcpettc4dpgwyli627u5umpf8aq9as58qnjj1ir222h2fp9x3ienrt4yx7zwu10nybitqytfeei31ajcx4jhh7ybmmjikwq9z8bdozi',
+                retries: 2986751981,
+                size: 9591974925,
+                timesFailed: 6076486498,
+                numberMax: 7383976980,
+                numberDays: 8395608747,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailNode is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailProtocol is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailProtocol is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'zff87y86wnx752lpmia62d7oaoqij3z2uxkgmvp2n4cnw4e7l5',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'btvlxpticm4kzznemho0',
-                scenario: 'ks721wr2w1pp21aneke7ev9oqprtswk62xhb8pzfci4ej9bsn9drchm9mkgl',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '8811fefa-baa6-47ad-9d13-24c62a3a0ddb',
+                tenantId: 'ca09750d-7732-4f13-91bf-7a4856dd66f2',
+                tenantCode: 'eakef37no2qx27m1sacenx1v311v1zl2pb5v6kpe6z1gpw1ezk',
+                systemId: '3613794e-6b67-4c56-9785-aa7eaf78a470',
+                systemName: 'vaweikv2cg7mn3wm2vnf',
+                scenario: 'vodswp8xxln8wo1inv5le30eiocjibn8e4x8ahgr8t8hdkm9yal7xnbnovgp',
+                executionId: 'db8f8079-eede-4a79-a7da-b05e9b4f27d9',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 22:34:24',
-                executionMonitoringStartAt: '2020-11-06 01:52:03',
-                executionMonitoringEndAt: '2020-11-05 23:39:41',
-                flowHash: '4vkc9yewohzz3v4l3nv5m7jkumye60ndtxzg2rgv',
-                flowParty: 'dad1zx48z69vbdkzzgv18wqy8dj2y9q8y5pi2ncukfjkk0v9mnmmtkgwnk1w3nx267no5g0ahbaimsnn7h2ooi7o78sqis9slha438v8qq19go0jbf7w689sw0oaxzs2m007blaa2dmlxl1ycz9szz3y9j5egh28',
-                flowReceiverParty: '0151yy660t4yolidi593y7zcb8fbsjwxieab7x40n8k1f65bzs3hiun0ihxmvyul9mh0nailkfwof5wgqemq249abwowfiv1v8lvburdmvnbjb3w75605zrjvu2qp9kgf3he46oopoife6ryo10x0zgtsk0guzjb',
-                flowComponent: 'pzceolah2r0du4gck7f87f71turtmkn7iedny7el126ziip9v2165jbmm1va8nq6935354a2zmgfd7rgbz5g9q1ep731tzelx5y0qpis1u2kikgqa8heo56p98daxrtw87n03gdlkd6l79jx1kgbvgkgpl2n71rr',
-                flowReceiverComponent: 'ouglmxrzpijy3qoxwqcaonas1ftx93m5ecxx6261pw9jtwcmz6pcuadh2h66leo2qpo7munhvmthpfwoaeo3g0ryp5pfq9nfk59k4tolyczh7mh4z5uiw17xiixo39vj62z081o58vf4hjodtx13z1dp536xs6px',
-                flowInterfaceName: '1fswpopz29y70lo4szjt5irgei7xk8ixf0nfdspyqassbsvr08gd34i8og1y059sjk6wkpbgzzmo5jxyl6zsih3n500jk9ifik3e8zo6siorm9bit21snt1hl98kviklcnlylvrupc1vrxzpidd39lnuuqnzgl89',
-                flowInterfaceNamespace: 'i1ztm8cvr6fsv1ntgpqktij3dzhbdo5820mulo2103sj6ik8z82karope8ootn23vdwopstsk11l4jk6mp3p9cndbyu6b4ob5g7861km18yfds5aktdln7p1gjaafxgmru1nbui3mxr1beifn71glc857u9i3xqe',
+                executionExecutedAt: '2021-05-23 12:24:58',
+                executionMonitoringStartAt: '2021-05-23 05:54:40',
+                executionMonitoringEndAt: '2021-05-23 07:33:17',
+                flowHash: '2dd8fu0zc3uzyv0wde98w4aurxuyu908rvvtfc5c',
+                flowParty: '674ckmfbib0ziayrgff61mxlwxv4sp2wo5etq3k3yqjxou2d5fxwez9817ws1bhwjkhpdbet925ty48xxh9l069ty0qyvkr3sq1soqr1asa0k0di4foqbj0s96pmiottyfaucc4hrch5hkmqo4sn2lhng6xbk399',
+                flowReceiverParty: '3zq8ht0tktg6rz4l8q1l389ax85ij5awb8d0l3c152uu60wfd4z2e6mnbuh06dpsmfupe9dlaiyce84n9fz3qyto0ppbwd08r1ez58v6neqqvb76ndgi2ril2zxq9sjggbu6wvwevuh2vsajpvz68yr5jdlddzlu',
+                flowComponent: 'h9x2r16c00n2dte3r20gjlmtu8b8j8zie8bjzxm9bwlap4r30chp9b6wdjhgscft9ulli6mdiylgvqgmc5euz1v0qdl3p6sw7bd035ynb9w2u2rhd9s3ufoijxxl7ll4pqqy391atwchlpr2vdnwkqwd42ebjode',
+                flowReceiverComponent: 's0nkccutjmct73obx3dxbu6lw8mrotswpu242f2t73dqou8t98qqiu7puzp5oxnaafu2sohoyuo9p886z4yd9tsnawpurkhicrb44etq8b6dv7r7dqndlowli5lt5b2h6f179fgr4omzsnc5tcmuf3dn59yeuhg3',
+                flowInterfaceName: '4pzwrzxknsp1u2ax5pqkfvsykhgg22gs01li6lgecz1bmc82h2x5j923uv2pb6p3d0edh27w975dtm7v3ysy9nzfo49642g9tem6ty5ugx2c7zrgfz9roxbcp6rrkv39r2t28vfmzylr90htocwjb6ylqfaucacd',
+                flowInterfaceNamespace: 'iypso1wikzaepzy7ck9ammif7rgubmj0bht9yh5ntj6fvkz18j2kcsf6jdj2u85wytlis6knaajtfcyqk1l7os1ja6h621xvtp84swbfi1t3gwcs15y5w77027uk4fuqoqoofe0hwqesp4oc3xqic4yi1er3opw7',
                 status: 'HOLDING',
-                refMessageId: 'tossr65xspvmqikk2z8375jq5s4l5jg4sd89vc7zn4356eoqm1ah61i47glma5vmldl7g6c283eg31czh7v6dsyuso0ozjk36rhxwdvzj5x4ze60gl9zvmz3jhqdjx0pkhbd8nww1shruyyqt5uys1bqqdald3yu',
-                detail: 'Quo amet porro sed praesentium deleniti perferendis id. Alias corrupti inventore. Quia qui ut. Ipsa dolorem velit velit voluptatem possimus saepe vel nostrum.',
-                example: 'mcqk5zvk0jhyco01rn3x6vc9qwn4isslmhnq7yehbti703dws596da86pvwcmro0g67ol973dd1b9zwb2slaxb2572afegkz3z0fd92b46n0xos7okdvgg5lfbt060l96yw0p082820679qnf3vvg2768fv5rbaz',
-                startTimeAt: '2020-11-06 02:52:51',
-                direction: 'OUTBOUND',
-                errorCategory: 'gisbovg11mbrb1ftow2qlvs9wxkqhd1oz5l0k8h8vlx37u304xdypkn3meecxbdrrkjy1q91dwfxitrzvc3lfp0cheg9fkkntonzpstinwwujtfcu295q71h92ss36hhnkz9sza727s6iy599g3zozpfr3eo9vxw',
-                errorCode: 's6mh4u61nc51o1jbfmj7c2exw5d622w0bzmxqvb42m4ckug0q8',
-                errorLabel: 338534,
-                node: 9650527091,
-                protocol: 'n7k4rfwgqzwnzukt73tiy',
-                qualityOfService: 'ym27kmr9xxr60dmxxrr4',
-                receiverParty: 'jlsnwmuw92er41uvduz401dqtunaav29b3bs6ikrw4pkohyut5jiui4iuwf4pr4p38cwtpaqp1fqntodx5nj4wmoufcxo3tlpjs3o8am4x77iprb7ngthmid0bmj74vzt2vlm7s1kr0dzvycffc7u32zgtixuuqu',
-                receiverComponent: '2mhh03xrjn3p4rqkanau6h297uj8rlbgrr2o0z8mypodsbhbgdcgz6hu4433ygl0300jykslw1bn9ftg205fno96pk9ylquz1xh7cy1xak71zpasif2jg023ai3w2iv49ifnbazidnqgotkshkifrzhxzq6orkbr',
-                receiverInterface: 'xzyj11dnrsu3l15d8lqz1p0kds2g4tj2smyk7oxwc3a7893n2fye4c3116w8u2tc4taen3en3koozo03khl7k9jdtj6hu8yvjhxo21lsydr4vy6frrelxvwbtzizbh6yt6nia0vykeipj5eoubvyvztfx36wyhur',
-                receiverInterfaceNamespace: 'npda9vxkoim4xdzqr4ctbyqvlwr6gb166frm559ll6gft7osgsvq4npz6spj333rpxwyg9ppp88s0gzufg6mjws15g41gyz9w1z7tkaqzsm3vrehkt0k7pdkqxxyn4hotd8q2h3vzxgwtjuhax86rmmtt9162nu1',
-                retries: 5312832032,
-                size: 8156188667,
-                timesFailed: 9114785562,
-                numberMax: 1107609346,
-                numberDays: 8680171041,
+                refMessageId: 't25d3drjo6sdxocg5gd0i7bhq5y2tkgdt5wx8zjfuca36daw9sm1h00hmx37ueo6zi7jxr4x6qfd3ju43wqpd4o1wbj3a10j4ng6opz8ay0jm2mxj3ehpj75kb2s4xrjr2rj6rdk51wmwlyn0ulc8emzgt54oh0q',
+                detail: 'In illum iusto deserunt totam recusandae harum et sunt culpa. Perferendis recusandae illo vitae rerum dolores. Illum provident ad id non molestiae odio. Deserunt sunt maiores eum ut optio magnam sed est iste.',
+                example: 'ymaowcbg9xhp9gm8e0112z9f2kugua1jhss0jfzja13rh3i0jmwqil4as6ce4fvxwyqpre92dkrl49yy0hczrj5ssi40n8e7qcrw516sxifost0aykznk8n9lvi31ks4mic5fwh3yjit1u12yr58uamhp7n9m92r',
+                startTimeAt: '2021-05-22 20:41:15',
+                direction: 'INBOUND',
+                errorCategory: 'lgueyurthfhofzibjt5riv5266si9hi90rgn3lrodzvvyrnsc52572qz2dlh51e3mrffqo1aa6l5bi1veyy74j3mgwrjkcbih9ftt2s8n37822fqkahx81p9dauhi5wvqtkrkd9dipp3k7n6y4r4by3xvhy443xm',
+                errorCode: 'ddxk2u0e19x1bh6l5l39yb1lr7o596vffk5xayhg8296f2mos9',
+                errorLabel: 807222,
+                node: 9763255606,
+                protocol: 'zp7rpd26mf4fvzwffcqhi',
+                qualityOfService: 'kjllfpqd3f5aorl63nvo',
+                receiverParty: 'l4n9ix62sqhet0t4uaz8rxxqrhjtsrvdkrid98b111q2x8wos4en7xvd7juq9bc0n05zbjyhrm6fxef9lww12jygf7bkf3xhhu2eaamupl858x6h9uqfuqtuxlk0of1pbc8k0ee8ul6k0iyqmsq6egjw1651he1b',
+                receiverComponent: '74ns4o8wdru5t264t1e7w3wh9r2e8q4847gf0w1pv57g3s2k00meicgd08l42jqwndblvfphkik4aeifm8u687m7hfm6tw51fdfu4q11tm6aqhskaa309590ig1qx90xwr2w6nrv6qvcx8tgmn1ulkpul5yhrexn',
+                receiverInterface: '7o5ye9fvdbhxyunovge1kaj4xmchzxf3l9hdyu9inr3t7l9mcl7ijbh7b45un0vspymtrvw3ioc5v19mbhr4fkgbrcop1d61k9rnwb8gyxpls8mzjltolb1ugewqjpid7o4fj9b9re71c6xoq8wyy4dbhk6qbo0c',
+                receiverInterfaceNamespace: 'tf6km5ngmiu5u9uqqmddpengmgl2a3hh9ab3szvj4iw20kc1dfd5bexa59rxl7szaiuep93tcg048nivqvwlz0nen7acf2i42pmzijvy2vx2t904barg6n5vyi9mlcdgz2qjlp5n525oe1mrteudmojxu1tayq54',
+                retries: 3454301135,
+                size: 9005415838,
+                timesFailed: 2566100583,
+                numberMax: 8177079571,
+                numberDays: 9731173023,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailProtocol is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailQualityOfService is too large, has a maximum length of 20`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailQualityOfService is too large, has a maximum length of 20`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'c63rq54wv2bp2wncxmahgjceyc1nnth8q89tt99okcvnc2jf2u',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'agl4ifjio13869ymyc7y',
-                scenario: 'kanqro3z0kxfizowufnqhyoq8osr46lhk2i47nbk0xj1j33zugmxxfqz61jt',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '5ecb4ba3-f44e-4bdb-9373-5d4011c28651',
+                tenantId: '9a5e1aa1-7147-4600-9067-355f51d5937c',
+                tenantCode: 'wxlrx0nexmks327jun4iacji583kvna3lonri8ifmzr6b35pdb',
+                systemId: '1e613794-0cb9-4042-9f26-c47a1502775d',
+                systemName: 'bg5fjwhc54xjg2cxpz03',
+                scenario: 'tnrchpksb43nycigxcfsfyciuc4dm3gythmw42r5966eqv3w1lin19lk7xxm',
+                executionId: 'e19619c2-358f-4356-9704-4e6e237c86a5',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 23:05:14',
-                executionMonitoringStartAt: '2020-11-05 20:28:53',
-                executionMonitoringEndAt: '2020-11-06 03:32:41',
-                flowHash: 'rdmrxz98o9lxv1iig4dlxrvhknrjeg11cy4500xl',
-                flowParty: 'muk97txiyz0lfku6u48ao7rsg2i1npt3ulgukaow3qhitq5tfd1ebp9ctudtam3s4xdzep12sminajqgy1brdmtqmycs8b9xxiwxg4d1tmrvrfkgt4nwkpxr07f9oeuzg93j12a4tnrhoophcda41zqecuy4dha7',
-                flowReceiverParty: 'bbdscgtwpsuy94on9dbd421ryn68ih5b1ceb40eek1scbv1qiygmtezt5ly4j55iffgnaz38xeohfn58xvy7v0dcnpqh68cuj0ux0hjd9kohu6tzxwaorgz839toagvz20oz72ukb40og93mced5zbqv633k9l04',
-                flowComponent: '3jjakw5gd8zsp9nz4g318qgr1wzuaba4ykgsx90tl0i0jt0vxnsg1hd2c50z7g9we5p0k7pdfu4g10a1o0lh9hdxt6uiyshtnntcu5h54n5i72e3zjmnyf2i51bj2l4b1k3relrc1e1cm3oayhcdz9wu2vp14ojh',
-                flowReceiverComponent: 'nsof5g11hepg77s0o7ntfv5fta7mp7docccf4n85fo4nskif8d8frgepzxceimkamq2o2koonl84krtyfr95rl482uxpjfqg1y4oyiuwrjly9jwa7sm7bazvagrrl117fr978se38sz84mwp9c2agt3fmc1ef0t2',
-                flowInterfaceName: '9o4b4d9sm2zfs18g8ycce3khw9ie6jspgbnjsnbgns65kqt4scahxcju4qi01qhkdbcy1u2cvl02ubyahngg2x0sxphn0e2pue9z7nz0h4stz59tkxelfg7un2szrwi28ssxzoiugwa0pjrl74a3holersn90w0z',
-                flowInterfaceNamespace: 'fnw490tbgtxltj4wm82t1v6w1abkx8c0o12i9wfqm0oh4o4k2euld8373b01uyjpi8o0ffhvfxb9073jd9mzrvoq8y1p2xrrt9qt9wdfism9z8gyxqa2bg0skg8miguvfz3m4r2p9v3hffikqx074zjje8g83p48',
-                status: 'SUCCESS',
-                refMessageId: '2ovpggq7pec3xt9zvy6p2559sww575wh9a2q6r430je0uzqqz100f2xnrp57qonc6xhxi8rm67fdjsoinjj810dr6v8ap5eco1g3jqq9fmbps03yhus8j6tws6yfkdznm0ltg9ob572htf94gb070z679j343h2k',
-                detail: 'Laborum doloribus earum quis ratione quia. Voluptatibus ut distinctio amet libero fuga eligendi. Occaecati magni voluptatem. Aperiam beatae ut aut voluptas nobis et quia non.',
-                example: 'c492m31n4z0lu4t53vjkral82rghcy9x0x01h6ug95e0aomrxb7wdoousuwit40mtxobs6yaldd6h7c677dhpr6f49xvcs6h2w92y8ztwyh6p18ba65h2a7y8bj71lj9kaw84bvi7m5m8zn8ebg4p1gn9n6qhb3m',
-                startTimeAt: '2020-11-05 14:58:12',
+                executionExecutedAt: '2021-05-23 13:07:31',
+                executionMonitoringStartAt: '2021-05-23 01:41:33',
+                executionMonitoringEndAt: '2021-05-22 18:56:08',
+                flowHash: 'wld9wq7zhzro9znuynhvo87vrremtujmz7hagroa',
+                flowParty: '43vqyh5t93a4x9xblcwl1y0mhwzragpchbm3bge4n98gcrx12jazgz7frldz015ybtligkpe6mwx71lhvrczn219d83bpmbzvm4idms0cr0pkie1ub3j5wiq1bpmnqt3v9vrkgtspzyutbk2t6br40cp8sqwr7k1',
+                flowReceiverParty: '9l8sqhulkqwebakcik9r09x02x5znt1r7l5omczwf721lzx3io2e6h6s4126l84bkqknju3h8pc12rvbu8dsvff1v7y6b6tmo0sfa2yajwkag4n9prqz5omugl2m0saq8lrj84kjqo0maiditwlnpunamucuxz6d',
+                flowComponent: '74qcmx6fqa3wzemu4vnvyyv4s9uf2ubg2v2p20qsty49vt527scatkeil75kkarclw1i0pf8p5s5bavr0rlhj1inozh18wph8evshu0eo7lxxz85wfwaeemp2r08a3og8s6dlcg698xisvkd7u75hcvcbslxrtsc',
+                flowReceiverComponent: 'ogyeq16ht3ah0iojh5ztmwlxh33xd451x4oar5cbfuepk97ovmdvigi441lysfvapkj2ueyvllevmlak9kgurpfdoai0ew2jnn9u6l44y4kzx12xv6mu3mxi4im3i0sanlfevuhrpmtzx7fj4yc8nw0px8eg15jo',
+                flowInterfaceName: 'k7ludz9tsr620dfdjo1oa6hh54cn42nbuvgekry1vr2y5rx4yb9unzq8lhd3lhd9nd78il6dxv2nlz4mhoca0oymaj1dy2mrh7srn35kc5ry5awc9leh3r1pb2gc42il7h0mq8q4fk1xtisgl8k6mni39ykcvo12',
+                flowInterfaceNamespace: 'gsx8qathfka5wex0e8atipno1f32gjiwzmkhk1jxj4jwahmt1g0frybb2c00bshfdj5e4dia2ck8w5k417ojxsonvv391x9323ppj89n3bqkcw0qkxz9sucx4w46je5ep5qmzp1061b45bhyfftxcx8yfxlfw9tg',
+                status: 'ERROR',
+                refMessageId: 'jjixcyhtzi0cbvg2z609435v1hpezuv5scz5qx55twzdvb2njjnegey7jg842ht4gghfw3ku2qbqnggk9dn3nkbb71ztp746r9zfrpv12vm3913xt6iujxluvhjnuztvtik43yraze6nyab6k0h2vg0jgb1xqanm',
+                detail: 'Eius laboriosam sed atque occaecati dolore ipsum. Quis vitae blanditiis pariatur nihil. Quibusdam pariatur id et. Reprehenderit quasi sed esse omnis blanditiis sint. Dicta quo rerum explicabo sint amet.',
+                example: 'zoesi6vrwur7bth3p7ew7lxmxgi958moi1xrp8w6y6rs677rf7389ni6m57qx14xfb8a04nyxmrbjcw4i5nyqqzsflcluvyaa6v2xxditqvdauv9r6jujp41nkkt7mvqmx2ap19sd8ymhnpqi4ofpnzx5dzjz59f',
+                startTimeAt: '2021-05-23 12:27:05',
                 direction: 'OUTBOUND',
-                errorCategory: 'om7x87jwmdcwhwwrr7x9ni7kwgezoziato8a6ferq4cjvfpb9hcn1ik838pd8nf5kre6899chxe1htnysfo39ywrmh37ytdnl1a731891mdqx9qwuipxgqnlhigmbl2g3negziqkj5zd53wh3rcv2bkdfyp3ljz5',
-                errorCode: 'aeogg0w2npjhovljjhqvd7mcpaz08p3nf154oi7n9r67nqe6xj',
-                errorLabel: 644845,
-                node: 1201283471,
-                protocol: 'z5eg8198n405vwoqkbbl',
-                qualityOfService: '16ccpmpzy1hmbdtqi7ii0',
-                receiverParty: 't1xp3afcdf5l1ldui6ljyjgmirqs5zznxi3maa5sba2ctdfl2uggqbl1fextm2lnrd4zw5v0egk6bzopx42bjjwmu6jg4ocvmhmr9vxb4z6fjkik8gfsm9loas6qtmw8g8as1zu6bhntc4o28nzusfjy6orjbp57',
-                receiverComponent: 'q34pkv4rxbrfpxfhmprf6e51zqgqpbnioyf5xyl2w1xcw4txkzkfl0zd04azpqvehs7yfha9741widehyg0ikty8fmzgick6krax3dch3s7aerdci3afwmqpzqbhtf5lmwjswtwq559joue2v2vx7gir94ea55cr',
-                receiverInterface: '54f0slv7rp8pudepblso8i7zpiivyeoi6t659k78gwsblvy0nflswwixh5y2dzuuarnyd55c1y5k247f0l1a12yqsky9v14tljx26uakoelh17l7wf3djggg3x3f1v96vyyjlx75f2u4zzrlvwe7967mbnnjpdy8',
-                receiverInterfaceNamespace: 'rhalal7s32xyknir0t49m0isk0c5chzvjw99yqt37urq1rrku0jfssbkvf5wmwz4a68tp1br0sah1twg9ek3dbaqjvscgryonfcv05f28hyhxejq4n1ydeb2gzhsnjxav3nyo6plryvowm3wwel62tm24agxxk30',
-                retries: 4798579758,
-                size: 2782647991,
-                timesFailed: 3174473702,
-                numberMax: 2027773218,
-                numberDays: 5250368248,
+                errorCategory: 'oq27t1id71jeb7wk8sygel11pxy6vu71um6ludu0k2puonb1eaoiqa3rikvfwnvly3ztqbszujw0qo8uudpkekdgyrw7jkesbg64eci0etnxmbb2z3ote19eknxyat3rprfri83x20l9ho0elpybwkzi9v7lfbrz',
+                errorCode: 'iz430x8v1jzwm6qdn4eizgouf191rhlpdsvicl6f9qlgnyz9gr',
+                errorLabel: 349372,
+                node: 7887239688,
+                protocol: '2xenyvzn70kdfgngi7nr',
+                qualityOfService: 'ict5py0t9zgreq4cpcw0p',
+                receiverParty: 'b3497h9q9fq4gomw5cywwfm86l10rizzvrmqp5au6r39pi2kh228g1r5g3o4xo6iaxixd9f8tj3ov05nikcxrm3d5n2vpvnuxdyuye9nxhs15rx642t2uinsarebjf3nnv5a707bc3ov1ktbyr33e3hu0uw42xo0',
+                receiverComponent: 'hq9o8klfqffn4wfmgxcajtr6jhm543b6xv88du3xj60jo7nct2zj8jipdomxn08r1p6o93urnn8lrq8dvqujs5rmj7hph35zdwb83tbns0icbqd6wrldtxy2u7vcwr55i45765fpuhcvjffveaqg0654gc2rfwf4',
+                receiverInterface: '7loica3ghziqeywvuoiiiekpai74e75rtrk82ou2qj513ru1kobkt44bl80tle3is5puxl7siri28qgu6xylg2m29yqrx0a2btv5iulth1bo6e4gerkbg3uyx8581m6pvottk0h5uz5ypchp5dbgbi008if2thoz',
+                receiverInterfaceNamespace: 'fy7l3hb9pin1tin75j8emzzef79icw3ts8dvhg4z2bxax6wpxaennhodr62nziraihef5vtcam8h9vuow67rb3qgpo88dxyuxm0u31vb38ko73dsi18aqj9uskk7gbvjtap539wk7gz5taukcolmv6xiz6b1ix82',
+                retries: 2830932405,
+                size: 3678069544,
+                timesFailed: 2336850918,
+                numberMax: 6077135181,
+                numberDays: 2012047529,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailQualityOfService is too large, has a maximum length of 20');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverParty is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverParty is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'woubg0gcuhr0qgnqgqk0qtuomajfppwhw1mhmrxkytjcw61gv7',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'n7lj7cyh5pe944hbjgmf',
-                scenario: '7gqui7keti5qkiuba86bqfux4qhnbn51etd748p52yk84dsg5vauwn5c2cu8',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 20:00:26',
-                executionMonitoringStartAt: '2020-11-05 19:10:47',
-                executionMonitoringEndAt: '2020-11-05 20:17:34',
-                flowHash: 'v91an4si4x6snstl7d03hua6qu4ehzkxvt23zvit',
-                flowParty: 'ii4v8390sivyyj5nfh7fc1x5pcmow09zksmkqf3647rvrn38hvq6gyoufswoqlhj3fblxhjm8xzd9xvhxxzct2xeillziaexu9v7jbnjnllvjc56229lxogbn3dqzaolyzg2ijuihgef7jatulgr01d4413jv70l',
-                flowReceiverParty: 'acwu34d5ppky6o8qecgor5wv8qre5iqexfvql9stoviug1x5yij80a1ybvw183ssxpzaq1w6hgnonemhcnvvm38snyo2mmqum7at65nnz650p2g6uxxwjbqshyhv95y8pfq3pr5c5dy21ykdmzjbsubdxqpnf307',
-                flowComponent: 'l261xepkkf854jgysfjeaaw4fhba3kzza31sc8fba8lwlocqe7aruvu0gcdd3yx4dbsbn6q39auv9lbqle7l5nwb5mxk9fp3ehs4wzajgp4tfjp51ddqu30byyd086wlu5059lkeltlidclvmq2xjq3s6oi23wy0',
-                flowReceiverComponent: 'm8ifwk97rfnjxwpu5z2craq8k8o7235b5rpksnmmoagsw79f20sgpcur21hiwed3p2wqenqx122kq938u8alcrqn2isc15mpvufr4e2es9adeclxy7wkobdedk6y1sthn8zazt39dvg0n97bjc1z4h3trgf2flkw',
-                flowInterfaceName: '1c98aeb1wnhjf1ui9hdrxhjyrcplolq2gotl1cxu65pvk0hmbb44w7gb3xw9vvg2mty431f33s2lv66iqg4xcgiz8ir2iucjw8btn7jgmtm5wy0pwd555votnvylexme8jhe9kk28slidd2dvd9zctf70shfxlnt',
-                flowInterfaceNamespace: 'uwg4wuwuw2vidzt9jwgyl6p7luwspix5cefmz83p1ydic8fogkw5rbb1sq5orolend2romykqf4bszkreu7962nv2h22fhrzx37ram9e2dn3zbsxtxerqfttdg8g9n4xio74dga0ube2dciq2kof2t05rvnyl624',
-                status: 'ERROR',
-                refMessageId: 'oayrfoxl3ip2dpfnetiznclnob5ke5n8mt04jt93mm25coyblpux3g3n35n92zsbp4967gym832d31y3sk19zlpz01j4cp07lguh67nnfnn441622nun4eh1i40gz1d1prxmk2a4nnwwn3lwx7alkvabrcaani8a',
-                detail: 'Reprehenderit non possimus et. Consequuntur laudantium at perferendis officiis et at. Cum doloremque voluptatum quasi distinctio. Ea ducimus ut debitis vero.',
-                example: '9fb0rn5nutx25hd60xl6mxljxatr0muwxh3zhokaiczhf3cpg64algidrx4kju5o07jzw9dcwkgdsehyu8quej4ntvasrwtg4zh3fh9lzwhxpjdms2uzhloda1yuq0jnsa8e1nas9bl92rlyvqbv74ikdjpzettk',
-                startTimeAt: '2020-11-06 09:25:22',
+                id: 'e0cde6c7-0e9f-4b7d-929a-0e4421e44c96',
+                tenantId: '5e94fd84-6987-4217-bc34-81f3f6c9484d',
+                tenantCode: '03t4sammg810kbkzdnachmiyoip0t7vwoiuxec9teqmuvjmp8v',
+                systemId: '12292492-1f12-470a-8cd3-b29dc92e5ed6',
+                systemName: 'vyjurxsvhr0akzfs9xlj',
+                scenario: 'by1bg9bdpk5vxted24o1oybqbl5o1xh0foom0nuan49c0430cm2w1qtdjto5',
+                executionId: '4a3a3ece-8c80-497e-81dc-c55be46d9700',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 09:46:44',
+                executionMonitoringStartAt: '2021-05-23 06:10:29',
+                executionMonitoringEndAt: '2021-05-23 10:07:30',
+                flowHash: '21kxfe58p52u67t67u90ehc1kvgoj86kzp55lpbo',
+                flowParty: 'xwa980rssitc44rf7yj2xblrk15ypw5jxnc1364sbukqz26w902kuysgfmmwwob0ceuv4xsj0xcoic46avcwz6ez0xccws6opmbesvkmimwo83qeqenwxiq1ruo97ur0mcx56ev9cklpxujewj71blyjxv7k5fjj',
+                flowReceiverParty: 'ipfa13ubks2502p5oiy1v2ovmgbjyzxp07xwnu5er3a6mh166omi91i8v1e9mrt43dcu82uvgld9xe6eyy8px9k9f3kpep7aofdc55ddh85f04vha5rlh2s6gho4yiicxt9q4cim55f6b1z8rdr33ekauxsongil',
+                flowComponent: 'wicjhza8slbcjyugzcpbynpeqj26sdg5df0ocbi51x4zk7qajci2i2xpij2nyof49detpqh7rv6v4p8gzk0cvtp81f0nbv18k1zfjczcoejq6u98hqh065v3r15nky5mmer1iehcrfveqnqtwfoxtkuhomfel4su',
+                flowReceiverComponent: '315ywbtq825n1qyun4fahlgdh6t5g7atmhgkgxnzp3fwwmj9vpkmdstiqhlebmn2b02ww0oda6z88wv28ch871a0791r5o36jwthp467bg9vedvwj26oqo8bme6eksn2kt15n7vqm5qb7yz7xehw9p2nkse39u5a',
+                flowInterfaceName: '896pnqiqa2rfeibni1co7i2yf7igwqpt34x7w3qrcfcomuvmzdr98tqo4ar8qcz0x7ck9j1gq2zqaycus1usjwsv6mae290eu7x2pfictwilwls0mvnvubnlhjh83xp8d7kukrevfrasqtx7eaaxihvkmelm5svb',
+                flowInterfaceNamespace: '2i1a3loezvu3rbxjj2popccuwp6pqfx15p2vl7jzsir80z962qpegnobczn374xjq2ruynm1dpsjfzv1969zml739kwmyiam551syjv0rd6usk0d33idf50bmpjy2m5yb1x3n1f8h3xw6ggxb0ntc5p1os869rrb',
+                status: 'SUCCESS',
+                refMessageId: 'g20vpg6l4ncpp5bev5a1q4vkv975yqqxbcssi4rnvrtyksjc4sl9wsy8pw0vrcouc55qhken4ppo2gixk8i7zb038o0g1q1fj71nxpu5ih5qmdudvf8ww2i63yhfftg1v6x4h2e5xrdkjaqaobn2aiagun68euap',
+                detail: 'Animi sed nesciunt id odit laboriosam possimus cumque. Fugiat aut deserunt ex qui atque rerum voluptate quo officia. Nisi error mollitia distinctio natus debitis et distinctio modi officia. Necessitatibus ab amet. Voluptatibus distinctio commodi quo.',
+                example: 'lkttu7456xgpin0mj5o4xb4g0ym4vamjxsyeq6r24ce44jibui86kjtpoki2wv5t6dzs28mr4fj1ec3fq3zv1xw6j0j3lz5c3jfzqhp8pgb8ppn9oc4en07ouohmfso5k7g0sle4xdn89q08w1yee5ov6torwaru',
+                startTimeAt: '2021-05-22 22:20:42',
                 direction: 'INBOUND',
-                errorCategory: '7tqz9sefav3obl6s0mr7rh9x1g0q7yhxup0rc536zpj0llwn8lxiolvy0stf92c414kdzj6k6myaylxf5gabt4y56o3i33hwo1qqj09cny3gutb6ky498mckzkwz9hth8jj8pvcbnx318r8c9qfs7jbn6wg1uqzn',
-                errorCode: '1amgdbwr5u4cakoopnknuztv2ggkctn5e0hevk68f02poxua6n',
-                errorLabel: 902492,
-                node: 8083870716,
-                protocol: '4t3jepgheqg2y1qs4ctj',
-                qualityOfService: 'zkb7uhh5jhp3p0l7k41r',
-                receiverParty: 'dnoglxqg8xsh3au448m3n5hrxapijmv8ngicqj8s1gc08l5sxaxxtrl3mupd51rnfi18ferrsxy4v5hawhluuvzpo0ph2g855clfuekn13vw8xtmtcuhsovhrty0bks619olt5p3d94kn5oaweqfrk00rrbu51k43',
-                receiverComponent: 'syatkk3o96i3kp0jrt77c9cx7xvd7etqz27ucj4djqsul8o9pthybtn796eoo62h1yrma7jjp1juxcwpstzc0mtezwammtfjk5cfvjvxmj3agfuyv1dqo2dme3i0v3w56cvq87n9h5fwz547jlnte9l8m653rzra',
-                receiverInterface: 'csuh14p8jkrv5pzrl4ixak5xj9z0gtx4iwns46k2rlguphszv2yk1q82sbou66exlmw71oys4uzsjjuf1skxmq4ydlaim57ygky8981uwyy22nubdlrei3dqwk6mg5agnqmja83kz2vf7gf3seb2tstpfvrpzt76',
-                receiverInterfaceNamespace: 'cb311rm0k722bjxyaqv92irk7awigz1x63sa14lfetxnwwm05244665s8hocohaw1ti0i0idhnnw4lkeyan3it882bbvu4qj96bqmvw2voauir9e2vn5ymfzzpfgbp6kzb8uhu61mqvvqukybw1syi4lzlh1in73',
-                retries: 8683113659,
-                size: 1344003072,
-                timesFailed: 9810993489,
-                numberMax: 4427843351,
-                numberDays: 1920615141,
+                errorCategory: 'mnhh7z0wviadhzk31talt85x02p0gi0jxfptuuq6qarv5b3ad72lsv7ws41otkv1etzrt4el3coy512zert1f3mzy6vlzivx2fgfngpyo4dzf4jiku3pu6lu48cuulzu4zkraplokysfeno7ihwpmxgxt2omiafn',
+                errorCode: 'o32z49tjnv01fgtw28pkxnei61rna5kcp0gy504vcajgy0fwle',
+                errorLabel: 859246,
+                node: 7862777456,
+                protocol: 'nhhgs44ciffefz7nwokw',
+                qualityOfService: '9ei3hppe22oyao7njgdp',
+                receiverParty: 'gz95c1wkqotso8d6sr65wdui6kh3swwo8cnw5f58wl7tq5ovroraqp0hkkgw03ypgokjr4i2rnfdr36wjcx607q06znhpp0m85iaaj1gzw7hfverfwwfaktsb0mra38o6q1gvraymurmi97hvshdz8gpxxkrb7hdy',
+                receiverComponent: '35bm4lltqkgxrdgk79zk7iiwt165omlzwnkocfbdcp3udbbot5vi0wzme85203weopa7244lzcxi4lrvj7vqmcgncuffnvam1jpbkrnui4gq80v8gl5rbz12prekdn5xqk7l40d2wrzzfjb4fid86jcaxo3s5xwf',
+                receiverInterface: 'fevvo8cssx74rfbs9ckguno75zzo4fjv0y6drt2fveiv2ourj9rq230xj9t7voveabu95oedsj0ymvwl4krdc333f1rxz4k41ssc5zar7hmjdaez670n4ewxb2bzlwlxv8tuafe8apx0o093toy5cwkb8nn2x8kf',
+                receiverInterfaceNamespace: 'dqvg8vv2r4q5iiycmqx2titbl0r6r93bzfqds0gxxspk2hbydhjrscs9qjzdonr2znrjq6ftxqodike5iayqf8w1tp39yxquotbn8f4gkxs08ikc53wnst3d5fsa6ftxkz2eopfpvk6tww9nd96zlp3bv9xh06ef',
+                retries: 5349443028,
+                size: 6485299978,
+                timesFailed: 5960673064,
+                numberMax: 9268070196,
+                numberDays: 3472013013,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailReceiverParty is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverComponent is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverComponent is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'chaabhmvfxncl1lyvdolsaqxniqc7mqyqse8yji97e3wsn1lrb',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'dobop2xwhs4g615g5ozk',
-                scenario: 'nsadj9jvoxk7prohd0cv26vzwf5o9mhhiaj453wtnhs3kyf94tjpx6w96niz',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'cc990c75-8ea0-407b-ae3f-6a221f9c6ecb',
+                tenantId: '19e29add-93fc-4b19-8246-a93fb41cba67',
+                tenantCode: '0i574fgbqnkzdoue5l99qzta7nn5fwmi1h3r9vq62s1th5qpqh',
+                systemId: 'c5bf07b6-a342-493e-81c1-df25e9694071',
+                systemName: '1tlcwo2fspnjuqxo14en',
+                scenario: 'ui0q0voub3a2ty2m80uj7yskm3w7ybqbmpbf2j46rpox17jp0pe5twcm3q47',
+                executionId: '2a517418-6477-44a4-a923-7bad1e1a8e0c',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 19:48:45',
-                executionMonitoringStartAt: '2020-11-06 06:17:08',
-                executionMonitoringEndAt: '2020-11-06 05:05:27',
-                flowHash: '1fjigk3ek9b79lqjwvbcxjj07yq6fnca4g5uo09v',
-                flowParty: 'bbo7ac9dyvf3h7uby32vvy6je6hu3rd35z6kuwjmk52eyxmkwmkdv9hix7htrw2dfq6yjhm4mf1z80qq3xdt9esdkhxapoby34rdox99hfdha1a2cos2snu81in1fp5eq6y15eu84udy4ixd538shmjhuntolfhp',
-                flowReceiverParty: 'hz4s2qoumsypbt4berwk61bx5a41ns289wq7l0um0w7v2kh6ncuq2lk476t2zis79h09rf2jerd20vy7fz20erhfbff0iak94q1qvas1458fflct67sr5wnqtsfcm4hpv6q4yrdxgviti0nia0moavsbkrzlrk0u',
-                flowComponent: 'or8v4be444t639vw81o60nvp4zbg9g5xvcga4e60qorx8cuqa5lxtsvbaeaei6ars605d9ry5rwhxspns5fflvbea7tp8apm89ievafo8xtxxgs8puitxevbwpo108zv7364e3yni5n8xjnjk4202v5mh6ykr0vo',
-                flowReceiverComponent: 'vnugiwh1gph6tlstssqygjlhng1yazd3pm6aaaa6wddexw33mknyja1umq4jy6be1zpaeilkrpxygea8aardedxk1yzhabp869lcn1cuud80zots9olgtxqmff4az4vu9jxqijhc2qinuldqbks6b3s9umaqplr6',
-                flowInterfaceName: 'xw4re4kb4j63a0jbmsn9684isz4l27za8ktkm1n1d9hlvolezgmkth8mohj24ybdyg53tynky5511owvikgs9br5kyuxv1n5bey61ai7oimakarkh3d4caj29t9zoi5fgs2noclha1jyhk1c1lyfyzhg016sv6jh',
-                flowInterfaceNamespace: 'lmfhnxoe1a9449xmh4fx4jhvoseemsd766ks7mqrmnj868bya1u5sjn44wchamyaoknpb8ndeu0uo2desp61u822420zicihtii6i37ylegz0myh4061ddry8oevgcxu8kgsvsuc525ep9zk6ajee9z6p7ffmux6',
+                executionExecutedAt: '2021-05-22 16:54:06',
+                executionMonitoringStartAt: '2021-05-23 09:15:47',
+                executionMonitoringEndAt: '2021-05-23 01:40:52',
+                flowHash: '0kpet7ihevp40uheuexr61xtmiywu1tng4rcor50',
+                flowParty: 'zwuxo1xk6m635qin1k9afzej2tbjts746lyw5fd2w6km6rq5t2hogckfny9kcif2w413ciggofxuovstup9sut185l0ikol1ea8fmfha6xgpfjlahgxw6vac5o5u0f24xh6glj0gdg0dlcsok7ykdxepnsiy34qu',
+                flowReceiverParty: 't6egf0i23bigf9h5j8kwcie7god8du44a2v5o7srr2dra03mzpxhsgsbutsyblkcj8kerwg6yuhf5bzgunvbzvlo84hbk1w0hykmiqkaod5nuxke7ighni5y0gxsefx082e4955qz2ntcur56oizhqqb9149iczr',
+                flowComponent: 'r2xyjanbtkf2xjwak38lbu1ub7hwsg4lde2uvsuyb3dth6wx1s68u302mud1uaitagss3f4ippx027lq3obfdd6lumz42glcqiluffwfr0idrhrazym4j6lrrivdro3uue4k0w0y5e0is48l16k13lzmxwkq5oyp',
+                flowReceiverComponent: 's7yldtp4vownhoj91r5ataz6s0hsibpzz5axsw2ef6nwlod4j96t3ugudutjyyqnf1mnj8nfzxz9o5ev7w9ssesolgglq1c1fx23rpgvblnytakgqwftoasj4pcbqw2w5h7u7yxy02kszus184656rjvgh7f82mi',
+                flowInterfaceName: 'jc4hf1qi6duqh9fkxzkn3br0pzrymfzk4xb3lqzwtth3w95rlv42vasbylw1i6cqdspjfjq17mghs8mrkmhpw31rtcakhp9rg09nt2cgxy32ja7e2dhj5w6jiagecx8l7xg4ne0z3uqolk2x9qokmrdxnrgiw295',
+                flowInterfaceNamespace: '9p2hm1ddtfcvh5zitfuxblyqz0no67zxpsmpn0ksc1449rkt5ouxsdfaxnf0lgg45vf40a6b3u8tnt3bcyk49yma0fox6eil2aleax9wu1i45keq6bxmf7hoz37c566smrciq591wdkx608wkrhx750c24jbfis9',
                 status: 'ERROR',
-                refMessageId: '4q9fh15vykc3b1bv8kf7xsdjcveo0812epn04qveeec2pq9rdsfwse10a9h5cscwji342tceo2ruqwqo0m51xn9wajte2gzx8o3978awgy3mttehd3635ddrdkn6agi4lvn0kojk0q3qw5ndg06fkr6rjb4el6mg',
-                detail: 'Libero sint expedita sit voluptas facilis suscipit voluptas. Libero aut quia eaque eos modi soluta laborum. Est repellendus aut veniam tenetur. Eligendi occaecati perferendis porro rerum. Iste quas laboriosam nesciunt voluptatem dolorem non repellendus qui perspiciatis. Deserunt non molestiae sequi quos reprehenderit aliquid laborum adipisci optio.',
-                example: '83r4i6nvh4iwfxgn6drlxh69yvv6sqi0aoehaoo0wiiug5vxt9vwot77sryno8zzpzspuoqj8ke677qkr9l8em9fnesd1pq6lhpd8v7bbbmqnkvq20jmouin9lxa7znzotaw5i0hjwbgbn2p4vi2hcmzn19cmowa',
-                startTimeAt: '2020-11-06 05:40:08',
-                direction: 'OUTBOUND',
-                errorCategory: 'md3e9qdmw23ezfos58dvywgfigsnzfddupyf5x8d3xmlmkkc4h0mzfhzn86ih35ncyow63tjrstn7s0h0adpl9dwuksewto8umggybge6sbzlz9aazqxsuo72xvapwbb8lmh4og1mqko95xo3mzvqfkwn46l17cq',
-                errorCode: '2hbu5k3bx5x81qvkwn5sx3a2phte8hwfvpc7r5wnzp6t8ibldk',
-                errorLabel: 144524,
-                node: 2233982557,
-                protocol: '588ei7cy17qh1y9em1x2',
-                qualityOfService: 'u1pj2as7s5rngn0o3kyu',
-                receiverParty: '25xpce9bm4ybife3k9erb6upv7paub8hbzrq9l6uvr4f1kft0821ulcptcv4z8oempeh1rtdk7fposnan4y32xxzc3mwnayx4kxymi873lgl0duxkcw1xl5bsvr9tpm1w4ot78hyj5mutu09and6qugim7mjnvxu',
-                receiverComponent: 'ihyknofs0e09pyxa7u80npaysldyrcpzfj9esrwrs9hykrk35qguxzl6dy6eepw5rgnod5uaweh6k1x7wgkvk31v5v4nd0v72jq8hgycfxlu0be623ioz2l2g90kv2j7uinbwht8n9lb9iprbmc9xr21kswzv0qzp',
-                receiverInterface: 'azc8kn9nwct2uwwsipur6eb6xt2w72513jfbzh9p0erxfoxlni2kfq7trsa3pju8f61c6p2fsfwwb7zvhzpkjau65v4kep285rjj624irzbjqpeqxvytm8xeaq8ch4avz9w4gb4v8d77cgtyzj10ki1ocdvwd392',
-                receiverInterfaceNamespace: 'i3mafn2te9hk65wsgh5n5tko8adruvuobyotxc8z2iuj5zkdxswxnu634uvww9pcv1spddt7g20hsledlflpzebzu9hthf78v67vqw92cao85i8gbmofhzpxw3sla2j8xyk5rts1i4jh6fpk9di1da0d849k278s',
-                retries: 3075760570,
-                size: 9823005196,
-                timesFailed: 8138108180,
-                numberMax: 6720417520,
-                numberDays: 3674759068,
+                refMessageId: '180n2k5q2ab97dx7ifh1xlcbatw81rj03w4ewhfzji5to1daf20ppipjzfiu7it839ypo3axxf0eii4ba4305g7mautv1samddn2fykclq6x6uiacurkg2li65zo01x703edm8gb97gbhorj407n3lnhx1zs5ydi',
+                detail: 'Sit quibusdam rerum cumque ab nesciunt voluptate. Consequuntur ratione odio unde placeat sint ut ut. Deserunt aliquam minima quas. Temporibus quas libero perferendis. Quis quas amet ratione enim earum sed quo dicta dolorum. Ducimus impedit omnis nihil praesentium est repellendus.',
+                example: 'gqaxuzpiygzvy7ye1wrfzhdjj1p1edrekvsr0km3tgyivvsrqirzif5iqjwuqsq7069p28ecnajmrr59525d7a4b047h7oisdpy0vpqcshy2pwsvo3wunp6waq1loxw32gaa1sbrvuc9qgvhsbo47ckxgo1ycghk',
+                startTimeAt: '2021-05-23 02:19:52',
+                direction: 'INBOUND',
+                errorCategory: 'emj48bwu21kt5783f7hn5yq0toqys671o721s7nnl3iercud91bwmy8kf8ija8sqx5rf9vhdikralkknps8q005il4yhhsc81avy5z18iv7wbbhxcpzcvkjpnkyk8wprj5iu6a55a6vhxq1v41ewq1kjyuix1y34',
+                errorCode: '3y9exortxuy1fii1a8jnvh225bxdifvqie9zx17wwusnw81ztb',
+                errorLabel: 440138,
+                node: 1899917582,
+                protocol: '0ubvhrxatb04x4986m1s',
+                qualityOfService: 'icaid9zld60f73kvqk2u',
+                receiverParty: 'u9fmgocer9nz6tclitycq8w3yss89v3wqdbn30bpg5o26nvzl18f26o6s9e9bwjkf5ccfwa1zb15ytsr4py8cunu5p4f6z46nx7am5puclhy170muo5o7445eznbo1vtow6xebdis9ju0mfdyxg3ae1qwhuaof0w',
+                receiverComponent: 'amon2lt0vg4bzqlqa2gyyamuuz4ocdlfjmidc34o6fxx71jbbv8lclqwbldprevpw68v2eb7mye0qdat3koexitmtx3hrli74i6coq4ampqgb8rfivs50qeeexzptzh7dqp6z9dmg45hz1ms04kl6qij1qzysampa',
+                receiverInterface: 'aefx0r50je6x3uhcee8k9unmcnap35kp1l0uw4aa7r2j6bjbzem29rivkszqv3zevbk0eiqkuqfg427ryca7n4x0d4yu8g1rwrc34132owe8yy6v2gvvpa908jxqy1ubgiccuw6tme8zzeiqzc7x54mkbif4hi44',
+                receiverInterfaceNamespace: 'ylybtf83upkp6ep1tbobh4orqw0mmjpuha1s1mol9yi5xmx8anpud9lx0ms01xd8uof61wi2pihuudywsphj6xjo3aljs7cq7jxc9fjd89rydnirmzx0vqsqrhj3jhbqyiqft067iipd05nlf33upp93ltpf4s1q',
+                retries: 8904087590,
+                size: 3589962150,
+                timesFailed: 3361951021,
+                numberMax: 2803308371,
+                numberDays: 5428259548,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailReceiverComponent is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverInterface is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverInterface is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '20ajccwq4sq4bxmj4n10xtw6yff1zqftvs9scjtj7jhhtvkh6n',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '3eqeozkq9vytsxjrparv',
-                scenario: 'qcr4byptefbbrc6sewzwy0dv4yzh1qd65tc1884dgu2socw59tjjvk8aundl',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 10:42:16',
-                executionMonitoringStartAt: '2020-11-06 04:31:35',
-                executionMonitoringEndAt: '2020-11-05 20:43:05',
-                flowHash: '6x8p29xt2jw20qcbted0omjvbt07glqzz1z582is',
-                flowParty: 'oylq95ji44c4y0cv1xbeaf091iegko2pcech5rpu0n4q1kta62jylxolqv3wxvq6iqne8lsh9p1p12p7xl71wicw8h7od9yti54kptobfxpy9neachfs56t3vwpt1y6n9vc7lkbds22n81inaq5vgozeawk2l0te',
-                flowReceiverParty: 'pd7e1fofqzsw6tjp19ad1ggcuehofezulkmnnn2v8sf2z56sevcg1y5sgrx1bvciwmetu424s4zf1sctszrj1l30zscky0oslbv5ubmst9ic20bkgxgmnvhkxrmfiovvafr36gn2li6k4y2yko3iay9vcr6ekd3y',
-                flowComponent: 'lbvspqjap4f4fdwsge14f9p9kfsoimi0ua37dc07e6fw0s9f6u0tm9mnyx5owj4eia0yviol3vcrfvimw8nby3g3ccxdac4m3mi8qmlida97gs90bg0s3x1rr0phmhabcnu9q068ym16y5sw8buicdcxbtfzwh42',
-                flowReceiverComponent: 'yi9oagqc1weijlj9goxbw5nso9pc2py7qq8l5b0mixez5cqdtf90zghw3ba1rymkxw2yeqr6g4i8hto5elc26p49egw2l429mfpko8wgt67fbrps3xrayzu3w8rojhb6fje49qc5ov7mbloyk1vqam9l3tjkhrh2',
-                flowInterfaceName: '4iriqvzc1bgq4ycwot92arojf4mihubgu65ckhgbepnmxwr7gck5ce1nzq060zbj7dt0fdppivfgcfd57zcvsrjf3oz51e3l9khqtpn2tw2xs7t93srzd1mqi9lmjkncwnp2oaopvq4jcrxjzbdvofkbf0vqjgg5',
-                flowInterfaceNamespace: 'pi8xmfmu4cgtehien9yfywz6oqw14x1366gvzxfx72j0uenynibf16vj2dqdovx03m5p4hcpx7rhv4f0l2vzdv36jgxw104lsu50zy8peyqdxemgwpa97q1m0dyz9wv0m15c1ba469axvcyxalnk6ym7l10nuih8',
-                status: 'HOLDING',
-                refMessageId: 'gk2bh6iyxt4i9st0w2p4doghswowcgczo1leolsre1o0dnq1d1p0hc3vqeintpxyvd0jn9l5ueklbk0systmrhv1nmoihhkrk7k39zs2a8j62l4ahwxbjkruzcbnn1eudizzke7piqjuqbkjhmkaezcatwtf3unr',
-                detail: 'Minima aspernatur ut repellendus quos voluptatem. Nihil accusantium est quia modi animi et sequi molestiae minus. Est voluptates quis eum repellendus quo ut dolore.',
-                example: 'y82hncw53zmyp5xpnuswb0i44ngnm0us98gygq67bksd0lwwxjaygfl5vcst7ollr63qveumvssfsmwsmfowl5vmlj90hs1n3sddf3rkgyef4x7h7rjdb5vu9ke8dn7o8b0vlhrbnb6e5cicsvs3gdxqo3batiyl',
-                startTimeAt: '2020-11-06 10:30:31',
+                id: 'b419a4e1-7972-452f-b8a5-b16f9f470e04',
+                tenantId: 'fd2a4eaa-a517-4079-a030-0d6d6962f97b',
+                tenantCode: 'deweirxkpl00s1kt4bonkwdr2ud9bgnr19ud10vb29bf87lji7',
+                systemId: '2ffdc0e8-5d53-48d9-b5dc-76f265cb34e2',
+                systemName: '7s1w6qt2zwet2sw4of0i',
+                scenario: 'p4sfw1hd5fmiz5sll78ewxbo112n4zisv9mk1ra5j128dlhz8dnua6p3kc49',
+                executionId: 'fc88b330-eae0-4121-9c76-d71329550810',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 01:02:57',
+                executionMonitoringStartAt: '2021-05-23 11:03:34',
+                executionMonitoringEndAt: '2021-05-23 08:14:14',
+                flowHash: 'ha2ax8r8njdz5etf0iyl6kej0hsooqoz36q4nk4p',
+                flowParty: 'g01o75f5po60277bt9vkm1mdtkx8iur7l7msdf3b1lknaorbtgr7o92emvd8o96e1xveohrmc92zzs8m3peqyck7rgg6kmrd1c4mbrjs1s72xd7sp888esipdj47jwpcs94c5xxj2dn1ry2ry9e5fgncq71hb33e',
+                flowReceiverParty: 'vupatj75wt7qjecn5bn062m6h6pln3f85eqfsqonrt9pp8z6r3ldx9d2ad0ek3bg95umfn54m59pd77fejgf1jgkxrsfab40utw9j83qkp2ndz5xhs8pb5uhlcuwmb3hvhfsrs9z4dxwbqci1ee8ql49144bws8t',
+                flowComponent: 'yz9bl3qvj51uqd3z953hma5t1fad2ugz0zskum5cgofuxw9t66q5iml3uafhbk88k6qxzvsbobk9crljaf1g176602md22c82xmcm4i8rpuk0gsy33ijxjd40lp8le1xz7m9maozgo56of6vwqof0benvzy8gr2n',
+                flowReceiverComponent: '1mt2n0hnc18ag03rjetyt2bjfd4m30v1o6tmz7pfmn5r9lwl1berkg6y5ernsdngl23i8lgtb5qynwlolo8s4zms00myug4qz7j0givd3v8l2lcckjztxpjnvjcfp0uvudlv3ghjqjri3t4b891auy6hvvht8svc',
+                flowInterfaceName: 'qcmaafy9cshyvvnashfs9bs9cc1pa7e9k14r1ny7gh3l9rl4r87swkheom3rexkgmt1az1vjtzm2ukuca5gtcra0r6om9fiour4tdu67hbdj3mgv874su0mivsw32lac07ax7q8ns5cjn5ytjsl126dq3bgwx69q',
+                flowInterfaceNamespace: 'h7vaomu7tmy4qf5boe6hcbhyfl91nenou3443bzb9p7hn6ws7kv4bqg1opgp0mvmkxaovzxbc3eva1vmq0sva8dksxhi0x23za7kylgjouchig26j4zqvw59rmp0yuj47a7rkjm213fnc0vne1eg12p5lgkdhsw1',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'h501ax6zxgkvzu64sokscqkw6qo1tl6f25hbhq83w92fvhlmd09uiqlnz8kpheoxyhh04l0sotjkdvz08rb9t8mgc3mdvjg0onl8jusk78rk9v8hm9h6t97n4con8prk54bcb9m5ykzx24taedlawkahtndz13pc',
+                detail: 'Eum voluptas voluptate. Consectetur vel dolores nihil nihil fugiat enim tenetur sequi iure. Explicabo vel suscipit consequatur qui in. Repudiandae expedita magnam quia incidunt quo occaecati.',
+                example: 'j2voog85tpsokctv9ahqlp1dy6qkwmhwnjkvb6t0dyl95laowjy1c0ith9mu2robr7prmv5rzzuhdz4l09cd8l41m3vqrmc7ds16qvkepxo8swcp3lchtyzy68gb22z1taqe56ntiwn2leu2omup0z9hcwk7usn6',
+                startTimeAt: '2021-05-23 07:25:34',
                 direction: 'INBOUND',
-                errorCategory: 'yo4wfxdse05n9m3a1qyqgwifpq9biszsjtl3u4v7byguj9n62sl501o4gjquv1bbzvsod2ab5mpemke1h7v3z91qdzbc7ti6b3l8l4y16hqlf2vc9lmr3q2guewbz2ibh3dwe0subxv9922e1agysyuy0we6yqeb',
-                errorCode: 'n3afbds95bknq2hg40u3otp256u1ehylsn2icpkbg3tbxyud0v',
-                errorLabel: 902250,
-                node: 4808256781,
-                protocol: '72j35ofvgco7gne8j38r',
-                qualityOfService: 'aau9dsbhg6b6x01azay1',
-                receiverParty: '1jap0lnb4msstkamxan2tku3j0mn78fatp3om0h8pxfvmvdrl1x0vqetv9dtvcj7nuzcwap3w8kn6r3cbmyl4e8kbchbt5phs85kvydxm9n4xca8rqsq9fplflmo5kfap02nf9su71wowxlzl6ajhcuaspfjqomy',
-                receiverComponent: 'amd8w7r777kwf4dr65zj5d7jj3d93osp845hhoia37uva7clqljx0o3d94mvqi6uueo6pg7te1za68ph6o3udqiei467gqijq0beqvz57pzg0vkzga7v42bfj4mcv7aom8a9mhxtcz3qikq87nil9ztcqoc4ye76',
-                receiverInterface: '4er56m8v7kvedzzk0dkkxillmqpr7jf5z9ly02v23w78r1h6ceus8fjfj4cqw7c6rxy3jz9xgv7sfvsg50etcmmlr7ndc9nb1trm1cwa7c9d7bhiiol1lpixdx7d98xf2v9i0ka6rt424xwc5b39wtoy0vo9mckx7',
-                receiverInterfaceNamespace: 'vjyyz7z25n3hcu4v8jm0o3lsd4sc7zx8kkz1o7l8we4dtfqkmbrkb5erfe14az0dbsrbsq95thycqup70j2okprp7jkpdbvubgf20nmo4913vrp4r1bpa3dza3lq02i0qu1sf35blz6s59va246liuqzkv1ih9ke',
-                retries: 5453507623,
-                size: 1376127344,
-                timesFailed: 5801333293,
-                numberMax: 5564138071,
-                numberDays: 7703831370,
+                errorCategory: 'u992eetnrqwfyi11n4ekvgxvr252qih4q2z943vt7ei23thlmi42t1e03hny4gdm1jhbr1g9yczaisubu1zeohqn5z6p74lg8iigh112uazu3ga438cbo44hc07ji2fe2kwk385dfdo9mkkbgaavud28lhqmri99',
+                errorCode: 'xfu7wtafwsckqd3qy1pd7wscez1uv9v4lix67t4pa8iicgan5n',
+                errorLabel: 356677,
+                node: 1619458450,
+                protocol: '73uiuekuzp68t6rcbp6j',
+                qualityOfService: '0r5lmgio7qmkdarj2erv',
+                receiverParty: 'vmkt24fcg0rld5y2j7fa8lr8n7hi1ocy3mwmoo8isadckx8gijj15swdp5zw8mniacfohn9rd6obpvd5jytrn9fcgnqx6t6zbzu2csiplv5tpw5ul9kgxlkgczy1gmzj2yg1z6dx0eh85gs9x38pa2w2dh1zgsdn',
+                receiverComponent: '5ij4o7gek0hvqktht1cyji09z99h2dg5kt1rmc344bbjs50olfwgbyqlvjyaj37ub8w6ggefkbedz52jyi1kmq2xk2y9ssaf009xmq1r730b3kna2poi8j85r6la0xdyhwri0vlxbtv4xohc6k2ldk3xpax8isrd',
+                receiverInterface: 'a7v2ws2kit2g73cn384a52wqc5df10xdjh5eacgzd8qnln8wavq7c7gfce6sbyxqplr40xunuugztsxj08mfhtsdhkeedkfr7gvvec43bqezhekmzux0nd224k7qxvx26m3wwklklpoxhz2n5vb39dvnj51gb3c82',
+                receiverInterfaceNamespace: 'lgx1qf7x36yhmj90r5wmegmr7s7bcp1nr3x9z8ce0c3fqbs15uiq17pkcsdmru8f0ex7fepkd66ycp7qs6m2ppw9ga2v5nwqv1jn7btfp7g347irrdfvl8y1677ne5kkirr5yq8f2bppb9gxdco0f9flhv106f7l',
+                retries: 3293390739,
+                size: 7153936980,
+                timesFailed: 3258994714,
+                numberMax: 3399839641,
+                numberDays: 2953016377,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailReceiverInterface is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverInterfaceNamespace is too large, has a maximum length of 160`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailReceiverInterfaceNamespace is too large, has a maximum length of 160`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'epqp7cto1d7k83080td40jos1iel96dosc2fm04ujiftj5ru25',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'ofnf8onw32rmtj8yoyhz',
-                scenario: 'fl2wrigtg80kk9u69biqz46pqa9r7lzh1qjizk6w89ng3ptp7b1izxmn82ev',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'c9c96a2f-5fef-4e49-8d69-5434e533e037',
+                tenantId: 'c623bdcb-0840-4fdf-aa44-fb49cdc8776d',
+                tenantCode: 'lxybv0w36dc86gmaykth6yrnfhd1qf7kqp5jzuvg1u1ytuocct',
+                systemId: '40200633-7a7a-40a9-be87-190f6ccaff83',
+                systemName: 'fdpnh0vrtx48d1n2qvxm',
+                scenario: 'awki02dcmrgm8ur4hvmb0fp22cry3ukc84cyhgupd6gudc7ts6z9c1bcodek',
+                executionId: '86218992-e554-4565-a977-6fc36046eddc',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 04:08:28',
-                executionMonitoringStartAt: '2020-11-05 18:11:39',
-                executionMonitoringEndAt: '2020-11-06 02:39:19',
-                flowHash: 'csmretudtxok1anu2488uiincrurf4asbrbvn3p8',
-                flowParty: '8u7u5fam76xias8e2bwsl0dc1g173onjcja6rg2rzuos1bnn4wm4tl22jl8x7216wlphz9rv45zx4bufqgndtlnbgamdnr5b6g3wsz54zq0kud2phsmt1b6krz700is6jml816k3jjmxrcnz0qf7a2nltimme6vv',
-                flowReceiverParty: 'yqa0z8fwmygyvoisyrm7cxprihnmzh1srlxjoyd14bv43y880fnk07d5wp1m1juxb04p5lruja1st08v52zh9r0c3kggizrrkudf2vp5xw1f9ts4uzt471yuupe3u1mru4q3gq50tchiurko70xvum6h72i0sjk7',
-                flowComponent: '2ya9b3sb7dm6k8w5kia785d94n37b3bfrgdagpb4opflm8p7930la1yu0soo185ta93ufyp4ra4gac64b8dr2hxpsvyl3oi2k7yo2v0zs4rfgnlbu7mc5oay8zt8hip7s5nxws7o1tns5qce1vyrlsr8ue45vard',
-                flowReceiverComponent: 'ql40fp4yxtz66rt66bkely7tzu26wpqqkr0lvk0dzmbkcrnxrz9d9tx2d6li1pthxkw1wuvi9bdni531z5mwq8r9qh71l4wpcwpr96drusezzffzb7ip17m5o69yxpouilfbab9fmt6802tabyhqv5vurk941e8d',
-                flowInterfaceName: 'xq32s7rxs5oiu37cjjlaez6huu1n9ciimvr3ncs8yyxeoovszuyjxpcj1peh2swwe8pooxb9p321oyjz37az9qisl5dw9dk3wbguux11ce2ve18of2ofwozw6obhmrmxoeuragu4x8qe4dkd01bcthvex965ih3d',
-                flowInterfaceNamespace: '9zewzcdvphlfq4j2aue2p9ip88jgtb8ua9it19btek97zhoxpynjsgivla0kjpjaaejpvdklysruhu1mrd5m6tt4zjcxxuevct40gyk0gelno72p9ndadtzta4c6j0c1n7w386e4ei7xcf1ryc96jmlhanoy7i76',
-                status: 'HOLDING',
-                refMessageId: '95fzridx4eoig4xzngl5anyubm3t1urvdnbi1nq4phurye7zvtekv2vg02559br5emc17qlkprcxglxtjpjk2nxxw3v6qde0nparpa129867d0gfziar3klglcvfsj0ffyfe2gag4bbdpdw59d1m89pjlfjqwisg',
-                detail: 'Deserunt et non laborum. Rem aut id. Ut fuga itaque occaecati fugit. Est similique aliquam.',
-                example: 'xhallqp51kf49s6ixu9d7k2jyfsuctp4hh7agc4rk8m8quf7dvtfcbahj67uh6z55rcthre7vj2z4ed02cfwmktnl7zpk07axbcjz6uaog5wn4me0n24g2wbo26vry7r79h5ap45rdxgqw597qrxt44yoszxu0zh',
-                startTimeAt: '2020-11-05 13:00:06',
-                direction: 'OUTBOUND',
-                errorCategory: 'u8f6ceuzc58ti3oz0c5b0a2fdn1bmprh622hykilpbli36uqcvuegwen7vgdewzgme8n8x9idxyaoydhmdrjpkqs6w5szihmh3m54totcqn6nyf003308pqehz5e7y5nw03go0ixgu16rqoztvqp0hzlaonpt14z',
-                errorCode: 'beawktmlbmyjsstnylwupg0wnr4atoh2r3pga41yp9etm5eo1u',
-                errorLabel: 854466,
-                node: 7245089584,
-                protocol: 'wmh6lrlkk685j2bqomr2',
-                qualityOfService: 'xmlenyf1iqeur8tmoc6m',
-                receiverParty: 'iyv85zi90hiz870rzsppuionbnpwdo0wk8sj2fcbun7tg2vuep0q180f9vl4vf2tusf7i7vjkqjrc8t6v6s3wssrcerhbsdoejuwsn5idowtym8c8ddibun88q6cv5se0sjtui0y9m5n39dgz7lu984xc2dol9kj',
-                receiverComponent: 'zhzltn5lg2z3lo2lxp4dztko589nmetfidb369pltuwcswdsuqk36maovkhwqazpvdyb9qa8zbvz0tah9j90pftiv0074974b2lk8b6vg40zqink5k2bgky1djjy1yg9ja7hnqy0rm8vaqrv7yomf9k2n4ycv606',
-                receiverInterface: 'oh09hiqgr9gsire6rmnaxhntnuao84rguhp33kpwbo6w0t4yjk83nzjotfp84877clupyrkip1c9c0a6ipj8oh8lx1t8i35j8sku9bgiaxb6he7wox7haqegz20set6xrm2fbiqdta2iuprkcxb4s9n5hgn2uge9',
-                receiverInterfaceNamespace: 'mpk9e427692g2nen6g0daps3v8zboyicyh57ppdpfp0g529lgz8qvcrubkzqmgn3k23atwbgpzfif47478bq68oysymfkd4hneapqorqhuwp8ta62kfe81uzkvh9fv1t11ukq8r63el708lrvanojn9oz8v6tqefx',
-                retries: 3692740617,
-                size: 1911468787,
-                timesFailed: 6830906684,
-                numberMax: 7087544870,
-                numberDays: 9327601196,
+                executionExecutedAt: '2021-05-22 21:17:57',
+                executionMonitoringStartAt: '2021-05-22 15:20:01',
+                executionMonitoringEndAt: '2021-05-23 08:08:01',
+                flowHash: 'dlrln64k695ovlt4w0egn3w80lemjpqr9djgi62w',
+                flowParty: 'l62pqag1r69gd2i3th0pqcq0drvl2piowztl2jzx4iofhmbr8hr250n8m2tu04cma2bfhm7kgfbvn2fv27e4tcy6u1i48m5825g33jtmgv5r8taar66xz51atoowb1c5z0t5n46227mndljgnj62h9sjc3fxlzpn',
+                flowReceiverParty: 'gxnu7cj7anlh5v4q92xqzyyey6snocgvg4ml2r0v6whndi8aah5y5r2dfvkvrhhxbvq7vkl3mcbjig47ku546dcbqhqp47d931yhjl41mqigpev9bw7036738iibkjrdd09jny16hby5y6as4ora1mmcq41dw5fj',
+                flowComponent: 'vl21ebxq72v1edn0uyx1weoifpufs5cffiugbh5m5gb0qtofccaob35vmhb4hw9dlkil2z284il3rgjg7aghg5h21ghkenp59lu8s9eovn4cuvwt6mpv7mmrsnqthustc6gfp2sefstt9osrkri6z14nfn8jt9fr',
+                flowReceiverComponent: 'skc67f135ynzirhiyu09oyq5uoa51c1v4nv051xhadp7qbzvkuslfkw1put24auhuxi5ot883j48b7q8bof26dxbr7r0eiovu3ft4uim12b23yex0fypxmyf30j0skvwmbcxzad04jmkh2cz2rsbtt3ng4pv4clz',
+                flowInterfaceName: 'cng64006g3fwhqwlx3uyvleppxzqz8t3qqa9pk4lresareuiy151syrzs8eec7nr6b7bhocpl2vm30ru05rp0pvsi9ikv34xp72j42m7yqtbeo3vkhyi2eo8sghxh707mvxpd5hqcmho6m1zc504uc5ukghewf5d',
+                flowInterfaceNamespace: '693hok99huik4gkg9u7xgev2vmrwgn5xvggh4jwpx5aevsxt36a3aauqej08wm4ck59z5x0dkq1fak3h492g3e1o8dxq9h5mpbrwesuskklo4nkjmx7hi6770o4n96kf3ywts5cln17bqeiyynph5vuojxch2jtf',
+                status: 'DELIVERING',
+                refMessageId: 'n32wbti0bh3h8yaxr1radzns8whfdnttcge4ccrppgkxkvh971dk2lp52kx0kdpvkl2mlx3p8e3oboqjrnfminyebkq3vrgfsjch9q4t7csc42ottj4omx19bf00u63swrk0cjneb7do70yyktt73mxor3xdernm',
+                detail: 'Laboriosam qui voluptatum. Et mollitia corrupti et laudantium quia esse accusamus natus non. Dolorem molestiae deleniti harum quia vel sequi minima officia esse. Voluptas aut ut.',
+                example: 'sr9d0bhevo990dhbk9673mi3n4luejjphvjbt784ivuzvtd0x3f2dnec1mlkar5bkxoe3dr6jugg4pu7zsrf3raakaim11tc72cpovfoi7d6x61qwj3xhbsg1m2amvdvatf1j8vg1sxjzeo7u1e17lucfm0olqsz',
+                startTimeAt: '2021-05-23 06:19:31',
+                direction: 'INBOUND',
+                errorCategory: 'orq1dyeobirizy2md3hi2so1ihkmhbmdtrdjrbywj67sbyk7vcei0fldy7tlv9vnkz1p2yd4km4lhobizr6vmapydmfqej3wzx6ue11fna4tx46f8ygr7gwa5d8c3c9m8ei0rpg3sddicj08a4a9iuu7r4zmarw9',
+                errorCode: 'yh09s484xuxhz1541o9c272gwwytfnni54tt9yge6e7anmbyxa',
+                errorLabel: 337047,
+                node: 7540096727,
+                protocol: '34f59n2amrtdudsn4qve',
+                qualityOfService: 'cnat4b04jc4ts0sye2ci',
+                receiverParty: 'huis5ypgyv5b330b9xb0rgnmp28n1mmv43l7krhrx2sbg41s2it93tg2wmp8emeteiegzoxxla0vdrqp899yaq8bya427ykqhx0lw3rb3bpvnpqihx563ib4ced3wzdlnpelk2pnr5r6ren19ox1alrypmdi5d31',
+                receiverComponent: '8n6zzguwdoegst3gfwtje0cwzyymjj87s493osfwmxfgwejzehlow17ovsx1jr4uiruffypsco5nff6205mfz1gflwkgz0b0ww1ycffw2dp4hvhir64b5tuu9y2449o0t3m0c0ucoxoregw8p7con5phaxrvacy0',
+                receiverInterface: 'oyjhgp0cbjq5boeuy9mn497qxi4uotfw4tokw4dj0ikh7nidl3yckk9sgatuershljijo98sx2imxy208w5sl8ep09jzokowaq4086vsg452kzeu6fk34aoc0akmx1qodcbmw42gedjothovtqbesxubdyy9145g',
+                receiverInterfaceNamespace: '8kob89mphrd2r7kvpb7zp6yfhq6cn50a9nlmi2zheo9g365wkm29qjj2o1mnh5r7c1u9drrc6nj33p5y7kojlhu11sj765318jldimbyk9cndffcpjj6gbolra4yw48bhd9y9hf01z46jkyipg0nguz04obo3xaxl',
+                retries: 6822520407,
+                size: 6610799849,
+                timesFailed: 2868548099,
+                numberMax: 2781365078,
+                numberDays: 2003474587,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailReceiverInterfaceNamespace is too large, has a maximum length of 160');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailRetries is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailRetries is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'n6bdhvtg5bw7e15tfpkd3zx7qvn2r8v2v34nxqn53bjbt18r0c',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'njmgi66peoaygigadvkn',
-                scenario: 'bg4qo86248o7a3a2jxazkezl9kun9bj2b583ilw5sq8y2b13fs1kyxlt01gk',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'bb3f92ab-b31c-45e9-abb7-e5abe33bc31c',
+                tenantId: '17c9d913-08d8-49c2-97b1-454265142c5d',
+                tenantCode: 'vo89j8vwnr02i9n9y19ifzflbguv09oi8433rk2q769odj9gdg',
+                systemId: '1fa8cbc4-f657-4592-9327-0e4d9f7e9275',
+                systemName: 'lydvb7hmrs1yx58vdg00',
+                scenario: '6zs8ea8f278hunnaqppnb9y38cbcllwjefoyglozv7zz3pzjuf1gn867r18r',
+                executionId: 'abf24615-0c0b-4ad0-922d-46ec33259e73',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 06:41:46',
-                executionMonitoringStartAt: '2020-11-05 20:26:32',
-                executionMonitoringEndAt: '2020-11-06 10:48:57',
-                flowHash: 'kn27h9fn4ijgqbhz5mvxtqthglwwx7ykmmctbnd9',
-                flowParty: 'bujat02f5nf62fzcejbjagriw6s6kny5nduxhso99sjkw3ck69qjp6z5r4fnagvsini1issdp4jzn0f4s2vvifj0fyhk97nlgwe8j7u2omgcb7ozhgghm7g1aimcvbhjuk01ovjvhsvbp2o5o6ciowwyc9lhyq0o',
-                flowReceiverParty: '64pq8q7cedaq2urbbyf053nao0fkoyqy8zynbyher0ozf8lp05vqk4aj39g8xfs7f9ggsz3e1kw7xltrnzpqhkgx8u5vmhexke7kdudblawa6tenv9et1fgkkv1hey2by22ntc0mxrpkhsysui4za18s4q77lcpa',
-                flowComponent: 'imw2ed28sdk36fpa5xsmcy0lwvhukt7cps8ywtgo64iwjs15rrkhiug8z8e1bd5ersuwbfaluute8z16t2slia0up1ai3pm712sggg86focf3a39b0xuej0tvdnvphh2ql273v0sviau9zuj4cov76nw3n8zmxki',
-                flowReceiverComponent: '5kot4dpqfs3eyf3bhaoacbifgo8i256t3n08f7qhwmi9flxsd91gjvxd2qzt91whwo95dfp4xevmstmfxlmf9o6971vqxgew424ohxdg60vgqyxbu3zw9f160slcoiw8aefh9huohkxglhiwa7wleosvstd5css8',
-                flowInterfaceName: 'c7uai74w8v8flp3x5n4ttd1lkdtfbx57epwavm9azat4kkvyjhqfikakyebzskc28hb301eaj3iativdtthfg6xfy70y5erg65zd0y9yblu9lf7y17d5rsc1veb5nodcsxfuk54mcl69w9sit5xe88jrnn5o1ip0',
-                flowInterfaceNamespace: 'n3ppvqg3avt6had4c8l4ms4bpj6z0vkrh3cfr1pygscc21vjdzlocarhicu72lt79f716jh0w5vyjt3qlb6lpusmue1vxfv4unsx0fmu63rzpb1197bi6ghvix27hj058xvo9b1j27ykwz4vwa5ff00b83psjhao',
-                status: 'CANCELLED',
-                refMessageId: 'h3ozfvaxpl78vw2frk2zqtv5ix7kj8no8yuhdsobnfzt1eibsgvuce40ea7hhrkd72sqv9p8g8a9rhoy9euwjy088olo3q9ezx5fne2vgoihaxungcxaq5ypget9gitqqj1bls3lo54iyrtkzbnusvabg5fxcqk4',
-                detail: 'Et ex nemo aut doloremque possimus magnam. Voluptas recusandae architecto. Voluptatem id porro vero.',
-                example: 'g5b1f0lzysbrtev0w7zrm7zt37okeg08psdv13dzldt2sdaggjl1rm48b90ho5nhijzbhb25psp4x7e1n0aiu9c7eumv4jd1xezha95n7mjxdf90kb2h6obgw68ataye6fio3lxkf77hseeqb54xrygfz1556wwi',
-                startTimeAt: '2020-11-05 23:24:57',
+                executionExecutedAt: '2021-05-23 13:17:25',
+                executionMonitoringStartAt: '2021-05-22 20:21:18',
+                executionMonitoringEndAt: '2021-05-22 22:27:19',
+                flowHash: 'mzoe3kl23fmzmlnyod585rxk7gz9o1o554egondp',
+                flowParty: 'oxaz7mwbznwogjolglbcn0i8wiolqdgidgd3wgq5n5rw8p40pr5wf1kxnrfb3gd7g2b9amdjrkqva86fcz7p8emf73qqcdu8irggv9auir044ecih1u3vhs9jy48nhroa4rut87u1e3y1iut3s3tepqdbi877aw3',
+                flowReceiverParty: '6grsg62d6pwi5q1gouwzar5mppw9uv8yss86qb5htcx1t4efhrxal2db37qmcz3qprzztds6fqvjceg229g3odtdtsshv6xvugp6yzhfrhuwxgghuv4ekw1dpsekagt13layoxzjcpavsnph4wpmtkb77yzycie3',
+                flowComponent: 'z3holmw442sc24hso5gr2vhhj7p1wkd4ol87cpit75t3gjf52cdxv9hvotpdccez1n8vql975dgyw8ktehafhahsjbboyg68aieuz46esinywvm3ofzi1m9p549a3orcqrai2e996yyzxdlbxo92n5vi28l08geo',
+                flowReceiverComponent: 'o60nvqs6qau8g89tf80ssy2xfb8ioweb2sajwgjnvc9g20rmgmnsihfn8kj4gb3flfv41mhhd820n3lzv52h0s91ntpkx17stwgb8aq51oh6q3dcebbqi6334z0imfed4cp12sfwlai2nc8hcbr44xjwz8i5od3k',
+                flowInterfaceName: 'b5q6nh6r0jqvvf42yz9bg15x8144i1d9m5jd0i2juwi62i6cw0wcssfz38er1h6i21er807drdywhb1js0to78kz1q66fzwvnxor5ecogm8vebjjpjm7d8jqfnysimyosp2yk6mehivi559qs81zs96f1gb8dxa6',
+                flowInterfaceNamespace: 's1dzvpfwi3ybj8occbxt9fn48v8ehuiyshv4ig2w7xby46thhcyipqh2fpc9xbhngwobzs240fbsuvwxkr7pzsq5rhsdj6kndlu4yxs40rona51wbew9ichnm2ozg7nd8ecm1hs5g1lizaxaod6tv525kkp3djf8',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: 'y3gs4i14z0scsvwdgrob62cr7hccdz3um47mlzwvfgcr4au177y2a75tdgui2zsn0an1ejupq74ah56vfa02wzou5racwp6njck672wuam7s7qhxxmily3cj5qedgv24ckl4irc42wwj8tb4h3wm4blr5cbhv8mc',
+                detail: 'Minus quibusdam sequi officia. Officia et iure porro perspiciatis quam. Repudiandae accusamus qui ea rem explicabo repellendus cum nostrum aut. Nam qui dolorem amet. Ut incidunt porro unde occaecati dolor atque quasi velit et. Est eos iure atque sit ullam porro consequatur.',
+                example: 'v3nvsr0xc8i36qj4esijsmlr9676tt78vchowj7z9y13y8rkjhlzpbmsfllcp3132yk9db3sq6nhjbcpeulgc5ctjryr4q7ln1008oykjjf5g69t588x7l8mcof4l25dhyj1wvtxaujmls4q1dmzdfyq09svb02b',
+                startTimeAt: '2021-05-23 02:55:45',
                 direction: 'OUTBOUND',
-                errorCategory: 'd20rpiexkxxfexmx9z6c0s5r4irszd3awwgzs6q3ox2psotvoko5v50yy6ppa5li6k3md2dz7w4wwkcap7ynjuatjul6291r8mkfvyh4rr0op0jg2hnnjophixulqbtmtw5te894u6fkeo8tadvy11vbxtkpfxa5',
-                errorCode: 'op75fa3yuu4azeh4ydt6hvr66wiibr71y0gjnbz8rvga9y8qvm',
-                errorLabel: 826436,
-                node: 9239155397,
-                protocol: 'el9cnrgh846ne7qetggr',
-                qualityOfService: '674eqb6d4uvf707fdpgv',
-                receiverParty: '20ufvxw1tqm839n8y99xs4xq41cjlfcc6hv92c5xl4ymdaz9c0w8j4mtevrelv65t1jcvslhazo1yx5g0jwq14hw0rywko6ox54fek2moaajqywkvti9cq4t2zbyvtddh7xx4z3nvepu2nramc6qw1e60v6osxei',
-                receiverComponent: 'qmyzdrbokah8tliqo5bjbefl2q16hzlflctf5tes3i9kdwslnsurroyt1p7p2rvlu1zx2721ns2ny8chlj55258jsf0oje03x6xgtp6ovj2pj948scxhx71n8waa1tu2g6ca8l177mpvba032dyeteoy8dk79zv6',
-                receiverInterface: 'pkk02fvfe5i5jnxoikde6vna1llz8m01a4xf92hkz46013sa98dydamnz15kh20hmy7vihy6wnl1xqr06bnwdxqx163sbr0epugdydqejdvmjf4b9itrltrco4et8xo73eumewpbfx7g6vwbab0ygq4jw4haswin',
-                receiverInterfaceNamespace: '3vgsxl641hxsm651iu1wkromqcc8t2epym01csd3gddeql2cw85pftx73wdd82mkz3r35mmbil4gt9wjpb06wm0d7ntinn1fikquqs5ehbuc6dtjsndog98ji1ok8ebc65i9vlrk6js78sogknxl2tf40onech4y',
-                retries: 87484093594,
-                size: 5351697771,
-                timesFailed: 8851756483,
-                numberMax: 5038112703,
-                numberDays: 3237733261,
+                errorCategory: 'mo7wcp7pmtpd1bnmjzrfa2zt2s0jdj3dhwyf824b0f7n9jj0tuodwqfycmj3ehkpo5zka6libl12om2y2be5w9gqpve743h5p1wacm7dq5ff6q5aqestok7ikp3h2fu3tj33ybigsb01xoybtvg8462oleeyd65a',
+                errorCode: 'tvt0wd0astvdqj8htwvbfd0tom023e602entzu03prz7ldn5pl',
+                errorLabel: 921506,
+                node: 7618757965,
+                protocol: '08jto0cuphxrjxvhzm4d',
+                qualityOfService: '0qd5jn1isbs1c3q5wflb',
+                receiverParty: 'kfu9tpiwhsnrfmdd6n26pp87mh1ox4r9tobdewwf4w1qaem60t7s1qng3xvhxk18r30h7q1q5bhgn8n9r9hl10b5yw11gans7tf8r7b37dc6gg551ym1f55ul1fz1msn0c02emu8v51hxoule4swxinzxl6g0jiy',
+                receiverComponent: 'dwnbbdced7q3mbyyr6o4qjjq4wk6zhdvavxmia0fd4pmm1ux7q4c35vvecb3yxpuxmml8nlqyb48b8lz4z9qb5al1cr9ges5dqrjfrqrvfymcgtruzxjh8h28qfk5zt083iggwl10rmmsmtqt6grahwoa0lvixns',
+                receiverInterface: 'p97lquhshdaz10njowzhnhz4rp1zbjn27mbo2jdd9o9viie47bx6l66v8sy5s50fy5vs8auzz7wueql9o76nxdoi3kvhxh8sxsj8j5wpst81em0xtphilav5qg7ropl48cwo4kydqre31arr925cf4135bugmm1z',
+                receiverInterfaceNamespace: 'v9nnacxrvmrowbd7menx2oqtf88w5qygg1ny6b0iohuy29zjkz55rexlfksfwuoy2im2krsixoixubp7zcnfkdd2csn7pee2nlh0dig796wfe5e7uek6qk44hw12olqjbxux7je9kb5yrykuuoxfkwfw6e1xyl1y',
+                retries: 91871176535,
+                size: 8451281280,
+                timesFailed: 7673435299,
+                numberMax: 1175678701,
+                numberDays: 5055663957,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailRetries is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSize is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSize is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '0j8kcxx16zt5d6o9r2zy279molly2nniwx25acvd08jz66xhyw',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'pqlfsprhvbdtngwt0lh2',
-                scenario: 'ex0ugjnl4dz8nn2ye7w2hukxfv3vnbnv7nf1772355leccs9lcx7hz3lwef8',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '8d84f988-94c0-428b-9033-1ba86c61debf',
+                tenantId: '29f00f10-57da-4aad-a398-86ba649e600d',
+                tenantCode: 'gpcurazwe0k76ub6tw515zgp6q7j4tr3tlazpr7z85xbysznkx',
+                systemId: 'fec5af70-64b5-4395-b525-98f99d98faff',
+                systemName: 'apuld6xp679q9a2vbc1r',
+                scenario: 'npbvsk7nnrpj3uiarnkp0ukag6f7xrqmgyowwpz2n9tf4cjvtf11zdfjzujp',
+                executionId: 'ac67b909-ae96-4a11-a8f7-70f36cd85e77',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 20:49:39',
-                executionMonitoringStartAt: '2020-11-06 10:03:07',
-                executionMonitoringEndAt: '2020-11-05 18:42:35',
-                flowHash: 'asrufnpgeuifppgp5iv905gni2tee97t5hvmysk7',
-                flowParty: '53ja1mn2g9qyx8gcjle6q435p8euvn0hha5wpfvk3sg20jdw7e1u5yiv1tx3ryvebrpesjm86ph75z9aegd4d8ixng5pn3b6bla5x3rsqt54bu2efqa3uud182hztl47eqel6wbqmuqp81zkq3i6kj39f1i7q1sp',
-                flowReceiverParty: 'vvcvg0lx1qdowex04eu8oml01rms2gtrufn1szumiwl6ixo670ag39wcoxqj3qg6kwgjpffbwo3xmf4l6eorxjnwftsp8cs2dv9zosdcrmihb89yyeyt9fleg1xpmy3mhy8thn2kjxs40mxraxs25hhh8sv1phqp',
-                flowComponent: 'ky38qjf7k7dcmhb7gjfrsgcnw27dogpudy63egfkijul3o5g4r97n4k0ephl0ekcrpjyls36hmzp9jz0343cyp8as8z5ivy78wbynnzdvog6jh00v3fjof72fha12nm3vh8g7ki9t6ekczg9373ftopl0ulh1h10',
-                flowReceiverComponent: 'gfl85541t1nnnkjeik0bzq24px5owq4zxjtqwnplepx2iz010gxc8oisj673g37ldtng71jswnlq8il6o7uoe0zfr2xx6eq6gzbm4n7yif02mn8g66tz7w603dd6t4sf23cb5dodxbo3pvp0mdrp3rh2m2jgidy6',
-                flowInterfaceName: '68t1cvpsxg1wuic9id3lx4jf0p38i84ootmsr9as9n52ct8rskxsw5vduy4ch6r1expk9bk2dljuyssn13j8msgdahub0bnp55lkpcif46ur3c2xtbtnyiir13abpghgr22um7zfk5hvchk9f9akzu1r1lq397f3',
-                flowInterfaceNamespace: '8y88dfmf1u77zxxtnl1k6foe36cawjxo9ocathj9vo9lb6j1q540tf25n65tfba9sxmywhqgve25nplax4rlgf580gibkq0wua3osm36yo36buo6apuvs79lexkjq3z0uyvr0dxotkz05ykouaq5j663blj4p6j7',
-                status: 'ERROR',
-                refMessageId: '72r7ucgsbu805izhiqognsez6gz97xpy2l9vtpmtwceca2aea18ks9nqgvcxgpyaw68tvgplgpvdjeld4kcumltfmv46sfl2gtrb4f806ufurlefp0fx8a5tr0b4ksnhshihv5yav7qq6apxsswmyjoclnjuoidl',
-                detail: 'Quis enim possimus iure veniam in consectetur. Occaecati voluptas ut nisi odit quisquam voluptatibus vel enim. Ipsam voluptatum error. Est explicabo maiores eveniet repellat at ex et. Ipsam vel vitae aut delectus ut. Et voluptatum illo deserunt rerum sint eligendi.',
-                example: '9hrqwjzfdvunm1xxbmvxfl0ovq6vhgzndc0vgpugv6ik5v9uft3lh5r363x6yz8nurqoh784d363ij2rwcnp3yvj2yt87af7q5eukwkunhc6hrer0el94b5n6zis88lxqt3xl4x4go8tkic6aq2nri571wn1f7en',
-                startTimeAt: '2020-11-06 08:03:44',
+                executionExecutedAt: '2021-05-23 11:54:28',
+                executionMonitoringStartAt: '2021-05-22 16:50:57',
+                executionMonitoringEndAt: '2021-05-23 04:34:32',
+                flowHash: '4tfemvuyziawz1brqlzoq078q3gixas13i10yshi',
+                flowParty: 'x702j0dru4zgk0n804hiup86sxgehuqmqpcr6jvrae84qnx63b5b4lts2tw0vk3ji8jzyo3plalwrc8e8hnr2y0ojh4xsp0no75sxn9xfo09bmpvmt6boztrqb2kr1bbi117gxbma6ati9uop61h3ufodwyhjaif',
+                flowReceiverParty: 'mqj5jevojw0hk1xzcwvmzdyz49c2wgp0i2dfzqmhodji5prsz44i03yysri1dwzyrkpar8grh3hi9tcndvdf0nv04bqgq6yz4eitcwba19nwrj0auvujjhrn59qe5mdaxflp04ymltcfyeuda6h17p703kixtfjp',
+                flowComponent: '13aok3tztrqv6q9dvtdzw5a8gej6itjltupdb8w57fuod3fmsec3x2c4ppqfgwejp2k1e1uhhru71475uwxmqkry9czqyugix5nyi34703m6tsogxi5zqurmmnu9r01yxaaan09oam769zwvtbs5g97zf07z4sbc',
+                flowReceiverComponent: 'jq3l3ib2jgd55z1oiq2dnqiqqqwtkqg2n2sp60uy3nyvyoujs6ufe6tdkytdzayqwpg6nv4qxjzleh7afw0qo4foy8guyysk2mwbuic9rrmfv1npmxmk1yjak2v1h7d92vafb4xejdrq6c9jng3pfuqfqq0he0v6',
+                flowInterfaceName: 'soyedz8w1pca5ri6fprbaykwubbemiwonxomlsx0bjsejwdlc66d74pzo2k3l0360g2xiyzbmzozwq3q2anbkqjau35eifhhcc4v1v2b4hbg5jmasmro1okyuul4tvk80m3ymsd0oxd3nosz4tck513jxyq7g42q',
+                flowInterfaceNamespace: 'd3sme2wr7gw7tbgekjl8axiktqahaxy0leru7nyjnm5i7sqmd4h890uw1mkrb7s6encnen8th6pn4jh2qjlgmal9m5yj9f8e6j281j9nwdrc5yh7tqkqt28byh40r80ikl2tx5pz5ubp16n8x7imhk58lf792pix',
+                status: 'DELIVERING',
+                refMessageId: 'pv5ku70qplvwp2ro67pv5suqnxey4jq56rpq3mm25tjncu75evexrmk0vrohpd3i5kxhohbwo1wrri2atllp9a1zags09irgr2hrvzz0p3r5t09yureylto4xnz7yh88e3qq6w83e63vzyveucfo3t69jyk4ithn',
+                detail: 'Molestias eius repellat non veniam autem corrupti voluptatem laborum. In amet vel aut aut consequatur fuga molestiae est. Praesentium quasi sunt quo. Nesciunt qui cum officiis molestiae cum ipsam et cumque. Quibusdam earum voluptatum laboriosam omnis dolores amet et. Dolorem enim praesentium.',
+                example: 'rfehtz9q21iti7urv0fm1vruypq7py1qripv4wutg0n34ajiyh1gaim00ltoloceyr5kzz8ouyte99yi3hprvgbiiu12aftw4dzc9gw00plomkswtr7lu6ch5y2l4j5u54mxknze8ybnz22wvnyqynxdftyx2gm3',
+                startTimeAt: '2021-05-23 08:23:32',
                 direction: 'OUTBOUND',
-                errorCategory: 'm6uwbamm6kc10jexb9uriu0v2vbl86bve8y1nn9yfhb16ow96vcz827hlfa2zmc2ihunhy4uhr7y7wpap2a0djlp3ekuawyfjjzf6sjouko32q6k9vlo5w9o8zc68z1rfmbq00p4d333ztvvunumyo1mblaofy36',
-                errorCode: 'lig9yum4yiwleu7bnjmemgjwq245ydwon8fwtib3eyal7zibwm',
-                errorLabel: 705339,
-                node: 5018807604,
-                protocol: 'xpu21dovaf6n78jeze8d',
-                qualityOfService: '1e22sckqysexwks10plp',
-                receiverParty: 'ldkrigj7xsknrgsfi4sa9zhx4e6m7rrivnuei83s3p3ry0gz1chdc83d3si8cx59smrskyw428h8kdsqk8fuw8gdvw1f3t5frnk39krvk98vj04stq86gcdqu6mzsjzvyrjvc1u1zuv8515q6obw6dude9jejh4p',
-                receiverComponent: 'i73ok126hf29tgxj8qdgay3srixrfy0px6pfxrz42qqxfboxy8zimgj3w72ebgbckoekzp6zouai31iu8ubb2udc1k3qgnmcodbrj2o35vttos3loc20a6bf44jtppcb0kwnls8rk12godo7cukbomvoev9ipyjx',
-                receiverInterface: 'isjpcb27ss56acl0o9el8dx1mck868uyvoq7287704b8c506hgrqpevvmlofmwv37e150ls46i1vz84vrdgrx75wu0f187wwl2d6w7bu51hgiyplfhi6jb47faq2fec2qf6yt0w971w1fx0p7l0fo7jo2fh4rult',
-                receiverInterfaceNamespace: '284riq2jakac3zq04x10r33p0h2spc0sqh755gtomx8jfgyff0whm9tmqwsz7cupwho3a2099ouoxaqjvybt47o8pri9r1joj84ff0rjl2dxvcfdzaxfg0aj4rrudkwg410jh216vsigmsoen7y3qq1d37z1kvhp',
-                retries: 1629606520,
-                size: 64289101103,
-                timesFailed: 9932212487,
-                numberMax: 5778126716,
-                numberDays: 3715834480,
+                errorCategory: 'cbqsookz0erfpb6l67hd7r5piwsmes2g526dhyq51b24cu2lgyepoyvqffit4u65z6cevff6gyysc6toqf7wszdh1pdjkwkswp11eyd1oo7ksihgexpdtwq2shtbtqgczr7lhkrjycr1r630hxenq554kf0l38h1',
+                errorCode: 'guuk4q6a460558td467ub8qjdxb5afq58bvcgkcmfijoy4grcy',
+                errorLabel: 348770,
+                node: 4837561158,
+                protocol: 'a89j1up4ckcerqhqcnq6',
+                qualityOfService: 'wjlld78qavvuq1m0ob5k',
+                receiverParty: 'zuvdvxx3soda1o2axmk9edwh6bakw5j3ovjyinfage6kmmzeh552l78s7dr43shs64sv8kml001fi5i7qw8qs2dumpntsp5tlgl59wwosppk5d6i1qcgv6xe5vs7k5ci35y8accj92h01qlnflvmgurpeq6j31el',
+                receiverComponent: 'ula1xmcbk6b84orzd8xbbnjv9ffnh7qkf673i083ga946vc905hesiahzj8jc0gmqqknnm6gjrw1d8arr8ofvws3nifj85wt20n32qged71xgoa7gbyroen06ct03h6go84bxyr7d8277qtgzspl9856wj5b6uya',
+                receiverInterface: 'mlvxobrn9nere7pjo4k2avx0zrgadk87xj25zl2i3hm72upl885ri43taxrqurf0adkqm19w7saeappunysc26o4gtm0bpjjjyv8qbuwdwy5wnlhf25s261i7ieel396vmnmltajlijk0r75fg58p1m3f9bvpqm3',
+                receiverInterfaceNamespace: '95smwm1qu6zp37hv84seprwarv58ncw88fzi3veetwetx1dt1xsc30cpxgcfrzi5e1596ywzggq3gnc10rj5sflfit8nlle3765mqa8ntnnrho7e4ihopifc1ffxl900vcro6v92k0wb9h8bnmvge4im7cjkc7gc',
+                retries: 3087205003,
+                size: 34832911004,
+                timesFailed: 3053595008,
+                numberMax: 1647182093,
+                numberDays: 8669225157,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailSize is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTimesFailed is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTimesFailed is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'a5r0fme83fsfv2aoniq5bjynnqgglpza48h8a0sll48bg0p1uh',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'o25t2g6nmrpc1lt12u47',
-                scenario: 'l7ik95o92by6png638mbbeb2xu3m5u4pc9byyv5wcrzf9m0fx3em05o0feru',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '8efc0bba-9772-4c55-9f74-1991e4077044',
+                tenantId: '17f8dd67-5877-4721-82e9-2cb37a786faa',
+                tenantCode: 'zn4n0urydmt9omhyzuye4bzpxexgwl6vi39xqu2t6k5oqc07vo',
+                systemId: '64487aa3-a171-4681-924b-59fd907d076d',
+                systemName: 'gqejjl3i83k49xihbqx5',
+                scenario: 'k5044q7jsbkmny61xwfqw41g2gjh6o5friy4tbu5k6bx99k6xqooh29b4b3f',
+                executionId: 'eacc2bef-c71d-4a6d-834d-af16ca15e765',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 00:19:23',
-                executionMonitoringStartAt: '2020-11-05 21:13:29',
-                executionMonitoringEndAt: '2020-11-06 05:22:53',
-                flowHash: '0ctpxwc95yd3fc6haz5f5odc9v8pipxjih6pvm70',
-                flowParty: 'u3btmktco07m83hxbonudztw37bdjln8iin1zpv52sxqtk0tdru1gt9ct5uid8amlo48b4rcv0pnv5cptjsdeh0dhc46zxxaolqqnrwuwduuhi2682cb6wtxep513y6mwdpynrc4wi9b3xp72o88d8xx5eil9hew',
-                flowReceiverParty: '0e57hrs976hne5gzx42lpp08fkrbisexc71toijjgxx4tza1j3g8sp1nppwmald1gebyhqs47kkl5wkd8tl8hty2gzss2vk707dm29ah6fecj7mbijsbpvwm8rblcexufp65cy317fz4oqzs1z39h3uvsjqa9zw7',
-                flowComponent: 'vizxj2idk8cq5rn1g8gv3n3wuhzjtc9sl9osqdaldfjsd0500y6kkta06ftcfb6093txj9b1ps7vieue19enozdok0gglw1lpinwja5orp9jit7tm5f0raz4p0mlvxci92womc7jd2q2npibkatpnebtf3qznkrd',
-                flowReceiverComponent: 'xdv7ge9nwsydht5j4uv8udr2epfbzbij5ov7il9wiygyrh3vb4y4ymleu9ibi4421o55a63k0m1albgcta43y5vcelae5mxggzvhg74ek9da6gdpcwnckb4r19wuw0trgv0yz87ptv0innkygh8wbbqp1enwoinc',
-                flowInterfaceName: '0kaectfvowesldw9rvtv1w3n5smt1sn2j2ww058plu2f1v1jg9gd2mu39ac258wbhjvsd0rtiya1fbi4o2bhum0lf5ysj3k0u6vujb31xqb9wa6xcrn9ffh4qoued0su57tju68kf2aclsoucshz26e0ty75e8h5',
-                flowInterfaceNamespace: 'u221pmp76p0qodj75452ndf25gichvy7bjh15shibwlhky6dgri4e267a2n907dz0sktsukc07m50ccuvr7kj53dqe4un16ia687mwqtnms3k7h8bdo6e5c4zbhhva93wz57fl48vs48agrs1bkw8g83ce5ubkgq',
-                status: 'HOLDING',
-                refMessageId: 'avtkh7dipqzgxy3baz5v6bk8lhry7q0tgpgmps01b8apbaccl5vpr1bg91o4xiuu5qltfelef7nr3pwayqz287z5ws0sk8sle2olrhhdamgz2sbn5p1z8qi6sbmxkdl8kpdnshy4u1b8yas7k3p23ph3coem4e7w',
-                detail: 'Voluptates aliquid quod dolores. Et autem sed incidunt sequi repellendus fugiat. Reiciendis consequatur dolores exercitationem et accusantium voluptate. Saepe tempora error odio iure fuga magni laborum et architecto.',
-                example: 'u2ict3be3z21t3vc3exe6iqrajwh01f99kajzxzru8wsvnm2zu7srzgq7fcjvmbvg6utladpkfv3bg6wx4v03jsbssc4isdefqckalzbei82axs4xy1xjm7zrebjz4vqv8ylb71s2xve0zuthspzrlpzmbadhqaj',
-                startTimeAt: '2020-11-05 22:53:25',
+                executionExecutedAt: '2021-05-23 06:02:23',
+                executionMonitoringStartAt: '2021-05-23 08:40:41',
+                executionMonitoringEndAt: '2021-05-23 05:57:37',
+                flowHash: 'fq47mxb7ror2dgukundm0xbn82remfwq3yd7cwy1',
+                flowParty: 'n5ba39g4gj2e0cuz5lsjx7n956pdz7veq3s9ou9ezbribcbvbmuep4xoawhoqa2munlxnrmosd4tdwfi34xz04oljy09rmpgofqbuemeag6hylzf4n3gqgnca2akb59ritovnibr8k74k8x1uw6aqzi9h70xxtp0',
+                flowReceiverParty: 'myw1n0wb9vfhhtmfk8lkxmzmmtrgyg50f9whpvb32hqbulib0zp6c2n0zymaiu65exjen1svf2i3rmhoz53oxc9xpo1klb1r81isxxu11zq4mn33zrf6st1ko6k467tnrcjuvilpf8jwpwbywy0y9anpulzsx6lj',
+                flowComponent: 't3evgl1jhqrls1zw1e7ej7v8xl4wu8stlp1k9bljr2fpkd9lvqfpywavwikipo1a1jj21y4h6j0504ps8llfg29jvl79wxskbc2fpqitdwbhr3jyzqf6rxrjsx6u7c6g15bjkb9njqtz0usmevmwct1de74i6i7j',
+                flowReceiverComponent: 'zhjz5ssn0yc9dk1p6a7mztnlvoqmnq4jcbr5ome4it674odmfr94yay0g1f5xscgkuun6n3izl8svwm24ep69iwe9jk69z23yh5m5btk8t49q3st6r98o2cjuqml7k3f9fpb4thao4f1b1kfgt65zj4agmzd84wy',
+                flowInterfaceName: '0ha34vcebpoiuelidrpdrlbkn7mh6uikc4zmjkwtfzuc2ley038sp6u0wyof7ne8hvphybcqaiohbvt148i1b8h4bebskary4sva6vlt175c7gbwi40fw16p2dx8o9hns5q2l7v7d01aq0xlolhh4292184ze80p',
+                flowInterfaceNamespace: 'lu9c3x31t20xb7ij22el2q6tqqyzm5uvvxgkscyjyf7f5qjcc24jw3m3cx8kqor1kjnc9tlyclqjtrzoupk96genhnperzrzkwjbw6p4bk5jmiuhj275u5b1uab9n73a774dg17oqgeyas1aiu98okvqofjc2ngp',
+                status: 'DELIVERING',
+                refMessageId: 'ipnh7l3c03w5ej32ftuegaoii8h6fcm0pflu9h88v0528gm6uqx3ti90fy61tmnmijc39ir2upw1w78dklp7nxjejdssvkwqfou9ktv1gqzdggj7f73iqx70h8l9aul9f9svn54xh73feh4v1yh09t6x803tzcgq',
+                detail: 'Eius voluptas natus. Est odio ea ut ea voluptatum ex. Occaecati veritatis non tempore provident quidem qui molestiae culpa. Hic nesciunt tenetur enim voluptatum hic. Explicabo voluptatibus ut non corporis nostrum et cupiditate quam.',
+                example: '3eekbkhg7355yf51vv3xasl5fnvedog810wzziorhuoydfjfpugujbp9zbnje61x893c06si0id038o4e3juqu9ldujvb1dfoh2t4u16bk2fzqtx3b7lu0t0hmfcwogxsoqwugrqijg1cbe7kz7in5singcgwadx',
+                startTimeAt: '2021-05-22 14:32:45',
                 direction: 'INBOUND',
-                errorCategory: 'wcndexvmskhxkwmmdy7cwdbgjmyao67lw059ausb5t7v926uimo66vmw040fvzixfcpl132dsl0hiqd070emsatrom5pfp778hnx0t0i4ccon1ddehxh21dh5ituk1cv5d9ksmy0xszq0lwtsjdauxx5icdcurax',
-                errorCode: '1xc9v8dna8jw4rl30ts0dzfqlprrjsdbyauz3qtq7nb00mitua',
-                errorLabel: 502489,
-                node: 5462675583,
-                protocol: 'zkkvdwgx4hijdeip5uc3',
-                qualityOfService: '9krm34sl9tpxrh3qceer',
-                receiverParty: 'fzeikd8q4qruswnu8i7xna6rvmwi9encqz73t5e35gcoyi7im1i3oxbuowmk3m8dzfil51iu08j4sd5uk32wkcrpokqbwv8d2pqqrtz6hdd154r9bszw1ppj2a1tn2p41ro2kowgz2sszgq5feqvrg6y03g11i0x',
-                receiverComponent: 'u021phxg2yws6qahek2w8pnfviqpt1lgt11peit1bwcacg25gniiq0rrtb520nx50lyp4tj7hr7inzpcu5goep2ft6h2aocz047si84lqizowfh1k5inx578tktfc00wo1vvlmeoxyr6w5l03rg6hapqw49maf8w',
-                receiverInterface: 'g5x2payn66kt7gxilu2rg56ibpqezkajc6bh9z6sl7pdwyef3i9l53o0w9idwakfx409l4e7y6jcc0evmksbib7nb3t4z6o5ighuxnima0793lplv97njjrdy3lip3h15bfyff4ygsubs0kuolczal3bi2aswx7b',
-                receiverInterfaceNamespace: 'wy00s6uhikd7u6c6p1vhvkxkimjdnmcbgpfxdx80dthvc37u3y2shy7t5i0oqsty8f5qvitenq7yvgry9azgyy1ylyckbcqef9u98sxc4denjqgj9gvtzrda554zu2lvgci7blov5sxw1l2zm0n2cok7fdzsd6xy',
-                retries: 4910943329,
-                size: 4087732489,
-                timesFailed: 67279148596,
-                numberMax: 3539846735,
-                numberDays: 9234864477,
+                errorCategory: '61dvy8x2aq1zk8qol0wsm6beqb5qzanl3bok0csyx9xdcixb0feqg3y12t5hci6y20vb2wsjhzvikrcn4hnzivkabhtpfhenqafwsnzxjfrlgt8azqzulcd0vd7lmxlmjntebtgvnpnnbcsty1wkygizsym4fsnw',
+                errorCode: 'nfrjuww7jb3nt78uh49mvboxkr7d0w7uyl67xzdrzle9rucppb',
+                errorLabel: 823122,
+                node: 5500461805,
+                protocol: 'v81rm0ftybwa076pwxzj',
+                qualityOfService: 'jx8ezvs2jn0hkxm8ipts',
+                receiverParty: '0p4ucg0sek0pk4vqrsvib5ue3qohlwf6ohpo6u8oujbzvtnk9zvrmfda3mkzs51c3217ux2uzwbsaktt2pppk1are8akzcd7qrcgkjlzprg97t7wn601me4gek8jmaavy5n8r9bbj2udv95yn3kyb2gkskevl9ug',
+                receiverComponent: 'x9p74vlbtvb9ko1i8o2u1fjz47umgenuoqkvxqn4avd0nk8beqinxo08hfvq70vcxh2hp307wwdwjcbdzhkego1z2azkyzjyize54dy9qdy23rtwjljwgww2bmad5cbqfdib8ufzkywh21ukfm1z8ivw5du69izw',
+                receiverInterface: 'sya20pumjsl1cgysqac78nejt7scxvj44r6aj2um5kn9z32i4rx0wcfpfsg4e98nse2hkmni4k6suggoymrd6hr4ec98uq76vr9xdfayteuf7zrncvfrtlwt6du532bakx82e7ifk0bekzwosipsfr64tlylbtz0',
+                receiverInterfaceNamespace: 'cussdsgig2ztuy7oa1uhctz9ur4hx1ay2686n0wsedsqp5m1k47u4gha51lvwj5agjdsvjmvz06ztplp27xfbu9pdrlbg309tpbhj3tvlgdz3d6kmuvc0ly2z7qeb570xpbc8yb4r58sqsyvtbdpn0w4dc09d4xj',
+                retries: 8305230687,
+                size: 3245364539,
+                timesFailed: 96788205192,
+                numberMax: 7417652306,
+                numberDays: 7749839066,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailTimesFailed is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberMax is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberMax is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '6d70io8pvqoj72pzkeph0nluatuf5z4gcarxd0x0u8g06zagi9',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'eksclhqxkifhms0thkhl',
-                scenario: 'alsc7b1d4trflbnxbqxx8byup0w4g2wxe41azs7pytyd5d2sn58rilwf39vh',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 19:55:51',
-                executionMonitoringStartAt: '2020-11-06 04:12:42',
-                executionMonitoringEndAt: '2020-11-05 15:03:01',
-                flowHash: 'k1os99xm6tq9e1weiv9uk8wnnvtn459c2jqxq0wq',
-                flowParty: 'zz0dxvqegi3yid94ecnv17zg4kukndqjzwmkqf9rnmnplmap9figi1ky5jnb5u79xgfryfpobfahi1oqaz95f5ijyqpe78oos3sgkr5165ghl7gfs1o1nlqyo3h1vt0xe5nrjppr8rkg01i3tgau2s4lkdddrszj',
-                flowReceiverParty: 'q7ru5e3kitcc3suzkaiooygyxvh7diz1jy0ec26ht3njsnr36svs3vqow87ap5umeg0oajg76zwi64x3bbltrho06i0epzpkbq1mqyrekwu3si9pdap3butmvcx3k25fse2qn71lyxjgmsvn4alqx13odtaq759p',
-                flowComponent: 'ofo5e6aogyxtwp0vurpbrqvhy4ifcrnc65w3kfsts93q31pyr9bbd5clvml1vah6zzdcarwy9w7bk1rfqdeqzyn4j91lslew4ldhrb68om6be6eefu7njnh0cyvd51n413bcmg8juvtl5yio5a9ef5uic01em4gz',
-                flowReceiverComponent: 'jebz8wmofvx9llsnfcuqoy7esw3u5arfnzswjmrwpyqf6n5hkoxe2jxt2p15jk7ah81xp7vpwvuqtfn91jpj9lxdycxom07tmhgtblwghidv10ntpzezzmvdenfjgxox6ksico1eouesocc5mynkpwwtygrija46',
-                flowInterfaceName: 'yohwk3w8npcm1bkz6joxuqax80vo1iiadlv1nru5t2m07cmzclz3bznbkbaan6ax3755130006d82ot71neni8uixrhphuatui65gab9k70eo23yujxq8axkl5woga23sabje3ufhj8rp47oqfk6yi4x8fcwfjdu',
-                flowInterfaceNamespace: 'lkleghkx6jm3fwajctp81tcg0xnhc40x8ilg8twjnh41d15d1ole8o9imhebphmuudm95ra1683jpaoy4qldcuyh8ufd915s8mt6l33rpnbkovkz9lb12l5u98o4ct8d7dqfyzve5okvdn8t51opfrmcg8xi9jou',
+                id: '104f768e-71a4-495f-85b2-039dcde85180',
+                tenantId: '0fd988a7-f0f8-4acd-86a4-3a802124055b',
+                tenantCode: 'kremx53klc0eo55gwlxnkzx7qmw7brl7tmf2zlkyghvxs0nqvh',
+                systemId: '60a744ac-cfe9-4c4c-9981-2f96176368ab',
+                systemName: '9u5ireuigprleyc538ju',
+                scenario: '5tu9rybcy5kasu026t6pi3rlp2zkmgjqgou8gbusbbffwx9pljwlwk45w1p0',
+                executionId: '41630367-9b3d-40b2-b92b-a7e8bfee9a9b',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 00:41:23',
+                executionMonitoringStartAt: '2021-05-23 08:28:35',
+                executionMonitoringEndAt: '2021-05-23 02:54:51',
+                flowHash: '9fifbnty80h09oyi4783thud5z1bphbnulxac35v',
+                flowParty: 'ywpyge7jj4osov8hmny4hyxkko11mk4x8m927cv6nas1g2jlc2mbstigfo7w2fqcsv78fd9xkjj7evspybo5joblyj2ojcetcat6gqu5l44y0osovxhdzwdw77ri2xsrja19sehjbzgx1hjoz3ao0o630xnydwun',
+                flowReceiverParty: 'ip050yvmygzsnovx7817ljdbw3id3663alchdovzr8axktmx13fbclppwy181lbakm6ap86xggeqc7qdfofh3wsa7onvy8devpp2zwit0zm1dpssewtnh1q4bug29n8mr687al320qvtkkzhsucwgj4o1ruhswv7',
+                flowComponent: 'ktnpcwib9fmmejnm62uiux9z0mmzqhwczo49hx1rl6xynnhw09jd6d60ehtq6mqx22vtfwotek574ums9o26w558nwqwuabniwp0hldnakyo3s82qvjkg8wdeybie09flcrahao7zmcyc00ub7b565fleocac8ke',
+                flowReceiverComponent: 'gtv7b7l3d42gn0cxt58t96sizchx36mp1caouf404vf309yr7wuu51izek2onvwd10ntzanh2fzma1ac4opm5vrpocolg1hnqiyinuer7rd2xi8c7een6ehl4y64utcwgiog6a6ejm8oz6ej807lmuw3a8kggw5y',
+                flowInterfaceName: 'ilv20sz1czbhluxkdlxl64vuo244mubi9c0un3jdmajlnts2xm0obw1omjvruq89e22l20x9ws9zupji9z8ugoljuwt4trdlq0r6jv4njr89vjf6ygcsy5jktym8dmxmif8l618rpwrbogxliasulb2u7vi5bmmx',
+                flowInterfaceNamespace: '1zoku019xyxjgebvfrkyo0gst0kgu4zi3vr4356rlt3qqg7qkfzvq4e9i9ddwoi5uzewbhwrdz2cyx0awgdppdbgvt530wwfy1ilfuc4pmbk89kdu8xhwvs6eivsvwu6aavgzy5yxuju30jlfsp6mw19qfcyqp4l',
                 status: 'WAITING',
-                refMessageId: 'blvpbh96977dh2fc7djbtsr0lr6ukheh0nxqbnqeknog6xzr9g8mt5vbpnu2lh92clkdb7wuk65t3hmob1wtq6utif5nb3gwu4rn39j5i6fv6hq9bz44dph7sppbthn88punt3kep71c3n858y8b0hdosbfjf12s',
-                detail: 'Temporibus non saepe doloribus expedita in eos qui dolore. Iusto commodi officiis modi maxime commodi aut. Ducimus officiis ut et numquam aut sapiente non.',
-                example: '51qfx2kbmuluuxkxh5pw5g1o2biz6p1rsriiu53di06duahrk1pta1w543f8f3ksqp55eabeyosnc8a33c4bpbci3dnytlfbe2fg791vv74yji6jn7p1wwzkepwtia9dowhn3q29er9qk4ny5fn2eeiw11rq4j0e',
-                startTimeAt: '2020-11-05 19:40:52',
+                refMessageId: '0rntyaggx11aak8pwp0j93vu7dc1v28ivea85xrlwdp2b7rlo0kpxbx0an3emuuscta1q015gyaae9y2lzfn3slld3gul90d0jwgopbtu2udssus52le5t5qox9w9ow41j0pd3xya7fs412l898d20g2ql0dz9oj',
+                detail: 'Et enim eveniet similique dolor quisquam qui tempora est iure. Laboriosam exercitationem voluptatibus temporibus enim nihil qui neque rem autem. Quos debitis mollitia voluptas sequi qui consectetur nihil. Consectetur nesciunt voluptatem deleniti enim. Illum et expedita nam perferendis quia. Aspernatur optio ut eum.',
+                example: 'kv00desp464ladwjfnfbarq5dvis3zi2igf5k3a74uq31qd10mo2l03p7hdv4eyhg459pfqoevznkjl5w9hs8hf0l10zgz9kwelgq94auj6dphho6j0dqi8ry1t4iuwrrpgsm2hrjr8i316t655kafo63m6qwgs2',
+                startTimeAt: '2021-05-23 12:16:47',
                 direction: 'INBOUND',
-                errorCategory: '10v3g1tr7rdnjormaoh46x5z384aqu05rth1bt47v5sg2crkwvfzojgn2vxba5c3oungamzq297h4jlfi8a5nkjm9ffqjjlqph0obqucxdqfwdvudg1s7x5wfz42dxvy7zl9kxijmeat1wpz80q1v2fil4p0suyg',
-                errorCode: 'm90e6s9xznqbejgynk9okc780fgdinqh4xbxm32f84ejmae8j4',
-                errorLabel: 895212,
-                node: 7084247356,
-                protocol: 'a3ou4439fu79to4k8hsh',
-                qualityOfService: 'ky4xfsfxc2kyirnw9b5e',
-                receiverParty: 'os742xrxenunmle61ch0o9s2fxbb7fx0e4b8jq1546fruwqk1f4b195nqvvjhx2alfrq3m98wccdxgjusdy3tp1fg4gikkejfwv9cx04q1pkrmyym4l3erxn87dph48odrp0tccalscilp647ndfuryn6ck2ib87',
-                receiverComponent: '1g9grio42zq2fb9o5ig1rxropav5vk1ejrho28bspfdyungdd46qvgyksy3dcdexa1sx7fyz407qhlfe1nnq9eo2jn40dqx9e7qr8o9rx08xcgyfz4tfzd2qot7sueced9xqp8i61pgbu6rosl6jdjtsuvtfnasa',
-                receiverInterface: '0m30au2i6p3peex0dduk9y3khk1t7owbkp7iihqfts3yo72bo6s3zx2x1h40ppb9ywk2ejtoxnvx3lntygybqbf7eux9owf9ser0pg2hgzt5f896qmx4emjdlwqr8i7s3jirkb8cdbzqbkct9emh5tionk6frema',
-                receiverInterfaceNamespace: 'pef89fouddalm48p3qwpx6wbsxpszul9h5hxakrth4woq6l1v75028axfp5mqmb1h9nqlyqfyul7dq6tl32rwf40vfe8nfjparhj2wgw21ru9mdg0ajw4rp1tpttcp9mmrtychp6qle8jjkthq4cu7eiwtzxe20p',
-                retries: 1034457064,
-                size: 7039987113,
-                timesFailed: 2740389518,
-                numberMax: 39716416919,
-                numberDays: 2413283075,
+                errorCategory: 'ksblgtyrlyn06t5j6aucpbj1g7w1drblay2cmevpofev7trueq67ku3povp859p76l3mjbpzagx3u2tecb2d5n0sd6nycz5lhypx0iib1k4sjoier7quzfgdyhpkxcg0sauutmjrcos6g9us6lzwp8x736wp02zl',
+                errorCode: 'e43kop4h01dhttqbvhu8541u2b5ajn774xwes89d3tiu4813qz',
+                errorLabel: 162544,
+                node: 9644887465,
+                protocol: 'num84u1wh1jyr74tazbw',
+                qualityOfService: 'dsyynlwa838gmzzb8uoc',
+                receiverParty: 'ffv2dl8jx78c3gx3jrgtdzeruezn0kfn6da863ysgwvej1e8y04a3i0gfde408nw6odr0feu9svtl9k3p5i05ctr12n0wn0oqeboqdx1fcmo63f332stq8s9335bbj2yoy5wslxxn11cc4to2hrmuq2lgm12u91s',
+                receiverComponent: 'ddexv98d0c2ydu298uqoamkcpua4outs6qcfmimwxpg3jrk0xq1szthe2nhuoizs28jwl9bbvktpjzipgk40syga5tm2kdjtyqwyxw974vf8uqfytam7cznne46leezbclmm1l11xq0i1t5mr6u3qde561vupcmn',
+                receiverInterface: 'pfk7a4o6wvpzyn2yenk9k9p07jlficr9xp1d0kqeprumuatrflyl7qlmq0bqc5ix3lvfeacpn2iw86fkxluabl60zdh5dvbwxd9r74k6w8oi3evj7c4ga0uiy6bx0se9i57wj1yddhfnqhpqutj2ko6n1sfkcdbg',
+                receiverInterfaceNamespace: 'paaw24opb2v2aqu7g9z3hnqiep47rseqkms673di96dpoqccmo71iyimn1anfszf6dxjzzukjh237fqtzu14sk0gnm6v9qpgco9gestucur4gmp18kwomkhngzefymqzqo4f9ibsxzcn1u8p1ilp4o5b074wqij3',
+                retries: 1129639642,
+                size: 7745264215,
+                timesFailed: 8481160443,
+                numberMax: 41902228292,
+                numberDays: 1472324682,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailNumberMax is too large, has a maximum length of 10');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberDays is too large, has a maximum length of 10`, () => 
+
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberDays is too large, has a maximum length of 10`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'jt2tb1sugmi8jimgox36aul9kryrh54skeazsnsegdqszvscra',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'fza4lfp2ph37lwtd9lnw',
-                scenario: '6b1gyczdwjzashoqvhmyafc42c2r50xoamjcl1pztkq8fjmd73wwc7jjgfa5',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-05 18:41:06',
-                executionMonitoringStartAt: '2020-11-05 18:01:15',
-                executionMonitoringEndAt: '2020-11-05 13:40:05',
-                flowHash: 'zra8z4pylen22efg95wgt5xlybb5zr4vm1h9gdsc',
-                flowParty: 'p16c6r99qrwuz4k473pvqki9o5g70o6sdi33nlnatultlbfnyegkjyf4ci5j6qzsfl6c8t2bj31n19vtowip00zvx1kl98w9t1vm9bn1zvxpxon8lt8fune7kvp24nnr89hbpdahuogooc288h3ce10p8s167a2l',
-                flowReceiverParty: 'dehcytmnem7et309ek09npq7nv43pdoakketlgqivk5lhvamg58dpm8l70fputg3cmxj020ru7bfddz10e553til6002gkhz09ci8t0iz7w5ea1h70yxj37r9emphtrs3jr51fon006dyjgtdjan06jsu37i65rf',
-                flowComponent: 'wql8dbkplqeuw0ni2yq1l75y41mr58eqix7qu02o0w7xlheztzh452io1hhkqkmpks6qgg15v53uzn8lap7o8v5s05gg0g8iaonglzo3v3yniw9vw7u8i4efb7x6tqop1dhbjqe7xbhkq71lyal06zjbpf8pbmgs',
-                flowReceiverComponent: 'j8qc0muxi6h9x6d4zne4yt6zgdy546vid392tkutbp8gnxw25r0k9y24tyxze2zlhxitykz02qs0h95holdu5kgaz4u4z6ybllx66c6uejqiiexqc5eevnj76ec99kofpqpgky3bevm4uzv2invz8ahgn7275ooe',
-                flowInterfaceName: 'oim09ugx3qic6lisyfxt4w5p8ah30dmrtbsqjrcu7tgeiiwb43lej76yc6nadw3dqkt4e05ziw2zc159nf0nbclj7q8cerq5gp9c4u8m2urse9t36ya3hpqkourz0d80ukl4kyhtjueadb7to7ejs289zcieatm4',
-                flowInterfaceNamespace: 'fmfdpr3ulkl8713l802bcwpljaohns6vznafpdvtb8bdet3b1spp04srrotjfi3e7qh1ufdj5kbo512v4dpy999s7nprdz6l3yrinp38rvfpcam763sdq2xxvuvrm7rhxi9knr8ighdz0bwyx667pn0zfb8ytu21',
-                status: 'CANCELLED',
-                refMessageId: 'dwhjhi0qn75da8c7bgg6icb4myyqu2b8hausmdxujo5kza85envug8hgesscn9ayt2s61bl89a94g8tjzcretr0wt0i82wzdk8w5mjkxlw4liqhqh9p6bt3urvfklke9csv6dj784mh4eqhuve58a5cu8dkzajx0',
-                detail: 'Itaque corrupti est voluptate. Aut voluptas veniam. Nam modi nobis dolorem earum sequi rerum. Omnis ipsam nesciunt et amet voluptatibus quis. Enim labore doloribus est autem quis ut sint et repellat.',
-                example: '4e1wh37tnyftee8ouddcth7xj5kdo3s8d5dqak0pd2g1ln1m10aaq8xavdu9itaci5y575l5n5jj60n50inwhnk2u2l9wfjeh8di8qkontuqrmcvmkd7amkyp3ye1ewcq3m5811d44z2b1y658zreci0y39kbw25',
-                startTimeAt: '2020-11-06 09:38:23',
+                id: '55657a9b-2570-4cbb-ab69-b7ac13308117',
+                tenantId: '01d4e1f3-fefa-4ea3-a623-c05f4398532a',
+                tenantCode: 'y50yci9pm4vglizmt466jjm8nn1gvhxmp4xxi5ysiva6cjghxl',
+                systemId: 'f7e73d0d-d48e-4be1-8d43-88f32dd1ae20',
+                systemName: '70vsbknji96lnddsd6ms',
+                scenario: 'xuqlle2epvue01kcf38lb4rvf86pz4hbmuelwcr1xq31oqdof5ka3podobkh',
+                executionId: '4cdec6c5-3f39-4ab8-acc1-0470dee6db5a',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 07:30:10',
+                executionMonitoringStartAt: '2021-05-22 20:41:08',
+                executionMonitoringEndAt: '2021-05-22 19:49:42',
+                flowHash: 'ca6lownd31mnla3ibpmzjnuvwafhbxrqyu3svp0c',
+                flowParty: 'tojw8mx52uuiluodqgpwsw62ail377by8pxnq456a93i6avm4nwg1wypr6bao4vwv6x69qukxikx4cm30sfqqxstclr4tvtwetzp5o9oxa9ir1u0jdlvwjwoxp2yzbeyqd7qrzu6ala3pbnp1kou28cjm9qppnxt',
+                flowReceiverParty: '3q7ukavxerepybqletr0iig6f1hfrmxt06dvk700s63k9yrwtap8t09ql3zszqpov5a33ax3f8qgdssoiawbzmtc34ow69kvknnsogoh0gg8oste8407frtf0uv7xy17graykrn2anxv03kupochptcwsz58o257',
+                flowComponent: 'jicu7uyjlxqa0ki3jqw957xyx0ucuo84ams14ffuaw1nwrjjta83xvkhprvoexu2tks4dr8r43rcv4yn3pblzg91uvmwdy2hlify2kofdmualykcf9y2drit11wmph5xsbzjfljc9r0t59p56m2rq6anwirl8cdp',
+                flowReceiverComponent: '211d8v96n1fviejj43n35iv7fayk0nc8uvqfbqknxwxbf7fi6qydlcyp2c31d3hou1gvgz46raec5ndjv9yfrx3kp4z4538p1jdhvr0ky3v1lm0r3eb0hphk3mt81ykthzsgqfxbcknlgeyxdcqvvvj655268fqt',
+                flowInterfaceName: '2ta2ycgm4s6ne4hiq3lfsl3d236kc4af3qoagqhig9gtaqulkj1652ci9qjxmfrn8uf2sr5w1rno8r8a92xhxrbc96exa0tpx1pxvbyjvqid8lvpnlrcrukl75v4cov1c7b9me9r9kc49nc4ifdm6grwjbbh98u4',
+                flowInterfaceNamespace: '5t0xepppy504rxkfsjx6sqky5l3e15qjxf5t4u00quwn5io3pv0qopw1696s0jvjcuesb5gdhag4r1hx9g4phpdwooz7tueyibkmkett3fc1dgl9zce2smwzf1t6zv684moe5f3nzdtggrqxzjfped00mngcp45b',
+                status: 'SUCCESS',
+                refMessageId: '28w4u4bahztl4k89k5q1nuenog143sxe7kzjib7yn2un1osidc146cy5y0wu2lrvy40fx586yv88tf5hzj2qfgklaq0bg76dmii3l97wtsqluelb08m4q39ushmru58q8oe7io3vjod472wlrwco9u5qp0r72oj5',
+                detail: 'Rerum corporis facere unde et fugit dolor harum. Dolores praesentium fugit quasi qui. Ipsam inventore autem ducimus quam et odio vitae officiis. Illo ex repellendus. Nihil sequi doloremque quos quaerat similique voluptatibus. Alias dolorem iure voluptatem.',
+                example: '1xhh4u4ncl4qgwf3bnvbwpcksnm1j1cjxsvnzrnz8rnz1gpze8nhvqhqn6nw75iaa1a5rjcr4tmpf2c2uivr9enp5g9cp81akgzvqg4u7y79exwl795rnl5ncnb4fc8fkspgrgybg669yy78j95vg6xayx1ppqpk',
+                startTimeAt: '2021-05-22 15:20:10',
                 direction: 'OUTBOUND',
-                errorCategory: '5exlm359v37o8nfxg6f99c1cuv7d4zu54kr8pyxahi1fqapocbhzminqrouccpzi5jnrsdocl9hyqep1i4fd3xrt9s1rk251jhf0mgphxzq0r0hqlk8or62fbzasd8l9xzhwdlvxxsv88i33mawvpad4cvmfjv26',
-                errorCode: 'lk5t6w5bovyknzvl4j80wtf7f8v9lhdgso23tusuj2lh6xe1p5',
-                errorLabel: 321149,
-                node: 4920833640,
-                protocol: 'cn4otqe7oeqotf4g7x09',
-                qualityOfService: '3kcn8mlnpqhoenm0pyfa',
-                receiverParty: '5fnwh9fangxhhvpmjk65q4qpqhaxdb7ytydsbg72oby6nufcirq2br7ehu02bq4p19bmy6vadcz10c7velpm2uqnynukktxbtsojhvc0fk6c97r6omlgfzq1ib1qk0dr9er67mul7n5sbw04nhw8yjhd8bl78f4s',
-                receiverComponent: 'ca5f20mtjlxze94ufqoavz635wx6sye3xbd058phc887nsmu4qon6y18762ysnatyzd28i6rhbfpelnpt1v7orsw8sbamwfvgaee4dxn6xdiwjr9tcbo8py9fdzi16s5zhse1s0blle3rofcxtlo5gkx1fhrcd43',
-                receiverInterface: 'dtn67nqk9ldfm0xkky6z1etzyjgoznbt1wwvgp4x34mlibloyznnhkvybiysrahes0l8fubmlkst8jtnucdpm0rug35zc9z5b35wux2r3jb7hjwzsl9xvdwt54ysspbo1pjf1lmkt4gx5mgc6h502vxe3djybdkc',
-                receiverInterfaceNamespace: '9tn1cjgxprmo0zlouwrixlfmwq2fcsud653a4q3ubcju3d9x5qj77xl93dl5r8iv0125cdlre1ztgydr0fesjy2mq759fwreqk49kidchdy499v6q2c8xmk0kuhibsj2weosc1g8ttrktdkev56oiojyzwihvgkj',
-                retries: 8366076055,
-                size: 7996962220,
-                timesFailed: 9019996944,
-                numberMax: 4943219891,
-                numberDays: 45339251115,
+                errorCategory: 'm45ufnu5gtwc2v4vn7rwfoko425k5im5oc5wn7s8y3tx8j23jz78jv2t1kq381v2nx5di6t29wm5jsbyirhviwwclimy4mqmb14cwdyq2xy1yw67pop3fqph7k9g91do3rhxg1gqgo0uuyyexdpdnmnqvepjftem',
+                errorCode: '9r022wuuzjtr7ey3zhtcwwmw19k4wrsumqgutd72ylygi2j6xm',
+                errorLabel: 465810,
+                node: 1027160418,
+                protocol: 'h29mwfk0vvkxv3g8a87n',
+                qualityOfService: 'n49s2gaq77ntcvdrdhwi',
+                receiverParty: 'btfekhn7ecl8w0d9atgafb9twfce2chifa42jpydo6bf4vhm0ixrk4lrmmyeo4q6hgvsay6w4dgecflmb9n2l4t3pnnc8c2ne5zlisej5ilcc96pr893p4wdges2u3dyo7v80ifiatvecd9djk2ohfobdedtz4x9',
+                receiverComponent: 'pzgkvmgqjn7t9300pfhjgponu2e9cw4rikbwwpkua4v3t8s7glhcgc9qx14eemhy2g83fdqur215uxr9ju1cu86w89cs9hoz88dk51y0kelf4vgsqylf4pn28rgko9cqku2t15uk3nrhbz72na2ex8jcj3a3p22g',
+                receiverInterface: 'cqfo3ulu1j95opaf62c54xd86vo7yv32e8gf71drzywdwxvpuiqsli8prlutrhlnah6oyby2k8f3z4a1sl866xjj3yxm6szwsic1mzjpd3dgfwcy937ft1stfv2ic0wnwhvvwpibprvp0rhr5nle89sg1w99llku',
+                receiverInterfaceNamespace: 'rja4637lwjd2lvdakfcyvlnjnplfmvt6psbyh5g5ut4haarbbd47cgy716nzrnnvkajv8wykv8wvwf6upjqrn2v92grxbaq75giuen6g5aedouwg48tk4mm23qs71qozmtq03mtoe62xxr08cdymgrm460t1ywdf',
+                retries: 3917784457,
+                size: 7273025856,
+                timesFailed: 9976388110,
+                numberMax: 6644627256,
+                numberDays: 50460352390,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailNumberDays is too large, has a maximum length of 10');
             });
     });
-    
 
-    
-
-    
-
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNode must have a positive sign`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNode must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'a4571npbh7hccnlua53whyyn7f9w85y4b71utifyn39e5os6tp',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '7vvdwrkdu948u5h8zxse',
-                scenario: '0k3scmi09apy4n6denued0fpt2frbmshmf2hl1j1z9ty35azoim5chp62xuq',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '2384ba01-8711-4ad0-9a06-34dad8877d57',
+                tenantId: '5fd2debb-0a77-409b-aaff-f03150abd62b',
+                tenantCode: '3vjm6z1l1m91zuurp8cmtp883yqcj8ulltm2ohx4oos5hmu7vk',
+                systemId: '574b1849-fd3d-446a-b916-b828002e0469',
+                systemName: '4vc9ednpyb5nvh82n8v0',
+                scenario: '23kyqp8wvxwf8o55nmmbk7ypqkdcjidrp1n8n79ay32lzn1recoww47noevt',
+                executionId: 'b890c3be-6212-4eb4-b6f4-e4bf99693309',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 02:47:10',
-                executionMonitoringStartAt: '2020-11-06 01:46:59',
-                executionMonitoringEndAt: '2020-11-06 07:55:53',
-                flowHash: 'x1o3oktonluwf5kcoh01msl1cbvnhi0mp39aynws',
-                flowParty: '1eunou99q5inkm348odtira7i4f5hpklyrnjl74d6hhlgp3aic0etnvqltzbzl7ttxhupseshwut1j7h3m5tlpbiee52dobta3a96vdw8r9xayg2xju5yzs57kpj8v5u0bp0mznsynz48i5euq15axrvsbdkl2sc',
-                flowReceiverParty: 'y0ij3lelzc284giqmg3jiinw702rc0766i0htd3p98euhdfow2p2y62iii7iagwuwkw2nmx3v5y0ip8inktfiuoos4g0hj1lwhqiqfq2kyrwi2w12a00lrkht0kwlqaat838g67e0ov1oodsw3vfribr7ahj0q03',
-                flowComponent: 'x167npa5mi0o9lpotelzzyh51fjn2m4jpfm7p90i17oo1iuy2vpywaf53bf5h6tzdiwzpqsqvu6z1zc5ivkzkoy0vbspwcc86l7ef999guhxr7a63u6tzpix8t963iqpu5dvzbzoet1cvq8s2ec1dj0hr9w3o35s',
-                flowReceiverComponent: 'w1isgglqbh7uqkdkocdwnrrqp7vku61t2h4bcf2581830y4byiuw2i3mif2h8ogf2odiqby049zw15sb8akfa07wloqcq7cz6wnz9pccv1a2k30n0dzapbkv0qauqimwteqg4qb8rjparqrw6njpptrqy98dai8u',
-                flowInterfaceName: '0ukdbdnkpmbzawctlnd2nlz6o784e9uvy5f2as1r865g9uj6s3p858l2osoukfg4hjqmuxbox7hrf5qnos9ndb8konrd490zme3oqkkwghi4cih3fwwdf1va1e20oncr3f8nfeqyrngk1fjfj7s7csr19l9poauw',
-                flowInterfaceNamespace: 'zigh725rzbr4zt70dnx79ff4ig1oe4sj8v08f6c2wfoxxvuie97dm5lhul4m59cqucnrtnw79oshdb3p8urm1b0q36h9vuo4qxqy8duzq86j63w2hveu6dk2sw1olppstwe7rq4ja7kt05gvkdpj9kzpooru83ii',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'c4t7zmaj5ym2s669yjz4z0vzfjmlwdmn0bpysknd451n3t8o5sna5zki5m5r8pseqat8uaikuqyxsu88r5styoqmjx7yv1f2dnjfwtukpghttvxxf9caxtympndh8mhp8dxwcnzdrvi907vvq7pk3pahwffjxr3s',
-                detail: 'Vel ut dolorem quis laudantium quisquam rerum reiciendis numquam. Qui perspiciatis minima hic ipsam perspiciatis fugiat. Fugiat optio dolorem. A esse tenetur tempore doloribus. Aspernatur ut iure consequatur totam consequatur cumque.',
-                example: 'jcxv7sn1ws2dwikcrynorgoycc83einw7xfdx3xu28dyfz735sr64a0g4sumnar7zgqhbuzrlf65ix0kyi9kt65287hdwed9pgdkljo11vuprklcdzfcu1au1y6wcppt5rx6adq86ra8q9wgyg3atgvyj0ykovk8',
-                startTimeAt: '2020-11-06 09:01:05',
+                executionExecutedAt: '2021-05-23 02:53:21',
+                executionMonitoringStartAt: '2021-05-22 18:16:14',
+                executionMonitoringEndAt: '2021-05-23 02:32:10',
+                flowHash: 'brnm7y0gu6jqe9yhpfyab68e5tvfu5mco24tzt5w',
+                flowParty: 'xpxtgq11mp5qxuwsic5xx1638yz57tzs9ovmrrcokl98jzwzpaf2ztf0e4uy4j5foa6wrl6t60lnnwwubv7bbuv98bphihccuyestn3ge8axbz4rohp5ivccna4hb0mowwafk0ih2tdyq3bmg6cn0gdjnjjoc9el',
+                flowReceiverParty: '6r6btojojuojbzvk017xnn3c06fns8hgvp8iezynvqyhrrsrogcyp1j9eu0em4v5huf6crzcdvxtov39xsbeojhse3zirxr0409b0svryp9w15ilu6l0lbmq3te3ufdeev55odvec10cy6e3zmw9xmbk7wnlpvfz',
+                flowComponent: 'x8z4dcmx70vc79mwqb4l6wnh58lth7ckfl4hluewb2wu142hhozely345qkl7y6r9ocg83zuj6hwkqkhn3s65fkfg5hfob0emb3y4k5wvdves8ke7ldamykko8a8nlyks7v2i9vpa1ltux4g3xy22g92d6q2iz6r',
+                flowReceiverComponent: 'vyirol8kqjm59au56vfltftopv1d8e2waxr72jb9oc1y0p5vezyekkhdjhx3nfdkz8d098k2615l0843874trki9h07e1r9tq23paotftkeupn6r724jmi03ba0tjk9uvz78gqsx97qbec1x4lfp40x8bra05gr3',
+                flowInterfaceName: '8x2nbiml83ag73lev1nmkxc5chucorckr5rn5pywv970kkfv1l44bttninvm8ddpborfngr0gdi0t2o8xgrauigzvpsnga5a4v3yhxxme39w4dody4udfjet4pqt6jkyf07oa4tk4yvpqs5vs1sia82kjhybb0zw',
+                flowInterfaceNamespace: 'v5eok43rlm30qmpcgnvlaxmx3nlzwviz1ivjfnkl4u1vu51kqg3z1axt6r5tiawrp5h4fze4sopur25nwczodx14q52gcq1kq0iir7aktl9i6k10f8e9nh03mu58sdw4o9aq2cyk1gsle2sjln9e4pc8coqppapd',
+                status: 'CANCELLED',
+                refMessageId: '808h0srjg7gglnnj5shbig11tynu59hpil4sgit6ed59sz80ch5tcq5a404t5wrjjzfs2l6hwngbob5t44mt5qwqsyptqqfuioeteou3gxbba7856xuh687v7o6vbxzenabi7yagrib8rnmupf43ro20ftwio8g1',
+                detail: 'Ipsa dolor placeat quas enim dicta quo ullam. Beatae eveniet aspernatur odit. Voluptatum ea ut fugiat beatae qui quo beatae quae. Quia accusantium et.',
+                example: '98k0cb1vdd1fjb482jr1v1ohrlg279gmzdb7kdluledisb4iqb48gkq3wkvxcznxhqx1wl37h8sj44aj5b0zzpzxfnl7b2pcws2sfx0otof1ji4od00i01noiyxq4vys5i2j77ihgatibf6quvdcu017cktevcp7',
+                startTimeAt: '2021-05-23 09:54:56',
                 direction: 'OUTBOUND',
-                errorCategory: 'icq2o6l791lowa4dru9y9ovna6fdn8w3vknb7q7n8erytr32ajwf7c2w55xkcvkun5uwopypvkf4245fgkr25in4u5mjehd910xxv78j7exqf67b9pey9zh7pj2fkrt1x9i3hbijbro8uvxitkldctvor4pi8q86',
-                errorCode: 'mm5mhestjm7jyib1iqlu5k3ldt8521f35y4vrbba9vdgzdffrz',
-                errorLabel: 216442,
+                errorCategory: 'pundwbbjdvkpdteyp5ud0qyt3qpe4gumzpfqjfisfluj3x0uodwuj9j2dcqg0trfcc3cfxxtfjykr8uhi137zw4wq9j3bafe2djvxnmovjj7e6kugqcbxo5ri1bwugb3sd4cs80w85f4y8netxyw675nnqttpd87',
+                errorCode: 'zin4i5v8nfzmr6ozzzihr3seh9jz5791b7b2r32c0oaaioyuv9',
+                errorLabel: 981662,
                 node: -9,
-                protocol: 'u2oww1rk78umetb8yj5g',
-                qualityOfService: 'xo7ysivwdv6x8u41q970',
-                receiverParty: '987dq31ldygdqrcd1nwfzv8lonftpd790srq6jxtuhpzr2lfxi9w8f951rwk3bdid1q4djzaswds68jhv9lw74yv82y9qqefvaxj5wr83lecs3t4ago58779gz1qbo47opmd30cl9gjbh8g9pugzww38j1y1qzrq',
-                receiverComponent: 'lqdv2t7fl6g7h5gcw092s3m0wxvdfq8l2836g17s78x592vgfi9pokp7qct6bofhjdi1633y11pdb0h4xvk9ie8q2velb499jd8clmk5fm1vw9uea55b94to14i1nvu2f8lbxrxqfpga07elg973quusaxjp53gb',
-                receiverInterface: 'q7mubqx9l9ubvxbjch2ih1y29ihbcks8alvgamwimcmut8m8gkumslz4pouhi958uhuyqdjuzqlcva5gxx3ar7zxge3dnyqs0c0hauurkg1cqflpr4mnp42v8289bgez2kf7chi20oa7355x1xlqe7k59uq6oijx',
-                receiverInterfaceNamespace: '317zgex8859kljjof91w57i3q6xakxa17zu86exr2545s1jvrj8m9h65qtso0zupegm15f583pcbzjmrc50vt6xvm1jwtf2anli65whujahlctychzh80v1kizdrrpwi6c7swntuxv006us2qyn8icbn65dw2khy',
-                retries: 7081488505,
-                size: 4168607066,
-                timesFailed: 8390748774,
-                numberMax: 9407074526,
-                numberDays: 8684785144,
+                protocol: 's4vusek9jhwtdm5epvau',
+                qualityOfService: 'jk2a3wyrct2nf8ml8nbl',
+                receiverParty: 'lbkuulpryo51njohhxaeb3h5w09ub2k30haj13ket90emcdonbojbzv4ovszh6kxsdiofcgusbniec78ht29ooosjjqnlhf7s0yvvzbzc4mqe4fzjiyzb9tuk30xcfznqzem2abxk3xpb780ubdp6pj1psz7s6qu',
+                receiverComponent: 'v8w9wkmm8tpq20mhgtxy77xrhecd9xf4200rzqw2txodyqcwbmbg79beak4zfr2ubj9wlg7p3kcrmh89qesxbznjczsh6p2l6ze5xaiwxdounlfey3kzu9cz0pmf1umqj81n5u24jn12g5poxfzq3eo0t69qaq4t',
+                receiverInterface: 'ya1aowlj93u4bkfhfqn5e2hlvwz2th12doa69nzfphm8r9fvgqpklh0jfsd91ah8re5cnu15gqts5fmq1dpywo6nhid9ro0oo1uyqmbrd0xm1ma2jpwm99drb4d2bo40ahupr2ys10e645z4p8bwwinilc2m84kk',
+                receiverInterfaceNamespace: 'x8wxf6q78rd133h26noybfez9elh18eyt5govsm69eqozxmyzoo1dsznnu4pjktrfsqtb6q3nqtdlk2xu2ten17fq9c5g5qgkl66kerxjufgi2zcdije7k3fv74rxwtrln960chj25b75grdl4yqkefcje2mtx9g',
+                retries: 2226155899,
+                size: 4941343774,
+                timesFailed: 3153879753,
+                numberMax: 4894067675,
+                numberDays: 8443964184,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for MessageDetailNode must have a positive sign, this field does not accept negative values');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailRetries must have a positive sign`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailRetries must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'ioarztgcwrn57s9cc1ezrbcx7jll0j81b3gtzy0t5kv3zk7vdf',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'ziq8iszb7pt5pbdg3513',
-                scenario: 'm7f8egma83voba5ig6vvpqyi4rawndqo8glsk11krlah97041nijl802kaio',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 10:32:23',
-                executionMonitoringStartAt: '2020-11-06 07:58:14',
-                executionMonitoringEndAt: '2020-11-06 11:22:30',
-                flowHash: 'zcbydbbqjec2fvzhk1ytzx7oql3oc6924r7iu029',
-                flowParty: 'm3l3dtnxc4ue3k9rb8j4qw7t0dxlyjtwwrjs1zqtj81plfrit7vw7ohxwvhmsgzcxu3xuvhc5yrxvcjs5jk5ts4urarrdzv0jlfs8jjkk84rqtx4z37j1k3c42sby06884wu73yia38l9n18s4in7pi18ccjzy7d',
-                flowReceiverParty: '6cwm8d3zqameoxczliu43uql254kfpbqc0mc7tb4mk5kgg93v1byjkfpax2z6qj6009ywzspxlafrvi8ku3obhpebmqmk5d0lsjfeiilphe67e8jbawr2aa3q9m4xkrqnab9bdl5ino14b7cjpla3cavcelylwxy',
-                flowComponent: 'trfmbipbqclgk8nr4j3ningb8o0341gceiq0ko1j01dota971nyhpvi05f6nv0p3tem6zntcr5h98gf620tbaswwshwsasq1rosq2tuocmpppub0u730v8uzq8n4ckmk8rbdno0t5rqraer9uzujpel44xo07uwp',
-                flowReceiverComponent: 'lf8y8hvm2z5xp2c3jmsug1tei2u68nllsvclvjis97mnpnwofj67wqokkp8hl32g7ylrdimy3ntu7wjva91o49df88qe3oobfmm80y07zg5z4shydmqtqqlp05zpvs2twxi9dzisv3pnxiuh7e3dnr9pz967ydg8',
-                flowInterfaceName: '1hu9met179vc9irlhfe5mf44oe3432teo0cyjz40lc2xo33lzvdnn7gt2ktvibqa4l80gh25doss1h2t4kv70i6lmrqozec5ge2a5lk3f86poxj2sv9fwcvg3s2y9vctl7hp2oet2k4nqisd838d9sp3jmoquy0t',
-                flowInterfaceNamespace: 'up5h1ne03gqi17raadxl0pjcmnwewwhc5fsmn80nefb791hyf80njffk5dnhasuz6d4cegzjy70z2d6gxaj46ri3zknv1kgt2o7whwjba8pze12e0vaujwnb6vpr17z5g1zp7arc8gqdc80weoowsf2w7kn1w67j',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'l8kd6zf5ycwsub11d90qms23hi92ouq9hc5hidzy9pdc67mp6orfhnzpo0xtzm4pun93wclalhthac0civvu5rxanwc825u1gp0g5291erfrult6v6ilgp9k8j7de2zesm2bqkwnjy3a2z00r0hv17jhxsfgenm0',
-                detail: 'Veritatis facilis temporibus quis quo facilis. Voluptas ipsam in consequatur recusandae fugit expedita. Nesciunt sunt architecto atque deserunt.',
-                example: 'vzkfy9skdh6555jj5hiwo60ggmfheye2ks49oyxdtvw7soi2x8im0yjdiy7895xqrfdljbwrsf1ku5699da910bpsmgeamojz00qp2mt6rgqhpkdipjquh0fc6yg00y2he6ryktmvg3nttlnkabrh6bros81pc8d',
-                startTimeAt: '2020-11-05 14:07:02',
-                direction: 'OUTBOUND',
-                errorCategory: 'yuvnv57lfmpkpzkvux0u5z5z667aiflqanuc43mw4jp150o7x693ysy77uiljsqle24sx1kfqa0hcc9ihiesb2cdj9o6ee4m9an3rk836z60gdpwkjf3znrsogkedrvhyql6cvw93lxv9mae8geidx3us2qwof1x',
-                errorCode: 'prdhq4owuju7ljufbd80cwcpcazxp3yh5h3eer7kpimkyr40na',
-                errorLabel: 778606,
-                node: 7286053889,
-                protocol: '3b46o5zdx9htndj09vub',
-                qualityOfService: 'of8ptuw06nylr7ptdnit',
-                receiverParty: 'fz0f5vhsa3bvpwctt6ax1pp00350g1dsxdxwduv18vegqe7zwl0xqrdsi9qdc6u9t003u1wnnfjno35z08f7q4hly35eba915jlvk2rmsith4tpcvfn9jkhzj4orukcllvq7ndnus07qhccos32zmjnyvm9vg0j2',
-                receiverComponent: 'bb029s2co2tzrfyuq3n52tt1kpa1pndz4c8mev2klfh82w2snrnucp5v8txzco4wed536yzc9qfwu2n7ekzfi5ytnqp9k0j6mg5nptuai7y7zua5yohnkrv4bpwkcv1bi5ottndkjl4plfq2jw5j7rvxfkrwvuvv',
-                receiverInterface: '0hwn0i4rghe9bmrx9c4ya9dqa2br94gtfd4jmte0llp1q2ixnzw4nvq2aibkbr4u5a0zbzd11v6lxorss5s1n2th3h8mokmy0qvfcp8qd5uykuc418lspysa7s9f3e33a3b1zuubsc0hgcoqusnplxah37y7aou4',
-                receiverInterfaceNamespace: '5ul2oph3psh8lmtprkpw0a540z0hudfvgwc1lcpzmd537a9f12y2kh1w46siy1lrp0oc4imu2bfap3oe054sqozixcjz0k7u08lx9jw0hvga29sjrc31tmdrabjeufnjxw3ezt3t5uznhl1xdxeb8u17djj4jo2l',
+                id: 'b0e8c2a1-5f59-4bdb-aad7-37214723f254',
+                tenantId: '668e45c4-ad09-424c-8856-b85399aa7213',
+                tenantCode: 'lq0zp584zas1nf29y651qf2o0lf4xy435k5nvrkyvptuvm8w9b',
+                systemId: '41ef0af3-b816-421f-b22e-68db208b7cdd',
+                systemName: 'h817wge9cx5f56s6m3cw',
+                scenario: 'lap581dhw9vqk9r08vdu4reydbkyia6qsp6u94iduvkb1jzgup0mpsneebvp',
+                executionId: '6cb6399f-d4f1-412c-a332-9d6c113dbe08',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 05:40:47',
+                executionMonitoringStartAt: '2021-05-22 20:37:19',
+                executionMonitoringEndAt: '2021-05-22 14:34:41',
+                flowHash: 'x55s7ihu98l19ccs1kw4250o61b16p38yu50chrk',
+                flowParty: '0afrdq8dt0cbosr9fhajfcxonnt8sc96s6bax72hmq5bbmpjhd6vhwgnjxcqxp1d25sse6sm0b0c9e73w5p7z69s5pbj3fia5icy292sks8c9enb3xq2331yj4s8hvkp4t5tkylwsm94x0z8vcm63t7uj06eohs4',
+                flowReceiverParty: '2rpl0rsp1aw98ziq69b7xdjls2c652o6zf3ljanfq6fog1roerqw69ssd039vfjec3wwcwplutus40uo3m37qbrshwsbbkw6jcghnau41fvvzyp0xyntn82p7d2rct1kg73sl2ymisiy7tapz90u0ornsh41iruf',
+                flowComponent: 'kwj9msjzzp2j8j259pq2bsc9zoapdqocbwv6eychnkv8z8jjc52dw3xiu3l6lxczfve79omfxp4xoqtkgpqzgf99v7pdhyoxoakbbpd5d2m930m2bw68se8v7mrh38lze44lcczlijng7ny21rj0zu37yyq1cc0t',
+                flowReceiverComponent: 'e9exffu3wiwgrg2egepm37l3v5rupgnbhv716qa4b6hye91kxapqjcphbd3xa4jt5kb8jx793y5geascpb68blo662nonm7b9pq9mboa4fazfbbisu7adibjqj07hwdonp9egeayjbguqaseyhbe9zqzsnm9qhh7',
+                flowInterfaceName: '9qku0t178gp0jwqabitmcv71s6xhi7p38paw5no1y1u2eg5b05ihwtthgsm43e8h117vst70avs0sqj9qgogscn4uqjklbxp0j4mq0e37ifklidop21lc7g8e5vy46rtax2vuq25e4ljebb93adc0x7wmtb8d7oz',
+                flowInterfaceNamespace: 'rqkog3mt53cpzqc0692sr2z890r2kifkdqa33c8gsddkfyssrmt5927bf7wl9bpxbt04bkfvpzsfvn0j6aeyenksulfedag8nt03czv1cdtjlrrb2xuamfesfovipym2o6rcii7b11t9cxppktdlujo1kwb85x6x',
+                status: 'HOLDING',
+                refMessageId: '9j3jj6lmfs3btwnfcawdgp90wv96czoltm8il56m9uaauz4h3b5arxcdsp6k2x6bt11w5t5i3ar5lxjxuvq9hnef7u0ja9f8ydxn404ep0gdulsbz8rfcvl49cmtk6d7jtbsx33n0q53cptz1e9ip2quw5fb40cw',
+                detail: 'Excepturi enim molestiae quod dolores quis beatae impedit vel. Vero sunt molestiae. Nesciunt eos totam quia soluta architecto.',
+                example: 'j3918vcv3mvfjoy04p4wv308cjr4zi17j7t1394189alyb7cj67bkh7fhdabg1e1z5kn9xk0rhw7wv5g4ihzj87kwjwecaf214s1jcpxs0cfyc3jud4d6egsk7ifzf6fmbrrmn9oy5ool519xltycku47rhi17u8',
+                startTimeAt: '2021-05-23 13:37:33',
+                direction: 'INBOUND',
+                errorCategory: 'ps3q5kwk0rlcdsxv539zaflw8oapuvg1gpavbv6zbv9vsy4zkh0o0xpd0v651zsz26mj0bk8eqts3kz319hs5r5kgouamx8emo2omb35nkbn5ugo64ii3kxgo8465zp4cyes3gkc1gzo10lam6svti06l3q3fxw6',
+                errorCode: 'ffw7tfimcfzysrheyfb9a4msokb6um9jva2vfraf21tixrsi9u',
+                errorLabel: 445771,
+                node: 7489884649,
+                protocol: 'ml8rpikaymccl0o9c9a8',
+                qualityOfService: 'ncv146ja4kaqtihbps2u',
+                receiverParty: 'l8n188qlxppsm4jqrlzr5ve1xobfqd3z5td8i1n54cblb980l58p3qpnmpos0dhivqzy14ia9x5unm7tzuy1f3iwh8rrwcttqdrpdohtg9r36dblt7clhi8xge8arv222f4mapw6x1s375qta4e60046ujg7ivzk',
+                receiverComponent: 'yyr8s6kjudkgrgz7v1n9gu95vnjip6hnw2400qcid5pgfil0lt933592po96b2b2xm3guvvqazusgh2sqh0541j850wu3xbg1w2evc8s6q2qirmwkgbop7o34tz0a0v07bmwv0qr8knr808conn2kjrb5uw6xt45',
+                receiverInterface: 'ic3di59pt6f74khqwcmp8mkq2bvwgcua8c2vlrrcx4htbankot5h29u0icb975crbjhwbt22ftbjz130ls5rt4zey8642rm3sh9c7dj9t540v0gp19vpnslgp7x2uez7a0sdrz163wgshmnsv1hsvs3gow20kjo5',
+                receiverInterfaceNamespace: 'igx5pu8pq6xezpngubcvu1bfa86fvk9va5eb1chzcokepfouu80y9jmqmk1ctsnt0mzzfe1e8o2fwfmadqx44vjqlcl2k04rs6gwj2wjlwbhju5e6c7409uls64kpwerdq46kbt9pi7kzn2e5c8ijqz7z77gdpik',
                 retries: -9,
-                size: 5664762699,
-                timesFailed: 3810938391,
-                numberMax: 2453369849,
-                numberDays: 9424398807,
+                size: 9858706732,
+                timesFailed: 5233366140,
+                numberMax: 9777641093,
+                numberDays: 7322309107,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for MessageDetailRetries must have a positive sign, this field does not accept negative values');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSize must have a positive sign`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailSize must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'icog427t7xu6tbz4t7v0bfkw4nyz8baoxzlkriopw9qydxq3ce',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'gevigq7rcg3ijevsvblq',
-                scenario: '9e2857wszktvfn2efrdn0u5keypw5jdiuesg8mf2s3jrhixfkx8bwn22u473',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 08:31:22',
-                executionMonitoringStartAt: '2020-11-05 12:56:54',
-                executionMonitoringEndAt: '2020-11-05 14:56:50',
-                flowHash: 'c5kirxjzdjwi3slbx0pitnmijn0md2lm6a22d2mw',
-                flowParty: 'q3vzmi8mumtuxb1uq2yr72b1mp6pp48o705g6kz3i69v8qs8c3ybh8jti6ui77t5olfqgdyv9hcdk4bs1xmcwswi92ce4i9b837zp9vsvkmk0fknak18pzs91b5z70199i6m0cyzoyoya7a8i203jp8v45gji7jb',
-                flowReceiverParty: 'pdol2o6nwu348elgx2p24jx2bfte4gzgo8r9i0lr52tu7i2u9mzfefc6w4cm39e3xmhzrxus06wu2wlhgvhdt0mkfy3favxssoth0pa59oc6ewghpysgefkmap1i8gv60agjr6v1lawysbyso7cyd0u601yluiyg',
-                flowComponent: 'l353z67qcigjpr6arp9s9gw1savx7l973etbvkqchjgyrbtig8x2j5bo11079vq223wddjr922akt4nr8o6o9pvs50glorzbr7wfalak83jxo2ce75dz1ajvqg1t6yv2q4ku82rt096c7lpi2hvwepn4y6ccw1pl',
-                flowReceiverComponent: 'hwkg8lnosx4l5utp6m3ykqlej6b5meqhq2aqlhe4009knl9qbkhr5ewkc68j9aaxbcwj3bu1pm73v1qr9krov5ldzz49zdzceyw3r5y69fh8gpquzysehjscjbo7b87rb9jy73a8b95166jvnmvfqufogak4kvmt',
-                flowInterfaceName: 'vkaf4m9qho29hsnyw8b33ptx0ldphzxmwocradz2wteej61x4zae0ij64zgmq6h3sfgi3wshfcjvafddgzvwd5z9zvt1wkr5pts7km4k30dvk786j3qzg9zchivkihd7lb6pxlhpjru24kibe9d3906lii359wcg',
-                flowInterfaceNamespace: 'c4tdy1jix0viey87hd11fbzopnbtzefa9tl9loc5lz0ukp0m6mt3ocoj7nxgaq0jl5cfhhnc0m2h0wiia8j6b2qzoclwpbzm5cqvudf3k1ld4avom0h4naq644pizny3sasuq56wfmutcunvx1vjj8vfbznveqty',
-                status: 'SUCCESS',
-                refMessageId: '0d61qx3th7tjbpzcyvqdj8bnor1e8gq7k2o5w4l51xn8spc4gv2uyrcf58im8ha40xqsfaxn7bzenvtydrv0iiysd79qbwzxvee7vp88ti541xrvhyy3gvieh77ms5hglff86i26z582e0mp54n5zylck3cqb9x1',
-                detail: 'Repellat ea velit eveniet. A blanditiis doloremque voluptatem repellat recusandae. Harum sunt sunt atque error animi mollitia expedita consectetur. Quia est nobis architecto error quia nam excepturi et saepe.',
-                example: 'wo4sn1zvxwjj1srmtxgcxzak6cg73ad2164k4loum7u8ofw1nay8fcvqsw2njof69hoqpb953fj7p09y85o9frj026l2oxv1d7mjpcft6qnzc1i0wtf8p3qxhgy4r8fkfmk3ougu25t24s9lbvyn5bg6whqaxbfz',
-                startTimeAt: '2020-11-05 20:43:39',
+                id: '7125051a-2993-4659-9be4-8a4701b9418f',
+                tenantId: 'c57da868-881a-4cf8-a831-5413ea3a8181',
+                tenantCode: 'xobrz2bkpb50ebymvph5a2302m6533sy8mmf0fkm3okl58efr3',
+                systemId: '5b50b673-59fa-4b97-9376-13c18fb60147',
+                systemName: '3mex1cww557sl2ffa3r9',
+                scenario: 'joo6pgge42xcc0hw0zebiagrzzm29js544a7tespdo4wgoe5itt7qdgzoxtz',
+                executionId: '941d73f4-82dc-4f41-932d-c27a656c0d6f',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-23 09:28:06',
+                executionMonitoringStartAt: '2021-05-22 22:13:41',
+                executionMonitoringEndAt: '2021-05-22 14:37:31',
+                flowHash: '7f9cy99xuc69l0zrsde91qcs8ufs7nhxw5j8xxu8',
+                flowParty: 'oqc6u5fnod4vwd4ftcwcj2l52up6lhg9sxgoy9xfi3b30bi4q86cxerghk391vpi85px1263gokfqvid3ys3m4uym5k28yoisox09v6cu6xy3kaapj0rstioyddhqip5i9vft8i0ygoyriz10wm3da1xic0i6u34',
+                flowReceiverParty: 'dibi9uo6d1fpuv9lt3hariawyki2wd6uas0dz01iik1w1fowilrb66n2m3xg3ou4al29ulw8routa247c92ala96nzt1i5l1vuh2w6hp8btkkcljom8b7o7atb0oj4tk3n9ehtr2c86mr8fsp69w7eu44xt70kvn',
+                flowComponent: '0qu1ql78t2jzmunkyx1apeoedzlmtw0utz2a4kv1nxxx9mkfr2z6z6vqg0033724h5uw9n94irjbbxrpwzdwo16dzwahif8oo67dk665rid7k0hkz8f2xd8hq1cjefvom7qwp11zn2u4s9iylpvitllqr2rrwcce',
+                flowReceiverComponent: 'tniqhv4a9fh5atwppblxj7p4mlcaw5xwrwsj3szo0im35kqqclaw2wr2ytpiiuhjy1kql84va35tyusaxzv8k49mszm860blw9w9swrng24tlvdggd1w4nkpi1ckx19wvmcd4piyqy6uhmislb5b06uyhwcpkihp',
+                flowInterfaceName: '2z59cv1ru9xon7v5cerd0c2yrfn2hxrw1wng10756qpikgrvi67ckz0k38fasaiuxox9w8yg6dt18x1n1sj7l7zcd2tog0a72l1jd3iz2rocob0h2c3zjnsockwtsrkjexsvu2xqpok26k75smwpflno61xwwmap',
+                flowInterfaceNamespace: 'a1atswqipm1w2uqj3gqsrpk1dayauqnw9dxiq7lmjc8c8je9qpnmwp6gaj5rvkwtsnhtb67wveugitm3bd3eh72qterezldge5ehgnxkmsraydftmmqqa5ylljn86f9zdr3n4dvpc7dclrqcgg3jax4uceh195zp',
+                status: 'ERROR',
+                refMessageId: 'o9zrom2uozpmbpty7a2ukj3enw8oumae0r3v1wgkdxul3fj18unflad0g2az3le5tv9cve6e8woike4a054vpyyhmu5lf1hlpz2drq9m2x6u760o4bxkn4vr2crra2wozzckjx6jurjt2l0j7iv4ptee8h7hcbi6',
+                detail: 'Architecto itaque qui quia at numquam officia. Rerum autem qui accusantium. Eum sit eligendi. Omnis saepe eveniet deserunt porro saepe. Commodi aspernatur ut dolor magni est non asperiores quo.',
+                example: 'rrae8xwcvnr7uy67t02x39pf541unv1zgy9h9x5bvkqawwfbnh39svlq0r0su6ecrswg2hx6kyuw44g3t8248dtwzruhqwjpx03bxhsavn7tymvsdt5j7qiuqr0k6o8ltqlbc0jeqa9ubmgpoef9oxea2axwruuv',
+                startTimeAt: '2021-05-22 15:14:04',
                 direction: 'OUTBOUND',
-                errorCategory: 'xavyvheum4qgdk3a775k4rc1uc3yuvww9vx51t42p2abtcxxrhmrmcha5kd5ze4ycp48bqs9rjxoj94adov9yt5c6gxjmhe16bq8rm8jg7oavxqb9tpzrp4jpr4v2lzqx4fma9ooowuky1sbg1nyfla301cgzi0r',
-                errorCode: '3uqvj4cfcyr24p3vy0rlej7tag09wk8z36vw8crt5i179307wd',
-                errorLabel: 866985,
-                node: 1061129466,
-                protocol: 'tswfjduug6dfq29o1fjq',
-                qualityOfService: 'rj4shj0wlmscoq4tgmmz',
-                receiverParty: '530rw0y8saxsw545bljx25yombz2t248bhja8n22rpocuigw2p3y7057blgrr73sbo1bev122jxpkqusd9xt5842a5epjn4xp18iilxw6a2tdcfrz6q3g0mt6zbaoprd2algawm3bo1vzzmyly0lmv1si3j319dz',
-                receiverComponent: 'tv9ppy0gma8iill3mnstm88rq7tz7kcvrigte0pitrzhv028opdhiivg1d7nihzb4x6oys8k9x81kwepx4xa0n29gio2imf4qm8ywv4ibzg5nfmf14b37200e677v3uaop0vejt50pz7mctc4sucv1ixoaygeoav',
-                receiverInterface: '8gjrbyfkwkde5v8citzqyilsyhnq7899q90220g5e2n58qd3fauccaynmf0r4v1j0ia70uksswc8hv31ruaddb9uguvahqjsz3faebo6u05ey4jj1gikchhqyqfehxj34egfsu4ne41nfnclt4bzi9727sva1uea',
-                receiverInterfaceNamespace: 'vwdba6q8xaf0svww666uq3q05ioxgy42modx3ka66tlfnkz9aekfcwwud0iv0x21tv3e99intu7tboylxe7hje14s9f7odjsu9ymrl6snb6vefsc1d9kloajppufmcfs19c01y42i8562w25xe5cnt9ze91l4t51',
-                retries: 8625436558,
+                errorCategory: '45xjoaxnanay3h0nw5lg3wh88bbcgnyse4hfewwl0y4mpd8ptndzv4cn2vrhtlbgbo2jw99wgseeh8bgsejq3fd1kr9gzx5jywkv5i4bo14ycxq6fkqwfgkh343u00vn24qu43zp0b43yin44chwmvq7r3c9k1i4',
+                errorCode: 'tm7vq3vbpp87itu45m4vfx47ngvdagn0zyue7uxzxfanmwi7k0',
+                errorLabel: 590153,
+                node: 7687916071,
+                protocol: 'ndeu8amvt7c9e4jcl7rh',
+                qualityOfService: 'cdhkakgy1a8kfp0y1ctu',
+                receiverParty: 'jqj77zmkizyqqrp5ovtpghv27zpyqow3tjufmlfw44s3iusc0cyfdmu5l0rjo9o2raz6fbwubulcx62g5zir2w64e21ouodeyo2pz8h999rb5ebzb4d772quy8iu49l8xs8v5rtduqay7g7j4wioo5zt3e2vebim',
+                receiverComponent: 'offs0ywxxkajn3idh7a86o9z3yg149etvibpe9b0ytvh8ebh7eiljiswigu6kyvcpydsfctd4w74e6934703t86ywrjfq7lma56ch3xq6v8ecbg03t5iimik4ppagg7nvc0nc28s8wsvrro00zmrcp8j71f3m6mn',
+                receiverInterface: 'mz6g0d6x1vhdshp9cbixm4u5y2h6jhxf0cz481niasqip8qat31acixy28yoi65h5wn2wlv121sbmme7pao7soasih5zmpzieu4qqdvbx2fo5iwnujkynyy9ud2a2nfk57kx81uadu84azflirczvabmtifkqeyp',
+                receiverInterfaceNamespace: 'vbayr41nqgcclkzxet459j7vuuob3rrbd7eh262wi6umwe451hth6t497d0oeg25r1185zv2ju26d4duf2w0cjtcuqbetr8te5llplis0rz0lfxb2lparp6vynephhdzklxg7otcmswmlkzxe9o6vj005ke57yae',
+                retries: 1175409167,
                 size: -9,
-                timesFailed: 9116658715,
-                numberMax: 8103273699,
-                numberDays: 9598834705,
+                timesFailed: 5328758933,
+                numberMax: 1566234103,
+                numberDays: 2093846092,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for MessageDetailSize must have a positive sign, this field does not accept negative values');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTimesFailed must have a positive sign`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailTimesFailed must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'uwjs9yhwyhvyo6n6vog1o4v55cit4lf8t2iqc7ko7cf9q37ntj',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'vzm765a9iavgn1fpfw6w',
-                scenario: 'hvh7x3mn6xswjjckaopnns60rbbxla6ne7ncj3edp30zqmx7xq94fnwysm9v',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 14:30:38',
-                executionMonitoringStartAt: '2020-11-05 13:24:58',
-                executionMonitoringEndAt: '2020-11-06 06:44:18',
-                flowHash: 'ucj6mwqjwgr2tdr4gt9qtktic1iqyaonvbhrx643',
-                flowParty: '9z0cm8frc3mvddqnwkcabdtfv952lq885ldbcj7xrwn2kttf95xs4cg15ujza3p52w9nk9ua7lw85f08kqbd0ow84q9cbt55x2jgi34hby1654igp0ih6sed0zcex9kddjkea5s79y6bh8z3q5orstln769idwq2',
-                flowReceiverParty: 'm4xp944fpxp1ea4tgjbsl83w4km5ynd6mkryz0ekdgsys4p1heqp0cmd2tr9o2he8h5wnwxc71qj6ndit7am1b8dzu059n2lzg927fxtvr6wfltg1qyl5flpronogtkngbgc2zchs4u4os1gq12ttkuhee1r0n1t',
-                flowComponent: 'qiaspgc2t1zykl2fkfq7f173eak4lsu2mov6f1d44fwcl6p8l427dypmhkwcf506ktuffvyezns8nb51mucepeg9aes2z159zlg4ofkotebjd392pguuc7wm516x4lhjv24pm3shbfeasatt0qyrz2gs5o3egpn1',
-                flowReceiverComponent: 'uoch4xpqtl1chi6p8upv6c2chsh3yzkz6o2mnwninni1mqbzopcbh68mjiymqoafiez3pf18n6bvkwl82stb5viq0nfzniwjnbc1hnpml3wfkvsq7qrje4d4j2v5xdbbcwtz4zndsc6xhb7s7guppfcdc1b99yrs',
-                flowInterfaceName: 'ky15quvgeqlzel2qlvj6ko0gm3gv7sj8dn8o30u1i4kq7izxsvi93ajr0o5xa0kfxxar9betk4i0be68pbh4084xs8nfhev4ohflbf3xp902ge57vkiqf4pxcwu2w1mzp24lo3m47vy441fsmlem88gipoq80pcq',
-                flowInterfaceNamespace: '772uxmn1qlegq1t4vtjp8enx17ptu9309r9os3ivurnymq5jyin4pnpe5glyo8n19fyuouegfthu3o6yv9bo18o5d9vnorydovy1ugfoa9pyaljosj67t50kv07hhn81qwgd243n06864idingdrfbuqo0gbe4bx',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: '2uuoc36jzdyd0ooypjrc1q0sdjsrgi8o99e0nxd9si2f9sqq3niac8qgrdfpu7m8mvk6ibw9oq43st3g1356wxo3hftj9uaonp126mayo11ezdshsgt2lxe6mb3g7yysam3ea9ftcwtx228hm4izme8oyanw9isl',
-                detail: 'Nam facilis totam. Minima mollitia mollitia quos quo non est voluptatibus esse id. Mollitia asperiores magni. Rerum tempore enim eos dolor sint ea eligendi totam quidem.',
-                example: 'ff73bth1vdzkt0pfojtifprg9jpb64pgts1q12cwkszehhfklv51yx25c8eh8zf32so5w38nsvnvun1k45wcq7ci67wxzvedvz7qkxpkyi774ru60ckb6ekx6ulymcpjcofon1t44aisrbvokoqtmr0njpw4b7eo',
-                startTimeAt: '2020-11-06 00:16:19',
+                id: '083ea3b4-9502-4f2d-99ae-5e3fbf861c19',
+                tenantId: 'b404c992-1ad5-414f-984f-c26cca88c5b8',
+                tenantCode: 'w55f63qjgrdbq8zdxzk8g887wm5ftt63k0rqed9lq9rxai69ae',
+                systemId: 'a7038401-e6b4-4119-af7c-e1826868921d',
+                systemName: '1d5k0oefw63u2vpc2cw2',
+                scenario: '9ge25cdox9qa7pa1oeowf9tvzqbzwpn1az1qrzoxtxh9kvcij4vfzt9b0nvp',
+                executionId: 'e2e870a2-f262-4877-ac69-55510d2faaf6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-22 17:53:25',
+                executionMonitoringStartAt: '2021-05-23 03:45:56',
+                executionMonitoringEndAt: '2021-05-23 03:50:17',
+                flowHash: 'id0bqh0iazlr8fli9o4333f53b3k0qj01azul1s3',
+                flowParty: 'l50nmjnsx0ho9b86f6lmza58sp28nmbrz0hys7rd2fgi1iiitc2fpbz8bv1u9gwtge09eabjeg3jeag0mpzsibrxtm6bkcv9zalvkk3k505eg0scdcclwvu8lurcvn2aj2xr6ewpvql8je4i901ia1takvxbo5pa',
+                flowReceiverParty: '77cr0z77vsn55ezzu873vb2qergxjoperjpbddr36swqnxgdes8vkz186yhdhpfj0j4foh2v95sjsgilu1qvr18l57mqsvx8jjos4dqu14vj7rvll16s8208py6js8hc79m4fggccj5m07akruvt8nqgdt3k7cqs',
+                flowComponent: '470f2hy1ibp78c3a21mfhxs40fpos11ccflfvf6xgqwfbft9s12p86tjiewif4mfecnmzyuh0irlislug15vepvf9skqpbo2xratkmkusqgad5t6549gd8xjk8n2tgual3bitxp97l92oda8viidlbj9qsrfdg1h',
+                flowReceiverComponent: 'uwwvodu951mm2kewp07yxih8mz34vagmrh78e3tb0311htuvuuk4qhhe7c02blccgb0dtns5iils7fhci5jzjhk2v8c8j2tn11a094f213org940xkmxknd5ewz2h2jnum64y3sr3m34dfm8kmci48xys4eouyi8',
+                flowInterfaceName: '7gufr0e0cjvy8c77ok15kk95lu3nm5y8c092o58z6q82vgn5mw5v5vgkn0j0dw4l7jlcm0wmwb9c9b4544vmpmsutzxpybn2iggpb9y87nlj7nm2uove4z8q5oqpi72bsfkv1nl039xugclaj08jo4sybul71t6g',
+                flowInterfaceNamespace: '992j109zh98pcd2xe82y50v729e15fm4ifulkth6wn5nxpxbzzrmhmimnmujdib9d60p5emjj85j16dmiix8jm4g8vckszee0p2pux1khwoosg9ve619ba0za6c56qe77jrsx96xt1kelrneiiszbyqylimlwpn3',
+                status: 'CANCELLED',
+                refMessageId: 'fd25hg4jx013ziojamigwmo8bc6b5u2w3wb2dukexcu768acas2jy5yd0wxvpausc7o4cg32gdpgny8bsvl52cnxnfgdu4hhjumq61373a50yvwjivgbvgrd64yv08422k14x9phf1l86jjqr5h41jgzxpl37u05',
+                detail: 'At doloremque sit et nisi et. Est voluptatem libero id dolores. Eveniet facilis dolorem esse voluptate. Quasi minima ut quia eum eligendi corrupti. A labore qui aliquam voluptatum id dolores excepturi. Laudantium voluptatem aut enim culpa quia.',
+                example: 'o73fcba773guqsyshpzswlfrcih6vjay3ie1h2qel2qcij4j9ctrf0q1qn09pzio0p28fctp05vwnle5075opvy25bpqsyltfpip06mcoyoe8luazaec2mu7ruggzao3nuprvowa5y6t8w70by6x8shi4lqo53sn',
+                startTimeAt: '2021-05-23 11:36:12',
                 direction: 'OUTBOUND',
-                errorCategory: 'pb9bibnhf5fuloself3iq741613yx6mpj0gmd1y8wtcljscekm5k9u1q6glm5j2zbggj8i9rbaayu0nnkt33fa04i2scwhawecgorga2tnz8c3s58thpix9s3q8d2rsd4x6e3r2cmni4nqyijo9h29sumjhytw96',
-                errorCode: 'c9ojtqt0st1gy1ea1943gd2k3p0lz1o90ucoywtlvktluhoaxc',
-                errorLabel: 414965,
-                node: 4501852585,
-                protocol: '2n68eschruc9hspqvf6b',
-                qualityOfService: 'ot35bvpvuk1gfinlb911',
-                receiverParty: 'ac1w1bzvnlcwg8a4f1yto0163jlqvsq25jee6z7qawhmhggkw4jk3t03upxzw5qosoz8juz5esdasx8m2ytvb9y6a3qu0rrclzsl33suz4u4yyo2stnl2uwhgckcqsknh4f41mizjg5loi31r7chcevvif70nhud',
-                receiverComponent: 'feckggk2bdr476ufgjp8tmgi9hql30rlo0xnp9wwt4q2zwyi0ww0si9le8hf97n5r4w9hjc9yh9rmtqfvam4w8627h52c9yw3apxl3mqmh4ytu73cf7dz27w5vkjjz41bz0m4dgag8qr0g947i0n8xb9mb4ndqat',
-                receiverInterface: 'fr7gnhiygrc5nsdk21zrbubc2k4g31cfakruc5euidsseeiwdbou9k07c74leqodws7nojbpio8m3shmjcuwhkswmrw0izw3rjii63vohr8nozey7aygciy0usiblpnqm6o9782huwlr9mrjop80ilta3e32lgny',
-                receiverInterfaceNamespace: 'khsdamwqhws45sw6n45qcath8vmttfkp2skx1o210f2weerq4duk71he9vdrh7lqxpawyjb9f4fj6474lh49zfoedhssuzdwco0su55qtlfc723feiyuqvdi2qqn2gxax5hht9kwo76clxnb2p5vpkwrwkt0se52',
-                retries: 5830398477,
-                size: 3698213916,
+                errorCategory: '0wwdaawpnqyurf79vxctikzwdf402whavye1i8pat32hrj7p3u216iom26h4801sxvj0ga8a5bx32zwe5g3te8ki0c2s02m115tfnklvzwvwzu3ru0zgc7ptcmjavb9tjy845saps5ztzr63s1ige8v0x03qri2i',
+                errorCode: 'aybt3e7u5wqxm6vuhjlc5i9taie2k9r2aa3jronafkhoujwega',
+                errorLabel: 587184,
+                node: 9779307830,
+                protocol: 'qcmiwn7184q2xrh65sce',
+                qualityOfService: 'c384vs3t0so7nltfg28j',
+                receiverParty: '3lhj4vvz0duc20h25l2w4g48lh1a45349hfspvq31i6n0lv8kpc1cjazhktv8tnaagku4miapnwa0no6w7ehd2sw0ykopjw174t8unb6jgkk6yjphn6e8adfz28i1lz48lk96jjyn7qw4s8dqta72w0h7iys92s6',
+                receiverComponent: 'a0zir54f981c6mp2upnr8fisgsffunorgbdf63ov81ybonlefxwy95exo8yprv7vzakd2tslmlwi7a5denrm8fc3x15invb3gg6y1lknymoc88a7vf4gmgcojy67phj0p35whv6ivpm4eni84q2w2wu1vjj8gd7x',
+                receiverInterface: '4lsls0gdxs2v8raae3y7nelz6ve38j5d1z9id8dng9c0549wegvmxk6yq14qhb30ov60dhytjs9kxbz6podke9484gg8eu3sgckhhfwa7xpivakn7iykjutqsa0q1kh9sm9abtov3x5dteikucern6kw9huam699',
+                receiverInterfaceNamespace: 'el2zak3o5ip0jt25ls19e7nip45det9ntgthx458awhbw38brpbssohj4ouy3h7nppqebc2r50ekpf8ui38k3naeve5g9muu6q01n3xhxhccpimcdzenpjcxt1flqkyp6nul05z22q6xrs26zg4gw5hwpxbqmhlj',
+                retries: 3147928327,
+                size: 3595270630,
                 timesFailed: -9,
-                numberMax: 8238130961,
-                numberDays: 8670425083,
+                numberMax: 7210137594,
+                numberDays: 1153589713,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for MessageDetailTimesFailed must have a positive sign, this field does not accept negative values');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberMax must have a positive sign`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberMax must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'scf9hhe2ujrbm4sp4a16vpiqv7678ack76pkqnvwd6a3fvic2w',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'qey3xtw0j2un7e7til09',
-                scenario: 'k31o07stvn6eutv4ho4nmnezvylyiwev4bdikcgtnlki4hopfzrni78plbqo',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'b44f7701-db80-438d-8f4b-a8616b4510be',
+                tenantId: 'd6aae299-240d-49db-b6ae-d58946010fa4',
+                tenantCode: '4wj1v3wu36lg7pq98wa0s1mb1c88aitf07ash9og6mjnrd7hrh',
+                systemId: '18ab71d0-509b-4ddc-acb8-64a1c99b273d',
+                systemName: 'lcas59creahw1b50kcfl',
+                scenario: 'ko7pwbytlsnelwnzj06zrv3j0cj0ce1nkox7coz1z3my0i1h5ltxdhrze1r4',
+                executionId: '9feae53d-8498-41f7-a721-9b7eecd96c5d',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 09:09:00',
-                executionMonitoringStartAt: '2020-11-05 15:19:35',
-                executionMonitoringEndAt: '2020-11-06 03:45:05',
-                flowHash: '80kx6tad6co0qlnr065ubu3qwm3flgnz77pbmq78',
-                flowParty: 'jfmpjcb00frcu88f13c1rhpm6pu25v2ou22u7d1vgnk1ayist14003clb1qm3wr11oxbbbvh8pspc6yc7vvgpdv8b4hvt4jmwjnzm06lprwx0gkv2rlpemkzi3m74m86h7cmfd3pkh4srymcyp2wn3aj193pbs1v',
-                flowReceiverParty: 'i1zpw61vfy6clm44wsf7v84ebz35bkcmiiyo80isbryk3eqeco2mxa7rywmuhxugs8lcnb25vvhzacumxk99wb74vqh51xiblaqb4577on9xatxekjk926s20478o85sxf8f68u5tljp4r1jiuy6yijr78wg0tut',
-                flowComponent: 'w5wov7vd6p540w3buwgb8pxxulbrtu9j9gm3upz5e9a67h5kr0yvy8pr4v7y1im7ivj1frcxl1nt94e7jev15jhw6n7wrwf1hnhv2breje0cby81cvfvlzgirrco8wfvmvvmele67or40frbgxqi1zq0vwvpvfxc',
-                flowReceiverComponent: '8698aoamezhnvzpysyen2a8pw2h1ge4aev3kjdjopx5uy1u4lzxr4ktnhio1xfwaptqb1u7s947p0gldke6kckgky1kqzh1ir0oosac55ca48gtbmkpkwb1hp8sj2ddonkqg8r20zjwuf1pe2rhorlf6fkn8fjuz',
-                flowInterfaceName: '5dt9pwjfm99qe3rtwt42z76og1apf8sjvk8xt2qifesna6x6tqiyo0crzcp9w1y9k2e26m10apx4q3g79l8j6xtag3txl8ujy0wb2huh5ab8b5m8xpwnrem3qui5cefg7qgl2hrt1ru2etmps53ualmv02yrll2m',
-                flowInterfaceNamespace: 'fhgczs4g8nlkre9i4y9h1xz8fw2vti53as381sekuezfdcf1pfu91nm02dh4lewoou84xlr5m0hzlflhox4h6vn9dv93gre01jsclh7ml0c9ktk0bl05qg2qtyxh2sjwzepn86pcyjtfz0ploksitu5io73dvw9w',
-                status: 'WAITING',
-                refMessageId: 'wzp3ga5crh8m5fkpfjibd0q133g3kh3i4qvc015p43hneotzeu59ynvd80mdkq11gou15s2b6azalli8623cuykispyftq66fjnrdicyvj6j52ww2rbm5sk2pu6rqvi2yi8u1r110yq6gyjf9ai0b6rq4h0x5gxq',
-                detail: 'Consequatur tempore quaerat quia molestiae minus sed dolorem. Consequatur eaque repellendus officiis impedit possimus quasi accusamus odit. Corrupti et qui placeat rerum fugiat consequatur praesentium amet. Illo praesentium et a est mollitia magni non optio quia.',
-                example: 'spizii1q6uzr9kg0gb9rfjwiqpr5m76gkm7kgxpivf23tdcby8evo3mc62l359k5fktv7w2cklvhcaln859o0pxp1jd0g2i4z2dhx1wzxgwddi21mu8wtv4dgjd9izl5ssttmwnj1g7vxos5ewnflq61g8l5w3im',
-                startTimeAt: '2020-11-05 23:36:24',
-                direction: 'INBOUND',
-                errorCategory: 'qiiuc9ytq943oh4y6kohbr5e12ziqdk2kraovtxt2lu9d0dnw9lo7payx9at25i5fvxosbxyk3fcp5d8pudu5wrpf73bb17v3f0dypyzeunnzbx0z9lwo05puxyk4onaux377ijrneok1uhl819nyx0jwzc5zgrh',
-                errorCode: 'r6ncql5rttj6r2p1q0k0fca5t99o7y9py42gq69n9oepaw7f7l',
-                errorLabel: 301009,
-                node: 5368061038,
-                protocol: '107ertowrjhbuq2mtqwp',
-                qualityOfService: 'cjgu3ircllc8b5euzr30',
-                receiverParty: 'zagcisvegx3rkees8kyszn3ijcydvqel3bajr1zdgpcq5wy95cglmp3pyngt79rxbuwmg5rkv3tycbwus1pmvrngmynvs050cnliqgd8w2ebr5za7dkp1qliqkffrtds6eyeap38fyiytyz4k3i3boef8728voy4',
-                receiverComponent: 'ucl8siaslknnwk0anwk4g7jzgiru5ov3wd2vqa0kn5b755fbqhxhzwcgrjpa99vjrmxrhm9no6y7tog3mdo3svi2cg687rrxry2y2uylw6txa9iq5jqf2vvu8pi04v6o08qjz7rq033mbq23w739tw46g5dlr7ig',
-                receiverInterface: 'qhshy7yyjnvnbno4vnb9x9q3htyq4ald31e9s65om5k2tisiluqc8py9g90dlk0cftblcvwre60rmamepgfgbudh0ai3mulbpx3lkwqow6vykfw950vchaow80tqlpj490pqrjwv5abf7ofn06n5we6xeibfmbeo',
-                receiverInterfaceNamespace: 'kfu586h5tokax3crd5wh26fbf4dty84l0sbwxoo60d07erna0umy34ny958oepkvutadgfhxwipwh0y98ay7m2w4tpxmjl07v6urnw453nppp56w1b6xm2it1ply9njs7240ivfq3k92qpv19955bq675upcytha',
-                retries: 7851354811,
-                size: 6084868745,
-                timesFailed: 8628920781,
+                executionExecutedAt: '2021-05-23 08:06:50',
+                executionMonitoringStartAt: '2021-05-23 03:05:35',
+                executionMonitoringEndAt: '2021-05-23 08:05:35',
+                flowHash: 'qn7765k1uvmr0hnbsdi8vv0xj7pg9oulnxiydo2s',
+                flowParty: 'cx811wq1fd2wjof3k9rsgtjouxkcjcidosa6yp9eqlnesstcnceqixl73uadn03gc7bm6bd1nx2wwvaax4arcwy6351bcnh3s1a8ib7t90xscwv3v7n3df57cuv3n212hublo0pu2xz6qa8vd8bi5pjwmwv5qyf3',
+                flowReceiverParty: '1f15s07ls44xqif4p6unfrzstne6wub0kxq9yl0a9xbu849jseairofhlv5sactytcpmz29hubrqd4rrcdacpscu3spavzlomswbv6rukfs55p0fiwu2fc4weeb6maoxcedqprcjvq0xznjw6upat9ag8ozh0opk',
+                flowComponent: 'iz637v10nx1fi5mgxw0zsy56fsmpmueb346n5e4f7lh6uwyqgkho1wv0zadv7ygvpm7r903injm66bpf79i2z7fsj4cknryb96a5689kdn5qb6dksqs0jsrldtby7yhmjrrk2fd3qcsce41xs1xrsbeo4s1ss65w',
+                flowReceiverComponent: 't5jnosdhmhhjj461civw6e64e1yrgmytw2fbq7gayhwhe0cl31cvtyuxxq68pua2i3ll2fc6xwwxwbs133ntcj9fv20t4o000syeidwtnwdmpcmb9jkda7jslt493g12kgzt7yk4769fqt62j4fy73wl23ksh3nb',
+                flowInterfaceName: '36idsnafgfmag0ui9x5mhl33at5jwhjsce58i1brtucykx8r1i3lecce6fwn4k2td4wazsxni3le5ovd6hj9amfiyt55wajtmyce9l41blq360ik2w60q9kkhucpcilj7nb1gtsazus68i6gs2heb32hthhtcbkq',
+                flowInterfaceNamespace: 'vuoiliigvs0qr9bpcc9iow8rg311x8d8eo0231nrqvzx5uj5b6hkp4tmt7uxbo8xydacfl2lkhio9ophdzf44g1d2ihlijov2i06pajnkol8antby48ohsju9x9qa333vniwp6nu3bj0t59z48a2tp8w6v091jtm',
+                status: 'ERROR',
+                refMessageId: 'p74f2kcf5ym26tr6qb05b41htgq2ehuuihuj3jrwb67t383vv9myrgrwp8h92rep30kbcp20ipmlzw5l4ei6lf5csyrf9int7hf7ctad7ip17jva6dj0qt1tqifnveah8h4j5i1gscdkwx3zr7k0hmmb72circep',
+                detail: 'Maxime quo aut necessitatibus enim est. Consequatur in reprehenderit quos reiciendis ipsam. Eum ut reiciendis nemo explicabo qui aut quis. Distinctio alias reiciendis ut inventore quam voluptates omnis tempora. Et ut sapiente et amet rerum unde. Reiciendis occaecati possimus magni.',
+                example: 'rvpuw3amtxy26ibzlwey8re4z366adyxd3ukkpk78zgw1scavq5g5kzm8vrjqb4v3zb942yxaqcidw5s6dhsj9wueytml8jmof7enf3pgmxiy05v6c8gn66ncfm1u70plgsbc0w2n82xq9kunpkp5xkr91kuj6db',
+                startTimeAt: '2021-05-22 22:35:52',
+                direction: 'OUTBOUND',
+                errorCategory: 'we7h93tex6o4std1lrzfixfxqma7k3au2m47w6v8hcobs5u3elnrwlqcp3u1fh72i35y5hanw77wpaoebynesbkn7fx92ob69ny08jig7380c8nfqwqee0dp98cozh6iod0gn5x1dcpg75x8l963oisczbmxh537',
+                errorCode: 'hpbtkphqaheqyp5f640fa1stolmfmrzrwfdkjrz0x78on1ygiw',
+                errorLabel: 598850,
+                node: 6391961183,
+                protocol: 'r5shvu1ncsqklo0ar4pc',
+                qualityOfService: '8zlrwf04a97mryeab43q',
+                receiverParty: 'g6lvcgsqvmsizcecq7q5zyhixhyd6gcu9wf9gnf7o9gp84aeu7p4veoiih2hrvrz6ozk2tnaycxg2j7nqi0mojrbqs0daqhnlgje523k897jfzwl2q3s84uyjqz8ga2eug9uxhl7y07p1ldp67emmt1uwhbu6yt6',
+                receiverComponent: 'a3gvx45om679x5ahycw7k1zrrdviko9ujriv8y5dtb1nh5ca6cj8hkcdjog4ab1wxkp3nxg6n5j1c99xgzy079kx2zvg4wfalibwns6tn5yt762tt3x5hbej8tnx51rb4q9n1kx6eyvsottdhkego45rj2hc3tp5',
+                receiverInterface: 'cvpym1uocli0g040jsheaqaast6s8oeo1559vile4oa2kjjag9fsh8ammlq8eix2xiznvei2xbmm7jppgpl7mnr4wveog25x26ej8ce8iefzpvcqwr9inm1rrjn2wc6q4dcp54248fumnoxiva0wd7i4gyhdsk70',
+                receiverInterfaceNamespace: 'j8eni7pdi2w7s4oujfvkww6vcub132x807tazmof03cwkiz98r90v2ylux5ct9im711xg6rg8sjy3upuvjdw4i2ya4p13hi95bi7549pf1yi4o1kkwbg9ydb71j5ca6mr6rgrcjgfdq4y18j63z7aws628ggoaz5',
+                retries: 4655467277,
+                size: 6859920036,
+                timesFailed: 7842983620,
                 numberMax: -9,
-                numberDays: 8713762302,
+                numberDays: 9059345548,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('The numerical value for MessageDetailNumberMax must have a positive sign, this field does not accept negative values');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberDays must have a positive sign`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailNumberDays must have a positive sign`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '1thi9yifau9vw8qlf0lqu1agn2tqk6vum3zfp0ydfi47tcemrg',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'zan620i1tr5pngp5g0tu',
-                scenario: 'ehgvl258wk2k9t95hq4qwwy8ogj9g51itr32l7iff99uweeowusxhjflir13',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '6e978eac-b918-470f-b0f3-c6aa1418669f',
+                tenantId: '2358a017-4289-4d4c-bfdb-29d619de58d7',
+                tenantCode: 'rbof5ml72665eax9hmsvp7cgk71ys82tm1bepf5l9av750fv1g',
+                systemId: 'fd312f17-3d2c-45ed-a62e-a1c074f421ca',
+                systemName: 'xcmrn5djjom0agfykqne',
+                scenario: '11eyteb4jcft5xvp30ljjziw5xkpu8y75jtmk2itp0zmre6t9ypk6805pm9x',
+                executionId: '2ecf0677-63e5-4d4f-9391-daadc5bb8195',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 13:25:50',
-                executionMonitoringStartAt: '2020-11-06 02:39:26',
-                executionMonitoringEndAt: '2020-11-05 19:17:06',
-                flowHash: 'x2yfs4mw5lm8a8uwq59wc5nxowar0fg4trqsrkyr',
-                flowParty: 'pbxnaq47a28j4falx5oxvtoywdtccltkjcb44ya15pm0gef9pogah1k2ntjezz4m0od6rdyxss1yysi6co4rgbsxnkn7f7tmxy1ibolbnc1226b04hq1rdtwpgccldlsfb5d0neu9z8oxxzj4vx3guig79lbt4ar',
-                flowReceiverParty: 'crhie29c7wgckihys3gbn2bi2ljz30b7s4g15boe2y3nnfgqvc2i76j20hm3jmw26dmoohq6v6dfrucy4jrewb7gb0vwuplcf3njqi7q4j75f5ovbxlsxp35pwhqp4d6y2tgzyur6akvc1y98w6e3ewsgsslafk2',
-                flowComponent: 'scc5e5n8sll9q0jk5m60tnnoa145fqc1gqwz6pc53wzgozemoiunhwr3yatgsb8v9ioj1ajv7pu21ohjn8m5k37zu5wqmtjns9u8veyhs7229g2l847bqixoku61l3bf45qjzvw0dn4l5vghlqqiblqkut0wniei',
-                flowReceiverComponent: 'mqz4lxcwt4u25gly8wma7ptf4oq2w1ozucvp54o1uwg82fpghlhk0o58sqn7p3gnwpjp09vjk0ns1z2nwyu2dzc1n68vjehy5t7mu04adlxcmvrvzkd394ntkbrg6qtva9qjvc6cf1n8nt6mkbzw1m7r5uh0af6x',
-                flowInterfaceName: 'azasirk0d7sr853r4wmw5vjvcpux7ltn2gj1tzr4b3jvx6gczmfnc9miok57uhk2eseo60fdvid7p2jy08vs6ewc968za6yu5dez8sq5mnj29gpd7ccd7ecklzvn7lpf7w27p7edu63h2l1v5u6vwm6klqpox0wj',
-                flowInterfaceNamespace: 'ahflum0qamvh758935o6mqutr08kdgmit13jolb21vincky0vj6lrzztahrekvbg3ctacjv4x4h98i3acbkbti8jlwc77sv4pay1jcad3fdzsdn80olnfeg3r6p4w4j6z3x6a430l436uki9vgufcgpk6zwfshgm',
-                status: 'HOLDING',
-                refMessageId: '3f5zh6sn83vee42owa7747aphxanrzaddzwvhtva4awanfrdcwmoeelcrz36n9hkziugo7br0687ls2n8iialfpu5bc34ydue7f4l5iase0fwzbnxl1nvji682d71i8jbpgg4xl5lm7yv58mefp1nl0v74ecphfr',
-                detail: 'Est nesciunt corporis et. Et corrupti velit libero animi fugit sed qui odio. Accusamus deleniti facilis quidem cum. Consequatur officiis vel. Minima aut tempora et.',
-                example: 'pc5c49yv3gfumwmgtp33m66mvg8j30n1ectzyukjjiloapc9e6mkub1nsppp6a7cjwj68ccx842266qgyw74m1zd4wdu9pdmzb5j89z2i22vpdlhbqcgdprlffp6mufqdpme8to40u35ay2xlry8u2jv5ydozx9i',
-                startTimeAt: '2020-11-06 03:16:51',
-                direction: 'INBOUND',
-                errorCategory: 'ka91rmq4sq1w59swpr92aw2lpevlw2w4r7utdjrrxgr76yorsem6budy0ohehvsg82anutwsn42nk2i81j3rx7cij2gxx0130c2j98091yi0fs4epjjbbe6hd4675gb9zy19ze6eozaprfda47xce20kiy76vttv',
-                errorCode: 'mn0cckjz65sxlxshiiikewmk6seuncvrju5widfg5bbojwk5n4',
-                errorLabel: 992802,
-                node: 4656620651,
-                protocol: '6fh869gcljsufhcrxp9z',
-                qualityOfService: 'k043473zkk23oxviafp2',
-                receiverParty: '9ndg926d39o4b4ef80tnadapo0zenhrmzygzjffqznvj7lt8t0k8qc848rxsj5m336meyqza7laiawukrjk7x6jhz6119qbzls3dvt7u4txy2q4zg692of2v8tk6ds09l5cdy7qxnca9verwz9ww64g31u3t4fzr',
-                receiverComponent: '5mlmk1dowvdall7voz27pxr4mlz1btwv80kslx0uy7zdtg5bwtgue89hede5fsvoyq8efs32klshal7o1iktc603t5git0zh2msthdh7tynfqopwtjsz2xgs5gwc8y407jhfbk1qskgmleg62eg89byobjtf4s07',
-                receiverInterface: '4673cz4m3wrsea1c3d0g7wqqadqf2gqziirp03bb6jjc151xqhiz0qgdvmidgdrmktchug2gv5ax464pmb75r7akx5ez1mb818xdp3t7syhpnceycb3zox23ih2ixerog054vkm7qisu0an473u2i8wx0ivansdy',
-                receiverInterfaceNamespace: 'k92gr6s39rzqeiar84cdheg0k15geabxrc5riqmm5xidtts5wwiim5m8kpp5k0f1b75yc2vkqdwejfmwwrar2jlxv4o9aaxiklot6m9klliul03pbz6cui587jnrdyjjrpu5f7cnvnh81tn1wdi3i9o0z0e7t394',
-                retries: 5009573963,
-                size: 8774391174,
-                timesFailed: 6099983595,
-                numberMax: 4382278626,
+                executionExecutedAt: '2021-05-23 04:34:56',
+                executionMonitoringStartAt: '2021-05-22 18:57:07',
+                executionMonitoringEndAt: '2021-05-23 13:20:45',
+                flowHash: '6q75pn54zzy7u9wivuhy780ade99x9g31da5i71l',
+                flowParty: '3930vnkv9npfx12lpe5eg6xg4g4w58eebqdnymaz9dnp0bxrjni2tsmul6q4igxh1uut1rwoqe4i08dd6k68bwqqhfz74yrnm3djaplu2nrnq3reoqvavb4n6okckm2qq3apkgg009q5mbd3t6wix2tfjgk4m0qq',
+                flowReceiverParty: 'y9nwm56d2v48a1nmndgjkcmhyeza3yhhqjsydvwiu4ehp4l28i4fn1xlnffvtz2ech4oambwkafs004pdygmvw6gfjd3dxok8ng52ib34nl1icz933bgfxvij2mu2bz058ix6cyqy4gggxetniyoys6qoo55misq',
+                flowComponent: 'z02dx9fe3a2ritksyu9ld02ezfd9vpdq7cff45ntin9vtyen8tnn4swv59i9bt0azke1icnest9aco6wyih3p7y77kdfywgjmtt5ftq9xyqfz1sqa9m9sp2rlcdwg6he6i1s8tzkylxun0b90phz4ycmy30zkf52',
+                flowReceiverComponent: 'wjndz94uaa2nokbtwie7qdkhr7x621a8v3671gu70cr1iq7rrb1225b2uzlhwpan8g6w3ad2huqvo5kl2z2in5qyirnrrbzh8s1eq38j3jsop55q3moz9vqdq7qz0lqnj0s4bkos07dhymbfv9kb0o4242vl6v4q',
+                flowInterfaceName: 'sim247un4w8ewl7ddfbzpu9dr0ptkrpbhvmlmz3j956b8crsbn87mrsem7quw6kh1yt5fl4du0qt9twqt16ul450l9xv317xsv12u11mnzfg22xhwlqso0q4j4mnzibqby23xfd262thh3gskhg2sodw67mayo5j',
+                flowInterfaceNamespace: 'abor74nqf54wzs79nr7ez6oh66jw8rfgdz1lgaxuhwl33fvsp39a96zjtqg8qzy9jv6ad0fw4sgao3utv9ks2fqeapu84xbgkpyg43bxc6jjch3xzzjgvwibcg1av9z6yp967elw98d0a210qo9cict0xhnndhlg',
+                status: 'WAITING',
+                refMessageId: 'uhqntpm9uzcq1cmz1ikfd24ozoxzu8ao153cfdfkg9zobdkn3nqyvkiih8u5lunrik2xk8zdizagya0r73taavk9f24tu4oizwc1fl2ocrca6je4pfhs55lyj2g9crxqbsg739900albe3jkbt2q1cj972s8rjwu',
+                detail: 'Expedita ut quo ea blanditiis quisquam fugit voluptatem provident est. In magni in vero est sequi amet pariatur. Modi perspiciatis iusto illum qui illo voluptatem quia impedit. Accusantium ipsum repudiandae quis qui cumque adipisci alias quis. Qui veniam quia eos.',
+                example: '022romqvzzc6zhbl21lyfa4g8fb2d4n8w4f6ro20hyqehjuftle0nx1r8v1akv247kytlsl0f3hvn5iu3wb87e7kigq9s9pa13rprwm98ejq5wph52wd4whs5fc4as7ay0baqyb5bfmczi6izbppm9y4z0mxgs4z',
+                startTimeAt: '2021-05-23 05:12:43',
+                direction: 'OUTBOUND',
+                errorCategory: 'k5dqcn36ins6myrkoyf092uegf8zc11puxx6diqd614ij63sa3qlj4f21rzowzm3jxvpdigow1ciplnqnrkooenhd9xj8dj6e2uf38m55o713gb3u0g2xdzvwkvi9jys87m0goyl1qnzcp3vd1rbgptp9piw79ui',
+                errorCode: '8jlxe97v64zwafc674s28smz56x0a6lj0nepn1qlxi9e306cbs',
+                errorLabel: 320701,
+                node: 3676857249,
+                protocol: 'racf41g45tj0jshmb9xn',
+                qualityOfService: 'ieb4499ib9id3t53f32n',
+                receiverParty: 'guqbsjyysj07fxw3svi2vgvbr1ojqet8vtf1ufiv47vc8ro5qo67ca7kwnxzxn5bzbxtqvkwbm4lb3uhubad8069tae68bb1t8pp4tnt7x4nvlhc56mxlnilo2lncymewx8e66xb15vty2go9qoiizk1yviabx9p',
+                receiverComponent: 'h53zfou8wwpc4yp7v150s7igvyb71a0xwmcaix0wgcmbkvz2lho442l8kquy1s19dnnqa9kl9iianwbdifh29l0jlkhf1tnys9ro1dvpldb98a9o4mv6m23k72lt06oaof1avzyiastifhtef21lhohv4lhf0c33',
+                receiverInterface: 'vxz4sn1eli7hvll6czoeziugvp1j34ot5e907ixsfd5uzmtodaajovmda70jcmux1s0ybtulyjftytzc4ed6mmr0ywr8rjkl7gfidqidczimgsbsh4p824qjhbopqeu4h3bwd82w7vl95y8xndtnnpql8blvhm7p',
+                receiverInterfaceNamespace: '9o2wb41z7s6qapf77j44l8g1iirj3mtyqb5zw94mc3y96a65udcjr6b36dx4raf3jo96rnus7p8ojbje5yrtwtwalrlk40k8jzg234wpoqyk05c4lgzmyf8gmqz0c6nu86e12lo573nu8chomworuo2l6wh4rj5h',
+                retries: 3292186000,
+                size: 7917456519,
+                timesFailed: 9556506892,
+                numberMax: 9456906080,
                 numberDays: -9,
             })
             .expect(400)
@@ -3650,636 +3708,655 @@ describe('message-detail', () =>
                 expect(res.body.message).toContain('The numerical value for MessageDetailNumberDays must have a positive sign, this field does not accept negative values');
             });
     });
-    
-
-    
-
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionType has to be a enum option of SUMMARY, DETAIL`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionType has to be a enum option of SUMMARY, DETAIL`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'c0bjdeb202llrp8q82lbwjjkfoc5nq6i83yzi5wtgksb2xln5e',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'fyvf3hp3nz0baz0dfqq8',
-                scenario: 'wu1qsg66dkbpbttav6mgcf7532vq4155xt9auiv1izcsm391kky8cnt8fcco',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'd538f57d-5d10-40af-8cfe-5d1f321f2105',
+                tenantId: '63fc39a8-1025-4338-8311-be773178f68c',
+                tenantCode: 'qsulv375d33h9w90cdguqcv8wk9rtqrenlq2mujrqktvw81xxf',
+                systemId: '3cac86ea-a591-4f5a-8a40-31bfdb0e5d42',
+                systemName: 'nau7bte52i9nlzyxa60p',
+                scenario: 'gjy4dit7b1gl7i5w1bga5jpj7rjp63wp6ajrr9t1hyzc3y0dx1msk6htbrrh',
+                executionId: 'f069c5e3-06c4-4f5a-afc3-98985bfdbaf9',
                 executionType: 'XXXX',
-                executionExecutedAt: '2020-11-06 03:52:43',
-                executionMonitoringStartAt: '2020-11-06 11:38:42',
-                executionMonitoringEndAt: '2020-11-05 15:44:27',
-                flowHash: 'kfjh955ts5r3ys8h0vydej5c3lkrj8v3xfbopoai',
-                flowParty: 'fewz1o81o041kaqo7soml9vhbmqifqv3r1tfq7q5ja3ha7o7y69ch4trearepnx6dj48q4a3zohw3ofc17l9dush3l3i8w54z96i1eop3c2k96mcuuxdlb69qmqj2d434kw8nks7px16rjhbxpb1y39oybjmlv0l',
-                flowReceiverParty: 'u3ffmkxh1bkbdyaa3tsdntx0mdsjblih5gxs5t4rgue87rcqmsqfiuhq4wf3y1hj2gf52jo2n1spr91jjq9jky9962xg2edcsk3fc3jj5scqptkwxwcr1oswmceh4ogauf4sqxoyu0177zgjr4qfupg8kxloi987',
-                flowComponent: 'e3eei4ksg5746xl5kz45fmub0pqputrmvtb08m65anwfo9kox2r3sah33cfalfw2khav3sq6wnl4ppa6nn1izytdteefiao6xncocbeyeo5nryogpjthx1n7bmz8bvj2ys0zuiim686dwjt9vb6pepgs9ibn1xqc',
-                flowReceiverComponent: '9ff644dpcawt896xlqivib8025xbvq4bz63dj9tojewvy4qhljlpek8a6gw7hmi6aby3chnuqyzfesshhux3f9kfbd5i98yr294wsncc8ees1my92d1ah33n0k1hpz4w9a2cxpff6dunp1z26kgnlgk3b4xcwhae',
-                flowInterfaceName: 'v1zca0rvbc7woh75zd2mj2n0orl38isxas0wsb16roz6yecbmqcgqmp08p6hojscchgilhtpah4wi4mwtjx719uk2r69kcz0u8qtuv9nc8axnr3unud51tmcqgsyiv89fnscelgq6kh1tlj4pegkm4au7uqoxof6',
-                flowInterfaceNamespace: 'swbiqb5h24nboib07rn328fys7hzdmc47gnqvu7f03zilydpgnhiz28mxv10hpspjclnjv2a5dz1jusuori4vd0taujz1xm2ffp6xr1x48iye0g6jg5ewg40h9qen6hk8cqh6k3z8q9pz862j9kj1p60lyt60zgd',
-                status: 'DELIVERING',
-                refMessageId: '3grsi7f6txxhij1ynr10vgyabgeuzx58pr7fn9aeqqle62pvgrw0yhmx9d3p3r0mrd2qeg1m3si0x4hbqpzb5ki5693jciklz2up5792qob48uhet1j74q3135x5js4ar9d43rwya4en432v15udxny3nk6toykj',
-                detail: 'Vel aut est omnis. Placeat aut explicabo exercitationem nihil. Delectus repudiandae in ut aut.',
-                example: 'vyckl4jbagjd4nmoh1mueqpmch4hvy71ebos2crns0u7zctvwez5wdfwyh16gfqo91vijycuft5mfqlfqw4vuof5sfgxyrt0nvkjqctc71w5ab0fock5pcbtebav5im4ta4zhbtluiufiiti0uc6gy8iqcyu85h6',
-                startTimeAt: '2020-11-05 22:02:19',
+                executionExecutedAt: '2021-05-22 20:07:14',
+                executionMonitoringStartAt: '2021-05-23 03:56:21',
+                executionMonitoringEndAt: '2021-05-23 10:45:40',
+                flowHash: 'ke6dl07ig5dy9b28j4vwg4e7vvn8vbp946y4rwdt',
+                flowParty: 'chq7ekboxwqmac32xleruy91ufgk6yblkn74z5nqzzwvsw4d99cqqgj4rq1r76nf1omjo7zb1n3q8rornj02cf9tifd1kw2vqx5lhhmk9torsno58fq3g59fbyjivpmk1rovjowcbaj137hsz0vhjo9rq1bbpjdk',
+                flowReceiverParty: 'dy64gb0rqpkqfnutz8ngfmwnz547oildmmfchwy6ougd5j5wi4qlnhhj8y1nnxixy7zwb98yz6ht2voxv35u4hmnl7qhxzxjgdm02izp77qdjshxpd21qmvwi9cymdt38qzy8rplxyead671q4zm1aygurgpaop9',
+                flowComponent: 't93odcscdhenzbh9t4qczmbrq0goh4djkfze1ohshpfeaauh4wfay04hlthieei61alpsn9nvgurifha34h3k442cvlg8f1m33km7i6ptu956vrr51oonvnyykw0flq7oi1he8tco7lif2vtvbzcrmdilkgtfasn',
+                flowReceiverComponent: 'g41o69elv95afwicmko8g6gw7v5mbsy5j6yn44w32zcdpznnrkliqhn70uln4xi2qvr51qdg08ylxjate4hf33ko0ijd5qoc3zvd9u91n1gduhjyrud6teqfmj4zfo01qysbaqwde4i8x30m2dyu202yhqs3krea',
+                flowInterfaceName: 'toy1j09ueai1crux3kfoz9pav9bqp5tp1pecv5t43vgbe9i8b0owp8ywpua80te1wiqgeoo8qi2xihxtcrtk0rrvd5hl2rb2188lnpx66j14dp5ky7d4jt0ss3pvf0ocipepyu8wijrbrjtb3sh5w8ffa0h3jwnt',
+                flowInterfaceNamespace: 'qzvzlqv8ldgffq57oviqbsn6h3grddoje4uijje6mtrb0y2qf9j3kqsymm3slwr9qb0s65cfxaw1lylh95bkktcqet60ygwefyays7dwe78ss3c0u9tur1oxp4vov8iyj356p3t4szhks9sqp04zj37r46bcw58h',
+                status: 'WAITING',
+                refMessageId: '4kxie29tid0mswan6117d9w7atltkm2ifz717klnvncy12rgs6o13fcqak90qyrzbaj48v5eavp1c4z4g6apfytu98z8nwfxryr7kw4ozojqd634igke2wxy821sys8btez2cfnc7u9g502dvoszm0xv2usrxhtn',
+                detail: 'Dolorem consequatur veritatis perspiciatis eius amet et. Et deserunt error cumque. Sint fuga est sit harum aliquid. Iusto quisquam cumque consequatur magnam ducimus amet dignissimos nobis.',
+                example: '9jydlwfsvjg83gaf79c8wh7yrjquv8mblff8kswztje5bev4qh8kili9l5s62phf53h7ergui51lga9m89n1aidq2hr3f5j3e3eumol2qzs8xjyhimg0dxsds5yq1amiha38i0d0wiayahr88rwltghigesqgykr',
+                startTimeAt: '2021-05-23 06:16:06',
                 direction: 'INBOUND',
-                errorCategory: 'znf0gx6pq7mtxuhqumn38wjvvo7p1c0ma98ssv64cfsps3q0r6cu28mvwpa5g1rxseenw40t4c1r64ymuxkvd7tji3v3a75glev0q28co4b6sfb3oim4sfyylu7kofrgcii63j97xz2m3l1gszdv5140niit13ln',
-                errorCode: '9b058of1saanvn9kk36e8npyf5xdx4s82bromuqk5gun6kwtrd',
-                errorLabel: 131773,
-                node: 5342550611,
-                protocol: 'rot0b8fu2jcna4hkkuvi',
-                qualityOfService: '5xl9pioe0o7wx073nwgz',
-                receiverParty: '1sdckitukuootsx6hy8759v2dw0uf8if1kkpqi6n8nllp1l2x31u5pqtpp9ph7a28pahxpocoycx5frbfc5lytskc8pyr6emrvsrqyb3f474bmdt24rcdlildpkfpsc7m25ow6ydzlel9003149wkyrpygcr5azj',
-                receiverComponent: 'xqchko6aainhdhgxdlu400gxkeyv651gcd8hjs18us3wc4rcg8kd9sza89al5sxdpm9e7gtuhape926xit3ws74bcs6ygpjm55fpu9uql30ke4kazx3naml6c2l3ydls14w99383uhlmgfa87d6yzv7chbe5lida',
-                receiverInterface: '4y837wi56o0hlca17wlst9kcdsl48n4sony01gukkkeic1zzsh8wi8l28fz0p8ec77vweq731mvpf1y6mvykdi20u09bh1qb2848gux6qxhymfrqic7j92oerktt3zlwbnldmy1zn2cevccld6aa1nka2fvu8fu5',
-                receiverInterfaceNamespace: 'agw1t4zxa81fxf5sn60zv08edf4ucexooo6th3mlbt1x0bqdxaqdizvxgrp9qu0e1w7y67n7th9u8kk5k5iq30y7wi40hjhr9ijcbov7ss8ikhaslyz7srt8a1nrzri6nx070hlfv8wqltamhes9mmkoqsxpq0bm',
-                retries: 7100265841,
-                size: 6874478098,
-                timesFailed: 7935213840,
-                numberMax: 6142431907,
-                numberDays: 4272449535,
+                errorCategory: '9vqzogw4z9d865bd16tgandidpzbylpp5pns8fk6z9y09fwui5na1qvhlxvknxfoi9qbxzbgn46wxq5kgjk7e2a2kadkaowxvrmfni9ckvrjrmcr0c8x18lz090v8vvav3f9i27mggye0beodl0fyrbd5csx0lgl',
+                errorCode: '1kbyp1vb4tl0pk909phl90yvqmyvd09c8jgal3a96mqlv5e4pu',
+                errorLabel: 765625,
+                node: 3619767784,
+                protocol: 'xxbhz0csu871vivtgtn2',
+                qualityOfService: 'dcmj088yigjljccdu3l4',
+                receiverParty: '5xbzts9r8ddipkxinrrgjwc73vjjro1bz8e5sc601tnlzi17fdsmy2fy1u3hmvp5m0x6kt9td6x5fkg94zdfqcnnrbsfagz8s76ngbi2thv6uf7hz0ztbv64k3lmo0m2keceynslihpjqqaebwmt097p2zzn9src',
+                receiverComponent: '2pp1l9ftow0re4v74jofgb9ahzmkxi3gjc9wnht40brwvoinzylvw0bxcqwrp2152p1r2r4lftgfd453ohgphm8kck16k3sq6uqzsk0am0zcnvlk7baprab32qfo3w5ntiq4gq3h1zns1nhr8u9hzh29gp6h88ha',
+                receiverInterface: 'imthxb2ssucekuu0c2dmksilgbfhq2wb0qzjzsq0nsbmast0zet51arl6uew1ivdm940tx0h27v3lt0izq76zwnpsx4sx4kb7jelguavi2atv06sn6d7d6ehba3dm36im7tl1fvz9funoptycrh35lhcmbge76vd',
+                receiverInterfaceNamespace: '6vmjku5vsjgrop8jvogpmrr5lshni95866b4j3xjb1annc09ubwjxij73q5g7fgpb1pr9olxptfhatle1cljsewlpkzseyw5nq020qzuw4xq3ccefesr1ylpopp3gsbq5at4x9i8nul4pb0kcrndx2mp1lywtb2u',
+                retries: 6272868210,
+                size: 8472532441,
+                timesFailed: 2281356042,
+                numberMax: 4829670487,
+                numberDays: 1517332967,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailExecutionType has to be any of this options: SUMMARY, DETAIL');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStatus has to be a enum option of SUCCESS, CANCELLED, DELIVERING, ERROR, HOLDING, TO_BE_DELIVERED, WAITING`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStatus has to be a enum option of SUCCESS, CANCELLED, DELIVERING, ERROR, HOLDING, TO_BE_DELIVERED, WAITING`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'mr8up5mah5pjgdjkl2km7qq91e6bgcpkbxc0keopond4zps6rl',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '4agidro00yw6mckmdp3s',
-                scenario: 'gjpburql9rl2ukk9t8tn98oueflibw4nldq05vr78b38v8zyjtrjl1pew36b',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'c9ebd6d5-cb16-4526-b13d-b370a5de74f1',
+                tenantId: 'a995cd05-8e89-4d34-8fae-304a67fdbfab',
+                tenantCode: 'j9xzcsdez70la64r2ekc7nd92tbkoepryk9xri2j0vli43eoy2',
+                systemId: 'c48eb77b-36ae-4299-a3ea-cfdb1c2718b6',
+                systemName: 'lg4zgl0crc41hpkyeuqw',
+                scenario: 'z0whxyfaccsa2v686qtmmcy75yetp5v666g077gxdce4uzvvyfncbt40kt5b',
+                executionId: '4ced49c7-0f14-4689-889f-78044d99d3ac',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 10:09:47',
-                executionMonitoringStartAt: '2020-11-06 07:13:21',
-                executionMonitoringEndAt: '2020-11-05 19:44:46',
-                flowHash: 'je0eae9l05nmnuub9194m2iz3mcs9za3cq7attd6',
-                flowParty: '3uudicheoponsh7adooeh3ko4a5t09jkcpplmx2h1ant8agp2borwvbuokog23mwnmc3kvs49jumw9noya2a2zj6f8zuxyty0dlik7bdr516urgv7p6e23l84mm5o28h58hjetyeazp4gduhxlg10bkplulgy762',
-                flowReceiverParty: '76pmhypq1foi6m12xp2he74km10mojqo90sbmn0zgx09qn03w3ake6c1q8fdccsm39mx6b9ckx1jgyv3ffns2848cb2m1n7q7hzgmxk3375jdvkxqoe57dydytwawh6qf84ccz93s9wn3qhpbkxfbu7bkx7ol1gv',
-                flowComponent: 'tjo5n6is3wffrt7rtvfgmk9ftvxza5y28o851a079gwae246a0i3g4p21dwh2bhsm6nzuumwkv5y648e1lwn9yz5bcmlr20m2ymr4qrjnf9dmedxxcrw13f4ejkjgjin2qctzq58qhkwyfcnee5vl19t48glzcoj',
-                flowReceiverComponent: 'fala79fionrd57ojj7047a517jktp6wboytb7q49luvvga8jjpifnjoztf2eof2a0ojaa37cva50thmekcnt0oj8ahe3gcvmoulp0i19m0ongltd3q4d2pn9sw9ovotxada46g0p2tvrmlv7xycqnwn6e8kas1dx',
-                flowInterfaceName: 'duexiwzhf1lebwvxk8hrctifxy1mvaywa67u7wmfuxg04ux5dvgeat62f7wv90u3kowbdmga96bhispu59d2dtzqjbciaamq7dyau7lwkw85ev8nb6htt7emso6ws5682hf751w1446hzjfm5fpltzieos8c4n0s',
-                flowInterfaceNamespace: 'bm6ugmglfy3da60v46h9hxcmxcmjcmxwaid7y74yfpo3qmmm67n552uxuhn1xqi4vwxo80nv1es3ldnpnnet859dz76xx7gz50dswztz715sysh4txt9vp097ltzgq2pq0kw61qvuijgf6mxcqwrn6xup1igczvp',
+                executionExecutedAt: '2021-05-22 17:55:16',
+                executionMonitoringStartAt: '2021-05-23 06:23:01',
+                executionMonitoringEndAt: '2021-05-22 16:37:20',
+                flowHash: '1pj572w0tgvmep12ym6l084ueq2mm56nohc547xs',
+                flowParty: '76d9pyxh4zsrlkggbk2rf4g9aah8zmwxfrqbb0wb69t96v1jjo3nyznqnbsxjjyrjavk0aziov9glhigd06hggw590cio2idr1pnwrvot3iaqhkeo79ctz9vj0vsccwwu01ohlzc8fcw1ax5jjpbm3vlf8ircmsc',
+                flowReceiverParty: 'dtxqpdxq7kqjm8oqjqxisv1xpm5kwp394i3zznhyd0fh9x6wkdlon9ofjeh58s6c6cnwefzsi3fixxpme0n0ljsd5a6fdj6j1lwmw40njsqu3xdke6koko5w736xfl9x8bn9h0qyxgk24a9xpo2ioicdkm3dfwxa',
+                flowComponent: 'byvpxfunelirorp9p72lf1abvyh7tmynhqic5a9v011ss42r50y4ucxomw1id0oo0sz0woql6zurus9eqr6ei2rfuxuubw2i1rt44u7cg952pd1vc5qsrztfeyanh7m0teo56ycmdxo6vvyi1tessdp8fysppe0m',
+                flowReceiverComponent: 'thy4b26a0cuj4j3yp58od20kv6kjy4sdjcyr9od11yeduu0z9t4ttt5lvrlassrt9fpmjj6ox08fskvfpwj737amfdfukwmru4kof4en1xse5vqqea1qmkd9mp4n2mjbdktzuq2tj2yisep1reoxa4uyzfijvukf',
+                flowInterfaceName: '98gvuq0phgnjmkbs3ihwigmc555vfujn4yxajllhktg6jjnk5u9cu80vb40avpavgqfx8dh7tkffhv3famwefz84ubzldrvuq2znx6hk5rxs0nd1qm3azvsl86itsus2aumeet6xz0xmqvko098v0o5th7asvxrc',
+                flowInterfaceNamespace: 'tuqgernmcudhdwigh4edbod2pgldtbfd40rs3z0orila22hifm5kt8ab4mgsjw5z3ub1gqelebsjy5pdw73lbd6q1dlrlblzm4o3gps9xociakomucfnbd9lefu7vi3qph6o02mcqcsjcvzeisz2m4cu3fzjiek1',
                 status: 'XXXX',
-                refMessageId: 'x7rlfcvruyb1b96yc75gafraw5zzj2pz3v5iec58934grd9jzydva96qhsa704i1pl314zhs07wrmi33db5msze8qkqhgsebfog9bgruu4mt9thd7d4eba88knwrenyzl8zd6uvhkpgcmjasan2o8zrmwm92jp33',
-                detail: 'Maxime sunt quidem eos illo voluptatem similique. Placeat dolorum dolor at. Optio ipsa et harum.',
-                example: '03pyjr4ne8l5szhzy17gapeby0lro0tch42g2nfu63zcbe423r6q2lsz10qyt452k36fr1g6hvp2q99yd9u32c3hjo1zslsu695sjnhwojlybf7avu3cxxeamvd9ea3mfactpq1u97e3dt3trvlls5cqdd9ty4cl',
-                startTimeAt: '2020-11-06 02:21:13',
-                direction: 'OUTBOUND',
-                errorCategory: 'gw3n1rjmrvi7hmckj582rtcmc4qn6adxpsdo8e4tbli86pewm21n6abl0vvzep7anyk9amvgzrewhh5gykk6u7cn6apn08yui0w9bngz4rezduzpmdurqqgepaql582j4b545h2tzk390n7kppsmgp1wbd72bfc8',
-                errorCode: 'o48eb4x3h0q22r4hoh67tvavqrijtbsapetdqtazh8dyndz1pc',
-                errorLabel: 311188,
-                node: 3262087634,
-                protocol: 'mrsya9rrdq1ioz7cgcsn',
-                qualityOfService: 'dfagpqdkc8vsax3jhtdn',
-                receiverParty: '794v40kfdovgpziwpxpbjtn9szcwcxsxzgs38ithsacpzzr0u8x56t0tdhbc5frbctmk9pgd1yj7zqjrszdqixctlozwneayqbq85x62g8pnlz2odf1r0hl99amnzqn2j1me7nlgfthl4wsvhqmcs8kz32kdidsl',
-                receiverComponent: 'a99awjkk820litm96o7p6mwbxl6wl4movum8yuaoa8akb07vkobfhu2w45iu73x39a0tf7rbwnd92q5fd0murm5aw66k24wtd22rskt0v4uujlx3hntizu8t7yjc6bxjuww5a90ibxh9rn4rfwcciq2kf9u0vvby',
-                receiverInterface: '532p82ugvlsouvz34xbe07doip1nq8xwa7qrouh69s5c4rhmrhdquxibgekn682u5grxdp1lcbhhvqwqom6xitzvxxd4nta5xu2ly4io13dk3hincfzw4at9e8dmvbp05jg5iq8syymted4y7jf2oqe3cnxcwiul',
-                receiverInterfaceNamespace: 'pzu63vqszldc24vrl3wmi2452275uuugts8t95y17vrilesj993efi66ot5becpg4hcs8q8ybo3gl87hxxx69oi9bx49ri8o0ddaiiowiuhemn73mwqx6kmd5tvzvieajqx1gntqpfymfts6p3tpw7npj89c3saq',
-                retries: 3213310879,
-                size: 9445315481,
-                timesFailed: 8340630061,
-                numberMax: 5112373942,
-                numberDays: 3297986753,
+                refMessageId: 'n2lk0yydxt76its20cql9f42sjwj161tv7g4ghzn9jsazbi0v1g6pegzuf6df4eaa1y2ebtdqanx4d3yn3odyz0kxiajoll4bdvtkyg092uqrld8859mcqzztb7zglcnr6ehem2je8fjlzuk7l9v2dkd83w5def3',
+                detail: 'Dicta nisi omnis sed rerum autem accusantium harum ducimus incidunt. Quae sit amet sint aut vero. Nesciunt omnis molestiae voluptas nostrum rerum voluptatibus libero. Sequi molestias beatae tempora ratione eum esse error maxime.',
+                example: '0fcbxysi0lfitana1vw95o8flika0bzp813fp5uf5f5ipfomd948vl4tzgu2ze0r5nrim68gg06jcwbvwtfjih36qg2ctxhrai4yw2uva8fnne0mi55r8eqk0rbnoodz479ibijh6be730o9lby9m3obr3nz876i',
+                startTimeAt: '2021-05-22 17:38:06',
+                direction: 'INBOUND',
+                errorCategory: 'xouwwd4psqx993yg55o43c0invi625iaj45d53oijj282vs7x3eahkwt0ps73s3bkg5qlr8i49quri22pcv5lgjscz7dc7ak89uutoegyaim2k0qnpp5w2tygwucyqg3qlg8pwb03ousirubk9t6wwcv39667qs2',
+                errorCode: 'j2ggvzokatcqqua15rfmos00zu7mfgwihc4dv8jv1yymdfbn0l',
+                errorLabel: 590822,
+                node: 7682234012,
+                protocol: 'g2y8bz1skyo2ym04y0fp',
+                qualityOfService: 'dp9r1a5p5o03q0jdb1v7',
+                receiverParty: 'n7ky73c6et9ckxfcd3uphdldpqcprp50ubj39tddijkdz3zgeihagtu00re8nh4auzhr5rsw2r5couoc8dao37b2jez7z6p9cqvywjdjy8tvizb4qjn4guim0nm8g7v4hvfxno19lpvyknunbh6ud5fb66l8eupc',
+                receiverComponent: 'cpmegz8mpngay4b359mf2zmzs8mkquhfnf9psogruthx54ltm74uai90xv9ga73kz7gnsykyoxbb6370ekkbh0fmotnhuh4kwlx6f4ukkxtet9sdn8eiz9msif9ktv636dq3649ueq8rny2ks5ypga6jh4z2i32l',
+                receiverInterface: 'rmqvjjyiikeoyfizcyl65rzgquzdmiycxzvap3ec6xq6xuc0biducmpw9al2u4hvkoi407g68zdeu5xulcl2s7gqg4is28asqwnaxellx7jpumr0x2glxt9iu6fqzvfkcqt8kqu9ge6kdx9asy0o9m6iwzx0vnaw',
+                receiverInterfaceNamespace: 'aaq5l48lgt5k5niuaz5b2mjioc1fae4j82eyj1c5vdn4cl0eapwq7aw0tluy9b0anlqs0f3kb4mdhkxy07mawvgeh0o7z5f308ibdkp4j4em948wk20ufvim12vnj44kdmadpen47abyuejzbhhcu8gjadhwm8mt',
+                retries: 2480931414,
+                size: 2900006734,
+                timesFailed: 3233507782,
+                numberMax: 6418582104,
+                numberDays: 7664216619,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailStatus has to be any of this options: SUCCESS, CANCELLED, DELIVERING, ERROR, HOLDING, TO_BE_DELIVERED, WAITING');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailDirection has to be a enum option of INBOUND, OUTBOUND`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailDirection has to be a enum option of INBOUND, OUTBOUND`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'zm6hm16m2cvs15u9x34svr910zhpqmhmmftgf46depn58k4oyz',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'qjhozjx3wnwnhws9axxo',
-                scenario: 'd4fruucnhl1hfiiovobv20q9z78fu1v4lxxfek22xpihe4c5g1hn455hmus2',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-05 18:19:09',
-                executionMonitoringStartAt: '2020-11-05 20:29:29',
-                executionMonitoringEndAt: '2020-11-06 09:16:46',
-                flowHash: '7rcqy7rhezmvoi2xa8mtra6urnu6oe89mq896usi',
-                flowParty: 'yo1jyaerdxnt2lr7nvj0bd235e9kupkb1azjsj2vcuqcs32zzkdvrvd49rn0h46kjdo97joq8f3vx78l687e1ehwnscxdt9js6n4bntfw12ldbjxpnfshamncemo10mxqdb23bqhm0y3dumtifbf7p5ato0ygo68',
-                flowReceiverParty: '88v3axlxepa5ylj5whqfy5eoyl4tayqtqslcdc4aal3qso7emjr2dbgtygnq9mjnxtm0fgaasgtcwfvgi6s592h9mnmy26e2dak1xf5kjwxqdl444r42baim01y7yri95e4vllfz9qyb803h4a7w2lux8d56uabq',
-                flowComponent: 'red9lnxw65n0kljvqp1utql1lvpvfqubpbxspfo6ejx3rpmfflk78vo0q8jsc5v8usrmteo81v5acvn9i54117k2f5pzdlyismgjy1zshdnmsxsb5kyfcwtrs2w0utlt3rhjizlff7w8dbn0sjmglu386fy319av',
-                flowReceiverComponent: 'wyawnh4xbr5n538y635vqx94bhr8oc8fee7sca1wcqvcb68ytjmyfurt69894yguzybyd37sztdumubvc6cr9a28khcdl7e9pv741p00rxlyusdn475sciyutta6podnahxez90z8trypfppi6p407se3b29lmji',
-                flowInterfaceName: 'a95rlq2wtlvnfh9nuwy4xj4rdfx8u680pmhhz5qxf0p2a3f66ugfw9mszpnx5rqxeb2mm4a8z8yetg4cyu5ovhlkn6jg8p1mnk5p3kqjnht9cswnxrn45qnwm2c4ic9wizcrtukow4iwmmguzrccq6lc254ozylu',
-                flowInterfaceNamespace: 'xyhmck02m4ipfbbs845ra6epmdy80uyzzyoqwkzu7ek0mbebr5qbb9yjnuwuwxv6kylwthoj2dpdwsyjy1pyvn5n8j14vjzjhxnxbm09993pwsvic8iu90xd93t3054mg1d35pqmhdp3kq5bcazdwt4efm30gvjv',
+                id: '6d612801-73b4-4740-b79a-bcc9e34ef51e',
+                tenantId: 'e48a618e-7b70-4cf9-aed3-c3471da69e08',
+                tenantCode: 'zrrrx1xqydb57un7pxq4trjqq4hflyfod28c84arcnf4bwz1sp',
+                systemId: '5589b756-7810-41bb-a80f-1768274406e9',
+                systemName: 'ckfpp29civ83wia50lg1',
+                scenario: 'ljmmob0a5qn7a1xrhxagsjifvdzvf41u4uy9830wfixwb22x3fvrphtplkzf',
+                executionId: '5c438d29-9672-4944-94fc-c851b02e9829',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 06:00:20',
+                executionMonitoringStartAt: '2021-05-23 07:43:56',
+                executionMonitoringEndAt: '2021-05-23 01:26:05',
+                flowHash: 'payi6x0bzap0qwvlfj2mcfoavshqgfdi0ia8x395',
+                flowParty: 'inkd1a8o8f409osy17xusnm3oyz4g703zv3cjaws429m9n7svw8hpi5fbxa26c71ae7g9ea8z09wmrb4t6skfqg6wrtn7xfw1y6s5mof5f7nkp8he5bwkhov3y3tfu3yqqi4qqemulydz0vmx7dadnz37pbbz5au',
+                flowReceiverParty: 'pgoc26hz729wlkmzpbk9naaoe8l8vgs1nrpk6w14zlk8ls94pvgykfx1dim28vcmjv0nz29ek20gdxaw58hisq3z9n1qqqmnxiyos9ncip57zp0posjkccu64kcjg9qf8mdr2l07ce825l1nuzltkj4lh5cfag0s',
+                flowComponent: 'ysttacvbrb6v80ye2roa1ucgxmvpffzrxvjx3dw1xkmrs0gf50hhvvkodbnaop772ckfbhr04eturu0ah8b00n4tk07k3r3wx7ny2c8iill11dlajfox9j9432b2h02if9m2xpo3wwxzyvcqlbh6tgdlarf4kdga',
+                flowReceiverComponent: 'noqycla5zy2y9gc3duyfme4vw2wfykz6i2wl7xjv83xlv0uizw4y04zb9w7vzrpb4rtq7tbdbiqlibnaf4lklor3l36lttzkd4sj69rhni1uyg0hugphnbmc2i47xfnnuprr0vurb3wexjam56oikbcl7p9ph3kd',
+                flowInterfaceName: 'ouw5zwl0xbc59i7o90ex9tzfiz9l4hdiwqd8m4je5dd0f3jhnn852qu20an54c38c556jfvi4pxxfvywzpyz8n15ng0osrs9ti8v6c9q1ib3nqj842768wg6cn6kgazs5uev1odc57duhvsag2no4kpe74abnix4',
+                flowInterfaceNamespace: '9xv7c9og7rzbzxsoy769x4gsb3hisxi2yijzktajhfcs8ms7z22hvcjp5nq4pki24lhhhy0kf3x6m50autuaf95khm0dnmxjl454kian0nss5nu5uxt5a39wmm8rxeijnqxckoajcjnt0bjf6gykz05j5oy1me2e',
                 status: 'HOLDING',
-                refMessageId: 'm2dtuz9hws12uxsodx8krjbie4uhcim7h04w7ezupdyi6bm47m3kd9jknztsd1uzilmvih9tkh3p3trm270gef1mvemsgevqufq0x65ebqf65x6gnfbcbls4qre8wsgup3cf8bx1yahfrslhmsf7vdopwfabv996',
-                detail: 'Ipsum ab voluptates. Aut aut id voluptas quaerat ut vero aut id dicta. Culpa aspernatur vero a aut nisi aut aut. Id vitae fugiat quasi non officiis est molestiae ullam accusamus. Iure nostrum eum libero animi rerum id fugit.',
-                example: '1lgryg26d6y8h4ofvjhfc3tq5p7eiu2z8dwezghuflikrdual0ezw5g9jpx98jzn57tnxga51i2whk1gobf20mfno9z2duojjvy45s2rg10vhn7tj3vkcx5jsmsktmk021okf1kj9l749etvf3ljp8kc9ggtq85q',
-                startTimeAt: '2020-11-05 21:35:37',
+                refMessageId: 'mje2knycaglw36u13gtfnh4t71qha67tfgvmv38xamykoyrj0z3fl9k00kzkzjju4z031ga52sa0bw6awt1rdwi4jbe20bwhurptw8zak831uzmb9y3a3b70d63sp30788hsee3gl5tefonb2oocbs6rtx48zb3k',
+                detail: 'Voluptatem ea accusantium inventore. Eum officia dolorum eius aperiam. Vel officiis dolor magni et error sed laudantium odio. Ipsam nihil beatae quae unde aut. Voluptatem aut itaque harum molestiae ducimus.',
+                example: 'pysbvzn50gjokqak8rtphplgisnhh9bajq789rypg8zwzv5tsh5yxh3nfzekakw91umaa8cajjyj3hnujvywt7wy9vfp9ad2ds3va35kd8j2e6hglkazk8aw3oekvkl11lt2nmaw426uhdy8k0pvvfkat02owif7',
+                startTimeAt: '2021-05-23 05:01:08',
                 direction: 'XXXX',
-                errorCategory: '5s07vj4myhvhfxpmhw5q4d45x0sva9lhi2vsu7x9u140m8nf49wskhb2z1049skpmxp2hdo8d1oaaldyuqiqs3vz6edj8uz68u8csjgk9e93o9nduzbov8j859rjnje4ksalx5iovi4bs3jmvgu7m0t6igntuhta',
-                errorCode: 'rcb0tlofiv15qnh2cv0zijwexm12evfu2vkwibdsmhtq5995qp',
-                errorLabel: 698801,
-                node: 7814542836,
-                protocol: 'b5vek4zsprnnu0fzgyqo',
-                qualityOfService: 'v3srhqgaqk6ss8a6112w',
-                receiverParty: 'pxy7jh36jblqis9mvh7n9j6ygw34w58yuyn2dehqwfie5fcs9qpkhbqv6gl1fuvr1v63hh77yf6isowiuco9zicyi4rn5pjm6srk5eomvzsc1b2mfxvcrxipeocl0f6njcusj6g4bnaep6l75p2p9t3mbv7jvuyr',
-                receiverComponent: 'neq22fb06w3daudfvix0yl52cte4gkmlkcfyqzpjjnygyl8jnf7f9j0zzw0pg544o3rv8e150jgxnbfd628gzvx0rbjy3m8r1mo0csx3akxgtcw45k0qsvgu71kcw31y1fi9wqwdjidetoju683sipl0yn26ujkf',
-                receiverInterface: 'v05ayynhqmbjv0a5szqlnsbo3sdqu7lr5m6gc1w6rwdiewqi1sly9en5fnigtphez7g6ez5g59ew8ylw5ap9vvtoclgi2n34n3xbqolavtgzrpdmaqut54g9mbvcpzw5or7d8t9fa9o6nhvusfwqc1iwwyevszcx',
-                receiverInterfaceNamespace: 'g3xs0ht8zuc6so75q9zl4esgwt12a2chc0z6kf08yf74gavma8mlvbavymkck2eovzoqxy90q1n9qq6j3j59f17zdqj07skjbnazwmxjuyit7n0s8rh3emizb1nhh5hyqmaavjecdwonoh0g5skw071lez82ihfw',
-                retries: 6726110467,
-                size: 3827136493,
-                timesFailed: 2567556835,
-                numberMax: 2144212514,
-                numberDays: 6929479693,
+                errorCategory: 'yz5bsfd7y6906dtzz63h108fpws30l2s2d0fr6dvjwa4aw9h7wt1j32w8dwuasguxbgji1ccokbgu1adn8ibzzavvqochpfxg1ino8geuag932k0ghwdjqiiccj8gqxyhyb7l2jabrh8lluvgr4d00am9w4hcfg1',
+                errorCode: 'nlnt1md63bbluklqu1aizak3x3esyxkwffxdkswb9f32p0huda',
+                errorLabel: 301462,
+                node: 2954937040,
+                protocol: 'dozxl68qpk4bik7wc45q',
+                qualityOfService: 'gyrb8z8wc06n146r6oax',
+                receiverParty: 'mbmzbspr42eaorxr5mnhu5ydbst6lw69lgzf7ya1kf1w5yt67vv0rz85kl5ghu68ieokdukcwuwxc1qti5bdzvv4ivuyqa52y9d9afz7748538gjn99v1s1jut5llltoq3jxtjbqkb8clcndpno8pgi022omsjmb',
+                receiverComponent: 'qtcpsjhpjj8befcknvd4rfvmkilqb8xwkiqel53whayqswbg47l4dl71znvvzdgsnaf02btg0zkfjzc064pjonkkxanx5mgr8yoq3jvjtarlvpi5vcws5n5m7e41v8c6g411c8awqyyfl4su1voy6abw1dcjkmsq',
+                receiverInterface: 'om1o0w0at43tkpmk59v4mm9k3svgko926lw7kcp41t75n93t3lrkzl3rzgm1f1kgo4mtavzrcj36el7y08af8sws1574bvlfl8q8yb9y1s6d3yilfja2ceycztw7b29z4m5vju6nqhlod2iqom43kvm04t9jwtj8',
+                receiverInterfaceNamespace: 'f37l50mi7yxjuwqlg7witx7qn14rrksrk1xqd1s2od1k6tyx0petkyz4cxa171pt0gqjvy042p3mdal8kyarlr62s7l58kw6aji692k2kntnfglvx2z0myxnr0aw5evqs1zu8aumfbxd8b1srk5ti01jmt9mj4jw',
+                retries: 8647030302,
+                size: 8106188925,
+                timesFailed: 9881717729,
+                numberMax: 6821253558,
+                numberDays: 1743606290,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailDirection has to be any of this options: INBOUND, OUTBOUND');
             });
     });
-    
-
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionExecutedAt has to be a timestamp value`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionExecutedAt has to be a timestamp value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'j5gnr5f7oef4a9ztolxy0fnub03kvqe0goo3lr4yrc9741p3nd',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'kk11gf325ls4pwbncfe0',
-                scenario: 'kv8p2xvsgnipyezj4y0r0mhfbi646tbxv9jxuppugisafvvb50uljasd7awe',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: '7a66a6f4-316f-4cbc-aad4-6b49d6f97e5c',
+                tenantId: 'e9eb57ac-3452-4e79-add3-daf6e0d36fc1',
+                tenantCode: 'x5x13vgyhf3ns2r444berzoxfqfzi6kbknazupstvbzukqgf1e',
+                systemId: 'a5e19c69-dc5e-4efc-885b-025598e08517',
+                systemName: 'aomzdd5luvam69ffqu30',
+                scenario: 'no95y33h1wn4w3d66mr3rydpof8dor6iliufk871v2m8v1y9escswdcx6ewx',
+                executionId: 'b96f610c-b443-4787-a6f7-6a4214b5aff2',
                 executionType: 'DETAIL',
                 executionExecutedAt: 'XXXXXXXX',
-                executionMonitoringStartAt: '2020-11-06 01:46:34',
-                executionMonitoringEndAt: '2020-11-05 12:56:28',
-                flowHash: 'ws2gjch79v4w2bp5el5b68pzj7s6wa9ogn0v6yol',
-                flowParty: 'ahr6cfryiyn0lknuo5iax1ft44xkavt56dxeyph4vohwvx97hhqy5i9x5rlfd5tebpndiu4bkqns40lv3uej78lej7683clyjzi1ww3xj5abv8qe1zz17is6ktkbq3hs8eylmqxbs1tm1mk8nbwlgcsuwu288ir5',
-                flowReceiverParty: 'pb7olhxwd42hawyxj2x561bffwfesevusbqh4v3yjt5tvri8kcx28k7o510yrtmth3564znwbj94s2voi83ujslaejxnjpc0i4p7fv2wdyfj7sfxcyn59flfsoda2vh1ib0hkx4dyldsltas40fm77pxm9qjw17e',
-                flowComponent: 'efa87s9jeznzigdekk5te7tq60m5xo39r93flwlcudviwe78rvz1mx3qkph8nt6lenkxreolygrz15q8b9b52ed5i7zeoj64navjdlppon62pny0xspcuf8889p5abo2y62xfbyxiol89uvsjiaf91f8igd1jtq9',
-                flowReceiverComponent: 'sws7qv7xk63z12matzf42iqmndg1s7eyju3p8e3u5z17tqid5cqd6s6nj51e6w0p2247qsp39vjf7b5i4i6yt0c30zyubw4ovrwe3bw9be6wqv7b7x7f9ps7fvtdacj9jgyf5j01c061z0yozdgj3z7ca8pn1ctp',
-                flowInterfaceName: '4agzhl3sfa26zlf3rlr6icp0gvq2s5xhe2ctx6xqm3rcanlcda2vd8gqt5ns32nv9sntfj8jmlp1w3363pm7hqqclurnslokmuxgfi84zjf457j44ngpfz3v27ojehuc9oiof4om1cbg9bm4yunwe5ib5jd1hpjz',
-                flowInterfaceNamespace: 'gp81snx9yhb5nmvwz51746z9q3fwwmvbrxnag3zuvkeldpo9dm3p3echv2vbretbzjaxrbtyrt91w45sa6ghpgolppwu994jpv7nnl1orfi28e0yltnhr05hy4371s77ekp7ougggvhgcu90ruc3n5q9t9tmxtse',
-                status: 'SUCCESS',
-                refMessageId: '86kpxjsvjwsi9oj7mutu8dio2mz6htgnnc5xpf8ngezmlfi270cjeb7e2e54fin8626g6ickiwpdrgop7w7cdgfku1dstqgr0nbha29c78jtvfxihi9wpy79a01c0rylg3jyxxp9oj1pmpqoy4je826xbxtzsc7x',
-                detail: 'Deserunt quia odit quam quam saepe. Itaque nihil dolore ut et debitis. Adipisci officia sint et eveniet quo dolor aperiam amet. Voluptatem aut dolor ut voluptas hic sed voluptatem veniam id. Adipisci qui quo. Exercitationem et nam consequatur blanditiis dolorum inventore ea aut nobis.',
-                example: 'jvtub1ubjfjyqyrhrodgrkrekh3rjgm39f6dy7n6f4j9ghca2pnpvo9tjdbfh77iwy1gjywjb20ysseb4rovgdurbg8iuxgs9q0q87ppwo3fgguaqut7j7v0uhzv1odhpwgavlcpsc2kd9shrrx3onigzwc4spzj',
-                startTimeAt: '2020-11-06 03:01:20',
+                executionMonitoringStartAt: '2021-05-22 19:16:39',
+                executionMonitoringEndAt: '2021-05-23 08:27:19',
+                flowHash: 'fas3d17tmzeku0ayu8nyf1af225r9eyujzkbikvi',
+                flowParty: 'bh30edh44v5qbpauan1f8407c79ezc0p96u2f3e1bt1fqdf7aehx4e1brmkya3ikep9qwbfl5ebuoe84xxpz5cuikdt10ywdzx68ibdxogqlyz8b9ax5zvs5alqx826zfzzzx4ks5ugey9wl4uyzdkb2o1najjzr',
+                flowReceiverParty: 'bi6fqrvdheefn3jobgee6l9ba8arlc12jo9oxpwfw8i7d93ddyxh5rlnaof87fo8cnqwnblag7xxfg2m6uz5f6bi33coaruvullbxcibgewl9nifjy3h8p1mh4vndz4siz1th3xoyq2n31jnk53g0imwozyafmh5',
+                flowComponent: '0g9nyq96ptxh95zw865g1uyt1nfazhlnxdz2pfina18okqectnl4iini39p0zngir9pmmanc3nf10scfjoaag7e17qnyr5jtdbpxiy1psk7hiqyg7g2z02cv7ligh52dp0d2xgydiipis2d2n987kfdgikkt5rfv',
+                flowReceiverComponent: 'z9xt9vk0bni048x1ivnmvm29hrlvyatxzja5p0vryv4og30jagabajt6u97njcgkq5qvdlthytvqd16nr5chgp82ia15rjklm1bm8i4lewcf1pbondp9qmq71grlvqb5rttymnrasuq25e0meznfavaihkcxlv0p',
+                flowInterfaceName: 'ynnyarz8zvowtw9xwdxkdo194ao6qwj6hxn2y3ecc5agmtpaxhwdj1ydh5bm1fn6qg5im1c0p2gb33maq7z5oadss1zlk4orurhhlv64771g0o36lwf3cph87el1o7h2jdj7dgea9t8l9topt46albc7dfsp6ew4',
+                flowInterfaceNamespace: 'd0xwykx2o3ikjt9sem7ynu9peyj552qalt3iplp5nt7m7af37c1d27wtzqe1s0boefgcs8h2e4yjsfx8cm910y0co18x1352u7bbzagbaekpnm00m78mzcic2kqe29vffv056q8vol2pau8259xu1401iuslsmax',
+                status: 'DELIVERING',
+                refMessageId: 'hvw3al1gzkmap09uohvsd0wanbpfsmpbz5l1t3dv85u1d5tdbu45h2ljz88psst1o91oc2xbccy3cmaed4loql8tf2dhezqqu81rujdn58y0inlpsy4bn9nethyfgp8qjfedzsb37xs4olczuhev1q3e9uiyu2l8',
+                detail: 'Provident reiciendis nihil quaerat fuga et quia nostrum molestiae. Qui est aperiam possimus eum temporibus molestias et molestiae corrupti. Repellendus doloribus est voluptatum qui tempora.',
+                example: '8m6iqj8ms2m39vw1pi5rxjmemfyt6e8ej5h1h836m0edeu1tp5tecjvze12deh2nbmayvu0wt14w4pms477q1iol7tdaqu7y1rerwqf0d9g0vn1crfwj4uc3gbqjs0326oymmfmrzt07f1ja49hk0w4l8dv1iksl',
+                startTimeAt: '2021-05-23 07:31:54',
                 direction: 'OUTBOUND',
-                errorCategory: 'wvbwbhjph1io9e69gsk1dd2hofao49kldmavd6l8jt2ynefvpeaqyzqpmmg9mdf5wss5df75u7sz9yu2gwn4bu2lmwr6ql3e7eq7kcsybylgzerp3vd129vdzhha9429ppum0dojbu8nj7dufuiikvhhspljay8y',
-                errorCode: '4y7ksdzpzd4kau279wgj1kk6v6jl53rffjrq57st8k215khwst',
-                errorLabel: 531525,
-                node: 3374914518,
-                protocol: '5lomwxh3hbinh83jwp8e',
-                qualityOfService: 'sh2ewjkspcgxqn7nsd1l',
-                receiverParty: 'nbn4xqf06sqq61k4r31eo90p7d1lk8a2ogu4a62zt4hws1aoa3zqpv0mjsazyh7zke4wa3gyzgr90khx75q6lu16i3xq8bx753f9oo27j4upxtxaqob2ctlilozskqkstzl86t7ynuomufbpzjeywwxd2ic3m69n',
-                receiverComponent: 'bwddbis70ui8d29et4ebiv5bd2zimzhrxlnb0fxfhtm6y27z6liojz2bxf3x2bt8qv1mwr1iatf1ubwcjxbs8u15wkh2b6kdlwl76rcvd6hovlf8qao6z73vjxinxhddr1m04qghmny664cfatjn30zdms2d4dnp',
-                receiverInterface: 'dgh5p3k5xhcackeovzgb10z1p8c4xjjciiq2vdjrglbjnu2ob1cgc9900zqhjq8strnywy5otnvdx8z77swesbbam3tp7tel2h0h93ks3jb31elto5r3r29hlc5hdcliz2j26rdkpip8w4me8kdgt23qjn43xap0',
-                receiverInterfaceNamespace: 'jvdf99128pp398kxdvpgzojeesn3nkrmx26bymitpdhhu285suj42y8q3zedhc26dtod7embi72dumzxtok0a80jxup5z77u3i0bgq8ggylbtzwo44qs2mwlexad6uzhc0fvnq0kwj0h5ybmrk4xr2ah52lpd36e',
-                retries: 2340482365,
-                size: 9633888729,
-                timesFailed: 8590232032,
-                numberMax: 7170145614,
-                numberDays: 7634729049,
+                errorCategory: 'qs6fgfwcqkr6j1xa03qjblsnrqf8q5yli3hu9ml53r8rnqxz2u4lru8qf6zsf7wpbjjnaq9jnp0wyohf1k8ikz1hwykow99zbmm5m6ox1fym2e4nbyqyvjrmgsiebj52nqhxkg2jfb8l35fdzggxklt84twla7xo',
+                errorCode: 'ekugfdvv4pnj9teuhpsgcnugoi3h8zfgubrrf1fjjp1do6oay9',
+                errorLabel: 696572,
+                node: 8708002988,
+                protocol: 'p24jc5a7tehmuo7vx040',
+                qualityOfService: '7sd0mfytoq0010zks1q4',
+                receiverParty: 'a6hrho0czid1a944obd9hiz0j8t2r8bv5liefq2y9mxzfzg0lwho95eabvfv6if6nm0dcrn3ssclkrdwwumfw09adxmxzznpsv1xkw8zsq3kqxz3xdg6a32o8v7j0vhtgih6s39xhpneb5kmehyxgyprl7evmkju',
+                receiverComponent: 'n1ceq2clwenye22agc66yg867w7gq10rjb13qtvabd6srtkz28l9461qzb3s4uladx8wlrg39otke0fjwn7b1wj70iuxv8k2rfk3i1bdghlh79lly0q5q40ylbmmwb2atj6e0e2mev4lyjddc534pgfnhg9kb8az',
+                receiverInterface: 'kvtk9nc4euc4h85z0oh7ghucz557sa1f6f1xuwhxxqv2bead3imefeitr9z8kyfpef69gdr6seorxidvt2ln84f1dojke4eg18v25lvcq81cmiupeandr5oa4uwj2umudj68aqt2dwp2u4eolvsxextvwbxh43gv',
+                receiverInterfaceNamespace: 'msv5xfe2j6dx3u2addqa588lvdfqm83w1hfvjjku2gbndx1l120susnud1y2cu8wi949tz9gjjp5dgf0hqhabzl3xc1psv3tfqtjay4omm316shc0xt3ad5rebybu5xy1s283plnw5v92rxkzkubwskrcjn992yv',
+                retries: 8332461678,
+                size: 2887481472,
+                timesFailed: 6083711402,
+                numberMax: 5462705341,
+                numberDays: 6931437312,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailExecutionExecutedAt has to be a timestamp value');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringStartAt has to be a timestamp value`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringStartAt has to be a timestamp value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '5po9nzwq0laur4z17ori6uw7g12qdj3n36qqpudodfxcxag0pb',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '5b6lsc1b4j9sd181oz5w',
-                scenario: 'q2urd04eokqbgi1rgjks728079wpy46rr010iybvd85gdz7vt0udv7ysqapy',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 06:05:17',
+                id: '3d444058-e3a9-47e4-a339-529fa0bcda33',
+                tenantId: '55a97d28-149f-49cb-85c3-8e386f6b7859',
+                tenantCode: 'yhj91g8589bzhiw4fg4qsxzzhkvuy7m30lza1ooech1aucu10o',
+                systemId: '90bf92dd-968d-414a-b18a-b9cb99465062',
+                systemName: '299cncbg9fvsw3h4h7wp',
+                scenario: 'icfkb3e5hxh4sg0chstq1e2czd9lel69bal4n7bbrnwhyf80vbnsbut0v2jh',
+                executionId: '30a965b9-4e60-4abc-9c0f-96dafbc70f7b',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 00:00:16',
                 executionMonitoringStartAt: 'XXXXXXXX',
-                executionMonitoringEndAt: '2020-11-06 09:35:54',
-                flowHash: '4id2xz0m0como7hjfki34u4dtawychsfxf91c5re',
-                flowParty: 'k7iu25xktt0qklsto01of655l98gzetpdn8p6808jccdj9f37uxpdpov7vrz7336rt9cxsbjunfco612mnw1li0nhbuqffh9qnx5683jv7dksjna4ebdm0sa5i33u7tdkntmrl6d4u2dgg3dk6jgb74okx8x73uk',
-                flowReceiverParty: '2bh5ndieo7iw9n73uynnla3j3w0ls1uaczmks4esd49z3crysonrcdvnr6iryng547umgutmn585ek7ur9rdxhdnzledsdvp1zclgzk1b5zynujkexw702vg9azcytkdvev2ahplnpdy180y7w7gjpwqacup277h',
-                flowComponent: 'bry6s0gqu557gmt9gv2ddpbwncwnnysyeo69vf21pvnyphjr2gt0n72s00y6bz5s3hnyhvfqs7vvz28h2et1xjre9xjo7yzgsob2oabxrirjih0dgitdmwpecuttlnlkr2l62nh086y6pxstvvo42k97o3zax4wi',
-                flowReceiverComponent: '3efx6pb819cr914iug9m4f5vxboe5cn77ga3me6e4srw84whwvc5z7x93iibe6ceeco5xtzxhabzryu714tuztsj5jwoy2oq3oz6cl199dpoikep8rtmyjq3y4ys4qjihotsei1p37wdmic9rimm0mmhls6vtqqb',
-                flowInterfaceName: '93i0cbjkxwbx4f8mi99jefv7ukg6srpc2t0yqtz5bark4ouq1obdsrd27wnyj80d798jqqrc7wt9k126urvgrmvk4irbmjb7ik2x511ry6v50freayadpwqmcjzla8pemocko20hme5smrnqz87l7ak42sv0vzem',
-                flowInterfaceNamespace: 's6mbuqv7pkc62l33ifbnf6s25id6xu7m3zapqi9guv0k6ijsybqsc4xt2agcd0hpc83zdtueyqwwr86221x6f2hzc5cx1k8v8ddmlyu9ccf1x6arsbgyz77v7m6ykiqdm6gr8hd2prkh2y0fdetft3q8bzkpb688',
-                status: 'WAITING',
-                refMessageId: 'lqhzm8u0x0itcg1g6gdowvok1oowjdoy46zgxhqtjuyxmndan4204iqdq0eu0z5yahay8ccr71fmlw0wzjvoi8cm7apu3il3eimxjcxfvhmelgb6wsfgxhos19bbmctus7758je74twkocb9p8qgyant2m6jcbp5',
-                detail: 'Voluptatem eveniet corrupti suscipit excepturi exercitationem aspernatur atque fuga. Ex quibusdam in assumenda expedita rem magnam aperiam. Ipsum rerum corporis nam. Dolorem autem dicta omnis quia ut dolor est. Nesciunt et aut voluptas.',
-                example: 'znxiipi5whamilrld2xl3bapfo25jawm2b801lcop8zgvf3g7eyxch6qugc5jrqf770mq41zuiuoa9wvjyk83mc89ktpzm6u3klo0o78bvtztg354gadcrfdg58mc7mv0ffbq1pkf3dtzhhags1de3j2uebtkmja',
-                startTimeAt: '2020-11-06 02:21:34',
-                direction: 'OUTBOUND',
-                errorCategory: 'd8v4fw10uryj2d40djlvuwc0dydep1ga4jk6qxd4arvmxjp65v2uhwwb3imgq33pba1ctt5ow9t2qdt15adq06yf9i0o7aolazoavavrhhwpoalg6xn0ymn1l61g1dbp8m16r42jcaud0sjo3fir24k74wg8fjxc',
-                errorCode: 'givlua1cta8r0w2tt3wddlwabm1vxqd7jx39tydy6a9vcb1dnh',
-                errorLabel: 328099,
-                node: 6366490620,
-                protocol: '5lvxw06079t5t66p35ra',
-                qualityOfService: '5pedsz59ghymslrd3536',
-                receiverParty: '3cg3tax9mw1dfr2m54ulgt6h2gajrnm5rrpn679m09pdivm0cin6nnr6ywd17v5eghewy79z3jrgxntzjikx1uewthfcg2p92q9ggotiexcu43g6yj1czll4itrb60t02kch925murlv2cyuya5j9u1itn4vbgpk',
-                receiverComponent: '0hhv561spg6llzgx9wuzjrzcy85h6pfqokku3j93pxhyisu5b0gptg6tgzsdfospdyaczz47hsc2nxyl2zefatlxm4bv0fmztaw5omaa0g5ezvlzl4msdsmevcxlqzo3myrvycatfw5ne2szbe1re9mat9lynx3l',
-                receiverInterface: 'u55cc0zgelsohoztn0xk4y6bbjwqbsgmzvgjbu4p62mjm2ecl4qkpuuhkgi7cc0grgon0bu3z8i8q4v510mi43rj7d97xc7j0slz6546dkgvx239gqqad07ofg8xcdtt8189c0u2dq20kd48qkk0p96uyvzcctov',
-                receiverInterfaceNamespace: 'eyos07cl3lyy0471knw8oj6grhvh5ytwvv6f8c4ytmhiv107quoexhh79a5yc9j4fzqznvtvvgctuamns8o59x5kk5tetczg2sdayzv1sy872m1y31dbhv44g8lelsz1qezs12bfza4n6aa0saz7zukagpb279g3',
-                retries: 3359798486,
-                size: 1390475789,
-                timesFailed: 8446099338,
-                numberMax: 3372086223,
-                numberDays: 8386229913,
+                executionMonitoringEndAt: '2021-05-22 19:07:02',
+                flowHash: '5dlz4sf7h06koo7q5bglj4l1sakmr3vplfr940j6',
+                flowParty: 'twxyzbf5jawp1k1c9dryt6mqza11hkhztjojm8m4lmx6nzmg6v096ticvm569f9lp0def0k5qkdfyr9wts7ovx9xnrrb030ifq48jp4c1hc4o3pep2v2bjnq4rb13omaa8qx0kbt906tr4a3cf6bf2vaf2bn1iyl',
+                flowReceiverParty: '0v89h7ad3wahspb1z25qih22cwof7fz9tnwyvkllzlgf4lrldutwlx1ptbpmqy9onsoqudg9vupe5r71nxhqtw8h6jrge36h4t4a8bwmlogkqfxisekntht0lykyluahkc4jvfgoo33sf1s7yjzqxtclfu9qrb6m',
+                flowComponent: 'eh5dsndukbcssmm6fcoj2leh35thdhxsqz3qzokfzse1q169qieph0mpxu4hifktqrcx4bxjrs1w4opgu3euehdfkfdjonuz3a2a77cyhvax31ce9iama1a1k04sahn5qyhoh6nmzeswadbg1jxhrwhgv2eevozp',
+                flowReceiverComponent: '3j68ekn153lyn1ig9lckitadlbyex5unnlwbog2meye5tzo2x69488hfuraot4ejv2wh2lct56usakieqgbcmmfgymfcsuuqvzp2shi5n6dvedq0t3iu0imvhol4ls5wnvv867xdexyfsp8tf9qpk349bk94q7ed',
+                flowInterfaceName: 'pg4wkejtrs02ef8dco3l1943j695x4nxz0mru7y8ub2y7a1lf0i0fb08isuejw462ds7or6fige7xqbvdkm2us1su6v5a2upma2pkng0bpew484n90j2t77yxk1o59h0hga35vp0h1zyjm99x1q2gien7vkh6wl2',
+                flowInterfaceNamespace: 'px4cpczspjwnw037oo7se1ehpm4873ert15yzc1xrrtuqn8q7m6y37pmt5yy17t6pfbqu2sa9jxenhck2kp9z5odntpvn6utbq946fzex4kb9rkywbhxscspf5fmou35ednbi9ud3njniia3x0f7x5jnfgf4wsm0',
+                status: 'CANCELLED',
+                refMessageId: 'xsycvg5lp5lzhhqyhen4gniyc77dcnunt75em7bnrgwozqpjaizzcww8zn8sxbukyc8h5t328zii7ij8mnij40ydl8pvpheu7slbhr9y7m7wz7k6w53hwu1hzisfxea450r35i4zki56o8yxo363fxqg2f90gkav',
+                detail: 'Consequatur dolorum omnis temporibus amet. Illum nulla fugiat ab amet inventore quae eius. Itaque mollitia laboriosam quia fuga neque laborum et nesciunt.',
+                example: 'nklafswmlwult1hbi2arq7bw1xecdqh1oixbj6ooj5bx0m1ktjzyopgz72f3g8ktqngnt1um2firr3j4o3jfw0z098inoi8u4jzcxc1a0y2hi4aagjz6mpjeuh1mhklpo199opwtn42t1520qks3crep09ultbpx',
+                startTimeAt: '2021-05-22 23:53:00',
+                direction: 'INBOUND',
+                errorCategory: 'chnnm5ji3s9q60kfsbyvyklsy487ymsy7kgmam9shrmvsq62ytdyi8o86w9fk3wz7u1vhorkv7zzlecd84nbdfxqnvvsna8i79tbom776087hsn0q8jp5bajj5avk1ryxyw0h6ux6t8avjsak83giodsqftfxsyr',
+                errorCode: 'ctf6h5pcszcmp1t2gh7m3ps9lhlmrnkmv0mpb41u770m49pt1q',
+                errorLabel: 917241,
+                node: 8685367497,
+                protocol: '9qy82bjuohcgpbp2ki3d',
+                qualityOfService: 'qj2d0h9gfrwt35ton4mz',
+                receiverParty: 'owjta49rt8w5s8qcnisic5f9i9jn598rmd04guurmpekoej7d7rjxptdo3mjai07s7shfy5mrk5oej54mh6bvmwspkm6rzuaednlix41u3pewpgll1l3xhnjqq79jffojpjimdnj0c978f4urj4ylwqlhbx5j3ve',
+                receiverComponent: 'b7w9xnvfhuzk94dhawbioa95hsrkufo08238ibjc7f62vr764anrzaimb1z11x1ket5y106bhp9n688cf4ghrafp6msbalajy8trn3mubbzjd75alr993646mh81wyxj5okl14pq0r6tae4g1r7hgzem05gmmiz1',
+                receiverInterface: '1m2lyov5mhp21k7y5lvzf7q1oe4lumrb1seb26081ejx58hvuqdjhmv6p3tjcxdfrhpe6uewq7clgfs1ik87daihpz9hmjnma4f18jfrysrokx5ydk96kj5hys74j67jsy0ktqpp1reww6oopov5iaz086jjc7kv',
+                receiverInterfaceNamespace: 'qcz1qnhsh2dtoows89soaupngli0jao1ggchv72sv0dt727y42amiubult3ix81ze1k4hz2xwx6wwe6t5alpittj9e11q7l541k90bw2issj0f9mgir4svfr3mydh7pc5pz524exavfli9z6s55lbdbdy5clvlxo',
+                retries: 1203554146,
+                size: 4494854762,
+                timesFailed: 2463931772,
+                numberMax: 6890488188,
+                numberDays: 8803118222,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailExecutionMonitoringStartAt has to be a timestamp value');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringEndAt has to be a timestamp value`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailExecutionMonitoringEndAt has to be a timestamp value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 'w4mpz47pvggv9i542bdxvjdz5i0zw18p7pdg3x6zzc0iajf6kf',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'ydw03nrienpxhb1opdv5',
-                scenario: 'aqprceos3jaydyij8sz0shmn7t3rtlgrd8em01hbfxc0pkb6y43jxm3xsdg5',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                id: 'ba67d379-6f34-4867-9528-0b6dcbdb8af6',
+                tenantId: 'a615fa87-2581-48e7-a973-d0e27b721cca',
+                tenantCode: '2jy950nfbl5d3g9em9mo00j8ipeoqu3370i60ofiit60d9cy3a',
+                systemId: 'b04e2d71-b89b-435c-9f25-deedacb824cc',
+                systemName: '3y9bis3ow8m0k6hsb592',
+                scenario: '81pqsozmi1hjxd7jyltowhfxut521q3eom7o4lpfgmdzisjivuxm9y8rel7k',
+                executionId: '20125c04-96b0-4e02-993a-3f4214eebca5',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-06 08:17:12',
-                executionMonitoringStartAt: '2020-11-06 01:56:41',
+                executionExecutedAt: '2021-05-23 14:04:59',
+                executionMonitoringStartAt: '2021-05-23 00:15:21',
                 executionMonitoringEndAt: 'XXXXXXXX',
-                flowHash: 've9c9pctod6o3vg0kodq8u7gu8051ys0e6srce5r',
-                flowParty: 'ridf0twr147bsvcq8dbbn277f4yw3elsglhwauj6ttr4hs82xlx9po1liaosazlo3bc2euhibx42x7n3qgm5ngoukgp76palakqvrg21c9lkeq0wm1216sso4c94cm6nc4zfuhe88ocasfxd8jvaqjtlf9hgnk28',
-                flowReceiverParty: 'zrmyzlc6d8gljegj6fzpk7o9vza67hetmqsgon79xmaiwkc5mftzbyzqzkbp9qcsytlttuki8qdzbyxliof7291mt3xgaxjqy14jty0tp29mtk30loea3p0mrter1hii7ona40v3xjgwbpl0dz4h7mh5q0jee31j',
-                flowComponent: 'gemaex18hjomjgm0pq07ls07qxs6t12p4ai4mpwuj6mb1crp7mshsbp0e72c3imdtae5l63qtt4kgsekg3uisfp6x680b31fu5jwh3o1vccyetbpaotsu0o2or7mqcmjm7mn814bb8l6mt6if43159k9utvcpybu',
-                flowReceiverComponent: 'arr97d2yud6bpl4vti8exx0wsgvialdtix11j3ud33wxgsynetzibw5gyhkmjqgo29fsqdhaf2cvuj1s8o6a0jmcotii8vlyirbfdtwqn2mj02yr4o4yc35l6vn96ubrmio8pxcq0t0w5g7g6hkqfy8gcj0ghkg2',
-                flowInterfaceName: '1n00x6anrogtec96p2m9r2w6143xl6il64b1libth78f75dr1xc3b9c9ks47mm9q46rs80zu2tq9fy20sax6arxfh6vgff6dk1s4kr8js60e9f877tdixolq7fry3joyl6dgdvdb8r6vmxxloiz0s8bs3la7tw73',
-                flowInterfaceNamespace: 'ng4cmef6wpf08iau65a0vojfzc3d1gogsblskx97ow9cmsdi8mfytic4h2q7h28by1vf3gfhfe4nl5rnap2mqixped5e78sbgtyt02t8ih1hu5mvnyw128a7pakixy5hokqfozlgeyvrfrn8pw42rte0tvmc59xt',
-                status: 'HOLDING',
-                refMessageId: 'v5mk34ekzxfq7o27zlj3t0zrq614d716v36cu86s5z1fjmtyqhwpz8cgsgial06ri5svp0tnmo7s729cpi25t73wsg5vvzs9hcjn75a0hrqxb9to1qvdaydcmyfzd25xvm660zi8ty4wpq87chgwkd1mj9b8piug',
-                detail: 'In praesentium ipsum. Ipsam porro exercitationem est sequi quia reprehenderit. Corporis rerum qui dolor. Possimus voluptatem autem dolores vero magnam unde ut incidunt.',
-                example: 'bk9uwoow3k5v97m6p36b5o3ki84ax90rkjrgyfpvpl2fthbhrj4h73c85mafonqrw17rrmd96fzqlcczd3ubp4k261gd9hyljpslijm3n947m0myzbq5h8qnxjbg95i1ug661di08egzqwvyzluwd41b8m79s7s3',
-                startTimeAt: '2020-11-06 10:18:38',
-                direction: 'INBOUND',
-                errorCategory: 'vc64xl2moi2in14u6lk7xwck93q6kwka6nsx405n9a9iw2k0pckzqfpnmnoev4s28ctzl461btx2f3xhb0j88za2ipm4w90gvfrchoxb8m7m5uy5xcpa0u2d20kpch1vx7kzjbukaubbzhq9s3hbncgu2ds9tsxv',
-                errorCode: '99089h0c31igqczy1go27m7dwpteja8sg0vcu3rfn5aesw5f21',
-                errorLabel: 663424,
-                node: 5967674235,
-                protocol: 'yfq6j7squ0ttp57g1nc7',
-                qualityOfService: 'bnyz1tgj16py48njt7oq',
-                receiverParty: 'luids3xk27pmehawrx4t380smxxeypfz7ak5dahb9ah5cyirc4jbr9dzans2qwz5cs7j1g7k0rykvhff0l8lsmpqjfqahdnbbl1y7gzefp9weml1jpoqx2a9xh1pzcg92ixd9kjgfvzpzt9jdti7h0y6njn5jel9',
-                receiverComponent: 'p9du5axj3je4fszalomlcmbogezbfws5hsn8dj4i3z1j5j86a138tzspmmwemetn9essi5cvbgnitrm566ryr6an39o25z1vdz3qsjp97uvu9lk9jh7aec5pj3wg2i0pt8ji8kxwsh4twy5vhgnz2j85wx5lm1dh',
-                receiverInterface: 'hk0ng5fnaxl267cc9e3k1i6opanex6fxq6sdj4buzlzd9d6umpkinyho642qg2cfc9rzido7py50u9hcemgvnyplvlaakfy5zv16qvi18lc3mk8ntq6p9wj8rcdatu0y8h00u4gcvp0dkipnf3qnl61n8renmbh1',
-                receiverInterfaceNamespace: 'ja6fa04zvb5ecahc3sdgxawr5187lf5hacputm594qi0txulmmkbfkv8us9we7gl2ddej8wzx14o282rt6tk056w4rbr9s7zfboyxsft5zwug1sudl3grm0jpss8lh8xuztxokbf76lxdsmj51dn7tx05r2n7mbg',
-                retries: 9928815048,
-                size: 6935823870,
-                timesFailed: 7637178685,
-                numberMax: 3371622451,
-                numberDays: 2395997356,
+                flowHash: 'omwajgv0qb1sufgdyfo4iaxsfkpes3v49xk3jxi4',
+                flowParty: '98m68bumvb397k0863gk1aa2hprslu6b5v99f6kt0lcpvvh2m73vrkkml5afs3no1ooqmup37sc0cvk5wxe97laxwn90t1127gkqghxhyd9g43st8fd3abi6463wcuw6brg9yb8r18q983qljhz6ke9aizkkpjb3',
+                flowReceiverParty: 't1ojc6tg5it92s2dvks2z7olal1ytq181ps22jz9h88skffvhigp6d42g4g5ot3qwr8ofest13pr5f0il3m7u2t76n02tlzxangrkcm9b11pelr1s43t5ugn22shv0r4iwg1ldrfkpff8en50pphwokk7y3xmlf8',
+                flowComponent: '557k9f2o4j36o9lyp6qikkbkrion19lj361f5o1k997swi9l5dbaq6f8dr3shzs9v8guxjkgr1ayvzzs0xkduva5vjhdvv4wwo778yl0a9mo5gaoarqkd3og5hbtf4bhng9mc01wgybs8gyczm1793dt3uvk4iz6',
+                flowReceiverComponent: 't8suiiuzwdqoithxhyayx21buhs8zs38m0syxgcxvf4la5xt3vmw7oa6bwxb7eerwnzwrslqou9b5di2h4xioiw2mkcoq9s6lgc7whm1yvs8g89hw3047yge2k8k7uhy2s739bvlqevwmdbxy4iq678htj0f4vbj',
+                flowInterfaceName: 'dp76rqr5vd44yjiajrhq0ionf951qdam4w48jvkoskaim2lexfld1egnb3yuqsycx3eqpv4c07pc9twa5365v36n0duq6d5f5itvvu1etgxq31ub78xkdfwl7voeiwja0lzh5lgkueqyrmor5clg35bs9ti62z1z',
+                flowInterfaceNamespace: 'ppoqwuyryiq9esoznl9y07xnglz1q6sfu580wux8wydl3j3a5npbmpa31fw64sujmbwtnwvfr7tp1vmexmfokbnph59s5emm5mtkifm0jfyxxumxysbdb4eeisyimlvarkw6h8uothzjqq22x211jd29fli4ty7b',
+                status: 'TO_BE_DELIVERED',
+                refMessageId: '0infqa9jr09e3loccs54pn1orjtnu7kfsxrn0igxsb10m6j5d68z03pflrloui95l3ap023b0ngp3oykjqa1dswtuhm08t3b58mrgi02xrhx8jkzvkut2xoq53mzqgmo602kf6xcoku2dx934imbshsg5tpqbo27',
+                detail: 'Accusantium velit sequi autem laudantium. Dolor ipsa nulla sed labore doloremque perferendis nihil. Perspiciatis impedit qui ipsam ipsam velit voluptas nihil id.',
+                example: '3cp5baeweom99e99rba3tfw4dz4ar3hljkisx0aa93w8zrspiqhszl6r4hbsoj9in5bg7amkgjdyq33tak0lksnkmah10pbpi1stpfommslx4mk6pzpmjrw72azzc7xxq1p7iyslfj66sduvallpfhfvgo4kg8bs',
+                startTimeAt: '2021-05-23 13:24:56',
+                direction: 'OUTBOUND',
+                errorCategory: '5pzql9mtf6yxnzxj5mju97s7nmuvvej0ym106dvek5np9y6l696d7kektssuajhkmurr8kgz41hm12i1hzo7jjjmgcsdz0tzcmbfd0spcpcreonvcosi91otadm7yy5hyqfi0va5bnkueco84d57rkftn08yy3ei',
+                errorCode: 'q943hbi1pq0wchi30lgrveduv7jc0sxkcqq2vxvwpaklpq3shh',
+                errorLabel: 775515,
+                node: 9883041569,
+                protocol: '3uxg3cn50oty84xeco7c',
+                qualityOfService: '27mbcxvmd90vv6jg9mlm',
+                receiverParty: 'qamk235allm7k0he8zabykkyinrapbf7ihasz5budz6kkwrzbfkwi4xlfok2pl8pk7sifma264kxgwf1a07oiq5s6y2gw3ecgh5zw7516o7cyuijkvw4lyectidn1o4ep3rdbv6mju460qmfi1d4kijf6mpnoyu3',
+                receiverComponent: '77ms2vzzrf5ou7ujplnmil6dkfrr8n94py96hcwlephg3l7935v13szop8zlpd4mve09tcf9a5sgvg54en35lrzo4psbyhl3stiognso99qwpndarbl167131x11347pki664kdwn0t9ddvc9pu8dnief01g0b49',
+                receiverInterface: 'pm6oyqlnh56rvq6cf02i8rswr1036c8eu5phlsuew3mcl0z9qlrcj7q2lk04b6osk2geclr1vfzvol5weg3xthmz1oukodaey9hy6keb487pb59cgy4osdmm8ivq9oo1ohv6hkg57fcrjp98jtr92ugn35nkh3k0',
+                receiverInterfaceNamespace: '85byyept77t5tnf6kxx5736l4pnx4ot6e4iv6nmo91smxdlfx8ibl71zbkjnseg7ppt5lzj2x4oyez2689n36ncuhf9uydw0pnf61fh522d780wqevqbt07xdpp19unypswwdts1atzfah9fd4v0hecjavu0xyxw',
+                retries: 5232405951,
+                size: 5182481111,
+                timesFailed: 5102822219,
+                numberMax: 6671008078,
+                numberDays: 4753712621,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailExecutionMonitoringEndAt has to be a timestamp value');
             });
     });
-    
-    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStartTimeAt has to be a timestamp value`, () => 
+    test(`/REST:POST cci/message-detail - Got 400 Conflict, MessageDetailStartTimeAt has to be a timestamp value`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '2zmbzfgwpd1u3x9k2i1mcnb90dgy68skpi39eo8nt4lvl8e36u',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'p7x6wkgsrhy61yogjuej',
-                scenario: '6ote76to48sxge1vz6am9k7z7ln1gb0dwd2a6y51lnkt208kb253vklma2z2',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 05:41:35',
-                executionMonitoringStartAt: '2020-11-06 01:20:15',
-                executionMonitoringEndAt: '2020-11-06 06:06:38',
-                flowHash: 'ab22zmfeknso48vnkes58olr32l3imqk4cjzgmq5',
-                flowParty: '7hnkzt55hrok80yipavo2hw3vhvg5xy2bjo74prwkekj393225wfuk0oml8se19h158py3vdjyhx7aw4ofwjpbm772i9zzjuu2858jzcgxdh9e45evn0pydrzmva8oxozo1sl174ek0dg4fut55t52m4ikf9zvvu',
-                flowReceiverParty: 'rtvmmsijyw91oh3l0u5qzqvkfioq8xhyj65ec75o1ahqqbcil7luu0thkiwo6rrgpmhot96qtetxnj82a4uygvd089kgqgq85g19ys3g0mgg3osdm6dz5k2x6pq63u2x9s8egwv79tisll6tax55onj464w5jnyp',
-                flowComponent: '7v1m67hg6ngqs25hzuyttn1dthl6sg5prpvm2hivjky7ke2ghwt7lizygdg2jyngxmbfg8vfcddpxzurqpldfy2s09hlizi9ihy4089hc1qtzjz5km5y1sf9p4knqrbh6tkuf6s2p7d4xmbwzgwyl0p495971n19',
-                flowReceiverComponent: 'dfnmuj60zp69k0tkyrtqcs82ud3d1dx1tuunvy79q93rup8gcjgqwz8kzo05lowduz9bsky27zfaxot7qlf7b2glh2tm5bm8z0d39xfyhxbj24dwdyjb4esnk50sazxhfzpyijwnvymivsgola94k1xodu68qx0e',
-                flowInterfaceName: '278zium1nka8g85gbvwoll773oki3357emg2nt8aingkajcxd7oht0a0fpmpqzp9evtvuur2oqoctmiqjip8ntsfqqh3icdnk9ntua9wo747kmr6hse8cljri05zgtfzq3g4lkdnpdutrtzrtrljznpg4n6de02q',
-                flowInterfaceNamespace: 'o7i6rahcyg9y2rp80oltzpwmrz6zm72mof5wtzgf4oj0sxvk4mkfbpjorbdxredv2q46gc12odbmymuvu01mu87kha0hfx2fucew69hnogxoe8w1t2795sklv8869li0430qzykvkxcg68ga689spcgupytb3l9s',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: 'el3qe0sygo1a702x4kxdtdptxv6ecc24ksbuvr6i4218ghccosdcaiyo9csx6br808h2sc4gc34d0842232ahf1d5l89b5l2bbstnvvt9drux7qfipwzmh00kbeqr3766ys27029bxyimgjlb6mvmalwcyjjho36',
-                detail: 'Quos et et totam vitae alias et dolore voluptatum. Non debitis optio deleniti. Ipsam minus harum iure. Est vitae nam tempora enim voluptas pariatur. Incidunt earum exercitationem delectus saepe ea officiis nostrum. Quis dolorem quis aut aut.',
-                example: 'uye445sxngh7iktyfi3v5myh06kpg85dg15h4o6eydwqhhr8vfparjtvz4ntraxyr5jev1fxl3rb3hch0ok49ytbvuwip9fun8y6f6srpbi9jgcze97q26101s8q9frhthyr77eocmtbi920ldn4r3c0i2h9ux2w',
+                id: '48621956-4689-42f6-ba34-e739a96022d2',
+                tenantId: '3f79fcd4-8248-4e65-aa81-a706a3526910',
+                tenantCode: 'h9lc03m3da36mh7wzqd8zwgmlxcz6v0nknzttztn0dd9b1ewwf',
+                systemId: 'c983a859-52c7-4729-a28c-bf6532104e91',
+                systemName: 'e9x5077n7e7lpc4eh9rv',
+                scenario: 'k0d0js59onkxizzmpn3j092b5q32ue6kr9fiy8o6idyheq0d3m8atmmwdlxd',
+                executionId: '4b5507f6-fcd1-450f-b06b-032bbc2956fe',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 22:28:32',
+                executionMonitoringStartAt: '2021-05-23 00:27:11',
+                executionMonitoringEndAt: '2021-05-22 21:39:54',
+                flowHash: 'wywcrwm46iwof05nensw7q58hb89yew577bz6kwg',
+                flowParty: 'ndgsltr9f617ynp7ozfoifylyjp13xmog085w4i4ktodvohcoxhn9sjjdcpgljnpx69dlrn8tvbg4vlahgiock1uv856re2u56f8r0hozxp7ze1isfnzovydj7ysdzni9f9x2vm5oir3de085ozc8vm2w2oran3j',
+                flowReceiverParty: 'ui3lgef8w5dia884lw9dlgwgi8zuxm867qmv1tmrkcunyjv5leons8zw7bp68vy089v7jg79j19oz4bpqi75gh3a1brs3a0nsbbil5tvpssb70m07244y3n2wu0257gcmdr5umtdh3jce64n576gwgf5i5r1v4pd',
+                flowComponent: 'kr3bcve0kpot3lzfdsopnbb9779th83064kn8ouqck6t4z0lj9qq8vytqeegu3jh1rqn3awnn0bflax7ndxexdsrk5uwsygctff92qmlmcl11jb9fa7i7wsgqj0i5c7jsbr8a0hfnnqzhz9xrjp6228dsghs6rdp',
+                flowReceiverComponent: '48z110b4v8po54qanu38jaer9eyb1nmy8ly7fet9vfuur6zkscdmcj0sizd79zdfvejotxifmwutt5yis8e6upv5jkgc1jnlfcpi4gh9xf59loypomtqipm2r60fj0zrbggjref5qxpacao1bx9tyjvqnsh0ct5p',
+                flowInterfaceName: 'f56j5o9oo4ibcr6wtn3d4tsek8bwgxxqs3wk51vnl4eoza52r3wltc32tni88lkw1625vr7jck3lx9ouofsnnm4y8bquwfa8m1fr0ykzemvua1uieo5s8d0semxm3o3l5sd2qp4vgn8637l0kpwgy2hm3zgieym7',
+                flowInterfaceNamespace: 't2fe6eglslb2b2nph0fhk738d1rf8ij0mcqxxgpys4lqkb1j60zy5mjc3beucc359h91c60rssxz2ik9s8wbtkqfp4vz2lqdafpaqhsexpr26ydutzyul6la9vhqs1hlx49dzvqb6ejeljf7uiic77qmhmqiqk1f',
+                status: 'CANCELLED',
+                refMessageId: 'rul6ha7wksk17mg8xjkzheho820mu8fmxjygdsjulk8mgqquj8g72b880hexis5hrcnvc2tvlssx92wrfbhoi674011hu1mpy1plg21sncgm586pnzanqdlxe7qxbvzmdg0le8ewxfm6b4f5fjqm6njtihn5dwe5',
+                detail: 'Pariatur qui debitis qui maxime et laborum sint officia facere. Molestiae quia error esse et adipisci. Consequuntur enim sit hic natus.',
+                example: 'gpe84otrk5y03tzsrrbnlx0j6ojqqq0ui5g06uy9i89xnpzdgvelfppbtvrczw41czbv8ttfdg2x4pcf4s5euep1nr9vz8kmcsxif148q92xg459iepjnats9f91ro7pjubqyhw531st1axn3xdfuryx336fsovi',
                 startTimeAt: 'XXXXXXXX',
                 direction: 'INBOUND',
-                errorCategory: 'gvrcdrmkpt3st0qd6ykh643sfzknusfnsjqr01z3y6ezvsqrzq54k2ipdpfwwdtrc0a4wn1na0wk2odmdjo0xlgt9kpv87n4ya85pt60za36cnkdj5dqwg8t2e715iiw12k12ugyco4f1pla2zjvzxdvd7swah6j',
-                errorCode: 'z7ir2vaviygx3405jdr36ctw2cbsmqlfbkpdf3ltbh3yutoxq0',
-                errorLabel: 777383,
-                node: 2830516049,
-                protocol: '9jumowdrveyq8qy1gl5f',
-                qualityOfService: 'cm4cbws9naku8su08x66',
-                receiverParty: '65urjh9i4pyqpgfk00xxc2p199hgtfcn3prvxo3xzri6dv4nau6g9upgnjhicdpoxhijf0lchigwvk3o9cw1m9xz0u5c8fx5pi5optpqn0uza5nymqpqifgm9o4enbg9lnbl44eydhec19mexk93i84ynn3winya',
-                receiverComponent: '4jda5to3ggum2drttubl4p6bnx763e2vzqusdg5pmc8ghlkhgzr9q75xxh7cjejj70q41gfal7zbyjjcqjqqw7z0t2tak9savfbhblthwj5m7xlyymcq0978xd9r1q7jqq6m29anh9rzpgr167fzdf7xrq5qyqvw',
-                receiverInterface: 'bma5daq50c09d49gjbtkrn6pnd6gpzr2xhc51apxfck6isv9e5whnksspisxvo9r0vsyokrnjdehywb07jmnsuxi34r03ryac71g4ab8owjd7etswc4vjy2nqmhpngie55zdv0z9n37bxt9on1l0qf8nfzkjy0hx',
-                receiverInterfaceNamespace: '5sjdxcvkbwegsj00i2xai5517675ueukn7eeyg2i20o20sdejdoay1ccbe5g47ahbsrbcm15p3egogbao9pwsjdfuffhmsh0uqzw7mq53r1gsm1d04496gosqd64tcyx6oixzb9jbj7bx42vaofk73e1uwupj2yo',
-                retries: 7725988110,
-                size: 3210292266,
-                timesFailed: 7204097718,
-                numberMax: 5579782897,
-                numberDays: 9760967748,
+                errorCategory: 'z4wswrmfzuamqeskzaz4ifmu4wffxzwj9ws04mq0apnza67l7i964vpe39l15rhv3g9tkw21b34xngww61659rydzuqos6g5v2x88up7fwv2jckib20myiq91o4l3uleze5kit7ljde88jdkbho4adtkwkuui7sj',
+                errorCode: 'akqye0s4wqdqxbyvi5x4r5dz5952oz1nmauvoo4wyddpd566zt',
+                errorLabel: 911717,
+                node: 1956703315,
+                protocol: '8t6gern00s7h638u9tct',
+                qualityOfService: 'r50j4oga4dzw4goj5b3f',
+                receiverParty: '3bhx9kfplkt8p9qn5uz7wpo4kx7pijupsndlykkm81r88bekx2r521qu4fyppcoznrhy6ycy3vm4jy0h77lqezmchgqewj0f5nmyvlmqqjfku0sy1x1uk0l1160bmhjmedpkbwgkw8llcbn1tf001ubx2ltbgnwk',
+                receiverComponent: 'atufyrct8nsqzvbaqgfmt24m7ueus2nsauqbtapy4p3y28tnppmde2yf64wcynfkx2ixkgl6j0w8xdgr8v1z750ueg7n8i7m2v9q1j49634vc2gtk4na45ho7acjzd70kswskckd8pjeejpu9azma89xqlv7fvin',
+                receiverInterface: 'dtiu4nb49pmcv8ui72ku0w1mukhord8mi2bkj2s7xia1qx6ir7v6b3ghcte2n3n706a5yi3grkgor05yxnnhmvby22anp63ggarces684hsl9h7xt1n4msm18ay42wz2aasbznctzfec7d0qjbzupb1owsv1q4v3',
+                receiverInterfaceNamespace: 'alwjdwf85by2w1j1i1vazlj0unsqtcltf0hvavffufyqenck4njf86tcx68oka0y7809ygdj95f3euf3e9ezi8xqm64m8jz18v02o9lg9bhc454z66sfc6emi9hwpu8rd6ojpff43jqyhcdcwdut460xf1wwl1w8',
+                retries: 8008811957,
+                size: 5664454116,
+                timesFailed: 2571032514,
+                numberMax: 2433163824,
+                numberDays: 5174052004,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for MessageDetailStartTimeAt has to be a timestamp value');
             });
     });
-    
 
-    test(`/REST:POST cci/message-detail`, () => 
+    test(`/REST:POST cci/message-detail - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/cci/message-detail')
             .set('Accept', 'application/json')
-            .send({
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: 't88g7pe7t1w5nxqj9vu8ah3iqhqs5kdz8oot225quplwlwu842',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: 'qp8wsg2az1xamdu6kgj0',
-                scenario: 'e0s582j9vq9xkzsdc7a2h9jd1gldew3j99jzc2dfjzf8b6tbgi53bxljicr8',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 11:38:24',
-                executionMonitoringStartAt: '2020-11-06 09:02:34',
-                executionMonitoringEndAt: '2020-11-06 04:24:29',
-                flowHash: 'ickcfk5g7p0cw192yn6060jz11zh2kzxei1kqbeg',
-                flowParty: '6ptomfdl79u9elqtcx0maqx3yuwm52nzftcen2f76w9fipgjkv4trmdudy58scgt6gdyfiu1lkyj91yhzmu7db62pf4mykf65usmm2pqijrnt73fhryi93n2x6etse5a3xz6ummnnp0u88foxzdjvmt3rf0wbi5a',
-                flowReceiverParty: 'kfb6njsuhhrprk9eo0r7c9yrueffokjo77mfemkrvwf819ty2s75ol8ilb0tuwuphg5hx8jewsocaqzavk0o2czsmzde2x87qzsevwaph248gem5qo7im0oh2z9fuvsmlop02oqtfzsgf8pci4x8cz9w56cvjape',
-                flowComponent: 'vasfiipwwhozvoupf9vtk40yz2nadixhuxkwdp8zpoxrllc66888l83xl54ve5ntmi3cz53mnmozvfzcth85jzn17xhjwnrovxp8pq1iifvwuhgrjchcx81mcimp64cdie1qfmokqvfeki8s434bbzwnuf9351w4',
-                flowReceiverComponent: '4pee0uckx4ygquug3oa90x3i9xm76dbqc6oj3gmok15tb6ttaf022t9f50w6smwat65ou88usaanuqeaoqc7vplqagqqqg7n5drq88bcz9z5baspba2n3brivchj21q1pjfljhk41hurjvr0ij0i5m2n05ew4jtt',
-                flowInterfaceName: 'cfjeoqb2l09dtbc6bg3d7lqajhmjchpc9mb1m7y7sy55ddi6gbk05f4dt6znp9z49762219akffldtkbl51z0r0glrjc1zs0m9h48ac0wuiv7ysfymq4zllsj1ywoco4ie8badozuhigjbi1rwm9b09b237jtbm6',
-                flowInterfaceNamespace: '7c3q5rmlf6o39jqne2wgv2p3yvks94yf7p95fnvd8cod15kvcblvlp7m3hfj1d3756x5scdc5c7luw86r4uti4vweieb2b0ds1m9vegpmhgcn1skjwy4lxoue0fb9e6ag7owzptvntg8q4kfzpxp4hsxlyrnw6vj',
-                status: 'TO_BE_DELIVERED',
-                refMessageId: '6etrj8fp9xxbyxw442e4iv7o76y2y16x2oo3mr5krplqiz51on25nd80b0gij79rr6u6blmtf0sraynurekih2yd0nhqf6paipr4yw4gi7mzhvgco73o2mskvc1s0jthpz8i57i0gv61dnn0xcuvilkurgrmzvpl',
-                detail: 'Neque corporis tempore eos odit nihil. Et eveniet in reiciendis. Minima accusantium explicabo doloremque totam qui eos officia non. Voluptate delectus aliquam corporis. Quod facere aut perferendis. Ut et molestiae illum quis voluptates explicabo labore tenetur occaecati.',
-                example: 'v0eekzkh04x5rzhc1f0h8dvkm937xnrnyp2sr1ylnrc94wxagvaz7lnmn181w0yqd2ejmfyv1l1xf828u1vik6tfln114fn5uhsa0lte0oix91r3os3x8o3shc5lu1q35z99xr7eqe3cslqbw0znltfa8olok2gy',
-                startTimeAt: '2020-11-05 15:01:36',
-                direction: 'INBOUND',
-                errorCategory: 'tpcfgnr9amyt0lvondhnwn6xt4aj4jy96x2n9ifny5x0rzz55yi7jzu2pb5uvre9xqannp23twq3g5u19oa8wxh2ueyz309nyel9kiu39ctqonlzak4vvn3nrgy2za52pk6xgvobmlpysrqs0s3yzwh3kkpz5b3f',
-                errorCode: '4u1fny3qbwz85xhiipxu9cqur2vq4xfze0dka2stdue57tpktg',
-                errorLabel: 949635,
-                node: 7797244737,
-                protocol: '1gu0yzdy0pf3knrsc37h',
-                qualityOfService: '1jfxsv0kvrrnymsvfztr',
-                receiverParty: 'x1kznkhk4gsm7n42o3f4qp2xt310d0o7llu4h0l0hml090g3ccdxrte86oepabci2i7c0iw9kwfcriiril7jgej728uzgti9be7i6uxhfa36qeer5waskurvw6p451ix6wcs1a025lxzz96fyakydlmgyn4ko4tr',
-                receiverComponent: '6i0rbnbm5kv60dvtuaqc163yzb87pof50hnx1ewjrm6yhzk9p4v6b535calug8l1hb1mgldix956d12j6o6gmth3p66kl81slkwkwsxqv3gijbzurnncvqbszlukofx7x7qa6i0joavpsy81by12z0dwglnhy3a7',
-                receiverInterface: 'c8hfn51or737j0ww8ot1equ9j370ct08hoq97e0dmu707vra4upq2ngtzeffvltgn9wweje36nzyosdjxkc2v7xslo1bwryhobh5c7nz4fued2bhzx5ln76daejwgqia9cdndohyen4pvacezc5ycyd7112sgela',
-                receiverInterfaceNamespace: 'zxkh8rb0ucfqorvtijp2kefolpiimjjlss2udcdi5s7shjdt6onh0brh9a9z3mo4kglpm22ze2t5alnyjsvf1elba7e22zx2smxj4kc63lmydwynxwc13r076etets18bllbhz9q3dnoufwfm99c9le60u6aqq5s',
-                retries: 7364217365,
-                size: 2221357113,
-                timesFailed: 3058338652,
-                numberMax: 1431753125,
-                numberDays: 2360987255,
-            })
-            .expect(201);
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send(seeder.collectionResponse[0])
+            .expect(409);
     });
 
-    test(`/REST:GET cci/messages-detail/paginate`, () => 
+    test(`/REST:GET cci/messages-detail/paginate`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/messages-detail/paginate')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                query: 
+                query:
                 {
                     offset: 0,
                     limit: 5
                 }
             })
             .expect(200)
-            .expect({ 
-                total   : repository.collectionResponse.length, 
-                count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 5)
+            .expect({
+                total   : seeder.collectionResponse.length,
+                count   : seeder.collectionResponse.length,
+                rows    : seeder.collectionResponse.slice(0, 5)
             });
     });
 
-    test(`/REST:GET cci/message-detail - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: '562c1542-9079-424e-9591-dee0e3069826'
-                    }
-                }
-            })
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/message-detail`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/message-detail')
-            .set('Accept', 'application/json')
-            .send({
-                query: 
-                {
-                    where: 
-                    {
-                        id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2'
-                    }
-                }
-            })
-            .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'd5917c79-7430-4453-b9e2-d35e94b6d9d2'));
-    });
-
-    test(`/REST:GET cci/message-detail/{id} - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/message-detail/8a244bd9-9934-497f-9c9c-7f058979aa2c')
-            .set('Accept', 'application/json')
-            .expect(404);
-    });
-
-    test(`/REST:GET cci/message-detail/{id}`, () => 
-    {
-        return request(app.getHttpServer())
-            .get('/cci/message-detail/d5917c79-7430-4453-b9e2-d35e94b6d9d2')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'd5917c79-7430-4453-b9e2-d35e94b6d9d2'));
-    });
-
-    test(`/REST:GET cci/messages-detail`, () => 
+    test(`/REST:GET cci/messages-detail`, () =>
     {
         return request(app.getHttpServer())
             .get('/cci/messages-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200)
-            .expect(repository.collectionResponse);
+            .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:PUT cci/message-detail - Got 404 Not Found`, () => 
+    test(`/REST:GET cci/message-detail - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .put('/cci/message-detail')
+            .get('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: '2637367c-46eb-4984-9ee8-70d1caeb7c65',
-                tenantId: '46b04002-8bc6-45e8-b735-f86e6a1b3f39',
-                tenantCode: '4f9xq1t2c7n6c0wpxcglsvy2fuwkgahvkh6utecqtfkaod9ptd',
-                systemId: '08d61af8-bc1e-4b81-b6df-eb084687a0ae',
-                systemName: 'fxk6za8f14afnp5hhgui',
-                scenario: '6ngzuqg3b6itnmg2upucbadrq2l7iyifmsa3mxro0fg4i9zfq7mrsz86f4oa',
-                executionId: 'f3b1e6ff-38ff-4fc1-ad70-876f15b80d4b',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 09:56:21',
-                executionMonitoringStartAt: '2020-11-05 23:35:38',
-                executionMonitoringEndAt: '2020-11-05 14:37:17',
-                flowHash: '9hgtt6eamgvqhxa6yju1lc7q7ohytx97wwzhetw0',
-                flowParty: 'n8000fc3qi24zyy2bxui3495mh075n6l38t34iorsqymqopipllnb0gyr9wsio80pd0z2o1imheb3hnfywrjmtix0qs987x4qfpvbz8cdn5ww2pp8c08xnemiil4xth37o4jnfh6uy0y37il38virfk1qwf94wbe',
-                flowReceiverParty: 'o54786keecawvy2t1x9oo4wbprvv3cqhuykwp8updzambi5w9n7qajxly1k9r53irdxgbjfzo4w3psnkklrv8x6jaboceaig77hui8yy66hxida1ggl1rn6xhc8o7japl1evhlvws3casqnabfysqjb0rwn258lh',
-                flowComponent: '6eo3jplrhe2n2r2k9xzflzkgop68s4dxxrprozckykwi1eqssbrcnxczf2momnkwhsgt4mgrl4pr92dfcsiyiz0ab2j92gaqyh5uphdswi68dp6dbnu5qlsaov5mhmau42dv0wcq0of8rqfkiturks6bh0cnocdu',
-                flowReceiverComponent: 'dub152mhotvhswinhfudrxz7c15pnyyehd6kued2eac0nz8m48n0u06zwy65dyziiurzod66jlkkpxhpbwf1qf187284kr6yw2agldxt2wbapsy6a80tsn8wesknv7zcegy8bqjnhw1l4oybgd9ay0o0m2nwuqo8',
-                flowInterfaceName: '010xal5pdmohj968jnko49ioglvv9tfbjg8ve972vf2t5e31i39c1kd3o7xvipisb6v3zv2iy3ckryuzbfl0efgjpj73gwv8y94qht49w922u6fnqir8d4vsk7836ni4kr0p70l2tki1gverru8muhoxgen0cck5',
-                flowInterfaceNamespace: 'jzh7v8n0xu6xpg71v30r2qktj07wb3nx02sd35e1ueqkro7kboolkb6qa0by3ooqb8srg0rcjguvi808w4410unbdu3z9mmt7l9f5do80yoabqrqu2oa833jgr0zdx06i6hrm1bmvq9ikfeljfpgetlhi5oatomy',
-                status: 'DELIVERING',
-                refMessageId: 'ayi707th0jrfvjq4er58rhxw6apk4frrzozxgkuml1ehgv1o5qozr39zaob7niupdfx1syo8t0x78n3mw5br3t562pv34h7okzq1o2u6h6sxjt70wvf44pdn3vitbrch5ronexl1l96gzp276y01pztpgs53vpcm',
-                detail: 'Sunt laudantium quo laudantium. Provident dolore dolorem. Dolorem veritatis iste iure debitis incidunt sunt ipsam et sint. Suscipit quia omnis aliquam perferendis. Corrupti voluptas vero in reiciendis ipsum. Nulla voluptatem quo tenetur soluta.',
-                example: 'dh3e7sq85k81xd1vib6ut6goo8hpe20vkf5yq5d8o8k6h409e62cuc03rcyy9tgth841j0yjzenozihoc4s4d8i5fi8717kdlyssexsjen1mk2lci4cp49bg5n2wabv7ff8mphjx8q5nb67o3ba4j6uc8pt0ff5q',
-                startTimeAt: '2020-11-05 21:53:58',
-                direction: 'OUTBOUND',
-                errorCategory: '7ltn83xvd3myspv1hgwv3u3qyomubwkzsqm24v0zqw9byo612trezpa74tjwlfk985ni91z0poj8tntbn4qzqhv89thc8ggv40gw26eb4edbwdwzvp93x7fopp7u6pz5pdne615ch9k0yhwfhqfbakz7bgclieko',
-                errorCode: 'gui1zudk0r7ovs3vcrkqvp28qrii3c84aaepect84vh7r0v85j',
-                errorLabel: 637627,
-                node: 7947759744,
-                protocol: '0ubcxl274ptacdhiimki',
-                qualityOfService: 'r09l1yjdhjeqxgi76ya2',
-                receiverParty: '5l5yxb6xyih99jqo2d0ur852kiozjey5qul19a8ukmzsiltnqxx7vc69lia6qz1mtv2g4ehbc6zbtndc5lukh04josbt51f1v0raqndkclnz2fbbuiuehfp1xnep9xjfk1041enlgkjf3dkcde10xmpua9vj2hb9',
-                receiverComponent: 'qcu5xtpyo14ocn2avayvc7hlsoxu2t2hkpdg5pi3pjy63pbdgk6gx9an1m4mhsqqqscnf9xj45ddczwb4dk0ktfds1w3dwtbzyqfptoj8pdles3jvlu2ifxy119dls8gu963laq362ca1cqngcnzhifccqj9b4ml',
-                receiverInterface: '48hyjz3gi5vbbatt7jz3ihxruvt7gn6vha4v79cylek2g528wd2arnv5dq8eahpo33gx6w2s792gcjopbgq89rnvdjf4gp9zyw9t7bl7a0onebn47f2scbd44sunjllwxdorycbrx0yn5euhmis1vpl55uxqlfab',
-                receiverInterfaceNamespace: 'blxtrsjwsbwast1p48w83ch27k60axebtvmacczguolnd7esofwfzwf8a2eept422i97j6l0swuf2bhm8gkq49qtkk03uul3n5gyj0aeqyk5socbirkfsrhw00lsgep45bkdylizd1j0xpigiawpld2wumtjayom',
-                retries: 7825945806,
-                size: 7432801632,
-                timesFailed: 7810913727,
-                numberMax: 3322220310,
-                numberDays: 6463571891,
+                query:
+                {
+                    where:
+                    {
+                        id: '27d21cdd-1d55-4922-9bfe-79fca00cbd5b'
+                    }
+                }
             })
             .expect(404);
     });
 
-    test(`/REST:PUT cci/message-detail`, () => 
+    test(`/REST:POST cci/message-detail`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                systemName: '4iyw9pwsdxcmgcu744j2',
+                scenario: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 11:13:17',
+                executionMonitoringStartAt: '2021-05-23 11:13:17',
+                executionMonitoringEndAt: '2021-05-23 11:13:17',
+                flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                status: 'HOLDING',
+                refMessageId: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                detail: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
+                example: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                startTimeAt: '2021-05-23 11:13:17',
+                direction: 'INBOUND',
+                errorCategory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                errorCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                errorLabel: 384668,
+                node: 6386547672,
+                protocol: '4iyw9pwsdxcmgcu744j2',
+                qualityOfService: '4iyw9pwsdxcmgcu744j2',
+                receiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                receiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                receiverInterface: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                receiverInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                retries: 2387214826,
+                size: 6255805912,
+                timesFailed: 2922778566,
+                numberMax: 4377320395,
+                numberDays: 8326998618,
+            })
+            .expect(201);
+    });
+
+    test(`/REST:GET cci/message-detail`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query:
+                {
+                    where:
+                    {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:GET cci/message-detail/{id} - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/message-detail/5dfb03a2-c8be-49db-8daa-416b6e647a3a')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(404);
+    });
+
+    test(`/REST:GET cci/message-detail/{id}`, () =>
+    {
+        return request(app.getHttpServer())
+            .get('/cci/message-detail/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/REST:PUT cci/message-detail - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
             .put('/cci/message-detail')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
-                
-                id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                tenantCode: '609j9sdt6bi6fygi2st6rdbjxdglfcnk8chkhnvgf7i5lllkxv',
-                systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                systemName: '416nlhwzn78hq1xbynjl',
-                scenario: 'o449da3xofrs8ebo3zohld0hdwfnu10roylepdts2kdgw6ooufm6ot77daed',
-                executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-06 06:53:53',
-                executionMonitoringStartAt: '2020-11-05 17:22:34',
-                executionMonitoringEndAt: '2020-11-06 04:03:46',
-                flowHash: 'xx6y11k5aetce4kzvnr7210xfs03s686skipwt4f',
-                flowParty: 'jwfk8huctuzr19e4if37cir7x0ptkaqcuwxglph4fjkfjfta1km202ck0jh267nasst6mczb7lmvzj26jh2h0zs1utzjro6wlnyrpvkmcg68oewwcygyksnkhahk2mo0ck53iacqyciktwrqacb1qtcsngx26emt',
-                flowReceiverParty: 'mnyu2b88syrdwo7apcfptmqz0b7n9i6x2td2qm9h7xig8lanvqq1hcpd9a1z88is3ebe2n19rlh7r8spkiynysyi3dspek10327e0u9pd1ukymlz0cmyfnjx3fg0c25zbfkubqg8qqfg3wibtld2xqns24om0sxx',
-                flowComponent: 'seaixq4osmqi3241q4egqebwuwj5s2xp1gyn4nb86688wdknajhahvhnc40pklm5ojq1zb1gct9mhy8pqp9pfiyn9yk542d9dqltditq84j3h5n3z4cihobv46wms0vr5v1lshpobedw9jy7zmduw88mpi37g69x',
-                flowReceiverComponent: 'iub2c3jp3ucfeotqbvrhf6c5bhewb5v0jal1iqvjeqousrsqwscednr4s6gi66evw4ec1eubt2fi6urgzmgude89zlouvixdvvnrkilo3e1d3i0s07p3w57jkuprnuaceg0vjmghqj8x4fpgvkwpjee6pbwuhqfk',
-                flowInterfaceName: 'aj04q41zrgh95yulgjbhbdvejxondhxx6kb3vlvvm0loznc8vzmhhlyrkhekzxr5ml8xtvekdkam68zoq72tmg9xvj6sg6ygiwtwzl29ykv44htwpkd3alp43k7gsv9ppxhlajiwjfqawrmlhaln8i477n9wpmwf',
-                flowInterfaceNamespace: 'pp1ykywr8kmwyj1kqhc64sohrcr27okjyfmpnvvr2k8wvo7o2d4si9ux6o454jyszy3ey7iz349wi5gbzcmukv9bdn3fze96t0tqhingfpe2yr36h9qvdmr2qxr8ihql0re3wmzyk72gbg5yh589y038gyvg1dvd',
-                status: 'CANCELLED',
-                refMessageId: 'qzr83u3qoqn5ti0y2a2xpescz1bbln4rpup6fmlkvewqoby9l4ybdgbd991fl0gqs1yt7perviiqoz652lmk4nxhqveijydbnpsr0sasqds3wy8fp8fxnun2altunr492zrwmg3lcpnnkkiga4twl0jwf236tn4b',
-                detail: 'Quia enim et enim ut labore praesentium asperiores sed dolore. Veritatis cum fugit voluptatem saepe voluptas fuga optio. Aut voluptatem et omnis mollitia dolorem. Perferendis non eaque ratione corporis amet et. Sit voluptatum vel impedit ipsam perspiciatis delectus et nemo.',
-                example: '8xdr76h78v2wn1417ltumtfmbx6y0q71faauelsn5ssaqxsq33fdvj201cwpjhl48kaeaophfz956hlq4ual9eu9d0ih4ofpahao9l5e05176lqg0nx6txx1bmha8gosz8584k6l9xck1u1exbu3ektzoe8zrm5x',
-                startTimeAt: '2020-11-05 20:01:24',
+                id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                tenantId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                tenantCode: 'scnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvto',
+                systemId: '9189c277-fd22-4a5a-a692-63a1c56085f6',
+                systemName: 'zwdlk281zptz1leq1e77',
+                scenario: 'myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduel',
+                executionId: '5bca6fc7-b485-49e7-b8fc-703ad456b0b8',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2021-05-22 21:46:36',
+                executionMonitoringStartAt: '2021-05-23 05:43:58',
+                executionMonitoringEndAt: '2021-05-23 05:03:14',
+                flowHash: 'yrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8',
+                flowParty: 'ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eq',
+                flowReceiverParty: 'gg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29',
+                flowComponent: 'phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs',
+                flowReceiverComponent: '4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9',
+                flowInterfaceName: 'm8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdv',
+                flowInterfaceNamespace: 'ihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj',
+                status: 'SUCCESS',
+                refMessageId: '0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswn',
+                detail: 'Dolores officiis aut et sit sunt. Doloremque enim quaerat dolorem. Quam et adipisci ad aut quia veniam pariatur quos at. Natus nostrum ipsam aliquid ut et hic. Minus et quo aliquid quos.',
+                example: 'cbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef',
+                startTimeAt: '2021-05-23 10:08:38',
                 direction: 'INBOUND',
-                errorCategory: '4esogef5as8v4ml2up3ilpn6qz8ue6eejj2lidy15o3mgx00i21wff5iwlc6svvex3mqx3berdqaz762oh1vgd85qx0nt7nboazthupg6wroa2y6x1o6999p9vu2q13xqmdajy8g3kus103db9ogcjxlgamqlkvo',
-                errorCode: 'd7rre9fi6swsui8jfb32xq3i3kudwsn8lyq9h903ykds9juele',
-                errorLabel: 817693,
-                node: 3330639756,
-                protocol: 'wqha2a4zhxyrzld479gr',
-                qualityOfService: 'dejl3j916wtmhfuewjvy',
-                receiverParty: 'x1ozyqkah7el0phk5ot3wqvx97qcogrytpezjp36fqayxgqx38zsyfd7ft083qlevgejx855adlmtmi1hloyx0o95d6nvratdvspnvdqrp3uutkvpiwr5w1m0pxhnww63sctw092ke6szlrsa6laxxwvrqepjegu',
-                receiverComponent: 'vdfr8k4iafgs3n6enkua3eq7quojsdvd3rmdrli6t8v6wcc0vwbqczbmem9g21sqlud3n1f866j83jei2dpnslm40kd870rythxazpjcdcciu2y6ofi8n0mi4mm9ak5apxfh65x38obbjotlb5uw2821kw11awc7',
-                receiverInterface: '5auxw0by1xzhpufzzn0y3mj5io4jjbpc22n8tqxfdbro4wh4snap9k1n98vzy0len43fwmw4vf2bfswyzkzlp0acbd301widzrn1ftxbbi8kvit5kpzdb4lyo6pc64lqki2a1yshieg4d7znkaegdw6pxp9z7i72',
-                receiverInterfaceNamespace: 'antfdqby4ppm5kv6rjqqazcodlf76hsh0i04qykr2pbzjpzgosbrv7xh9qcb724c9cmwpb1ufehcaeoaeyc6da7x0vvx3st437lej6kcu1ljdflqj0vg0che42y3cys1wiykxf6cg2y9w0tlbg2ignia5j025fno',
-                retries: 9001949413,
-                size: 8563969395,
-                timesFailed: 6324249953,
-                numberMax: 4872073606,
-                numberDays: 1877046815,
+                errorCategory: 'ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5',
+                errorCode: 'e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0a',
+                errorLabel: 847456,
+                node: 9528133014,
+                protocol: 'ymiddm35tvzvmb4nypou',
+                qualityOfService: 'ftdf36pc1yhkdb61qc4v',
+                receiverParty: '4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzdntq2dwpfe',
+                receiverComponent: '69m3t43mgjqiqozv988o5uvrvzar1sn5k5inohd66avgziqwkfrh5yokp5zfcokdax2wvhrolweqcbr4523r7pxmgq1lpka4smtlwwoy2z1yp7i4ky5d7hwje8mjrpcsxyqxcafwoiphu9onf67bj10ih0r2czpw',
+                receiverInterface: 'g5xku796d23v2fei7jhepble3wu4exl1x0zul5p0qv2ahsrg3i6x7r6oxhxu0ox436wmc6e90hg1qzprjqegqzvxybflf53k64rl60ixc3yoyaq4b5dsnppzhh0xbxsyi61qmqd8xwa7ma0do4vxf1z4oqahtt2g',
+                receiverInterfaceNamespace: 'nbyg2gqc383b9j7j58ilxh0o635ynbj3p1314z4ruc5zxlgdcoh4hsr8rzap39slxzj92i3nx18hn9hbt8tv3vuko4uxvvr8x2yp6qei7j14xbrti9oc9y8vofpxqlihxol63jjd28cnmb26u3cr1n1wau1fehl2',
+                retries: 7690528554,
+                size: 3087637807,
+                timesFailed: 5869037692,
+                numberMax: 4660789208,
+                numberDays: 1828762846,
+            })
+            .expect(404);
+    });
+
+    test(`/REST:PUT cci/message-detail`, () =>
+    {
+        return request(app.getHttpServer())
+            .put('/cci/message-detail')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                systemName: '4iyw9pwsdxcmgcu744j2',
+                scenario: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2021-05-23 11:13:17',
+                executionMonitoringStartAt: '2021-05-23 11:13:17',
+                executionMonitoringEndAt: '2021-05-23 11:13:17',
+                flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                status: 'SUCCESS',
+                refMessageId: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                detail: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
+                example: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                startTimeAt: '2021-05-23 11:13:17',
+                direction: 'OUTBOUND',
+                errorCategory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                errorCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                errorLabel: 683966,
+                node: 2252056328,
+                protocol: '4iyw9pwsdxcmgcu744j2',
+                qualityOfService: '4iyw9pwsdxcmgcu744j2',
+                receiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                receiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                receiverInterface: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                receiverInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                retries: 1995075512,
+                size: 6861316131,
+                timesFailed: 3637814105,
+                numberMax: 3673241458,
+                numberDays: 8309621222,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'd5917c79-7430-4453-b9e2-d35e94b6d9d2'));
+            .then(res => {
+                expect(res.body).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
     });
 
     test(`/REST:DELETE cci/message-detail/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/message-detail/bed870e0-b710-46f1-a0eb-b42b9b835c78')
+            .delete('/cci/message-detail/5ccc93cc-2353-47bd-8c03-1dd105107f8d')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
     });
 
     test(`/REST:DELETE cci/message-detail/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/message-detail/d5917c79-7430-4453-b9e2-d35e94b6d9d2')
+            .delete('/cci/message-detail/28fe4bec-6e5a-475d-b118-1567f2fd5d25')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .expect(200);
     });
 
-    test(`/GraphQL cciCreateMessageDetail - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL cciCreateMessageDetail - Got 409 Conflict, item already exist in database`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:CciCreateMessageDetailInput!)
                     {
                         cciCreateMessageDetail (payload:$payload)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -4316,14 +4393,12 @@ describe('message-detail', () =>
                             timesFailed
                             numberMax
                             numberDays
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
             .expect(200)
@@ -4334,128 +4409,27 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/GraphQL cciCreateMessageDetail`, () => 
+    test(`/GraphQL cciPaginateMessagesDetail`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($payload:CciCreateMessageDetailInput!)
-                    {
-                        cciCreateMessageDetail (payload:$payload)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            scenario
-                            executionType
-                            executionExecutedAt
-                            executionMonitoringStartAt
-                            executionMonitoringEndAt
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            status
-                            refMessageId
-                            detail
-                            example
-                            startTimeAt
-                            direction
-                            errorCategory
-                            errorCode
-                            errorLabel
-                            node
-                            protocol
-                            qualityOfService
-                            receiverParty
-                            receiverComponent
-                            receiverInterface
-                            receiverInterfaceNamespace
-                            retries
-                            size
-                            timesFailed
-                            numberMax
-                            numberDays
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    payload: {
-                        id: '9969550d-b090-4be8-bb96-3b17e5acd745',
-                        tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                        tenantCode: '5at0ss0vui5wavxlmb22k62be0658zyzwuesxzqvggxpi3jt06',
-                        systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                        systemName: '3vc5nxjduwjb1fl5z5ib',
-                        scenario: 'pn7igwjh3vvnyozkge3tzh5e4p5279e1tggy1nx4hx202unpvu7hc2i4gdf3',
-                        executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-11-06 07:32:03',
-                        executionMonitoringStartAt: '2020-11-05 15:31:04',
-                        executionMonitoringEndAt: '2020-11-05 15:35:26',
-                        flowHash: 'uwmbjxsmfpd4wr4ijhnx7sg5x8qid5uiscpm2kdc',
-                        flowParty: 'fswbfc5p5txa667rhe85y6wa1eyqjjp98qzwnx4if8khe2uxy3820uqrj6b3emwqnq25m1ovj3jakz3w01ppq2ghf92n1dopzmu4r29q83eijeufshoxhpd7ezologe2rpobv16mv27xqf059v5hibdyxcl7yozs',
-                        flowReceiverParty: '9uahgjtd8ihxm1i8c3naqrtf6a0fplur7tvz8rmxdgcqwemsdl93tl4vki082ing8jpgn3nbsgqicv3do5jp4sxrfhr239if5b2f94rg9bq13o3gxx2qddgwluhtdx5yve9do4jbif7qs80ayw11vxhw4eg7huu2',
-                        flowComponent: '7oqcybe990pbetuqm7bwrxjkar8f03gcw1ky7pcibplpd5tkvyjx1iz1b7encv5u48dxlw2u7xk4t0rxsqqnztc0uerkfmfmnrx2cplh0ygz9c1zmu1ijq5eh9xdh1ztnnelw81suc114gwlj8lhpkmnqh3do5k0',
-                        flowReceiverComponent: '4x9zn19rq19okmpi05b76lu2rcb3vqmgenmcugwdr1xomnqy20bhix7t0xwsf9c7ta6s4a8ptxesruws08bfp916gec3qxgm36bcff70vc3saj87fcw34rjpca1yenryjyhc1i10ic84kuq3lgt0fu0cjz8ejwrl',
-                        flowInterfaceName: 'neqkg8mpydzl3bb5syom7a8zgatufm06syv6vjlf96fcp2hxlple5nf9y3z1dpgzi0j7bayd6gbkinsdu9v37hlojpusfwwzti3dm8wd5edmz7koc1b300mulrpcgyrxeut5h10ymqa7wf7aun5bvnhvkd1ptnwv',
-                        flowInterfaceNamespace: 'lsj33pqfs485cogtwcknamkmxtby8ulbmneuvl35o7a4a7veu92io6sia2wsnz333gxu97iydeweyk9ht8qzllu2ykgtn1ib9uqwpvnawe988wex35oritprzuz6d3axchdov7xwhpu6x758088191vbncvt1esc',
-                        status: 'CANCELLED',
-                        refMessageId: 'm1w65cldpsqrwyzvj5k8dhudmkrzu9d5j0cmqgb2olxw4w9m5qwx1m2uvy7k5zn93yql9e66gwd05by68jkw766hrvyiruq26b8rco3s0lxz5l8e5kd8xxz9t0g3bl0evw984fcu5rmkdnufbo0xwz7crj5npqmn',
-                        detail: 'Iusto est modi accusamus unde repellendus. Aspernatur est quis voluptates. Corrupti animi quis in.',
-                        example: 'd2dft9gw6vqkctbw7ugat724ty67xgmzpgi3uc4f3akqfrg19zol517cw7588tljo30r6acsogauzz620u9ge8tymv6zbm54cyyp716km9yz465g6rfa1rvdr4hiygzvnm8azobjl0fh7wnd66zsqj5le4d7eakn',
-                        startTimeAt: '2020-11-05 20:36:00',
-                        direction: 'OUTBOUND',
-                        errorCategory: 'pngr9gat8dqk6gfp51m6ktqzqi5h3k3c50zcq3yt9m5upojjvygxo9hqlkp47w24mz9dykvy680ffklulghqrlbhj85zqdrtpuqm24m5vrr259lsini4g6db4fjag7ez59czu7o6wnx34667ba7tog6chl1i0uvt',
-                        errorCode: 'crb8t6zqg52s4hrq5ojurr4sa1vxd2lmafq67w611bb22160o9',
-                        errorLabel: 330992,
-                        node: 5463411618,
-                        protocol: 'wj84uchjlcu88mgs8sal',
-                        qualityOfService: 'p69d1sp2u2a0y1szzucu',
-                        receiverParty: '1h64h4e09u6abv7rrygi6megsheib41y0p2kcq7c1t5gq2os70r53qgx5bm2b6ee9gpurr9va98esfszql3n858xqn6db1tobjqygz9cc77z9azq0y3xmteulrshdojeit9ahakivt1y4xsulefu2foclvsi2ekr',
-                        receiverComponent: 'vp3y2g9fkewejjnttw4bqzd589knm2ebzxxg8jbsy5md20iq09veblcfmw2l6s8icsjzcswofa84egxri0kze156pb5z93t8w33cjx7uhtyd2ow55jmdarxuy9o5jy95pulq317mrdg8dtw5my47zucea3apnq09',
-                        receiverInterface: 'c1vcixrz09l9mhhxn44emlm8zqkcujo4vnx90e5bopb3rbsywg89lsucf2m5tdnt6q9bbv2qrgvikaq4q6eovwp7rk5er150nj1ik2xuuodl9k67peocfju3v1bw5z7a6w95yvkl3uspr300povtbhyjh0kdrz2v',
-                        receiverInterfaceNamespace: 'soqo3vubtyj656fjc7zkxl556l0u3g9sl538g46cc59fc84dmzlcv8y0u8fl2xj63sb8avotgqeq1uww68rq3wjs82tmr2r7mmo1zoq43t3ptwg7bn124elda2oz2gatr2mw3i1go1o97af42354sf532lrruiqr',
-                        retries: 3498290446,
-                        size: 7020330328,
-                        timesFailed: 3768797842,
-                        numberMax: 6383595274,
-                        numberDays: 7642339797,
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciCreateMessageDetail).toHaveProperty('id', '9969550d-b090-4be8-bb96-3b17e5acd745');
-            });
-    });
-
-    test(`/GraphQL cciPaginateMessagesDetail`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         cciPaginateMessagesDetail (query:$query constraint:$constraint)
-                        {   
+                        {
                             total
                             count
                             rows
                         }
                     }
                 `,
-                variables: 
+                variables:
                 {
-                    query: 
+                    query:
                     {
                         offset: 0,
                         limit: 5
@@ -4464,289 +4438,24 @@ describe('message-detail', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciPaginateMessagesDetail.total).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateMessagesDetail.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.cciPaginateMessagesDetail.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
+                expect(res.body.data.cciPaginateMessagesDetail.total).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateMessagesDetail.count).toBe(seeder.collectionResponse.length);
+                expect(res.body.data.cciPaginateMessagesDetail.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
             });
     });
 
-    test(`/GraphQL cciFindMessageDetail - Got 404 Not Found`, () => 
+    test(`/GraphQL cciGetMessagesDetail`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindMessageDetail (query:$query)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            scenario
-                            executionType
-                            executionExecutedAt
-                            executionMonitoringStartAt
-                            executionMonitoringEndAt
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            status
-                            refMessageId
-                            detail
-                            example
-                            startTimeAt
-                            direction
-                            errorCategory
-                            errorCode
-                            errorLabel
-                            node
-                            protocol
-                            qualityOfService
-                            receiverParty
-                            receiverComponent
-                            receiverInterface
-                            receiverInterfaceNamespace
-                            retries
-                            size
-                            timesFailed
-                            numberMax
-                            numberDays
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: 'f2a77059-8b6c-4ca4-a2ec-f556ae1e95fe'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindMessageDetail`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($query:QueryStatement)
-                    {
-                        cciFindMessageDetail (query:$query)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            scenario
-                            executionType
-                            executionExecutedAt
-                            executionMonitoringStartAt
-                            executionMonitoringEndAt
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            status
-                            refMessageId
-                            detail
-                            example
-                            startTimeAt
-                            direction
-                            errorCategory
-                            errorCode
-                            errorLabel
-                            node
-                            protocol
-                            qualityOfService
-                            receiverParty
-                            receiverComponent
-                            receiverInterface
-                            receiverInterfaceNamespace
-                            retries
-                            size
-                            timesFailed
-                            numberMax
-                            numberDays
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: 
-                {
-                    query: 
-                    {
-                        where: 
-                        {
-                            id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2'
-                        }
-                    }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindMessageDetail.id).toStrictEqual('d5917c79-7430-4453-b9e2-d35e94b6d9d2');
-            });
-    });
-
-    test(`/GraphQL cciFindMessageDetailById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindMessageDetailById (id:$id)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            scenario
-                            executionType
-                            executionExecutedAt
-                            executionMonitoringStartAt
-                            executionMonitoringEndAt
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            status
-                            refMessageId
-                            detail
-                            example
-                            startTimeAt
-                            direction
-                            errorCategory
-                            errorCode
-                            errorLabel
-                            node
-                            protocol
-                            qualityOfService
-                            receiverParty
-                            receiverComponent
-                            receiverInterface
-                            receiverInterfaceNamespace
-                            retries
-                            size
-                            timesFailed
-                            numberMax
-                            numberDays
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: '3f29bb2f-38a3-41dd-8388-8186546e8f9b'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
-            });
-    });
-
-    test(`/GraphQL cciFindMessageDetailById`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    query ($id:ID!)
-                    {
-                        cciFindMessageDetailById (id:$id)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            scenario
-                            executionType
-                            executionExecutedAt
-                            executionMonitoringStartAt
-                            executionMonitoringEndAt
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            status
-                            refMessageId
-                            detail
-                            example
-                            startTimeAt
-                            direction
-                            errorCategory
-                            errorCode
-                            errorLabel
-                            node
-                            protocol
-                            qualityOfService
-                            receiverParty
-                            receiverComponent
-                            receiverInterface
-                            receiverInterfaceNamespace
-                            retries
-                            size
-                            timesFailed
-                            numberMax
-                            numberDays
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2'
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciFindMessageDetailById.id).toStrictEqual('d5917c79-7430-4453-b9e2-d35e94b6d9d2');
-            });
-    });
-
-    test(`/GraphQL cciGetMessagesDetail`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     query ($query:QueryStatement)
                     {
                         cciGetMessagesDetail (query:$query)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -4794,22 +4503,23 @@ describe('message-detail', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.cciGetMessagesDetail.entries())
                 {
-                    expect(repository.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
                 }
             });
     });
 
-    test(`/GraphQL cciUpdateMessageDetail - Got 404 Not Found`, () => 
+    test(`/GraphQL cciCreateMessageDetail`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($payload:CciUpdateMessageDetailInput!)
+                    mutation ($payload:CciCreateMessageDetailInput!)
                     {
-                        cciUpdateMessageDetail (payload:$payload)
-                        {   
+                        cciCreateMessageDetail (payload:$payload)
+                        {
                             id
                             tenantCode
                             systemName
@@ -4846,53 +4556,120 @@ describe('message-detail', () =>
                             timesFailed
                             numberMax
                             numberDays
-                            createdAt
-                            updatedAt
                         }
                     }
                 `,
                 variables: {
                     payload: {
-                        
-                        id: '9cde2f65-d0ca-4340-8d15-717f1032518e',
-                        tenantId: 'dfbcb915-4a13-42fc-b6cc-8b65b04af6dc',
-                        tenantCode: 'l4slstcwdu04c1arml8ry4lbhl4b7astky5db5jtypviztnb47',
-                        systemId: '97a92b6e-adb3-46e1-8d16-25ac8f4d8e3e',
-                        systemName: 'ua9hcv690z0os77se819',
-                        scenario: 'nrah0lgyynbcxxof2pcs73gthknc3jgu8uhgww37mjafl2es5fnxzbi50sad',
-                        executionId: 'a99a9e45-2a13-4bb5-89ba-0de2fe698ae6',
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        systemName: '4iyw9pwsdxcmgcu744j2',
+                        scenario: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
                         executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-11-05 19:11:28',
-                        executionMonitoringStartAt: '2020-11-05 16:41:54',
-                        executionMonitoringEndAt: '2020-11-06 01:52:42',
-                        flowHash: 'ljb6v5l9g9by3puo3zqhw8zhoch0g2qsclsq32cc',
-                        flowParty: 'nyi2hzelj509d0dm2qil71lil0rmf7i13k0zo1wzlmth67iub4deeopqn6pvsfh9npcrxtsyobl20f7slux3fddrinjmphf5leeuscg8ez6li1mm933ro88r07vgr6pi3q675wjr1ydvwd2a9fufwdibva7uczsz',
-                        flowReceiverParty: 'nj955t2p7f73j8p3n7x6xjk6en5dvaq6px5xnvfidxtuodvaz1gvyiiaqr08ywb65r3fxzr9gvbkijuhn2gohr6lphtp3tqqt6elnno574c72qxa8599pomedr37bm3lhdt9zakegcmbw0868dsy3ssh9xhu8pny',
-                        flowComponent: 'qaqm9t4cs5tea27p7jn5o5a1s4ywf4wtrsr7m07r39o5f7mge9kls0kaciaul5dbpdx9h3so3cgju4n7xigoyls2xs53di0e6krq19kvkrn0rg523fo8e9krskx7wvpb65fhgg7ymhl3592p25jn78jpvgjwzue7',
-                        flowReceiverComponent: 'szdfbd1x7pkypl70edrmrrq1u688tskfqa7d6k8gppmn7wpov0517ryd0q364s6cahqjxkht5r3u1v3lpldj658x3f7x8hotyt9eq7l9xsgd83m1d9wpngphvo6tybz0oaf2imvfhu1ke2jp2f6ra9d0b0zwbjih',
-                        flowInterfaceName: '22gyic7ahx1r9ipfnhqjhsqz40d4xnt4872iccgr6i22v5hdgrgas4t30uhoy8i6az3dkbipfn2nyuv3fbi9sv6y8tvdlbv4bj9dvk2jwe5ss4f9gb9vrgwqwky9607jp2ohjq98l6zvkbsap97uuda4cgvambvj',
-                        flowInterfaceNamespace: '2h4t0tys2bykudr6ruxlfx4m1arjlie2c2blyfmx2yq2mzobjegmy7xha312urihmg5ifnefbfdwzsae046qbcp4kleasto8n1qqpcr1eiky2bfqoa9hnscwhlcxl5n1dfjne23p2dgrputwtd8iwdrgx5t1gq9d',
+                        executionExecutedAt: '2021-05-23 11:13:17',
+                        executionMonitoringStartAt: '2021-05-23 11:13:17',
+                        executionMonitoringEndAt: '2021-05-23 11:13:17',
+                        flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                        flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
                         status: 'WAITING',
-                        refMessageId: 'kmjblnd9puepokzio1e54ootso522tt3ruxq7i7dk6l0247lpfaet9q4mjq3avrl3enjd6684j7calo7ylnndhdimrm7f0j1a5fa9q1uar095urmhmztdiasbynjx4tn3370biqyxv1biwcqdd94rzrmx6hmgvnb',
-                        detail: 'In molestiae mollitia et fugit debitis rem vel. Ut inventore vero deserunt et voluptate. Iste enim modi ut expedita aut non. Sed omnis aliquid sit. Cupiditate fugiat voluptatem nulla praesentium pariatur ea in ab.',
-                        example: '85ukbxv63ki8egrdbatx4if6c9umv8re49t9ibu7vk5mrq0k26nnec1wy5sumfxonkuqz5s00sr9zyu73j7q02gxmxiu5m6oxrjm8uzrk4n90ussjgd8qz6r8i0pfbvla8lr2ysw0ushzb3yhqnoydv9j31vewni',
-                        startTimeAt: '2020-11-06 11:16:53',
+                        refMessageId: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        detail: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
+                        example: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        startTimeAt: '2021-05-23 11:13:17',
                         direction: 'INBOUND',
-                        errorCategory: 'r6ny685ju5u0g63qruro2a5ynozq9phi9ec65wrvzz9c9if595jgxt3qs5udlbtq7ztvgai0u3ff6i87gjfqxlvlvuazfpx09e0rnf0soeofsyp19y2uumakzk5boa7u0is1tgwbbxqwbkhwya000fylvh205xue',
-                        errorCode: 'req5oas2e7w2hffhsozasjnuhyupcoeu3cil3nl11wz8xvsfaz',
-                        errorLabel: 844417,
-                        node: 5725651653,
-                        protocol: '05x0h7z36dkt4bk02hvb',
-                        qualityOfService: 'wl35b8vyt56u0fwx6grp',
-                        receiverParty: 'd2pl4egkr076u6qwv9hhg8idpmbjfenqqj3paddhm8n0svgb19q0eug1ieyok42dke76uctiisww1t705hkv28q0pj0no2niqe69og07hbm57zd2rlcgmm7gc14sjfuxbo0u7m471zf3acbc5ttcbca9z5jw6ayh',
-                        receiverComponent: 'h3zp0w9eammnudryq5xasp86kvtrndki6ulvigwb7geyszde71bc5zm780829cwckpp803i8nc4m3m8y7fbqsf8rzs95j7pcc84p087u9ti7o2pomc8pt96o9ensd0uqrdenloenjdfpkr9fqcqq041ngrsahi45',
-                        receiverInterface: 'dx2fstrv5w1tzelwr44ncr7ciswzac70z1kzo2ysl9y5yo08sao1qwu5jh0n91i13qqo70o42w39v4set97tc9i9fbzpatubx4s4i5fp5qwrsx9kzk7kkburk8wv1zex5l8a7lo8q2s0qv1se3s9b6qxfb7uptx5',
-                        receiverInterfaceNamespace: '2q4nuhnocwshhp0x30oa3zyvyg9uq0jb6snj8bsu7oumq3laqyxuh51clhvpihluhowrzcvxj5ng6u8d3pzjlrocw5ozf6lcp9ms93116ktn05jjpuqtt51at0lfyog13j3fb3df5oy9fym0cajgmnn6o51qxm9l',
-                        retries: 8203092263,
-                        size: 2894317088,
-                        timesFailed: 2537724186,
-                        numberMax: 6753570875,
-                        numberDays: 1448655804,
+                        errorCategory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        errorCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        errorLabel: 456083,
+                        node: 5452707681,
+                        protocol: '4iyw9pwsdxcmgcu744j2',
+                        qualityOfService: '4iyw9pwsdxcmgcu744j2',
+                        receiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        receiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        receiverInterface: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        receiverInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        retries: 6020058422,
+                        size: 5174655048,
+                        timesFailed: 2814648290,
+                        numberMax: 9556095172,
+                        numberDays: 4599264485,
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciCreateMessageDetail).toHaveProperty('id', '28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciFindMessageDetail - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        cciFindMessageDetail (query:$query)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            scenario
+                            executionType
+                            executionExecutedAt
+                            executionMonitoringStartAt
+                            executionMonitoringEndAt
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            status
+                            refMessageId
+                            detail
+                            example
+                            startTimeAt
+                            direction
+                            errorCategory
+                            errorCode
+                            errorLabel
+                            node
+                            protocol
+                            qualityOfService
+                            receiverParty
+                            receiverComponent
+                            receiverInterface
+                            receiverInterfaceNamespace
+                            retries
+                            size
+                            timesFailed
+                            numberMax
+                            numberDays
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '58f2b524-8385-4476-b0d6-5ebde0b3e042'
+                        }
                     }
                 }
             })
@@ -4904,17 +4681,216 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/GraphQL cciUpdateMessageDetail`, () => 
+    test(`/GraphQL cciFindMessageDetail`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($query:QueryStatement)
+                    {
+                        cciFindMessageDetail (query:$query)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            scenario
+                            executionType
+                            executionExecutedAt
+                            executionMonitoringStartAt
+                            executionMonitoringEndAt
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            status
+                            refMessageId
+                            detail
+                            example
+                            startTimeAt
+                            direction
+                            errorCategory
+                            errorCode
+                            errorLabel
+                            node
+                            protocol
+                            qualityOfService
+                            receiverParty
+                            receiverComponent
+                            receiverInterface
+                            receiverInterfaceNamespace
+                            retries
+                            size
+                            timesFailed
+                            numberMax
+                            numberDays
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables:
+                {
+                    query:
+                    {
+                        where:
+                        {
+                            id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                        }
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciFindMessageDetail.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciFindMessageDetailById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        cciFindMessageDetailById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            scenario
+                            executionType
+                            executionExecutedAt
+                            executionMonitoringStartAt
+                            executionMonitoringEndAt
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            status
+                            refMessageId
+                            detail
+                            example
+                            startTimeAt
+                            direction
+                            errorCategory
+                            errorCode
+                            errorLabel
+                            node
+                            protocol
+                            qualityOfService
+                            receiverParty
+                            receiverComponent
+                            receiverInterface
+                            receiverInterfaceNamespace
+                            retries
+                            size
+                            timesFailed
+                            numberMax
+                            numberDays
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '1b50d913-7715-4527-ba97-c0ba754b4cde'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciFindMessageDetailById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    query ($id:ID!)
+                    {
+                        cciFindMessageDetailById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            scenario
+                            executionType
+                            executionExecutedAt
+                            executionMonitoringStartAt
+                            executionMonitoringEndAt
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            status
+                            refMessageId
+                            detail
+                            example
+                            startTimeAt
+                            direction
+                            errorCategory
+                            errorCode
+                            errorLabel
+                            node
+                            protocol
+                            qualityOfService
+                            receiverParty
+                            receiverComponent
+                            receiverInterface
+                            receiverInterfaceNamespace
+                            retries
+                            size
+                            timesFailed
+                            numberMax
+                            numberDays
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciFindMessageDetailById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    test(`/GraphQL cciUpdateMessageDetail - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
                     mutation ($payload:CciUpdateMessageDetailInput!)
                     {
                         cciUpdateMessageDetail (payload:$payload)
-                        {   
+                        {
                             id
                             tenantCode
                             systemName
@@ -4958,109 +4934,46 @@ describe('message-detail', () =>
                 `,
                 variables: {
                     payload: {
-                        
-                        id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2',
-                        tenantId: '5ff12e4d-97f8-4169-b8fb-bb6aefd8da9f',
-                        tenantCode: 'h0ria3kbvy5jjiqa71kx8aujwiglbqmb4nl09xla60xc2r8drc',
-                        systemId: 'eebbc732-98bf-455b-8856-9c27957942af',
-                        systemName: '898ic04oy0x1ts1162me',
-                        scenario: 'ji3fbclp0tahyvcjzmzaczea4532whzdq7sgzps0azf11v84f3vvw93l42xf',
-                        executionId: 'e9d7855f-d0e5-402d-8012-48c077552e38',
+                        id: '23fc2902-ddc3-4a2e-9894-029b3450f1ef',
+                        tenantId: '01d3c56e-5728-46aa-8427-4d9639511b96',
+                        tenantCode: 'scnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvto',
+                        systemId: '9189c277-fd22-4a5a-a692-63a1c56085f6',
+                        systemName: 'zwdlk281zptz1leq1e77',
+                        scenario: 'myn282zl1ect8c684xo8v4ajo1l62460waru7gxtobxgad0lxognfmpgduel',
+                        executionId: '5bca6fc7-b485-49e7-b8fc-703ad456b0b8',
                         executionType: 'DETAIL',
-                        executionExecutedAt: '2020-11-05 21:44:44',
-                        executionMonitoringStartAt: '2020-11-06 08:00:26',
-                        executionMonitoringEndAt: '2020-11-06 09:17:48',
-                        flowHash: '971qsn9tepncmk87kblek1p1hoc2jj18bjbd3lql',
-                        flowParty: '8q2avr2bl7dtdik0cjcacfpiakjby2nm17omi7l98cqtit6wp0ksruwudlzg3j1u6mvydae38t5u49m9oahwuzq7labib16ebcqpcq8emzg60edhiw3zq2u61hjrjluwqji7x67bxgsiiowojkdzkgze50wag3dd',
-                        flowReceiverParty: 'homveludxcikccgaohqkryp92tkas1w582s49pup55j0mliefsfsm07wxcbutxn886g04drkct9e67h6k7vhl0wf3ww0um3vq4vv4pnr01aj14xh1d8k5j94st5vk6bq3fzaqqgbl50t06ad89typ1chmoqvmfed',
-                        flowComponent: '3zvmwowd9std40q2eeke4h17sr5b1ayc9ohtjk87uv37pzsivlv4rfstlvnqdp2krxnhs6grwef9o7l915bv8doui5wfihm3w3u28b39issyrtc1j84z3aw08ao31bgnsk1melbcd47o4nsorfolyw3uqi0u1qrq',
-                        flowReceiverComponent: 'b6bt92vnvwuadfuqes8hihs4o7a9yytjsupk8idxqm03xu88hebcvt3ec5ozek49d6l50gtikbemuyin126cla5bmy05f808ncdj32180wdnosnn59bf8nwqpd08rk86fi1sjdeao7hfa1qrm5t1sjnndb5pkorl',
-                        flowInterfaceName: '7kw3pahu9d5dvztbg2kkhsklkemk4bqld7u0umfce3j3a20xhbis0abhdqdjhc3wgd2sjttz0jg8zm9a8ofex92flionku1mn4ayvqukpb8usyq7el9pjtg0w3p8bsg6t4s8e63m4j7k7r2rx7qxqav6mwlrq91u',
-                        flowInterfaceNamespace: 'lk9f5gcddi2mq9smc0yuwky3iszzltdgxmmcsrnvjde7fmujexp3hlfcdekwsedgnr1v0pmx0t6n3fzw00cv76wqyrknyh0t0tuvzwgwf8vqwtjwfuc76yv973stng619zm6a3v8p5iapxzpn8ln71yur5gcx15f',
-                        status: 'SUCCESS',
-                        refMessageId: '5cfszxrz0lo47sxt7gu653nt0lq7kjurgnhgik8z5w8z5ctpqbpmp3dxs1od3va1ugxh6fe619uzp8z11wozhwqt90fccbbre83d1rl7324qpmoe3yd2a0xu70iii1pjzbwn1dyjnzq8aw798radrsgkkkiq1afn',
-                        detail: 'Tempora illo sint provident voluptas porro corporis et ea debitis. Vel quibusdam exercitationem expedita optio ut alias at repudiandae eius. Enim libero sed maxime totam. Dicta optio rem vel. Eius placeat ducimus in molestias. Et asperiores deleniti omnis dolores.',
-                        example: 'zcpxmsgw0g587077gm8ikauhk32e7p08ud7mllh3gf3wcorpc11co198f7f17vgkb6ijvm0npr6s6x1krwxxr3n68vxfge9q99gvgo0wmbb4a41wtbrs4l6arj34f9lfvicjg5depltp6wt6nses9vxz6isosqkr',
-                        startTimeAt: '2020-11-05 17:14:16',
+                        executionExecutedAt: '2021-05-22 21:46:36',
+                        executionMonitoringStartAt: '2021-05-23 05:43:58',
+                        executionMonitoringEndAt: '2021-05-23 05:03:14',
+                        flowHash: 'yrl1forbodwozlqpexzxjgkmv10g43tgjhehkgt8',
+                        flowParty: 'ou5lht4kje3qnln97hwu74thggz0hre9zemrbkpahus3nq90zw7jml6wiamh31maoakraj97l6flmhe9xr02088wlcbqwwl6af0emzsn4pxwbua64ndegmz4rykqkvq7a8wx02h49zlvb99np7emp8xsql36g9eq',
+                        flowReceiverParty: 'gg8mrhjejd3z0qfm12yhof94rvr4akboilzkpivwoxhmn26uiw52bi2lbsj76kyelgewp26fn0mknij0sotm0npea6p4cbpg7yy8z59x3cbwwbyeudrw05a5gtg6gvkrflox14jxi7gtz7qlp3i8cd3npqjy1b29',
+                        flowComponent: 'phn8ihg72yqwdv78ybjzcf5usxu4yv329914wq1yny728jvysn8bq656apncpzms4azd7q47mwmjdl16hq2y6rkdhngpbq94li9bhnd9jnunagcg8xlkbgyfyj4hctbai7bguii5hrd26wihmhwdmtoghud4gufs',
+                        flowReceiverComponent: '4i5kqyfmlilkuzwjlmxnqeb3x2bqmiyvbnnzeoizi0wgya50jfvrywskab2uhk7cbu8wrj4fdvmd3bxk5dy4dprg4lhahn4uq2fb29wy7cigf6weih8t14tbkczm3rsptnfb5pl77bxx9wsvagw7gyy5xzvkurk9',
+                        flowInterfaceName: 'm8f9wo4tq62ka9nq9iaegmolj9du5wwltytex1yjk7bvukm28jrqf34m4qxrqvlqixpc2nobxg4lg72vmo4cbxex9iyq9y6r188q78cfjo95qnvoklo5na3hzbtg2n4mojykzpz74iejyobcfizd10i97ukt7mdv',
+                        flowInterfaceNamespace: 'ihhnnuik8eyuthti0edezrm9q4svqk8xna4yd70xk5l3g2djfu9iznyhj6r9mzu0sy1fpl8j40h34rcwamj2qv84x95dxdoy80p7hnh2vnu51m6uywg0w54m30nmzsclytr0qsgzsu8hlxnoooiw9608obx75jsj',
+                        status: 'CANCELLED',
+                        refMessageId: '0bfbqqm71u6kwzsch7bsx394fbgxztxh6k371q8abl7airl312raizbook4zo6lhtvhi2i52vr5zwwfybzgvvsjcb22tydt5cmlhsfuq1g3az43iypz35lr19fq5xdcyamk0ucu88kcxjwbvq9q8ret96fqrjswn',
+                        detail: 'Dolores officiis aut et sit sunt. Doloremque enim quaerat dolorem. Quam et adipisci ad aut quia veniam pariatur quos at. Natus nostrum ipsam aliquid ut et hic. Minus et quo aliquid quos.',
+                        example: 'cbzv8m47qme17w39lng0ial3n897ava9kygwz5bvh5a58mfwce584ww1s31cpd4284k4a62c2xt9vorwc2tt66syl1axosw58q00wwrd8ozvxzypxu162l1in0ezu0a5tkjhypw9vs663y0i99c3wazmb1amskef',
+                        startTimeAt: '2021-05-23 10:08:38',
                         direction: 'OUTBOUND',
-                        errorCategory: '18mbf3cmfvlp7henwhexkn5co5p2ylewckqiy3uocwo62d8knr0ob3gxxlnlz8emxerx80b1j1p5ybr4uhv7fxoi7ldidzvx7db228dptr3fahjc467qwhyuw27lhi84rqbo92kehgsijxgrufn69od7dl0p830m',
-                        errorCode: 'u1rc6gulu3q5c762cqrn9x08xmmupsdpekcg9p8gbxnbd5rrps',
-                        errorLabel: 356662,
-                        node: 7532162600,
-                        protocol: '6y6w91gk9tdzpqjunnn5',
-                        qualityOfService: '17i82ou0limrk0xy418u',
-                        receiverParty: '041w4bvn271xdr6lozmiri1quqvysv1udgukanzqjfxoikicppxdy37j2mapa8nw5uic214hurvg37u556jufl5skxyn3jo40niou0ewfcbr5f21e9akl8pfmd1xxjjox4fjzat7a0qvrc47shnq8h20126al1hg',
-                        receiverComponent: 'kvip2c3l5q1uw97va5lv5cq7vionrp0z63zllhxul421wswv172xs9vkxyq6b8kf42ttztp52bo62ss72adlz6ysrhfijy0ykm93iu3hac120wnj8wup8d7hc7vpnq2l94tjsnboytfdn7gjibnyrmdrxutgxj93',
-                        receiverInterface: 'coo6arjpyabpgtcabbcpsq0y03liwsbin1y1w85do01gce28gpsk8d5xogecwx1i736blqqti27ef2rbqvspgv95gftfo6idiwhu69a7oh46rupt8ofobyhezp4l29m4y17a0ongvt1ihz92gx3sg3nq08emowjh',
-                        receiverInterfaceNamespace: 'z8ynnqhx9oghag44pfunl0l8zdlpmcbieid18o7cnl28cnz4jeeelyrcikpi3epm1x7wygjoi4doj45r75j6wpgo1iu4i5f3ri7osz2mhg0kd2jeiwxtebkj1bequ6c8n739apo87ybw4vpqfapld7t5ydljfbfz',
-                        retries: 3247284326,
-                        size: 6579422934,
-                        timesFailed: 4935717733,
-                        numberMax: 5068349433,
-                        numberDays: 3168654107,
+                        errorCategory: 'ymariqg6jlzb769l2m8iayna0o1geuk4gmu70fs4nk2cy9jyew9wwpvu3krq40eidff9yo7uxtsg8w34a3f7ecwc6ghl3mc2xzkjvx0pimqe41vsj5kwkxyddmizjxakl8d8o9bqjfno6kms3hh2kkzbpkh10hh5',
+                        errorCode: 'e75gknb83zltp33xdpg62gfr9w8z0ageka6qq3l7dfwb1glb0a',
+                        errorLabel: 847783,
+                        node: 3811338712,
+                        protocol: 'ymiddm35tvzvmb4nypou',
+                        qualityOfService: 'ftdf36pc1yhkdb61qc4v',
+                        receiverParty: '4324atf9kcdpvzfx9sha52o0l77yipboxy9yd9hahj4agkeicw0mltq9xp4pljnmsizn9i3d9prs596tmdkf5l3igv5jjpko6aba3t6w5fls3pqh3bthusrrnnktmdatzg8aj8twor8sd59z9jluhzdntq2dwpfe',
+                        receiverComponent: '69m3t43mgjqiqozv988o5uvrvzar1sn5k5inohd66avgziqwkfrh5yokp5zfcokdax2wvhrolweqcbr4523r7pxmgq1lpka4smtlwwoy2z1yp7i4ky5d7hwje8mjrpcsxyqxcafwoiphu9onf67bj10ih0r2czpw',
+                        receiverInterface: 'g5xku796d23v2fei7jhepble3wu4exl1x0zul5p0qv2ahsrg3i6x7r6oxhxu0ox436wmc6e90hg1qzprjqegqzvxybflf53k64rl60ixc3yoyaq4b5dsnppzhh0xbxsyi61qmqd8xwa7ma0do4vxf1z4oqahtt2g',
+                        receiverInterfaceNamespace: 'nbyg2gqc383b9j7j58ilxh0o635ynbj3p1314z4ruc5zxlgdcoh4hsr8rzap39slxzj92i3nx18hn9hbt8tv3vuko4uxvvr8x2yp6qei7j14xbrti9oc9y8vofpxqlihxol63jjd28cnmb26u3cr1n1wau1fehl2',
+                        retries: 7579654114,
+                        size: 4277830716,
+                        timesFailed: 5468513653,
+                        numberMax: 1190844700,
+                        numberDays: 6456234207,
                     }
-                }
-            })
-            .expect(200)
-            .then(res => {
-                expect(res.body.data.cciUpdateMessageDetail.id).toStrictEqual('d5917c79-7430-4453-b9e2-d35e94b6d9d2');
-            });
-    });
-
-    test(`/GraphQL cciDeleteMessageDetailById - Got 404 Not Found`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/graphql')
-            .set('Accept', 'application/json')
-            .send({ 
-                query: `
-                    mutation ($id:ID!)
-                    {
-                        cciDeleteMessageDetailById (id:$id)
-                        {   
-                            id
-                            tenantCode
-                            systemName
-                            scenario
-                            executionType
-                            executionExecutedAt
-                            executionMonitoringStartAt
-                            executionMonitoringEndAt
-                            flowHash
-                            flowParty
-                            flowReceiverParty
-                            flowComponent
-                            flowReceiverComponent
-                            flowInterfaceName
-                            flowInterfaceNamespace
-                            status
-                            refMessageId
-                            detail
-                            example
-                            startTimeAt
-                            direction
-                            errorCategory
-                            errorCode
-                            errorLabel
-                            node
-                            protocol
-                            qualityOfService
-                            receiverParty
-                            receiverComponent
-                            receiverInterface
-                            receiverInterfaceNamespace
-                            retries
-                            size
-                            timesFailed
-                            numberMax
-                            numberDays
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-                variables: {
-                    id: 'eb69902e-98c6-4416-ab76-6ae5c3774993'
                 }
             })
             .expect(200)
@@ -5071,17 +4984,18 @@ describe('message-detail', () =>
             });
     });
 
-    test(`/GraphQL cciDeleteMessageDetailById`, () => 
+    test(`/GraphQL cciUpdateMessageDetail`, () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .send({ 
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
                 query: `
-                    mutation ($id:ID!)
+                    mutation ($payload:CciUpdateMessageDetailInput!)
                     {
-                        cciDeleteMessageDetailById (id:$id)
-                        {   
+                        cciUpdateMessageDetail (payload:$payload)
+                        {
                             id
                             tenantCode
                             systemName
@@ -5124,16 +5038,184 @@ describe('message-detail', () =>
                     }
                 `,
                 variables: {
-                    id: 'd5917c79-7430-4453-b9e2-d35e94b6d9d2'
+                    payload: {
+                        id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        tenantCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        systemId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        systemName: '4iyw9pwsdxcmgcu744j2',
+                        scenario: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3',
+                        executionId: '28fe4bec-6e5a-475d-b118-1567f2fd5d25',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2021-05-23 11:13:17',
+                        executionMonitoringStartAt: '2021-05-23 11:13:17',
+                        executionMonitoringEndAt: '2021-05-23 11:13:17',
+                        flowHash: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14u',
+                        flowParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowReceiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceName: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        flowInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        status: 'WAITING',
+                        refMessageId: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        detail: 'Delectus eveniet quaerat nihil eveniet omnis autem. Suscipit et qui laboriosam voluptas numquam quia sed perspiciatis vitae. Eum ducimus sapiente magni earum.',
+                        example: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        startTimeAt: '2021-05-23 11:13:17',
+                        direction: 'OUTBOUND',
+                        errorCategory: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        errorCode: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka',
+                        errorLabel: 592503,
+                        node: 5071080912,
+                        protocol: '4iyw9pwsdxcmgcu744j2',
+                        qualityOfService: '4iyw9pwsdxcmgcu744j2',
+                        receiverParty: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        receiverComponent: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        receiverInterface: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        receiverInterfaceNamespace: '4iyw9pwsdxcmgcu744j2ddgy4xuct6c58yr5l14uut8o5xljka25lp8ac0z3xy12v8rbexch6iemni95gavle8lc44pkescnln7a3oqw0khx3oh2u3w2qarbk9g74h3pxy47m0n2f35cvtol3ikt5hhyu65obmme',
+                        retries: 8565369181,
+                        size: 5632762000,
+                        timesFailed: 4235929646,
+                        numberMax: 6056198217,
+                        numberDays: 8846772486,
+                    }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciDeleteMessageDetailById.id).toStrictEqual('d5917c79-7430-4453-b9e2-d35e94b6d9d2');
+                expect(res.body.data.cciUpdateMessageDetail.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
             });
     });
 
-    afterAll(async () => 
+    test(`/GraphQL cciDeleteMessageDetailById - Got 404 Not Found`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        cciDeleteMessageDetailById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            scenario
+                            executionType
+                            executionExecutedAt
+                            executionMonitoringStartAt
+                            executionMonitoringEndAt
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            status
+                            refMessageId
+                            detail
+                            example
+                            startTimeAt
+                            direction
+                            errorCategory
+                            errorCode
+                            errorLabel
+                            node
+                            protocol
+                            qualityOfService
+                            receiverParty
+                            receiverComponent
+                            receiverInterface
+                            receiverInterfaceNamespace
+                            retries
+                            size
+                            timesFailed
+                            numberMax
+                            numberDays
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '9bca19ae-39fe-4969-b6d6-a6bf6671a0cc'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    test(`/GraphQL cciDeleteMessageDetailById`, () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        cciDeleteMessageDetailById (id:$id)
+                        {
+                            id
+                            tenantCode
+                            systemName
+                            scenario
+                            executionType
+                            executionExecutedAt
+                            executionMonitoringStartAt
+                            executionMonitoringEndAt
+                            flowHash
+                            flowParty
+                            flowReceiverParty
+                            flowComponent
+                            flowReceiverComponent
+                            flowInterfaceName
+                            flowInterfaceNamespace
+                            status
+                            refMessageId
+                            detail
+                            example
+                            startTimeAt
+                            direction
+                            errorCategory
+                            errorCode
+                            errorLabel
+                            node
+                            protocol
+                            qualityOfService
+                            receiverParty
+                            receiverComponent
+                            receiverInterface
+                            receiverInterfaceNamespace
+                            retries
+                            size
+                            timesFailed
+                            numberMax
+                            numberDays
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '28fe4bec-6e5a-475d-b118-1567f2fd5d25'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.cciDeleteMessageDetailById.id).toStrictEqual('28fe4bec-6e5a-475d-b118-1567f2fd5d25');
+            });
+    });
+
+    afterAll(async () =>
     {
         await app.close();
     });
