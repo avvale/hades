@@ -11,32 +11,32 @@ export abstract class IMessageOverviewRepository implements IRepository<CciMessa
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciMessageOverview>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciMessageOverview>>;
 
     // create a single record
-    abstract async create(messageOverview: CciMessageOverview): Promise<void>;
+    abstract create(messageOverview: CciMessageOverview): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(messagesOverview: CciMessageOverview[], options?: object): Promise<void>;
+    abstract insert(messagesOverview: CciMessageOverview[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciMessageOverview | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciMessageOverview | null>;
 
     // find a single record by id
-    abstract async findById(id: MessageOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciMessageOverview | null>;
+    abstract findById(id: MessageOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciMessageOverview | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciMessageOverview[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciMessageOverview[]>;
 
     // get multiple records
-    abstract async getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciMessageOverview[]>;
+    abstract getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciMessageOverview[]>;
 
     // update record
-    abstract async update(messageOverview: CciMessageOverview, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(messageOverview: CciMessageOverview, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: MessageOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: MessageOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }
