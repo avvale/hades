@@ -6,13 +6,13 @@ import { DeleteChannelsService } from './delete-channels.service';
 import { IChannelRepository } from './../../domain/channel.repository';
 import { MockChannelRepository } from './../../infrastructure/mock/mock-channel.repository';
 
-describe('DeleteChannelsService', () => 
+describe('DeleteChannelsService', () =>
 {
     let service: DeleteChannelsService;
     let repository: IChannelRepository;
     let mockRepository: MockChannelRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteChannelsService', () =>
                 EventPublisher,
                 DeleteChannelsService,
                 MockChannelRepository,
-                { 
+                {
                     provide: IChannelRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteChannelsService', () =>
         mockRepository  = module.get(MockChannelRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteChannelsService should be defined', () => 
+        test('DeleteChannelsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete channel and emit event', async () => 
+        test('should delete channel and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

@@ -6,13 +6,13 @@ import { CreateContactsService } from './create-contacts.service';
 import { IContactRepository } from './../../domain/contact.repository';
 import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
-describe('CreateContactsService', () => 
+describe('CreateContactsService', () =>
 {
     let service: CreateContactsService;
     let repository: IContactRepository;
     let mockRepository: MockContactRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('CreateContactsService', () =>
                 EventPublisher,
                 CreateContactsService,
                 MockContactRepository,
-                { 
+                {
                     provide: IContactRepository,
                     useValue: {
                         insert: (items) => {}
@@ -35,14 +35,14 @@ describe('CreateContactsService', () =>
         mockRepository  = module.get(MockContactRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateContactsService should be defined', () => 
+        test('CreateContactsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create contacts and emit event', async () => 
+        test('should create contacts and emit event', async () =>
         {
             expect(await service.main(
                 mockRepository.collectionSource

@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciContact } from './../../domain/contact.aggregate';
 import { CreatedContactEvent } from './created-contact.event';
-import { DeletedContactEvent } from './deleted-contact.event';
 import { CreatedContactsEvent } from './created-contacts.event';
+import { DeletedContactEvent } from './deleted-contact.event';
 import { DeletedContactsEvent } from './deleted-contacts.event';
 
 export class AddContactsContextEvent extends AggregateRoot

@@ -68,23 +68,25 @@ describe('UpdateChannelDetailService', () =>
         test('should update a channelDetail and emit event', async () =>
         {
             expect(await service.main(
-                new ChannelDetailId(channelsDetail[0].id),
-                new ChannelDetailTenantId(channelsDetail[0].tenantId),
-                new ChannelDetailTenantCode(channelsDetail[0].tenantCode),
-                new ChannelDetailSystemId(channelsDetail[0].systemId),
-                new ChannelDetailSystemName(channelsDetail[0].systemName),
-                new ChannelDetailExecutionId(channelsDetail[0].executionId),
-                new ChannelDetailExecutionType(channelsDetail[0].executionType),
-                new ChannelDetailExecutionExecutedAt(channelsDetail[0].executionExecutedAt),
-                new ChannelDetailExecutionMonitoringStartAt(channelsDetail[0].executionMonitoringStartAt),
-                new ChannelDetailExecutionMonitoringEndAt(channelsDetail[0].executionMonitoringEndAt),
-                new ChannelDetailStatus(channelsDetail[0].status),
-                new ChannelDetailChannelHash(channelsDetail[0].channelHash),
-                new ChannelDetailChannelSapId(channelsDetail[0].channelSapId),
-                new ChannelDetailChannelParty(channelsDetail[0].channelParty),
-                new ChannelDetailChannelComponent(channelsDetail[0].channelComponent),
-                new ChannelDetailChannelName(channelsDetail[0].channelName),
-                new ChannelDetailDetail(channelsDetail[0].detail),
+                {
+                    id: new ChannelDetailId(channelsDetail[0].id),
+                    tenantId: new ChannelDetailTenantId(channelsDetail[0].tenantId),
+                    tenantCode: new ChannelDetailTenantCode(channelsDetail[0].tenantCode),
+                    systemId: new ChannelDetailSystemId(channelsDetail[0].systemId),
+                    systemName: new ChannelDetailSystemName(channelsDetail[0].systemName),
+                    executionId: new ChannelDetailExecutionId(channelsDetail[0].executionId),
+                    executionType: new ChannelDetailExecutionType(channelsDetail[0].executionType),
+                    executionExecutedAt: new ChannelDetailExecutionExecutedAt(channelsDetail[0].executionExecutedAt),
+                    executionMonitoringStartAt: new ChannelDetailExecutionMonitoringStartAt(channelsDetail[0].executionMonitoringStartAt),
+                    executionMonitoringEndAt: new ChannelDetailExecutionMonitoringEndAt(channelsDetail[0].executionMonitoringEndAt),
+                    status: new ChannelDetailStatus(channelsDetail[0].status),
+                    channelHash: new ChannelDetailChannelHash(channelsDetail[0].channelHash),
+                    channelSapId: new ChannelDetailChannelSapId(channelsDetail[0].channelSapId),
+                    channelParty: new ChannelDetailChannelParty(channelsDetail[0].channelParty),
+                    channelComponent: new ChannelDetailChannelComponent(channelsDetail[0].channelComponent),
+                    channelName: new ChannelDetailChannelName(channelsDetail[0].channelName),
+                    detail: new ChannelDetailDetail(channelsDetail[0].detail),
+                }
             )).toBe(undefined);
         });
     });

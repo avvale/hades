@@ -1,11 +1,10 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 import { CciRoleModel } from '@hades/cci/role/infrastructure/sequelize/sequelize-role.model';
 
-@Table({ modelName: 'cci_contact', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciContact', freezeTableName: true, timestamps: false })
 export class CciContactModel extends Model<CciContactModel>
 {
     @Column({
@@ -18,7 +17,7 @@ export class CciContactModel extends Model<CciContactModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -33,7 +32,7 @@ export class CciContactModel extends Model<CciContactModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -41,7 +40,7 @@ export class CciContactModel extends Model<CciContactModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -56,7 +55,7 @@ export class CciContactModel extends Model<CciContactModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -64,7 +63,7 @@ export class CciContactModel extends Model<CciContactModel>
 
     @ForeignKey(() => CciRoleModel)
     @Column({
-        field: 'role_id',
+        field: 'roleId',
         allowNull: true,
         type: DataTypes.UUID,
         references: {
@@ -79,7 +78,7 @@ export class CciContactModel extends Model<CciContactModel>
     role: CciRoleModel;
 
     @Column({
-        field: 'role_name',
+        field: 'roleName',
         allowNull: true,
         type: DataTypes.STRING(255),
     })
@@ -121,42 +120,42 @@ export class CciContactModel extends Model<CciContactModel>
     area: string;
 
     @Column({
-        field: 'has_consent_email',
+        field: 'hasConsentEmail',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     hasConsentEmail: boolean;
 
     @Column({
-        field: 'has_consent_mobile',
+        field: 'hasConsentMobile',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     hasConsentMobile: boolean;
 
     @Column({
-        field: 'is_active',
+        field: 'isActive',
         allowNull: false,
         type: DataTypes.BOOLEAN,
     })
     isActive: boolean;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

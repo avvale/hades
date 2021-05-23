@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 
-@Table({ modelName: 'cci_channel', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciChannel', freezeTableName: true, timestamps: false })
 export class CciChannelModel extends Model<CciChannelModel>
 {
     @Unique
@@ -25,7 +24,7 @@ export class CciChannelModel extends Model<CciChannelModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -40,7 +39,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -48,7 +47,7 @@ export class CciChannelModel extends Model<CciChannelModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -63,7 +62,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -90,51 +89,51 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     name: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'flow_hash',
+        field: 'flowHash',
         allowNull: true,
         type: DataTypes.CHAR(40),
     })
     flowHash: string;
 
     @Column({
-        field: 'flow_party',
+        field: 'flowParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowParty: string;
 
     @Column({
-        field: 'flow_receiver_party',
+        field: 'flowReceiverParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowReceiverParty: string;
 
     @Column({
-        field: 'flow_component',
+        field: 'flowComponent',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowComponent: string;
 
     @Column({
-        field: 'flow_receiver_component',
+        field: 'flowReceiverComponent',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowReceiverComponent: string;
 
     @Column({
-        field: 'flow_interface_name',
+        field: 'flowInterfaceName',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowInterfaceName: string;
 
     @Column({
-        field: 'flow_interface_namespace',
+        field: 'flowInterfaceNamespace',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
@@ -148,7 +147,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     version: string;
 
     @Column({
-        field: 'adapter_type',
+        field: 'adapterType',
         allowNull: true,
         type: DataTypes.STRING(60),
     })
@@ -162,21 +161,21 @@ export class CciChannelModel extends Model<CciChannelModel>
     direction: string;
 
     @Column({
-        field: 'transport_protocol',
+        field: 'transportProtocol',
         allowNull: true,
         type: DataTypes.STRING(60),
     })
     transportProtocol: string;
 
     @Column({
-        field: 'message_protocol',
+        field: 'messageProtocol',
         allowNull: true,
         type: DataTypes.STRING(60),
     })
     messageProtocol: string;
 
     @Column({
-        field: 'adapter_engine_name',
+        field: 'adapterEngineName',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
@@ -197,14 +196,14 @@ export class CciChannelModel extends Model<CciChannelModel>
     username: string;
 
     @Column({
-        field: 'remote_host',
+        field: 'remoteHost',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     remoteHost: string;
 
     @Column({
-        field: 'remote_port',
+        field: 'remotePort',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
@@ -218,21 +217,21 @@ export class CciChannelModel extends Model<CciChannelModel>
     directory: string;
 
     @Column({
-        field: 'file_schema',
+        field: 'fileSchema',
         allowNull: true,
         type: DataTypes.STRING(1024),
     })
     fileSchema: string;
 
     @Column({
-        field: 'proxy_host',
+        field: 'proxyHost',
         allowNull: true,
         type: DataTypes.STRING(60),
     })
     proxyHost: string;
 
     @Column({
-        field: 'proxy_port',
+        field: 'proxyPort',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
@@ -246,70 +245,70 @@ export class CciChannelModel extends Model<CciChannelModel>
     destination: string;
 
     @Column({
-        field: 'adapter_status',
+        field: 'adapterStatus',
         allowNull: true,
         type: DataTypes.ENUM('ACTIVE','INACTIVE'),
     })
     adapterStatus: string;
 
     @Column({
-        field: 'software_component_name',
+        field: 'softwareComponentName',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     softwareComponentName: string;
 
     @Column({
-        field: 'responsible_user_account_name',
+        field: 'responsibleUserAccountName',
         allowNull: true,
         type: DataTypes.STRING(20),
     })
     responsibleUserAccountName: string;
 
     @Column({
-        field: 'last_change_user_account',
+        field: 'lastChangeUserAccount',
         allowNull: true,
         type: DataTypes.STRING(20),
     })
     lastChangeUserAccount: string;
 
     @Column({
-        field: 'last_changed_at',
+        field: 'lastChangedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     lastChangedAt: string;
 
     @Column({
-        field: 'ri_interface_name',
+        field: 'riInterfaceName',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     riInterfaceName: string;
 
     @Column({
-        field: 'ri_interface_namespace',
+        field: 'riInterfaceNamespace',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     riInterfaceNamespace: string;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

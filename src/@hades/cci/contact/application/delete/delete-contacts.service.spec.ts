@@ -6,13 +6,13 @@ import { DeleteContactsService } from './delete-contacts.service';
 import { IContactRepository } from './../../domain/contact.repository';
 import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
-describe('DeleteContactsService', () => 
+describe('DeleteContactsService', () =>
 {
     let service: DeleteContactsService;
     let repository: IContactRepository;
     let mockRepository: MockContactRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteContactsService', () =>
                 EventPublisher,
                 DeleteContactsService,
                 MockContactRepository,
-                { 
+                {
                     provide: IContactRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteContactsService', () =>
         mockRepository  = module.get(MockContactRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteContactsService should be defined', () => 
+        test('DeleteContactsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete contact and emit event', async () => 
+        test('should delete contact and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

@@ -1,11 +1,10 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
-@Table({ modelName: 'cci_channel_detail', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciChannelDetail', freezeTableName: true, timestamps: false })
 export class CciChannelDetailModel extends Model<CciChannelDetailModel>
 {
     @Column({
@@ -18,7 +17,7 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -33,7 +32,7 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -41,7 +40,7 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -56,7 +55,7 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -64,7 +63,7 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
 
     @ForeignKey(() => CciExecutionModel)
     @Column({
-        field: 'execution_id',
+        field: 'executionId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -79,28 +78,28 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
     execution: CciExecutionModel;
 
     @Column({
-        field: 'execution_type',
+        field: 'executionType',
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
     })
     executionType: string;
 
     @Column({
-        field: 'execution_executed_at',
+        field: 'executionExecutedAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionExecutedAt: string;
 
     @Column({
-        field: 'execution_monitoring_start_at',
+        field: 'executionMonitoringStartAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionMonitoringStartAt: string;
 
     @Column({
-        field: 'execution_monitoring_end_at',
+        field: 'executionMonitoringEndAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
@@ -113,37 +112,37 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
     })
     status: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'channel_hash',
+        field: 'channelHash',
         allowNull: false,
         type: DataTypes.CHAR(40),
     })
     channelHash: string;
 
     @Column({
-        field: 'channel_sap_id',
+        field: 'channelSapId',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
     channelSapId: string;
 
     @Column({
-        field: 'channel_party',
+        field: 'channelParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     channelParty: string;
 
     @Column({
-        field: 'channel_component',
+        field: 'channelComponent',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
     channelComponent: string;
 
     @Column({
-        field: 'channel_name',
+        field: 'channelName',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
@@ -157,21 +156,21 @@ export class CciChannelDetailModel extends Model<CciChannelDetailModel>
     detail: string;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
