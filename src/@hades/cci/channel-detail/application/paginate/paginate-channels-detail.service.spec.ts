@@ -6,13 +6,13 @@ import { PaginateChannelsDetailService } from './paginate-channels-detail.servic
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
 import { MockChannelDetailRepository } from './../../infrastructure/mock/mock-channel-detail.repository';
 
-describe('PaginateChannelsDetailService', () => 
+describe('PaginateChannelsDetailService', () =>
 {
     let service: PaginateChannelsDetailService;
     let repository: IChannelDetailRepository;
     let mockRepository: MockChannelDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateChannelsDetailService', () =>
                 EventPublisher,
                 PaginateChannelsDetailService,
                 MockChannelDetailRepository,
-                { 
+                {
                     provide: IChannelDetailRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateChannelsDetailService', () =>
         mockRepository  = module.get(MockChannelDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateChannelsDetailService should be defined', () => 
+        test('PaginateChannelsDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate channelsDetail', async () => 
+        test('should paginate channelsDetail', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

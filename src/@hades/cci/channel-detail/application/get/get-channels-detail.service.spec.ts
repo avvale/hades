@@ -6,13 +6,13 @@ import { GetChannelsDetailService } from './get-channels-detail.service';
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
 import { MockChannelDetailRepository } from './../../infrastructure/mock/mock-channel-detail.repository';
 
-describe('GetChannelsDetailService', () => 
+describe('GetChannelsDetailService', () =>
 {
     let service: GetChannelsDetailService;
     let repository: IChannelDetailRepository;
     let mockRepository: MockChannelDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetChannelsDetailService', () =>
                 EventPublisher,
                 GetChannelsDetailService,
                 MockChannelDetailRepository,
-                { 
+                {
                     provide: IChannelDetailRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetChannelsDetailService', () =>
         mockRepository  = module.get(MockChannelDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetChannelsDetailService should be defined', () => 
+        test('GetChannelsDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get channelsDetail', async () => 
+        test('should get channelsDetail', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);
