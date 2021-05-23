@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { messagesOverview } from '@hades/cci/message-overview/infrastructure/seeds/message-overview.seed';
 
-describe('CciFindMessageOverviewController', () => 
+describe('CciFindMessageOverviewController', () =>
 {
     let controller: CciFindMessageOverviewController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('CciFindMessageOverviewController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciFindMessageOverviewController should be defined', () => 
+        test('CciFindMessageOverviewController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a messageOverview', async () => 
+        test('should return a messageOverview', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messagesOverview[0])));
             expect(await controller.main()).toBe(messagesOverview[0]);

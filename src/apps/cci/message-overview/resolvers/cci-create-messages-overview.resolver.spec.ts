@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { messagesOverview } from '@hades/cci/message-overview/infrastructure/seeds/message-overview.seed';
 import { CciCreateMessageOverviewInput } from './../../../../graphql';
 
-describe('CciCreateMessagesOverviewResolver', () => 
+describe('CciCreateMessagesOverviewResolver', () =>
 {
     let resolver: CciCreateMessagesOverviewResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateMessagesOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateMessagesOverviewResolver should be defined', () => 
+    test('CciCreateMessagesOverviewResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateMessagesOverviewResolver should be defined', () => 
+        test('CciCreateMessagesOverviewResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an messagesOverview created', async () => 
+        test('should return an messagesOverview created', async () =>
         {
             expect(await resolver.main(<CciCreateMessageOverviewInput[]>messagesOverview)).toBe(true);
         });

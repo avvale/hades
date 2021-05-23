@@ -80,17 +80,17 @@ input CciUpdateMessageOverviewInput
 
 type Query
 {
-    cciFindMessageOverview(query:QueryStatement constraint:QueryStatement): CciMessageOverview
-    cciFindMessageOverviewById(id:ID constraint:QueryStatement): CciMessageOverview
-    cciGetMessagesOverview(query:QueryStatement constraint:QueryStatement): [CciMessageOverview]!
-    cciPaginateMessagesOverview(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindMessageOverview(query: QueryStatement constraint: QueryStatement): CciMessageOverview
+    cciFindMessageOverviewById(id: ID constraint: QueryStatement): CciMessageOverview
+    cciGetMessagesOverview(query: QueryStatement constraint: QueryStatement): [CciMessageOverview]!
+    cciPaginateMessagesOverview(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateMessageOverview(payload: CciCreateMessageOverviewInput!): CciMessageOverview
     cciCreateMessagesOverview(payload: [CciCreateMessageOverviewInput]!): Boolean!
-    cciUpdateMessageOverview(payload: CciUpdateMessageOverviewInput! constraint:QueryStatement): CciMessageOverview
-    cciDeleteMessageOverviewById(id: ID! constraint:QueryStatement): CciMessageOverview
-    cciDeleteMessagesOverview(query:QueryStatement constraint:QueryStatement): [CciMessageOverview]!
+    cciUpdateMessageOverview(payload: CciUpdateMessageOverviewInput! constraint: QueryStatement): CciMessageOverview
+    cciDeleteMessageOverviewById(id: ID! constraint: QueryStatement): CciMessageOverview
+    cciDeleteMessagesOverview(query: QueryStatement constraint: QueryStatement): [CciMessageOverview]!
 }

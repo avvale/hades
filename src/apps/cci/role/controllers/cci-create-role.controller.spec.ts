@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/cci/role/infrastructure/seeds/role.seed';
 
-describe('CciCreateRoleController', () => 
+describe('CciCreateRoleController', () =>
 {
     let controller: CciCreateRoleController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('CciCreateRoleController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateRoleController should be defined', () => 
+        test('CciCreateRoleController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an role created', async () => 
+        test('should return an role created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await controller.main(roles[0])).toBe(roles[0]);

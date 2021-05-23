@@ -13,7 +13,7 @@ describe('CciCreateMessageOverviewResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateMessageOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateMessageOverviewResolver should be defined', () => 
+    test('CciCreateMessageOverviewResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateMessageOverviewResolver should be defined', () => 
+        test('CciCreateMessageOverviewResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an messageOverview created', async () => 
+        test('should return an messageOverview created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messagesOverview[0])));
             expect(await resolver.main(<CciCreateMessageOverviewInput>messagesOverview[0])).toBe(messagesOverview[0]);
