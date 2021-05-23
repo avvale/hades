@@ -8,7 +8,7 @@ import { ContactId } from './../../domain/value-objects';
 import { IContactRepository } from './../../domain/contact.repository';
 import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
-describe('DeleteContactByIdService', () => 
+describe('DeleteContactByIdService', () =>
 {
     let service: DeleteContactByIdService;
     let repository: IContactRepository;
@@ -38,14 +38,14 @@ describe('DeleteContactByIdService', () =>
         mockRepository  = module.get(MockContactRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteContactByIdService should be defined', () => 
+        test('DeleteContactByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete contact and emit event', async () => 
+        test('should delete contact and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

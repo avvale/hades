@@ -56,11 +56,13 @@ describe('UpdateDataLakeService', () =>
         test('should update a dataLake and emit event', async () =>
         {
             expect(await service.main(
-                new DataLakeId(dataLakes[0].id),
-                new DataLakeTenantId(dataLakes[0].tenantId),
-                new DataLakeExecutionId(dataLakes[0].executionId),
-                new DataLakeTenantCode(dataLakes[0].tenantCode),
-                new DataLakePayload(dataLakes[0].payload),
+                {
+                    id: new DataLakeId(dataLakes[0].id),
+                    tenantId: new DataLakeTenantId(dataLakes[0].tenantId),
+                    executionId: new DataLakeExecutionId(dataLakes[0].executionId),
+                    tenantCode: new DataLakeTenantCode(dataLakes[0].tenantCode),
+                    payload: new DataLakePayload(dataLakes[0].payload),
+                }
             )).toBe(undefined);
         });
     });

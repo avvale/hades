@@ -11,29 +11,29 @@ export abstract class IDataLakeRepository implements IRepository<CciDataLake>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciDataLake>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciDataLake>>;
 
     // create a single record
-    abstract async create(dataLake: CciDataLake): Promise<void>;
+    abstract create(dataLake: CciDataLake): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(dataLakes: CciDataLake[], options?: object): Promise<void>;
+    abstract insert(dataLakes: CciDataLake[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciDataLake | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciDataLake | null>;
 
     // find a single record by id
-    abstract async findById(id: DataLakeId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciDataLake | null>;
+    abstract findById(id: DataLakeId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciDataLake | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciDataLake[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciDataLake[]>;
 
     // update record
-    abstract async update(dataLake: CciDataLake, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(dataLake: CciDataLake, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: DataLakeId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: DataLakeId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

@@ -8,7 +8,7 @@ import { DataLakeId } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
-describe('DeleteDataLakeByIdService', () => 
+describe('DeleteDataLakeByIdService', () =>
 {
     let service: DeleteDataLakeByIdService;
     let repository: IDataLakeRepository;
@@ -38,14 +38,14 @@ describe('DeleteDataLakeByIdService', () =>
         mockRepository  = module.get(MockDataLakeRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteDataLakeByIdService should be defined', () => 
+        test('DeleteDataLakeByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete dataLake and emit event', async () => 
+        test('should delete dataLake and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

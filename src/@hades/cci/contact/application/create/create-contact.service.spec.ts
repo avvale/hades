@@ -67,21 +67,23 @@ describe('CreateContactService', () =>
         test('should create a contact and emit event', async () =>
         {
             expect(await service.main(
-                new ContactId(contacts[0].id),
-                new ContactTenantId(contacts[0].tenantId),
-                new ContactTenantCode(contacts[0].tenantCode),
-                new ContactSystemId(contacts[0].systemId),
-                new ContactSystemName(contacts[0].systemName),
-                new ContactRoleId(contacts[0].roleId),
-                new ContactRoleName(contacts[0].roleName),
-                new ContactName(contacts[0].name),
-                new ContactSurname(contacts[0].surname),
-                new ContactEmail(contacts[0].email),
-                new ContactMobile(contacts[0].mobile),
-                new ContactArea(contacts[0].area),
-                new ContactHasConsentEmail(contacts[0].hasConsentEmail),
-                new ContactHasConsentMobile(contacts[0].hasConsentMobile),
-                new ContactIsActive(contacts[0].isActive),
+                {
+                    id: new ContactId(contacts[0].id),
+                    tenantId: new ContactTenantId(contacts[0].tenantId),
+                    tenantCode: new ContactTenantCode(contacts[0].tenantCode),
+                    systemId: new ContactSystemId(contacts[0].systemId),
+                    systemName: new ContactSystemName(contacts[0].systemName),
+                    roleId: new ContactRoleId(contacts[0].roleId),
+                    roleName: new ContactRoleName(contacts[0].roleName),
+                    name: new ContactName(contacts[0].name),
+                    surname: new ContactSurname(contacts[0].surname),
+                    email: new ContactEmail(contacts[0].email),
+                    mobile: new ContactMobile(contacts[0].mobile),
+                    area: new ContactArea(contacts[0].area),
+                    hasConsentEmail: new ContactHasConsentEmail(contacts[0].hasConsentEmail),
+                    hasConsentMobile: new ContactHasConsentMobile(contacts[0].hasConsentMobile),
+                    isActive: new ContactIsActive(contacts[0].isActive),
+                }
             )).toBe(undefined);
         });
     });
