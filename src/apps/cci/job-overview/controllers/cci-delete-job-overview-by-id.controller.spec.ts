@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-overview.seed';
 
-describe('CciDeleteJobOverviewByIdController', () => 
+describe('CciDeleteJobOverviewByIdController', () =>
 {
     let controller: CciDeleteJobOverviewByIdController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('CciDeleteJobOverviewByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteJobOverviewByIdController should be defined', () => 
+        test('CciDeleteJobOverviewByIdController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an jobOverview deleted', async () => 
+        test('should return an jobOverview deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsOverview[0])));
             expect(await controller.main(jobsOverview[0].id)).toBe(jobsOverview[0]);

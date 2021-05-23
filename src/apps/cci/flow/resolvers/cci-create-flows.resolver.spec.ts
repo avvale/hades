@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { flows } from '@hades/cci/flow/infrastructure/seeds/flow.seed';
 import { CciCreateFlowInput } from './../../../../graphql';
 
-describe('CciCreateFlowsResolver', () => 
+describe('CciCreateFlowsResolver', () =>
 {
     let resolver: CciCreateFlowsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateFlowsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateFlowsResolver should be defined', () => 
+    test('CciCreateFlowsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateFlowsResolver should be defined', () => 
+        test('CciCreateFlowsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an flows created', async () => 
+        test('should return an flows created', async () =>
         {
             expect(await resolver.main(<CciCreateFlowInput[]>flows)).toBe(true);
         });
