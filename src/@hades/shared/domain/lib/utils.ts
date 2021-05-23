@@ -1,25 +1,31 @@
-import { Moment } from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import * as path from 'path';
 import * as mime from 'mime';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import * as dayjs from 'dayjs';
 declare const Buffer: any;
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(advancedFormat);
 
 export class Utils
 {
     // TODO, create interface and decouple
     constructor() {}
 
-    public static now(): Moment
+    public static now(): dayjs.Dayjs
     {
-        return moment();
+        return dayjs();
     }
 
     public static nowTimestamp(): string
     {
-        return moment().format('YYYY-MM-DD H:mm:ss');
+        return dayjs().format('YYYY-MM-DD H:mm:ss');
     }
 
     public static sha1(data: string): string
