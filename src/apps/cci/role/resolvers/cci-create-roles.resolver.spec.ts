@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/cci/role/infrastructure/seeds/role.seed';
 import { CciCreateRoleInput } from './../../../../graphql';
 
-describe('CciCreateRolesResolver', () => 
+describe('CciCreateRolesResolver', () =>
 {
     let resolver: CciCreateRolesResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateRolesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateRolesResolver should be defined', () => 
+    test('CciCreateRolesResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateRolesResolver should be defined', () => 
+        test('CciCreateRolesResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an roles created', async () => 
+        test('should return an roles created', async () =>
         {
             expect(await resolver.main(<CciCreateRoleInput[]>roles)).toBe(true);
         });

@@ -13,7 +13,7 @@ describe('CciCreateRoleResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateRoleResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateRoleResolver should be defined', () => 
+    test('CciCreateRoleResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateRoleResolver should be defined', () => 
+        test('CciCreateRoleResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an role created', async () => 
+        test('should return an role created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await resolver.main(<CciCreateRoleInput>roles[0])).toBe(roles[0]);

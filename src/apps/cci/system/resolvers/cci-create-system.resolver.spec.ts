@@ -13,7 +13,7 @@ describe('CciCreateSystemResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateSystemResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateSystemResolver should be defined', () => 
+    test('CciCreateSystemResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateSystemResolver should be defined', () => 
+        test('CciCreateSystemResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an system created', async () => 
+        test('should return an system created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await resolver.main(<CciCreateSystemInput>systems[0])).toBe(systems[0]);

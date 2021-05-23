@@ -14,8 +14,8 @@ import { CciCreateRoleResolver } from './resolvers/cci-create-role.resolver';
 import { CciCreateRolesResolver } from './resolvers/cci-create-roles.resolver';
 import { CciPaginateRolesResolver } from './resolvers/cci-paginate-roles.resolver';
 import { CciGetRolesResolver } from './resolvers/cci-get-roles.resolver';
-import { CciFindRoleResolver } from './resolvers/cci-find-role.resolver';
 import { CciFindRoleByIdResolver } from './resolvers/cci-find-role-by-id.resolver';
+import { CciFindRoleResolver } from './resolvers/cci-find-role.resolver';
 import { CciUpdateRoleResolver } from './resolvers/cci-update-role.resolver';
 import { CciDeleteRoleByIdResolver } from './resolvers/cci-delete-role-by-id.resolver';
 import { CciDeleteRolesResolver } from './resolvers/cci-delete-roles.resolver';
@@ -37,8 +37,8 @@ export const CciRoleResolvers = [
     CciCreateRolesResolver,
     CciPaginateRolesResolver,
     CciGetRolesResolver,
-    CciFindRoleResolver,
     CciFindRoleByIdResolver,
+    CciFindRoleResolver,
     CciUpdateRoleResolver,
     CciDeleteRoleByIdResolver,
     CciDeleteRolesResolver,

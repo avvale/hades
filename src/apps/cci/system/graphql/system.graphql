@@ -51,17 +51,17 @@ input CciUpdateSystemInput
 
 type Query
 {
-    cciFindSystem(query:QueryStatement constraint:QueryStatement): CciSystem
-    cciFindSystemById(id:ID constraint:QueryStatement): CciSystem
-    cciGetSystems(query:QueryStatement constraint:QueryStatement): [CciSystem]!
-    cciPaginateSystems(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindSystem(query: QueryStatement constraint: QueryStatement): CciSystem
+    cciFindSystemById(id: ID constraint: QueryStatement): CciSystem
+    cciGetSystems(query: QueryStatement constraint: QueryStatement): [CciSystem]!
+    cciPaginateSystems(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateSystem(payload: CciCreateSystemInput!): CciSystem
     cciCreateSystems(payload: [CciCreateSystemInput]!): Boolean!
-    cciUpdateSystem(payload: CciUpdateSystemInput! constraint:QueryStatement): CciSystem
-    cciDeleteSystemById(id: ID! constraint:QueryStatement): CciSystem
-    cciDeleteSystems(query:QueryStatement constraint:QueryStatement): [CciSystem]!
+    cciUpdateSystem(payload: CciUpdateSystemInput! constraint: QueryStatement): CciSystem
+    cciDeleteSystemById(id: ID! constraint: QueryStatement): CciSystem
+    cciDeleteSystems(query: QueryStatement constraint: QueryStatement): [CciSystem]!
 }

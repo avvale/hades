@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/cci/role/infrastructure/seeds/role.seed';
 import { CciUpdateRoleInput } from './../../../../graphql';
 
-describe('CciUpdateRoleResolver', () => 
+describe('CciUpdateRoleResolver', () =>
 {
     let resolver: CciUpdateRoleResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('CciUpdateRoleResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<CciUpdateRoleResolver>(CciUpdateRoleResolver);
+        resolver    = module.get<CciUpdateRoleResolver>(CciUpdateRoleResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciUpdateRoleResolver should be defined', () => 
+    test('CciUpdateRoleResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciUpdateRoleResolver should be defined', () => 
+        test('CciUpdateRoleResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a role created', async () => 
+        test('should return a role created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await resolver.main(<CciUpdateRoleInput>roles[0])).toBe(roles[0]);
