@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 
-@Table({ modelName: 'cci_execution', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciExecution', freezeTableName: true, timestamps: false })
 export class CciExecutionModel extends Model<CciExecutionModel>
 {
     @Column({
@@ -17,7 +16,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -32,7 +31,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -40,7 +39,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -55,7 +54,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -76,42 +75,42 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     type: string;
 
     @Column({
-        field: 'executed_at',
+        field: 'executedAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executedAt: string;
 
     @Column({
-        field: 'monitoring_start_at',
+        field: 'monitoringStartAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     monitoringStartAt: string;
 
     @Column({
-        field: 'monitoring_end_at',
+        field: 'monitoringEndAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     monitoringEndAt: string;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

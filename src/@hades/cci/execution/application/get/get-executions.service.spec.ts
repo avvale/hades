@@ -6,13 +6,13 @@ import { GetExecutionsService } from './get-executions.service';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
-describe('GetExecutionsService', () => 
+describe('GetExecutionsService', () =>
 {
     let service: GetExecutionsService;
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetExecutionsService', () =>
                 EventPublisher,
                 GetExecutionsService,
                 MockExecutionRepository,
-                { 
+                {
                     provide: IExecutionRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetExecutionsService', () =>
         mockRepository  = module.get(MockExecutionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetExecutionsService should be defined', () => 
+        test('GetExecutionsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get executions', async () => 
+        test('should get executions', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

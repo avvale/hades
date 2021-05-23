@@ -6,13 +6,13 @@ import { PaginateFlowsService } from './paginate-flows.service';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
-describe('PaginateFlowsService', () => 
+describe('PaginateFlowsService', () =>
 {
     let service: PaginateFlowsService;
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateFlowsService', () =>
                 EventPublisher,
                 PaginateFlowsService,
                 MockFlowRepository,
-                { 
+                {
                     provide: IFlowRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateFlowsService', () =>
         mockRepository  = module.get(MockFlowRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateFlowsService should be defined', () => 
+        test('PaginateFlowsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate flows', async () => 
+        test('should paginate flows', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

@@ -61,16 +61,18 @@ describe('UpdateExecutionService', () =>
         test('should update a execution and emit event', async () =>
         {
             expect(await service.main(
-                new ExecutionId(executions[0].id),
-                new ExecutionTenantId(executions[0].tenantId),
-                new ExecutionTenantCode(executions[0].tenantCode),
-                new ExecutionSystemId(executions[0].systemId),
-                new ExecutionSystemName(executions[0].systemName),
-                new ExecutionVersion(executions[0].version),
-                new ExecutionType(executions[0].type),
-                new ExecutionExecutedAt(executions[0].executedAt),
-                new ExecutionMonitoringStartAt(executions[0].monitoringStartAt),
-                new ExecutionMonitoringEndAt(executions[0].monitoringEndAt),
+                {
+                    id: new ExecutionId(executions[0].id),
+                    tenantId: new ExecutionTenantId(executions[0].tenantId),
+                    tenantCode: new ExecutionTenantCode(executions[0].tenantCode),
+                    systemId: new ExecutionSystemId(executions[0].systemId),
+                    systemName: new ExecutionSystemName(executions[0].systemName),
+                    version: new ExecutionVersion(executions[0].version),
+                    type: new ExecutionType(executions[0].type),
+                    executedAt: new ExecutionExecutedAt(executions[0].executedAt),
+                    monitoringStartAt: new ExecutionMonitoringStartAt(executions[0].monitoringStartAt),
+                    monitoringEndAt: new ExecutionMonitoringEndAt(executions[0].monitoringEndAt),
+                }
             )).toBe(undefined);
         });
     });

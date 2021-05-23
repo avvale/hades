@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciFlow } from './../../domain/flow.aggregate';
 import { CreatedFlowEvent } from './created-flow.event';
-import { DeletedFlowEvent } from './deleted-flow.event';
 import { CreatedFlowsEvent } from './created-flows.event';
+import { DeletedFlowEvent } from './deleted-flow.event';
 import { DeletedFlowsEvent } from './deleted-flows.event';
 
 export class AddFlowsContextEvent extends AggregateRoot

@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciExecution } from './../../domain/execution.aggregate';
 import { CreatedExecutionEvent } from './created-execution.event';
-import { DeletedExecutionEvent } from './deleted-execution.event';
 import { CreatedExecutionsEvent } from './created-executions.event';
+import { DeletedExecutionEvent } from './deleted-execution.event';
 import { DeletedExecutionsEvent } from './deleted-executions.event';
 
 export class AddExecutionsContextEvent extends AggregateRoot
