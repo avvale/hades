@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
 import { CreatedJobOverviewEvent } from './created-job-overview.event';
-import { DeletedJobOverviewEvent } from './deleted-job-overview.event';
 import { CreatedJobsOverviewEvent } from './created-jobs-overview.event';
+import { DeletedJobOverviewEvent } from './deleted-job-overview.event';
 import { DeletedJobsOverviewEvent } from './deleted-jobs-overview.event';
 
 export class AddJobsOverviewContextEvent extends AggregateRoot

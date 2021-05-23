@@ -1,11 +1,10 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
-@Table({ modelName: 'cci_message_detail', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciMessageDetail', freezeTableName: true, timestamps: false })
 export class CciMessageDetailModel extends Model<CciMessageDetailModel>
 {
     @Column({
@@ -18,7 +17,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -33,7 +32,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -41,7 +40,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -56,7 +55,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -71,7 +70,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
 
     @ForeignKey(() => CciExecutionModel)
     @Column({
-        field: 'execution_id',
+        field: 'executionId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -86,78 +85,78 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     execution: CciExecutionModel;
 
     @Column({
-        field: 'execution_type',
+        field: 'executionType',
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
     })
     executionType: string;
 
     @Column({
-        field: 'execution_executed_at',
+        field: 'executionExecutedAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionExecutedAt: string;
 
     @Column({
-        field: 'execution_monitoring_start_at',
+        field: 'executionMonitoringStartAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionMonitoringStartAt: string;
 
     @Column({
-        field: 'execution_monitoring_end_at',
+        field: 'executionMonitoringEndAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionMonitoringEndAt: string;
 
-    @UnderscoredIndex
+    @Index
     @Column({
-        field: 'flow_hash',
+        field: 'flowHash',
         allowNull: false,
         type: DataTypes.CHAR(40),
     })
     flowHash: string;
 
     @Column({
-        field: 'flow_party',
+        field: 'flowParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowParty: string;
 
     @Column({
-        field: 'flow_receiver_party',
+        field: 'flowReceiverParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowReceiverParty: string;
 
     @Column({
-        field: 'flow_component',
+        field: 'flowComponent',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
     flowComponent: string;
 
     @Column({
-        field: 'flow_receiver_component',
+        field: 'flowReceiverComponent',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     flowReceiverComponent: string;
 
     @Column({
-        field: 'flow_interface_name',
+        field: 'flowInterfaceName',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
     flowInterfaceName: string;
 
     @Column({
-        field: 'flow_interface_namespace',
+        field: 'flowInterfaceNamespace',
         allowNull: false,
         type: DataTypes.STRING(160),
     })
@@ -171,7 +170,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     status: string;
 
     @Column({
-        field: 'ref_message_id',
+        field: 'refMessageId',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
@@ -192,7 +191,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     example: string;
 
     @Column({
-        field: 'start_time_at',
+        field: 'startTimeAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
@@ -206,21 +205,21 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     direction: string;
 
     @Column({
-        field: 'error_category',
+        field: 'errorCategory',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     errorCategory: string;
 
     @Column({
-        field: 'error_code',
+        field: 'errorCode',
         allowNull: true,
         type: DataTypes.STRING(50),
     })
     errorCode: string;
 
     @Column({
-        field: 'error_label',
+        field: 'errorLabel',
         allowNull: true,
         type: DataTypes.SMALLINT.UNSIGNED,
     })
@@ -241,35 +240,35 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     protocol: string;
 
     @Column({
-        field: 'quality_of_service',
+        field: 'qualityOfService',
         allowNull: true,
         type: DataTypes.STRING(20),
     })
     qualityOfService: string;
 
     @Column({
-        field: 'receiver_party',
+        field: 'receiverParty',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     receiverParty: string;
 
     @Column({
-        field: 'receiver_component',
+        field: 'receiverComponent',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     receiverComponent: string;
 
     @Column({
-        field: 'receiver_interface',
+        field: 'receiverInterface',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
     receiverInterface: string;
 
     @Column({
-        field: 'receiver_interface_namespace',
+        field: 'receiverInterfaceNamespace',
         allowNull: true,
         type: DataTypes.STRING(160),
     })
@@ -290,42 +289,42 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     size: number;
 
     @Column({
-        field: 'times_failed',
+        field: 'timesFailed',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
     timesFailed: number;
 
     @Column({
-        field: 'number_max',
+        field: 'numberMax',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
     numberMax: number;
 
     @Column({
-        field: 'number_days',
+        field: 'numberDays',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
     numberDays: number;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

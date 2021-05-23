@@ -64,19 +64,21 @@ describe('UpdateJobOverviewService', () =>
         test('should update a jobOverview and emit event', async () =>
         {
             expect(await service.main(
-                new JobOverviewId(jobsOverview[0].id),
-                new JobOverviewTenantId(jobsOverview[0].tenantId),
-                new JobOverviewTenantCode(jobsOverview[0].tenantCode),
-                new JobOverviewSystemId(jobsOverview[0].systemId),
-                new JobOverviewSystemName(jobsOverview[0].systemName),
-                new JobOverviewExecutionId(jobsOverview[0].executionId),
-                new JobOverviewExecutionType(jobsOverview[0].executionType),
-                new JobOverviewExecutionExecutedAt(jobsOverview[0].executionExecutedAt),
-                new JobOverviewExecutionMonitoringStartAt(jobsOverview[0].executionMonitoringStartAt),
-                new JobOverviewExecutionMonitoringEndAt(jobsOverview[0].executionMonitoringEndAt),
-                new JobOverviewCancelled(jobsOverview[0].cancelled),
-                new JobOverviewCompleted(jobsOverview[0].completed),
-                new JobOverviewError(jobsOverview[0].error),
+                {
+                    id: new JobOverviewId(jobsOverview[0].id),
+                    tenantId: new JobOverviewTenantId(jobsOverview[0].tenantId),
+                    tenantCode: new JobOverviewTenantCode(jobsOverview[0].tenantCode),
+                    systemId: new JobOverviewSystemId(jobsOverview[0].systemId),
+                    systemName: new JobOverviewSystemName(jobsOverview[0].systemName),
+                    executionId: new JobOverviewExecutionId(jobsOverview[0].executionId),
+                    executionType: new JobOverviewExecutionType(jobsOverview[0].executionType),
+                    executionExecutedAt: new JobOverviewExecutionExecutedAt(jobsOverview[0].executionExecutedAt),
+                    executionMonitoringStartAt: new JobOverviewExecutionMonitoringStartAt(jobsOverview[0].executionMonitoringStartAt),
+                    executionMonitoringEndAt: new JobOverviewExecutionMonitoringEndAt(jobsOverview[0].executionMonitoringEndAt),
+                    cancelled: new JobOverviewCancelled(jobsOverview[0].cancelled),
+                    completed: new JobOverviewCompleted(jobsOverview[0].completed),
+                    error: new JobOverviewError(jobsOverview[0].error),
+                }
             )).toBe(undefined);
         });
     });

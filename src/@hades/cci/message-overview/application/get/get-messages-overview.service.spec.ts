@@ -6,13 +6,13 @@ import { GetMessagesOverviewService } from './get-messages-overview.service';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
-describe('GetMessagesOverviewService', () => 
+describe('GetMessagesOverviewService', () =>
 {
     let service: GetMessagesOverviewService;
     let repository: IMessageOverviewRepository;
     let mockRepository: MockMessageOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetMessagesOverviewService', () =>
                 EventPublisher,
                 GetMessagesOverviewService,
                 MockMessageOverviewRepository,
-                { 
+                {
                     provide: IMessageOverviewRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetMessagesOverviewService', () =>
         mockRepository  = module.get(MockMessageOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetMessagesOverviewService should be defined', () => 
+        test('GetMessagesOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get messagesOverview', async () => 
+        test('should get messagesOverview', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

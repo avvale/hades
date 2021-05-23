@@ -6,13 +6,13 @@ import { FindModuleService } from './find-module.service';
 import { IModuleRepository } from './../../domain/module.repository';
 import { MockModuleRepository } from './../../infrastructure/mock/mock-module.repository';
 
-describe('FindModuleService', () => 
+describe('FindModuleService', () =>
 {
     let service: FindModuleService;
     let repository: IModuleRepository;
     let mockRepository: MockModuleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('FindModuleService', () =>
                 EventPublisher,
                 FindModuleService,
                 MockModuleRepository,
-                { 
+                {
                     provide: IModuleRepository,
                     useValue: {
                         find: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('FindModuleService', () =>
         mockRepository  = module.get(MockModuleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindModuleService should be defined', () => 
+        test('FindModuleService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find module', async () => 
+        test('should find module', async () =>
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main()).toBe(mockRepository.collectionSource[0]);

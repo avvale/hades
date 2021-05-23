@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciModule } from './../../domain/module.aggregate';
 import { CreatedModuleEvent } from './created-module.event';
-import { DeletedModuleEvent } from './deleted-module.event';
 import { CreatedModulesEvent } from './created-modules.event';
+import { DeletedModuleEvent } from './deleted-module.event';
 import { DeletedModulesEvent } from './deleted-modules.event';
 
 export class AddModulesContextEvent extends AggregateRoot

@@ -37,14 +37,14 @@ describe('FindMessageDetailByIdService', () =>
         mockRepository  = module.get(MockMessageDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindMessageDetailByIdService should be defined', () => 
+        test('FindMessageDetailByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should find messageDetail by id', async () => 
+        test('should find messageDetail by id', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

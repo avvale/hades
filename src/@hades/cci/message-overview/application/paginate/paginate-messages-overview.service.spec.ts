@@ -6,13 +6,13 @@ import { PaginateMessagesOverviewService } from './paginate-messages-overview.se
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
-describe('PaginateMessagesOverviewService', () => 
+describe('PaginateMessagesOverviewService', () =>
 {
     let service: PaginateMessagesOverviewService;
     let repository: IMessageOverviewRepository;
     let mockRepository: MockMessageOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateMessagesOverviewService', () =>
                 EventPublisher,
                 PaginateMessagesOverviewService,
                 MockMessageOverviewRepository,
-                { 
+                {
                     provide: IMessageOverviewRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateMessagesOverviewService', () =>
         mockRepository  = module.get(MockMessageOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateMessagesOverviewService should be defined', () => 
+        test('PaginateMessagesOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate messagesOverview', async () => 
+        test('should paginate messagesOverview', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

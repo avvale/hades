@@ -6,13 +6,13 @@ import { DeleteMessagesDetailService } from './delete-messages-detail.service';
 import { IMessageDetailRepository } from './../../domain/message-detail.repository';
 import { MockMessageDetailRepository } from './../../infrastructure/mock/mock-message-detail.repository';
 
-describe('DeleteMessagesDetailService', () => 
+describe('DeleteMessagesDetailService', () =>
 {
     let service: DeleteMessagesDetailService;
     let repository: IMessageDetailRepository;
     let mockRepository: MockMessageDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('DeleteMessagesDetailService', () =>
                 EventPublisher,
                 DeleteMessagesDetailService,
                 MockMessageDetailRepository,
-                { 
+                {
                     provide: IMessageDetailRepository,
                     useValue: {
                         get: (queryStatement) => {},
@@ -36,14 +36,14 @@ describe('DeleteMessagesDetailService', () =>
         mockRepository  = module.get(MockMessageDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('DeleteMessagesDetailService should be defined', () => 
+        test('DeleteMessagesDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should delete messageDetail and emit event', async () => 
+        test('should delete messageDetail and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main()).toBe(undefined);

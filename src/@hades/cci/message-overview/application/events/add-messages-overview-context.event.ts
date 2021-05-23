@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 import { CreatedMessageOverviewEvent } from './created-message-overview.event';
-import { DeletedMessageOverviewEvent } from './deleted-message-overview.event';
 import { CreatedMessagesOverviewEvent } from './created-messages-overview.event';
+import { DeletedMessageOverviewEvent } from './deleted-message-overview.event';
 import { DeletedMessagesOverviewEvent } from './deleted-messages-overview.event';
 
 export class AddMessagesOverviewContextEvent extends AggregateRoot
