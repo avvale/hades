@@ -6,13 +6,13 @@ import { GetJobsDetailService } from './get-jobs-detail.service';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { MockJobDetailRepository } from './../../infrastructure/mock/mock-job-detail.repository';
 
-describe('GetJobsDetailService', () => 
+describe('GetJobsDetailService', () =>
 {
     let service: GetJobsDetailService;
     let repository: IJobDetailRepository;
     let mockRepository: MockJobDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('GetJobsDetailService', () =>
                 EventPublisher,
                 GetJobsDetailService,
                 MockJobDetailRepository,
-                { 
+                {
                     provide: IJobDetailRepository,
                     useValue: {
                         get: (queryStatement) => {}
@@ -35,14 +35,14 @@ describe('GetJobsDetailService', () =>
         mockRepository  = module.get(MockJobDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('GetJobsDetailService should be defined', () => 
+        test('GetJobsDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should get jobsDetail', async () => 
+        test('should get jobsDetail', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main()).toBe(mockRepository.collectionSource);

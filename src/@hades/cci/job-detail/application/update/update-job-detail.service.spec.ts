@@ -68,23 +68,25 @@ describe('UpdateJobDetailService', () =>
         test('should update a jobDetail and emit event', async () =>
         {
             expect(await service.main(
-                new JobDetailId(jobsDetail[0].id),
-                new JobDetailTenantId(jobsDetail[0].tenantId),
-                new JobDetailTenantCode(jobsDetail[0].tenantCode),
-                new JobDetailSystemId(jobsDetail[0].systemId),
-                new JobDetailSystemName(jobsDetail[0].systemName),
-                new JobDetailExecutionId(jobsDetail[0].executionId),
-                new JobDetailExecutionType(jobsDetail[0].executionType),
-                new JobDetailExecutionExecutedAt(jobsDetail[0].executionExecutedAt),
-                new JobDetailExecutionMonitoringStartAt(jobsDetail[0].executionMonitoringStartAt),
-                new JobDetailExecutionMonitoringEndAt(jobsDetail[0].executionMonitoringEndAt),
-                new JobDetailStatus(jobsDetail[0].status),
-                new JobDetailName(jobsDetail[0].name),
-                new JobDetailReturnCode(jobsDetail[0].returnCode),
-                new JobDetailNode(jobsDetail[0].node),
-                new JobDetailUser(jobsDetail[0].user),
-                new JobDetailStartAt(jobsDetail[0].startAt),
-                new JobDetailEndAt(jobsDetail[0].endAt),
+                {
+                    id: new JobDetailId(jobsDetail[0].id),
+                    tenantId: new JobDetailTenantId(jobsDetail[0].tenantId),
+                    tenantCode: new JobDetailTenantCode(jobsDetail[0].tenantCode),
+                    systemId: new JobDetailSystemId(jobsDetail[0].systemId),
+                    systemName: new JobDetailSystemName(jobsDetail[0].systemName),
+                    executionId: new JobDetailExecutionId(jobsDetail[0].executionId),
+                    executionType: new JobDetailExecutionType(jobsDetail[0].executionType),
+                    executionExecutedAt: new JobDetailExecutionExecutedAt(jobsDetail[0].executionExecutedAt),
+                    executionMonitoringStartAt: new JobDetailExecutionMonitoringStartAt(jobsDetail[0].executionMonitoringStartAt),
+                    executionMonitoringEndAt: new JobDetailExecutionMonitoringEndAt(jobsDetail[0].executionMonitoringEndAt),
+                    status: new JobDetailStatus(jobsDetail[0].status),
+                    name: new JobDetailName(jobsDetail[0].name),
+                    returnCode: new JobDetailReturnCode(jobsDetail[0].returnCode),
+                    node: new JobDetailNode(jobsDetail[0].node),
+                    user: new JobDetailUser(jobsDetail[0].user),
+                    startAt: new JobDetailStartAt(jobsDetail[0].startAt),
+                    endAt: new JobDetailEndAt(jobsDetail[0].endAt),
+                }
             )).toBe(undefined);
         });
     });

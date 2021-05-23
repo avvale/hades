@@ -11,29 +11,29 @@ export abstract class IJobDetailRepository implements IRepository<CciJobDetail>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciJobDetail>>;
+    abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciJobDetail>>;
 
     // create a single record
-    abstract async create(jobDetail: CciJobDetail): Promise<void>;
+    abstract create(jobDetail: CciJobDetail): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(jobsDetail: CciJobDetail[], options?: object): Promise<void>;
+    abstract insert(jobsDetail: CciJobDetail[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciJobDetail | null>;
+    abstract find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciJobDetail | null>;
 
     // find a single record by id
-    abstract async findById(id: JobDetailId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciJobDetail | null>;
+    abstract findById(id: JobDetailId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciJobDetail | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciJobDetail[]>;
+    abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciJobDetail[]>;
 
     // update record
-    abstract async update(jobDetail: CciJobDetail, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract update(jobDetail: CciJobDetail, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: JobDetailId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract deleteById(id: JobDetailId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+    abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

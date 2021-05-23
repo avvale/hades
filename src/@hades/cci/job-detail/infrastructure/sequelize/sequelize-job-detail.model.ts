@@ -1,11 +1,10 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
-import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
-@Table({ modelName: 'cci_job_detail', freezeTableName: true, timestamps: false })
+@Table({ modelName: 'CciJobDetail', freezeTableName: true, timestamps: false })
 export class CciJobDetailModel extends Model<CciJobDetailModel>
 {
     @Column({
@@ -18,7 +17,7 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
 
     @ForeignKey(() => IamTenantModel)
     @Column({
-        field: 'tenant_id',
+        field: 'tenantId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -33,7 +32,7 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
     tenant: IamTenantModel;
 
     @Column({
-        field: 'tenant_code',
+        field: 'tenantCode',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
@@ -41,7 +40,7 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
 
     @ForeignKey(() => CciSystemModel)
     @Column({
-        field: 'system_id',
+        field: 'systemId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -56,7 +55,7 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
     system: CciSystemModel;
 
     @Column({
-        field: 'system_name',
+        field: 'systemName',
         allowNull: false,
         type: DataTypes.STRING(20),
     })
@@ -64,7 +63,7 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
 
     @ForeignKey(() => CciExecutionModel)
     @Column({
-        field: 'execution_id',
+        field: 'executionId',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
@@ -79,28 +78,28 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
     execution: CciExecutionModel;
 
     @Column({
-        field: 'execution_type',
+        field: 'executionType',
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
     })
     executionType: string;
 
     @Column({
-        field: 'execution_executed_at',
+        field: 'executionExecutedAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionExecutedAt: string;
 
     @Column({
-        field: 'execution_monitoring_start_at',
+        field: 'executionMonitoringStartAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     executionMonitoringStartAt: string;
 
     @Column({
-        field: 'execution_monitoring_end_at',
+        field: 'executionMonitoringEndAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
@@ -121,7 +120,7 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
     name: string;
 
     @Column({
-        field: 'return_code',
+        field: 'returnCode',
         allowNull: true,
         type: DataTypes.INTEGER,
     })
@@ -142,35 +141,35 @@ export class CciJobDetailModel extends Model<CciJobDetailModel>
     user: string;
 
     @Column({
-        field: 'start_at',
+        field: 'startAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     startAt: string;
 
     @Column({
-        field: 'end_at',
+        field: 'endAt',
         allowNull: false,
         type: DataTypes.DATE,
     })
     endAt: string;
 
     @Column({
-        field: 'created_at',
+        field: 'createdAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     createdAt: string;
 
     @Column({
-        field: 'updated_at',
+        field: 'updatedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })
     updatedAt: string;
 
     @Column({
-        field: 'deleted_at',
+        field: 'deletedAt',
         allowNull: true,
         type: DataTypes.DATE,
     })

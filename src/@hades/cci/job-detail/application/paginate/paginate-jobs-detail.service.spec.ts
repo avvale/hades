@@ -6,13 +6,13 @@ import { PaginateJobsDetailService } from './paginate-jobs-detail.service';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { MockJobDetailRepository } from './../../infrastructure/mock/mock-job-detail.repository';
 
-describe('PaginateJobsDetailService', () => 
+describe('PaginateJobsDetailService', () =>
 {
     let service: PaginateJobsDetailService;
     let repository: IJobDetailRepository;
     let mockRepository: MockJobDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -21,7 +21,7 @@ describe('PaginateJobsDetailService', () =>
                 EventPublisher,
                 PaginateJobsDetailService,
                 MockJobDetailRepository,
-                { 
+                {
                     provide: IJobDetailRepository,
                     useValue: {
                         paginate: (queryStatement, constraints) => {}
@@ -35,14 +35,14 @@ describe('PaginateJobsDetailService', () =>
         mockRepository  = module.get(MockJobDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('PaginateJobsDetailService should be defined', () => 
+        test('PaginateJobsDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should paginate jobsDetail', async () => 
+        test('should paginate jobsDetail', async () =>
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,
