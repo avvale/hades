@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.seed';
 import { CciUpdateExecutionInput } from './../../../../graphql';
 
-describe('CciUpdateExecutionResolver', () => 
+describe('CciUpdateExecutionResolver', () =>
 {
     let resolver: CciUpdateExecutionResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,24 +33,24 @@ describe('CciUpdateExecutionResolver', () =>
             ]
         }).compile();
 
-        resolver  = module.get<CciUpdateExecutionResolver>(CciUpdateExecutionResolver);
+        resolver    = module.get<CciUpdateExecutionResolver>(CciUpdateExecutionResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciUpdateExecutionResolver should be defined', () => 
+    test('CciUpdateExecutionResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciUpdateExecutionResolver should be defined', () => 
+        test('CciUpdateExecutionResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a execution created', async () => 
+        test('should return a execution created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions[0])));
             expect(await resolver.main(<CciUpdateExecutionInput>executions[0])).toBe(executions[0]);

@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.seed';
 
-describe('CciFindExecutionByIdResolver', () => 
+describe('CciFindExecutionByIdResolver', () =>
 {
     let resolver: CciFindExecutionByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciFindExecutionByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciFindExecutionByIdResolver should be defined', () => 
+    test('CciFindExecutionByIdResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciFindExecutionByIdResolver should be defined', () => 
+        test('CciFindExecutionByIdResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an execution by id', async () => 
+        test('should return an execution by id', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions[0])));
             expect(await resolver.main(executions[0].id)).toBe(executions[0]);

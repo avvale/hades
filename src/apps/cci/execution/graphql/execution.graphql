@@ -52,17 +52,17 @@ input CciUpdateExecutionInput
 
 type Query
 {
-    cciFindExecution(query:QueryStatement constraint:QueryStatement): CciExecution
-    cciFindExecutionById(id:ID constraint:QueryStatement): CciExecution
-    cciGetExecutions(query:QueryStatement constraint:QueryStatement): [CciExecution]!
-    cciPaginateExecutions(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindExecution(query: QueryStatement constraint: QueryStatement): CciExecution
+    cciFindExecutionById(id: ID constraint: QueryStatement): CciExecution
+    cciGetExecutions(query: QueryStatement constraint: QueryStatement): [CciExecution]!
+    cciPaginateExecutions(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateExecution(payload: CciCreateExecutionInput!): CciExecution
     cciCreateExecutions(payload: [CciCreateExecutionInput]!): Boolean!
-    cciUpdateExecution(payload: CciUpdateExecutionInput! constraint:QueryStatement): CciExecution
-    cciDeleteExecutionById(id: ID! constraint:QueryStatement): CciExecution
-    cciDeleteExecutions(query:QueryStatement constraint:QueryStatement): [CciExecution]!
+    cciUpdateExecution(payload: CciUpdateExecutionInput! constraint: QueryStatement): CciExecution
+    cciDeleteExecutionById(id: ID! constraint: QueryStatement): CciExecution
+    cciDeleteExecutions(query: QueryStatement constraint: QueryStatement): [CciExecution]!
 }

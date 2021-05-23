@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { flows } from '@hades/cci/flow/infrastructure/seeds/flow.seed';
 
-describe('CciDeleteFlowByIdController', () => 
+describe('CciDeleteFlowByIdController', () =>
 {
     let controller: CciDeleteFlowByIdController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('CciDeleteFlowByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteFlowByIdController should be defined', () => 
+        test('CciDeleteFlowByIdController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an flow deleted', async () => 
+        test('should return an flow deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows[0])));
             expect(await controller.main(flows[0].id)).toBe(flows[0]);

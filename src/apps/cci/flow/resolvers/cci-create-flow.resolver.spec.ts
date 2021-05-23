@@ -13,7 +13,7 @@ describe('CciCreateFlowResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateFlowResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateFlowResolver should be defined', () => 
+    test('CciCreateFlowResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateFlowResolver should be defined', () => 
+        test('CciCreateFlowResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an flow created', async () => 
+        test('should return an flow created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows[0])));
             expect(await resolver.main(<CciCreateFlowInput>flows[0])).toBe(flows[0]);
