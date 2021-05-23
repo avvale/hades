@@ -1482,7 +1482,7 @@ describe('module', () =>
                 {
                     where:
                     {
-                        id: '6791ffe8-4628-40e9-8acf-79bc369ea8c8'
+                        id: '10660973-9e47-4445-b92c-1b92fb3edf94'
                     }
                 }
             })
@@ -1545,7 +1545,7 @@ describe('module', () =>
     test(`/REST:GET cci/module/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/cci/module/3f570b99-16dc-450e-9069-8461d90cbf04')
+            .get('/cci/module/fdf951c8-7b0c-443f-9c24-edcf6e7612ff')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -1633,7 +1633,7 @@ describe('module', () =>
     test(`/REST:DELETE cci/module/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/module/78c39c17-f1d6-4a1e-87b2-4625c6446554')
+            .delete('/cci/module/e2f0a81f-cd80-4419-a3d3-b4b84f2d171e')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -1885,7 +1885,7 @@ describe('module', () =>
                     {
                         where:
                         {
-                            id: 'fd50e948-1ed3-465a-9f3f-4d1a4317acd8'
+                            id: '50378289-a556-46d4-baa8-b46535713790'
                         }
                     }
                 }
@@ -1988,7 +1988,7 @@ describe('module', () =>
                     }
                 `,
                 variables: {
-                    id: '2e30e145-6971-429e-abbd-91939a3bda27'
+                    id: '2e66d166-3160-4992-b353-2562d964cd69'
                 }
             })
             .expect(200)
@@ -2220,7 +2220,7 @@ describe('module', () =>
                     }
                 `,
                 variables: {
-                    id: '046c204b-e7e3-4d47-b1be-9398ea86fa69'
+                    id: '139000f0-26ca-4d66-bd77-31d149cc8602'
                 }
             })
             .expect(200)

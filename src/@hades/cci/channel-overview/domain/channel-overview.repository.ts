@@ -1,4 +1,4 @@
-
+// ignored file
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';

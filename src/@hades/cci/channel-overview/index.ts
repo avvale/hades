@@ -1,3 +1,4 @@
+// ignored file
 // commands
 import { CreateChannelOverviewCommandHandler } from './application/create/create-channel-overview.command-handler';
 import { CreateChannelsOverviewCommandHandler } from './application/create/create-channels-overview.command-handler';
@@ -10,6 +11,7 @@ import { PaginateChannelsOverviewQueryHandler } from './application/paginate/pag
 import { GetChannelsOverviewQueryHandler } from './application/get/get-channels-overview.query-handler';
 import { FindChannelOverviewQueryHandler } from './application/find/find-channel-overview.query-handler';
 import { FindChannelOverviewByIdQueryHandler } from './application/find/find-channel-overview-by-id.query-handler';
+import { GetDashboardChannelsOverviewQueryHandler } from './application/get/get-dashboard-channels-overview.query-handler';
 
 // events
 import { CreatedChannelOverviewEventHandler } from './application/events/created-channel-overview.event-handler';
@@ -23,13 +25,12 @@ import { CreateChannelOverviewService } from './application/create/create-channe
 import { CreateChannelsOverviewService } from './application/create/create-channels-overview.service';
 import { PaginateChannelsOverviewService } from './application/paginate/paginate-channels-overview.service';
 import { GetChannelsOverviewService } from './application/get/get-channels-overview.service';
-import { GetDashboardChannelsOverviewService } from './application/get/get-dashboard-channels-overview.service';
 import { FindChannelOverviewService } from './application/find/find-channel-overview.service';
 import { FindChannelOverviewByIdService } from './application/find/find-channel-overview-by-id.service';
 import { UpdateChannelOverviewService } from './application/update/update-channel-overview.service';
 import { DeleteChannelOverviewByIdService } from './application/delete/delete-channel-overview-by-id.service';
 import { DeleteChannelsOverviewService } from './application/delete/delete-channels-overview.service';
-import { GetDashboardChannelsOverviewQueryHandler } from './application/get/get-dashboard-channels-overview.query-handler';
+import { GetDashboardChannelsOverviewService } from './application/get/get-dashboard-channels-overview.service';
 
 // models
 export { CciChannelOverviewModel } from './infrastructure/sequelize/sequelize-channel-overview.model';

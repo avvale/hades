@@ -86,9 +86,9 @@ describe('system', () =>
                 version: 'm',
                 name: '8',
                 environment: 'l',
-                technology: 'B2B',
+                technology: 'SAPPI',
                 isActive: false,
-                cancelledAt: '2021-05-23 09:12:30',
+                cancelledAt: '2021-05-23 19:26:24',
             })
             .expect(400)
             .then(res => {
@@ -109,9 +109,9 @@ describe('system', () =>
                 version: 'j',
                 name: '4',
                 environment: 'a',
-                technology: 'B2B',
+                technology: 'SAPPI',
                 isActive: false,
-                cancelledAt: '2021-05-22 16:02:57',
+                cancelledAt: '2021-05-23 02:16:51',
             })
             .expect(400)
             .then(res => {
@@ -132,9 +132,9 @@ describe('system', () =>
                 version: 'p',
                 name: 'r',
                 environment: 'n',
-                technology: 'SAPSCI',
+                technology: 'SAPPI',
                 isActive: false,
-                cancelledAt: '2021-05-23 14:01:55',
+                cancelledAt: '2021-05-24 00:15:49',
             })
             .expect(400)
             .then(res => {
@@ -155,9 +155,9 @@ describe('system', () =>
                 version: null,
                 name: '8',
                 environment: '3',
-                technology: 'SAPSCI',
+                technology: 'SAPPI',
                 isActive: true,
-                cancelledAt: '2021-05-22 15:54:08',
+                cancelledAt: '2021-05-23 02:08:02',
             })
             .expect(400)
             .then(res => {
@@ -178,9 +178,9 @@ describe('system', () =>
                 version: '8',
                 name: null,
                 environment: '7',
-                technology: 'SAPPI',
+                technology: 'B2B',
                 isActive: true,
-                cancelledAt: '2021-05-23 02:34:14',
+                cancelledAt: '2021-05-23 12:48:08',
             })
             .expect(400)
             .then(res => {
@@ -201,9 +201,9 @@ describe('system', () =>
                 version: 'a',
                 name: 't',
                 environment: null,
-                technology: 'SAPPI',
+                technology: 'WSO2',
                 isActive: false,
-                cancelledAt: '2021-05-23 01:01:13',
+                cancelledAt: '2021-05-23 11:15:07',
             })
             .expect(400)
             .then(res => {
@@ -226,7 +226,7 @@ describe('system', () =>
                 environment: '5',
                 technology: null,
                 isActive: true,
-                cancelledAt: '2021-05-22 22:58:13',
+                cancelledAt: '2021-05-23 09:12:07',
             })
             .expect(400)
             .then(res => {
@@ -247,9 +247,9 @@ describe('system', () =>
                 version: 'j',
                 name: 'j',
                 environment: 'v',
-                technology: 'SAPPI',
+                technology: 'SAPSCI',
                 isActive: null,
-                cancelledAt: '2021-05-22 17:28:43',
+                cancelledAt: '2021-05-23 03:42:37',
             })
             .expect(400)
             .then(res => {
@@ -269,9 +269,9 @@ describe('system', () =>
                 version: 'i',
                 name: '9',
                 environment: 'z',
-                technology: 'MULESOFT',
+                technology: 'WSO2',
                 isActive: true,
-                cancelledAt: '2021-05-23 11:28:51',
+                cancelledAt: '2021-05-23 21:42:45',
             })
             .expect(400)
             .then(res => {
@@ -293,7 +293,7 @@ describe('system', () =>
                 environment: 'e',
                 technology: 'WSO2',
                 isActive: true,
-                cancelledAt: '2021-05-22 14:49:43',
+                cancelledAt: '2021-05-23 01:03:38',
             })
             .expect(400)
             .then(res => {
@@ -313,9 +313,9 @@ describe('system', () =>
                 version: 'v',
                 name: 'q',
                 environment: 'p',
-                technology: 'SAPSCI',
+                technology: 'B2B',
                 isActive: true,
-                cancelledAt: '2021-05-23 13:30:22',
+                cancelledAt: '2021-05-23 23:44:16',
             })
             .expect(400)
             .then(res => {
@@ -337,7 +337,7 @@ describe('system', () =>
                 environment: 'c',
                 technology: 'B2B',
                 isActive: true,
-                cancelledAt: '2021-05-23 06:44:00',
+                cancelledAt: '2021-05-23 16:57:55',
             })
             .expect(400)
             .then(res => {
@@ -359,7 +359,7 @@ describe('system', () =>
                 environment: 'v',
                 technology: 'B2B',
                 isActive: true,
-                cancelledAt: '2021-05-23 10:28:12',
+                cancelledAt: '2021-05-23 20:42:06',
             })
             .expect(400)
             .then(res => {
@@ -379,9 +379,9 @@ describe('system', () =>
                 tenantCode: 'gp94e0t3pxurd1t2hplx4s5o0gg766xb0qrcuw7fh9257s7e8y',
                 version: 'h',
                 name: '6',
-                technology: 'SAPPI',
+                technology: 'SAPSCI',
                 isActive: false,
-                cancelledAt: '2021-05-22 14:23:31',
+                cancelledAt: '2021-05-23 00:37:26',
             })
             .expect(400)
             .then(res => {
@@ -403,7 +403,7 @@ describe('system', () =>
                 name: 'd',
                 environment: '8',
                 isActive: true,
-                cancelledAt: '2021-05-23 11:26:47',
+                cancelledAt: '2021-05-23 21:40:41',
             })
             .expect(400)
             .then(res => {
@@ -424,8 +424,8 @@ describe('system', () =>
                 version: 'b',
                 name: '3',
                 environment: 'g',
-                technology: 'SAPPI',
-                cancelledAt: '2021-05-22 14:29:37',
+                technology: 'WSO2',
+                cancelledAt: '2021-05-23 00:43:32',
             })
             .expect(400)
             .then(res => {
@@ -448,7 +448,7 @@ describe('system', () =>
                 environment: '2',
                 technology: 'SAPSCI',
                 isActive: true,
-                cancelledAt: '2021-05-23 09:02:33',
+                cancelledAt: '2021-05-23 19:16:27',
             })
             .expect(400)
             .then(res => {
@@ -469,9 +469,9 @@ describe('system', () =>
                 version: '4',
                 name: 'u',
                 environment: 'k',
-                technology: 'SAPPI',
+                technology: 'WSO2',
                 isActive: false,
-                cancelledAt: '2021-05-22 14:32:52',
+                cancelledAt: '2021-05-23 00:46:46',
             })
             .expect(400)
             .then(res => {
@@ -492,9 +492,9 @@ describe('system', () =>
                 version: 'z',
                 name: '7',
                 environment: 'p',
-                technology: 'SAPSCI',
+                technology: 'WSO2',
                 isActive: false,
-                cancelledAt: '2021-05-22 16:50:13',
+                cancelledAt: '2021-05-23 03:04:07',
             })
             .expect(400)
             .then(res => {
@@ -515,9 +515,9 @@ describe('system', () =>
                 version: 't',
                 name: 'n',
                 environment: 'z',
-                technology: 'B2B',
+                technology: 'MULESOFT',
                 isActive: 'true',
-                cancelledAt: '2021-05-23 02:29:19',
+                cancelledAt: '2021-05-23 12:43:14',
             })
             .expect(400)
             .then(res => {
@@ -539,7 +539,7 @@ describe('system', () =>
                 environment: 'f',
                 technology: 'XXXX',
                 isActive: true,
-                cancelledAt: '2021-05-23 09:20:19',
+                cancelledAt: '2021-05-23 19:34:13',
             })
             .expect(400)
             .then(res => {
@@ -559,7 +559,7 @@ describe('system', () =>
                 version: 'm',
                 name: '6',
                 environment: 'a',
-                technology: 'MULESOFT',
+                technology: 'SAPSCI',
                 isActive: false,
                 cancelledAt: 'XXXXXXXX',
             })
@@ -621,7 +621,7 @@ describe('system', () =>
                 {
                     where:
                     {
-                        id: 'ceacb830-233f-414b-a424-546a01c9afd3'
+                        id: 'a40bf335-7d3d-42a6-bfcc-e26d393f948b'
                     }
                 }
             })
@@ -641,9 +641,9 @@ describe('system', () =>
                 version: '4',
                 name: '4',
                 environment: '4',
-                technology: 'MULESOFT',
+                technology: 'WSO2',
                 isActive: false,
-                cancelledAt: '2021-05-23 11:14:02',
+                cancelledAt: '2021-05-23 21:27:56',
             })
             .expect(201);
     });
@@ -672,7 +672,7 @@ describe('system', () =>
     test(`/REST:GET cci/system/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/cci/system/ae52cbbb-2f91-415e-9654-8f3430670001')
+            .get('/cci/system/858f2c7c-eb7d-4270-aebd-f040e48b6b49')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -703,9 +703,9 @@ describe('system', () =>
                 version: 'l',
                 name: '3',
                 environment: 'i',
-                technology: 'SAPSCI',
+                technology: 'WSO2',
                 isActive: true,
-                cancelledAt: '2021-05-22 18:52:05',
+                cancelledAt: '2021-05-23 05:05:59',
             })
             .expect(404);
     });
@@ -723,9 +723,9 @@ describe('system', () =>
                 version: '4',
                 name: '4',
                 environment: '4',
-                technology: 'WSO2',
+                technology: 'SAPSCI',
                 isActive: false,
-                cancelledAt: '2021-05-23 11:14:02',
+                cancelledAt: '2021-05-23 21:27:56',
             })
             .expect(200)
             .then(res => {
@@ -736,7 +736,7 @@ describe('system', () =>
     test(`/REST:DELETE cci/system/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/system/c22100d5-3ba7-4b1a-84fc-f45bdee95091')
+            .delete('/cci/system/54bca618-e15c-496d-8570-cf588ef317fa')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -889,9 +889,9 @@ describe('system', () =>
                         version: '4',
                         name: '4',
                         environment: '4',
-                        technology: 'MULESOFT',
+                        technology: 'SAPSCI',
                         isActive: false,
-                        cancelledAt: '2021-05-23 11:14:02',
+                        cancelledAt: '2021-05-23 21:27:56',
                     }
                 }
             })
@@ -932,7 +932,7 @@ describe('system', () =>
                     {
                         where:
                         {
-                            id: '25de8241-efa6-4afe-9967-c7c117864485'
+                            id: '47d66323-94de-449c-80ac-95b831d2a4c2'
                         }
                     }
                 }
@@ -1013,7 +1013,7 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: 'd62c5133-608c-4b48-b204-6d2d8e6c6edf'
+                    id: 'fee5815c-cb48-4aa3-8375-b622f3e6419d'
                 }
             })
             .expect(200)
@@ -1094,7 +1094,7 @@ describe('system', () =>
                         environment: 'i',
                         technology: 'SAPSCI',
                         isActive: true,
-                        cancelledAt: '2021-05-22 18:52:05',
+                        cancelledAt: '2021-05-23 05:05:59',
                     }
                 }
             })
@@ -1139,9 +1139,9 @@ describe('system', () =>
                         version: '4',
                         name: '4',
                         environment: '4',
-                        technology: 'WSO2',
+                        technology: 'SAPSCI',
                         isActive: false,
-                        cancelledAt: '2021-05-23 11:14:02',
+                        cancelledAt: '2021-05-23 21:27:56',
                     }
                 }
             })
@@ -1177,7 +1177,7 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: '048ee8c8-4d54-4161-b172-cdece22f5b79'
+                    id: 'a3bdba0e-c77d-4c79-8d16-b40d28cb66c5'
                 }
             })
             .expect(200)

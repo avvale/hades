@@ -1,3 +1,4 @@
+// ignored file
 // commands
 import { CreateJobOverviewCommandHandler } from './application/create/create-job-overview.command-handler';
 import { CreateJobsOverviewCommandHandler } from './application/create/create-jobs-overview.command-handler';
@@ -8,9 +9,9 @@ import { DeleteJobsOverviewCommandHandler } from './application/delete/delete-jo
 // queries
 import { PaginateJobsOverviewQueryHandler } from './application/paginate/paginate-jobs-overview.query-handler';
 import { GetJobsOverviewQueryHandler } from './application/get/get-jobs-overview.query-handler';
-import { GetDashboardJobsOverviewQueryHandler } from './application/get/get-dashboard-jobs-overview.query-handler';
 import { FindJobOverviewQueryHandler } from './application/find/find-job-overview.query-handler';
 import { FindJobOverviewByIdQueryHandler } from './application/find/find-job-overview-by-id.query-handler';
+import { GetDashboardJobsOverviewQueryHandler } from './application/get/get-dashboard-jobs-overview.query-handler';
 
 // events
 import { CreatedJobOverviewEventHandler } from './application/events/created-job-overview.event-handler';
@@ -24,12 +25,12 @@ import { CreateJobOverviewService } from './application/create/create-job-overvi
 import { CreateJobsOverviewService } from './application/create/create-jobs-overview.service';
 import { PaginateJobsOverviewService } from './application/paginate/paginate-jobs-overview.service';
 import { GetJobsOverviewService } from './application/get/get-jobs-overview.service';
-import { GetDashboardJobsOverviewService } from './application/get/get-dashboard-jobs-overview.service';
 import { FindJobOverviewService } from './application/find/find-job-overview.service';
 import { FindJobOverviewByIdService } from './application/find/find-job-overview-by-id.service';
 import { UpdateJobOverviewService } from './application/update/update-job-overview.service';
 import { DeleteJobOverviewByIdService } from './application/delete/delete-job-overview-by-id.service';
 import { DeleteJobsOverviewService } from './application/delete/delete-jobs-overview.service';
+import { GetDashboardJobsOverviewService } from './application/get/get-dashboard-jobs-overview.service';
 
 // models
 export { CciJobOverviewModel } from './infrastructure/sequelize/sequelize-job-overview.model';
