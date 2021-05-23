@@ -1,3 +1,4 @@
+// ignored file
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
@@ -16,7 +17,6 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
 {
     public readonly aggregateName: string = 'CciMessageOverview';
     public readonly mapper: MessageOverviewMapper = new MessageOverviewMapper();
-    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciMessageOverviewModel)

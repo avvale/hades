@@ -1,3 +1,4 @@
+// ignored file
 // commands
 import { CreateMessageOverviewCommandHandler } from './application/create/create-message-overview.command-handler';
 import { CreateMessagesOverviewCommandHandler } from './application/create/create-messages-overview.command-handler';
@@ -8,9 +9,9 @@ import { DeleteMessagesOverviewCommandHandler } from './application/delete/delet
 // queries
 import { PaginateMessagesOverviewQueryHandler } from './application/paginate/paginate-messages-overview.query-handler';
 import { GetMessagesOverviewQueryHandler } from './application/get/get-messages-overview.query-handler';
-import { GetDashboardMessagesOverviewQueryHandler } from './application/get/get-dashboard-messages-overview.query-handler';
 import { FindMessageOverviewQueryHandler } from './application/find/find-message-overview.query-handler';
 import { FindMessageOverviewByIdQueryHandler } from './application/find/find-message-overview-by-id.query-handler';
+import { GetDashboardMessagesOverviewQueryHandler } from './application/get/get-dashboard-messages-overview.query-handler';
 
 // events
 import { CreatedMessageOverviewEventHandler } from './application/events/created-message-overview.event-handler';
@@ -24,12 +25,12 @@ import { CreateMessageOverviewService } from './application/create/create-messag
 import { CreateMessagesOverviewService } from './application/create/create-messages-overview.service';
 import { PaginateMessagesOverviewService } from './application/paginate/paginate-messages-overview.service';
 import { GetMessagesOverviewService } from './application/get/get-messages-overview.service';
-import { GetDashboardMessagesOverviewService } from './application/get/get-dashboard-messages-overview.service';
 import { FindMessageOverviewService } from './application/find/find-message-overview.service';
 import { FindMessageOverviewByIdService } from './application/find/find-message-overview-by-id.service';
 import { UpdateMessageOverviewService } from './application/update/update-message-overview.service';
 import { DeleteMessageOverviewByIdService } from './application/delete/delete-message-overview-by-id.service';
 import { DeleteMessagesOverviewService } from './application/delete/delete-messages-overview.service';
+import { GetDashboardMessagesOverviewService } from './application/get/get-dashboard-messages-overview.service';
 
 // models
 export { CciMessageOverviewModel } from './infrastructure/sequelize/sequelize-message-overview.model';

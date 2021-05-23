@@ -338,7 +338,7 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: 'd63e4138-9b1d-4b42-a746-e498dcc97cdf'
+                        id: 'e2fec107-877d-4ba4-a525-c86a78de10ad'
                     }
                 }
             })
@@ -384,7 +384,7 @@ describe('role', () =>
     test(`/REST:GET cci/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/cci/role/26de3b40-81bf-47ae-b415-9919e839c6a9')
+            .get('/cci/role/101b5cc6-3b86-4637-b364-b180dfe658dd')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -438,7 +438,7 @@ describe('role', () =>
     test(`/REST:DELETE cci/role/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/role/6a99e22f-73c3-4230-aeb7-1ff34c657dcb')
+            .delete('/cci/role/302ea23a-5d73-4ecf-8b28-bd1d5850cf25')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -609,7 +609,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '6ee3c4a9-dbbe-44ac-9e9c-f283251bd123'
+                            id: '6771b1d8-62be-4d2f-8846-f3ee4c525e03'
                         }
                     }
                 }
@@ -680,7 +680,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: 'abb233e1-c5a6-4362-a11f-0ead1d352936'
+                    id: '56636341-ed0c-4aaf-b745-ccb1ec2d60c9'
                 }
             })
             .expect(200)
@@ -814,7 +814,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '904ab1b0-f611-4f23-a230-ded00bcc43f6'
+                    id: '621a4baf-13d6-4ad5-8fa6-92cff2f04625'
                 }
             })
             .expect(200)

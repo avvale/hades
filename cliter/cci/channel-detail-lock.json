@@ -263,7 +263,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed.ts",
-            "integrity": "sha1:0b6fd80ae0879e18e7c107eff859297a60b4d1fa"
+            "integrity": "sha1:853ac0f375a0e0c3bdcec7e3836538bdf25aec13"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/sequelize/sequelize-channel-detail.model.ts",
@@ -527,7 +527,7 @@
         },
         {
             "path": "postman/cci.channel-detail.postman.json",
-            "integrity": "sha1:22553a181e936011821d7f737ecd52b5cb85d77e"
+            "integrity": "sha1:57b7e5e423c3a26b8c35620ba52a1f0e3f2a8e21"
         }
     ]
 }

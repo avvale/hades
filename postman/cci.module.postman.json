@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "386cc438-2199-47ea-b378-9956dfe65978",
+		"_postman_id"   : "7bb380ba-4e4f-4f79-8c2a-09c649530473",
 		"name"          : "@hades - cci/module",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "8279ca64-af9f-4edf-a5e5-1fac7eb3bec7",
+			"id": "6751e38d-8f5c-47fc-87d9-94ff6e9134e6",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

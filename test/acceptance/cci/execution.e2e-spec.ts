@@ -86,10 +86,10 @@ describe('execution', () =>
                 systemId: '633559ec-bc95-46b1-8ddb-7c4e7b72f127',
                 systemName: 'fkghjuf1ryanfusktki4',
                 version: 'xhpcl6jn0n0vmip7vmat',
-                type: 'SUMMARY',
-                executedAt: '2021-05-23 11:22:00',
-                monitoringStartAt: '2021-05-23 09:12:40',
-                monitoringEndAt: '2021-05-23 03:50:21',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 21:35:38',
+                monitoringStartAt: '2021-05-23 19:26:18',
+                monitoringEndAt: '2021-05-23 14:03:59',
             })
             .expect(400)
             .then(res => {
@@ -111,9 +111,9 @@ describe('execution', () =>
                 systemName: 'hmwais5jr397g5tvdw0d',
                 version: 'o8udxg3z6diwyrg1z0gt',
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 03:52:30',
-                monitoringStartAt: '2021-05-23 06:33:56',
-                monitoringEndAt: '2021-05-23 12:17:29',
+                executedAt: '2021-05-23 14:06:08',
+                monitoringStartAt: '2021-05-23 16:47:34',
+                monitoringEndAt: '2021-05-23 22:31:07',
             })
             .expect(400)
             .then(res => {
@@ -134,10 +134,10 @@ describe('execution', () =>
                 systemId: 'dba1bc16-6daf-4655-bdf4-5a4694dd4ca5',
                 systemName: 'ch0ly67zigkjvpi9dzmy',
                 version: 'd74uji87qmy0rwez8i0n',
-                type: 'SUMMARY',
-                executedAt: '2021-05-23 06:43:37',
-                monitoringStartAt: '2021-05-22 23:34:58',
-                monitoringEndAt: '2021-05-23 05:22:58',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 16:57:15',
+                monitoringStartAt: '2021-05-23 09:48:36',
+                monitoringEndAt: '2021-05-23 15:36:36',
             })
             .expect(400)
             .then(res => {
@@ -158,10 +158,10 @@ describe('execution', () =>
                 systemId: null,
                 systemName: 'r5fbqbdawefthdc65zq7',
                 version: 'gj2sjcorr7udimur0y8g',
-                type: 'SUMMARY',
-                executedAt: '2021-05-23 00:30:47',
-                monitoringStartAt: '2021-05-23 06:13:12',
-                monitoringEndAt: '2021-05-22 22:49:13',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 10:44:25',
+                monitoringStartAt: '2021-05-23 16:26:50',
+                monitoringEndAt: '2021-05-23 09:02:51',
             })
             .expect(400)
             .then(res => {
@@ -183,9 +183,9 @@ describe('execution', () =>
                 systemName: null,
                 version: 'zq9h5bhbzrs14o5iyzvo',
                 type: 'SUMMARY',
-                executedAt: '2021-05-22 21:44:03',
-                monitoringStartAt: '2021-05-23 13:26:34',
-                monitoringEndAt: '2021-05-23 06:24:44',
+                executedAt: '2021-05-23 07:57:41',
+                monitoringStartAt: '2021-05-23 23:40:12',
+                monitoringEndAt: '2021-05-23 16:38:22',
             })
             .expect(400)
             .then(res => {
@@ -207,9 +207,9 @@ describe('execution', () =>
                 systemName: 'lf43qgvqo1bu0l1u4iqs',
                 version: null,
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 13:06:24',
-                monitoringStartAt: '2021-05-23 06:31:44',
-                monitoringEndAt: '2021-05-22 15:23:11',
+                executedAt: '2021-05-23 23:20:02',
+                monitoringStartAt: '2021-05-23 16:45:22',
+                monitoringEndAt: '2021-05-23 01:36:49',
             })
             .expect(400)
             .then(res => {
@@ -231,9 +231,9 @@ describe('execution', () =>
                 systemName: 'g6tg0a3upftw6537q6c7',
                 version: 'tkwc8xrj2h5hhvsxe9pt',
                 type: null,
-                executedAt: '2021-05-22 18:48:46',
-                monitoringStartAt: '2021-05-23 02:03:58',
-                monitoringEndAt: '2021-05-23 03:15:57',
+                executedAt: '2021-05-23 05:02:24',
+                monitoringStartAt: '2021-05-23 12:17:36',
+                monitoringEndAt: '2021-05-23 13:29:35',
             })
             .expect(400)
             .then(res => {
@@ -254,10 +254,10 @@ describe('execution', () =>
                 systemId: '7391e1a2-29c4-482c-a02e-0a21d11ef8e9',
                 systemName: 'svr3dbxeigf6sp8ved2s',
                 version: 'yu3xzdcux33fr1po91ik',
-                type: 'SUMMARY',
+                type: 'DETAIL',
                 executedAt: null,
-                monitoringStartAt: '2021-05-23 10:05:24',
-                monitoringEndAt: '2021-05-23 09:12:01',
+                monitoringStartAt: '2021-05-23 20:19:02',
+                monitoringEndAt: '2021-05-23 19:25:39',
             })
             .expect(400)
             .then(res => {
@@ -279,9 +279,9 @@ describe('execution', () =>
                 systemName: '4lrq9bavqjfm51iifgaw',
                 version: 'e170vq4nw98xx0i0qz2f',
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 04:24:10',
+                executedAt: '2021-05-23 14:37:48',
                 monitoringStartAt: null,
-                monitoringEndAt: '2021-05-22 15:12:25',
+                monitoringEndAt: '2021-05-23 01:26:03',
             })
             .expect(400)
             .then(res => {
@@ -302,9 +302,9 @@ describe('execution', () =>
                 systemId: 'b969eb06-c400-41d3-ac3d-80c8020985d4',
                 systemName: 'c6ttg19kzyu2fpkfnxum',
                 version: 'zz9wb6ga5t91e3vztjf3',
-                type: 'SUMMARY',
-                executedAt: '2021-05-23 08:46:37',
-                monitoringStartAt: '2021-05-23 13:02:24',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 19:00:15',
+                monitoringStartAt: '2021-05-23 23:16:02',
                 monitoringEndAt: null,
             })
             .expect(400)
@@ -325,10 +325,10 @@ describe('execution', () =>
                 systemId: '2d2f7141-10e7-4889-9c9a-4e9978844085',
                 systemName: '11csihesmnszhu2edlt1',
                 version: '0ii8nak87qpb399gddje',
-                type: 'DETAIL',
-                executedAt: '2021-05-23 07:25:57',
-                monitoringStartAt: '2021-05-23 09:57:52',
-                monitoringEndAt: '2021-05-23 10:04:56',
+                type: 'SUMMARY',
+                executedAt: '2021-05-23 17:39:35',
+                monitoringStartAt: '2021-05-23 20:11:30',
+                monitoringEndAt: '2021-05-23 20:18:34',
             })
             .expect(400)
             .then(res => {
@@ -349,9 +349,9 @@ describe('execution', () =>
                 systemName: 'wr7m5xfk0ih0lpbwdvwj',
                 version: 'xd590gfexnlrpslv3g59',
                 type: 'DETAIL',
-                executedAt: '2021-05-22 22:28:21',
-                monitoringStartAt: '2021-05-23 00:43:40',
-                monitoringEndAt: '2021-05-23 08:06:30',
+                executedAt: '2021-05-23 08:41:59',
+                monitoringStartAt: '2021-05-23 10:57:18',
+                monitoringEndAt: '2021-05-23 18:20:08',
             })
             .expect(400)
             .then(res => {
@@ -372,9 +372,9 @@ describe('execution', () =>
                 systemName: 'k0scggnt63tclcslaw08',
                 version: 'cx6hq6ni3ya1rn5m3o5r',
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 07:36:53',
-                monitoringStartAt: '2021-05-22 16:16:16',
-                monitoringEndAt: '2021-05-23 01:59:35',
+                executedAt: '2021-05-23 17:50:31',
+                monitoringStartAt: '2021-05-23 02:29:54',
+                monitoringEndAt: '2021-05-23 12:13:13',
             })
             .expect(400)
             .then(res => {
@@ -395,9 +395,9 @@ describe('execution', () =>
                 systemName: '5r1a93wp574wlqflvh0j',
                 version: '8jt51lfm07y4wsx5xnx6',
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 11:05:40',
-                monitoringStartAt: '2021-05-23 02:38:03',
-                monitoringEndAt: '2021-05-23 00:58:19',
+                executedAt: '2021-05-23 21:19:18',
+                monitoringStartAt: '2021-05-23 12:51:41',
+                monitoringEndAt: '2021-05-23 11:11:57',
             })
             .expect(400)
             .then(res => {
@@ -417,10 +417,10 @@ describe('execution', () =>
                 tenantCode: '5wj273f6d8ajozck2bc0igxpxx92c8j7leplsl9aiqrxe593ux',
                 systemId: 'f7c1606e-9e7f-4e17-bba2-7b243dad571b',
                 version: 'z3pqawd40hoahyubyr1e',
-                type: 'SUMMARY',
-                executedAt: '2021-05-23 11:38:45',
-                monitoringStartAt: '2021-05-23 08:33:20',
-                monitoringEndAt: '2021-05-22 22:27:20',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 21:52:23',
+                monitoringStartAt: '2021-05-23 18:46:58',
+                monitoringEndAt: '2021-05-23 08:40:58',
             })
             .expect(400)
             .then(res => {
@@ -441,9 +441,9 @@ describe('execution', () =>
                 systemId: 'a12bfc86-d4e4-4d27-bbca-42abd2e17693',
                 systemName: 'cswtg6k1v3bg5kv4jje6',
                 type: 'DETAIL',
-                executedAt: '2021-05-22 17:01:52',
-                monitoringStartAt: '2021-05-23 01:15:19',
-                monitoringEndAt: '2021-05-23 11:25:00',
+                executedAt: '2021-05-23 03:15:30',
+                monitoringStartAt: '2021-05-23 11:28:57',
+                monitoringEndAt: '2021-05-23 21:38:38',
             })
             .expect(400)
             .then(res => {
@@ -464,9 +464,9 @@ describe('execution', () =>
                 systemId: 'ed145249-5a99-4764-8002-20da0de8443a',
                 systemName: 'kjvnd83subjot6jyh76d',
                 version: 'l1kv02g3cn5zy1qc91j2',
-                executedAt: '2021-05-23 09:38:53',
-                monitoringStartAt: '2021-05-23 10:10:40',
-                monitoringEndAt: '2021-05-22 17:43:15',
+                executedAt: '2021-05-23 19:52:31',
+                monitoringStartAt: '2021-05-23 20:24:18',
+                monitoringEndAt: '2021-05-23 03:56:53',
             })
             .expect(400)
             .then(res => {
@@ -487,9 +487,9 @@ describe('execution', () =>
                 systemId: '63208d9b-ce26-46e3-86b5-51dc4e997780',
                 systemName: 'iqcptf90f9gr3rxgvxmp',
                 version: 'n6914icxnfurmkeljgzq',
-                type: 'SUMMARY',
-                monitoringStartAt: '2021-05-23 04:29:44',
-                monitoringEndAt: '2021-05-23 02:19:00',
+                type: 'DETAIL',
+                monitoringStartAt: '2021-05-23 14:43:22',
+                monitoringEndAt: '2021-05-23 12:32:38',
             })
             .expect(400)
             .then(res => {
@@ -510,9 +510,9 @@ describe('execution', () =>
                 systemId: 'b53f089a-60df-4c39-a576-59f401577b81',
                 systemName: '0w4fmlw5aaffo95elbl8',
                 version: 'fdyxm8ychyjf7dxp0lp2',
-                type: 'SUMMARY',
-                executedAt: '2021-05-22 18:17:10',
-                monitoringEndAt: '2021-05-22 21:32:37',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 04:30:48',
+                monitoringEndAt: '2021-05-23 07:46:15',
             })
             .expect(400)
             .then(res => {
@@ -533,9 +533,9 @@ describe('execution', () =>
                 systemId: '349e2b3e-bfe8-4a85-83c7-8bb04e1b1596',
                 systemName: '4p9z1jmya72072vbefcp',
                 version: 'apv162w9kuuy7h31ly49',
-                type: 'SUMMARY',
-                executedAt: '2021-05-23 06:25:04',
-                monitoringStartAt: '2021-05-23 07:21:36',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 16:38:42',
+                monitoringStartAt: '2021-05-23 17:35:14',
             })
             .expect(400)
             .then(res => {
@@ -557,9 +557,9 @@ describe('execution', () =>
                 systemName: 'duo9hr8viqy78yrtlrtc',
                 version: '1nu0mya363l5z1bzjv45',
                 type: 'DETAIL',
-                executedAt: '2021-05-23 09:20:15',
-                monitoringStartAt: '2021-05-23 02:29:25',
-                monitoringEndAt: '2021-05-23 12:14:56',
+                executedAt: '2021-05-23 19:33:53',
+                monitoringStartAt: '2021-05-23 12:43:03',
+                monitoringEndAt: '2021-05-23 22:28:34',
             })
             .expect(400)
             .then(res => {
@@ -581,9 +581,9 @@ describe('execution', () =>
                 systemName: 'bqngw5jxs4j197o0la1d',
                 version: '7ll5enkmra9sp8mdiy39',
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 04:03:13',
-                monitoringStartAt: '2021-05-22 16:14:49',
-                monitoringEndAt: '2021-05-22 15:55:46',
+                executedAt: '2021-05-23 14:16:51',
+                monitoringStartAt: '2021-05-23 02:28:27',
+                monitoringEndAt: '2021-05-23 02:09:24',
             })
             .expect(400)
             .then(res => {
@@ -605,9 +605,9 @@ describe('execution', () =>
                 systemName: 'uha3kvjdlvxa5lmar79o',
                 version: '0l98y58iobde81216rxc',
                 type: 'DETAIL',
-                executedAt: '2021-05-23 04:52:24',
-                monitoringStartAt: '2021-05-23 06:46:50',
-                monitoringEndAt: '2021-05-23 14:14:33',
+                executedAt: '2021-05-23 15:06:02',
+                monitoringStartAt: '2021-05-23 17:00:28',
+                monitoringEndAt: '2021-05-24 00:28:11',
             })
             .expect(400)
             .then(res => {
@@ -629,9 +629,9 @@ describe('execution', () =>
                 systemName: 'p1iia8c2ljzpep5f67fu',
                 version: 'nkpv75iqmhppbyd2uxuh',
                 type: 'DETAIL',
-                executedAt: '2021-05-23 09:46:35',
-                monitoringStartAt: '2021-05-23 13:34:31',
-                monitoringEndAt: '2021-05-22 17:58:48',
+                executedAt: '2021-05-23 20:00:13',
+                monitoringStartAt: '2021-05-23 23:48:09',
+                monitoringEndAt: '2021-05-23 04:12:26',
             })
             .expect(400)
             .then(res => {
@@ -652,10 +652,10 @@ describe('execution', () =>
                 systemId: '933a7810-0234-42be-be87-993b3f980580',
                 systemName: '7hgi33gfhdxn9og8szp8m',
                 version: 'kbvnhwwr9rlalbhwu4vo',
-                type: 'DETAIL',
-                executedAt: '2021-05-23 07:11:15',
-                monitoringStartAt: '2021-05-22 15:30:22',
-                monitoringEndAt: '2021-05-23 04:11:46',
+                type: 'SUMMARY',
+                executedAt: '2021-05-23 17:24:53',
+                monitoringStartAt: '2021-05-23 01:44:00',
+                monitoringEndAt: '2021-05-23 14:25:24',
             })
             .expect(400)
             .then(res => {
@@ -677,9 +677,9 @@ describe('execution', () =>
                 systemName: '80cjrc2pr66v5rojhigq',
                 version: 'n2ts9s1n9oenvvuk6fe8j',
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 11:14:34',
-                monitoringStartAt: '2021-05-22 19:43:36',
-                monitoringEndAt: '2021-05-23 10:01:41',
+                executedAt: '2021-05-23 21:28:12',
+                monitoringStartAt: '2021-05-23 05:57:14',
+                monitoringEndAt: '2021-05-23 20:15:19',
             })
             .expect(400)
             .then(res => {
@@ -701,9 +701,9 @@ describe('execution', () =>
                 systemName: 'wue5fvfencl4npcekp9y',
                 version: 'zxktxoqm3r3xrl75tfhg',
                 type: 'XXXX',
-                executedAt: '2021-05-22 14:59:12',
-                monitoringStartAt: '2021-05-22 14:22:59',
-                monitoringEndAt: '2021-05-22 16:33:22',
+                executedAt: '2021-05-23 01:12:50',
+                monitoringStartAt: '2021-05-23 00:36:37',
+                monitoringEndAt: '2021-05-23 02:47:00',
             })
             .expect(400)
             .then(res => {
@@ -723,10 +723,10 @@ describe('execution', () =>
                 systemId: '69a8578f-9250-4ed1-a223-aff61f7e0922',
                 systemName: 'sp8ge4n9t1o9qjr2yxvc',
                 version: 'pp56f6t9vxf5286p32ud',
-                type: 'DETAIL',
+                type: 'SUMMARY',
                 executedAt: 'XXXXXXXX',
-                monitoringStartAt: '2021-05-23 13:42:41',
-                monitoringEndAt: '2021-05-22 16:46:33',
+                monitoringStartAt: '2021-05-23 23:56:19',
+                monitoringEndAt: '2021-05-23 03:00:11',
             })
             .expect(400)
             .then(res => {
@@ -747,9 +747,9 @@ describe('execution', () =>
                 systemName: 'm94j86dplugrlpmx8ql1',
                 version: 'q8vde6iggibbas3pcwsp',
                 type: 'SUMMARY',
-                executedAt: '2021-05-22 16:19:23',
+                executedAt: '2021-05-23 02:33:01',
                 monitoringStartAt: 'XXXXXXXX',
-                monitoringEndAt: '2021-05-23 08:35:03',
+                monitoringEndAt: '2021-05-23 18:48:41',
             })
             .expect(400)
             .then(res => {
@@ -769,9 +769,9 @@ describe('execution', () =>
                 systemId: 'bb0cb764-5b17-4bcd-b9dd-32b455ed268a',
                 systemName: 'fm4sa3j7nvx209kob3xt',
                 version: '4p3eak4f93u9pyjpqb56',
-                type: 'DETAIL',
-                executedAt: '2021-05-23 07:12:45',
-                monitoringStartAt: '2021-05-22 21:38:12',
+                type: 'SUMMARY',
+                executedAt: '2021-05-23 17:26:23',
+                monitoringStartAt: '2021-05-23 07:51:50',
                 monitoringEndAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -832,7 +832,7 @@ describe('execution', () =>
                 {
                     where:
                     {
-                        id: '73cf99a9-5aa7-49a3-902a-7071c9a742b3'
+                        id: 'bfc93733-e783-48a8-ba21-e697cd0c3a30'
                     }
                 }
             })
@@ -853,9 +853,9 @@ describe('execution', () =>
                 systemName: '4iyw9pwsdxcmgcu744j2',
                 version: '4iyw9pwsdxcmgcu744j2',
                 type: 'SUMMARY',
-                executedAt: '2021-05-23 11:12:31',
-                monitoringStartAt: '2021-05-23 11:12:31',
-                monitoringEndAt: '2021-05-23 11:12:31',
+                executedAt: '2021-05-23 21:26:09',
+                monitoringStartAt: '2021-05-23 21:26:09',
+                monitoringEndAt: '2021-05-23 21:26:09',
             })
             .expect(201);
     });
@@ -884,7 +884,7 @@ describe('execution', () =>
     test(`/REST:GET cci/execution/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .get('/cci/execution/9db7f0d9-a324-497e-84f9-fb724c411a62')
+            .get('/cci/execution/2d3dfb06-3eb2-4180-bb15-f6a1e490e0ac')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -915,10 +915,10 @@ describe('execution', () =>
                 systemId: '9189c277-fd22-4a5a-a692-63a1c56085f6',
                 systemName: 'zwdlk281zptz1leq1e77',
                 version: 'myn282zl1ect8c684xo8',
-                type: 'SUMMARY',
-                executedAt: '2021-05-22 16:59:15',
-                monitoringStartAt: '2021-05-23 11:17:27',
-                monitoringEndAt: '2021-05-23 07:33:17',
+                type: 'DETAIL',
+                executedAt: '2021-05-23 03:12:53',
+                monitoringStartAt: '2021-05-23 21:31:05',
+                monitoringEndAt: '2021-05-23 17:46:55',
             })
             .expect(404);
     });
@@ -937,9 +937,9 @@ describe('execution', () =>
                 systemName: '4iyw9pwsdxcmgcu744j2',
                 version: '4iyw9pwsdxcmgcu744j2',
                 type: 'DETAIL',
-                executedAt: '2021-05-23 11:12:31',
-                monitoringStartAt: '2021-05-23 11:12:31',
-                monitoringEndAt: '2021-05-23 11:12:31',
+                executedAt: '2021-05-23 21:26:09',
+                monitoringStartAt: '2021-05-23 21:26:09',
+                monitoringEndAt: '2021-05-23 21:26:09',
             })
             .expect(200)
             .then(res => {
@@ -950,7 +950,7 @@ describe('execution', () =>
     test(`/REST:DELETE cci/execution/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/execution/bc572822-2687-4cf3-b59e-276ab9f32c2f')
+            .delete('/cci/execution/e8340046-6916-4ab5-a4e2-70662fdee911')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .expect(404);
@@ -1104,9 +1104,9 @@ describe('execution', () =>
                         systemName: '4iyw9pwsdxcmgcu744j2',
                         version: '4iyw9pwsdxcmgcu744j2',
                         type: 'SUMMARY',
-                        executedAt: '2021-05-23 11:12:31',
-                        monitoringStartAt: '2021-05-23 11:12:31',
-                        monitoringEndAt: '2021-05-23 11:12:31',
+                        executedAt: '2021-05-23 21:26:09',
+                        monitoringStartAt: '2021-05-23 21:26:09',
+                        monitoringEndAt: '2021-05-23 21:26:09',
                     }
                 }
             })
@@ -1147,7 +1147,7 @@ describe('execution', () =>
                     {
                         where:
                         {
-                            id: 'c00b1c36-3bee-451f-80d0-0ef75c64b618'
+                            id: '775706a7-3b29-4f7b-a63f-540bbed41b04'
                         }
                     }
                 }
@@ -1228,7 +1228,7 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: '22432e64-f902-4364-9b12-7538d5df14a3'
+                    id: '91a455c1-1c51-4763-8380-5ad3b5ffae92'
                 }
             })
             .expect(200)
@@ -1308,9 +1308,9 @@ describe('execution', () =>
                         systemName: 'zwdlk281zptz1leq1e77',
                         version: 'myn282zl1ect8c684xo8',
                         type: 'SUMMARY',
-                        executedAt: '2021-05-22 16:59:15',
-                        monitoringStartAt: '2021-05-23 11:17:27',
-                        monitoringEndAt: '2021-05-23 07:33:17',
+                        executedAt: '2021-05-23 03:12:53',
+                        monitoringStartAt: '2021-05-23 21:31:05',
+                        monitoringEndAt: '2021-05-23 17:46:55',
                     }
                 }
             })
@@ -1356,9 +1356,9 @@ describe('execution', () =>
                         systemName: '4iyw9pwsdxcmgcu744j2',
                         version: '4iyw9pwsdxcmgcu744j2',
                         type: 'SUMMARY',
-                        executedAt: '2021-05-23 11:12:31',
-                        monitoringStartAt: '2021-05-23 11:12:31',
-                        monitoringEndAt: '2021-05-23 11:12:31',
+                        executedAt: '2021-05-23 21:26:09',
+                        monitoringStartAt: '2021-05-23 21:26:09',
+                        monitoringEndAt: '2021-05-23 21:26:09',
                     }
                 }
             })
@@ -1394,7 +1394,7 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: '6cb1bf71-4dea-4d6b-ae44-4214e482ebd9'
+                    id: 'b7820e7f-e7a9-4f3d-9d2e-fd7584dcc8cc'
                 }
             })
             .expect(200)
