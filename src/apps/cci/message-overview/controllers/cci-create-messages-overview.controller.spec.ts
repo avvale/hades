@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { messagesOverview } from '@hades/cci/message-overview/infrastructure/seeds/message-overview.seed';
 
-describe('CciCreateMessagesOverviewController', () => 
+describe('CciCreateMessagesOverviewController', () =>
 {
     let controller: CciCreateMessagesOverviewController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
@@ -39,14 +39,14 @@ describe('CciCreateMessagesOverviewController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateMessagesOverviewController should be defined', () => 
+        test('CciCreateMessagesOverviewController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an messagesOverview created', async () => 
+        test('should return an messagesOverview created', async () =>
         {
             expect(await controller.main(messagesOverview)).toBe(undefined);
         });

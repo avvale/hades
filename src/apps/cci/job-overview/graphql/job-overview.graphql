@@ -62,17 +62,17 @@ input CciUpdateJobOverviewInput
 
 type Query
 {
-    cciFindJobOverview(query:QueryStatement constraint:QueryStatement): CciJobOverview
-    cciFindJobOverviewById(id:ID constraint:QueryStatement): CciJobOverview
-    cciGetJobsOverview(query:QueryStatement constraint:QueryStatement): [CciJobOverview]!
-    cciPaginateJobsOverview(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindJobOverview(query: QueryStatement constraint: QueryStatement): CciJobOverview
+    cciFindJobOverviewById(id: ID constraint: QueryStatement): CciJobOverview
+    cciGetJobsOverview(query: QueryStatement constraint: QueryStatement): [CciJobOverview]!
+    cciPaginateJobsOverview(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateJobOverview(payload: CciCreateJobOverviewInput!): CciJobOverview
     cciCreateJobsOverview(payload: [CciCreateJobOverviewInput]!): Boolean!
-    cciUpdateJobOverview(payload: CciUpdateJobOverviewInput! constraint:QueryStatement): CciJobOverview
-    cciDeleteJobOverviewById(id: ID! constraint:QueryStatement): CciJobOverview
-    cciDeleteJobsOverview(query:QueryStatement constraint:QueryStatement): [CciJobOverview]!
+    cciUpdateJobOverview(payload: CciUpdateJobOverviewInput! constraint: QueryStatement): CciJobOverview
+    cciDeleteJobOverviewById(id: ID! constraint: QueryStatement): CciJobOverview
+    cciDeleteJobsOverview(query: QueryStatement constraint: QueryStatement): [CciJobOverview]!
 }
