@@ -13,7 +13,7 @@ describe('CciCreateChannelOverviewResolver', () =>
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateChannelOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateChannelOverviewResolver should be defined', () => 
+    test('CciCreateChannelOverviewResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateChannelOverviewResolver should be defined', () => 
+        test('CciCreateChannelOverviewResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an channelOverview created', async () => 
+        test('should return an channelOverview created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channelsOverview[0])));
             expect(await resolver.main(<CciCreateChannelOverviewInput>channelsOverview[0])).toBe(channelsOverview[0]);

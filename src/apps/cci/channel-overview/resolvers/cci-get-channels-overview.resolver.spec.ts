@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { CciGetChannelsOverviewResolver } from './cci-get-channels-overview.resolver'; 
+import { CciGetChannelsOverviewResolver } from './cci-get-channels-overview.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { channelsOverview } from '@hades/cci/channel-overview/infrastructure/seeds/channel-overview.seed';
 
-describe('CciGetChannelsOverviewResolver', () => 
+describe('CciGetChannelsOverviewResolver', () =>
 {
     let resolver:   CciGetChannelsOverviewResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciGetChannelsOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciGetChannelsOverviewResolver should be defined', () => 
+    test('CciGetChannelsOverviewResolver should be defined', () =>
     {
         expect(resolver).   toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciGetChannelsOverviewResolver should be defined', () => 
+        test('CciGetChannelsOverviewResolver should be defined', () =>
         {
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a channelsOverview', async () => 
+        test('should return a channelsOverview', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channelsOverview)));
             expect(await resolver.main()).toBe(channelsOverview);

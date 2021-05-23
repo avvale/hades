@@ -140,17 +140,17 @@ input CciUpdateChannelInput
 
 type Query
 {
-    cciFindChannel(query:QueryStatement constraint:QueryStatement): CciChannel
-    cciFindChannelById(id:ID constraint:QueryStatement): CciChannel
-    cciGetChannels(query:QueryStatement constraint:QueryStatement): [CciChannel]!
-    cciPaginateChannels(query:QueryStatement constraint:QueryStatement): Pagination!
+    cciFindChannel(query: QueryStatement constraint: QueryStatement): CciChannel
+    cciFindChannelById(id: ID constraint: QueryStatement): CciChannel
+    cciGetChannels(query: QueryStatement constraint: QueryStatement): [CciChannel]!
+    cciPaginateChannels(query: QueryStatement constraint: QueryStatement): Pagination!
 }
 
 type Mutation
 {
     cciCreateChannel(payload: CciCreateChannelInput!): CciChannel
     cciCreateChannels(payload: [CciCreateChannelInput]!): Boolean!
-    cciUpdateChannel(payload: CciUpdateChannelInput! constraint:QueryStatement): CciChannel
-    cciDeleteChannelById(id: ID! constraint:QueryStatement): CciChannel
-    cciDeleteChannels(query:QueryStatement constraint:QueryStatement): [CciChannel]!
+    cciUpdateChannel(payload: CciUpdateChannelInput! constraint: QueryStatement): CciChannel
+    cciDeleteChannelById(id: ID! constraint: QueryStatement): CciChannel
+    cciDeleteChannels(query: QueryStatement constraint: QueryStatement): [CciChannel]!
 }

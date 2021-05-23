@@ -6,13 +6,13 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { channels } from '@hades/cci/channel/infrastructure/seeds/channel.seed';
 
-describe('CciDeleteChannelsResolver', () => 
+describe('CciDeleteChannelsResolver', () =>
 {
     let resolver: CciDeleteChannelsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,19 +37,19 @@ describe('CciDeleteChannelsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciDeleteChannelsResolver should be defined', () => 
+    test('CciDeleteChannelsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciDeleteChannelsResolver should be defined', () => 
+        test('CciDeleteChannelsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an channels deleted', async () => 
+        test('should return an channels deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channels)));
             expect(await resolver.main()).toBe(channels);

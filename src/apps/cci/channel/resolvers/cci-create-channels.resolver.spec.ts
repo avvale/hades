@@ -7,13 +7,13 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { channels } from '@hades/cci/channel/infrastructure/seeds/channel.seed';
 import { CciCreateChannelInput } from './../../../../graphql';
 
-describe('CciCreateChannelsResolver', () => 
+describe('CciCreateChannelsResolver', () =>
 {
     let resolver: CciCreateChannelsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,19 +38,19 @@ describe('CciCreateChannelsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('CciCreateChannelsResolver should be defined', () => 
+    test('CciCreateChannelsResolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CciCreateChannelsResolver should be defined', () => 
+        test('CciCreateChannelsResolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an channels created', async () => 
+        test('should return an channels created', async () =>
         {
             expect(await resolver.main(<CciCreateChannelInput[]>channels)).toBe(true);
         });

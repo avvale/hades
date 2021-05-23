@@ -14,8 +14,8 @@ import { CciCreateChannelResolver } from './resolvers/cci-create-channel.resolve
 import { CciCreateChannelsResolver } from './resolvers/cci-create-channels.resolver';
 import { CciPaginateChannelsResolver } from './resolvers/cci-paginate-channels.resolver';
 import { CciGetChannelsResolver } from './resolvers/cci-get-channels.resolver';
-import { CciFindChannelResolver } from './resolvers/cci-find-channel.resolver';
 import { CciFindChannelByIdResolver } from './resolvers/cci-find-channel-by-id.resolver';
+import { CciFindChannelResolver } from './resolvers/cci-find-channel.resolver';
 import { CciUpdateChannelResolver } from './resolvers/cci-update-channel.resolver';
 import { CciDeleteChannelByIdResolver } from './resolvers/cci-delete-channel-by-id.resolver';
 import { CciDeleteChannelsResolver } from './resolvers/cci-delete-channels.resolver';
@@ -37,8 +37,8 @@ export const CciChannelResolvers = [
     CciCreateChannelsResolver,
     CciPaginateChannelsResolver,
     CciGetChannelsResolver,
-    CciFindChannelResolver,
     CciFindChannelByIdResolver,
+    CciFindChannelResolver,
     CciUpdateChannelResolver,
     CciDeleteChannelByIdResolver,
     CciDeleteChannelsResolver,
