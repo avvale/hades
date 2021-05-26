@@ -1,0 +1,66 @@
+name: Build and Deploy Google App Engine
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  tests:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install dependencies
+      run: npm install
+    - name: Lint
+      run: npm run lint
+    - name: Unit testing
+      run: npm run test
+    - name: Acceptance testing
+      run: npm run test:e2e
+
+  deploy:
+    name: GCP App Engine Deploy
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Create .env file
+        run: |
+          touch .env
+          echo "$DOT_ENV" > .env
+        shell: bash
+        env:
+          DOT_ENV: ${{secrets.DOT_ENV}}
+      - name: Create SSL private Key from secrets
+        run: |
+          touch src/oauth-private.key
+          echo "$PRIVATE_KEY" > src/oauth-private.key
+        shell: bash
+        env:
+          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
+      - name: Create SSL public Key from secrets
+        run: |
+          touch src/oauth-public.key
+          echo "$PUBLIC_KEY" > src/oauth-public.key
+        shell: bash
+        env:
+          PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
+      - name: Build monolax project
+        run: npm run build
+      - name: Deploy Google App Engine
+        uses: google-github-actions/deploy-appengine@main
+        with:
+          credentials: ${{ secrets.GPC_CREDENTIALS }}
