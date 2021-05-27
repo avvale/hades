@@ -1,3 +1,15 @@
 runtime: nodejs14
 env: standard
 entrypoint: npm run start:prod
+skip_files:
+  - ^(.*/)?.*\.e2e-spec.ts$
+  - ^(.*/)?.*\.spec.ts$
+  - ^(.*/)?.*\.ts$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.sqlite$
+  - tsconfig.json
+  - tsconfig.build.json
+  - nest-cli.json
+  - test/
+  - postman/
+  - cliter/
