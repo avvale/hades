@@ -1,0 +1,23 @@
+# ignore files
+.gcloudignore
+.git
+.gitignore
+
+# directories
+/node_modules/
+/test
+/postman
+/cliter
+
+# pattern files
+*~
+*.e2e-spec.ts$
+*.spec.ts$
+*.ts
+*.md
+*.sqlite
+
+# specific files
+tsconfig.json
+tsconfig.build.json
+nest-cli.json
