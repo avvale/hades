@@ -4,18 +4,19 @@
 .gitignore
 
 # directories
-/node_modules/
+/node_modules
 /test
 /postman
 /cliter
 
 # pattern files
 *~
-*.e2e-spec.ts$
-*.spec.ts$
+*.e2e-spec.ts
+*.spec.ts
 *.ts
 *.md
 *.sqlite
+!graphql.ts
 
 # specific files
 tsconfig.json
