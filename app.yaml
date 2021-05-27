@@ -4,5 +4,6 @@ entrypoint: npm run start:prod
 automatic_scaling:
   min_instances: 0
   max_instances: 2
-forwarded_ports:
-  - 9000/tcp
+network:
+  forwarded_ports:
+    - 9000/tcp
