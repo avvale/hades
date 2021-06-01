@@ -53,7 +53,7 @@ export class IamCreateAccountResolver
         // get client to get applications related
         const client = await this.queryBus.ask(new FindClientQuery({
                 where: {
-                    id: accessToken.clientId
+                    id: accessToken.clientId // TODO, el clientId puede ser diferente, cuando es un client credentials, se cambia el clientId
                 },
                 include: ['applications']
             }));
