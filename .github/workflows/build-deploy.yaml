@@ -63,4 +63,4 @@ jobs:
       - name: Deploy Google App Engine
         uses: google-github-actions/deploy-appengine@main
         with:
-          credentials: ${{ secrets.GPC_CREDENTIALS }}
+          credentials: ${{ secrets.GCP_CREDENTIALS }}
