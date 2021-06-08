@@ -32,41 +32,41 @@ export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciC
     {
         const queryRaw = `
             SELECT
-                \`origin_channel\`.\`id\`,
-                \`origin_channel\`.\`tenant_id\`,
-                \`origin_channel\`.\`tenant_code\`,
-                \`origin_channel\`.\`system_id\`,
-                \`origin_channel\`.\`system_name\`,
-                \`origin_channel\`.\`execution_id\`,
-                \`origin_channel\`.\`execution_type\`,
-                \`origin_channel\`.\`execution_executed_at\`,
-                \`origin_channel\`.\`execution_monitoring_start_at\`,
-                \`origin_channel\`.\`execution_monitoring_end_at\`,
-                \`origin_channel\`.\`error\`,
-                \`origin_channel\`.\`inactive\`,
-                \`origin_channel\`.\`successful\`,
-                \`origin_channel\`.\`stopped\`,
-                \`origin_channel\`.\`unknown\`,
-                \`origin_channel\`.\`unregistered\`,
-                \`origin_channel\`.\`created_at\`,
-                \`origin_channel\`.\`updated_at\`,
-                \`origin_channel\`.\`deleted_at\`
+                \`OriginChannel\`.\`id\`,
+                \`OriginChannel\`.\`tenantId\`,
+                \`OriginChannel\`.\`tenantCode\`,
+                \`OriginChannel\`.\`systemId\`,
+                \`OriginChannel\`.\`systemName\`,
+                \`OriginChannel\`.\`executionId\`,
+                \`OriginChannel\`.\`executionType\`,
+                \`OriginChannel\`.\`executionExecutedAt\`,
+                \`OriginChannel\`.\`executionMonitoringStartAt\`,
+                \`OriginChannel\`.\`executionMonitoringEndAt\`,
+                \`OriginChannel\`.\`error\`,
+                \`OriginChannel\`.\`inactive\`,
+                \`OriginChannel\`.\`successful\`,
+                \`OriginChannel\`.\`stopped\`,
+                \`OriginChannel\`.\`unknown\`,
+                \`OriginChannel\`.\`unregistered\`,
+                \`OriginChannel\`.\`createdAt\`,
+                \`OriginChannel\`.\`updatedAt\`,
+                \`OriginChannel\`.\`deletedAt\`
             FROM
-                \`cci_channel_overview\` AS \`origin_channel\`
+                \`CciChannelOverview\` AS \`OriginChannel\`
             LEFT JOIN
-                \`cci_channel_overview\` AS \`aux_channel\`
+                \`CciChannelOverview\` AS \`AuxChannel\`
             ON
-                \`origin_channel\`.\`tenant_id\` = \`aux_channel\`.\`tenant_id\`
+                \`OriginChannel\`.\`tenantId\` = \`AuxChannel\`.\`tenantId\`
             AND
-                \`origin_channel\`.\`system_id\` = \`aux_channel\`.\`system_id\`
+                \`OriginChannel\`.\`systemId\` = \`AuxChannel\`.\`systemId\`
             AND
-                \`origin_channel\`.\`execution_executed_at\` < \`aux_channel\`.\`execution_executed_at\`
+                \`OriginChannel\`.\`executionExecutedAt\` < \`AuxChannel\`.\`executionExecutedAt\`
             WHERE
-                \`aux_channel\`.\`id\` IS NULL
+                \`AuxChannel\`.\`id\` IS NULL
             AND
-                \`origin_channel\`.\`tenant_id\` IN (:tenantIds)
+                \`OriginChannel\`.\`tenantId\` IN (:tenantIds)
             AND
-                \`origin_channel\`.\`system_id\` IN (:systemIds)
+                \`OriginChannel\`.\`systemId\` IN (:systemIds)
         `;
 
         const models = await this.repository.sequelize.query(
