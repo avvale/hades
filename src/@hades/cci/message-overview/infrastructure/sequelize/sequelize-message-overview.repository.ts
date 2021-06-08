@@ -30,44 +30,44 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
     {
         const queryRaw = `
             SELECT
-                \`origin_message\`.\`id\`,
-                \`origin_message\`.\`tenant_id\`,
-                \`origin_message\`.\`tenant_code\`,
-                \`origin_message\`.\`system_id\`,
-                \`origin_message\`.\`system_name\`,
-                \`origin_message\`.\`execution_id\`,
-                \`origin_message\`.\`execution_type\`,
-                \`origin_message\`.\`execution_executed_at\`,
-                \`origin_message\`.\`execution_monitoring_start_at\`,
-                \`origin_message\`.\`execution_monitoring_end_at\`,
-                \`origin_message\`.\`number_max\`,
-                \`origin_message\`.\`number_days\`,
-                \`origin_message\`.\`success\`,
-                \`origin_message\`.\`cancelled\`,
-                \`origin_message\`.\`delivering\`,
-                \`origin_message\`.\`error\`,
-                \`origin_message\`.\`holding\`,
-                \`origin_message\`.\`to_be_delivered\`,
-                \`origin_message\`.\`waiting\`,
-                \`origin_message\`.\`created_at\`,
-                \`origin_message\`.\`updated_at\`,
-                \`origin_message\`.\`deleted_at\`
+                \`OriginMessage\`.\`id\`,
+                \`OriginMessage\`.\`tenantId\`,
+                \`OriginMessage\`.\`tenantCode\`,
+                \`OriginMessage\`.\`systemId\`,
+                \`OriginMessage\`.\`systemName\`,
+                \`OriginMessage\`.\`executionId\`,
+                \`OriginMessage\`.\`executionType\`,
+                \`OriginMessage\`.\`executionExecutedAt\`,
+                \`OriginMessage\`.\`executionMonitoringStartAt\`,
+                \`OriginMessage\`.\`executionMonitoringEndAt\`,
+                \`OriginMessage\`.\`numberMax\`,
+                \`OriginMessage\`.\`numberDays\`,
+                \`OriginMessage\`.\`success\`,
+                \`OriginMessage\`.\`cancelled\`,
+                \`OriginMessage\`.\`delivering\`,
+                \`OriginMessage\`.\`error\`,
+                \`OriginMessage\`.\`holding\`,
+                \`OriginMessage\`.\`toBeDelivered\`,
+                \`OriginMessage\`.\`waiting\`,
+                \`OriginMessage\`.\`createdAt\`,
+                \`OriginMessage\`.\`updatedAt\`,
+                \`OriginMessage\`.\`deletedAt\`
             FROM
-                \`cci_message_overview\` AS \`origin_message\`
+                \`CciMessageOverview\` AS \`OriginMessage\`
             LEFT JOIN
-                \`cci_message_overview\` AS \`aux_message\`
+                \`CciMessageOverview\` AS \`AuxMessage\`
             ON
-                \`origin_message\`.\`tenant_id\` = \`aux_message\`.\`tenant_id\`
+                \`OriginMessage\`.\`tenantId\` = \`AuxMessage\`.\`tenantId\`
             AND
-                \`origin_message\`.\`system_id\` = \`aux_message\`.\`system_id\`
+                \`OriginMessage\`.\`systemId\` = \`AuxMessage\`.\`systemId\`
             AND
-                \`origin_message\`.\`execution_executed_at\` < \`aux_message\`.\`execution_executed_at\`
+                \`OriginMessage\`.\`executionExecutedAt\` < \`AuxMessage\`.\`executionExecutedAt\`
             WHERE
-                \`aux_message\`.\`id\` IS NULL
+                \`AuxMessage\`.\`id\` IS NULL
             AND
-                \`origin_message\`.\`tenant_id\` IN (:tenantIds)
+                \`OriginMessage\`.\`tenantId\` IN (:tenantIds)
             AND
-                \`origin_message\`.\`system_id\` IN (:systemIds)
+                \`OriginMessage\`.\`systemId\` IN (:systemIds)
         `;
 
         const models = await this.repository.sequelize.query(
