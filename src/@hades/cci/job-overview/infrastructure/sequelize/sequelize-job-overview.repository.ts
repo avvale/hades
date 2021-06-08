@@ -32,38 +32,38 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
     {
         const queryRaw = `
             SELECT
-                \`origin_job\`.\`id\`,
-                \`origin_job\`.\`tenant_id\`,
-                \`origin_job\`.\`tenant_code\`,
-                \`origin_job\`.\`system_id\`,
-                \`origin_job\`.\`system_name\`,
-                \`origin_job\`.\`execution_id\`,
-                \`origin_job\`.\`execution_type\`,
-                \`origin_job\`.\`execution_executed_at\`,
-                \`origin_job\`.\`execution_monitoring_start_at\`,
-                \`origin_job\`.\`execution_monitoring_end_at\`,
-                \`origin_job\`.\`cancelled\`,
-                \`origin_job\`.\`completed\`,
-                \`origin_job\`.\`error\`,
-                \`origin_job\`.\`created_at\`,
-                \`origin_job\`.\`updated_at\`,
-                \`origin_job\`.\`deleted_at\`
+                \`OriginJob\`.\`id\`,
+                \`OriginJob\`.\`tenantId\`,
+                \`OriginJob\`.\`tenantCode\`,
+                \`OriginJob\`.\`systemId\`,
+                \`OriginJob\`.\`systemName\`,
+                \`OriginJob\`.\`executionId\`,
+                \`OriginJob\`.\`executionType\`,
+                \`OriginJob\`.\`executionExecutedAt\`,
+                \`OriginJob\`.\`executionMonitoringStartAt\`,
+                \`OriginJob\`.\`executionMonitoringEndAt\`,
+                \`OriginJob\`.\`cancelled\`,
+                \`OriginJob\`.\`completed\`,
+                \`OriginJob\`.\`error\`,
+                \`OriginJob\`.\`createdAt\`,
+                \`OriginJob\`.\`updatedAt\`,
+                \`OriginJob\`.\`deletedAt\`
             FROM
-                \`cci_job_overview\` AS \`origin_job\`
+                \`CciJobOverview\` AS \`OriginJob\`
             LEFT JOIN
-                \`cci_job_overview\` AS \`aux_job\`
+                \`CciJobOverview\` AS \`AuxJob\`
             ON
-                \`origin_job\`.\`tenant_id\` = \`aux_job\`.\`tenant_id\`
+                \`OriginJob\`.\`tenantId\` = \`AuxJob\`.\`tenantId\`
             AND
-                \`origin_job\`.\`system_id\` = \`aux_job\`.\`system_id\`
+                \`OriginJob\`.\`systemId\` = \`AuxJob\`.\`systemId\`
             AND
-                \`origin_job\`.\`execution_executed_at\` < \`aux_job\`.\`execution_executed_at\`
+                \`OriginJob\`.\`executionExecutedAt\` < \`AuxJob\`.\`executionExecutedAt\`
             WHERE
-                \`aux_job\`.\`id\` IS NULL
+                \`AuxJob\`.\`id\` IS NULL
             AND
-                \`origin_job\`.\`tenant_id\` IN (:tenantIds)
+                \`OriginJob\`.\`tenantId\` IN (:tenantIds)
             AND
-                \`origin_job\`.\`system_id\` IN (:systemIds)
+                \`OriginJob\`.\`systemId\` IN (:systemIds)
         `;
 
         const models = await this.repository.sequelize.query(
