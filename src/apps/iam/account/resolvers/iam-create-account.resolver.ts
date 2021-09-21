@@ -53,7 +53,7 @@ export class IamCreateAccountResolver
         // get client to get applications related
         const client = await this.queryBus.ask(new FindClientQuery({
                 where: {
-                    id: accessToken.clientId
+                    id: payload.type === IamAccountType.SERVICE ? payload.clientId : accessToken.clientId
                 },
                 include: ['applications']
             }));
