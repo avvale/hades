@@ -293,8 +293,8 @@ export class AdminCountry extends AggregateRoot
     {
         return {
             id: Utils.uuid(),
-            langId: this.langId.value,
             countryId: this.id.value,
+            langId: this.langId.value,
             name: this.name.value,
             slug: this.slug.value,
             administrativeAreaLevel1: this.administrativeAreaLevel1?.value,

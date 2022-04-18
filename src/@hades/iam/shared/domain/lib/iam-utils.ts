@@ -22,6 +22,8 @@ export class IamUtils
     )
     {
         const administratorAccount = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
+
+        // insert bounded contexts and permissions
         await commandBus.dispatch(new CreateBoundedContextsCommand(boundedContexts));
         await commandBus.dispatch(new CreatePermissionsCommand(permissions));
 
@@ -40,7 +42,7 @@ export class IamUtils
             administratorAccount
         );
 
-        // set all permissions to administration account
+        // set all permissions denormalized to administration account
         await commandBus.dispatch(new UpdateAccountCommand({
             id: IamUtils.administratorAccountId,
             type: undefined,
