@@ -7,7 +7,7 @@ import { IAccessTokenRepository } from '@hades/o-auth/access-token/domain/access
 import { MockAccessTokenRepository } from '@hades/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
 import { IClientRepository } from '@hades/o-auth/client/domain/client.repository';
 import { MockClientRepository } from '@hades/o-auth/client/infrastructure/mock/mock-client.repository';
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
+import { AuthorizationGuard } from '@hades/iam/shared/domain/modules/auth/guards/authorization.guard';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { IamModule } from './../../../src/apps/iam/iam.module';
 import { OAuthModule } from './../../../src/apps/o-auth/o-auth.module';
